@@ -1,4 +1,9 @@
 #this is directly from googlesheets
+
+#environment to store credentials
+.state <- new.env(parent = emptyenv())
+.state$gd_base_url_files_v3 <- "https://www.googleapis.com/drive/v3/files"
+
 .onLoad <- function(libname, pkgname) {
 
   op <- options()
@@ -19,4 +24,13 @@
 
   invisible()
 
+}
+
+## from gh
+`%||%` <- function(x, y) {
+  if (is.null(x)) {
+    y
+  } else {
+    x
+  }
 }

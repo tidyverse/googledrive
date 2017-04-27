@@ -1,6 +1,25 @@
-# environment to store credentials
-.state <- new.env(parent = emptyenv())
 # this is fully copied from googlesheets with all `gs` replaced with `gd` and `googlesheets` with `googledrive`
+#' Produce Google token
+#'
+#' If token is not already available, call \code{\link{gd_auth}} to either load
+#' from cache or initiate OAuth2.0 flow. Return the token -- not "bare" but,
+#' rather, prepared for inclusion in downstream requests. Use
+#' \code{access_token()} to reveal the actual access token, suitable for use
+#' with \code{curl}.
+#'
+#' @return a \code{request} object (an S3 class provided by \code{httr})
+#'
+#' @keywords internal
+gd_token <- function(verbose = FALSE) {
+  if (!token_available(verbose = verbose)) gd_auth(verbose = verbose)
+  httr::config(token = .state$token)
+}
+
+#' @rdname gd_token
+include_token_if <- function(cond) if (cond) gd_token() else NULL
+#' @rdname gd_token
+omit_token_if <- function(cond) if (cond) NULL else gd_token()
+
 #' Authorize \code{googledrive}
 #'
 #' Authorize \code{googledrive} to view and manage your files. You will be
@@ -103,11 +122,11 @@ gd_auth <- function(token = NULL,
 
     scope_list <- "https://www.googleapis.com/auth/drive"
     googledrive_app <- httr::oauth_app("google", key = key, secret = secret)
-    google_token <-
+    gd_token <-
       httr::oauth2.0_token(httr::oauth_endpoints("google"), googledrive_app,
                            scope = scope_list, cache = cache)
-    stopifnot(is_legit_token(google_token, verbose = TRUE))
-    .state$token <- google_token
+    stopifnot(is_legit_token(gd_token, verbose = TRUE))
+    .state$token <- gd_token
 
   } else if (inherits(token, "Token2.0")) {
 
@@ -116,45 +135,25 @@ gd_auth <- function(token = NULL,
 
   } else if (inherits(token, "character")) {
 
-    google_token <- try(suppressWarnings(readRDS(token)), silent = TRUE)
-    if (inherits(google_token, "try-error")) {
+    gd_token <- try(suppressWarnings(readRDS(token)), silent = TRUE)
+    if (inherits(gd_token, "try-error")) {
       spf("Cannot read token from alleged .rds file:\n%s", token)
-    } else if (!is_legit_token(google_token, verbose = TRUE)) {
+    } else if (!is_legit_token(gd_token, verbose = TRUE)) {
       spf("File does not contain a proper token:\n%s", token)
     }
-    .state$token <- google_token
+    .state$token <- gd_token
   } else {
     spf("Input provided via 'token' is neither a",
         "token,\nnor a path to an .rds file containing a token.")
   }
 
-#TODO
- # .state$user <- drive_user()
+  #TODO
+  # .state$user <- drive_user()
 
   invisible(.state$token)
 
 }
 
-#' Produce Google token
-#'
-#' If token is not already available, call \code{\link{gd_auth}} to either load
-#' from cache or initiate OAuth2.0 flow. Return the token -- not "bare" but,
-#' rather, prepared for inclusion in downstream requests. Use
-#' \code{access_token()} to reveal the actual access token, suitable for use
-#' with \code{curl}.
-#'
-#' @return a \code{request} object (an S3 class provided by \code{httr})
-#'
-#' @keywords internal
-google_token <- function(verbose = FALSE) {
-  if (!token_available(verbose = verbose)) gd_auth(verbose = verbose)
-  httr::config(token = .state$token)
-}
-
-#' @rdname google_token
-include_token_if <- function(cond) if (cond) google_token() else NULL
-#' @rdname google_token
-omit_token_if <- function(cond) if (cond) NULL else google_token()
 
 #' Check token availability
 #'

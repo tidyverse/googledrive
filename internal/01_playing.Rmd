@@ -2,7 +2,8 @@
 title: "playing"
 author: "Lucy D’Agostino McGowan"
 date: "4/26/2017"
-output: html_notebook
+output:
+  pdf_document: default
 ---
 
 ```{r, message = FALSE, warning = FALSE}
@@ -10,16 +11,41 @@ library('googledrive')
 library('dplyr')
 ```
 
-
+this is almost an exact copy of how `gs_auth()` works
 ```{r}
 gd_auth() 
 ```
 
-`gd_ls()` pulls out name & type
+`gd_ls()` pulls out name, type, & id 
+(we probably don't want to see id, but seems useful to have here, so we could pick which one we want to get more info on?)
 ```{r}
 gd_ls()
 ```
 
 
-Note: now it seems we have to specify the fields (in v2 where I was working previously, it would automatically output everything see [this](https://developers.google.com/drive/v3/web/migration)).
+Note: now it seems we have to specify the fields (in v2 where I was working previously, it would automatically output everything, see [this](https://developers.google.com/drive/v3/web/migration)).
+
+Now let's say I want to dive deeper into the top one
+
+```{r}
+metadata_tbl <- gd_ls() %>%
+                  slice(1) %>%
+                  select(id) %>%
+                  gd_get()
+metadata_tbl
+```
+
+It looks a bit repetitive - right now I have a seperate line for everyone permission
+
+```{r}
+metadata_tbl %>%
+  select(name, permission_who, permission_role)
+```
+
+In addition to the things I've pulled out, there is a `list-col` (now named `object`, this should change), that contains all output fields.
+
+```{r}
+metadata_tbl %>%
+  select(object)
+```
 

@@ -2,4 +2,5 @@
 
 export(gd_auth)
 export(gd_deauth)
+export(gd_get)
 export(gd_ls)

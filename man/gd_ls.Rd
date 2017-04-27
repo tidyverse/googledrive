@@ -4,7 +4,7 @@
 \alias{gd_ls}
 \title{Google Drive List}
 \usage{
-gd_ls(token)
+gd_ls()
 }
 \arguments{
 \item{token}{obtained from `gd_auth()`}
