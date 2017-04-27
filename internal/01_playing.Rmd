@@ -2,7 +2,7 @@
 title: "playing"
 author: "Lucy D’Agostino McGowan"
 date: "4/26/2017"
-output: html_document
+output: html_notebook
 ---
 
 ```{r, message = FALSE, warning = FALSE}
@@ -17,8 +17,7 @@ gd_auth()
 
 `gd_ls()` pulls out name & type
 ```{r}
-gd_ls() %>% 
-  head()
+gd_ls()
 ```
 
 
