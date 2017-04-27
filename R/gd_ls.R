@@ -23,8 +23,8 @@ gd_ls <- function(){
   if (length(reqlist) == 0) stop("Zero records match your url.\n")
 
   req_tbl <- tibble::tibble(
-    id             = purrr::map_chr(reqlist$files, "id") ,
-    title          = purrr::map_chr(reqlist$files, "name")
+    name = purrr::map_chr(reqlist$files, "name"),
+    type = sub('.*\\.', '',purrr::map_chr(reqlist$files, "mimeType"))
   )
   req_tbl
 }
