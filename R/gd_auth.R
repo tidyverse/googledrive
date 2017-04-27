@@ -67,9 +67,7 @@
 #'   defaults to the ID and secret built into the \code{googledrive} package
 #' @param cache logical indicating if \code{googledrive} should cache
 #'   credentials in the default cache file \code{.httr-oauth}
-#' @template verbose
 #'
-#' @template return-Token2
 #' @family auth functions
 #' @export
 #'
@@ -130,7 +128,8 @@ gd_auth <- function(token = NULL,
         "token,\nnor a path to an .rds file containing a token.")
   }
 
-  .state$user <- drive_user()
+#TODO
+ # .state$user <- drive_user()
 
   invisible(.state$token)
 
@@ -196,7 +195,6 @@ token_available <- function(verbose = TRUE) {
 #' @param clear_cache logical indicating whether to disable the
 #'   \code{.httr-oauth} file in working directory, if such exists, by renaming
 #'   to \code{.httr-oauth-SUSPENDED}
-#' @template verbose
 #' @export
 #' @family auth functions
 #' @examples
