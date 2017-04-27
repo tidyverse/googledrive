@@ -2,8 +2,7 @@
 title: "playing"
 author: "Lucy D’Agostino McGowan"
 date: "4/26/2017"
-output:
-  pdf_document: default
+output: github_document
 ---
 
 ```{r, message = FALSE, warning = FALSE}
