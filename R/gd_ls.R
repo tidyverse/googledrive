@@ -24,8 +24,8 @@ gd_ls <- function(){
 
   req_tbl <- tibble::tibble(
     name = purrr::map_chr(reqlist$files, "name"),
-    type = sub('.*\\.', '',purrr::map_chr(reqlist$files, "mimeType"),
-    id = purrr::map_chr(reqlist$files, "id"))
+    type = sub('.*\\.', '',purrr::map_chr(reqlist$files, "mimeType")),
+    id = purrr::map_chr(reqlist$files, "id")
   )
   req_tbl
 }
