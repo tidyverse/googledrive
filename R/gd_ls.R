@@ -7,7 +7,7 @@
 #'
 gd_ls <- function(){
   token <- .state$token
-  url <- "https://www.googleapis.com/drive/v3/files"
+  url <- "https://www.googleapis.com/drive/v3/files/"
   req <- httr::GET(url,token)
   if (req$status_code >= 400) {
     stop(

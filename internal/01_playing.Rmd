@@ -5,9 +5,22 @@ date: "4/26/2017"
 output: html_document
 ---
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
+library('googledrive')
+library('dplyr')
+```
 
+
+```{r}
+gd_auth() 
+```
+
+`gd_ls()` pulls out name & type
+```{r}
+gd_ls() %>% 
+  head()
 ```
 
 
 Note: now it seems we have to specify the fields (in v2 where I was working previously, it would automatically output everything see [this](https://developers.google.com/drive/v3/web/migration)).
+
