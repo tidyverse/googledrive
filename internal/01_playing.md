@@ -3,6 +3,12 @@ playing
 Lucy D’Agostino McGowan
 4/26/2017
 
+-   [List](#list)
+-   [Metadata](#metadata)
+-   [User info](#user-info)
+
+*side note, really excited to include emojis in a non-hacky way, thanks [emo::ji](http://github.com/hadley/emo)* 🌻
+
 ``` r
 library('googledrive')
 library('dplyr')
@@ -13,6 +19,9 @@ this is almost an exact copy of how `gs_auth()` works
 ``` r
 gd_auth() 
 ```
+
+List
+----
 
 `gd_ls()` pulls out name, type, & id (we probably don't want to see id, but seems useful to have here, so we could pick which one we want to get more info on?)
 
@@ -35,7 +44,12 @@ gd_ls()
     ## 10                              Exec Board Reponsibilities         form
     ## # ... with 90 more rows, and 1 more variables: id <chr>
 
+Metadata
+--------
+
 Note: now it seems we have to specify the fields (in v2 where I was working previously, it would automatically output everything, see [this](https://developers.google.com/drive/v3/web/migration)).
+
+List of all fields [here](https://developers.google.com/drive/v3/web/migration).
 
 Now let's say I want to dive deeper into the top one
 
@@ -60,7 +74,7 @@ metadata_tbl
     ## # ... with 5 more variables: permission_who <chr>, permission_role <chr>,
     ## #   permission_type <chr>, modified <date>, object <list>
 
-It looks a bit repetitive - right now I have a seperate line for everyone permission
+It looks a bit repetitive - right now I have a separate line for everyone permission
 
 ``` r
 metadata_tbl %>%
@@ -95,3 +109,36 @@ metadata_tbl %>%
     ## 5 <list [25]>
     ## 6 <list [25]>
     ## 7 <list [25]>
+
+User info
+---------
+
+``` r
+gd_user()
+```
+
+    ## $user
+    ## $user$kind
+    ## [1] "drive#user"
+    ## 
+    ## $user$displayName
+    ## [1] "Lucy D'Agostino"
+    ## 
+    ## $user$photoLink
+    ## [1] "https://lh5.googleusercontent.com/-9QyJNrSIw8U/AAAAAAAAAAI/AAAAAAAAAXY/zcdEycKqKQk/s64/photo.jpg"
+    ## 
+    ## $user$me
+    ## [1] TRUE
+    ## 
+    ## $user$permissionId
+    ## [1] "13813982488463916564"
+    ## 
+    ## $user$emailAddress
+    ## [1] "lucydagostino@gmail.com"
+    ## 
+    ## 
+    ## $date
+    ## [1] "2017-04-27 18:30:15 GMT"
+    ## 
+    ## attr(,"class")
+    ## [1] "drive_user" "list"

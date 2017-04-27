@@ -1,23 +1,14 @@
 #' Google Drive Get
 #'
 #' @param id document id obtained from `gd_ls`
+#' @param fields user can input an vector of fields - defaults to all fields
+#' @param auth default TRUE
 #'
 #' @return tibble
 #' @export
 #'
-gd_get <- function(id, auth = TRUE){
-  fields <- c("appProperties", "capabilities", "contentHints", "createdTime",
-              "description", "explicitlyTrashed", "fileExtension",
-              "folderColorRgb", "fullFileExtension", "headRevisionId",
-              "iconLink", "id", "imageMediaMetadata", "kind",
-              "lastModifyingUser", "md5Checksum", "mimeType",
-              "modifiedByMeTime", "modifiedTime", "name", "originalFilename",
-              "ownedByMe", "owners", "parents", "permissions", "properties",
-              "quotaBytesUsed", "shared", "sharedWithMeTime", "sharingUser",
-              "size", "spaces", "starred", "thumbnailLink", "trashed",
-              "version", "videoMediaMetadata", "viewedByMe", "viewedByMeTime",
-              "viewersCanCopyContent", "webContentLink", "webViewLink",
-              "writersCanShare")
+gd_get <- function(id, fields = default_fields, auth = TRUE){
+
   fields <- paste(fields, collapse = ",")
   the_url <- file.path(.state$gd_base_url_files_v3, id)
   the_url <- httr::modify_url(the_url, query = list(fields = fields))

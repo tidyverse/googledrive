@@ -1,8 +1,48 @@
+#fields
+default_fields <- c("appProperties", "capabilities", "contentHints", "createdTime",
+            "description", "explicitlyTrashed", "fileExtension",
+            "folderColorRgb", "fullFileExtension", "headRevisionId",
+            "iconLink", "id", "imageMediaMetadata", "kind",
+            "lastModifyingUser", "md5Checksum", "mimeType",
+            "modifiedByMeTime", "modifiedTime", "name", "originalFilename",
+            "ownedByMe", "owners", "parents", "permissions", "properties",
+            "quotaBytesUsed", "shared", "sharedWithMeTime", "sharingUser",
+            "size", "spaces", "starred", "thumbnailLink", "trashed",
+            "version", "videoMediaMetadata", "viewedByMe", "viewedByMeTime",
+            "viewersCanCopyContent", "webContentLink", "webViewLink",
+            "writersCanShare")
+
+# fx
+spf <- function(...) stop(sprintf(...), call. = FALSE)
+
 #this is directly from googlesheets
+
+#httr helpers
+
+stop_for_content_type <- function(req, expected) {
+  actual <- req$headers$`Content-Type`
+  if (actual != expected) {
+    stop(
+      sprintf(
+        paste0("Expected content-type:\n%s",
+               "\n",
+               "Actual content-type:\n%s"),
+        expected, actual
+      )
+    )
+  }
+  invisible(NULL)
+}
+
+content_as_json_UTF8 <- function(req) {
+  stop_for_content_type(req, expected = "application/json; charset=UTF-8")
+  jsonlite::fromJSON(httr::content(req, as = "text", encoding = "UTF-8"))
+}
 
 #environment to store credentials
 .state <- new.env(parent = emptyenv())
 .state$gd_base_url_files_v3 <- "https://www.googleapis.com/drive/v3/files"
+.state$gd_base_url <- "https://www.googleapis.com/"
 
 .onLoad <- function(libname, pkgname) {
 

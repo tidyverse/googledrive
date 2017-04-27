@@ -2,8 +2,12 @@
 title: "playing"
 author: "Lucy D’Agostino McGowan"
 date: "4/26/2017"
-output: github_document
+output: 
+  github_document:
+    toc: true
 ---
+
+*side note, really excited to include emojis in a non-hacky way, thanks [emo::ji](http://github.com/hadley/emo)* `r emo::ji("sunflower")`
 
 ```{r, message = FALSE, warning = FALSE}
 library('googledrive')
@@ -15,14 +19,19 @@ this is almost an exact copy of how `gs_auth()` works
 gd_auth() 
 ```
 
+## List
+
 `gd_ls()` pulls out name, type, & id 
 (we probably don't want to see id, but seems useful to have here, so we could pick which one we want to get more info on?)
 ```{r}
 gd_ls()
 ```
 
+## Metadata
 
 Note: now it seems we have to specify the fields (in v2 where I was working previously, it would automatically output everything, see [this](https://developers.google.com/drive/v3/web/migration)).
+
+List of all fields [here](https://developers.google.com/drive/v3/web/migration).
 
 Now let's say I want to dive deeper into the top one
 
@@ -34,7 +43,7 @@ metadata_tbl <- gd_ls() %>%
 metadata_tbl
 ```
 
-It looks a bit repetitive - right now I have a seperate line for everyone permission
+It looks a bit repetitive - right now I have a separate line for everyone permission
 
 ```{r}
 metadata_tbl %>%
@@ -46,5 +55,11 @@ In addition to the things I've pulled out, there is a `list-col` (now named `obj
 ```{r}
 metadata_tbl %>%
   select(object)
+```
+
+## User info
+
+```{r}
+gd_user()
 ```
 

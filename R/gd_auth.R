@@ -6,6 +6,7 @@
 #' rather, prepared for inclusion in downstream requests. Use
 #' \code{access_token()} to reveal the actual access token, suitable for use
 #' with \code{curl}.
+#' @param verbose Logical, indicating whether to print informative messages (default \code{TRUE})
 #'
 #' @return a \code{request} object (an S3 class provided by \code{httr})
 #'
@@ -72,9 +73,7 @@ omit_token_if <- function(cond) if (cond) NULL else gd_token()
 #'
 #' More detail is available from
 #' \href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{Using
-#' OAuth 2.0 for Installed Applications}. See \code{\link{gd_webapp_auth_url}}
-#' and \code{\link{gd_webapp_get_token}} for functions that execute the "web
-#' server application" flow.
+#' OAuth 2.0 for Installed Applications}.
 #'
 #' @param token optional; an actual token object or the path to a valid token
 #'   stored as an \code{.rds} file
@@ -86,6 +85,7 @@ omit_token_if <- function(cond) if (cond) NULL else gd_token()
 #'   defaults to the ID and secret built into the \code{googledrive} package
 #' @param cache logical indicating if \code{googledrive} should cache
 #'   credentials in the default cache file \code{.httr-oauth}
+#' @param verbose Logical, indicating whether to print informative messages (default \code{TRUE})
 #'
 #' @family auth functions
 #' @export
@@ -147,8 +147,7 @@ gd_auth <- function(token = NULL,
         "token,\nnor a path to an .rds file containing a token.")
   }
 
-  #TODO
-  # .state$user <- drive_user()
+  .state$user <- gd_user()
 
   invisible(.state$token)
 
@@ -157,7 +156,7 @@ gd_auth <- function(token = NULL,
 
 #' Check token availability
 #'
-#' Check if a token is available in \code{\link{googledrive}}' internal
+#' Check if a token is available in \code{googledrive}' internal
 #' \code{.state} environment.
 #'
 #' @return logical
@@ -188,12 +187,14 @@ token_available <- function(verbose = TRUE) {
 
 #' Suspend authorization
 #'
-#' Suspend \code{\link{googledrive}}' authorization to place requests to the
+#' Suspend \code{googledrive}' authorization to place requests to the
 #' Drive and Sheets APIs on behalf of the authenticated user.
 #'
 #' @param clear_cache logical indicating whether to disable the
 #'   \code{.httr-oauth} file in working directory, if such exists, by renaming
 #'   to \code{.httr-oauth-SUSPENDED}
+#' @param verbose Logical, indicating whether to print informative messages (default \code{TRUE})
+#'
 #' @export
 #' @family auth functions
 #' @examples

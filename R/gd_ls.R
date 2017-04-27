@@ -1,7 +1,5 @@
 #' Google Drive List
 #'
-#' @param token obtained from `gd_auth()`
-#'
 #' @return tibble of files
 #' @export
 #'

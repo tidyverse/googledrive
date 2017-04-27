@@ -6,9 +6,6 @@
 \usage{
 gd_ls()
 }
-\arguments{
-\item{token}{obtained from `gd_auth()`}
-}
 \value{
 tibble of files
 }

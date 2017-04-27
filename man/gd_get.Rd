@@ -4,10 +4,14 @@
 \alias{gd_get}
 \title{Google Drive Get}
 \usage{
-gd_get(id, auth = TRUE)
+gd_get(id, fields = default_fields, auth = TRUE)
 }
 \arguments{
 \item{id}{document id obtained from `gd_ls`}
+
+\item{fields}{user can input an vector of fields - defaults to all fields}
+
+\item{auth}{default TRUE}
 }
 \value{
 tibble

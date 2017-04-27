@@ -5,10 +5,15 @@ Authors@R: c(
           person("Lucy", "D'Agostino McGowan", email = "ld.mcgowan@vanderbilt.edu", role = c("aut", "cre")),
           person("Jennifer", "Bryan", , "jenny@stat.ubc.ca", c("aut"))
           )
-Description: Manage Google Drive from R
+Description: Manage Google Drive from R.
 Depends:
     R (>= 3.3.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
+Imports: httr,
+    jsonlite,
+    lubridate,
+    purrr,
+    tibble
