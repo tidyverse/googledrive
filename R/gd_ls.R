@@ -3,7 +3,7 @@
 #' @param search character, regular expression(s) of title(s) of documents to output in a tibble. If it is \code{NULL} (defualt), information about all documents in drive will be output in a tibble.
 #' @param verbose Logical, indicating whether to print informative messages (default \code{TRUE})
 #'
-#' @return tibble of files
+#' @return tibble containing the name, type, and id of files on your google drive
 #' @export
 #'
 gd_ls <- function(search = NULL, ..., verbose = TRUE){
@@ -20,20 +20,22 @@ gd_ls <- function(search = NULL, ..., verbose = TRUE){
   )
 
   if (is.null(search)){
-
     return(req_tbl)
-
   } else{
+    if(!inherits(search, "character")){
+      stop("Please update `search` to be a character string or vector of character strings.")
+    }
+  }
 
-    stopifnot(inherits(search, "character"))
-
+  if (length(search) > 1) {
+    search <- paste(search, collapse = "|")
   }
 
   keep_names <- grep(search, req_tbl$name, ...)
 
   if(length(keep_names) == 0L){
     if(verbose){
-      message(paste0("We couldn't find any documents matching '", search, "'. Try updating your search critria."))
+      message(paste0("We couldn't find any documents matching '", search, "'. Try updating your `search` critria."))
     }
     invisible(NULL)
   } else
