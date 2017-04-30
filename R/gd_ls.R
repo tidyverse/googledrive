@@ -7,8 +7,7 @@
 #' @export
 #'
 gd_ls <- function(search = NULL, ..., verbose = TRUE){
-  token <- .state$token
-  req <- httr::GET(.state$gd_base_url_files_v3,token)
+  req <- httr::GET(.state$gd_base_url_files_v3,gd_token())
   httr::stop_for_status(req)
   reqlist <- httr::content(req, "parsed")
   if (length(reqlist) == 0) stop("Zero records match your url.\n")
