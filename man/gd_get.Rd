@@ -4,10 +4,12 @@
 \alias{gd_get}
 \title{Google Drive Get}
 \usage{
-gd_get(id, fields = default_fields, auth = TRUE)
+gd_get(id, ..., fields = default_fields, auth = TRUE)
 }
 \arguments{
 \item{id}{document id obtained from `gd_ls`}
+
+\item{...}{name-value pairs to query the API}
 
 \item{fields}{user can input an vector of fields - defaults to all fields}
 
