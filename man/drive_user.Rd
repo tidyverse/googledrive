@@ -4,10 +4,12 @@
 \alias{drive_user}
 \title{Google Drive User Information}
 \usage{
-drive_user(fields = "user")
+drive_user(fields = "user", ...)
 }
 \arguments{
 \item{fields}{fields to query, default is `user`.}
+
+\item{...}{name-value pairs to query the API}
 }
 \value{
 list of class \code{drive_user} with user's information

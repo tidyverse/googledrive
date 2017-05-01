@@ -4,10 +4,12 @@
 \alias{gd_user}
 \title{Pull information about the Google Drive user}
 \usage{
-gd_user(fields = "user", verbose = TRUE)
+gd_user(fields = "user", ..., verbose = TRUE)
 }
 \arguments{
 \item{fields}{the fields the user would like output - by default only `user`, which will display as detailed above.}
+
+\item{...}{name-value pairs to query the API}
 
 \item{verbose}{Logical, indicating whether to print informative messages (default \code{TRUE})}
 }

@@ -71,17 +71,6 @@ set_url <- function(x){
   x
 }
 
-# build_request <- function(url = NULL,token = NULL, method = "GET", query = NULL, body = NULL, encode = NULL){
-#   x <- list()
-#   x$url <- url
-#   x$method <- method
-#   x$query <- query
-#   x$body <- body
-#   x$token <- token
-#   x$encode <- encode
-#   x
-# }
-
 make_request <- function(x, ...){
   method <-  list("GET" = httr::GET,
                   "POST" = httr::POST,
@@ -94,7 +83,9 @@ make_request <- function(x, ...){
          body = x$body, ...)
 }
 
-process_request <- function(res) {
+process_request <- function(res, content = TRUE) {
   httr::stop_for_status(res)
-  metadata <- httr::content(res)
+  if (content == TRUE){
+  httr::content(res)
+  }
 }

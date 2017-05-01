@@ -25,13 +25,13 @@ gd_ls()
 We can search using regular expressions
 
 ```{r}
-gd_ls(search = "name")
+gd_ls(search = "test")
 ```
 
 We can also pass additional query parameters through the `...`, for example
 
 ```{r}
-gd_ls(search = "name", orderBy = "modifiedTime desc")
+gd_ls(search = "test", orderBy = "modifiedTime")
 ```
 
 ## Metadata
@@ -43,28 +43,22 @@ List of all fields [here](https://developers.google.com/drive/v3/web/migration).
 Now let's say I want to dive deeper into the top one
 
 ```{r}
-metadata_tbl <- gd_ls("name")$id[1] %>%
-                  gd_get()
-metadata_tbl
+id <- gd_get_id("test")
+file <- gd_file(id)
+file
 ```
 
-In addition to the things I've pulled out, there is a `list-col` (now named `object`, this should change), that contains all output fields.
+In addition to the things I've pulled out, there is a `tibble` of permissions as well as a  `list` (now named `kitchen_sink`, this should change), that contains all output fields.
 
 ```{r}
-metadata_tbl %>%
-  select(object)
+file$permissions
 ```
 
-and we can dive deeper into this object by piecing through this list like so
 
 ```{r}
-metadata_tbl %>%
-  select(object) %>%
-  .[[1]] %>% #ick this is clearly not the best way to do this...
-  .[[1]] %>%
-  .$permissions
-  
+str(file$kitchen_sink)
 ```
+
 
 ## User info
 
@@ -76,6 +70,16 @@ gd_user()
 
 ```{r}
 write.table("this is a test", file = "~/desktop/test.txt")
-gd_upload(file = "~/desktop/test.txt")
+gd_upload(file = "~/desktop/test.txt", name = "This is a test", overwrite = TRUE)
+```
+
+```{r}
+file <- gd_file(gd_get_id("This is a test"))
+file
+```
+
+## Delete file
+```{r}
+gd_delete(file)
 ```
 
