@@ -54,24 +54,22 @@ gd_upload <- function(file, name = NULL, overwrite = FALSE, type = NULL, verbose
   }
 
   if (is.null(id)){
-    req <- build_request(url = .state$gd_base_url_files_v3,
+    req <- build_request(endpoint = .state$gd_base_url_files_v3,
                          token = gd_token(),
-                         body = list(name = name,
-                                     mimeType = type),
-                         encode = "json",
+                         params = list("name" = name,
+                                       "mimeType" = type),
                          method = "POST")
-    res <- make_request(req)
+    res <- make_request(req, encode = "json")
     proc_res <- process_request(res)
     id <- proc_res$id
   }
 
-url <- file.path(.state$gd_base_url, "upload/drive/v3/files", id)
-url <- httr::modify_url(url, query = list(uploadType = "media"))
+url <- file.path(.state$gd_base_url, "upload/drive/v3/files", paste0(id, "?uploadType=media"))
 
-req <- build_request(url = url,
+req <- build_request(endpoint = url,
                      token = gd_token(),
-                     query = list(uploadType = "media"),
-                     body = httr::upload_file(file),
+                     params = list("path" = file,
+                                   "type" = type),
                      method = "PATCH"
                      )
 

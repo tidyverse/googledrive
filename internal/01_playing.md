@@ -25,19 +25,49 @@ gd_ls()
 ```
 
     ## # A tibble: 100 × 3
-    ##                                      name         type
-    ##                                     <chr>        <chr>
-    ## 1                                    test     document
-    ## 2                                    test     document
-    ## 3                                    test     document
-    ## 4                                    test     document
-    ## 5                                test9999 presentation
-    ## 6                              lalallalal     document
-    ## 7                               test12345     document
-    ## 8                               test12345     document
-    ## 9  Health Insurance Questions (Responses)  spreadsheet
-    ## 10             Health Insurance Questions         form
+    ##        name                     type
+    ##       <chr>                    <chr>
+    ## 1      name                 document
+    ## 2  Untitled application/octet-stream
+    ## 3  Untitled application/octet-stream
+    ## 4      name                 document
+    ## 5  Untitled application/octet-stream
+    ## 6  Untitled application/octet-stream
+    ## 7  Untitled application/octet-stream
+    ## 8      name                 document
+    ## 9  Untitled application/octet-stream
+    ## 10     name                 document
     ## # ... with 90 more rows, and 1 more variables: id <chr>
+
+We can search using regular expressions
+
+``` r
+gd_ls(search = "name")
+```
+
+    ## # A tibble: 5 × 3
+    ##    name     type                                           id
+    ##   <chr>    <chr>                                        <chr>
+    ## 1  name document 1BMB_ACTQ_yPvxB875mQgbp69V1BkZ-j4bq2ajjh-f3I
+    ## 2  name document 1ILEWVDVkViiEFzsIvw5_It21TZnKsF7H1A6tyEsLqps
+    ## 3  name document 13aTKA2drWe6RGFj7xhJWegnHU79USlNDFCakznWPl8o
+    ## 4  name document 1sj5KzFFc4IP2QWpUvay1RN5dC8L3dhQjWj4LXG9e4mw
+    ## 5  name document 1zNwmEA2mU9pJjEb83VDBHP49IB4NSFMA8aDjh2AgnNY
+
+We can also pass additional query parameters through the `...`, for example
+
+``` r
+gd_ls(search = "name", orderBy = "modifiedTime desc")
+```
+
+    ## # A tibble: 5 × 3
+    ##    name     type                                           id
+    ##   <chr>    <chr>                                        <chr>
+    ## 1  name document 1BMB_ACTQ_yPvxB875mQgbp69V1BkZ-j4bq2ajjh-f3I
+    ## 2  name document 1ILEWVDVkViiEFzsIvw5_It21TZnKsF7H1A6tyEsLqps
+    ## 3  name document 13aTKA2drWe6RGFj7xhJWegnHU79USlNDFCakznWPl8o
+    ## 4  name document 1sj5KzFFc4IP2QWpUvay1RN5dC8L3dhQjWj4LXG9e4mw
+    ## 5  name document 1zNwmEA2mU9pJjEb83VDBHP49IB4NSFMA8aDjh2AgnNY
 
 Metadata
 --------
@@ -59,7 +89,7 @@ metadata_tbl
     ## # A tibble: 1 × 5
     ##    name     type           owner   modified      object
     ##   <chr>    <chr>           <chr>     <date>      <list>
-    ## 1  test document Lucy D'Agostino 2017-05-01 <list [27]>
+    ## 1  name document Lucy D'Agostino 2017-05-01 <list [27]>
 
 In addition to the things I've pulled out, there is a `list-col` (now named `object`, this should change), that contains all output fields.
 
@@ -136,7 +166,7 @@ gd_user()
     ## 
     ## 
     ## $date
-    ## [1] "2017-05-01 04:03:47 GMT"
+    ## [1] "2017-05-01 16:28:13 GMT"
     ## 
     ## attr(,"class")
     ## [1] "drive_user" "list"

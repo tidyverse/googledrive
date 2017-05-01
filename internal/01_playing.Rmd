@@ -22,6 +22,18 @@ library('dplyr')
 gd_ls()
 ```
 
+We can search using regular expressions
+
+```{r}
+gd_ls(search = "name")
+```
+
+We can also pass additional query parameters through the `...`, for example
+
+```{r}
+gd_ls(search = "name", orderBy = "modifiedTime desc")
+```
+
 ## Metadata
 
 Note: now it seems we have to specify the fields (in v2 where I was working previously, it would automatically output everything, see [this](https://developers.google.com/drive/v3/web/migration)).

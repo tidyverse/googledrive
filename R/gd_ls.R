@@ -1,21 +1,25 @@
 #' Google Drive List
 #'
-#' @param search character, regular expression(s) of title(s) of documents to output in a tibble. If it is \code{NULL} (defualt), information about all documents in drive will be output in a tibble.
-#' @param verbose Logical, indicating whether to print informative messages (default \code{TRUE})
+#' @param search character, regular expression(s) of title(s) of documents to output in a tibble. If it is \code{NULL} (default), information about all documents in drive will be output in a tibble.
+#' @param ... name-value pairs to query the API
+#' @param fixed logical, from \code{\link{grep}}. If \code{TRUE}, \code{search} is exactly matched to a document's name on Google Drive.
+#' @param verbose logical, indicating whether to print informative messages (default \code{TRUE})
 #'
 #' @return tibble containing the name, type, and id of files on your google drive (default 100 files)
 #' @export
 #'
-gd_ls <- function(search = NULL, ..., verbose = TRUE){
+gd_ls <- function(search = NULL, ..., fixed = FALSE, verbose = TRUE){
 
-  req <- build_request(url = .state$gd_base_url_files_v3, token = gd_token() )
+  req <- build_request(endpoint = .state$gd_base_url_files_v3,
+                       token = gd_token(),
+                       params = list(...))
   res <- make_request(req)
-  reqlist <- process_request(res)
+  proc_res <- process_request(res)
 
   req_tbl <- tibble::tibble(
-    name = purrr::map_chr(reqlist$files, "name"),
-    type = sub('.*\\.', '',purrr::map_chr(reqlist$files, "mimeType")),
-    id = purrr::map_chr(reqlist$files, "id")
+    name = purrr::map_chr(proc_res$files, "name"),
+    type = sub('.*\\.', '',purrr::map_chr(proc_res$files, "mimeType")),
+    id = purrr::map_chr(proc_res$files, "id")
   )
 
   if (is.null(search)){
@@ -30,7 +34,7 @@ gd_ls <- function(search = NULL, ..., verbose = TRUE){
     search <- paste(search, collapse = "|")
   }
 
-  keep_names <- grep(search, req_tbl$name, ...)
+  keep_names <- grep(search, req_tbl$name, fixed = fixed)
 
   if(length(keep_names) == 0L){
     if(verbose){
