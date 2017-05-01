@@ -43,9 +43,7 @@ List of all fields [here](https://developers.google.com/drive/v3/web/migration).
 Now let's say I want to dive deeper into the top one
 
 ```{r}
-metadata_tbl <- gd_ls() %>%
-                  slice(1) %>%
-                  select(id) %>%
+metadata_tbl <- gd_ls("name")$id[1] %>%
                   gd_get()
 metadata_tbl
 ```
