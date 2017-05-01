@@ -42,7 +42,7 @@ content_as_json_UTF8 <- function(req) {
 #environment to store credentials
 .state <- new.env(parent = emptyenv())
 .state$gd_base_url_files_v3 <- "https://www.googleapis.com/drive/v3/files"
-.state$gd_base_url <- "https://www.googleapis.com/"
+.state$gd_base_url <- "https://www.googleapis.com"
 
 .onLoad <- function(libname, pkgname) {
 

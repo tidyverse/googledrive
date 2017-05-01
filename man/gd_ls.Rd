@@ -4,10 +4,15 @@
 \alias{gd_ls}
 \title{Google Drive List}
 \usage{
-gd_ls()
+gd_ls(search = NULL, ..., verbose = TRUE)
+}
+\arguments{
+\item{search}{character, regular expression(s) of title(s) of documents to output in a tibble. If it is \code{NULL} (defualt), information about all documents in drive will be output in a tibble.}
+
+\item{verbose}{Logical, indicating whether to print informative messages (default \code{TRUE})}
 }
 \value{
-tibble of files
+tibble containing the name, type, and id of files on your google drive (default 100 files)
 }
 \description{
 Google Drive List

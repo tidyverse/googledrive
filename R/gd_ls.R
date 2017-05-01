@@ -3,14 +3,14 @@
 #' @param search character, regular expression(s) of title(s) of documents to output in a tibble. If it is \code{NULL} (defualt), information about all documents in drive will be output in a tibble.
 #' @param verbose Logical, indicating whether to print informative messages (default \code{TRUE})
 #'
-#' @return tibble containing the name, type, and id of files on your google drive
+#' @return tibble containing the name, type, and id of files on your google drive (default 100 files)
 #' @export
 #'
 gd_ls <- function(search = NULL, ..., verbose = TRUE){
-  req <- httr::GET(.state$gd_base_url_files_v3,gd_token())
-  httr::stop_for_status(req)
-  reqlist <- httr::content(req, "parsed")
-  if (length(reqlist) == 0) stop("Zero records match your url.\n")
+
+  req <- build_request(url = .state$gd_base_url_files_v3, token = gd_token() )
+  res <- make_request(req)
+  reqlist <- process_request(res)
 
   req_tbl <- tibble::tibble(
     name = purrr::map_chr(reqlist$files, "name"),
@@ -34,7 +34,7 @@ gd_ls <- function(search = NULL, ..., verbose = TRUE){
 
   if(length(keep_names) == 0L){
     if(verbose){
-      message(paste0("We couldn't find any documents matching '", search, "'. Try updating your `search` critria."))
+      message(sprintf("We couldn't find any documents matching '%s'. \nTry updating your `search` critria.", gsub("\\|", "' or '", search)))
     }
     invisible(NULL)
   } else

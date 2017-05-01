@@ -6,18 +6,13 @@ Lucy D’Agostino McGowan
 -   [List](#list)
 -   [Metadata](#metadata)
 -   [User info](#user-info)
+-   [Upload file](#upload-file)
 
 *side note, really excited to include emojis in a non-hacky way, thanks [emo::ji](http://github.com/hadley/emo)* 🌻
 
 ``` r
 library('googledrive')
 library('dplyr')
-```
-
-this is almost an exact copy of how `gs_auth()` works
-
-``` r
-gd_auth() 
 ```
 
 List
@@ -30,18 +25,18 @@ gd_ls()
 ```
 
     ## # A tibble: 100 × 3
-    ##                                                        name        type
-    ##                                                       <chr>       <chr>
-    ## 1                                2017 Owen Olympics Sign-up spreadsheet
-    ## 2                                     contributr-maintainer spreadsheet
-    ## 3                                contributr maintainer form        form
-    ## 4  Space Apps 2017 - Social Media Information for All Sites spreadsheet
-    ## 5  Graduate Education Working Group Nominations (Responses) spreadsheet
-    ## 6          Vanderbilt Graduate Student Handbook (Responses) spreadsheet
-    ## 7                                            GSC Committees        form
-    ## 8                                     R-Ladies Global TEAMS    document
-    ## 9                   Exec Board Reponsibilities  (Responses) spreadsheet
-    ## 10                              Exec Board Reponsibilities         form
+    ##                                      name         type
+    ##                                     <chr>        <chr>
+    ## 1                                    test     document
+    ## 2                                    test     document
+    ## 3                                    test     document
+    ## 4                                    test     document
+    ## 5                                test9999 presentation
+    ## 6                              lalallalal     document
+    ## 7                               test12345     document
+    ## 8                               test12345     document
+    ## 9  Health Insurance Questions (Responses)  spreadsheet
+    ## 10             Health Insurance Questions         form
     ## # ... with 90 more rows, and 1 more variables: id <chr>
 
 Metadata
@@ -61,36 +56,10 @@ metadata_tbl <- gd_ls() %>%
 metadata_tbl
 ```
 
-    ## # A tibble: 7 × 8
-    ##                         name        type             owner
-    ##                        <chr>       <chr>             <chr>
-    ## 1 2017 Owen Olympics Sign-up spreadsheet Courtney Williams
-    ## 2 2017 Owen Olympics Sign-up spreadsheet Courtney Williams
-    ## 3 2017 Owen Olympics Sign-up spreadsheet Courtney Williams
-    ## 4 2017 Owen Olympics Sign-up spreadsheet Courtney Williams
-    ## 5 2017 Owen Olympics Sign-up spreadsheet Courtney Williams
-    ## 6 2017 Owen Olympics Sign-up spreadsheet Courtney Williams
-    ## 7 2017 Owen Olympics Sign-up spreadsheet Courtney Williams
-    ## # ... with 5 more variables: permission_who <chr>, permission_role <chr>,
-    ## #   permission_type <chr>, modified <date>, object <list>
-
-It looks a bit repetitive - right now I have a separate line for everyone permission
-
-``` r
-metadata_tbl %>%
-  select(name, permission_who, permission_role)
-```
-
-    ## # A tibble: 7 × 3
-    ##                         name    permission_who permission_role
-    ##                        <chr>             <chr>           <chr>
-    ## 1 2017 Owen Olympics Sign-up Courtney Williams           owner
-    ## 2 2017 Owen Olympics Sign-up   Richard Rosenow          writer
-    ## 3 2017 Owen Olympics Sign-up     Ryan W Gillis          writer
-    ## 4 2017 Owen Olympics Sign-up       John Wilson          writer
-    ## 5 2017 Owen Olympics Sign-up caroline guenther          writer
-    ## 6 2017 Owen Olympics Sign-up     Francis Huynh          writer
-    ## 7 2017 Owen Olympics Sign-up    anyoneWithLink          writer
+    ## # A tibble: 1 × 5
+    ##    name     type           owner   modified      object
+    ##   <chr>    <chr>           <chr>     <date>      <list>
+    ## 1  test document Lucy D'Agostino 2017-05-01 <list [27]>
 
 In addition to the things I've pulled out, there is a `list-col` (now named `object`, this should change), that contains all output fields.
 
@@ -99,16 +68,45 @@ metadata_tbl %>%
   select(object)
 ```
 
-    ## # A tibble: 7 × 1
+    ## # A tibble: 1 × 1
     ##        object
     ##        <list>
-    ## 1 <list [25]>
-    ## 2 <list [25]>
-    ## 3 <list [25]>
-    ## 4 <list [25]>
-    ## 5 <list [25]>
-    ## 6 <list [25]>
-    ## 7 <list [25]>
+    ## 1 <list [27]>
+
+and we can dive deeper into this object by piecing through this list like so
+
+``` r
+metadata_tbl %>%
+  select(object) %>%
+  .[[1]] %>% #ick this is clearly not the best way to do this...
+  .[[1]] %>%
+  .$permissions
+```
+
+    ## [[1]]
+    ## [[1]]$kind
+    ## [1] "drive#permission"
+    ## 
+    ## [[1]]$id
+    ## [1] "13813982488463916564"
+    ## 
+    ## [[1]]$type
+    ## [1] "user"
+    ## 
+    ## [[1]]$emailAddress
+    ## [1] "lucydagostino@gmail.com"
+    ## 
+    ## [[1]]$role
+    ## [1] "owner"
+    ## 
+    ## [[1]]$displayName
+    ## [1] "Lucy D'Agostino"
+    ## 
+    ## [[1]]$photoLink
+    ## [1] "https://lh5.googleusercontent.com/-9QyJNrSIw8U/AAAAAAAAAAI/AAAAAAAAAXY/zcdEycKqKQk/s64/photo.jpg"
+    ## 
+    ## [[1]]$deleted
+    ## [1] FALSE
 
 User info
 ---------
@@ -138,7 +136,20 @@ gd_user()
     ## 
     ## 
     ## $date
-    ## [1] "2017-04-27 18:32:12 GMT"
+    ## [1] "2017-05-01 04:03:47 GMT"
     ## 
     ## attr(,"class")
     ## [1] "drive_user" "list"
+
+Upload file
+-----------
+
+``` r
+write.table("this is a test", file = "~/desktop/test.txt")
+gd_upload(file = "~/desktop/test.txt")
+```
+
+    ## File uploaded to Google Drive: 
+    ## ~/desktop/test.txt 
+    ## As the Google document named:
+    ## test

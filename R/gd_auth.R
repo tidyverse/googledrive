@@ -6,7 +6,7 @@
 #' rather, prepared for inclusion in downstream requests. Use
 #' \code{access_token()} to reveal the actual access token, suitable for use
 #' with \code{curl}.
-#' @param verbose Logical, indicating whether to print informative messages (default \code{TRUE})
+#' @param verbose logical, indicating whether to print informative messages (default \code{TRUE})
 #'
 #' @return a \code{request} object (an S3 class provided by \code{httr})
 #'

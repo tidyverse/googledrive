@@ -14,11 +14,6 @@ library('googledrive')
 library('dplyr')
 ```
 
-this is almost an exact copy of how `gs_auth()` works
-```{r}
-gd_auth() 
-```
-
 ## List
 
 `gd_ls()` pulls out name, type, & id 
@@ -43,13 +38,6 @@ metadata_tbl <- gd_ls() %>%
 metadata_tbl
 ```
 
-It looks a bit repetitive - right now I have a separate line for everyone permission
-
-```{r}
-metadata_tbl %>%
-  select(name, permission_who, permission_role)
-```
-
 In addition to the things I've pulled out, there is a `list-col` (now named `object`, this should change), that contains all output fields.
 
 ```{r}
@@ -57,9 +45,27 @@ metadata_tbl %>%
   select(object)
 ```
 
+and we can dive deeper into this object by piecing through this list like so
+
+```{r}
+metadata_tbl %>%
+  select(object) %>%
+  .[[1]] %>% #ick this is clearly not the best way to do this...
+  .[[1]] %>%
+  .$permissions
+  
+```
+
 ## User info
 
 ```{r}
 gd_user()
+```
+
+## Upload file
+
+```{r}
+write.table("this is a test", file = "~/desktop/test.txt")
+gd_upload(file = "~/desktop/test.txt")
 ```
 
