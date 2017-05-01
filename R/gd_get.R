@@ -1,6 +1,6 @@
 #' Google Drive Get
 #'
-#' @param id document id obtained from `gd_ls`
+#' @param id document id obtained from `[gd_ls()]`
 #' @param ... name-value pairs to query the API
 #' @param fields user can input an vector of fields - defaults to all fields
 #' @param auth default TRUE

@@ -15,17 +15,16 @@ gd_upload(file, name = NULL, overwrite = FALSE, type = NULL,
 \item{overwrite}{logical, do you want to overwrite file already on Google Drive}
 
 \item{type}{if type = \code{NULL}, will force type as follows:
- \itemize{
- \item document: .doc, .docx, .txt, .rtf., .html, .odt, .pdf, .jpeg, .png, .gif,.bmp
- \item spreadsheet: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
+\itemize{
+\item document: .doc, .docx, .txt, .rtf., .html, .odt, .pdf, .jpeg, .png, .gif,.bmp
+\item spreadsheet: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
 .ods
- \item presentation: .opt, .ppt, .pptx, .pptm
- otherwise you can specify \code{document}, \code{spreadsheet}, or \code{presentation}
- }}
+\item presentation: .opt, .ppt, .pptx, .pptm
+otherwise you can specify \code{document}, \code{spreadsheet}, or \code{presentation}
+}}
 
 \item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
 }
 \description{
 Upload a file to Google Drive
 }
-

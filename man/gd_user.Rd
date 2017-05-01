@@ -7,7 +7,7 @@
 gd_user(fields = "user", ..., verbose = TRUE)
 }
 \arguments{
-\item{fields}{the fields the user would like output - by default only `user`, which will display as detailed above.}
+\item{fields}{the fields the user would like output - by default only \code{user}, which will display as detailed above.}
 
 \item{...}{name-value pairs to query the API}
 
@@ -19,4 +19,3 @@ a list of class \code{drive_user} with user's data
 \description{
 Pull information about the Google Drive user
 }
-

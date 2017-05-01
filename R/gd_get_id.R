@@ -1,11 +1,11 @@
 #' Get Google Drive id
 #'
 #' @param search character, regular expression to determin document title to output the Google Drive id
-#' If it is \code{NULL} (default), the most recently modified document id will be output.
+#' If it is `NULL` (default), the most recently modified document id will be output.
 #' @param ... name-value pairs to query the API
-#' @param fixed logical, from \code{\link{grep}}. If \code{TRUE}, \code{search} is exactly matched to a
+#' @param fixed logical, from `[grep()]`. If `TRUE`, `search` is exactly matched to a
 #' document's name on Google Drive.
-#' @param verbose logical, indicating whether to print informative messages (default \code{TRUE})
+#' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
 #'
 #'
 #' @return character, Google Drive id

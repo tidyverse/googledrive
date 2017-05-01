@@ -7,7 +7,7 @@
 gd_get(id, ..., fields = default_fields, auth = TRUE)
 }
 \arguments{
-\item{id}{document id obtained from `gd_ls`}
+\item{id}{document id obtained from \code{[gd_ls()]}}
 
 \item{...}{name-value pairs to query the API}
 
@@ -21,4 +21,3 @@ tibble
 \description{
 Google Drive Get
 }
-

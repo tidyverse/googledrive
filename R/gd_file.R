@@ -3,7 +3,7 @@
 #' @param id character, Google drive id for file of interest
 #' @param ... name-value pairs to query the API
 #'
-#' @return object of class \code{drive_file} and \code{list}
+#' @return object of class `drive_file` and `list`
 #' @export
 #'
 gd_file <- function(id, ...){

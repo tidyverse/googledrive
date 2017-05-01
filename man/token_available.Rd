@@ -14,4 +14,3 @@ Check if a token is available in \code{googledrive}' internal
 \code{.state} environment.
 }
 \keyword{internal}
-

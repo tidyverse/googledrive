@@ -1,14 +1,14 @@
 # this is fully copied from googlesheets with all `gs` replaced with `gd` and `googlesheets` with `googledrive`
 #' Produce Google token
 #'
-#' If token is not already available, call \code{\link{gd_auth}} to either load
+#' If token is not already available, call `[gd_auth()]` to either load
 #' from cache or initiate OAuth2.0 flow. Return the token -- not "bare" but,
 #' rather, prepared for inclusion in downstream requests. Use
-#' \code{access_token()} to reveal the actual access token, suitable for use
-#' with \code{curl}.
-#' @param verbose logical, indicating whether to print informative messages (default \code{TRUE})
+#' `access_token()` to reveal the actual access token, suitable for use
+#' with `curl`.
+#' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
 #'
-#' @return a \code{request} object (an S3 class provided by \code{httr})
+#' @return a \code{request} object (an S3 class provided by `httr`)
 #'
 #' @keywords internal
 gd_token <- function(verbose = FALSE) {
@@ -21,13 +21,13 @@ include_token_if <- function(cond) if (cond) gd_token() else NULL
 #' @rdname gd_token
 omit_token_if <- function(cond) if (cond) NULL else gd_token()
 
-#' Authorize \code{googledrive}
+#' Authorize `googledrive`
 #'
-#' Authorize \code{googledrive} to view and manage your files. You will be
+#' Authorize `googledrive` to view and manage your files. You will be
 #' directed to a web browser, asked to sign in to your Google account, and to
-#' grant \code{googledrive} permission to operate on your behalf with Google
+#' grant `googledrive` permission to operate on your behalf with Google
 #' Sheets and Google Drive. By default, these user credentials are cached in a
-#' file named \code{.httr-oauth} in the current working directory, from where
+#' file named .`httr-oauth` in the current working directory, from where
 #' they can be automatically refreshed, as necessary.
 #'
 #' Most users, most of the time, do not need to call this function
@@ -35,20 +35,19 @@ omit_token_if <- function(cond) if (cond) NULL else gd_token()
 #' requires authorization. Even when called, the default arguments will often
 #' suffice. However, when necessary, this function allows the user to
 #'
-#' \itemize{
-#'   \item force the creation of a new token
-#'   \item retrieve current token as an object, for possible storage to an
-#'   \code{.rds} file
-#'   \item read the token from an object or from an \code{.rds} file
-#'   \item provide your own app key and secret -- this requires setting up a new
+#'   * force the creation of a new token
+#'   * retrieve current token as an object, for possible storage to an
+#'   `.rds` file
+#'   * read the token from an object or from an `.rds` file
+#'   * provide your own app key and secret -- this requires setting up a new
 #'   project in
-#'   \href{https://console.developers.google.com}{Google Developers Console}
-#'   \item prevent caching of credentials in \code{.httr-oauth}
-#' }
+#'   [Google Developers Console](https://console.developers.google.com)
+#'   * prevent caching of credentials in `.httr-oauth`
 #'
-#' In a direct call to \code{gd_auth}, the user can provide the token, app key
+#'
+#' In a direct call to `gd_auth`, the user can provide the token, app key
 #' and secret explicitly and can dictate whether interactively-obtained
-#' credentials will be cached in \code{.httr_oauth}. If unspecified, these
+#' credentials will be cached in`.httr_oauth`. If unspecified, these
 #' arguments are controlled via options, which, if undefined at the time
 #' \code{googledrive} is loaded, are defined like so:
 #'

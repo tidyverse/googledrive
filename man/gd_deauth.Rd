@@ -23,6 +23,5 @@ gd_deauth()
 }
 }
 \seealso{
-Other auth.functions: \code{\link{gd_auth}}
+Other auth functions: \code{\link{gd_auth}}
 }
-

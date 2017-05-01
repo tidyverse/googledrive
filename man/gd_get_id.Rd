@@ -12,7 +12,7 @@ If it is \code{NULL} (default), the most recently modified document id will be o
 
 \item{...}{name-value pairs to query the API}
 
-\item{fixed}{logical, from \code{\link{grep}}. If \code{TRUE}, \code{search} is exactly matched to a
+\item{fixed}{logical, from \code{[grep()]}. If \code{TRUE}, \code{search} is exactly matched to a
 document's name on Google Drive.}
 
 \item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
@@ -23,4 +23,3 @@ character, Google Drive id
 \description{
 Get Google Drive id
 }
-

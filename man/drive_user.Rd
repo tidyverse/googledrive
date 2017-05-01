@@ -7,7 +7,7 @@
 drive_user(fields = "user", ...)
 }
 \arguments{
-\item{fields}{fields to query, default is `user`.}
+\item{fields}{fields to query, default is \code{user}.}
 
 \item{...}{name-value pairs to query the API}
 }
@@ -18,4 +18,3 @@ list of class \code{drive_user} with user's information
 Google Drive User Information
 }
 \keyword{internal}
-

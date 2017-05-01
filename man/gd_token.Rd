@@ -19,11 +19,10 @@ omit_token_if(cond)
 a \code{request} object (an S3 class provided by \code{httr})
 }
 \description{
-If token is not already available, call \code{\link{gd_auth}} to either load
+If token is not already available, call \code{[gd_auth()]} to either load
 from cache or initiate OAuth2.0 flow. Return the token -- not "bare" but,
 rather, prepared for inclusion in downstream requests. Use
 \code{access_token()} to reveal the actual access token, suitable for use
 with \code{curl}.
 }
 \keyword{internal}
-

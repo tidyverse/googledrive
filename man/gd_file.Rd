@@ -17,4 +17,3 @@ object of class \code{drive_file} and \code{list}
 \description{
 Create a Google Drive file object
 }
-

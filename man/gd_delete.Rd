@@ -17,4 +17,3 @@ logical, indicating whether the delete succeeded
 \description{
 Delete file from Google Drive
 }
-

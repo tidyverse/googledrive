@@ -2,9 +2,9 @@
 #'
 #' @param fields the fields the user would like output - by default only `user`, which will display as detailed above.
 #' @param ... name-value pairs to query the API
-#' @param verbose Logical, indicating whether to print informative messages (default \code{TRUE})
+#' @param verbose Logical, indicating whether to print informative messages (default `TRUE`)
 #'
-#' @return a list of class \code{drive_user} with user's data
+#' @return a list of class `drive_user` with user's data
 #' @export
 #'
 gd_user <- function(fields = "user",..., verbose = TRUE) {

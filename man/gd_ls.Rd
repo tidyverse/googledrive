@@ -12,7 +12,7 @@ If it is \code{NULL} (default), information about all documents in drive will be
 
 \item{...}{name-value pairs to query the API}
 
-\item{fixed}{logical, from \code{\link{grep}}. If \code{TRUE}, \code{search} is exactly matched to a
+\item{fixed}{logical, from \code{[grep()]}. If \code{TRUE``,}search` is exactly matched to a
 document's name on Google Drive.}
 
 \item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})
@@ -26,4 +26,3 @@ tibble containing the name, type, and id of files on your google drive (default 
 \description{
 Tibble of files on Google Drive
 }
-

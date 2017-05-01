@@ -1,7 +1,7 @@
 #' Delete file from Google Drive
 #'
-#' @param file \code{drive_file} object representing the file you would like to delete
-#' @param verbose logical, indicating whether to print informative messages (default \code{TRUE})
+#' @param file `drive_file` object representing the file you would like to delete
+#' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
 #'
 #' @return logical, indicating whether the delete succeeded
 #' @export

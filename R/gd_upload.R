@@ -3,15 +3,14 @@
 #' @param file character, path the the file you'd like to upload
 #' @param name character, what you'd like the uploaded file to be called on Google Drive
 #' @param overwrite logical, do you want to overwrite file already on Google Drive
-#' @param type if type = \code{NULL}, will force type as follows:
-#'  \itemize{
-#'  \item document: .doc, .docx, .txt, .rtf., .html, .odt, .pdf, .jpeg, .png, .gif,.bmp
-#'  \item spreadsheet: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
+#' @param type if type = `NULL`, will force type as follows:
+#'  * document: .doc, .docx, .txt, .rtf., .html, .odt, .pdf, .jpeg, .png, .gif,.bmp
+#'  * spreadsheet: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
 #' .ods
-#'  \item presentation: .opt, .ppt, .pptx, .pptm
-#'  otherwise you can specify \code{document}, \code{spreadsheet}, or \code{presentation}
-#'  }
-#' @param verbose logical, indicating whether to print informative messages (default \code{TRUE})
+#'  * presentation: .opt, .ppt, .pptx, .pptm
+#'  otherwise you can specify `document`, `spreadsheet`, or `presentation`
+#'
+#' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
 #'
 #' @export
 gd_upload <- function(file, name = NULL, overwrite = FALSE, type = NULL, verbose = TRUE){
