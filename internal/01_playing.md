@@ -8,8 +8,10 @@ Lucy D’Agostino McGowan
 -   [User info](#user-info)
 -   [Upload file](#upload-file)
 -   [Update sharing](#update-sharing)
--   [Extract share link](#extract-share-link)
+-   [Re-get file](#re-get-file)
 -   [View permissions](#view-permissions)
+-   [Make it fully shareable](#make-it-fully-shareable)
+-   [Extract share link](#extract-share-link)
 -   [Delete file](#delete-file)
 
 *side note, really excited to include emojis in a non-hacky way, thanks [emo::ji](http://github.com/hadley/emo)* 🌻
@@ -31,13 +33,13 @@ gd_ls()
     ## # A tibble: 100 × 3
     ##                                 name                     type
     ##                                <chr>                    <chr>
-    ## 1   WSDS Concurrent Session Abstract                 document
-    ## 2                               name                 document
-    ## 3  R-Ladies Nashville 6-Month Survey                     form
-    ## 4                               test                 document
+    ## 1                     This is a test                 document
+    ## 2   WSDS Concurrent Session Abstract                 document
+    ## 3                               name                 document
+    ## 4  R-Ladies Nashville 6-Month Survey                     form
     ## 5                               test                 document
     ## 6                               test                 document
-    ## 7                           Untitled application/octet-stream
+    ## 7                               test                 document
     ## 8                           Untitled application/octet-stream
     ## 9                           Untitled application/octet-stream
     ## 10                          Untitled application/octet-stream
@@ -49,10 +51,10 @@ We can search using regular expressions
 gd_ls(search = "test")
 ```
 
-    ## # A tibble: 12 × 3
+    ## # A tibble: 13 × 3
     ##                    name                   type
     ##                   <chr>                  <chr>
-    ## 1                  test               document
+    ## 1        This is a test               document
     ## 2                  test               document
     ## 3                  test               document
     ## 4                  test               document
@@ -60,10 +62,11 @@ gd_ls(search = "test")
     ## 6                  test               document
     ## 7                  test               document
     ## 8                  test               document
-    ## 9              test9999           presentation
-    ## 10            test12345               document
+    ## 9                  test               document
+    ## 10             test9999           presentation
     ## 11            test12345               document
-    ## 12 plotly-latest.min.js application/javascript
+    ## 12            test12345               document
+    ## 13 plotly-latest.min.js application/javascript
     ## # ... with 1 more variables: id <chr>
 
 We can also pass additional query parameters through the `...`, for example
@@ -93,10 +96,10 @@ file <- gd_file(id)
 file
 ```
 
-    ## File name: test 
+    ## File name: This is a test 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
-    ## Last modified: 2017-05-01
+    ## Last modified: 2017-05-03
 
 In addition to the things I've pulled out, there is a `tibble` of permissions as well as a `list` (now named `kitchen_sink`, this should change), that contains all output fields.
 
@@ -104,12 +107,15 @@ In addition to the things I've pulled out, there is a `tibble` of permissions as
 file$permissions
 ```
 
-    ## # A tibble: 1 × 8
-    ##               kind                   id  type            emailAddress
-    ##              <chr>                <chr> <chr>                   <chr>
-    ## 1 drive#permission 13813982488463916564  user lucydagostino@gmail.com
-    ## # ... with 4 more variables: role <chr>, displayName <chr>,
-    ## #   photoLink <chr>, deleted <lgl>
+    ## # A tibble: 3 × 9
+    ##               kind                   id   type
+    ##              <chr>                <chr>  <chr>
+    ## 1 drive#permission 13813982488463916564   user
+    ## 2 drive#permission 07492089897429905190   user
+    ## 3 drive#permission               anyone anyone
+    ## # ... with 6 more variables: emailAddress <chr>, role <chr>,
+    ## #   displayName <chr>, photoLink <chr>, deleted <lgl>,
+    ## #   allowFileDiscovery <lgl>
 
 ``` r
 str(file$kitchen_sink)
@@ -118,25 +124,25 @@ str(file$kitchen_sink)
     ## List of 1
     ##  $ :List of 27
     ##   ..$ kind                 : chr "drive#file"
-    ##   ..$ id                   : chr "1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA"
-    ##   ..$ name                 : chr "test"
+    ##   ..$ id                   : chr "1UpIfHHpDdR0aRWYHdCQcu7Smhx0nFfeNhPG6AQwlIzk"
+    ##   ..$ name                 : chr "This is a test"
     ##   ..$ mimeType             : chr "application/vnd.google-apps.document"
     ##   ..$ starred              : logi FALSE
-    ##   ..$ trashed              : logi TRUE
-    ##   ..$ explicitlyTrashed    : logi TRUE
+    ##   ..$ trashed              : logi FALSE
+    ##   ..$ explicitlyTrashed    : logi FALSE
     ##   ..$ parents              :List of 1
     ##   .. ..$ : chr "0AA9rJumZU4vEUk9PVA"
     ##   ..$ spaces               :List of 1
     ##   .. ..$ : chr "drive"
-    ##   ..$ version              : chr "38667"
-    ##   ..$ webViewLink          : chr "https://docs.google.com/document/d/1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA/edit?usp=drivesdk"
+    ##   ..$ version              : chr "38934"
+    ##   ..$ webViewLink          : chr "https://docs.google.com/document/d/1UpIfHHpDdR0aRWYHdCQcu7Smhx0nFfeNhPG6AQwlIzk/edit?usp=drivesdk"
     ##   ..$ iconLink             : chr "https://drive-thirdparty.googleusercontent.com/16/type/application/vnd.google-apps.document"
-    ##   ..$ thumbnailLink        : chr "https://docs.google.com/feeds/vt?gd=true&id=1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA&v=1&s=AMedNnoAAAAAWQlNbGNRmWkqjV1bT7HH"| __truncated__
+    ##   ..$ thumbnailLink        : chr "https://docs.google.com/feeds/vt?gd=true&id=1UpIfHHpDdR0aRWYHdCQcu7Smhx0nFfeNhPG6AQwlIzk&v=3&s=AMedNnoAAAAAWQlXZ5ixcH-XuCn87ouR"| __truncated__
     ##   ..$ viewedByMe           : logi TRUE
-    ##   ..$ viewedByMeTime       : chr "2017-05-01T17:48:24.013Z"
-    ##   ..$ createdTime          : chr "2017-05-01T17:48:22.992Z"
-    ##   ..$ modifiedTime         : chr "2017-05-01T17:48:24.013Z"
-    ##   ..$ modifiedByMeTime     : chr "2017-05-01T17:48:24.013Z"
+    ##   ..$ viewedByMeTime       : chr "2017-05-03T02:05:59.571Z"
+    ##   ..$ createdTime          : chr "2017-05-03T01:46:55.346Z"
+    ##   ..$ modifiedTime         : chr "2017-05-03T02:06:38.281Z"
+    ##   ..$ modifiedByMeTime     : chr "2017-05-03T02:06:38.281Z"
     ##   ..$ owners               :List of 1
     ##   .. ..$ :List of 6
     ##   .. .. ..$ kind        : chr "drive#user"
@@ -152,7 +158,7 @@ str(file$kitchen_sink)
     ##   .. ..$ me          : logi TRUE
     ##   .. ..$ permissionId: chr "13813982488463916564"
     ##   .. ..$ emailAddress: chr "lucydagostino@gmail.com"
-    ##   ..$ shared               : logi FALSE
+    ##   ..$ shared               : logi TRUE
     ##   ..$ ownedByMe            : logi TRUE
     ##   ..$ capabilities         :List of 15
     ##   .. ..$ canAddChildren                : logi FALSE
@@ -172,7 +178,7 @@ str(file$kitchen_sink)
     ##   .. ..$ canUntrash                    : logi TRUE
     ##   ..$ viewersCanCopyContent: logi TRUE
     ##   ..$ writersCanShare      : logi TRUE
-    ##   ..$ permissions          :List of 1
+    ##   ..$ permissions          :List of 3
     ##   .. ..$ :List of 8
     ##   .. .. ..$ kind        : chr "drive#permission"
     ##   .. .. ..$ id          : chr "13813982488463916564"
@@ -182,6 +188,20 @@ str(file$kitchen_sink)
     ##   .. .. ..$ displayName : chr "Lucy D'Agostino"
     ##   .. .. ..$ photoLink   : chr "https://lh5.googleusercontent.com/-9QyJNrSIw8U/AAAAAAAAAAI/AAAAAAAAAXY/zcdEycKqKQk/s64/photo.jpg"
     ##   .. .. ..$ deleted     : logi FALSE
+    ##   .. ..$ :List of 7
+    ##   .. .. ..$ kind        : chr "drive#permission"
+    ##   .. .. ..$ id          : chr "07492089897429905190"
+    ##   .. .. ..$ type        : chr "user"
+    ##   .. .. ..$ emailAddress: chr "dagostino.mcgowan.stats@gmail.com"
+    ##   .. .. ..$ role        : chr "writer"
+    ##   .. .. ..$ displayName : chr "D'Agostino McGowan Statistics"
+    ##   .. .. ..$ deleted     : logi FALSE
+    ##   .. ..$ :List of 5
+    ##   .. .. ..$ kind              : chr "drive#permission"
+    ##   .. .. ..$ id                : chr "anyone"
+    ##   .. .. ..$ type              : chr "anyone"
+    ##   .. .. ..$ role              : chr "reader"
+    ##   .. .. ..$ allowFileDiscovery: logi TRUE
     ##   ..$ quotaBytesUsed       : chr "0"
 
 User info
@@ -246,14 +266,14 @@ gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@
 
     ## The permissions for file 'This is a test' have been updated
 
-Extract share link
-------------------
+Re-get file
+-----------
+
+*should we do this for you?*
 
 ``` r
-gd_share_link(file)
+file <- gd_file(gd_get_id("This is a test"))
 ```
-
-    ## [1] "https://docs.google.com/document/d/1wN0NbieKY2r39AV9BrNY1SksMu0LJN-jItSpuZr-ELw/edit?usp=drivesdk"
 
 View permissions
 ----------------
@@ -262,12 +282,35 @@ View permissions
 file$permissions
 ```
 
-    ## # A tibble: 1 × 8
-    ##               kind                   id  type            emailAddress
-    ##              <chr>                <chr> <chr>                   <chr>
-    ## 1 drive#permission 13813982488463916564  user lucydagostino@gmail.com
-    ## # ... with 4 more variables: role <chr>, displayName <chr>,
-    ## #   photoLink <chr>, deleted <lgl>
+    ## # A tibble: 3 × 9
+    ##               kind                   id   type
+    ##              <chr>                <chr>  <chr>
+    ## 1 drive#permission 13813982488463916564   user
+    ## 2 drive#permission 07492089897429905190   user
+    ## 3 drive#permission               anyone anyone
+    ## # ... with 6 more variables: emailAddress <chr>, role <chr>,
+    ## #   displayName <chr>, photoLink <chr>, deleted <lgl>,
+    ## #   allowFileDiscovery <lgl>
+
+Make it fully shareable
+-----------------------
+
+``` r
+gd_share(file, role = "reader", type = "anyone", allowFileDiscovery = "true")
+```
+
+    ## The permissions for file 'This is a test' have been updated
+
+Extract share link
+------------------
+
+``` r
+gd_share_link(file)
+```
+
+    ## [1] "https://docs.google.com/document/d/1UpIfHHpDdR0aRWYHdCQcu7Smhx0nFfeNhPG6AQwlIzk/edit?usp=drivesdk"
+
+*this looks exactly the same as the share link from the Google Drive GUI except `usp=drivesdk` instead of `usp=sharing`*
 
 Delete file
 -----------

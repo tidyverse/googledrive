@@ -84,10 +84,14 @@ file
 gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
 ```
 
-## Extract share link
+## Re-get file 
+
+*should we do this for you?*
+
 ```{r}
-gd_share_link(file)
+file <- gd_file(gd_get_id("This is a test"))
 ```
+
 
 ## View permissions
 
@@ -95,7 +99,18 @@ gd_share_link(file)
 file$permissions
 ```
 
+## Make it fully shareable
 
+```{r}
+gd_share(file, role = "reader", type = "anyone", allowFileDiscovery = "true")
+```
+
+## Extract share link
+```{r}
+gd_share_link(file)
+```
+
+*this looks exactly the same as the share link from the Google Drive GUI except `usp=drivesdk` instead of `usp=sharing`*
 
 ## Delete file
 ```{r}

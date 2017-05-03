@@ -55,8 +55,8 @@ gd_upload <- function(file, name = NULL, overwrite = FALSE, type = NULL, verbose
   if (is.null(id)){
     req <- build_request(endpoint = .state$gd_base_url_files_v3,
                          token = gd_token(),
-                         params = list("name" = name,
-                                       "mimeType" = type),
+                         params = list(name = name,
+                                       mimeType = type),
                          method = "POST")
     res <- make_request(req, encode = "json")
     proc_res <- process_request(res)
@@ -67,8 +67,7 @@ url <- file.path(.state$gd_base_url, "upload/drive/v3/files", paste0(id, "?uploa
 
 req <- build_request(endpoint = url,
                      token = gd_token(),
-                     params = list("path" = file,
-                                   "type" = type),
+                     params = httr::upload_file(path = file, type = type),
                      method = "PATCH"
                      )
 
