@@ -96,7 +96,8 @@ file <- gd_file(gd_get_id("This is a test"))
 ## View permissions
 
 ```{r}
-file$permissions
+file$permissions %>%
+  select(displayName,role, type)
 ```
 
 ## Make it fully shareable
