@@ -84,6 +84,18 @@ file
 gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
 ```
 
+## Extract share link
+```{r}
+gd_share_link(file)
+```
+
+## View permissions
+
+```{r}
+file$permissions
+```
+
+
 
 ## Delete file
 ```{r}

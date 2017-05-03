@@ -8,6 +8,8 @@ Lucy D’Agostino McGowan
 -   [User info](#user-info)
 -   [Upload file](#upload-file)
 -   [Update sharing](#update-sharing)
+-   [Extract share link](#extract-share-link)
+-   [View permissions](#view-permissions)
 -   [Delete file](#delete-file)
 
 *side note, really excited to include emojis in a non-hacky way, thanks [emo::ji](http://github.com/hadley/emo)* 🌻
@@ -29,12 +31,12 @@ gd_ls()
     ## # A tibble: 100 × 3
     ##                                 name                     type
     ##                                <chr>                    <chr>
-    ## 1                               name                 document
-    ## 2  R-Ladies Nashville 6-Month Survey                     form
-    ## 3                               test                 document
+    ## 1   WSDS Concurrent Session Abstract                 document
+    ## 2                               name                 document
+    ## 3  R-Ladies Nashville 6-Month Survey                     form
     ## 4                               test                 document
     ## 5                               test                 document
-    ## 6                           Untitled application/octet-stream
+    ## 6                               test                 document
     ## 7                           Untitled application/octet-stream
     ## 8                           Untitled application/octet-stream
     ## 9                           Untitled application/octet-stream
@@ -129,7 +131,7 @@ str(file$kitchen_sink)
     ##   ..$ version              : chr "38667"
     ##   ..$ webViewLink          : chr "https://docs.google.com/document/d/1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA/edit?usp=drivesdk"
     ##   ..$ iconLink             : chr "https://drive-thirdparty.googleusercontent.com/16/type/application/vnd.google-apps.document"
-    ##   ..$ thumbnailLink        : chr "https://docs.google.com/feeds/vt?gd=true&id=1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA&v=1&s=AMedNnoAAAAAWQlEvVu7rP74PxHtJ4wh"| __truncated__
+    ##   ..$ thumbnailLink        : chr "https://docs.google.com/feeds/vt?gd=true&id=1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA&v=1&s=AMedNnoAAAAAWQlNbGNRmWkqjV1bT7HH"| __truncated__
     ##   ..$ viewedByMe           : logi TRUE
     ##   ..$ viewedByMeTime       : chr "2017-05-01T17:48:24.013Z"
     ##   ..$ createdTime          : chr "2017-05-01T17:48:22.992Z"
@@ -243,6 +245,29 @@ gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@
 ```
 
     ## The permissions for file 'This is a test' have been updated
+
+Extract share link
+------------------
+
+``` r
+gd_share_link(file)
+```
+
+    ## [1] "https://docs.google.com/document/d/1wN0NbieKY2r39AV9BrNY1SksMu0LJN-jItSpuZr-ELw/edit?usp=drivesdk"
+
+View permissions
+----------------
+
+``` r
+file$permissions
+```
+
+    ## # A tibble: 1 × 8
+    ##               kind                   id  type            emailAddress
+    ##              <chr>                <chr> <chr>                   <chr>
+    ## 1 drive#permission 13813982488463916564  user lucydagostino@gmail.com
+    ## # ... with 4 more variables: role <chr>, displayName <chr>,
+    ## #   photoLink <chr>, deleted <lgl>
 
 Delete file
 -----------
