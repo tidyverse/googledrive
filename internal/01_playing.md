@@ -7,6 +7,7 @@ Lucy D’Agostino McGowan
 -   [Metadata](#metadata)
 -   [User info](#user-info)
 -   [Upload file](#upload-file)
+-   [Update sharing](#update-sharing)
 -   [Delete file](#delete-file)
 
 *side note, really excited to include emojis in a non-hacky way, thanks [emo::ji](http://github.com/hadley/emo)* 🌻
@@ -26,18 +27,18 @@ gd_ls()
 ```
 
     ## # A tibble: 100 × 3
-    ##              name                     type
-    ##             <chr>                    <chr>
-    ## 1  This is a test                 document
-    ## 2            test                 document
-    ## 3            test                 document
-    ## 4            test                 document
-    ## 5        Untitled application/octet-stream
-    ## 6        Untitled application/octet-stream
-    ## 7            name                 document
-    ## 8        Untitled application/octet-stream
-    ## 9        Untitled application/octet-stream
-    ## 10       Untitled application/octet-stream
+    ##                                 name                     type
+    ##                                <chr>                    <chr>
+    ## 1                               name                 document
+    ## 2  R-Ladies Nashville 6-Month Survey                     form
+    ## 3                               test                 document
+    ## 4                               test                 document
+    ## 5                               test                 document
+    ## 6                           Untitled application/octet-stream
+    ## 7                           Untitled application/octet-stream
+    ## 8                           Untitled application/octet-stream
+    ## 9                           Untitled application/octet-stream
+    ## 10                          Untitled application/octet-stream
     ## # ... with 90 more rows, and 1 more variables: id <chr>
 
 We can search using regular expressions
@@ -46,10 +47,10 @@ We can search using regular expressions
 gd_ls(search = "test")
 ```
 
-    ## # A tibble: 13 × 3
+    ## # A tibble: 12 × 3
     ##                    name                   type
     ##                   <chr>                  <chr>
-    ## 1        This is a test               document
+    ## 1                  test               document
     ## 2                  test               document
     ## 3                  test               document
     ## 4                  test               document
@@ -57,11 +58,10 @@ gd_ls(search = "test")
     ## 6                  test               document
     ## 7                  test               document
     ## 8                  test               document
-    ## 9                  test               document
-    ## 10             test9999           presentation
+    ## 9              test9999           presentation
+    ## 10            test12345               document
     ## 11            test12345               document
-    ## 12            test12345               document
-    ## 13 plotly-latest.min.js application/javascript
+    ## 12 plotly-latest.min.js application/javascript
     ## # ... with 1 more variables: id <chr>
 
 We can also pass additional query parameters through the `...`, for example
@@ -91,7 +91,7 @@ file <- gd_file(id)
 file
 ```
 
-    ## File name: This is a test 
+    ## File name: test 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
     ## Last modified: 2017-05-01
@@ -116,25 +116,25 @@ str(file$kitchen_sink)
     ## List of 1
     ##  $ :List of 27
     ##   ..$ kind                 : chr "drive#file"
-    ##   ..$ id                   : chr "1PMmmnNCAAOAxA9sOlGhuRAsgQKZurOidAvlj0weMWKk"
-    ##   ..$ name                 : chr "This is a test"
+    ##   ..$ id                   : chr "1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA"
+    ##   ..$ name                 : chr "test"
     ##   ..$ mimeType             : chr "application/vnd.google-apps.document"
     ##   ..$ starred              : logi FALSE
-    ##   ..$ trashed              : logi FALSE
-    ##   ..$ explicitlyTrashed    : logi FALSE
+    ##   ..$ trashed              : logi TRUE
+    ##   ..$ explicitlyTrashed    : logi TRUE
     ##   ..$ parents              :List of 1
     ##   .. ..$ : chr "0AA9rJumZU4vEUk9PVA"
     ##   ..$ spaces               :List of 1
     ##   .. ..$ : chr "drive"
-    ##   ..$ version              : chr "38797"
-    ##   ..$ webViewLink          : chr "https://docs.google.com/document/d/1PMmmnNCAAOAxA9sOlGhuRAsgQKZurOidAvlj0weMWKk/edit?usp=drivesdk"
+    ##   ..$ version              : chr "38667"
+    ##   ..$ webViewLink          : chr "https://docs.google.com/document/d/1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA/edit?usp=drivesdk"
     ##   ..$ iconLink             : chr "https://drive-thirdparty.googleusercontent.com/16/type/application/vnd.google-apps.document"
-    ##   ..$ thumbnailLink        : chr "https://docs.google.com/feeds/vt?gd=true&id=1PMmmnNCAAOAxA9sOlGhuRAsgQKZurOidAvlj0weMWKk&v=2&s=AMedNnoAAAAAWQe7Y8tDUk1j4SEnBhLn"| __truncated__
+    ##   ..$ thumbnailLink        : chr "https://docs.google.com/feeds/vt?gd=true&id=1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA&v=1&s=AMedNnoAAAAAWQlEvVu7rP74PxHtJ4wh"| __truncated__
     ##   ..$ viewedByMe           : logi TRUE
-    ##   ..$ viewedByMeTime       : chr "2017-05-01T20:47:15.533Z"
-    ##   ..$ createdTime          : chr "2017-05-01T20:33:29.415Z"
-    ##   ..$ modifiedTime         : chr "2017-05-01T20:47:15.533Z"
-    ##   ..$ modifiedByMeTime     : chr "2017-05-01T20:47:15.533Z"
+    ##   ..$ viewedByMeTime       : chr "2017-05-01T17:48:24.013Z"
+    ##   ..$ createdTime          : chr "2017-05-01T17:48:22.992Z"
+    ##   ..$ modifiedTime         : chr "2017-05-01T17:48:24.013Z"
+    ##   ..$ modifiedByMeTime     : chr "2017-05-01T17:48:24.013Z"
     ##   ..$ owners               :List of 1
     ##   .. ..$ :List of 6
     ##   .. .. ..$ kind        : chr "drive#user"
@@ -233,7 +233,16 @@ file
     ## File name: This is a test 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
-    ## Last modified: 2017-05-01
+    ## Last modified: 2017-05-03
+
+Update sharing
+--------------
+
+``` r
+gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
+```
+
+    ## The permissions for file 'This is a test' have been updated
 
 Delete file
 -----------

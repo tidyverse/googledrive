@@ -78,8 +78,17 @@ file <- gd_file(gd_get_id("This is a test"))
 file
 ```
 
+## Update sharing
+
+```{r}
+gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
+```
+
+
 ## Delete file
 ```{r}
 gd_delete(file)
 ```
+
+
 
