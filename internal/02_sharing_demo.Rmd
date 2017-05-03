@@ -1,0 +1,86 @@
+---
+title: "sharing demo"
+author: "Lucy D’Agostino McGowan"
+date: "5/3/2017"
+output: 
+  github_document:
+    toc: true
+---
+
+This is a little demo to show how we may view sharing.
+
+```{r, message = FALSE, warning = FALSE}
+library('dplyr')
+library('googledrive')
+```
+
+```{r}
+write.table("Sharing demo", "sharing_demo.txt")
+gd_upload("sharing_demo.txt")
+```
+
+```{r}
+my_file <- gd_get_id("sharing_demo") %>%
+  gd_file()
+```
+
+## check current permissions
+```{r}
+my_file$permissions
+```
+
+cool beans - it's private!
+
+## change permissions (anyone with link)
+
+```{r}
+my_file %>%
+  gd_share(role = "reader", type = "anyone")
+```
+
+Let's see what that did
+
+```{r}
+my_file <- gd_get_id("sharing_demo") %>%
+  gd_file()
+
+my_file$permissions
+```
+
+Now anyone with the link can view it
+
+## change permissions (anyone in the `r emo::ji('world')`)
+
+```{r}
+my_file %>%
+  gd_share(role = "reader", type = "anyone", allowFileDiscovery = "true")
+```
+
+Let's see what that did
+
+```{r}
+my_file <- gd_get_id("sharing_demo") %>%
+  gd_file()
+
+my_file$permissions
+```
+
+## make it easier to see
+
+I've added `access` to the Google Drive file object
+```{r}
+my_file$access
+```
+
+and also to the print method:
+
+```{r}
+my_file
+```
+
+## clean up
+
+```{r}
+gd_delete(my_file)
+```
+
