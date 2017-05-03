@@ -24,7 +24,8 @@ gd_publish <- function(file, verbose = TRUE){
   res <- make_request(req)
   proc_res <- process_request(res)
 
-  rev_id <- proc_res$revisions[[1]]$id
+  last_rev <- length(proc_res$revisions)
+  rev_id <- proc_res$revisions[[last_rev]]$id
 
   url <- paste0(url, "/",rev_id, "?fields=published")
   req <- build_request(endpoint = url,
@@ -65,7 +66,8 @@ gd_check_publish <- function (file, verbose = TRUE){
   res <- make_request(req)
   proc_res <- process_request(res)
 
-  rev_id <- proc_res$revisions[[1]]$id
+  last_rev <- length(proc_res$revisions)
+  rev_id <- proc_res$revisions[[last_rev]]$id
 
   url <- file.path(url,rev_id)
   req <- build_request(endpoint = url,
