@@ -1,0 +1,51 @@
+---
+title: "publish"
+author: "Lucy D’Agostino McGowan"
+date: "5/3/2017"
+output: 
+  github_document:
+    toc: true
+---
+
+This is a little demo to show how we can check if a file is published & publish it if we so desire.
+
+```{r, message = FALSE, warning = FALSE}
+library('dplyr')
+library('googledrive')
+```
+
+```{r}
+write.table("This is a little demo", "demo.txt")
+gd_upload("demo.txt", name = "Happy Little Demo")
+```
+
+```{r}
+my_file <- gd_get_id("Happy Little Demo") %>%
+  gd_file
+```
+
+## check published status
+
+```{r}
+my_file %>%
+  gd_check_publish
+```
+
+## publish it
+```{r}
+my_file %>%
+  gd_publish
+```
+
+## check again
+
+```{r}
+my_file %>%
+  gd_check_publish
+```
+
+## clean up
+
+```{r}
+gd_delete(my_file)
+```

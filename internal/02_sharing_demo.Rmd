@@ -15,12 +15,12 @@ library('googledrive')
 ```
 
 ```{r}
-write.table("Sharing demo", "sharing_demo.txt")
-gd_upload("sharing_demo.txt")
+write.table("This is a little demo", "demo.txt")
+gd_upload("demo.txt", "Happy Little Demo")
 ```
 
 ```{r}
-my_file <- gd_get_id("sharing_demo") %>%
+my_file <- gd_get_id("Happy Little Demo") %>%
   gd_file()
 ```
 
@@ -41,7 +41,7 @@ my_file %>%
 Let's see what that did
 
 ```{r}
-my_file <- gd_get_id("sharing_demo") %>%
+my_file <- gd_get_id("Happy Little Demo") %>%
   gd_file()
 
 my_file$permissions
@@ -59,7 +59,7 @@ my_file %>%
 Let's see what that did
 
 ```{r}
-my_file <- gd_get_id("sharing_demo") %>%
+my_file <- gd_get_id("Happy Little Demo") %>%
   gd_file()
 
 my_file$permissions
