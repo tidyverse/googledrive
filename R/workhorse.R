@@ -42,8 +42,14 @@ set_method <- function(x) {
 ## may introduce the :parameter notation in endpoint later :)
 
 set_query <- function(x){
-  if (x$method != "GET" | length(x$params) == 0L) return(x)
-
+  if (length(x$params) == 0L) return(x)
+  if (x$method != "GET") {
+    if (grepl("?", x$endpoint)) {
+      x$query = sub(".*\\?","",x$endpoint)
+      return(x)
+    }
+    return(x)
+  }
   if (!all(has_names(x$params))){
     spf("All parameters must be named.")
   }
