@@ -44,7 +44,7 @@ set_method <- function(x) {
 set_query <- function(x){
   if (length(x$params) == 0L) return(x)
   if (x$method != "GET") {
-    if (grepl("?", x$endpoint)) {
+    if (grepl("\\?", x$endpoint)) {
       x$query = sub(".*\\?","",x$endpoint)
       return(x)
     }

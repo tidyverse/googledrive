@@ -4,7 +4,7 @@
 \alias{gd_publish}
 \title{Publish Google Drive file}
 \usage{
-gd_publish(file, verbose = TRUE)
+gd_publish(file, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{\code{drive_file} object representing the file you would like to publish}

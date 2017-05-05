@@ -12,7 +12,7 @@ gd_check_publish(file, verbose = TRUE)
 \item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
 }
 \value{
-logical, whether the file is published
+\code{drive_file} object, a list with published information as a \code{tibble} under the list element \code{publish}
 }
 \description{
 Check if Google Drive file is published

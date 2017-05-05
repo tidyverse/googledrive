@@ -6,7 +6,14 @@
 #' @return object of class `drive_file` and `list`
 #' @export
 #'
-gd_file <- function(id, ...){
+gd_file <- function(id = NULL, ...){
+
+  request <- build_gd_file(id = id, ...)
+  response <- make_request(request)
+  process_gd_file(response)
+}
+
+build_gd_file <- function(id = NULL, ...){
   default_fields <- c("appProperties", "capabilities", "contentHints", "createdTime",
                       "description", "explicitlyTrashed", "fileExtension",
                       "folderColorRgb", "fullFileExtension", "headRevisionId",
@@ -22,12 +29,14 @@ gd_file <- function(id, ...){
   fields <- paste(default_fields, collapse = ",")
   url <- file.path(.state$gd_base_url_files_v3, id)
 
-  req <- build_request(endpoint = url,
-                       token = gd_token(),
-                       params = list(...,
-                                     "fields" = fields))
-  res <- make_request(req)
-  proc_res <- process_request(res)
+  build_request(endpoint = url,
+                token = gd_token(),
+                params = list(...,
+                              fields = fields))
+}
+
+process_gd_file <- function(response = response){
+  proc_res <- process_request(response)
 
   metadata <- list(
     name = proc_res$name,
@@ -49,13 +58,6 @@ gd_file <- function(id, ...){
     },
     #everything else
     kitchen_sink = proc_res
-    # kitchen_sink = list(proc_res[!(names(proc_res) %in% c("name",
-    #                                                       "id",
-    #                                                       "mimeType",
-    #                                                       "modifiedTime",
-    #                                                       "createdTime",
-    #                                                       "starred",
-    #                                                       "permissions"))])
   )
 
   perm <- metadata$permissions
@@ -71,7 +73,6 @@ gd_file <- function(id, ...){
   metadata <- structure(metadata, class = c("drive_file", "list"))
   metadata
 }
-
 
 #' @export
 print.drive_file <- function(x, ...){

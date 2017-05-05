@@ -4,7 +4,7 @@
 \alias{gd_delete}
 \title{Delete file from Google Drive}
 \usage{
-gd_delete(file, verbose = TRUE)
+gd_delete(file = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{\code{drive_file} object representing the file you would like to delete}

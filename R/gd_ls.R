@@ -15,37 +15,46 @@
 #'
 gd_ls <- function(search = NULL, ..., fixed = FALSE, verbose = TRUE){
 
-  req <- build_request(endpoint = .state$gd_base_url_files_v3,
-                       token = gd_token(),
-                       params = list(...))
-  res <- make_request(req)
-  proc_res <- process_request(res)
+  request <- build_gd_ls(...)
+  response <- make_request(request)
+  process_gd_ls(response = response, search = search, fixed = fixed, verbose = verbose)
 
-  req_tbl <- tibble::tibble(
-    name = purrr::map_chr(proc_res$files, "name"),
-    type = sub('.*\\.', '',purrr::map_chr(proc_res$files, "mimeType")),
-    id = purrr::map_chr(proc_res$files, "id")
-  )
+}
 
-  if (is.null(search)){
-    return(req_tbl)
-  } else{
-    if(!inherits(search, "character")){
-      stop("Please update `search` to be a character string or vector of character strings.")
-    }
+build_gd_ls <- function(...){
+  build_request(endpoint = .state$gd_base_url_files_v3,
+                token = gd_token(),
+                params = list(...))
+}
+
+process_gd_ls <- function(response = NULL, search = NULL, fixed = FALSE, verbose = TRUE){
+proc_res <- process_request(response)
+
+req_tbl <- tibble::tibble(
+  name = purrr::map_chr(proc_res$files, "name"),
+  type = sub('.*\\.', '',purrr::map_chr(proc_res$files, "mimeType")),
+  id = purrr::map_chr(proc_res$files, "id")
+)
+
+if (is.null(search)){
+  return(req_tbl)
+} else{
+  if(!inherits(search, "character")){
+    stop("Please update `search` to be a character string or vector of character strings.")
   }
+}
 
-  if (length(search) > 1) {
-    search <- paste(search, collapse = "|")
+if (length(search) > 1) {
+  search <- paste(search, collapse = "|")
+}
+
+keep_names <- grep(search, req_tbl$name, fixed = fixed)
+
+if(length(keep_names) == 0L){
+  if(verbose){
+    message(sprintf("We couldn't find any documents matching '%s'. \nTry updating your `search` critria.", gsub("\\|", "' or '", search)))
   }
-
-  keep_names <- grep(search, req_tbl$name, fixed = fixed)
-
-  if(length(keep_names) == 0L){
-    if(verbose){
-      message(sprintf("We couldn't find any documents matching '%s'. \nTry updating your `search` critria.", gsub("\\|", "' or '", search)))
-    }
-    invisible(NULL)
-  } else
-    req_tbl[keep_names,]
+  invisible(NULL)
+} else
+  req_tbl[keep_names,]
 }

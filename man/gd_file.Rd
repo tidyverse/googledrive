@@ -4,7 +4,7 @@
 \alias{gd_file}
 \title{Create a Google Drive file object}
 \usage{
-gd_file(id, ...)
+gd_file(id = NULL, ...)
 }
 \arguments{
 \item{id}{character, Google drive id for file of interest}
