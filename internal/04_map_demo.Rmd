@@ -1,0 +1,72 @@
+---
+title: "Untitled"
+author: "Lucy D’Agostino McGowan"
+date: "5/5/2017"
+output: 
+  github_document:
+    toc: true
+---
+
+```{r}
+library("dplyr")
+library("googledrive")
+```
+
+## grab a file
+```{r}
+file <- gd_get_id("test") %>%
+  gd_file
+```
+
+## lets take a peak
+```{r}
+file
+```
+
+
+## we can also pull out multiple files
+```{r}
+lst_of_files <- purrr::map(.x =gd_get_id("test", n = 3), gd_file) 
+```
+
+## change access
+```{r}
+file %>%
+  gd_share(role = "reader", type = "anyone") -> file_update
+```
+
+## check access
+```{r}
+file_update
+```
+
+## upload one
+```{r}
+gd_upload("~/desktop/hide/test.txt", "This is a test")
+```
+
+## upload to a specific folder
+```{r}
+gd_ls()
+```
+
+I'll use my `THIS IS A TEST` folder.
+
+```{r}
+folder <- gd_get_id("THIS IS A TEST") %>%
+  gd_file
+```
+
+
+```{r}
+new_file <- gd_upload("~/desktop/hide/test.txt", folder = folder)
+```
+
+## delete a lot!
+
+```{r}
+to_delete <- purrr::map(gd_get_id("test", n = 3),  gd_file)
+ 
+purrr::map(to_delete, gd_delete)
+```
+
