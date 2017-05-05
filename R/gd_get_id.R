@@ -14,6 +14,6 @@ gd_get_id <- function(search, ..., fixed = FALSE, verbose = TRUE){
 
   #if (missing(orderBy)) orderBy = "modifiedTime desc"
 
-  id <- as.character(gd_ls(search = search, orderBy="modifiedTime desc")[1,3])
+  id <- as.character(gd_ls(search = search, fixed = fixed, orderBy="modifiedTime desc")[1,3])
   structure(id, class=c("drive_id","character"))
 }

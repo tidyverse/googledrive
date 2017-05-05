@@ -8,7 +8,7 @@
 #'  * **spreadsheet**: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
 #' .ods
 #'  * **presentation**: .opt, .ppt, .pptx, .pptm
-#'  otherwise you can specify `document`, `spreadsheet`, or `presentation`
+#'  otherwise you can specify `document`, `spreadsheet`, or `presentation`. Files with no extension will be assumed to be a `folder`
 #'
 #' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
 #'
@@ -17,6 +17,9 @@
 gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, verbose = TRUE){
 
 request <- build_gd_upload(file = file, name = name, overwrite = overwrite, type = type, verbose = verbose)
+
+if (inherits(request, "drive_file")) return(invisible(request))
+
 response <- make_request(request)
 process_gd_upload(response = response, file = file, verbose = verbose)
 
@@ -31,7 +34,7 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
 
   #default to .txt is a doc
   if (!is.null(type)){
-    stopifnot(type %in% c("document","spreadsheet","presentation"))
+    stopifnot(type %in% c("document","spreadsheet","presentation","folder"))
     type <- paste0("application/vnd.google-apps.",type)
   } else {
     if (ext %in% c("doc, docx", "txt", "rtf", "html", "odt", "pdf", "jpeg",
@@ -42,11 +45,16 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
       type <- "application/vnd.google-apps.spreadsheet"
     } else if (ext %in% c("opt", "ppt", "pptx", "pptm")){
       type <- "application/vnd.google-apps.presentation"
+    } else if (ext == ""){
+      type <- "application/vnd.google-apps.folder"
     } else {
       spf("We cannot currently upload a file with this extension to Google Drive: %s", ext)
     }
   }
 
+  if (type == "application/vnd.google-apps.folder" & overwrite){
+    spf("You are not able to overwrite a folder, please set `overwrite = FALSE`")
+  }
   if (is.null(name)){
     name <- tools::file_path_sans_ext(basename(file))
   }
@@ -69,6 +77,23 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
     res <- make_request(req, encode = "json")
     proc_res <- process_request(res)
     id <- proc_res$id
+  }
+
+  if (type == "application/vnd.google-apps.folder" & internet){
+    success <- proc_res$id == gd_get_id(name, fixed = TRUE)
+
+    if (success) {
+      if (verbose) {
+        message(sprintf("File uploaded to Google Drive: \n%s \nAs the Google %s named:\n%s",
+                        file,
+                        sub('.*\\.','',proc_res$mimeType),
+                        proc_res$name))
+      }
+    } else {
+      spf("Zoinks! the file doesn't seem to have uploaded")
+    }
+
+    return(invisible(gd_file(proc_res$id)))
   }
 
   url <- file.path(.state$gd_base_url, "upload/drive/v3/files", paste0(id, "?uploadType=media"))
