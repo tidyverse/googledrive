@@ -4,7 +4,7 @@
 \alias{gd_check_publish}
 \title{Check if Google Drive file is published}
 \usage{
-gd_check_publish(file, verbose = TRUE)
+gd_check_publish(file = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{\code{drive_file} object representing the file you would like to check the published status of}

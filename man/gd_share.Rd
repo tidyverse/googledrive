@@ -4,8 +4,8 @@
 \alias{gd_share}
 \title{Update Google Drive file share permissions}
 \usage{
-gd_share(file, role = NULL, type = NULL, email = NULL, message = NULL,
-  ..., verbose = TRUE)
+gd_share(file = NULL, role = NULL, type = NULL, email = NULL,
+  message = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{\code{drive_file} object representing the file you would like to delete}
@@ -36,7 +36,7 @@ gd_share(file, role = NULL, type = NULL, email = NULL, message = NULL,
 \item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
 }
 \value{
-logical, indicating whether the permissions update succeeded
+\code{drive_file} object updated with new sharing information
 }
 \description{
 Update Google Drive file share permissions

@@ -4,7 +4,7 @@
 \alias{gd_upload}
 \title{Upload a file to Google Drive}
 \usage{
-gd_upload(file, name = NULL, overwrite = FALSE, type = NULL,
+gd_upload(file = NULL, name = NULL, overwrite = FALSE, type = NULL,
   verbose = TRUE)
 }
 \arguments{
@@ -16,14 +16,17 @@ gd_upload(file, name = NULL, overwrite = FALSE, type = NULL,
 
 \item{type}{if type = \code{NULL}, will force type as follows:
 \itemize{
-\item document: .doc, .docx, .txt, .rtf., .html, .odt, .pdf, .jpeg, .png, .gif,.bmp
-\item spreadsheet: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
+\item \strong{document}: .doc, .docx, .txt, .rtf., .html, .odt, .pdf, .jpeg, .png, .gif,.bmp
+\item \strong{spreadsheet}: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
 .ods
-\item presentation: .opt, .ppt, .pptx, .pptm
+\item \strong{presentation}: .opt, .ppt, .pptx, .pptm
 otherwise you can specify \code{document}, \code{spreadsheet}, or \code{presentation}
 }}
 
 \item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
+}
+\value{
+object of class \code{drive_file} and \code{list} that contains uploaded file's information
 }
 \description{
 Upload a file to Google Drive

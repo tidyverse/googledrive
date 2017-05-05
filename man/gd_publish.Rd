@@ -4,7 +4,7 @@
 \alias{gd_publish}
 \title{Publish Google Drive file}
 \usage{
-gd_publish(file, publish = TRUE, ..., verbose = TRUE)
+gd_publish(file = NULL, publish = TRUE, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{\code{drive_file} object representing the file you would like to publish}
@@ -16,7 +16,7 @@ gd_publish(file, publish = TRUE, ..., verbose = TRUE)
 \item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
 }
 \value{
-\code{drive_file} object, a list with published information as a \code{tibble} under the list element \code{publish}
+\code{drive_file} object, a list with published information as a \code{tibble} added under the list element \code{publish}
 }
 \description{
 Publish Google Drive file
