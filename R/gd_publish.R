@@ -5,7 +5,7 @@
 #' @param ... name-value pairs to add to the API request body, for example `publishAuto = FALSE` will ensure that each subsequent revision will not be automatically published (default here is `publishAuto = TRUE`)
 #' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
 #'
-#' @return `drive_file` object, a list with published information as a `tibble` under the list element `publish`
+#' @return `drive_file` object, a list with published information as a `tibble` added under the list element `publish`
 #' @export
 gd_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRUE){
 

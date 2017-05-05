@@ -17,9 +17,19 @@
 #' @param ... name-value pairs to add to the API request body
 #' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
 #'
-#' @return logical, indicating whether the permissions update succeeded
+#' @return `drive_file` object updated with new sharing information
 #' @export
-gd_share <- function(file, role = NULL, type = NULL, email = NULL, message = NULL, ..., verbose = TRUE){
+gd_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, message = NULL, ..., verbose = TRUE){
+
+  request <- build_gd_share(file = file, role = role, type = type, email = email, message = message, ...)
+  response <- make_request(request, encode = 'json')
+  process_gd_share(response = response, file = file, verbose = verbose)
+
+  file <- gd_file(file$id)
+  invisible(file)
+}
+
+build_gd_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, message = NULL, ...){
 
   if (!inherits(file, "drive_file")) {
     spf("Input must be a `drive_file`. See `gd_file()`")
@@ -49,21 +59,21 @@ gd_share <- function(file, role = NULL, type = NULL, email = NULL, message = NUL
     url <- paste0(url,"?emailMessage=", message)
   }
 
-  req <- build_request(endpoint = url,
-                       token = gd_token(),
-                       params = body,
-                       method = "POST")
+  build_request(endpoint = url,
+                token = gd_token(),
+                params = body,
+                method = "POST")
+}
 
-  res <- make_request(req, encode = 'json')
-  process_request(res, content = FALSE)
+process_gd_share <- function(response = NULL, file = NULL, verbose = TRUE){
+
+  process_request(response, content = FALSE)
 
   if (verbose==TRUE){
-    if (res$status_code == 200L){
+    if (response$status_code == 200L){
       message(sprintf("The permissions for file '%s' have been updated", file$name))
     } else {
       message(sprintf("Zoinks! Something went wrong, '%s' permissions were not updated.", file$name))
     }
   }
-
-  if(res$status_code == 200L) invisible(TRUE) else invisible(FALSE)
 }
