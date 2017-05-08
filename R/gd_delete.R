@@ -14,7 +14,7 @@ gd_delete <- function(file = NULL, verbose = TRUE){
 
 }
 
-build_gd_delete <- function(file = NULL) {
+build_gd_delete <- function(file = NULL, token = gd_token()) {
   if(!inherits(file, "drive_file")){
     spf("Input must be a `drive_file`. See `gd_file()`")
   }
@@ -23,7 +23,7 @@ build_gd_delete <- function(file = NULL) {
   url <- file.path(.state$gd_base_url_files_v3, id)
 
   build_request(endpoint = url,
-                token = gd_token(),
+                token = token,
                 method = "DELETE")
 }
 

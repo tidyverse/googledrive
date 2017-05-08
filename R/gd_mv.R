@@ -15,7 +15,7 @@ gd_mv <- function(file = NULL, folder = NULL){
   invisible(file)
 }
 
-build_gd_mv <- function(file = NULL, folder = NULL){
+build_gd_mv <- function(file = NULL, folder = NULL, token = gd_token()){
   if(!inherits(file, "drive_file")){
     spf("Input `file` must be a `drive_file`. See `gd_file()`")
   }
@@ -28,6 +28,6 @@ build_gd_mv <- function(file = NULL, folder = NULL){
                    paste0(file$id, "?addParents=",folder$id,"&removeParents=",file$kitchen_sink$parents[[1]]))
 
                    build_request(endpoint = url,
-                                 token = gd_token(),
+                                 token = token,
                                  method = "PATCH")
 }

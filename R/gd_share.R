@@ -29,7 +29,7 @@ gd_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, messag
   invisible(file)
 }
 
-build_gd_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, message = NULL, ...){
+build_gd_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, message = NULL, ..., token = gd_token()){
 
   if (!inherits(file, "drive_file")) {
     spf("Input must be a `drive_file`. See `gd_file()`")
@@ -60,7 +60,7 @@ build_gd_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, 
   }
 
   build_request(endpoint = url,
-                token = gd_token(),
+                token = token,
                 params = body,
                 method = "POST")
 }

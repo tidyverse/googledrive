@@ -13,7 +13,7 @@ gd_file <- function(id = NULL, ...){
   process_gd_file(response)
 }
 
-build_gd_file <- function(id = NULL, ...){
+build_gd_file <- function(id = NULL, ..., token = gd_token()){
   default_fields <- c("appProperties", "capabilities", "contentHints", "createdTime",
                       "description", "explicitlyTrashed", "fileExtension",
                       "folderColorRgb", "fullFileExtension", "headRevisionId",
@@ -30,7 +30,7 @@ build_gd_file <- function(id = NULL, ...){
   url <- file.path(.state$gd_base_url_files_v3, id)
 
   build_request(endpoint = url,
-                token = gd_token(),
+                token = token,
                 params = list(...,
                               fields = fields))
 }

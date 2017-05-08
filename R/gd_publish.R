@@ -22,7 +22,7 @@ gd_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRUE){
   gd_check_publish(file = file_update, verbose = FALSE)
 }
 
-build_gd_publish <- function(file = NULL, publish = TRUE, ...){
+build_gd_publish <- function(file = NULL, publish = TRUE, ..., token = gd_token()){
 
   x <- list(...)
   if ("publishAuto" %in% names(x)){
@@ -40,7 +40,7 @@ build_gd_publish <- function(file = NULL, publish = TRUE, ...){
   url <- file.path(.state$gd_base_url_files_v3, id,"revisions", rev_id)
   build_request(endpoint = url,
                params = params,
-               token = gd_token(),
+               token = token,
                method = "PATCH")
 }
 
@@ -74,7 +74,7 @@ gd_check_publish <- function (file = NULL, verbose = TRUE){
   process_gd_check_publish(response = response, file = file, verbose = verbose)
 }
 
-build_gd_check_publish1 <- function(file = NULL){
+build_gd_check_publish1 <- function(file = NULL, token = gd_token()){
   if(!inherits(file, "drive_file")){
     spf("Input must be a `drive_file`. See `gd_file()`")
   }
@@ -84,10 +84,10 @@ build_gd_check_publish1 <- function(file = NULL){
   url <- file.path(.state$gd_base_url_files_v3, id,"revisions")
 
   build_request(endpoint = url,
-                token = gd_token())
+                token = token)
 }
 
-build_gd_check_publish2 <- function(file = NULL, proc_res = NULL){
+build_gd_check_publish2 <- function(file = NULL, proc_res = NULL, token = gd_token()){
   last_rev <- length(proc_res$revisions)
   rev_id <- proc_res$revisions[[last_rev]]$id
 
@@ -96,7 +96,7 @@ build_gd_check_publish2 <- function(file = NULL, proc_res = NULL){
   id <- file$id
   url <- file.path(.state$gd_base_url_files_v3, id,"revisions",rev_id)
   req <- build_request(endpoint = url,
-                       token = gd_token(),
+                       token = token,
                        params = list(fields = fields))
 }
 

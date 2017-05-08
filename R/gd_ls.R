@@ -21,9 +21,9 @@ gd_ls <- function(search = NULL, ..., fixed = FALSE, verbose = TRUE){
 
 }
 
-build_gd_ls <- function(...){
+build_gd_ls <- function(..., token = gd_token()){
   build_request(endpoint = .state$gd_base_url_files_v3,
-                token = gd_token(),
+                token = token,
                 params = list(...))
 }
 

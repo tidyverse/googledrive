@@ -25,7 +25,7 @@ process_gd_upload(response = response, file = file, verbose = verbose)
 
 }
 
-build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, verbose = TRUE, internet = TRUE){
+build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, verbose = TRUE, token = gd_token(), internet = TRUE){
   if (!file.exists(file)) {
     spf("\"%s\" does not exist!", file)
   }
@@ -73,7 +73,7 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
     url <- .state$gd_base_url_files_v3
 
     req <- build_request(endpoint = url,
-                         token = gd_token(),
+                         token = token,
                          params = list(name = name,
                                        mimeType = type),
                          method = "POST")
@@ -102,7 +102,7 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
   url <- file.path(.state$gd_base_url, "upload/drive/v3/files", paste0(id, "?uploadType=media"))
 
   build_request(endpoint = url,
-                token = gd_token(),
+                token = token,
                 params = httr::upload_file(path = file, type = type),
                 method = "PATCH")
 

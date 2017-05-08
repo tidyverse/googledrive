@@ -17,3 +17,4 @@ Imports: httr,
     dplyr,
     purrr,
     tibble
+Suggests: testthat
