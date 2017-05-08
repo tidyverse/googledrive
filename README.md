@@ -3,7 +3,7 @@
 googledrive
 ===========
 
-[![Build Status](https://travis-ci.org/LucyMcGowan/googledrive.svg?branch=master)](https://travis-ci.org/LucyMcGowan/googledrive)
+[![Build Status](https://travis-ci.org/LucyMcGowan/googledrive.svg?branch=master)](https://travis-ci.org/LucyMcGowan/googledrive)[![Coverage Status](https://coveralls.io/repos/LucyMcGowan/googledrive/badge.svg)](https://coveralls.io/r/LucyMcGowan/googledrive)
 
 🚧 WARNING: this is very much under construction 🚧
 
