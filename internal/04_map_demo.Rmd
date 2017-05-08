@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Map Demo"
 author: "Lucy D’Agostino McGowan"
 date: "5/5/2017"
 output: 
