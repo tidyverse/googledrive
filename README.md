@@ -3,7 +3,7 @@
 googledrive
 ===========
 
-[![Build Status](https://travis-ci.org/lucymcgowan/googledrive.svg?branch=master)](https://travis-ci.org/lucymcgowan/googledrive)
+[![Build Status](https://travis-ci.org/LucyMcGowan/googledrive.svg?branch=master)](https://travis-ci.org/LucyMcGowan/googledrive)
 
 🚧 WARNING: this is very much under construction 🚧
 
