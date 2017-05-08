@@ -1,4 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-internal
+^internal$
 \.httr-oauth
+^\.travis\.yml$
