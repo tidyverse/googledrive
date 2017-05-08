@@ -5,7 +5,7 @@
 \title{Upload a file to Google Drive}
 \usage{
 gd_upload(file = NULL, name = NULL, overwrite = FALSE, type = NULL,
-  folder = NULL, verbose = TRUE)
+  verbose = TRUE)
 }
 \arguments{
 \item{file}{character, path the the file you'd like to upload}
