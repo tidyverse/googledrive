@@ -27,7 +27,7 @@ process_gd_upload(response = response, file = file, verbose = verbose)
 
 build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, verbose = TRUE, token = gd_token(), internet = TRUE){
   if (!file.exists(file)) {
-    spf("\"%s\" does not exist!", file)
+    spf("'%s' does not exist!", file)
   }
 
   ext <- tolower(tools::file_ext(file))
