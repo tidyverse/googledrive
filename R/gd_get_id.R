@@ -14,10 +14,17 @@
 gd_get_id <- function(search, n = 1, ..., fixed = FALSE, verbose = TRUE){
 
   if ("orderBy" %in% names(list(...))){
-    id <- as.list(gd_ls(search = search, fixed = fixed, ...)[1:n,3])[[1]]
+    ls <- gd_ls(search = search, fixed = fixed, ...)
+    if(!is.null(ls)) {
+      id <- as.list(ls[1:n,3])[[1]]
+    }
   } else{
-    id <- as.list(gd_ls(search = search, fixed = fixed, orderBy="modifiedTime desc", ...)[1:n,3])[[1]]
+    ls <- gd_ls(search = search, fixed = fixed, orderBy="modifiedTime desc", ...)
+    if(!is.null(ls)) {
+      id <- as.list(ls[1:n,3])[[1]]
+    }
   }
-
+  if (!is.null(ls)){
   structure(id, class=c("drive_id","list"))
+  } else invisible(NULL)
 }
