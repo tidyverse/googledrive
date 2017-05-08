@@ -4,11 +4,13 @@
 \alias{gd_get_id}
 \title{Get Google Drive id}
 \usage{
-gd_get_id(search, ..., fixed = FALSE, verbose = TRUE)
+gd_get_id(search, n = 1, ..., fixed = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{search}{character, regular expression to determin document title to output the Google Drive id
 If it is \code{NULL} (default), the most recently modified document id will be output.}
+
+\item{n}{numeric, how many ids to output, default = 1}
 
 \item{...}{name-value pairs to query the API}
 
@@ -18,7 +20,7 @@ document's name on Google Drive.}
 \item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
 }
 \value{
-character, Google Drive id
+object of class\code{drive_id} & \code{list}, Google Drive id(s)
 }
 \description{
 Get Google Drive id
