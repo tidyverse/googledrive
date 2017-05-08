@@ -14,9 +14,9 @@
 #'
 #' @return object of class `drive_file` and `list` that contains uploaded file's information
 #' @export
-gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, folder = NULL, verbose = TRUE){
+gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, verbose = TRUE){
 
-request <- build_gd_upload(file = file, name = name, overwrite = overwrite, type = type, folder = folder, verbose = verbose)
+request <- build_gd_upload(file = file, name = name, overwrite = overwrite, type = type, verbose = verbose)
 
 if (inherits(request, "drive_file")) return(invisible(request))
 
@@ -25,7 +25,7 @@ process_gd_upload(response = response, file = file, verbose = verbose)
 
 }
 
-build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, folder = NULL, verbose = TRUE, internet = TRUE){
+build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, verbose = TRUE, internet = TRUE){
   if (!file.exists(file)) {
     spf("\"%s\" does not exist!", file)
   }
@@ -101,9 +101,6 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
 
   url <- file.path(.state$gd_base_url, "upload/drive/v3/files", paste0(id, "?uploadType=media"))
 
-  if (!is.null(folder)){
-    url <- paste0(url ,"&addParents=",folder$id)
-  }
   build_request(endpoint = url,
                 token = gd_token(),
                 params = httr::upload_file(path = file, type = type),
