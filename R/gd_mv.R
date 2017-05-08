@@ -25,7 +25,7 @@ build_gd_mv <- function(file = NULL, folder = NULL){
   }
 
   url <- file.path(.state$gd_base_url_files_v3,
-                   paste0(id, "?addParents=",folder$id,"&removeParents=",file$kitchen_sink$parents[[1]]))
+                   paste0(file$id, "?addParents=",folder$id,"&removeParents=",file$kitchen_sink$parents[[1]]))
 
                    build_request(endpoint = url,
                                  token = gd_token(),
