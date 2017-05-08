@@ -1,0 +1,25 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README/README-"
+)
+```
+
+# googledrive
+
+[![Build Status](https://travis-ci.org/lucymcgowan/googledrive.svg?branch=master)](https://travis-ci.org/lucymcgowan/googledrive)
+
+`r emo::ji("construction")` WARNING: this is very much under construction `r emo::ji("construction")`
+
+## installation
+```{r, eval = FALSE}
+devtools::install_github("LucyMcGowan/googledrive")
+```
+

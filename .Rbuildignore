@@ -3,3 +3,4 @@
 ^internal$
 \.httr-oauth
 ^\.travis\.yml$
+^README\.Rmd$
