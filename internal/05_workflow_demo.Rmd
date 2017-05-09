@@ -1,0 +1,40 @@
+---
+title: "workflow demo"
+author: "Lucy D’Agostino McGowan"
+date: "5/8/2017"
+output: 
+  github_document:
+    toc: true
+---
+
+I'm demoing a simple workflow, using our to-do list as an example
+```{r, message = FALSE, warning = FALSE}
+library(googledrive)
+library(dplyr)
+```
+
+## get file
+
+```{r}
+our_file <- gd_get_id("Lucy & Jenny") %>% 
+  gd_file
+```
+
+## publish file
+
+```{r}
+our_file <- our_file %>%
+  gd_publish
+```
+
+## check publication status
+
+```{r}
+our_file$publish
+```
+
+## edit file in browser
+```{r}
+gd_open(our_file)
+```
+

@@ -51,9 +51,9 @@ process_gd_publish <- function(response = NULL, file = NULL, verbose = TRUE){
 
   if (verbose){
     if(response$status_code == 200L){
-      cat(sprintf("You have changed the publication status of '%s'.", file$name))
+      message(sprintf("You have changed the publication status of '%s'.", file$name))
     } else
-      cat(sprintf("Uh oh, something went wrong. The publication status of '%s' was not changed", file$name))
+      message(sprintf("Uh oh, something went wrong. The publication status of '%s' was not changed", file$name))
   }
 }
 
@@ -114,9 +114,9 @@ process_gd_check_publish <- function(response = NULL, file = NULL, verbose = TRU
 
   if (verbose){
     if (proc_res$published) {
-      cat(sprintf("The latest revision of Google Drive file '%s' is published.", file$name))
+      message(sprintf("The latest revision of Google Drive file '%s' is published.", file$name))
     } else
-      cat(sprintf("The latest revision of the Google Drive file '%s' is not published.", file$name))
+      message(sprintf("The latest revision of the Google Drive file '%s' is not published.", file$name))
   }
 
   invisible(file)
