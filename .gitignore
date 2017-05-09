@@ -3,3 +3,4 @@
 .Rproj.user
 .RData
 .httr-oauth
+*.Rproj
