@@ -5,8 +5,9 @@ Lucy D’Agostino McGowan
 
 -   [check current permissions](#check-current-permissions)
 -   [change permissions (anyone with link)](#change-permissions-anyone-with-link)
--   [change permissions (anyone in the 🌎)](#change-permissions-anyone-in-the)
+-   [change permissions (anyone in the 🌏)](#change-permissions-anyone-in-the)
 -   [make it easier to see](#make-it-easier-to-see)
+-   [share link](#share-link)
 -   [clean up](#clean-up)
 
 This is a little demo to show how we may view sharing.
@@ -50,8 +51,10 @@ cool beans - it's private!
 change permissions (anyone with link)
 -------------------------------------
 
+*all functions that will somehow change the file will output a new file, overwrite the old file with this to avoid confusion*
+
 ``` r
-my_file %>%
+my_file<- my_file %>%
   gd_share(role = "reader", type = "anyone")
 ```
 
@@ -60,9 +63,6 @@ my_file %>%
 Let's see what that did
 
 ``` r
-my_file <- gd_get_id("Happy Little Demo") %>%
-  gd_file()
-
 my_file$permissions
 ```
 
@@ -76,11 +76,11 @@ my_file$permissions
 
 Now anyone with the link can view it
 
-change permissions (anyone in the 🌎)
+change permissions (anyone in the 🌏)
 ------------------------------------
 
 ``` r
-my_file %>%
+my_file <- my_file %>%
   gd_share(role = "reader", type = "anyone", allowFileDiscovery = "true")
 ```
 
@@ -89,9 +89,6 @@ my_file %>%
 Let's see what that did
 
 ``` r
-my_file <- gd_get_id("Happy Little Demo") %>%
-  gd_file()
-
 my_file$permissions
 ```
 
@@ -124,8 +121,19 @@ my_file
     ## File name: Happy Little Demo 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
-    ## Last modified: 2017-05-03 
+    ## Last modified: 2017-05-09 
     ## Access: Anyone on the internet can find and access. No sign-in required.
+
+share link
+----------
+
+you can also output a link to share
+
+``` r
+gd_share_link(my_file)
+```
+
+    ## [1] "https://docs.google.com/document/d/1TUuc-I8vdStN5bETYYsMaQvrvTfII_A9Y41zwH5Ln5U/edit?usp=drivesdk"
 
 clean up
 --------

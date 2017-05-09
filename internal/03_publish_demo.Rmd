@@ -30,18 +30,26 @@ my_file <- gd_get_id("Happy Little Demo") %>%
 my_file %>%
   gd_check_publish
 ```
+the `gd_check_publish` also outputs a new file with a tibble called `publish` with publication information. We can overwrite `my_file` to see this
+```{r}
+my_file <- my_file %>%
+  gd_check_publish
+```
+
+```{r}
+my_file$publish
+```
 
 ## publish it
 ```{r}
-my_file %>%
+my_file <- my_file %>%
   gd_publish
 ```
 
-## check again
+now we have tibble with publication status
 
 ```{r}
-my_file %>%
-  gd_check_publish
+my_file$publish
 ```
 
 ## clean up

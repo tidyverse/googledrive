@@ -19,6 +19,7 @@ gd_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRUE){
   response <- make_request(request, encode = "json")
   proc_res <- process_gd_publish(response = response, file = file_update, verbose = FALSE)
 
+  file_update <- gd_file(file$id)
   gd_check_publish(file = file_update, verbose = FALSE)
 }
 

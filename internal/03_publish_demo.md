@@ -5,7 +5,6 @@ Lucy D’Agostino McGowan
 
 -   [check published status](#check-published-status)
 -   [publish it](#publish-it)
--   [check again](#check-again)
 -   [clean up](#clean-up)
 
 This is a little demo to show how we can check if a file is published & publish it if we so desire.
@@ -38,27 +37,46 @@ my_file %>%
   gd_check_publish
 ```
 
-    ## The Google Drive file 'Happy Little Demo' is not published.
+    ## The latest revision of the Google Drive file 'Happy Little Demo' is not published.
+
+the `gd_check_publish` also outputs a new file with a tibble called `publish` with publication information. We can overwrite `my_file` to see this
+
+``` r
+my_file <- my_file %>%
+  gd_check_publish
+```
+
+    ## The latest revision of the Google Drive file 'Happy Little Demo' is not published.
+
+``` r
+my_file$publish
+```
+
+    ## # A tibble: 1 × 5
+    ##            check_time revision published auto_publish       last_user
+    ##                <dttm>    <chr>     <lgl>        <lgl>           <chr>
+    ## 1 2017-05-09 09:49:43        3     FALSE        FALSE Lucy D'Agostino
 
 publish it
 ----------
 
 ``` r
-my_file %>%
+my_file <- my_file %>%
   gd_publish
 ```
 
-    ## You have successfully published 'Happy Little Demo'.
+    ## You have changed the publication status of 'Happy Little Demo'.
 
-check again
------------
+now we have tibble with publication status
 
 ``` r
-my_file %>%
-  gd_check_publish
+my_file$publish
 ```
 
-    ## The Google Drive file 'Happy Little Demo' is published.
+    ## # A tibble: 1 × 5
+    ##            check_time revision published auto_publish       last_user
+    ##                <dttm>    <chr>     <lgl>        <lgl>           <chr>
+    ## 1 2017-05-09 09:49:45        3      TRUE         TRUE Lucy D'Agostino
 
 clean up
 --------

@@ -33,17 +33,15 @@ cool beans - it's private!
 
 ## change permissions (anyone with link)
 
+*all functions that will somehow change the file will output a new file, overwrite the old file with this to avoid confusion*
 ```{r}
-my_file %>%
+my_file<- my_file %>%
   gd_share(role = "reader", type = "anyone")
 ```
 
 Let's see what that did
 
 ```{r}
-my_file <- gd_get_id("Happy Little Demo") %>%
-  gd_file()
-
 my_file$permissions
 ```
 
@@ -52,16 +50,13 @@ Now anyone with the link can view it
 ## change permissions (anyone in the `r emo::ji('world')`)
 
 ```{r}
-my_file %>%
+my_file <- my_file %>%
   gd_share(role = "reader", type = "anyone", allowFileDiscovery = "true")
 ```
 
 Let's see what that did
 
 ```{r}
-my_file <- gd_get_id("Happy Little Demo") %>%
-  gd_file()
-
 my_file$permissions
 ```
 
@@ -76,6 +71,13 @@ and also to the print method:
 
 ```{r}
 my_file
+```
+
+## share link
+
+you can also output a link to share
+```{r}
+gd_share_link(my_file)
 ```
 
 ## clean up
