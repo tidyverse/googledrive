@@ -8,7 +8,6 @@ Lucy D’Agostino McGowan
 -   [User info](#user-info)
 -   [Upload file](#upload-file)
 -   [Update sharing](#update-sharing)
--   [Re-get file](#re-get-file)
 -   [View permissions](#view-permissions)
 -   [Make it fully shareable](#make-it-fully-shareable)
 -   [Extract share link](#extract-share-link)
@@ -31,18 +30,18 @@ gd_ls()
 ```
 
     ## # A tibble: 100 × 3
-    ##                                 name                     type
-    ##                                <chr>                    <chr>
-    ## 1   WSDS Concurrent Session Abstract                 document
-    ## 2                               name                 document
-    ## 3  R-Ladies Nashville 6-Month Survey                     form
-    ## 4                               test                 document
-    ## 5                               test                 document
-    ## 6                               test                 document
-    ## 7                           Untitled application/octet-stream
-    ## 8                           Untitled application/octet-stream
-    ## 9                           Untitled application/octet-stream
-    ## 10                          Untitled application/octet-stream
+    ##                       name     type
+    ##                      <chr>    <chr>
+    ## 1                     test document
+    ## 2                     test document
+    ## 3                     test document
+    ## 4                     test document
+    ## 5                     test document
+    ## 6                     test document
+    ## 7        Happy Little Demo document
+    ## 8  Football Stadium Survey     form
+    ## 9        test_for_deleting document
+    ## 10 \U0001f33b Lucy & Jenny document
     ## # ... with 90 more rows, and 1 more variables: id <chr>
 
 We can search using regular expressions
@@ -51,21 +50,18 @@ We can search using regular expressions
 gd_ls(search = "test")
 ```
 
-    ## # A tibble: 12 × 3
-    ##                    name                   type
-    ##                   <chr>                  <chr>
-    ## 1                  test               document
-    ## 2                  test               document
-    ## 3                  test               document
-    ## 4                  test               document
-    ## 5                  test               document
-    ## 6                  test               document
-    ## 7                  test               document
-    ## 8                  test               document
-    ## 9              test9999           presentation
-    ## 10            test12345               document
-    ## 11            test12345               document
-    ## 12 plotly-latest.min.js application/javascript
+    ## # A tibble: 9 × 3
+    ##                   name                   type
+    ##                  <chr>                  <chr>
+    ## 1                 test               document
+    ## 2                 test               document
+    ## 3                 test               document
+    ## 4                 test               document
+    ## 5                 test               document
+    ## 6                 test               document
+    ## 7    test_for_deleting               document
+    ## 8 remark-latest.min.js application/javascript
+    ## 9 remark-latest.min.js        text/javascript
     ## # ... with 1 more variables: id <chr>
 
 We can also pass additional query parameters through the `...`, for example
@@ -98,7 +94,8 @@ file
     ## File name: test 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
-    ## Last modified: 2017-05-01
+    ## Last modified: 2017-05-09 
+    ## Access: Anyone who has the link can access. No sign-in required.
 
 In addition to the things I've pulled out, there is a `tibble` of permissions as well as a `list` (now named `kitchen_sink`, this should change), that contains all output fields.
 
@@ -106,85 +103,91 @@ In addition to the things I've pulled out, there is a `tibble` of permissions as
 file$permissions
 ```
 
-    ## # A tibble: 1 × 8
-    ##               kind                   id  type            emailAddress
-    ##              <chr>                <chr> <chr>                   <chr>
-    ## 1 drive#permission 13813982488463916564  user lucydagostino@gmail.com
-    ## # ... with 4 more variables: role <chr>, displayName <chr>,
-    ## #   photoLink <chr>, deleted <lgl>
+    ## # A tibble: 2 × 9
+    ##               kind                   id   type            emailAddress
+    ##              <chr>                <chr>  <chr>                   <chr>
+    ## 1 drive#permission 13813982488463916564   user lucydagostino@gmail.com
+    ## 2 drive#permission       anyoneWithLink anyone                    <NA>
+    ## # ... with 5 more variables: role <chr>, displayName <chr>,
+    ## #   photoLink <chr>, deleted <lgl>, allowFileDiscovery <lgl>
 
 ``` r
 str(file$kitchen_sink)
 ```
 
-    ## List of 1
-    ##  $ :List of 27
-    ##   ..$ kind                 : chr "drive#file"
-    ##   ..$ id                   : chr "1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA"
-    ##   ..$ name                 : chr "test"
-    ##   ..$ mimeType             : chr "application/vnd.google-apps.document"
-    ##   ..$ starred              : logi FALSE
-    ##   ..$ trashed              : logi TRUE
-    ##   ..$ explicitlyTrashed    : logi TRUE
-    ##   ..$ parents              :List of 1
-    ##   .. ..$ : chr "0AA9rJumZU4vEUk9PVA"
-    ##   ..$ spaces               :List of 1
-    ##   .. ..$ : chr "drive"
-    ##   ..$ version              : chr "38667"
-    ##   ..$ webViewLink          : chr "https://docs.google.com/document/d/1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA/edit?usp=drivesdk"
-    ##   ..$ iconLink             : chr "https://drive-thirdparty.googleusercontent.com/16/type/application/vnd.google-apps.document"
-    ##   ..$ thumbnailLink        : chr "https://docs.google.com/feeds/vt?gd=true&id=1bXF6Xvl8G_c6kBcQL8mKQF4m7xNGXh_oJbrNVW2PjFA&v=1&s=AMedNnoAAAAAWQlX5NEkwNxToK5bqAx3"| __truncated__
-    ##   ..$ viewedByMe           : logi TRUE
-    ##   ..$ viewedByMeTime       : chr "2017-05-01T17:48:24.013Z"
-    ##   ..$ createdTime          : chr "2017-05-01T17:48:22.992Z"
-    ##   ..$ modifiedTime         : chr "2017-05-01T17:48:24.013Z"
-    ##   ..$ modifiedByMeTime     : chr "2017-05-01T17:48:24.013Z"
-    ##   ..$ owners               :List of 1
-    ##   .. ..$ :List of 6
-    ##   .. .. ..$ kind        : chr "drive#user"
-    ##   .. .. ..$ displayName : chr "Lucy D'Agostino"
-    ##   .. .. ..$ photoLink   : chr "https://lh5.googleusercontent.com/-9QyJNrSIw8U/AAAAAAAAAAI/AAAAAAAAAXY/zcdEycKqKQk/s64/photo.jpg"
-    ##   .. .. ..$ me          : logi TRUE
-    ##   .. .. ..$ permissionId: chr "13813982488463916564"
-    ##   .. .. ..$ emailAddress: chr "lucydagostino@gmail.com"
-    ##   ..$ lastModifyingUser    :List of 6
+    ## List of 27
+    ##  $ kind                 : chr "drive#file"
+    ##  $ id                   : chr "1iiuNXc0AEAzPE3D2U-tSioObSY4cAI-bX60PE_glUK0"
+    ##  $ name                 : chr "test"
+    ##  $ mimeType             : chr "application/vnd.google-apps.document"
+    ##  $ starred              : logi FALSE
+    ##  $ trashed              : logi FALSE
+    ##  $ explicitlyTrashed    : logi FALSE
+    ##  $ parents              :List of 1
+    ##   ..$ : chr "0AA9rJumZU4vEUk9PVA"
+    ##  $ spaces               :List of 1
+    ##   ..$ : chr "drive"
+    ##  $ version              : chr "40153"
+    ##  $ webViewLink          : chr "https://docs.google.com/document/d/1iiuNXc0AEAzPE3D2U-tSioObSY4cAI-bX60PE_glUK0/edit?usp=drivesdk"
+    ##  $ iconLink             : chr "https://drive-thirdparty.googleusercontent.com/16/type/application/vnd.google-apps.document"
+    ##  $ thumbnailLink        : chr "https://docs.google.com/feeds/vt?gd=true&id=1iiuNXc0AEAzPE3D2U-tSioObSY4cAI-bX60PE_glUK0&v=1&s=AMedNnoAAAAAWRH42pQOg16rCklmzCVU"| __truncated__
+    ##  $ viewedByMe           : logi TRUE
+    ##  $ viewedByMeTime       : chr "2017-05-09T15:10:22.695Z"
+    ##  $ createdTime          : chr "2017-05-09T15:08:28.800Z"
+    ##  $ modifiedTime         : chr "2017-05-09T15:09:33.038Z"
+    ##  $ modifiedByMeTime     : chr "2017-05-09T15:09:33.038Z"
+    ##  $ owners               :List of 1
+    ##   ..$ :List of 6
     ##   .. ..$ kind        : chr "drive#user"
     ##   .. ..$ displayName : chr "Lucy D'Agostino"
     ##   .. ..$ photoLink   : chr "https://lh5.googleusercontent.com/-9QyJNrSIw8U/AAAAAAAAAAI/AAAAAAAAAXY/zcdEycKqKQk/s64/photo.jpg"
     ##   .. ..$ me          : logi TRUE
     ##   .. ..$ permissionId: chr "13813982488463916564"
     ##   .. ..$ emailAddress: chr "lucydagostino@gmail.com"
-    ##   ..$ shared               : logi FALSE
-    ##   ..$ ownedByMe            : logi TRUE
-    ##   ..$ capabilities         :List of 15
-    ##   .. ..$ canAddChildren                : logi FALSE
-    ##   .. ..$ canChangeViewersCanCopyContent: logi TRUE
-    ##   .. ..$ canComment                    : logi TRUE
-    ##   .. ..$ canCopy                       : logi TRUE
-    ##   .. ..$ canDelete                     : logi TRUE
-    ##   .. ..$ canDownload                   : logi TRUE
-    ##   .. ..$ canEdit                       : logi TRUE
-    ##   .. ..$ canListChildren               : logi FALSE
-    ##   .. ..$ canMoveItemIntoTeamDrive      : logi TRUE
-    ##   .. ..$ canReadRevisions              : logi TRUE
-    ##   .. ..$ canRemoveChildren             : logi FALSE
-    ##   .. ..$ canRename                     : logi TRUE
-    ##   .. ..$ canShare                      : logi TRUE
-    ##   .. ..$ canTrash                      : logi TRUE
-    ##   .. ..$ canUntrash                    : logi TRUE
-    ##   ..$ viewersCanCopyContent: logi TRUE
-    ##   ..$ writersCanShare      : logi TRUE
-    ##   ..$ permissions          :List of 1
-    ##   .. ..$ :List of 8
-    ##   .. .. ..$ kind        : chr "drive#permission"
-    ##   .. .. ..$ id          : chr "13813982488463916564"
-    ##   .. .. ..$ type        : chr "user"
-    ##   .. .. ..$ emailAddress: chr "lucydagostino@gmail.com"
-    ##   .. .. ..$ role        : chr "owner"
-    ##   .. .. ..$ displayName : chr "Lucy D'Agostino"
-    ##   .. .. ..$ photoLink   : chr "https://lh5.googleusercontent.com/-9QyJNrSIw8U/AAAAAAAAAAI/AAAAAAAAAXY/zcdEycKqKQk/s64/photo.jpg"
-    ##   .. .. ..$ deleted     : logi FALSE
-    ##   ..$ quotaBytesUsed       : chr "0"
+    ##  $ lastModifyingUser    :List of 6
+    ##   ..$ kind        : chr "drive#user"
+    ##   ..$ displayName : chr "Lucy D'Agostino"
+    ##   ..$ photoLink   : chr "https://lh5.googleusercontent.com/-9QyJNrSIw8U/AAAAAAAAAAI/AAAAAAAAAXY/zcdEycKqKQk/s64/photo.jpg"
+    ##   ..$ me          : logi TRUE
+    ##   ..$ permissionId: chr "13813982488463916564"
+    ##   ..$ emailAddress: chr "lucydagostino@gmail.com"
+    ##  $ shared               : logi TRUE
+    ##  $ ownedByMe            : logi TRUE
+    ##  $ capabilities         :List of 15
+    ##   ..$ canAddChildren                : logi FALSE
+    ##   ..$ canChangeViewersCanCopyContent: logi TRUE
+    ##   ..$ canComment                    : logi TRUE
+    ##   ..$ canCopy                       : logi TRUE
+    ##   ..$ canDelete                     : logi TRUE
+    ##   ..$ canDownload                   : logi TRUE
+    ##   ..$ canEdit                       : logi TRUE
+    ##   ..$ canListChildren               : logi FALSE
+    ##   ..$ canMoveItemIntoTeamDrive      : logi TRUE
+    ##   ..$ canReadRevisions              : logi TRUE
+    ##   ..$ canRemoveChildren             : logi FALSE
+    ##   ..$ canRename                     : logi TRUE
+    ##   ..$ canShare                      : logi TRUE
+    ##   ..$ canTrash                      : logi TRUE
+    ##   ..$ canUntrash                    : logi TRUE
+    ##  $ viewersCanCopyContent: logi TRUE
+    ##  $ writersCanShare      : logi TRUE
+    ##  $ permissions          :List of 2
+    ##   ..$ :List of 8
+    ##   .. ..$ kind        : chr "drive#permission"
+    ##   .. ..$ id          : chr "13813982488463916564"
+    ##   .. ..$ type        : chr "user"
+    ##   .. ..$ emailAddress: chr "lucydagostino@gmail.com"
+    ##   .. ..$ role        : chr "owner"
+    ##   .. ..$ displayName : chr "Lucy D'Agostino"
+    ##   .. ..$ photoLink   : chr "https://lh5.googleusercontent.com/-9QyJNrSIw8U/AAAAAAAAAAI/AAAAAAAAAXY/zcdEycKqKQk/s64/photo.jpg"
+    ##   .. ..$ deleted     : logi FALSE
+    ##   ..$ :List of 5
+    ##   .. ..$ kind              : chr "drive#permission"
+    ##   .. ..$ id                : chr "anyoneWithLink"
+    ##   .. ..$ type              : chr "anyone"
+    ##   .. ..$ role              : chr "reader"
+    ##   .. ..$ allowFileDiscovery: logi FALSE
+    ##  $ quotaBytesUsed       : chr "0"
 
 User info
 ---------
@@ -237,25 +240,17 @@ file
     ## File name: This is a test 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
-    ## Last modified: 2017-05-03
+    ## Last modified: 2017-05-09 
+    ## Access: Shared with specific people.
 
 Update sharing
 --------------
 
 ``` r
-gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
+file <- gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
 ```
 
     ## The permissions for file 'This is a test' have been updated
-
-Re-get file
------------
-
-*should we do this for you?*
-
-``` r
-file <- gd_file(gd_get_id("This is a test"))
-```
 
 View permissions
 ----------------
@@ -275,7 +270,7 @@ Make it fully shareable
 -----------------------
 
 ``` r
-gd_share(file, role = "reader", type = "anyone", allowFileDiscovery = "true")
+file <- gd_share(file, role = "reader", type = "anyone", allowFileDiscovery = "true")
 ```
 
     ## The permissions for file 'This is a test' have been updated
@@ -287,7 +282,7 @@ Extract share link
 gd_share_link(file)
 ```
 
-    ## [1] "https://docs.google.com/document/d/1HT6CxvLzKv12m7ggZYUBtei7_0aQC4yjN2EtXjBaTwI/edit?usp=drivesdk"
+    ## [1] "https://docs.google.com/document/d/17yO56Rc-nb-0wpDGtW7eUN90dMBGw0-pmcTovsqi-RM/edit?usp=drivesdk"
 
 *this looks exactly the same as the share link from the Google Drive GUI except `usp=drivesdk` instead of `usp=sharing`*
 

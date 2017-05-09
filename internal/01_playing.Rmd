@@ -81,17 +81,8 @@ file
 ## Update sharing
 
 ```{r}
-gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
+file <- gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
 ```
-
-## Re-get file 
-
-*should we do this for you?*
-
-```{r}
-file <- gd_file(gd_get_id("This is a test"))
-```
-
 
 ## View permissions
 
@@ -103,7 +94,7 @@ file$permissions %>%
 ## Make it fully shareable
 
 ```{r}
-gd_share(file, role = "reader", type = "anyone", allowFileDiscovery = "true")
+file <- gd_share(file, role = "reader", type = "anyone", allowFileDiscovery = "true")
 ```
 
 ## Extract share link
