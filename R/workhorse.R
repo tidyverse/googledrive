@@ -16,7 +16,6 @@ build_request <- function(endpoint = NULL,
                      send_headers = send_headers,
                      api_url = api_url)
 
-  workhorse <- set_method(workhorse)
   workhorse <- set_query(workhorse)
   workhorse <- set_body(workhorse)
   workhorse <- set_url(workhorse)
@@ -24,19 +23,6 @@ build_request <- function(endpoint = NULL,
   workhorse
 }
 
-set_method <- function(x) {
-  if (is.null(x$endpoint)) return(x)
-
-  if (grepl("^/", x$endpoint) | grepl("^http", x$endpoint)) return(x)
-
-  x$method <- sub(" .*$", "", x$endpoint)
-  stopifnot(x$method %in% c("GET","POST","PATCH","PUT","DELETE"))
-  x$endpoint <- sub(".* ","", x$endpoint)
-  if (!(grepl("^/", x$endpoint) | grepl("^http", x$endpoint))){
-    spf("endpoint not properly specified.")
-  }
-  x
-}
 
 ## right now not setting endpoint, if you want to include parameters, must be in a named list
 ## may introduce the :parameter notation in endpoint later :)

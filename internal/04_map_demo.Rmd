@@ -7,20 +7,20 @@ output:
     toc: true
 ---
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 library("dplyr")
 library("googledrive")
 ```
 
 ## grab a file
 ```{r}
-file <- gd_get_id("test") %>%
+my_file <- gd_get_id("test") %>%
   gd_file
 ```
 
 ## lets take a peak
 ```{r}
-file
+my_file
 ```
 
 
@@ -31,13 +31,13 @@ lst_of_files <- purrr::map(.x =gd_get_id("test", n = 3), gd_file)
 
 ## change access
 ```{r}
-file %>%
-  gd_share(role = "reader", type = "anyone") -> file_update
+my_file <- my_file %>%
+  gd_share(role = "reader", type = "anyone")
 ```
 
 ## check access
 ```{r}
-file_update
+my_file
 ```
 
 ## upload one
@@ -59,7 +59,8 @@ folder <- gd_get_id("THIS IS A TEST") %>%
 
 
 ```{r}
-new_file <- gd_upload("~/desktop/hide/test.txt", folder = folder)
+new_file <- gd_upload("~/desktop/hide/test.txt") %>%
+  gd_mv(folder)
 ```
 
 ## delete a lot!
