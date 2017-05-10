@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 
 # googledrive
 
-[![Build Status](https://travis-ci.org/LucyMcGowan/googledrive.svg?branch=master)](https://travis-ci.org/LucyMcGowan/googledrive)[![Coverage Status](https://coveralls.io/repos/LucyMcGowan/googledrive/badge.svg)](https://coveralls.io/r/LucyMcGowan/googledrive)
+[![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![Coverage Status](https://coveralls.io/repos/tidyverse/googledrive/badge.svg)](https://coveralls.io/r/tidyverse/googledrive)
 
 `r emo::ji("construction")` WARNING: this is very much under construction `r emo::ji("construction")`
 
