@@ -4,10 +4,13 @@
 #'
 #' @return NULL
 #' @export
-gd_open <- function(file){
+gd_browse <- function(file){
+  if (!interactive()) return(invisible(file))
   if(!inherits(file, "drive_file")){
     spf("Input `file` must be a `drive_file`. See `gd_file()`")
   }
+
   link <- gd_share_link(file = file)
-  browseURL(link)
+  utils::browseURL(link)
+  return(invisible(file))
 }

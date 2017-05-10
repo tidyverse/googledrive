@@ -35,6 +35,18 @@ our_file$publish
 
 ## edit file in browser
 ```{r}
-gd_open(our_file)
+gd_browse(our_file)
 ```
+
+## pull in file again
+```{r}
+our_file <- gd_get_id("Lucy & Jenny") %>% 
+  gd_file
+```
+
+```{r}
+our_file
+```
+
+
 

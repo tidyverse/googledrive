@@ -7,6 +7,7 @@ Lucy D’Agostino McGowan
 -   [publish file](#publish-file)
 -   [check publication status](#check-publication-status)
 -   [edit file in browser](#edit-file-in-browser)
+-   [pull in file again](#pull-in-file-again)
 
 I'm demoing a simple workflow, using our to-do list as an example
 
@@ -43,11 +44,29 @@ our_file$publish
     ## # A tibble: 1 × 5
     ##            check_time revision published auto_publish       last_user
     ##                <dttm>    <chr>     <lgl>        <lgl>           <chr>
-    ## 1 2017-05-09 17:12:28      742      TRUE         TRUE Lucy D'Agostino
+    ## 1 2017-05-09 19:30:30      742      TRUE         TRUE Lucy D'Agostino
 
 edit file in browser
 --------------------
 
 ``` r
-gd_open(our_file)
+gd_browse(our_file)
 ```
+
+pull in file again
+------------------
+
+``` r
+our_file <- gd_get_id("Lucy & Jenny") %>% 
+  gd_file
+```
+
+``` r
+our_file
+```
+
+    ## File name: 🌻 Lucy & Jenny 
+    ## File owner: Lucy D'Agostino 
+    ## File type: document 
+    ## Last modified: 2017-05-09 
+    ## Access: Anyone who has the link can access. No sign-in required.
