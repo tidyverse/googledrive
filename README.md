@@ -3,7 +3,7 @@
 googledrive
 ===========
 
-[![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![Coverage Status](https://coveralls.io/repos/tidyverse/googledrive/badge.svg)](https://coveralls.io/r/tidyverse/googledrive)
+[![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master)
 
 🚧 WARNING: this is very much under construction 🚧
 

@@ -17,6 +17,7 @@ Imports: httr,
     dplyr,
     purrr,
     tibble
-Suggests: testthat
+Suggests: testthat,
+    covr
 URL: https://github.com/tidyverse/googledrive
 BugReports: https://github.com/tidyverse/googledrive/issues
