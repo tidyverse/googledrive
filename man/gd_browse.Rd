@@ -9,6 +9,9 @@ gd_browse(file)
 \arguments{
 \item{file}{\code{drive_file} object for the file you would like to edit}
 }
+\value{
+\code{drive_file} object
+}
 \description{
 Open Google Drive file in browser to edit
 }

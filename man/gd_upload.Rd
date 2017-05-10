@@ -4,7 +4,7 @@
 \alias{gd_upload}
 \title{Upload a file to Google Drive}
 \usage{
-gd_upload(file = NULL, name = NULL, overwrite = FALSE, type = NULL,
+gd_upload(file = NULL, name = NULL, overwrite = FALSE, type = NULL, ...,
   verbose = TRUE)
 }
 \arguments{
@@ -22,6 +22,8 @@ gd_upload(file = NULL, name = NULL, overwrite = FALSE, type = NULL,
 \item \strong{presentation}: .opt, .ppt, .pptx, .pptm
 otherwise you can specify \code{document}, \code{spreadsheet}, or \code{presentation}. Files with no extension will be assumed to be a \code{folder}
 }}
+
+\item{...}{name-value pairs to query the API}
 
 \item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
 }
