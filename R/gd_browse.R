@@ -2,7 +2,7 @@
 #'
 #' @param file `drive_file` object for the file you would like to edit
 #'
-#' @return NULL
+#' @return `drive_file` object
 #' @export
 gd_browse <- function(file){
   if (!interactive()) return(invisible(file))

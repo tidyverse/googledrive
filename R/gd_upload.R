@@ -9,14 +9,14 @@
 #' .ods
 #'  * **presentation**: .opt, .ppt, .pptx, .pptm
 #'  otherwise you can specify `document`, `spreadsheet`, or `presentation`. Files with no extension will be assumed to be a `folder`
-#'
+#' @param ... name-value pairs to query the API
 #' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
 #'
 #' @return object of class `drive_file` and `list` that contains uploaded file's information
 #' @export
-gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, verbose = TRUE){
+gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, ..., verbose = TRUE){
 
-request <- build_gd_upload(file = file, name = name, overwrite = overwrite, type = type, verbose = verbose)
+request <- build_gd_upload(file = file, name = name, overwrite = overwrite, type = type,..., verbose = verbose)
 
 if (inherits(request, "drive_file")) return(invisible(request))
 
@@ -25,7 +25,7 @@ process_gd_upload(response = response, file = file, verbose = verbose)
 
 }
 
-build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, verbose = TRUE, token = gd_token(), internet = TRUE){
+build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, ..., verbose = TRUE, token = gd_token(), internet = TRUE){
   if (!file.exists(file)) {
     spf("'%s' does not exist!", file)
   }
@@ -101,10 +101,11 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
 
   url <- file.path(.state$gd_base_url, "upload/drive/v3/files", paste0(id, "?uploadType=media"))
 
-  build_request(endpoint = url,
-                token = token,
-                params = httr::upload_file(path = file, type = type),
-                method = "PATCH")
+  list(method = "PATCH",
+       url = url,
+       token = token,
+       body = httr::upload_file(path = file, type = type),
+       query = list(...))
 
 }
 
