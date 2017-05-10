@@ -11,5 +11,5 @@ installation
 ------------
 
 ``` r
-devtools::install_github("LucyMcGowan/googledrive")
+devtools::install_github("tidyverse/googledrive")
 ```
