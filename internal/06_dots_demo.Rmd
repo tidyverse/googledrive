@@ -1,30 +1,100 @@
 ---
-title: "passing query in the dots!"
+title: "passing queries in the dots!"
 author: "Lucy D’Agostino McGowan"
 date: "5/9/2017"
-output: html_document
+output: 
+  github_document:
+    toc: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+*This is all about those dots[.](https://www.youtube.com/watch?v=GI6CfKcMhjY)*
+
+Most of the functions have `...` which allow the user to input name-value pairs to query the API.
+
+```{r, message = FALSE, warning = FALSE}
+library('googledrive')
+library('dplyr')
 ```
 
-## R Markdown
+## List files
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+We list files using `gd_ls()`[.](https://www.youtube.com/watch?v=F-X4SLhorvw) Possible parameters to pass to the `...` can be found here. For example, by default files are listed in descending order by most recently modified.  
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Here is my list using the default:
 
-```{r cars}
-summary(cars)
+```{r}
+gd_ls()
 ```
 
-## Including Plots
+Let's say I want to order them by folders, then modified time, then name. I can do that!
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+gd_ls(orderBy = "folder,modifiedTime desc,name" )
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+As another example, by default, this will list 100 drive files. If we want to output more, we can pass the `pageSize` parameter[.](https://www.youtube.com/watch?v=cRpdIrq7Rbo&t=67s)
+
+```{r}
+gd_ls(pageSize = 200)
+```
+
+## Publish files
+
+To publish files, we use `gd_publish()`. Parameters found [here](https://developers.google.com/drive/v3/reference/revisions/update) can be passed to the `...` of this function. For example, by default for Google Docs, subsequent revisions will be automatically republished. We can change this by passing the `publishAuto` parameter.
+
+```{r}
+my_file <- gd_get_id("test") %>%
+  gd_file %>%
+  gd_publish(publishAuto=FALSE)
+```
+
+```{r}
+my_file$publish
+```
+
+## Share files
+
+To share files, we use `gd_share()`. Parameters that can be passed to the `...` can be found [here](https://developers.google.com/drive/v3/reference/permissions/create). For example, if we set the `type` parameter as `anyone`, we can pass the `allowFileDiscovery` through the `...` to allow anyone to discover the file (this is equivalent to being "Public on the Web").
+
+```{r}
+my_file <- my_file %>%
+  gd_share(type = "anyone", role = "writer", allowFileDiscovery = TRUE)
+```
+
+```{r}
+my_file$permissions
+```
+
+I also display this in the print method.
+
+```{r}
+my_file
+```
+
+## Uploading a file
+
+To upload a file we use `gd_upload()`. Parameters that can be passed to the `...` can be found [here](https://developers.google.com/drive/v3/reference/files/update). For example, if you would like to add a file to a specific folder, and do not want to use the `gd_mv` function after, you can use `addParents`.
+
+Let's grab a folder to stick the file in.
+```{r}
+folder <- gd_get_id("THIS IS A TEST") %>%
+  gd_file
+```
+
+
+Make sure it's a folder.
+```{r}
+folder
+```
+
+Upload to the folder.
+```{r}
+new_file <- gd_upload("demo.txt",addParents = folder$id)
+```
+
+
+## clean up
+```{r}
+new_file <- gd_delete(new_file)
+```
+
