@@ -16,22 +16,22 @@ library('dplyr')
 
 ## List
 
-`gd_ls()` pulls out name, type, & id 
+`drive_ls()` pulls out name, type, & id 
 (we probably don't want to see id, but seems useful to have here, so we could pick which one we want to get more info on?)
 ```{r}
-gd_ls()
+drive_ls()
 ```
 
 We can search using regular expressions
 
 ```{r}
-gd_ls(search = "test")
+drive_ls(search = "test")
 ```
 
 We can also pass additional query parameters through the `...`, for example
 
 ```{r}
-gd_ls(search = "test", orderBy = "modifiedTime")
+drive_ls(search = "test", orderBy = "modifiedTime")
 ```
 
 ## Metadata
@@ -43,8 +43,8 @@ List of all fields [here](https://developers.google.com/drive/v3/web/migration).
 Now let's say I want to dive deeper into the top one
 
 ```{r}
-id <- gd_get_id("test")
-file <- gd_file(id)
+id <- drive_get_id("test")
+file <- drive_file(id)
 file
 ```
 
@@ -63,25 +63,25 @@ str(file$kitchen_sink)
 ## User info
 
 ```{r}
-gd_user()
+drive_user()
 ```
 
 ## Upload file
 
 ```{r}
 write.table("this is a test", file = "~/desktop/test.txt")
-gd_upload(file = "~/desktop/test.txt", name = "This is a test", overwrite = TRUE)
+drive_upload(file = "~/desktop/test.txt", name = "This is a test", overwrite = TRUE)
 ```
 
 ```{r}
-file <- gd_file(gd_get_id("This is a test"))
+file <- drive_file(drive_get_id("This is a test"))
 file
 ```
 
 ## Update sharing
 
 ```{r}
-file <- gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
+file <- drive_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
 ```
 
 ## View permissions
@@ -94,19 +94,19 @@ file$permissions %>%
 ## Make it fully shareable
 
 ```{r}
-file <- gd_share(file, role = "reader", type = "anyone", allowFileDiscovery = "true")
+file <- drive_share(file, role = "reader", type = "anyone", allowFileDiscovery = "true")
 ```
 
 ## Extract share link
 ```{r}
-gd_share_link(file)
+drive_share_link(file)
 ```
 
 *this looks exactly the same as the share link from the Google Drive GUI except `usp=drivesdk` instead of `usp=sharing`*
 
 ## Delete file
 ```{r}
-gd_delete(file)
+drive_delete(file)
 ```
 
 

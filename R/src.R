@@ -25,8 +25,8 @@ spf <- function(...) stop(sprintf(...), call. = FALSE)
 
 #environment to store credentials
 .state <- new.env(parent = emptyenv())
-.state$gd_base_url_files_v3 <- "https://www.googleapis.com/drive/v3/files"
-.state$gd_base_url <- "https://www.googleapis.com"
+.state$drive_base_url_files_v3 <- "https://www.googleapis.com/drive/v3/files"
+.state$drive_base_url <- "https://www.googleapis.com"
 
 .onLoad <- function(libname, pkgname) {
 
