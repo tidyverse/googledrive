@@ -2,19 +2,22 @@
 % Please edit documentation in R/drive_user.R
 \name{drive_user}
 \alias{drive_user}
-\title{Google Drive User Information}
+\title{Pull information about the Google Drive user}
 \usage{
-drive_user(fields = "user", ...)
+drive_user(fields = "user", ..., verbose = TRUE)
 }
 \arguments{
-\item{fields}{fields to query, default is \code{user}.}
+\item{fields}{the fields the user would like output - by default only \code{user},
+which will display as detailed above.}
 
 \item{...}{name-value pairs to query the API}
+
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE})}
 }
 \value{
-list of class \code{drive_user} with user's information
+a list of class \code{guser} with user's data
 }
 \description{
-Google Drive User Information
+Pull information about the Google Drive user
 }
-\keyword{internal}

@@ -146,7 +146,7 @@ drive_auth <- function(token = NULL,
         "token,\nnor a path to an .rds file containing a token.")
   }
 
-  .state$user <- drive_user()
+  .state$user <- guser()
 
   invisible(.state$token)
 

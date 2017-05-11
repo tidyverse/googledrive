@@ -6,10 +6,10 @@
 #' @param verbose Logical, indicating whether to print informative messages
 #'   (default `TRUE`)
 #'
-#' @return a list of class `drive_user` with user's data
+#' @return a list of class `guser` with user's data
 #' @export
 #'
-gd_user <- function(fields = "user",..., verbose = TRUE) {
+drive_user <- function(fields = "user",..., verbose = TRUE) {
 
   if (!token_available(verbose = verbose) || !is_legit_token(.state$token)) {
     if (verbose) {
@@ -18,7 +18,7 @@ gd_user <- function(fields = "user",..., verbose = TRUE) {
     return(invisible(NULL))
   }
 
-  user_info <- drive_user(fields = fields,...)
+  user_info <- guser(fields = fields,...)
 
   user_info
 
@@ -29,10 +29,10 @@ gd_user <- function(fields = "user",..., verbose = TRUE) {
 #' @param fields fields to query, default is `user`.
 #' @param ... name-value pairs to query the API
 #'
-#' @return list of class \code{drive_user} with user's information
+#' @return list of class \code{guser} with user's information
 #' @keywords internal
 
-drive_user <- function(fields = "user",...) {
+guser <- function(fields = "user",...) {
 
   if (!token_available(verbose = FALSE)) {
     return(NULL)
@@ -47,6 +47,6 @@ drive_user <- function(fields = "user",...) {
   res <- make_request(req)
   proc_res <- process_request(res)
   proc_res$date <- httr::parse_http_date(req$headers$date)
-  structure(proc_res, class = c("drive_user", "list"))
+  structure(proc_res, class = c("guser", "list"))
 
 }
