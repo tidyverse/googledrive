@@ -8,7 +8,8 @@ gd_share(file = NULL, role = NULL, type = NULL, email = NULL,
   message = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{file}{\code{drive_file} object representing the file you would like to delete}
+\item{file}{\code{drive_file} object representing the file you would like to
+delete}
 
 \item{role}{The role granted by this permission. Valid values are:
 \itemize{
@@ -27,13 +28,15 @@ gd_share(file = NULL, role = NULL, type = NULL, email = NULL,
 \item anyone
 }}
 
-\item{email}{The email address of the user or group to which this permission refers.}
+\item{email}{The email address of the user or group to which this permission
+refers.}
 
 \item{message}{A custom message to include in the notification email.}
 
 \item{...}{name-value pairs to add to the API request body}
 
-\item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
+\item{verbose}{logical, indicating whether to print informative messages
+(default \code{TRUE})}
 }
 \value{
 \code{drive_file} object updated with new sharing information

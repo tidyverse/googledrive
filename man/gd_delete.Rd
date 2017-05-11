@@ -7,9 +7,11 @@
 gd_delete(file = NULL, verbose = TRUE)
 }
 \arguments{
-\item{file}{\code{drive_file} object representing the file you would like to delete}
+\item{file}{\code{drive_file} object representing the file you would like to
+delete}
 
-\item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
+\item{verbose}{logical, indicating whether to print informative messages
+(default \code{TRUE})}
 }
 \value{
 logical, indicating whether the delete succeeded

@@ -10,9 +10,11 @@ gd_upload(file = NULL, name = NULL, overwrite = FALSE, type = NULL, ...,
 \arguments{
 \item{file}{character, path the the file you'd like to upload}
 
-\item{name}{character, what you'd like the uploaded file to be called on Google Drive}
+\item{name}{character, what you'd like the uploaded file to be called on
+Google Drive}
 
-\item{overwrite}{logical, do you want to overwrite file already on Google Drive}
+\item{overwrite}{logical, do you want to overwrite file already on Google
+Drive}
 
 \item{type}{if type = \code{NULL}, will force type as follows:
 \itemize{
@@ -20,15 +22,19 @@ gd_upload(file = NULL, name = NULL, overwrite = FALSE, type = NULL, ...,
 \item \strong{spreadsheet}: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
 .ods
 \item \strong{presentation}: .opt, .ppt, .pptx, .pptm
-otherwise you can specify \code{document}, \code{spreadsheet}, or \code{presentation}. Files with no extension will be assumed to be a \code{folder}
-}}
+}
+
+otherwise you can specify \code{document}, \code{spreadsheet}, or \code{presentation}. Files with no extension will
+be assumed to be a \code{folder}}
 
 \item{...}{name-value pairs to query the API}
 
-\item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
+\item{verbose}{logical, indicating whether to print informative messages
+(default \code{TRUE})}
 }
 \value{
-object of class \code{drive_file} and \code{list} that contains uploaded file's information
+object of class \code{drive_file} and \code{list} that contains uploaded file's
+information
 }
 \description{
 Upload a file to Google Drive

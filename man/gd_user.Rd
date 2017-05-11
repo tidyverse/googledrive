@@ -7,11 +7,13 @@
 gd_user(fields = "user", ..., verbose = TRUE)
 }
 \arguments{
-\item{fields}{the fields the user would like output - by default only \code{user}, which will display as detailed above.}
+\item{fields}{the fields the user would like output - by default only \code{user},
+which will display as detailed above.}
 
 \item{...}{name-value pairs to query the API}
 
-\item{verbose}{Logical, indicating whether to print informative messages (default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE})}
 }
 \value{
 a list of class \code{drive_user} with user's data

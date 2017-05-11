@@ -7,7 +7,8 @@
 gd_share_link(file)
 }
 \arguments{
-\item{file}{\code{drive_file} object representing the file you would like to retrieve the link for}
+\item{file}{\code{drive_file} object representing the file you would like to
+retrieve the link for}
 }
 \value{
 character, link to Google Drive file

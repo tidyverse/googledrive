@@ -7,16 +7,22 @@
 gd_publish(file = NULL, publish = TRUE, ..., verbose = TRUE)
 }
 \arguments{
-\item{file}{\code{drive_file} object representing the file you would like to publish}
+\item{file}{\code{drive_file} object representing the file you would like to
+publish}
 
-\item{publish}{logical, indicating whether you'd like to publish the most recent revision of the file (default \code{TRUE})}
+\item{publish}{logical, indicating whether you'd like to publish the most
+recent revision of the file (default \code{TRUE})}
 
-\item{...}{name-value pairs to add to the API request body, for example \code{publishAuto = FALSE} will ensure that each subsequent revision will not be automatically published (default here is \code{publishAuto = TRUE})}
+\item{...}{name-value pairs to add to the API request body, for example
+\code{publishAuto = FALSE} will ensure that each subsequent revision will not be
+automatically published (default here is \code{publishAuto = TRUE})}
 
-\item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
+\item{verbose}{logical, indicating whether to print informative messages
+(default \code{TRUE})}
 }
 \value{
-\code{drive_file} object, a list with published information as a \code{tibble} added under the list element \code{publish}
+\code{drive_file} object, a list with published information as a \code{tibble}
+added under the list element \code{publish}
 }
 \description{
 Publish Google Drive file

@@ -9,9 +9,11 @@ gd_mv(file = NULL, folder = NULL, verbose = TRUE)
 \arguments{
 \item{file}{\code{drive_file} object for the file you would like to move}
 
-\item{folder}{\code{drive_file} object for the folder you would like to move the file to}
+\item{folder}{\code{drive_file} object for the folder you would like to move the
+file to}
 
-\item{verbose}{logical, indicating whether to print informative messages (default \code{TRUE})}
+\item{verbose}{logical, indicating whether to print informative messages
+(default \code{TRUE})}
 }
 \value{
 \code{drive_file} that was moved
