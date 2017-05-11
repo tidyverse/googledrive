@@ -30,18 +30,18 @@ drive_ls()
 ```
 
     ## # A tibble: 100 × 3
-    ##                                                name        type
-    ##                                               <chr>       <chr>
-    ## 1                           \U0001f33b Lucy & Jenny    document
-    ## 2                                 test_for_deleting    document
-    ## 3               Football Stadium Survey (Responses) spreadsheet
-    ## 4                           Football Stadium Survey        form
-    ## 5                                 Happy Little Demo    document
-    ## 6                                    THIS IS A TEST      folder
-    ## 7  Vanderbilt Graduate Student Handbook (Responses) spreadsheet
-    ## 8                  WSDS Concurrent Session Abstract    document
-    ## 9                 R-Ladies Nashville 6-Month Survey        form
-    ## 10           Health Insurance Questions (Responses) spreadsheet
+    ##                                                name                   type
+    ##                                               <chr>                  <chr>
+    ## 1                              remark-latest.min.js application/javascript
+    ## 2                           \U0001f33b Lucy & Jenny               document
+    ## 3               Football Stadium Survey (Responses)            spreadsheet
+    ## 4                           Football Stadium Survey                   form
+    ## 5                                 Happy Little Demo               document
+    ## 6                                    THIS IS A TEST                 folder
+    ## 7  Vanderbilt Graduate Student Handbook (Responses)            spreadsheet
+    ## 8                  WSDS Concurrent Session Abstract               document
+    ## 9                 R-Ladies Nashville 6-Month Survey                   form
+    ## 10           Health Insurance Questions (Responses)            spreadsheet
     ## # ... with 90 more rows, and 1 more variables: id <chr>
 
 We can search using regular expressions
@@ -50,13 +50,11 @@ We can search using regular expressions
 drive_ls(search = "test")
 ```
 
-    ## # A tibble: 3 × 3
-    ##                   name                   type
-    ##                  <chr>                  <chr>
-    ## 1    test_for_deleting               document
-    ## 2 remark-latest.min.js application/javascript
-    ## 3 remark-latest.min.js        text/javascript
-    ## # ... with 1 more variables: id <chr>
+    ## # A tibble: 2 × 3
+    ##                   name                   type                           id
+    ##                  <chr>                  <chr>                        <chr>
+    ## 1 remark-latest.min.js application/javascript 0Bw9rJumZU4vENkFlOXVpb3pUalU
+    ## 2 remark-latest.min.js        text/javascript 0Bw9rJumZU4vEWjRBUUdkV3Y4LTg
 
 We can also pass additional query parameters through the `...`, for example
 
@@ -85,10 +83,10 @@ file <- drive_file(id)
 file
 ```
 
-    ## File name: test_for_deleting 
+    ## File name: remark-latest.min.js 
     ## File owner: Lucy D'Agostino 
-    ## File type: document 
-    ## Last modified: 2017-05-10 
+    ## File type: application/javascript 
+    ## Last modified: 2017-05-11 
     ## Access: Anyone on the internet can find and access. No sign-in required.
 
 In addition to the things I've pulled out, there is a `tibble` of permissions as well as a `list` (now named `kitchen_sink`, this should change), that contains all output fields.
@@ -97,11 +95,12 @@ In addition to the things I've pulled out, there is a `tibble` of permissions as
 file$permissions
 ```
 
-    ## # A tibble: 2 × 9
+    ## # A tibble: 3 × 9
     ##               kind                   id   type            emailAddress
     ##              <chr>                <chr>  <chr>                   <chr>
     ## 1 drive#permission 13813982488463916564   user lucydagostino@gmail.com
     ## 2 drive#permission               anyone anyone                    <NA>
+    ## 3 drive#permission       anyoneWithLink anyone                    <NA>
     ## # ... with 5 more variables: role <chr>, displayName <chr>,
     ## #   photoLink <chr>, deleted <lgl>, allowFileDiscovery <lgl>
 
@@ -109,27 +108,28 @@ file$permissions
 str(file$kitchen_sink)
 ```
 
-    ## List of 27
+    ## List of 34
     ##  $ kind                 : chr "drive#file"
-    ##  $ id                   : chr "1CPf-Y-paR6htziclFQsb0hOPmXgMAdK2vMCplPKT44s"
-    ##  $ name                 : chr "test_for_deleting"
-    ##  $ mimeType             : chr "application/vnd.google-apps.document"
+    ##  $ id                   : chr "0Bw9rJumZU4vENkFlOXVpb3pUalU"
+    ##  $ name                 : chr "remark-latest.min.js"
+    ##  $ mimeType             : chr "application/javascript"
     ##  $ starred              : logi FALSE
     ##  $ trashed              : logi FALSE
     ##  $ explicitlyTrashed    : logi FALSE
     ##  $ parents              :List of 1
-    ##   ..$ : chr "0AA9rJumZU4vEUk9PVA"
+    ##   ..$ : chr "0Bw9rJumZU4vENy1wVTVSSXNYbk0"
     ##  $ spaces               :List of 1
     ##   ..$ : chr "drive"
-    ##  $ version              : chr "40361"
-    ##  $ webViewLink          : chr "https://docs.google.com/document/d/1CPf-Y-paR6htziclFQsb0hOPmXgMAdK2vMCplPKT44s/edit?usp=drivesdk"
-    ##  $ iconLink             : chr "https://drive-thirdparty.googleusercontent.com/16/type/application/vnd.google-apps.document"
-    ##  $ thumbnailLink        : chr "https://docs.google.com/feeds/vt?gd=true&id=1CPf-Y-paR6htziclFQsb0hOPmXgMAdK2vMCplPKT44s&v=3&s=AMedNnoAAAAAWRSjZCDKGGlGStwOPiKv"| __truncated__
+    ##  $ version              : chr "40454"
+    ##  $ webContentLink       : chr "https://drive.google.com/uc?id=0Bw9rJumZU4vENkFlOXVpb3pUalU&export=download"
+    ##  $ webViewLink          : chr "https://drive.google.com/file/d/0Bw9rJumZU4vENkFlOXVpb3pUalU/view?usp=drivesdk"
+    ##  $ iconLink             : chr "https://drive-thirdparty.googleusercontent.com/16/type/application/javascript"
+    ##  $ thumbnailLink        : chr "https://lh3.googleusercontent.com/MF9KKsIgRiHL68IFiplv707Tvrqjd_uKl_n7LAoc0N1UG3D4BDVShrm3uEjSDwkuDoFY0Q=s220"
     ##  $ viewedByMe           : logi TRUE
-    ##  $ viewedByMeTime       : chr "2017-05-10T03:28:47.320Z"
-    ##  $ createdTime          : chr "2017-05-08T15:07:01.450Z"
-    ##  $ modifiedTime         : chr "2017-05-10T03:30:03.096Z"
-    ##  $ modifiedByMeTime     : chr "2017-05-10T03:30:03.096Z"
+    ##  $ viewedByMeTime       : chr "2017-03-14T16:26:33.621Z"
+    ##  $ createdTime          : chr "2017-03-14T16:26:33.621Z"
+    ##  $ modifiedTime         : chr "2017-05-11T15:47:44.833Z"
+    ##  $ modifiedByMeTime     : chr "2017-05-11T15:47:44.833Z"
     ##  $ owners               :List of 1
     ##   ..$ :List of 6
     ##   .. ..$ kind        : chr "drive#user"
@@ -165,7 +165,7 @@ str(file$kitchen_sink)
     ##   ..$ canUntrash                    : logi TRUE
     ##  $ viewersCanCopyContent: logi TRUE
     ##  $ writersCanShare      : logi TRUE
-    ##  $ permissions          :List of 2
+    ##  $ permissions          :List of 3
     ##   ..$ :List of 8
     ##   .. ..$ kind        : chr "drive#permission"
     ##   .. ..$ id          : chr "13813982488463916564"
@@ -181,13 +181,25 @@ str(file$kitchen_sink)
     ##   .. ..$ type              : chr "anyone"
     ##   .. ..$ role              : chr "writer"
     ##   .. ..$ allowFileDiscovery: logi TRUE
-    ##  $ quotaBytesUsed       : chr "0"
+    ##   ..$ :List of 5
+    ##   .. ..$ kind              : chr "drive#permission"
+    ##   .. ..$ id                : chr "anyoneWithLink"
+    ##   .. ..$ type              : chr "anyone"
+    ##   .. ..$ role              : chr "reader"
+    ##   .. ..$ allowFileDiscovery: logi FALSE
+    ##  $ originalFilename     : chr "remark-latest.min.js"
+    ##  $ fullFileExtension    : chr "min.js"
+    ##  $ fileExtension        : chr "js"
+    ##  $ md5Checksum          : chr "4fa8ea6ea94f06fd72d7ea551daa468d"
+    ##  $ size                 : chr "665144"
+    ##  $ quotaBytesUsed       : chr "665144"
+    ##  $ headRevisionId       : chr "0Bw9rJumZU4vENmZLUno5djQxMldFcmwvU1h6UVZNVTNMOHBvPQ"
 
 User info
 ---------
 
 ``` r
-gd_user()
+drive_user()
 ```
 
     ## $user
@@ -211,7 +223,7 @@ gd_user()
     ## 
     ## 
     ## attr(,"class")
-    ## [1] "drive_user" "list"
+    ## [1] "guser" "list"
 
 Upload file
 -----------
@@ -276,7 +288,7 @@ Extract share link
 drive_share_link(file)
 ```
 
-    ## [1] "https://docs.google.com/document/d/1EFF7b0M1SF4AfdWPbfRECsVCV1wJU56CD-jH1CVr8XA/edit?usp=drivesdk"
+    ## [1] "https://docs.google.com/document/d/12myASbiBZaSP54Ux9YAGVc9wEl-4uxEclyv1TTJwAEQ/edit?usp=drivesdk"
 
 *this looks exactly the same as the share link from the Google Drive GUI except `usp=drivesdk` instead of `usp=sharing`*
 

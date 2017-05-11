@@ -63,7 +63,7 @@ str(file$kitchen_sink)
 ## User info
 
 ```{r}
-gd_user()
+drive_user()
 ```
 
 ## Upload file
