@@ -11,7 +11,7 @@
 #'
 #' This will default to the most recent 100 files on your Google Drive. If you
 #' would like more than 100, include the `pageSize` parameter. For example, if I
-#' wanted 200, I would run `gd_ls(pageSize = 200)`.
+#' wanted 200, I would run `drive_ls(pageSize = 200)`.
 #'
 #' Helpful links for forming queries:
 #'   * <https://developers.google.com/drive/v3/web/search-parameters>
@@ -22,25 +22,25 @@
 #' @examples
 #' \dontrun{
 #' ## list user's Google Sheets
-#' gd_ls(q = "mimeType='application/vnd.google-apps.spreadsheet'")
+#' drive_ls(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 #' }
 #'
 #' @export
-gd_ls <- function(search = NULL, ..., fixed = FALSE, verbose = TRUE){
+drive_ls <- function(search = NULL, ..., fixed = FALSE, verbose = TRUE){
 
-  request <- build_gd_ls(...)
+  request <- build_drive_ls(...)
   response <- make_request(request)
-  process_gd_ls(response = response, search = search, fixed = fixed, verbose = verbose)
+  process_drive_ls(response = response, search = search, fixed = fixed, verbose = verbose)
 
 }
 
-build_gd_ls <- function(..., token = gd_token()){
-  build_request(endpoint = .state$gd_base_url_files_v3,
+build_drive_ls <- function(..., token = drive_token()){
+  build_request(endpoint = .state$drive_base_url_files_v3,
                 token = token,
                 params = list(...))
 }
 
-process_gd_ls <- function(response = NULL,
+process_drive_ls <- function(response = NULL,
                           search = NULL,
                           fixed = FALSE,
                           verbose = TRUE) {

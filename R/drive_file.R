@@ -3,16 +3,16 @@
 #' @param id character, Google drive id for file of interest
 #' @param ... name-value pairs to query the API
 #'
-#' @return object of class `drive_file` and `list`
+#' @return object of class `gfile` and `list`
 #' @export
 #'
-gd_file <- function(id = NULL, ...) {
-  request <- build_gd_file(id = id, ...)
+drive_file <- function(id = NULL, ...) {
+  request <- build_drive_file(id = id, ...)
   response <- make_request(request)
-  process_gd_file(response)
+  process_drive_file(response)
 }
 
-build_gd_file <- function(id = NULL, ..., token = gd_token()) {
+build_drive_file <- function(id = NULL, ..., token = drive_token()) {
   default_fields <-
     c(
       "appProperties",
@@ -60,7 +60,7 @@ build_gd_file <- function(id = NULL, ..., token = gd_token()) {
       "writersCanShare"
     )
   fields <- paste(default_fields, collapse = ",")
-  url <- file.path(.state$gd_base_url_files_v3, id)
+  url <- file.path(.state$drive_base_url_files_v3, id)
 
   build_request(
     endpoint = url,
@@ -70,7 +70,7 @@ build_gd_file <- function(id = NULL, ..., token = gd_token()) {
   )
 }
 
-process_gd_file <- function(response = response) {
+process_drive_file <- function(response = response) {
   proc_res <- process_request(response)
 
   metadata <- list(
@@ -115,12 +115,12 @@ process_gd_file <- function(response = response) {
 
   metadata$access <- access
 
-  metadata <- structure(metadata, class = c("drive_file", "list"))
+  metadata <- structure(metadata, class = c("gfile", "list"))
   metadata
 }
 
 #' @export
-print.drive_file <- function(x, ...) {
+print.gfile <- function(x, ...) {
   cat(
     sprintf(
       "File name: %s \nFile owner: %s \nFile type: %s \nLast modified: %s \nAccess: %s",

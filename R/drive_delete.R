@@ -1,6 +1,6 @@
 #' Delete file from Google Drive
 #'
-#' @param file `drive_file` object representing the file you would like to
+#' @param file `gfile` object representing the file you would like to
 #'   delete
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)
@@ -8,30 +8,30 @@
 #' @return logical, indicating whether the delete succeeded
 #' @export
 #'
-gd_delete <- function(file = NULL, verbose = TRUE){
+drive_delete <- function(file = NULL, verbose = TRUE){
 
-  request <- build_gd_delete(file = file)
+  request <- build_drive_delete(file = file)
   response <- make_request(request)
-  process_gd_delete(response = response, file = file, verbose = verbose)
+  process_drive_delete(response = response, file = file, verbose = verbose)
 
 }
 
-build_gd_delete <- function(file = NULL,
-                            token = gd_token()) {
+build_drive_delete <- function(file = NULL,
+                            token = drive_token()) {
 
-  if(!inherits(file, "drive_file")){
-    spf("Input must be a `drive_file`. See `gd_file()`")
+  if(!inherits(file, "gfile")){
+    spf("Input must be a `gfile`. See `drive_file()`")
   }
 
   id <- file$id
-  url <- file.path(.state$gd_base_url_files_v3, id)
+  url <- file.path(.state$drive_base_url_files_v3, id)
 
   build_request(endpoint = url,
                 token = token,
                 method = "DELETE")
 }
 
-process_gd_delete <- function(response = NULL,
+process_drive_delete <- function(response = NULL,
                               file = NULL,
                               verbose = TRUE){
 

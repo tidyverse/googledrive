@@ -1,7 +1,7 @@
 # this is fully copied from googlesheets with all `gs` replaced with `gd` and `googlesheets` with `googledrive`
 #' Produce Google token
 #'
-#' If token is not already available, call `[gd_auth()]` to either load
+#' If token is not already available, call `[drive_auth()]` to either load
 #' from cache or initiate OAuth2.0 flow. Return the token -- not "bare" but,
 #' rather, prepared for inclusion in downstream requests. Use
 #' `access_token()` to reveal the actual access token, suitable for use
@@ -11,15 +11,15 @@
 #' @return a \code{request} object (an S3 class provided by `httr`)
 #'
 #' @keywords internal
-gd_token <- function(verbose = FALSE) {
-  if (!token_available(verbose = verbose)) gd_auth(verbose = verbose)
+drive_token <- function(verbose = FALSE) {
+  if (!token_available(verbose = verbose)) drive_auth(verbose = verbose)
   httr::config(token = .state$token)
 }
 
-#' @rdname gd_token
-include_token_if <- function(cond) if (cond) gd_token() else NULL
-#' @rdname gd_token
-omit_token_if <- function(cond) if (cond) NULL else gd_token()
+#' @rdname drive_token
+include_token_if <- function(cond) if (cond) drive_token() else NULL
+#' @rdname drive_token
+omit_token_if <- function(cond) if (cond) NULL else drive_token()
 
 #' Authorize `googledrive`
 #'
@@ -45,7 +45,7 @@ omit_token_if <- function(cond) if (cond) NULL else gd_token()
 #'   * prevent caching of credentials in `.httr-oauth`
 #'
 #'
-#' In a direct call to `gd_auth`, the user can provide the token, app key
+#' In a direct call to `drive_auth`, the user can provide the token, app key
 #' and secret explicitly and can dictate whether interactively-obtained
 #' credentials will be cached in`.httr_oauth`. If unspecified, these
 #' arguments are controlled via options, which, if undefined at the time
@@ -93,20 +93,20 @@ omit_token_if <- function(cond) if (cond) NULL else gd_token()
 #' \dontrun{
 #' ## load/refresh existing credentials, if available
 #' ## otherwise, go to browser for authentication and authorization
-#' gd_auth()
+#' drive_auth()
 #'
 #' ## force a new token to be obtained
-#' gd_auth(new_user = TRUE)
+#' drive_auth(new_user = TRUE)
 #'
 #' ## store token in an object and then to file
-#' ttt <- gd_auth()
+#' ttt <- drive_auth()
 #' saveRDS(ttt, "ttt.rds")
 #'
 #' ## load a pre-existing token
-#' gd_auth(token = ttt)       # from an object
-#' gd_auth(token = "ttt.rds") # from .rds file
+#' drive_auth(token = ttt)       # from an object
+#' drive_auth(token = "ttt.rds") # from .rds file
 #' }
-gd_auth <- function(token = NULL,
+drive_auth <- function(token = NULL,
                     new_user = FALSE,
                     key = getOption("googledrive.client_id"),
                     secret = getOption("googledrive.client_secret"),
@@ -114,18 +114,18 @@ gd_auth <- function(token = NULL,
                     verbose = TRUE) {
 
   if (new_user) {
-    gd_deauth(clear_cache = TRUE, verbose = verbose)
+    drive_deauth(clear_cache = TRUE, verbose = verbose)
   }
 
   if (is.null(token)) {
 
     scope_list <- "https://www.googleapis.com/auth/drive"
     googledrive_app <- httr::oauth_app("google", key = key, secret = secret)
-    gd_token <-
+    drive_token <-
       httr::oauth2.0_token(httr::oauth_endpoints("google"), googledrive_app,
                            scope = scope_list, cache = cache)
-    stopifnot(is_legit_token(gd_token, verbose = TRUE))
-    .state$token <- gd_token
+    stopifnot(is_legit_token(drive_token, verbose = TRUE))
+    .state$token <- drive_token
 
   } else if (inherits(token, "Token2.0")) {
 
@@ -134,13 +134,13 @@ gd_auth <- function(token = NULL,
 
   } else if (inherits(token, "character")) {
 
-    gd_token <- try(suppressWarnings(readRDS(token)), silent = TRUE)
-    if (inherits(gd_token, "try-error")) {
+    drive_token <- try(suppressWarnings(readRDS(token)), silent = TRUE)
+    if (inherits(drive_token, "try-error")) {
       spf("Cannot read token from alleged .rds file:\n%s", token)
-    } else if (!is_legit_token(gd_token, verbose = TRUE)) {
+    } else if (!is_legit_token(drive_token, verbose = TRUE)) {
       spf("File does not contain a proper token:\n%s", token)
     }
-    .state$token <- gd_token
+    .state$token <- drive_token
   } else {
     spf("Input provided via 'token' is neither a",
         "token,\nnor a path to an .rds file containing a token.")
@@ -168,12 +168,12 @@ token_available <- function(verbose = TRUE) {
       if (file.exists(".httr-oauth")) {
         message("A .httr-oauth file exists in current working ",
                 "directory.\nWhen/if needed, the credentials cached in ",
-                ".httr-oauth will be used for this session.\nOr run gd_auth() ",
+                ".httr-oauth will be used for this session.\nOr run drive_auth() ",
                 "for explicit authentication and authorization.")
       } else {
         message("No .httr-oauth file exists in current working directory.\n",
                 "When/if needed, 'googledrive' will initiate authentication ",
-                "and authorization.\nOr run gd_auth() to trigger this ",
+                "and authorization.\nOr run drive_auth() to trigger this ",
                 "explicitly.")
       }
     }
@@ -198,9 +198,9 @@ token_available <- function(verbose = TRUE) {
 #' @family auth functions
 #' @examples
 #' \dontrun{
-#' gd_deauth()
+#' drive_deauth()
 #' }
-gd_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
+drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
 
   if (clear_cache && file.exists(".httr-oauth")) {
     if (verbose) {

@@ -17,21 +17,21 @@
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)
 #'
-#' @return object of class `drive_file` and `list` that contains uploaded file's
+#' @return object of class `gfile` and `list` that contains uploaded file's
 #'   information
 #' @export
-gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, ..., verbose = TRUE){
+drive_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, ..., verbose = TRUE){
 
-  request <- build_gd_upload(file = file, name = name, overwrite = overwrite, type = type,..., verbose = verbose)
+  request <- build_drive_upload(file = file, name = name, overwrite = overwrite, type = type,..., verbose = verbose)
 
-  if (inherits(request, "drive_file")) return(invisible(request))
+  if (inherits(request, "gfile")) return(invisible(request))
 
   response <- make_request(request)
-  process_gd_upload(response = response, file = file, verbose = verbose)
+  process_drive_upload(response = response, file = file, verbose = verbose)
 
 }
 
-build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, ..., verbose = TRUE, token = gd_token(), internet = TRUE){
+build_drive_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, ..., verbose = TRUE, token = drive_token(), internet = TRUE){
   if (!file.exists(file)) {
     spf("'%s' does not exist!", file)
   }
@@ -68,7 +68,7 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
   id <- NULL
 
   if (overwrite & internet){
-    old_doc <- gd_ls(name, fixed = TRUE, verbose = FALSE)
+    old_doc <- drive_ls(name, fixed = TRUE, verbose = FALSE)
     if (!is.null(old_doc)){
       id <- old_doc$id[1]
     }
@@ -76,7 +76,7 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
 
   if (is.null(id) & internet){
 
-    url <- .state$gd_base_url_files_v3
+    url <- .state$drive_base_url_files_v3
 
     req <- build_request(endpoint = url,
                          token = token,
@@ -89,7 +89,7 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
   }
 
   if (type == "application/vnd.google-apps.folder" & internet){
-    success <- proc_res$id == gd_get_id(name, fixed = TRUE)
+    success <- proc_res$id == drive_get_id(name, fixed = TRUE)
 
     if (success) {
       if (verbose) {
@@ -102,10 +102,10 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
       spf("Zoinks! the file doesn't seem to have uploaded")
     }
 
-    return(invisible(gd_file(proc_res$id)))
+    return(invisible(gfile(proc_res$id)))
   }
 
-  url <- file.path(.state$gd_base_url, "upload/drive/v3/files", paste0(id, "?uploadType=media"))
+  url <- file.path(.state$drive_base_url, "upload/drive/v3/files", paste0(id, "?uploadType=media"))
 
   list(method = "PATCH",
        url = url,
@@ -115,10 +115,10 @@ build_gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = 
 
 }
 
-process_gd_upload <- function(response = NULL, file = NULL, name = NULL, verbose = TRUE){
+process_drive_upload <- function(response = NULL, file = NULL, name = NULL, verbose = TRUE){
   proc_res <- process_request(response)
 
-  uploaded_doc <- gd_file(proc_res$id)
+  uploaded_doc <- drive_file(proc_res$id)
   success <- proc_res$id == uploaded_doc$id[1]
 
   if (success) {

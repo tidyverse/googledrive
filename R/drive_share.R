@@ -1,6 +1,6 @@
 #' Update Google Drive file share permissions
 #'
-#' @param file `drive_file` object representing the file you would like to
+#' @param file `gfile` object representing the file you would like to
 #'   delete
 #' @param role The role granted by this permission. Valid values are:
 #' * organizer
@@ -20,22 +20,22 @@
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)
 #'
-#' @return `drive_file` object updated with new sharing information
+#' @return `gfile` object updated with new sharing information
 #' @export
-gd_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, message = NULL, ..., verbose = TRUE){
+drive_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, message = NULL, ..., verbose = TRUE){
 
-  request <- build_gd_share(file = file, role = role, type = type, email = email, message = message, ...)
+  request <- build_drive_share(file = file, role = role, type = type, email = email, message = message, ...)
   response <- make_request(request, encode = 'json')
-  process_gd_share(response = response, file = file, verbose = verbose)
+  process_drive_share(response = response, file = file, verbose = verbose)
 
-  file <- gd_file(file$id)
+  file <- drive_file(file$id)
   invisible(file)
 }
 
-build_gd_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, message = NULL, ..., token = gd_token()){
+build_drive_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, message = NULL, ..., token = drive_token()){
 
-  if (!inherits(file, "drive_file")) {
-    spf("Input must be a `drive_file`. See `gd_file()`")
+  if (!inherits(file, "gfile")) {
+    spf("Input must be a `gfile`. See `drive_file()`")
   }
 
   ok_roles <- c("organizer", "owner", "writer", "commenter", "reader")
@@ -55,7 +55,7 @@ build_gd_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, 
                type = type,
                emailAddress = email,...)
 
-  url <- file.path(.state$gd_base_url_files_v3, id, "permissions")
+  url <- file.path(.state$drive_base_url_files_v3, id, "permissions")
 
   if (!is.null(message)) {
     message <- gsub(" ", "%20", message)
@@ -68,7 +68,7 @@ build_gd_share <- function(file = NULL, role = NULL, type = NULL, email = NULL, 
                 method = "POST")
 }
 
-process_gd_share <- function(response = NULL, file = NULL, verbose = TRUE){
+process_drive_share <- function(response = NULL, file = NULL, verbose = TRUE){
 
   process_request(response, content = FALSE)
 
