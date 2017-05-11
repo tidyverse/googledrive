@@ -6,3 +6,4 @@
 ^README\.Rmd$
 ^sandbox$
 ^codecov\.yml$
+^data-raw$
