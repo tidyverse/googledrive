@@ -14,8 +14,8 @@ library("googledrive")
 
 ## grab a file
 ```{r}
-my_file <- gd_get_id("test") %>%
-  gd_file
+my_file <- drive_get_id("test") %>%
+  drive_file
 ```
 
 ## lets take a peak
@@ -26,13 +26,13 @@ my_file
 
 ## we can also pull out multiple files
 ```{r}
-lst_of_files <- purrr::map(.x =gd_get_id("test", n = 3), gd_file) 
+lst_of_files <- purrr::map(.x =drive_get_id("test", n = 3), drive_file) 
 ```
 
 ## change access
 ```{r}
 my_file <- my_file %>%
-  gd_share(role = "reader", type = "anyone")
+  drive_share(role = "reader", type = "anyone")
 ```
 
 ## check access
@@ -42,32 +42,32 @@ my_file
 
 ## upload one
 ```{r}
-gd_upload("~/desktop/hide/test.txt", "This is a test")
+drive_upload("~/desktop/hide/test.txt", "This is a test")
 ```
 
 ## upload to a specific folder
 ```{r}
-gd_ls()
+drive_ls()
 ```
 
 I'll use my `THIS IS A TEST` folder.
 
 ```{r}
-folder <- gd_get_id("THIS IS A TEST") %>%
-  gd_file
+folder <- drive_get_id("THIS IS A TEST") %>%
+  drive_file
 ```
 
 
 ```{r}
-new_file <- gd_upload("~/desktop/hide/test.txt") %>%
-  gd_mv(folder)
+new_file <- drive_upload("~/desktop/hide/test.txt") %>%
+  drive_mv(folder)
 ```
 
 ## delete a lot!
 
 ```{r}
-to_delete <- purrr::map(gd_get_id("test", n = 3),  gd_file)
+to_delete <- purrr::map(drive_get_id("test", n = 3),  drive_file)
  
-purrr::map(to_delete, gd_delete)
+purrr::map(to_delete, drive_delete)
 ```
 

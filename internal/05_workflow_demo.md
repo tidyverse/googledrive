@@ -20,8 +20,8 @@ get file
 --------
 
 ``` r
-our_file <- gd_get_id("Lucy & Jenny") %>% 
-  gd_file
+our_file <- drive_get_id("Lucy & Jenny") %>% 
+  drive_file
 ```
 
 publish file
@@ -29,7 +29,7 @@ publish file
 
 ``` r
 our_file <- our_file %>%
-  gd_publish
+  drive_publish
 ```
 
     ## You have changed the publication status of '🌻 Lucy & Jenny'.
@@ -41,24 +41,24 @@ check publication status
 our_file$publish
 ```
 
-    ## # A tibble: 1 × 5
-    ##            check_time revision published auto_publish       last_user
-    ##                <dttm>    <chr>     <lgl>        <lgl>           <chr>
-    ## 1 2017-05-09 19:30:30      742      TRUE         TRUE Lucy D'Agostino
+    ## # A tibble: 1 × 4
+    ##            check_time revision published auto_publish
+    ##                <dttm>    <chr>     <lgl>        <lgl>
+    ## 1 2017-05-11 10:52:36      777      TRUE         TRUE
 
 edit file in browser
 --------------------
 
 ``` r
-gd_browse(our_file)
+drive_browse(our_file)
 ```
 
 pull in file again
 ------------------
 
 ``` r
-our_file <- gd_get_id("Lucy & Jenny") %>% 
-  gd_file
+our_file <- drive_get_id("Lucy & Jenny") %>% 
+  drive_file
 ```
 
 ``` r
@@ -68,5 +68,5 @@ our_file
     ## File name: 🌻 Lucy & Jenny 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
-    ## Last modified: 2017-05-09 
+    ## Last modified: 2017-05-10 
     ## Access: Anyone who has the link can access. No sign-in required.

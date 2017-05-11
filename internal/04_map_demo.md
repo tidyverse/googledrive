@@ -21,8 +21,8 @@ grab a file
 -----------
 
 ``` r
-my_file <- gd_get_id("test") %>%
-  gd_file
+my_file <- drive_get_id("test") %>%
+  drive_file
 ```
 
 lets take a peak
@@ -32,17 +32,17 @@ lets take a peak
 my_file
 ```
 
-    ## File name: This is a test 
+    ## File name: test_for_deleting 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
-    ## Last modified: 2017-05-09 
-    ## Access: Shared with specific people.
+    ## Last modified: 2017-05-10 
+    ## Access: Anyone on the internet can find and access. No sign-in required.
 
 we can also pull out multiple files
 -----------------------------------
 
 ``` r
-lst_of_files <- purrr::map(.x =gd_get_id("test", n = 3), gd_file) 
+lst_of_files <- purrr::map(.x =drive_get_id("test", n = 3), drive_file) 
 ```
 
 change access
@@ -50,10 +50,10 @@ change access
 
 ``` r
 my_file <- my_file %>%
-  gd_share(role = "reader", type = "anyone")
+  drive_share(role = "reader", type = "anyone")
 ```
 
-    ## The permissions for file 'This is a test' have been updated
+    ## The permissions for file 'test_for_deleting' have been updated
 
 check access
 ------------
@@ -62,17 +62,17 @@ check access
 my_file
 ```
 
-    ## File name: This is a test 
+    ## File name: test_for_deleting 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
-    ## Last modified: 2017-05-09 
-    ## Access: Anyone who has the link can access. No sign-in required.
+    ## Last modified: 2017-05-11 
+    ## Access: Anyone on the internet can find and access. No sign-in required.
 
 upload one
 ----------
 
 ``` r
-gd_upload("~/desktop/hide/test.txt", "This is a test")
+drive_upload("~/desktop/hide/test.txt", "This is a test")
 ```
 
     ## File uploaded to Google Drive: 
@@ -84,34 +84,34 @@ upload to a specific folder
 ---------------------------
 
 ``` r
-gd_ls()
+drive_ls()
 ```
 
     ## # A tibble: 100 × 3
-    ##                       name     type
-    ##                      <chr>    <chr>
-    ## 1           This is a test document
-    ## 2           This is a test document
-    ## 3                     test document
-    ## 4                     test document
-    ## 5                     test document
-    ## 6                     test document
-    ## 7                     test document
-    ## 8                     test document
-    ## 9        Happy Little Demo document
-    ## 10 Football Stadium Survey     form
+    ##                                                name        type
+    ##                                               <chr>       <chr>
+    ## 1                                    This is a test    document
+    ## 2                                 test_for_deleting    document
+    ## 3                           \U0001f33b Lucy & Jenny    document
+    ## 4               Football Stadium Survey (Responses) spreadsheet
+    ## 5                           Football Stadium Survey        form
+    ## 6                                 Happy Little Demo    document
+    ## 7                                    THIS IS A TEST      folder
+    ## 8  Vanderbilt Graduate Student Handbook (Responses) spreadsheet
+    ## 9                  WSDS Concurrent Session Abstract    document
+    ## 10                R-Ladies Nashville 6-Month Survey        form
     ## # ... with 90 more rows, and 1 more variables: id <chr>
 
 I'll use my `THIS IS A TEST` folder.
 
 ``` r
-folder <- gd_get_id("THIS IS A TEST") %>%
-  gd_file
+folder <- drive_get_id("THIS IS A TEST") %>%
+  drive_file
 ```
 
 ``` r
-new_file <- gd_upload("~/desktop/hide/test.txt") %>%
-  gd_mv(folder)
+new_file <- drive_upload("~/desktop/hide/test.txt") %>%
+  drive_mv(folder)
 ```
 
     ## File uploaded to Google Drive: 
@@ -128,15 +128,16 @@ delete a lot!
 -------------
 
 ``` r
-to_delete <- purrr::map(gd_get_id("test", n = 3),  gd_file)
+to_delete <- purrr::map(drive_get_id("test", n = 3),  drive_file)
  
-purrr::map(to_delete, gd_delete)
+purrr::map(to_delete, drive_delete)
 ```
 
     ## The file 'test' has been deleted from your Google Drive
 
     ## The file 'This is a test' has been deleted from your Google Drive
-    ## The file 'This is a test' has been deleted from your Google Drive
+
+    ## The file 'test_for_deleting' has been deleted from your Google Drive
 
     ## [[1]]
     ## [1] TRUE

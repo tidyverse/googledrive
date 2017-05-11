@@ -16,12 +16,12 @@ library('googledrive')
 
 ```{r}
 write.table("This is a little demo", "demo.txt")
-gd_upload("demo.txt", "Happy Little Demo")
+drive_upload("demo.txt", "Happy Little Demo")
 ```
 
 ```{r}
-my_file <- gd_get_id("Happy Little Demo") %>%
-  gd_file()
+my_file <- drive_get_id("Happy Little Demo") %>%
+  drive_file()
 ```
 
 ## check current permissions
@@ -36,7 +36,7 @@ cool beans - it's private!
 *all functions that will somehow change the file will output a new file, overwrite the old file with this to avoid confusion*
 ```{r}
 my_file<- my_file %>%
-  gd_share(role = "reader", type = "anyone")
+  drive_share(role = "reader", type = "anyone")
 ```
 
 Let's see what that did
@@ -51,7 +51,7 @@ Now anyone with the link can view it
 
 ```{r}
 my_file <- my_file %>%
-  gd_share(role = "reader", type = "anyone", allowFileDiscovery = "true")
+  drive_share(role = "reader", type = "anyone", allowFileDiscovery = "true")
 ```
 
 Let's see what that did
@@ -77,12 +77,12 @@ my_file
 
 you can also output a link to share
 ```{r}
-gd_share_link(my_file)
+drive_share_link(my_file)
 ```
 
 ## clean up
 
 ```{r}
-gd_delete(my_file)
+drive_delete(my_file)
 ```
 

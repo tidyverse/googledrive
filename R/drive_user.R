@@ -38,10 +38,10 @@ drive_user <- function(fields = "user",...) {
     return(NULL)
   }
 
-  url <- file.path(.state$gd_base_url, "drive/v3/about")
+  url <- file.path(.state$drive_base_url, "drive/v3/about")
 
   req <- build_request(endpoint = url,
-                       token = gd_token(),
+                       token = drive_token(),
                        params = list(fields = fields,
                                      ...))
   res <- make_request(req)

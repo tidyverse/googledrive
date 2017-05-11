@@ -5,7 +5,7 @@ Lucy D’Agostino McGowan
 
 -   [check current permissions](#check-current-permissions)
 -   [change permissions (anyone with link)](#change-permissions-anyone-with-link)
--   [change permissions (anyone in the 🌏)](#change-permissions-anyone-in-the)
+-   [change permissions (anyone in the 🌎)](#change-permissions-anyone-in-the)
 -   [make it easier to see](#make-it-easier-to-see)
 -   [share link](#share-link)
 -   [clean up](#clean-up)
@@ -19,7 +19,7 @@ library('googledrive')
 
 ``` r
 write.table("This is a little demo", "demo.txt")
-gd_upload("demo.txt", "Happy Little Demo")
+drive_upload("demo.txt", "Happy Little Demo")
 ```
 
     ## File uploaded to Google Drive: 
@@ -28,8 +28,8 @@ gd_upload("demo.txt", "Happy Little Demo")
     ## Happy Little Demo
 
 ``` r
-my_file <- gd_get_id("Happy Little Demo") %>%
-  gd_file()
+my_file <- drive_get_id("Happy Little Demo") %>%
+  drive_file()
 ```
 
 check current permissions
@@ -55,7 +55,7 @@ change permissions (anyone with link)
 
 ``` r
 my_file<- my_file %>%
-  gd_share(role = "reader", type = "anyone")
+  drive_share(role = "reader", type = "anyone")
 ```
 
     ## The permissions for file 'Happy Little Demo' have been updated
@@ -76,12 +76,12 @@ my_file$permissions
 
 Now anyone with the link can view it
 
-change permissions (anyone in the 🌏)
+change permissions (anyone in the 🌎)
 ------------------------------------
 
 ``` r
 my_file <- my_file %>%
-  gd_share(role = "reader", type = "anyone", allowFileDiscovery = "true")
+  drive_share(role = "reader", type = "anyone", allowFileDiscovery = "true")
 ```
 
     ## The permissions for file 'Happy Little Demo' have been updated
@@ -121,7 +121,7 @@ my_file
     ## File name: Happy Little Demo 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
-    ## Last modified: 2017-05-09 
+    ## Last modified: 2017-05-11 
     ## Access: Anyone on the internet can find and access. No sign-in required.
 
 share link
@@ -130,16 +130,16 @@ share link
 you can also output a link to share
 
 ``` r
-gd_share_link(my_file)
+drive_share_link(my_file)
 ```
 
-    ## [1] "https://docs.google.com/document/d/1TUuc-I8vdStN5bETYYsMaQvrvTfII_A9Y41zwH5Ln5U/edit?usp=drivesdk"
+    ## [1] "https://docs.google.com/document/d/1qrIsA5fFKn1VmvzzZ4Pymq6SYZuxaRe7xJK35j_SRRA/edit?usp=drivesdk"
 
 clean up
 --------
 
 ``` r
-gd_delete(my_file)
+drive_delete(my_file)
 ```
 
     ## The file 'Happy Little Demo' has been deleted from your Google Drive

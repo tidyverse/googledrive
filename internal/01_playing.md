@@ -23,51 +23,45 @@ library('dplyr')
 List
 ----
 
-`gd_ls()` pulls out name, type, & id (we probably don't want to see id, but seems useful to have here, so we could pick which one we want to get more info on?)
+`drive_ls()` pulls out name, type, & id (we probably don't want to see id, but seems useful to have here, so we could pick which one we want to get more info on?)
 
 ``` r
-gd_ls()
+drive_ls()
 ```
 
     ## # A tibble: 100 × 3
-    ##                       name     type
-    ##                      <chr>    <chr>
-    ## 1                     test document
-    ## 2                     test document
-    ## 3                     test document
-    ## 4                     test document
-    ## 5                     test document
-    ## 6                     test document
-    ## 7        Happy Little Demo document
-    ## 8  Football Stadium Survey     form
-    ## 9        test_for_deleting document
-    ## 10 \U0001f33b Lucy & Jenny document
+    ##                                                name        type
+    ##                                               <chr>       <chr>
+    ## 1                           \U0001f33b Lucy & Jenny    document
+    ## 2                                 test_for_deleting    document
+    ## 3               Football Stadium Survey (Responses) spreadsheet
+    ## 4                           Football Stadium Survey        form
+    ## 5                                 Happy Little Demo    document
+    ## 6                                    THIS IS A TEST      folder
+    ## 7  Vanderbilt Graduate Student Handbook (Responses) spreadsheet
+    ## 8                  WSDS Concurrent Session Abstract    document
+    ## 9                 R-Ladies Nashville 6-Month Survey        form
+    ## 10           Health Insurance Questions (Responses) spreadsheet
     ## # ... with 90 more rows, and 1 more variables: id <chr>
 
 We can search using regular expressions
 
 ``` r
-gd_ls(search = "test")
+drive_ls(search = "test")
 ```
 
-    ## # A tibble: 9 × 3
+    ## # A tibble: 3 × 3
     ##                   name                   type
     ##                  <chr>                  <chr>
-    ## 1                 test               document
-    ## 2                 test               document
-    ## 3                 test               document
-    ## 4                 test               document
-    ## 5                 test               document
-    ## 6                 test               document
-    ## 7    test_for_deleting               document
-    ## 8 remark-latest.min.js application/javascript
-    ## 9 remark-latest.min.js        text/javascript
+    ## 1    test_for_deleting               document
+    ## 2 remark-latest.min.js application/javascript
+    ## 3 remark-latest.min.js        text/javascript
     ## # ... with 1 more variables: id <chr>
 
 We can also pass additional query parameters through the `...`, for example
 
 ``` r
-gd_ls(search = "test", orderBy = "modifiedTime")
+drive_ls(search = "test", orderBy = "modifiedTime")
 ```
 
     ## # A tibble: 1 × 3
@@ -86,16 +80,16 @@ List of all fields [here](https://developers.google.com/drive/v3/web/migration).
 Now let's say I want to dive deeper into the top one
 
 ``` r
-id <- gd_get_id("test")
-file <- gd_file(id)
+id <- drive_get_id("test")
+file <- drive_file(id)
 file
 ```
 
-    ## File name: test 
+    ## File name: test_for_deleting 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
-    ## Last modified: 2017-05-09 
-    ## Access: Anyone who has the link can access. No sign-in required.
+    ## Last modified: 2017-05-10 
+    ## Access: Anyone on the internet can find and access. No sign-in required.
 
 In addition to the things I've pulled out, there is a `tibble` of permissions as well as a `list` (now named `kitchen_sink`, this should change), that contains all output fields.
 
@@ -107,7 +101,7 @@ file$permissions
     ##               kind                   id   type            emailAddress
     ##              <chr>                <chr>  <chr>                   <chr>
     ## 1 drive#permission 13813982488463916564   user lucydagostino@gmail.com
-    ## 2 drive#permission       anyoneWithLink anyone                    <NA>
+    ## 2 drive#permission               anyone anyone                    <NA>
     ## # ... with 5 more variables: role <chr>, displayName <chr>,
     ## #   photoLink <chr>, deleted <lgl>, allowFileDiscovery <lgl>
 
@@ -117,8 +111,8 @@ str(file$kitchen_sink)
 
     ## List of 27
     ##  $ kind                 : chr "drive#file"
-    ##  $ id                   : chr "1iiuNXc0AEAzPE3D2U-tSioObSY4cAI-bX60PE_glUK0"
-    ##  $ name                 : chr "test"
+    ##  $ id                   : chr "1CPf-Y-paR6htziclFQsb0hOPmXgMAdK2vMCplPKT44s"
+    ##  $ name                 : chr "test_for_deleting"
     ##  $ mimeType             : chr "application/vnd.google-apps.document"
     ##  $ starred              : logi FALSE
     ##  $ trashed              : logi FALSE
@@ -127,15 +121,15 @@ str(file$kitchen_sink)
     ##   ..$ : chr "0AA9rJumZU4vEUk9PVA"
     ##  $ spaces               :List of 1
     ##   ..$ : chr "drive"
-    ##  $ version              : chr "40153"
-    ##  $ webViewLink          : chr "https://docs.google.com/document/d/1iiuNXc0AEAzPE3D2U-tSioObSY4cAI-bX60PE_glUK0/edit?usp=drivesdk"
+    ##  $ version              : chr "40361"
+    ##  $ webViewLink          : chr "https://docs.google.com/document/d/1CPf-Y-paR6htziclFQsb0hOPmXgMAdK2vMCplPKT44s/edit?usp=drivesdk"
     ##  $ iconLink             : chr "https://drive-thirdparty.googleusercontent.com/16/type/application/vnd.google-apps.document"
-    ##  $ thumbnailLink        : chr "https://docs.google.com/feeds/vt?gd=true&id=1iiuNXc0AEAzPE3D2U-tSioObSY4cAI-bX60PE_glUK0&v=1&s=AMedNnoAAAAAWRH42pQOg16rCklmzCVU"| __truncated__
+    ##  $ thumbnailLink        : chr "https://docs.google.com/feeds/vt?gd=true&id=1CPf-Y-paR6htziclFQsb0hOPmXgMAdK2vMCplPKT44s&v=3&s=AMedNnoAAAAAWRSjZCDKGGlGStwOPiKv"| __truncated__
     ##  $ viewedByMe           : logi TRUE
-    ##  $ viewedByMeTime       : chr "2017-05-09T15:10:22.695Z"
-    ##  $ createdTime          : chr "2017-05-09T15:08:28.800Z"
-    ##  $ modifiedTime         : chr "2017-05-09T15:09:33.038Z"
-    ##  $ modifiedByMeTime     : chr "2017-05-09T15:09:33.038Z"
+    ##  $ viewedByMeTime       : chr "2017-05-10T03:28:47.320Z"
+    ##  $ createdTime          : chr "2017-05-08T15:07:01.450Z"
+    ##  $ modifiedTime         : chr "2017-05-10T03:30:03.096Z"
+    ##  $ modifiedByMeTime     : chr "2017-05-10T03:30:03.096Z"
     ##  $ owners               :List of 1
     ##   ..$ :List of 6
     ##   .. ..$ kind        : chr "drive#user"
@@ -183,10 +177,10 @@ str(file$kitchen_sink)
     ##   .. ..$ deleted     : logi FALSE
     ##   ..$ :List of 5
     ##   .. ..$ kind              : chr "drive#permission"
-    ##   .. ..$ id                : chr "anyoneWithLink"
+    ##   .. ..$ id                : chr "anyone"
     ##   .. ..$ type              : chr "anyone"
-    ##   .. ..$ role              : chr "reader"
-    ##   .. ..$ allowFileDiscovery: logi FALSE
+    ##   .. ..$ role              : chr "writer"
+    ##   .. ..$ allowFileDiscovery: logi TRUE
     ##  $ quotaBytesUsed       : chr "0"
 
 User info
@@ -224,7 +218,7 @@ Upload file
 
 ``` r
 write.table("this is a test", file = "~/desktop/test.txt")
-gd_upload(file = "~/desktop/test.txt", name = "This is a test", overwrite = TRUE)
+drive_upload(file = "~/desktop/test.txt", name = "This is a test", overwrite = TRUE)
 ```
 
     ## File uploaded to Google Drive: 
@@ -233,21 +227,21 @@ gd_upload(file = "~/desktop/test.txt", name = "This is a test", overwrite = TRUE
     ## This is a test
 
 ``` r
-file <- gd_file(gd_get_id("This is a test"))
+file <- drive_file(drive_get_id("This is a test"))
 file
 ```
 
     ## File name: This is a test 
     ## File owner: Lucy D'Agostino 
     ## File type: document 
-    ## Last modified: 2017-05-09 
+    ## Last modified: 2017-05-11 
     ## Access: Shared with specific people.
 
 Update sharing
 --------------
 
 ``` r
-file <- gd_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
+file <- drive_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
 ```
 
     ## The permissions for file 'This is a test' have been updated
@@ -270,7 +264,7 @@ Make it fully shareable
 -----------------------
 
 ``` r
-file <- gd_share(file, role = "reader", type = "anyone", allowFileDiscovery = "true")
+file <- drive_share(file, role = "reader", type = "anyone", allowFileDiscovery = "true")
 ```
 
     ## The permissions for file 'This is a test' have been updated
@@ -279,10 +273,10 @@ Extract share link
 ------------------
 
 ``` r
-gd_share_link(file)
+drive_share_link(file)
 ```
 
-    ## [1] "https://docs.google.com/document/d/17yO56Rc-nb-0wpDGtW7eUN90dMBGw0-pmcTovsqi-RM/edit?usp=drivesdk"
+    ## [1] "https://docs.google.com/document/d/1EFF7b0M1SF4AfdWPbfRECsVCV1wJU56CD-jH1CVr8XA/edit?usp=drivesdk"
 
 *this looks exactly the same as the share link from the Google Drive GUI except `usp=drivesdk` instead of `usp=sharing`*
 
@@ -290,7 +284,7 @@ Delete file
 -----------
 
 ``` r
-gd_delete(file)
+drive_delete(file)
 ```
 
     ## The file 'This is a test' has been deleted from your Google Drive

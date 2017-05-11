@@ -16,7 +16,7 @@ library('googledrive')
 
 ``` r
 write.table("This is a little demo", "demo.txt")
-gd_upload("demo.txt", name = "Happy Little Demo")
+drive_upload("demo.txt", name = "Happy Little Demo")
 ```
 
     ## File uploaded to Google Drive: 
@@ -25,8 +25,8 @@ gd_upload("demo.txt", name = "Happy Little Demo")
     ## Happy Little Demo
 
 ``` r
-my_file <- gd_get_id("Happy Little Demo") %>%
-  gd_file
+my_file <- drive_get_id("Happy Little Demo") %>%
+  drive_file
 ```
 
 check published status
@@ -34,16 +34,16 @@ check published status
 
 ``` r
 my_file %>%
-  gd_check_publish
+  drive_check_publish
 ```
 
     ## The latest revision of the Google Drive file 'Happy Little Demo' is not published.
 
-the `gd_check_publish` also outputs a new file with a tibble called `publish` with publication information. We can overwrite `my_file` to see this
+the `drive_check_publish` also outputs a new file with a tibble called `publish` with publication information. We can overwrite `my_file` to see this
 
 ``` r
 my_file <- my_file %>%
-  gd_check_publish
+  drive_check_publish
 ```
 
     ## The latest revision of the Google Drive file 'Happy Little Demo' is not published.
@@ -55,14 +55,14 @@ my_file$publish
     ## # A tibble: 1 × 5
     ##            check_time revision published auto_publish       last_user
     ##                <dttm>    <chr>     <lgl>        <lgl>           <chr>
-    ## 1 2017-05-09 09:49:43        3     FALSE        FALSE Lucy D'Agostino
+    ## 1 2017-05-11 10:47:13        3     FALSE        FALSE Lucy D'Agostino
 
 publish it
 ----------
 
 ``` r
 my_file <- my_file %>%
-  gd_publish
+  drive_publish
 ```
 
     ## You have changed the publication status of 'Happy Little Demo'.
@@ -76,13 +76,13 @@ my_file$publish
     ## # A tibble: 1 × 5
     ##            check_time revision published auto_publish       last_user
     ##                <dttm>    <chr>     <lgl>        <lgl>           <chr>
-    ## 1 2017-05-09 09:49:45        3      TRUE         TRUE Lucy D'Agostino
+    ## 1 2017-05-11 10:47:16        3      TRUE         TRUE Lucy D'Agostino
 
 clean up
 --------
 
 ``` r
-gd_delete(my_file)
+drive_delete(my_file)
 ```
 
     ## The file 'Happy Little Demo' has been deleted from your Google Drive

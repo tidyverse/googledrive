@@ -18,34 +18,34 @@ library('dplyr')
 
 ## List files
 
-We list files using `gd_ls()`[.](https://www.youtube.com/watch?v=F-X4SLhorvw) Possible parameters to pass to the `...` can be found here. For example, by default files are listed in descending order by most recently modified.  
+We list files using `drive_ls()`[.](https://www.youtube.com/watch?v=F-X4SLhorvw) Possible parameters to pass to the `...` can be found here. For example, by default files are listed in descending order by most recently modified.  
 
 Here is my list using the default:
 
 ```{r}
-gd_ls()
+drive_ls()
 ```
 
 Let's say I want to order them by folders, then modified time, then name. I can do that!
 
 ```{r}
-gd_ls(orderBy = "folder,modifiedTime desc,name" )
+drive_ls(orderBy = "folder,modifiedTime desc,name" )
 ```
 
 As another example, by default, this will list 100 drive files. If we want to output more, we can pass the `pageSize` parameter[.](https://www.youtube.com/watch?v=cRpdIrq7Rbo&t=67s)
 
 ```{r}
-gd_ls(pageSize = 200)
+drive_ls(pageSize = 200)
 ```
 
 ## Publish files
 
-To publish files, we use `gd_publish()`. Parameters found [here](https://developers.google.com/drive/v3/reference/revisions/update) can be passed to the `...` of this function. For example, by default for Google Docs, subsequent revisions will be automatically republished. We can change this by passing the `publishAuto` parameter.
+To publish files, we use `drive_publish()`. Parameters found [here](https://developers.google.com/drive/v3/reference/revisions/update) can be passed to the `...` of this function. For example, by default for Google Docs, subsequent revisions will be automatically republished. We can change this by passing the `publishAuto` parameter.
 
 ```{r}
-my_file <- gd_get_id("test") %>%
-  gd_file %>%
-  gd_publish(publishAuto=FALSE)
+my_file <- drive_get_id("test") %>%
+  drive_file %>%
+  drive_publish(publishAuto=FALSE)
 ```
 
 ```{r}
@@ -54,11 +54,11 @@ my_file$publish
 
 ## Share files
 
-To share files, we use `gd_share()`. Parameters that can be passed to the `...` can be found [here](https://developers.google.com/drive/v3/reference/permissions/create). For example, if we set the `type` parameter as `anyone`, we can pass the `allowFileDiscovery` through the `...` to allow anyone to discover the file (this is equivalent to being "Public on the Web").
+To share files, we use `drive_share()`. Parameters that can be passed to the `...` can be found [here](https://developers.google.com/drive/v3/reference/permissions/create). For example, if we set the `type` parameter as `anyone`, we can pass the `allowFileDiscovery` through the `...` to allow anyone to discover the file (this is equivalent to being "Public on the Web").
 
 ```{r}
 my_file <- my_file %>%
-  gd_share(type = "anyone", role = "writer", allowFileDiscovery = TRUE)
+  drive_share(type = "anyone", role = "writer", allowFileDiscovery = TRUE)
 ```
 
 ```{r}
@@ -73,12 +73,12 @@ my_file
 
 ## Uploading a file
 
-To upload a file we use `gd_upload()`. Parameters that can be passed to the `...` can be found [here](https://developers.google.com/drive/v3/reference/files/update). For example, if you would like to add a file to a specific folder, and do not want to use the `gd_mv` function after, you can use `addParents`.
+To upload a file we use `drive_upload()`. Parameters that can be passed to the `...` can be found [here](https://developers.google.com/drive/v3/reference/files/update). For example, if you would like to add a file to a specific folder, and do not want to use the `drive_mv` function after, you can use `addParents`.
 
 Let's grab a folder to stick the file in.
 ```{r}
-folder <- gd_get_id("THIS IS A TEST") %>%
-  gd_file
+folder <- drive_get_id("THIS IS A TEST") %>%
+  drive_file
 ```
 
 
@@ -89,12 +89,12 @@ folder
 
 Upload to the folder.
 ```{r}
-new_file <- gd_upload("demo.txt",addParents = folder$id)
+new_file <- drive_upload("demo.txt",addParents = folder$id)
 ```
 
 
 ## clean up
 ```{r}
-new_file <- gd_delete(new_file)
+new_file <- drive_delete(new_file)
 ```
 

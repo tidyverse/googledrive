@@ -114,8 +114,7 @@ process_drive_check_publish <- function(response = NULL, file = NULL, verbose = 
     check_time = Sys.time(),
     revision = proc_res$id,
     published = proc_res$published,
-    auto_publish = ifelse(!is.null(proc_res$publishAuto), proc_res$publishAuto, FALSE),
-    last_user = proc_res$lastModifyingUser$displayName
+    auto_publish = ifelse(!is.null(proc_res$publishAuto), proc_res$publishAuto, FALSE)
   )
 
   if (verbose){
