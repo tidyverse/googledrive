@@ -1,27 +1,33 @@
 #' Upload a file to Google Drive
 #'
 #' @param file character, path the the file you'd like to upload
-#' @param name character, what you'd like the uploaded file to be called on Google Drive
-#' @param overwrite logical, do you want to overwrite file already on Google Drive
+#' @param name character, what you'd like the uploaded file to be called on
+#'   Google Drive
+#' @param overwrite logical, do you want to overwrite file already on Google
+#'   Drive
 #' @param type if type = `NULL`, will force type as follows:
-#'  * **document**: .doc, .docx, .txt, .rtf., .html, .odt, .pdf, .jpeg, .png, .gif,.bmp
-#'  * **spreadsheet**: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
-#' .ods
-#'  * **presentation**: .opt, .ppt, .pptx, .pptm
-#'  otherwise you can specify `document`, `spreadsheet`, or `presentation`. Files with no extension will be assumed to be a `folder`
-#' @param ... name-value pairs to query the API
-#' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
+#' * **document**: .doc, .docx, .txt, .rtf., .html, .odt, .pdf, .jpeg, .png, .gif,.bmp
+#' * **spreadsheet**: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
+#'   .ods
+#' * **presentation**: .opt, .ppt, .pptx, .pptm
 #'
-#' @return object of class `drive_file` and `list` that contains uploaded file's information
+#'  otherwise you can specify `document`, `spreadsheet`, or `presentation`. Files with no extension will
+#'   be assumed to be a `folder`
+#' @param ... name-value pairs to query the API
+#' @param verbose logical, indicating whether to print informative messages
+#'   (default `TRUE`)
+#'
+#' @return object of class `drive_file` and `list` that contains uploaded file's
+#'   information
 #' @export
 gd_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type = NULL, ..., verbose = TRUE){
 
-request <- build_gd_upload(file = file, name = name, overwrite = overwrite, type = type,..., verbose = verbose)
+  request <- build_gd_upload(file = file, name = name, overwrite = overwrite, type = type,..., verbose = verbose)
 
-if (inherits(request, "drive_file")) return(invisible(request))
+  if (inherits(request, "drive_file")) return(invisible(request))
 
-response <- make_request(request)
-process_gd_upload(response = response, file = file, verbose = verbose)
+  response <- make_request(request)
+  process_gd_upload(response = response, file = file, verbose = verbose)
 
 }
 

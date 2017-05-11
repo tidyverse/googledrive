@@ -1,6 +1,7 @@
 #' Retrieves Google Drive file's share link
 #'
-#' @param file `drive_file` object representing the file you would like to retrieve the link for
+#' @param file `drive_file` object representing the file you would like to
+#'   retrieve the link for
 #'
 #' @return character, link to Google Drive file
 #' @export

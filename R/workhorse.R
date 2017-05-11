@@ -6,15 +6,15 @@ build_request <- function(endpoint = NULL,
                           method = "GET"){
 
   workhorse <- list(method = method,
-                     url = character(),
-                     headers = NULL,
-                     query = NULL,
-                     body = NULL,
-                     endpoint = endpoint,
-                     params = params,
-                     token = token,
-                     send_headers = send_headers,
-                     api_url = api_url)
+                    url = character(),
+                    headers = NULL,
+                    query = NULL,
+                    body = NULL,
+                    endpoint = endpoint,
+                    params = params,
+                    token = token,
+                    send_headers = send_headers,
+                    api_url = api_url)
 
   workhorse <- set_query(workhorse)
   workhorse <- set_body(workhorse)
@@ -78,6 +78,6 @@ make_request <- function(x, ...){
 process_request <- function(res, content = TRUE) {
   httr::stop_for_status(res)
   if (content == TRUE){
-  httr::content(res)
+    httr::content(res)
   }
 }

@@ -1,6 +1,7 @@
 #' Update Google Drive file share permissions
 #'
-#' @param file `drive_file` object representing the file you would like to delete
+#' @param file `drive_file` object representing the file you would like to
+#'   delete
 #' @param role The role granted by this permission. Valid values are:
 #' * organizer
 #' * owner
@@ -12,10 +13,12 @@
 #' * group
 #' * domain
 #' * anyone
-#' @param email The email address of the user or group to which this permission refers.
+#' @param email The email address of the user or group to which this permission
+#'   refers.
 #' @param message A custom message to include in the notification email.
 #' @param ... name-value pairs to add to the API request body
-#' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
+#' @param verbose logical, indicating whether to print informative messages
+#'   (default `TRUE`)
 #'
 #' @return `drive_file` object updated with new sharing information
 #' @export

@@ -1,11 +1,17 @@
 #' Publish Google Drive file
 #'
-#' @param file `drive_file` object representing the file you would like to publish
-#' @param publish logical, indicating whether you'd like to publish the most recent revision of the file (default `TRUE`)
-#' @param ... name-value pairs to add to the API request body, for example `publishAuto = FALSE` will ensure that each subsequent revision will not be automatically published (default here is `publishAuto = TRUE`)
-#' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
+#' @param file `drive_file` object representing the file you would like to
+#'   publish
+#' @param publish logical, indicating whether you'd like to publish the most
+#'   recent revision of the file (default `TRUE`)
+#' @param ... name-value pairs to add to the API request body, for example
+#'   `publishAuto = FALSE` will ensure that each subsequent revision will not be
+#'   automatically published (default here is `publishAuto = TRUE`)
+#' @param verbose logical, indicating whether to print informative messages
+#'   (default `TRUE`)
 #'
-#' @return `drive_file` object, a list with published information as a `tibble` added under the list element `publish`
+#' @return `drive_file` object, a list with published information as a `tibble`
+#'   added under the list element `publish`
 #' @export
 gd_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRUE){
 
@@ -31,8 +37,8 @@ build_gd_publish <- function(file = NULL, publish = TRUE, ..., token = gd_token(
                   published = publish)
   } else {
     params = list(published = publish,
-              publishAuto = TRUE,
-              ...)
+                  publishAuto = TRUE,
+                  ...)
   }
 
   id <- file$id
@@ -40,14 +46,14 @@ build_gd_publish <- function(file = NULL, publish = TRUE, ..., token = gd_token(
   rev_id <- file$publish$revision
   url <- file.path(.state$gd_base_url_files_v3, id,"revisions", rev_id)
   build_request(endpoint = url,
-               params = params,
-               token = token,
-               method = "PATCH")
+                params = params,
+                token = token,
+                method = "PATCH")
 }
 
 process_gd_publish <- function(response = NULL, file = NULL, verbose = TRUE){
 
-   proc_res <- process_request(response)
+  proc_res <- process_request(response)
 
   if (verbose){
     if(response$status_code == 200L){
