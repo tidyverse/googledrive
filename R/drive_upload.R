@@ -102,7 +102,7 @@ build_drive_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type
       spf("Zoinks! the file doesn't seem to have uploaded")
     }
 
-    return(invisible(gfile(proc_res$id)))
+    return(invisible(drive_file(proc_res$id)))
   }
 
   url <- file.path(.state$drive_base_url, "upload/drive/v3/files", paste0(id, "?uploadType=media"))
