@@ -8,12 +8,12 @@ drive_ls(path = NULL, pattern = NULL, ..., fixed = FALSE,
   verbose = TRUE)
 }
 \arguments{
-\item{path}{character vector, path name(s) where the Google drive files are that you
-would like to list. Defaults to the "My Drive" directory.}
+\item{path}{character vector, path name(s) where the Google drive files are
+that you would like to list. Defaults to the "My Drive" directory.}
 
-\item{pattern}{character vector, regular expression(s) of title(s) of documents to
-output in a tibble. If it is \code{NULL} (default), information about all
-documents in drive will be output in a tibble.}
+\item{pattern}{character vector, regular expression(s) of title(s) of
+documents to output in a tibble. If it is \code{NULL} (default), information
+about all documents in drive will be output in a tibble.}
 
 \item{...}{name-value pairs to query the API}
 
@@ -24,9 +24,8 @@ to a document's name on Google Drive.}
 (default \code{TRUE})
 
 This will default to the most recent 100 files on your Google Drive. If you
-would like more than 100, include the \code{pageSize} parameter. For example, if I
-wanted 200, I would run \code{drive_ls(pageSize = 200)}.
-
+would like more than 100, include the \code{pageSize} parameter. For example, if
+I wanted 200, I would run \code{drive_ls(pageSize = 200)}.
 Helpful links for forming queries:
 \itemize{
 \item \url{https://developers.google.com/drive/v3/web/search-parameters}
