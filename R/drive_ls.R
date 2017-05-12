@@ -28,7 +28,11 @@
 #' }
 #'
 #' @export
-drive_ls <- function(path = NULL, pattern = NULL, ..., fixed = FALSE, verbose = TRUE){
+drive_ls <- function(path = NULL,
+                     pattern = NULL,
+                     ...,
+                     fixed = FALSE,
+                     verbose = TRUE){
 
   folder <- NULL
 
@@ -38,36 +42,41 @@ drive_ls <- function(path = NULL, pattern = NULL, ..., fixed = FALSE, verbose = 
 
   request <- build_drive_ls(..., folder = folder)
   response <- make_request(request)
-  process_drive_ls(response = response, pattern = pattern, fixed = fixed, verbose = verbose)
+  process_drive_ls(
+    response = response,
+    pattern = pattern,
+    fixed = fixed,
+    verbose = verbose
+  )
 
 }
 
 climb_folders <- function(path = NULL, my_folders = drive_folders()){
 
   folders <- unlist(strsplit(path, "/"))
-  my_folder_ids <- purrr::map(folders,folder_ids, folder_tbl = my_folders)
+  my_folder_ids <- purrr::map(folders, folder_ids, folder_tbl = my_folders)
 
   if (!any(my_folder_ids[[1]]$root)){
     spf("We could not find a folder named '%s' in your 'My Drive' (root) directory.", folders[1])
   }
 
   #it is v silly that Google Drive allows this but...
-  if (!sum(my_folder_ids[[1]]$root)==1){
+  if (!sum(my_folder_ids[[1]]$root) == 1){
     spf("It seems you have more than one folder named '%s' in your 'My Drive' (root) directory.", folders[1])
   }
 
-  if (length(my_folder_ids)==1){
+  if (length(my_folder_ids) == 1){
     return(my_folder_ids[[1]]$id[my_folder_ids[[1]]$root == TRUE])
   }
   len <- length(my_folder_ids)
 
-  while (nrow(my_folder_ids[[len-1]]) != 1){
+  while (nrow(my_folder_ids[[len - 1]]) != 1){
     len <- length(my_folder_ids)
-    f1 <- my_folder_ids[1:(len-1)]
+    f1 <- my_folder_ids[1:(len - 1)]
     f2 <- my_folder_ids[2:len]
     my_folder_ids <- purrr::map2(f1, f2, folder_check)
   }
-  my_folder_ids[[len-1]]$id
+  my_folder_ids[[len - 1]]$id
 }
 build_drive_ls <- function(..., folder = NULL, token = drive_token()){
 
@@ -118,12 +127,12 @@ build_drive_ls <- function(..., folder = NULL, token = drive_token()){
       "webViewLink",
       "writersCanShare"
     )
-  fields <- paste0("files/",default_fields, collapse = ",")
+  fields <- paste0("files/", default_fields, collapse = ",")
 
   x <- list(...)
 
   if (!is.null(folder)){
-    parents <- paste0("'",folder,"'"," in parents")
+    parents <- paste0("'", folder, "'", " in parents")
     if ("q" %in% names(x)){
       x$q <- paste(x$q, "and", parents)
     } else {
@@ -145,11 +154,11 @@ process_drive_ls <- function(response = NULL,
 
   location <- tibble::tibble(
     id = purrr::map_chr(proc_res$files, "id"),
-    parent = purrr::map(proc_res$files,"parents")
+    parent = purrr::map(proc_res$files, "parents")
   )
   req_tbl <- tibble::tibble(
     name = purrr::map_chr(proc_res$files, "name"),
-    type = sub('.*\\.', '',purrr::map_chr(proc_res$files, "mimeType")),
+    type = sub(".*\\.", "", purrr::map_chr(proc_res$files, "mimeType")),
     id = purrr::map_chr(proc_res$files, "id"),
     gfile = proc_res$files)
 
@@ -158,7 +167,7 @@ process_drive_ls <- function(response = NULL,
   if (is.null(pattern)){
     return(req_tbl)
   } else{
-    if(!inherits(pattern, "character")){
+    if (!inherits(pattern, "character")){
       stop("Please update `pattern` to be a character string or vector of character strings.")
     }
   }
@@ -169,11 +178,11 @@ process_drive_ls <- function(response = NULL,
 
   keep_names <- grep(pattern, req_tbl$name, fixed = fixed)
 
-  if(length(keep_names) == 0L){
-    if(verbose){
+  if (length(keep_names) == 0L){
+    if (verbose){
       message(sprintf("We couldn't find any documents matching '%s'. \nTry updating your `pattern` critria.", gsub("\\|", "' or '", pattern)))
     }
     invisible(NULL)
   } else
-    req_tbl[keep_names,]
+    req_tbl[keep_names, ]
 }
