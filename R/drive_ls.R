@@ -56,6 +56,9 @@ climb_folders <- function(path = NULL, my_folders = drive_folders()){
     spf("It seems you have more than one folder named '%s' in your 'My Drive' (root) directory.", folders[1])
   }
 
+  if (length(my_folder_ids)==1){
+    return(my_folder_ids[[1]]$id[my_folder_ids[[1]]$root == TRUE])
+  }
   len <- length(my_folder_ids)
 
   while (nrow(my_folder_ids[[len-1]]) != 1){
@@ -64,7 +67,7 @@ climb_folders <- function(path = NULL, my_folders = drive_folders()){
     f2 <- my_folder_ids[2:len]
     my_folder_ids <- purrr::map2(f1, f2, folder_check)
   }
-  folder <- my_folder_ids[[len-1]]$id
+  my_folder_ids[[len-1]]$id
 }
 build_drive_ls <- function(..., folder = NULL, token = drive_token()){
 
