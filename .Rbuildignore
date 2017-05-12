@@ -7,3 +7,4 @@
 ^sandbox$
 ^codecov\.yml$
 ^data-raw$
+^appveyor\.yml$

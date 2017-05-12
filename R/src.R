@@ -39,8 +39,8 @@ spf <- function(...) stop(sprintf(...), call. = FALSE)
     googledrive.httr_oauth_cache = TRUE,
     googledrive.client_id = "178989665258-f4scmimctv2o96isfppehg1qesrpvjro.apps.googleusercontent.com",
     googledrive.client_secret = "iWPrYg0lFHNQblnRrDbypvJL",
-    googledrive.webapp.client_id = "178989665258-mbn7q84ai89if6ja59jmh8tqn5aqoe3n.apps.googleusercontent.com",
-    googledrive.webapp.client_secret = "UiF2uCHeMiUH0BeNbSAzzBxL",
+    googledrive.webapp.client_id = "189666615045-8qjpi7iqn5141qbevsnavh08u7brltbq.apps.googleusercontent.com",
+    googledrive.webapp.client_secret = "9D4iWjMUwLUJDLViBgQQHA3v",
     googledrive.webapp.redirect_uri = "http://127.0.0.1:4642"
   )
   toset <- !(names(op.googledrive) %in% names(op))
