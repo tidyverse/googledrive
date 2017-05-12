@@ -30,19 +30,8 @@
 #' @export
 drive_ls <- function(path = NULL, pattern = NULL, ..., fixed = FALSE, verbose = TRUE){
 
-  my_folders <- drive_folders()
   if (!is.null(path)){
-    folders <- unlist(strsplit(path, "/"))
-    folder_ids <- purrr::map_chr(folders,folder_id, folder_tbl = my_folders)
-    root <- my_folders$root[my_folders$id == folder_ids[1]]
-    if (!root){
-      spf("It seems that the folder '%s' is not located in your 'My Drive' (root) directory.", folders[1])
-    }
-    test_folders <- my_folders[my_folders$id %in% folder_ids,]
-    if(test_folders$id[-1] == test_folders$parent_id[-length(test_folders$parent_id)]){
-
-    }
-    folder_q <- paste(paste0("'",folder_ids, "'",collapse = " in parents or "), "in parents")
+  climb_folders(path = path)
   }
   request <- build_drive_ls(...)
   response <- make_request(request)
@@ -50,6 +39,32 @@ drive_ls <- function(path = NULL, pattern = NULL, ..., fixed = FALSE, verbose = 
 
 }
 
+climb_folders <- function(path = NULL, my_folders = drive_folders()){
+
+    folders <- unlist(strsplit(path, "/"))
+    my_folder_ids <- purrr::map(folders,folder_ids, folder_tbl = my_folders)
+
+    if (!any(my_folder_ids[[1]]$root)){
+      spf("We could not find a folder named '%s' in your 'My Drive' (root) directory.", folders[1])
+    }
+
+    #it is v silly that Google Drive allows this but...
+    if (!sum(my_folder_ids[[1]]$root)==1){
+      spf("It seems you have more than one folder named '%s' in your 'My Drive' (root) directory.", folders[1])
+    }
+
+    len <- length(my_folder_ids)
+    f1 <- my_folder_ids[1:(len-1)]
+    f2 <- my_folder_ids[2:len]
+    folder_guess <- purrr::map2(f1, f2, folder_check)
+    while (nrow(my_folder_ids[[len-1]]) != 1){
+      len <- length(my_folder_ids)
+      f1 <- my_folder_ids[1:(len-1)]
+      f2 <- my_folder_ids[2:len]
+      my_folder_ids <- purrr::map2(f1, f2, folder_check)
+    }
+     folder <- my_folder_ids[[len-1]]$id
+  }
 build_drive_ls <- function(..., token = drive_token()){
 
   ## add fields

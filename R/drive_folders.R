@@ -34,12 +34,17 @@ root_folder <- function(){
 
 }
 
-folder_id <- function(name = NULL, folder_tbl = NULL, verbose = TRUE){
+folder_ids <- function(name = NULL, folder_tbl = NULL, verbose = TRUE){
   if(!(name %in% folder_tbl$name)){
-    spf("We could not find a folder named '%s' on your Google Drive", name)
+    spf("We could not find a folder named '%s' on your Google Drive.", name)
   }
-  if (sum(folder_tbl$name == name) > 1) {
-    spf("You have not uniquely identified the folder '%s', it seems you have more than one folder by that name.", name)
+  folder_tbl[folder_tbl$name == name,]
+}
+
+folder_check <- function(folder, sub_folder){
+  if (!any(sub_folder$parent_id %in% folder$id)){
+    spf("We could not find a folder named '%s' within a folder named '%s' on your Google Drive.", sub_folder$name[1], folder$name[1])
   }
-  folder_tbl$id[folder_tbl$name == name]
+  winner <- sub_folder[sub_folder$parent_id %in% folder$id,]
+  winner
 }
