@@ -33,7 +33,7 @@ drive_ls <- function(path = NULL, pattern = NULL, ..., fixed = FALSE, verbose = 
   folder <- NULL
 
   if (!is.null(path)){
-  folder <- climb_folders(path = path)
+    folder <- climb_folders(path = path)
   }
 
   request <- build_drive_ls(..., folder = folder)
@@ -44,30 +44,30 @@ drive_ls <- function(path = NULL, pattern = NULL, ..., fixed = FALSE, verbose = 
 
 climb_folders <- function(path = NULL, my_folders = drive_folders()){
 
-    folders <- unlist(strsplit(path, "/"))
-    my_folder_ids <- purrr::map(folders,folder_ids, folder_tbl = my_folders)
+  folders <- unlist(strsplit(path, "/"))
+  my_folder_ids <- purrr::map(folders,folder_ids, folder_tbl = my_folders)
 
-    if (!any(my_folder_ids[[1]]$root)){
-      spf("We could not find a folder named '%s' in your 'My Drive' (root) directory.", folders[1])
-    }
+  if (!any(my_folder_ids[[1]]$root)){
+    spf("We could not find a folder named '%s' in your 'My Drive' (root) directory.", folders[1])
+  }
 
-    #it is v silly that Google Drive allows this but...
-    if (!sum(my_folder_ids[[1]]$root)==1){
-      spf("It seems you have more than one folder named '%s' in your 'My Drive' (root) directory.", folders[1])
-    }
+  #it is v silly that Google Drive allows this but...
+  if (!sum(my_folder_ids[[1]]$root)==1){
+    spf("It seems you have more than one folder named '%s' in your 'My Drive' (root) directory.", folders[1])
+  }
 
+  len <- length(my_folder_ids)
+  f1 <- my_folder_ids[1:(len-1)]
+  f2 <- my_folder_ids[2:len]
+  folder_guess <- purrr::map2(f1, f2, folder_check)
+  while (nrow(my_folder_ids[[len-1]]) != 1){
     len <- length(my_folder_ids)
     f1 <- my_folder_ids[1:(len-1)]
     f2 <- my_folder_ids[2:len]
-    folder_guess <- purrr::map2(f1, f2, folder_check)
-    while (nrow(my_folder_ids[[len-1]]) != 1){
-      len <- length(my_folder_ids)
-      f1 <- my_folder_ids[1:(len-1)]
-      f2 <- my_folder_ids[2:len]
-      my_folder_ids <- purrr::map2(f1, f2, folder_check)
-    }
-     folder <- my_folder_ids[[len-1]]$id
+    my_folder_ids <- purrr::map2(f1, f2, folder_check)
   }
+  folder <- my_folder_ids[[len-1]]$id
+}
 build_drive_ls <- function(..., folder = NULL, token = drive_token()){
 
   ## add fields
@@ -122,10 +122,10 @@ build_drive_ls <- function(..., folder = NULL, token = drive_token()){
   x <- list(...)
 
   if (!is.null(folder)){
-  parents <- paste0("'",folder,"'"," in parents")
-  if ("q" %in% names(x)){
-    x$q <- paste(x$q, "and", parents)
-  } else {
+    parents <- paste0("'",folder,"'"," in parents")
+    if ("q" %in% names(x)){
+      x$q <- paste(x$q, "and", parents)
+    } else {
       x$q <- parents
     }
   }
