@@ -1,18 +1,24 @@
 ## gets all the other folders
 drive_folders <- function(...){
 
-  fields <- paste0("files/",c("id","name","mimeType","parents"), collapse = ",")
-  request <- build_request(endpoint = .state$drive_base_url_files_v3,
-                           token = drive_token(),
-                           params = list(...,
-                                         fields = fields ,
-                                         q = "mimeType='application/vnd.google-apps.folder'"))
+  fields <- paste0(
+    "files/",
+    c("id", "name", "mimeType", "parents"),
+    collapse = ","
+  )
+  request <- build_request(
+    endpoint = .state$drive_base_url_files_v3,
+    token = drive_token(),
+    params = list(#...,
+                  fields = fields ,
+                  q = "mimeType='application/vnd.google-apps.folder'")
+  )
   response <- make_request(request)
   proc_res <- process_request(response)
   tbl <- tibble::tibble(
     name = purrr::map_chr(proc_res$files, "name"),
-    type = sub('.*\\.', '',purrr::map_chr(proc_res$files, "mimeType")),
-    parent_id =  purrr::map_chr(purrr::map(proc_res$files, 'parents', .null = NA),1),
+    type = sub('.*\\.', '', purrr::map_chr(proc_res$files, "mimeType")),
+    parent_id = purrr::map_chr(purrr::map(proc_res$files, 'parents', .null = NA), 1),
     id = purrr::map_chr(proc_res$files, "id")
   )
 

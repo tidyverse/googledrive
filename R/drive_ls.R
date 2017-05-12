@@ -36,7 +36,7 @@ drive_ls <- function(path = NULL,
 
   folder <- NULL
 
-  if (!is.null(path)){
+  if (!is.null(path)) {
     folder <- climb_folders(path = path)
   }
 
@@ -56,7 +56,7 @@ climb_folders <- function(path = NULL, my_folders = drive_folders()){
   folders <- unlist(strsplit(path, "/"))
   my_folder_ids <- purrr::map(folders, folder_ids, folder_tbl = my_folders)
 
-  if (!any(my_folder_ids[[1]]$root)){
+  if (!any(my_folder_ids[[1]]$root)) {
     spf("We could not find a folder named '%s' in your 'My Drive' (root) directory.", folders[1])
   }
 
@@ -65,7 +65,7 @@ climb_folders <- function(path = NULL, my_folders = drive_folders()){
     spf("It seems you have more than one folder named '%s' in your 'My Drive' (root) directory.", folders[1])
   }
 
-  if (length(my_folder_ids) == 1){
+  if (length(my_folder_ids) == 1) {
     return(my_folder_ids[[1]]$id[my_folder_ids[[1]]$root == TRUE])
   }
   len <- length(my_folder_ids)
@@ -78,6 +78,7 @@ climb_folders <- function(path = NULL, my_folders = drive_folders()){
   }
   my_folder_ids[[len - 1]]$id
 }
+
 build_drive_ls <- function(..., folder = NULL, token = drive_token()){
 
   ## add fields
@@ -178,11 +179,12 @@ process_drive_ls <- function(response = NULL,
 
   keep_names <- grep(pattern, req_tbl$name, fixed = fixed)
 
-  if (length(keep_names) == 0L){
-    if (verbose){
+  if (length(keep_names) == 0L) {
+    if (verbose) {
       message(sprintf("We couldn't find any documents matching '%s'. \nTry updating your `pattern` critria.", gsub("\\|", "' or '", pattern)))
     }
-    invisible(NULL)
-  } else
+    invisible()
+  } else {
     req_tbl[keep_names, ]
+  }
 }
