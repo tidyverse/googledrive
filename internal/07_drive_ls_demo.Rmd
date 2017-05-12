@@ -2,7 +2,7 @@
 title: "folders_are_weird"
 author: "Lucy D’Agostino McGowan"
 date: "5/11/2017"
-output: html_document
+output: github_document
 ---
 
 very brief demo
