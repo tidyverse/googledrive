@@ -5,3 +5,4 @@ sandbox
 .RData
 .httr-oauth
 *.Rproj
+.httr-oauth*
