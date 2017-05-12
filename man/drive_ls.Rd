@@ -4,16 +4,20 @@
 \alias{drive_ls}
 \title{List files on Google Drive}
 \usage{
-drive_ls(search = NULL, ..., fixed = FALSE, verbose = TRUE)
+drive_ls(path = NULL, pattern = NULL, ..., fixed = FALSE,
+  verbose = TRUE)
 }
 \arguments{
-\item{search}{character, regular expression(s) of title(s) of documents to
+\item{path}{character vector, path name(s) where the Google drive files are that you
+would like to list. Defaults to the "My Drive" directory.}
+
+\item{pattern}{character vector, regular expression(s) of title(s) of documents to
 output in a tibble. If it is \code{NULL} (default), information about all
 documents in drive will be output in a tibble.}
 
 \item{...}{name-value pairs to query the API}
 
-\item{fixed}{logical, from \code{\link[=grep]{grep()}}. If \code{TRUE}, \code{search} is exactly matched
+\item{fixed}{logical, from \code{\link[=grep]{grep()}}. If \code{TRUE}, \code{pattern} is exactly matched
 to a document's name on Google Drive.}
 
 \item{verbose}{logical, indicating whether to print informative messages

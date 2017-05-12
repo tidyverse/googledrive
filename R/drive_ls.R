@@ -30,10 +30,13 @@
 #' @export
 drive_ls <- function(path = NULL, pattern = NULL, ..., fixed = FALSE, verbose = TRUE){
 
+  folder <- NULL
+
   if (!is.null(path)){
-  climb_folders(path = path)
+  folder <- climb_folders(path = path)
   }
-  request <- build_drive_ls(...)
+
+  request <- build_drive_ls(..., folder = folder)
   response <- make_request(request)
   process_drive_ls(response = response, pattern = pattern, fixed = fixed, verbose = verbose)
 
@@ -65,7 +68,7 @@ climb_folders <- function(path = NULL, my_folders = drive_folders()){
     }
      folder <- my_folder_ids[[len-1]]$id
   }
-build_drive_ls <- function(..., token = drive_token()){
+build_drive_ls <- function(..., folder = NULL, token = drive_token()){
 
   ## add fields
   default_fields <-
@@ -116,11 +119,17 @@ build_drive_ls <- function(..., token = drive_token()){
     )
   fields <- paste0("files/",default_fields, collapse = ",")
 
+  params <- list(..., fields = fields)
+
+  if (!is.null(folder)){
+  parents <- paste0("'",folder,"'"," in parents")
+  params <- list(...,
+                 fields = fields,
+                 q = parents)
+  }
   build_request(endpoint = .state$drive_base_url_files_v3,
                 token = token,
-                params = list(...,
-                              fields = fields,
-                              q = folder_q))
+                params = params)
 
 }
 
