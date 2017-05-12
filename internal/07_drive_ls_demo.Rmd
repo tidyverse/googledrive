@@ -1,0 +1,37 @@
+---
+title: "folders_are_weird"
+author: "Lucy D’Agostino McGowan"
+date: "5/11/2017"
+output: html_document
+---
+
+very brief demo
+
+```{r}
+library(googledrive)
+```
+
+## here is what my most recent files look like:
+```{r}
+drive_ls()
+```
+Notice I have lots of folders named the same name!
+
+## now we can query by path
+
+```{r}
+drive_ls(path = "foo/bar/baz")
+```
+In this subdirectory, I have 2 things, a folder named `yo` and a file named `my_file`.
+
+## can still pass other query parameters
+```{r}
+drive_ls(path = "foo/bar/baz",q = "mimeType='application/vnd.google-apps.folder'")
+```
+
+## can also pass patterns
+
+```{r}
+drive_ls(path = "foo/bar/baz", pattern = "my_file")
+```
+

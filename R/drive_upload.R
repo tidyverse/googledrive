@@ -68,7 +68,7 @@ build_drive_upload <- function(file = NULL, name = NULL, overwrite = FALSE, type
   id <- NULL
 
   if (overwrite & internet){
-    old_doc <- drive_ls(name, fixed = TRUE, verbose = FALSE)
+    old_doc <- drive_ls(pattern = name, fixed = TRUE, verbose = FALSE)
     if (!is.null(old_doc)){
       id <- old_doc$id[1]
     }
