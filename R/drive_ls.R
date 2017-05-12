@@ -119,17 +119,20 @@ build_drive_ls <- function(..., folder = NULL, token = drive_token()){
     )
   fields <- paste0("files/",default_fields, collapse = ",")
 
-  params <- list(..., fields = fields)
+  x <- list(...)
 
   if (!is.null(folder)){
   parents <- paste0("'",folder,"'"," in parents")
-  params <- list(...,
-                 fields = fields,
-                 q = parents)
+  if ("q" %in% names(x)){
+    x$q <- paste(x$q, "and", parents)
+  } else {
+      x$q <- parents
+    }
   }
+  x$fields <- fields
   build_request(endpoint = .state$drive_base_url_files_v3,
                 token = token,
-                params = params)
+                params = x)
 
 }
 
