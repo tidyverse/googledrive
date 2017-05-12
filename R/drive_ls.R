@@ -57,9 +57,7 @@ climb_folders <- function(path = NULL, my_folders = drive_folders()){
   }
 
   len <- length(my_folder_ids)
-  f1 <- my_folder_ids[1:(len-1)]
-  f2 <- my_folder_ids[2:len]
-  folder_guess <- purrr::map2(f1, f2, folder_check)
+
   while (nrow(my_folder_ids[[len-1]]) != 1){
     len <- length(my_folder_ids)
     f1 <- my_folder_ids[1:(len-1)]
