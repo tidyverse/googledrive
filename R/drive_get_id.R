@@ -13,20 +13,28 @@
 #'
 #' @return object of class`drive_id` & `list`, Google Drive id(s)
 #' @export
-drive_get_id <- function(pattern = NULL, n = 1, ..., fixed = FALSE, verbose = TRUE){
-
-  if ("orderBy" %in% names(list(...))){
+drive_get_id <- function(pattern = NULL,
+                         n = 1,
+                         ...,
+                         fixed = FALSE,
+                         verbose = TRUE) {
+  if ("orderBy" %in% names(list(...))) {
     ls <- drive_ls(pattern = pattern, fixed = fixed, ...)
-    if(!is.null(ls)) {
-      id <- as.list(ls[1:n,3])[[1]]
+    if (!is.null(ls)) {
+      id <- as.list(ls[1:n, 3])[[1]]
     }
   } else{
-    ls <- drive_ls(pattern = pattern, fixed = fixed, orderBy="modifiedTime desc", ...)
-    if(!is.null(ls)) {
-      id <- as.list(ls[1:n,3])[[1]]
+    ls <-
+      drive_ls(pattern = pattern,
+               fixed = fixed,
+               orderBy = "modifiedTime desc",
+               ...)
+    if (!is.null(ls)) {
+      id <- as.list(ls[1:n, 3])[[1]]
     }
   }
-  if (!is.null(ls)){
-  structure(id, class=c("drive_id","list"))
-  } else invisible(NULL)
+  if (!is.null(ls)) {
+    structure(id, class = c("drive_id", "list"))
+  } else
+    invisible(NULL)
 }

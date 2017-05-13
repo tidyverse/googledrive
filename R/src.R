@@ -44,9 +44,8 @@ spf <- function(...) stop(sprintf(...), call. = FALSE)
     googledrive.webapp.redirect_uri = "http://127.0.0.1:4642"
   )
   toset <- !(names(op.googledrive) %in% names(op))
-  if(any(toset)) options(op.googledrive[toset])
+  if (any(toset)) options(op.googledrive[toset])
 
   invisible()
 
 }
-

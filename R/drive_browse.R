@@ -6,7 +6,7 @@
 #' @export
 drive_browse <- function(file){
   if (!interactive()) return(invisible(file))
-  if(!inherits(file, "gfile")){
+  if (!inherits(file, "gfile")){
     spf("Input `file` must be a `gfile`. See `drive_file()`")
   }
 
