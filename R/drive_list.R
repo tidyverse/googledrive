@@ -119,8 +119,13 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
   }
 
   #add folder if not null
-  if(!is.null(folder)){
-    x$q <- paste0("'", folder, "'", " in parents")
+  if (!is.null(folder)){
+    q <- paste0("'", folder, "'", " in parents")
+    if (!is.null(x$q)){
+      x$q <- paste(x$q, "and", q)
+    } else {
+      x$q <- q
+    }
   }
 
 
