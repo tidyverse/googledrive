@@ -29,93 +29,12 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
 
   folder <- NULL
   if (!is.null(path)) {
-    folder_nms <- unlist(strsplit(path, "/"))
-    folder_pattern <- paste0("^", folder_nms, "$", collapse = "|")
-    folder_order <- tibble::tibble(
-      name = folder_nms,
-      dir = seq_along(folder_nms)
-      )
-    folder_tbl <- drive_list(pattern = folder_pattern,
-                             fields = paste0("files/parents,files/name,files/mimeType,files/id"),
-                             q = "mimeType='application/vnd.google-apps.folder'")
-
-    if (!all(folder_nms %in% folder_tbl$name)){
-      spf("We could not find the file path '%s' on your Google Drive", path)
-    }
-
-    # merge in to get the correct directory order & sort, oh how I miss the %>% :(
-    folder_tbl <- tibble::as_data_frame(merge(folder_tbl, folder_order, by = "name"))
-    folder_tbl_sort <- folder_tbl[order(folder_tbl$dir), ]
-
-    parent_id <- root_folder()
-    keep_folders <- NULL
-    for (i in 1:nrow(folder_tbl_sort)){
-      subfolder <- folder_tbl_sort[i, ]
-      keep <- subfolder$folder_id == parent_id
-      if (keep){
-        parent_id <- subfolder$id
-      }
-      keep_folders[i] <- keep
-    }
-
-    folder_tbl_keep <- folder_tbl_sort[keep_folders, ]
-    leafmost <- nrow(folder_tbl_keep)
-    if (leafmost != length(folder_nms)){
-      spf("Uh oh, something went wrong. We could not find the path '%s' on your Google Drive", path)
-    }
-
-    folder <- folder_tbl_keep[leafmost, "id"]
+    folder <- get_leafmost_id(path = path)
   }
   x <- list(...)
 
   #add default fields if null
-  if (is.null(x$fields)){
-    default_fields <-
-      c(
-        "appProperties",
-        "capabilities",
-        "contentHints",
-        "createdTime",
-        "description",
-        "explicitlyTrashed",
-        "fileExtension",
-        "folderColorRgb",
-        "fullFileExtension",
-        "headRevisionId",
-        "iconLink",
-        "id",
-        "imageMediaMetadata",
-        "kind",
-        "lastModifyingUser",
-        "md5Checksum",
-        "mimeType",
-        "modifiedByMeTime",
-        "modifiedTime",
-        "name",
-        "originalFilename",
-        "ownedByMe",
-        "owners",
-        "parents",
-        "permissions",
-        "properties",
-        "quotaBytesUsed",
-        "shared",
-        "sharedWithMeTime",
-        "sharingUser",
-        "size",
-        "spaces",
-        "starred",
-        "thumbnailLink",
-        "trashed",
-        "version",
-        "videoMediaMetadata",
-        "viewedByMe",
-        "viewedByMeTime",
-        "viewersCanCopyContent",
-        "webContentLink",
-        "webViewLink",
-        "writersCanShare"
-      )
+  if (is.null(x$fields)) {
     x$fields <- paste0("files/", default_fields, collapse = ",")
   }
 
@@ -140,14 +59,20 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
   req_tbl <- tibble::tibble(
     name = purrr::map_chr(proc_res$files, "name"),
     type = sub(".*\\.", "", purrr::map_chr(proc_res$files, "mimeType")),
-    folder_id = purrr::map_chr(purrr::map(proc_res$files, "parents", .null = NA), 1),
+    folder_id = purrr::map_chr(
+      purrr::map(
+        proc_res$files,
+        "parents",
+        .null = NA
+      ),
+      1),
     id = purrr::map_chr(proc_res$files, "id"),
     gfile = proc_res$files)
 
   if (is.null(pattern)){
     return(req_tbl)
   } else{
-    if (!(inherits(pattern, "character") & length(pattern)==1)){
+    if (!(inherits(pattern, "character") & length(pattern) == 1)){
       stop("Please update `pattern` to be a character string.")
     }
   }
@@ -162,3 +87,103 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
   } else
     req_tbl[keep_names, ]
 }
+
+get_leafmost_id <- function(path) {
+  folder_nms <- unlist(strsplit(path, "/"))
+  folder_pattern <- paste0("^", folder_nms, "$", collapse = "|")
+  folder_order <- tibble::tibble(
+    name = folder_nms,
+    dir = seq_along(folder_nms)
+  )
+  folder_tbl <- drive_list(pattern = folder_pattern,
+                           fields = "files/parents,files/name,files/mimeType,files/id",
+                           q = "mimeType='application/vnd.google-apps.folder'")
+
+  if (!all(folder_nms %in% folder_tbl$name)){
+    spf("We could not find the file path '%s' on your Google Drive", path)
+  }
+
+  # merge in to get the correct directory order & sort
+  folder_tbl <- folder_tbl %>%
+    merge(folder_order, by = "name")
+  folder_tbl_sort <- folder_tbl[order(folder_tbl$dir),]
+    # I could do in a pipe with `[`(order(.$dir), ) is this kosher?
+
+  parent_id <- root_folder()
+  keep_folders <- NULL
+  for (i in 1:nrow(folder_tbl_sort)){
+    subfolder <- folder_tbl_sort[i, ]
+    keep <- subfolder$folder_id == parent_id
+    if (keep){
+      parent_id <- subfolder$id
+    }
+    keep_folders[i] <- keep
+  }
+
+  folder_tbl_keep <- folder_tbl_sort[keep_folders, ]
+  leafmost <- nrow(folder_tbl_keep)
+  if (leafmost != length(folder_nms)){
+    spf("Uh oh, something went wrong. We were unable to find the folder '%s' within the path '%s'.",
+        folder_nms[leafmost + 1],
+        paste0(folder_nms[1:leafmost], collapse = "/"))
+  }
+
+  folder_tbl_keep[leafmost, "id"]
+}
+
+## gets the root folder id
+root_folder <- function() {
+  url <- file.path(.state$drive_base_url_files_v3, "root")
+  request <- build_request(endpoint = url,
+                           token = drive_token())
+  response <- make_request(request)
+  proc_res <- process_request(response)
+  proc_res$id
+
+}
+
+default_fields <-
+  c("appProperties",
+    "capabilities",
+    "contentHints",
+    "createdTime",
+    "description",
+    "explicitlyTrashed",
+    "fileExtension",
+    "folderColorRgb",
+    "fullFileExtension",
+    "headRevisionId",
+    "iconLink",
+    "id",
+    "imageMediaMetadata",
+    "kind",
+    "lastModifyingUser",
+    "md5Checksum",
+    "mimeType",
+    "modifiedByMeTime",
+    "modifiedTime",
+    "name",
+    "originalFilename",
+    "ownedByMe",
+    "owners",
+    "parents",
+    "permissions",
+    "properties",
+    "quotaBytesUsed",
+    "shared",
+    "sharedWithMeTime",
+    "sharingUser",
+    "size",
+    "spaces",
+    "starred",
+    "thumbnailLink",
+    "trashed",
+    "version",
+    "videoMediaMetadata",
+    "viewedByMe",
+    "viewedByMeTime",
+    "viewersCanCopyContent",
+    "webContentLink",
+    "webViewLink",
+    "writersCanShare"
+  )
