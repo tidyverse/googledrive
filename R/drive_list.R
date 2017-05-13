@@ -3,8 +3,7 @@
 #' @param path character, path where the Google drive files are
 #'   that you would like to list. Defaults to the "My Drive" directory.
 #' @param pattern character, regular expression of titles of
-#'   documents to output in a tibble. If it is `NULL` (default), information
-#'   about all documents in drive will be output in a tibble.
+#'   documents to output in a tibble.
 #' @param ... name-value pairs to query the API
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)

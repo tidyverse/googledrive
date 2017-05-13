@@ -11,8 +11,7 @@ drive_list(path = NULL, pattern = NULL, ..., verbose = TRUE)
 that you would like to list. Defaults to the "My Drive" directory.}
 
 \item{pattern}{character, regular expression of titles of
-documents to output in a tibble. If it is \code{NULL} (default), information
-about all documents in drive will be output in a tibble.}
+documents to output in a tibble.}
 
 \item{...}{name-value pairs to query the API}
 
