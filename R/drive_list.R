@@ -29,9 +29,9 @@
 drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
 
   folder <- NULL
-  if (!is.null(path)){
-    folder_pattern <- paste0("^", gsub("/", "$|^", path), "$")
+  if (!is.null(path)) {
     folder_nms <- unlist(strsplit(path, "/"))
+    folder_pattern <- paste0("^", folder_nms, "$", collapse = "|")
     folder_order <- tibble::tibble(name = folder_nms,
                                    dir = 1:length(folder_nms))
     folder_tbl <- drive_list(pattern = folder_pattern,
