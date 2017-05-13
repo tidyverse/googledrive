@@ -1,8 +1,8 @@
 #' List files on Google Drive
 #'
-#' @param path character vector, path where the Google drive files are
+#' @param path character, path where the Google drive files are
 #'   that you would like to list. Defaults to the "My Drive" directory.
-#' @param pattern character vector, regular expression(s) of title(s) of
+#' @param pattern character, regular expression of titles of
 #'   documents to output in a tibble. If it is `NULL` (default), information
 #'   about all documents in drive will be output in a tibble.
 #' @param ... name-value pairs to query the API
@@ -148,13 +148,9 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
   if (is.null(pattern)){
     return(req_tbl)
   } else{
-    if (!inherits(pattern, "character")){
-      stop("Please update `pattern` to be a character string or vector of character strings.")
+    if (!(inherits(pattern, "character") & length(pattern)==1)){
+      stop("Please update `pattern` to be a character string.")
     }
-  }
-
-  if (length(pattern) > 1) {
-    pattern <- paste(pattern, collapse = "|")
   }
 
   keep_names <- grep(pattern, req_tbl$name)

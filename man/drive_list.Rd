@@ -7,10 +7,10 @@
 drive_list(path = NULL, pattern = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{path}{character vector, path where the Google drive files are
+\item{path}{character, path where the Google drive files are
 that you would like to list. Defaults to the "My Drive" directory.}
 
-\item{pattern}{character vector, regular expression(s) of title(s) of
+\item{pattern}{character, regular expression of titles of
 documents to output in a tibble. If it is \code{NULL} (default), information
 about all documents in drive will be output in a tibble.}
 
