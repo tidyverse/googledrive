@@ -109,9 +109,8 @@ build_drive_upload <-
     id <- NULL
 
     if (overwrite & internet) {
-      old_doc <- drive_ls(pattern = name,
-                          fixed = TRUE,
-                          verbose = FALSE)
+      old_doc <- drive_list(pattern = name,
+                            verbose = FALSE)
       if (!is.null(old_doc)) {
         id <- old_doc$id[1]
       }
@@ -133,7 +132,7 @@ build_drive_upload <-
     }
 
     if (type == "application/vnd.google-apps.folder" & internet) {
-      success <- proc_res$id == drive_get_id(name, fixed = TRUE)
+      success <- proc_res$id == drive_get_id(name)
 
       if (success) {
         if (verbose) {
@@ -154,8 +153,8 @@ build_drive_upload <-
     }
 
     url <- file.path(.state$drive_base_url,
-                "upload/drive/v3/files",
-                paste0(id, "?uploadType=media"))
+                     "upload/drive/v3/files",
+                     paste0(id, "?uploadType=media"))
 
     list(
       method = "PATCH",

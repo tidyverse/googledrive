@@ -1,29 +1,3 @@
-## gets all the other folders
-drive_folders <- function(...) {
-  fields <-
-    paste0("files/", c("id", "name", "mimeType", "parents"), collapse = ",")
-  request <-
-    build_request(
-      endpoint = .state$drive_base_url_files_v3,
-      token = drive_token(),
-      params = list(...,
-                    fields = fields,
-                    q = "mimeType='application/vnd.google-apps.folder'")
-    )
-  response <- make_request(request)
-  proc_res <- process_request(response)
-  tbl <- tibble::tibble(
-    name = purrr::map_chr(proc_res$files, "name"),
-    type = sub(".*\\.", "", purrr::map_chr(proc_res$files, "mimeType")),
-    parent_id =  purrr::map_chr(purrr::map(proc_res$files, "parents", .null = NA), 1),
-    id = purrr::map_chr(proc_res$files, "id")
-  )
-
-  root <- root_folder()
-  tbl$root <- ifelse(tbl$parent_id == root, TRUE, FALSE)
-  tbl
-}
-
 ## gets the root folder id
 root_folder <- function() {
   url <- file.path(.state$drive_base_url_files_v3, "root")
@@ -33,27 +7,4 @@ root_folder <- function() {
   proc_res <- process_request(response)
   proc_res$id
 
-}
-
-folder_ids <-
-  function(name = NULL,
-           folder_tbl = NULL,
-           verbose = TRUE) {
-    if (!(name %in% folder_tbl$name)) {
-      spf("We could not find a folder named '%s' on your Google Drive.",
-          name)
-    }
-    folder_tbl[folder_tbl$name == name, ]
-  }
-
-folder_check <- function(folder, sub_folder) {
-  if (!any(sub_folder$parent_id %in% folder$id)) {
-    spf(
-      "We could not find a folder named '%s' within a folder named '%s' on your Google Drive.",
-      sub_folder$name[1],
-      folder$name[1]
-    )
-  }
-  winner <- sub_folder[sub_folder$parent_id %in% folder$id, ]
-  winner
 }

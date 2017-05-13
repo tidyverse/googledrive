@@ -5,8 +5,6 @@
 #'   modified document id will be output.
 #' @param n numeric, how many ids to output, default = 1
 #' @param ... name-value pairs to query the API
-#' @param fixed logical, from `[grep()]`. If `TRUE`, `pattern` is exactly matched
-#'   to a document's name on Google Drive.
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)
 #'
@@ -16,19 +14,16 @@
 drive_get_id <- function(pattern = NULL,
                          n = 1,
                          ...,
-                         fixed = FALSE,
                          verbose = TRUE) {
   if ("orderBy" %in% names(list(...))) {
-    ls <- drive_ls(pattern = pattern, fixed = fixed, ...)
+    ls <- drive_list(pattern = pattern, ...)
     if (!is.null(ls)) {
       id <- as.list(ls[1:n, 3])[[1]]
     }
   } else{
-    ls <-
-      drive_ls(pattern = pattern,
-               fixed = fixed,
-               orderBy = "modifiedTime desc",
-               ...)
+    ls <- drive_list(pattern = pattern,
+                     orderBy = "modifiedTime desc",
+                     ...)
     if (!is.null(ls)) {
       id <- as.list(ls[1:n, 3])[[1]]
     }
