@@ -38,7 +38,7 @@ build_drive_mv <-
     }
 
     url <- file.path(
-      .state$drive_base_url_files_v3,
+      .drive$base_url_files_v3,
       paste0(
         file$id,
         "?addParents=",

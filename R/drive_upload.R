@@ -117,7 +117,7 @@ build_drive_upload <-
     }
 
     if (is.null(id) & internet) {
-      url <- .state$drive_base_url_files_v3
+      url <- .drive$base_url_files_v3
 
       req <- build_request(
         endpoint = url,
@@ -152,7 +152,7 @@ build_drive_upload <-
       return(invisible(drive_file(proc_res$id)))
     }
 
-    url <- file.path(.state$drive_base_url,
+    url <- file.path(.drive$base_url,
                      "upload/drive/v3/files",
                      paste0(id, "?uploadType=media"))
 

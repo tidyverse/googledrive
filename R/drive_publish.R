@@ -53,7 +53,7 @@ build_drive_publish <-
     id <- file$id
 
     rev_id <- file$publish$revision
-    url <- file.path(.state$drive_base_url_files_v3, id, "revisions", rev_id)
+    url <- file.path(.drive$base_url_files_v3, id, "revisions", rev_id)
     build_request(
       endpoint = url,
       params = params,
@@ -110,7 +110,7 @@ build_drive_check_publish1 <-
 
     id <- file$id
 
-    url <- file.path(.state$drive_base_url_files_v3, id, "revisions")
+    url <- file.path(.drive$base_url_files_v3, id, "revisions")
 
     build_request(endpoint = url,
                   token = token)
@@ -126,7 +126,7 @@ build_drive_check_publish2 <- function(file = NULL,
                   collapse = ",")
 
   id <- file$id
-  url <- file.path(.state$drive_base_url_files_v3, id, "revisions", rev_id)
+  url <- file.path(.drive$base_url_files_v3, id, "revisions", rev_id)
   req <- build_request(
     endpoint = url,
     token = token,

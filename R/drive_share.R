@@ -79,7 +79,7 @@ build_drive_share <- function(file = NULL,
                emailAddress = email,
                ...)
 
-  url <- file.path(.state$drive_base_url_files_v3, id, "permissions")
+  url <- file.path(.drive$base_url_files_v3, id, "permissions")
 
   if (!is.null(message)) {
     message <- gsub(" ", "%20", message)
