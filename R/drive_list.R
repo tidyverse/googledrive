@@ -68,7 +68,7 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
   x <- list(...)
 
   #add default fields if null
-  if(is.null(x$fields)){
+  if (is.null(x$fields)){
     default_fields <-
       c(
         "appProperties",
