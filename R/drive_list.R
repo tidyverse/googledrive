@@ -1,6 +1,6 @@
 #' List files on Google Drive
 #'
-#' @param path character vector, path name(s) where the Google drive files are
+#' @param path character vector, path where the Google drive files are
 #'   that you would like to list. Defaults to the "My Drive" directory.
 #' @param pattern character vector, regular expression(s) of title(s) of
 #'   documents to output in a tibble. If it is `NULL` (default), information
