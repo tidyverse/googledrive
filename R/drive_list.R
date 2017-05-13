@@ -32,8 +32,10 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
   if (!is.null(path)) {
     folder_nms <- unlist(strsplit(path, "/"))
     folder_pattern <- paste0("^", folder_nms, "$", collapse = "|")
-    folder_order <- tibble::tibble(name = folder_nms,
-                                   dir = 1:length(folder_nms))
+    folder_order <- tibble::tibble(
+      name = folder_nms,
+      dir = seq_along(folder_nms)
+      )
     folder_tbl <- drive_list(pattern = folder_pattern,
                              fields = paste0("files/parents,files/name,files/mimeType,files/id"),
                              q = "mimeType='application/vnd.google-apps.folder'")
