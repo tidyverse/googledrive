@@ -85,7 +85,8 @@ get_leafmost_id <- function(path) {
   folders <- drive_list(
     pattern = path_pattern,
     fields = "files/parents,files/name,files/mimeType,files/id",
-    q = "mimeType='application/vnd.google-apps.folder'"
+    q = "mimeType='application/vnd.google-apps.folder'",
+    verbose = FALSE
   )
 
   if (!all(path_pieces %in% folders$name)){
@@ -97,13 +98,12 @@ get_leafmost_id <- function(path) {
   folders$depth <- match(folders$name, path_pieces)
   folders <- folders[order(folders$depth), ]
 
-  ## this is the candidate return value, if various checks pass
+  ## the candidate return value(s)
   folder <- folders$id[folders$depth == d]
 
-  if (length(folder) != 1) {
-    spf("'%s' does not uniquely define a single path", path)
-  }
-  ## guarantee: there is exactly one folder at depth d
+  ## TO DO:
+  ## add a test case that explores path = foo/bar/baz when
+  ## foo/yo/baz also exists, i.e. when folder will be of length >1 here
 
   ## can you get from folder to root by traversing a child-->parent chain
   ## within this set of folders?
@@ -121,11 +121,31 @@ get_leafmost_id <- function(path) {
   parents <- folders$parents %>% purrr::flatten() %>% purrr::simplify()
   child_is_present <- purrr::map_lgl(
     folders$id,
-    ~ .x %in% parents | .x == folder
+    ~ .x %in% parents | .x %in% folder
   )
+
+  ## pare down, now we know all but the final layer
   folders <- folders[parent_is_present & child_is_present, ]
+
+  ## I have to rerun this because if there are x folders named foo and
+  ## the one we are interested in is in the root, we will have multiple
+  ## in "folder", but just want one.
+  folder <- folders$id[folders$depth == d]
+
+  # if there are multiple in depth d & it isn't the root
+  if (length(folder) > 1) {
+    leafmost_parent <- folders[folders$depth == d - 1, ]
+    child_is_leafmost <- purrr::map_lgl(
+      folders$parents,
+      ~ .x == leafmost_parent$id
+    )
+    folder <- folders$id[child_is_leafmost]
+  }
   if (!all(seq_len(d) %in% folders$depth)) {
     spf("Path not found: '%s'", path)
+  }
+  if (length(folder) > 1) {
+    spf("Path is not unique: '%s'", path)
   }
   folder
 }
