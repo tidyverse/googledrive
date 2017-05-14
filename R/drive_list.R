@@ -28,7 +28,7 @@
 drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
 
   if (!is.null(pattern)) {
-    if (!(inherits(pattern, "character") && length(pattern) == 1)) {
+    if (!(is.character(pattern) && length(pattern) == 1)) {
       stop("Please update `pattern` to be a character string.", call. = FALSE)
     }
   }
@@ -60,9 +60,7 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
   req_tbl <- tibble::tibble(
     name = purrr::map_chr(proc_res$files, "name"),
     type = sub(".*\\.", "", purrr::map_chr(proc_res$files, "mimeType")),
-    ## FIXME: all parents should be taken, not just the first
-    ## parents should be a list-column
-    parents = purrr::map_chr(proc_res$files, list("parents", 1), .null = NA),
+    parents = purrr::map(proc_res$files, "parents"),
     id = purrr::map_chr(proc_res$files, "id"),
     gfile = proc_res$files
   )
@@ -89,9 +87,6 @@ get_leafmost_id <- function(path) {
     fields = "files/parents,files/name,files/mimeType,files/id",
     q = "mimeType='application/vnd.google-apps.folder'"
   )
-  ## FIXME
-  ## seems like the "parents" variable should be a list-column?
-  ## can't parents technically have length greater than one?
 
   if (!all(path_pieces %in% folders$name)){
     spf("We could not find the file path '%s' on your Google Drive", path)
@@ -101,7 +96,10 @@ get_leafmost_id <- function(path) {
 
   folders$depth <- match(folders$name, path_pieces)
   folders <- folders[order(folders$depth), ]
+
+  ## this is the candidate return value, if various checks pass
   folder <- folders$id[folders$depth == d]
+
   if (length(folder) != 1) {
     spf("'%s' does not uniquely define a single path", path)
   }
@@ -115,16 +113,15 @@ get_leafmost_id <- function(path) {
   ## foo/bar/baz DOES exist
   ## but there are two folders named bar under foo, one of which hosts baz
 
-  # FIXME: account for parents being a list-col of parents,
-  ## i.e. .x is a character of parent ids
   root_id <- root_folder() ## store so we don't make repeated API calls
   parent_is_present <- purrr::map_lgl(
     folders$parents,
-    ~ .x %in% folders$id | .x == root_id
+    ~ any(.x %in% folders$id) | root_id %in% .x
   )
+  parents <- folders$parents %>% purrr::flatten() %>% purrr::simplify()
   child_is_present <- purrr::map_lgl(
     folders$id,
-    ~ .x %in% folders$parents | .x == folder
+    ~ .x %in% parents | .x == folder
   )
   folders <- folders[parent_is_present & child_is_present, ]
   if (!all(seq_len(d) %in% folders$depth)) {
