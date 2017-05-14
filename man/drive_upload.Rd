@@ -4,14 +4,14 @@
 \alias{drive_upload}
 \title{Upload a file to Google Drive}
 \usage{
-drive_upload(file = NULL, name = NULL, overwrite = FALSE, type = NULL,
-  ..., verbose = TRUE)
+drive_upload(input = NULL, output = NULL, overwrite = FALSE,
+  type = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{file}{character, path the the file you'd like to upload}
+\item{input}{character, path (on your computer) of the file you'd like to upload}
 
-\item{name}{character, what you'd like the uploaded file to be called on
-Google Drive}
+\item{output}{character, path (on your Google Drive) where you'd like to upload
+the file}
 
 \item{overwrite}{logical, do you want to overwrite file already on Google
 Drive}

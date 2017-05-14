@@ -80,6 +80,18 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
 get_leafmost_id <- function(path) {
 
   path_pieces <- unlist(strsplit(path, "/"))
+
+  root_id <- root_folder() ## store so we don't make repeated API calls
+
+  if (all(path_pieces == "~")) {
+    return(root_id)
+  }
+
+  ## remove ~ if it was added to the beginning of the path (like ~/foo/bar/baz instead of foo/bar/baz)
+  if (path_pieces[1] == "~") {
+    path_pieces <- path_pieces[-1]
+  }
+
   d <- length(path_pieces)
   path_pattern <- paste0("^", path_pieces, "$", collapse = "|")
   folders <- drive_list(
@@ -113,7 +125,6 @@ get_leafmost_id <- function(path) {
   ## foo/bar/baz DOES exist
   ## but there are two folders named bar under foo, one of which hosts baz
 
-  root_id <- root_folder() ## store so we don't make repeated API calls
   parent_is_present <- purrr::map_lgl(
     folders$parents,
     ~ any(.x %in% folders$id) | root_id %in% .x
