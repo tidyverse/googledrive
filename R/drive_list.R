@@ -115,34 +115,37 @@ get_leafmost_id <- function(path) {
   ## guarantee: we have found at least one folder with correct name for
   ## each piece of path
 
-  folders <- tibble::as_tibble(merge(folders, path_pieces, by = "name"))
+  folders <- folders %>%
+    merge(path_pieces, by = "name") %>%
+    tibble::as_tibble()
+  folders <- folders[order(folders$depth), ]
   folder <- folders$id[folders$depth == d]
   if (length(folder) != 1) {
     spf("'%s' does not uniquely define a single path", path)
   }
   ## guarantee: there is exactly one folder at depth d
 
-  ## the only task left is to make sure you can get from folder to root
-  ## by traversing a child-->parent chain of relationships
-  ## once that's established, you know folder is good and you return it
+  ## can you get from folder to root by traversing a child-->parent chain
+  ## within this set of folders?
 
-  ## FIXME: this is too simple, I think this will have to be recursive
-  ## example that breaks it: path = foo/bar/baz
+  ## TO DO: add this as a test
+  ## path = foo/bar/baz
   ## foo/bar/baz DOES exist
-  ## but there is a second folder named bar under foo
-  folders <- folders[order(folders$depth), ]
-  parent_id <- root_folder()
-  keep_folders <- NULL
-  for (i in seq_len(nrow(folders))) {
-    subfolder <- folders[i, ]
-    keep <- subfolder$parents == parent_id
-    if (keep) {
-      parent_id <- subfolder$id
-    }
-    keep_folders[i] <- keep
-  }
+  ## but there are two folders named bar under foo, one of which hosts baz
 
-  if (!keep_folders[length(keep_folders)]) {
+  # FIXME: account for parents being a list-col of parents,
+  ## i.e. .x is a character of parent ids
+  root_id <- root_folder() ## store so we don't make repeated API calls
+  parent_is_present <- purrr::map_lgl(
+    folders$parents,
+    ~ .x %in% folders$id | .x == root_id
+  )
+  child_is_present <- purrr::map_lgl(
+    folders$id,
+    ~ .x %in% folders$parents | .x == folder
+  )
+  folders <- folders[parent_is_present & child_is_present, ]
+  if (!all(seq_len(d) %in% folders$depth)) {
     spf("Path not found: '%s'", path)
   }
   folder
