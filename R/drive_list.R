@@ -27,97 +27,79 @@
 #' @export
 drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
 
-  folder <- NULL
-  if (!is.null(path)) {
-    folder <- get_leafmost_id(path = path)
+  if (!is.null(pattern)) {
+    if (!(inherits(pattern, "character") && length(pattern) == 1)) {
+      stop("Please update `pattern` to be a character string.", call. = FALSE)
+    }
   }
+
   x <- list(...)
 
-  #add default fields if null
   if (is.null(x$fields)) {
     x$fields <- paste0("files/", .drive$default_fields, collapse = ",")
   }
 
-  #add folder if not null
-  if (!is.null(folder)){
+  if (!is.null(path)) {
+    folder <- get_leafmost_id(path = path)
     q <- paste0("'", folder, "'", " in parents")
-    if (!is.null(x$q)){
-      x$q <- paste(x$q, "and", q)
-    } else {
+    if (is.null(x$q)) {
       x$q <- q
+    } else {
+      x$q <- paste(x$q, "and", q)
     }
   }
 
-
-
-
-  request <- build_request(endpoint = .drive$base_url_files_v3,
-                           token = drive_token(),
-                           params = x)
+  request <- build_request(
+    endpoint = .drive$base_url_files_v3,
+    token = drive_token(),
+    params = x
+  )
   response <- make_request(request)
   proc_res <- process_request(response)
+
   req_tbl <- tibble::tibble(
     name = purrr::map_chr(proc_res$files, "name"),
     type = sub(".*\\.", "", purrr::map_chr(proc_res$files, "mimeType")),
-    folder_id = purrr::map_chr(
-      purrr::map(
-        proc_res$files,
-        "parents",
-        .null = NA
-      ),
-      1),
+    ## FIXME: all parents should be taken, not just the first
+    ## parents should be a list-column
+    parents = purrr::map_chr(proc_res$files, list("parents", 1), .null = NA),
     id = purrr::map_chr(proc_res$files, "id"),
-    gfile = proc_res$files)
+    gfile = proc_res$files
+  )
 
-  if (is.null(pattern)){
+  if (is.null(pattern)) {
     return(req_tbl)
-  } else{
-    if (!(inherits(pattern, "character") & length(pattern) == 1)){
-      stop("Please update `pattern` to be a character string.")
-    }
   }
 
   keep_names <- grep(pattern, req_tbl$name)
-
-  if (length(keep_names) == 0L){
-    if (verbose){
-      message(sprintf("We couldn't find any documents matching '%s'. \nTry updating your `pattern` critria.", gsub("\\|", "' or '", pattern)))
-    }
-    invisible(NULL)
-  } else
-    req_tbl[keep_names, ]
+  if (length(keep_names) == 0L) {
+    if (verbose) message(sprintf("No file names match the pattern: '%s'.", pattern))
+    return(invisible())
+  }
+  req_tbl[keep_names, ]
 }
 
 get_leafmost_id <- function(path) {
 
-  path_pieces <- tibble::tibble(
-    name =  unlist(strsplit(path, "/")),
-    depth = seq_along(name)
-  )
-  d <- max(path_pieces$depth)
-  path_pattern <- paste0("^", path_pieces$name, "$", collapse = "|")
+  path_pieces <- unlist(strsplit(path, "/"))
+  d <- length(path_pieces)
+  path_pattern <- paste0("^", path_pieces, "$", collapse = "|")
   folders <- drive_list(
     pattern = path_pattern,
     fields = "files/parents,files/name,files/mimeType,files/id",
     q = "mimeType='application/vnd.google-apps.folder'"
   )
   ## FIXME
-  ## seems like the tibble returned above should have a "parents" variable?
-  ## and that it should be a list-column, not character
+  ## seems like the "parents" variable should be a list-column?
   ## can't parents technically have length greater than one?
-  ## temporarily just fixing the name
-  folders$parents <- folders$folder_id
-  folders$folder_id <- NULL
 
-  if (!all(path_pieces$name %in% folders$name)){
+  if (!all(path_pieces %in% folders$name)){
     spf("We could not find the file path '%s' on your Google Drive", path)
   }
   ## guarantee: we have found at least one folder with correct name for
   ## each piece of path
 
-  folders <- folders %>%
-    merge(path_pieces, by = "name") %>%
-    tibble::as_tibble()
+  folders$depth <- match(folders$name, path_pieces)
   folders <- folders[order(folders$depth), ]
   folder <- folders$id[folders$depth == d]
   if (length(folder) != 1) {
