@@ -4,58 +4,19 @@ test_that("drive_test when we have 2 folders of the same name & depth", {
 
   url <- .drive$base_url_files_v3
   ## create a folder named foo
-  foo <- httr::POST(url,
-             drive_token(),
-             body = list(name = "foo",
-                         mimeType = "application/vnd.google-apps.folder"
-                         ),
-             encode = "json"
-             )
-  foo_id <- process_request(foo)$id
+  foo_id <- drive_mkdir("foo")$id
 
   ## create a folder named bar inside foo
-  bar <- httr::POST(url,
-                    drive_token(),
-                    body = list(name = "bar",
-                                mimeType = "application/vnd.google-apps.folder",
-                                parents = list(foo_id)
-                    ),
-                    encode = "json"
-  )
-  bar_id <- process_request(bar)$id
+  bar_id <- drive_mkdir("bar", path = "foo")$id
 
   ## let's stick a folder baz in bar, this is what we are hoping our search will find
-
-  baz <- httr::POST(url,
-                    drive_token(),
-                    body = list(name = "baz",
-                                mimeType = "application/vnd.google-apps.folder",
-                                parents = list(bar_id)
-                    ),
-                    encode = "json"
-  )
-  baz_id <- process_request(baz)$id
+  baz_id <- drive_mkdir("baz", path = "foo/bar")$id
 
   ## create a folder yo
-  yo <- httr::POST(url,
-                  drive_token(),
-                  body = list(name = "yo",
-                              mimeType = "application/vnd.google-apps.folder"
-                  ),
-                  encode = "json"
-  )
-  yo_id <- process_request(yo)$id
+  yo_id <- drive_mkdir("yo")$id
 
   ## create a folder bar in yo
-  bar_2 <- httr::POST(url,
-                    drive_token(),
-                    body = list(name = "bar",
-                                mimeType = "application/vnd.google-apps.folder",
-                                parents = list(yo_id)
-                    ),
-                    encode = "json"
-  )
-  bar_2_id <- process_request(bar_2)$id
+  bar_2_id <- drive_mkdir("bar", path = "yo")$id
 
   ## now we have bar and bar_2, both folders with depth 2, but one is in foo and
   ## one is in yo. We want to peak inside the one in foo, this should have a folder
