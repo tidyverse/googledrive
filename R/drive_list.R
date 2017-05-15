@@ -146,6 +146,12 @@ get_leafmost_id <- function(path) {
   # if there are multiple in depth d & it isn't the root
   if (length(folder) > 1) {
     leafmost_parent <- folders[folders$depth == d - 1, ]
+
+    ## if there are 2 leafmost parents that got to this point, we have a
+    ## double naming, throw an error
+    if (length(leafmost_parent) > 1) {
+      spf("The path '%s' is not uniquely defined.", path)
+    }
     child_is_leafmost <- purrr::map_lgl(
       folders$parents,
       ~ .x == leafmost_parent$id
