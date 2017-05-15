@@ -4,12 +4,15 @@
 \alias{drive_mkdir}
 \title{Make a Google Drive Directory}
 \usage{
-drive_mkdir(dir = NULL, path = NULL)
+drive_mkdir(dir = NULL, path = NULL, verbose = TRUE)
 }
 \arguments{
 \item{dir}{character, name of the folder you would like to create}
 
 \item{path}{character, path where you would like the folder on your Google Drive}
+
+\item{verbose}{logical, indicating whether to print informative messages
+(default \code{TRUE})}
 }
 \value{
 object of class \code{gfile} and \code{list} that contains uploaded folder's
