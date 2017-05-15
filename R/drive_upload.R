@@ -88,17 +88,23 @@ build_drive_upload <- function(input = NULL,
     } else if (ext == "") {
       type <- "application/vnd.google-apps.folder"
     } else {
-      spf("We cannot currently upload a file with this extension to Google Drive: %s",
-          ext)
+      # spf("We cannot currently upload a file with this extension to Google Drive: %s",
+      #     ext)
+      type = NULL
     }
   }
 
-  if (type == "application/vnd.google-apps.folder" & overwrite) {
-    spf("You are not able to overwrite a folder, please set `overwrite = FALSE`")
+  if (!is.null(type)) {
+    if (type == "application/vnd.google-apps.folder" & overwrite) {
+      spf("You are not able to overwrite a folder, please set `overwrite = FALSE`")
+    }
   }
 
   if (is.null(output)) {
-    output <- tools::file_path_sans_ext(basename(input))
+    output <- basename(input)
+    if (!is.null(type)){
+      output <- tools::file_path_sans_ext(basename(input))
+    }
   }
 
   #split the output into the name & the folder
@@ -157,13 +163,15 @@ build_drive_upload <- function(input = NULL,
       params = list(name = name,
                     parents = list(parent),
                     mimeType = type
-                    ),
+      ),
       method = "POST"
     )
 
     # if we are just uploading a folder, we are finished,
-    if (type == "application/vnd.google-apps.folder" & internet) {
-      return(res)
+    if (!is.null(type)) {
+      if (type == "application/vnd.google-apps.folder" & internet) {
+        return(res)
+      }
     }
 
     res <- make_request(req, encode = "json")
