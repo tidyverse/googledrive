@@ -17,7 +17,7 @@ Imports: dplyr,
     httr,
     purrr,
     tibble
-Suggests: cover,
+Suggests: covr,
     rprojroot,
     testthat
 URL: https://github.com/tidyverse/googledrive
