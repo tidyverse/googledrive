@@ -1,32 +1,35 @@
 #' Get Google Drive id
 #'
-#' @param search character, regular expression to determin document title to
+#' @param pattern character, regular expression to determin document title to
 #'   output the Google Drive id If it is `NULL` (default), the most recently
 #'   modified document id will be output.
 #' @param n numeric, how many ids to output, default = 1
 #' @param ... name-value pairs to query the API
-#' @param fixed logical, from `[grep()]`. If `TRUE`, `search` is exactly matched
-#'   to a document's name on Google Drive.
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)
 #'
 #'
 #' @return object of class`drive_id` & `list`, Google Drive id(s)
 #' @export
-drive_get_id <- function(search, n = 1, ..., fixed = FALSE, verbose = TRUE){
-
-  if ("orderBy" %in% names(list(...))){
-    ls <- drive_ls(search = search, fixed = fixed, ...)
-    if(!is.null(ls)) {
-      id <- as.list(ls[1:n,3])[[1]]
+drive_get_id <- function(pattern = NULL,
+                         n = 1,
+                         ...,
+                         verbose = TRUE) {
+  if ("orderBy" %in% names(list(...))) {
+    ls <- drive_list(pattern = pattern, ...)
+    if (!is.null(ls)) {
+      id <- as.list(ls[1:n, 3])[[1]]
     }
   } else{
-    ls <- drive_ls(search = search, fixed = fixed, orderBy="modifiedTime desc", ...)
-    if(!is.null(ls)) {
-      id <- as.list(ls[1:n,3])[[1]]
+    ls <- drive_list(pattern = pattern,
+                     orderBy = "modifiedTime desc",
+                     ...)
+    if (!is.null(ls)) {
+      id <- as.list(ls[1:n, 3])[[1]]
     }
   }
-  if (!is.null(ls)){
-  structure(id, class=c("drive_id","list"))
-  } else invisible(NULL)
+  if (!is.null(ls)) {
+    structure(id, class = c("drive_id", "list"))
+  } else
+    invisible(NULL)
 }

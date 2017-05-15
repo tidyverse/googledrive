@@ -60,7 +60,7 @@ build_drive_file <- function(id = NULL, ..., token = drive_token()) {
       "writersCanShare"
     )
   fields <- paste(default_fields, collapse = ",")
-  url <- file.path(.state$drive_base_url_files_v3, id)
+  url <- file.path(.drive$base_url_files_v3, id)
 
   build_request(
     endpoint = url,
@@ -76,12 +76,13 @@ process_drive_file <- function(response = response) {
   metadata <- list(
     name = proc_res$name,
     id = proc_res$id,
-    type = sub('.*\\.', '', proc_res$mimeType),
-    owner = purrr::map_chr(proc_res$owners, 'displayName'),
+    type = sub(".*\\.", "", proc_res$mimeType),
+    owner = purrr::map_chr(proc_res$owners, "displayName"),
     last_modified = as.Date(proc_res$modifiedTime),
     created = as.Date(proc_res$createdTime),
     starred = proc_res$starred,
-    #make a tibble of permissions - this seems a bit silly how I've done it so far.
+    #make a tibble of permissions - this seems a bit
+    #silly how I've done it so far.
     permissions = if (is.null(proc_res$permissions)) {
       tibble::tibble(
         kind = character(),

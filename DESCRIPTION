@@ -13,11 +13,12 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
-Imports: httr,
-    dplyr,
+Imports: dplyr,
+    httr,
     purrr,
     tibble
-Suggests: testthat,
-    covr
+Suggests: covr,
+    rprojroot,
+    testthat
 URL: https://github.com/tidyverse/googledrive
 BugReports: https://github.com/tidyverse/googledrive/issues

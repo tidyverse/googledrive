@@ -9,7 +9,7 @@
 #' @return a list of class `guser` with user's data
 #' @export
 #'
-drive_user <- function(fields = "user",..., verbose = TRUE) {
+drive_user <- function(fields = "user", ..., verbose = TRUE) {
 
   if (!token_available(verbose = verbose) || !is_legit_token(.state$token)) {
     if (verbose) {
@@ -18,7 +18,7 @@ drive_user <- function(fields = "user",..., verbose = TRUE) {
     return(invisible(NULL))
   }
 
-  user_info <- guser(fields = fields,...)
+  user_info <- guser(fields = fields, ...)
 
   user_info
 
@@ -32,13 +32,13 @@ drive_user <- function(fields = "user",..., verbose = TRUE) {
 #' @return list of class \code{guser} with user's information
 #' @keywords internal
 
-guser <- function(fields = "user",...) {
+guser <- function(fields = "user", ...) {
 
   if (!token_available(verbose = FALSE)) {
     return(NULL)
   }
 
-  url <- file.path(.state$drive_base_url, "drive/v3/about")
+  url <- file.path(.drive$base_url, "drive/v3/about")
 
   req <- build_request(endpoint = url,
                        token = drive_token(),

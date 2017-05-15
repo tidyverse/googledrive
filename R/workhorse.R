@@ -31,7 +31,7 @@ set_query <- function(x){
   if (length(x$params) == 0L) return(x)
   if (x$method != "GET") {
     if (grepl("\\?", x$endpoint)) {
-      x$query = sub(".*\\?","",x$endpoint)
+      x$query <- sub(".*\\?", "", x$endpoint)
       return(x)
     }
     return(x)
@@ -58,7 +58,7 @@ set_url <- function(x){
   if (grepl("^http", x$endpoint)){
     x$url <- x$endpoint
   } else{
-    x$url <- file.path(x$api_url, sub(".","",x$endpoint))
+    x$url <- file.path(x$api_url, sub(".", "", x$endpoint))
   }
   x
 }
