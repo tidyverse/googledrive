@@ -49,6 +49,10 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
     }
   }
 
+  if (is.null(path)) {
+    path = "~/"
+  }
+
   request <- build_request(
     endpoint = .drive$base_url_files_v3,
     token = drive_token(),
@@ -66,6 +70,9 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
   )
 
   if (is.null(pattern)) {
+    if (nrow(req_tbl) == 0) {
+      if (verbose) message(sprintf("There are no files in Google Drive path: '%s'", path))
+    }
     return(req_tbl)
   }
 

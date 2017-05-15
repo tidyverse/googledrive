@@ -55,7 +55,7 @@ test_that("drive_list when we have 2 folders of the same name & depth", {
     drive_delete
 })
 
-test_that("drive_list when we have two folders of the same name in the same location (and one has the correct output)", {
+test_that("drive_list when we have two folders of the same name in the same location, but one has unique target folder", {
   skip_if_not(internet)
   ## path = foo/bar/baz
   ## foo/bar/baz DOES exist
@@ -85,7 +85,7 @@ test_that("drive_list when we have two folders of the same name in the same loca
 
 })
 
-test_that("drive_list when we have two folders of the same name in the same location", {
+test_that("drive_list when we have two folders of the same name in the same location, not unique", {
   ## Google Drive treats folders like labels, so you can have two folders with the
   ## exact same name in the same location. This is silly. At them moment, if you try
   ## to search within a folder like this, if there is nothing identifiable (as in the
