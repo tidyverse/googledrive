@@ -5,4 +5,7 @@
 ## folders and files will be created AND DELETED!
 ## drive_user()
 ## saveRDS(token, rprojroot::find_testthat_root_file("testing-token.rds"))
-drive_auth(rprojroot::find_testthat_root_file("testing-token.rds"))
+if (!identical(Sys.getenv("APPVEYOR"), "True") &&
+    !identical(Sys.getenv("TRAVIS"), "true")) {
+  drive_auth(rprojroot::find_testthat_root_file("testing-token.rds"))
+}
