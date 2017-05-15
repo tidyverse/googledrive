@@ -50,10 +50,15 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
   }
 
   ## make sure it isn't in the trash
+
   if (is.null(x$q)) {
     x$q <- "trashed = false"
   } else {
-    x$q <- paste(x$q, "and trashed = false")
+    ## but if they want it to be it could be
+    trash <- grepl("trashed", x$q)
+    if (!trash) {
+      x$q <- paste(x$q, "and trashed = false")
+    }
   }
 
   if (is.null(path)) {
