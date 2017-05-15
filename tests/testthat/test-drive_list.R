@@ -1,12 +1,10 @@
-internet <- FALSE
-#internet <- TRUE
-
 ## NOTE these tests are creating & deleting the folders needed, however
 ## they do assume that you do NOT have a folder named "foo" or a folder
 ## named "yo" in your Drive root directory.
 
 test_that("drive_list when we have 2 folders of the same name & depth", {
-  skip_if_not(internet)
+  skip_on_appveyor()
+  skip_on_travis()
 
   url <- .drive$base_url_files_v3
   ## create a folder named foo
@@ -56,7 +54,8 @@ test_that("drive_list when we have 2 folders of the same name & depth", {
 })
 
 test_that("drive_list when we have two folders of the same name in the same location, but one has unique target folder", {
-  skip_if_not(internet)
+  skip_on_appveyor()
+  skip_on_travis()
   ## path = foo/bar/baz
   ## foo/bar/baz DOES exist
   ## but there are two folders named bar under foo, one of which hosts baz
@@ -91,7 +90,8 @@ test_that("drive_list when we have two folders of the same name in the same loca
   ## to search within a folder like this, if there is nothing identifiable (as in the
   ## leafmost folder you are looking for is identical to another by name) we should give
   ## and error. For example, let's say there are 2 paths in the root with foo/bar
-  skip_if_not(internet)
+  skip_on_appveyor()
+  skip_on_travis()
 
   ## create foo/bar
   foo_id <- drive_mkdir("foo")$id
