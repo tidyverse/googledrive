@@ -1,5 +1,5 @@
-internet = FALSE
-#internet = TRUE
+internet <- FALSE
+#internet <- TRUE
 
 ## NOTE these tests are creating & deleting the folders needed, however
 ## they do assume that you do NOT have a folder named "foo" or a folder

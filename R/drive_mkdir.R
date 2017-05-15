@@ -17,7 +17,7 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   url <- .drive$base_url_files_v3
 
   request <- build_request(
-    endpoint = .drive$base_url_files_v3,
+    endpoint = url,
     token = drive_token(),
     params = list(
       name = dir,

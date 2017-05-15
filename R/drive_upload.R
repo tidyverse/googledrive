@@ -111,7 +111,7 @@ build_drive_upload <- function(input = NULL,
   if (overwrite & internet) {
     path <- "~"
     if (d > 1) {
-      path <- paste(path_pieces[seq_len(d-1)],
+      path <- paste(path_pieces[seq_len(d - 1)],
                     collapse = "/")
     }
     old_doc <- drive_list(path = path,
@@ -128,12 +128,12 @@ build_drive_upload <- function(input = NULL,
     parent <- NULL
     # if there are folders defined
     if (d > 1) {
-      leafmost <- path_pieces[d-1]
+      leafmost <- path_pieces[d - 1]
 
       upper_folders <- "~"
 
       if (d > 2) {
-        upper_folders <- paste(path_pieces[seq_len(d-2)],
+        upper_folders <- paste(path_pieces[seq_len(d - 2)],
                                collapse = "/")
       }
 
