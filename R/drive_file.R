@@ -95,10 +95,8 @@ process_drive_file <- function(response = response) {
         deleted = character(),
         allowFileDiscovery = logical()
       )
-    } else if (length(proc_res$permissions) == 1) {
-      tibble::as_data_frame(proc_res$permissions[[1]])
     } else {
-      purrr::reduce(proc_res$permissions, dplyr::bind_rows)
+      purrr::map_df(proc_res$permissions, tibble::as_tibble)
     },
     #everything else
     kitchen_sink = proc_res
