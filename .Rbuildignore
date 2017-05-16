@@ -8,3 +8,4 @@
 ^codecov\.yml$
 ^data-raw$
 ^appveyor\.yml$
+^README-.*\.png$
