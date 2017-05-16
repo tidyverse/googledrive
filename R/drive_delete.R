@@ -24,9 +24,8 @@ build_drive_delete <- function(file = NULL,
   }
 
   id <- file$id
-  url <- file.path(.drive$base_url_files_v3, id)
 
-  build_request(endpoint = url,
+  build_request(endpoint = id,
                 token = token,
                 method = "DELETE")
 }

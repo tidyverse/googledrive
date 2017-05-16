@@ -1,8 +1,9 @@
-build_request <- function(endpoint = NULL,
+build_request <- function(endpoint = NULL ,
+                          path = "drive/v3/files",
                           params = list(),
                           token = NULL,
                           send_headers = NULL,
-                          api_url = NULL,
+                          api_url = "https://www.googleapis.com",
                           method = "GET"){
 
   workhorse <- list(method = method,
@@ -11,6 +12,7 @@ build_request <- function(endpoint = NULL,
                     query = NULL,
                     body = NULL,
                     endpoint = endpoint,
+                    path = path,
                     params = params,
                     token = token,
                     send_headers = send_headers,
@@ -30,10 +32,6 @@ build_request <- function(endpoint = NULL,
 set_query <- function(x){
   if (length(x$params) == 0L) return(x)
   if (x$method != "GET") {
-    if (grepl("\\?", x$endpoint)) {
-      x$query <- sub(".*\\?", "", x$endpoint)
-      return(x)
-    }
     return(x)
   }
   if (!all(has_names(x$params))){
@@ -44,21 +42,25 @@ set_query <- function(x){
   x
 }
 
-set_body <- function(x){
+set_body <- function(x) {
   if (length(x$params) == 0L) return(x)
 
   x$body <- x$params
   x
 }
 
+
 ## not setting headers yet
 
 set_url <- function(x){
 
-  if (grepl("^http", x$endpoint)){
-    x$url <- x$endpoint
+  if (!is.null(x$endpoint)) {
+    x$url <- file.path(x$api_url,
+                       x$path,
+                       x$endpoint)
   } else{
-    x$url <- file.path(x$api_url, sub(".", "", x$endpoint))
+    x$url <- file.path(x$api_url,
+                       x$path)
   }
   x
 }

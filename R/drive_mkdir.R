@@ -14,10 +14,8 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   if (!is.null(path)) {
     parent <- get_parent(path = path)
   }
-  url <- .drive$base_url_files_v3
 
   request <- build_request(
-    endpoint = url,
     token = drive_token(),
     params = list(
       name = dir,

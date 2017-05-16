@@ -37,20 +37,16 @@ build_drive_mv <-
       spf("Input `folder` must be a `gfile`. See `drive_file()`")
     }
 
-    url <- file.path(
-      .drive$base_url_files_v3,
-      paste0(
-        file$id,
-        "?addParents=",
-        folder$id,
-        "&removeParents=",
-        file$kitchen_sink$parents[[1]]
-      )
-    )
 
-    build_request(endpoint = url,
-                  token = token,
-                  method = "PATCH")
+    build_request(endpoint = paste0(
+      file$id,
+      "?addParents=",
+      folder$id,
+      "&removeParents=",
+      file$kitchen_sink$parents[[1]]
+    ),
+    token = token,
+    method = "PATCH")
   }
 
 process_drive_mv <-

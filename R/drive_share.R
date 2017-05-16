@@ -79,15 +79,15 @@ build_drive_share <- function(file = NULL,
                emailAddress = email,
                ...)
 
-  url <- file.path(.drive$base_url_files_v3, id, "permissions")
+  endpoint <- file.path(id, "permissions")
 
   if (!is.null(message)) {
     message <- gsub(" ", "%20", message)
-    url <- paste0(url, "?emailMessage=", message)
+    endpoint <- paste0(endpoint, "?emailMessage=", message)
   }
 
   build_request(
-    endpoint = url,
+    endpoint = endpoint,
     token = token,
     params = body,
     method = "POST"

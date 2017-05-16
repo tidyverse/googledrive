@@ -155,10 +155,7 @@ build_drive_upload <- function(input = NULL,
       parent <- leafmost_tbl$id
     }
 
-    url <- .drive$base_url_files_v3
-
     req <- build_request(
-      endpoint = url,
       token = token,
       params = list(name = name,
                     parents = list(parent),
@@ -179,13 +176,10 @@ build_drive_upload <- function(input = NULL,
     id <- proc_res$id
   }
 
-  url <- file.path(.drive$base_url,
-                   "upload/drive/v3/files",
-                   paste0(id, "?uploadType=media"))
-
   list(
     method = "PATCH",
-    url = url,
+    endpoint =  paste0(id, "?uploadType=media"),
+    path = "upload/drive/v3/files",
     token = token,
     body = httr::upload_file(path = input,
                              type = type),

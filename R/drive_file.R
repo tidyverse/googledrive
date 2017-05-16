@@ -60,10 +60,9 @@ build_drive_file <- function(id = NULL, ..., token = drive_token()) {
       "writersCanShare"
     )
   fields <- paste(default_fields, collapse = ",")
-  url <- file.path(.drive$base_url_files_v3, id)
 
   build_request(
-    endpoint = url,
+    endpoint = id,
     token = token,
     params = list(...,
                   fields = fields)

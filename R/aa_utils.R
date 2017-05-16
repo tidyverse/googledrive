@@ -10,8 +10,6 @@ NULL
 
 # environment to hold data about the Drive API
 .drive <- new.env(parent = emptyenv())
-.drive$base_url_files_v3 <- "https://www.googleapis.com/drive/v3/files"
-.drive$base_url <- "https://www.googleapis.com"
 
 # environment to store credentials
 .state <- new.env(parent = emptyenv())

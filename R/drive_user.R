@@ -38,9 +38,7 @@ guser <- function(fields = "user", ...) {
     return(NULL)
   }
 
-  url <- file.path(.drive$base_url, "drive/v3/about")
-
-  req <- build_request(endpoint = url,
+  req <- build_request(path = "drive/v3/about",
                        token = drive_token(),
                        params = list(fields = fields,
                                      ...))
