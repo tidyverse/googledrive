@@ -75,9 +75,18 @@ make_request <- function(x, ...){
          body = x$body, ...)
 }
 
-process_request <- function(res, content = TRUE) {
+process_request <- function(res, content = TRUE, expected = "application/json; charset=UTF-8") {
   httr::stop_for_status(res)
   if (content == TRUE){
-    httr::content(res)
+    actual <- res$headers$`content-type`
+    if (actual != expected) {
+      spf(
+        paste0("Expected content-type:\n%s",
+               "\n",
+               "Actual content-type:\n%s"),
+        expected, actual
+      )
+    }
+    httr::content(res, as = "parsed", encoding = "UTF-8")
   }
 }
