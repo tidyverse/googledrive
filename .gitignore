@@ -6,3 +6,4 @@ sandbox
 .httr-oauth
 *.Rproj
 .httr-oauth*
+.httr-oauth-SUSPENDED

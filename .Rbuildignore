@@ -9,3 +9,4 @@
 ^data-raw$
 ^appveyor\.yml$
 ^README-.*\.png$
+^\.httr-oauth-SUSPENDED$

@@ -5,12 +5,12 @@ googledrive
 
 [![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master)
 
-🚧 WARNING: this is very much under construction 🚧
+WARNING: this is very much under construction
 
 Overview
 --------
 
-`googledrive` interfaces with Google Drive from R, allowing users to seamlessly manage files on Google Drive from the comfort of their console 🏠.
+`googledrive` interfaces with Google Drive from R, allowing users to seamlessly manage files on Google Drive from the comfort of their console.
 
 Installation
 ------------
@@ -33,7 +33,7 @@ library("googledrive")
 ### Package idiosyncrasies
 
 -   All functions begin with the prefix `drive_`
--   Functions and parameters attempt to mimic local file navigating conventions in `R`, such as `list.files`.
+-   Functions and parameters attempt to mimic local file navigating conventions in R, such as `list.files`.
 
 ### Quick demo
 
@@ -41,18 +41,43 @@ Here's how to list the most recently modified 100 files on your drive. This will
 
 ``` r
 drive_list()
+#> # A tibble: 100 × 5
+#>                                      name         type    parents
+#>                                     <chr>        <chr>     <list>
+#> 1                                     baz  spreadsheet <list [1]>
+#> 2                                  foobar       folder <list [1]>
+#> 3                         r-ladies_global       folder <list [1]>
+#> 4                      r-ladies_nashville       folder <list [1]>
+#> 5                        2017_user-slides presentation <list [1]>
+#> 6         monty-python_dead-parrot-sketch     document <list [1]>
+#> 7                        david-s-pumpkins     document <list [1]>
+#> 8                             its-a-test!   image/jpeg <list [1]>
+#> 9                         sick-stat-burns       folder <list [1]>
+#> 10 Bross_Journal-of-Chronic-Diseases_1966     document <list [1]>
+#> # ... with 90 more rows, and 2 more variables: id <chr>, gfile <list>
 ```
 
-You can narrow the query by specifying a `path` and/or `pattern` you'd like to search within. For example, to search within the folder `foo` for a file named `bar` you could run the following.
+You can narrow the query by specifying a `path` and/or `pattern` you'd like to search within. For example, to search within the folder `foobar` for a file named `baz` you could run the following.
 
 ``` r
-drive_list(path = "foo", pattern = "bar")
+drive_list(path = "foobar", pattern = "baz")
+#> # A tibble: 1 × 5
+#>    name        type    parents
+#>   <chr>       <chr>     <list>
+#> 1   baz spreadsheet <list [1]>
+#> # ... with 2 more variables: id <chr>, gfile <list>
 ```
 
 Alternatively, you can pass query parameters to `q` parameter. Accepted search parameters can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, if I wanted to search for all spreadsheets, I could run the following.
 
 ``` r
 drive_list(q = "mimeType='application/vnd.google-apps.spreadsheet'")
+#> # A tibble: 2 × 5
+#>                   name        type    parents
+#>                  <chr>       <chr>     <list>
+#> 1                  baz spreadsheet <list [1]>
+#> 2 538-star-wars-survey spreadsheet <list [1]>
+#> # ... with 2 more variables: id <chr>, gfile <list>
 ```
 
 #### Upload files
@@ -73,9 +98,9 @@ We now have a file of class `gfile` that contains information about the uploaded
 ``` r
 drive_chickwts
 #> File name: chickwts 
-#> File owner: Lucy D'Agostino 
+#> File owner: tidyverse testdrive 
 #> File type: document 
-#> Last modified: 2017-05-16 
+#> Last modified: 2017-05-17 
 #> Access: Shared with specific people.
 ```
 
@@ -83,7 +108,7 @@ Notice that file was uploaded as a `document`. Since this was a `.txt` document,
 
 ``` r
 drive_chickwts <- drive_chickwts %>%
-  drive_delete
+  drive_delete()
 #> The file 'chickwts' has been deleted from your Google Drive
 ```
 
@@ -100,13 +125,13 @@ Let's see if that worked.
 ``` r
 drive_chickwts
 #> File name: chickwts 
-#> File owner: Lucy D'Agostino 
+#> File owner: tidyverse testdrive 
 #> File type: spreadsheet 
-#> Last modified: 2017-05-16 
+#> Last modified: 2017-05-17 
 #> Access: Shared with specific people.
 ```
 
-Much better 🎉.
+Much better!
 
 #### Share files
 
@@ -118,20 +143,20 @@ drive_chickwts <- drive_chickwts %>%
 #> The permissions for file 'chickwts' have been updated
 ```
 
-*Notice when I run any of the `googledrive` functions, I am assigning them. This is good practice, since each of these functions is inherintely changing our file on Google Drive, so we want to keep track of that with our `R` object.*
+We always assign the return value of googledrive functions back into an R object. This object is of type `gfile`, which holds up-to-date metadata on the associated Drive file. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.
 
 We can then extract a share link.
 
 ``` r
 drive_chickwts %>%
-  drive_share_link
-#> [1] "https://docs.google.com/spreadsheets/d/152-RdhgMnxiQwvNghvx8wl4HK3Ebh54sYvcASR2a7us/edit?usp=drivesdk"
+  drive_share_link()
+#> [1] "https://docs.google.com/spreadsheets/d/1B9bEubnkdcREKbaZ791Zqiapy95Mb3tSmYjsd5rp0Dg/edit?usp=drivesdk"
 ```
 
 #### Clean up
 
 ``` r
 drive_chickwts %>%
-  drive_delete
+  drive_delete()
 #> The file 'chickwts' has been deleted from your Google Drive
 ```

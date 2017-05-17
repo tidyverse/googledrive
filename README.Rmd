@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
 
 [![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master)
 
-`r emo::ji("construction")` WARNING: this is very much under construction `r emo::ji("construction")`
+WARNING: this is very much under construction 
 
 ## Overview
 
-`googledrive` interfaces with Google Drive from R, allowing users to seamlessly manage files on Google Drive from the comfort of their console `r emo::ji("house")`. 
+`googledrive` interfaces with Google Drive from R, allowing users to seamlessly manage files on Google Drive from the comfort of their console. 
 
 ## Installation
 
@@ -41,25 +41,25 @@ library("googledrive")
 ### Package idiosyncrasies
 
 * All functions begin with the prefix `drive_`
-* Functions and parameters attempt to mimic local file navigating conventions in `R`, such as `list.files`.
+* Functions and parameters attempt to mimic local file navigating conventions in R, such as `list.files`.
 
 ### Quick demo
 
 Here's how to list the most recently modified 100 files on your drive. This will kick off your authentication, so you will be sent to your browser to authorize your Google Drive access. The functions here are designed to be pipeable, using `%>%`, however they can also be implemented without.
 
-```{r, eval = FALSE}
+```{r}
 drive_list()
 ```
 
-You can narrow the query by specifying a `path` and/or `pattern` you'd like to search within. For example, to search within the folder `foo` for a file named `bar` you could run the following.
+You can narrow the query by specifying a `path` and/or `pattern` you'd like to search within. For example, to search within the folder `foobar` for a file named `baz` you could run the following.
 
-```{r, eval = FALSE}
-drive_list(path = "foo", pattern = "bar")
+```{r}
+drive_list(path = "foobar", pattern = "baz")
 ```
 
 Alternatively, you can pass query parameters to `q` parameter. Accepted search parameters can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, if I wanted to search for all spreadsheets, I could run the following.
 
-```{r, eval = FALSE}
+```{r}
 drive_list(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 ```
 
@@ -82,7 +82,7 @@ Notice that file was uploaded as a `document`. Since this was a `.txt` document,
 
 ```{r}
 drive_chickwts <- drive_chickwts %>%
-  drive_delete
+  drive_delete()
 ```
 
 
@@ -94,7 +94,7 @@ Let's see if that worked.
 ```{r}
 drive_chickwts
 ```
-Much better `r emo::ji("tada")`.
+Much better!
 
 #### Share files
 
@@ -105,20 +105,20 @@ drive_chickwts <- drive_chickwts %>%
   drive_share(role = "reader", type = "anyone")
 ```
 
-*Notice when I run any of the `googledrive` functions, I am assigning them. This is good practice, since each of these functions is inherintely changing our file on Google Drive, so we want to keep track of that with our `R` object.*
+We always assign the return value of googledrive functions back into an R object. This object is of type `gfile`, which holds up-to-date metadata on the associated Drive file. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.
 
 We can then extract a share link.
 
 ```{r}
 drive_chickwts %>%
-  drive_share_link
+  drive_share_link()
 ```
 
 #### Clean up
 
 ```{r}
 drive_chickwts %>%
-  drive_delete
+  drive_delete()
 ```
 
 ```{r, echo = FALSE}
