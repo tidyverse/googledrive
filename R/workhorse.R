@@ -84,9 +84,7 @@ make_request <- function(x, ...) {
 
 process_request <- function(res,
                             content = TRUE,
-                            expected = "application/json; charset=UTF-8",
-                            as = "parsed",
-                            encoding = "UTF-8") {
+                            expected = "application/json; charset=UTF-8") {
   httr::stop_for_status(res)
   if (content == TRUE) {
     actual <- res$headers$`content-type`
@@ -101,6 +99,6 @@ process_request <- function(res,
         actual
       )
     }
-    httr::content(res, as = as, encoding = encoding)
+    jsonlite::fromJSON(httr::content(res, "text"), simplifyVector = FALSE)
   }
 }
