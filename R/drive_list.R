@@ -187,8 +187,10 @@ get_leafmost_id <- function(path) {
 
 ## gets the root folder id
 root_folder <- function() {
-  request <- build_request(endpoint = "root",
-                           token = drive_token())
+  request <- build_request(
+    method = "get",
+    token = drive_token(),
+    params = list(fileId = "root"))
   response <- make_request(request)
   proc_res <- process_request(response)
   proc_res$id

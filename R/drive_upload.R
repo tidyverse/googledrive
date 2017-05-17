@@ -156,12 +156,12 @@ build_drive_upload <- function(input = NULL,
     }
 
     req <- build_request(
+      method = "create",
       token = token,
       params = list(name = name,
                     parents = list(parent),
                     mimeType = type
-      ),
-      method = "POST"
+      )
     )
 
     # if we are just uploading a folder, we are finished,
@@ -176,14 +176,17 @@ build_drive_upload <- function(input = NULL,
     id <- proc_res$id
   }
 
-  list(
-    method = "PATCH",
-    endpoint =  paste0(id, "?uploadType=media"),
-    path = "upload/drive/v3/files",
+  build_request(
+    path = "https://www.googleapis.com/upload/drive/v3/files/{fileId}",
+    method = "update",
     token = token,
-    body = httr::upload_file(path = input,
-                             type = type),
-    query = list(...)
+    params = list(
+      fileId = id,
+      uploadType = "media",
+      body = httr::upload_file(path = input,
+                               type = type),
+      ...
+    )
   )
 
 }

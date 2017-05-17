@@ -57,40 +57,35 @@ build_drive_share <- function(file = NULL,
     spf("Input must be a `gfile`. See `drive_file()`")
   }
 
+  if (is.null(role) | is.null(type)) {
+    spf("Role and type must be specified.")
+  }
+
   ok_roles <- c("organizer", "owner", "writer", "commenter", "reader")
   ok_types <- c("user", "group", "domain", "anyone")
 
-  if (!is.null(role))
     if (!(role %in% ok_roles)) {
       spf("Role must be one of the following: %s.",
           paste(ok_roles, collapse = ", "))
     }
 
-  if (!is.null(type))
     if (!(type %in% ok_types)) {
       spf("Role must be one of the following: %s.",
           paste(ok_types, collapse = ", "))
     }
 
-  id <- file$id
-
-  body <- list(role = role,
-               type = type,
-               emailAddress = email,
-               ...)
-
-  endpoint <- file.path(id, "permissions")
-
-  if (!is.null(message)) {
-    message <- gsub(" ", "%20", message)
-    endpoint <- paste0(endpoint, "?emailMessage=", message)
-  }
-
   build_request(
-    endpoint = endpoint,
+    method = "create",
+    resource = "permissions",
     token = token,
-    params = body,
-    method = "POST"
+    params = list(
+      fileId = file$id,
+      role = role,
+      type = type,
+      emailAddress = email,
+      emailMessage = message,
+      ...
+    )
   )
 }
 

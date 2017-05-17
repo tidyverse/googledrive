@@ -27,27 +27,27 @@ names(metadata) <- c("about",
 metadata <- metadata %>%
   bind_rows(.id = "resource") %>%
   tibble::as_tibble() %>%
-  mutate(request = sub("([A-Za-z]+).*", "\\1", `HTTP request`),
+  mutate(verb = sub("([A-Za-z]+).*", "\\1", `HTTP request`),
          path = gsub(".*? (.+)", "\\1", `HTTP request`)) %>%
   select(resource,
          method = Method,
-         request,
+         verb,
          path,
-         description = Description) %>%
+         method_description = Description) %>%
   filter(method != "URIs relative to https://www.googleapis.com/drive/v3, unless otherwise noted",
          !grepl("and", path)) %>%  #2 finicky ones have 2 paths, we'll fix those by hand
   tibble::add_row(
     resource = "files",
     method = "create",
-    request = "POST",
-    path = "https://www.googleapis.com/upload/drive/v3/files",
-    description = "Creates a new file.") %>%
+    verb = "POST",
+    path = "/files",
+    method_description = "Creates a new file.") %>%
   tibble::add_row(
     resource = "files",
     method = "update",
-    request = "PATCH",
-    path = "https://www.googleapis.com/upload/drive/v3/files/fileId",
-    description = "Updates a file's content with patch semantics."
+    verb = "PATCH",
+    path = "/files/fileId",
+    method_description = "Updates a file's content with patch semantics."
   ) %>%
   mutate(path = Hmisc::sedit(path, id, id_sub))
 
@@ -72,7 +72,8 @@ wrangle_query <- function(resource, method) {
            method = method,
            resource = resource) %>%
     tidyr::fill(full_type) %>%
-    filter(!grepl(" parameters", param_name) & grepl("query", full_type))
+    filter(!grepl(" parameters", param_name) & grepl("query", full_type))  %>%
+    mutate(param_name = ifelse(param_name == "parents[]", "parents", param_name))
 }
 
 ## wrangle body
@@ -100,7 +101,8 @@ wrangle_body <- function(resource, method) {
            method = method,
            resource = resource) %>%
     tidyr::fill(full_type) %>%
-    filter(!grepl(" Properties", param_name))
+    filter(!grepl(" Properties", param_name)) %>%
+    mutate(param_name = ifelse(param_name == "parents[]", "parents", param_name))
 }
 
 query_params <- purrr::map2(metadata$resource, metadata$method, wrangle_query) %>%
@@ -109,6 +111,10 @@ query_params <- purrr::map2(metadata$resource, metadata$method, wrangle_query) %
 body_params <- purrr::map2(metadata$resource, metadata$method, wrangle_body) %>%
   bind_rows()
 
-params <- bind_rows(body_params, query_params)
+
+params <- bind_rows(body_params, query_params) %>%
+  full_join(metadata, by = c("method", "resource"))
+
+
 
 readr::write_csv(params, path = "inst/extdata/params.csv")

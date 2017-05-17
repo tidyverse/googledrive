@@ -1,338 +1,441 @@
-param_name,description,expects,writable,full_type,type,method,resource
-kind,"Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string ""api#channel"".",string,0,NA,body,watch,changes
-id,A UUID or similar unique string that identifies this channel.,string,0,NA,body,watch,changes
-resourceId,An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.,string,0,NA,body,watch,changes
-resourceUri,A version-specific identifier for the watched resource.,string,0,NA,body,watch,changes
-token,An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.,string,0,NA,body,watch,changes
-expiration,"Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.",long,0,NA,body,watch,changes
-type,The type of delivery mechanism used for this channel.,string,0,NA,body,watch,changes
-address,The address where notifications are delivered for this channel.,string,0,NA,body,watch,changes
-payload,A Boolean value to indicate whether payload is wanted. Optional.,boolean,0,NA,body,watch,changes
-params,Additional parameters controlling delivery channel behavior. Optional.,object,0,NA,body,watch,changes
-params.(key),Declares a new parameter by name.,string,0,NA,body,watch,changes
-kind,"Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string ""api#channel"".",string,0,NA,body,stop,channels
-id,A UUID or similar unique string that identifies this channel.,string,0,NA,body,stop,channels
-resourceId,An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.,string,0,NA,body,stop,channels
-resourceUri,A version-specific identifier for the watched resource.,string,0,NA,body,stop,channels
-token,An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.,string,0,NA,body,stop,channels
-expiration,"Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.",long,0,NA,body,stop,channels
-type,The type of delivery mechanism used for this channel.,string,0,NA,body,stop,channels
-address,The address where notifications are delivered for this channel.,string,0,NA,body,stop,channels
-payload,A Boolean value to indicate whether payload is wanted. Optional.,boolean,0,NA,body,stop,channels
-params,Additional parameters controlling delivery channel behavior. Optional.,object,0,NA,body,stop,channels
-params.(key),Declares a new parameter by name.,string,0,NA,body,stop,channels
-content,"The plain text content of the comment. This field is used for setting the content, while htmlContent should be displayed.",string,1,Required Properties,body,create,comments
-anchor,A region of the document represented as a JSON string. See anchor documentation for details on how to define and interpret anchor properties.,string,1,Optional Properties,body,create,comments
-quotedFileContent.value,The quoted content itself. This is interpreted as plain text if set through the API.,string,1,Optional Properties,body,create,comments
-content,"The plain text content of the comment. This field is used for setting the content, while htmlContent should be displayed.",string,1,Required Properties,body,update,comments
-appProperties,A collection of arbitrary key-value pairs which are private to the requesting app.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,copy,files
-contentHints.thumbnail.image,The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).,bytes,1,Optional Properties,body,copy,files
-contentHints.thumbnail.mimeType,The MIME type of the thumbnail.,string,1,Optional Properties,body,copy,files
-description,A short description of the file.,string,1,Optional Properties,body,copy,files
-mimeType,"The MIME type of the file.  Drive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.  If a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource.",string,1,Optional Properties,body,copy,files
-modifiedTime,The last time the file was modified by anyone (RFC 3339 date-time).  Note that setting modifiedTime will also update modifiedByMeTime for the user.,datetime,1,Optional Properties,body,copy,files
-name,"The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant.",string,1,Optional Properties,body,copy,files
-parents[],"The IDs of the parent folders which contain the file.  If not specified as part of a create request, the file will be placed directly in the My Drive folder. Update requests must use the addParents and removeParents parameters to modify the values.",list,1,Optional Properties,body,copy,files
-properties,A collection of arbitrary key-value pairs which are visible to all apps.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,copy,files
-starred,Whether the user has starred the file.,boolean,1,Optional Properties,body,copy,files
-viewedByMeTime,The last time the file was viewed by the user (RFC 3339 date-time).,datetime,1,Optional Properties,body,copy,files
-viewersCanCopyContent,"Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations.",boolean,1,Optional Properties,body,copy,files
-writersCanShare,Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files.,boolean,1,Optional Properties,body,copy,files
-kind,"Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string ""api#channel"".",string,0,NA,body,watch,files
-id,A UUID or similar unique string that identifies this channel.,string,0,NA,body,watch,files
-resourceId,An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.,string,0,NA,body,watch,files
-resourceUri,A version-specific identifier for the watched resource.,string,0,NA,body,watch,files
-token,An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.,string,0,NA,body,watch,files
-expiration,"Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.",long,0,NA,body,watch,files
-type,The type of delivery mechanism used for this channel.,string,0,NA,body,watch,files
-address,The address where notifications are delivered for this channel.,string,0,NA,body,watch,files
-payload,A Boolean value to indicate whether payload is wanted. Optional.,boolean,0,NA,body,watch,files
-params,Additional parameters controlling delivery channel behavior. Optional.,object,0,NA,body,watch,files
-params.(key),Declares a new parameter by name.,string,0,NA,body,watch,files
-role,"The role granted by this permission. While new values may be supported in the future, the following are currently allowed: organizer owner writer commenter reader",string,1,Required Properties,body,create,permissions
-type,The type of the grantee. Valid values are: user group domain anyone,string,1,Required Properties,body,create,permissions
-allowFileDiscovery,Whether the permission allows the file to be discovered through search. This is only applicable for permissions of type domain or anyone.,boolean,1,Optional Properties,body,create,permissions
-domain,The domain to which this permission refers.,string,1,Optional Properties,body,create,permissions
-emailAddress,The email address of the user or group to which this permission refers.,string,1,Optional Properties,body,create,permissions
-expirationTime,The time at which this permission will expire (RFC 3339 date-time).  Expiration times have the following restrictions: They can only be set on user and group permissions The time must be in the future The time cannot be more than a year in the future,datetime,1,Optional Properties,body,update,permissions
-role,"The role granted by this permission. While new values may be supported in the future, the following are currently allowed: organizer owner writer commenter reader",string,1,Optional Properties,body,update,permissions
-action,The action the reply performed to the parent comment. Valid values are: resolve reopen,string,1,Optional Properties,body,create,replies
-content,"The plain text content of the reply. This field is used for setting the content, while htmlContent should be displayed. This is required on creates if no action is specified.",string,1,Optional Properties,body,create,replies
-content,"The plain text content of the reply. This field is used for setting the content, while htmlContent should be displayed. This is required on creates if no action is specified.",string,1,Required Properties,body,update,replies
-keepForever,"Whether to keep this revision forever, even if it is no longer the head revision. If not set, the revision will be automatically purged 30 days after newer content is uploaded. This can be set on a maximum of 200 revisions for a file.  This field is only applicable to files with binary content in Drive.",boolean,1,Optional Properties,body,update,revisions
-publishAuto,Whether subsequent revisions will be automatically republished. This is only applicable to Google Docs.,boolean,1,Optional Properties,body,update,revisions
-published,Whether this revision is published. This is only applicable to Google Docs.,boolean,1,Optional Properties,body,update,revisions
-publishedOutsideDomain,Whether this revision is published outside the domain. This is only applicable to Google Docs.,boolean,1,Optional Properties,body,update,revisions
-themeId,"The ID of the theme from which the background image and color will be set. The set of possible teamDriveThemes can be retrieved from a drive.about.get response.  When not specified on a drive.teamdrives.create request, a random theme is chosen from which the background image and color are set.  This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile.",string,1,Optional Properties,body,create,teamdrives
-backgroundImageFile,"An image file and cropping parameters from which a background image for this Team Drive is set.  This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId.  When specified, all fields of the backgroundImageFile must be set.",object,1,Optional Properties,body,update,teamdrives
-colorRgb,The color of this Team Drive as an RGB hex string.  It can only be set on a drive.teamdrives.update request that does not set themeId.,string,1,Optional Properties,body,update,teamdrives
-themeId,"The ID of the theme from which the background image and color will be set. The set of possible teamDriveThemes can be retrieved from a drive.about.get response.  When not specified on a drive.teamdrives.create request, a random theme is chosen from which the background image and color are set.  This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile.",string,1,Optional Properties,body,update,teamdrives
-appProperties,A collection of arbitrary key-value pairs which are private to the requesting app.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,create,files
-contentHints.indexableText,Text to be indexed for the file to improve fullText queries. This is limited to 128KB in length and may contain HTML elements.,string,1,Optional Properties,body,create,files
-contentHints.thumbnail.image,The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).,bytes,1,Optional Properties,body,create,files
-contentHints.thumbnail.mimeType,The MIME type of the thumbnail.,string,1,Optional Properties,body,create,files
-createdTime,The time at which the file was created (RFC 3339 date-time).,datetime,1,Optional Properties,body,create,files
-description,A short description of the file.,string,1,Optional Properties,body,create,files
-folderColorRgb,"The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.  If an unsupported color is specified, the closest color in the palette will be used instead.",string,1,Optional Properties,body,create,files
-id,The ID of the file.,string,1,Optional Properties,body,create,files
-mimeType,"The MIME type of the file.  Drive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.  If a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource.",string,1,Optional Properties,body,create,files
-modifiedTime,The last time the file was modified by anyone (RFC 3339 date-time).  Note that setting modifiedTime will also update modifiedByMeTime for the user.,datetime,1,Optional Properties,body,create,files
-name,"The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant.",string,1,Optional Properties,body,create,files
-originalFilename,"The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Drive.",string,1,Optional Properties,body,create,files
-parents[],"The IDs of the parent folders which contain the file.  If not specified as part of a create request, the file will be placed directly in the My Drive folder. Update requests must use the addParents and removeParents parameters to modify the values.",list,1,Optional Properties,body,create,files
-properties,A collection of arbitrary key-value pairs which are visible to all apps.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,create,files
-starred,Whether the user has starred the file.,boolean,1,Optional Properties,body,create,files
-viewedByMeTime,The last time the file was viewed by the user (RFC 3339 date-time).,datetime,1,Optional Properties,body,create,files
-viewersCanCopyContent,"Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations.",boolean,1,Optional Properties,body,create,files
-writersCanShare,Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files.,boolean,1,Optional Properties,body,create,files
-appProperties,A collection of arbitrary key-value pairs which are private to the requesting app.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,update,files
-contentHints.indexableText,Text to be indexed for the file to improve fullText queries. This is limited to 128KB in length and may contain HTML elements.,string,1,Optional Properties,body,update,files
-contentHints.thumbnail.image,The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).,bytes,1,Optional Properties,body,update,files
-contentHints.thumbnail.mimeType,The MIME type of the thumbnail.,string,1,Optional Properties,body,update,files
-description,A short description of the file.,string,1,Optional Properties,body,update,files
-folderColorRgb,"The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.  If an unsupported color is specified, the closest color in the palette will be used instead.",string,1,Optional Properties,body,update,files
-mimeType,"The MIME type of the file.  Drive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.  If a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource.",string,1,Optional Properties,body,update,files
-modifiedTime,The last time the file was modified by anyone (RFC 3339 date-time).  Note that setting modifiedTime will also update modifiedByMeTime for the user.,datetime,1,Optional Properties,body,update,files
-name,"The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant.",string,1,Optional Properties,body,update,files
-originalFilename,"The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Drive.",string,1,Optional Properties,body,update,files
-properties,A collection of arbitrary key-value pairs which are visible to all apps.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,update,files
-starred,Whether the user has starred the file.,boolean,1,Optional Properties,body,update,files
-trashed,"Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file, and other users cannot see files in the owner's trash.",boolean,1,Optional Properties,body,update,files
-viewedByMeTime,The last time the file was viewed by the user (RFC 3339 date-time).,datetime,1,Optional Properties,body,update,files
-viewersCanCopyContent,"Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations.",boolean,1,Optional Properties,body,update,files
-writersCanShare,Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files.,boolean,1,Optional Properties,body,update,files
+param_name,description,expects,writable,full_type,type,method,resource,verb,path,method_description
+kind,"Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string ""api#channel"".",string,0,NA,body,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+id,A UUID or similar unique string that identifies this channel.,string,0,NA,body,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+resourceId,An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.,string,0,NA,body,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+resourceUri,A version-specific identifier for the watched resource.,string,0,NA,body,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+token,An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.,string,0,NA,body,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+expiration,"Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.",long,0,NA,body,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+type,The type of delivery mechanism used for this channel.,string,0,NA,body,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+address,The address where notifications are delivered for this channel.,string,0,NA,body,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+payload,A Boolean value to indicate whether payload is wanted. Optional.,boolean,0,NA,body,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+params,Additional parameters controlling delivery channel behavior. Optional.,object,0,NA,body,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+params.(key),Declares a new parameter by name.,string,0,NA,body,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+kind,"Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string ""api#channel"".",string,0,NA,body,stop,channels,POST,/channels/stop,Stop watching resources through this channel
+id,A UUID or similar unique string that identifies this channel.,string,0,NA,body,stop,channels,POST,/channels/stop,Stop watching resources through this channel
+resourceId,An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.,string,0,NA,body,stop,channels,POST,/channels/stop,Stop watching resources through this channel
+resourceUri,A version-specific identifier for the watched resource.,string,0,NA,body,stop,channels,POST,/channels/stop,Stop watching resources through this channel
+token,An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.,string,0,NA,body,stop,channels,POST,/channels/stop,Stop watching resources through this channel
+expiration,"Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.",long,0,NA,body,stop,channels,POST,/channels/stop,Stop watching resources through this channel
+type,The type of delivery mechanism used for this channel.,string,0,NA,body,stop,channels,POST,/channels/stop,Stop watching resources through this channel
+address,The address where notifications are delivered for this channel.,string,0,NA,body,stop,channels,POST,/channels/stop,Stop watching resources through this channel
+payload,A Boolean value to indicate whether payload is wanted. Optional.,boolean,0,NA,body,stop,channels,POST,/channels/stop,Stop watching resources through this channel
+params,Additional parameters controlling delivery channel behavior. Optional.,object,0,NA,body,stop,channels,POST,/channels/stop,Stop watching resources through this channel
+params.(key),Declares a new parameter by name.,string,0,NA,body,stop,channels,POST,/channels/stop,Stop watching resources through this channel
+content,"The plain text content of the comment. This field is used for setting the content, while htmlContent should be displayed.",string,1,Required Properties,body,create,comments,POST,/files/{fileId}/comments,Creates a new comment on a file.
+anchor,A region of the document represented as a JSON string. See anchor documentation for details on how to define and interpret anchor properties.,string,1,Optional Properties,body,create,comments,POST,/files/{fileId}/comments,Creates a new comment on a file.
+quotedFileContent.value,The quoted content itself. This is interpreted as plain text if set through the API.,string,1,Optional Properties,body,create,comments,POST,/files/{fileId}/comments,Creates a new comment on a file.
+content,"The plain text content of the comment. This field is used for setting the content, while htmlContent should be displayed.",string,1,Required Properties,body,update,comments,PATCH,/files/{fileId}/comments/{commentId},Updates a comment with patch semantics.
+appProperties,A collection of arbitrary key-value pairs which are private to the requesting app.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+contentHints.thumbnail.image,The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).,bytes,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+contentHints.thumbnail.mimeType,The MIME type of the thumbnail.,string,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+description,A short description of the file.,string,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+mimeType,"The MIME type of the file.  Drive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.  If a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource.",string,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+modifiedTime,The last time the file was modified by anyone (RFC 3339 date-time).  Note that setting modifiedTime will also update modifiedByMeTime for the user.,datetime,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+name,"The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant.",string,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+parents,"The IDs of the parent folders which contain the file.  If not specified as part of a create request, the file will be placed directly in the My Drive folder. Update requests must use the addParents and removeParents parameters to modify the values.",list,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+properties,A collection of arbitrary key-value pairs which are visible to all apps.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+starred,Whether the user has starred the file.,boolean,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+viewedByMeTime,The last time the file was viewed by the user (RFC 3339 date-time).,datetime,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+viewersCanCopyContent,"Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations.",boolean,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+writersCanShare,Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files.,boolean,1,Optional Properties,body,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+kind,"Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string ""api#channel"".",string,0,NA,body,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+id,A UUID or similar unique string that identifies this channel.,string,0,NA,body,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+resourceId,An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.,string,0,NA,body,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+resourceUri,A version-specific identifier for the watched resource.,string,0,NA,body,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+token,An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.,string,0,NA,body,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+expiration,"Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.",long,0,NA,body,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+type,The type of delivery mechanism used for this channel.,string,0,NA,body,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+address,The address where notifications are delivered for this channel.,string,0,NA,body,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+payload,A Boolean value to indicate whether payload is wanted. Optional.,boolean,0,NA,body,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+params,Additional parameters controlling delivery channel behavior. Optional.,object,0,NA,body,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+params.(key),Declares a new parameter by name.,string,0,NA,body,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+role,"The role granted by this permission. While new values may be supported in the future, the following are currently allowed: organizer owner writer commenter reader",string,1,Required Properties,body,create,permissions,POST,/files/{fileId}/permissions,Creates a permission for a file or Team Drive.
+type,The type of the grantee. Valid values are: user group domain anyone,string,1,Required Properties,body,create,permissions,POST,/files/{fileId}/permissions,Creates a permission for a file or Team Drive.
+allowFileDiscovery,Whether the permission allows the file to be discovered through search. This is only applicable for permissions of type domain or anyone.,boolean,1,Optional Properties,body,create,permissions,POST,/files/{fileId}/permissions,Creates a permission for a file or Team Drive.
+domain,The domain to which this permission refers.,string,1,Optional Properties,body,create,permissions,POST,/files/{fileId}/permissions,Creates a permission for a file or Team Drive.
+emailAddress,The email address of the user or group to which this permission refers.,string,1,Optional Properties,body,create,permissions,POST,/files/{fileId}/permissions,Creates a permission for a file or Team Drive.
+expirationTime,The time at which this permission will expire (RFC 3339 date-time).  Expiration times have the following restrictions: They can only be set on user and group permissions The time must be in the future The time cannot be more than a year in the future,datetime,1,Optional Properties,body,update,permissions,PATCH,/files/{fileId}/permissions/{permissionId},Updates a permission with patch semantics.
+role,"The role granted by this permission. While new values may be supported in the future, the following are currently allowed: organizer owner writer commenter reader",string,1,Optional Properties,body,update,permissions,PATCH,/files/{fileId}/permissions/{permissionId},Updates a permission with patch semantics.
+action,The action the reply performed to the parent comment. Valid values are: resolve reopen,string,1,Optional Properties,body,create,replies,POST,/files/{fileId}/comments/{commentId}/replies,Creates a new reply to a comment.
+content,"The plain text content of the reply. This field is used for setting the content, while htmlContent should be displayed. This is required on creates if no action is specified.",string,1,Optional Properties,body,create,replies,POST,/files/{fileId}/comments/{commentId}/replies,Creates a new reply to a comment.
+content,"The plain text content of the reply. This field is used for setting the content, while htmlContent should be displayed. This is required on creates if no action is specified.",string,1,Required Properties,body,update,replies,PATCH,/files/{fileId}/comments/{commentId}/replies/{replyId},Updates a reply with patch semantics.
+keepForever,"Whether to keep this revision forever, even if it is no longer the head revision. If not set, the revision will be automatically purged 30 days after newer content is uploaded. This can be set on a maximum of 200 revisions for a file.  This field is only applicable to files with binary content in Drive.",boolean,1,Optional Properties,body,update,revisions,PATCH,/files/{fileId}/revisions/{revisionId},Updates a revision with patch semantics.
+publishAuto,Whether subsequent revisions will be automatically republished. This is only applicable to Google Docs.,boolean,1,Optional Properties,body,update,revisions,PATCH,/files/{fileId}/revisions/{revisionId},Updates a revision with patch semantics.
+published,Whether this revision is published. This is only applicable to Google Docs.,boolean,1,Optional Properties,body,update,revisions,PATCH,/files/{fileId}/revisions/{revisionId},Updates a revision with patch semantics.
+publishedOutsideDomain,Whether this revision is published outside the domain. This is only applicable to Google Docs.,boolean,1,Optional Properties,body,update,revisions,PATCH,/files/{fileId}/revisions/{revisionId},Updates a revision with patch semantics.
+themeId,"The ID of the theme from which the background image and color will be set. The set of possible teamDriveThemes can be retrieved from a drive.about.get response.  When not specified on a drive.teamdrives.create request, a random theme is chosen from which the background image and color are set.  This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile.",string,1,Optional Properties,body,create,teamdrives,POST,/teamdrives,"Creates a new Team Drive.
+          
+          Required query parameters:
+requestId"
+backgroundImageFile,"An image file and cropping parameters from which a background image for this Team Drive is set.  This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId.  When specified, all fields of the backgroundImageFile must be set.",object,1,Optional Properties,body,update,teamdrives,PATCH,/teamdrives/{teamDriveId},Updates a Team Drive's metadata
+colorRgb,The color of this Team Drive as an RGB hex string.  It can only be set on a drive.teamdrives.update request that does not set themeId.,string,1,Optional Properties,body,update,teamdrives,PATCH,/teamdrives/{teamDriveId},Updates a Team Drive's metadata
+themeId,"The ID of the theme from which the background image and color will be set. The set of possible teamDriveThemes can be retrieved from a drive.about.get response.  When not specified on a drive.teamdrives.create request, a random theme is chosen from which the background image and color are set.  This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile.",string,1,Optional Properties,body,update,teamdrives,PATCH,/teamdrives/{teamDriveId},Updates a Team Drive's metadata
+appProperties,A collection of arbitrary key-value pairs which are private to the requesting app.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+contentHints.indexableText,Text to be indexed for the file to improve fullText queries. This is limited to 128KB in length and may contain HTML elements.,string,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+contentHints.thumbnail.image,The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).,bytes,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+contentHints.thumbnail.mimeType,The MIME type of the thumbnail.,string,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+createdTime,The time at which the file was created (RFC 3339 date-time).,datetime,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+description,A short description of the file.,string,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+folderColorRgb,"The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.  If an unsupported color is specified, the closest color in the palette will be used instead.",string,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+id,The ID of the file.,string,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+mimeType,"The MIME type of the file.  Drive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.  If a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource.",string,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+modifiedTime,The last time the file was modified by anyone (RFC 3339 date-time).  Note that setting modifiedTime will also update modifiedByMeTime for the user.,datetime,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+name,"The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant.",string,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+originalFilename,"The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Drive.",string,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+parents,"The IDs of the parent folders which contain the file.  If not specified as part of a create request, the file will be placed directly in the My Drive folder. Update requests must use the addParents and removeParents parameters to modify the values.",list,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+properties,A collection of arbitrary key-value pairs which are visible to all apps.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+starred,Whether the user has starred the file.,boolean,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+viewedByMeTime,The last time the file was viewed by the user (RFC 3339 date-time).,datetime,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+viewersCanCopyContent,"Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations.",boolean,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+writersCanShare,Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files.,boolean,1,Optional Properties,body,create,files,POST,/files,Creates a new file.
+appProperties,A collection of arbitrary key-value pairs which are private to the requesting app.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+contentHints.indexableText,Text to be indexed for the file to improve fullText queries. This is limited to 128KB in length and may contain HTML elements.,string,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+contentHints.thumbnail.image,The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).,bytes,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+contentHints.thumbnail.mimeType,The MIME type of the thumbnail.,string,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+description,A short description of the file.,string,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+folderColorRgb,"The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.  If an unsupported color is specified, the closest color in the palette will be used instead.",string,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+mimeType,"The MIME type of the file.  Drive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.  If a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource.",string,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+modifiedTime,The last time the file was modified by anyone (RFC 3339 date-time).  Note that setting modifiedTime will also update modifiedByMeTime for the user.,datetime,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+name,"The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant.",string,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+originalFilename,"The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Drive.",string,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+properties,A collection of arbitrary key-value pairs which are visible to all apps.  Entries with null values are cleared in update and copy requests.,object,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+starred,Whether the user has starred the file.,boolean,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+trashed,"Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file, and other users cannot see files in the owner's trash.",boolean,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+viewedByMeTime,The last time the file was viewed by the user (RFC 3339 date-time).,datetime,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+viewersCanCopyContent,"Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations.",boolean,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+writersCanShare,Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files.,boolean,1,Optional Properties,body,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,getStartPageToken,changes
-teamDriveId,The ID of the Team Drive for which the starting pageToken for listing future changes from that Team Drive will be returned.,string,NA,Optional query parameters,query,getStartPageToken,changes
-pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.,string,NA,Required query parameters,query,list,changes
+          (Default: false)",boolean,NA,Optional query parameters,query,getStartPageToken,changes,GET,/changes/startPageToken,Gets the starting pageToken for listing future changes.
+teamDriveId,The ID of the Team Drive for which the starting pageToken for listing future changes from that Team Drive will be returned.,string,NA,Optional query parameters,query,getStartPageToken,changes,GET,/changes/startPageToken,Gets the starting pageToken for listing future changes.
+pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.,string,NA,Required query parameters,query,list,changes,GET,/changes,"Lists the changes for a user or Team Drive.
+          
+          Required query parameters:
+pageToken"
 includeCorpusRemovals,"Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,list,changes
+          (Default: false)",boolean,NA,Optional query parameters,query,list,changes,GET,/changes,"Lists the changes for a user or Team Drive.
+          
+          Required query parameters:
+pageToken"
 includeRemoved,"Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
 
 
-          (Default: true)",boolean,NA,Optional query parameters,query,list,changes
+          (Default: true)",boolean,NA,Optional query parameters,query,list,changes,GET,/changes,"Lists the changes for a user or Team Drive.
+          
+          Required query parameters:
+pageToken"
 includeTeamDriveItems,"Whether Team Drive files or changes should be included in results.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,list,changes
+          (Default: false)",boolean,NA,Optional query parameters,query,list,changes,GET,/changes,"Lists the changes for a user or Team Drive.
+          
+          Required query parameters:
+pageToken"
 pageSize,"The maximum number of changes to return per page.
           Acceptable values are 1 to 1000, inclusive.
-          (Default: 100)",integer,NA,Optional query parameters,query,list,changes
+          (Default: 100)",integer,NA,Optional query parameters,query,list,changes,GET,/changes,"Lists the changes for a user or Team Drive.
+          
+          Required query parameters:
+pageToken"
 restrictToMyDrive,"Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,list,changes
-spaces,"A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.",string,NA,Optional query parameters,query,list,changes
+          (Default: false)",boolean,NA,Optional query parameters,query,list,changes,GET,/changes,"Lists the changes for a user or Team Drive.
+          
+          Required query parameters:
+pageToken"
+spaces,"A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.",string,NA,Optional query parameters,query,list,changes,GET,/changes,"Lists the changes for a user or Team Drive.
+          
+          Required query parameters:
+pageToken"
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,list,changes
-teamDriveId,The Team Drive from which changes will be returned. If specified the change IDs will be reflective of the Team Drive; use the combined Team Drive ID and change ID as an identifier.,string,NA,Optional query parameters,query,list,changes
-pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.,string,NA,Required query parameters,query,watch,changes
+          (Default: false)",boolean,NA,Optional query parameters,query,list,changes,GET,/changes,"Lists the changes for a user or Team Drive.
+          
+          Required query parameters:
+pageToken"
+teamDriveId,The Team Drive from which changes will be returned. If specified the change IDs will be reflective of the Team Drive; use the combined Team Drive ID and change ID as an identifier.,string,NA,Optional query parameters,query,list,changes,GET,/changes,"Lists the changes for a user or Team Drive.
+          
+          Required query parameters:
+pageToken"
+pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.,string,NA,Required query parameters,query,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
 includeCorpusRemovals,"Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,watch,changes
+          (Default: false)",boolean,NA,Optional query parameters,query,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
 includeRemoved,"Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
 
 
-          (Default: true)",boolean,NA,Optional query parameters,query,watch,changes
+          (Default: true)",boolean,NA,Optional query parameters,query,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
 includeTeamDriveItems,"Whether Team Drive files or changes should be included in results.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,watch,changes
+          (Default: false)",boolean,NA,Optional query parameters,query,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
 pageSize,"The maximum number of changes to return per page.
           Acceptable values are 1 to 1000, inclusive.
-          (Default: 100)",integer,NA,Optional query parameters,query,watch,changes
+          (Default: 100)",integer,NA,Optional query parameters,query,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
 restrictToMyDrive,"Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,watch,changes
-spaces,"A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.",string,NA,Optional query parameters,query,watch,changes
+          (Default: false)",boolean,NA,Optional query parameters,query,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+spaces,"A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.",string,NA,Optional query parameters,query,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,watch,changes
-teamDriveId,The Team Drive from which changes will be returned. If specified the change IDs will be reflective of the Team Drive; use the combined Team Drive ID and change ID as an identifier.,string,NA,Optional query parameters,query,watch,changes
+          (Default: false)",boolean,NA,Optional query parameters,query,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
+teamDriveId,The Team Drive from which changes will be returned. If specified the change IDs will be reflective of the Team Drive; use the combined Team Drive ID and change ID as an identifier.,string,NA,Optional query parameters,query,watch,changes,POST,/changes/watch,"Subscribes to changes for a user.
+          
+          Required query parameters:
+pageToken"
 includeDeleted,"Whether to return deleted comments. Deleted comments will not include their original content.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,get,comments
+          (Default: false)",boolean,NA,Optional query parameters,query,get,comments,GET,/files/{fileId}/comments/{commentId},Gets a comment by ID.
 includeDeleted,"Whether to include deleted comments. Deleted comments will not include their original content.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,list,comments
+          (Default: false)",boolean,NA,Optional query parameters,query,list,comments,GET,/files/{fileId}/comments,Lists a file's comments.
 pageSize,"The maximum number of comments to return per page.
           Acceptable values are 1 to 100, inclusive.
-          (Default: 20)",integer,NA,Optional query parameters,query,list,comments
-pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.,string,NA,Optional query parameters,query,list,comments
-startModifiedTime,The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time).,string,NA,Optional query parameters,query,list,comments
+          (Default: 20)",integer,NA,Optional query parameters,query,list,comments,GET,/files/{fileId}/comments,Lists a file's comments.
+pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.,string,NA,Optional query parameters,query,list,comments,GET,/files/{fileId}/comments,Lists a file's comments.
+startModifiedTime,The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time).,string,NA,Optional query parameters,query,list,comments,GET,/files/{fileId}/comments,Lists a file's comments.
 ignoreDefaultVisibility,"Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,copy,files
+          (Default: false)",boolean,NA,Optional query parameters,query,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
 keepRevisionForever,"Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,copy,files
-ocrLanguage,A language hint for OCR processing during image import (ISO 639-1 code).,string,NA,Optional query parameters,query,copy,files
+          (Default: false)",boolean,NA,Optional query parameters,query,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
+ocrLanguage,A language hint for OCR processing during image import (ISO 639-1 code).,string,NA,Optional query parameters,query,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,copy,files
+          (Default: false)",boolean,NA,Optional query parameters,query,copy,files,POST,/files/{fileId}/copy,Creates a copy of a file and applies any requested updates with patch semantics.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,delete,files
-mimeType,The MIME type of the format requested for this export.,string,NA,Required query parameters,query,export,files
+          (Default: false)",boolean,NA,Optional query parameters,query,delete,files,DELETE,/files/{fileId},"Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a Team Drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted."
+mimeType,The MIME type of the format requested for this export.,string,NA,Required query parameters,query,export,files,GET,/files/{fileId}/export,"Exports a Google Doc to the requested MIME type and returns the exported content.
+          
+          Required query parameters:
+mimeType"
 count,"The number of IDs to return.
           Acceptable values are 1 to 1000, inclusive.
-          (Default: 10)",integer,NA,Optional query parameters,query,generateIds,files
-space,The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.,string,NA,Optional query parameters,query,generateIds,files
+          (Default: 10)",integer,NA,Optional query parameters,query,generateIds,files,GET,/files/generateIds,Generates a set of file IDs which can be provided in create requests.
+space,The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.,string,NA,Optional query parameters,query,generateIds,files,GET,/files/generateIds,Generates a set of file IDs which can be provided in create requests.
 acknowledgeAbuse,"Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,get,files
+          (Default: false)",boolean,NA,Optional query parameters,query,get,files,GET,/files/{fileId},Gets a file's metadata or content by ID.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,get,files
-corpora,"Comma-separated list of bodies of items (files/documents) to which the query applies. Supported bodies are 'user', 'domain', 'teamDrive' and 'allTeamDrives'. 'allTeamDrives' must be combined with 'user'; all other values must be used in isolation. Prefer 'user' or 'teamDrive' to 'allTeamDrives' for efficiency.",string,NA,Optional query parameters,query,list,files
+          (Default: false)",boolean,NA,Optional query parameters,query,get,files,GET,/files/{fileId},Gets a file's metadata or content by ID.
+corpora,"Comma-separated list of bodies of items (files/documents) to which the query applies. Supported bodies are 'user', 'domain', 'teamDrive' and 'allTeamDrives'. 'allTeamDrives' must be combined with 'user'; all other values must be used in isolation. Prefer 'user' or 'teamDrive' to 'allTeamDrives' for efficiency.",string,NA,Optional query parameters,query,list,files,GET,/files,Lists or searches files.
 corpus,"The source of files to list. Deprecated: use 'corpora' instead.
 
           Acceptable values are:
           ""domain"": Files shared to the user's domain.
             
-            ""user"": Files owned by or shared to the user.",string,NA,Optional query parameters,query,list,files
+            ""user"": Files owned by or shared to the user.",string,NA,Optional query parameters,query,list,files,GET,/files,Lists or searches files.
 includeTeamDriveItems,"Whether Team Drive items should be included in results.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,list,files
-orderBy,"A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.",string,NA,Optional query parameters,query,list,files
+          (Default: false)",boolean,NA,Optional query parameters,query,list,files,GET,/files,Lists or searches files.
+orderBy,"A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.",string,NA,Optional query parameters,query,list,files,GET,/files,Lists or searches files.
 pageSize,"The maximum number of files to return per page. Partial or empty result pages are possible even before the end of the files list has been reached.
           Acceptable values are 1 to 1000, inclusive.
-          (Default: 100)",integer,NA,Optional query parameters,query,list,files
-pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.,string,NA,Optional query parameters,query,list,files
-q,"A query for filtering the file results. See the ""Search for Files"" guide for supported syntax.",string,NA,Optional query parameters,query,list,files
-spaces,"A comma-separated list of spaces to query within the corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.",string,NA,Optional query parameters,query,list,files
+          (Default: 100)",integer,NA,Optional query parameters,query,list,files,GET,/files,Lists or searches files.
+pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.,string,NA,Optional query parameters,query,list,files,GET,/files,Lists or searches files.
+q,"A query for filtering the file results. See the ""Search for Files"" guide for supported syntax.",string,NA,Optional query parameters,query,list,files,GET,/files,Lists or searches files.
+spaces,"A comma-separated list of spaces to query within the corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.",string,NA,Optional query parameters,query,list,files,GET,/files,Lists or searches files.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,list,files
-teamDriveId,ID of Team Drive to search.,string,NA,Optional query parameters,query,list,files
+          (Default: false)",boolean,NA,Optional query parameters,query,list,files,GET,/files,Lists or searches files.
+teamDriveId,ID of Team Drive to search.,string,NA,Optional query parameters,query,list,files,GET,/files,Lists or searches files.
 acknowledgeAbuse,"Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,watch,files
+          (Default: false)",boolean,NA,Optional query parameters,query,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,watch,files
-emailMessage,A custom message to include in the notification email.,string,NA,Optional query parameters,query,create,permissions
-sendNotificationEmail,"Whether to send a notification email when sharing to users or groups. This defaults to true for users and groups, and is not allowed for other requests. It must not be disabled for ownership transfers.",boolean,NA,Optional query parameters,query,create,permissions
+          (Default: false)",boolean,NA,Optional query parameters,query,watch,files,POST,/files/{fileId}/watch,Subscribes to changes to a file
+emailMessage,A custom message to include in the notification email.,string,NA,Optional query parameters,query,create,permissions,POST,/files/{fileId}/permissions,Creates a permission for a file or Team Drive.
+sendNotificationEmail,"Whether to send a notification email when sharing to users or groups. This defaults to true for users and groups, and is not allowed for other requests. It must not be disabled for ownership transfers.",boolean,NA,Optional query parameters,query,create,permissions,POST,/files/{fileId}/permissions,Creates a permission for a file or Team Drive.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,create,permissions
+          (Default: false)",boolean,NA,Optional query parameters,query,create,permissions,POST,/files/{fileId}/permissions,Creates a permission for a file or Team Drive.
 transferOwnership,"Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,create,permissions
+          (Default: false)",boolean,NA,Optional query parameters,query,create,permissions,POST,/files/{fileId}/permissions,Creates a permission for a file or Team Drive.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,delete,permissions
+          (Default: false)",boolean,NA,Optional query parameters,query,delete,permissions,DELETE,/files/{fileId}/permissions/{permissionId},Deletes a permission.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,get,permissions
+          (Default: false)",boolean,NA,Optional query parameters,query,get,permissions,GET,/files/{fileId}/permissions/{permissionId},Gets a permission by ID.
 pageSize,"The maximum number of permissions to return per page. When not set for files in a Team Drive, at most 100 results will be returned. When not set for files that are not in a Team Drive, the entire list will be returned.
-          Acceptable values are 1 to 100, inclusive.",integer,NA,Optional query parameters,query,list,permissions
-pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.,string,NA,Optional query parameters,query,list,permissions
+          Acceptable values are 1 to 100, inclusive.",integer,NA,Optional query parameters,query,list,permissions,GET,/files/{fileId}/permissions,Lists a file's or Team Drive's permissions.
+pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.,string,NA,Optional query parameters,query,list,permissions,GET,/files/{fileId}/permissions,Lists a file's or Team Drive's permissions.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,list,permissions
+          (Default: false)",boolean,NA,Optional query parameters,query,list,permissions,GET,/files/{fileId}/permissions,Lists a file's or Team Drive's permissions.
 removeExpiration,"Whether to remove the expiration date.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,update,permissions
+          (Default: false)",boolean,NA,Optional query parameters,query,update,permissions,PATCH,/files/{fileId}/permissions/{permissionId},Updates a permission with patch semantics.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,update,permissions
+          (Default: false)",boolean,NA,Optional query parameters,query,update,permissions,PATCH,/files/{fileId}/permissions/{permissionId},Updates a permission with patch semantics.
 transferOwnership,"Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,update,permissions
+          (Default: false)",boolean,NA,Optional query parameters,query,update,permissions,PATCH,/files/{fileId}/permissions/{permissionId},Updates a permission with patch semantics.
 includeDeleted,"Whether to return deleted replies. Deleted replies will not include their original content.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,get,replies
+          (Default: false)",boolean,NA,Optional query parameters,query,get,replies,GET,/files/{fileId}/comments/{commentId}/replies/{replyId},Gets a reply by ID.
 includeDeleted,"Whether to include deleted replies. Deleted replies will not include their original content.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,list,replies
+          (Default: false)",boolean,NA,Optional query parameters,query,list,replies,GET,/files/{fileId}/comments/{commentId}/replies,Lists a comment's replies.
 pageSize,"The maximum number of replies to return per page.
           Acceptable values are 1 to 100, inclusive.
-          (Default: 20)",integer,NA,Optional query parameters,query,list,replies
-pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.,string,NA,Optional query parameters,query,list,replies
+          (Default: 20)",integer,NA,Optional query parameters,query,list,replies,GET,/files/{fileId}/comments/{commentId}/replies,Lists a comment's replies.
+pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.,string,NA,Optional query parameters,query,list,replies,GET,/files/{fileId}/comments/{commentId}/replies,Lists a comment's replies.
 acknowledgeAbuse,"Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,get,revisions
+          (Default: false)",boolean,NA,Optional query parameters,query,get,revisions,GET,/files/{fileId}/revisions/{revisionId},Gets a revision's metadata or content by ID.
 pageSize,"The maximum number of revisions to return per page.
           Acceptable values are 1 to 1000, inclusive.
-          (Default: 200)",integer,NA,Optional query parameters,query,list,revisions
-pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.,string,NA,Optional query parameters,query,list,revisions
-requestId,"An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.",string,NA,Required query parameters,query,create,teamdrives
+          (Default: 200)",integer,NA,Optional query parameters,query,list,revisions,GET,/files/{fileId}/revisions,Lists a file's revisions.
+pageToken,The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.,string,NA,Optional query parameters,query,list,revisions,GET,/files/{fileId}/revisions,Lists a file's revisions.
+requestId,"An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.",string,NA,Required query parameters,query,create,teamdrives,POST,/teamdrives,"Creates a new Team Drive.
+          
+          Required query parameters:
+requestId"
 pageSize,"Maximum number of Team Drives to return.
           Acceptable values are 1 to 100, inclusive.
-          (Default: 10)",integer,NA,Optional query parameters,query,list,teamdrives
-pageToken,Page token for Team Drives.,string,NA,Optional query parameters,query,list,teamdrives
+          (Default: 10)",integer,NA,Optional query parameters,query,list,teamdrives,GET,/teamdrives,Lists the user's Team Drives.
+pageToken,Page token for Team Drives.,string,NA,Optional query parameters,query,list,teamdrives,GET,/teamdrives,Lists the user's Team Drives.
 uploadType,"The type of upload request to the /upload URI.
                           Acceptable values are:
           media - Simple upload. Upload the media only, without any metadata.
             multipart - Multipart upload. Upload both the media and its metadata, in a single request.
-            resumable - Resumable upload. Upload the file in a resumable fashion, using a series of at least two requests where the first request includes the metadata.",string,NA,Required query parameters,query,create,files
+            resumable - Resumable upload. Upload the file in a resumable fashion, using a series of at least two requests where the first request includes the metadata.",string,NA,Required query parameters,query,create,files,POST,/files,Creates a new file.
 ignoreDefaultVisibility,"Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,create,files
+          (Default: false)",boolean,NA,Optional query parameters,query,create,files,POST,/files,Creates a new file.
 keepRevisionForever,"Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,create,files
-ocrLanguage,A language hint for OCR processing during image import (ISO 639-1 code).,string,NA,Optional query parameters,query,create,files
+          (Default: false)",boolean,NA,Optional query parameters,query,create,files,POST,/files,Creates a new file.
+ocrLanguage,A language hint for OCR processing during image import (ISO 639-1 code).,string,NA,Optional query parameters,query,create,files,POST,/files,Creates a new file.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,create,files
+          (Default: false)",boolean,NA,Optional query parameters,query,create,files,POST,/files,Creates a new file.
 useContentAsIndexableText,"Whether to use the uploaded content as indexable text.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,create,files
+          (Default: false)",boolean,NA,Optional query parameters,query,create,files,POST,/files,Creates a new file.
 uploadType,"The type of upload request to the /upload URI.
                           Acceptable values are:
           media - Simple upload. Upload the media only, without any metadata.
             multipart - Multipart upload. Upload both the media and its metadata, in a single request.
-            resumable - Resumable upload. Upload the file in a resumable fashion, using a series of at least two requests where the first request includes the metadata.",string,NA,Required query parameters,query,update,files
-addParents,A comma-separated list of parent IDs to add.,string,NA,Optional query parameters,query,update,files
+            resumable - Resumable upload. Upload the file in a resumable fashion, using a series of at least two requests where the first request includes the metadata.",string,NA,Required query parameters,query,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+addParents,A comma-separated list of parent IDs to add.,string,NA,Optional query parameters,query,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
 keepRevisionForever,"Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,update,files
-ocrLanguage,A language hint for OCR processing during image import (ISO 639-1 code).,string,NA,Optional query parameters,query,update,files
-removeParents,A comma-separated list of parent IDs to remove.,string,NA,Optional query parameters,query,update,files
+          (Default: false)",boolean,NA,Optional query parameters,query,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+ocrLanguage,A language hint for OCR processing during image import (ISO 639-1 code).,string,NA,Optional query parameters,query,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+removeParents,A comma-separated list of parent IDs to remove.,string,NA,Optional query parameters,query,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
 supportsTeamDrives,"Whether the requesting application supports Team Drives.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,update,files
+          (Default: false)",boolean,NA,Optional query parameters,query,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
 useContentAsIndexableText,"Whether to use the uploaded content as indexable text.
 
 
-          (Default: false)",boolean,NA,Optional query parameters,query,update,files
+          (Default: false)",boolean,NA,Optional query parameters,query,update,files,PATCH,/files/{fileId},Updates a file's content with patch semantics.
+NA,NA,NA,NA,NA,NA,get,about,GET,/about,"Gets information about the user, the user's Drive, and system capabilities."
+NA,NA,NA,NA,NA,NA,delete,comments,DELETE,/files/{fileId}/comments/{commentId},Deletes a comment.
+NA,NA,NA,NA,NA,NA,emptyTrash,files,DELETE,/files/trash,Permanently deletes all of the user's trashed files.
+NA,NA,NA,NA,NA,NA,delete,replies,DELETE,/files/{fileId}/comments/{commentId}/replies/{replyId},Deletes a reply.
+NA,NA,NA,NA,NA,NA,delete,revisions,DELETE,/files/{fileId}/revisions/{revisionId},Permanently deletes a revision. This method is only applicable to files with binary content in Drive.
+NA,NA,NA,NA,NA,NA,delete,teamdrives,DELETE,/teamdrives/{teamDriveId},Permanently deletes a Team Drive for which the user is an organizer. The Team Drive cannot contain any untrashed items.
+NA,NA,NA,NA,NA,NA,get,teamdrives,GET,/teamdrives/{teamDriveId},Gets a Team Drive's metadata by ID.

@@ -38,13 +38,15 @@ guser <- function(fields = "user", ...) {
     return(NULL)
   }
 
-  req <- build_request(path = "drive/v3/about",
-                       token = drive_token(),
-                       params = list(fields = fields,
-                                     ...))
-  res <- make_request(req)
-  proc_res <- process_request(res)
-  proc_res$date <- httr::parse_http_date(req$headers$date)
+  request <- build_request(
+    method = "get",
+    resource = "about",
+    token = drive_token(),
+    params = list(fields = fields,
+                  ...))
+  response <- make_request(request)
+  proc_res <- process_request(response)
+  proc_res$date <- httr::parse_http_date(request$headers$date)
   structure(proc_res, class = c("guser", "list"))
 
 }

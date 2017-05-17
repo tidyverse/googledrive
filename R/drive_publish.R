@@ -35,32 +35,27 @@ drive_publish <- function(file = NULL,
   drive_check_publish(file = file_update, verbose = FALSE)
 }
 
-build_drive_publish <-
-  function(file = NULL,
-           publish = TRUE,
-           ...,
-           token = drive_token()) {
-    x <- list(...)
-    if ("publishAuto" %in% names(x)) {
-      params <- list(...,
-                     published = publish)
-    } else {
-      params <- list(published = publish,
-                     publishAuto = TRUE,
-                     ...)
-    }
-
-    id <- file$id
-
-    rev_id <- file$publish$revision
-    endpoint <- file.path(id, "revisions", rev_id)
-    build_request(
-      endpoint = endpoint,
-      params = params,
-      token = token,
-      method = "PATCH"
-    )
+build_drive_publish <- function(file = NULL,
+                                publish = TRUE,
+                                ...,
+                                token = drive_token()) {
+  x <- list(...)
+  x$published <- publish
+  if (!("publishAuto" %in% names(x))) {
+    x$publishAuto <- TRUE
   }
+
+  x$fileId <- file$id
+
+  x$revisionId <- file$publish$revision
+
+  build_request(
+    method = "update",
+    resource = "revisions",
+    params = x,
+    token = token
+  )
+}
 
 process_drive_publish <- function(response = NULL,
                                   file = NULL,
@@ -91,47 +86,38 @@ process_drive_publish <- function(response = NULL,
 #' @return `gfile` object, a list with published information as a `tibble` under the list element `publish`
 #' @export
 drive_check_publish <- function (file = NULL, verbose = TRUE) {
-  request <- build_drive_check_publish1(file = file)
+
+  if (!inherits(file, "gfile")) {
+    spf("Input must be a `gfile`. See `drive_file()`")
+  }
+
+  request <- build_request(
+    method = "list",
+    resource = "revisions",
+    params = list(fileId = file$id),
+    token = drive_token()
+  )
   response <- make_request(request)
   proc_res <- process_request(response)
 
-  request <- build_drive_check_publish2(file = file, proc_res = proc_res)
-  response <- make_request(request)
-  process_drive_check_publish(response = response,
-                              file = file,
-                              verbose = verbose)
-}
-
-build_drive_check_publish1 <-
-  function(file = NULL, token = drive_token()) {
-    if (!inherits(file, "gfile")) {
-      spf("Input must be a `gfile`. See `drive_file()`")
-    }
-
-    id <- file$id
-
-    endpoint <- file.path(id, "revisions")
-
-    build_request(endpoint = endpoint,
-                  token = token)
-  }
-
-build_drive_check_publish2 <- function(file = NULL,
-                                       proc_res = NULL,
-                                       token = drive_token()) {
   last_rev <- length(proc_res$revisions)
   rev_id <- proc_res$revisions[[last_rev]]$id
 
   fields <- paste(c("id", "published", "publishAuto", "lastModifyingUser"),
                   collapse = ",")
 
-  id <- file$id
-  endpoint <- file.path(id, "revisions", rev_id)
-  req <- build_request(
-    endpoint = endpoint,
-    token = token,
-    params = list(fields = fields)
+  request <- build_request(
+    method = "get",
+    resource = "revisions",
+    token = drive_token(),
+    params = list(fileId = file$id,
+                  revisionId = rev_id,
+                  fields = fields)
   )
+  response <- make_request(request)
+  process_drive_check_publish(response = response,
+                              file = file,
+                              verbose = verbose)
 }
 
 process_drive_check_publish <- function(response = NULL,

@@ -16,13 +16,13 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   }
 
   request <- build_request(
+    method = "create",
     token = drive_token(),
     params = list(
       name = dir,
       mimeType =  "application/vnd.google-apps.folder",
       parents = list(parent)
-    ),
-    method = "POST"
+    )
   )
 
   response <- make_request(request, encode = "json")
