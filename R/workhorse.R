@@ -103,10 +103,11 @@ set_body_params <- function(x) {
 }
 
 set_url <- function(x) {
-  if (grepl("^http", x$path)) {
+  if (grepl("^/upload", x$path)) {
     x$path <- glue::glue_data(x$path_params, x$path)
     x$url <- httr::modify_url(
-      url = x$path,
+      url = x$api_url,
+      path = x$path,
       query = x$query
     )
     return(x)

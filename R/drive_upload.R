@@ -177,7 +177,7 @@ build_drive_upload <- function(input = NULL,
   }
 
   build_request(
-    path = "https://www.googleapis.com/upload/drive/v3/files/{fileId}",
+    path = "/upload/drive/v3/files/{fileId}",
     method = "update",
     token = token,
     params = list(
