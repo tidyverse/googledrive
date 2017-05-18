@@ -37,8 +37,7 @@ drive_publish <- function(file = NULL,
 
 build_drive_publish <- function(file = NULL,
                                 publish = TRUE,
-                                ...,
-                                token = drive_token()) {
+                                ...) {
   x <- list(...)
   x$published <- publish
   if (!("publishAuto" %in% names(x))) {
@@ -51,9 +50,8 @@ build_drive_publish <- function(file = NULL,
 
   build_request(
     endpoint = "drive.revisions.update",
-    params = x,
-    token = token
-  )
+    params = x
+    )
 }
 
 process_drive_publish <- function(response = NULL,
@@ -93,7 +91,6 @@ drive_check_publish <- function (file = NULL, verbose = TRUE) {
   request <- build_request(
     endpoint = "drive.revisions.list",
     params = list(fileId = file$id),
-    token = drive_token()
   )
   response <- make_request(request)
   proc_res <- process_request(response)
@@ -106,7 +103,6 @@ drive_check_publish <- function (file = NULL, verbose = TRUE) {
 
   request <- build_request(
     endpoint = "drive.revisions.get",
-    token = drive_token(),
     params = list(fileId = file$id,
                   revisionId = rev_id,
                   fields = fields)

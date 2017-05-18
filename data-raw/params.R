@@ -41,13 +41,14 @@ metadata <- metadata %>%
     method = "create",
     verb = "POST",
     path = "/files",
-    method_description = "Creates a new file.") %>%
+    method_description = "Creates a new file (metadata)"
+  ) %>%
   tibble::add_row(
     resource = "files",
     method = "update",
     verb = "PATCH",
     path = "/files/fileId",
-    method_description = "Updates a file's content with patch semantics."
+    method_description = "Updates a file's content with patch semantics (metadata)"
   ) %>%
   mutate(path = Hmisc::sedit(path, id, id_sub))
 
@@ -114,6 +115,25 @@ body_params <- purrr::map2(metadata$resource, metadata$method, wrangle_body) %>%
 
 params <- bind_rows(body_params, query_params) %>%
   full_join(metadata, by = c("method", "resource"))
+
+double_endpoint_create <- params %>%
+  filter(resource == "files", method == "create") %>%
+  mutate(method = "create.media",
+         path = "/upload/drive/v3/files",
+         method_description = "Creates a new file (media)"
+         )
+
+double_endpoint_update <- params %>%
+  filter(resource == "files", method == "update") %>%
+  mutate(method = "update.media",
+         path = "/upload/drive/v3/files/{fileId}",
+         method_description = "Updates a file's content with patch semantics (media)"
+         )
+
+params <- params %>%
+  mutate(method = ifelse(method == "create" & resource == "files", "create.meta", method),
+         method = ifelse(method == "update" & resource == "files", "update.meta", method)) %>%
+  bind_rows(double_endpoint_create, double_endpoint_update)
 
 params$endpoint <- glue::glue_data(params, "drive.{resource}.{method}")
 

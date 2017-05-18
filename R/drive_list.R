@@ -66,7 +66,6 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
   }
 
   request <- build_request(
-    token = drive_token(),
     params = x
   )
   response <- make_request(request)
@@ -189,7 +188,6 @@ get_leafmost_id <- function(path) {
 root_folder <- function() {
   request <- build_request(
     endpoint = "drive.files.get",
-    token = drive_token(),
     params = list(fileId = "root"))
   response <- make_request(request)
   proc_res <- process_request(response)

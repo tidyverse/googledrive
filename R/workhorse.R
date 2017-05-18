@@ -1,7 +1,7 @@
 build_request <- function(path = NULL,
                           params = list(),
                           endpoint = "drive.files.list",
-                          token = NULL,
+                          token = drive_token(),
                           send_headers = NULL,
                           api_url = .drive$base_url) {
 
@@ -17,6 +17,7 @@ build_request <- function(path = NULL,
                     send_headers = send_headers,
                     api_url = api_url)
 
+  workhorse <- check_repeats(workhorse)
   workhorse <- set_path(workhorse)
   workhorse <- set_path_params(workhorse)
   workhorse <- set_query_params(workhorse)
@@ -25,6 +26,21 @@ build_request <- function(path = NULL,
   workhorse <- set_verb(workhorse)
 
   return(workhorse)
+}
+
+## check for repeat parameters
+check_repeats <- function(x) {
+  is_a_repeat <- duplicated(names(x$params))
+
+  if (any(is_a_repeat)) {
+    stop(
+      paste(
+      c("These parameters are not allowed to appear more than once:",
+      names(x$params)[is_a_repeat]), collapse = "\n"
+      )
+    )
+  }
+  return(x)
 }
 
 set_path <- function(x) {

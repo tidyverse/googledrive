@@ -24,9 +24,8 @@ drive_mv <- function(file = NULL,
       fileId = file$id,
       addParents = folder$id,
       removeParents = file$kitchen_sink$parents[[1]]
-    ),
-    token = drive_token()
-  )
+      )
+    )
 
   response <- make_request(request)
   proc_res <-

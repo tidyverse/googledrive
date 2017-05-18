@@ -48,7 +48,6 @@ build_drive_upload <- function(input = NULL,
                                type = NULL,
                                ...,
                                verbose = TRUE,
-                               token = drive_token(),
                                internet = TRUE) {
   if (!file.exists(input)) {
     spf("'%s' does not exist!", input)
@@ -156,8 +155,7 @@ build_drive_upload <- function(input = NULL,
     }
 
     req <- build_request(
-      endpoint = "drive.files.create",
-      token = token,
+      endpoint = "drive.files.create.meta",
       params = list(name = name,
                     parents = list(parent),
                     mimeType = type
@@ -177,9 +175,7 @@ build_drive_upload <- function(input = NULL,
   }
 
   build_request(
-    path = "/upload/drive/v3/files/{fileId}",
-    endpoint = "drive.files.update",
-    token = token,
+    endpoint = "drive.files.update.media",
     params = list(
       fileId = id,
       uploadType = "media",

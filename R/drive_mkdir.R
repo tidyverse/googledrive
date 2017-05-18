@@ -16,8 +16,7 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   }
 
   request <- build_request(
-    endpoint = "drive.files.create",
-    token = drive_token(),
+    endpoint = "drive.files.create.meta",
     params = list(
       name = dir,
       mimeType =  "application/vnd.google-apps.folder",

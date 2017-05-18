@@ -42,13 +42,12 @@ drive_share <- function(file = NULL,
 build_drive_share <- function(file = NULL,
                               role = NULL,
                               type = NULL,
-                              ...,
-                              token = drive_token()) {
+                              ...) {
   if (!inherits(file, "gfile")) {
     spf("Input must be a `gfile`. See `drive_file()`")
   }
 
-  if (is.null(role) | is.null(type)) {
+  if (is.null(role) || is.null(type)) {
     spf("Role and type must be specified.")
   }
 
@@ -67,7 +66,6 @@ build_drive_share <- function(file = NULL,
 
   build_request(
     endpoint = "drive.permissions.create",
-    token = token,
     params = list(
       fileId = file$id,
       role = role,

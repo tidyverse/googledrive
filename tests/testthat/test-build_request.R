@@ -11,7 +11,7 @@ test_that("build_request default works properly", {
 
 })
 
-test_that("build_request messages effectively with input", {
+test_that("build_request messages effectively single incorrect input", {
   ## the only piece that is "user facing" is you can supply
   ## parameters to the ...
 
@@ -29,8 +29,9 @@ test_that("build_request messages effectively with input", {
                    ),
                    collapse = "\n")
   )
+})
 
-  ## and if we supply multiple crazy parameters
+test_that("build_request messages effectively multiple incorrect inputs", {
   params <- list(chicken = "muffin",
                  bunny = "pippin")
   expect_message(build_request(params = params),
@@ -44,8 +45,9 @@ test_that("build_request messages effectively with input", {
                    ),
                    collapse = "\n")
   )
+})
 
-  ## what if some are right and some are wrong?
+test_that("build_request messages effectively mixed correct/incorrect input", {
 
   params <- list(chicken = "muffin",
                  q = "fields='files/id'")
@@ -62,11 +64,13 @@ test_that("build_request messages effectively with input", {
                    ),
                    collapse = "\n")
   )
-
   ## let's make sure the correct parameter (q) still passed
   expect_identical(suppressMessages(build_request(params = params)$query),
                    params_right)
+})
 
+
+test_that("build_request messages effectively with sometimes correct but this time incorrect input", {
   ## what if you give a parameter that is accepted in a
   ## different endpoint, but not the one you specified?
   ## should still give a message
@@ -92,4 +96,39 @@ test_that("build_request messages effectively with input", {
   )
 
 
+})
+
+test_that("build_request catches if you pass fileId when endpoint doesn't need it", {
+
+  params <- list(fileId = 1)
+  expect_message(build_request(endpoint = "drive.files.list",
+                               params = params),
+                 paste(
+                   c(
+                     "Ignoring these unrecognized parameters:",
+                     glue::glue_data(
+                       tibble::enframe(params),
+                       "{name}: {value}"
+                     )
+                   ),
+                   collapse = "\n")
+  )
+
+})
+
+test_that("build_request catches if you pass fileId when endpoint DOES need it", {
+
+  ## here, fileId = 1 is the fileId that I pass,
+  ## fileId = 2 is the one that was passed in the ...
+  ## want to make it throws an error
+  params <- list(fileId = 1,
+                 fileId = 2)
+
+  expect_error(build_request(endpoint = "drive.files.get",
+                             params = params),
+               paste(
+                 c("These parameters are not allowed to appear more than once:",
+                   "fileId"), collapse = "\n"
+               )
+  )
 })
