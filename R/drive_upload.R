@@ -170,7 +170,7 @@ build_drive_upload <- function(input = NULL,
     # if we are just uploading a folder, we are finished,
     if (!is.null(type)) {
       if (type == "application/vnd.google-apps.folder" & internet) {
-        return(res)
+        return(req)
       }
     }
 
