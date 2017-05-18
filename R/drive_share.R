@@ -97,7 +97,8 @@ build_drive_share <- function(file = NULL,
 process_drive_share <- function(response = NULL,
                                 file = NULL,
                                 verbose = TRUE) {
-  process_request(response, content = FALSE)
+
+  httr::stop_for_status(response)
 
   if (verbose == TRUE) {
     if (response$status_code == 200L) {

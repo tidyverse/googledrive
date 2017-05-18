@@ -75,22 +75,24 @@ make_request <- function(x, ...){
 }
 
 process_request <- function(res,
-                            content = TRUE,
-                            expected = "application/json; charset=UTF-8") {
-  httr::stop_for_status(res)
-  if (content == TRUE) {
-    actual <- res$headers$`content-type`
-    if (actual != expected) {
-      spf(
-        paste0(
-          "Expected content-type:\n%s",
-          "\n",
-          "Actual content-type:\n%s"
-        ),
-        expected,
-        actual
-      )
-    }
-    jsonlite::fromJSON(httr::content(res, "text"), simplifyVector = FALSE)
+                            expected = "application/json; charset=UTF-8",
+                            internet = TRUE) {
+
+  actual <- res$headers$`content-type`
+  if (actual != expected) {
+    spf(
+      paste0(
+        "Expected content-type:\n%s",
+        "\n",
+        "Actual content-type:\n%s"
+      ),
+      expected,
+      actual
+    )
   }
+
+  if (internet) {
+    httr::stop_for_status(res)
+    jsonlite::fromJSON(httr::content(res, "text"), simplifyVector = FALSE)
+  } else return(NULL)
 }
