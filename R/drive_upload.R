@@ -156,7 +156,7 @@ build_drive_upload <- function(input = NULL,
     }
 
     req <- build_request(
-      method = "create",
+      endpoint = "drive.files.create",
       token = token,
       params = list(name = name,
                     parents = list(parent),
@@ -178,7 +178,7 @@ build_drive_upload <- function(input = NULL,
 
   build_request(
     path = "/upload/drive/v3/files/{fileId}",
-    method = "update",
+    endpoint = "drive.files.update",
     token = token,
     params = list(
       fileId = id,

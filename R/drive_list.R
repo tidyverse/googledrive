@@ -188,7 +188,7 @@ get_leafmost_id <- function(path) {
 ## gets the root folder id
 root_folder <- function() {
   request <- build_request(
-    method = "get",
+    endpoint = "drive.files.get",
     token = drive_token(),
     params = list(fileId = "root"))
   response <- make_request(request)

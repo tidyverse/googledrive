@@ -115,6 +115,6 @@ body_params <- purrr::map2(metadata$resource, metadata$method, wrangle_body) %>%
 params <- bind_rows(body_params, query_params) %>%
   full_join(metadata, by = c("method", "resource"))
 
-
+params$endpoint <- glue::glue_data(params, "drive.{resource}.{method}")
 
 readr::write_csv(params, path = "inst/extdata/params.csv")

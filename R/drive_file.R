@@ -8,7 +8,7 @@
 #'
 drive_file <- function(id = NULL, ...) {
   request <- build_request(
-    method = "get",
+    endpoint = "drive.files.get",
     token = drive_token(),
     params = list(...,
                   fields = paste(.drive$default_fields, collapse = ","),

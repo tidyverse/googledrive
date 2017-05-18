@@ -50,8 +50,7 @@ build_drive_publish <- function(file = NULL,
   x$revisionId <- file$publish$revision
 
   build_request(
-    method = "update",
-    resource = "revisions",
+    endpoint = "drive.revisions.update",
     params = x,
     token = token
   )
@@ -92,8 +91,7 @@ drive_check_publish <- function (file = NULL, verbose = TRUE) {
   }
 
   request <- build_request(
-    method = "list",
-    resource = "revisions",
+    endpoint = "drive.revisions.list",
     params = list(fileId = file$id),
     token = drive_token()
   )
@@ -107,8 +105,7 @@ drive_check_publish <- function (file = NULL, verbose = TRUE) {
                   collapse = ",")
 
   request <- build_request(
-    method = "get",
-    resource = "revisions",
+    endpoint = "drive.revisions.get",
     token = drive_token(),
     params = list(fileId = file$id,
                   revisionId = rev_id,

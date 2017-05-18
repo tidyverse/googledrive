@@ -39,8 +39,7 @@ guser <- function(fields = "user", ...) {
   }
 
   request <- build_request(
-    method = "get",
-    resource = "about",
+    endpoint = "drive.about.get",
     token = drive_token(),
     params = list(fields = fields,
                   ...))

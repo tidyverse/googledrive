@@ -75,8 +75,7 @@ build_drive_share <- function(file = NULL,
     }
 
   build_request(
-    method = "create",
-    resource = "permissions",
+    endpoint = "drive.permissions.create",
     token = token,
     params = list(
       fileId = file$id,

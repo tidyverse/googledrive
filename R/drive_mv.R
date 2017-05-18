@@ -19,7 +19,7 @@ drive_mv <- function(file = NULL,
     spf("Input `folder` must be a `gfile`. See `drive_file()`")
   }
   request <- build_request(
-    method = "update",
+    endpoint = "drive.files.update",
     params = list(
       fileId = file$id,
       addParents = folder$id,

@@ -1,7 +1,6 @@
 build_request <- function(path = NULL,
                           params = list(),
-                          method = "list",
-                          resource = "files",
+                          endpoint = "drive.files.list",
                           token = NULL,
                           send_headers = NULL,
                           api_url = "https://www.googleapis.com/drive/v3") {
@@ -11,8 +10,7 @@ build_request <- function(path = NULL,
                     headers = NULL,
                     query = NULL,
                     body = NULL,
-                    method = method,
-                    resource = resource,
+                    endpoint = endpoint,
                     path = path,
                     params = params,
                     token = token,
@@ -21,7 +19,6 @@ build_request <- function(path = NULL,
 
   workhorse <- set_path(workhorse)
   workhorse <- set_path_params(workhorse)
-  workhorse <- set_query_params(workhorse)
   workhorse <- set_query_params(workhorse)
   workhorse <- set_body_params(workhorse)
   workhorse <- set_url(workhorse)
@@ -34,9 +31,8 @@ set_path <- function(x) {
   if (!is.null(x$path)) {
     return(x)
   }
-  ## find the path that matches the given method and resource
-  x$path <- unique(.drive$params$path[.drive$params$method == x$method &
-                                        .drive$params$resource == x$resource])
+  ## find the path that matches the given endpoint
+  x$path <- unique(.drive$params$path[.drive$params$endpoint == x$endpoint])
   return(x)
 }
 
@@ -59,8 +55,7 @@ set_query_params <- function(x) {
   if (is.null(x$params)) {
     return(x)
   }
-  ok_query <- .drive$params$param_name[.drive$params$method == x$method &
-                                         .drive$params$resource == x$resource &
+  ok_query <- .drive$params$param_name[.drive$params$endpoint == x$endpoint &
                                          .drive$params$type == "query"]
   m <- names(x$params) %in% c(ok_query, "fields") ## also allow fields for now
   x$query <- x$params[m]
@@ -80,8 +75,7 @@ set_body_params <- function(x) {
     x$body <- x$params$body ##for uploads, just stick it all in the body and return
     return(x)
   }
-  ok_body <- .drive$params$param_name[.drive$params$method == x$method &
-                                        .drive$params$resource == x$resource &
+  ok_body <- .drive$params$param_name[.drive$params$endpoint == x$endpoint &
                                         .drive$params$type == "body"]
   m <- names(x$params) %in% c(ok_body)
   x$body <- x$params[m]
@@ -122,8 +116,7 @@ set_url <- function(x) {
 }
 
 set_verb <- function(x) {
-  x$verb <- unique(.drive$params$verb[.drive$params$method == x$method &
-                                    .drive$params$resource == x$resource ])
+  x$verb <- unique(.drive$params$verb[.drive$params$endpoint == x$endpoint])
   return(x)
 }
 
