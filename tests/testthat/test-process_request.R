@@ -1,5 +1,20 @@
-wrong <- readRDS(rprojroot::find_testthat_root_file("wrong-content.rds"))
-right <- readRDS(rprojroot::find_testthat_root_file("right-content.rds"))
+## for testing process_request
+## wrong content:
+## res <- httr::GET("https://httpbin.org")
+## saveRDS(res, rprojroot::find_testthat_root_file("test-files/wrong-content.rds"))
+## res <- httr::GET()
+##
+## right content:
+## x <- drive_list()[1,] # grab most recent thing on drive
+## url <- httr::modify_url(url = .drive$base_url,
+##                         path = paste0("drive/v3/files/",x$id),
+##                         query = list(fields = "name"))
+## res <- httr::GET(url, drive_token())
+## saveRDS(res, rprojroot::find_testthat_root_file("test-files/right-content.rds"))
+
+
+wrong <- readRDS(rprojroot::find_testthat_root_file("test-files/wrong-content.rds"))
+right <- readRDS(rprojroot::find_testthat_root_file("test-files/right-content.rds"))
 
 test_that("process_request properly errors on wrong content type with default expected type", {
 
