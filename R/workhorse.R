@@ -75,8 +75,7 @@ make_request <- function(x, ...){
 }
 
 process_request <- function(res,
-                            expected = "application/json; charset=UTF-8",
-                            internet = TRUE) {
+                            expected = "application/json; charset=UTF-8") {
 
   actual <- res$headers$`content-type`
   if (actual != expected) {
@@ -90,9 +89,6 @@ process_request <- function(res,
       actual
     )
   }
-
-  if (internet) {
-    httr::stop_for_status(res)
-    jsonlite::fromJSON(httr::content(res, "text"), simplifyVector = FALSE)
-  } else return(NULL)
+  httr::stop_for_status(res)
+  jsonlite::fromJSON(httr::content(res, "text"), simplifyVector = FALSE)
 }
