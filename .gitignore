@@ -7,3 +7,4 @@ sandbox
 *.Rproj
 .httr-oauth*
 .Rapp.history
+.httr-oauth-SUSPENDED

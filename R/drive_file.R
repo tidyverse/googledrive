@@ -26,8 +26,8 @@ process_drive_file <- function(response = response) {
     id = proc_res$id,
     type = sub(".*\\.", "", proc_res$mimeType),
     owner = purrr::map_chr(proc_res$owners, "displayName"),
-    last_modified = as.Date(proc_res$modifiedTime),
-    created = as.Date(proc_res$createdTime),
+    last_modified = as.POSIXct(proc_res$modifiedTime),
+    created = as.POSIXct(proc_res$createdTime),
     starred = proc_res$starred,
     #make a tibble of permissions - this seems a bit
     #silly how I've done it so far.
