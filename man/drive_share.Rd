@@ -4,8 +4,7 @@
 \alias{drive_share}
 \title{Update Google Drive file share permissions}
 \usage{
-drive_share(file = NULL, role = NULL, type = NULL, email = NULL,
-  message = NULL, ..., verbose = TRUE)
+drive_share(file = NULL, role = NULL, type = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{\code{gfile} object representing the file you would like to
@@ -27,11 +26,6 @@ delete}
 \item domain
 \item anyone
 }}
-
-\item{email}{The email address of the user or group to which this permission
-refers.}
-
-\item{message}{A custom message to include in the notification email.}
 
 \item{...}{name-value pairs to add to the API request body}
 

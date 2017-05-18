@@ -13,9 +13,6 @@
 #' * group
 #' * domain
 #' * anyone
-#' @param email The email address of the user or group to which this permission
-#'   refers.
-#' @param message A custom message to include in the notification email.
 #' @param ... name-value pairs to add to the API request body
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)
@@ -25,16 +22,12 @@
 drive_share <- function(file = NULL,
                         role = NULL,
                         type = NULL,
-                        email = NULL,
-                        message = NULL,
                         ...,
                         verbose = TRUE) {
   request <- build_drive_share(
     file = file,
     role = role,
     type = type,
-    email = email,
-    message = message,
     ...
   )
   response <- make_request(request, encode = "json")
@@ -49,8 +42,6 @@ drive_share <- function(file = NULL,
 build_drive_share <- function(file = NULL,
                               role = NULL,
                               type = NULL,
-                              email = NULL,
-                              message = NULL,
                               ...,
                               token = drive_token()) {
   if (!inherits(file, "gfile")) {
@@ -81,8 +72,6 @@ build_drive_share <- function(file = NULL,
       fileId = file$id,
       role = role,
       type = type,
-      emailAddress = email,
-      emailMessage = message,
       ...
     )
   )

@@ -3,7 +3,7 @@ build_request <- function(path = NULL,
                           endpoint = "drive.files.list",
                           token = NULL,
                           send_headers = NULL,
-                          api_url = "https://www.googleapis.com/drive/v3") {
+                          api_url = .drive$base_url) {
 
   workhorse <- list(verb = NULL,
                     url = character(),
