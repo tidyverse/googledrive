@@ -8,4 +8,6 @@
 ^codecov\.yml$
 ^data-raw$
 ^appveyor\.yml$
-^.httr-oauth-SUSPENDED$
+^README-.*\.png$
+^\.httr-oauth-SUSPENDED$
+
