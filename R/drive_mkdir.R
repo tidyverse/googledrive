@@ -14,17 +14,14 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   if (!is.null(path)) {
     parent <- get_parent(path = path)
   }
-  url <- .drive$base_url_files_v3
 
   request <- build_request(
-    endpoint = url,
-    token = drive_token(),
+    endpoint = "drive.files.create.meta",
     params = list(
       name = dir,
       mimeType =  "application/vnd.google-apps.folder",
       parents = list(parent)
-    ),
-    method = "POST"
+    )
   )
 
   response <- make_request(request, encode = "json")

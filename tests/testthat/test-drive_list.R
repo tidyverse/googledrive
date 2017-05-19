@@ -6,7 +6,6 @@ test_that("drive_list when we have 2 folders of the same name & depth", {
   skip_on_appveyor()
   skip_on_travis()
 
-  url <- .drive$base_url_files_v3
   ## create a folder named foo
   foo_id <- drive_mkdir("foo")$id
 
@@ -102,7 +101,7 @@ test_that("drive_list when we have two folders of the same name in the same loca
 
   ## our drive_mkdir won't let you place bar in foo, since it doesn't know which foo to place
   ## it in, so we will use plain httr to make the second foo/bar
-  bar_2 <- httr::POST(.drive$base_url_files_v3,
+  bar_2 <- httr::POST("https://www.googleapis.com/drive/v3/files",
                       drive_token(),
                       body = list(
                         name = "bar",
