@@ -11,13 +11,9 @@ download_mime_types <- httr::GET(url) %>%
   purrr::flatten() %>%
   tibble::as_tibble() %>%
   filter(rowSums(is.na(.)) != ncol(.)) %>%  #remove NAs
-  mutate(google_fmt = replace(`Google Doc Format`,
-                              `Google Doc Format` == "", NA)) %>%
-  select(google_fmt,
-         conversion_fmt = `Conversion Format`,
-         mime_type = `Corresponding MIME type`
-  ) %>%
-  do(zoo::na.locf(.)) #fill
+  select(friendly_fmt = `Conversion Format`,
+         mime_type = `Corresponding MIME type`)  %>%
+  distinct()
 
 url <- "https://developers.google.com/drive/v3/web/mime-types"
 query_mime_types <- httr::GET(url) %>%
@@ -28,5 +24,36 @@ query_mime_types <- httr::GET(url) %>%
   select(mime_type = `MIME Type`,
          google_fmt = `Description`)
 
-#.drive$query_mime_types <- query_mime_types
-#.drive$download_mime_types <- download_mime_types
+fmts <- build_request(endpoint = "drive.about.get",
+                      params = list(fields = "importFormats,exportFormats")) %>%
+  make_request() %>%
+  process_request()
+
+imports <- tibble::enframe(fmts$importFormats,
+                           name = "mime_type_local",
+                           value = "mime_type_google") %>%
+  mutate(mime_type_google = purrr::simplify_all(mime_type_google),
+         action = "import") %>%
+  tidyr::unnest()
+
+exports <- tibble::enframe(fmts$exportFormats,
+                           name = "mime_type_google",
+                           value = "mime_type_local") %>%
+  mutate(mime_type_local = purrr::simplify_all(mime_type_local),
+         action = "export") %>%
+  tidyr::unnest()
+
+
+translate_mime_types <- bind_rows(imports, exports) %>%
+  left_join(download_mime_types, by = c("mime_type_local" = "mime_type"))
+
+
+ok_ext <- paste(c("opt", "ppt", "pptx", "pptm","xls","xlsx","csv","tsv",
+            "tab","xlsm","xlt","xltx","xltm","ods","doc, docx","txt",
+            "rtf","html","odt","pdf","jpeg","png","gif","bmp"), collapse = "|")
+
+translate_mime_types$ext <- stringr::str_extract(translate_mime_types$mime_type_local, ok_ext)
+
+
+readr::write_csv(translate_mime_types, path = "inst/extdata/translate_mime_types.csv")
+readr::write_csv(query_mime_types, path = "inst/extdata/query_mime_types.csv")
