@@ -26,7 +26,8 @@ drive_delete <- function(file = NULL, verbose = TRUE) {
 process_drive_delete <- function(response = NULL,
                                  file = NULL,
                                  verbose = TRUE) {
-  process_request(response, content = FALSE)
+
+  httr::stop_for_status(response)
 
   if (verbose == TRUE) {
     if (response$status_code == 204L) {
