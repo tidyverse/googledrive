@@ -9,18 +9,3 @@ if (!identical(Sys.getenv("APPVEYOR"), "True") &&
     !identical(Sys.getenv("TRAVIS"), "true")) {
   drive_auth(rprojroot::find_testthat_root_file("testing-token.rds"))
 }
-
-## for testing process_request
-## wrong content:
-## res <- httr::GET("https://httpbin.org")
-## saveRDS(res, rprojroot::find_testthat_root_file("wrong-content.rds"))
-## res <- httr::GET()
-##
-## right content:
-## x <- drive_list()[1,] # grab most recent thing on drive
-## url <- httr::modify_url(url = .drive$base_url,
-##                         path = paste0("drive/v3/files/",x$id),
-##                         query = list(fields = "name"))
-## res <- httr::GET(url, drive_token())
-## saveRDS(res, rprojroot::find_testthat_root_file("right-content.rds"))
-
