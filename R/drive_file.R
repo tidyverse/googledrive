@@ -7,68 +7,16 @@
 #' @export
 #'
 drive_file <- function(id = NULL, ...) {
-  request <- build_drive_file(id = id, ...)
+  request <- build_request(
+    endpoint = "drive.files.get",
+    params = list(...,
+                  fields = paste(.drive$default_fields, collapse = ","),
+                  fileId = id)
+  )
   response <- make_request(request)
   process_drive_file(response)
 }
 
-build_drive_file <- function(id = NULL, ..., token = drive_token()) {
-  default_fields <-
-    c(
-      "appProperties",
-      "capabilities",
-      "contentHints",
-      "createdTime",
-      "description",
-      "explicitlyTrashed",
-      "fileExtension",
-      "folderColorRgb",
-      "fullFileExtension",
-      "headRevisionId",
-      "iconLink",
-      "id",
-      "imageMediaMetadata",
-      "kind",
-      "lastModifyingUser",
-      "md5Checksum",
-      "mimeType",
-      "modifiedByMeTime",
-      "modifiedTime",
-      "name",
-      "originalFilename",
-      "ownedByMe",
-      "owners",
-      "parents",
-      "permissions",
-      "properties",
-      "quotaBytesUsed",
-      "shared",
-      "sharedWithMeTime",
-      "sharingUser",
-      "size",
-      "spaces",
-      "starred",
-      "thumbnailLink",
-      "trashed",
-      "version",
-      "videoMediaMetadata",
-      "viewedByMe",
-      "viewedByMeTime",
-      "viewersCanCopyContent",
-      "webContentLink",
-      "webViewLink",
-      "writersCanShare"
-    )
-  fields <- paste(default_fields, collapse = ",")
-  url <- file.path(.drive$base_url_files_v3, id)
-
-  build_request(
-    endpoint = url,
-    token = token,
-    params = list(...,
-                  fields = fields)
-  )
-}
 
 process_drive_file <- function(response = response) {
   proc_res <- process_request(response)

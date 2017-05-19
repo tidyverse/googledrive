@@ -48,7 +48,6 @@ build_drive_upload <- function(input = NULL,
                                type = NULL,
                                ...,
                                verbose = TRUE,
-                               token = drive_token(),
                                internet = TRUE) {
   if (!file.exists(input)) {
     spf("'%s' does not exist!", input)
@@ -155,16 +154,12 @@ build_drive_upload <- function(input = NULL,
       parent <- leafmost_tbl$id
     }
 
-    url <- .drive$base_url_files_v3
-
     req <- build_request(
-      endpoint = url,
-      token = token,
+      endpoint = "drive.files.create.meta",
       params = list(name = name,
                     parents = list(parent),
                     mimeType = type
-      ),
-      method = "POST"
+      )
     )
 
     # if we are just uploading a folder, we are finished,
@@ -179,17 +174,15 @@ build_drive_upload <- function(input = NULL,
     id <- proc_res$id
   }
 
-  url <- file.path(.drive$base_url,
-                   "upload/drive/v3/files",
-                   paste0(id, "?uploadType=media"))
-
-  list(
-    method = "PATCH",
-    url = url,
-    token = token,
-    body = httr::upload_file(path = input,
-                             type = type),
-    query = list(...)
+  build_request(
+    endpoint = "drive.files.update.media",
+    params = list(
+      fileId = id,
+      uploadType = "media",
+      body = httr::upload_file(path = input,
+                               type = type),
+      ...
+    )
   )
 
 }

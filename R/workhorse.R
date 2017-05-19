@@ -1,77 +1,161 @@
-build_request <- function(endpoint = NULL,
+build_request <- function(path = NULL,
                           params = list(),
-                          token = NULL,
+                          endpoint = "drive.files.list",
+                          token = drive_token(),
                           send_headers = NULL,
-                          api_url = NULL,
-                          method = "GET") {
-  workhorse <- list(method = method,
+                          api_url = .drive$base_url) {
+
+  workhorse <- list(verb = NULL,
                     url = character(),
                     headers = NULL,
                     query = NULL,
                     body = NULL,
                     endpoint = endpoint,
+                    path = path,
                     params = params,
                     token = token,
                     send_headers = send_headers,
                     api_url = api_url)
 
-  workhorse <- set_query(workhorse)
-  workhorse <- set_body(workhorse)
+  workhorse <- check_repeats(workhorse)
+  workhorse <- set_path(workhorse)
+  workhorse <- set_path_params(workhorse)
+  workhorse <- set_query_params(workhorse)
+  workhorse <- set_body_params(workhorse)
   workhorse <- set_url(workhorse)
+  workhorse <- set_verb(workhorse)
 
-  workhorse
+  return(workhorse)
 }
 
+## check for repeat parameters
+check_repeats <- function(x) {
+  is_a_repeat <- duplicated(names(x$params))
 
-## right now not setting endpoint, if you want to include parameters, must be in a named list
-## may introduce the :parameter notation in endpoint later :)
+  if (any(is_a_repeat)) {
+    stop(
+      paste(
+      c("These parameters are not allowed to appear more than once:",
+      names(x$params)[is_a_repeat]), collapse = "\n"
+      )
+    )
+  }
+  return(x)
+}
 
-set_query <- function(x){
-  if (length(x$params) == 0L) return(x)
-  if (x$method != "GET") {
-    if (grepl("\\?", x$endpoint)) {
-      x$query <- sub(".*\\?", "", x$endpoint)
-      return(x)
-    }
+set_path <- function(x) {
+  if (!is.null(x$path)) {
     return(x)
   }
-  if (!all(has_names(x$params))){
-    spf("All parameters must be named.")
-  }
-  x$query <- x$params
-  x$params <- NULL
-  x
+  ## find the path that matches the given endpoint
+  x$path <- unique(.drive$params$path[.drive$params$endpoint == x$endpoint])
+  return(x)
 }
 
-set_body <- function(x){
-  if (length(x$params) == 0L) return(x)
+set_path_params <- function(x) {
+  path_param_names <- extract_param_names(x$path)
 
-  x$body <- x$params
-  x
+  if (length(path_param_names) & length(x$params)) {
+    m <- names(x$params) %in% path_param_names
+    x$path_params <- x$params[m]
+    x$params <- x$params[!m]
+  }
+
+  if (length(x$params) == 0) {
+    x$params <- NULL
+  }
+  return(x)
 }
 
-## not setting headers yet
-
-set_url <- function(x){
-
-  if (grepl("^http", x$endpoint)){
-    x$url <- x$endpoint
-  } else{
-    x$url <- file.path(x$api_url, sub(".", "", x$endpoint))
+set_query_params <- function(x) {
+  if (is.null(x$params)) {
+    return(x)
   }
-  x
+  ok_query <- .drive$params$param_name[.drive$params$endpoint == x$endpoint &
+                                         .drive$params$type == "query"]
+  m <- names(x$params) %in% c(ok_query, "fields") ## also allow fields for now
+  x$query <- x$params[m]
+  x$params <- x$params[!m]
+
+  if (length(x$params) == 0) {
+    x$params <- NULL
+  }
+  return(x)
+}
+
+set_body_params <- function(x) {
+  if (is.null(x$params)) {
+    return(x)
+  }
+  if (!is.null(x$params$body)) {
+    x$body <- x$params$body ##for uploads, just stick it all in the body and return
+    return(x)
+  }
+  ok_body <- .drive$params$param_name[.drive$params$endpoint == x$endpoint &
+                                        .drive$params$type == "body"]
+  m <- names(x$params) %in% c(ok_body)
+  x$body <- x$params[m]
+  x$params <- x$params[!m]
+
+  if (length(x$params) == 0) {
+    x$params <- NULL
+  }
+  ## by now, we have used all of the params, if there are more,
+  ## we will ignore them
+  if (!is.null(x$params)) {
+    msg <-  c(
+      "Ignoring these unrecognized parameters:",
+      glue::glue_data(tibble::enframe(x$params),"{name}: {value}")
+    )
+    message(paste(msg, collapse = "\n"))
+  }
+  return(x)
+}
+
+set_url <- function(x) {
+  if (grepl("^/upload", x$path)) {
+    x$path <- glue::glue_data(x$path_params, x$path)
+    x$url <- httr::modify_url(
+      url = x$api_url,
+      path = x$path,
+      query = x$query
+    )
+    return(x)
+  }
+  x$path <- paste0("drive/v3",glue::glue_data(x$path_params, x$path))
+  x$url <- httr::modify_url(
+    url = x$api_url,
+    path = x$path,
+    query = x$query
+  )
+  return(x)
+}
+
+set_verb <- function(x) {
+  x$verb <- unique(.drive$params$verb[.drive$params$endpoint == x$endpoint])
+  return(x)
+}
+
+## adapted from googlesheets, thank you Jenny!
+
+## input: /files/{fileId}/comments/{commentId}
+## output: fileId, commentId
+extract_param_names <- function(path) {
+  m <- gregexpr("\\{[^/]*\\}", path)
+  path_param_names <- regmatches(path, m)[[1]]
+  gsub("[\\{\\}]", "", path_param_names)
 }
 
 make_request <- function(x, ...){
-  method <-  list("GET" = httr::GET,
-                  "POST" = httr::POST,
-                  "PATCH" = httr::PATCH,
-                  "PUT" = httr::PUT,
-                  "DELETE" = httr::DELETE)[[x$method]]
-  method(url = x$url,
-         x$token,
-         query = x$query,
-         body = x$body, ...)
+  verb <-  list("GET" = httr::GET,
+                "POST" = httr::POST,
+                "PATCH" = httr::PATCH,
+                "PUT" = httr::PUT,
+                "DELETE" = httr::DELETE)[[x$verb]]
+  verb(url = x$url,
+       x$token,
+       query = x$query,
+       body = x$body, ...)
 }
 
 process_request <- function(res,

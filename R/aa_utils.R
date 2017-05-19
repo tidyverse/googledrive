@@ -13,6 +13,10 @@ NULL
 .drive$base_url_files_v3 <- "https://www.googleapis.com/drive/v3/files"
 .drive$base_url <- "https://www.googleapis.com"
 
+.drive$params <-
+  system.file("extdata", "params.csv", package = "googledrive") %>%
+  read.csv(stringsAsFactors = FALSE)
+
 # environment to store credentials
 .state <- new.env(parent = emptyenv())
 

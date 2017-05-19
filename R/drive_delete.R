@@ -9,7 +9,12 @@
 #' @export
 #'
 drive_delete <- function(file = NULL, verbose = TRUE) {
-  request <- build_drive_delete(file = file)
+  if (!inherits(file, "gfile")) {
+    spf("Input must be a `gfile`. See `drive_file()`")
+  }
+
+  request <- build_request(endpoint = "drive.files.delete",
+                           params = list(fileId = file$id))
   response <- make_request(request)
   process_drive_delete(response = response,
                        file = file,
@@ -17,19 +22,6 @@ drive_delete <- function(file = NULL, verbose = TRUE) {
 
 }
 
-build_drive_delete <- function(file = NULL,
-                               token = drive_token()) {
-  if (!inherits(file, "gfile")) {
-    spf("Input must be a `gfile`. See `drive_file()`")
-  }
-
-  id <- file$id
-  url <- file.path(.drive$base_url_files_v3, id)
-
-  build_request(endpoint = url,
-                token = token,
-                method = "DELETE")
-}
 
 process_drive_delete <- function(response = NULL,
                                  file = NULL,

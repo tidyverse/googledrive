@@ -16,6 +16,7 @@ Roxygen: list(markdown = TRUE)
 Imports: httr,
     purrr,
     tibble,
+    glue,
     jsonlite
 Suggests: covr,
     rprojroot,
