@@ -39,8 +39,11 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
     x$fields <- paste0("files/", .drive$default_fields, collapse = ",")
   }
 
+  ## this still needs to be modified to accept the case where leafmost id is
+  ## a file, not a folder
+  ## get_leaf should return id and indicator if folder
   if (!is.null(path)) {
-    folder <- get_leafmost_id(path = path)
+    folder <- get_leaf(path = path)
     q <- paste0("'", folder, "'", " in parents")
     if (is.null(x$q)) {
       x$q <- q

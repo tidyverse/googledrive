@@ -66,3 +66,15 @@ clean_names <- function(x){
 spf <- function(...) stop(sprintf(...), call. = FALSE)
 
 last <- function(x) x[length(x)]
+
+sq <- function(x) glue::single_quote(x)
+
+crop <- function(x, n = 6L) if (n == 0) x else utils::head(x, -1 * abs(n))
+
+## version of glue::collapse() that returns x if length(x) == 0
+collapse2 <- function(x, sep = "", width = Inf, last = "") {
+  if (length(x) == 0) {
+    x
+  } else
+    glue::collapse(x = x, sep = sep, width = width, last = last)
+}

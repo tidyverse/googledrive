@@ -112,7 +112,10 @@ test_that("drive_list when we have two folders of the same name in the same loca
   )
   bar_2_id <- process_request(bar_2)$id
 
-  expect_error(drive_list("foo/bar"), "The path 'foo/bar' is not uniquely defined.")
+  expect_error(
+    drive_list("foo/bar"),
+    "The path 'foo/bar' identifies more than one file:"
+  )
 
   ## clean up
   clean <- c(foo_id, foo_2_id) %>%
@@ -123,7 +126,10 @@ test_that("drive_list when we have two folders of the same name in the same loca
   foo_id <- drive_mkdir("foo")$id
   foo_2_id <- drive_mkdir("foo")$id
 
-  expect_error(drive_list("foo"), "The path 'foo' is not uniquely defined.")
+  expect_error(
+    drive_list("foo"),
+    "The path 'foo' identifies more than one file:"
+  )
 
   clean <- c(foo_id, foo_2_id) %>%
     purrr::map(drive_file) %>%

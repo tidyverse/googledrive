@@ -1,91 +1,50 @@
-get_leafmost_id <- function(path) {
+get_leaf <- function(path = NULL) {
 
-  path_pieces <- unlist(strsplit(path, "/"))
-
-  root_id <- root_folder() ## store so we don't make repeated API calls
-
-  if (all(path_pieces == "~")) {
+  root_id <- root_folder() ## store to avoid repeated API calls
+  path_pieces <- split_path(path)
+  d <- length(path_pieces)
+  if (d == 0) {
     return(root_id)
   }
 
-  ## remove ~ if it was added to the beginning of the path (like ~/foo/bar/baz instead of foo/bar/baz)
-  if (path_pieces[1] == "~") {
-    path_pieces <- path_pieces[-1]
-  }
-
-  d <- length(path_pieces)
-  path_pattern <- paste0("^", path_pieces, "$", collapse = "|")
-  folders <- drive_list(
-    pattern = path_pattern,
+  hits <- drive_list(
     fields = "files/parents,files/name,files/mimeType,files/id",
-    q = "mimeType='application/vnd.google-apps.folder'",
+    q = form_query(path_pieces, leaf_is_folder = grepl("/$", path)),
     verbose = FALSE
   )
 
-  if (!all(path_pieces %in% folders$name)){
-    spf("We could not find the file path '%s' on your Google Drive", path)
+  if (!all(path_pieces %in% hits$name)) {
+    stop(glue::glue("The path '{path}' does not exist.", call. = FALSE))
   }
-  ## guarantee: we have found at least one folder with correct name for
+  ## guarantee: we have found at least one item with correct name for
   ## each piece of path
 
-  folders$depth <- match(folders$name, path_pieces)
-  folders <- folders[order(folders$depth), ]
+  hits$depth <- match(hits$name, path_pieces)
+  hits <- hits[order(hits$depth), ]
 
-  ## the candidate return value(s)
-  folder <- folders$id[folders$depth == d]
+  ## leaf candidate(s)
+  leaf_id <- hits$id[hits$depth == d]
 
-  ## TO DO:
-  ## add a test case that explores path = foo/bar/baz when
-  ## foo/yo/baz also exists, i.e. when folder will be of length >1 here
+  ## for each candidate, try to establish path back to root
+  root_paths <- leaf_id %>%
+    purrr::map(pth, kids = hits$id, elders = hits$parents, stop_value = root_id)
+  root_path_exists <- root_paths %>%
+    purrr::at_depth(2, ~ !is.na(last(.x))) %>%
+    purrr::map(purrr::flatten_lgl) %>%
+    purrr::map_lgl(any)
 
-  ## can you get from folder to root by traversing a child-->parent chain
-  ## within this set of folders?
-
-  ## TO DO: add this as a test
-  ## path = foo/bar/baz
-  ## foo/bar/baz DOES exist
-  ## but there are two folders named bar under foo, one of which hosts baz
-
-  parent_is_present <- purrr::map_lgl(
-    folders$parents,
-    ~ any(.x %in% folders$id) | root_id %in% .x
-  )
-  parents <- folders$parents %>% purrr::flatten() %>% purrr::simplify()
-  child_is_present <- purrr::map_lgl(
-    folders$id,
-    ~ .x %in% parents | .x %in% folder
-  )
-
-  ## pare down, now we know all but the final layer
-  folders <- folders[parent_is_present & child_is_present, ]
-
-  ## I have to rerun this because if there are x folders named foo and
-  ## the one we are interested in is in the root, we will have multiple
-  ## in "folder", but just want one.
-  folder <- folders$id[folders$depth == d]
-
-  # if there are multiple in depth d & it isn't the root
-  if (length(folder) > 1) {
-    leafmost_parent <- folders[folders$depth == d - 1, ]
-
-    ## if there are 2 leafmost parents that got to this point, we have a
-    ## double naming, throw an error
-    if (length(leafmost_parent) > 1) {
-      spf("The path '%s' is not uniquely defined.", path)
-    }
-    child_is_leafmost <- purrr::map_lgl(
-      folders$parents,
-      ~ .x == leafmost_parent$id
+  if (sum(root_path_exists) > 1) {
+    line0 <- glue::glue("The path '{path}' identifies more than one file:")
+    lines <- glue::glue_data(
+      hits[hits$id %in% leaf_id[root_path_exists], ],
+      "File of type {type}, with id {id}."
     )
-    folder <- folders$id[child_is_leafmost]
+    stop(glue::collapse(c(line0, lines), "\n"), call. = FALSE)
   }
-  if (!all(seq_len(d) %in% folders$depth)) {
-    spf("Path not found: '%s'", path)
+  if (sum(root_path_exists) < 1) {
+    stop(glue::glue("The path '{path}' does not exist.", call. = FALSE))
   }
-  if (length(folder) > 1) {
-    spf("Path is not unique: '%s'", path)
-  }
-  folder
+  leaf_id[root_path_exists]
 }
 
 ## gets the root folder id
@@ -97,4 +56,45 @@ root_folder <- function() {
   proc_res <- process_request(response)
   proc_res$id
 
+}
+
+pth <- function(id, kids, elders, stop_value) {
+  this <- last(id)
+  i <- which(kids == this)
+  if (length(i) < 1) {
+    ## parent not found, end it here with sentinel NA
+    list(c(id, NA))
+  } else {
+    parents <- elders[[i]]
+    if (stop_value %in% parents) {
+      ## we're done, e.g. have found way to root, end it here
+      list(c(id, stop_value))
+    } else {
+      unlist(
+        lapply(parents, function(p) pth(c(id, p), kids, elders, stop_value)),
+        recursive = FALSE
+      )
+    }
+  }
+}
+
+split_path <- function(path = "") {
+  path <- path %||% ""
+  path <- sub("^~?/*", "", path)
+  unlist(strsplit(path, "/"))
+}
+
+## path  path pieces  dir pieces  leaf pieces
+## a/b/  a b          a b
+## a/b   a b          a           b
+## a/    a            a
+## a     a                        a
+form_query <- function(path_pieces, leaf_is_folder = FALSE) {
+  nms <- paste0("name = ", sq(path_pieces))
+  leaf_q <- utils::tail(nms, !leaf_is_folder)
+  dirs_q <- glue::glue(
+    "(({dir_pieces}) and mimeType = 'application/vnd.google-apps.folder')",
+    dir_pieces = collapse2(crop(nms, !leaf_is_folder), sep = " or ")
+  )
+  glue::collapse(c(leaf_q, dirs_q), last = " or ")
 }

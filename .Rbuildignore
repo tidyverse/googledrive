@@ -12,3 +12,4 @@
 ^\.httr-oauth-SUSPENDED$
 ^scratch.R$
 ^tidyverse-token\.rds$
+^tidyverse-noncaching-token\.rds$
