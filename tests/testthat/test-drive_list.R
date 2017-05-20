@@ -138,3 +138,20 @@ test_that("drive_list when we have two folders of the same name in the same loca
     purrr::map(drive_delete)
 
 })
+
+
+## TO DO: add this as a test
+## path = foo/bar/baz
+## foo/bar/baz DOES exist
+## but there are two folders named bar under foo, one of which hosts baz
+
+## TO DO: add this as a test
+## path = "jt01/jt02/jt03" or "jt01/jt02/jt03/"
+## "jt01/jt02/jt03" exists where jt03 is´a folder holding a file jt04
+## "jt01/jt02/jt03" exists where jt03 is a file
+## so there are two folders named jt02 inside jt01
+## make sure that path = "jt01/jt02" errors because ambiguous
+## make sure that path = "jt01/jt02/" errors because ambiguous
+## make sure that path = "jt01/jt02/jt03" errors because ambiguous
+## make sure that path = "jt01/jt02/jt03/" lists jt04
+## make sure that path = "jt01/jt02/jt03/jt04" lists jt04
