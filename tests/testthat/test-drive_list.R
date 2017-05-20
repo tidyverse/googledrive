@@ -123,8 +123,10 @@ test_that("drive_list errors with two folders of the same name in the same locat
 })
 test_that("drive_list errors with two folders of the same name in the root, not unique", {
 
-  ## let's make sure it works if it is the root
-  foo_id <- drive_mkdir(foo_name)$id
+  skip_on_appveyor()
+  skip_on_travis()
+
+    foo_id <- drive_mkdir(foo_name)$id
   foo_2_id <- drive_mkdir(foo_name)$id
 
   expect_error(drive_list(foo_name),
