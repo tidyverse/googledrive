@@ -1,3 +1,5 @@
+context("List files")
+
 ## NOTE these tests are creating & deleting the folders needed, however
 ## they do assume that you do NOT have a folder named "foo" or a folder
 ## named "yo" in your Drive root directory.

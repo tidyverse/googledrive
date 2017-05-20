@@ -1,3 +1,5 @@
+context("Process responses")
+
 ## for testing process_request
 ## wrong content:
 ## res <- httr::GET("https://httpbin.org")

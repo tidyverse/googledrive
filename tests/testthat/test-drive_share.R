@@ -1,3 +1,4 @@
+context("Share files")
 
 test_that("drive_share doesn't explicitly fail", {
   skip_on_appveyor()
