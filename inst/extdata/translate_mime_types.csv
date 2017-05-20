@@ -1,70 +1,70 @@
-mime_type_local,action,mime_type_google,friendly_fmt,ext
-application/x-vnd.oasis.opendocument.presentation,import,application/vnd.google-apps.presentation,NA,NA
-text/tab-separated-values,import,application/vnd.google-apps.spreadsheet,TSV (first sheet only),tab
-image/jpeg,import,application/vnd.google-apps.document,JPEG,jpeg
-image/bmp,import,application/vnd.google-apps.document,NA,bmp
-image/gif,import,application/vnd.google-apps.document,NA,gif
-application/vnd.ms-excel.sheet.macroenabled.12,import,application/vnd.google-apps.spreadsheet,NA,NA
-application/vnd.openxmlformats-officedocument.wordprocessingml.template,import,application/vnd.google-apps.document,NA,NA
-application/vnd.ms-powerpoint.presentation.macroenabled.12,import,application/vnd.google-apps.presentation,NA,NA
-application/vnd.ms-word.template.macroenabled.12,import,application/vnd.google-apps.document,NA,NA
-application/vnd.openxmlformats-officedocument.wordprocessingml.document,import,application/vnd.google-apps.document,MS Word document,NA
-image/pjpeg,import,application/vnd.google-apps.document,NA,jpeg
-application/vnd.google-apps.script+text/plain,import,application/vnd.google-apps.script,NA,NA
-application/vnd.ms-excel,import,application/vnd.google-apps.spreadsheet,NA,NA
-application/vnd.sun.xml.writer,import,application/vnd.google-apps.document,NA,NA
-application/vnd.ms-word.document.macroenabled.12,import,application/vnd.google-apps.document,NA,NA
-application/vnd.ms-powerpoint.slideshow.macroenabled.12,import,application/vnd.google-apps.presentation,NA,NA
-text/rtf,import,application/vnd.google-apps.document,NA,rtf
-text/plain,import,application/vnd.google-apps.document,Plain text,NA
-application/vnd.oasis.opendocument.spreadsheet,import,application/vnd.google-apps.spreadsheet,NA,NA
-application/x-vnd.oasis.opendocument.spreadsheet,import,application/vnd.google-apps.spreadsheet,Open Office sheet,NA
-image/png,import,application/vnd.google-apps.document,PNG,png
-application/x-vnd.oasis.opendocument.text,import,application/vnd.google-apps.document,NA,NA
-application/msword,import,application/vnd.google-apps.document,NA,NA
-application/pdf,import,application/vnd.google-apps.document,PDF,pdf
-application/json,import,application/vnd.google-apps.script,NA,NA
-application/x-msmetafile,import,application/vnd.google-apps.drawing,NA,NA
-application/vnd.openxmlformats-officedocument.spreadsheetml.template,import,application/vnd.google-apps.spreadsheet,NA,NA
-application/vnd.ms-powerpoint,import,application/vnd.google-apps.presentation,NA,NA
-application/vnd.ms-excel.template.macroenabled.12,import,application/vnd.google-apps.spreadsheet,NA,NA
-image/x-bmp,import,application/vnd.google-apps.document,NA,bmp
-application/rtf,import,application/vnd.google-apps.document,Rich text,rtf
-application/vnd.openxmlformats-officedocument.presentationml.template,import,application/vnd.google-apps.presentation,NA,NA
-image/x-png,import,application/vnd.google-apps.document,NA,png
-text/html,import,application/vnd.google-apps.document,HTML,html
-application/vnd.oasis.opendocument.text,import,application/vnd.google-apps.document,Open Office doc,NA
-application/vnd.openxmlformats-officedocument.presentationml.presentation,import,application/vnd.google-apps.presentation,MS PowerPoint,NA
-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,import,application/vnd.google-apps.spreadsheet,MS Excel,NA
-application/vnd.google-apps.script+json,import,application/vnd.google-apps.script,JSON,NA
-application/vnd.openxmlformats-officedocument.presentationml.slideshow,import,application/vnd.google-apps.presentation,NA,NA
-application/vnd.ms-powerpoint.template.macroenabled.12,import,application/vnd.google-apps.presentation,NA,NA
-text/csv,import,application/vnd.google-apps.spreadsheet,CSV (first sheet only),csv
-application/vnd.oasis.opendocument.presentation,import,application/vnd.google-apps.presentation,Open Office presentation,NA
-image/jpg,import,application/vnd.google-apps.document,NA,NA
-text/richtext,import,application/vnd.google-apps.document,NA,NA
-application/zip,export,application/vnd.google-apps.form,HTML (zipped),NA
-application/rtf,export,application/vnd.google-apps.document,Rich text,rtf
-application/vnd.oasis.opendocument.text,export,application/vnd.google-apps.document,Open Office doc,NA
-text/html,export,application/vnd.google-apps.document,HTML,html
-application/pdf,export,application/vnd.google-apps.document,PDF,pdf
-application/epub+zip,export,application/vnd.google-apps.document,EPUB,NA
-application/zip,export,application/vnd.google-apps.document,HTML (zipped),NA
-application/vnd.openxmlformats-officedocument.wordprocessingml.document,export,application/vnd.google-apps.document,MS Word document,NA
-text/plain,export,application/vnd.google-apps.document,Plain text,NA
-image/svg+xml,export,application/vnd.google-apps.drawing,SVG,NA
-image/png,export,application/vnd.google-apps.drawing,PNG,png
-application/pdf,export,application/vnd.google-apps.drawing,PDF,pdf
-image/jpeg,export,application/vnd.google-apps.drawing,JPEG,jpeg
-application/x-vnd.oasis.opendocument.spreadsheet,export,application/vnd.google-apps.spreadsheet,Open Office sheet,NA
-text/tab-separated-values,export,application/vnd.google-apps.spreadsheet,TSV (first sheet only),tab
-application/pdf,export,application/vnd.google-apps.spreadsheet,PDF,pdf
-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,export,application/vnd.google-apps.spreadsheet,MS Excel,NA
-text/csv,export,application/vnd.google-apps.spreadsheet,CSV (first sheet only),csv
-application/zip,export,application/vnd.google-apps.spreadsheet,HTML (zipped),NA
-application/vnd.oasis.opendocument.spreadsheet,export,application/vnd.google-apps.spreadsheet,NA,NA
-application/vnd.google-apps.script+json,export,application/vnd.google-apps.script,JSON,NA
-application/vnd.oasis.opendocument.presentation,export,application/vnd.google-apps.presentation,Open Office presentation,NA
-application/pdf,export,application/vnd.google-apps.presentation,PDF,pdf
-application/vnd.openxmlformats-officedocument.presentationml.presentation,export,application/vnd.google-apps.presentation,MS PowerPoint,NA
-text/plain,export,application/vnd.google-apps.presentation,Plain text,NA
+mime_type_local,action,mime_type_google
+application/x-vnd.oasis.opendocument.presentation,import,application/vnd.google-apps.presentation
+text/tab-separated-values,import,application/vnd.google-apps.spreadsheet
+image/jpeg,import,application/vnd.google-apps.document
+image/bmp,import,application/vnd.google-apps.document
+image/gif,import,application/vnd.google-apps.document
+application/vnd.ms-excel.sheet.macroenabled.12,import,application/vnd.google-apps.spreadsheet
+application/vnd.openxmlformats-officedocument.wordprocessingml.template,import,application/vnd.google-apps.document
+application/vnd.ms-powerpoint.presentation.macroenabled.12,import,application/vnd.google-apps.presentation
+application/vnd.ms-word.template.macroenabled.12,import,application/vnd.google-apps.document
+application/vnd.openxmlformats-officedocument.wordprocessingml.document,import,application/vnd.google-apps.document
+image/pjpeg,import,application/vnd.google-apps.document
+application/vnd.google-apps.script+text/plain,import,application/vnd.google-apps.script
+application/vnd.ms-excel,import,application/vnd.google-apps.spreadsheet
+application/vnd.sun.xml.writer,import,application/vnd.google-apps.document
+application/vnd.ms-word.document.macroenabled.12,import,application/vnd.google-apps.document
+application/vnd.ms-powerpoint.slideshow.macroenabled.12,import,application/vnd.google-apps.presentation
+text/rtf,import,application/vnd.google-apps.document
+text/plain,import,application/vnd.google-apps.document
+application/vnd.oasis.opendocument.spreadsheet,import,application/vnd.google-apps.spreadsheet
+application/x-vnd.oasis.opendocument.spreadsheet,import,application/vnd.google-apps.spreadsheet
+image/png,import,application/vnd.google-apps.document
+application/x-vnd.oasis.opendocument.text,import,application/vnd.google-apps.document
+application/msword,import,application/vnd.google-apps.document
+application/pdf,import,application/vnd.google-apps.document
+application/json,import,application/vnd.google-apps.script
+application/x-msmetafile,import,application/vnd.google-apps.drawing
+application/vnd.openxmlformats-officedocument.spreadsheetml.template,import,application/vnd.google-apps.spreadsheet
+application/vnd.ms-powerpoint,import,application/vnd.google-apps.presentation
+application/vnd.ms-excel.template.macroenabled.12,import,application/vnd.google-apps.spreadsheet
+image/x-bmp,import,application/vnd.google-apps.document
+application/rtf,import,application/vnd.google-apps.document
+application/vnd.openxmlformats-officedocument.presentationml.template,import,application/vnd.google-apps.presentation
+image/x-png,import,application/vnd.google-apps.document
+text/html,import,application/vnd.google-apps.document
+application/vnd.oasis.opendocument.text,import,application/vnd.google-apps.document
+application/vnd.openxmlformats-officedocument.presentationml.presentation,import,application/vnd.google-apps.presentation
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,import,application/vnd.google-apps.spreadsheet
+application/vnd.google-apps.script+json,import,application/vnd.google-apps.script
+application/vnd.openxmlformats-officedocument.presentationml.slideshow,import,application/vnd.google-apps.presentation
+application/vnd.ms-powerpoint.template.macroenabled.12,import,application/vnd.google-apps.presentation
+text/csv,import,application/vnd.google-apps.spreadsheet
+application/vnd.oasis.opendocument.presentation,import,application/vnd.google-apps.presentation
+image/jpg,import,application/vnd.google-apps.document
+text/richtext,import,application/vnd.google-apps.document
+application/zip,export,application/vnd.google-apps.form
+application/rtf,export,application/vnd.google-apps.document
+application/vnd.oasis.opendocument.text,export,application/vnd.google-apps.document
+text/html,export,application/vnd.google-apps.document
+application/pdf,export,application/vnd.google-apps.document
+application/epub+zip,export,application/vnd.google-apps.document
+application/zip,export,application/vnd.google-apps.document
+application/vnd.openxmlformats-officedocument.wordprocessingml.document,export,application/vnd.google-apps.document
+text/plain,export,application/vnd.google-apps.document
+image/svg+xml,export,application/vnd.google-apps.drawing
+image/png,export,application/vnd.google-apps.drawing
+application/pdf,export,application/vnd.google-apps.drawing
+image/jpeg,export,application/vnd.google-apps.drawing
+application/x-vnd.oasis.opendocument.spreadsheet,export,application/vnd.google-apps.spreadsheet
+text/tab-separated-values,export,application/vnd.google-apps.spreadsheet
+application/pdf,export,application/vnd.google-apps.spreadsheet
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,export,application/vnd.google-apps.spreadsheet
+text/csv,export,application/vnd.google-apps.spreadsheet
+application/zip,export,application/vnd.google-apps.spreadsheet
+application/vnd.oasis.opendocument.spreadsheet,export,application/vnd.google-apps.spreadsheet
+application/vnd.google-apps.script+json,export,application/vnd.google-apps.script
+application/vnd.oasis.opendocument.presentation,export,application/vnd.google-apps.presentation
+application/pdf,export,application/vnd.google-apps.presentation
+application/vnd.openxmlformats-officedocument.presentationml.presentation,export,application/vnd.google-apps.presentation
+text/plain,export,application/vnd.google-apps.presentation

@@ -88,9 +88,15 @@ drive_check_publish <- function (file = NULL, verbose = TRUE) {
     spf("Input must be a `gfile`. See `drive_file()`")
   }
 
+  if (!grepl("application/vnd.google-apps.",
+             file$kitchen_sink$mimeType)) {
+    spf("Only Google Drive files need to be published. \nYour file is of type: %s \nCheck out drive_share() to change sharing permissions.",
+        file$type)
+  }
+
   request <- build_request(
     endpoint = "drive.revisions.list",
-    params = list(fileId = file$id),
+    params = list(fileId = file$id)
   )
   response <- make_request(request)
   proc_res <- process_request(response)
