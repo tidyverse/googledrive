@@ -134,6 +134,10 @@ test_that("drive_list when we have 2 folders of the same name & depth (>1)", {
   ## foo/yo/baz also exists, i.e. when folder will be of length >1 here.
   ## I'll put fum in "foo/bar/baz" to make sure it is finding the correct
   ## one.
+
+  skip_on_appveyor()
+  skip_on_travis()
+
   foo_id <- drive_mkdir("foo")$id
   bar_id <- drive_mkdir("bar", path = "foo")$id
   baz_id <- drive_mkdir("baz", path = "foo/bar")$id
