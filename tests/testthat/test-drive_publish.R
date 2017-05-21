@@ -1,4 +1,5 @@
 context("Publish files")
+name <- paste0("chickwts_", round(runif(1,0,10^12)), ".txt")
 
 test_that("drive_publish doesn't explicitly fail", {
 
@@ -6,7 +7,10 @@ test_that("drive_publish doesn't explicitly fail", {
   skip_on_travis()
   ## upload a file
   write.table(chickwts, "chickwts.txt")
-  drive_chickwts <- drive_upload("chickwts.txt", verbose = FALSE)
+  drive_chickwts <- drive_upload("chickwts.txt",
+                                 output = name,
+                                 type = "document",
+                                 verbose = FALSE)
 
   ## since we haven't checked the publication status,
   ## this should be NULL
@@ -26,6 +30,28 @@ test_that("drive_publish doesn't explicitly fail", {
 
   ## now this sould be false
   expect_false(drive_chickwts$publish$published)
+
+  ## clean up
+  drive_delete(drive_chickwts)
+  rm <- file.remove("chickwts.txt")
+})
+
+test_that("drive_publish fails if the file input is not a Google Drive type",{
+
+  skip_on_appveyor()
+  skip_on_travis()
+  ## upload a file
+  write.table(chickwts, "chickwts.txt")
+
+  drive_chickwts <- drive_upload("chickwts.txt",
+                                 output = name,
+                                 verbose = FALSE)
+
+  expect_error(drive_publish(drive_chickwts, verbose = FALSE),
+               sprintf("Only Google Drive files need to be published. \nYour file is of type: %s \nCheck out drive_share() to change sharing permissions.",
+                   drive_chickwts$type),
+               fixed = TRUE
+  )
 
   ## clean up
   drive_delete(drive_chickwts)

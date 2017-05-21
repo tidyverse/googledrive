@@ -1,11 +1,14 @@
 context("Share files")
+name <- paste0("chickwts_", round(runif(1,0,10^12)), ".txt")
 
 test_that("drive_share doesn't explicitly fail", {
   skip_on_appveyor()
   skip_on_travis()
   ## upload a file
   write.table(chickwts, "chickwts.txt")
-  drive_chickwts <- drive_upload("chickwts.txt", verbose = FALSE)
+  drive_chickwts <- drive_upload("chickwts.txt",
+                                 output = name,
+                                 verbose = FALSE)
 
   ## since we haven't updated the permissions, the permissions
   ## tibble should be just 1 row

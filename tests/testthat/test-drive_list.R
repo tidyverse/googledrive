@@ -12,7 +12,7 @@ test_that("drive_list when we have 2 folders of the same name & depth", {
   skip_on_appveyor()
   skip_on_travis()
 
-  ## create a folder named foo
+  ## create a folder named foo with some suffix
   foo_id <- drive_mkdir("foo")$id
 
   ## create a folder named bar inside foo
@@ -31,10 +31,10 @@ test_that("drive_list when we have 2 folders of the same name & depth", {
   ## one is in yo. We want to peak inside the one in foo, this should have a folder
   ## baz inside it.
 
-  expect_identical(drive_list(path = "foo/bar")$id, baz_id)
+  expect_identical(drive_list(path =  "foo/bar")$id, baz_id)
 
   # clean up
-  ids <- list(foo_id, yo_id)
+  ids <- c(foo_id, yo_id)
   cleanup <- purrr::map(ids, drive_file) %>%
     purrr::map(drive_delete)
 
@@ -47,7 +47,7 @@ test_that("drive_list when we have 2 folders of the same name & depth", {
   bar_id <- drive_mkdir("bar", path = "foo")$id
   baz_id <- drive_mkdir("baz", path = "foo/bar")$id
   fum_id <- drive_mkdir("fum", path = "foo/bar/baz")$id
-  yo_id <- drive_mkdir("yo", "foo")$id
+  yo_id <- drive_mkdir("yo", path = "foo")$id
   baz_2_id <- drive_mkdir("baz", "foo/yo")$id
 
   expect_identical(fum_id, drive_list("foo/bar/baz")$id)
@@ -89,7 +89,7 @@ test_that("drive_list when we have two folders of the same name in the same loca
 
 })
 
-test_that("drive_list when we have two folders of the same name in the same location, not unique", {
+test_that("drive_list errors with two folders of the same name in the same location, not unique", {
   ## Google Drive treats folders like labels, so you can have two folders with the
   ## exact same name in the same location. This is silly. At them moment, if you try
   ## to search within a folder like this, if there is nothing identifiable (as in the
@@ -127,9 +127,13 @@ test_that("drive_list when we have two folders of the same name in the same loca
   clean <- c(foo_id, foo_2_id) %>%
     purrr::map(drive_file) %>%
     purrr::map(drive_delete)
+})
+test_that("drive_list errors with two folders of the same name in the root, not unique", {
 
-  ## let's make sure it works if it is the root
-  foo_id <- drive_mkdir("foo")$id
+  skip_on_appveyor()
+  skip_on_travis()
+
+    foo_id <- drive_mkdir("foo")$id
   foo_2_id <- drive_mkdir("foo")$id
 
   expect_error(

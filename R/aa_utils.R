@@ -10,11 +10,18 @@ NULL
 
 # environment to hold data about the Drive API
 .drive <- new.env(parent = emptyenv())
-.drive$base_url_files_v3 <- "https://www.googleapis.com/drive/v3/files"
 .drive$base_url <- "https://www.googleapis.com"
 
 .drive$params <-
   system.file("extdata", "params.csv", package = "googledrive") %>%
+  read.csv(stringsAsFactors = FALSE)
+
+.drive$translate_mime_types <-
+  system.file("extdata", "translate_mime_types.csv", package = "googledrive") %>%
+  read.csv(stringsAsFactors = FALSE)
+
+.drive$mime_tbl <-
+  system.file("extdata", "mime_tbl.csv", package = "googledrive") %>%
   read.csv(stringsAsFactors = FALSE)
 
 # environment to store credentials

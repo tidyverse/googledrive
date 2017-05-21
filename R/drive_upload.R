@@ -55,42 +55,17 @@ build_drive_upload <- function(input = NULL,
 
   ext <- tolower(tools::file_ext(input))
 
-  #default to .txt is a doc
   if (!is.null(type)) {
     stopifnot(type %in% c("document", "spreadsheet", "presentation", "folder"))
     type <- paste0("application/vnd.google-apps.", type)
+  } else if (ext %in% .drive$mime_tbl$ext) {
+
+    type <- .drive$mime_tbl$mime_type[.drive$mime_tbl$ext == ext &
+                                        !is.na(.drive$mime_tbl$ext)]
+  } else if (ext == "") {
+    type <- "application/vnd.google-apps.folder"
   } else {
-    if (ext %in% c("doc, docx",
-                   "txt",
-                   "rtf",
-                   "html",
-                   "odt",
-                   "pdf",
-                   "jpeg",
-                   "png",
-                   "gif",
-                   "bmp")) {
-      type <- "application/vnd.google-apps.document"
-    } else if (ext %in% c("xls",
-                          "xlsx",
-                          "csv",
-                          "tsv",
-                          "tab",
-                          "xlsm",
-                          "xlt",
-                          "xltx",
-                          "xltm",
-                          "ods")) {
-      type <- "application/vnd.google-apps.spreadsheet"
-    } else if (ext %in% c("opt", "ppt", "pptx", "pptm")) {
-      type <- "application/vnd.google-apps.presentation"
-    } else if (ext == "") {
-      type <- "application/vnd.google-apps.folder"
-    } else {
-      # spf("We cannot currently upload a file with this extension to Google Drive: %s",
-      #     ext)
-      type = NULL
-    }
+    type = NULL
   }
 
   if (!is.null(type)) {
