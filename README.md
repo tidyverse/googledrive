@@ -30,7 +30,7 @@ Usage
 library("googledrive")
 ```
 
-### Package idiosyncrasies
+### Package conventions
 
 -   All functions begin with the prefix `drive_`
 -   Functions and parameters attempt to mimic local file navigating conventions in R, such as `list.files`.
@@ -41,42 +41,37 @@ Here's how to list the most recently modified 100 files on your drive. This will
 
 ``` r
 drive_list()
-#> # A tibble: 100 × 5
-#>                                      name         type    parents
-#>                                     <chr>        <chr>     <list>
-#> 1                                     baz  spreadsheet <list [1]>
-#> 2                                  foobar       folder <list [1]>
-#> 3                         r-ladies_global       folder <list [1]>
-#> 4                      r-ladies_nashville       folder <list [1]>
-#> 5                        2017_user-slides presentation <list [1]>
-#> 6         monty-python_dead-parrot-sketch     document <list [1]>
-#> 7                        david-s-pumpkins     document <list [1]>
-#> 8                             its-a-test!   image/jpeg <list [1]>
-#> 9                         sick-stat-burns       folder <list [1]>
-#> 10 Bross_Journal-of-Chronic-Diseases_1966     document <list [1]>
+#> # A tibble: 100 x 5
+#>                         name       type    parents
+#>                        <chr>      <chr>     <list>
+#>  1                  chickwts   document <list [1]>
+#>  2                  chickwts   document <list [1]>
+#>  3                  chickwts   document <list [1]>
+#>  4                  chickwts   document <list [1]>
+#>  5                  chickwts   document <list [1]>
+#>  6                  chickwts   document <list [1]>
+#>  7                  chickwts   document <list [1]>
+#>  8                  chickwts   document <list [1]>
+#>  9 chickwts_382878401782.txt text/plain <list [1]>
+#> 10 chickwts_160767344525.txt   document <list [1]>
 #> # ... with 90 more rows, and 2 more variables: id <chr>, gfile <list>
 ```
 
-You can narrow the query by specifying a `path` and/or `pattern` you'd like to search within. For example, to search within the folder `foobar` for a file named `baz` you could run the following.
+You can narrow the query by specifying a `path` and/or `pattern` you'd like to search within. For example, to search within the folder `foobar` for a file named `baz` you could run either of the following.
 
 ``` r
 drive_list(path = "foobar", pattern = "baz")
-#> # A tibble: 1 × 5
-#>    name        type    parents
-#>   <chr>       <chr>     <list>
-#> 1   baz spreadsheet <list [1]>
-#> # ... with 2 more variables: id <chr>, gfile <list>
+drive_list(path = "foobar/baz")
 ```
 
-Alternatively, you can pass query parameters to `q` parameter. Accepted search parameters can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, if I wanted to search for all spreadsheets, I could run the following.
+Alternatively, you can refine the search using the `q` query parameter. Accepted search clauses can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, if I wanted to search for all spreadsheets, I could run the following.
 
 ``` r
-drive_list(q = "mimeType='application/vnd.google-apps.spreadsheet'")
-#> # A tibble: 2 × 5
+drive_list(q = "mimeType = 'application/vnd.google-apps.spreadsheet'")
+#> # A tibble: 1 x 5
 #>                   name        type    parents
 #>                  <chr>       <chr>     <list>
-#> 1                  baz spreadsheet <list [1]>
-#> 2 538-star-wars-survey spreadsheet <list [1]>
+#> 1 538-star-wars-survey spreadsheet <list [1]>
 #> # ... with 2 more variables: id <chr>, gfile <list>
 ```
 
@@ -100,7 +95,7 @@ drive_chickwts
 #> File name: chickwts 
 #> File owner: tidyverse testdrive 
 #> File type: document 
-#> Last modified: 2017-05-17 
+#> Last modified: 2017-05-21 
 #> Access: Shared with specific people.
 ```
 
@@ -127,7 +122,7 @@ drive_chickwts
 #> File name: chickwts 
 #> File owner: tidyverse testdrive 
 #> File type: spreadsheet 
-#> Last modified: 2017-05-17 
+#> Last modified: 2017-05-21 
 #> Access: Shared with specific people.
 ```
 
@@ -150,7 +145,7 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1B9bEubnkdcREKbaZ791Zqiapy95Mb3tSmYjsd5rp0Dg/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1TSum7IUVfGlxxw72w5Ame-2GX0bjFmrd8BDaKxdF7nY/edit?usp=drivesdk"
 ```
 
 #### Clean up

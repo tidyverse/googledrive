@@ -1,7 +1,4 @@
-## NOTE these tests create a file called "chickwts.txt"
-## in your working directory and subsequently delete it
-
-## generate random name so tests don't overlap
+context("Share files")
 name <- paste0("chickwts_", round(runif(1,0,10^12)), ".txt")
 
 test_that("drive_share doesn't explicitly fail", {

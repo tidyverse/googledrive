@@ -7,20 +7,22 @@
 drive_list(path = NULL, pattern = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{path}{character, path where the Google drive files are
-that you would like to list. Defaults to the "My Drive" directory.}
+\item{path}{character. Google Drive path to list. Defaults to the "My Drive"
+folder. If path is a folder, contents are listed, not recursively. If path
+is a file, that file is listed. A trailing slash indicates explicitly that
+the path is a folder, which can disambiguate if there is a file of the same
+name (yes this is possible on Drive!).}
 
-\item{pattern}{character, regular expression of titles of
-documents to output in a tibble.}
+\item{pattern}{character. If provided, only the files whose names match this
+regular expression are returned.}
 
-\item{...}{name-value pairs to query the API}
+\item{...}{Parameters to pass along to the API query.}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})
+\item{verbose}{logical. Indicates whether to print informative messages.
 
-This will default to the most recent 100 files on your Google Drive. If you
-would like more than 100, include the \code{pageSize} parameter. For example, if
-I wanted 200, I would run \code{drive_ls(pageSize = 200)}.
+This will default to the most recent 100 files on your Google Drive. For
+example, to get 200 instead, specify the \code{pageSize}, i.e.
+\code{drive_ls(pageSize = 200)}.
 Helpful links for forming queries:
 \itemize{
 \item \url{https://developers.google.com/drive/v3/web/search-parameters}
@@ -28,14 +30,28 @@ Helpful links for forming queries:
 }}
 }
 \value{
-tibble containing the name, type, and id of files on your google
-drive (default 100 files)
+tibble with one row per file
 }
 \description{
 List files on Google Drive
 }
 \examples{
 \dontrun{
+## list "My Drive"
+drive_list()
+
+## just folders
+drive_list(q = "mimeType = 'application/vnd.google-apps.folder'")
+
+## just folders that have the folder with id 'abc' as direct parent
+drive_list(q = "'abc' in parents and mimeType='application/vnd.google-apps.folder'")
+
+## files that match a regex
+drive_list(pattern = "jt")
+
+## list the contents of the 'jt01' folder
+drive_list("jt01/")
+
 ## list user's Google Sheets
 drive_list(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 }

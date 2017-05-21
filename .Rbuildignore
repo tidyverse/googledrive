@@ -1,7 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^internal$
-\.httr-oauth$
+^\.httr-oauth$
 ^\.travis\.yml$
 ^README\.Rmd$
 ^sandbox$
@@ -10,3 +10,6 @@
 ^appveyor\.yml$
 ^README-.*\.png$
 ^\.httr-oauth-SUSPENDED$
+^scratch.R$
+^tidyverse-token\.rds$
+^tidyverse-noncaching-token\.rds$

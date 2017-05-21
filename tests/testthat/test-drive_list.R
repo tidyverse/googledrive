@@ -1,32 +1,37 @@
-## NOTE these tests are creating & deleting the folders needed
+context("List files")
 
-foo_name <- paste0("foo_", round(runif(1,0,10^12)))
-yo_name <- paste0("yo_", round(runif(1,0,10^12)))
+## NOTE these tests are creating & deleting the folders needed, however
+## they do assume that you do NOT have a folder named "foo" or a folder
+## named "yo" in your Drive root directory.
+
+## ad hoc code for cleaning up if tests exit uncleanly
+# (pesky_files <- drive_list(pattern = "foo|bar|baz|yo"))
+# pesky_files$id %>% purrr::map(drive_file) %>% purrr::map(drive_delete)
 
 test_that("drive_list when we have 2 folders of the same name & depth", {
   skip_on_appveyor()
   skip_on_travis()
 
   ## create a folder named foo with some suffix
-  foo_id <- drive_mkdir(foo_name)$id
+  foo_id <- drive_mkdir("foo")$id
 
   ## create a folder named bar inside foo
-  bar_id <- drive_mkdir("bar", path = foo_name)$id
+  bar_id <- drive_mkdir("bar", path = "foo")$id
 
   ## let's stick a folder baz in bar, this is what we are hoping our search will find
-  baz_id <- drive_mkdir("baz", path = paste0(foo_name,"/bar"))$id
+  baz_id <- drive_mkdir("baz", path = "foo/bar")$id
 
   ## create a folder yo
-  yo_id <- drive_mkdir(yo_name)$id
+  yo_id <- drive_mkdir("yo")$id
 
   ## create a folder bar in yo
-  bar_2_id <- drive_mkdir("bar", path = yo_name)$id
+  bar_2_id <- drive_mkdir("bar", path = "yo")$id
 
   ## now we have bar and bar_2, both folders with depth 2, but one is in foo and
   ## one is in yo. We want to peak inside the one in foo, this should have a folder
   ## baz inside it.
 
-  expect_identical(drive_list(path =  paste0(foo_name,"/bar"))$id, baz_id)
+  expect_identical(drive_list(path =  "foo/bar")$id, baz_id)
 
   # clean up
   ids <- c(foo_id, yo_id)
@@ -38,14 +43,14 @@ test_that("drive_list when we have 2 folders of the same name & depth", {
   ## I'll put fum in "foo/bar/baz" to make sure it is finding the correct
   ## one.
 
-  foo_id <- drive_mkdir(foo_name)$id
-  bar_id <- drive_mkdir("bar", path = foo_name)$id
-  baz_id <- drive_mkdir("baz", path = paste0(foo_name, "/bar"))$id
-  fum_id <- drive_mkdir("fum", path = paste0(foo_name, "/bar/baz"))$id
-  yo_id <- drive_mkdir("yo", path = foo_name)$id
-  baz_2_id <- drive_mkdir("baz", paste0(foo_name,"/yo"))$id
+  foo_id <- drive_mkdir("foo")$id
+  bar_id <- drive_mkdir("bar", path = "foo")$id
+  baz_id <- drive_mkdir("baz", path = "foo/bar")$id
+  fum_id <- drive_mkdir("fum", path = "foo/bar/baz")$id
+  yo_id <- drive_mkdir("yo", path = "foo")$id
+  baz_2_id <- drive_mkdir("baz", "foo/yo")$id
 
-  expect_identical(fum_id, drive_list(paste0(foo_name,"/bar/baz"))$id)
+  expect_identical(fum_id, drive_list("foo/bar/baz")$id)
 
   ## clean up
   foo_id %>%
@@ -60,22 +65,22 @@ test_that("drive_list when we have two folders of the same name in the same loca
   ## foo/bar/baz DOES exist
   ## but there are two folders named bar under foo, one of which hosts baz
 
-  foo_id <- drive_mkdir(foo_name)$id
+  foo_id <- drive_mkdir("foo")$id
   ## bar is in foo
-  bar_id <- drive_mkdir("bar", path = foo_name)$id
+  bar_id <- drive_mkdir("bar", path = "foo")$id
   ## baz is in foo/bar
-  baz_id <- drive_mkdir("baz", path = paste0(foo_name,"/bar"))$id
+  baz_id <- drive_mkdir("baz", path = "foo/bar")$id
   ## let's stick something in baz to know what to look for
-  yo_id <- drive_mkdir("yo", path = paste0(foo_name,"/bar/baz"))$id
+  yo_id <- drive_mkdir("yo", path = "foo/bar/baz")$id
   ## there is another bar in foo (without baz in it)
-  bar_2_id <- drive_mkdir("bar", path = foo_name)$id
+  bar_2_id <- drive_mkdir("bar", path = "foo")$id
 
   ## let's look in foo, there should be two folders named "bar"
-  expect_true(all(c(bar_id, bar_2_id) %in% drive_list(path = foo_name)$id))
+  expect_true(all(c(bar_id, bar_2_id) %in% drive_list(path = "foo")$id))
 
   ## let's try to see if the function can find "baz" in the correct foo/bar
   ## (this should output yo)
-  expect_identical(yo_id, drive_list(path = paste0(foo_name, "/bar/baz"))$id)
+  expect_identical(yo_id, drive_list(path = "foo/bar/baz")$id)
 
   ## clean up
   foo_id %>%
@@ -94,11 +99,11 @@ test_that("drive_list errors with two folders of the same name in the same locat
   skip_on_travis()
 
   ## create foo/bar
-  foo_id <- drive_mkdir(foo_name)$id
-  bar_id <- drive_mkdir("bar", path = foo_name)$id
+  foo_id <- drive_mkdir("foo")$id
+  bar_id <- drive_mkdir("bar", path = "foo")$id
 
   ## create another foo/bar
-  foo_2_id <- drive_mkdir(foo_name)$id
+  foo_2_id <- drive_mkdir("foo")$id
 
   ## our drive_mkdir won't let you place bar in foo, since it doesn't know which foo to place
   ## it in, so we will use plain httr to make the second foo/bar
@@ -113,8 +118,10 @@ test_that("drive_list errors with two folders of the same name in the same locat
   )
   bar_2_id <- process_request(bar_2)$id
 
-  expect_error(drive_list(paste0(foo_name, "/bar")),
-               sprintf("The path '%s/bar' is not uniquely defined.", foo_name))
+  expect_error(
+    drive_list("foo/bar"),
+    "The path 'foo/bar' identifies more than one file:"
+  )
 
   ## clean up
   clean <- c(foo_id, foo_2_id) %>%
@@ -126,14 +133,33 @@ test_that("drive_list errors with two folders of the same name in the root, not 
   skip_on_appveyor()
   skip_on_travis()
 
-    foo_id <- drive_mkdir(foo_name)$id
-  foo_2_id <- drive_mkdir(foo_name)$id
+    foo_id <- drive_mkdir("foo")$id
+  foo_2_id <- drive_mkdir("foo")$id
 
-  expect_error(drive_list(foo_name),
-               sprintf("The path '%s' is not uniquely defined.", foo_name))
+  expect_error(
+    drive_list("foo"),
+    "The path 'foo' identifies more than one file:"
+  )
 
   clean <- c(foo_id, foo_2_id) %>%
     purrr::map(drive_file) %>%
     purrr::map(drive_delete)
 
 })
+
+
+## TO DO: add this as a test
+## path = foo/bar/baz
+## foo/bar/baz DOES exist
+## but there are two folders named bar under foo, one of which hosts baz
+
+## TO DO: add this as a test
+## path = "jt01/jt02/jt03" or "jt01/jt02/jt03/"
+## "jt01/jt02/jt03" exists where jt03 is´a folder holding a file jt04
+## "jt01/jt02/jt03" exists where jt03 is a file
+## so there are two folders named jt02 inside jt01
+## make sure that path = "jt01/jt02" errors because ambiguous
+## make sure that path = "jt01/jt02/" errors because ambiguous
+## make sure that path = "jt01/jt02/jt03" errors because ambiguous
+## make sure that path = "jt01/jt02/jt03/" lists jt04
+## make sure that path = "jt01/jt02/jt03/jt04" lists jt04

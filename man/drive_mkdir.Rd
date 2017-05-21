@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_mkdir.R
 \name{drive_mkdir}
 \alias{drive_mkdir}
-\title{Make a Google Drive Directory}
+\title{Create a folder on Google Drive}
 \usage{
 drive_mkdir(dir = NULL, path = NULL, verbose = TRUE)
 }
@@ -19,5 +19,5 @@ object of class \code{gfile} and \code{list} that contains uploaded folder's
 information
 }
 \description{
-Make a Google Drive Directory
+Create a folder on Google Drive
 }
