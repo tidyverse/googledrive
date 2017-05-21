@@ -13,9 +13,6 @@ test_that("split_path() strips leading ~ or ~/ or /, then splits", {
 })
 
 test_that("form_query() handles paths w/ all combos of dir and leaf piece(s)", {
-  ## currently, appveyor cannot build dev version of glue
-  skip_on_appveyor()
-
   expect_identical(
     ## path = a/b/
     form_query(c("a", "b"), TRUE),
