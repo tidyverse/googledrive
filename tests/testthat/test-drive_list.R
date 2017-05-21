@@ -6,7 +6,7 @@ context("List files")
 
 ## ad hoc code for cleaning up if tests exit uncleanly
 # (pesky_files <- drive_list(pattern = "foo|bar|baz|yo"))
-# pesky_files$id %>% purrr::map(drive_file) %>% purrr::map(drive_delete)
+# dpesky_files$id %>% purrr::map(drive_file) %>% purrr::map(drive_delete)
 
 test_that("drive_list when we have 2 folders of the same name & depth", {
   skip_on_appveyor()
