@@ -37,6 +37,21 @@ List files on Google Drive
 }
 \examples{
 \dontrun{
+## list "My Drive"
+drive_list()
+
+## just folders
+drive_list(q = "mimeType = 'application/vnd.google-apps.folder'")
+
+## just folders that have the folder with id 'abc' as direct parent
+drive_list(q = "'abc' in parents and mimeType='application/vnd.google-apps.folder'")
+
+## files that match a regex
+drive_list(pattern = "jt")
+
+## list the contents of the 'jt01' folder
+drive_list("jt01/")
+
 ## list user's Google Sheets
 drive_list(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 }
