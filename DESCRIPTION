@@ -24,3 +24,4 @@ Suggests: covr,
     testthat
 URL: https://github.com/tidyverse/googledrive
 BugReports: https://github.com/tidyverse/googledrive/issues
+Remotes: tidyverse/glue
