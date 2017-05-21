@@ -6,7 +6,7 @@
 #' @return object of class `gfile` and `list`
 #' @export
 #'
-drive_file <- function(id = NULL, ...) {
+drive_file <- function(id, ...) {
   request <- build_request(
     endpoint = "drive.files.get",
     params = list(...,
