@@ -1,12 +1,23 @@
+## input: a path, such as "foo/bar/baz"
+## output: a list about the leafmost member, i.e. "baz"
+##   * file id
+##   * mimeType
+##   * id of one direct parent (there could be more)
 get_leaf <- function(path = NULL) {
 
   root_id <- root_folder() ## store to avoid repeated API calls
   path_pieces <- split_path(path)
   d <- length(path_pieces)
   if (d == 0) {
-    return(root_id)
+    return(list(
+      id = root_id,
+      mimeType = "application/vnd.google-apps.folder",
+      parent_id <- NA_character_
+    ))
   }
 
+  ## query will restrict to the names seen in path and to mimeType = folder, for
+  ## all pieces where that is known
   hits <- drive_list(
     fields = "files/parents,files/name,files/mimeType,files/id",
     q = form_query(path_pieces, leaf_is_folder = grepl("/$", path)),
@@ -25,13 +36,14 @@ get_leaf <- function(path = NULL) {
   ## leaf candidate(s)
   leaf_id <- hits$id[hits$depth == d]
 
-  ## for each candidate, try to establish path back to root
-  root_paths <- leaf_id %>%
+  ## for each candidate, enumerate all upward paths, hopefully to root
+  root_path <- leaf_id %>%
     purrr::map(pth, kids = hits$id, elders = hits$parents, stop_value = root_id)
-  root_path_exists <- root_paths %>%
-    purrr::at_depth(2, ~ !is.na(last(.x))) %>%
-    purrr::map(purrr::flatten_lgl) %>%
-    purrr::map_lgl(any)
+  ## for each candidate, get an immediate parent on a path back to root
+  ## will be NA is there is no such path
+  root_parent <- root_path %>%
+    purrr::map_chr(rootwise_parent)
+  root_path_exists <- !is.na(root_parent)
 
   if (sum(root_path_exists) > 1) {
     line0 <- glue::glue("The path '{path}' identifies more than one file:")
@@ -41,10 +53,17 @@ get_leaf <- function(path = NULL) {
     )
     stop(glue::collapse(c(line0, lines), "\n"), call. = FALSE)
   }
+
   if (sum(root_path_exists) < 1) {
     stop(glue::glue("The path '{path}' does not exist.", call. = FALSE))
   }
-  leaf_id[root_path_exists]
+
+  i <- which(hits$id == leaf_id[root_path_exists])
+  list(
+    id = hits$id[i],
+    mimeType = hits$gfile[[i]][["mimeType"]],
+    parent_id = root_parent
+  )
 }
 
 ## gets the root folder id
@@ -58,6 +77,10 @@ root_folder <- function() {
 
 }
 
+## returns a list
+## each component is a character vector:
+## id --> parent of id --> grandparent of id --> ... END
+## END is either stop_value (root_id, for us) or NA_character_
 pth <- function(id, kids, elders, stop_value) {
   this <- last(id)
   i <- which(kids == this)
@@ -97,4 +120,12 @@ form_query <- function(path_pieces, leaf_is_folder = FALSE) {
     dir_pieces = collapse2(crop(nms, !leaf_is_folder), sep = " or ")
   )
   glue::collapse(c(leaf_q, dirs_q), last = " or ")
+}
+
+rootwise_parent <- function(paths) {
+  ## retain only paths that end with root_id <==> not NA
+  paths <- paths %>% purrr::keep(~ !is.na(last(.x)))
+  if (length(paths) == 0) return(NA_character_)
+  ## return one -- of possibly many -- direct parents
+  paths[[1]][2]
 }

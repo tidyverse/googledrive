@@ -1,23 +1,24 @@
 #' List files on Google Drive
 #'
-#' @param path character, path where the Google drive files are
-#'   that you would like to list. Defaults to the "My Drive" directory.
-#' @param pattern character, regular expression of titles of
-#'   documents to output in a tibble.
-#' @param ... name-value pairs to query the API
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#' @param path character. Google Drive path to list. Defaults to the "My Drive"
+#'   folder. If path is a folder, contents are listed, not recursively. If path
+#'   is a file, that file is listed. A trailing slash indicates explicitly that
+#'   the path is a folder, which can disambiguate if there is a file of the same
+#'   name (yes this is possible on Drive!).
+#' @param pattern character. If provided, only the files whose names match this
+#'   regular expression are returned.
+#' @param ... Parameters to pass along to the API query.
+#' @param verbose logical. Indicates whether to print informative messages.
 #'
-#'   This will default to the most recent 100 files on your Google Drive. If you
-#'   would like more than 100, include the `pageSize` parameter. For example, if
-#'   I wanted 200, I would run `drive_ls(pageSize = 200)`.
+#'   This will default to the most recent 100 files on your Google Drive. For
+#'   example, to get 200 instead, specify the `pageSize`, i.e.
+#'   `drive_ls(pageSize = 200)`.
 
 #' Helpful links for forming queries:
 #'   * <https://developers.google.com/drive/v3/web/search-parameters>
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
 
-#' @return tibble containing the name, type, and id of files on your google
-#'   drive (default 100 files)
+#' @return tibble with one row per file
 #' @examples
 #' \dontrun{
 #' ## list user's Google Sheets
@@ -25,7 +26,7 @@
 #' }
 #'
 #' @export
-drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
+drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
 
   if (!is.null(pattern)) {
     if (!(is.character(pattern) && length(pattern) == 1)) {
@@ -33,44 +34,43 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
     }
   }
 
-  x <- list(...)
+  ## if path reduces to root (i.e., "My Drive"), make it an explicit NULL
+  path <- rationalize_path(path)
 
-  if (is.null(x$fields)) {
-    x$fields <- paste0("files/", .drive$default_fields, collapse = ",")
+  params <- list(...)
+
+  if (is.null(params$fields)) {
+    params$fields <- paste0("files/", .drive$default_fields, collapse = ",")
   }
 
-  ## this still needs to be modified to accept the case where leafmost id is
-  ## a file, not a folder
-  ## get_leaf should return id and indicator if folder
+  ## initialize q, if necessary
+  ## by default, don't list items in trash
+  if (is.null(params$q) || !grepl("trashed", params$q)) {
+    params$q <- glue::collapse(c(params$q, "trashed = false"), sep = " and ")
+  }
+
+  ## if path is specified, we call the API twice
+  ## once to learn id of the folder to list
+  ## then again to list the contents
   if (!is.null(path)) {
-    folder <- get_leaf(path = path)
-    q <- paste0("'", folder, "'", " in parents")
-    if (is.null(x$q)) {
-      x$q <- q
+    leaf <- get_leaf(path)
+    if (leaf$mimeType == "application/vnd.google-apps.folder") {
+      ## path identifies a folder
+      ## we will list it
+      parent_id <- leaf$id
     } else {
-      x$q <- paste(x$q, "and", q)
+      ## path identifies a file
+      ## we will list its parent, but restrict to the file's name
+      ## simplest way to get a single file back in "drive_list()" style
+      parent_id <- leaf$parent_id
+      q_name <- glue::glue("name = {sq(name)}", name = basename(path))
+      params$q <- glue::collapse(c(params$q, q_name), sep = " and ")
     }
+    q_parent <- glue::glue("{sq(parent_id)} in parents")
+    params$q <- glue::collapse(c(params$q, q_parent), sep = " and ")
   }
 
-  ## make sure it isn't in the trash
-
-  if (is.null(x$q)) {
-    x$q <- "trashed = false"
-  } else {
-    ## but if they want it to be it could be
-    trash <- grepl("trashed", x$q)
-    if (!trash) {
-      x$q <- paste(x$q, "and trashed = false")
-    }
-  }
-
-  if (is.null(path)) {
-    path = "~/"
-  }
-
-  request <- build_request(
-    params = x
-  )
+  request <- build_request(params = params)
   response <- make_request(request)
   proc_res <- process_request(response)
 
@@ -142,3 +142,14 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE){
   "webViewLink",
   "writersCanShare"
 )
+
+## strip leading ~, / or ~/
+## if it's empty string --> target is root --> set path to NULL
+rationalize_path <- function(path) {
+  if (is.null(path)) return(path)
+  if (!(is.character(path) && length(path) == 1)) {
+    stop("'path' must be a character string.", call. = FALSE)
+  }
+  path <- sub("^~?/*", "", path)
+  if (identical(path, "")) NULL else path
+}

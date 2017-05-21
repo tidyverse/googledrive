@@ -4,7 +4,7 @@ context("List files")
 ## they do assume that you do NOT have a folder named "foo" or a folder
 ## named "yo" in your Drive root directory.
 
-# ad hoc code for cleaning up if tests exit uncleanly
+## ad hoc code for cleaning up if tests exit uncleanly
 # (pesky_files <- drive_list(pattern = "foo|bar|baz|yo"))
 # pesky_files$id %>% purrr::map(drive_file) %>% purrr::map(drive_delete)
 

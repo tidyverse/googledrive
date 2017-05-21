@@ -1,4 +1,4 @@
-#' Make a Google Drive Directory
+#' Create a folder on Google Drive
 #'
 #' @param dir character, name of the folder you would like to create
 #' @param path character, path where you would like the folder on your Google Drive
@@ -12,7 +12,8 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   parent <- NULL
 
   if (!is.null(path)) {
-    parent <- get_parent(path = path)
+    path <- append_slash(path)
+    parent <- get_leaf(path)$id
   }
 
   request <- build_request(
@@ -47,38 +48,8 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   invisible(drive_file(proc_res$id))
 }
 
-get_parent <- function(path) {
-  path_pieces <- unlist(strsplit(path, "/"))
-
-  root_id <- root_folder()
-
-  if (all(path_pieces == "~")) {
-    return(root_id)
-  }
-
-  if (path_pieces[1] == "~") {
-    path_pieces <- path_pieces[-1]
-  }
-
-  d <- length(path_pieces)
-
-  leafmost <- path_pieces[d]
-  upper_folders <- "~"
-
-  if (d > 1) {
-    upper_folders <- paste(path_pieces[seq_len(d - 1)],
-                           collapse = "/")
-  }
-  leafmost_tbl <- drive_list(path = upper_folders,
-                             pattern = paste0("^", leafmost, "$"))
-
-  if (nrow(leafmost_tbl) != 1) {
-    spf(
-      "We could not find a unique folder named '%s' in the path '%s' on your Google Drive.",
-      leafmost,
-      upper_folders
-    )
-  }
-
-  leafmost_tbl$id
+## trailing slash indicates that 'path' is path to a folder
+## which can simplify the work inside get_leaf()
+append_slash <- function(path) {
+  if (grepl("/$", path)) path else paste0(path, "/")
 }
