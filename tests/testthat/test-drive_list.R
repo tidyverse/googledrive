@@ -37,25 +37,6 @@ test_that("drive_list when we have 2 folders of the same name & depth", {
   ids <- c(foo_id, yo_id)
   cleanup <- purrr::map(ids, drive_file) %>%
     purrr::map(drive_delete)
-
-  ## test when path = foo/bar/baz when
-  ## foo/yo/baz also exists, i.e. when folder will be of length >1 here.
-  ## I'll put fum in "foo/bar/baz" to make sure it is finding the correct
-  ## one.
-
-  foo_id <- drive_mkdir("foo")$id
-  bar_id <- drive_mkdir("bar", path = "foo")$id
-  baz_id <- drive_mkdir("baz", path = "foo/bar")$id
-  fum_id <- drive_mkdir("fum", path = "foo/bar/baz")$id
-  yo_id <- drive_mkdir("yo", path = "foo")$id
-  baz_2_id <- drive_mkdir("baz", "foo/yo")$id
-
-  expect_identical(fum_id, drive_list("foo/bar/baz")$id)
-
-  ## clean up
-  foo_id %>%
-    drive_file() %>%
-    drive_delete()
 })
 
 test_that("drive_list when we have two folders of the same name in the same location, but one has unique target folder", {
@@ -148,6 +129,29 @@ test_that("drive_list errors with two folders of the same name in the root, not 
 })
 
 
+test_that("drive_list when we have 2 folders of the same name & depth (>1)", {
+  ## test when path = foo/bar/baz when
+  ## foo/yo/baz also exists, i.e. when folder will be of length >1 here.
+  ## I'll put fum in "foo/bar/baz" to make sure it is finding the correct
+  ## one.
+
+  skip_on_appveyor()
+  skip_on_travis()
+
+  foo_id <- drive_mkdir("foo")$id
+  bar_id <- drive_mkdir("bar", path = "foo")$id
+  baz_id <- drive_mkdir("baz", path = "foo/bar")$id
+  fum_id <- drive_mkdir("fum", path = "foo/bar/baz")$id
+  yo_id <- drive_mkdir("yo", path = "foo")$id
+  baz_2_id <- drive_mkdir("baz", "foo/yo")$id
+
+  expect_identical(fum_id, drive_list("foo/bar/baz")$id)
+
+  ## clean up
+  foo_id %>%
+    drive_file() %>%
+    drive_delete()
+})
 ## TO DO: add this as a test
 ## path = foo/bar/baz
 ## foo/bar/baz DOES exist
