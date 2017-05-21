@@ -30,7 +30,13 @@ get_leaf <- function(path = NULL) {
   ## guarantee: we have found at least one item with correct name for
   ## each piece of path
 
-  hits$depth <- match(hits$name, path_pieces)
+  ## a simple match doesn't work because we could have two folders with
+  ## the same name, and the match will only grab the first match.
+  hits_order <- tibble::tibble(
+    name = path_pieces,
+    depth = seq_along(path_pieces)
+  )
+  hits <- merge(hits, hits_order, by = "name")
   hits <- hits[order(hits$depth), ]
 
   ## leaf candidate(s)
@@ -43,7 +49,12 @@ get_leaf <- function(path = NULL) {
   ## will be NA is there is no such path
   root_parent <- root_path %>%
     purrr::map_chr(rootwise_parent)
-  root_path_exists <- !is.na(root_parent)
+  ## make sure it is the immediate parent
+  root_path_exists <- !is.na(root_parent) & root_parent == root_id
+
+  if (d > 1) {
+    root_path_exists <- !is.na(root_parent) & (root_parent %in% hits$id[hits$depth == d-1])
+  }
 
   if (sum(root_path_exists) > 1) {
     line0 <- glue::glue("The path '{path}' identifies more than one file:")
@@ -58,7 +69,7 @@ get_leaf <- function(path = NULL) {
     stop(glue::glue("The path '{path}' does not exist.", call. = FALSE))
   }
 
-  i <- which(hits$id == leaf_id[root_path_exists])
+  i <- which(hits$id == leaf_id[root_path_exists])[1] ## just need 1 if 2 show up
   list(
     id = hits$id[i],
     mimeType = hits$gfile[[i]][["mimeType"]],
@@ -88,6 +99,7 @@ pth <- function(id, kids, elders, stop_value) {
     ## parent not found, end it here with sentinel NA
     list(c(id, NA))
   } else {
+    i <- i[1] ## just need 1 if there are many that match
     parents <- elders[[i]]
     if (stop_value %in% parents) {
       ## we're done, e.g. have found way to root, end it here
