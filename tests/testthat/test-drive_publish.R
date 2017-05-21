@@ -1,3 +1,5 @@
+context("Publish files")
+
 test_that("drive_publish doesn't explicitly fail", {
 
   skip_on_appveyor()

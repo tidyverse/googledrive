@@ -1,6 +1,12 @@
+context("List files")
+
 ## NOTE these tests are creating & deleting the folders needed, however
 ## they do assume that you do NOT have a folder named "foo" or a folder
 ## named "yo" in your Drive root directory.
+
+## ad hoc code for cleaning up if tests exit uncleanly
+# (pesky_files <- drive_list(pattern = "foo|bar|baz|yo"))
+# pesky_files$id %>% purrr::map(drive_file) %>% purrr::map(drive_delete)
 
 test_that("drive_list when we have 2 folders of the same name & depth", {
   skip_on_appveyor()
@@ -48,8 +54,8 @@ test_that("drive_list when we have 2 folders of the same name & depth", {
 
   ## clean up
   foo_id %>%
-    drive_file %>%
-    drive_delete
+    drive_file() %>%
+    drive_delete()
 })
 
 test_that("drive_list when we have two folders of the same name in the same location, but one has unique target folder", {
@@ -78,8 +84,8 @@ test_that("drive_list when we have two folders of the same name in the same loca
 
   ## clean up
   foo_id %>%
-    drive_file %>%
-    drive_delete
+    drive_file() %>%
+    drive_delete()
 
 })
 
@@ -112,7 +118,10 @@ test_that("drive_list when we have two folders of the same name in the same loca
   )
   bar_2_id <- process_request(bar_2)$id
 
-  expect_error(drive_list("foo/bar"), "The path 'foo/bar' is not uniquely defined.")
+  expect_error(
+    drive_list("foo/bar"),
+    "The path 'foo/bar' identifies more than one file:"
+  )
 
   ## clean up
   clean <- c(foo_id, foo_2_id) %>%
@@ -123,10 +132,30 @@ test_that("drive_list when we have two folders of the same name in the same loca
   foo_id <- drive_mkdir("foo")$id
   foo_2_id <- drive_mkdir("foo")$id
 
-  expect_error(drive_list("foo"), "The path 'foo' is not uniquely defined.")
+  expect_error(
+    drive_list("foo"),
+    "The path 'foo' identifies more than one file:"
+  )
 
   clean <- c(foo_id, foo_2_id) %>%
     purrr::map(drive_file) %>%
     purrr::map(drive_delete)
 
 })
+
+
+## TO DO: add this as a test
+## path = foo/bar/baz
+## foo/bar/baz DOES exist
+## but there are two folders named bar under foo, one of which hosts baz
+
+## TO DO: add this as a test
+## path = "jt01/jt02/jt03" or "jt01/jt02/jt03/"
+## "jt01/jt02/jt03" exists where jt03 is´a folder holding a file jt04
+## "jt01/jt02/jt03" exists where jt03 is a file
+## so there are two folders named jt02 inside jt01
+## make sure that path = "jt01/jt02" errors because ambiguous
+## make sure that path = "jt01/jt02/" errors because ambiguous
+## make sure that path = "jt01/jt02/jt03" errors because ambiguous
+## make sure that path = "jt01/jt02/jt03/" lists jt04
+## make sure that path = "jt01/jt02/jt03/jt04" lists jt04

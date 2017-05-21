@@ -1,3 +1,5 @@
+context("Upload files")
+
 test_that("build_drive_upload behaves", {
   #the file should be a file that exists
   input <- "this should not work"
