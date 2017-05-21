@@ -1,7 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-    ## Auto-refreshing stale OAuth token.
-
 googledrive
 ===========
 
@@ -147,7 +145,7 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1juSDnxIcLYa_mzacbmd-wWYiKzOBenwvfTuyVCF2HcA/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1TSum7IUVfGlxxw72w5Ame-2GX0bjFmrd8BDaKxdF7nY/edit?usp=drivesdk"
 ```
 
 #### Clean up
