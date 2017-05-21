@@ -4,6 +4,10 @@ context("List files")
 ## they do assume that you do NOT have a folder named "foo" or a folder
 ## named "yo" in your Drive root directory.
 
+# ad hoc code for cleaning up if tests exit uncleanly
+# (pesky_files <- drive_list(pattern = "foo|bar|baz|yo"))
+# pesky_files$id %>% purrr::map(drive_file) %>% purrr::map(drive_delete)
+
 test_that("drive_list when we have 2 folders of the same name & depth", {
   skip_on_appveyor()
   skip_on_travis()
@@ -50,8 +54,8 @@ test_that("drive_list when we have 2 folders of the same name & depth", {
 
   ## clean up
   foo_id %>%
-    drive_file %>%
-    drive_delete
+    drive_file() %>%
+    drive_delete()
 })
 
 test_that("drive_list when we have two folders of the same name in the same location, but one has unique target folder", {
@@ -80,8 +84,8 @@ test_that("drive_list when we have two folders of the same name in the same loca
 
   ## clean up
   foo_id %>%
-    drive_file %>%
-    drive_delete
+    drive_file() %>%
+    drive_delete()
 
 })
 
