@@ -183,7 +183,7 @@ test_that("get_leaf() is not confused by nested same-named things", {
     purrr::map(drive_delete)
 })
 
-test_that("get_leaf() is not confused by paths w/ swapped interior folders", {
+test_that("get_leaf() is not confused by differently ordered non-leaf folders", {
 
   skip_on_appveyor()
   skip_on_travis()
