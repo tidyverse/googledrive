@@ -44,11 +44,11 @@ drive_publish <- function(file = NULL,
 
   ## if we want to autopublish, it must have already been published, so
   ## we need to run again
-  if (x$published == TRUE & x$publishAuto == TRUE) {
-  response <- make_request(request, encode = "json")
-  proc_res <- process_drive_publish(response = response,
-                                    file = file_update,
-                                    verbose = FALSE)
+  if (isTRUE(x$published) && isTRUE(x$publishAuto)) {
+    response <- make_request(request, encode = "json")
+    proc_res <- process_drive_publish(response = response,
+                                      file = file_update,
+                                      verbose = FALSE)
   }
 
   file_update <- drive_file(file$id)
@@ -98,12 +98,10 @@ drive_check_publish <- function (file = NULL, verbose = TRUE) {
   fields <- paste(c("id", "published", "publishAuto", "lastModifyingUser"),
                   collapse = ",")
 
-  revisionId = "head"
-
   request <- build_request(
     endpoint = "drive.revisions.get",
     params = list(fileId = file$id,
-                  revisionId = revisionId,
+                  revisionId = "head",
                   fields = fields)
   )
   response <- make_request(request)

@@ -3,7 +3,9 @@
 googledrive
 ===========
 
-[![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master) WARNING: this is very much under construction
+[![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master)
+
+WARNING: this is very much under construction
 
 Overview
 --------
@@ -128,7 +130,7 @@ Much better!
 
 #### Publish files
 
-Revisions of Google Documents, Sheets, and Presentations can be published online. By default, `drive_publish()` will publish your most recent revision. Running this function will update a tibble in your `gfile` object with publication information. You can also check your publication status by running `drive_check_publish()`.
+Versions of Google Documents, Sheets, and Presentations can be published online. By default, `drive_publish()` will publish your most recent version. You can check your publication status by running `drive_check_publish()`.
 
 ``` r
 drive_check_publish(drive_chickwts)
@@ -142,7 +144,7 @@ drive_chickwts$publish
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-05-22 14:48:00        3      TRUE         TRUE
+#> 1 2017-05-22 16:25:57        3      TRUE         TRUE
 ```
 
 ``` r
@@ -167,7 +169,7 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1pExUPFCl9DFiZn0ntl11HprJZh6pjSkpfC6k9Wmw_20/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1gCH3V7-KGiBxEPMgdNclAn04ERhbDKRdZ8ZJoqwEHAs/edit?usp=drivesdk"
 ```
 
 #### Clean up

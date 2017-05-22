@@ -16,7 +16,8 @@ googledrive::drive_auth("tidyverse-noncaching-token.rds")
 
 # googledrive
 
-[![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master)
+[![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master) 
+
 WARNING: this is very much under construction 
 
 ## Overview
@@ -99,8 +100,7 @@ Much better!
 
 #### Publish files
 
-Revisions of Google Documents, Sheets, and Presentations can be published online. By default, `drive_publish()` will publish your most recent revision. Running this function will update a tibble in
-your `gfile` object with publication information. You can also check your publication status by running `drive_check_publish()`.
+Versions of Google Documents, Sheets, and Presentations can be published online. By default, `drive_publish()` will publish your most recent version. You can check your publication status by running `drive_check_publish()`.
 
 ```{r}
 drive_check_publish(drive_chickwts)

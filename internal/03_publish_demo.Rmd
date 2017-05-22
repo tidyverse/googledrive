@@ -30,7 +30,8 @@ Now, as the other user, try again to read it via googlesheets. You should succee
 ## Push a file into a Sheet
 ```{r}
 drive_auth("drive-token.rds")
-drive_chickwts <- drive_upload("~/desktop/chickwts.csv", type = "spreadsheet")
+write_csv(chickwts, "chickwts.csv")
+drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
 ```
 
 ## Check publication status (should be FALSE)
@@ -41,8 +42,14 @@ drive_check_publish(drive_chickwts)
 ## get URL
 ```{r}
 url <- drive_share_link(drive_chickwts)
+url
 ```
 
+## it's published, not shared
+
+```{r}
+drive_chickwts
+```
 
 ```{r}
 key <- drive_chickwts$id
@@ -56,7 +63,7 @@ gs_auth("sheets-token.rds")
 
 ## this shouldn't work
 ```{r}
-try(gs_url(url, lookup = FALSE))
+try(gs_url(url, visibility = "private", lookup = FALSE))
 geterrmessage()
 ```
 
@@ -71,8 +78,19 @@ drive_check_publish(drive_chickwts)
 gs_url(url, lookup  = FALSE)
 ```
 
+check again that the access is still just "Shared with specific people."
+
+```{r}
+drive_chickwts$access
+```
+
 ## clean up
 
 ```{r}
-drive_delete(drive_chickwts)
+#drive_delete(drive_chickwts)
 ```
+
+```{r, echo = FALSE}
+rm <- file.remove("chickwts.csv")
+```
+

@@ -7,6 +7,7 @@ Lucy D’Agostino McGowan
 -   [Push a file into a Sheet](#push-a-file-into-a-sheet)
 -   [Check publication status (should be FALSE)](#check-publication-status-should-be-false)
 -   [get URL](#get-url)
+-   [it's published, not shared](#its-published-not-shared)
 -   [switch to different account](#switch-to-different-account)
 -   [this shouldn't work](#this-shouldnt-work)
 -   [publish it on Drive](#publish-it-on-drive)
@@ -29,11 +30,17 @@ Push a file into a Sheet
 
 ``` r
 drive_auth("drive-token.rds")
-drive_chickwts <- drive_upload("~/desktop/chickwts.csv", type = "spreadsheet")
+```
+
+    ## Auto-refreshing stale OAuth token.
+
+``` r
+write_csv(chickwts, "chickwts.csv")
+drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
 ```
 
     ## File uploaded to Google Drive: 
-    ## ~/desktop/chickwts.csv 
+    ## chickwts.csv 
     ## As the Google spreadsheet named:
     ## chickwts
 
@@ -51,7 +58,23 @@ get URL
 
 ``` r
 url <- drive_share_link(drive_chickwts)
+url
 ```
+
+    ## [1] "https://docs.google.com/spreadsheets/d/1dES65Ur8AcYSS4JnnMGRp7A3wVJEHKMvBG8M60U4m0A/edit?usp=drivesdk"
+
+it's published, not shared
+--------------------------
+
+``` r
+drive_chickwts
+```
+
+    ## File name: chickwts 
+    ## File owner: tidyverse testdrive 
+    ## File type: spreadsheet 
+    ## Last modified: 2017-05-22 
+    ## Access: Shared with specific people.
 
 ``` r
 key <- drive_chickwts$id
@@ -68,21 +91,21 @@ this shouldn't work
 -------------------
 
 ``` r
-try(gs_url(url, lookup = FALSE))
+try(gs_url(url, visibility = "private", lookup = FALSE))
 ```
 
     ## Sheet-identifying info appears to be a browser URL.
     ## googlesheets will attempt to extract sheet key from the URL.
 
-    ## Putative key: 1S-GYudy2qu_JMZCVPYwKUH2Kh3hLUeqtwH7-XrF_Vs8
+    ## Putative key: 1dES65Ur8AcYSS4JnnMGRp7A3wVJEHKMvBG8M60U4m0A
 
-    ## Worksheets feed constructed with public visibility
+    ## Worksheets feed constructed with private visibility
 
 ``` r
 geterrmessage()
 ```
 
-    ## [1] "Error in stop_for_content_type(req, expected = \"application/atom+xml; charset=UTF-8\") : \n  Expected content-type:\napplication/atom+xml; charset=UTF-8\nActual content-type:\ntext/html; charset=UTF-8\n"
+    ## [1] "Error in function_list[[k]](value) : Forbidden (HTTP 403).\n"
 
 publish it on Drive
 -------------------
@@ -109,14 +132,14 @@ gs_url(url, lookup  = FALSE)
     ## Sheet-identifying info appears to be a browser URL.
     ## googlesheets will attempt to extract sheet key from the URL.
 
-    ## Putative key: 1S-GYudy2qu_JMZCVPYwKUH2Kh3hLUeqtwH7-XrF_Vs8
+    ## Putative key: 1dES65Ur8AcYSS4JnnMGRp7A3wVJEHKMvBG8M60U4m0A
 
     ## Worksheets feed constructed with public visibility
 
     ##                   Spreadsheet title: chickwts
     ##                  Spreadsheet author: tidyverse.testdrive
-    ##   Date of googlesheets registration: 2017-05-22 19:21:02 GMT
-    ##     Date of last spreadsheet update: 2017-05-22 19:20:59 GMT
+    ##   Date of googlesheets registration: 2017-05-22 21:45:25 GMT
+    ##     Date of last spreadsheet update: 2017-05-22 21:45:21 GMT
     ##                          visibility: public
     ##                         permissions: rw
     ##                             version: new
@@ -125,14 +148,20 @@ gs_url(url, lookup  = FALSE)
     ## (Title): (Nominal worksheet extent as rows x columns)
     ## chickwts: 1000 x 26
     ## 
-    ## Key: 1S-GYudy2qu_JMZCVPYwKUH2Kh3hLUeqtwH7-XrF_Vs8
-    ## Browser URL: https://docs.google.com/spreadsheets/d/1S-GYudy2qu_JMZCVPYwKUH2Kh3hLUeqtwH7-XrF_Vs8/
+    ## Key: 1dES65Ur8AcYSS4JnnMGRp7A3wVJEHKMvBG8M60U4m0A
+    ## Browser URL: https://docs.google.com/spreadsheets/d/1dES65Ur8AcYSS4JnnMGRp7A3wVJEHKMvBG8M60U4m0A/
+
+check again that the access is still just "Shared with specific people."
+
+``` r
+drive_chickwts$access
+```
+
+    ## [1] "Shared with specific people."
 
 clean up
 --------
 
 ``` r
-drive_delete(drive_chickwts)
+#drive_delete(drive_chickwts)
 ```
-
-    ## The file 'chickwts' has been deleted from your Google Drive
