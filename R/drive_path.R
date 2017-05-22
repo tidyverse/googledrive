@@ -127,10 +127,6 @@ form_query <- function(path_pieces, leaf_is_folder = FALSE) {
   glue::collapse(c(leaf_q, dirs_q), last = " or ")
 }
 
-require_length <- function(paths, len) {
-  paths %>% purrr::keep(~ length(.x) == len)
-}
-
 rootwise_parent <- function(paths) {
   ## retain only paths that end with root_id <==> not NA
   paths <- paths %>% purrr::keep(~ !is.na(last(.x)))
