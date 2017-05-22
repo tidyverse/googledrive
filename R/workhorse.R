@@ -158,7 +158,7 @@ make_request <- function(x, ...){
        body = x$body, ...)
 }
 
-process_request <- function(res,
+process_response <- function(res,
                             expected = "application/json; charset=UTF-8") {
 
   actual <- res$headers$`content-type`

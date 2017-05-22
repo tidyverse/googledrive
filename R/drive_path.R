@@ -77,7 +77,7 @@ root_folder <- function() {
     endpoint = "drive.files.get",
     params = list(fileId = "root"))
   response <- make_request(request)
-  proc_res <- process_request(response)
+  proc_res <- process_response(response)
   proc_res$id
 
 }

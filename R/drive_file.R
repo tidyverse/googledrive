@@ -19,7 +19,7 @@ drive_file <- function(id, ...) {
 
 
 process_drive_file <- function(response = response) {
-  proc_res <- process_request(response)
+  proc_res <- process_response(response)
 
   metadata <- list(
     name = proc_res$name,

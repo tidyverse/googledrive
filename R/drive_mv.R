@@ -45,7 +45,7 @@ process_drive_mv <-
            file = NULL,
            folder = NULL,
            verbose = TRUE) {
-    proc_res <- process_request(response)
+    proc_res <- process_response(response)
     if (verbose) {
       if (response$status_code == 200L) {
         message(

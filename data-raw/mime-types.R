@@ -16,7 +16,7 @@ google_mime_types <- httr::GET(url) %>%
 fmts <- build_request(endpoint = "drive.about.get",
                       params = list(fields = "importFormats,exportFormats")) %>%
   make_request() %>%
-  process_request()
+  process_response()
 
 imports <- tibble::enframe(fmts$importFormats,
                            name = "mime_type_local",

@@ -145,7 +145,7 @@ build_drive_upload <- function(input = NULL,
     }
 
     res <- make_request(req, encode = "json")
-    proc_res <- process_request(res)
+    proc_res <- process_response(res)
     id <- proc_res$id
   }
 
@@ -165,7 +165,7 @@ build_drive_upload <- function(input = NULL,
 process_drive_upload <- function(response = NULL,
                                  input = NULL,
                                  verbose = TRUE) {
-  proc_res <- process_request(response)
+  proc_res <- process_response(response)
 
   uploaded_doc <- drive_file(proc_res$id)
   success <- proc_res$id == uploaded_doc$id[1]
