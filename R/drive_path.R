@@ -127,14 +127,6 @@ form_query <- function(path_pieces, leaf_is_folder = FALSE) {
   glue::collapse(c(leaf_q, dirs_q), last = " or ")
 }
 
-rootwise_parent <- function(paths) {
-  ## retain only paths that end with root_id <==> not NA
-  paths <- paths %>% purrr::keep(~ !is.na(last(.x)))
-  if (length(paths) == 0) return(NA_character_)
-  ## return one -- of possibly many -- direct parents
-  paths[[1]][2]
-}
-
 ## "a/b/c" and "a/b/c/" both return "a/b/c/"
 append_slash <- function(path) {
   ifelse(grepl("/$", path), path, paste0(path, "/"))
