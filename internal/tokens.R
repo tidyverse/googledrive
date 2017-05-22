@@ -1,0 +1,6 @@
+token <- drive_auth(cache = FALSE)
+saveRDS(token, file = "internal/drive-token.rds")
+token <- gs_auth(cache = FALSE, new_user = TRUE)
+saveRDS(token, file = "internal/sheets-token.rds")
+token <- drive_auth(cache = FALSE)
+saveRDS(token, file = "tidyverse-noncaching-token.rds")

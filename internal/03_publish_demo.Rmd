@@ -6,54 +6,73 @@ output:
   github_document:
     toc: true
 ---
-
-This is a little demo to show how we can check if a file is published & publish it if we so desire.
-
-```{r, message = FALSE, warning = FALSE}
-library('dplyr')
-library('googledrive')
+```{r setup, include=FALSE}
+library("googledrive")
+library("googlesheets")
+library("dplyr")
+library("readr")
 ```
 
+
+## Motivation
+
+Push a table into a Sheet.
+
+Try to read it _as another user_ 
+Assume you even have the key.
+You will fail.
+
+Now, as the user who owns the Sheet, publish it.
+
+Now, as the other user, try again to read it via googlesheets. You should succeed.
+
+
+## Push a file into a Sheet
 ```{r}
-write.table("This is a little demo", "demo.txt")
-drive_upload("demo.txt", name = "Happy Little Demo")
+drive_auth("drive-token.rds")
+drive_chickwts <- drive_upload("~/desktop/chickwts.csv", type = "spreadsheet")
 ```
 
+## Check publication status (should be FALSE)
 ```{r}
-my_file <- drive_get_id("Happy Little Demo") %>%
-  drive_file
+drive_check_publish(drive_chickwts)
 ```
 
-## check published status
-
+## get URL
 ```{r}
-my_file %>%
-  drive_check_publish
-```
-the `drive_check_publish` also outputs a new file with a tibble called `publish` with publication information. We can overwrite `my_file` to see this
-```{r}
-my_file <- my_file %>%
-  drive_check_publish
+url <- drive_share_link(drive_chickwts)
 ```
 
+
 ```{r}
-my_file$publish
+key <- drive_chickwts$id
 ```
 
-## publish it
-```{r}
-my_file <- my_file %>%
-  drive_publish
+## switch to different account
+```{r, eval = FALSE}
+gs_auth("sheets-token.rds")
 ```
 
-now we have tibble with publication status
 
+## this shouldn't work
 ```{r}
-my_file$publish
+try(gs_url(url, lookup = FALSE))
+geterrmessage()
+```
+
+## publish it on Drive
+```{r}
+drive_chickwts <- drive_publish(drive_chickwts)
+drive_check_publish(drive_chickwts)
+```
+
+## try again!
+```{r}
+gs_url(url, lookup  = FALSE)
 ```
 
 ## clean up
 
 ```{r}
-drive_delete(my_file)
+drive_delete(drive_chickwts)
 ```

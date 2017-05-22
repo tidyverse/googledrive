@@ -5,7 +5,7 @@ Lucy D’Agostino McGowan
 
 -   [check current permissions](#check-current-permissions)
 -   [change permissions (anyone with link)](#change-permissions-anyone-with-link)
--   [change permissions (anyone in the 🌎)](#change-permissions-anyone-in-the)
+-   [change permissions (anyone in the 🌐)](#change-permissions-anyone-in-the)
 -   [make it easier to see](#make-it-easier-to-see)
 -   [share link](#share-link)
 -   [clean up](#clean-up)
@@ -15,6 +15,7 @@ This is a little demo to show how we may view sharing.
 ``` r
 library('dplyr')
 library('googledrive')
+drive_auth("drive-token.rds")
 ```
 
 ``` r
@@ -24,11 +25,11 @@ drive_upload("demo.txt", "Happy Little Demo")
 
     ## File uploaded to Google Drive: 
     ## demo.txt 
-    ## As the Google document named:
+    ## As the Google text/plain named:
     ## Happy Little Demo
 
 ``` r
-my_file <- drive_get_id("Happy Little Demo") %>%
+my_file <- drive_list("Happy Little Demo")$id %>%
   drive_file()
 ```
 
@@ -36,15 +37,14 @@ check current permissions
 -------------------------
 
 ``` r
-my_file$permissions
+my_file
 ```
 
-    ## # A tibble: 1 × 8
-    ##               kind                   id  type            emailAddress
-    ##              <chr>                <chr> <chr>                   <chr>
-    ## 1 drive#permission 13813982488463916564  user lucydagostino@gmail.com
-    ## # ... with 4 more variables: role <chr>, displayName <chr>,
-    ## #   photoLink <chr>, deleted <lgl>
+    ## File name: Happy Little Demo 
+    ## File owner: tidyverse testdrive 
+    ## File type: text/plain 
+    ## Last modified: 2017-05-22 
+    ## Access: Shared with specific people.
 
 cool beans - it's private!
 
@@ -63,20 +63,18 @@ my_file<- my_file %>%
 Let's see what that did
 
 ``` r
-my_file$permissions
+my_file
 ```
 
-    ## # A tibble: 2 × 9
-    ##               kind                   id   type            emailAddress
-    ##              <chr>                <chr>  <chr>                   <chr>
-    ## 1 drive#permission 13813982488463916564   user lucydagostino@gmail.com
-    ## 2 drive#permission       anyoneWithLink anyone                    <NA>
-    ## # ... with 5 more variables: role <chr>, displayName <chr>,
-    ## #   photoLink <chr>, deleted <lgl>, allowFileDiscovery <lgl>
+    ## File name: Happy Little Demo 
+    ## File owner: tidyverse testdrive 
+    ## File type: text/plain 
+    ## Last modified: 2017-05-22 
+    ## Access: Anyone who has the link can access. No sign-in required.
 
 Now anyone with the link can view it
 
-change permissions (anyone in the 🌎)
+change permissions (anyone in the 🌐)
 ------------------------------------
 
 ``` r
@@ -89,17 +87,14 @@ my_file <- my_file %>%
 Let's see what that did
 
 ``` r
-my_file$permissions
+my_file
 ```
 
-    ## # A tibble: 3 × 9
-    ##               kind                   id   type            emailAddress
-    ##              <chr>                <chr>  <chr>                   <chr>
-    ## 1 drive#permission 13813982488463916564   user lucydagostino@gmail.com
-    ## 2 drive#permission               anyone anyone                    <NA>
-    ## 3 drive#permission       anyoneWithLink anyone                    <NA>
-    ## # ... with 5 more variables: role <chr>, displayName <chr>,
-    ## #   photoLink <chr>, deleted <lgl>, allowFileDiscovery <lgl>
+    ## File name: Happy Little Demo 
+    ## File owner: tidyverse testdrive 
+    ## File type: text/plain 
+    ## Last modified: 2017-05-22 
+    ## Access: Anyone on the internet can find and access. No sign-in required.
 
 make it easier to see
 ---------------------
@@ -112,18 +107,6 @@ my_file$access
 
     ## [1] "Anyone on the internet can find and access. No sign-in required."
 
-and also to the print method:
-
-``` r
-my_file
-```
-
-    ## File name: Happy Little Demo 
-    ## File owner: Lucy D'Agostino 
-    ## File type: document 
-    ## Last modified: 2017-05-11 
-    ## Access: Anyone on the internet can find and access. No sign-in required.
-
 share link
 ----------
 
@@ -133,7 +116,7 @@ you can also output a link to share
 drive_share_link(my_file)
 ```
 
-    ## [1] "https://docs.google.com/document/d/1qrIsA5fFKn1VmvzzZ4Pymq6SYZuxaRe7xJK35j_SRRA/edit?usp=drivesdk"
+    ## [1] "https://drive.google.com/file/d/0B0Gh-SuuA2nTNHFSM05ycjhwRVE/view?usp=drivesdk"
 
 clean up
 --------

@@ -19,39 +19,40 @@ drive_publish <- function(file = NULL,
                           verbose = TRUE) {
   file_update <- drive_check_publish(file = file, verbose = FALSE)
 
-  request <- build_drive_publish(file = file_update, publish = publish, ...)
-  response <- make_request(request, encode = "json")
-  proc_res <- process_drive_publish(response = response,
-                                    file = file_update,
-                                    verbose = verbose)
-
-  ##for some reason we have to make the request 2x?
-  response <- make_request(request, encode = "json")
-  proc_res <- process_drive_publish(response = response,
-                                    file = file_update,
-                                    verbose = FALSE)
-
-  file_update <- drive_file(file$id)
-  drive_check_publish(file = file_update, verbose = FALSE)
-}
-
-build_drive_publish <- function(file = NULL,
-                                publish = TRUE,
-                                ...) {
   x <- list(...)
   x$published <- publish
   if (!("publishAuto" %in% names(x))) {
     x$publishAuto <- TRUE
   }
 
-  x$fileId <- file$id
+  x$fileId <- file_update$id
 
-  x$revisionId <- file$publish$revision
+  x$revisionId <- file_update$publish$revision
 
-  build_request(
+  if (grepl("application/vnd.google-apps.spreadsheet", file_update$kitchen_sink$mimeType)) {
+    x$revisionId <- 1
+  }
+
+  request <- build_request(
     endpoint = "drive.revisions.update",
     params = x
-    )
+  )
+  response <- make_request(request, encode = "json")
+  proc_res <- process_drive_publish(response = response,
+                                    file = file_update,
+                                    verbose = verbose)
+
+  ## if we want to autopublish, it must have already been published, so
+  ## we need to run again
+  if (x$published == TRUE & x$publishAuto == TRUE) {
+  response <- make_request(request, encode = "json")
+  proc_res <- process_drive_publish(response = response,
+                                    file = file_update,
+                                    verbose = FALSE)
+  }
+
+  file_update <- drive_file(file$id)
+  drive_check_publish(file = file_update, verbose = FALSE)
 }
 
 process_drive_publish <- function(response = NULL,
@@ -94,23 +95,15 @@ drive_check_publish <- function (file = NULL, verbose = TRUE) {
         file$type)
   }
 
-  request <- build_request(
-    endpoint = "drive.revisions.list",
-    params = list(fileId = file$id)
-  )
-  response <- make_request(request)
-  proc_res <- process_request(response)
-
-  last_rev <- length(proc_res$revisions)
-  rev_id <- proc_res$revisions[[last_rev]]$id
-
   fields <- paste(c("id", "published", "publishAuto", "lastModifyingUser"),
                   collapse = ",")
+
+  revisionId = "head"
 
   request <- build_request(
     endpoint = "drive.revisions.get",
     params = list(fileId = file$id,
-                  revisionId = rev_id,
+                  revisionId = revisionId,
                   fields = fields)
   )
   response <- make_request(request)

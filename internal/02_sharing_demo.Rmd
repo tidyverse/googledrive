@@ -12,6 +12,7 @@ This is a little demo to show how we may view sharing.
 ```{r, message = FALSE, warning = FALSE}
 library('dplyr')
 library('googledrive')
+drive_auth("drive-token.rds")
 ```
 
 ```{r}
@@ -20,13 +21,13 @@ drive_upload("demo.txt", "Happy Little Demo")
 ```
 
 ```{r}
-my_file <- drive_get_id("Happy Little Demo") %>%
+my_file <- drive_list("Happy Little Demo")$id %>%
   drive_file()
 ```
 
 ## check current permissions
 ```{r}
-my_file$permissions
+my_file
 ```
 
 cool beans - it's private!
@@ -42,7 +43,7 @@ my_file<- my_file %>%
 Let's see what that did
 
 ```{r}
-my_file$permissions
+my_file
 ```
 
 Now anyone with the link can view it
@@ -57,7 +58,7 @@ my_file <- my_file %>%
 Let's see what that did
 
 ```{r}
-my_file$permissions
+my_file
 ```
 
 ## make it easier to see
@@ -65,12 +66,6 @@ my_file$permissions
 I've added `access` to the Google Drive file object
 ```{r}
 my_file$access
-```
-
-and also to the print method:
-
-```{r}
-my_file
 ```
 
 ## share link
@@ -84,5 +79,9 @@ drive_share_link(my_file)
 
 ```{r}
 drive_delete(my_file)
+```
+
+```{r, echo = FALSE}
+rm <- file.remove("demo.txt")
 ```
 
