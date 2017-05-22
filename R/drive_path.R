@@ -39,6 +39,9 @@ get_leaf <- function(path = NULL) {
   ## for each candidate, enumerate all upward paths, hopefully to root
   root_path <- leaf_id %>%
     purrr::map(pth, kids = hits$id, elders = hits$parents, stop_value = root_id)
+  ## retain candidate paths with d + 1 elements = d path pieces + root_id
+  root_path <- root_path %>%
+    purrr::map(require_length, len = d + 1)
   ## for each candidate, get an immediate parent on a path back to root
   ## will be NA is there is no such path
   root_parent <- root_path %>%
@@ -120,6 +123,10 @@ form_query <- function(path_pieces, leaf_is_folder = FALSE) {
     dir_pieces = collapse2(crop(nms, !leaf_is_folder), sep = " or ")
   )
   glue::collapse(c(leaf_q, dirs_q), last = " or ")
+}
+
+require_length <- function(paths, len) {
+  paths %>% purrr::keep(~ length(.x) == len)
 }
 
 rootwise_parent <- function(paths) {
