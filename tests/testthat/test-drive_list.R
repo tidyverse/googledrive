@@ -166,6 +166,47 @@ test_that("get_leaf() is not confused by same-named leafs at different depths", 
     purrr::map(drive_delete)
 })
 
+test_that("get_leaf() is not confused by nested same-named things", {
+
+  skip_on_appveyor()
+  skip_on_travis()
+
+  # +-- foo
+  # | +-- foo
+  foo_1_id <- drive_mkdir("foo")$id
+  foo_2_id <- drive_mkdir("foo", path = "foo/")$id
+  expect_identical(get_leaf("foo")$id, foo_1_id)
+  expect_identical(get_leaf("foo/foo/")$id, foo_2_id)
+
+  foo_1_id %>%
+    purrr::map(drive_file) %>%
+    purrr::map(drive_delete)
+})
+
+test_that("get_leaf() is not confused by paths w/ swapped interior folders", {
+
+  skip_on_appveyor()
+  skip_on_travis()
+
+  # +-- foo
+  # | +-- bar
+  #   | +-- baz
+  # +-- bar
+  # | +-- foo
+  #   | +-- baz
+  foo_1_id <- drive_mkdir("foo")$id
+  bar_1_id <- drive_mkdir("bar", path = "foo/")$id
+  baz_1_id <- drive_mkdir("baz", path = "foo/bar/")$id
+  bar_2_id <- drive_mkdir("bar")$id
+  foo_2_id <- drive_mkdir("foo", path = "bar/")$id
+  baz_2_id <- drive_mkdir("baz", path = "bar/foo/")$id
+  expect_identical(get_leaf("foo/bar/baz")$id, baz_1_id)
+  expect_identical(get_leaf("bar/foo/baz/")$id, baz_2_id)
+
+  c(foo_1_id, bar_2_id) %>%
+    purrr::map(drive_file) %>%
+    purrr::map(drive_delete)
+})
 
 ## TO DO: add this as a test
 ## path = foo/bar/baz
