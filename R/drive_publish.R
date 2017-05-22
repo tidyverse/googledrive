@@ -58,7 +58,7 @@ drive_publish <- function(file = NULL,
 process_drive_publish <- function(response = NULL,
                                   file = NULL,
                                   verbose = TRUE) {
-  proc_res <- process_request(response)
+  proc_res <- process_response(response)
 
   if (verbose) {
     if (response$status_code == 200L) {
@@ -113,7 +113,7 @@ drive_check_publish <- function (file = NULL, verbose = TRUE) {
 process_drive_check_publish <- function(response = NULL,
                                         file = NULL,
                                         verbose = TRUE) {
-  proc_res <- process_request(response)
+  proc_res <- process_response(response)
 
   file$publish <- tibble::tibble(
     check_time = Sys.time(),

@@ -26,7 +26,7 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   )
 
   response <- make_request(request, encode = "json")
-  proc_res <- process_request(response)
+  proc_res <- process_response(response)
 
   folder <- drive_file(proc_res$id)
 

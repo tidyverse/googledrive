@@ -53,7 +53,7 @@ test_that("get_leaf() errors when two distinct folders have same path", {
                       ),
                       encode = "json"
   )
-  bar_2_id <- process_request(bar_2)$id
+  bar_2_id <- process_response(bar_2)$id
 
   expect_error(
     get_leaf("foo/bar"),
