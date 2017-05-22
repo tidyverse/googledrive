@@ -43,7 +43,7 @@ guser <- function(fields = "user", ...) {
     params = list(fields = fields,
                   ...))
   response <- make_request(request)
-  proc_res <- process_request(response)
+  proc_res <- process_response(response)
   proc_res$date <- httr::parse_http_date(request$headers$date)
   structure(proc_res, class = c("guser", "list"))
 

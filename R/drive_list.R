@@ -88,7 +88,7 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
 
   request <- build_request(params = params)
   response <- make_request(request)
-  proc_res <- process_request(response)
+  proc_res <- process_response(response)
 
   req_tbl <- tibble::tibble(
     name = purrr::map_chr(proc_res$files, "name"),
