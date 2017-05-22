@@ -30,39 +30,44 @@ get_leaf <- function(path = NULL) {
   ## guarantee: we have found at least one item with correct name for
   ## each piece of path
 
-  hits$depth <- match(hits$name, path_pieces)
-  hits <- hits[order(hits$depth), ]
-
   ## leaf candidate(s)
-  leaf_id <- hits$id[hits$depth == d]
+  leaf_id <- hits$id[hits$name == last(path_pieces)]
 
   ## for each candidate, enumerate all upward paths, hopefully to root
   root_path <- leaf_id %>%
     purrr::map(pth, kids = hits$id, elders = hits$parents, stop_value = root_id)
-  ## for each candidate, get an immediate parent on a path back to root
-  ## will be NA is there is no such path
-  root_parent <- root_path %>%
-    purrr::map_chr(rootwise_parent)
-  root_path_exists <- !is.na(root_parent)
 
-  if (sum(root_path_exists) > 1) {
+  ## put into a tibble, one row per candidate path
+  leaf_tbl <- tibble::tibble(
+    id = rep(leaf_id, lengths(root_path)),
+    root_path = purrr::flatten(root_path)
+  )
+  leaf_tbl$path <- purrr::map_chr(
+    leaf_tbl$root_path,
+    ~ glue::collapse(rev(hits$name[match(crop(.x, 1), hits$id)]), sep = "/")
+  )
+
+  ## retain candidate paths that match input path
+  keep_me <- which(strip_slash(path) == leaf_tbl$path)
+
+  if (length(keep_me) > 1) {
     line0 <- glue::glue("The path '{path}' identifies more than one file:")
     lines <- glue::glue_data(
-      hits[hits$id %in% leaf_id[root_path_exists], ],
+      hits[hits$id %in% leaf_id[keep_me], ],
       "File of type {type}, with id {id}."
     )
     stop(glue::collapse(c(line0, lines), "\n"), call. = FALSE)
   }
 
-  if (sum(root_path_exists) < 1) {
+  if (length(keep_me) < 1) {
     stop(glue::glue("The path '{path}' does not exist.", call. = FALSE))
   }
 
-  i <- which(hits$id == leaf_id[root_path_exists])
+  i <- which(hits$id == leaf_id[keep_me])
   list(
     id = hits$id[i],
     mimeType = hits$gfile[[i]][["mimeType"]],
-    parent_id = root_parent
+    parent_id = leaf_tbl[[keep_me, "root_path"]][2]
   )
 }
 
@@ -128,4 +133,14 @@ rootwise_parent <- function(paths) {
   if (length(paths) == 0) return(NA_character_)
   ## return one -- of possibly many -- direct parents
   paths[[1]][2]
+}
+
+## "a/b/c" and "a/b/c/" both return "a/b/c/"
+append_slash <- function(path) {
+  ifelse(grepl("/$", path), path, paste0(path, "/"))
+}
+
+## "a/b/c" and "a/b/c/" both return "a/b/c"
+strip_slash <- function(path) {
+  ifelse(grepl("/$", path), gsub("/$", "", path), path)
 }

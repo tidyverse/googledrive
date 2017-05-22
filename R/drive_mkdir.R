@@ -48,8 +48,3 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   invisible(drive_file(proc_res$id))
 }
 
-## trailing slash indicates that 'path' is path to a folder
-## which can simplify the work inside get_leaf()
-append_slash <- function(path) {
-  if (grepl("/$", path)) path else paste0(path, "/")
-}
