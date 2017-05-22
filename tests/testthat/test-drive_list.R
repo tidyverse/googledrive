@@ -128,6 +128,7 @@ test_that("drive_list errors with two folders of the same name in the same locat
     purrr::map(drive_file) %>%
     purrr::map(drive_delete)
 })
+
 test_that("drive_list errors with two folders of the same name in the root, not unique", {
 
   skip_on_appveyor()
@@ -147,6 +148,24 @@ test_that("drive_list errors with two folders of the same name in the root, not 
 
 })
 
+test_that("get_leaf() is not confused by same-named leafs at different depths", {
+
+  skip_on_appveyor()
+  skip_on_travis()
+
+  # +-- foo
+  # | +-- bar
+  # +-- bar
+  foo_id <- drive_mkdir("foo")$id
+  bar_id <- drive_mkdir("bar", path = "foo/")$id
+  bar_2_id <- drive_mkdir("bar")$id
+  expect_identical(get_leaf("foo/bar/")$id, bar_id)
+
+  c(foo_id, bar_2_id) %>%
+    purrr::map(drive_file) %>%
+    purrr::map(drive_delete)
+})
+
 
 ## TO DO: add this as a test
 ## path = foo/bar/baz
@@ -155,7 +174,7 @@ test_that("drive_list errors with two folders of the same name in the root, not 
 
 ## TO DO: add this as a test
 ## path = "jt01/jt02/jt03" or "jt01/jt02/jt03/"
-## "jt01/jt02/jt03" exists where jt03 is´a folder holding a file jt04
+## "jt01/jt02/jt03" exists where jt03 is a folder holding a file jt04
 ## "jt01/jt02/jt03" exists where jt03 is a file
 ## so there are two folders named jt02 inside jt01
 ## make sure that path = "jt01/jt02" errors because ambiguous
