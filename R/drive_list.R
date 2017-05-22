@@ -1,10 +1,11 @@
 #' List files on Google Drive
 #'
-#' @param path character. Google Drive path to list. Defaults to the "My Drive"
-#'   folder. If path is a folder, contents are listed, not recursively. If path
-#'   is a file, that file is listed. A trailing slash indicates explicitly that
-#'   the path is a folder, which can disambiguate if there is a file of the same
-#'   name (yes this is possible on Drive!).
+#' @param path character. Google Drive path to list. Defaults to "My Drive", but
+#'   without regard to any folder hierarchy. If path is a folder, its contents
+#'   are listed, not recursively. If path is a file, that single file is listed.
+#'   A trailing slash indicates explicitly that the path is a folder, which can
+#'   disambiguate if there is a file of the same name (yes this is possible on
+#'   Drive!).
 #' @param pattern character. If provided, only the files whose names match this
 #'   regular expression are returned.
 #' @param ... Parameters to pass along to the API query.
