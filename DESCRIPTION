@@ -17,8 +17,7 @@ Imports: httr,
     purrr,
     tibble,
     glue,
-    jsonlite,
-    dplyr
+    jsonlite
 Suggests: covr,
     rprojroot,
     testthat

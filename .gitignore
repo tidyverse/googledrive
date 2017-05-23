@@ -5,9 +5,9 @@ sandbox
 .RData
 .httr-oauth
 *.Rproj
-.httr-oauth*
+*.httr-oauth*
 .Rapp.history
-.httr-oauth-SUSPENDED
+*.httr-oauth-SUSPENDED
 scratch.R
 tidyverse-token.rds
 tidyverse-noncaching-token.rds

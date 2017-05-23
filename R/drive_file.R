@@ -29,28 +29,12 @@ process_drive_file <- function(response = response) {
     last_modified = as.POSIXct(proc_res$modifiedTime),
     created = as.POSIXct(proc_res$createdTime),
     starred = proc_res$starred,
-    #make a tibble of permissions - this seems a bit
-    #silly how I've done it so far.
-    permissions = if (is.null(proc_res$permissions)) {
-      tibble::tibble(
-        kind = character(),
-        id = character(),
-        type = character(),
-        emailAddress = character(),
-        role = character(),
-        displayName = character(),
-        photoLink = character(),
-        deleted = character(),
-        allowFileDiscovery = logical()
-      )
-    } else {
-      purrr::map_df(proc_res$permissions, tibble::as_tibble)
-    },
     #everything else
     kitchen_sink = proc_res
   )
 
-  perm <- metadata$permissions
+  perm <- wrangle_permissions(proc_res$permissions)
+  metadata$permissions <- perm
 
   if (sum(perm$id %in% c("anyone")) > 0) {
     access <-
@@ -64,6 +48,30 @@ process_drive_file <- function(response = response) {
 
   metadata <- structure(metadata, class = c("gfile", "list"))
   metadata
+}
+
+
+wrangle_permissions <- function(x) {
+  permissions <- tibble::tibble(
+    kind = character(),
+    id = character(),
+    type = character(),
+    emailAddress = character(),
+    role = character(),
+    displayName = character(),
+    photoLink = character(),
+    deleted = character(),
+    allowFileDiscovery = logical()
+  )
+  if (is.null(x)) {
+    return(permissions)
+  }
+  if (length(x) == 1) {
+    x <- fill_tbl(x[[1]], permissions)
+    return(x)
+  }
+  x <- purrr::map(x, fill_tbl, full = permissions)
+  do.call(rbind, x)
 }
 
 #' @export
