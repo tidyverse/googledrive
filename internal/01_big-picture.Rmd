@@ -1,5 +1,5 @@
 ---
-title: "playing"
+title: "big picture"
 author: "Lucy D’Agostino McGowan"
 date: "4/26/2017"
 output: 
@@ -12,26 +12,27 @@ output:
 ```{r, message = FALSE, warning = FALSE}
 library('googledrive')
 library('dplyr')
+drive_auth("drive-token.rds")
 ```
 
 ## List
 
-`drive_ls()` pulls out name, type, & id 
-(we probably don't want to see id, but seems useful to have here, so we could pick which one we want to get more info on?)
+`drive_list()` pulls out name, type, & id 
+
 ```{r}
-drive_ls()
+drive_list()
 ```
 
 We can search using regular expressions
 
 ```{r}
-drive_ls(search = "test")
+drive_list(pattern = "test")
 ```
 
 We can also pass additional query parameters through the `...`, for example
 
 ```{r}
-drive_ls(search = "test", orderBy = "modifiedTime")
+drive_list(pattern = "test", orderBy = "modifiedTime")
 ```
 
 ## Metadata
@@ -43,7 +44,7 @@ List of all fields [here](https://developers.google.com/drive/v3/web/migration).
 Now let's say I want to dive deeper into the top one
 
 ```{r}
-id <- drive_get_id("test")
+id <- drive_list("test")$id[1]
 file <- drive_file(id)
 file
 ```
@@ -70,18 +71,18 @@ drive_user()
 
 ```{r}
 write.table("this is a test", file = "~/desktop/test.txt")
-drive_upload(file = "~/desktop/test.txt", name = "This is a test", overwrite = TRUE)
+drive_upload(input = "~/desktop/test.txt", output = "This is a test", overwrite = TRUE)
 ```
 
 ```{r}
-file <- drive_file(drive_get_id("This is a test"))
+file <- drive_file(drive_list("This is a test")$id)
 file
 ```
 
 ## Update sharing
 
 ```{r}
-file <- drive_share(file, role = "writer", type = "user", email = "dagostino.mcgowan.stats@gmail.com",message = "I am sharing this cool file with you. Now you can write. You are welcome." )
+file <- drive_share(file, role = "writer", type = "user", emailAddress = "dagostino.mcgowan.stats@gmail.com",emailMessage = "I am sharing this cool file with you. Now you can write. You are welcome." )
 ```
 
 ## View permissions

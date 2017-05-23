@@ -10,64 +10,32 @@ output:
 ```{r, message = FALSE, warning = FALSE}
 library("dplyr")
 library("googledrive")
-```
-
-## grab a file
-```{r}
-my_file <- drive_get_id("test") %>%
-  drive_file
-```
-
-## lets take a peak
-```{r}
-my_file
+drive_auth("drive-token.rds")
 ```
 
 
 ## we can also pull out multiple files
 ```{r}
-lst_of_files <- purrr::map(.x =drive_get_id("test", n = 3), drive_file) 
+list_of_ids <- drive_list(pattern = "test")$id[1:10]
+list_of_files <- list_of_ids %>%
+  purrr::map(drive_file)
 ```
 
 ## change access
 ```{r}
-my_file <- my_file %>%
-  drive_share(role = "reader", type = "anyone")
+list_of_files <- list_of_files %>%
+  purrr::map(drive_share, role = "reader", type = "anyone")
 ```
 
 ## check access
 ```{r}
-my_file
+list_of_files %>% purrr::map_chr("access")
 ```
 
-## upload one
-```{r}
-drive_upload("~/desktop/hide/test.txt", "This is a test")
-```
-
-## upload to a specific folder
-```{r}
-drive_ls()
-```
-
-I'll use my `THIS IS A TEST` folder.
+## delete them all!
 
 ```{r}
-folder <- drive_get_id("THIS IS A TEST") %>%
-  drive_file
-```
-
-
-```{r}
-new_file <- drive_upload("~/desktop/hide/test.txt") %>%
-  drive_mv(folder)
-```
-
-## delete a lot!
-
-```{r}
-to_delete <- purrr::map(drive_get_id("test", n = 3),  drive_file)
- 
-purrr::map(to_delete, drive_delete)
+list_of_files <- list_of_files %>% 
+  purrr::map(drive_delete)
 ```
 

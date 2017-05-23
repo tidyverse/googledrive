@@ -3,86 +3,165 @@ publish
 Lucy D’Agostino McGowan
 5/3/2017
 
--   [check published status](#check-published-status)
--   [publish it](#publish-it)
+-   [Motivation](#motivation)
+-   [Push a file into a Sheet](#push-a-file-into-a-sheet)
+-   [Check publication status (should be FALSE)](#check-publication-status-should-be-false)
+-   [get URL](#get-url)
+-   [it's published, not shared](#its-published-not-shared)
+-   [switch to different account](#switch-to-different-account)
+-   [this shouldn't work](#this-shouldnt-work)
+-   [publish it on Drive](#publish-it-on-drive)
+-   [try again!](#try-again)
 -   [clean up](#clean-up)
 
-This is a little demo to show how we can check if a file is published & publish it if we so desire.
+Motivation
+----------
+
+Push a table into a Sheet.
+
+Try to read it *as another user* Assume you even have the key. You will fail.
+
+Now, as the user who owns the Sheet, publish it.
+
+Now, as the other user, try again to read it via googlesheets. You should succeed.
+
+Push a file into a Sheet
+------------------------
 
 ``` r
-library('dplyr')
-library('googledrive')
+drive_auth("drive-token.rds")
 ```
 
+    ## Auto-refreshing stale OAuth token.
+
 ``` r
-write.table("This is a little demo", "demo.txt")
-drive_upload("demo.txt", name = "Happy Little Demo")
+write_csv(chickwts, "chickwts.csv")
+drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
 ```
 
     ## File uploaded to Google Drive: 
-    ## demo.txt 
-    ## As the Google document named:
-    ## Happy Little Demo
+    ## chickwts.csv 
+    ## As the Google spreadsheet named:
+    ## chickwts
+
+Check publication status (should be FALSE)
+------------------------------------------
 
 ``` r
-my_file <- drive_get_id("Happy Little Demo") %>%
-  drive_file
+drive_check_publish(drive_chickwts)
 ```
 
-check published status
-----------------------
+    ## The latest revision of the Google Drive file 'chickwts' is not published.
+
+get URL
+-------
 
 ``` r
-my_file %>%
-  drive_check_publish
+url <- drive_share_link(drive_chickwts)
+url
 ```
 
-    ## The latest revision of the Google Drive file 'Happy Little Demo' is not published.
+    ## [1] "https://docs.google.com/spreadsheets/d/1dES65Ur8AcYSS4JnnMGRp7A3wVJEHKMvBG8M60U4m0A/edit?usp=drivesdk"
 
-the `drive_check_publish` also outputs a new file with a tibble called `publish` with publication information. We can overwrite `my_file` to see this
+it's published, not shared
+--------------------------
 
 ``` r
-my_file <- my_file %>%
-  drive_check_publish
+drive_chickwts
 ```
 
-    ## The latest revision of the Google Drive file 'Happy Little Demo' is not published.
+    ## File name: chickwts 
+    ## File owner: tidyverse testdrive 
+    ## File type: spreadsheet 
+    ## Last modified: 2017-05-22 
+    ## Access: Shared with specific people.
 
 ``` r
-my_file$publish
+key <- drive_chickwts$id
 ```
 
-    ## # A tibble: 1 × 5
-    ##            check_time revision published auto_publish       last_user
-    ##                <dttm>    <chr>     <lgl>        <lgl>           <chr>
-    ## 1 2017-05-11 10:47:13        3     FALSE        FALSE Lucy D'Agostino
+switch to different account
+---------------------------
 
-publish it
+``` r
+gs_auth("sheets-token.rds")
+```
+
+this shouldn't work
+-------------------
+
+``` r
+try(gs_url(url, visibility = "private", lookup = FALSE))
+```
+
+    ## Sheet-identifying info appears to be a browser URL.
+    ## googlesheets will attempt to extract sheet key from the URL.
+
+    ## Putative key: 1dES65Ur8AcYSS4JnnMGRp7A3wVJEHKMvBG8M60U4m0A
+
+    ## Worksheets feed constructed with private visibility
+
+``` r
+geterrmessage()
+```
+
+    ## [1] "Error in function_list[[k]](value) : Forbidden (HTTP 403).\n"
+
+publish it on Drive
+-------------------
+
+``` r
+drive_chickwts <- drive_publish(drive_chickwts)
+```
+
+    ## You have changed the publication status of 'chickwts'.
+
+``` r
+drive_check_publish(drive_chickwts)
+```
+
+    ## The latest revision of Google Drive file 'chickwts' is published.
+
+try again!
 ----------
 
 ``` r
-my_file <- my_file %>%
-  drive_publish
+gs_url(url, lookup  = FALSE)
 ```
 
-    ## You have changed the publication status of 'Happy Little Demo'.
+    ## Sheet-identifying info appears to be a browser URL.
+    ## googlesheets will attempt to extract sheet key from the URL.
 
-now we have tibble with publication status
+    ## Putative key: 1dES65Ur8AcYSS4JnnMGRp7A3wVJEHKMvBG8M60U4m0A
+
+    ## Worksheets feed constructed with public visibility
+
+    ##                   Spreadsheet title: chickwts
+    ##                  Spreadsheet author: tidyverse.testdrive
+    ##   Date of googlesheets registration: 2017-05-22 21:45:25 GMT
+    ##     Date of last spreadsheet update: 2017-05-22 21:45:21 GMT
+    ##                          visibility: public
+    ##                         permissions: rw
+    ##                             version: new
+    ## 
+    ## Contains 1 worksheets:
+    ## (Title): (Nominal worksheet extent as rows x columns)
+    ## chickwts: 1000 x 26
+    ## 
+    ## Key: 1dES65Ur8AcYSS4JnnMGRp7A3wVJEHKMvBG8M60U4m0A
+    ## Browser URL: https://docs.google.com/spreadsheets/d/1dES65Ur8AcYSS4JnnMGRp7A3wVJEHKMvBG8M60U4m0A/
+
+check again that the access is still just "Shared with specific people."
 
 ``` r
-my_file$publish
+drive_chickwts$access
 ```
 
-    ## # A tibble: 1 × 5
-    ##            check_time revision published auto_publish       last_user
-    ##                <dttm>    <chr>     <lgl>        <lgl>           <chr>
-    ## 1 2017-05-11 10:47:16        3      TRUE         TRUE Lucy D'Agostino
+    ## [1] "Shared with specific people."
 
 clean up
 --------
 
 ``` r
-drive_delete(my_file)
+#drive_delete(drive_chickwts)
 ```
-
-    ## The file 'Happy Little Demo' has been deleted from your Google Drive

@@ -16,7 +16,7 @@ googledrive::drive_auth("tidyverse-noncaching-token.rds")
 
 # googledrive
 
-[![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master)
+[![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master) 
 
 WARNING: this is very much under construction 
 
@@ -71,8 +71,8 @@ drive_list(q = "mimeType = 'application/vnd.google-apps.spreadsheet'")
 We can upload any file type. 
 
 ```{r}
-write.table(chickwts, "chickwts.txt")
-drive_chickwts <- drive_upload("chickwts.txt")
+write.csv(chickwts, "chickwts.csv")
+drive_chickwts <- drive_upload("chickwts.csv")
 ```
 
 We now have a file of class `gfile` that contains information about the uploaded file. 
@@ -81,16 +81,15 @@ We now have a file of class `gfile` that contains information about the uploaded
 drive_chickwts
 ```
 
-Notice that file was uploaded as a `document`. Since this was a `.txt` document, and we didn't specify the type, `googledrive` assumed it was a document (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter. Let's delete this file first.
+Notice that file was uploaded as a `document`. Since this was a `.csv` document, and we didn't specify the type, `googledrive` assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
 
 ```{r}
 drive_chickwts <- drive_chickwts %>%
   drive_delete()
 ```
 
-
 ```{r}
-drive_chickwts <- drive_upload("chickwts.txt", type = "spreadsheet")
+drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
 ```
 
 Let's see if that worked.
@@ -98,6 +97,25 @@ Let's see if that worked.
 drive_chickwts
 ```
 Much better!
+
+#### Publish files
+
+Versions of Google Documents, Sheets, and Presentations can be published online. By default, `drive_publish()` will publish your most recent version. You can check your publication status by running `drive_check_publish()`.
+
+```{r}
+drive_check_publish(drive_chickwts)
+```
+
+
+```{r}
+drive_chickwts <- drive_publish(drive_chickwts)
+drive_chickwts$publish
+```
+
+```{r}
+drive_check_publish(drive_chickwts)
+```
+
 
 #### Share files
 
@@ -125,6 +143,6 @@ drive_chickwts %>%
 ```
 
 ```{r, echo = FALSE}
-rm <- file.remove("chickwts.txt")
+rm <- file.remove("chickwts.csv")
 ```
 
