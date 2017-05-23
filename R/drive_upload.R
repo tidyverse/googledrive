@@ -5,14 +5,9 @@
 #'   the file
 #' @param overwrite logical, do you want to overwrite file already on Google
 #'   Drive
-#' @param type if type = `NULL`, will force type as follows:
-#' * **document**: .doc, .docx, .txt, .rtf., .html, .odt, .pdf, .jpeg, .png, .gif,.bmp
-#' * **spreadsheet**: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
-#'   .ods
-#' * **presentation**: .opt, .ppt, .pptx, .pptm
-#'
-#'  otherwise you can specify `document`, `spreadsheet`, or `presentation`. Files with no extension will
-#'   be assumed to be a `folder`
+#' @param type if type = `NULL`, will upload as a non-Google Drive document
+#'  otherwise you can specify `document`, `spreadsheet`, or `presentation`.
+#'  Files with no extension will be assumed to be a `folder`.
 #' @param ... name-value pairs to query the API
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)

@@ -16,16 +16,9 @@ the file}
 \item{overwrite}{logical, do you want to overwrite file already on Google
 Drive}
 
-\item{type}{if type = \code{NULL}, will force type as follows:
-\itemize{
-\item \strong{document}: .doc, .docx, .txt, .rtf., .html, .odt, .pdf, .jpeg, .png, .gif,.bmp
-\item \strong{spreadsheet}: .xls, .xlsx, .csv, .tsv, .tab, .xlsm, .xlt, .xltx, .xltm,
-.ods
-\item \strong{presentation}: .opt, .ppt, .pptx, .pptm
-}
-
-otherwise you can specify \code{document}, \code{spreadsheet}, or \code{presentation}. Files with no extension will
-be assumed to be a \code{folder}}
+\item{type}{if type = \code{NULL}, will upload as a non-Google Drive document
+otherwise you can specify \code{document}, \code{spreadsheet}, or \code{presentation}.
+Files with no extension will be assumed to be a \code{folder}.}
 
 \item{...}{name-value pairs to query the API}
 
