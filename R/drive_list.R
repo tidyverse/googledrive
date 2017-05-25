@@ -1,11 +1,11 @@
 #' List files on Google Drive
 #'
 #' @param path character. Google Drive path to list. Defaults to "My Drive", but
-#'   without regard to any folder hierarchy. If path is a folder, its contents
-#'   are listed, not recursively. If path is a file, that single file is listed.
-#'   A trailing slash indicates explicitly that the path is a folder, which can
-#'   disambiguate if there is a file of the same name (yes this is possible on
-#'   Drive!).
+#'   without regard to any folder hierarchy. If `path` uniquely identifies a
+#'   folder, its contents are listed, not recursively. Use a trailing slash to
+#'   indicate explicitly that the path is a folder, which can disambiguate if
+#'   there is a file of the same name (yes this is possible on Drive!). If
+#'   `path` uniquely identifies a file, that single file is listed.
 #' @param pattern character. If provided, only the files whose names match this
 #'   regular expression are returned.
 #' @param ... Parameters to pass along to the API query.
@@ -51,6 +51,8 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
   }
 
   ## if path reduces to root (i.e., "My Drive"), make it an explicit NULL
+  ## TO MODIFY: if root is explicitly requested, yes make path NULL but also
+  ## store "root_in id in parents" in q
   path <- rationalize_path(path)
 
   params <- list(...)
@@ -69,7 +71,7 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
   ## once to learn id of the folder to list
   ## then again to list the contents
   if (!is.null(path)) {
-    leaf <- get_leaf(path)
+    leaf <- get_one_path(path)
     if (leaf$mimeType == "application/vnd.google-apps.folder") {
       ## path identifies a folder
       ## we will list it

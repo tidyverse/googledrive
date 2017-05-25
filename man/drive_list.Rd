@@ -8,11 +8,11 @@ drive_list(path = NULL, pattern = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{path}{character. Google Drive path to list. Defaults to "My Drive", but
-without regard to any folder hierarchy. If path is a folder, its contents
-are listed, not recursively. If path is a file, that single file is listed.
-A trailing slash indicates explicitly that the path is a folder, which can
-disambiguate if there is a file of the same name (yes this is possible on
-Drive!).}
+without regard to any folder hierarchy. If \code{path} uniquely identifies a
+folder, its contents are listed, not recursively. Use a trailing slash to
+indicate explicitly that the path is a folder, which can disambiguate if
+there is a file of the same name (yes this is possible on Drive!). If
+\code{path} uniquely identifies a file, that single file is listed.}
 
 \item{pattern}{character. If provided, only the files whose names match this
 regular expression are returned.}

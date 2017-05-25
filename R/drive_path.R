@@ -1,91 +1,186 @@
-## input: a path, such as "foo/bar/baz"
-## output: a list about the leafmost member, i.e. "baz"
-##   * file id
-##   * mimeType
-##   * id of one direct parent (there could be more)
-get_leaf <- function(path = NULL) {
+#' Query a path on Google Drive
+#'
+#' These functions gather information about a single path. If you want to list
+#' the contents of a folder or do general searching, use [drive_list()].
+#'
+#' @param path character. A single Google Drive path to query. All matching
+#'   files are returned. Folders are a specific type of file. Use a trailing
+#'   slash to indicate explicitly that the path is a folder, which can
+#'   disambiguate if there is a file of the same name (yes this is possible on
+#'   Drive!).
+#' @param partial_ok logical. If `path` identifies no files and `partial_ok` is
+#'   `TRUE`, `drive_path()` finds and queries the maximal existing subpath.
+#' @param verbose logical. Indicates whether to print informative messages.
+#' @name paths
+#' @examples
+#' \dontrun{
+#' ## determine if path 'abc' exists and list matching paths
+#' drive_path_exists("abc")
+#' drive_path("abc")
+#'
+#' ## be more specific: consider only folder(s) that match 'abc'
+#' drive_path_exists("abc/")
+#' drive_path("abc/")
+#'
+#' ## use of 'partial_ok'
+#' ## assume 'abc' exists but 'abc/xyz' does not
+#' ## this returns nothing
+#' drive_path("abc/xyz")
+#' ## this returns 'abc'
+#' drive_path("abc/xyz", partial_ok = TRUE)
+#' }
+NULL
 
-  root_id <- root_folder() ## store to avoid repeated API calls
+#' @export
+#' @rdname paths
+#' @return `drive_path_exists()`: `TRUE` or `FALSE`
+drive_path_exists <- function(path, verbose = TRUE) {
+  nrow(get_paths(path = path, partial_ok = FALSE)) > 0
+}
+
+#' @export
+#' @rdname paths
+#' @return `drive_path()`: tibble with one row per matching file
+drive_path <- function(path, partial_ok = FALSE, verbose = TRUE) {
+  get_paths(path = path, partial_ok = partial_ok)
+}
+
+## path helpers -------------------------------------------------------
+
+## input:
+##   path: a target path
+##   partial_ok: if path does not exist, but some prefix does, ok to report that?
+##   .rships, .root: (optional) tibble of relationships & id of the root folder
+##         for internal use, i.e. testing logic without calling the API
+## output:
+##   a tibble of actual paths that match the target path
+##   if partial_ok = FALSE, match(es) is/are exact
+##   if partial_ok = TRUE, match(es) is/are on the maximally existing partial path
+get_paths <- function(path = NULL,
+                      partial_ok = FALSE,
+                      .rships = NULL,
+                      .root = "ROOT") {
+  stopifnot(is.character(path), length(path) == 1)
   path_pieces <- split_path(path)
   d <- length(path_pieces)
   if (d == 0) {
-    return(list(
-      id = root_id,
-      mimeType = "application/vnd.google-apps.folder",
-      parent_id <- NA_character_
-    ))
+    return(null_path())
   }
 
-  ## query will restrict to the names seen in path and to mimeType = folder, for
-  ## all pieces where that is known
-  hits <- drive_list(
-    fields = "files/parents,files/name,files/mimeType,files/id",
-    q = form_query(path_pieces, leaf_is_folder = grepl("/$", path)),
-    verbose = FALSE
-  )
-
-  if (!all(path_pieces %in% hits$name)) {
-    stop(glue::glue("The path '{path}' does not exist.", call. = FALSE))
-  }
-  ## guarantee: we have found at least one item with correct name for
-  ## each piece of path
-
-  ## leaf candidate(s)
-  leaf_id <- hits$id[hits$name == last(path_pieces)]
-
-  ## for each candidate, enumerate all upward paths, hopefully to root
-  root_path <- leaf_id %>%
-    purrr::map(pth, kids = hits$id, elders = hits$parents, stop_value = root_id)
-
-  ## put into a tibble, one row per candidate path
-  leaf_tbl <- tibble::tibble(
-    id = rep(leaf_id, lengths(root_path)),
-    root_path = purrr::flatten(root_path)
-  )
-  leaf_tbl$path <- purrr::map_chr(
-    leaf_tbl$root_path,
-    ~ glue::collapse(rev(hits$name[match(crop(.x, 1), hits$id)]), sep = "/")
-  )
-
-  ## retain candidate paths that match input path
-  keep_me <- which(strip_slash(path) == leaf_tbl$path)
-
-  if (length(keep_me) > 1) {
-    line0 <- glue::glue("The path '{path}' identifies more than one file:")
-    lines <- glue::glue_data(
-      hits[hits$id %in% leaf_id[keep_me], ],
-      "File of type {type}, with id {id}."
+  if (is.null(.rships)) {
+    ## query restricts to names in path_pieces and, for all pieces that are
+    ## known to be folder, to mimeType = folder
+    .rships <- drive_list(
+      fields = "files/parents,files/name,files/mimeType,files/id",
+      q = form_query(path_pieces, leaf_is_folder = grepl("/$", path)),
+      verbose = FALSE
     )
+    ## fetch fileId of user's My Drive root folder
+    .root <- root_id()
+  }
+
+  ## revise target path to be longest partial path that is compatible
+  ## with folder names that exist
+  nm_detected <- purrr::set_names(path_pieces %in% .rships$name, path_pieces)
+  d <- last_all(nm_detected)
+  if (d == 0 || (!partial_ok && d < length(path_pieces))) {
+    return(null_path())
+  }
+
+  repeat {
+    ## leaf candidate(s)
+    leaf_id <- .rships$id[.rships$name == path_pieces[d]]
+
+    ## for each candidate, enumerate all rooted paths
+    leaf_tbl <- leaf_id %>%
+      purrr::map(pth_tbl, .rships = .rships, stop_value = .root)
+    leaf_tbl <- do.call(rbind, leaf_tbl)
+
+    ## require path to match target, in manner appropriate to partial_ok
+    ## glue::glue() gives me this: length 0 in --> length 0 out
+    path_matches <- purrr::map_lgl(
+      glue::glue("^{leaf_tbl$path}{if (partial_ok) '' else '$'}"),
+      grepl, x = strip_slash(path)
+    )
+    leaf_tbl <- leaf_tbl[path_matches, ]
+
+    if (d == 1 || !partial_ok || nrow(leaf_tbl) > 0) {
+      break
+    }
+    d <- d - 1
+  }
+
+  ## ensure path_orig gets added, even if there are zero rows
+  leaf_tbl$path_orig <- rep_len(path, nrow(leaf_tbl))
+  leaf_tbl
+
+}
+
+## wrapper around get_paths() that errors if we don't get exactly 1 path
+## input: a path, such as foo/bar/baz
+## output: a one-row tibble about the uniquely-defined leafmost member
+## if partial_ok = TRUE, require foo/bar/baz
+## if partial_ok = FALSE, might get foo/ or foo/bar/ or foo/bar/baz
+get_one_path <- function(path = NULL,
+                         partial_ok = FALSE,
+                         .rships = NULL,
+                         .root = "ROOT") {
+
+  leaf <- get_paths(
+    path = path, partial_ok = partial_ok,
+    .rships = .rships, .root = .root
+  )
+
+  if (nrow(leaf) > 1) {
+    line0 <- glue::glue("Path identifies more than one file: {sq(path)}")
+    lines <- glue::glue_data(leaf, "File of type {mimeType}, with id {id}.")
     stop(glue::collapse(c(line0, lines), "\n"), call. = FALSE)
   }
 
-  if (length(keep_me) < 1) {
-    stop(glue::glue("The path '{path}' does not exist.", call. = FALSE))
+  if (nrow(leaf) < 1) {
+    if (partial_ok) {
+      return(null_path())
+    } else {
+      stop(glue::glue("Path does not exist: {sq(path)}"), call. = FALSE)
+    }
   }
 
-  i <- which(hits$id == leaf_id[keep_me])
-  list(
-    id = hits$id[i],
-    mimeType = hits$gfile[[i]][["mimeType"]],
-    parent_id = leaf_tbl[[keep_me, "root_path"]][2]
+  leaf
+
+}
+
+## calls pth() and post-processes output into a tibble
+## number of rows = number of rooted paths found
+## these rooted paths are stored in root_path list-column
+## all other variables are replicated to this length
+pth_tbl <- function(id, .rships, stop_value) {
+  i <- which(.rships$id == id)
+  df <- tibble::tibble(
+    id = id,
+    path = "",
+    mimeType = .rships$gfile[[i]][["mimeType"]],
+    parent_id = "",
+    root_path = pth(
+      id,
+      kids = .rships$id,
+      elders = .rships$parents,
+      stop_value = stop_value
+    )
   )
+  is_rooted <- purrr::map_lgl(df$root_path, ~ !is.na(last(.x)))
+  df <- df[is_rooted, ]
+  df$path <- purrr::map_chr(
+    df$root_path,
+    ~ collapse2(rev(.rships$name[match(crop(.x, 1), .rships$id)]), sep = "/")
+  )
+  df$parent_id <- purrr::map_chr(df$root_path, 2)
+  df
 }
 
-## gets the root folder id
-root_folder <- function() {
-  request <- build_request(
-    endpoint = "drive.files.get",
-    params = list(fileId = "root"))
-  response <- make_request(request)
-  proc_res <- process_response(response)
-  proc_res$id
-
-}
-
-## returns a list
+## enumerates paths in a list
 ## each component is a character vector:
 ## id --> parent of id --> grandparent of id --> ... END
-## END is either stop_value (root_id, for us) or NA_character_
+## END is either stop_value (root folder id for us) or NA_character_
 pth <- function(id, kids, elders, stop_value) {
   this <- last(id)
   i <- which(kids == this)
@@ -106,11 +201,7 @@ pth <- function(id, kids, elders, stop_value) {
   }
 }
 
-split_path <- function(path = "") {
-  path <- path %||% ""
-  path <- sub("^~?/*", "", path)
-  unlist(strsplit(path, "/"))
-}
+## path utilities -----------------------------------------------------
 
 ## path  path pieces  dir pieces  leaf pieces
 ## a/b/  a b          a b
@@ -118,7 +209,7 @@ split_path <- function(path = "") {
 ## a/    a            a
 ## a     a                        a
 form_query <- function(path_pieces, leaf_is_folder = FALSE) {
-  nms <- paste0("name = ", sq(path_pieces))
+  nms <- glue::glue("name = {sq(path_pieces)}")
   leaf_q <- utils::tail(nms, !leaf_is_folder)
   dirs_q <- glue::glue(
     "(({dir_pieces}) and mimeType = 'application/vnd.google-apps.folder')",
@@ -127,12 +218,35 @@ form_query <- function(path_pieces, leaf_is_folder = FALSE) {
   glue::collapse(c(leaf_q, dirs_q), last = " or ")
 }
 
-## "a/b/c" and "a/b/c/" both return "a/b/c/"
+## "a/b/" and "a/b" both return "a/b/"
 append_slash <- function(path) {
+  if (length(path) < 1 || path == "") return(path)
   ifelse(grepl("/$", path), path, paste0(path, "/"))
 }
 
-## "a/b/c" and "a/b/c/" both return "a/b/c"
+## "a/b/" and "a/b" both return "a/b"
 strip_slash <- function(path) {
-  ifelse(grepl("/$", path), gsub("/$", "", path), path)
+  gsub("/$", "", path)
+}
+
+split_path <- function(path = "") {
+  path <- path %||% ""
+  path <- sub("^~?/*", "", path)
+  unlist(strsplit(path, "/"))
+}
+
+null_path <- function() {
+  tibble::tibble(
+    id = character(), path = character(), mimeType = character(),
+    parent_id = character(), root_path = list(), path_orig = character()
+  )
+}
+
+## gets the root folder id
+root_id <- function() {
+  request <- build_request(
+    endpoint = "drive.files.get",
+    params = list(fileId = "root"))
+  response <- make_request(request)
+  process_response(response)$id
 }

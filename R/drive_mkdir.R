@@ -13,7 +13,7 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
 
   if (!is.null(path)) {
     path <- append_slash(path)
-    parent <- get_leaf(path)$id
+    parent <- get_one_path(path)$id
   }
 
   request <- build_request(
