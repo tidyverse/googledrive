@@ -1,15 +1,20 @@
 context("Share files")
-name <- paste0("chickwts_", round(runif(1,0,10^12)), ".txt")
+
+## NOTE this will create and delete
+## files
+
+nm_ <- nm_fun("-TEST-drive-share")
 
 test_that("drive_share doesn't explicitly fail", {
   skip_on_appveyor()
   skip_on_travis()
-  ## upload a file
-  write.table(chickwts, "chickwts.txt")
-  drive_chickwts <- drive_upload("chickwts.txt",
-                                 output = name,
-                                 verbose = FALSE)
 
+  write.table(chickwts, "chickwts.txt")
+  on.exit(unlink("chickwts.txt"))
+
+  drive_chickwts <- drive_upload("chickwts.txt",
+                                 output = nm_("chickwts"),
+                                 verbose = FALSE)
   ## since we haven't updated the permissions, the permissions
   ## tibble should be just 1 row
   expect_equal(nrow(drive_chickwts$permissions), 1)
@@ -22,7 +27,7 @@ test_that("drive_share doesn't explicitly fail", {
       drive_chickwts,
       role = role,
       type = type
-      )
+    )
   },
   glue::glue("The permissions for file '{drive_chickwts$name}' have been updated")
   )
@@ -39,7 +44,6 @@ test_that("drive_share doesn't explicitly fail", {
 
   ## clean up
   drive_delete(drive_chickwts)
-  rm <- file.remove("chickwts.txt")
 })
 
 

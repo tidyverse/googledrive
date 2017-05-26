@@ -9,3 +9,7 @@ if (!identical(Sys.getenv("APPVEYOR"), "True") &&
     !identical(Sys.getenv("TRAVIS"), "true")) {
   drive_auth(rprojroot::find_testthat_root_file("testing-token.rds"))
 }
+
+nm_fun <- function(slug) {
+  function(x) paste(paste0(x, slug), collapse = "/")
+}
