@@ -5,12 +5,12 @@
 ##   * id of one direct parent (there could be more)
 get_leaf <- function(path = NULL) {
 
-  root_id <- root_folder() ## store to avoid repeated API calls
+  rid <- root_id() ## store to avoid repeated API calls
   path_pieces <- split_path(path)
   d <- length(path_pieces)
   if (d == 0) {
     return(list(
-      id = root_id,
+      id = rid,
       mimeType = "application/vnd.google-apps.folder",
       parent_id <- NA_character_
     ))
@@ -35,7 +35,7 @@ get_leaf <- function(path = NULL) {
 
   ## for each candidate, enumerate all upward paths, hopefully to root
   root_path <- leaf_id %>%
-    purrr::map(pth, kids = hits$id, elders = hits$parents, stop_value = root_id)
+    purrr::map(pth, kids = hits$id, elders = hits$parents, stop_value = rid)
 
   ## put into a tibble, one row per candidate path
   leaf_tbl <- tibble::tibble(
@@ -72,7 +72,7 @@ get_leaf <- function(path = NULL) {
 }
 
 ## gets the root folder id
-root_folder <- function() {
+root_id <- function() {
   request <- build_request(
     endpoint = "drive.files.get",
     params = list(fileId = "root"))
@@ -125,6 +125,17 @@ form_query <- function(path_pieces, leaf_is_folder = FALSE) {
     dir_pieces = collapse2(crop(nms, !leaf_is_folder), sep = " or ")
   )
   glue::collapse(c(leaf_q, dirs_q), last = " or ")
+}
+
+## strip leading ~, / or ~/
+## if it's empty string --> target is root --> set path to NULL
+normalize_path <- function(path) {
+  if (is.null(path)) return(path)
+  if (!(is.character(path) && length(path) == 1)) {
+    stop("'path' must be a character string.", call. = FALSE)
+  }
+  path <- sub("^~?/*", "", path)
+  if (identical(path, "")) NULL else path
 }
 
 ## "a/b/c" and "a/b/c/" both return "a/b/c/"

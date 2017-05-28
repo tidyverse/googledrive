@@ -22,8 +22,11 @@
 #' @return tibble with one row per file
 #' @examples
 #' \dontrun{
-#' ## list "My Drive"
+#' ## list "My Drive" w/o regard for folders
 #' drive_list()
+#'
+#' ## list files that specifically live at the top-level of "My Drive"
+#' drive_list("~/")
 #'
 #' ## just folders
 #' drive_list(q = "mimeType = 'application/vnd.google-apps.folder'")
@@ -50,9 +53,6 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
     }
   }
 
-  ## if path reduces to root (i.e., "My Drive"), make it an explicit NULL
-  path <- rationalize_path(path)
-
   params <- list(...)
 
   if (is.null(params$fields)) {
@@ -62,8 +62,16 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
   ## initialize q, if necessary
   ## by default, don't list items in trash
   if (is.null(params$q) || !grepl("trashed", params$q)) {
+    ## TO DO: scrutinize what happens here when params$q is NULL
     params$q <- glue::collapse(c(params$q, "trashed = false"), sep = " and ")
   }
+
+  if (!is.null(path) && grepl("^~$|^/$|^~/$", path)) {
+    q_root <- glue::glue("{sq(root_id())} in parents")
+    params$q <- glue::collapse(c(params$q, q_root), sep = " and ")
+    path <- NULL
+  }
+  path <- normalize_path(path)
 
   ## if path is specified, we call the API twice
   ## once to learn id of the folder to list
@@ -158,14 +166,3 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
   "webViewLink",
   "writersCanShare"
 )
-
-## strip leading ~, / or ~/
-## if it's empty string --> target is root --> set path to NULL
-rationalize_path <- function(path) {
-  if (is.null(path)) return(path)
-  if (!(is.character(path) && length(path) == 1)) {
-    stop("'path' must be a character string.", call. = FALSE)
-  }
-  path <- sub("^~?/*", "", path)
-  if (identical(path, "")) NULL else path
-}
