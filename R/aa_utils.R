@@ -85,3 +85,10 @@ collapse2 <- function(x, sep = "", width = Inf, last = "") {
   } else
     glue::collapse(x = x, sep = sep, width = width, last = last)
 }
+
+fill_tbl <- function(x, full) {
+  x <- tibble::as_tibble(x)
+  nms <- names(full)[!(names(full) %in% names(x))]
+  x[,nms] <- NA
+  return(x)
+}
