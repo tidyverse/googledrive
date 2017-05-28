@@ -1,104 +1,141 @@
 context("List files")
 
-## NOTE these tests are creating & deleting the folders needed, however
-## they do assume that you do NOT have a folder named "foo" or a folder
-## named "yo" in your Drive root directory.
+## NOTE if you do not currently have the files needed,
+## change run & clean below to TRUE to create files needed
+## (CAUTION, this will delete files that will interfere)
 
-## ad hoc code for cleaning up if tests exit uncleanly
-# (pesky_files <- drive_list(pattern = "foo|bar|baz|yo"))
-# pesky_files$id %>% purrr::map(drive_file) %>% purrr::map(drive_delete)
+nm_ <- nm_fun("-TEST-drive-list")
+
+
+run <- FALSE
+clean <- FALSE
+if (run) {
+  ## make sure directory is clean
+  if (clean) {
+    del_ids <- drive_list(pattern = paste(c(nm_("foo"),
+                                            nm_("bar"),
+                                            nm_("baz"),
+                                            nm_("yo")),
+                                          collapse = "|"))$id
+    if (!is.null(del_ids)) {
+      del_files <- purrr::map(del_ids, drive_file)
+      del <- purrr::map(del_files, drive_delete, verbose = FALSE)
+    }
+  }
+
+  ## drive_list() not confused by same-named folders
+  ## get_leaf() errors when two distinct folders have same path
+  ## +-- foo
+  ## | +-- bar
+  ## | +-- bar
+  ## | | +-- baz
+  ## | | | +-- yo
+
+  drive_mkdir(nm_("foo"), verbose = FALSE)
+  drive_mkdir(nm_("bar"), path = nm_("foo"), verbose = FALSE)
+  drive_mkdir(nm_("baz"), path = nm_(c("foo","bar")), verbose = FALSE)
+  drive_mkdir(nm_("yo"), path = nm_(c("foo", "bar", "baz")), verbose = FALSE)
+  drive_mkdir(nm_("bar"), path = nm_("foo"), verbose = FALSE)
+
+  ## get_leaf() is not confused by same-named leafs at different depths
+  # +-- foo
+  # | +-- bar
+  # | | +-- baz
+  # +-- baz
+  drive_mkdir(nm_("baz"), verbose = FALSE)
+
+  ## get_leaf() is not confused by nested same-named things
+
+  # +-- foo (folder)
+  # | +-- foo (document)
+
+  write.table(chickwts, "chickwts.txt")
+  drive_upload(input = "chickwts.txt",
+               output = nm_(c("foo","foo")),
+               verbose = FALSE)
+
+  ## get_leaf() is not confused by differently ordered non-leaf folders
+  # +-- bar
+  # | +-- foo
+  #   | +-- baz (file)
+  drive_mkdir(nm_("bar"), verbose = FALSE)
+  drive_mkdir(nm_("foo"), nm_("bar"), verbose = FALSE)
+  drive_upload(input = "chickwts.txt",
+               output = nm_(c("bar","foo","baz")),
+               verbose = FALSE)
+
+
+
+  ## same-named folder and file is diagnosed, but can be disambiguated
+  ## +-- foobar (folder)
+  ## +-- foobar (file)
+  drive_mkdir(nm_("foobar"), verbose = FALSE)
+  drive_upload(input = "chickwts.txt",
+               output = nm_("foobar"),
+               verbose = FALSE)
+  rm <- unlink("chickwts.txt")
+}
+
 
 test_that("drive_list() not confused by same-named folders", {
   skip_on_appveyor()
   skip_on_travis()
 
-  foo_id <- drive_mkdir("foo")$id
-  bar_id <- drive_mkdir("bar", path = "foo")$id
-  baz_id <- drive_mkdir("baz", path = "foo/bar")$id
-  yo_id <- drive_mkdir("yo", path = "foo/bar/baz")$id
-  bar_2_id <- drive_mkdir("bar", path = "foo")$id
-
   ## there should be two folders named 'bar' in 'foo'
-  expect_true(all(c(bar_id, bar_2_id) %in% drive_list(path = "foo")$id))
+  expect_true(all(c(nm_("bar"), nm_("bar")) %in% drive_list(path = nm_("foo"))$name))
 
   ## there should be no trouble telling which bar to route through
-  expect_identical(yo_id, drive_list(path = "foo/bar/baz")$id)
-
-  ## clean up
-  foo_id %>%
-    drive_file() %>%
-    drive_delete()
+  expect_identical(
+    nm_("yo"),
+    drive_list(path = nm_(c("foo","bar","baz")))$name
+  )
 
 })
 
 test_that("get_leaf() errors when two distinct folders have same path", {
+
+  ## +-- foo
+  ## | +-- bar
+  ## | +-- bar
+  ## | | +-- baz
+  ## | | | +-- yo
+
   skip_on_appveyor()
   skip_on_travis()
 
-  ## create foo/bar
-  foo_id <- drive_mkdir("foo")$id
-  bar_id <- drive_mkdir("bar", path = "foo")$id
-
-  ## create another foo/bar
-  foo_2_id <- drive_mkdir("foo")$id
-
-  ## our drive_mkdir won't let you place bar in foo, since it doesn't know which foo to place
-  ## it in, so we will use plain httr to make the second foo/bar
-  bar_2 <- httr::POST("https://www.googleapis.com/drive/v3/files",
-                      drive_token(),
-                      body = list(
-                        name = "bar",
-                        parents = list(foo_2_id),
-                        mimeType = "application/vnd.google-apps.folder"
-                      ),
-                      encode = "json"
-  )
-  bar_2_id <- process_response(bar_2)$id
-
   expect_error(
-    get_leaf("foo/bar"),
-    "The path 'foo/bar' identifies more than one file:"
+    get_leaf(nm_(c("foo","bar"))),
+    paste0("The path '",
+           nm_(c("foo","bar")),
+           "' identifies more than one file:")
   )
-
-  ## clean up
-  clean <- c(foo_id, foo_2_id) %>%
-    purrr::map(drive_file) %>%
-    purrr::map(drive_delete)
 })
 
 test_that("get_leaf() is not confused by same-named leafs at different depths", {
 
+  # +-- foo
+  # | +-- bar
+  # | | +-- baz
+  # +-- baz
+
   skip_on_appveyor()
   skip_on_travis()
 
-  # +-- foo
-  # | +-- bar
-  # +-- bar
-  foo_id <- drive_mkdir("foo")$id
-  bar_id <- drive_mkdir("bar", path = "foo/")$id
-  bar_2_id <- drive_mkdir("bar")$id
-  expect_identical(get_leaf("foo/bar/")$id, bar_id)
-
-  c(foo_id, bar_2_id) %>%
-    purrr::map(drive_file) %>%
-    purrr::map(drive_delete)
+  expect_silent(get_leaf(nm_(c("foo","bar","baz"))))
 })
 
 test_that("get_leaf() is not confused by nested same-named things", {
 
+  # +-- foo (folder)
+  # | +-- foo (document)
+
   skip_on_appveyor()
   skip_on_travis()
 
-  # +-- foo
-  # | +-- foo
-  foo_1_id <- drive_mkdir("foo")$id
-  foo_2_id <- drive_mkdir("foo", path = "foo/")$id
-  expect_identical(get_leaf("foo")$id, foo_1_id)
-  expect_identical(get_leaf("foo/foo/")$id, foo_2_id)
-
-  foo_1_id %>%
-    purrr::map(drive_file) %>%
-    purrr::map(drive_delete)
+  ## we've created one to be a folder and one to be a document.
+  expect_true(grepl("folder", get_leaf(nm_("foo"))$mimeType))
+  expect_true(grepl("text",
+                    get_leaf(nm_(c("foo","foo")))$mimeType))
 })
 
 test_that("get_leaf() is not confused by differently ordered non-leaf folders", {
@@ -112,48 +149,33 @@ test_that("get_leaf() is not confused by differently ordered non-leaf folders", 
   # +-- bar
   # | +-- foo
   #   | +-- baz
-  foo_1_id <- drive_mkdir("foo")$id
-  bar_1_id <- drive_mkdir("bar", path = "foo/")$id
-  baz_1_id <- drive_mkdir("baz", path = "foo/bar/")$id
-  bar_2_id <- drive_mkdir("bar")$id
-  foo_2_id <- drive_mkdir("foo", path = "bar/")$id
-  baz_2_id <- drive_mkdir("baz", path = "bar/foo/")$id
-  expect_identical(get_leaf("foo/bar/baz")$id, baz_1_id)
-  expect_identical(get_leaf("bar/foo/baz/")$id, baz_2_id)
 
-  c(foo_1_id, bar_2_id) %>%
-    purrr::map(drive_file) %>%
-    purrr::map(drive_delete)
+  expect_true(grepl("folder", get_leaf(nm_(c("foo", "bar", "baz")))$mimeType))
+
+  expect_true(grepl("text", get_leaf(nm_(c("bar", "foo", "baz")))$mimeType))
 })
 
 test_that("same-named folder and file is diagnosed, but can be disambiguated", {
+
+  ## +-- foobar (folder)
+  ## +-- foobar (file)
+
   skip_on_appveyor()
   skip_on_travis()
 
-  foo_dir_id <- drive_mkdir("foo")$id
-
-  write.table(chickwts, "chickwts.txt")
-  on.exit(unlink("chickwts.txt"))
-  foo_file_1_id <- drive_upload("chickwts.txt", "foo")$id
-  ## TO DO: when drive_upload is capable of this, uncomment it
-  #foo_file_2_id <- drive_upload("chickwts.txt", "foo/foo")
-
   expect_error(
-    drive_list("foo"),
-    "The path 'foo' identifies more than one file:"
+    drive_list(nm_("foobar")),
+    paste0("The path '", nm_("foobar"), "' identifies more than one file:")
   )
   ## TO DO: change the expectation once foo/ contains a file
   expect_message(
-    out <- drive_list("foo/"),
-    "There are no files in Google Drive path: 'foo/'"
+    out <- drive_list(paste0(nm_("foobar"), "/")),
+    paste0("There are no files in Google Drive path: '",paste0(nm_("foobar"), "/"),"'")
   )
   expect_is(out, "tbl_df")
   expect_identical(nrow(out), 0L)
   expect_true(all(c("name", "id") %in% names(out)))
 
-  c(foo_dir_id, foo_file_1_id) %>%
-    purrr::map(drive_file) %>%
-    purrr::map(drive_delete)
 })
 
 ## TO DO: add test for listing a single file via path, eg drive_file("foo/a_file")
