@@ -1,11 +1,11 @@
 #' List files on Google Drive
 #'
 #' @param path character. Google Drive path to list. Defaults to "My Drive", but
-#'   without regard to any folder hierarchy. If path is a folder, its contents
-#'   are listed, not recursively. If path is a file, that single file is listed.
-#'   A trailing slash indicates explicitly that the path is a folder, which can
-#'   disambiguate if there is a file of the same name (yes this is possible on
-#'   Drive!).
+#'   without regard to any folder hierarchy. If `path` uniquely identifies a
+#'   folder, its contents are listed, not recursively. Use a trailing slash to
+#'   indicate explicitly that the path is a folder, which can disambiguate if
+#'   there is a file of the same name (yes this is possible on Drive!). If
+#'   `path` uniquely identifies a file, that single file is listed.
 #' @param pattern character. If provided, only the files whose names match this
 #'   regular expression are returned.
 #' @param ... Parameters to pass along to the API query.
@@ -22,8 +22,11 @@
 #' @return tibble with one row per file
 #' @examples
 #' \dontrun{
-#' ## list "My Drive"
+#' ## list "My Drive" w/o regard for folders
 #' drive_list()
+#'
+#' ## list files that specifically live at the top-level of "My Drive"
+#' drive_list("~/")
 #'
 #' ## just folders
 #' drive_list(q = "mimeType = 'application/vnd.google-apps.folder'")
@@ -50,9 +53,6 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
     }
   }
 
-  ## if path reduces to root (i.e., "My Drive"), make it an explicit NULL
-  path <- rationalize_path(path)
-
   params <- list(...)
 
   if (is.null(params$fields)) {
@@ -62,14 +62,22 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
   ## initialize q, if necessary
   ## by default, don't list items in trash
   if (is.null(params$q) || !grepl("trashed", params$q)) {
+    ## TO DO: scrutinize what happens here when params$q is NULL
     params$q <- glue::collapse(c(params$q, "trashed = false"), sep = " and ")
   }
+
+  if (is_root(path)) {
+    q_root <- glue::glue("{sq(root_id())} in parents")
+    params$q <- glue::collapse(c(params$q, q_root), sep = " and ")
+    path <- NULL
+  }
+  path <- normalize_path(path)
 
   ## if path is specified, we call the API twice
   ## once to learn id of the folder to list
   ## then again to list the contents
   if (!is.null(path)) {
-    leaf <- get_leaf(path)
+    leaf <- get_one_path(path)
     if (leaf$mimeType == "application/vnd.google-apps.folder") {
       ## path identifies a folder
       ## we will list it
@@ -158,14 +166,3 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
   "webViewLink",
   "writersCanShare"
 )
-
-## strip leading ~, / or ~/
-## if it's empty string --> target is root --> set path to NULL
-rationalize_path <- function(path) {
-  if (is.null(path)) return(path)
-  if (!(is.character(path) && length(path) == 1)) {
-    stop("'path' must be a character string.", call. = FALSE)
-  }
-  path <- sub("^~?/*", "", path)
-  if (identical(path, "")) NULL else path
-}

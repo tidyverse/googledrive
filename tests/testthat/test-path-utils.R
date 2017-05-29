@@ -1,4 +1,4 @@
-context("Drive path helpers")
+context("Path utilities")
 
 test_that("split_path() strips leading ~ or ~/ or /, then splits", {
   expect_identical(split_path(""), character(0))
@@ -10,6 +10,22 @@ test_that("split_path() strips leading ~ or ~/ or /, then splits", {
   expect_identical(split_path("/a/bc/"), c("a", "bc"))
   expect_identical(split_path("a/bc"), c("a", "bc"))
   expect_identical(split_path("a/bc/"), c("a", "bc"))
+})
+
+test_that("append_slash() appends a slash or declines to do so", {
+  expect_identical(append_slash("a"), "a/")
+  expect_identical(append_slash("a/"), "a/")
+  expect_identical(append_slash("/"), "/")
+  expect_identical(append_slash(""), "")
+  expect_identical(append_slash(character(0)), character(0))
+})
+
+test_that("strip_slash() strips a trailing slash", {
+  expect_identical(strip_slash("a"), "a")
+  expect_identical(strip_slash("a/"), "a")
+  expect_identical(strip_slash("/"), "")
+  expect_identical(strip_slash(""), "")
+  expect_identical(strip_slash(character(0)), character(0))
 })
 
 test_that("form_query() handles paths w/ all combos of dir and leaf piece(s)", {
@@ -33,4 +49,15 @@ test_that("form_query() handles paths w/ all combos of dir and leaf piece(s)", {
     form_query("a", FALSE),
     "name = 'a'"
   )
+})
+
+test_that("is_root() recognizes requests for root folder", {
+  expect_true(is_root("~"))
+  expect_true(is_root("~/"))
+  expect_true(is_root("/"))
+  expect_false(is_root(NULL))
+  expect_false(is_root(character(0)))
+  expect_false(is_root("abc"))
+  expect_false(is_root("/abc"))
+  expect_false(is_root("~/abc"))
 })

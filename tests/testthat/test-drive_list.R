@@ -76,7 +76,6 @@ if (run) {
   rm <- unlink("chickwts.txt")
 }
 
-
 test_that("drive_list() not confused by same-named folders", {
   skip_on_appveyor()
   skip_on_travis()
@@ -92,67 +91,15 @@ test_that("drive_list() not confused by same-named folders", {
 
 })
 
-test_that("get_leaf() errors when two distinct folders have same path", {
-
-  ## +-- foo
-  ## | +-- bar
-  ## | +-- bar
-  ## | | +-- baz
-  ## | | | +-- yo
-
+test_that("drive_list() can target top-level files only", {
   skip_on_appveyor()
   skip_on_travis()
 
-  expect_error(
-    get_leaf(nm_(c("foo","bar"))),
-    paste0("The path '",
-           nm_(c("foo","bar")),
-           "' identifies more than one file:")
-  )
-})
-
-test_that("get_leaf() is not confused by same-named leafs at different depths", {
-
-  # +-- foo
-  # | +-- bar
-  # | | +-- baz
-  # +-- baz
-
-  skip_on_appveyor()
-  skip_on_travis()
-
-  expect_silent(get_leaf(nm_(c("foo","bar","baz"))))
-})
-
-test_that("get_leaf() is not confused by nested same-named things", {
-
-  # +-- foo (folder)
-  # | +-- foo (document)
-
-  skip_on_appveyor()
-  skip_on_travis()
-
-  ## we've created one to be a folder and one to be a document.
-  expect_true(grepl("folder", get_leaf(nm_("foo"))$mimeType))
-  expect_true(grepl("text",
-                    get_leaf(nm_(c("foo","foo")))$mimeType))
-})
-
-test_that("get_leaf() is not confused by differently ordered non-leaf folders", {
-
-  skip_on_appveyor()
-  skip_on_travis()
-
-  # +-- foo
-  # | +-- bar
-  #   | +-- baz
-  # +-- bar
-  # | +-- foo
-  #   | +-- baz
-
-  expect_true(grepl("folder", get_leaf(nm_(c("foo", "bar", "baz")))$mimeType))
-
-  expect_true(grepl("text", get_leaf(nm_(c("bar", "foo", "baz")))$mimeType))
+  default <- drive_list()
+  just_root <- drive_list("~/")
+  rid <- root_id()
+  expect_true(nrow(default) > nrow(just_root))
+  expect_true(all(purrr::map_lgl(just_root$parents, ~ rid %in% .x)))
 })
 
 test_that("same-named folder and file is diagnosed, but can be disambiguated", {
@@ -165,7 +112,7 @@ test_that("same-named folder and file is diagnosed, but can be disambiguated", {
 
   expect_error(
     drive_list(nm_("foobar")),
-    paste0("The path '", nm_("foobar"), "' identifies more than one file:")
+    paste0("Path identifies more than one file:")
   )
   ## TO DO: change the expectation once foo/ contains a file
   expect_message(
@@ -179,3 +126,11 @@ test_that("same-named folder and file is diagnosed, but can be disambiguated", {
 })
 
 ## TO DO: add test for listing a single file via path, eg drive_file("foo/a_file")
+
+## Jenny deleted many tests in favor of non-API-calling tests of path helpers
+## could be resurrected as consider bringing back as integration tests
+##   * two distinct folders with same path (error)
+##   * same-named leafs at different depths (success)
+##   * nest same-named things, e.g., a/a (success)
+##   * differently-ordered paths, e.g., a/b/c vs b/a/c (success)
+
