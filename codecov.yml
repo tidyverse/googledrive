@@ -1,5 +1,9 @@
 comment: false
 coverage:
   status:
-    project: off
-    patch: off
+    project:
+      default:
+        target: 5%
+    patch:
+      default:
+        target: 5%
