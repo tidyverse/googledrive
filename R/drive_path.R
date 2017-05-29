@@ -14,6 +14,9 @@
 #' @name paths
 #' @examples
 #' \dontrun{
+#' ## get info about your root folder
+#' drive_path()
+#'
 #' ## determine if path 'abc' exists and list matching paths
 #' drive_path_exists("abc")
 #' drive_path("abc")
@@ -41,7 +44,7 @@ drive_path_exists <- function(path, verbose = TRUE) {
 #' @export
 #' @rdname paths
 #' @return `drive_path()`: tibble with one row per matching file
-drive_path <- function(path, partial_ok = FALSE, verbose = TRUE) {
+drive_path <- function(path = "~/", partial_ok = FALSE, verbose = TRUE) {
   get_paths(path = path, partial_ok = partial_ok)
 }
 
@@ -61,6 +64,10 @@ get_paths <- function(path = NULL,
                       .rships = NULL,
                       .root = "ROOT") {
   stopifnot(is.character(path), length(path) == 1)
+  if (is_root(path)) {
+    return(root_folder())
+  }
+  path <- normalize_path(path)
   path_pieces <- split_path(path)
   d <- length(path_pieces)
   if (d == 0) {
@@ -253,11 +260,21 @@ null_path <- function() {
   )
 }
 
-## gets the root folder id
-root_id <- function() {
+is_root <- function(path) {
+  length(path) == 1 && is.character(path) && grepl("^~$|^/$|^~/$", path)
+}
+
+root_folder <- function() {
   request <- build_request(
     endpoint = "drive.files.get",
-    params = list(fileId = "root"))
+    params = list(fileId = "root")
+  )
   response <- make_request(request)
-  process_response(response)$id
+  proc_res <- process_response(response)
+  tibble::tibble(
+    id = proc_res$id, path = "~/", mimeType = proc_res$mimeType,
+    parent_id = NA_character_, root_path = list(proc_res$id), path_orig = "~/"
+  )
 }
+
+root_id <- function() root_folder()$id

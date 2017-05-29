@@ -8,7 +8,7 @@
 \usage{
 drive_path_exists(path, verbose = TRUE)
 
-drive_path(path, partial_ok = FALSE, verbose = TRUE)
+drive_path(path = "~/", partial_ok = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{path}{character. A single Google Drive path to query. All matching
@@ -33,6 +33,9 @@ the contents of a folder or do general searching, use \code{\link[=drive_list]{d
 }
 \examples{
 \dontrun{
+## get info about your root folder
+drive_path()
+
 ## determine if path 'abc' exists and list matching paths
 drive_path_exists("abc")
 drive_path("abc")

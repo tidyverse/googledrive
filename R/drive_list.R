@@ -66,7 +66,7 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
     params$q <- glue::collapse(c(params$q, "trashed = false"), sep = " and ")
   }
 
-  if (!is.null(path) && grepl("^~$|^/$|^~/$", path)) {
+  if (is_root(path)) {
     q_root <- glue::glue("{sq(root_id())} in parents")
     params$q <- glue::collapse(c(params$q, q_root), sep = " and ")
     path <- NULL

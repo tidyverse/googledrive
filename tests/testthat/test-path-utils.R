@@ -50,3 +50,14 @@ test_that("form_query() handles paths w/ all combos of dir and leaf piece(s)", {
     "name = 'a'"
   )
 })
+
+test_that("is_root() recognizes requests for root folder", {
+  expect_true(is_root("~"))
+  expect_true(is_root("~/"))
+  expect_true(is_root("/"))
+  expect_false(is_root(NULL))
+  expect_false(is_root(character(0)))
+  expect_false(is_root("abc"))
+  expect_false(is_root("/abc"))
+  expect_false(is_root("~/abc"))
+})
