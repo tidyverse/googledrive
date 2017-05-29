@@ -218,6 +218,17 @@ form_query <- function(path_pieces, leaf_is_folder = FALSE) {
   glue::collapse(c(leaf_q, dirs_q), last = " or ")
 }
 
+## strip leading ~, / or ~/
+## if it's empty string --> target is root --> set path to NULL
+normalize_path <- function(path) {
+  if (is.null(path)) return(path)
+  if (!(is.character(path) && length(path) == 1)) {
+    stop("'path' must be a character string.", call. = FALSE)
+  }
+  path <- sub("^~?/*", "", path)
+  if (identical(path, "")) NULL else path
+}
+
 ## "a/b/" and "a/b" both return "a/b/"
 append_slash <- function(path) {
   if (length(path) < 1 || path == "") return(path)

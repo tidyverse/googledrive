@@ -38,8 +38,11 @@ List files on Google Drive
 }
 \examples{
 \dontrun{
-## list "My Drive"
+## list "My Drive" w/o regard for folders
 drive_list()
+
+## list files that specifically live at the top-level of "My Drive"
+drive_list("~/")
 
 ## just folders
 drive_list(q = "mimeType = 'application/vnd.google-apps.folder'")

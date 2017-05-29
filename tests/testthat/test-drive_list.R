@@ -91,6 +91,17 @@ test_that("drive_list() not confused by same-named folders", {
 
 })
 
+test_that("drive_list() can target top-level files only", {
+  skip_on_appveyor()
+  skip_on_travis()
+
+  default <- drive_list()
+  just_root <- drive_list("~/")
+  rid <- root_id()
+  expect_true(nrow(default) > nrow(just_root))
+  expect_true(all(purrr::map_lgl(just_root$parents, ~ rid %in% .x)))
+})
+
 test_that("same-named folder and file is diagnosed, but can be disambiguated", {
 
   ## +-- foobar (folder)
