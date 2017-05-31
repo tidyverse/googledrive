@@ -16,12 +16,12 @@ drive_get_id <- function(pattern = NULL,
                          ...,
                          verbose = TRUE) {
   if ("orderBy" %in% names(list(...))) {
-    ls <- drive_list(pattern = pattern, ...)
+    ls <- drive_search(pattern = pattern, ...)
     if (!is.null(ls)) {
       id <- as.list(ls[1:n, 3])[[1]]
     }
   } else{
-    ls <- drive_list(pattern = pattern,
+    ls <- drive_search(pattern = pattern,
                      orderBy = "modifiedTime desc",
                      ...)
     if (!is.null(ls)) {

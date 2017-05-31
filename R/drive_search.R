@@ -1,11 +1,5 @@
-#' List files on Google Drive
+#' Search for files on Google Drive
 #'
-#' @param path character. Google Drive path to list. Defaults to "My Drive", but
-#'   without regard to any folder hierarchy. If `path` uniquely identifies a
-#'   folder, its contents are listed, not recursively. Use a trailing slash to
-#'   indicate explicitly that the path is a folder, which can disambiguate if
-#'   there is a file of the same name (yes this is possible on Drive!). If
-#'   `path` uniquely identifies a file, that single file is listed.
 #' @param pattern character. If provided, only the files whose names match this
 #'   regular expression are returned.
 #' @param ... Parameters to pass along to the API query.
@@ -22,30 +16,32 @@
 #' @return tibble with one row per file
 #' @examples
 #' \dontrun{
-#' ## list "My Drive" w/o regard for folders
-#' drive_list()
+#' ## list "My Drive" w/o regard for folder hierarchy
+#' drive_search()
 #'
-#' ## list files that specifically live at the top-level of "My Drive"
-#' drive_list("~/")
+#' ## search for files located directly in your root folder
+#' drive_search(q = "'root' in parents")
 #'
-#' ## just folders
-#' drive_list(q = "mimeType = 'application/vnd.google-apps.folder'")
+#' ## filter for folders
+#' drive_search(q = "mimeType = 'application/vnd.google-apps.folder'")
 #'
-#' ## just folders that have the folder with id 'abc' as direct parent
-#' drive_list(q = "'abc' in parents and mimeType='application/vnd.google-apps.folder'")
+#' ## get contents of the folder 'abc' (non-recursive)
+#' ## THIS WORKFLOW WILL GET SMOOTHER!
+#' ## first, get the folder's id
+#' x <- drive_path("abc")
+#' ## now, search for files with this folder as direct parent
+#' q_clause <- paste(shQuote(x$id), "in parents")
+#' drive_search(q = q_clause)
 #'
-#' ## files that match a regex
-#' drive_list(pattern = "jt")
+#' ## files whose names match a regex
+#' drive_search(pattern = "jt")
 #'
-#' ## list the contents of the 'jt01' folder
-#' drive_list("jt01/")
-#'
-#' ## list user's Google Sheets
-#' drive_list(q = "mimeType='application/vnd.google-apps.spreadsheet'")
+#' ## filter for  Google Sheets
+#' drive_search(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 #' }
 #'
 #' @export
-drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
+drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
 
   if (!is.null(pattern)) {
     if (!(is.character(pattern) && length(pattern) == 1)) {
@@ -66,34 +62,6 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
     params$q <- glue::collapse(c(params$q, "trashed = false"), sep = " and ")
   }
 
-  if (is_root(path)) {
-    q_root <- glue::glue("{sq(root_id())} in parents")
-    params$q <- glue::collapse(c(params$q, q_root), sep = " and ")
-    path <- NULL
-  }
-  path <- normalize_path(path)
-
-  ## if path is specified, we call the API twice
-  ## once to learn id of the folder to list
-  ## then again to list the contents
-  if (!is.null(path)) {
-    leaf <- get_one_path(path)
-    if (leaf$mimeType == "application/vnd.google-apps.folder") {
-      ## path identifies a folder
-      ## we will list it
-      parent_id <- leaf$id
-    } else {
-      ## path identifies a file
-      ## we will list its parent, but restrict to the file's name
-      ## simplest way to get a single file back in "drive_list()" style
-      parent_id <- leaf$parent_id
-      q_name <- glue::glue("name = {sq(name)}", name = basename(path))
-      params$q <- glue::collapse(c(params$q, q_name), sep = " and ")
-    }
-    q_parent <- glue::glue("{sq(parent_id)} in parents")
-    params$q <- glue::collapse(c(params$q, q_parent), sep = " and ")
-  }
-
   request <- build_request(params = params)
   response <- make_request(request)
   proc_res <- process_response(response)
@@ -107,9 +75,6 @@ drive_list <- function(path = NULL, pattern = NULL, ..., verbose = TRUE) {
   )
 
   if (is.null(pattern)) {
-    if (nrow(req_tbl) == 0) {
-      if (verbose) message(sprintf("There are no files in Google Drive path: '%s'", path))
-    }
     return(req_tbl)
   }
 

@@ -11,7 +11,7 @@ drive_path_exists(path, verbose = TRUE)
 drive_path(path = "~/", partial_ok = FALSE, verbose = TRUE)
 }
 \arguments{
-\item{path}{character. A single Google Drive path to query. All matching
+\item{path}{character. A single path to query on Google Drive. All matching
 files are returned. Folders are a specific type of file. Use a trailing
 slash to indicate explicitly that the path is a folder, which can
 disambiguate if there is a file of the same name (yes this is possible on
@@ -28,13 +28,16 @@ Drive!).}
 \code{drive_path()}: tibble with one row per matching file
 }
 \description{
-These functions gather information about a single path. If you want to list
-the contents of a folder or do general searching, use \code{\link[=drive_list]{drive_list()}}.
+These functions gather information about a single path, which may very well
+correspond to more than one file. Note that a folder is a specific type of
+file on Drive. If you want to list the contents of a folder or do general
+searching, use \code{\link[=drive_search]{drive_search()}}.
 }
 \examples{
 \dontrun{
-## get info about your root folder
+## get info about your "My Drive" root folder
 drive_path()
+drive_path("~/")
 
 ## determine if path 'abc' exists and list matching paths
 drive_path_exists("abc")

@@ -1,9 +1,11 @@
 #' Query a path on Google Drive
 #'
-#' These functions gather information about a single path. If you want to list
-#' the contents of a folder or do general searching, use [drive_list()].
+#' These functions gather information about a single path, which may very well
+#' correspond to more than one file. Note that a folder is a specific type of
+#' file on Drive. If you want to list the contents of a folder or do general
+#' searching, use [drive_search()].
 #'
-#' @param path character. A single Google Drive path to query. All matching
+#' @param path character. A single path to query on Google Drive. All matching
 #'   files are returned. Folders are a specific type of file. Use a trailing
 #'   slash to indicate explicitly that the path is a folder, which can
 #'   disambiguate if there is a file of the same name (yes this is possible on
@@ -14,8 +16,9 @@
 #' @name paths
 #' @examples
 #' \dontrun{
-#' ## get info about your root folder
+#' ## get info about your "My Drive" root folder
 #' drive_path()
+#' drive_path("~/")
 #'
 #' ## determine if path 'abc' exists and list matching paths
 #' drive_path_exists("abc")
@@ -77,7 +80,7 @@ get_paths <- function(path = NULL,
   if (is.null(.rships)) {
     ## query restricts to names in path_pieces and, for all pieces that are
     ## known to be folder, to mimeType = folder
-    .rships <- drive_list(
+    .rships <- drive_search(
       fields = "files/parents,files/name,files/mimeType,files/id",
       q = form_query(path_pieces, leaf_is_folder = grepl("/$", path)),
       verbose = FALSE
@@ -251,6 +254,10 @@ split_path <- function(path = "") {
   path <- path %||% ""
   path <- sub("^~?/*", "", path)
   unlist(strsplit(path, "/"))
+}
+
+unsplit_path <- function(...) {
+  gsub("^/*", "", file.path(...))
 }
 
 null_path <- function() {
