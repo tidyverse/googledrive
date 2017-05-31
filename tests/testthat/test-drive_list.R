@@ -1,5 +1,14 @@
 context("List files")
 
+## LUCY: These tests are really about path finding and resolution, which should
+## be handled in tests of drive_path() and associated helpers. For now, I think
+## a couple of very simple tests of `drive_search()` are enough. Maybe just draw
+## on the examples?
+##
+## The code to create all these folders and files would be useful if we have
+## extensive integration tests of drive_path(). Until that day, perhaps we don't
+## need it?
+
 ## NOTE if you do not currently have the files needed,
 ## change run & clean below to TRUE to create files needed
 ## (CAUTION, this will delete files that will interfere)
@@ -12,11 +21,11 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del_ids <- drive_list(pattern = paste(c(nm_("foo"),
-                                            nm_("bar"),
-                                            nm_("baz"),
-                                            nm_("yo")),
-                                          collapse = "|"))$id
+    del_ids <- drive_search(pattern = paste(c(nm_("foo"),
+                                              nm_("bar"),
+                                              nm_("baz"),
+                                              nm_("yo")),
+                                            collapse = "|"))$id
     if (!is.null(del_ids)) {
       del_files <- purrr::map(del_ids, drive_file)
       del <- purrr::map(del_files, drive_delete, verbose = FALSE)
@@ -79,6 +88,7 @@ if (run) {
 test_that("drive_list() not confused by same-named folders", {
   skip_on_appveyor()
   skip_on_travis()
+  skip("drive_list() is gone")
 
   ## there should be two folders named 'bar' in 'foo'
   expect_true(all(c(nm_("bar"), nm_("bar")) %in% drive_list(path = nm_("foo"))$name))
@@ -94,6 +104,7 @@ test_that("drive_list() not confused by same-named folders", {
 test_that("drive_list() can target top-level files only", {
   skip_on_appveyor()
   skip_on_travis()
+  skip("drive_list() is gone")
 
   default <- drive_list()
   just_root <- drive_list("~/")
@@ -109,6 +120,7 @@ test_that("same-named folder and file is diagnosed, but can be disambiguated", {
 
   skip_on_appveyor()
   skip_on_travis()
+  skip("drive_list() is gone")
 
   expect_error(
     drive_list(nm_("foobar")),
@@ -124,13 +136,4 @@ test_that("same-named folder and file is diagnosed, but can be disambiguated", {
   expect_true(all(c("name", "id") %in% names(out)))
 
 })
-
-## TO DO: add test for listing a single file via path, eg drive_file("foo/a_file")
-
-## Jenny deleted many tests in favor of non-API-calling tests of path helpers
-## could be resurrected as consider bringing back as integration tests
-##   * two distinct folders with same path (error)
-##   * same-named leafs at different depths (success)
-##   * nest same-named things, e.g., a/a (success)
-##   * differently-ordered paths, e.g., a/b/c vs b/a/c (success)
 
