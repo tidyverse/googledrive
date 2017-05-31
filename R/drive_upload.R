@@ -42,8 +42,7 @@ build_drive_upload <- function(input = NULL,
                                overwrite = FALSE,
                                type = NULL,
                                ...,
-                               verbose = TRUE,
-                               internet = TRUE) {
+                               verbose = TRUE) {
   if (!file.exists(input)) {
     spf("'%s' does not exist!", input)
   }
@@ -83,22 +82,16 @@ build_drive_upload <- function(input = NULL,
 
   id <- NULL
 
-  if (overwrite & internet) {
-    path <- "~"
-    if (d > 1) {
-      path <- paste(path_pieces[seq_len(d - 1)],
-                    collapse = "/")
-    }
-    old_doc <- drive_list(path = path,
-                          pattern = paste0("^", name, "$"),
-                          verbose = FALSE)
+  if (overwrite) {
+   old_doc <- drive_list(path = output,
+                         verbose = FALSE)
     if (!is.null(old_doc)) {
-      id <- old_doc$id[1]
+      id <- old_doc$id
     }
   }
 
 
-  if (is.null(id) & internet) {
+  if (is.null(id)) {
 
     parent <- NULL
     # if there are folders defined
@@ -134,7 +127,7 @@ build_drive_upload <- function(input = NULL,
 
     # if we are just uploading a folder, we are finished,
     if (!is.null(type)) {
-      if (type == "application/vnd.google-apps.folder" & internet) {
+      if (type == "application/vnd.google-apps.folder") {
         return(req)
       }
     }
