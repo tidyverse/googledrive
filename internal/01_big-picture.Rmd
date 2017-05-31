@@ -71,7 +71,7 @@ drive_user()
 
 ```{r}
 write.table("this is a test", file = "~/desktop/test.txt")
-drive_upload(input = "~/desktop/test.txt", output = "This is a test", overwrite = TRUE)
+drive_upload(from = "~/desktop/test.txt", up_name = "This is a test", overwrite = TRUE)
 ```
 
 ```{r}

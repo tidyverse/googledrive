@@ -13,7 +13,7 @@ test_that("drive_share doesn't explicitly fail", {
   on.exit(unlink("chickwts.txt"))
 
   drive_chickwts <- drive_upload("chickwts.txt",
-                                 output = nm_("chickwts"),
+                                 up_name = nm_("chickwts"),
                                  verbose = FALSE)
   ## since we haven't updated the permissions, the permissions
   ## tibble should be just 1 row

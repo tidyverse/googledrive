@@ -21,12 +21,12 @@ if (run) {
   }
   write.table(chickwts, "chickwts.txt")
   drive_upload("chickwts.txt",
-               output = nm_("chickwts_gdoc"),
+               up_name = nm_("chickwts_gdoc"),
                type = "document",
                verbose = FALSE)
 
   drive_upload("chickwts.txt",
-               output = nm_("chickwts_txt"),
+               up_name = nm_("chickwts_txt"),
                verbose = FALSE)
 
 

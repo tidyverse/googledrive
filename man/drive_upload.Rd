@@ -4,14 +4,17 @@
 \alias{drive_upload}
 \title{Upload a file to Google Drive}
 \usage{
-drive_upload(input = NULL, output = NULL, overwrite = FALSE,
-  type = NULL, ..., verbose = TRUE)
+drive_upload(from = NULL, up_name = NULL, up_folder = NULL,
+  overwrite = FALSE, type = NULL, verbose = TRUE)
 }
 \arguments{
-\item{input}{character, path (on your computer) of the file you'd like to upload}
+\item{from}{character, local path to the file to upload}
 
-\item{output}{character, path (on your Google Drive) where you'd like to upload
-the file}
+\item{up_name}{character, name the file should have on Google Drive. Will
+default to its local name.}
+
+\item{up_folder}{character, name of parent folder on Google Drive. Will
+default to user's root folder, i.e. the top-level of "My Drive".}
 
 \item{overwrite}{logical, do you want to overwrite file already on Google
 Drive}
@@ -19,8 +22,6 @@ Drive}
 \item{type}{if type = \code{NULL}, will upload as a non-Google Drive document
 otherwise you can specify \code{document}, \code{spreadsheet}, or \code{presentation}.
 Files with no extension will be assumed to be a \code{folder}.}
-
-\item{...}{name-value pairs to query the API}
 
 \item{verbose}{logical, indicating whether to print informative messages
 (default \code{TRUE})}

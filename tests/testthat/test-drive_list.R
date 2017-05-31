@@ -59,8 +59,9 @@ if (run) {
   # | +-- foo (document)
 
   write.table(chickwts, "chickwts.txt")
-  drive_upload(input = "chickwts.txt",
-               output = nm_(c("foo","foo")),
+  drive_upload(from = "chickwts.txt",
+               up_name = nm_("foo"),
+               up_folder = nm_("foo"),
                verbose = FALSE)
 
   ## get_leaf() is not confused by differently ordered non-leaf folders
@@ -69,8 +70,9 @@ if (run) {
   #   | +-- baz (file)
   drive_mkdir(nm_("bar"), verbose = FALSE)
   drive_mkdir(nm_("foo"), nm_("bar"), verbose = FALSE)
-  drive_upload(input = "chickwts.txt",
-               output = nm_(c("bar","foo","baz")),
+  drive_upload(from = "chickwts.txt",
+               up_name = nm_("baz"),
+               up_folder = nm_(c("bar","foo")),
                verbose = FALSE)
 
 
@@ -79,8 +81,8 @@ if (run) {
   ## +-- foobar (folder)
   ## +-- foobar (file)
   drive_mkdir(nm_("foobar"), verbose = FALSE)
-  drive_upload(input = "chickwts.txt",
-               output = nm_("foobar"),
+  drive_upload(from = "chickwts.txt",
+               up_name = nm_("foobar"),
                verbose = FALSE)
   rm <- unlink("chickwts.txt")
 }

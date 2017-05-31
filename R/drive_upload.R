@@ -78,18 +78,33 @@ drive_upload <- function(from = NULL,
   ## id for the uploaded file
   up_id <- existing$id
 
-  ## TO DO: build the actual requests
   if (length(up_id) == 0) {
-    ## create a file
-    ## name = up_name
-    ## parents = list(up_parent_id)
-    ## mimeType = mimeType
-  } else {
-    ## update existing file
-    ## fileId = up_id
+    request <- build_request(
+      endpoint = "drive.files.create.meta",
+      params = list(
+        name = up_name,
+        parents = list(up_parent_id),
+        mimeType = mimeType
+      )
+    )
+
+    response <- make_request(request, encode = "json")
+    proc_res <- process_response(response)
+    up_id <- proc_res$id
   }
 
-  response <- make_request(request, encode = "json")
+  request <- build_request(
+    endpoint = "drive.files.update.media",
+    params = list(
+      fileId = up_id,
+      uploadType = "media",
+      body = httr::upload_file(path = from,
+                               type = mimeType)
+    )
+  )
+
+
+  response <- make_request(request)
   process_drive_upload(response = response,
                        from = from,
                        verbose = verbose)
