@@ -104,7 +104,7 @@ drive_upload <- function(from = NULL,
   )
 
 
-  response <- make_request(request)
+  response <- make_request(request, encode = "json")
   process_drive_upload(response = response,
                        from = from,
                        verbose = verbose)
