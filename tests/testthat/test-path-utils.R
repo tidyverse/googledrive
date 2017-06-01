@@ -12,6 +12,14 @@ test_that("split_path() strips leading ~ or ~/ or /, then splits", {
   expect_identical(split_path("a/bc/"), c("a", "bc"))
 })
 
+test_that("unsplit_path() is file.path(), but never leads with /'s", {
+  expect_identical(unsplit_path(), character(0))
+  expect_identical(unsplit_path(""), "")
+  expect_identical(unsplit_path("", "a"), "a")
+  expect_identical(unsplit_path("", "", "a"), "a")
+  expect_identical(unsplit_path("a", "b"), file.path("a", "b"))
+})
+
 test_that("append_slash() appends a slash or declines to do so", {
   expect_identical(append_slash("a"), "a/")
   expect_identical(append_slash("a/"), "a/")

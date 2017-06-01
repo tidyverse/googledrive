@@ -17,7 +17,7 @@ drive_auth("drive-token.rds")
 
 ```{r}
 write.table("This is a little demo", "demo.txt")
-drive_upload("demo.txt", "Happy Little Demo")
+drive_upload(from = "demo.txt", up_name = "Happy Little Demo")
 ```
 
 ```{r}

@@ -1,14 +1,10 @@
 context("Upload files")
 
-test_that("build_drive_upload behaves", {
+test_that("drive_upload behaves", {
+  skip_on_appveyor()
+  skip_on_travis()
+
   #the file should be a file that exists
   input <- "this should not work"
-  expect_error(
-    build_drive_upload(
-      input = input,
-      token = NULL,
-      internet = FALSE
-    ),
-    sprintf("'%s' does not exist!", input)
-  )
+  expect_error(drive_upload(from = input), "File does not exist")
 })
