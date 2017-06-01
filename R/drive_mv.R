@@ -14,6 +14,10 @@ drive_mv <- function(file = NULL,
   file <- as.dribble(file)
   folder <- as.dribble(folder)
 
+  if (nrow(file) != 1 || nrow(folder) != 1) {
+    spf("We can currently only move 1 `dribble` at a time.")
+  }
+
   request <- build_request(
     endpoint = "drive.files.update.meta",
     params = list(
