@@ -21,6 +21,14 @@
 #' @return object of class `gfile` and `list` that contains uploaded file's
 #'   information
 #' @export
+#' @examples
+#' \dontrun{
+#' write.csv(chickwts, "chickwts.csv")
+#' drive_chickwts <- drive_upload("chickwts.csv")
+#'
+#' ## or convert it to a Google Sheet
+#' drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
+#' }
 drive_upload <- function(from = NULL,
                          up_name = NULL,
                          up_folder = NULL,

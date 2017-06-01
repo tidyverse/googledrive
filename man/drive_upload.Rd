@@ -40,3 +40,12 @@ information
 \description{
 Upload a file to Google Drive
 }
+\examples{
+\dontrun{
+write.csv(chickwts, "chickwts.csv")
+drive_chickwts <- drive_upload("chickwts.csv")
+
+## or convert it to a Google Sheet
+drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
+}
+}
