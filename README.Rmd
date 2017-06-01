@@ -43,27 +43,26 @@ library("googledrive")
 ### Package conventions
 
 * All functions begin with the prefix `drive_`
-* Functions and parameters attempt to mimic local file navigating conventions in R, such as `list.files`.
+* Functions and parameters attempt to mimic local file navigating conventions in R, such as `list.files()`.
 
 ### Quick demo
 
 Here's how to list the most recently modified 100 files on your drive. This will kick off your authentication, so you will be sent to your browser to authorize your Google Drive access. The functions here are designed to be pipeable, using `%>%`, however they can also be implemented without.
 
 ```{r}
-drive_list()
+drive_search()
 ```
 
-You can narrow the query by specifying a `path` and/or `pattern` you'd like to search within. For example, to search within the folder `foobar` for a file named `baz` you could run either of the following.
+You can narrow the query by specifying a `pattern` you'd like to match names against.
 
 ```{r eval = FALSE}
-drive_list(path = "foobar", pattern = "baz")
-drive_list(path = "foobar/baz")
+drive_search(pattern = "baz")
 ```
 
 Alternatively, you can refine the search using the `q` query parameter. Accepted search clauses can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, if I wanted to search for all spreadsheets, I could run the following.
 
 ```{r}
-drive_list(q = "mimeType = 'application/vnd.google-apps.spreadsheet'")
+drive_search(q = "mimeType = 'application/vnd.google-apps.spreadsheet'")
 ```
 
 #### Upload files
