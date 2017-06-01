@@ -6,7 +6,7 @@
 #'   automatically published (default here is `publishAuto = TRUE`)
 #' @template verbose
 #'
-#' @template dribble
+#' @template dribble-return
 #' @export
 drive_publish <- function(file = NULL, ..., verbose = TRUE) {
   drive_change_publish(file = file, publish = TRUE, ..., verbose = verbose)
@@ -18,7 +18,7 @@ drive_publish <- function(file = NULL, ..., verbose = TRUE) {
 #' @param ... name-value pairs to add to the API request body.
 #' @template verbose
 #'
-#' @template dribble
+#' @template dribble-return
 #' @export
 drive_unpublish <- function(file = NULL, ..., verbose = TRUE) {
   drive_change_publish(file = file, publish = FALSE, ..., verbose = verbose)
@@ -41,7 +41,7 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
 
   x$revisionId <- purrr::map_chr(file_update$publish, "revision")
 
-  mime_type <- purrr::map_chr(file_update$file_resource, "mimeType")
+  mime_type <- purrr::map_chr(file_update$files_resource, "mimeType")
 
   x$revisionId <- ifelse(grepl("application/vnd.google-apps.spreadsheet", mime_type),
                          1,
@@ -77,7 +77,7 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
 
   }
 
-  file_update <- as.dribble(drive_id(file$id))
+  file_update <- as_dribble(drive_id(file$id))
   drive_is_published(file = file_update, verbose = FALSE)
 }
 
@@ -90,9 +90,9 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
 #' @export
 drive_is_published <- function (file = NULL, verbose = TRUE) {
 
-  file <- as.dribble(file)
+  file <- as_dribble(file)
 
-  mime_types <- purrr::map_chr(file$file_resource, "mimeType")
+  mime_types <- purrr::map_chr(file$files_resource, "mimeType")
   if (!all(grepl("application/vnd.google-apps.",
              mime_types))) {
     stop(

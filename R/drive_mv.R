@@ -5,13 +5,13 @@
 #'   file to
 #' @template verbose
 #'
-#' @template dribble
+#' @template dribble-return
 #' @export
 drive_mv <- function(file = NULL,
                      folder = NULL,
                      verbose = TRUE) {
-  file <- as.dribble(file)
-  folder <- as.dribble(folder)
+  file <- as_dribble(file)
+  folder <- as_dribble(folder)
 
   if (nrow(file) != 1 || nrow(folder) != 1) {
     spf("We can currently only move 1 `dribble` at a time.")
@@ -22,7 +22,7 @@ drive_mv <- function(file = NULL,
     params = list(
       fileId = file$id,
       addParents = folder$id,
-      removeParents = file$file_resource[[1]]$parents
+      removeParents = file$files_resource[[1]]$parents
     )
   )
 
@@ -46,6 +46,6 @@ drive_mv <- function(file = NULL,
     }
   }
 
-  file <- drive_get(proc_res$id)
+  file <- as_dribble(drive_id(proc_res$id))
   invisible(file)
 }

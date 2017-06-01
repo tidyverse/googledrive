@@ -9,17 +9,17 @@ drive_publish(file = NULL, ..., verbose = TRUE)
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a `dribble`.}
+or a \code{dribble}.}
 
 \item{...}{name-value pairs to add to the API request body, for example
 \code{publishAuto = FALSE} will ensure that each subsequent revision will not be
 automatically published (default here is \code{publishAuto = TRUE})}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default `TRUE`)}
+(default \code{TRUE})}
 }
 \value{
-Drive File. An object of class `dribble`, a tibble with
+An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{

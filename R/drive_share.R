@@ -15,7 +15,7 @@
 #' @param ... name-value pairs to add to the API request body
 #' @template verbose
 #'
-#' @template dribble
+#' @template dribble-return
 #' @export
 drive_share <- function(file = NULL,
                         role = NULL,

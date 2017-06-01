@@ -25,7 +25,7 @@ defaults to the ID and secret built into the \code{googledrive} package}
 credentials in the default cache file \code{.httr-oauth}}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default `TRUE`)}
+(default \code{TRUE})}
 }
 \description{
 Authorize \code{googledrive} to view and manage your files. You will be

@@ -44,7 +44,7 @@ test_that("get_paths() correctly reports paths, no name duplication", {
     "e", "d"
   )
   df$name <- df$id
-  df$file_resource <- list(list(mimeType = ""))
+  df$files_resource <- list(list(mimeType = ""))
 
   ## path exists
   out <- get_paths(path = "a/c", .rships = df)
@@ -111,7 +111,7 @@ test_that("get_paths() works, with name duplication & multiple parents", {
        "c",  "8",         "2",
        "c",  "9",         "7"
   )
-  df$file_resource <- list(list(mimeType = ""))
+  df$files_resource <- list(list(mimeType = ""))
 
   ## single path exists
   out <- get_paths(path = "a/b", .rships = df)
@@ -183,7 +183,7 @@ test_that("get_one_path() errors when > 1 path matches", {
        "c",  "8",       "7",
        "b", "10",       "6"
   )
-  df$file_resource <- list(list(mimeType = "mimeType"))
+  df$files_resource <- list(list(mimeType = "mimeType"))
 
   ## error when >1 thing
   expect_error(

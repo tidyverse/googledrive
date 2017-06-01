@@ -18,7 +18,7 @@ disambiguate if there is a file of the same name (yes this is possible on
 Drive!).}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default `TRUE`)}
+(default \code{TRUE})}
 
 \item{partial_ok}{logical. If \code{path} identifies no files and \code{partial_ok} is
 \code{TRUE}, \code{drive_path()} finds and queries the maximal existing subpath.}
@@ -26,7 +26,7 @@ Drive!).}
 \value{
 \code{drive_path_exists()}: \code{TRUE} or \code{FALSE}
 
-Drive File. An object of class `dribble`, a tibble with
+An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{

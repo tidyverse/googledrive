@@ -46,12 +46,12 @@ drive_path_exists <- function(path, verbose = TRUE) {
 
 #' @export
 #' @rdname paths
-#' @template dribble
+#' @template dribble-return
 drive_path <- function(path = "~/", partial_ok = FALSE, verbose = TRUE) {
   path_id <- get_paths(path = path, partial_ok = partial_ok)$id
   if (length(path_id) == 0L) {
     dribble()
-  } else as.dribble(drive_id(path_id))
+  } else as_dribble(drive_id(path_id))
 }
 
 ## path helpers -------------------------------------------------------
@@ -174,7 +174,7 @@ pth_tbl <- function(id, .rships, stop_value) {
   df <- tibble::tibble(
     id = id,
     path = "",
-    mimeType = .rships$file_resource[[i]][["mimeType"]],
+    mimeType = .rships$files_resource[[i]][["mimeType"]],
     parent_id = "",
     root_path = pth(
       id,

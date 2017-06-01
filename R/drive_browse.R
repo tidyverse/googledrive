@@ -2,12 +2,12 @@
 #'
 #' @template file
 #'
-#' @template dribble
+#' @template dribble-return
 #' @export
 drive_browse <- function(file){
   if (!interactive()) return(invisible(file))
 
-  file <- as.dribble(file)
+  file <- as_dribble(file)
 
   if (!inherits(file, "dribble") || nrow(file) != 1) {
     spf("Input `file` must be a `dribble` with 1 row.")

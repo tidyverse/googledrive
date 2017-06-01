@@ -9,10 +9,10 @@ drive_browse(file)
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a `dribble`.}
+or a \code{dribble}.}
 }
 \value{
-Drive File. An object of class `dribble`, a tibble with
+An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{

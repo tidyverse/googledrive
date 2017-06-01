@@ -3,10 +3,10 @@
 #'
 #' @export
 drive_hello <- function(file) {
-  drib <- as.dribble(file)
+  drib <- as_dribble(file)
   ## this silly second pass is necessary because, eg, drive_path() doesn't
   ## actually return a dribble yet! but you get the idea, yes?
-  drib <- as.dribble(drive_id(drib$id))
+  drib <- as_dribble(drive_id(drib$id))
   message(
     glue::glue_data(
       drib,

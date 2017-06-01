@@ -8,7 +8,7 @@
 #'
 drive_delete <- function(file = NULL, verbose = TRUE) {
 
-  file <- as.dribble(file)
+  file <- as_dribble(file)
 
   out <- purrr::map2_lgl(file$id, file$name, ~ {
   request <- build_request(endpoint = "drive.files.delete",

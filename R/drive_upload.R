@@ -1,5 +1,8 @@
 #' Upload a file to Google Drive
 #'
+#' @seealso MIME types that can be converted to native Google formats:
+#'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
+#'
 #' @param from character, local path to the file to upload
 #' @param up_name character, name the file should have on Google Drive. Will
 #'   default to its local name.
@@ -14,12 +17,9 @@
 #'   respectively.
 #' @template verbose
 #'
-#' @template dribble
+#' @template dribble-return
 #' @export
 #' @examples
-#' MIME types that can be converted to native Google formats:
-#'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
-#'
 #' \dontrun{
 #' write.csv(chickwts, "chickwts.csv")
 #' drive_chickwts <- drive_upload("chickwts.csv")

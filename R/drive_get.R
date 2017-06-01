@@ -11,5 +11,5 @@ drive_get <- function(id) {
   response <- make_request(request)
   proc_res <- process_response(response)
 
-  as.dribble(list(proc_res))
+  as_dribble(list(proc_res))
 }

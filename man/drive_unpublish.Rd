@@ -9,15 +9,15 @@ drive_unpublish(file = NULL, ..., verbose = TRUE)
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a `dribble`.}
+or a \code{dribble}.}
 
 \item{...}{name-value pairs to add to the API request body.}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default `TRUE`)}
+(default \code{TRUE})}
 }
 \value{
-Drive File. An object of class `dribble`, a tibble with
+An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{

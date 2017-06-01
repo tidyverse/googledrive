@@ -4,7 +4,7 @@
 #' @param path character, path where you would like the folder on your Google Drive
 #' @template verbose
 #'
-#' @template dribble
+#' @template dribble-return
 #' @export
 drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   parent <- NULL

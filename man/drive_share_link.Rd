@@ -6,10 +6,12 @@
 \usage{
 drive_share_link(file)
 }
+\arguments{
+\item{file}{Drive File, something that identifies the file of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a \code{dribble}.}
+}
 \value{
-Drive File. An object of class `dribble`, a tibble with
-   one row per file.
-
 character, link to Google Drive file
 }
 \description{

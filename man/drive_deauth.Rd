@@ -12,7 +12,7 @@ drive_deauth(clear_cache = TRUE, verbose = TRUE)
 to \code{.httr-oauth-SUSPENDED}}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default `TRUE`)}
+(default \code{TRUE})}
 }
 \description{
 Suspend \code{googledrive}' authorization to place requests to the

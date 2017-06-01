@@ -43,7 +43,7 @@ test_that("drive_publish doesn't explicitly fail", {
 
   ## since we haven't checked the publication status,
   ## this should be NULL
-  expect_equal(drive_chickwts$file_resource[[1]]$publish, NULL)
+  expect_equal(drive_chickwts$files_resource[[1]]$publish, NULL)
 
   drive_chickwts <- drive_publish(drive_chickwts)
 

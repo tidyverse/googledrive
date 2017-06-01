@@ -9,10 +9,10 @@ drive_delete(file = NULL, verbose = TRUE)
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a `dribble`.}
+or a \code{dribble}.}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default `TRUE`)}
+(default \code{TRUE})}
 }
 \value{
 logical, indicating whether the delete succeeded

@@ -4,7 +4,7 @@
 #'   example, to get 200 instead, specify the `pageSize`, i.e.
 #'   `drive_ls(pageSize = 200)`.
 
-#' Helpful links for forming queries:
+#' @seealso Helpful links for forming queries:
 #'   * <https://developers.google.com/drive/v3/web/search-parameters>
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
 #'
@@ -13,7 +13,7 @@
 #' @param ... Parameters to pass along to the API query.
 #' @template verbose
 #'
-#' @template dribble
+#' @template dribble-return
 #' @examples
 #' \dontrun{
 #' ## list "My Drive" w/o regard for folder hierarchy
@@ -66,7 +66,7 @@ drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
   response <- make_request(request)
   proc_res <- process_response(response)
 
-  res_tbl <- as.dribble(proc_res$files)
+  res_tbl <- as_dribble(proc_res$files)
 
   if (is.null(pattern)) {
     return(res_tbl)
@@ -77,7 +77,7 @@ drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
     if (verbose) message(sprintf("No file names match the pattern: '%s'.", pattern))
     return(invisible())
   }
-  as.dribble(res_tbl[keep_names, ]) ## TO DO change this once we get indexing working
+  as_dribble(res_tbl[keep_names, ]) ## TO DO change this once we get indexing working
 }
 
 .drive$default_fields <- c(
