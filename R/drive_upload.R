@@ -34,16 +34,12 @@ drive_upload <- function(from = NULL,
   ##   * id
 
   up_name <- up_name %||% basename(from)
-  ## LUCY: is it actually important to strip file extension?
-  ## earlier version had this:
-  # if (!is.null(type)) {
-  #   up_name <- tools::file_path_sans_ext(up_name)
-  # }
 
   ## mimeType
   if (!is.null(type) &&
       type %in% c("document", "spreadsheet", "presentation", "folder")) {
     type <- paste0("application/vnd.google-apps.", type)
+    up_name <- tools::file_path_sans_ext(up_name)
   }
   mimeType <- type
   ## TO REVISIT: this is quite naive! assumes mimeType is sensible
