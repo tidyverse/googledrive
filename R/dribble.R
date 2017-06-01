@@ -58,22 +58,16 @@ as.dribble.list <- function(x, ...) {
 ## as a column in the main dribble
 pull_into_dribble <- function(dribble, pull) {
 
-  if (nrow(dribble) == 1) {
-    dribble[[pull]] <- dribble$drive_file[[1]][[pull]]
-    dribble
-  } else {
+  mp <- list(character = purrr::map_chr,
+             numeric = purrr::map_dbl,
+             list = purrr::map,
+             logical = purrr::map_lgl
+  )
 
-    mp <- list(character = purrr::map_chr,
-               numeric = purrr::map_dbl,
-               list = purrr::map,
-               logical = purrr::map_lgl
-    )
+  cl <- class(dribble$drive_file[[1]][[pull]])
 
-    cl <- class(dribble$drive_file[[1]][[pull]])
-
-    fn <- mp[[cl]]
-    dribble[[pull]] <- fn(dribble$drive_file, pull)
-  }
+  fn <- mp[[cl]]
+  dribble[[pull]] <- fn(dribble$drive_file, pull)
   dribble
 }
 
