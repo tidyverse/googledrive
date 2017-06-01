@@ -1,10 +1,5 @@
 #' Search for files on Google Drive
 #'
-#' @param pattern character. If provided, only the files whose names match this
-#'   regular expression are returned.
-#' @param ... Parameters to pass along to the API query.
-#' @param verbose logical. Indicates whether to print informative messages.
-#'
 #'   This will default to the most recent 100 files on your Google Drive. For
 #'   example, to get 200 instead, specify the `pageSize`, i.e.
 #'   `drive_ls(pageSize = 200)`.
@@ -12,8 +7,13 @@
 #' Helpful links for forming queries:
 #'   * <https://developers.google.com/drive/v3/web/search-parameters>
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
-
-#' @return `dribble`, tibble with one row per file
+#'
+#' @param pattern character. If provided, only the files whose names match this
+#'   regular expression are returned.
+#' @param ... Parameters to pass along to the API query.
+#' @template verbose
+#'
+#' @template dribble
 #' @examples
 #' \dontrun{
 #' ## list "My Drive" w/o regard for folder hierarchy

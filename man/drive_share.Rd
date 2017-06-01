@@ -7,8 +7,9 @@
 drive_share(file = NULL, role = NULL, type = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{file}{\code{dribble} or \code{drive_id} object representing the file you
-would like to share}
+\item{file}{Drive File, something that identifies the file of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a `dribble`.}
 
 \item{role}{The role granted by this permission. Valid values are:
 \itemize{
@@ -30,10 +31,11 @@ would like to share}
 \item{...}{name-value pairs to add to the API request body}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+(default `TRUE`)}
 }
 \value{
-\code{dribble} object updated with new sharing information
+Drive File. An object of class `dribble`, a tibble with
+   one row per file.
 }
 \description{
 Update Google Drive file share permissions

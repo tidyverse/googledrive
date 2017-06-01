@@ -26,21 +26,19 @@ setting \code{type} to \code{document}, \code{spreadsheet}, or \code{presentatio
 respectively.}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})
-
-MIME types that can be converted to native Google formats:
-\itemize{
-\item \url{https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19}
-}}
+(default `TRUE`)}
 }
 \value{
-object of class \code{dribble} and \code{tbl} that contains uploaded file's
-information
+Drive File. An object of class `dribble`, a tibble with
+   one row per file.
 }
 \description{
 Upload a file to Google Drive
 }
 \examples{
+MIME types that can be converted to native Google formats:
+   * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
+
 \dontrun{
 write.csv(chickwts, "chickwts.csv")
 drive_chickwts <- drive_upload("chickwts.csv")

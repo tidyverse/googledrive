@@ -1,12 +1,11 @@
 #' Move Google Drive file
 #'
-#' @param file object of class `dribble` or `drive_id` for the file you would like to move
+#' @template file
 #' @param folder object of class `dribble` or `drive_id` for the folder you would like to move the
 #'   file to
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#' @template verbose
 #'
-#' @return `dribble` that was moved
+#' @template dribble
 #' @export
 drive_mv <- function(file = NULL,
                      folder = NULL,
@@ -23,7 +22,7 @@ drive_mv <- function(file = NULL,
     params = list(
       fileId = file$id,
       addParents = folder$id,
-      removeParents = file$drive_file[[1]]$parents
+      removeParents = file$file_resource[[1]]$parents
     )
   )
 

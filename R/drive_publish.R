@@ -1,15 +1,12 @@
 #' Publish Google Drive file
 #'
-#' @param file `dribble` or `drive_id` object representing the file you would
-#'   like to publish
+#' @template file
 #' @param ... name-value pairs to add to the API request body, for example
 #'   `publishAuto = FALSE` will ensure that each subsequent revision will not be
 #'   automatically published (default here is `publishAuto = TRUE`)
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#' @template verbose
 #'
-#' @return `dribble` object, with published information as a `tibble`
-#'   added under the column name `publish`
+#' @template dribble
 #' @export
 drive_publish <- function(file = NULL, ..., verbose = TRUE) {
   drive_change_publish(file = file, publish = TRUE, ..., verbose = verbose)
@@ -17,14 +14,11 @@ drive_publish <- function(file = NULL, ..., verbose = TRUE) {
 
 #' Unpublish Google Drive file
 #'
-#' @param file `dribble` or `drive_id` object representing the file you would
-#'   like to unpublish
+#' @template file
 #' @param ... name-value pairs to add to the API request body.
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#' @template verbose
 #'
-#' @return `dribble` object, with published information as a `tibble`
-#'   added under the column name `publish`
+#' @template dribble
 #' @export
 drive_unpublish <- function(file = NULL, ..., verbose = TRUE) {
   drive_change_publish(file = file, publish = FALSE, ..., verbose = verbose)
@@ -47,7 +41,7 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
 
   x$revisionId <- purrr::map_chr(file_update$publish, "revision")
 
-  mime_type <- purrr::map_chr(file_update$drive_file, "mimeType")
+  mime_type <- purrr::map_chr(file_update$file_resource, "mimeType")
 
   x$revisionId <- ifelse(grepl("application/vnd.google-apps.spreadsheet", mime_type),
                          1,
@@ -98,7 +92,7 @@ drive_is_published <- function (file = NULL, verbose = TRUE) {
 
   file <- as.dribble(file)
 
-  mime_types <- purrr::map_chr(file$drive_file, "mimeType")
+  mime_types <- purrr::map_chr(file$file_resource, "mimeType")
   if (!all(grepl("application/vnd.google-apps.",
              mime_types))) {
     stop(

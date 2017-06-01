@@ -14,7 +14,7 @@ if (run) {
   if (clean) {
     del_ids <- drive_search(pattern = paste(nm_(c("foo","this-should-not-exist"))))$id
     if (!is.null(del_ids)) {
-      del_files <- purrr::map(del_ids, drive_file)
+      del_files <- purrr::map(drive_id(del_ids), drive_get)
       del <- purrr::map(del_files, drive_delete, verbose = FALSE)
     }
   }
@@ -30,7 +30,7 @@ test_that("drive_search() passes q correctly", {
   ## this should find at least 1 folder (foo), and all files found should
   ## be folders
 
-  expect_true(all(drive_search(q = "mimeType='application/vnd.google-apps.folder'")$drive_file[[1]]$mimeType == "application/vnd.google-apps.folder"))
+  expect_true(all(drive_search(q = "mimeType='application/vnd.google-apps.folder'")$file_resource[[1]]$mimeType == "application/vnd.google-apps.folder"))
 
 })
 

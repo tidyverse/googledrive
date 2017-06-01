@@ -3,7 +3,7 @@ dribble <- function() {
     tibble::tibble(
       name = character(),
       id = character(),
-      drive_file = list()
+      file_resource = list()
     ),
     class = c("dribble", "tbl_df", "tbl", "data.frame")
   )
@@ -48,13 +48,13 @@ as.dribble.list <- function(x, ...) {
     tibble::tibble(
       name = purrr::map_chr(x, "name"),
       id = purrr::map_chr(x, "id"),
-      drive_file = x
+      file_resource = x
     ),
     class = c("dribble", "tbl_df", "tbl", "data.frame")
   )
 }
 
-## this let's us pull things out of drive_file column that we'd like
+## this let's us pull things out of file_resource column that we'd like
 ## as a column in the main dribble
 pull_into_dribble <- function(dribble, pull) {
 
@@ -64,10 +64,10 @@ pull_into_dribble <- function(dribble, pull) {
              logical = purrr::map_lgl
   )
 
-  cl <- class(dribble$drive_file[[1]][[pull]])
+  cl <- class(dribble$file_resource[[1]][[pull]])
 
   fn <- mp[[cl]]
-  dribble[[pull]] <- fn(dribble$drive_file, pull)
+  dribble[[pull]] <- fn(dribble$file_resource, pull)
   dribble
 }
 

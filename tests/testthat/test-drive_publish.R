@@ -15,8 +15,8 @@ if (run) {
                                               nm_("chickwts_gdoc")),
                                             collapse = "|"))$id
     if (!is.null(del_ids)) {
-      del_files <- purrr::map(del_ids, drive_file)
-      del <- purrr::map(del_files, drive_delete, verbose = FALSE)
+      del_files <- purrr::map(drive_id(del_ids), drive_get)
+      del <- purrr::map(del_files, drive_delete)
     }
   }
   write.table(chickwts, "chickwts.txt")
@@ -43,7 +43,7 @@ test_that("drive_publish doesn't explicitly fail", {
 
   ## since we haven't checked the publication status,
   ## this should be NULL
-  expect_equal(drive_chickwts$drive_file[[1]]$publish, NULL)
+  expect_equal(drive_chickwts$file_resource[[1]]$publish, NULL)
 
   drive_chickwts <- drive_publish(drive_chickwts)
 

@@ -5,8 +5,7 @@
 #'   modified document id will be output.
 #' @param n numeric, how many ids to output, default = 1
 #' @param ... name-value pairs to query the API
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#' @template verbose
 #'
 #'
 #' @return object of class`drive_id` & `list`, Google Drive id(s)

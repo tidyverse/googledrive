@@ -12,7 +12,7 @@
 #'   Drive!).
 #' @param partial_ok logical. If `path` identifies no files and `partial_ok` is
 #'   `TRUE`, `drive_path()` finds and queries the maximal existing subpath.
-#' @param verbose logical. Indicates whether to print informative messages.
+#' @template verbose
 #' @name paths
 #' @examples
 #' \dontrun{
@@ -46,7 +46,7 @@ drive_path_exists <- function(path, verbose = TRUE) {
 
 #' @export
 #' @rdname paths
-#' @return `drive_path()`: tibble with one row per matching file
+#' @template dribble
 drive_path <- function(path = "~/", partial_ok = FALSE, verbose = TRUE) {
   path_id <- get_paths(path = path, partial_ok = partial_ok)$id
   if (length(path_id) == 0L) {
@@ -174,7 +174,7 @@ pth_tbl <- function(id, .rships, stop_value) {
   df <- tibble::tibble(
     id = id,
     path = "",
-    mimeType = .rships$drive_file[[i]][["mimeType"]],
+    mimeType = .rships$file_resource[[i]][["mimeType"]],
     parent_id = "",
     root_path = pth(
       id,

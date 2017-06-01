@@ -12,16 +12,14 @@
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,
 #'   respectively.
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#' @template verbose
 #'
-#'  MIME types that can be converted to native Google formats:
-#'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
-#'
-#' @return object of class `dribble` and `tbl` that contains uploaded file's
-#'   information
+#' @template dribble
 #' @export
 #' @examples
+#' MIME types that can be converted to native Google formats:
+#'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
+#'
 #' \dontrun{
 #' write.csv(chickwts, "chickwts.csv")
 #' drive_chickwts <- drive_upload("chickwts.csv")

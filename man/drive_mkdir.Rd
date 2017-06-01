@@ -12,11 +12,11 @@ drive_mkdir(dir = NULL, path = NULL, verbose = TRUE)
 \item{path}{character, path where you would like the folder on your Google Drive}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+(default `TRUE`)}
 }
 \value{
-object of class \code{dribble} and \code{tbl_df} that contains uploaded folder's
-information
+Drive File. An object of class `dribble`, a tibble with
+   one row per file.
 }
 \description{
 Create a folder on Google Drive

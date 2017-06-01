@@ -16,7 +16,7 @@ modified document id will be output.}
 \item{...}{name-value pairs to query the API}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+(default `TRUE`)}
 }
 \value{
 object of class\code{drive_id} & \code{list}, Google Drive id(s)

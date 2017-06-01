@@ -12,8 +12,14 @@ regular expression are returned.}
 
 \item{...}{Parameters to pass along to the API query.}
 
-\item{verbose}{logical. Indicates whether to print informative messages.
-
+\item{verbose}{logical, indicating whether to print informative messages
+(default `TRUE`)}
+}
+\value{
+Drive File. An object of class `dribble`, a tibble with
+   one row per file.
+}
+\description{
 This will default to the most recent 100 files on your Google Drive. For
 example, to get 200 instead, specify the \code{pageSize}, i.e.
 \code{drive_ls(pageSize = 200)}.
@@ -21,13 +27,7 @@ Helpful links for forming queries:
 \itemize{
 \item \url{https://developers.google.com/drive/v3/web/search-parameters}
 \item \url{https://developers.google.com/drive/v3/reference/files/list}
-}}
 }
-\value{
-\code{dribble}, tibble with one row per file
-}
-\description{
-Search for files on Google Drive
 }
 \examples{
 \dontrun{

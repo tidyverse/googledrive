@@ -2,11 +2,9 @@
 #'
 #' @param dir character, name of the folder you would like to create
 #' @param path character, path where you would like the folder on your Google Drive
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#' @template verbose
 #'
-#' @return object of class `dribble` and `tbl_df` that contains uploaded folder's
-#'   information
+#' @template dribble
 #' @export
 drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   parent <- NULL
@@ -43,7 +41,7 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
       message(
         glue::glue_data(
           folder,
-          "Uh oh, something went wrong. The folder '{name}' was no uploaded."
+          "Uh oh, something went wrong. The folder '{name}' was not uploaded."
         )
       )
   }

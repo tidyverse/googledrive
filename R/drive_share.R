@@ -1,7 +1,6 @@
 #' Update Google Drive file share permissions
 #'
-#' @param file `dribble` or `drive_id` object representing the file you
-#'   would like to share
+#' @template file
 #' @param role The role granted by this permission. Valid values are:
 #' * organizer
 #' * owner
@@ -14,10 +13,9 @@
 #' * domain
 #' * anyone
 #' @param ... name-value pairs to add to the API request body
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#' @template verbose
 #'
-#' @return `dribble` object updated with new sharing information
+#' @template dribble
 #' @export
 drive_share <- function(file = NULL,
                         role = NULL,

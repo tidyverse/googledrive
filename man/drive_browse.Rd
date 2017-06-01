@@ -7,10 +7,13 @@
 drive_browse(file)
 }
 \arguments{
-\item{file}{\code{dribble} for the file you would like to edit}
+\item{file}{Drive File, something that identifies the file of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a `dribble`.}
 }
 \value{
-\code{dribble}
+Drive File. An object of class `dribble`, a tibble with
+   one row per file.
 }
 \description{
 Open Google Drive file in browser to edit

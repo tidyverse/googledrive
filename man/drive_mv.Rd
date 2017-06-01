@@ -7,16 +7,19 @@
 drive_mv(file = NULL, folder = NULL, verbose = TRUE)
 }
 \arguments{
-\item{file}{object of class \code{dribble} or \code{drive_id} for the file you would like to move}
+\item{file}{Drive File, something that identifies the file of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a `dribble`.}
 
 \item{folder}{object of class \code{dribble} or \code{drive_id} for the folder you would like to move the
 file to}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+(default `TRUE`)}
 }
 \value{
-\code{dribble} that was moved
+Drive File. An object of class `dribble`, a tibble with
+   one row per file.
 }
 \description{
 Move Google Drive file

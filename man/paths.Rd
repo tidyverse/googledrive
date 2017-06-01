@@ -17,7 +17,8 @@ slash to indicate explicitly that the path is a folder, which can
 disambiguate if there is a file of the same name (yes this is possible on
 Drive!).}
 
-\item{verbose}{logical. Indicates whether to print informative messages.}
+\item{verbose}{logical, indicating whether to print informative messages
+(default `TRUE`)}
 
 \item{partial_ok}{logical. If \code{path} identifies no files and \code{partial_ok} is
 \code{TRUE}, \code{drive_path()} finds and queries the maximal existing subpath.}
@@ -25,7 +26,8 @@ Drive!).}
 \value{
 \code{drive_path_exists()}: \code{TRUE} or \code{FALSE}
 
-\code{drive_path()}: tibble with one row per matching file
+Drive File. An object of class `dribble`, a tibble with
+   one row per file.
 }
 \description{
 These functions gather information about a single path, which may very well

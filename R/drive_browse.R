@@ -1,8 +1,8 @@
 #' Open Google Drive file in browser to edit
 #'
-#' @param file `dribble` for the file you would like to edit
+#' @template file
 #'
-#' @return `dribble`
+#' @template dribble
 #' @export
 drive_browse <- function(file){
   if (!interactive()) return(invisible(file))
