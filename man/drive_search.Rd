@@ -24,7 +24,7 @@ Helpful links for forming queries:
 }}
 }
 \value{
-tibble with one row per file
+\code{dribble}, tibble with one row per file
 }
 \description{
 Search for files on Google Drive

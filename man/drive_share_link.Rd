@@ -7,7 +7,7 @@
 drive_share_link(file)
 }
 \arguments{
-\item{file}{\code{gfile} object representing the file you would like to
+\item{file}{\code{dribble} representing the file you would like to
 retrieve the link for}
 }
 \value{

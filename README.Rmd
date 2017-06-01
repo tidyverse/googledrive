@@ -102,7 +102,7 @@ Much better!
 Versions of Google Documents, Sheets, and Presentations can be published online. By default, `drive_publish()` will publish your most recent version. You can check your publication status by running `drive_check_publish()`.
 
 ```{r}
-drive_check_publish(drive_chickwts)
+drive_is_published(drive_chickwts)
 ```
 
 
@@ -112,7 +112,7 @@ drive_chickwts$publish
 ```
 
 ```{r}
-drive_check_publish(drive_chickwts)
+drive_is_published(drive_chickwts)
 ```
 
 

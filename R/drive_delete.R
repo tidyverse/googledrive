@@ -1,6 +1,6 @@
 #' Delete file from Google Drive
 #'
-#' @param file `gfile` object representing the file you would like to
+#' @param file `dribble` representing the file you would like to
 #'   delete
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)
@@ -9,42 +9,37 @@
 #' @export
 #'
 drive_delete <- function(file = NULL, verbose = TRUE) {
-  if (!inherits(file, "gfile")) {
-    spf("Input must be a `gfile`. See `drive_file()`")
-  }
 
+  file <- as.dribble(file)
+
+  out <- purrr::map2_lgl(file$id, file$name, ~ {
   request <- build_request(endpoint = "drive.files.delete",
-                           params = list(fileId = file$id))
+                           params = list(fileId = .x))
   response <- make_request(request)
-  process_drive_delete(response = response,
-                       file = file,
-                       verbose = verbose)
 
-}
-
-
-process_drive_delete <- function(response = NULL,
-                                 file = NULL,
-                                 verbose = TRUE) {
+  ## note, delete does not send a response header, so we
+  ## will just stop for status & check the status code
+  ## rather than using process_response()
 
   httr::stop_for_status(response)
 
   if (verbose == TRUE) {
     if (response$status_code == 204L) {
-      message(sprintf(
-        "The file '%s' has been deleted from your Google Drive",
-        file$name
-      ))
+      message(
+        glue::glue(
+        "The file '{.y}' has been deleted from your Google Drive"
+        )
+      )
     } else {
-      message(sprintf(
-        "Zoinks! Something went wrong, '%s' was not deleted.",
-        file$name
-      ))
+      message(
+        glue::glue(
+        "Zoinks! Something went wrong, '{.y}' was not deleted."
+        )
+      )
     }
   }
 
-  if (response$status_code == 204L)
-    invisible(TRUE)
-  else
-    invisible(FALSE)
+  if (response$status_code == 204L) TRUE else FALSE
+  })
+  invisible(out)
 }

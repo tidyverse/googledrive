@@ -13,7 +13,7 @@
 #'   * <https://developers.google.com/drive/v3/web/search-parameters>
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
 
-#' @return tibble with one row per file
+#' @return `dribble`, tibble with one row per file
 #' @examples
 #' \dontrun{
 #' ## list "My Drive" w/o regard for folder hierarchy
@@ -66,24 +66,18 @@ drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
   response <- make_request(request)
   proc_res <- process_response(response)
 
-  req_tbl <- tibble::tibble(
-    name = purrr::map_chr(proc_res$files, "name"),
-    type = sub(".*\\.", "", purrr::map_chr(proc_res$files, "mimeType")),
-    parents = purrr::map(proc_res$files, "parents"),
-    id = purrr::map_chr(proc_res$files, "id"),
-    gfile = proc_res$files
-  )
+  res_tbl <- as.dribble(proc_res$files)
 
   if (is.null(pattern)) {
-    return(req_tbl)
+    return(res_tbl)
   }
 
-  keep_names <- grep(pattern, req_tbl$name)
+  keep_names <- grep(pattern, res_tbl$name)
   if (length(keep_names) == 0L) {
     if (verbose) message(sprintf("No file names match the pattern: '%s'.", pattern))
     return(invisible())
   }
-  req_tbl[keep_names, ]
+  as.dribble(res_tbl[keep_names, ]) ## TO DO change this once we get indexing working
 }
 
 .drive$default_fields <- c(

@@ -34,7 +34,7 @@ MIME types that can be converted to native Google formats:
 }}
 }
 \value{
-object of class \code{gfile} and \code{list} that contains uploaded file's
+object of class \code{dribble} and \code{tbl} that contains uploaded file's
 information
 }
 \description{

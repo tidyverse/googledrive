@@ -39,23 +39,23 @@ test_that("drive_publish doesn't explicitly fail", {
   skip_on_appveyor()
   skip_on_travis()
 
-  drive_chickwts <- drive_file(drive_path(nm_("chickwts_gdoc"))$id)
+  drive_chickwts <- drive_get(drive_id(drive_path(nm_("chickwts_gdoc"))$id))
 
   ## since we haven't checked the publication status,
   ## this should be NULL
-  expect_equal(drive_chickwts$publish, NULL)
+  expect_equal(drive_chickwts$drive_file[[1]]$publish, NULL)
 
   drive_chickwts <- drive_publish(drive_chickwts)
 
   ## the published column should be TRUE
-  expect_true(drive_chickwts$publish$published)
+  expect_true(drive_chickwts$publish[[1]]$published)
 
   ## let's unpublish it
 
-  drive_chickwts <- drive_publish(drive_chickwts, publish = FALSE)
+  drive_chickwts <- drive_unpublish(drive_chickwts)
 
   ## now this sould be false
-  expect_false(drive_chickwts$publish$published)
+  expect_false(drive_chickwts$publish[[1]]$published)
 })
 
 test_that("drive_publish fails if the file input is not a Google Drive type",{
@@ -63,12 +63,10 @@ test_that("drive_publish fails if the file input is not a Google Drive type",{
   skip_on_appveyor()
   skip_on_travis()
 
-  drive_chickwts <- drive_file(drive_path(nm_("chickwts_txt"))$id)
+  drive_chickwts <- drive_get(drive_id(drive_path(nm_("chickwts_txt"))$id))
 
   expect_error(drive_publish(drive_chickwts, verbose = FALSE),
-               sprintf("Only Google Drive files need to be published. \nYour file is of type: %s \nCheck out drive_share() to change sharing permissions.",
-                       drive_chickwts$type),
-               fixed = TRUE
+               "Only Google Drive files can be published."
   )
 })
 

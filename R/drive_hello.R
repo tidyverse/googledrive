@@ -1,3 +1,6 @@
+#' Example using dribbles
+#' @param file input
+#'
 #' @export
 drive_hello <- function(file) {
   drib <- as.dribble(file)

@@ -1,13 +1,16 @@
 #' Open Google Drive file in browser to edit
 #'
-#' @param file `gfile` object for the file you would like to edit
+#' @param file `dribble` for the file you would like to edit
 #'
-#' @return `gfile` object
+#' @return `dribble`
 #' @export
 drive_browse <- function(file){
   if (!interactive()) return(invisible(file))
-  if (!inherits(file, "gfile")){
-    spf("Input `file` must be a `gfile`. See `drive_file()`")
+
+  file <- as.dribble(file)
+
+  if (!inherits(file, "dribble") || nrow(file) != 1) {
+    spf("Input `file` must be a `dribble` with 1 row.")
   }
 
   link <- drive_share_link(file = file)

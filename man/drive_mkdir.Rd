@@ -15,7 +15,7 @@ drive_mkdir(dir = NULL, path = NULL, verbose = TRUE)
 (default \code{TRUE})}
 }
 \value{
-object of class \code{gfile} and \code{list} that contains uploaded folder's
+object of class \code{dribble} and \code{tbl_df} that contains uploaded folder's
 information
 }
 \description{

@@ -5,7 +5,7 @@
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)
 #'
-#' @return object of class `gfile` and `list` that contains uploaded folder's
+#' @return object of class `dribble` and `tbl_df` that contains uploaded folder's
 #'   information
 #' @export
 drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
@@ -28,23 +28,25 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
-  folder <- drive_file(proc_res$id)
+  folder <- drive_get(proc_res$id)
 
   success <- folder$name == dir
   if (verbose) {
     if (success) {
-      message(sprintf(
-        "You have successfully uploaded the folder: '%s'.",
-        proc_res$name
-      ))
+      message(
+        glue::glue_data(
+          folder,
+          "You have successfully uploaded the folder: '{name}'."
+          )
+        )
     } else
       message(
-        sprintf(
-          "Uh oh, something went wrong. The folder '%s' was no uploaded.",
-          proc_res$name
+        glue::glue_data(
+          folder,
+          "Uh oh, something went wrong. The folder '{name}' was no uploaded."
         )
       )
   }
-  invisible(drive_file(proc_res$id))
+  invisible(folder)
 }
 

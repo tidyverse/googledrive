@@ -4,7 +4,8 @@ drive_get <- function(id) {
   request <- build_request(
     endpoint = "drive.files.get",
     params = list(
-      fileId = id
+      fileId = id,
+      fields = "*"
     )
   )
   response <- make_request(request)

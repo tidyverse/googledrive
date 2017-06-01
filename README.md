@@ -41,21 +41,20 @@ Here's how to list the most recently modified 100 files on your drive. This will
 
 ``` r
 drive_search()
-#> # A tibble: 100 x 5
-#>                                name                              type
-#>                               <chr>                             <chr>
-#>  1            foo-TEST-drive-search                            folder
-#>  2                              foo application/x-www-form-urlencoded
-#>  3                    chickwts1.csv                          text/csv
-#>  4                        file_test                          document
-#>  5                       unconftest                          document
-#>  6      chickwts-TEST-drive-publish                        text/plain
-#>  7  chickwts_txt-TEST-drive-publish                        text/plain
-#>  8 chickwts_gdoc-TEST-drive-publish                          document
-#>  9    chickwts_gdoc-TEST-drive-list                          document
-#> 10             foo2-TEST-drive-list                            folder
-#> # ... with 90 more rows, and 3 more variables: parents <list>, id <chr>,
-#> #   gfile <list>
+#> # A tibble: 100 x 3
+#>                                name
+#>  *                            <chr>
+#>  1           Copy of to-delete-file
+#>  2                   to-delete-file
+#>  3                        to-delete
+#>  4                        to-delete
+#>  5            foo-TEST-drive-search
+#>  6                        file_test
+#>  7                       unconftest
+#>  8      chickwts-TEST-drive-publish
+#>  9  chickwts_txt-TEST-drive-publish
+#> 10 chickwts_gdoc-TEST-drive-publish
+#> # ... with 90 more rows, and 2 more variables: id <chr>, drive_file <list>
 ```
 
 You can narrow the query by specifying a `pattern` you'd like to match names against.
@@ -68,12 +67,11 @@ Alternatively, you can refine the search using the `q` query parameter. Accepted
 
 ``` r
 drive_search(q = "mimeType = 'application/vnd.google-apps.spreadsheet'")
-#> # A tibble: 2 x 5
-#>                   name        type    parents
-#>                  <chr>       <chr>     <list>
-#> 1     Copy of chickwts spreadsheet <list [1]>
-#> 2 538-star-wars-survey spreadsheet <list [1]>
-#> # ... with 2 more variables: id <chr>, gfile <list>
+#> # A tibble: 1 x 3
+#>                   name                                           id
+#> *                <chr>                                        <chr>
+#> 1 538-star-wars-survey 1xw_M2OBUdPjoOVrmWKWNu07BW_PHCh-EMSfJN5WEJDE
+#> # ... with 1 more variables: drive_file <list>
 ```
 
 #### Upload files
@@ -93,11 +91,10 @@ We now have a file of class `gfile` that contains information about the uploaded
 
 ``` r
 drive_chickwts
-#> File name: chickwts.csv 
-#> File owner: tidyverse testdrive 
-#> File type: text/csv 
-#> Last modified: 2017-06-01 
-#> Access: Shared with specific people.
+#> # A tibble: 1 x 3
+#>           name                           id  drive_file
+#> *        <chr>                        <chr>      <list>
+#> 1 chickwts.csv 0B0Gh-SuuA2nTRGtZZ3JNM1Q4bVk <list [36]>
 ```
 
 Notice that file was uploaded as a `document`. Since this was a `.csv` document, and we didn't specify the type, `googledrive` assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -120,11 +117,10 @@ Let's see if that worked.
 
 ``` r
 drive_chickwts
-#> File name: chickwts 
-#> File owner: tidyverse testdrive 
-#> File type: spreadsheet 
-#> Last modified: 2017-06-01 
-#> Access: Shared with specific people.
+#> # A tibble: 1 x 3
+#>       name                                           id  drive_file
+#> *    <chr>                                        <chr>      <list>
+#> 1 chickwts 1HRyoF_yS7J-LUU4_VR2srZWBbvbUy5h995ym34DF570 <list [31]>
 ```
 
 Much better!
@@ -134,7 +130,7 @@ Much better!
 Versions of Google Documents, Sheets, and Presentations can be published online. By default, `drive_publish()` will publish your most recent version. You can check your publication status by running `drive_check_publish()`.
 
 ``` r
-drive_check_publish(drive_chickwts)
+drive_is_published(drive_chickwts)
 #> The latest revision of the Google Drive file 'chickwts' is not published.
 ```
 
@@ -142,14 +138,15 @@ drive_check_publish(drive_chickwts)
 drive_chickwts <- drive_publish(drive_chickwts)
 #> You have changed the publication status of 'chickwts'.
 drive_chickwts$publish
+#> [[1]]
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-05-31 20:57:36        3      TRUE         TRUE
+#> 1 2017-06-01 12:16:56        3      TRUE         TRUE
 ```
 
 ``` r
-drive_check_publish(drive_chickwts)
+drive_is_published(drive_chickwts)
 #> The latest revision of Google Drive file 'chickwts' is published.
 ```
 
@@ -170,7 +167,7 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1vmNKiM4tSgDeQbFcfs5pre5MBhazTJjjoh7PzRPLQiw/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1HRyoF_yS7J-LUU4_VR2srZWBbvbUy5h995ym34DF570/edit?usp=drivesdk"
 ```
 
 #### Clean up

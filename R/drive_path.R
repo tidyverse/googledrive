@@ -48,7 +48,10 @@ drive_path_exists <- function(path, verbose = TRUE) {
 #' @rdname paths
 #' @return `drive_path()`: tibble with one row per matching file
 drive_path <- function(path = "~/", partial_ok = FALSE, verbose = TRUE) {
-  get_paths(path = path, partial_ok = partial_ok)
+  path_id <- get_paths(path = path, partial_ok = partial_ok)$id
+  if (length(path_id) == 0L) {
+    dribble()
+  } else as.dribble(drive_id(path_id))
 }
 
 ## path helpers -------------------------------------------------------
@@ -81,10 +84,13 @@ get_paths <- function(path = NULL,
     ## query restricts to names in path_pieces and, for all pieces that are
     ## known to be folder, to mimeType = folder
     .rships <- drive_search(
-      fields = "files/parents,files/name,files/mimeType,files/id",
+      fields = "files/parents,files/name,files/mimeType,files/id,files/kind",
       q = form_query(path_pieces, leaf_is_folder = grepl("/$", path)),
       verbose = FALSE
     )
+    if (nrow(.rships) > 0) {
+    .rships <- pull_into_dribble(.rships, "parents")
+    } else .rships$parents <- list()
     ## fetch fileId of user's My Drive root folder
     .root <- root_id()
   }
@@ -168,7 +174,7 @@ pth_tbl <- function(id, .rships, stop_value) {
   df <- tibble::tibble(
     id = id,
     path = "",
-    mimeType = .rships$gfile[[i]][["mimeType"]],
+    mimeType = .rships$drive_file[[i]][["mimeType"]],
     parent_id = "",
     root_path = pth(
       id,

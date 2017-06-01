@@ -1,7 +1,7 @@
 #' Update Google Drive file share permissions
 #'
-#' @param file `gfile` object representing the file you would like to
-#'   delete
+#' @param file `dribble` or `drive_id` object representing the file you
+#'   would like to share
 #' @param role The role granted by this permission. Valid values are:
 #' * organizer
 #' * owner
@@ -17,7 +17,7 @@
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)
 #'
-#' @return `gfile` object updated with new sharing information
+#' @return `dribble` object updated with new sharing information
 #' @export
 drive_share <- function(file = NULL,
                         role = NULL,
@@ -35,7 +35,7 @@ drive_share <- function(file = NULL,
                       file = file,
                       verbose = verbose)
 
-  file <- drive_file(file$id)
+  file <- drive_get(file$id)
   invisible(file)
 }
 
@@ -43,8 +43,11 @@ build_drive_share <- function(file = NULL,
                               role = NULL,
                               type = NULL,
                               ...) {
-  if (!inherits(file, "gfile")) {
-    spf("Input must be a `gfile`. See `drive_file()`")
+  if (inherits(file, "drive_id")) {
+    file <- drive_get(file)
+  }
+  if (!inherits(file, "dribble") || nrow(file) != 1) {
+    spf("Input `file` must be a `dribble` with 1 row.")
   }
 
   if (is.null(role) || is.null(type)) {
@@ -54,15 +57,15 @@ build_drive_share <- function(file = NULL,
   ok_roles <- c("organizer", "owner", "writer", "commenter", "reader")
   ok_types <- c("user", "group", "domain", "anyone")
 
-    if (!(role %in% ok_roles)) {
-      spf("Role must be one of the following: %s.",
-          paste(ok_roles, collapse = ", "))
-    }
+  if (!(role %in% ok_roles)) {
+    spf("Role must be one of the following: %s.",
+        paste(ok_roles, collapse = ", "))
+  }
 
-    if (!(type %in% ok_types)) {
-      spf("Role must be one of the following: %s.",
-          paste(ok_types, collapse = ", "))
-    }
+  if (!(type %in% ok_types)) {
+    spf("Role must be one of the following: %s.",
+        paste(ok_types, collapse = ", "))
+  }
 
   build_request(
     endpoint = "drive.permissions.create",
@@ -83,12 +86,17 @@ process_drive_share <- function(response = NULL,
 
   if (verbose == TRUE) {
     if (response$status_code == 200L) {
-      message(sprintf("The permissions for file '%s' have been updated", file$name))
+      message(
+        glue::glue_data(
+          file,
+          "The permissions for file '{name}' have been updated"
+        )
+      )
     } else {
       message(
-        sprintf(
-          "Zoinks! Something went wrong, '%s' permissions were not updated.",
-          file$name
+        glue::glue_data(
+          file,
+          "Zoinks! Something went wrong, '{name}' permissions were not updated."
         )
       )
     }

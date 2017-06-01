@@ -18,7 +18,7 @@
 #'  MIME types that can be converted to native Google formats:
 #'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
 #'
-#' @return object of class `gfile` and `list` that contains uploaded file's
+#' @return object of class `dribble` and `tbl` that contains uploaded file's
 #'   information
 #' @export
 #' @examples
@@ -124,7 +124,7 @@ process_drive_upload <- function(response = NULL,
                                  verbose = TRUE) {
   proc_res <- process_response(response)
 
-  uploaded_doc <- drive_file(proc_res$id)
+  uploaded_doc <- drive_get(proc_res$id)
   success <- proc_res$id == uploaded_doc$id[1]
 
   if (success) {

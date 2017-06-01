@@ -7,7 +7,7 @@
 drive_delete(file = NULL, verbose = TRUE)
 }
 \arguments{
-\item{file}{\code{gfile} object representing the file you would like to
+\item{file}{\code{dribble} representing the file you would like to
 delete}
 
 \item{verbose}{logical, indicating whether to print informative messages

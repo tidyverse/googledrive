@@ -30,7 +30,7 @@ test_that("drive_search() passes q correctly", {
   ## this should find at least 1 folder (foo), and all files found should
   ## be folders
 
-  expect_true(all(drive_search(q = "mimeType='application/vnd.google-apps.folder'")$type == "folder"))
+  expect_true(all(drive_search(q = "mimeType='application/vnd.google-apps.folder'")$drive_file[[1]]$mimeType == "application/vnd.google-apps.folder"))
 
 })
 

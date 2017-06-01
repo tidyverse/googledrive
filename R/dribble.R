@@ -16,6 +16,12 @@ drive_id <- function(x) {
 
 as.dribble <- function(x, ...) UseMethod("as.dribble")
 
+## TO DO: this is here because I don't have indexing,
+## can probably get rid of after
+as.dribble.tbl_df <- function(x, ...) {
+  structure(x, class = c("dribble", "tbl_df", "tbl", "data.frame"))
+}
+
 as.dribble.dribble <- function(x, ...) x
 
 as.dribble.character <- function(x, ...) {
@@ -47,3 +53,27 @@ as.dribble.list <- function(x, ...) {
     class = c("dribble", "tbl_df", "tbl", "data.frame")
   )
 }
+
+## this let's us pull things out of drive_file column that we'd like
+## as a column in the main dribble
+pull_into_dribble <- function(dribble, pull) {
+
+  if (nrow(dribble) == 1) {
+    dribble[[pull]] <- dribble$drive_file[[1]][[pull]]
+    dribble
+  } else {
+
+    mp <- list(character = purrr::map_chr,
+               numeric = purrr::map_dbl,
+               list = purrr::map,
+               logical = purrr::map_lgl
+    )
+
+    cl <- class(dribble$drive_file[[1]][[pull]])
+
+    fn <- mp[[cl]]
+    dribble[[pull]] <- fn(dribble$drive_file, pull)
+  }
+  dribble
+}
+

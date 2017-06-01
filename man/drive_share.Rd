@@ -7,8 +7,8 @@
 drive_share(file = NULL, role = NULL, type = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{file}{\code{gfile} object representing the file you would like to
-delete}
+\item{file}{\code{dribble} or \code{drive_id} object representing the file you
+would like to share}
 
 \item{role}{The role granted by this permission. Valid values are:
 \itemize{
@@ -33,7 +33,7 @@ delete}
 (default \code{TRUE})}
 }
 \value{
-\code{gfile} object updated with new sharing information
+\code{dribble} object updated with new sharing information
 }
 \description{
 Update Google Drive file share permissions

@@ -12,7 +12,7 @@ drive_file(id, ...)
 \item{...}{name-value pairs to query the API}
 }
 \value{
-object of class \code{gfile} and \code{list}
+\code{dribble}
 }
 \description{
 Create a Google Drive file object
