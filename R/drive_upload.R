@@ -5,13 +5,18 @@
 #'   default to its local name.
 #' @param up_folder character, name of parent folder on Google Drive. Will
 #'   default to user's root folder, i.e. the top-level of "My Drive".
-#' @param overwrite logical, do you want to overwrite file already on Google
-#'   Drive
-#' @param type if type = `NULL`, will upload as a non-Google Drive document
-#'   otherwise you can specify `document`, `spreadsheet`, or `presentation`.
-#'   Files with no extension will be assumed to be a `folder`.
+#' @param overwrite logical, do you want to overwrite a file already on Google
+#'   Drive, if such exists?
+#' @param type character. If type = `NULL`, a MIME type is automatically
+#'   determined from the file extension, if possible. If the source file is of a
+#'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
+#'   setting `type` to `document`, `spreadsheet`, or `presentation`,
+#'   respectively.
 #' @param verbose logical, indicating whether to print informative messages
 #'   (default `TRUE`)
+#'
+#'  MIME types that can be converted to native Google formats:
+#'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
 #'
 #' @return object of class `gfile` and `list` that contains uploaded file's
 #'   information
@@ -27,7 +32,7 @@ drive_upload <- function(from = NULL,
     stop(glue::glue("File does not exist:\n{from}"), call. = FALSE)
   }
 
-  ## upload elements:
+  ## upload meta-data:
   ##   * name
   ##   * mimeType
   ##   * parent
@@ -44,7 +49,6 @@ drive_upload <- function(from = NULL,
   mimeType <- type
   ## TO REVISIT: this is quite naive! assumes mimeType is sensible
   ## use mimeType helpers as soon as they exist
-  ## maybe add back logic re: getting mimeType from file extension?
   ## the whole issue of upload vs "upload & convert" still needs thought
 
   ## id of the parent folder
@@ -118,12 +122,8 @@ process_drive_upload <- function(response = NULL,
   if (success) {
     if (verbose) {
       message(
-        sprintf(
-          "File uploaded to Google Drive: \n%s \nAs the Google %s named:\n%s",
-          from,
-          sub(".*\\.", "", proc_res$mimeType),
-          proc_res$name
-        )
+        glue::glue("File uploaded to Google Drive:\n{proc_res$name}\n",
+                   "with MIME type:\n{proc_res$mimeType}")
       )
     }
   } else {

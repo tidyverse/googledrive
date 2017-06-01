@@ -16,15 +16,22 @@ default to its local name.}
 \item{up_folder}{character, name of parent folder on Google Drive. Will
 default to user's root folder, i.e. the top-level of "My Drive".}
 
-\item{overwrite}{logical, do you want to overwrite file already on Google
-Drive}
+\item{overwrite}{logical, do you want to overwrite a file already on Google
+Drive, if such exists?}
 
-\item{type}{if type = \code{NULL}, will upload as a non-Google Drive document
-otherwise you can specify \code{document}, \code{spreadsheet}, or \code{presentation}.
-Files with no extension will be assumed to be a \code{folder}.}
+\item{type}{character. If type = \code{NULL}, a MIME type is automatically
+determined from the file extension, if possible. If the source file is of a
+suitable type, you can request conversion to Google Doc, Sheet or Slides by
+setting \code{type} to \code{document}, \code{spreadsheet}, or \code{presentation},
+respectively.}
 
 \item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+(default \code{TRUE})
+
+MIME types that can be converted to native Google formats:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19}
+}}
 }
 \value{
 object of class \code{gfile} and \code{list} that contains uploaded file's
