@@ -11,8 +11,8 @@ drive_mv(file = NULL, folder = NULL, verbose = TRUE)
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{folder}{Drive Folder, something that identifies the folder of interest
-on your Google Drive. This can be name(s)/path(s), marked folder id(s),
+\item{folder}{Drive File, something that identifies the folder of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages

@@ -7,9 +7,9 @@
 drive_mkdir(dir = NULL, path = NULL, verbose = TRUE)
 }
 \arguments{
-\item{dir}{A character string. The name of the folder you would like to create.}
+\item{dir}{Character. The name of the folder you would like to create.}
 
-\item{path}{A character string. The path where you would like the folder on your Google Drive.}
+\item{path}{Character. The path of the parent folder.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

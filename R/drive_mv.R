@@ -1,9 +1,7 @@
 #' Move Google Drive file.
 #'
 #' @template file
-#' @param folder Drive Folder, something that identifies the folder of interest
-#'   on your Google Drive. This can be name(s)/path(s), marked folder id(s),
-#'   or a \code{dribble}.
+#' @template folder
 #' @template verbose
 #'
 #' @template dribble-return
@@ -15,23 +13,22 @@ drive_mv <- function(file = NULL,
   folder <- as_dribble(folder)
 
   if (nrow(file) != 1 || nrow(folder) != 1) {
-    stop("We can currently only move 1 Drive File at a time.")
+    stop("Must specify exactly one file and exactly one folder.", call. = FALSE)
   }
 
   if (!is_mine(file)) {
     stop(
       glue::glue_data(
         file,
-        "You are trying to move file: {id} \nYou do not own this file"
-      )
+        "You do not own and, therefore cannot move, this file:\n{name}"
+      ),
+      call. = FALSE
     )
   }
   if (!is_folder(folder)) {
     stop(
-      glue::glue_data(
-        folder,
-        "The folder you have input, id: {id} \nis not a valid Google Drive folder."
-        )
+      glue::glue_data(folder, "'folder' is not a folder:\n{name}"),
+      call. = FALSE
     )
   }
 
@@ -48,22 +45,20 @@ drive_mv <- function(file = NULL,
   proc_res <- process_response(response)
 
   if (verbose) {
-    if (response$status_code == 200L) {
+    if (httr::status_code(response) == 200L) {
       message(
         glue::glue(
-          "The Google Drive file:\n{file$name} \nwas moved to folder:\n{folder$name}"
+          "This file:\n{file$name}\nwas moved to folder:\n{folder$name}"
         )
       )
     } else {
       message(
-        glue::glue_data(
-          file,
-          "Oh dear! Something went wrong, the file '{name}' was not moved"
-        )
+        glue::glue_data(file, "Oh dear! this file was not moved:\n{name}")
       )
     }
   }
 
+  ## LUCY: do we need to call the API again?
   file <- as_dribble(drive_id(proc_res$id))
   invisible(file)
 }
