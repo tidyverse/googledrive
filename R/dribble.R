@@ -9,50 +9,18 @@ dribble <- function() {
   )
 }
 
-drive_id <- function(x) {
-  stopifnot(is.character(x))
-  structure(x, class = "drive_id")
+check_dribble <- function(x) {
+  if (!all(c("name", "id", "files_resource") %in% colnames(x))) {
+    stop("Invalid dribble. Must have `name`, `id`, and `file_resource` columns")
+  }
+  if (!all(inherits(x$name, "character") &&
+           inherits(x$id, "character") &&
+           inherits(x$files_resource, "list"))) {
+    stop("Invalid dribble. Column types are misspecified.")
+  }
+  x
 }
 
-as_dribble <- function(x, ...) UseMethod("as_dribble")
-
-## TO DO: this is here because I don't have indexing,
-## can probably get rid of after
-as_dribble.data.frame <- function(x, ...) {
-  structure(x, class = c("dribble", "tbl_df", "tbl", "data.frame"))
-}
-
-as_dribble.dribble <- function(x, ...) x
-
-as_dribble.character <- function(x, ...) {
-  structure(
-    drive_path(x),
-    class = c("dribble", "tbl_df", "tbl", "data.frame")
-  )
-}
-
-as_dribble.drive_id <- function(x, ...) {
-  structure(
-    drive_get(x),
-    class = c("dribble", "tbl_df", "tbl", "data.frame")
-  )
-}
-
-as_dribble.list <- function(x, ...) {
-  if (length(x) == 0) return(dribble())
-
-  kind <- purrr::map_chr(x, "kind", .null = NA_character_)
-  stopifnot(all(kind == "drive#file"))
-
-  structure(
-    tibble::tibble(
-      name = purrr::map_chr(x, "name"),
-      id = purrr::map_chr(x, "id"),
-      files_resource = x
-    ),
-    class = c("dribble", "tbl_df", "tbl", "data.frame")
-  )
-}
 
 is_folder <- function(dribble) {
   if (inherits(dribble, "dribble") &&
