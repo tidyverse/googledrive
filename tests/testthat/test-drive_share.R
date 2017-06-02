@@ -14,7 +14,7 @@ test_that("drive_share doesn't explicitly fail", {
 
   drive_chickwts <- drive_upload(
     "chickwts.txt",
-    up_name = nm_("chickwts"),
+    name = nm_("chickwts"),
     verbose = FALSE
   )
   ## since we haven't updated the permissions, the permissions
