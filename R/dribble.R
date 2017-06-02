@@ -36,13 +36,10 @@ check_dribble <- function(x) {
   x
 }
 
-
-is_folder <- function(dribble) {
-  if (inherits(dribble, "dribble") &&
-      nrow(dribble) == 1 &&
-      dribble$files_resource[[1]]$mimeType == "application/vnd.google-apps.folder") {
-    TRUE
-  } else FALSE
+is_folder <- function(x) {
+  stopifnot(inherits(x, "dribble"))
+  purrr::map_chr(x$files_resource, "mimeType") ==
+    "application/vnd.google-apps.folder"
 }
 
 is_owner <- function(dribble) {
