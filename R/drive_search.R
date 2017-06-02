@@ -8,7 +8,7 @@
 #'   * <https://developers.google.com/drive/v3/web/search-parameters>
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
 #'
-#' @param pattern A character string. If provided, only the files whose names match this
+#' @param pattern Character. If provided, only the files whose names match this
 #'   regular expression are returned.
 #' @param ... Parameters to pass along to the API query.
 #' @template verbose

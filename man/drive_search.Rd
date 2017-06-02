@@ -7,7 +7,7 @@
 drive_search(pattern = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{pattern}{A character string. If provided, only the files whose names match this
+\item{pattern}{Character. If provided, only the files whose names match this
 regular expression are returned.}
 
 \item{...}{Parameters to pass along to the API query.}

@@ -22,7 +22,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
   file <- as_dribble(file)
 
   if (nrow(file) != 1) {
-    spf("Input `file` must be a single Drive File.")
+    spf("Input `file` must be exactly one Drive File.")
   }
 
   if (is.null(role) || is.null(type)) {
@@ -54,7 +54,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
   response <- make_request(request, encode = "json")
   proc_req <- process_response(response)
 
-  if (verbose == TRUE) {
+  if (verbose) {
     if (proc_req$type == type && proc_req$role == role) {
       message(
         glue::glue_data(
