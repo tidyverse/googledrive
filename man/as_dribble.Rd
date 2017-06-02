@@ -2,16 +2,14 @@
 % Please edit documentation in R/as_dribble.R
 \name{as_dribble}
 \alias{as_dribble}
-\alias{as_dribble.data.frame}
 \alias{as_dribble.dribble}
 \alias{as_dribble.character}
 \alias{as_dribble.drive_id}
 \alias{as_dribble.list}
-\title{Coerce lists and character strings into Drive Files, \code{dribbles}.}
+\alias{as_dribble.data.frame}
+\title{Identify files on Google Drive.}
 \usage{
 as_dribble(x, ...)
-
-\method{as_dribble}{data.frame}(x, ...)
 
 \method{as_dribble}{dribble}(x, ...)
 
@@ -20,14 +18,38 @@ as_dribble(x, ...)
 \method{as_dribble}{drive_id}(x, ...)
 
 \method{as_dribble}{list}(x, ...)
+
+\method{as_dribble}{data.frame}(x, ...)
 }
 \arguments{
-\item{x}{A list.}
+\item{x}{A vector of Drive file paths, a vector of file ids marked
+with \code{\link[=drive_id]{drive_id()}}, a list of Files Resource objects, or a suitable data
+frame.}
 
-\item{...}{Other arguments to pass on to individual methods.}
+\item{...}{Other arguments passed down to methods.}
 }
 \description{
-This is an S3 generic. dribble includes methods for
-data frames and tibbles (adds \code{dribble} class), dribbles (returns
-unchanged input), drive_ids, lists, and character vectors.
+Converts various representations of Google Drive files into a \code{\link{dribble}},
+the object used by googledrive to hold Drive file metadata. Files can be
+specified via
+\itemize{
+\item File path
+\item File id (be sure to mark with \code{\link[=drive_id]{drive_id()}} to distinguish from file path!)
+\item List representing a \href{https://developers.google.com/drive/v3/reference/files#resource}{Files resource}
+object (for internal use)
+\item Data frame or \code{\link{dribble}} (for internal use)
+}
+}
+\details{
+This is a generic function.
+}
+\examples{
+\dontrun{
+## specify the path
+as_dribble("abc")
+as_dribble("abc/def")
+
+## specify the file id (substitute one of your own!)
+as_dribble(drive_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
+}
 }
