@@ -1,3 +1,15 @@
+#' dribble object
+#'
+#' googledrive stores the metadata for one or more Google Drive files as a
+#' `dribble`. It is a [tibble][tibble::tibble-package] with one row per file
+#' and, at a minimum, character variables containing file name and id and a
+#' list-column of [Files resource](https://developers.google.com/drive/v3/reference/files#resource)
+#' objects (possibly incomplete).
+#'
+#' @export
+#' @name dribble
+NULL
+
 dribble <- function() {
   structure(
     tibble::tibble(
