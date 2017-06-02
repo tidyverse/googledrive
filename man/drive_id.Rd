@@ -2,13 +2,14 @@
 % Please edit documentation in R/drive_id.R
 \name{drive_id}
 \alias{drive_id}
-\title{Register Drive id.}
+\title{Mark as Google Drive id.}
 \usage{
 drive_id(x)
 }
 \arguments{
-\item{x}{A character string, the Google drive id to register as class \code{drive_id}.}
+\item{x}{Character vector of Google Drive ids}
 }
 \description{
-This adds the class \code{drive_id} to a character string.
+Marks a character vector as holding Google Drive file ids, as opposed to file
+names or paths.
 }

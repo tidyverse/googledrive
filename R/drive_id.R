@@ -1,7 +1,9 @@
-#' Register Drive id.
+#' Mark as Google Drive id.
 #'
-#' This adds the class `drive_id` to a character string.
-#' @param x A character string, the Google drive id to register as class `drive_id`.
+#' Marks a character vector as holding Google Drive file ids, as opposed to file
+#' names or paths.
+#'
+#' @param x Character vector of Google Drive ids
 #'
 #' @export
 drive_id <- function(x) {
