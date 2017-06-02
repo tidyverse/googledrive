@@ -34,7 +34,7 @@ test_that("drive_publish doesn't explicitly fail", {
   skip_on_appveyor()
   skip_on_travis()
 
-  drive_chickwts <- drive_get(drive_id(drive_path(nm_("chickwts_gdoc"))$id))
+  drive_chickwts <- as_dribble(nm_("chickwts_gdoc"))
 
   ## since we haven't checked the publication status,
   ## this should be NULL
@@ -43,14 +43,14 @@ test_that("drive_publish doesn't explicitly fail", {
   drive_chickwts <- drive_publish(drive_chickwts)
 
   ## the published column should be TRUE
-  expect_true(drive_chickwts$publish[[1]]$published)
+  expect_true(drive_chickwts$publish$published)
 
   ## let's unpublish it
 
   drive_chickwts <- drive_unpublish(drive_chickwts)
 
   ## now this sould be false
-  expect_false(drive_chickwts$publish[[1]]$published)
+  expect_false(drive_chickwts$publish$published)
 })
 
 test_that("drive_publish fails if the file input is not a Google Drive type",{

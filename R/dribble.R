@@ -41,6 +41,15 @@ is_one <- function(x, what = "file") {
   }
   x
 }
+
+is_any <- function(x) {
+  stopifnot(inherits(x, "dribble"))
+  if (nrow(x) == 0L) {
+    stop("There are no Drive files that match your input.", call. = FALSE)
+  }
+  x
+}
+
 ## promote elements in files_resource into a top-level variable
 promote <- function(x, pull) {
 
