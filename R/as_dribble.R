@@ -50,6 +50,9 @@ as_dribble.drive_id <- function(x, ...) {
 as_dribble.list <- function(x, ...) {
   if (length(x) == 0) return(dribble())
 
+  required_nms <- c("name", "id", "kind")
+  stopifnot(purrr::map_lgl(x, ~ all(required_nms %in% names(.x))))
+
   kind <- purrr::map_chr(x, "kind", .null = NA_character_)
   stopifnot(all(kind == "drive#file"))
 

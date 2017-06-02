@@ -25,12 +25,28 @@ test_that("as_dribble.character() works", {
   expect_equal(nrow(empty), 0)
 })
 
-test_that("as_dribble.list() works", {
+test_that("as_dribble.list() works for good input", {
 
-  drib_lst <- list(kind = "drive#file",
-               name = "name",
-               id = "id")
-  drib <- as_dribble(list(drib_lst))
+  drib_lst <- list(
+    name = "name",
+    id = "id",
+    kind = "drive#file"
+  )
   expect_silent(drib <- as_dribble(list(drib_lst)))
-  expect_true(all(c("name", "id", "files_resource") %in% colnames(drib)))
+  expect_is(drib, "dribble")
+})
+
+test_that("as_dribble.list() catches bad input", {
+  ## not testing error messages, as_dribble.list() intended for internal use
+  drib_lst <- list(
+    name = "name"
+  )
+  expect_error(drib <- as_dribble(list(drib_lst)))
+
+  drib_lst <- list(
+    name = "name",
+    id = "id",
+    kind = "whatever"
+  )
+  expect_error(drib <- as_dribble(list(drib_lst)))
 })
