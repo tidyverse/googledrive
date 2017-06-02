@@ -110,7 +110,8 @@ drive_upload <- function(from = NULL,
       fileId = up_id,
       uploadType = "media",
       body = httr::upload_file(path = from,
-                               type = mimeType)
+                               type = mimeType),
+      fields = "*"
     )
   )
 
@@ -118,8 +119,7 @@ drive_upload <- function(from = NULL,
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
-  ## TO DO: must we call the API again?
-  uploaded_doc <- as_dribble(drive_id(proc_res$id))
+  uploaded_doc <- as_dribble(list(proc_res))
   ## TO DO: this is a pretty weak test for success...
   success <- proc_res$id == uploaded_doc$id[1]
 

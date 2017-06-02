@@ -78,8 +78,7 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
     proc_res <- process_response(response)
   }
 
-  ## TO DO: do we really have to call the API again?
-  file_update <- as_dribble(drive_id(file$id))
+  file_update <- drive_id(file$id)
   drive_is_published(file = file_update, verbose = FALSE)
 }
 

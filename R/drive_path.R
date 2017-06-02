@@ -49,12 +49,16 @@ drive_path_exists <- function(path, verbose = TRUE) {
 #' @rdname paths
 #' @template dribble-return
 drive_path <- function(path = "~/", partial_ok = FALSE, verbose = TRUE) {
-  path_id <- get_paths(path = path, partial_ok = partial_ok)$id
-  if (length(path_id) == 0L) {
+  path_tbl <- get_paths(path = path, partial_ok = partial_ok)
+  if (nrow(path_tbl) == 0L) {
     dribble()
   } else {
-    ## TO DO: do we really have to call the API again?
-    as_dribble(drive_id(path_id))
+    x <- tibble::tibble(
+      name = path_tbl$path,
+      id = path_tbl$id,
+      files_resource = list(list(kind = "drive#file"))
+    )
+    as_dribble(x)
   }
 }
 

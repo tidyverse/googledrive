@@ -21,15 +21,15 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
     params = list(
       name = dir,
       mimeType =  "application/vnd.google-apps.folder",
-      parents = list(parent)
+      parents = list(parent),
+      fields = "*"
     )
   )
 
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
-  ## LUCY: why do we call the API again?
-  folder <- as_dribble(drive_id(proc_res$id))
+  folder <- as_dribble(list(proc_res))
 
   success <- folder$name == dir
   if (verbose) {

@@ -37,7 +37,8 @@ drive_mv <- function(file = NULL,
     params = list(
       fileId = file$id,
       addParents = folder$id,
-      removeParents = file$files_resource[[1]]$parents
+      removeParents = file$files_resource[[1]]$parents,
+      fields = "*"
     )
   )
 
@@ -59,6 +60,6 @@ drive_mv <- function(file = NULL,
   }
 
   ## LUCY: do we need to call the API again?
-  file <- as_dribble(drive_id(proc_res$id))
+  file <- as_dribble(list(proc_res))
   invisible(file)
 }
