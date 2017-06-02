@@ -21,20 +21,7 @@ dribble <- function() {
   )
 }
 
-check_dribble <- function(x) {
-  if (!all(c("name", "id", "files_resource") %in% colnames(x))) {
-    stop("Invalid dribble. Must have `name`, `id`, and `files_resource` columns.",
-         call. = FALSE)
-  }
-  if (!all(is.character(x$name) &&
-           is.character(x$id) &&
-           inherits(x$files_resource, "list"))) {
-    stop("Invalid dribble. Column types are incorrect.", call. = FALSE)
-  }
-  kind <- purrr::map_chr(x$files_resource, "kind", .null = NA_character_)
-  stopifnot(all(kind == "drive#file"))
-  x
-}
+
 
 is_folder <- function(x) {
   stopifnot(inherits(x, "dribble"))

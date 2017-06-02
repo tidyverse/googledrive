@@ -69,6 +69,21 @@ as_dribble.list <- function(x, ...) {
 #' @export
 #' @rdname as_dribble
 as_dribble.data.frame <- function(x, ...) {
-  x <- check_dribble(x)
+  required_nms <- c("name", "id", "files_resource")
+  if (!all(required_nms %in% colnames(x))) {
+    msg <- glue::glue("Invalid dribble. These column names are required:\n{x}",
+                      x = glue::collapse(required_nms, "\n"))
+    stop(msg, call. = FALSE)
+  }
+
+  if (!all(is.character(x$name) &&
+           is.character(x$id) &&
+           inherits(x$files_resource, "list"))) {
+    stop("Invalid dribble. Column types are incorrect.", call. = FALSE)
+  }
+
+  kind <- purrr::map_chr(x$files_resource, "kind", .null = NA_character_)
+  stopifnot(all(kind == "drive#file"))
+
   structure(x, class = c("dribble", "tbl_df", "tbl", "data.frame"))
 }
