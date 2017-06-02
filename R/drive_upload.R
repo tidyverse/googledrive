@@ -60,11 +60,14 @@ drive_upload <- function(from = NULL,
   ## for now, user must make sure folder already exists and is unique
   folder <- folder %||% drive_id('root')
   up_parent <- as_dribble(folder)
+  if (inherits(folder, "character")) {
+    folder <- append_slash(folder)
+  }
+  up_parent <- as_dribble(folder)
   up_parent <- is_one(up_parent)
-
-  if (!is_folder(up_parent)) {
+  if (!is_folder(up_parent)){
     stop(
-      glue::glue_data(up_parent, "'folder' is not a folder:\n{name}"),
+      glue::glue_data(up_parent, "'path' is not a folder:\n{name}"),
       call. = FALSE
     )
   }
