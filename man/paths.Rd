@@ -4,23 +4,23 @@
 \alias{paths}
 \alias{drive_path_exists}
 \alias{drive_path}
-\title{Query a path on Google Drive}
+\title{Query a path on Google Drive.}
 \usage{
 drive_path_exists(path, verbose = TRUE)
 
 drive_path(path = "~/", partial_ok = FALSE, verbose = TRUE)
 }
 \arguments{
-\item{path}{character. A single path to query on Google Drive. All matching
+\item{path}{A character string. A single path to query on Google Drive. All matching
 files are returned. Folders are a specific type of file. Use a trailing
 slash to indicate explicitly that the path is a folder, which can
 disambiguate if there is a file of the same name (yes this is possible on
 Drive!).}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 
-\item{partial_ok}{logical. If \code{path} identifies no files and \code{partial_ok} is
+\item{partial_ok}{A logical scalar. If \code{path} identifies no files and \code{partial_ok} is
 \code{TRUE}, \code{drive_path()} finds and queries the maximal existing subpath.}
 }
 \value{

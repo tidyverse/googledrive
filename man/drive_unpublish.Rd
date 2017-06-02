@@ -11,10 +11,10 @@ drive_unpublish(file = NULL, ..., verbose = TRUE)
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{...}{name-value pairs to add to the API request body.}
+\item{...}{Name-value pairs to add to the API request body.}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
 An object of class \code{dribble}, a tibble with

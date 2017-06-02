@@ -11,8 +11,8 @@ drive_deauth(clear_cache = TRUE, verbose = TRUE)
 \code{.httr-oauth} file in working directory, if such exists, by renaming
 to \code{.httr-oauth-SUSPENDED}}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \description{
 Suspend \code{googledrive}' authorization to place requests to the

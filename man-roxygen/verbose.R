@@ -1,2 +1,2 @@
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default \code{TRUE})
+#' @param verbose Logical, indicating whether to print informative messages
+#'   (default \code{TRUE}).

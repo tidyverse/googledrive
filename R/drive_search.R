@@ -1,4 +1,4 @@
-#' Search for files on Google Drive
+#' Search for files on Google Drive.
 #'
 #'   This will default to the most recent 100 files on your Google Drive. For
 #'   example, to get 200 instead, specify the `pageSize`, i.e.
@@ -8,7 +8,7 @@
 #'   * <https://developers.google.com/drive/v3/web/search-parameters>
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
 #'
-#' @param pattern character. If provided, only the files whose names match this
+#' @param pattern A character string. If provided, only the files whose names match this
 #'   regular expression are returned.
 #' @param ... Parameters to pass along to the API query.
 #' @template verbose

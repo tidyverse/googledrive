@@ -1,4 +1,4 @@
-#' Coerce lists and character strings into Drive Files, dribbles.
+#' Coerce lists and character strings into Drive Files, `dribbles`.
 #'
 #' This is an S3 generic. dribble includes methods for
 #' data frames and tibbles (adds `dribble` class), dribbles (returns

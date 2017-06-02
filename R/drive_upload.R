@@ -1,16 +1,17 @@
-#' Upload a file to Google Drive
+#' Upload a file to Google Drive.
 #'
 #' @seealso MIME types that can be converted to native Google formats:
 #'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
 #'
-#' @param from character, local path to the file to upload
-#' @param up_name character, name the file should have on Google Drive. Will
+#' @param from A character string, local path to the file to upload.
+#' @param up_name A character string, name the file should have on Google Drive. Will
 #'   default to its local name.
-#' @param up_folder character, name of parent folder on Google Drive. Will
+#' @param up_folder A character string, name of parent folder on Google Drive,
+#'   `drive_id` or `dribble` identifying the parent folder on Google Drive. Will
 #'   default to user's root folder, i.e. the top-level of "My Drive".
-#' @param overwrite logical, do you want to overwrite a file already on Google
+#' @param overwrite A logical scalar, do you want to overwrite a file already on Google
 #'   Drive, if such exists?
-#' @param type character. If type = `NULL`, a MIME type is automatically
+#' @param type A character string. If type = `NULL`, a MIME type is automatically
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,

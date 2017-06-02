@@ -1,4 +1,4 @@
-#' Move Google Drive file
+#' Move Google Drive file.
 #'
 #' @template file
 #' @param folder Drive Folder, something that identifies the folder of interest

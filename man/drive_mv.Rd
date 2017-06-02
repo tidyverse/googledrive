@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_mv.R
 \name{drive_mv}
 \alias{drive_mv}
-\title{Move Google Drive file}
+\title{Move Google Drive file.}
 \usage{
 drive_mv(file = NULL, folder = NULL, verbose = TRUE)
 }
@@ -15,13 +15,13 @@ or a \code{dribble}.}
 on your Google Drive. This can be name(s)/path(s), marked folder id(s),
 or a \code{dribble}.}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
 An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{
-Move Google Drive file
+Move Google Drive file.
 }

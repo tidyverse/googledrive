@@ -7,7 +7,7 @@
 \alias{as_dribble.character}
 \alias{as_dribble.drive_id}
 \alias{as_dribble.list}
-\title{Coerce lists and character strings into Drive Files, dribbles.}
+\title{Coerce lists and character strings into Drive Files, \code{dribbles}.}
 \usage{
 as_dribble(x, ...)
 

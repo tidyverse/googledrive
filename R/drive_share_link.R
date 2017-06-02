@@ -1,8 +1,8 @@
-#' Retrieves Google Drive file's share link
+#' Retrieves Google Drive file's share link.
 #'
 #' @template file
 #'
-#' @return character, link to Google Drive file
+#' @return A character string, link to Google Drive file.
 #' @export
 drive_share_link <- function(file) {
   file <- as_dribble(file)

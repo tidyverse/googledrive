@@ -2,22 +2,22 @@
 % Please edit documentation in R/drive_mkdir.R
 \name{drive_mkdir}
 \alias{drive_mkdir}
-\title{Create a folder on Google Drive}
+\title{Create a folder on Google Drive.}
 \usage{
 drive_mkdir(dir = NULL, path = NULL, verbose = TRUE)
 }
 \arguments{
-\item{dir}{character, name of the folder you would like to create}
+\item{dir}{A character string. The name of the folder you would like to create.}
 
-\item{path}{character, path where you would like the folder on your Google Drive}
+\item{path}{A character string. The path where you would like the folder on your Google Drive.}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
 An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{
-Create a folder on Google Drive
+Create a folder on Google Drive.
 }

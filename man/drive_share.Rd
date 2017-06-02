@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_share.R
 \name{drive_share}
 \alias{drive_share}
-\title{Update Google Drive file share permissions}
+\title{Update Google Drive file share permissions.}
 \usage{
 drive_share(file = NULL, role = NULL, type = NULL, ..., verbose = TRUE)
 }
@@ -28,15 +28,15 @@ or a \code{dribble}.}
 \item anyone
 }}
 
-\item{...}{name-value pairs to add to the API request body}
+\item{...}{Name-value pairs to add to the API request body.}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
 An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{
-Update Google Drive file share permissions
+Update Google Drive file share permissions.
 }

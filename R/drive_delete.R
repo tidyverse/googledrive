@@ -1,9 +1,9 @@
-#' Delete file from Google Drive
+#' Delete file from Google Drive.
 #'
 #' @template file
 #' @template verbose
 #'
-#' @return logical, indicating whether the delete succeeded
+#' @return Logical, indicating whether the delete succeeded.
 #' @export
 #'
 drive_delete <- function(file = NULL, verbose = TRUE) {

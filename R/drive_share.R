@@ -1,4 +1,4 @@
-#' Update Google Drive file share permissions
+#' Update Google Drive file share permissions.
 #'
 #' @template file
 #' @param role The role granted by this permission. Valid values are:
@@ -12,7 +12,7 @@
 #' * group
 #' * domain
 #' * anyone
-#' @param ... name-value pairs to add to the API request body
+#' @param ... Name-value pairs to add to the API request body.
 #' @template verbose
 #'
 #' @template dribble-return

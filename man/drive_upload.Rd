@@ -2,38 +2,39 @@
 % Please edit documentation in R/drive_upload.R
 \name{drive_upload}
 \alias{drive_upload}
-\title{Upload a file to Google Drive}
+\title{Upload a file to Google Drive.}
 \usage{
 drive_upload(from = NULL, up_name = NULL, up_folder = NULL,
   overwrite = FALSE, type = NULL, verbose = TRUE)
 }
 \arguments{
-\item{from}{character, local path to the file to upload}
+\item{from}{A character string, local path to the file to upload.}
 
-\item{up_name}{character, name the file should have on Google Drive. Will
+\item{up_name}{A character string, name the file should have on Google Drive. Will
 default to its local name.}
 
-\item{up_folder}{character, name of parent folder on Google Drive. Will
+\item{up_folder}{A character string, name of parent folder on Google Drive,
+\code{drive_id} or \code{dribble} identifying the parent folder on Google Drive. Will
 default to user's root folder, i.e. the top-level of "My Drive".}
 
-\item{overwrite}{logical, do you want to overwrite a file already on Google
+\item{overwrite}{A logical scalar, do you want to overwrite a file already on Google
 Drive, if such exists?}
 
-\item{type}{character. If type = \code{NULL}, a MIME type is automatically
+\item{type}{A character string. If type = \code{NULL}, a MIME type is automatically
 determined from the file extension, if possible. If the source file is of a
 suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting \code{type} to \code{document}, \code{spreadsheet}, or \code{presentation},
 respectively.}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
 An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{
-Upload a file to Google Drive
+Upload a file to Google Drive.
 }
 \examples{
 \dontrun{

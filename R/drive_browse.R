@@ -1,4 +1,4 @@
-#' Open Google Drive file in browser to edit
+#' Open Google Drive file in browser to edit.
 #'
 #' @template file
 #'

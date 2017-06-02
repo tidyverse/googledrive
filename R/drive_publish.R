@@ -1,9 +1,9 @@
-#' Publish Google Drive file
+#' Publish Google Drive file.
 #'
 #' @template file
-#' @param ... name-value pairs to add to the API request body, for example
+#' @param ... Name-value pairs to add to the API request body, for example
 #'   `publishAuto = FALSE` will ensure that each subsequent revision will not be
-#'   automatically published (default here is `publishAuto = TRUE`)
+#'   automatically published (default here is `publishAuto = TRUE`).
 #' @template verbose
 #'
 #' @template dribble-return
@@ -15,7 +15,7 @@ drive_publish <- function(file = NULL, ..., verbose = TRUE) {
 #' Unpublish Google Drive file
 #'
 #' @template file
-#' @param ... name-value pairs to add to the API request body.
+#' @param ... Name-value pairs to add to the API request body.
 #' @template verbose
 #'
 #' @template dribble-return

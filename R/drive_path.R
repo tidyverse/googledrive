@@ -1,16 +1,16 @@
-#' Query a path on Google Drive
+#' Query a path on Google Drive.
 #'
 #' These functions gather information about a single path, which may very well
 #' correspond to more than one file. Note that a folder is a specific type of
 #' file on Drive. If you want to list the contents of a folder or do general
 #' searching, use [drive_search()].
 #'
-#' @param path character. A single path to query on Google Drive. All matching
+#' @param path A character string. A single path to query on Google Drive. All matching
 #'   files are returned. Folders are a specific type of file. Use a trailing
 #'   slash to indicate explicitly that the path is a folder, which can
 #'   disambiguate if there is a file of the same name (yes this is possible on
 #'   Drive!).
-#' @param partial_ok logical. If `path` identifies no files and `partial_ok` is
+#' @param partial_ok A logical scalar. If `path` identifies no files and `partial_ok` is
 #'   `TRUE`, `drive_path()` finds and queries the maximal existing subpath.
 #' @template verbose
 #' @name paths

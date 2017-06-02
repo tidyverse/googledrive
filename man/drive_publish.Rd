@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_publish.R
 \name{drive_publish}
 \alias{drive_publish}
-\title{Publish Google Drive file}
+\title{Publish Google Drive file.}
 \usage{
 drive_publish(file = NULL, ..., verbose = TRUE)
 }
@@ -11,17 +11,17 @@ drive_publish(file = NULL, ..., verbose = TRUE)
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{...}{name-value pairs to add to the API request body, for example
+\item{...}{Name-value pairs to add to the API request body, for example
 \code{publishAuto = FALSE} will ensure that each subsequent revision will not be
-automatically published (default here is \code{publishAuto = TRUE})}
+automatically published (default here is \code{publishAuto = TRUE}).}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
 An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{
-Publish Google Drive file
+Publish Google Drive file.
 }

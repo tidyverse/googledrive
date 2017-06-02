@@ -1,7 +1,7 @@
-#' Register Drive id
+#' Register Drive id.
 #'
-#' This addes the class `drive_id` to a character string.
-#' @param x character, drive id to register
+#' This adds the class `drive_id` to a character string.
+#' @param x A character string, the Google drive id to register as class `drive_id`.
 #'
 #' @export
 drive_id <- function(x) {

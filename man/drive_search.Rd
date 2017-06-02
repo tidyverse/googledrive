@@ -2,18 +2,18 @@
 % Please edit documentation in R/drive_search.R
 \name{drive_search}
 \alias{drive_search}
-\title{Search for files on Google Drive}
+\title{Search for files on Google Drive.}
 \usage{
 drive_search(pattern = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{pattern}{character. If provided, only the files whose names match this
+\item{pattern}{A character string. If provided, only the files whose names match this
 regular expression are returned.}
 
 \item{...}{Parameters to pass along to the API query.}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
 An object of class \code{dribble}, a tibble with

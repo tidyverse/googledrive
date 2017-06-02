@@ -2,13 +2,13 @@
 % Please edit documentation in R/drive_id.R
 \name{drive_id}
 \alias{drive_id}
-\title{Register Drive id}
+\title{Register Drive id.}
 \usage{
 drive_id(x)
 }
 \arguments{
-\item{x}{character, drive id to register}
+\item{x}{A character string, the Google drive id to register as class \code{drive_id}.}
 }
 \description{
-This addes the class \code{drive_id} to a character string.
+This adds the class \code{drive_id} to a character string.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_share_link.R
 \name{drive_share_link}
 \alias{drive_share_link}
-\title{Retrieves Google Drive file's share link}
+\title{Retrieves Google Drive file's share link.}
 \usage{
 drive_share_link(file)
 }
@@ -12,8 +12,8 @@ on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 }
 \value{
-character, link to Google Drive file
+A character string, link to Google Drive file.
 }
 \description{
-Retrieves Google Drive file's share link
+Retrieves Google Drive file's share link.
 }
