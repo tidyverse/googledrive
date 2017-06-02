@@ -18,7 +18,7 @@ drive_mv <- function(file = NULL,
     stop("We can currently only move 1 Drive File at a time.")
   }
 
-  if (!is_owner(file)) {
+  if (!is_mine(file)) {
     stop(
       glue::glue_data(
         file,

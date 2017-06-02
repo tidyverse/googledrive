@@ -42,14 +42,9 @@ is_folder <- function(x) {
     "application/vnd.google-apps.folder"
 }
 
-is_owner <- function(dribble) {
-  if (inherits(dribble, "dribble") &&
-      all(unlist(purrr::map(
-        purrr::flatten(
-          purrr::map(dribble$files_resource,"owners")
-        ),"me")))) {
-    TRUE
-  } else FALSE
+is_mine <- function(x) {
+  stopifnot(inherits(x, "dribble"))
+  purrr::map_lgl(x$files_resource, list("owners", 1, "me"))
 }
 
 ## this let's us pull things out of files_resource column that we'd like
