@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_browse.R
 \name{drive_browse}
 \alias{drive_browse}
-\title{Open Google Drive file in browser to edit.}
+\title{Visit Google Drive file in browser.}
 \usage{
 drive_browse(file)
 }
@@ -16,5 +16,5 @@ An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{
-Open Google Drive file in browser to edit.
+Visit Google Drive file in browser.
 }
