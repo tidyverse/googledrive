@@ -26,7 +26,7 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
-  folder <- drive_get(proc_res$id)
+  folder <- as_dribble(drive_id(proc_res$id))
 
   success <- folder$name == dir
   if (verbose) {

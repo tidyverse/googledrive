@@ -1,8 +1,9 @@
 #' Move Google Drive file
 #'
 #' @template file
-#' @param folder object of class `dribble` or `drive_id` for the folder you would like to move the
-#'   file to
+#' @param folder Drive Folder, something that identifies the folder of interest
+#'   on your Google Drive. This can be name(s)/path(s), marked folder id(s),
+#'   or a \code{dribble}.
 #' @template verbose
 #'
 #' @template dribble-return
@@ -14,7 +15,24 @@ drive_mv <- function(file = NULL,
   folder <- as_dribble(folder)
 
   if (nrow(file) != 1 || nrow(folder) != 1) {
-    spf("We can currently only move 1 `dribble` at a time.")
+    stop("We can currently only move 1 Drive File at a time.")
+  }
+
+  if (!is_owner(file)) {
+    stop(
+      glue::glue_data(
+        file,
+        "You are trying to move file: {id} \nYou do not own this file"
+      )
+    )
+  }
+  if (!is_folder(folder)) {
+    stop(
+      glue::glue_data(
+        folder,
+        "The folder you have input, id: {id} \nis not a valid Google Drive folder."
+        )
+    )
   }
 
   request <- build_request(

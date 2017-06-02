@@ -18,7 +18,7 @@ as_dribble <- function(x, ...) UseMethod("as_dribble")
 
 ## TO DO: this is here because I don't have indexing,
 ## can probably get rid of after
-as_dribble.tbl_df <- function(x, ...) {
+as_dribble.data.frame <- function(x, ...) {
   structure(x, class = c("dribble", "tbl_df", "tbl", "data.frame"))
 }
 
@@ -52,6 +52,24 @@ as_dribble.list <- function(x, ...) {
     ),
     class = c("dribble", "tbl_df", "tbl", "data.frame")
   )
+}
+
+is_folder <- function(dribble) {
+  if (inherits(dribble, "dribble") &&
+      nrow(dribble) == 1 &&
+      dribble$files_resource[[1]]$mimeType == "application/vnd.google-apps.folder") {
+    TRUE
+  } else FALSE
+}
+
+is_owner <- function(dribble) {
+  if (inherits(dribble, "dribble") &&
+      all(unlist(purrr::map(
+        purrr::flatten(
+          purrr::map(dribble$files_resource,"owners")
+        ),"me")))) {
+    TRUE
+  } else FALSE
 }
 
 ## this let's us pull things out of files_resource column that we'd like

@@ -50,7 +50,6 @@ drive_upload <- function(from = NULL,
   if (!is.null(type) &&
       type %in% c("document", "spreadsheet", "presentation", "folder")) {
     type <- paste0("application/vnd.google-apps.", type)
-    up_name <- tools::file_path_sans_ext(up_name)
   }
   mimeType <- type
   ## TO REVISIT: this is quite naive! assumes mimeType is sensible
@@ -58,8 +57,19 @@ drive_upload <- function(from = NULL,
   ## the whole issue of upload vs "upload & convert" still needs thought
 
   ## id of the parent folder
+  ## TO DO use is_folder to make sure this is really a folder
   if (is.null(up_folder)) {
     up_parent_id <- 'root'
+  } else if (inherits(up_folder, "drive_id")) {
+    up_parent_id <- as_dribble(up_folder)$id
+    if (length(up_parent_id) > 1) {
+      stop("Please input a single Drive folder to upload into.")
+    }
+  } else if (inherits(up_folder, "dribble")) {
+    up_parent_id <- up_folder$id
+    if (length(up_parent_id) > 1) {
+      stop("Please input a single Drive folder to upload into.")
+    }
   } else {
     ## TO DO: be willing to create the bits of up_folder that don't yet exist
     ## for now, user must make sure up_folder already exists and is unique
@@ -111,19 +121,10 @@ drive_upload <- function(from = NULL,
 
 
   response <- make_request(request, encode = "json")
-  process_drive_upload(response = response,
-                       from = from,
-                       verbose = verbose)
-
-}
-
-process_drive_upload <- function(response = NULL,
-                                 from = NULL,
-                                 verbose = TRUE) {
   proc_res <- process_response(response)
 
-  uploaded_doc <- drive_get(proc_res$id)
-  success <- proc_res$id == uploaded_doc$id[1]
+  uploaded_doc <- as_dribble(drive_id(proc_res$id))
+  success <- proc_res$id == uploaded_doc$id[1] ##TO DO this is a pretty weak test for success...
 
   if (success) {
     if (verbose) {

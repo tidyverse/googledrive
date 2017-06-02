@@ -11,8 +11,9 @@ drive_mv(file = NULL, folder = NULL, verbose = TRUE)
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{folder}{object of class \code{dribble} or \code{drive_id} for the folder you would like to move the
-file to}
+\item{folder}{Drive Folder, something that identifies the folder of interest
+on your Google Drive. This can be name(s)/path(s), marked folder id(s),
+or a \code{dribble}.}
 
 \item{verbose}{logical, indicating whether to print informative messages
 (default \code{TRUE})}
