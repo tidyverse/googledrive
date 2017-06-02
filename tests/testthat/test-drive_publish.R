@@ -11,22 +11,17 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del_ids <- drive_search(pattern = paste(c(nm_("chickwts_txt"),
-                                              nm_("chickwts_gdoc")),
-                                            collapse = "|"))$id
-    if (!is.null(del_ids)) {
-      del_files <- purrr::map(drive_id(del_ids), drive_get)
-      del <- purrr::map(del_files, drive_delete)
-    }
+    del_pths <- c(nm_("chickwts_txt"),nm_("chickwts_gdoc"))
+    del <- purrr::map(del_pths, drive_delete, verbose = FALSE)
   }
   write.table(chickwts, "chickwts.txt")
   drive_upload("chickwts.txt",
-               up_name = nm_("chickwts_gdoc"),
+               name = nm_("chickwts_gdoc"),
                type = "document",
                verbose = FALSE)
 
   drive_upload("chickwts.txt",
-               up_name = nm_("chickwts_txt"),
+               name = nm_("chickwts_txt"),
                verbose = FALSE)
 
 

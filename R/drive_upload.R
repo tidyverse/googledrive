@@ -60,9 +60,8 @@ drive_upload <- function(from = NULL,
   ## for now, user must make sure folder already exists and is unique
   folder <- folder %||% drive_id('root')
   up_parent <- as_dribble(folder)
-  if (nrow(up_parent) != 1) {
-    stop("Please input a single Drive folder to upload into.", call. = FALSE)
-  }
+  up_parent <- is_one(up_parent)
+
   if (!is_folder(up_parent)) {
     stop(
       glue::glue_data(up_parent, "'folder' is not a folder:\n{name}"),

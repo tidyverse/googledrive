@@ -12,13 +12,9 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del_ids <- drive_search(pattern = paste(nm_(c("foo","this-should-not-exist"))))$id
-    if (!is.null(del_ids)) {
-      del_files <- purrr::map(drive_id(del_ids), drive_get)
-      del <- purrr::map(del_files, drive_delete, verbose = FALSE)
-    }
+    del_pths <- c(nm_("foo"), nm_("this-should-not-exist"))
+    del <- purrr::map(del_pths, drive_delete, verbose = FALSE)
   }
-
   ## test that it finds at least a folder
   drive_mkdir(nm_("foo"), verbose = FALSE)
 }

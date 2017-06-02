@@ -34,6 +34,13 @@ is_mine <- function(x) {
   purrr::map_lgl(x$files_resource, list("owners", 1, "me"))
 }
 
+is_one <- function(x, what = "file") {
+  stopifnot(inherits(x, "dribble"))
+  if (!(nrow(x) == 1)) {
+    stop(glue::glue("Input must specify exactly 1 Drive {what}."), call. = FALSE)
+  }
+  x
+}
 ## promote elements in files_resource into a top-level variable
 promote <- function(x, pull) {
 

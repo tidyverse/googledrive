@@ -11,9 +11,7 @@ drive_browse <- function(file) {
 
   ## TO DO: do we really want to require a 1 row dribble?
   ## another options is to browse first n where n is low, maybe even 1
-  if (nrow(file) != 1) {
-    spf("Input must specify exactly 1 Drive file.")
-  }
+  file <- is_one(file)
 
   link <- drive_share_link(file = file)
   utils::browseURL(link)

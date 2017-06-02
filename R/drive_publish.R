@@ -27,10 +27,8 @@ drive_unpublish <- function(file = NULL, ..., verbose = TRUE) {
 drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRUE) {
   file_update <- drive_is_published(file = file, verbose = FALSE)
 
-  ## TO DO can only publish 1 at a time at the moment
-  if (nrow(file_update) != 1) {
-    spf("Publish exactly 1 file at a time.")
-  }
+  file_update <- is_one(file_update)
+
   x <- list(...)
   x$published <- publish
   if (!("publishAuto" %in% names(x))) {

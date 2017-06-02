@@ -21,9 +21,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
 
   file <- as_dribble(file)
 
-  if (nrow(file) != 1) {
-    spf("Input `file` must be exactly one Drive File.")
-  }
+  file <- is_one(file)
 
   if (is.null(role) || is.null(type)) {
     spf("`role` and `type` must be specified.")

@@ -12,9 +12,8 @@ drive_mv <- function(file = NULL,
   file <- as_dribble(file)
   folder <- as_dribble(folder)
 
-  if (nrow(file) != 1 || nrow(folder) != 1) {
-    stop("Must specify exactly one file and exactly one folder.", call. = FALSE)
-  }
+  file <- is_one(file)
+  folder <- is_one(folder, "folder")
 
   if (!is_mine(file)) {
     stop(
@@ -59,7 +58,6 @@ drive_mv <- function(file = NULL,
     }
   }
 
-  ## LUCY: do we need to call the API again?
   file <- as_dribble(list(proc_res))
   invisible(file)
 }

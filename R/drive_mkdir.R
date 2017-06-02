@@ -10,26 +10,20 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   parent <- NULL
 
   if (!is.null(path)) {
-    if (inherits(path, "dribble") || inherits(path, "drive_id")) {
-      path <- as_dribble(path)
-      if (!is_folder(path)){
-        stop(
-          glue::glue_data(path, "'path' is not a folder:\n{name}"),
-          call. = FALSE
-        )
-      }
-    } else {
+    if (inherits(path, "character")) {
       path <- append_slash(path)
-      path <- get_one_path(path)
-      if (path$mimeType != "application/vnd.google-apps.folder") {
-        stop(
-          glue::glue_data(parent, "'path' is not a folder:\n{name}"),
-          call. = FALSE
-        )
-      }
+    }
+    path <- as_dribble(path)
+    path <- is_one(path)
+    if (!is_folder(path)){
+      stop(
+        glue::glue_data(path, "'path' is not a folder:\n{name}"),
+        call. = FALSE
+      )
     }
     parent <- path$id
   }
+
   request <- build_request(
     endpoint = "drive.files.create.meta",
     params = list(
