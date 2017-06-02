@@ -29,7 +29,7 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
 
   ## TO DO can only publish 1 at a time at the moment
   if (nrow(file_update) != 1) {
-    spf("We can currently only publish `dribble`s with 1 row.")
+    spf("Publish exactly 1 file at a time.")
   }
   x <- list(...)
   x$published <- publish
@@ -43,6 +43,7 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
 
   mime_type <- purrr::map_chr(file_update$files_resource, "mimeType")
 
+  ## TO DO: do you need vectorized ifelse()? if not, use if(){...}else{...}
   x$revisionId <- ifelse(grepl("application/vnd.google-apps.spreadsheet", mime_type),
                          1,
                          x$revisionId)
@@ -55,7 +56,8 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
   proc_res <- process_response(response)
 
   if (verbose) {
-    if (response$status_code == 200L) {
+    if (httr::status_code(response) == 200L) {
+      ## TO DO: switch these to glue
       message(sprintf(
         "You have changed the publication status of '%s'.",
         file$name
@@ -74,73 +76,75 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
   if (isTRUE(x$published) && isTRUE(x$publishAuto)) {
     response <- make_request(request, encode = "json")
     proc_res <- process_response(response)
-
   }
 
+  ## TO DO: do we really have to call the API again?
   file_update <- as_dribble(drive_id(file$id))
   drive_is_published(file = file_update, verbose = FALSE)
 }
 
 #' Check if Google Drive file is published
 #'
-#' @param file `dribble` or `drive_id` object representing the file you would like to check the published status of
-#' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
+#' @template file
+#' @template verbose
 #'
-#' @return `dribble` object
+#' @template dribble-return
 #' @export
-drive_is_published <- function (file = NULL, verbose = TRUE) {
+drive_is_published <- function(file = NULL, verbose = TRUE) {
 
   file <- as_dribble(file)
 
   mime_types <- purrr::map_chr(file$files_resource, "mimeType")
-  if (!all(grepl("application/vnd.google-apps.",
-             mime_types))) {
+  if (!all(grepl("application/vnd.google-apps.", mime_types))) {
     stop(
       glue::glue(
         "Only Google Drive files can be published. \nYour file is of type:\n {paste(mime_types, collapse = ' \n ')} \nCheck out `drive_share()` to change sharing permissions."
-        )
+      )
     )
   }
 
-  fields <- paste(c("id", "published", "publishAuto", "lastModifyingUser"),
-                  collapse = ",")
-
-  published <- purrr::map2(file$id, file$name, ~ {
-    request <- build_request(
-      endpoint = "drive.revisions.get",
-      params = list(fileId = .x,
-                    revisionId = "head",
-                    fields = fields)
-    )
-    response <- make_request(request)
-    proc_res <- process_response(response)
-
-    if (verbose) {
-      if (proc_res$published) {
-        message(
-          glue::glue(
-            "The latest revision of Google Drive file '{.y}' is published."
-          ))
-      } else
-        message(
-          glue::glue(
-            "The latest revision of the Google Drive file '{.y}' is not published."
-          )
-        )
-    }
-
-    tibble::tibble(
-      check_time = Sys.time(),
-      revision = proc_res$id,
-      published = proc_res$published,
-      auto_publish = ifelse(
-        !is.null(proc_res$publishAuto),
-        proc_res$publishAuto,
-        FALSE
-      )
-    )
-  })
+  published <- purrr::map2(file$id, file$name, publish_one, verbose = verbose)
   file$publish <- published
 
   invisible(file)
+}
+
+publish_one <- function(id, name, verbose = TRUE) {
+  fields <- paste(c("id", "published", "publishAuto", "lastModifyingUser"),
+                  collapse = ",")
+
+  request <- build_request(
+    endpoint = "drive.revisions.get",
+    params = list(fileId = id,
+                  revisionId = "head",
+                  fields = fields)
+  )
+  response <- make_request(request)
+  proc_res <- process_response(response)
+
+  if (verbose) {
+    if (proc_res$published) {
+      message(
+        glue::glue(
+          "The latest revision of Google Drive file '{name}' is published."
+        ))
+    } else
+      message(
+        glue::glue(
+          "The latest revision of the Google Drive file '{name}' is not published."
+        )
+      )
+  }
+
+  tibble::tibble(
+    check_time = Sys.time(),
+    revision = proc_res$id,
+    published = proc_res$published,
+    ## TO DO: do you need vectorized ifelse()? if not, use if(){...}else{...}
+    auto_publish = ifelse(
+      !is.null(proc_res$publishAuto),
+      proc_res$publishAuto,
+      FALSE
+    )
+  )
 }
