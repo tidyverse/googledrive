@@ -5,13 +5,14 @@
 #' file on Drive. If you want to list the contents of a folder or do general
 #' searching, use [drive_search()].
 #'
-#' @param path A character string. A single path to query on Google Drive. All matching
+#' @param path Character. A single path to query on Google Drive. All matching
 #'   files are returned. Folders are a specific type of file. Use a trailing
 #'   slash to indicate explicitly that the path is a folder, which can
 #'   disambiguate if there is a file of the same name (yes this is possible on
 #'   Drive!).
-#' @param partial_ok A logical scalar. If `path` identifies no files and `partial_ok` is
-#'   `TRUE`, `drive_path()` finds and queries the maximal existing subpath.
+#' @param partial_ok A logical scalar. If `path` identifies no files and
+#'   `partial_ok` is `TRUE`, `drive_path()` finds and queries the maximal
+#'   existing subpath.
 #' @template verbose
 #' @name paths
 #' @examples
@@ -51,7 +52,10 @@ drive_path <- function(path = "~/", partial_ok = FALSE, verbose = TRUE) {
   path_id <- get_paths(path = path, partial_ok = partial_ok)$id
   if (length(path_id) == 0L) {
     dribble()
-  } else as_dribble(drive_id(path_id))
+  } else {
+    ## TO DO: do we really have to call the API again?
+    as_dribble(drive_id(path_id))
+  }
 }
 
 ## path helpers -------------------------------------------------------
