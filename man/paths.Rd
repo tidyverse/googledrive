@@ -8,7 +8,7 @@
 \usage{
 drive_path_exists(path, verbose = TRUE)
 
-drive_path(path = "~/", partial_ok = FALSE, verbose = TRUE)
+drive_path(path = "~/", verbose = TRUE)
 }
 \arguments{
 \item{path}{Character. A single path to query on Google Drive. All matching
@@ -19,12 +19,11 @@ Drive!).}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
-
-\item{partial_ok}{A logical scalar. If \code{path} identifies no files and
-\code{partial_ok} is \code{TRUE}, \code{drive_path()} finds and queries the maximal
-existing subpath.}
 }
 \value{
+An object of class \code{dribble}, a tibble with
+   one row per file.
+
 \code{drive_path_exists()}: \code{TRUE} or \code{FALSE}
 
 An object of class \code{dribble}, a tibble with
@@ -49,12 +48,5 @@ drive_path("abc")
 ## be more specific: consider only folder(s) that match 'abc'
 drive_path_exists("abc/")
 drive_path("abc/")
-
-## use of 'partial_ok'
-## assume 'abc' exists but 'abc/xyz' does not
-## this returns nothing
-drive_path("abc/xyz")
-## this returns 'abc'
-drive_path("abc/xyz", partial_ok = TRUE)
 }
 }
