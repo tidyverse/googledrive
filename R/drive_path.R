@@ -88,13 +88,7 @@ get_paths <- function(path = NULL,
       q = form_query(path_pieces, leaf_is_folder = grepl("/$", path)),
       verbose = FALSE
     )
-    ## TO DO: when elevation is based on API knowledge, the list-ness of parents
-    ## should be enforced there, not here
-    if (nrow(.rships) > 0) {
-      .rships <- pull_into_dribble(.rships, "parents")
-    } else {
-      .rships$parents <- list()
-    }
+    .rships <- promote(.rships, "parents")
     ## fetch fileId of user's My Drive root folder
     .root <- root_id()
   }

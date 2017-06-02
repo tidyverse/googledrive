@@ -1,4 +1,4 @@
-context("Dribble Methods")
+context("Dribble methods")
 
 ## NOTE if you do not currently have the files needed,
 ## change run & clean below to TRUE to create files needed
@@ -77,4 +77,28 @@ test_that("as_dribble.list() catches bad input", {
     kind = "whatever"
   )
   expect_error(drib <- as_dribble(list(drib_lst)))
+})
+
+test_that("promote() works when pull present, absent, and input is trivial", {
+  x <- tibble::tibble(
+    name = c("a", "b"),
+    id = c("1", "2"),
+    files_resource = list(list(foo = "a1"), list(foo = "b2"))
+  )
+
+  ## foo is present
+  out <- promote(x, "foo")
+  expect_identical(out, tibble::add_column(x, foo = c("a1", "b2")))
+
+  ## bar is not present
+  out <- promote(x, "bar")
+  expect_identical(
+    out,
+    tibble::add_column(x, bar = list(NULL, NULL))
+  )
+
+  ## input dribble has zero rows
+  x <- dribble()
+  out <- promote(x, "bar")
+  expect_identical(out, tibble::add_column(x, bar = list()))
 })

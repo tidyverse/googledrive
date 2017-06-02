@@ -47,20 +47,30 @@ is_mine <- function(x) {
   purrr::map_lgl(x$files_resource, list("owners", 1, "me"))
 }
 
-## this let's us pull things out of files_resource column that we'd like
-## as a column in the main dribble
-pull_into_dribble <- function(dribble, pull) {
+## promote elements in files_resource into a top-level variable
+promote <- function(x, pull) {
 
-  mp <- list(character = purrr::map_chr,
-             numeric = purrr::map_dbl,
-             list = purrr::map,
-             logical = purrr::map_lgl
+  present <- any(purrr::map_lgl(x$files_resource, ~ pull %in% names(.x)))
+
+  ## TO DO: do we really want promote() to be this forgiving?
+  ## add a placeholder column for pull
+  if (!present) {
+    ## ensure pull is added, even if there are zero rows
+    x[[pull]] <- rep_len(list(NULL), nrow(x))
+    return(x)
+  }
+
+  mp <- list(
+    character = purrr::map_chr,
+    numeric = purrr::map_dbl,
+    list = purrr::map,
+    logical = purrr::map_lgl
   )
-
-  cl <- class(dribble$files_resource[[1]][[pull]])
+  ## TO DO: should be using .default in the above fxns
+  cl <- class(x$files_resource[[1]][[pull]])
 
   fn <- mp[[cl]]
-  dribble[[pull]] <- fn(dribble$files_resource, pull)
-  dribble
+  x[[pull]] <- fn(x$files_resource, pull)
+  x
 }
 

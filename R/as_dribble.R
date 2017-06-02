@@ -72,4 +72,3 @@ as_dribble.data.frame <- function(x, ...) {
   x <- check_dribble(x)
   structure(x, class = c("dribble", "tbl_df", "tbl", "data.frame"))
 }
-
