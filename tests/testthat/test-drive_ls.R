@@ -7,8 +7,8 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del_pths <- c(nm_("foo"), nm_("this-should-not-exist"))
-    del <- purrr::map(del_pths, drive_delete, verbose = FALSE)
+    del <- drive_delete(c(nm_("foo"), nm_("this-should-not-exist")),
+                             verbose = FALSE)
   }
   ## test that it finds at least a folder
   drive_mkdir(nm_("foo"), verbose = FALSE)
