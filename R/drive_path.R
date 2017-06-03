@@ -2,8 +2,8 @@
 #'
 #' These functions gather information about a single path, which may very well
 #' correspond to more than one file. Note that a folder is a specific type of
-#' file on Drive. If you want to list the contents of a folder or do general
-#' searching, use [drive_search()].
+#' file on Drive. If you want to list the contents of a folder, use
+#' [drive_ls()]. For general searching, use [drive_search()].
 #'
 #' @param path Character. A single path to query on Google Drive. All matching
 #'   files are returned. Folders are a specific type of file. Use a trailing
@@ -56,6 +56,7 @@ drive_path <- function(path = "~/", verbose = TRUE) {
 ##   a dribble of Drive files whose paths match the target
 ##   if partial_ok = FALSE, match(es) is/are exact
 ##   if partial_ok = TRUE, match(es) is/are on the maximally existing partial path
+##   output contains an extra column, `path`, with the effective target path
 get_paths <- function(path = NULL,
                       partial_ok = FALSE,
                       .rships = NULL,
@@ -88,18 +89,29 @@ get_paths <- function(path = NULL,
   ## with folder names that exist
   nm_detected <- purrr::set_names(path_pieces %in% .rships$name, path_pieces)
   d <- last_all(nm_detected)
-  if (d == 0 || (!partial_ok && d < length(path_pieces))) {
-    return(dribble())
+  if (d < length(path_pieces) && !partial_ok) {
+    return(tibble::add_column(dribble(), path = character(0)))
   }
 
   repeat {
     ## leaf candidate(s)
     leaf_id <- .rships$id[.rships$name == path_pieces[d]]
 
-    ## for each candidate, enumerate all rooted paths
+    ## for each candidate, enumerate all paths
     leaf_tbl <- leaf_id %>%
       purrr::map(pth_tbl, .rships = .rships, stop_value = .root)
     leaf_tbl <- do.call(rbind, leaf_tbl)
+
+    ## TO THINK: just return all paths, even those that aren't rooted?
+    ## why matters? files owned by someone else can never be rooted
+    is_rooted <- purrr::map_lgl(leaf_tbl$pths, ~ !is.na(last(.x)))
+    leaf_tbl <- leaf_tbl[is_rooted, ]
+
+    ## form the path, as a string
+    leaf_tbl$path <- purrr::map_chr(
+      leaf_tbl$pths,
+      ~ collapse2(rev(.rships$name[match(crop(.x, 1), .rships$id)]), sep = "/")
+    )
 
     ## require path to match target, in manner appropriate to partial_ok
     ## glue::glue() gives me this: length 0 in --> length 0 out
@@ -115,11 +127,17 @@ get_paths <- function(path = NULL,
     d <- d - 1
   }
 
-  ## remove the parents column
-  ## keep the non-standard path column for downstream internal use, i.e.
-  ## determining how much of a path exists vs. we need to build
-  cols_to_keep <- ! names(leaf_tbl) %in% "parents"
-  as_dribble(leaf_tbl[cols_to_keep])
+  ## remove the parents and pths columns
+  ## but keep the non-standard path column for downstream internal use, i.e.
+  ## determining how much of a path exists vs. what we need to build
+  nms_to_remove <- c("parents", "pths")
+  leaf_tbl <- as_dribble(leaf_tbl[!names(leaf_tbl) %in% nms_to_remove])
+
+  ## ensure only 1 row per id
+  ## rare but possible: multiple distinct paths that have same path string
+  ## recall that files can have multiple parents and names need not be unique
+  leaf_tbl[!duplicated(leaf_tbl$id), ]
+
 }
 
 ## calls pth() on one id
@@ -128,19 +146,14 @@ get_paths <- function(path = NULL,
 ## adds a variable of the corresponding paths
 pth_tbl <- function(id, .rships, stop_value) {
   i <- which(.rships$id == id)
-  paths <- pth(
+  pths <- pth(
     id,
     kids = .rships$id,
     elders = .rships$parents,
     stop_value = stop_value
   )
-  rooted_paths <- purrr::keep(paths, ~ !is.na(last(.x)))
-  path <- purrr::map_chr(
-    rooted_paths,
-    ~ collapse2(rev(.rships$name[match(crop(.x, 1), .rships$id)]), sep = "/")
-  )
-  tbl <- .rships[rep_len(i, length(path)), ]
-  tibble::add_column(tbl, path)
+  tbl <- .rships[rep_len(i, length(pths)), ]
+  tibble::add_column(tbl, pths)
 }
 
 ## enumerates paths in a list

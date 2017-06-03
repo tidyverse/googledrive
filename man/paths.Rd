@@ -32,8 +32,8 @@ An object of class \code{dribble}, a tibble with
 \description{
 These functions gather information about a single path, which may very well
 correspond to more than one file. Note that a folder is a specific type of
-file on Drive. If you want to list the contents of a folder or do general
-searching, use \code{\link[=drive_search]{drive_search()}}.
+file on Drive. If you want to list the contents of a folder, use
+\code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_search]{drive_search()}}.
 }
 \examples{
 \dontrun{
