@@ -43,11 +43,12 @@ library("googledrive")
 ### Package conventions
 
 * All functions begin with the prefix `drive_`
-* Functions and parameters attempt to mimic local file navigating conventions in R, such as `list.files()`.
+* Functions and parameters attempt to mimic convetions for working with local files in R, such as `list.files()`.
+* The metadata for one or more Drive files is held in a `dribble`, a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive.
 
 ### Quick demo
 
-Here's how to list the most recently modified 100 files on your drive. This will kick off your authentication, so you will be sent to your browser to authorize your Google Drive access. The functions here are designed to be pipeable, using `%>%`, however they can also be implemented without.
+Here's how to list the most recently modified 100 files on your drive. This will kick off your authentication, so you will be sent to your browser to authorize your Google Drive access. The functions here are designed to be pipeable, using `%>%`, however they obviously don't require it.
 
 ```{r}
 drive_search()
@@ -62,8 +63,24 @@ drive_search(pattern = "baz")
 Alternatively, you can refine the search using the `q` query parameter. Accepted search clauses can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, if I wanted to search for all spreadsheets, I could run the following.
 
 ```{r}
-drive_search(q = "mimeType = 'application/vnd.google-apps.spreadsheet'")
+(sheets <- drive_search(q = "mimeType = 'application/vnd.google-apps.spreadsheet'"))
+class(sheets)
 ```
+
+You often want to store the result of a googledrive call, so you can act on those files in the future.
+
+#### Identify files
+
+In addition to `drive_search()`, you can also identify files by name (path, really) or Drive file id, using `drive_path()` and `drive_get()`, respectively.
+
+```{r}
+(x <- drive_path("~/abc/def"))
+## let's grab that file id and retrieve it that way
+x$id
+drive_get(x$id)
+```
+
+In general, googledrive functions let you specify Drive file(s) by name (path), file id, and `dribble`. See examples below.
 
 #### Upload files
 
@@ -71,18 +88,13 @@ We can upload any file type.
 
 ```{r}
 write.csv(chickwts, "chickwts.csv")
-drive_chickwts <- drive_upload("chickwts.csv")
+(drive_chickwts <- drive_upload("chickwts.csv"))
 ```
 
-We now have a file of class `dribble` that contains information about the uploaded file. 
+Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
 
 ```{r}
-drive_chickwts
-```
-
-Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, `googledrive` assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
-
-```{r}
+## example of using a dribble as input
 drive_chickwts <- drive_chickwts %>%
   drive_delete()
 ```
@@ -121,7 +133,7 @@ drive_chickwts <- drive_chickwts %>%
   drive_share(role = "reader", type = "anyone")
 ```
 
-We always assign the return value of googledrive functions back into an R object. This object is of type `gfile`, which holds up-to-date metadata on the associated Drive file. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.
+We always assign the return value of googledrive functions back into an R object. This object is of type `dribble`, which holds metadata on one or more Drive files. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.
 
 We can then extract a share link.
 

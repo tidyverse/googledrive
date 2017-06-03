@@ -13,3 +13,4 @@ tidyverse-token.rds
 tidyverse-noncaching-token.rds
 *drive-token.rds
 *sheets-token.rds
+*-noncaching-token.rds
