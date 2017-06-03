@@ -34,21 +34,21 @@ is_mine <- function(x) {
   purrr::map_lgl(x$files_resource, list("owners", 1, "me"))
 }
 
-#' Confirm that dribble contains exactly one Drive file.
+#' Require that dribble contains exactly one Drive file.
 #'
-#' This will return the input `dribble` if it contains exactly
+#' This will return the input [`dribble`] if it contains exactly
 #' one Drive file, and will error otherwise.
-#' @template file
-#' @param .what Character, description of intput for informative
+#' @param d A [`dribble`].
+#' @param .what Character, description of input for informative
 #'   error message.
 #'
 #' @export
-is_one <- function(file, .what = "file") {
-  stopifnot(inherits(file, "dribble"))
-  if (!(nrow(file) == 1)) {
+is_one <- function(d, .what = "file") {
+  stopifnot(inherits(d, "dribble"))
+  if (nrow(d) != 1) {
     stop(glue::glue("Input must specify exactly 1 Drive {.what}."), call. = FALSE)
   }
-  file
+  d
 }
 
 is_any <- function(x) {

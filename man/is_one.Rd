@@ -2,19 +2,17 @@
 % Please edit documentation in R/dribble.R
 \name{is_one}
 \alias{is_one}
-\title{Confirm that dribble contains exactly one Drive file.}
+\title{Require that dribble contains exactly one Drive file.}
 \usage{
-is_one(file, .what = "file")
+is_one(d, .what = "file")
 }
 \arguments{
-\item{file}{Drive File, something that identifies the file of interest
-on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a \code{dribble}.}
+\item{d}{A \code{\link{dribble}}.}
 
-\item{.what}{Character, description of intput for informative
+\item{.what}{Character, description of input for informative
 error message.}
 }
 \description{
-This will return the input \code{dribble} if it contains exactly
+This will return the input \code{\link{dribble}} if it contains exactly
 one Drive file, and will error otherwise.
 }
