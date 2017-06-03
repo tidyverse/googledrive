@@ -11,15 +11,11 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del_ids <- drive_search(pattern = nm_("letters.txt"))$id
-    if (!is.null(del_ids)) {
-      del_files <- purrr::map(drive_id(del_ids), drive_get)
-      del <- purrr::map(del_files, drive_delete)
-    }
+    del<- drive_delete(as_dribble(nm_("letters.txt")), verbose = FALSE)
   }
   writeLines(letters, "letters.txt")
   drive_upload("letters.txt",
-               up_name = nm_("letters.txt"),
+               name = nm_("letters.txt"),
                verbose = FALSE)
   rm <- unlink("letters.txt")
 }

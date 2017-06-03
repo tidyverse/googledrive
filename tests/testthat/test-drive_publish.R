@@ -58,7 +58,7 @@ test_that("drive_publish fails if the file input is not a Google Drive type",{
   skip_on_appveyor()
   skip_on_travis()
 
-  drive_chickwts <- drive_get(drive_id(drive_path(nm_("chickwts_txt"))$id))
+  drive_chickwts <- as_dribble(nm_("chickwts_txt"))
 
   expect_error(drive_publish(drive_chickwts, verbose = FALSE),
                "Only Google Drive files can be published."
