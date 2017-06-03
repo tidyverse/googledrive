@@ -18,8 +18,9 @@ test_that("drive_ls() errors if file does not exist", {
   skip_on_appveyor()
   skip_on_travis()
 
-  expect_error(drive_ls(nm_("this-should-not-exist")),
-               "There are no Drive files that match your input."
+  expect_error(
+    drive_ls(nm_("this-should-not-exist")),
+    "Input must specify exactly 1 Drive file."
   )
 })
 

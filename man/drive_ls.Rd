@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_ls.R
 \name{drive_ls}
 \alias{drive_ls}
-\title{List Drive files.}
+\title{List contents of a folder.}
 \usage{
 drive_ls(path = "~/", pattern = NULL, ...)
 }
@@ -20,12 +20,12 @@ An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{
-List Drive files.
+List contents of a folder.
 }
 \examples{
 \dontrun{
 ## get contents of the folder 'abc' (non-recursive)
-drive_ls(path = "abc")
+drive_ls("abc")
 
 ## get contents of folder 'abc' that contain the
 ## letters 'def'

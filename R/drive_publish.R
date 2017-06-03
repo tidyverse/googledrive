@@ -95,8 +95,13 @@ drive_is_published <- function(file = NULL, verbose = TRUE) {
   if (!all(grepl("application/vnd.google-apps.", mime_types)) || is_folder(file)) {
     stop(
       glue::glue(
-        "Only Google Drive files can be published. \nYour file is of type:\n {paste(mime_types, collapse = ' \n ')} \nCheck out `drive_share()` to change sharing permissions."
-      )
+        "Only Google Drive files can be published.",
+        "Your file is of type:",
+        "{glue::collapse(mime_types, sep = '\n')}",
+        "Check out `drive_share()` to change sharing permissions.",
+        .sep = "\n"
+      ),
+      call. = FALSE
     )
   }
 
@@ -138,7 +143,6 @@ publish_tbl <- function(x) {
     check_time = Sys.time(),
     revision = x$id,
     published = x$published,
-    auto_publish =
-      if (!is.null(x$publishAuto)) x$publishAuto else FALSE
+    auto_publish = x$publishAuto %||% FALSE
   )
 }
