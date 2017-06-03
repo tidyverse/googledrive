@@ -6,5 +6,6 @@
 #' @export
 drive_share_link <- function(file) {
   file <- as_dribble(file)
+  file <- is_any(file)
   purrr::map_chr(file$files_resource, "webViewLink")
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/dribble.R
 \name{is_one}
 \alias{is_one}
-\title{Checks whether dribble contains exactly one Drive file.}
+\title{Confirm that dribble contains exactly one Drive file.}
 \usage{
 is_one(file, .what = "file")
 }
