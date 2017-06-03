@@ -11,7 +11,7 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del_pths <- c(nm_("chickwts_txt"),nm_("chickwts_gdoc"))
+    del_pths <- c(nm_("chickwts_txt"), nm_("chickwts_gdoc"))
     del <- purrr::map(del_pths, drive_delete, verbose = FALSE)
   }
   write.table(chickwts, "chickwts.txt")
@@ -53,7 +53,7 @@ test_that("drive_publish doesn't explicitly fail", {
   expect_false(drive_chickwts$publish$published)
 })
 
-test_that("drive_publish fails if the file input is not a Google Drive type",{
+test_that("drive_publish fails if the file input is not a Google Drive type", {
 
   skip_on_appveyor()
   skip_on_travis()
@@ -64,4 +64,3 @@ test_that("drive_publish fails if the file input is not a Google Drive type",{
                "Only Google Drive files can be published."
   )
 })
-

@@ -49,4 +49,3 @@ drive_mkdir <- function(name = NULL, path = NULL, verbose = TRUE) {
   }
   invisible(folder)
 }
-

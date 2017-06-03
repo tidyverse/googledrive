@@ -11,7 +11,7 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del<- drive_delete(as_dribble(nm_("letters.txt")), verbose = FALSE)
+    del <- drive_delete(as_dribble(nm_("letters.txt")), verbose = FALSE)
   }
   writeLines(letters, "letters.txt")
   drive_upload("letters.txt",

@@ -46,5 +46,3 @@ test_that("drive_share doesn't explicitly fail", {
   ## clean up
   drive_delete(drive_chickwts)
 })
-
-

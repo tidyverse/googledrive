@@ -85,4 +85,3 @@ promote <- function(x, pull) {
   x[[pull]] <- fn(x$files_resource, pull)
   x
 }
-

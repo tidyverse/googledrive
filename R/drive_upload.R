@@ -58,7 +58,7 @@ drive_upload <- function(from = NULL,
   ## parent folder
   ## TO DO: be willing to create the bits of folder that don't yet exist
   ## for now, user must make sure folder already exists and is unique
-  folder <- folder %||% drive_id('root')
+  folder <- folder %||% drive_id("root")
   up_parent <- as_dribble(folder)
   if (inherits(folder, "character")) {
     folder <- append_slash(folder)

@@ -105,7 +105,7 @@ set_body_params <- function(x) {
   if (!is.null(x$params)) {
     msg <-  c(
       "Ignoring these unrecognized parameters:",
-      glue::glue_data(tibble::enframe(x$params),"{name}: {value}")
+      glue::glue_data(tibble::enframe(x$params), "{name}: {value}")
     )
     message(paste(msg, collapse = "\n"))
   }
@@ -122,7 +122,7 @@ set_url <- function(x) {
     )
     return(x)
   }
-  x$path <- paste0("drive/v3",glue::glue_data(x$path_params, x$path))
+  x$path <- paste0("drive/v3", glue::glue_data(x$path_params, x$path))
   x$url <- httr::modify_url(
     url = x$api_url,
     path = x$path,
