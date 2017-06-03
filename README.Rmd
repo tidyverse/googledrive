@@ -74,13 +74,13 @@ write.csv(chickwts, "chickwts.csv")
 drive_chickwts <- drive_upload("chickwts.csv")
 ```
 
-We now have a file of class `gfile` that contains information about the uploaded file. 
+We now have a file of class `dribble` that contains information about the uploaded file. 
 
 ```{r}
 drive_chickwts
 ```
 
-Notice that file was uploaded as a `document`. Since this was a `.csv` document, and we didn't specify the type, `googledrive` assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
+Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, `googledrive` assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
 
 ```{r}
 drive_chickwts <- drive_chickwts %>%
@@ -91,10 +91,6 @@ drive_chickwts <- drive_chickwts %>%
 drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
 ```
 
-Let's see if that worked.
-```{r}
-drive_chickwts
-```
 Much better!
 
 #### Publish files

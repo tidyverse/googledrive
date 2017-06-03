@@ -44,16 +44,16 @@ drive_search()
 #> # A tibble: 100 x 3
 #>                                name
 #>  *                            <chr>
-#>  1                          LICENSE
-#>  2      letters.txt-TEST-as-dribble
-#>  3                           foobar
-#>  4               another-share-test
-#>  5                             test
-#>  6  chickwts_txt-TEST-drive-publish
-#>  7 chickwts_gdoc-TEST-drive-publish
-#>  8            foo-TEST-drive-search
-#>  9                        file_test
-#> 10                       unconftest
+#>  1           foo-TEST-drive-publish
+#>  2  chickwts_txt-TEST-drive-publish
+#>  3 chickwts_gdoc-TEST-drive-publish
+#>  4                foo-TEST-drive-ls
+#>  5      letters.txt-TEST-as-dribble
+#>  6                     chickwts.csv
+#>  7            foo-TEST-drive-search
+#>  8                        DELETE-ME
+#>  9                        DELETE-ME
+#> 10                             test
 #> # ... with 90 more rows, and 2 more variables: id <chr>,
 #> #   files_resource <list>
 ```
@@ -88,22 +88,23 @@ drive_chickwts <- drive_upload("chickwts.csv")
 #> text/csv
 ```
 
-We now have a file of class `gfile` that contains information about the uploaded file.
+We now have a file of class `dribble` that contains information about the uploaded file.
 
 ``` r
 drive_chickwts
 #> # A tibble: 1 x 3
 #>           name                           id files_resource
 #> *        <chr>                        <chr>         <list>
-#> 1 chickwts.csv 0B0Gh-SuuA2nTa2ZVTjJCVzBnUGc    <list [36]>
+#> 1 chickwts.csv 0B0Gh-SuuA2nTaTczNW82a3Mxak0    <list [36]>
 ```
 
-Notice that file was uploaded as a `document`. Since this was a `.csv` document, and we didn't specify the type, `googledrive` assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
+Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, `googledrive` assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
 
 ``` r
 drive_chickwts <- drive_chickwts %>%
   drive_delete()
-#> The file 'chickwts.csv' has been deleted from your Google Drive
+#> File deleted from Google Drive:
+#> chickwts.csv
 ```
 
 ``` r
@@ -112,16 +113,6 @@ drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
 #> chickwts.csv
 #> with MIME type:
 #> application/vnd.google-apps.spreadsheet
-```
-
-Let's see if that worked.
-
-``` r
-drive_chickwts
-#> # A tibble: 1 x 3
-#>           name                                           id files_resource
-#> *        <chr>                                        <chr>         <list>
-#> 1 chickwts.csv 1skl0r12zAUIPrknXEFwvzwhm0McE8CXBEiGtq-OisZg    <list [32]>
 ```
 
 Much better!
@@ -139,11 +130,10 @@ drive_is_published(drive_chickwts)
 drive_chickwts <- drive_publish(drive_chickwts)
 #> You have changed the publication status of 'chickwts.csv'.
 drive_chickwts$publish
-#> [[1]]
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-06-02 01:21:53        3      TRUE         TRUE
+#> 1 2017-06-02 20:27:34        1      TRUE         TRUE
 ```
 
 ``` r
@@ -171,7 +161,7 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1skl0r12zAUIPrknXEFwvzwhm0McE8CXBEiGtq-OisZg/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1Gdn3vpq1VNnZDp8SeQ_YmsWZh6e_jY4IncJpe2snlmY/edit?usp=drivesdk"
 ```
 
 #### Clean up
@@ -179,5 +169,6 @@ drive_chickwts %>%
 ``` r
 drive_chickwts %>%
   drive_delete()
-#> The file 'chickwts.csv' has been deleted from your Google Drive
+#> File deleted from Google Drive:
+#> chickwts.csv
 ```
