@@ -1,6 +1,17 @@
-## TO DO: should this be exported?
-## is this functionality what people would expect drive_id() to have?
-## maybe this should be exported as drive_id() and drive_id() should be as_id()
+#' Get Drive files by id
+#'
+#' Warning: the name of this function is likely to change.
+#'
+#' @param id Character, a Drive file id, such as you might see in the URL when
+#'   visiting a file on Google Drive.
+#'
+#' @return dribble-return
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' drive_get("abcdefgeh12345678")
+#' }
 drive_get <- function(id) {
   stopifnot(is.character(id), length(id) == 1)
 
