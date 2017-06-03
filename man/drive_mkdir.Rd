@@ -4,10 +4,10 @@
 \alias{drive_mkdir}
 \title{Create a folder on Google Drive.}
 \usage{
-drive_mkdir(dir = NULL, path = NULL, verbose = TRUE)
+drive_mkdir(name = NULL, path = NULL, verbose = TRUE)
 }
 \arguments{
-\item{dir}{Character. The name of the folder you would like to create.}
+\item{name}{Character. The name of the folder you would like to create.}
 
 \item{path}{Character. The path of the parent folder.}
 

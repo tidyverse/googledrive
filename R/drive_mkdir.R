@@ -1,12 +1,12 @@
 #' Create a folder on Google Drive.
 #'
-#' @param dir Character. The name of the folder you would like to create.
+#' @param name Character. The name of the folder you would like to create.
 #' @param path Character. The path of the parent folder.
 #' @template verbose
 #'
 #' @template dribble-return
 #' @export
-drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
+drive_mkdir <- function(name = NULL, path = NULL, verbose = TRUE) {
   parent <- NULL
 
   if (!is.null(path)) {
@@ -27,7 +27,7 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
   request <- build_request(
     endpoint = "drive.files.create.meta",
     params = list(
-      name = dir,
+      name = name,
       mimeType =  "application/vnd.google-apps.folder",
       parents = list(parent),
       fields = "*"
@@ -39,7 +39,7 @@ drive_mkdir <- function(dir = NULL, path = NULL, verbose = TRUE) {
 
   folder <- as_dribble(list(proc_res))
 
-  success <- folder$name == dir
+  success <- folder$name == name
   if (verbose) {
     if (success) {
       message(glue::glue_data(folder, "Folder created:\n{name}"))
