@@ -34,15 +34,13 @@ as_dribble.dribble <- function(x, ...) x
 #' @export
 #' @rdname as_dribble
 as_dribble.character <- function(x, ...) {
-  ## TO DO: we should accept x with length > 1
-  drive_path(x)
+  do.call(rbind, purrr::map(x, drive_path))
 }
 
 #' @export
 #' @rdname as_dribble
 as_dribble.drive_id <- function(x, ...) {
-  ## TO DO: we should accept x with length > 1
-  drive_get(x)
+  do.call(rbind, purrr::map(x, drive_get))
 }
 
 #' @export
