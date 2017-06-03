@@ -2,13 +2,14 @@
 % Please edit documentation in R/drive_share.R
 \name{drive_share}
 \alias{drive_share}
-\title{Update Google Drive file share permissions}
+\title{Update Google Drive file share permissions.}
 \usage{
 drive_share(file = NULL, role = NULL, type = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{file}{\code{gfile} object representing the file you would like to
-delete}
+\item{file}{Drive File, something that identifies the file of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a \code{dribble}.}
 
 \item{role}{The role granted by this permission. Valid values are:
 \itemize{
@@ -27,14 +28,15 @@ delete}
 \item anyone
 }}
 
-\item{...}{name-value pairs to add to the API request body}
+\item{...}{Name-value pairs to add to the API request body.}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
-\code{gfile} object updated with new sharing information
+An object of class \code{dribble}, a tibble with
+   one row per file.
 }
 \description{
-Update Google Drive file share permissions
+Update Google Drive file share permissions.
 }

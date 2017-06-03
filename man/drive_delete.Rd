@@ -2,20 +2,21 @@
 % Please edit documentation in R/drive_delete.R
 \name{drive_delete}
 \alias{drive_delete}
-\title{Delete file from Google Drive}
+\title{Delete file from Google Drive.}
 \usage{
 drive_delete(file = NULL, verbose = TRUE)
 }
 \arguments{
-\item{file}{\code{gfile} object representing the file you would like to
-delete}
+\item{file}{Drive File, something that identifies the file of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a \code{dribble}.}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
-logical, indicating whether the delete succeeded
+Logical, indicating whether the delete succeeded.
 }
 \description{
-Delete file from Google Drive
+Delete file from Google Drive.
 }

@@ -1,14 +1,17 @@
-#' Open Google Drive file in browser to edit
+#' Visit Google Drive file in browser.
 #'
-#' @param file `gfile` object for the file you would like to edit
+#' @template file
 #'
-#' @return `gfile` object
+#' @template dribble-return
 #' @export
-drive_browse <- function(file){
+drive_browse <- function(file) {
   if (!interactive()) return(invisible(file))
-  if (!inherits(file, "gfile")){
-    spf("Input `file` must be a `gfile`. See `drive_file()`")
-  }
+
+  file <- as_dribble(file)
+
+  ## TO DO: do we really want to require a 1 row dribble?
+  ## another options is to browse first n where n is low, maybe even 1
+  file <- is_one(file)
 
   link <- drive_share_link(file = file)
   utils::browseURL(link)

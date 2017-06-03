@@ -4,34 +4,36 @@
 \alias{paths}
 \alias{drive_path_exists}
 \alias{drive_path}
-\title{Query a path on Google Drive}
+\title{Query a path on Google Drive.}
 \usage{
 drive_path_exists(path, verbose = TRUE)
 
-drive_path(path = "~/", partial_ok = FALSE, verbose = TRUE)
+drive_path(path = "~/", verbose = TRUE)
 }
 \arguments{
-\item{path}{character. A single path to query on Google Drive. All matching
+\item{path}{Character. A single path to query on Google Drive. All matching
 files are returned. Folders are a specific type of file. Use a trailing
 slash to indicate explicitly that the path is a folder, which can
 disambiguate if there is a file of the same name (yes this is possible on
 Drive!).}
 
-\item{verbose}{logical. Indicates whether to print informative messages.}
-
-\item{partial_ok}{logical. If \code{path} identifies no files and \code{partial_ok} is
-\code{TRUE}, \code{drive_path()} finds and queries the maximal existing subpath.}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
+An object of class \code{dribble}, a tibble with
+   one row per file.
+
 \code{drive_path_exists()}: \code{TRUE} or \code{FALSE}
 
-\code{drive_path()}: tibble with one row per matching file
+An object of class \code{dribble}, a tibble with
+   one row per file.
 }
 \description{
 These functions gather information about a single path, which may very well
 correspond to more than one file. Note that a folder is a specific type of
-file on Drive. If you want to list the contents of a folder or do general
-searching, use \code{\link[=drive_search]{drive_search()}}.
+file on Drive. If you want to list the contents of a folder, use
+\code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_search]{drive_search()}}.
 }
 \examples{
 \dontrun{
@@ -46,12 +48,5 @@ drive_path("abc")
 ## be more specific: consider only folder(s) that match 'abc'
 drive_path_exists("abc/")
 drive_path("abc/")
-
-## use of 'partial_ok'
-## assume 'abc' exists but 'abc/xyz' does not
-## this returns nothing
-drive_path("abc/xyz")
-## this returns 'abc'
-drive_path("abc/xyz", partial_ok = TRUE)
 }
 }

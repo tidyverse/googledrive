@@ -1,50 +1,42 @@
-#' Delete file from Google Drive
+#' Delete file from Google Drive.
 #'
-#' @param file `gfile` object representing the file you would like to
-#'   delete
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#' @template file
+#' @template verbose
 #'
-#' @return logical, indicating whether the delete succeeded
+#' @return Logical, indicating whether the delete succeeded.
 #' @export
 #'
 drive_delete <- function(file = NULL, verbose = TRUE) {
-  if (!inherits(file, "gfile")) {
-    spf("Input must be a `gfile`. See `drive_file()`")
+  del_file <- as_dribble(file)
+  if (nrow(del_file) == 0L) {
+    if (verbose == TRUE) {
+      message(glue::glue("There are no files that match 'file': {sq(file)}."))
+    }
+    return(FALSE)
   }
-
-  request <- build_request(endpoint = "drive.files.delete",
-                           params = list(fileId = file$id))
-  response <- make_request(request)
-  process_drive_delete(response = response,
-                       file = file,
-                       verbose = verbose)
-
+  out <- purrr::map2_lgl(del_file$id, del_file$name, delete_one, verbose = verbose)
+  invisible(out)
 }
 
+delete_one <- function(id, name, verbose = TRUE) {
+  request <- build_request(
+    endpoint = "drive.files.delete",
+    params = list(fileId = id)
+  )
+  response <- make_request(request)
 
-process_drive_delete <- function(response = NULL,
-                                 file = NULL,
-                                 verbose = TRUE) {
+  ## note, delete does not send a response header, so we
+  ## will just stop for status & check the status code
+  ## rather than using process_response()
 
   httr::stop_for_status(response)
 
-  if (verbose == TRUE) {
-    if (response$status_code == 204L) {
-      message(sprintf(
-        "The file '%s' has been deleted from your Google Drive",
-        file$name
-      ))
+  if (verbose) {
+    if (httr::status_code(response) == 204L) {
+      message(glue::glue("File deleted from Google Drive:\n{name}"))
     } else {
-      message(sprintf(
-        "Zoinks! Something went wrong, '%s' was not deleted.",
-        file$name
-      ))
+      message(glue::glue("Zoinks! File NOT deleted:\n{name}"))
     }
   }
-
-  if (response$status_code == 204L)
-    invisible(TRUE)
-  else
-    invisible(FALSE)
+  response$status_code == 204L
 }

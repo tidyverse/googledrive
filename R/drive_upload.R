@@ -1,25 +1,22 @@
-#' Upload a file to Google Drive
+#' Upload a file to Google Drive.
 #'
-#' @param from character, local path to the file to upload
-#' @param up_name character, name the file should have on Google Drive. Will
+#' @seealso MIME types that can be converted to native Google formats:
+#'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
+#'
+#' @param from Character, local path to the file to upload.
+#' @param name Character, name the file should have on Google Drive. Will
 #'   default to its local name.
-#' @param up_folder character, name of parent folder on Google Drive. Will
-#'   default to user's root folder, i.e. the top-level of "My Drive".
-#' @param overwrite logical, do you want to overwrite a file already on Google
-#'   Drive, if such exists?
-#' @param type character. If type = `NULL`, a MIME type is automatically
+#' @template folder
+#' @param overwrite A logical scalar, do you want to overwrite a file already on
+#'   Google Drive, if such exists?
+#' @param type Character. If type = `NULL`, a MIME type is automatically
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,
 #'   respectively.
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#' @template verbose
 #'
-#'  MIME types that can be converted to native Google formats:
-#'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
-#'
-#' @return object of class `gfile` and `list` that contains uploaded file's
-#'   information
+#' @template dribble-return
 #' @export
 #' @examples
 #' \dontrun{
@@ -30,8 +27,8 @@
 #' drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
 #' }
 drive_upload <- function(from = NULL,
-                         up_name = NULL,
-                         up_folder = NULL,
+                         name = NULL,
+                         folder = NULL,
                          overwrite = FALSE,
                          type = NULL,
                          verbose = TRUE) {
@@ -46,36 +43,43 @@ drive_upload <- function(from = NULL,
   ##   * parent
   ##   * id
 
-  up_name <- up_name %||% basename(from)
+  name <- name %||% basename(from)
 
   ## mimeType
   if (!is.null(type) &&
       type %in% c("document", "spreadsheet", "presentation", "folder")) {
     type <- paste0("application/vnd.google-apps.", type)
-    up_name <- tools::file_path_sans_ext(up_name)
   }
   mimeType <- type
   ## TO REVISIT: this is quite naive! assumes mimeType is sensible
   ## use mimeType helpers as soon as they exist
   ## the whole issue of upload vs "upload & convert" still needs thought
 
-  ## id of the parent folder
-  if (is.null(up_folder)) {
-    up_parent_id <- 'root'
-  } else {
-    ## TO DO: be willing to create the bits of up_folder that don't yet exist
-    ## for now, user must make sure up_folder already exists and is unique
-    up_parent_id <- get_one_path(path = up_folder)
+  ## parent folder
+  ## TO DO: be willing to create the bits of folder that don't yet exist
+  ## for now, user must make sure folder already exists and is unique
+  folder <- folder %||% root_folder()
+  if (is.character(folder)) {
+    folder <- append_slash(folder)
   }
+  up_parent <- as_dribble(folder)
+  up_parent <- is_one(up_parent)
+  if (!is_folder(up_parent)) {
+    stop(
+      glue::glue_data(up_parent, "'folder' is not a folder:\n{name}"),
+      call. = FALSE
+    )
+  }
+  up_parent_id <- up_parent$id
 
   ## is there a pre-existing file at destination?
-  q_name <- glue::glue("name = {sq(up_name)}")
+  q_name <- glue::glue("name = {sq(name)}")
   q_parent <- glue::glue("{sq(up_parent_id)} in parents")
   qq <- glue::collapse(c(q_name, q_parent), sep = " and ")
   existing <- drive_search(q = qq)
 
   if (nrow(existing) > 0) {
-    out_path <- unsplit_path(up_folder %||% "", up_name)
+    out_path <- unsplit_path(folder %||% "", name)
     if (!overwrite) {
       stop(glue::glue("Path already exists:\n{out_path}", call. = FALSE))
     }
@@ -90,7 +94,7 @@ drive_upload <- function(from = NULL,
     request <- build_request(
       endpoint = "drive.files.create.meta",
       params = list(
-        name = up_name,
+        name = name,
         parents = list(up_parent_id),
         mimeType = mimeType
       )
@@ -107,24 +111,17 @@ drive_upload <- function(from = NULL,
       fileId = up_id,
       uploadType = "media",
       body = httr::upload_file(path = from,
-                               type = mimeType)
+                               type = mimeType),
+      fields = "*"
     )
   )
 
 
   response <- make_request(request, encode = "json")
-  process_drive_upload(response = response,
-                       from = from,
-                       verbose = verbose)
-
-}
-
-process_drive_upload <- function(response = NULL,
-                                 from = NULL,
-                                 verbose = TRUE) {
   proc_res <- process_response(response)
 
-  uploaded_doc <- drive_file(proc_res$id)
+  uploaded_doc <- as_dribble(list(proc_res))
+  ## TO DO: this is a pretty weak test for success...
   success <- proc_res$id == uploaded_doc$id[1]
 
   if (success) {

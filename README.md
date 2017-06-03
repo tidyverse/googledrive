@@ -33,29 +33,30 @@ library("googledrive")
 ### Package conventions
 
 -   All functions begin with the prefix `drive_`
--   Functions and parameters attempt to mimic local file navigating conventions in R, such as `list.files()`.
+-   Functions and parameters attempt to mimic convetions for working with local files in R, such as `list.files()`.
+-   The metadata for one or more Drive files is held in a `dribble`, a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive.
 
 ### Quick demo
 
-Here's how to list the most recently modified 100 files on your drive. This will kick off your authentication, so you will be sent to your browser to authorize your Google Drive access. The functions here are designed to be pipeable, using `%>%`, however they can also be implemented without.
+Here's how to list the most recently modified 100 files on your drive. This will kick off your authentication, so you will be sent to your browser to authorize your Google Drive access. The functions here are designed to be pipeable, using `%>%`, however they obviously don't require it.
 
 ``` r
 drive_search()
-#> # A tibble: 100 x 5
-#>                                name                              type
-#>                               <chr>                             <chr>
-#>  1            foo-TEST-drive-search                            folder
-#>  2                              foo application/x-www-form-urlencoded
-#>  3                    chickwts1.csv                          text/csv
-#>  4                        file_test                          document
-#>  5                       unconftest                          document
-#>  6      chickwts-TEST-drive-publish                        text/plain
-#>  7  chickwts_txt-TEST-drive-publish                        text/plain
-#>  8 chickwts_gdoc-TEST-drive-publish                          document
-#>  9    chickwts_gdoc-TEST-drive-list                          document
-#> 10             foo2-TEST-drive-list                            folder
-#> # ... with 90 more rows, and 3 more variables: parents <list>, id <chr>,
-#> #   gfile <list>
+#> # A tibble: 100 x 3
+#>                                name
+#>  *                            <chr>
+#>  1                foo-TEST-drive-ls
+#>  2  chickwts_txt-TEST-drive-publish
+#>  3 chickwts_gdoc-TEST-drive-publish
+#>  4           foo-TEST-drive-publish
+#>  5      letters.txt-TEST-as-dribble
+#>  6                     chickwts.csv
+#>  7            foo-TEST-drive-search
+#>  8                        DELETE-ME
+#>  9                        DELETE-ME
+#> 10                             test
+#> # ... with 90 more rows, and 2 more variables: id <chr>,
+#> #   files_resource <list>
 ```
 
 You can narrow the query by specifying a `pattern` you'd like to match names against.
@@ -67,14 +68,39 @@ drive_search(pattern = "baz")
 Alternatively, you can refine the search using the `q` query parameter. Accepted search clauses can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, if I wanted to search for all spreadsheets, I could run the following.
 
 ``` r
-drive_search(q = "mimeType = 'application/vnd.google-apps.spreadsheet'")
-#> # A tibble: 2 x 5
-#>                   name        type    parents
-#>                  <chr>       <chr>     <list>
-#> 1     Copy of chickwts spreadsheet <list [1]>
-#> 2 538-star-wars-survey spreadsheet <list [1]>
-#> # ... with 2 more variables: id <chr>, gfile <list>
+(sheets <- drive_search(q = "mimeType = 'application/vnd.google-apps.spreadsheet'"))
+#> # A tibble: 1 x 3
+#>                   name                                           id
+#> *                <chr>                                        <chr>
+#> 1 538-star-wars-survey 1xw_M2OBUdPjoOVrmWKWNu07BW_PHCh-EMSfJN5WEJDE
+#> # ... with 1 more variables: files_resource <list>
+class(sheets)
+#> [1] "dribble"    "tbl_df"     "tbl"        "data.frame"
 ```
+
+You often want to store the result of a googledrive call, so you can act on those files in the future.
+
+#### Identify files
+
+In addition to `drive_search()`, you can also identify files by name (path, really) or Drive file id, using `drive_path()` and `drive_get()`, respectively.
+
+``` r
+(x <- drive_path("~/abc/def"))
+#> # A tibble: 1 x 3
+#>    name                           id files_resource
+#> * <chr>                        <chr>         <list>
+#> 1   def 0B0Gh-SuuA2nTMHhkaW8wR1FrVHM     <list [6]>
+## let's grab that file id and retrieve it that way
+x$id
+#> [1] "0B0Gh-SuuA2nTMHhkaW8wR1FrVHM"
+drive_get(x$id)
+#> # A tibble: 1 x 3
+#>    name                           id files_resource
+#> * <chr>                        <chr>         <list>
+#> 1   def 0B0Gh-SuuA2nTMHhkaW8wR1FrVHM    <list [31]>
+```
+
+In general, googledrive functions let you specify Drive file(s) by name (path), file id, and `dribble`. See examples below.
 
 #### Upload files
 
@@ -82,49 +108,33 @@ We can upload any file type.
 
 ``` r
 write.csv(chickwts, "chickwts.csv")
-drive_chickwts <- drive_upload("chickwts.csv")
+(drive_chickwts <- drive_upload("chickwts.csv"))
 #> File uploaded to Google Drive:
 #> chickwts.csv
 #> with MIME type:
 #> text/csv
+#> # A tibble: 1 x 3
+#>           name                           id files_resource
+#> *        <chr>                        <chr>         <list>
+#> 1 chickwts.csv 0B0Gh-SuuA2nTTlFsUWVHUTM5aVU    <list [36]>
 ```
 
-We now have a file of class `gfile` that contains information about the uploaded file.
+Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
 
 ``` r
-drive_chickwts
-#> File name: chickwts.csv 
-#> File owner: tidyverse testdrive 
-#> File type: text/csv 
-#> Last modified: 2017-06-01 
-#> Access: Shared with specific people.
-```
-
-Notice that file was uploaded as a `document`. Since this was a `.csv` document, and we didn't specify the type, `googledrive` assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
-
-``` r
+## example of using a dribble as input
 drive_chickwts <- drive_chickwts %>%
   drive_delete()
-#> The file 'chickwts.csv' has been deleted from your Google Drive
+#> File deleted from Google Drive:
+#> chickwts.csv
 ```
 
 ``` r
 drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
 #> File uploaded to Google Drive:
-#> chickwts
+#> chickwts.csv
 #> with MIME type:
 #> application/vnd.google-apps.spreadsheet
-```
-
-Let's see if that worked.
-
-``` r
-drive_chickwts
-#> File name: chickwts 
-#> File owner: tidyverse testdrive 
-#> File type: spreadsheet 
-#> Last modified: 2017-06-01 
-#> Access: Shared with specific people.
 ```
 
 Much better!
@@ -134,23 +144,23 @@ Much better!
 Versions of Google Documents, Sheets, and Presentations can be published online. By default, `drive_publish()` will publish your most recent version. You can check your publication status by running `drive_check_publish()`.
 
 ``` r
-drive_check_publish(drive_chickwts)
-#> The latest revision of the Google Drive file 'chickwts' is not published.
+drive_is_published(drive_chickwts)
+#> The latest revision of the Google Drive file 'chickwts.csv' is not published.
 ```
 
 ``` r
 drive_chickwts <- drive_publish(drive_chickwts)
-#> You have changed the publication status of 'chickwts'.
+#> You have changed the publication status of 'chickwts.csv'.
 drive_chickwts$publish
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-05-31 20:57:36        3      TRUE         TRUE
+#> 1 2017-06-03 09:10:55        1      TRUE         TRUE
 ```
 
 ``` r
-drive_check_publish(drive_chickwts)
-#> The latest revision of Google Drive file 'chickwts' is published.
+drive_is_published(drive_chickwts)
+#> The latest revision of Google Drive file 'chickwts.csv' is published.
 ```
 
 #### Share files
@@ -160,17 +170,20 @@ Notice the access here says "Shared with specific people". To update the access,
 ``` r
 drive_chickwts <- drive_chickwts %>%
   drive_share(role = "reader", type = "anyone")
-#> The permissions for file 'chickwts' have been updated
+#> The permissions for file 'chickwts.csv' have been updated.
+#> id: anyoneWithLink
+#> type: anyone
+#> role: reader
 ```
 
-We always assign the return value of googledrive functions back into an R object. This object is of type `gfile`, which holds up-to-date metadata on the associated Drive file. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.
+We always assign the return value of googledrive functions back into an R object. This object is of type `dribble`, which holds metadata on one or more Drive files. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.
 
 We can then extract a share link.
 
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1vmNKiM4tSgDeQbFcfs5pre5MBhazTJjjoh7PzRPLQiw/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1dIe_gcqFZQpOs-9MKz4sNnlqe_vFBqqsGd9mUu3TK3E/edit?usp=drivesdk"
 ```
 
 #### Clean up
@@ -178,5 +191,6 @@ drive_chickwts %>%
 ``` r
 drive_chickwts %>%
   drive_delete()
-#> The file 'chickwts' has been deleted from your Google Drive
+#> File deleted from Google Drive:
+#> chickwts.csv
 ```

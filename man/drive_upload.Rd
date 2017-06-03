@@ -2,43 +2,39 @@
 % Please edit documentation in R/drive_upload.R
 \name{drive_upload}
 \alias{drive_upload}
-\title{Upload a file to Google Drive}
+\title{Upload a file to Google Drive.}
 \usage{
-drive_upload(from = NULL, up_name = NULL, up_folder = NULL,
-  overwrite = FALSE, type = NULL, verbose = TRUE)
+drive_upload(from = NULL, name = NULL, folder = NULL, overwrite = FALSE,
+  type = NULL, verbose = TRUE)
 }
 \arguments{
-\item{from}{character, local path to the file to upload}
+\item{from}{Character, local path to the file to upload.}
 
-\item{up_name}{character, name the file should have on Google Drive. Will
+\item{name}{Character, name the file should have on Google Drive. Will
 default to its local name.}
 
-\item{up_folder}{character, name of parent folder on Google Drive. Will
-default to user's root folder, i.e. the top-level of "My Drive".}
+\item{folder}{Drive File, something that identifies the folder of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a \code{dribble}.}
 
-\item{overwrite}{logical, do you want to overwrite a file already on Google
-Drive, if such exists?}
+\item{overwrite}{A logical scalar, do you want to overwrite a file already on
+Google Drive, if such exists?}
 
-\item{type}{character. If type = \code{NULL}, a MIME type is automatically
+\item{type}{Character. If type = \code{NULL}, a MIME type is automatically
 determined from the file extension, if possible. If the source file is of a
 suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting \code{type} to \code{document}, \code{spreadsheet}, or \code{presentation},
 respectively.}
 
-\item{verbose}{logical, indicating whether to print informative messages
-(default \code{TRUE})
-
-MIME types that can be converted to native Google formats:
-\itemize{
-\item \url{https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19}
-}}
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
-object of class \code{gfile} and \code{list} that contains uploaded file's
-information
+An object of class \code{dribble}, a tibble with
+   one row per file.
 }
 \description{
-Upload a file to Google Drive
+Upload a file to Google Drive.
 }
 \examples{
 \dontrun{
@@ -47,5 +43,11 @@ drive_chickwts <- drive_upload("chickwts.csv")
 
 ## or convert it to a Google Sheet
 drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
+}
+}
+\seealso{
+MIME types that can be converted to native Google formats:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19}
 }
 }

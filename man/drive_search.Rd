@@ -2,32 +2,27 @@
 % Please edit documentation in R/drive_search.R
 \name{drive_search}
 \alias{drive_search}
-\title{Search for files on Google Drive}
+\title{Search for files on Google Drive.}
 \usage{
 drive_search(pattern = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{pattern}{character. If provided, only the files whose names match this
+\item{pattern}{Character. If provided, only the files whose names match this
 regular expression are returned.}
 
 \item{...}{Parameters to pass along to the API query.}
 
-\item{verbose}{logical. Indicates whether to print informative messages.
-
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
+}
+\value{
+An object of class \code{dribble}, a tibble with
+   one row per file.
+}
+\description{
 This will default to the most recent 100 files on your Google Drive. For
 example, to get 200 instead, specify the \code{pageSize}, i.e.
 \code{drive_ls(pageSize = 200)}.
-Helpful links for forming queries:
-\itemize{
-\item \url{https://developers.google.com/drive/v3/web/search-parameters}
-\item \url{https://developers.google.com/drive/v3/reference/files/list}
-}}
-}
-\value{
-tibble with one row per file
-}
-\description{
-Search for files on Google Drive
 }
 \examples{
 \dontrun{
@@ -55,4 +50,11 @@ drive_search(pattern = "jt")
 drive_search(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 }
 
+}
+\seealso{
+Helpful links for forming queries:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/web/search-parameters}
+\item \url{https://developers.google.com/drive/v3/reference/files/list}
+}
 }

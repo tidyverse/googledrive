@@ -1,63 +1,63 @@
-#' Move Google Drive file
+#' Move Google Drive file.
 #'
-#' @param file `gfile` object for the file you would like to move
-#' @param folder `gfile` object for the folder you would like to move the
-#'   file to
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#' @template file
+#' @template folder
+#' @template verbose
 #'
-#' @return `gfile` that was moved
+#' @template dribble-return
 #' @export
 drive_mv <- function(file = NULL,
                      folder = NULL,
                      verbose = TRUE) {
-  if (!inherits(file, "gfile")) {
-    spf("Input `file` must be a `gfile`. See `drive_file()`")
+  file <- as_dribble(file)
+  folder <- as_dribble(folder)
+
+  file <- is_one(file)
+  folder <- is_one(folder, "folder")
+
+  if (!is_mine(file)) {
+    stop(
+      glue::glue_data(
+        file,
+        "You do not own and, therefore cannot move, this file:\n{name}"
+      ),
+      call. = FALSE
+    )
+  }
+  if (!is_folder(folder)) {
+    stop(
+      glue::glue_data(folder, "'folder' is not a folder:\n{name}"),
+      call. = FALSE
+    )
   }
 
-  if (!inherits(folder, "gfile")) {
-    spf("Input `folder` must be a `gfile`. See `drive_file()`")
-  }
   request <- build_request(
     endpoint = "drive.files.update.meta",
     params = list(
       fileId = file$id,
       addParents = folder$id,
-      removeParents = file$kitchen_sink$parents[[1]]
-      )
+      removeParents = file$files_resource[[1]]$parents,
+      fields = "*"
     )
+  )
 
   response <- make_request(request)
-  proc_res <-
-    process_drive_mv(
-      response = response,
-      file = file,
-      folder = folder,
-      verbose = verbose
-    )
+  proc_res <- process_response(response)
 
-  file <- drive_file(proc_res$id)
+  if (verbose) {
+    if (httr::status_code(response) == 200L) {
+      message(
+        glue::glue(
+          "This file:\n{file$name}\nwas moved to folder:\n{folder$name}"
+        )
+      )
+    } else {
+      message(
+        glue::glue_data(file, "Oh dear! this file was not moved:\n{name}")
+      )
+    }
+  }
+
+  file <- as_dribble(list(proc_res))
   invisible(file)
 }
-
-process_drive_mv <-
-  function(response = NULL,
-           file = NULL,
-           folder = NULL,
-           verbose = TRUE) {
-    proc_res <- process_response(response)
-    if (verbose) {
-      if (response$status_code == 200L) {
-        message(
-          sprintf(
-            "The Google Drive file:\n%s \nwas moved to folder:\n%s",
-            file$name,
-            folder$name
-          )
-        )
-      } else
-        spf("Oh dear! Something went wrong, the file '%s' was not moved",
-            file$name)
-    }
-    proc_res
-  }

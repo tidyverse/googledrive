@@ -34,8 +34,8 @@ test_that("process_response properly errors on wrong content type with default e
 
 test_that("process_response properly errors on wrong content type with inserted expected type", {
 
-  actual = wrong$headers$`content-type`
-  expected = "something else"
+  actual <- wrong$headers$`content-type`
+  expected <- "something else"
   expect_error(process_response(wrong, expected = expected),
                sprintf(paste0("Expected content-type:\n%s",
                               "\n",
@@ -53,4 +53,3 @@ test_that("process_response is okay with correct content type and default expect
   expect_length(process_response(right), 1)
   expect_equal(names(process_response(right)), "name")
 })
-

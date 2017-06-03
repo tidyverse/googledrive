@@ -1,23 +1,33 @@
-#' Publish Google Drive file
+#' Publish Google Drive file.
 #'
-#' @param file `gfile` object representing the file you would like to
-#'   publish
-#' @param publish logical, indicating whether you'd like to publish the most
-#'   recent revision of the file (default `TRUE`)
-#' @param ... name-value pairs to add to the API request body, for example
+#' @template file
+#' @param ... Name-value pairs to add to the API request body, for example
 #'   `publishAuto = FALSE` will ensure that each subsequent revision will not be
-#'   automatically published (default here is `publishAuto = TRUE`)
-#' @param verbose logical, indicating whether to print informative messages
-#'   (default `TRUE`)
+#'   automatically published (default here is `publishAuto = TRUE`).
+#' @template verbose
 #'
-#' @return `gfile` object, a list with published information as a `tibble`
-#'   added under the list element `publish`
+#' @template dribble-return
 #' @export
-drive_publish <- function(file = NULL,
-                          publish = TRUE,
-                          ...,
-                          verbose = TRUE) {
-  file_update <- drive_check_publish(file = file, verbose = FALSE)
+drive_publish <- function(file = NULL, ..., verbose = TRUE) {
+  drive_change_publish(file = file, publish = TRUE, ..., verbose = verbose)
+}
+
+#' Unpublish Google Drive file
+#'
+#' @template file
+#' @param ... Name-value pairs to add to the API request body.
+#' @template verbose
+#'
+#' @template dribble-return
+#' @export
+drive_unpublish <- function(file = NULL, ..., verbose = TRUE) {
+  drive_change_publish(file = file, publish = FALSE, ..., verbose = verbose)
+}
+
+drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRUE) {
+  file_update <- drive_is_published(file = file, verbose = FALSE)
+
+  file_update <- is_one(file_update)
 
   x <- list(...)
   x$published <- publish
@@ -27,119 +37,112 @@ drive_publish <- function(file = NULL,
 
   x$fileId <- file_update$id
 
-  x$revisionId <- file_update$publish$revision
+  x$revisionId <- purrr::map_chr(file_update$publish, "revision")
 
-  if (grepl("application/vnd.google-apps.spreadsheet", file_update$kitchen_sink$mimeType)) {
-    x$revisionId <- 1
+  mime_type <- purrr::map_chr(file_update$files_resource, "mimeType")
+
+  x$revisionId <- if (grepl("application/vnd.google-apps.spreadsheet", mime_type)) {
+    1
+  } else {
+    x$revisionId
   }
+
+  x$fields <- "*"
 
   request <- build_request(
     endpoint = "drive.revisions.update",
     params = x
   )
   response <- make_request(request, encode = "json")
-  proc_res <- process_drive_publish(response = response,
-                                    file = file_update,
-                                    verbose = verbose)
+  proc_res <- process_response(response)
+
+  if (verbose) {
+    if (httr::status_code(response) == 200L) {
+      message(
+        glue::glue_data(file_update, "You have changed the publication status of {sq(name)}.")
+      )
+    } else
+      message(
+        glue::glue_data(file_update, "Uh oh, something went wrong. The publication status of {sq(name)} was not changed.")
+      )
+  }
 
   ## if we want to autopublish, it must have already been published, so
   ## we need to run again
   if (isTRUE(x$published) && isTRUE(x$publishAuto)) {
     response <- make_request(request, encode = "json")
-    proc_res <- process_drive_publish(response = response,
-                                      file = file_update,
-                                      verbose = FALSE)
+    proc_res <- process_response(response)
   }
 
-  file_update <- drive_file(file$id)
-  drive_check_publish(file = file_update, verbose = FALSE)
-}
-
-process_drive_publish <- function(response = NULL,
-                                  file = NULL,
-                                  verbose = TRUE) {
-  proc_res <- process_response(response)
-
-  if (verbose) {
-    if (response$status_code == 200L) {
-      message(sprintf(
-        "You have changed the publication status of '%s'.",
-        file$name
-      ))
-    } else
-      message(
-        sprintf(
-          "Uh oh, something went wrong. The publication status of '%s' was not changed",
-          file$name
-        )
-      )
-  }
+  file_update$publish <- publish_tbl(proc_res)
+  invisible(file_update)
 }
 
 #' Check if Google Drive file is published
 #'
-#' @param file `gfile` object representing the file you would like to check the published status of
-#' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
+#' @template file
+#' @template verbose
 #'
-#' @return `gfile` object, a list with published information as a `tibble` under the list element `publish`
+#' @template dribble-return
 #' @export
-drive_check_publish <- function (file = NULL, verbose = TRUE) {
+drive_is_published <- function(file = NULL, verbose = TRUE) {
 
-  if (!inherits(file, "gfile")) {
-    spf("Input must be a `gfile`. See `drive_file()`")
+  file <- as_dribble(file)
+
+  file <- is_any(file)
+
+  mime_types <- purrr::map_chr(file$files_resource, "mimeType")
+  if (!all(grepl("application/vnd.google-apps.", mime_types)) || is_folder(file)) {
+    stop(
+      glue::glue(
+        "Only Google Drive files can be published.",
+        "Your file is of type:",
+        "{glue::collapse(mime_types, sep = '\n')}",
+        "Check out `drive_share()` to change sharing permissions.",
+        .sep = "\n"
+      ),
+      call. = FALSE
+    )
   }
 
-  if (!grepl("application/vnd.google-apps.",
-             file$kitchen_sink$mimeType)) {
-    spf("Only Google Drive files need to be published. \nYour file is of type: %s \nCheck out drive_share() to change sharing permissions.",
-        file$type)
-  }
+  published <- purrr::map2(file$id, file$name, is_published_one, verbose = verbose)
+  file$publish <- published
 
-  fields <- paste(c("id", "published", "publishAuto", "lastModifyingUser"),
-                  collapse = ",")
+  invisible(file)
+}
+
+is_published_one <- function(id, name, verbose = TRUE) {
 
   request <- build_request(
     endpoint = "drive.revisions.get",
-    params = list(fileId = file$id,
+    params = list(fileId = id,
                   revisionId = "head",
-                  fields = fields)
+                  fields = "*")
   )
   response <- make_request(request)
-  process_drive_check_publish(response = response,
-                              file = file,
-                              verbose = verbose)
-}
-
-process_drive_check_publish <- function(response = NULL,
-                                        file = NULL,
-                                        verbose = TRUE) {
   proc_res <- process_response(response)
-
-  file$publish <- tibble::tibble(
-    check_time = Sys.time(),
-    revision = proc_res$id,
-    published = proc_res$published,
-    auto_publish = ifelse(
-      !is.null(proc_res$publishAuto),
-      proc_res$publishAuto,
-      FALSE
-    )
-  )
 
   if (verbose) {
     if (proc_res$published) {
-      message(sprintf(
-        "The latest revision of Google Drive file '%s' is published.",
-        file$name
-      ))
+      message(
+        glue::glue(
+          "The latest revision of Google Drive file '{name}' is published."
+        ))
     } else
       message(
-        sprintf(
-          "The latest revision of the Google Drive file '%s' is not published.",
-          file$name
+        glue::glue(
+          "The latest revision of the Google Drive file '{name}' is not published."
         )
       )
   }
+  publish_tbl(proc_res)
+}
 
-  invisible(file)
+publish_tbl <- function(x) {
+  tibble::tibble(
+    check_time = Sys.time(),
+    revision = x$id,
+    published = x$published,
+    auto_publish = x$publishAuto %||% FALSE
+  )
 }

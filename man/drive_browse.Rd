@@ -2,16 +2,19 @@
 % Please edit documentation in R/drive_browse.R
 \name{drive_browse}
 \alias{drive_browse}
-\title{Open Google Drive file in browser to edit}
+\title{Visit Google Drive file in browser.}
 \usage{
 drive_browse(file)
 }
 \arguments{
-\item{file}{\code{gfile} object for the file you would like to edit}
+\item{file}{Drive File, something that identifies the file of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a \code{dribble}.}
 }
 \value{
-\code{gfile} object
+An object of class \code{dribble}, a tibble with
+   one row per file.
 }
 \description{
-Open Google Drive file in browser to edit
+Visit Google Drive file in browser.
 }

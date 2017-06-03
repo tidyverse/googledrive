@@ -11,22 +11,17 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del_ids <- drive_search(pattern = paste(c(nm_("chickwts_txt"),
-                                              nm_("chickwts_gdoc")),
-                                            collapse = "|"))$id
-    if (!is.null(del_ids)) {
-      del_files <- purrr::map(del_ids, drive_file)
-      del <- purrr::map(del_files, drive_delete, verbose = FALSE)
-    }
+    del <- drive_delete(c(nm_("chickwts_txt"), nm_("chickwts_gdoc")),
+                             verbose = FALSE)
   }
   write.table(chickwts, "chickwts.txt")
   drive_upload("chickwts.txt",
-               up_name = nm_("chickwts_gdoc"),
+               name = nm_("chickwts_gdoc"),
                type = "document",
                verbose = FALSE)
 
   drive_upload("chickwts.txt",
-               up_name = nm_("chickwts_txt"),
+               name = nm_("chickwts_txt"),
                verbose = FALSE)
 
 
@@ -39,11 +34,11 @@ test_that("drive_publish doesn't explicitly fail", {
   skip_on_appveyor()
   skip_on_travis()
 
-  drive_chickwts <- drive_file(drive_path(nm_("chickwts_gdoc"))$id)
+  drive_chickwts <- as_dribble(nm_("chickwts_gdoc"))
 
   ## since we haven't checked the publication status,
   ## this should be NULL
-  expect_equal(drive_chickwts$publish, NULL)
+  expect_equal(drive_chickwts$files_resource[[1]]$publish, NULL)
 
   drive_chickwts <- drive_publish(drive_chickwts)
 
@@ -52,23 +47,20 @@ test_that("drive_publish doesn't explicitly fail", {
 
   ## let's unpublish it
 
-  drive_chickwts <- drive_publish(drive_chickwts, publish = FALSE)
+  drive_chickwts <- drive_unpublish(drive_chickwts)
 
   ## now this sould be false
   expect_false(drive_chickwts$publish$published)
 })
 
-test_that("drive_publish fails if the file input is not a Google Drive type",{
+test_that("drive_publish fails if the file input is not a Google Drive type", {
 
   skip_on_appveyor()
   skip_on_travis()
 
-  drive_chickwts <- drive_file(drive_path(nm_("chickwts_txt"))$id)
+  drive_chickwts <- as_dribble(nm_("chickwts_txt"))
 
   expect_error(drive_publish(drive_chickwts, verbose = FALSE),
-               sprintf("Only Google Drive files need to be published. \nYour file is of type: %s \nCheck out drive_share() to change sharing permissions.",
-                       drive_chickwts$type),
-               fixed = TRUE
+               "Only Google Drive files can be published."
   )
 })
-

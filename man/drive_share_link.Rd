@@ -2,17 +2,18 @@
 % Please edit documentation in R/drive_share_link.R
 \name{drive_share_link}
 \alias{drive_share_link}
-\title{Retrieves Google Drive file's share link}
+\title{Retrieve a file's share link.}
 \usage{
 drive_share_link(file)
 }
 \arguments{
-\item{file}{\code{gfile} object representing the file you would like to
-retrieve the link for}
+\item{file}{Drive File, something that identifies the file of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a \code{dribble}.}
 }
 \value{
-character, link to Google Drive file
+Character. The link to Google Drive file.
 }
 \description{
-Retrieves Google Drive file's share link
+Retrieve a file's share link.
 }

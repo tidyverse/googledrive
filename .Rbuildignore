@@ -13,3 +13,5 @@
 ^scratch.R$
 ^tidyverse-token\.rds$
 ^tidyverse-noncaching-token\.rds$
+^jennyfbryan-noncaching-token\.rds$
+^man-roxygen$

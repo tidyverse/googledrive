@@ -6,7 +6,7 @@
 #' rather, prepared for inclusion in downstream requests. Use
 #' `access_token()` to reveal the actual access token, suitable for use
 #' with `curl`.
-#' @param verbose logical, indicating whether to print informative messages (default `TRUE`)
+#' @template verbose
 #'
 #' @return a \code{request} object (an S3 class provided by `httr`)
 #'
@@ -84,8 +84,7 @@ omit_token_if <- function(cond) if (cond) NULL else drive_token()
 #'   defaults to the ID and secret built into the \code{googledrive} package
 #' @param cache logical indicating if \code{googledrive} should cache
 #'   credentials in the default cache file \code{.httr-oauth}
-#' @param verbose Logical, indicating whether to print informative messages (default \code{TRUE})
-#'
+#' @template verbose
 #' @family auth functions
 #' @export
 #'
@@ -192,7 +191,7 @@ token_available <- function(verbose = TRUE) {
 #' @param clear_cache logical indicating whether to disable the
 #'   \code{.httr-oauth} file in working directory, if such exists, by renaming
 #'   to \code{.httr-oauth-SUSPENDED}
-#' @param verbose Logical, indicating whether to print informative messages (default \code{TRUE})
+#' @template verbose
 #'
 #' @export
 #' @family auth functions
