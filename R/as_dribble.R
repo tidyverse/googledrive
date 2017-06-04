@@ -40,7 +40,7 @@ as_dribble.character <- function(x, ...) {
 #' @export
 #' @rdname as_dribble
 as_dribble.drive_id <- function(x, ...) {
-  do.call(rbind, purrr::map(x, drive_get))
+  drive_get(x)
 }
 
 #' @export
