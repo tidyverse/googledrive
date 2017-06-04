@@ -36,8 +36,11 @@
 #' ## files whose names match a regex
 #' drive_search(pattern = "jt")
 #'
-#' ## filter for  Google Sheets
+#' ## filter for Google Sheets
 #' drive_search(q = "mimeType='application/vnd.google-apps.spreadsheet'")
+#'
+#' ## filter for folders
+#' drive_search(q = "mimeType='application/vnd.google-apps.folder'")
 #' }
 #'
 #' @export
