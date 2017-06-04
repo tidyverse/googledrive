@@ -1,3 +1,13 @@
+#' Pipe operator
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
+#' @export
+#' @importFrom purrr %>%
+#' @usage lhs \%>\% rhs
+NULL
+
 # environment to hold data about the Drive API
 .drive <- new.env(parent = emptyenv())
 .drive$base_url <- "https://www.googleapis.com"
