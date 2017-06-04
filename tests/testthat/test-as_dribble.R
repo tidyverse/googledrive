@@ -28,12 +28,26 @@ test_that("as_dribble.data.frame() checks properly", {
   )
   expect_silent(as_dribble(d))
 
+  ## wrong type
   d <- tibble::tibble(
     name = character(),
     id = numeric(),
     files_resource = list()
   )
-  expect_error(as_dribble(d), "Invalid dribble.")
+  expect_error(
+    as_dribble(d),
+    "Invalid dribble. Column types are incorrect."
+  )
+
+  ## missing a required variable
+  d <- tibble::tibble(
+    name = character(),
+    files_resource = list()
+  )
+  expect_error(
+    as_dribble(d),
+    "Invalid dribble. These column names are required:"
+  )
 })
 
 test_that("as_dribble.character() works", {
@@ -41,8 +55,7 @@ test_that("as_dribble.character() works", {
   skip_on_travis()
 
   empty <- as_dribble("this-should-give-empty")
-  expect_is(empty, "dribble")
-  expect_identical(nrow(empty), 0L)
+  expect_identical(empty, dribble())
 
   one_file <- as_dribble(nm_("letters.txt"))
   expect_is(one_file, "dribble")
