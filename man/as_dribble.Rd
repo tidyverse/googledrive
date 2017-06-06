@@ -3,6 +3,8 @@
 \name{as_dribble}
 \alias{as_dribble}
 \alias{as_dribble.dribble}
+\alias{as_dribble.default}
+\alias{as_dribble.NULL}
 \alias{as_dribble.character}
 \alias{as_dribble.drive_id}
 \alias{as_dribble.list}
@@ -12,6 +14,10 @@
 as_dribble(x, ...)
 
 \method{as_dribble}{dribble}(x, ...)
+
+\method{as_dribble}{default}(x, ...)
+
+\method{as_dribble}{NULL}(x, ...)
 
 \method{as_dribble}{character}(x, ...)
 

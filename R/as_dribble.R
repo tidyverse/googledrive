@@ -33,6 +33,20 @@ as_dribble.dribble <- function(x, ...) x
 
 #' @export
 #' @rdname as_dribble
+as_dribble.default <- function(x, ...) {
+  stop(
+    "Don't know how to coerce object of class ",
+    paste(class(x), collapse = "/"), " into a dribble",
+    call. = FALSE
+  )
+}
+
+#' @export
+#' @rdname as_dribble
+as_dribble.NULL <- function(x, ...) dribble()
+
+#' @export
+#' @rdname as_dribble
 as_dribble.character <- function(x, ...) drive_paths(x)
 
 #' @export
