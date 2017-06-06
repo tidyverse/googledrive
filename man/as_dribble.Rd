@@ -35,8 +35,8 @@ specified via
 \itemize{
 \item File path
 \item File id (be sure to mark with \code{\link[=drive_id]{drive_id()}} to distinguish from file path!)
-\item List representing a \href{https://developers.google.com/drive/v3/reference/files#resource}{Files resource}
-object (for internal use)
+\item List representing \href{https://developers.google.com/drive/v3/reference/files#resource}{Files resource}
+objects (for internal use)
 \item Data frame or \code{\link{dribble}} (for internal use)
 }
 }

@@ -20,7 +20,7 @@ test_that("drive_ls() errors if file does not exist", {
 
   expect_error(
     drive_ls(nm_("this-should-not-exist")),
-    "Input must specify exactly 1 Drive file."
+    "Input must hold exactly one Drive file."
   )
 })
 

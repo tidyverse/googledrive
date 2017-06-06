@@ -21,55 +21,98 @@ dribble <- function() {
   )
 }
 
-
-
-is_folder <- function(x) {
-  stopifnot(inherits(x, "dribble"))
-  purrr::map_chr(x$files_resource, "mimeType") ==
-    "application/vnd.google-apps.folder"
-}
-
-is_mine <- function(x) {
-  stopifnot(inherits(x, "dribble"))
-  purrr::map_lgl(x$files_resource, list("owners", 1, "me"))
-}
-
-#' Require that dribble contains exactly one Drive file.
+#' Check facts about a dribble
 #'
-#' This will return the input [`dribble`] if it contains exactly
-#' one Drive file, and will error otherwise.
+#' Sometimes you need to check things about a dribble or about the files it
+#' represents, such as:
+#'   * Size: Does the dribble hold exactly one file? At least one file? No file?
+#'   * File type: Is this file a folder?
+#'   * File ownership and access: Is it mine? Published? Shared?
+#'
+#' @name dribble-checks
 #' @param d A [`dribble`].
-#' @param .what Character, description of input for informative
-#'   error message.
-#'
+#' @examples
+#' \dontrun{
+#' ## most of us have multiple files or folders on Google Drive
+#' d <- drive_search()
+#' no_file(d)
+#' single_file(d)
+#' some_files(d)
+#' confirm_single_file(d)
+#' confirm_some_files(d)
+#' is_folder(d)
+#' is_mine(d)
+#' }
+NULL
+
 #' @export
-is_one <- function(d, .what = "file") {
+#' @rdname dribble-checks
+no_file <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  if (nrow(d) != 1) {
-    stop(glue::glue("Input must specify exactly 1 Drive {.what}."), call. = FALSE)
+  nrow(d) == 0
+}
+
+#' @export
+#' @rdname dribble-checks
+single_file <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  nrow(d) == 1
+}
+
+#' @export
+#' @rdname dribble-checks
+some_files <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  nrow(d) > 0
+}
+
+#' @export
+#' @rdname dribble-checks
+confirm_single_file <- function(d) {
+  if (!single_file(d)) {
+    stop("Input does not hold exactly one Drive file:\n", deparse(substitute(d)),
+         call. = FALSE)
   }
   d
 }
 
-is_any <- function(x) {
-  stopifnot(inherits(x, "dribble"))
-  if (nrow(x) == 0L) {
-    stop("There are no Drive files that match your input.", call. = FALSE)
+#' @export
+#' @rdname dribble-checks
+confirm_some_files <- function(d) {
+  if (!some_files(d)) {
+    stop("Input does not hold at least one Drive file:\n", deparse(substitute(d)),
+         call. = FALSE)
   }
-  x
+  d
 }
 
-## promote elements in files_resource into a top-level variable
-promote <- function(x, pull) {
+#' @export
+#' @rdname dribble-checks
+is_folder <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  purrr::map_chr(d$files_resource, "mimeType") ==
+    "application/vnd.google-apps.folder"
+}
 
-  present <- any(purrr::map_lgl(x$files_resource, ~ pull %in% names(.x)))
+#' @export
+#' @rdname dribble-checks
+is_mine <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  purrr::map_lgl(d$files_resource, list("owners", 1, "me"))
+}
+
+
+## promote elements in files_resource into a top-level variable
+promote <- function(d, elem) {
+
+  present <- any(purrr::map_lgl(d$files_resource, ~ elem %in% names(.x)))
 
   ## TO DO: do we really want promote() to be this forgiving?
-  ## add a placeholder column for pull
+  ## add a placeholder column for elem
   if (!present) {
-    ## ensure pull is added, even if there are zero rows
-    x[[pull]] <- rep_len(list(NULL), nrow(x))
-    return(x)
+    ## ensure elem is added, even if there are zero rows
+    d[[elem]] <- rep_len(list(NULL), nrow(d))
+    return(d)
   }
 
   mp <- list(
@@ -79,9 +122,9 @@ promote <- function(x, pull) {
     logical = purrr::map_lgl
   )
   ## TO DO: should be using .default in the above fxns
-  cl <- class(x$files_resource[[1]][[pull]])
+  cl <- class(d$files_resource[[1]][[elem]])
 
   fn <- mp[[cl]]
-  x[[pull]] <- fn(x$files_resource, pull)
-  x
+  d[[elem]] <- fn(d$files_resource, elem)
+  d
 }

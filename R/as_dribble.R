@@ -5,8 +5,8 @@
 #' specified via
 #'   * File path
 #'   * File id (be sure to mark with [drive_id()] to distinguish from file path!)
-#'   * List representing a [Files resource](https://developers.google.com/drive/v3/reference/files#resource)
-#'     object (for internal use)
+#'   * List representing [Files resource](https://developers.google.com/drive/v3/reference/files#resource)
+#'     objects (for internal use)
 #'   * Data frame or [`dribble`] (for internal use)
 #'
 #' This is a generic function.
@@ -33,15 +33,11 @@ as_dribble.dribble <- function(x, ...) x
 
 #' @export
 #' @rdname as_dribble
-as_dribble.character <- function(x, ...) {
-  drive_paths(x)
-}
+as_dribble.character <- function(x, ...) drive_paths(x)
 
 #' @export
 #' @rdname as_dribble
-as_dribble.drive_id <- function(x, ...) {
-  drive_get(x)
-}
+as_dribble.drive_id <- function(x, ...) drive_get(x)
 
 #' @export
 #' @rdname as_dribble
