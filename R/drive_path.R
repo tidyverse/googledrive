@@ -54,7 +54,9 @@ drive_paths_exist <- function(path, verbose = TRUE) {
 #' @rdname paths
 #' @template dribble-return
 drive_path <- function(path = "~/", verbose = TRUE) {
-  stopifnot(is.character(path), length(path) == 1)
+  stopifnot(is.character(path))
+  if (length(path) < 1) return(dribble())
+  stopifnot(length(path) == 1)
   path_tbl <- get_paths(path = path, partial_ok = FALSE)
   as_dribble(path_tbl[names(path_tbl) != "path"])
 }
@@ -63,6 +65,8 @@ drive_path <- function(path = "~/", verbose = TRUE) {
 #' @rdname paths
 #' @template dribble-return
 drive_paths <- function(path = "~/", verbose = TRUE) {
+  stopifnot(is.character(path))
+  if (length(path) < 1) return(dribble())
   do.call(rbind, purrr::map(path, drive_path))
 }
 

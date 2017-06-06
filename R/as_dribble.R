@@ -55,43 +55,21 @@ as_dribble.drive_id <- function(x, ...) drive_get(x)
 
 #' @export
 #' @rdname as_dribble
+as_dribble.data.frame <- function(x, ...) validate_dribble(new_dribble(x))
+
+#' @export
+#' @rdname as_dribble
 as_dribble.list <- function(x, ...) {
   if (length(x) == 0) return(dribble())
 
   required_nms <- c("name", "id", "kind")
   stopifnot(purrr::map_lgl(x, ~ all(required_nms %in% names(.x))))
 
-  kind <- purrr::map_chr(x, "kind", .null = NA_character_)
-  stopifnot(all(kind == "drive#file"))
-
-  structure(
+  as_dribble(
     tibble::tibble(
       name = purrr::map_chr(x, "name"),
       id = purrr::map_chr(x, "id"),
       files_resource = x
-    ),
-    class = c("dribble", "tbl_df", "tbl", "data.frame")
+    )
   )
-}
-
-#' @export
-#' @rdname as_dribble
-as_dribble.data.frame <- function(x, ...) {
-  required_nms <- c("name", "id", "files_resource")
-  if (!all(required_nms %in% colnames(x))) {
-    msg <- glue::glue("Invalid dribble. These column names are required:\n{x}",
-                      x = glue::collapse(required_nms, "\n"))
-    stop(msg, call. = FALSE)
-  }
-
-  if (!all(is.character(x$name) &&
-           is.character(x$id) &&
-           inherits(x$files_resource, "list"))) {
-    stop("Invalid dribble. Column types are incorrect.", call. = FALSE)
-  }
-
-  kind <- purrr::map_chr(x$files_resource, "kind", .null = NA_character_)
-  stopifnot(all(kind == "drive#file"))
-
-  structure(x, class = c("dribble", "tbl_df", "tbl", "data.frame"))
 }

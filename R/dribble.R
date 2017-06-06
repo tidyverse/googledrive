@@ -2,23 +2,70 @@
 #'
 #' googledrive stores the metadata for one or more Google Drive files as a
 #' `dribble`. It is a [tibble][tibble::tibble-package] with one row per file
-#' and, at a minimum, character variables containing file name and id and a
-#' list-column of [Files resource](https://developers.google.com/drive/v3/reference/files#resource)
-#' objects (possibly incomplete).
+#' and, at a minimum, these variables:
+#'   * `name`: a character variable containing file names
+#'   * `id`: a character variable of Google Drive file ids
+#'   * `files_resource`: a list-column of
+#'   [Files resource](https://developers.google.com/drive/v3/reference/files#resource)
+#'   objects. Note there is no guarantee that all documented fields are always
+#'   present.
+#'
+#' In general, the dribble class will be retained even after subsetting, as
+#' long as the required variables are present and of the correct type.
 #'
 #' @export
 #' @name dribble
+#' @seealso [as_dribble()]
 NULL
 
-dribble <- function() {
-  structure(
-    tibble::tibble(
-      name = character(),
-      id = character(),
-      files_resource = list()
-    ),
-    class = c("dribble", "tbl_df", "tbl", "data.frame")
+## implementing dribble as advised here:
+## https://github.com/hadley/adv-r/blob/master/S3.Rmd
+
+new_dribble <- function(x) {
+  stopifnot(inherits(x, "data.frame"))
+  structure(x, class = c("dribble", "tbl_df", "tbl", "data.frame"))
+}
+
+validate_dribble <- function(x) {
+  stopifnot(inherits(x, "dribble"))
+
+  required_nms <- c("name", "id", "files_resource")
+  if (!all(required_nms %in% colnames(x))) {
+    msg <- glue::glue("Invalid dribble. These column names are required:\n{x}",
+                      x = glue::collapse(required_nms, "\n"))
+    stop(msg, call. = FALSE)
+  }
+
+  if (!all(is.character(x$name) &&
+           is.character(x$id) &&
+           inherits(x$files_resource, "list"))) {
+    stop("Invalid dribble. Column types are incorrect.", call. = FALSE)
+  }
+
+  kind <- purrr::map_chr(x$files_resource, "kind", .null = NA_character_)
+  stopifnot(all(kind == "drive#file"))
+
+  x
+}
+
+dribble <- function(x = NULL) {
+  x <- x %||% tibble::tibble(
+    name = character(),
+    id = character(),
+    files_resource = list()
   )
+  validate_dribble(new_dribble(x))
+}
+
+#' @export
+`[.dribble` <- function(x, i, j, drop = FALSE) {
+  out <- NextMethod()
+  maybe_dribble <- try(validate_dribble(new_dribble(out)), silent = TRUE)
+  if (inherits(maybe_dribble, "try-error")) {
+    out
+  } else {
+    maybe_dribble
+  }
 }
 
 #' Check facts about a dribble

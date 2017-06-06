@@ -6,7 +6,20 @@
 \description{
 googledrive stores the metadata for one or more Google Drive files as a
 \code{dribble}. It is a \link[tibble:tibble-package]{tibble} with one row per file
-and, at a minimum, character variables containing file name and id and a
-list-column of \href{https://developers.google.com/drive/v3/reference/files#resource}{Files resource}
-objects (possibly incomplete).
+and, at a minimum, these variables:
+\itemize{
+\item \code{name}: a character variable containing file names
+\item \code{id}: a character variable of Google Drive file ids
+\item \code{files_resource}: a list-column of
+\href{https://developers.google.com/drive/v3/reference/files#resource}{Files resource}
+objects. Note there is no guarantee that all documented fields are always
+present.
+}
+}
+\details{
+In general, the dribble class will be retained even after subsetting, as
+long as the required variables are present and of the correct type.
+}
+\seealso{
+\code{\link[=as_dribble]{as_dribble()}}
 }

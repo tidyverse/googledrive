@@ -7,8 +7,8 @@
 \alias{as_dribble.NULL}
 \alias{as_dribble.character}
 \alias{as_dribble.drive_id}
-\alias{as_dribble.list}
 \alias{as_dribble.data.frame}
+\alias{as_dribble.list}
 \title{Identify files on Google Drive.}
 \usage{
 as_dribble(x, ...)
@@ -23,9 +23,9 @@ as_dribble(x, ...)
 
 \method{as_dribble}{drive_id}(x, ...)
 
-\method{as_dribble}{list}(x, ...)
-
 \method{as_dribble}{data.frame}(x, ...)
+
+\method{as_dribble}{list}(x, ...)
 }
 \arguments{
 \item{x}{A vector of Drive file paths, a vector of file ids marked
