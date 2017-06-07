@@ -24,11 +24,11 @@ if (length(dd_cache) == 0) {
   json_fname <- rev(dd_cache)[1]
 }
 dd_content <- fromJSON(json_fname)
-##view(dd_content)
-listviewer::jsonedit(dd_content)
+##View(dd_content)
+##listviewer::jsonedit(dd_content)
 
 ## extract the method collections and bring to same level of hierarchy
-files <- dd_content[[c("resources",  "files", "methods")]]
+files <- dd_content[[c("resources", "files", "methods")]]
 names(files) <- paste("files", names(files), sep = ".")
 permissions <-
   dd_content[[c("resources", "permissions", "methods")]]
@@ -37,33 +37,22 @@ revisions <-
   dd_content[[c("resources", "revisions", "methods")]]
 names(revisions) <- paste("revisions", names(revisions), sep = ".")
 
-## extract the schema collections and bring to same level of hierarchy
-files_schema <- dd_content[[c("schemas",  "File", "properties")]]
-permissions_schema <-
-  dd_content[[c("schemas", "Permission", "properties")]]
-revisions_schema <-
-  dd_content[[c("schemas", "Revision", "properties")]]
-
-
 endpoints <- c(files, permissions, revisions)
 # str(endpoints, max.level = 1)
-listviewer::jsonedit(endpoints)
+# listviewer::jsonedit(endpoints)
+View(endpoints)
 
-nms <- names(endpoints)
-
-add_params <- function(endpoints, ref, object) {
-  for (x in nms) {
-    if (is.null(endpoints[[x]][["request"]])) next
-    if (ref %in% endpoints[[x]][["request"]]) {
-      endpoints[[x]][["parameters"]] = c(endpoints[[x]][["parameters"]], object)
-    }
-  }
-  endpoints
+add_schema_params <- function(endpoint, nm) {
+  req <- endpoint$request$`$ref`
+  if (is.null(req) || req == "Channel") return(endpoint)
+  message(glue::glue("{nm} gains {req} schema params\n"))
+  endpoint$parameters <- c(
+    endpoint$parameters,
+    dd_content[[c("schemas",  req, "properties")]]
+  )
+  endpoint
 }
-
-endpoints <- add_params(endpoints, ref = "File", object = files_schema)
-endpoints <- add_params(endpoints, ref = "Permission", object = permissions_schema)
-endpoints <- add_params(endpoints, ref = "Revisions", object = revisions_schema)
+endpoints <- imap(endpoints, add_schema_params)
 
 nms <- endpoints %>%
   map(names) %>%
