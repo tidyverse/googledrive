@@ -3,37 +3,45 @@
 \name{paths}
 \alias{paths}
 \alias{drive_path_exists}
+\alias{drive_paths_exist}
 \alias{drive_path}
-\title{Query a path on Google Drive.}
+\alias{drive_paths}
+\title{Query paths.}
 \usage{
 drive_path_exists(path, verbose = TRUE)
 
+drive_paths_exist(path, verbose = TRUE)
+
 drive_path(path = "~/", verbose = TRUE)
+
+drive_paths(path = "~/", verbose = TRUE)
 }
 \arguments{
-\item{path}{Character. A single path to query on Google Drive. All matching
-files are returned. Folders are a specific type of file. Use a trailing
-slash to indicate explicitly that the path is a folder, which can
-disambiguate if there is a file of the same name (yes this is possible on
-Drive!).}
+\item{path}{Character vector of path(s) to query. Use a trailing slash to
+indicate explicitly that the path is a folder, which can disambiguate if
+there is a file of the same name (yes this is possible on Drive!).}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
 \value{
+\code{drive_path_exists()}: a single \code{TRUE} or \code{FALSE}
+
+\code{drive_paths_exist()}: Logical vector of same length as input
+
 An object of class \code{dribble}, a tibble with
    one row per file.
-
-\code{drive_path_exists()}: \code{TRUE} or \code{FALSE}
 
 An object of class \code{dribble}, a tibble with
    one row per file.
 }
 \description{
-These functions gather information about a single path, which may very well
-correspond to more than one file. Note that a folder is a specific type of
-file on Drive. If you want to list the contents of a folder, use
-\code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_search]{drive_search()}}.
+These functions query files that match one or more paths. The plural \code{s} of
+\code{paths} conveys whether you are allowed to provide more than one input path.
+Be aware that you can get more than one file back even when the input is a
+single path! Drive file and folder names need not be unique, even at a given
+level of the hierarchy. Note also that a folder is just a specific type of
+file on Drive.
 }
 \examples{
 \dontrun{
@@ -48,5 +56,13 @@ drive_path("abc")
 ## be more specific: consider only folder(s) that match 'abc'
 drive_path_exists("abc/")
 drive_path("abc/")
+
+## use the plural forms to query multiple paths at once
+drive_paths_exist(c("abc", "def"))
+drive_paths(c("abc", "def"))
 }
+}
+\seealso{
+If you want to list the contents of a folder, use \code{\link[=drive_ls]{drive_ls()}}. For
+general searching, use \code{\link[=drive_search]{drive_search()}}.
 }
