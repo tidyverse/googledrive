@@ -125,7 +125,7 @@ params <- params %>%
     type = type %>% map(1, .null = NA) %>% flatten_chr(),
     repeated = repeated %>% map(1, .null = NA) %>% flatten_lgl(),
     format = format %>%  map(1, .null = NA) %>% flatten_chr(),
-    enum = enum %>%  modify_if(is_null, ~ NA),
+    enum = enum %>% map(1, .null = NA) %>% flatten_chr(),
     description = description %>% map(1, .null = NA) %>% flatten_chr()
   )
 ## repack all the info for each parameter into a list

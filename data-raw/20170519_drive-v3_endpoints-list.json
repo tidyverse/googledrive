@@ -1303,7 +1303,7 @@
         "type": ["string"],
         "repeated": [null],
         "format": [null],
-        "enum": ["domain", "user"],
+        "enum": ["domain"],
         "description": ["The source of files to list. Deprecated: use 'corpora' instead."]
       },
       "includeTeamDriveItems": {
@@ -2712,21 +2712,13 @@
         "enum": [null],
         "description": ["The ID of the revision."]
       },
-<<<<<<< HEAD
-      "fields": {
-        "location": ["query"],
-=======
       "id": {
         "location": ["body"],
->>>>>>> 6642d693889e0fb31ac3c66c685241983824931d
         "required": [null],
         "type": ["string"],
         "repeated": [null],
         "format": [null],
         "enum": [null],
-<<<<<<< HEAD
-        "description": [null]
-=======
         "description": ["The ID of the revision."]
       },
       "keepForever": {
@@ -2827,7 +2819,15 @@
         "format": ["int64"],
         "enum": [null],
         "description": ["The size of the revision's content in bytes. This is only applicable to files with binary content in Drive."]
->>>>>>> 6642d693889e0fb31ac3c66c685241983824931d
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
