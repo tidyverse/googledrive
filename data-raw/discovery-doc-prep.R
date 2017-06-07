@@ -88,7 +88,7 @@ View(edf)
 #   x
 # }
 
-map(edf, f, thing = "File", to_append = files_schema)
+## map(edf, f, thing = "File", to_append = files_schema)
 
 ## clean up individual variables
 
@@ -143,9 +143,7 @@ params <- params %>%
     location = location %>% flatten_chr(),
     required = required %>% map(1, .null = NA) %>% flatten_lgl(),
     type = type %>% flatten_chr(),
-    repeated = repeated %>% map(1, .null = NA) %>% flatten_lgl(),
     format = format %>%  map(1, .null = NA) %>% flatten_chr(),
-    enum = enum %>%  modify_if(is_null, ~ NA),
     description = description %>% flatten_chr()
   )
 ## repack all the info for each parameter into a list
