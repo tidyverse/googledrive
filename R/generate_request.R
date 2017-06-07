@@ -51,6 +51,7 @@ generate_request <- function(endpoint = character(),
   check_enums(params, ept$parameters)
 
   drive_build_request(
+    endpoint = ept$id,
     path = ept$path,
     method = ept$method,
     params = params,
@@ -75,15 +76,18 @@ generate_request <- function(endpoint = character(),
 #'   )
 #' )
 #' req
-drive_build_request <- function(path,
+drive_build_request <- function(endpoint,
+                          path,
                           method,
                           params = list(),
                           .api_key = NULL) {
-  params <- partition_params(params, extract_param_names(path))
+  ept <- .endpoints[[endpoint]]
+  params <- partition_params(params, extract_path_names(path), extract_body_names(endpoint$params))
   out <- list(
     method = method,
     path = paste0("drive/v3/", glue::glue_data(params$path_params, path)),
-    query = c(params$query_params)
+    query = c(params$query_params),
+    body = c(params$body_params)
   )
   ## yes it is redundant to store the parts and the url
   ## but it is helpful to me, so it shall be this way
@@ -188,12 +192,17 @@ check_enums <- function(provided, spec) {
 ## why is this correct?
 ## if the endpoint was specified, we have already matched against spec
 ## if the endpoint was unspecified, we have no choice
-partition_params <- function(provided, path_param_names) {
+partition_params <- function(provided, path_param_names, body_param_names) {
   query_params <- provided
   path_params <- NULL
   if (length(path_param_names) && length(query_params)) {
     m <- names(provided) %in% path_param_names
     path_params <- query_params[m]
+    query_params <- query_params[!m]
+  }
+  if (length(body_param_names) && length(query_params)) {
+    m <- names(query_params) %in% body_param_names
+    body_params <- query_params[m]
     query_params <- query_params[!m]
   }
   ## if no query_params, NULL is preferred to list() for the sake of
@@ -204,14 +213,19 @@ partition_params <- function(provided, path_param_names) {
   }
   return(list(
     path_params = path_params,
+    body_params = body_params,
     query_params = query_params
   ))
 }
 
 ##  input: /v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo
 ## output: spreadsheetId, sheetId
-extract_param_names <- function(path) {
+extract_path_names <- function(path) {
   m <- gregexpr("\\{[^/]*\\}", path)
   path_param_names <- regmatches(path, m)[[1]]
   gsub("[\\{\\}]", "", path_param_names)
+}
+
+extract_body_names <- function(params) {
+  names(params)[map_lgl(params, ~ .x[["location"]] == "body")]
 }

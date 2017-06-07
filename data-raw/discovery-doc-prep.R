@@ -76,39 +76,6 @@ edf <- endpoints %>%
   as_tibble()
 View(edf)
 
-edf$parameters$files.copy$id
-
-
-## Trouble starts here!
-## 1. Trying to say if response == "File" then we want the
-##    parameters to be a list of the parameters we already have + the files_schema
-##    parametrs (something like c(parameters, files_schema)), similarly if
-##    response == "Permission" the parameters should be c(parameters,
-##    permissions_schema)
-## 2. want to add $location to all of the schema parameters and set to "body"
-
-# edf <- endpoints %>%
-#   transpose(.names = nms) %>%
-#   simplify_all(.type = character(1)) %>%
-#   as_tibble() %>%
-#   mutate(response = response %>% map(1, .null = NA) %>% flatten_chr(),
-#          extra_params = ifelse(response == "File", files_schema, NA),
-#          all_params = list(list(parameters, extra_params)))
-# View(edf)
-
-# f <- function(x, thing, to_append) {
-#   if (x$response == thing) {
-#     nm <- names(x$parameters)
-#     nms <- names(to_append)
-#     names(to_append) <- paste(nm, nms, sep = ".")
-#     x <- x %>%
-#       mutate(extra_params = to_append)
-#   }
-#   x
-# }
-
-## map(edf, f, thing = "File", to_append = files_schema)
-
 ## clean up individual variables
 
 ## docs omit the leading `drive`
@@ -147,8 +114,10 @@ params <- edf %>%
   } %>%
   select(id, pname, parameters)
 #params$parameters %>% map(names) %>% reduce(union)
+
+## keeping repeated and enum so it can generalize to sheets in the future..
 nms <-
-  c("location", "required", "type", "format", "description")
+  c("location", "required", "type", "repeated", "format", "enum", "description")
 
 ## tibble with one row per parameter
 ## variables method and pname keep track of endpoint and parameter name
@@ -162,7 +131,9 @@ params <- params %>%
     location = location %>% map(1, .null = "body") %>% flatten_chr(),
     required = required %>% map(1, .null = NA) %>% flatten_lgl(),
     type = type %>% map(1, .null = NA) %>% flatten_chr(),
+    repeated = repeated %>% map(1, .null = NA) %>% flatten_lgl(),
     format = format %>%  map(1, .null = NA) %>% flatten_chr(),
+    enum = enum %>%  modify_if(is_null, ~ NA),
     description = description %>% flatten_chr()
   )
 ## repack all the info for each parameter into a list
