@@ -19,7 +19,7 @@ test_that("drive_share doesn't explicitly fail", {
   )
   ## since we haven't updated the permissions, the permissions
   ## tibble should be just 1 row
-  expect_length(drive_chickwts$files_resource[[1]]$permissions, 1)
+  expect_length(drive_chickwts[["files_resource"]][[1]][["permissions"]], 1)
 
   role <- "reader"
   type <- "anyone"
@@ -34,14 +34,14 @@ test_that("drive_share doesn't explicitly fail", {
   )
 
   ## this new drive_chickwts should have a larger tibble
-  expect_length(drive_chickwts$files_resource[[1]]$permissions, 2)
+  expect_length(drive_chickwts[["files_resource"]][[1]][["permissions"]], 2)
 
   ## this new tibble should have type "user" and the type
   ## defined above, and the roles should be "owner" and
   ## the role defined above
 
-  expect_equal(drive_chickwts$files_resource[[1]]$permissions[[2]]$type, type)
-  expect_equal(drive_chickwts$files_resource[[1]]$permissions[[2]]$role, role)
+  perms <- drive_chickwts[["files_resource"]][[1]][["permissions"]][[2]]
+  expect_identical(perms[c("role", "type")], list(role = role, type = type))
 
   ## clean up
   drive_delete(drive_chickwts)

@@ -45,7 +45,7 @@ test_that("get_path() works", {
   expect_s3_class(one_file, "dribble")
   expect_identical(nrow(one_file), 1L)
 
-  expect_error(drive_path(c("a", "b")),"length\\(path\\) == 1 is not TRUE")
+  expect_error(drive_path(c("a", "b")), "length\\(path\\) == 1 is not TRUE")
 })
 
 test_that("get_paths() works", {

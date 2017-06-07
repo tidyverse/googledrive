@@ -8,7 +8,7 @@ if (run) {
   ## make sure directory is clean
   if (clean) {
     del <- drive_delete(c(nm_("foo"), nm_("this-should-not-exist")),
-                             verbose = FALSE)
+                        verbose = FALSE)
   }
   ## test that it finds at least a folder
   drive_mkdir(nm_("foo"), verbose = FALSE)
