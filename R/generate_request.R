@@ -48,13 +48,13 @@ generate_request <- function(endpoint = character(),
   ## use the spec to vet and rework request parameters
   params <-   match_params(params, ept$parameters)
   params <- handle_repeats(params, ept$parameters)
-  check_enums(params, ept$parameters)
+  params <- check_enums(params, ept$parameters)
   params <- partition_params(params,
                              extract_path_names(ept$path),
                              extract_body_names(ept$params))
   out <- list(
     method = ept$method,
-    path = paste0("drive/v3/", glue::glue_data(params$path_params, path)),
+    path = paste0("drive/v3/", glue::glue_data(params$path_params, ept$path)),
     query = c(params$query_params),
     body = c(params$body_params)
   )
@@ -78,7 +78,7 @@ match_params <- function(provided, spec) {
     stop("Required parameter(s) are missing:\n", missing, call. = FALSE)
   }
 
-  unknown <- setdiff(names(provided), names(spec))
+  unknown <- setdiff(names(provided), c(names(spec)))
   if (length(unknown)) {
     m <- names(provided) %in% unknown
     msgs <- c(
@@ -163,6 +163,7 @@ check_enums <- function(provided, spec) {
 partition_params <- function(provided, path_param_names, body_param_names) {
   query_params <- provided
   path_params <- NULL
+  body_params <- NULL
   if (length(path_param_names) && length(query_params)) {
     m <- names(provided) %in% path_param_names
     path_params <- query_params[m]

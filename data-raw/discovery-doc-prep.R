@@ -65,6 +65,14 @@ endpoints <- add_params(endpoints, ref = "File", object = files_schema)
 endpoints <- add_params(endpoints, ref = "Permission", object = permissions_schema)
 endpoints <- add_params(endpoints, ref = "Revisions", object = revisions_schema)
 
+## add fields to all endpoints
+add_fields <- function(x) {
+  x[["parameters"]] <- c(x[["parameters"]],
+                         fields = list(list(location = "query", type = "string")))
+  x
+}
+endpoints <- map(endpoints, add_fields)
+
 nms <- endpoints %>%
   map(names) %>%
   reduce(union)
@@ -134,7 +142,7 @@ params <- params %>%
     repeated = repeated %>% map(1, .null = NA) %>% flatten_lgl(),
     format = format %>%  map(1, .null = NA) %>% flatten_chr(),
     enum = enum %>%  modify_if(is_null, ~ NA),
-    description = description %>% flatten_chr()
+    description = description %>% map(1, .null = NA) %>% flatten_chr()
   )
 ## repack all the info for each parameter into a list
 repacked <- params %>%

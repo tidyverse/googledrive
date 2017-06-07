@@ -507,6 +507,15 @@
         "format": [null],
         "enum": [null],
         "description": ["Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.photos.readonly"],
@@ -1028,6 +1037,15 @@
         "format": [null],
         "enum": [null],
         "description": ["Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
@@ -1076,6 +1094,15 @@
         "format": [null],
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
@@ -1093,7 +1120,17 @@
     "id": ["files.emptyTrash"],
     "httpMethod": ["DELETE"],
     "path": ["files/trash"],
-    "parameters": {},
+    "parameters": {
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
+      }
+    },
     "scopes": ["drive"],
     "description": ["Permanently deletes all of the user's trashed files."],
     "parameterOrder": [null],
@@ -1127,6 +1164,15 @@
         "format": [null],
         "enum": [null],
         "description": ["The MIME type of the format requested for this export."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.file, drive.readonly"],
@@ -1162,6 +1208,15 @@
         "format": [null],
         "enum": [null],
         "description": ["The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
@@ -1206,6 +1261,15 @@
         "format": [null],
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -1313,6 +1377,15 @@
         "format": [null],
         "enum": [null],
         "description": ["ID of Team Drive to search."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -1852,6 +1925,15 @@
         "format": [null],
         "enum": [null],
         "description": ["Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.scripts"],
@@ -1909,6 +1991,15 @@
         "format": [null],
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -2079,6 +2170,15 @@
         "format": [null],
         "enum": [null],
         "description": ["The type of the grantee. Valid values are:  \n- user \n- group \n- domain \n- anyone"]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.file"],
@@ -2123,6 +2223,15 @@
         "format": [null],
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.file"],
@@ -2167,6 +2276,15 @@
         "format": [null],
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -2220,6 +2338,15 @@
         "format": [null],
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -2390,6 +2517,15 @@
         "format": [null],
         "enum": [null],
         "description": ["The type of the grantee. Valid values are:  \n- user \n- group \n- domain \n- anyone"]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.file"],
@@ -2425,6 +2561,15 @@
         "format": [null],
         "enum": [null],
         "description": ["The ID of the revision."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
@@ -2469,6 +2614,15 @@
         "format": [null],
         "enum": [null],
         "description": ["The ID of the revision."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -2513,6 +2667,15 @@
         "format": [null],
         "enum": [null],
         "description": ["The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -2548,6 +2711,15 @@
         "format": [null],
         "enum": [null],
         "description": ["The ID of the revision."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
