@@ -49,6 +49,22 @@ endpoints <- c(files, permissions, revisions)
 # str(endpoints, max.level = 1)
 listviewer::jsonedit(endpoints)
 
+nms <- names(endpoints)
+
+add_params <- function(endpoints, ref, object) {
+  for (x in nms) {
+    if (is.null(endpoints[[x]][["request"]])) next
+    if (ref %in% endpoints[[x]][["request"]]) {
+      endpoints[[x]][["parameters"]] = c(endpoints[[x]][["parameters"]], object)
+    }
+  }
+  endpoints
+}
+
+endpoints <- add_params(endpoints, ref = "File", object = files_schema)
+endpoints <- add_params(endpoints, ref = "Permission", object = permissions_schema)
+endpoints <- add_params(endpoints, ref = "Revisions", object = revisions_schema)
+
 nms <- endpoints %>%
   map(names) %>%
   reduce(union)
@@ -59,6 +75,9 @@ edf <- endpoints %>%
   simplify_all(.type = character(1)) %>%
   as_tibble()
 View(edf)
+
+edf$parameters$files.copy$id
+
 
 ## Trouble starts here!
 ## 1. Trying to say if response == "File" then we want the
@@ -140,9 +159,9 @@ params <- params$parameters %>%
   add_column(id = params$id, .before = 1)
 params <- params %>%
   mutate(
-    location = location %>% flatten_chr(),
+    location = location %>% map(1, .null = "body") %>% flatten_chr(),
     required = required %>% map(1, .null = NA) %>% flatten_lgl(),
-    type = type %>% flatten_chr(),
+    type = type %>% map(1, .null = NA) %>% flatten_chr(),
     format = format %>%  map(1, .null = NA) %>% flatten_chr(),
     description = description %>% flatten_chr()
   )
