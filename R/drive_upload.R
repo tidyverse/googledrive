@@ -92,7 +92,7 @@ drive_upload <- function(from = NULL,
 
   if (length(up_id) == 0) {
     request <- build_request(
-      endpoint = "drive.files.create.meta",
+      endpoint = "drive.files.create",
       params = list(
         name = name,
         parents = list(up_parent_id),
@@ -105,16 +105,26 @@ drive_upload <- function(from = NULL,
     up_id <- proc_res$id
   }
 
-  request <- build_request(
-    endpoint = "drive.files.update.media",
-    params = list(
-      fileId = up_id,
-      uploadType = "media",
-      body = httr::upload_file(path = from,
-                               type = mimeType),
-      fields = "*"
-    )
-  )
+  request <- list(url = httr::modify_url(url = .drive$base_url,
+                                         path = glue::glue("upload/drive/v3/files/{up_id}")),
+                  body = httr::upload_file(path = from,
+                                           type = mimeType),
+                  method = "PATCH",
+                  token = drive_token(),
+                  query = list(uploadType = "media",
+                               fields = "*"))
+  ## TO DO the above is temporary since there isn't a seperate endpoint
+  ## for uploading media
+  # request <- build_request(
+  #   endpoint = "drive.files.update.media",
+  #   params = list(
+  #     fileId = up_id,
+  #     uploadType = "media",
+  #     body = httr::upload_file(path = from,
+  #                              type = mimeType),
+  #     fields = "*"
+  #   )
+  # )
 
 
   response <- make_request(request, encode = "json")

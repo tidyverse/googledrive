@@ -1,6 +1,6 @@
 {
-  "files.copy": {
-    "id": ["files.copy"],
+  "drive.files.copy": {
+    "id": ["drive.files.copy"],
     "httpMethod": ["POST"],
     "path": ["files/{fileId}/copy"],
     "parameters": {
@@ -529,8 +529,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "files.create": {
-    "id": ["files.create"],
+  "drive.files.create": {
+    "id": ["drive.files.create"],
     "httpMethod": ["POST"],
     "path": ["files"],
     "parameters": {
@@ -1072,8 +1072,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "files.delete": {
-    "id": ["files.delete"],
+  "drive.files.delete": {
+    "id": ["drive.files.delete"],
     "httpMethod": ["DELETE"],
     "path": ["files/{fileId}"],
     "parameters": {
@@ -1116,8 +1116,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "files.emptyTrash": {
-    "id": ["files.emptyTrash"],
+  "drive.files.emptyTrash": {
+    "id": ["drive.files.emptyTrash"],
     "httpMethod": ["DELETE"],
     "path": ["files/trash"],
     "parameters": {
@@ -1142,8 +1142,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "files.export": {
-    "id": ["files.export"],
+  "drive.files.export": {
+    "id": ["drive.files.export"],
     "httpMethod": ["GET"],
     "path": ["files/{fileId}/export"],
     "parameters": {
@@ -1186,8 +1186,8 @@
     "supportsMediaDownload": [true],
     "useMediaDownloadService": {}
   },
-  "files.generateIds": {
-    "id": ["files.generateIds"],
+  "drive.files.generateIds": {
+    "id": ["drive.files.generateIds"],
     "httpMethod": ["GET"],
     "path": ["files/generateIds"],
     "parameters": {
@@ -1230,8 +1230,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "files.get": {
-    "id": ["files.get"],
+  "drive.files.get": {
+    "id": ["drive.files.get"],
     "httpMethod": ["GET"],
     "path": ["files/{fileId}"],
     "parameters": {
@@ -1283,8 +1283,8 @@
     "supportsMediaDownload": [true],
     "useMediaDownloadService": [true]
   },
-  "files.list": {
-    "id": ["files.list"],
+  "drive.files.list": {
+    "id": ["drive.files.list"],
     "httpMethod": ["GET"],
     "path": ["files"],
     "parameters": {
@@ -1399,8 +1399,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "files.update": {
-    "id": ["files.update"],
+  "drive.files.update": {
+    "id": ["drive.files.update"],
     "httpMethod": ["PATCH"],
     "path": ["files/{fileId}"],
     "parameters": {
@@ -1960,8 +1960,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "files.watch": {
-    "id": ["files.watch"],
+  "drive.files.watch": {
+    "id": ["drive.files.watch"],
     "httpMethod": ["POST"],
     "path": ["files/{fileId}/watch"],
     "parameters": {
@@ -2013,8 +2013,8 @@
     "supportsMediaDownload": [true],
     "useMediaDownloadService": [true]
   },
-  "permissions.create": {
-    "id": ["permissions.create"],
+  "drive.permissions.create": {
+    "id": ["drive.permissions.create"],
     "httpMethod": ["POST"],
     "path": ["files/{fileId}/permissions"],
     "parameters": {
@@ -2192,8 +2192,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "permissions.delete": {
-    "id": ["permissions.delete"],
+  "drive.permissions.delete": {
+    "id": ["drive.permissions.delete"],
     "httpMethod": ["DELETE"],
     "path": ["files/{fileId}/permissions/{permissionId}"],
     "parameters": {
@@ -2245,8 +2245,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "permissions.get": {
-    "id": ["permissions.get"],
+  "drive.permissions.get": {
+    "id": ["drive.permissions.get"],
     "httpMethod": ["GET"],
     "path": ["files/{fileId}/permissions/{permissionId}"],
     "parameters": {
@@ -2298,8 +2298,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "permissions.list": {
-    "id": ["permissions.list"],
+  "drive.permissions.list": {
+    "id": ["drive.permissions.list"],
     "httpMethod": ["GET"],
     "path": ["files/{fileId}/permissions"],
     "parameters": {
@@ -2360,8 +2360,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "permissions.update": {
-    "id": ["permissions.update"],
+  "drive.permissions.update": {
+    "id": ["drive.permissions.update"],
     "httpMethod": ["PATCH"],
     "path": ["files/{fileId}/permissions/{permissionId}"],
     "parameters": {
@@ -2539,8 +2539,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "revisions.delete": {
-    "id": ["revisions.delete"],
+  "drive.revisions.delete": {
+    "id": ["drive.revisions.delete"],
     "httpMethod": ["DELETE"],
     "path": ["files/{fileId}/revisions/{revisionId}"],
     "parameters": {
@@ -2583,8 +2583,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "revisions.get": {
-    "id": ["revisions.get"],
+  "drive.revisions.get": {
+    "id": ["drive.revisions.get"],
     "httpMethod": ["GET"],
     "path": ["files/{fileId}/revisions/{revisionId}"],
     "parameters": {
@@ -2636,8 +2636,8 @@
     "supportsMediaDownload": [true],
     "useMediaDownloadService": [true]
   },
-  "revisions.list": {
-    "id": ["revisions.list"],
+  "drive.revisions.list": {
+    "id": ["drive.revisions.list"],
     "httpMethod": ["GET"],
     "path": ["files/{fileId}/revisions"],
     "parameters": {
@@ -2689,8 +2689,8 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
-  "revisions.update": {
-    "id": ["revisions.update"],
+  "drive.revisions.update": {
+    "id": ["drive.revisions.update"],
     "httpMethod": ["PATCH"],
     "path": ["files/{fileId}/revisions/{revisionId}"],
     "parameters": {

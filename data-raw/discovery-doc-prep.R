@@ -86,11 +86,6 @@ View(edf)
 
 ## clean up individual variables
 
-## docs omit the leading `drive`
-edf <- edf %>%
-  mutate(id = gsub("^drive\\.", "", id))
-
-
 ## enforce my own order
 edf <- edf %>%
   select(id, httpMethod, path, parameters, scopes, description, everything())

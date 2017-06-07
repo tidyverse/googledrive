@@ -1,45 +1,42 @@
-#' Generate a request for the Google Drive v3 API
+#' Build a request for the Google Drive v3 API
 #'
-#' Generate a request, using some knowledge of the [Drive v3
+#' Build a request, using some knowledge of the [Drive v3
 #' API](https://developers.google.com/drive/v3/web/about-sdk). Most users
 #' should, instead, use higher-level wrappers that facilitate common tasks, such
 #' as reading the contents of a sheet. The functions here are intended for
-#' internal use and for programming around the Sheets API.
+#' internal use and for programming around the Drive API.
 #'
-#' There are two functions:
-#' * `generate_request()` is a wrapper around `build_request()`. It takes
-#' a nickname for an endpoint and uses the API spec to look up the `path` and
-#' `method`. The `params` are checked for validity and completeness with respect
-#' to the endpoint. It then passes things along to `build_request()`.
-#' * `build_request()` builds a request from explicit parts. It is quite
-#' dumb, only doing URL endpoint substitution and URL formation. It's up to the
-#' caller to make sure the `path`, `method`, and `params` are valid.
+#' * `build_request()` takes a nickname for an endpoint and uses the API spec to
+#'  look up the `path` and `method`. The `params` are checked for validity and
+#'  completeness with respect to the endpoint.
 #'
-#' @param endpoint `character(1)`\cr Nickname for one of the documented Drive
+#' @param endpoint Character. Nickname for one of the documented Drive
 #'   v3 API endpoints. *to do: list or link, once I've auto-generated those
 #'   docs*
-#' @param params `named list()`\cr Parameters destined for endpoint URL
+#' @param params Name list. Parameters destined for endpoint URL
 #'   substitution or, otherwise, the query.
+#' @param token Drive token, obtained from [`drive_auth()`]
 #' @param .api_key NULL for now..
 #'
 
 #' @return `list()`\cr Components are `method`, `path`, `query`, and `url`,
-#'   suitable as input for [gs_make_request()]. The `path` is post-substitution
+#'   suitable as input for [make_request()]. The `path` is post-substitution
 #'   and the `query` is a named list of all the input `params` that were not
 #'   used during this substitution. `url` is the full URL after prepending the
 #'   base URL for the Drive v3 API and appending an API key to the query.
 #' @export
 #' @examples
-#' req <- generate_request(
+#' req <- build_request(
 #'   "files.get",
 #'   list(
 #'     fileId = "abc",
 #'   )
 #' )
 #' req
-generate_request <- function(endpoint = character(),
-                                params = list(),
-                                .api_key = NULL) {
+build_request <- function(endpoint = character(),
+                          params = list(),
+                          token = drive_token(),
+                          .api_key = NULL) {
   ept <- .endpoints[[endpoint]]
   if (is.null(ept)) {
     stop("Endpoint not recognized:\n", endpoint, call. = FALSE)
@@ -51,12 +48,13 @@ generate_request <- function(endpoint = character(),
   params <- check_enums(params, ept$parameters)
   params <- partition_params(params,
                              extract_path_names(ept$path),
-                             extract_body_names(ept$params))
+                             extract_body_names(ept$parameters))
   out <- list(
     method = ept$method,
     path = paste0("drive/v3/", glue::glue_data(params$path_params, ept$path)),
     query = c(params$query_params),
-    body = c(params$body_params)
+    body = c(params$body_params),
+    token = token
   )
 
   out$url <- httr::modify_url(
@@ -180,11 +178,11 @@ partition_params <- function(provided, path_param_names, body_param_names) {
   if (length(query_params) == 0) {
     query_params <- NULL
   }
-  return(list(
+  list(
     path_params = path_params,
     body_params = body_params,
     query_params = query_params
-  ))
+  )
 }
 
 ##  input: /v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo

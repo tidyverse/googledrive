@@ -2,13 +2,10 @@ context("Build requests")
 
 test_that("build_request default works properly", {
 
-  ## by default, it should give the endpoint drive.files.list
-
-  req <- build_request(token = NULL)
+  req <- build_request(endpoint = "drive.files.list", token = NULL)
   expect_type(req, "list") ## should be a list
-  expect_length(req, 10) ## should have 10 elements
-  expect_identical(req$endpoint, "drive.files.list")
-  expect_identical(req$verb, "GET")
+  expect_length(req, 6) ## should have 6 elements
+  expect_identical(req$method, "GET")
   expect_identical(req$url, "https://www.googleapis.com/drive/v3/files")
 
 })
@@ -20,8 +17,8 @@ test_that("build_request messages effectively single incorrect input", {
   ## if we give a crazy parameter that isn't found in our
   ## master tibble, housed in .drive$params, we should error
   params <- list(chicken = "muffin")
-  expect_message(build_request(params = params,
-                               token = NULL),
+  expect_message(build_request(endpoint = "drive.files.list",
+                               params = params, token = NULL),
                  paste(
                    c(
                      "Ignoring these unrecognized parameters:",
@@ -37,8 +34,8 @@ test_that("build_request messages effectively single incorrect input", {
 test_that("build_request messages effectively multiple incorrect inputs", {
   params <- list(chicken = "muffin",
                  bunny = "pippin")
-  expect_message(build_request(params = params,
-                               token = NULL),
+  expect_message(build_request(endpoint = "drive.files.list",
+                               params = params, token = NULL),
                  paste(
                    c(
                      "Ignoring these unrecognized parameters:",
@@ -57,8 +54,8 @@ test_that("build_request messages effectively mixed correct/incorrect input", {
                  q = "fields='files/id'")
   params_wrong <- params[1]
   params_right <- params[2]
-  expect_message(build_request(params = params,
-                               token = NULL),
+  expect_message(build_request(endpoint = "drive.files.list",
+                               params = params, token = NULL),
                  paste(
                    c(
                      "Ignoring these unrecognized parameters:",
@@ -70,7 +67,9 @@ test_that("build_request messages effectively mixed correct/incorrect input", {
                    collapse = "\n")
   )
   ## let's make sure the correct parameter (q) still passed
-  expect_identical(suppressMessages(build_request(params = params, token = NULL)$query),
+  expect_identical(suppressMessages(build_request(endpoint = "drive.files.list",
+                                                  params = params,
+                                                  token = NULL)$query),
                    params_right)
 })
 
@@ -133,9 +132,5 @@ test_that("build_request catches if you pass fileId when endpoint DOES need it",
 
   expect_error(build_request(endpoint = "drive.files.get",
                              params = params, token = NULL),
-               paste(
-                 c("These parameters are not allowed to appear more than once:",
-                   "fileId"), collapse = "\n"
-               )
-  )
+               "These parameter")
 })

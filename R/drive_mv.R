@@ -32,7 +32,7 @@ drive_mv <- function(file = NULL,
   }
 
   request <- build_request(
-    endpoint = "drive.files.update.meta",
+    endpoint = "drive.files.update",
     params = list(
       fileId = file$id,
       addParents = folder$id,

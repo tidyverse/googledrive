@@ -13,8 +13,10 @@ google_mime_types <- httr::GET(url) %>%
   select(mime_type = `MIME Type`)
 
 
-fmts <- build_request(endpoint = "drive.about.get",
-                      params = list(fields = "importFormats,exportFormats")) %>%
+fmts <- list(url = httr::modify_url(.drive$base_url, path = paste0("drive/v3/about")),
+             query = list(fields = "importFormats,exportFormats"),
+             method = "GET",
+             token = drive_token()) %>%
   make_request() %>%
   process_response()
 
