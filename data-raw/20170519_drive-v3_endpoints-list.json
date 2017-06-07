@@ -2712,14 +2712,122 @@
         "enum": [null],
         "description": ["The ID of the revision."]
       },
+<<<<<<< HEAD
       "fields": {
         "location": ["query"],
+=======
+      "id": {
+        "location": ["body"],
+>>>>>>> 6642d693889e0fb31ac3c66c685241983824931d
         "required": [null],
         "type": ["string"],
         "repeated": [null],
         "format": [null],
         "enum": [null],
+<<<<<<< HEAD
         "description": [null]
+=======
+        "description": ["The ID of the revision."]
+      },
+      "keepForever": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to keep this revision forever, even if it is no longer the head revision. If not set, the revision will be automatically purged 30 days after newer content is uploaded. This can be set on a maximum of 200 revisions for a file.\nThis field is only applicable to files with binary content in Drive."]
+      },
+      "kind": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Identifies what kind of resource this is. Value: the fixed string \"drive#revision\"."]
+      },
+      "lastModifyingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The last user to modify this revision."]
+      },
+      "md5Checksum": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MD5 checksum of the revision's content. This is only applicable to files with binary content in Drive."]
+      },
+      "mimeType": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MIME type of the revision."]
+      },
+      "modifiedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the revision was modified (RFC 3339 date-time)."]
+      },
+      "originalFilename": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The original filename used to create this revision. This is only applicable to files with binary content in Drive."]
+      },
+      "publishAuto": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether subsequent revisions will be automatically republished. This is only applicable to Google Docs."]
+      },
+      "published": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether this revision is published. This is only applicable to Google Docs."]
+      },
+      "publishedOutsideDomain": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether this revision is published outside the domain. This is only applicable to Google Docs."]
+      },
+      "size": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The size of the revision's content in bytes. This is only applicable to files with binary content in Drive."]
+>>>>>>> 6642d693889e0fb31ac3c66c685241983824931d
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
