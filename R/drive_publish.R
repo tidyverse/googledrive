@@ -87,7 +87,8 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
 #' @export
 drive_is_published <- function(file = NULL, verbose = TRUE) {
 
-  file <- confirm_some_files(as_dribble(file))
+  file <- as_dribble(file)
+  file <- confirm_some_files(file)
 
   mime_types <- purrr::map_chr(file$files_resource, "mimeType")
   if (!all(grepl("application/vnd.google-apps.", mime_types)) || is_folder(file)) {

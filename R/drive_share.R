@@ -19,7 +19,8 @@
 #' @export
 drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TRUE) {
 
-  file <- confirm_single_file(as_dribble(file))
+  file <- as_dribble(file)
+  file <- confirm_single_file(file)
 
   if (is.null(role) || is.null(type)) {
     spf("`role` and `type` must be specified.")

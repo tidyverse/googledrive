@@ -13,7 +13,8 @@ drive_mkdir <- function(name = NULL, path = NULL, verbose = TRUE) {
     if (inherits(path, "character")) {
       path <- append_slash(path)
     }
-    path <- confirm_single_file(as_dribble(path))
+    path <- as_dribble(path)
+    path <- confirm_single_file(path)
     if (!is_folder(path)) {
       stop(
         glue::glue_data(path, "'path' is not a folder:\n{name}"),
