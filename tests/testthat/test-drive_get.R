@@ -26,12 +26,24 @@ if (run) {
   rm <- unlink(c("letters-a-m.txt", "letters-n-z.txt"))
 }
 
-test_that("drive_get() give n-row output for n-row input", {
+test_that("drive_get() 'no input' edge cases", {
   skip_on_appveyor()
   skip_on_travis()
 
-  nothing <- drive_get(character(0))
-  expect_identical(nothing, dribble())
+  expect_identical(drive_get(character(0)), dribble())
+  expect_error(
+    drive_get(NA_character_),
+    "all\\(nzchar\\(id, keepNA = TRUE\\)\\) is not TRUE"
+  )
+  expect_error(
+    drive_get(""),
+    "all\\(nzchar\\(id, keepNA = TRUE\\)\\) is not TRUE"
+  )
+})
+
+test_that("drive_get() gives n-row output for n-row input", {
+  skip_on_appveyor()
+  skip_on_travis()
 
   two_files_search <- drive_search(pattern = "letters-[an]-[mz].txt")
   two_files_get <- drive_get(two_files_search$id)

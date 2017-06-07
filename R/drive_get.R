@@ -19,6 +19,10 @@
 #' }
 drive_get <- function(id) {
   stopifnot(is.character(id))
+  if (length(id) < 1) return(dribble())
+  ## when id = "", drive.files.get actually becomes a call to drive.files.list
+  ## and, therefore, returns 100 files by default
+  stopifnot(all(nzchar(id, keepNA = TRUE)))
   as_dribble(purrr::map(id, get_one))
 }
 
