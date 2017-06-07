@@ -49,48 +49,16 @@ generate_request <- function(endpoint = character(),
   params <-   match_params(params, ept$parameters)
   params <- handle_repeats(params, ept$parameters)
   check_enums(params, ept$parameters)
-
-  drive_build_request(
-    endpoint = ept$id,
-    path = ept$path,
-    method = ept$method,
-    params = params,
-    .api_key = .api_key
-  )
-}
-
-#' @param path character, e.g.,
-#'   `"/files/{fileId}/"`. It can include
-#'   variables inside curly brackets, as the example does, which are substituted
-#'   using named parameters found in the `params` argument.
-#' @param method character, should match an HTTP verb, e.g., `GET`, `POST`, or
-#'   `PUT`
-#' @rdname generate_request
-#' @export
-#' @examples
-#' req <- build_request(
-#'   path = "files/{fileId}",
-#'   method = "GET",
-#'   list(
-#'     fileId = "abc",
-#'   )
-#' )
-#' req
-drive_build_request <- function(endpoint,
-                          path,
-                          method,
-                          params = list(),
-                          .api_key = NULL) {
-  ept <- .endpoints[[endpoint]]
-  params <- partition_params(params, extract_path_names(path), extract_body_names(endpoint$params))
+  params <- partition_params(params,
+                             extract_path_names(ept$path),
+                             extract_body_names(ept$params))
   out <- list(
-    method = method,
+    method = ept$method,
     path = paste0("drive/v3/", glue::glue_data(params$path_params, path)),
     query = c(params$query_params),
     body = c(params$body_params)
   )
-  ## yes it is redundant to store the parts and the url
-  ## but it is helpful to me, so it shall be this way
+
   out$url <- httr::modify_url(
     url = .drive$base_url,
     path = out$path,
