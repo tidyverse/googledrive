@@ -3,23 +3,29 @@
 \name{as_dribble}
 \alias{as_dribble}
 \alias{as_dribble.dribble}
+\alias{as_dribble.default}
+\alias{as_dribble.NULL}
 \alias{as_dribble.character}
 \alias{as_dribble.drive_id}
-\alias{as_dribble.list}
 \alias{as_dribble.data.frame}
+\alias{as_dribble.list}
 \title{Identify files on Google Drive.}
 \usage{
 as_dribble(x, ...)
 
 \method{as_dribble}{dribble}(x, ...)
 
+\method{as_dribble}{default}(x, ...)
+
+\method{as_dribble}{NULL}(x, ...)
+
 \method{as_dribble}{character}(x, ...)
 
 \method{as_dribble}{drive_id}(x, ...)
 
-\method{as_dribble}{list}(x, ...)
-
 \method{as_dribble}{data.frame}(x, ...)
+
+\method{as_dribble}{list}(x, ...)
 }
 \arguments{
 \item{x}{A vector of Drive file paths, a vector of file ids marked
@@ -35,8 +41,8 @@ specified via
 \itemize{
 \item File path
 \item File id (be sure to mark with \code{\link[=drive_id]{drive_id()}} to distinguish from file path!)
-\item List representing a \href{https://developers.google.com/drive/v3/reference/files#resource}{Files resource}
-object (for internal use)
+\item List representing \href{https://developers.google.com/drive/v3/reference/files#resource}{Files resource}
+objects (for internal use)
 \item Data frame or \code{\link{dribble}} (for internal use)
 }
 }

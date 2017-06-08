@@ -8,11 +8,8 @@
 #'
 drive_delete <- function(file = NULL, verbose = TRUE) {
   del_file <- as_dribble(file)
-  if (nrow(del_file) == 0L) {
-    if (verbose == TRUE) {
-      message(glue::glue("There are no files that match 'file': {sq(file)}."))
-    }
-    return(FALSE)
+  if (!some_files(del_file) && verbose) {
+    message(glue::glue("No such files found to delete."))
   }
   out <- purrr::map2_lgl(del_file$id, del_file$name, delete_one, verbose = verbose)
   invisible(out)

@@ -1,19 +1,20 @@
-#' Query a path on Google Drive.
+#' Query paths.
 #'
-#' These functions gather information about a single path, which may very well
-#' correspond to more than one file. Note that a folder is a specific type of
-#' file on Drive. If you want to list the contents of a folder, use
-#' [drive_ls()]. For general searching, use [drive_search()].
+#' These functions query files that match one or more paths. The plural `s` of
+#' `paths` conveys whether you are allowed to provide more than one input path.
+#' Be aware that you can get more than one file back even when the input is a
+#' single path! Drive file and folder names need not be unique, even at a given
+#' level of the hierarchy. Note also that a folder is just a specific type of
+#' file on Drive.
 #'
-#' @param path Character. A single path to query on Google Drive. All matching
-#'   files are returned. Folders are a specific type of file. Use a trailing
-#'   slash to indicate explicitly that the path is a folder, which can
-#'   disambiguate if there is a file of the same name (yes this is possible on
-#'   Drive!).
+#' @param path Character vector of path(s) to query. Use a trailing slash to
+#'   indicate explicitly that the path is a folder, which can disambiguate if
+#'   there is a file of the same name (yes this is possible on Drive!).
 #' @template verbose
 #'
-#' @template dribble-return
 #' @name paths
+#' @seealso If you want to list the contents of a folder, use [drive_ls()]. For
+#'   general searching, use [drive_search()].
 #' @examples
 #' \dontrun{
 #' ## get info about your "My Drive" root folder
@@ -27,28 +28,52 @@
 #' ## be more specific: consider only folder(s) that match 'abc'
 #' drive_path_exists("abc/")
 #' drive_path("abc/")
+#'
+#' ## use the plural forms to query multiple paths at once
+#' drive_paths_exist(c("abc", "def"))
+#' drive_paths(c("abc", "def"))
 #' }
 NULL
 
 #' @export
 #' @rdname paths
-#' @return `drive_path_exists()`: `TRUE` or `FALSE`
+#' @return `drive_path_exists()`: a single `TRUE` or `FALSE`
 drive_path_exists <- function(path, verbose = TRUE) {
+  stopifnot(is.character(path), length(path) == 1)
   nrow(get_paths(path = path, partial_ok = FALSE)) > 0
+}
+
+#' @export
+#' @rdname paths
+#' @return `drive_paths_exist()`: Logical vector of same length as input
+drive_paths_exist <- function(path, verbose = TRUE) {
+  purrr::map_lgl(path, drive_path_exists)
 }
 
 #' @export
 #' @rdname paths
 #' @template dribble-return
 drive_path <- function(path = "~/", verbose = TRUE) {
+  stopifnot(is.character(path))
+  if (length(path) < 1) return(dribble())
+  stopifnot(length(path) == 1)
   path_tbl <- get_paths(path = path, partial_ok = FALSE)
   as_dribble(path_tbl[names(path_tbl) != "path"])
+}
+
+#' @export
+#' @rdname paths
+#' @template dribble-return
+drive_paths <- function(path = "~/", verbose = TRUE) {
+  stopifnot(is.character(path))
+  if (length(path) < 1) return(dribble())
+  do.call(rbind, purrr::map(path, drive_path))
 }
 
 ## path helpers -------------------------------------------------------
 
 ## input:
-##   path: a target path
+##   path: a single target path
 ##   partial_ok: if path does not exist, but some prefix does, ok to report that?
 ##   .rships, .root: (optional) tibble of relationships & id of the root folder
 ##         for internal use, i.e. testing logic without calling the API
@@ -143,7 +168,7 @@ get_paths <- function(path = NULL,
 ## calls pth() on one id
 ## returns a tibble that replicates the relevant row of .rships
 ## once per rooted path found
-## adds a variable of the corresponding paths
+## adds the paths as the variable `pths` = a list-column of character vectors
 pth_tbl <- function(id, .rships, stop_value) {
   i <- which(.rships$id == id)
   pths <- pth(
@@ -180,8 +205,6 @@ pth <- function(id, kids, elders, stop_value) {
   }
 }
 
-## path utilities -----------------------------------------------------
-
 ## path  path pieces  dir pieces  leaf pieces
 ## a/b/  a b          a b
 ## a/b   a b          a           b
@@ -196,50 +219,3 @@ form_query <- function(path_pieces, leaf_is_folder = FALSE) {
   )
   glue::collapse(c(leaf_q, dirs_q), last = " or ")
 }
-
-## strip leading ~, / or ~/
-## if it's empty string --> target is root --> set path to NULL
-normalize_path <- function(path) {
-  if (is.null(path)) return(path)
-  if (!(is.character(path) && length(path) == 1)) {
-    stop("'path' must be a character string.", call. = FALSE)
-  }
-  path <- sub("^~?/*", "", path)
-  if (identical(path, "")) NULL else path
-}
-
-## "a/b/" and "a/b" both return "a/b/"
-append_slash <- function(path) {
-  if (length(path) < 1 || path == "") return(path)
-  ifelse(grepl("/$", path), path, paste0(path, "/"))
-}
-
-## "a/b/" and "a/b" both return "a/b"
-strip_slash <- function(path) {
-  gsub("/$", "", path)
-}
-
-split_path <- function(path = "") {
-  path <- path %||% ""
-  path <- sub("^~?/*", "", path)
-  unlist(strsplit(path, "/"))
-}
-
-unsplit_path <- function(...) {
-  gsub("^/*", "", file.path(...))
-}
-
-null_path <- function() {
-  tibble::tibble(
-    id = character(), path = character(), mimeType = character(),
-    parent_id = character(), root_path = list(), path_orig = character()
-  )
-}
-
-is_root <- function(path) {
-  length(path) == 1 && is.character(path) && grepl("^~$|^/$|^~/$", path)
-}
-
-root_folder <- function() drive_get("root")
-
-root_id <- function() root_folder()$id

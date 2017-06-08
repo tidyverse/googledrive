@@ -2,19 +2,31 @@
 #'
 #' Warning: the name of this function is likely to change.
 #'
-#' @param id Character, a Drive file id, such as you might see in the URL when
-#'   visiting a file on Google Drive.
+#' @param id Character vector of Drive file ids, such as you might see in the
+#'   URL when visiting a file on Google Drive.
 #'
 #' @return dribble-return
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' drive_get("abcdefgeh12345678")
+#' drive_get("abcdefgeh123456789")
+#'
+#' drive_get(c("abcdefgh123456789", "jklmnopq123456789"))
+#'
+#' ## the id "root" is an alias for your root folder on My Drive
+#' drive_get("root")
 #' }
 drive_get <- function(id) {
-  stopifnot(is.character(id), length(id) == 1)
+  stopifnot(is.character(id))
+  if (length(id) < 1) return(dribble())
+  ## when id = "", drive.files.get actually becomes a call to drive.files.list
+  ## and, therefore, returns 100 files by default
+  stopifnot(all(nzchar(id, keepNA = TRUE)))
+  as_dribble(purrr::map(id, get_one))
+}
 
+get_one <- function(id) {
   request <- build_request(
     endpoint = "drive.files.get",
     params = list(
@@ -23,7 +35,5 @@ drive_get <- function(id) {
     )
   )
   response <- make_request(request)
-  proc_res <- process_response(response)
-
-  as_dribble(list(proc_res))
+  process_response(response)
 }

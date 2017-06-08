@@ -10,10 +10,9 @@ drive_mv <- function(file = NULL,
                      folder = NULL,
                      verbose = TRUE) {
   file <- as_dribble(file)
+  file <- confirm_single_file(file)
   folder <- as_dribble(folder)
-
-  file <- is_one(file)
-  folder <- is_one(folder, "folder")
+  folder <- confirm_single_file(folder)
 
   if (!is_mine(file)) {
     stop(

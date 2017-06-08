@@ -8,7 +8,7 @@ if (run) {
   ## make sure directory is clean
   if (clean) {
     del <- drive_delete(c(nm_("foo"), nm_("this-should-not-exist")),
-                             verbose = FALSE)
+                        verbose = FALSE)
   }
   ## test that it finds at least a folder
   drive_mkdir(nm_("foo"), verbose = FALSE)
@@ -20,7 +20,7 @@ test_that("drive_ls() errors if file does not exist", {
 
   expect_error(
     drive_ls(nm_("this-should-not-exist")),
-    "Input must specify exactly 1 Drive file."
+    "Input does not hold exactly one Drive file"
   )
 })
 

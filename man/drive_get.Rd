@@ -7,8 +7,8 @@
 drive_get(id)
 }
 \arguments{
-\item{id}{Character, a Drive file id, such as you might see in the URL when
-visiting a file on Google Drive.}
+\item{id}{Character vector of Drive file ids, such as you might see in the
+URL when visiting a file on Google Drive.}
 }
 \value{
 dribble-return
@@ -18,6 +18,11 @@ Warning: the name of this function is likely to change.
 }
 \examples{
 \dontrun{
-drive_get("abcdefgeh12345678")
+drive_get("abcdefgeh123456789")
+
+drive_get(c("abcdefgh123456789", "jklmnopq123456789"))
+
+## the id "root" is an alias for your root folder on My Drive
+drive_get("root")
 }
 }

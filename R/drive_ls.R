@@ -28,7 +28,7 @@ drive_ls <- function(path = "~/", pattern = NULL, ...) {
       path <- append_slash(path)
     }
     path <- as_dribble(path)
-    path <- is_one(path)
+    path <- confirm_single_file(path)
 
     q_clause <- paste(sq(path$id), "in parents")
     if (!is.null(x$q)) {
