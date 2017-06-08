@@ -38,10 +38,8 @@ guser <- function(fields = "user", ...) {
     return(NULL)
   }
 
-  request <-  list(url = httr::modify_url(.drive$base_url, path = paste0("drive/v3/about")),
-                   query = list(fields = fields),
-                   method = "GET",
-                   token = drive_token())
+  request <-  build_request(endpoint = "drive.about.get",
+                   params = list(fields = fields))
   response <- make_request(request)
   proc_res <- process_response(response)
   proc_res$date <- httr::parse_http_date(request$headers$date)

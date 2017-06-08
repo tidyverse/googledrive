@@ -28,6 +28,8 @@ dd_content <- fromJSON(json_fname)
 ##listviewer::jsonedit(dd_content)
 
 ## extract the method collections and bring to same level of hierarchy
+about <- dd_content[[c("resources", "about", "methods")]]
+names(about) <- paste("about", names(about), sep = ".")
 files <- dd_content[[c("resources", "files", "methods")]]
 names(files) <- paste("files", names(files), sep = ".")
 permissions <-
@@ -37,10 +39,9 @@ revisions <-
   dd_content[[c("resources", "revisions", "methods")]]
 names(revisions) <- paste("revisions", names(revisions), sep = ".")
 
-endpoints <- c(files, permissions, revisions)
+endpoints <- c(about, files, permissions, revisions)
 # str(endpoints, max.level = 1)
 # listviewer::jsonedit(endpoints)
-View(endpoints)
 
 add_schema_params <- function(endpoint, nm) {
   req <- endpoint$request$`$ref`
@@ -53,7 +54,6 @@ add_schema_params <- function(endpoint, nm) {
   endpoint
 }
 endpoints <- imap(endpoints, add_schema_params)
-<<<<<<< HEAD
 
 ## add fields to all endpoints
 add_fields <- function(x) {
@@ -62,8 +62,7 @@ add_fields <- function(x) {
   x
 }
 endpoints <- map(endpoints, add_fields)
-=======
->>>>>>> 6642d693889e0fb31ac3c66c685241983824931d
+
 
 nms <- endpoints %>%
   map(names) %>%
