@@ -3,20 +3,19 @@
 #' Build a request, using some knowledge of the [Drive v3
 #' API](https://developers.google.com/drive/v3/web/about-sdk). Most users
 #' should, instead, use higher-level wrappers that facilitate common tasks, such
-#' as reading the contents of a sheet. The functions here are intended for
+#' as uploading or downloading Drive files. The functions here are intended for
 #' internal use and for programming around the Drive API.
 #'
 #' * `build_request()` takes a nickname for an endpoint and uses the API spec to
-#'  look up the `path` and `method`. The `params` are checked for validity and
-#'  completeness with respect to the endpoint.
+#' look up the `path` and `method`. The `params` are checked for validity and
+#' completeness with respect to the endpoint.
 #'
-#' @param endpoint Character. Nickname for one of the documented Drive
-#'   v3 API endpoints. *to do: list or link, once I've auto-generated those
-#'   docs*
-#' @param params Name list. Parameters destined for endpoint URL
-#'   substitution or, otherwise, the query.
+#' @param endpoint Character. Nickname for one of the documented Drive v3 API
+#'   endpoints. *to do: list or link, once I've auto-generated those docs*
+#' @param params Named list. Parameters destined for endpoint URL substitution
+#'   or, otherwise, the query.
 #' @param token Drive token, obtained from [`drive_auth()`]
-#' @param .api_key NULL for now..
+#' @param .api_key NULL for now.
 #'
 
 #' @return `list()`\cr Components are `method`, `path`, `query`, and `url`,
@@ -85,10 +84,13 @@ match_params <- function(provided, spec) {
   required <- spec %>% purrr::keep("required") %>% names()
   missing <- setdiff(required, names(provided))
   if (length(missing)) {
-    stop("Required parameter(s) are missing:\n", missing, call. = FALSE)
+    stop(glue::collapse(
+      c("Required parameter(s) are missing:", missing), sep = "\n"),
+      call. = FALSE
+    )
   }
 
-  unknown <- setdiff(names(provided), c(names(spec)))
+  unknown <- setdiff(names(provided), names(spec))
   if (length(unknown)) {
     m <- names(provided) %in% unknown
     msgs <- c(
