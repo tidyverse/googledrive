@@ -108,10 +108,12 @@ drive_upload <- function(from = NULL,
   request <- build_request(endpoint = "drive.files.update.media",
                            params = list(fileId = up_id,
                                          uploadType = "media",
-                                         fields = "*",
-                                         body = httr::upload_file(path = from,
-                                                                  type = mimeType)))
+                                         fields = "*")
+                           )
 
+  ## media uploads have unique body situations, so customizing here.
+  request$body <- httr::upload_file(path = from,
+                                    type = mimeType)
 
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)

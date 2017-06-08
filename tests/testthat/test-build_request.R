@@ -4,7 +4,7 @@ test_that("build_request default works properly", {
 
   req <- build_request(endpoint = "drive.files.list", token = NULL)
   expect_type(req, "list") ## should be a list
-  expect_length(req, 4) ## should have 4 elements
+  expect_length(req, 6) ## should have 6 elements
   expect_identical(req$method, "GET")
   expect_identical(req$url, "https://www.googleapis.com/drive/v3/files")
 

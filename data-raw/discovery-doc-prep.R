@@ -106,6 +106,9 @@ View(edf)
 edf <- edf %>%
   select(id, httpMethod, path, parameters, scopes, description, everything())
 
+edf$path <- edf$path %>%
+  modify_if(~ !grepl("upload", .x), ~ paste0("drive/v3/", .x))
+
 edf$scopes <- edf$scopes %>%
   map(~ gsub("https://www.googleapis.com/auth/", "", .)) %>%
   map_chr(str_c, collapse = ", ")

@@ -43,13 +43,6 @@ build_request <- function(endpoint = character(),
     stop("Endpoint not recognized:\n", endpoint, call. = FALSE)
   }
 
-  out <- list(token = token)
-
-  if (grepl("media", endpoint)) {
-    out$body <- params$body
-    params$body <- NULL
-  }
-
   ## use the spec to vet and rework request parameters
   params <-   match_params(params, ept$parameters)
   params <- handle_repeats(params, ept$parameters)
@@ -58,15 +51,13 @@ build_request <- function(endpoint = character(),
                              extract_path_names(ept$path),
                              extract_body_names(ept$parameters))
 
-  out$method <- ept$method
-
-  if (grepl("media", endpoint)) {
-    out$path <- glue::glue_data(params$path_params, ept$path)
-  } else {
-    out$path <-  paste0("drive/v3/", glue::glue_data(params$path_params, ept$path))
-    out$body <- c(params$body_params)
-  }
-  out$query = c(params$query_params)
+  out <- list(
+    method = ept$method,
+    path = glue::glue_data(params$path_params, ept$path),
+    query = c(params$query_params),
+    body = c(params$body_params),
+    token = token
+  )
 
   out$url <- httr::modify_url(
     url = .drive$base_url,

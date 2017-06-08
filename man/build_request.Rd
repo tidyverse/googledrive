@@ -8,16 +8,15 @@ build_request(endpoint = character(), params = list(),
   token = drive_token(), .api_key = NULL)
 }
 \arguments{
-\item{endpoint}{Character. Nickname for one of the documented Drive
-v3 API endpoints. \emph{to do: list or link, once I've auto-generated those
-docs}}
+\item{endpoint}{Character. Nickname for one of the documented Drive v3 API
+endpoints. \emph{to do: list or link, once I've auto-generated those docs}}
 
-\item{params}{Name list. Parameters destined for endpoint URL
-substitution or, otherwise, the query.}
+\item{params}{Named list. Parameters destined for endpoint URL substitution
+or, otherwise, the query.}
 
 \item{token}{Drive token, obtained from \code{\link[=drive_auth]{drive_auth()}}}
 
-\item{.api_key}{NULL for now..}
+\item{.api_key}{NULL for now.}
 }
 \value{
 \code{list()}\cr Components are \code{method}, \code{path}, \code{query}, and \code{url},
@@ -29,7 +28,7 @@ base URL for the Drive v3 API and appending an API key to the query.
 \description{
 Build a request, using some knowledge of the \href{https://developers.google.com/drive/v3/web/about-sdk}{Drive v3API}. Most users
 should, instead, use higher-level wrappers that facilitate common tasks, such
-as reading the contents of a sheet. The functions here are intended for
+as uploading or downloading Drive files. The functions here are intended for
 internal use and for programming around the Drive API.
 }
 \details{
