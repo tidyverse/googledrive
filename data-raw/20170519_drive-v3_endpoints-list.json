@@ -2866,5 +2866,201 @@
     "supportsSubscription": {},
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
+  },
+  "drive.files.update.media": {
+    "id": ["drive.files.update.media"],
+    "httpMethod": ["PATCH"],
+    "path": ["/upload/drive/v3/files/{fileId}"],
+    "parameters": {
+      "addParents": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of parent IDs to add."]
+      },
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "keepRevisionForever": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive."]
+      },
+      "ocrLanguage": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A language hint for OCR processing during image import (ISO 639-1 code)."]
+      },
+      "removeParents": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of parent IDs to remove."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "useContentAsIndexableText": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to use the uploaded content as indexable text."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.scripts"],
+    "description": {},
+    "response": [null],
+    "parameterOrder": ["fileId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.files.update.media.resumable": {
+    "id": ["drive.files.update.media.resumable"],
+    "httpMethod": ["PATCH"],
+    "path": ["/resumable/upload/drive/v3/files/{fileId}"],
+    "parameters": {
+      "addParents": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of parent IDs to add."]
+      },
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "keepRevisionForever": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive."]
+      },
+      "ocrLanguage": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A language hint for OCR processing during image import (ISO 639-1 code)."]
+      },
+      "removeParents": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of parent IDs to remove."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "useContentAsIndexableText": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to use the uploaded content as indexable text."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.scripts"],
+    "description": {},
+    "response": [null],
+    "parameterOrder": ["fileId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
   }
 }

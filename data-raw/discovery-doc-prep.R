@@ -43,6 +43,32 @@ endpoints <- c(about, files, permissions, revisions)
 # str(endpoints, max.level = 1)
 # listviewer::jsonedit(endpoints)
 
+## add in simple upload and resumable upload
+endpoints <- c(endpoints,
+               files.update.media = list(list(id = "drive.files.update.media",
+                                              path = "/upload/drive/v3/files/{fileId}",
+                                              httpMethod = endpoints$files.update$httpMethod,
+                                              parameters = c(endpoints$files.update$parameters,
+                                                            uploadType = list(list(type = "string",
+                                                                              required = TRUE,
+                                                                              location = "query")
+                                                            )),
+                                              parameterOrder = endpoints$files.update$parameterOrder,
+                                              scopes = endpoints$files.update$scopes
+               )),
+               files.update.media.resumable = list(list(id = "drive.files.update.media.resumable",
+                                                        path = "/resumable/upload/drive/v3/files/{fileId}",
+                                                        httpMethod = endpoints$files.update$httpMethod,
+                                                        parameters = c(endpoints$files.update$parameters,
+                                                                      uploadType = list(list(type = "string",
+                                                                                        required = TRUE,
+                                                                                        location = "query")
+                                                        )),
+                                                        parameterOrder = endpoints$files.update$parameterOrder,
+                                                        scopes = endpoints$files.update$scopes
+               ))
+)
+
 add_schema_params <- function(endpoint, nm) {
   req <- endpoint$request$`$ref`
   if (is.null(req) || req == "Channel") return(endpoint)
@@ -62,7 +88,6 @@ add_fields <- function(x) {
   x
 }
 endpoints <- map(endpoints, add_fields)
-
 
 nms <- endpoints %>%
   map(names) %>%
