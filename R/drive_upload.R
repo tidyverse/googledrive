@@ -92,7 +92,7 @@ drive_upload <- function(from = NULL,
 
   if (length(up_id) == 0) {
     request <- build_request(
-      endpoint = "drive.files.create.meta",
+      endpoint = "drive.files.create",
       params = list(
         name = name,
         parents = list(up_parent_id),
@@ -105,17 +105,15 @@ drive_upload <- function(from = NULL,
     up_id <- proc_res$id
   }
 
-  request <- build_request(
-    endpoint = "drive.files.update.media",
-    params = list(
-      fileId = up_id,
-      uploadType = "media",
-      body = httr::upload_file(path = from,
-                               type = mimeType),
-      fields = "*"
-    )
-  )
+  request <- build_request(endpoint = "drive.files.update.media",
+                           params = list(fileId = up_id,
+                                         uploadType = "media",
+                                         fields = "*")
+                           )
 
+  ## media uploads have unique body situations, so customizing here.
+  request$body <- httr::upload_file(path = from,
+                                    type = mimeType)
 
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)

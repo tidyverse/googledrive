@@ -12,7 +12,6 @@ google_mime_types <- httr::GET(url) %>%
   tibble::as_tibble() %>%
   select(mime_type = `MIME Type`)
 
-
 fmts <- build_request(endpoint = "drive.about.get",
                       params = list(fields = "importFormats,exportFormats")) %>%
   make_request() %>%
