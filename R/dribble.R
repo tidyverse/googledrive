@@ -60,12 +60,12 @@ dribble <- function(x = NULL) {
 #' @export
 `[.dribble` <- function(x, i, j, drop = FALSE) {
   out <- NextMethod()
-  maybe_dribble <- try(validate_dribble(new_dribble(out)), silent = TRUE)
-  if (inherits(maybe_dribble, "try-error")) {
-    out
-  } else {
-    maybe_dribble
-  }
+  ## allow dribble class to be lost if subsetted object is no longer valid
+  ## dribble
+  tryCatch(
+    validate_dribble(new_dribble(out)),
+    error = function(e) out,
+    silent = TRUE)
 }
 
 #' Check facts about a dribble
