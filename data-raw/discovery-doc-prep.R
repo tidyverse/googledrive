@@ -53,6 +53,7 @@ add_schema_params <- function(endpoint, nm) {
   endpoint
 }
 endpoints <- imap(endpoints, add_schema_params)
+<<<<<<< HEAD
 
 ## add fields to all endpoints
 add_fields <- function(x) {
@@ -61,6 +62,8 @@ add_fields <- function(x) {
   x
 }
 endpoints <- map(endpoints, add_fields)
+=======
+>>>>>>> 6642d693889e0fb31ac3c66c685241983824931d
 
 nms <- endpoints %>%
   map(names) %>%
