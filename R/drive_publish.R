@@ -49,7 +49,7 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
 
   x$fields <- "*"
 
-  request <- build_request(
+  request <- generate_request(
     endpoint = "drive.revisions.update",
     params = x
   )
@@ -112,7 +112,7 @@ drive_is_published <- function(file = NULL, verbose = TRUE) {
 
 is_published_one <- function(id, name, verbose = TRUE) {
 
-  request <- build_request(
+  request <- generate_request(
     endpoint = "drive.revisions.get",
     params = list(fileId = id,
                   revisionId = "head",

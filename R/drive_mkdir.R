@@ -24,7 +24,7 @@ drive_mkdir <- function(name = NULL, path = NULL, verbose = TRUE) {
     parent <- path$id
   }
 
-  request <- build_request(
+  request <- generate_request(
     endpoint = "drive.files.create",
     params = list(
       name = name,

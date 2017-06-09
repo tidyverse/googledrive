@@ -91,7 +91,7 @@ drive_upload <- function(from = NULL,
   up_id <- existing$id
 
   if (length(up_id) == 0) {
-    request <- build_request(
+    request <- generate_request(
       endpoint = "drive.files.create",
       params = list(
         name = name,
@@ -105,7 +105,7 @@ drive_upload <- function(from = NULL,
     up_id <- proc_res$id
   }
 
-  request <- build_request(endpoint = "drive.files.update.media",
+  request <- generate_request(endpoint = "drive.files.update.media",
                            params = list(fileId = up_id,
                                          uploadType = "media",
                                          fields = "*")

@@ -65,7 +65,7 @@ drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
     params$q <- glue::collapse(c(params$q, "trashed = false"), sep = " and ")
   }
 
-  request <- build_request(endpoint = "drive.files.list", params = params)
+  request <- generate_request(endpoint = "drive.files.list", params = params)
   response <- make_request(request)
   proc_res <- process_response(response)
 

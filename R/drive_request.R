@@ -6,12 +6,12 @@
 #' as uploading or downloading Drive files. The functions here are intended for
 #' internal use and for programming around the Drive API.
 #'
-#' * `build_request()` takes a nickname for an endpoint and uses the API spec to
+#' * `generate_request()` takes a nickname for an endpoint and uses the API spec to
 #' look up the `path` and `method`. The `params` are checked for validity and
 #' completeness with respect to the endpoint.
 #'
 #' @param endpoint Character. Nickname for one of the documented Drive v3 API
-#'   endpoints. *to do: list or link, once I've auto-generated those docs*
+#'   endpoints. These can be found in the [`drive_endpoints()`] function.
 #' @param params Named list. Parameters destined for endpoint URL substitution
 #'   or, otherwise, the query.
 #' @param token Drive token, obtained from [`drive_auth()`]
@@ -26,7 +26,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' req <- build_request(
+#' req <- generate_request(
 #'   "drive.files.get",
 #'   list(
 #'     fileId = "abc",
@@ -34,7 +34,7 @@
 #' )
 #' req
 #' }
-build_request <- function(endpoint = character(),
+generate_request <- function(endpoint = character(),
                           params = list(),
                           token = drive_token(),
                           .api_key = NULL) {
@@ -47,16 +47,56 @@ build_request <- function(endpoint = character(),
   params <-   match_params(params, ept$parameters)
   params <- handle_repeats(params, ept$parameters)
   params <- check_enums(params, ept$parameters)
-  params <- partition_params(params,
-                             extract_path_names(ept$path),
-                             extract_body_names(ept$parameters))
+  params <- partition_body(params,
+                           extract_body_names(ept$parameters))
 
-  out <- list(
+  build_request(
+    path = ept$path,
     method = ept$method,
-    path = glue::glue_data(params$path_params, ept$path),
-    query = c(params$query_params),
-    body = c(params$body_params),
-    token = token
+    params = params$remaining_params,
+    body = params$body_params,
+    token = token,
+    .api_key = .api_key
+  )
+}
+
+#' @param path Character, e.g.,
+#'   `"drive/v3/files/{fileId}"`. It can include
+#'   variables inside curly brackets, as the example does, which are substituted
+#'   using named parameters found in the `params` argument.
+#' @param method Character, should match an HTTP verb, e.g., `GET`, `POST`, `PATCH`
+#'    or PUT`
+#' @param body List, values to pass to the API request body.
+#' @rdname generate_request
+#' @export
+#' @examples
+#' \dontrun{
+#' req <- build_request(
+#'   path = "drive/v3/files/{fileId}",
+#'   method = "GET",
+#'   list(
+#'     fileId = "abs",
+#'   )
+#' )
+#' req
+#' }
+build_request <- function(path,
+                          method,
+                          params = list(),
+                          body = list(),
+                          token = NULL,
+                          .api_key = NULL) {
+
+  all_params <- c(partition_params(params,
+                               extract_path_names(path)),
+              body_params = list(body))
+  out <- list(
+    method = method,
+    path = glue::glue_data(all_params$path_params, path),
+    query = c(all_params$query_params),
+    body = c(all_params$body_params),
+    token = token,
+    .api_key = .api_key
   )
 
   out$url <- httr::modify_url(
@@ -66,7 +106,6 @@ build_request <- function(endpoint = character(),
   )
   out
 }
-
 ## match params provided by user to spec
 ##   * error if required params are missing
 ##   * message and drop unknown params
@@ -159,24 +198,32 @@ check_enums <- function(provided, spec) {
   return(provided)
 }
 
+partition_body <- function(provided, body_param_names) {
+  remaining_params <- provided
+  body_params <- NULL
+  if (length(body_param_names) && length(remaining_params)) {
+    m <- names(remaining_params) %in% body_param_names
+    body_params <- remaining_params[m]
+    remaining_params <- remaining_params[!m]
+  }
+  list(
+    remaining_params = remaining_params,
+    body_params = body_params
+  )
+}
 ## extract the path params by name and put the leftovers in query
 ## why is this correct?
 ## if the endpoint was specified, we have already matched against spec
 ## if the endpoint was unspecified, we have no choice
-partition_params <- function(provided, path_param_names, body_param_names) {
+partition_params <- function(provided, path_param_names) {
   query_params <- provided
   path_params <- NULL
-  body_params <- NULL
   if (length(path_param_names) && length(query_params)) {
     m <- names(provided) %in% path_param_names
     path_params <- query_params[m]
     query_params <- query_params[!m]
   }
-  if (length(body_param_names) && length(query_params)) {
-    m <- names(query_params) %in% body_param_names
-    body_params <- query_params[m]
-    query_params <- query_params[!m]
-  }
+
   ## if no query_params, NULL is preferred to list() for the sake of
   ## downstream URLs, though the API key will generally imply there are
   ## no empty queries
@@ -185,7 +232,6 @@ partition_params <- function(provided, path_param_names, body_param_names) {
   }
   list(
     path_params = path_params,
-    body_params = body_params,
     query_params = query_params
   )
 }

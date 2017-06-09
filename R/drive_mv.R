@@ -30,7 +30,7 @@ drive_mv <- function(file = NULL,
     )
   }
 
-  request <- build_request(
+  request <- generate_request(
     endpoint = "drive.files.update",
     params = list(
       fileId = file$id,
