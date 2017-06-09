@@ -4,8 +4,8 @@
 #' `paths` conveys whether you are allowed to provide more than one input path.
 #' Be aware that you can get more than one file back even when the input is a
 #' single path! Drive file and folder names need not be unique, even at a given
-#' level of the hierarchy. Note also that a folder is just a specific type of
-#' file on Drive.
+#' level of the hierarchy. A file or folder can also have multiple parents. Note
+#' also that a folder is just a specific type of file on Drive.
 #'
 #' @param path Character vector of path(s) to query. Use a trailing slash to
 #'   indicate explicitly that the path is a folder, which can disambiguate if
@@ -29,6 +29,9 @@
 #' drive_path_exists("abc/")
 #' drive_path("abc/")
 #'
+#' ## limit to files with your My Drive root folder as direct parent
+#' drive_path("~/def")
+#'
 #' ## use the plural forms to query multiple paths at once
 #' drive_paths_exist(c("abc", "def"))
 #' drive_paths(c("abc", "def"))
@@ -39,7 +42,8 @@ NULL
 #' @rdname paths
 #' @return `drive_path_exists()`: a single `TRUE` or `FALSE`
 drive_path_exists <- function(path, verbose = TRUE) {
-  stopifnot(is.character(path), length(path) == 1)
+  stopifnot(is.character(path))
+  if (length(path) < 1) return(logical(0))
   nrow(get_paths(path = path, partial_ok = FALSE)) > 0
 }
 
@@ -73,7 +77,7 @@ drive_paths <- function(path = "~/", verbose = TRUE) {
 ## path helpers -------------------------------------------------------
 
 ## input:
-##   path: a single target path
+##   path: a single target path, e.g. "~/", "abc", "~/abc", "a/b/c"
 ##   partial_ok: if path does not exist, but some prefix does, ok to report that?
 ##   .rships, .root: (optional) tibble of relationships & id of the root folder
 ##         for internal use, i.e. testing logic without calling the API
@@ -87,15 +91,18 @@ get_paths <- function(path = NULL,
                       .rships = NULL,
                       .root = "ROOT") {
   stopifnot(is.character(path), length(path) == 1)
+  path <- rootize_path(path)
   if (is_root(path)) {
-    return(tibble::add_column(root_folder(), path = "~/"))
+    return(tibble::add_column(root_folder(), path = path))
   }
-  path <- normalize_path(path)
+
   path_pieces <- split_path(path)
   d <- length(path_pieces)
   if (d == 0) {
     return(tibble::add_column(dribble(), path = character(0)))
   }
+  rooted <- path_pieces[1] == "~"
+  path_pieces <- if (rooted) path_pieces[-1] else path_pieces
 
   if (is.null(.rships)) {
     ## query restricts to names in path_pieces and, for all pieces that are
@@ -108,7 +115,21 @@ get_paths <- function(path = NULL,
     .rships <- promote(.rships, "parents")
     ## fetch fileId of user's My Drive root folder
     .root <- root_id()
+  } else {
+    .rships <- .rships[.rships$name %in% path_pieces, ]
   }
+
+  ## input path is just a name
+  if (d == 1) {
+    return(
+      tibble::add_column(
+        .rships[c("name", "id", "files_resource")],
+        path = path_pieces
+      )
+    )
+  }
+
+  ## input path has > 1 pieces
 
   ## revise target path to be longest partial path that is compatible
   ## with folder names that exist
@@ -127,15 +148,16 @@ get_paths <- function(path = NULL,
       purrr::map(pth_tbl, .rships = .rships, stop_value = .root)
     leaf_tbl <- do.call(rbind, leaf_tbl)
 
-    ## TO THINK: just return all paths, even those that aren't rooted?
-    ## why matters? files owned by someone else can never be rooted
-    is_rooted <- purrr::map_lgl(leaf_tbl$pths, ~ !is.na(last(.x)))
-    leaf_tbl <- leaf_tbl[is_rooted, ]
+    ## require rooted paths if input was rooted
+    if (rooted) {
+      is_rooted <- purrr::map_lgl(leaf_tbl$pths, ~ !is.na(last(.x)))
+      leaf_tbl <- leaf_tbl[is_rooted, ]
+    }
 
     ## form the path, as a string
     leaf_tbl$path <- purrr::map_chr(
       leaf_tbl$pths,
-      ~ collapse2(rev(.rships$name[match(crop(.x, 1), .rships$id)]), sep = "/")
+      ~ make_path(.x, ids = .rships$id, nms = .rships$name, rooted = rooted, d = d)
     )
 
     ## require path to match target, in manner appropriate to partial_ok
@@ -193,6 +215,10 @@ pth <- function(id, kids, elders, stop_value) {
     list(c(id, NA))
   } else {
     parents <- elders[[i]]
+    if (is.null(parents)) {
+      ## parents not given, end it here with sentinel NA
+      return(list(c(id, NA)))
+    }
     if (stop_value %in% parents) {
       ## we're done, e.g. have found way to root, end it here
       list(c(id, stop_value))
@@ -218,4 +244,18 @@ form_query <- function(path_pieces, leaf_is_folder = FALSE) {
     dir_pieces = collapse2(crop(nms, !leaf_is_folder), sep = " or ")
   )
   glue::collapse(c(leaf_q, dirs_q), last = " or ")
+}
+
+## pth is a character vector of ids produced by pth() aboven
+## here we look up the names of those ids and make a string for the path
+make_path <- function(pth, ids, nms, rooted, d) {
+  pth <- rev(pth)
+  pth_nms <- nms[match(pth, ids)]
+  if (rooted) {
+    pth_nms[1] <- "~"
+  } else {
+    pth_nms <- pth_nms[-1]
+  }
+  pth_nms <- utils::tail(pth_nms, d + rooted)
+  collapse2(pth_nms, sep = "/")
 }
