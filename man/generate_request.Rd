@@ -46,10 +46,14 @@ as uploading or downloading Drive files. The functions here are intended for
 internal use and for programming around the Drive API.
 }
 \details{
+#' There are two functions:
 \itemize{
 \item \code{generate_request()} takes a nickname for an endpoint and uses the API spec to
 look up the \code{path} and \code{method}. The \code{params} are checked for validity and
-completeness with respect to the endpoint.
+completeness with respect to the endpoint. It then passes things along to \code{gs_build_request()}.
+\item \code{build_request()} builds a request from explicit parts. It is quite
+dumb, only doing URL endpoint substitution and URL formation. It's up to the
+caller to make sure the \code{path}, \code{method}, \code{params}, and \code{body} are valid.
 }
 }
 \examples{

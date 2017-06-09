@@ -6,9 +6,13 @@
 #' as uploading or downloading Drive files. The functions here are intended for
 #' internal use and for programming around the Drive API.
 #'
+#' #' There are two functions:
 #' * `generate_request()` takes a nickname for an endpoint and uses the API spec to
 #' look up the `path` and `method`. The `params` are checked for validity and
-#' completeness with respect to the endpoint.
+#' completeness with respect to the endpoint. It then passes things along to `gs_build_request()`.
+#' * `build_request()` builds a request from explicit parts. It is quite
+#' dumb, only doing URL endpoint substitution and URL formation. It's up to the
+#' caller to make sure the `path`, `method`, `params`, and `body` are valid.
 #'
 #' @param endpoint Character. Nickname for one of the documented Drive v3 API
 #'   endpoints. These can be found in the [`drive_endpoints()`] function.
@@ -35,9 +39,9 @@
 #' req
 #' }
 generate_request <- function(endpoint = character(),
-                          params = list(),
-                          token = drive_token(),
-                          .api_key = NULL) {
+                             params = list(),
+                             token = drive_token(),
+                             .api_key = NULL) {
   ept <- .endpoints[[endpoint]]
   if (is.null(ept)) {
     stop("Endpoint not recognized:\n", endpoint, call. = FALSE)
@@ -88,8 +92,8 @@ build_request <- function(path,
                           .api_key = NULL) {
 
   all_params <- c(partition_params(params,
-                               extract_path_names(path)),
-              body_params = list(body))
+                                   extract_path_names(path)),
+                  body_params = list(body))
   out <- list(
     method = method,
     path = glue::glue_data(all_params$path_params, path),
