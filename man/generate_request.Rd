@@ -8,72 +8,72 @@
 generate_request(endpoint = character(), params = list(),
   token = drive_token(), .api_key = NULL)
 
-build_request(path, method, params = list(), body = list(), token = NULL,
+build_request(path, method, params = list(), body = NULL, token = NULL,
   .api_key = NULL)
 }
 \arguments{
-\item{endpoint}{Character. Nickname for one of the documented Drive v3 API
-endpoints. These can be found in the \code{\link[=drive_endpoints]{drive_endpoints()}} function.}
+\item{endpoint}{Character. Nickname for one of the selected Drive v3 API
+endpoints built into googledrive. Inspect via \code{\link[=drive_endpoints]{drive_endpoints()}}.}
 
-\item{params}{Named list. Parameters destined for endpoint URL substitution
-or, otherwise, the query.}
+\item{params}{Named list. Parameters destined for endpoint URL substitution,
+the query, or body.}
 
-\item{token}{Drive token, obtained from \code{\link[=drive_auth]{drive_auth()}}}
+\item{token}{Drive token, obtained from \code{\link[=drive_auth]{drive_auth()}}.}
 
-\item{.api_key}{NULL for now.}
+\item{.api_key}{\emph{not in use yet}}
 
 \item{path}{Character, e.g.,
 \code{"drive/v3/files/{fileId}"}. It can include
 variables inside curly brackets, as the example does, which are substituted
 using named parameters found in the \code{params} argument.}
 
-\item{method}{Character, should match an HTTP verb, e.g., \code{GET}, \code{POST}, \code{PATCH}
-or PUT`}
+\item{method}{Character, should match an HTTP verb, e.g., \code{GET}, \code{POST},
+\code{PATCH} or \code{PUT}}
 
 \item{body}{List, values to pass to the API request body.}
 }
 \value{
-\code{list()}\cr Components are \code{method}, \code{path}, \code{query}, and \code{url},
-suitable as input for \code{\link[=make_request]{make_request()}}. The \code{path} is post-substitution
-and the \code{query} is a named list of all the input \code{params} that were not
-used during this substitution. \code{url} is the full URL after prepending the
-base URL for the Drive v3 API and appending an API key to the query.
+\code{list()}\cr Components are \code{method}, \code{path}, \code{query}, \code{body}, and
+\code{url}, suitable as input for \code{\link[=make_request]{make_request()}}. The \code{path} is
+post-substitution and the \code{query} is a named list of all the non-body
+\code{params} that were not used during this substitution. \code{url} is the full URL
+after prepending the base URL for the Drive v3 API and appending an API key
+to the query.
 }
 \description{
-Build a request, using some knowledge of the \href{https://developers.google.com/drive/v3/web/about-sdk}{Drive v3API}. Most users
-should, instead, use higher-level wrappers that facilitate common tasks, such
-as uploading or downloading Drive files. The functions here are intended for
-internal use and for programming around the Drive API.
+Build a request, using some knowledge of the
+\href{https://developers.google.com/drive/v3/web/about-sdk}{Drive v3 API}. Most
+users should, instead, use higher-level wrappers that facilitate common
+tasks, such as uploading or downloading Drive files. The functions here are
+intended for internal use and for programming around the Drive API.
 }
 \details{
-#' There are two functions:
+There are two functions:
 \itemize{
-\item \code{generate_request()} takes a nickname for an endpoint and uses the API spec to
-look up the \code{path} and \code{method}. The \code{params} are checked for validity and
-completeness with respect to the endpoint. It then passes things along to \code{gs_build_request()}.
+\item \code{generate_request()} takes a nickname for an endpoint and uses the API spec
+to look up the \code{path} and \code{method}. The \code{params} are checked for validity and
+completeness with respect to the endpoint. It then passes things along to
+\code{gs_build_request()}. Use \code{\link[=drive_endpoints]{drive_endpoints()}} to see which endpoints can be
+accessed this way.
 \item \code{build_request()} builds a request from explicit parts. It is quite
 dumb, only doing URL endpoint substitution and URL formation. It's up to the
-caller to make sure the \code{path}, \code{method}, \code{params}, and \code{body} are valid.
+caller to make sure the \code{path}, \code{method}, \code{params}, and \code{body} are valid. Use
+this to call a Drive API endpoint that doesn't appear in the list returned
+by \code{\link[=drive_endpoints]{drive_endpoints()}}.
 }
 }
 \examples{
-\dontrun{
 req <- generate_request(
   "drive.files.get",
-  list(
-    fileId = "abc",
-  )
+  list(fileId = "abc"),
+  token = NULL
 )
 req
-}
-\dontrun{
 req <- build_request(
   path = "drive/v3/files/{fileId}",
   method = "GET",
-  list(
-    fileId = "abs",
-  )
+  list(fileId = "abc"),
+  token = NULL
 )
 req
-}
 }

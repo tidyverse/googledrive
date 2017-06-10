@@ -1,43 +1,45 @@
 #' Build a request for the Google Drive v3 API
 #'
-#' Build a request, using some knowledge of the [Drive v3
-#' API](https://developers.google.com/drive/v3/web/about-sdk). Most users
-#' should, instead, use higher-level wrappers that facilitate common tasks, such
-#' as uploading or downloading Drive files. The functions here are intended for
-#' internal use and for programming around the Drive API.
+#' Build a request, using some knowledge of the
+#' [Drive v3 API](https://developers.google.com/drive/v3/web/about-sdk). Most
+#' users should, instead, use higher-level wrappers that facilitate common
+#' tasks, such as uploading or downloading Drive files. The functions here are
+#' intended for internal use and for programming around the Drive API.
 #'
-#' #' There are two functions:
-#' * `generate_request()` takes a nickname for an endpoint and uses the API spec to
-#' look up the `path` and `method`. The `params` are checked for validity and
-#' completeness with respect to the endpoint. It then passes things along to `gs_build_request()`.
+#' There are two functions:
+#' * `generate_request()` takes a nickname for an endpoint and uses the API spec
+#' to look up the `path` and `method`. The `params` are checked for validity and
+#' completeness with respect to the endpoint. It then passes things along to
+#' `gs_build_request()`. Use [drive_endpoints()] to see which endpoints can be
+#' accessed this way.
 #' * `build_request()` builds a request from explicit parts. It is quite
 #' dumb, only doing URL endpoint substitution and URL formation. It's up to the
-#' caller to make sure the `path`, `method`, `params`, and `body` are valid.
+#' caller to make sure the `path`, `method`, `params`, and `body` are valid. Use
+#' this to call a Drive API endpoint that doesn't appear in the list returned
+#' by [drive_endpoints()].
 #'
-#' @param endpoint Character. Nickname for one of the documented Drive v3 API
-#'   endpoints. These can be found in the [`drive_endpoints()`] function.
-#' @param params Named list. Parameters destined for endpoint URL substitution
-#'   or, otherwise, the query.
-#' @param token Drive token, obtained from [`drive_auth()`]
-#' @param .api_key NULL for now.
+#' @param endpoint Character. Nickname for one of the selected Drive v3 API
+#'   endpoints built into googledrive. Inspect via [drive_endpoints()].
+#' @param params Named list. Parameters destined for endpoint URL substitution,
+#'   the query, or body.
+#' @param token Drive token, obtained from [drive_auth()].
+#' @param .api_key *not in use yet*
 #'
 
-#' @return `list()`\cr Components are `method`, `path`, `query`, and `url`,
-#'   suitable as input for [make_request()]. The `path` is post-substitution
-#'   and the `query` is a named list of all the input `params` that were not
-#'   used during this substitution. `url` is the full URL after prepending the
-#'   base URL for the Drive v3 API and appending an API key to the query.
+#' @return `list()`\cr Components are `method`, `path`, `query`, `body`, and
+#'   `url`, suitable as input for [make_request()]. The `path` is
+#'   post-substitution and the `query` is a named list of all the non-body
+#'   `params` that were not used during this substitution. `url` is the full URL
+#'   after prepending the base URL for the Drive v3 API and appending an API key
+#'   to the query.
 #' @export
 #' @examples
-#' \dontrun{
 #' req <- generate_request(
 #'   "drive.files.get",
-#'   list(
-#'     fileId = "abc",
-#'   )
+#'   list(fileId = "abc"),
+#'   token = NULL
 #' )
 #' req
-#' }
 generate_request <- function(endpoint = character(),
                              params = list(),
                              token = drive_token(),
@@ -68,22 +70,19 @@ generate_request <- function(endpoint = character(),
 #'   `"drive/v3/files/{fileId}"`. It can include
 #'   variables inside curly brackets, as the example does, which are substituted
 #'   using named parameters found in the `params` argument.
-#' @param method Character, should match an HTTP verb, e.g., `GET`, `POST`, `PATCH`
-#'    or PUT`
+#' @param method Character, should match an HTTP verb, e.g., `GET`, `POST`,
+#'   `PATCH` or `PUT`
 #' @param body List, values to pass to the API request body.
 #' @rdname generate_request
 #' @export
 #' @examples
-#' \dontrun{
 #' req <- build_request(
 #'   path = "drive/v3/files/{fileId}",
 #'   method = "GET",
-#'   list(
-#'     fileId = "abs",
-#'   )
+#'   list(fileId = "abc"),
+#'   token = NULL
 #' )
 #' req
-#' }
 build_request <- function(path,
                           method,
                           params = list(),
@@ -108,6 +107,7 @@ build_request <- function(path,
   )
   out
 }
+
 ## match params provided by user to spec
 ##   * error if required params are missing
 ##   * message and drop unknown params
@@ -213,6 +213,7 @@ partition_body <- function(provided, body_param_names) {
     body_params = body_params
   )
 }
+
 ## extract the path params by name and put the leftovers in query
 ## why is this correct?
 ## if the endpoint was specified, we have already matched against spec
