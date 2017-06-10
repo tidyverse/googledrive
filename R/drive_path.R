@@ -101,7 +101,7 @@ get_paths <- function(path = NULL,
     ## query restricts to names in path_pieces and, for all pieces that are
     ## known to be folder, to mimeType = folder
     .rships <- drive_search(
-      fields = "files/parents,files/name,files/mimeType,files/id,files/kind,files/owners",
+      fields = prep_fields(c("parents", "name", "mimeType", "id", "kind", "owners")),
       q = form_query(path_pieces, leaf_is_folder = grepl("/$", path)),
       verbose = FALSE
     )

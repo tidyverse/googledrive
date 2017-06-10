@@ -20,6 +20,10 @@ NULL
   system.file("extdata", "mime_tbl.csv", package = "googledrive") %>%
   read.csv(stringsAsFactors = FALSE)
 
+.drive$files_fields <-
+  system.file("extdata", "files_fields.csv", package = "googledrive") %>%
+  read.csv(stringsAsFactors = FALSE)
+
 # environment to store credentials
 .state <- new.env(parent = emptyenv())
 

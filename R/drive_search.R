@@ -53,10 +53,7 @@ drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
   }
 
   params <- list(...)
-
-  if (is.null(params$fields)) {
-    params$fields <- paste0("files/", .drive$default_fields, collapse = ",")
-  }
+  params$fields <- params$fields %||% drive_fields()
 
   ## initialize q, if necessary
   ## by default, don't list items in trash
@@ -82,49 +79,3 @@ drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
   }
   as_dribble(res_tbl[keep_names, ]) ## TO DO change this once we get indexing working
 }
-
-.drive$default_fields <- c(
-  "appProperties",
-  "capabilities",
-  "contentHints",
-  "createdTime",
-  "description",
-  "explicitlyTrashed",
-  "fileExtension",
-  "folderColorRgb",
-  "fullFileExtension",
-  "headRevisionId",
-  "iconLink",
-  "id",
-  "imageMediaMetadata",
-  "kind",
-  "lastModifyingUser",
-  "md5Checksum",
-  "mimeType",
-  "modifiedByMeTime",
-  "modifiedTime",
-  "name",
-  "originalFilename",
-  "ownedByMe",
-  "owners",
-  "parents",
-  "permissions",
-  "properties",
-  "quotaBytesUsed",
-  "shared",
-  "sharedWithMeTime",
-  "sharingUser",
-  "size",
-  "spaces",
-  "starred",
-  "thumbnailLink",
-  "trashed",
-  "version",
-  "videoMediaMetadata",
-  "viewedByMe",
-  "viewedByMeTime",
-  "viewersCanCopyContent",
-  "webContentLink",
-  "webViewLink",
-  "writersCanShare"
-)
