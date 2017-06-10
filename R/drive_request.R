@@ -87,18 +87,16 @@ generate_request <- function(endpoint = character(),
 build_request <- function(path,
                           method,
                           params = list(),
-                          body = list(),
+                          body = NULL,
                           token = NULL,
                           .api_key = NULL) {
 
-  all_params <- c(partition_params(params,
-                                   extract_path_names(path)),
-                  body_params = list(body))
+  params <- partition_params(params, extract_path_names(path))
   out <- list(
     method = method,
-    path = glue::glue_data(all_params$path_params, path),
-    query = c(all_params$query_params),
-    body = c(all_params$body_params),
+    path = glue::glue_data(params$path_params, path),
+    query = params$query_params,
+    body = body,
     token = token,
     .api_key = .api_key
   )
