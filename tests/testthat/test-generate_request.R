@@ -1,136 +1,62 @@
 context("Generate requests")
 
-test_that("generate_request default works properly", {
+test_that("generate_request() basically works", {
 
   req <- generate_request(endpoint = "drive.files.list", token = NULL)
-  expect_type(req, "list") ## should be a list
-  expect_length(req, 7) ## should have 6 elements
+  expect_type(req, "list")
+  expect_length(req, 7)
   expect_identical(req$method, "GET")
   expect_identical(req$url, "https://www.googleapis.com/drive/v3/files")
 
 })
 
-test_that("generate_request messages effectively single incorrect input", {
-  ## the only piece that is "user facing" is you can supply
-  ## parameters to the ...
-
-  ## if we give a crazy parameter that isn't found in our
-  ## master tibble, housed in .drive$params, we should error
-  params <- list(chicken = "muffin")
-  expect_message(generate_request(endpoint = "drive.files.list",
-                               params = params, token = NULL),
-                 paste(
-                   c(
-                     "Ignoring these unrecognized parameters:",
-                     glue::glue_data(
-                       tibble::enframe(params),
-                       "{name}: {value}"
-                     )
-                   ),
-                   collapse = "\n")
+test_that("generate_request() messages for incorrect inputs", {
+  params <- list(chicken = "muffin", bunny = "pippin")
+  expect_message(
+    generate_request(endpoint = "drive.files.list",
+                     params = params, token = NULL),
+    "Ignoring these unrecognized parameters:\nchicken: muffin\nbunny: pippin"
   )
 })
 
-test_that("generate_request messages effectively multiple incorrect inputs", {
-  params <- list(chicken = "muffin",
-                 bunny = "pippin")
-  expect_message(generate_request(endpoint = "drive.files.list",
-                               params = params, token = NULL),
-                 paste(
-                   c(
-                     "Ignoring these unrecognized parameters:",
-                     glue::glue_data(
-                       tibble::enframe(params),
-                       "{name}: {value}"
-                     )
-                   ),
-                   collapse = "\n")
+test_that("generate_request() handles a mix of correct/incorrect input", {
+  params <- list(chicken = "muffin", q = "fields='files/id'")
+  expect_message(
+    req <- generate_request(endpoint = "drive.files.list",
+                            params = params, token = NULL),
+    "Ignoring these unrecognized parameters:\nchicken: muffin"
+  )
+  expect_identical(req$query, list(q = "fields='files/id'"))
+})
+
+test_that("generate_request() catches input valid for another endpoint", {
+  params <- list(q = "abc", fileId = "def")
+  expect_message(
+    generate_request(
+      endpoint = "drive.permissions.list",
+      params = params,
+      token = NULL),
+    "Ignoring these unrecognized parameters:\nq: abc"
   )
 })
 
-test_that("generate_request messages effectively mixed correct/incorrect input", {
-
-  params <- list(chicken = "muffin",
-                 q = "fields='files/id'")
-  params_wrong <- params[1]
-  params_right <- params[2]
-  expect_message(generate_request(endpoint = "drive.files.list",
-                               params = params, token = NULL),
-                 paste(
-                   c(
-                     "Ignoring these unrecognized parameters:",
-                     glue::glue_data(
-                       tibble::enframe(params_wrong),
-                       "{name}: {value}"
-                     )
-                   ),
-                   collapse = "\n")
+test_that("generate_request() catches illegal parameter replication", {
+  params <- list(fileId = "abc", fileId = "def")
+  expect_error(
+    generate_request(
+      endpoint = "drive.files.get",
+      params = params, token = NULL),
+    "These parameter\\(s\\) are not allowed to appear more than once"
   )
-  ## let's make sure the correct parameter (q) still passed
-  expect_identical(suppressMessages(generate_request(endpoint = "drive.files.list",
-                                                  params = params,
-                                                  token = NULL)$query),
-                   params_right)
 })
 
-
-test_that("generate_request messages effectively with sometimes correct but this time incorrect input", {
-  ## what if you give a parameter that is accepted in a
-  ## different endpoint, but not the one you specified?
-  ## should still give a message
-
-  ## for the permissions, must supply fileId
-  params <- list(q = "this is not the q you're looking for",
-                 fileId = 1)
-
-  ## q is not an allowed parameter for listing permissions
-  params_wrong <- params[1]
-
-  expect_message(generate_request(endpoint = "drive.permissions.list",
-                               params = params,
-                               token = NULL),
-                 paste(
-                   c(
-                     "Ignoring these unrecognized parameters:",
-                     glue::glue_data(
-                       tibble::enframe(params_wrong),
-                       "{name}: {value}"
-                     )
-                   ),
-                   collapse = "\n")
+test_that("generate_request() and build_request() can deliver same result", {
+  gen <- generate_request("drive.files.get", list(fileId = "abc"), token = NULL)
+  build <- build_request(
+    path = "drive/v3/files/{fileId}",
+    method = "GET",
+    list(fileId = "abc"),
+    token = NULL
   )
-
-
-})
-
-test_that("generate_request catches if you pass fileId when endpoint doesn't need it", {
-
-  params <- list(fileId = 1)
-  expect_message(generate_request(endpoint = "drive.files.list",
-                               params = params,
-                               token = NULL),
-                 paste(
-                   c(
-                     "Ignoring these unrecognized parameters:",
-                     glue::glue_data(
-                       tibble::enframe(params),
-                       "{name}: {value}"
-                     )
-                   ),
-                   collapse = "\n")
-  )
-
-})
-
-test_that("generate_request catches if you pass fileId when endpoint DOES need it", {
-
-  ## here, fileId = 1 is the fileId that I pass,
-  ## fileId = 2 is the one that was passed in the ...
-  ## want to make it throws an error
-  params <- list(fileId = 1,
-                 fileId = 2)
-
-  expect_error(generate_request(endpoint = "drive.files.get",
-                             params = params, token = NULL),
-               "These parameter")
+  expect_identical(gen, build)
 })
