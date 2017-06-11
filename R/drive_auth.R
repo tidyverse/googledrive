@@ -1,7 +1,9 @@
-# this is fully copied from googlesheets with all `gs` replaced with `gd` and `googlesheets` with `googledrive`
+# this is fully copied from googlesheets with all `gs` replaced with `gd` and
+# `googlesheets` with `googledrive`
+
 #' Produce Google token
 #'
-#' If token is not already available, call `[drive_auth()]` to either load
+#' If token is not already available, call [drive_auth()] to either load
 #' from cache or initiate OAuth2.0 flow. Return the token -- not "bare" but,
 #' rather, prepared for inclusion in downstream requests. Use
 #' `access_token()` to reveal the actual access token, suitable for use
@@ -34,16 +36,13 @@ omit_token_if <- function(cond) if (cond) NULL else drive_token()
 #' explicitly -- it will be triggered by the first action that
 #' requires authorization. Even when called, the default arguments will often
 #' suffice. However, when necessary, this function allows the user to
-#'
 #'   * force the creation of a new token
-#'   * retrieve current token as an object, for possible storage to an
-#'   `.rds` file
+#'   * retrieve current token as an object, for possible storage to an `.rds`
+#'     file
 #'   * read the token from an object or from an `.rds` file
 #'   * provide your own app key and secret -- this requires setting up a new
-#'   project in
-#'   [Google Developers Console](https://console.developers.google.com)
+#'     project in [Google Developers Console](https://console.developers.google.com)
 #'   * prevent caching of credentials in `.httr-oauth`
-#'
 #'
 #' In a direct call to `drive_auth`, the user can provide the token, app key
 #' and secret explicitly and can dictate whether interactively-obtained

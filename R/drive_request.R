@@ -76,6 +76,7 @@ generate_request <- function(endpoint = character(),
 #' @rdname generate_request
 #' @export
 #' @examples
+#' ## re-create the previous request, but the hard way, i.e. "by hand"
 #' req <- build_request(
 #'   path = "drive/v3/files/{fileId}",
 #'   method = "GET",
@@ -83,6 +84,22 @@ generate_request <- function(endpoint = character(),
 #'   token = NULL
 #' )
 #' req
+#'
+#' ## call an endpoint not used by googledrive
+#' ## List a file's comments
+#' ## https://developers.google.com/drive/v3/reference/comments/list
+#' \dontrun{
+#' req <- build_request(
+#'   path = "drive/v3/files/{fileId}/comments",
+#'   method = "GET",
+#'   params = list(
+#'     fileId = "file-id-goes-here",
+#'     fields = "*"
+#'   ),
+#'   token = googledrive:::drive_token()
+#' )
+#' make_request(x)
+#' }
 build_request <- function(path,
                           method,
                           params = list(),
@@ -254,17 +271,17 @@ extract_body_names <- function(params) {
 #' Make a request for the Google Drive v3 API
 #'
 #' @param x List, contains the  `method`, `path`, `query`, and `url`, to make
-#'  the API request obtained from [`build_request()`]
+#'  the API request obtained from [build_request()]
 #' @param ... List, Name-value pairs to query the API
 #'
 #' @return Object of class `response` from [httr].
 #' @export
 make_request <- function(x, ...){
-  method <-  list("GET" = httr::GET,
-                  "POST" = httr::POST,
-                  "PATCH" = httr::PATCH,
-                  "PUT" = httr::PUT,
-                  "DELETE" = httr::DELETE)[[x$method]]
+  method <- list("GET" = httr::GET,
+                 "POST" = httr::POST,
+                 "PATCH" = httr::PATCH,
+                 "PUT" = httr::PUT,
+                 "DELETE" = httr::DELETE)[[x$method]]
   method(url = x$url,
          x$token,
          query = x$query,

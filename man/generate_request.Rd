@@ -69,6 +69,7 @@ req <- generate_request(
   token = NULL
 )
 req
+## re-create the previous request, but the hard way, i.e. "by hand"
 req <- build_request(
   path = "drive/v3/files/{fileId}",
   method = "GET",
@@ -76,4 +77,20 @@ req <- build_request(
   token = NULL
 )
 req
+
+## call an endpoint not used by googledrive
+## List a file's comments
+## https://developers.google.com/drive/v3/reference/comments/list
+\dontrun{
+req <- build_request(
+  path = "drive/v3/files/{fileId}/comments",
+  method = "GET",
+  params = list(
+    fileId = "file-id-goes-here",
+    fields = "*"
+  ),
+  token = googledrive:::drive_token()
+)
+make_request(x)
+}
 }
