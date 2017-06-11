@@ -42,15 +42,12 @@ requires authorization. Even when called, the default arguments will often
 suffice. However, when necessary, this function allows the user to
 \itemize{
 \item force the creation of a new token
-\itemize{
-\item retrieve current token as an object, for possible storage to an
-\code{.rds} file
+\item retrieve current token as an object, for possible storage to an \code{.rds}
+file
 \item read the token from an object or from an \code{.rds} file
 \item provide your own app key and secret -- this requires setting up a new
-project in
-\href{https://console.developers.google.com}{Google Developers Console}
+project in \href{https://console.developers.google.com}{Google Developers Console}
 \item prevent caching of credentials in \code{.httr-oauth}
-}
 }
 
 In a direct call to \code{drive_auth}, the user can provide the token, app key

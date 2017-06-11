@@ -39,7 +39,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
         paste(ok_types, collapse = ", "))
   }
 
-  request <- build_request(
+  request <- generate_request(
     endpoint = "drive.permissions.create",
     params = list(
       fileId = file$id,

@@ -38,7 +38,7 @@ guser <- function(fields = "user", ...) {
     return(NULL)
   }
 
-  request <-  build_request(endpoint = "drive.about.get",
+  request <-  generate_request(endpoint = "drive.about.get",
                    params = list(fields = fields))
   response <- make_request(request)
   proc_res <- process_response(response)

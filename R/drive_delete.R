@@ -16,7 +16,7 @@ drive_delete <- function(file = NULL, verbose = TRUE) {
 }
 
 delete_one <- function(id, name, verbose = TRUE) {
-  request <- build_request(
+  request <- generate_request(
     endpoint = "drive.files.delete",
     params = list(fileId = id)
   )

@@ -27,7 +27,7 @@ drive_get <- function(id) {
 }
 
 get_one <- function(id) {
-  request <- build_request(
+  request <- generate_request(
     endpoint = "drive.files.get",
     params = list(
       fileId = id,
