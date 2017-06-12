@@ -27,3 +27,20 @@ drive_extract_id <- function(x) {
   id <- ifelse(id_loc == -1, NA, gsub("/d/", "", regmatches(x, id_loc)))
   id
 }
+
+drive_extract_id_smarter <- function(x) {
+  id <- drive_extract_id(x)
+  purrr::map2_chr(id, x, redirect_id)
+}
+
+redirect_id <- function(id, url) {
+  if (!is.na(id)) {
+    return(id)
+  }
+  header <- try(httr::HEAD(url), silent = TRUE)
+  if (class(header) == "try-error" || header$status_code > 400) {
+    return(id)
+  }
+  url <- header$url
+  drive_extract_id(url)
+}
