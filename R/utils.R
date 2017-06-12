@@ -20,3 +20,10 @@ collapse2 <- function(x, sep = "", width = Inf, last = "") {
 last_all <- function(x) {
   Position(isTRUE, as.logical(cumprod(x)), right = TRUE, nomatch = 0)
 }
+
+## I expect the links to have /d/ before the fileId
+drive_extract_id <- function(x) {
+  id_loc <- regexpr("/d/([^/])+", x)
+  id <- ifelse(id_loc == -1, NA, gsub("/d/", "", regmatches(x, id_loc)))
+  id
+}
