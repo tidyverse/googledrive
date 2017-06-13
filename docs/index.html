@@ -172,7 +172,7 @@ x<span class="op">$</span>id
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;           name                           id files_resource</span>
 <span class="co">#&gt; *        &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 chickwts.csv 0B0Gh-SuuA2nTcUJ2bnVoM3gwU2M    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 chickwts.csv 0B0Gh-SuuA2nTZ2pjYzBGZTZzUlk    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## example of using a dribble as input
 drive_chickwts &lt;-<span class="st"> </span>drive_chickwts <span class="op">%&gt;%</span>
@@ -198,7 +198,7 @@ drive_chickwts<span class="op">$</span>publish
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;            check_time revision published auto_publish</span>
 <span class="co">#&gt;                &lt;dttm&gt;    &lt;chr&gt;     &lt;lgl&gt;        &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 2017-06-13 10:15:42        1      TRUE         TRUE</span></code></pre></div>
+<span class="co">#&gt; 1 2017-06-13 14:47:50        1      TRUE         TRUE</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_is_published.html">drive_is_published</a></span>(drive_chickwts)
 <span class="co">#&gt; The latest revision of Google Drive file 'chickwts.csv' is published.</span></code></pre></div>
 </div>
@@ -216,7 +216,7 @@ drive_chickwts<span class="op">$</span>publish
 <p>We can then extract a share link.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drive_chickwts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_share_link.html">drive_share_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1QCotIBUuhBBeLkQGk8Ywe3u4U1QicZhtXl1hpgTwijs/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1QBWpMTfYvvZKSEonN9I5saWYKrgKMwbytptCC5x8HmM/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="clean-up" class="section level4">
 <h4 class="hasAnchor">

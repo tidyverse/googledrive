@@ -140,22 +140,11 @@ regular expression are returned.</p></td>
   <span class='co'>## filter for folders</span>
   <span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType = 'application/vnd.google-apps.folder'"</span>)
 
-  <span class='co'>## get contents of the folder 'abc' (non-recursive)</span>
-  <span class='co'>## THIS WORKFLOW WILL GET SMOOTHER!</span>
-  <span class='co'>## first, get the folder's id</span>
-  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='paths.html'>drive_path</a></span>(<span class='st'>"abc"</span>)
-  <span class='co'>## now, search for files with this folder as direct parent</span>
-  <span class='no'>q_clause</span> <span class='kw'>&lt;-</span> <span class='fu'>paste</span>(<span class='fu'>shQuote</span>(<span class='no'>x</span>$<span class='no'>id</span>), <span class='st'>"in parents"</span>)
-  <span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='no'>q_clause</span>)
-
-  <span class='co'>## files whose names match a regex</span>
-  <span class='fu'>drive_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"jt"</span>)
-
   <span class='co'>## filter for Google Sheets</span>
   <span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType='application/vnd.google-apps.spreadsheet'"</span>)
 
-  <span class='co'>## filter for folders</span>
-  <span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType='application/vnd.google-apps.folder'"</span>)
+  <span class='co'>## files whose names match a regex</span>
+  <span class='fu'>drive_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"jt"</span>)
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
