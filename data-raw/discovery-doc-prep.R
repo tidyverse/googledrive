@@ -93,13 +93,12 @@ add_schema_params <- function(endpoint, nm) {
 }
 endpoints <- imap(endpoints, add_schema_params)
 
-## add fields to all endpoints
-add_fields <- function(x) {
-  x[["parameters"]] <- c(x[["parameters"]],
-                         fields = list(list(location = "query", type = "string")))
+## add general parameters to all endpoints
+add_params <- function(x) {
+  x[["parameters"]] <- c(x[["parameters"]], dd_content[["parameters"]])
   x
 }
-endpoints <- map(endpoints, add_fields)
+endpoints <- map(endpoints, add_params)
 
 nms <- endpoints %>%
   map(names) %>%
