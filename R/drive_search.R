@@ -10,6 +10,9 @@
 #'
 #' @param pattern Character. If provided, only the files whose names match this
 #'   regular expression are returned.
+#' @param type Character. If provided, only files of this type will be returned.
+#'   This is either a Google Drive file type (document, spreadsheet, presentation, folder,
+#'   form) or a file extension (jpeg, pdf, etc.)
 #' @param ... Parameters to pass along to the API query.
 #' @template verbose
 #'
@@ -23,9 +26,11 @@
 #' drive_search(q = "'root' in parents")
 #'
 #' ## filter for folders
+#' drive_search(type = "folder")
 #' drive_search(q = "mimeType = 'application/vnd.google-apps.folder'")
 #'
 #' ## filter for Google Sheets
+#' drive_search(type = "spreadsheet")
 #' drive_search(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 #'
 #' ## files whose names match a regex
@@ -33,7 +38,7 @@
 #' }
 #'
 #' @export
-drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
+drive_search <- function(pattern = NULL, type = NULL, ..., verbose = TRUE) {
 
   if (!is.null(pattern)) {
     if (!(is.character(pattern) && length(pattern) == 1)) {
@@ -44,6 +49,13 @@ drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
   params <- list(...)
   params$fields <- params$fields %||% drive_fields()
 
+  if (!is.null(type)) {
+    mime_type <- drive_mime_type(type, verbose = verbose)
+    if (!is.null(mime_type)) {
+    params$q <- glue::collapse(c(params$q, paste0("mimeType = '", mime_type,"'")),
+                               sep = " and ")
+    }
+  }
   ## initialize q, if necessary
   ## by default, don't list items in trash
   if (is.null(params$q) || !grepl("trashed", params$q)) {
