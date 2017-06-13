@@ -45,15 +45,10 @@ drive_upload <- function(from = NULL,
 
   name <- name %||% basename(from)
 
-  ## mimeType
-  if (!is.null(type) &&
-      type %in% c("document", "spreadsheet", "presentation", "folder")) {
-    type <- paste0("application/vnd.google-apps.", type)
+  mimeType <- NULL
+  if (!is.null(type)) {
+    mimeType <- drive_mime_type(type)
   }
-  mimeType <- type
-  ## TO REVISIT: this is quite naive! assumes mimeType is sensible
-  ## use mimeType helpers as soon as they exist
-  ## the whole issue of upload vs "upload & convert" still needs thought
 
   ## parent folder
   ## TO DO: be willing to create the bits of folder that don't yet exist
@@ -106,10 +101,10 @@ drive_upload <- function(from = NULL,
   }
 
   request <- generate_request(endpoint = "drive.files.update.media",
-                           params = list(fileId = up_id,
-                                         uploadType = "media",
-                                         fields = "*")
-                           )
+                              params = list(fileId = up_id,
+                                            uploadType = "media",
+                                            fields = "*")
+  )
 
   ## media uploads have unique body situations, so customizing here.
   request$body <- httr::upload_file(path = from,

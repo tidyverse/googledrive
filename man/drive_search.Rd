@@ -4,11 +4,15 @@
 \alias{drive_search}
 \title{Search for files on Google Drive.}
 \usage{
-drive_search(pattern = NULL, ..., verbose = TRUE)
+drive_search(pattern = NULL, type = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the files whose names match this
 regular expression are returned.}
+
+\item{type}{Character. If provided, only files of this type will be returned.
+This is either a Google Drive file type (document, spreadsheet, presentation, folder,
+form) or a file extension (jpeg, pdf, etc.)}
 
 \item{...}{Parameters to pass along to the API query.}
 
@@ -33,9 +37,11 @@ drive_search()
 drive_search(q = "'root' in parents")
 
 ## filter for folders
+drive_search(type = "folder")
 drive_search(q = "mimeType = 'application/vnd.google-apps.folder'")
 
 ## filter for Google Sheets
+drive_search(type = "spreadsheet")
 drive_search(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 
 ## files whose names match a regex

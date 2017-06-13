@@ -4,6 +4,9 @@
 #'   want to list.
 #' @param pattern Character. If provided, only the files whose names match this
 #'   regular expression are returned.
+#' @param type Character. If provided, only files of this type will be returned.
+#'   This is either a Google Drive file type (document, spreadsheet, presentation, folder,
+#'   form) or a file extension (jpeg, pdf, etc.)
 #' @param ... Parameters to pass along to the API query.
 #'
 #' @template dribble-return
@@ -17,8 +20,12 @@
 #' ## get contents of folder 'abc' that contain the
 #' ## letters 'def'
 #' drive_ls(path = "abc", pattern = "def")
+#'
+#' ## get all Google spreadsheets in folder 'abc'
+#' ## that contain the letters 'def'
+#' drive_ls(path = "abc", pattern = "def", type = "spreadsheet")
 #' }
-drive_ls <- function(path = "~/", pattern = NULL, ...) {
+drive_ls <- function(path = "~/", pattern = NULL, type = NULL, ...) {
 
   x <- list(...)
   q_clause <- NULL
@@ -36,5 +43,5 @@ drive_ls <- function(path = "~/", pattern = NULL, ...) {
     }
   }
 
-  drive_search(pattern = pattern, q = q_clause)
+  drive_search(pattern = pattern, type = type, q = q_clause)
 }

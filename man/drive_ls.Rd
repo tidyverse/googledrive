@@ -4,7 +4,7 @@
 \alias{drive_ls}
 \title{List contents of a folder.}
 \usage{
-drive_ls(path = "~/", pattern = NULL, ...)
+drive_ls(path = "~/", pattern = NULL, type = NULL, ...)
 }
 \arguments{
 \item{path}{Character. A single path on Google Drive whose contents you
@@ -12,6 +12,10 @@ want to list.}
 
 \item{pattern}{Character. If provided, only the files whose names match this
 regular expression are returned.}
+
+\item{type}{Character. If provided, only files of this type will be returned.
+This is either a Google Drive file type (document, spreadsheet, presentation, folder,
+form) or a file extension (jpeg, pdf, etc.)}
 
 \item{...}{Parameters to pass along to the API query.}
 }
@@ -30,5 +34,9 @@ drive_ls("abc")
 ## get contents of folder 'abc' that contain the
 ## letters 'def'
 drive_ls(path = "abc", pattern = "def")
+
+## get all Google spreadsheets in folder 'abc'
+## that contain the letters 'def'
+drive_ls(path = "abc", pattern = "def", type = "spreadsheet")
 }
 }
