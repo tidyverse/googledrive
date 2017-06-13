@@ -1,8 +1,11 @@
 ---
 title: "Placeholder Vignette"
 author: "Lucy D’Agostino McGowan"
-date: "6/13/2017"
-output: html_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{Title of your vignette}
+  %\usepackage[UTF-8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}
