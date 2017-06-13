@@ -1,0 +1,12 @@
+---
+title: "Placeholder Vignette"
+author: "Lucy D’Agostino McGowan"
+date: "6/13/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+*This is a placeholder for now*
