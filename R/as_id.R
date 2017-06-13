@@ -14,21 +14,19 @@ as_id <- function(x) {
 
   x <- purrr::map_chr(x, one_id)
 
-  structure(x, class = c("drive_id"))
+  structure(x, class = "drive_id")
 }
 
 one_id <- function(x) {
-  if (grepl("^http|/", x)) {
-
-    ## We expect the links to have /d/ before the file id, have /folders/
-    ## before a folder id, or have id= before an uploaded blob
-
-    id_loc <- regexpr("/d/([^/])+|/folders/([^/])+|id=([^/])+", x)
-    if (id_loc == -1) {
-      x <- NA_character_
-    } else {
-      x <- gsub("/d/|/folders/|id=", "", regmatches(x, id_loc))
-    }
+  if (!grepl("^http|/", x)) {
+    return(x)
   }
-  x
+  ## We expect the links to have /d/ before the file id, have /folders/
+  ## before a folder id, or have id= before an uploaded blob
+  id_loc <- regexpr("/d/([^/])+|/folders/([^/])+|id=([^/])+", x)
+  if (id_loc == -1) {
+      NA_character_
+  } else {
+      gsub("/d/|/folders/|id=", "", regmatches(x, id_loc))
+  }
 }
