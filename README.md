@@ -43,18 +43,18 @@ Here's how to list the most recently modified 100 files on your drive. This will
 ``` r
 drive_search()
 #> # A tibble: 100 x 3
-#>                                name
-#>  *                            <chr>
-#>  1                foo-TEST-drive-ls
-#>  2  chickwts_txt-TEST-drive-publish
-#>  3 chickwts_gdoc-TEST-drive-publish
-#>  4           foo-TEST-drive-publish
-#>  5      letters.txt-TEST-as-dribble
-#>  6                     chickwts.csv
-#>  7            foo-TEST-drive-search
-#>  8                        DELETE-ME
-#>  9                        DELETE-ME
-#> 10                             test
+#>                              name
+#>  *                          <chr>
+#>  1             another-share-test
+#>  2                       Untitled
+#>  3          b.txt-TEST-drive-path
+#>  4          a.txt-TEST-drive-path
+#>  5                       chickwts
+#>  6    letters.txt-TEST-as-dribble
+#>  7                             la
+#>  8 letters-n-z.txt-TEST-drive-get
+#>  9 letters-a-m.txt-TEST-drive-get
+#> 10              foo-TEST-drive-ls
 #> # ... with 90 more rows, and 2 more variables: id <chr>,
 #> #   files_resource <list>
 ```
@@ -116,7 +116,7 @@ write.csv(chickwts, "chickwts.csv")
 #> # A tibble: 1 x 3
 #>           name                           id files_resource
 #> *        <chr>                        <chr>         <list>
-#> 1 chickwts.csv 0B0Gh-SuuA2nTTlFsUWVHUTM5aVU    <list [36]>
+#> 1 chickwts.csv 0B0Gh-SuuA2nTNHFJU1ZEUVJlVGs    <list [36]>
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -155,7 +155,7 @@ drive_chickwts$publish
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-06-03 09:10:55        1      TRUE         TRUE
+#> 1 2017-06-13 10:15:17        1      TRUE         TRUE
 ```
 
 ``` r
@@ -183,7 +183,7 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1dIe_gcqFZQpOs-9MKz4sNnlqe_vFBqqsGd9mUu3TK3E/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/18wzIgQqctUXSq67NV1ThlN19E5ujCiWDQcly9tIq8Cc/edit?usp=drivesdk"
 ```
 
 #### Clean up

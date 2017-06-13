@@ -40,22 +40,22 @@ test_that("form_query() handles paths w/ all combos of dir and leaf piece(s)", {
   expect_identical(
     ## path = a/b/
     form_query(c("a", "b"), TRUE),
-    "((name = 'a' or name = 'b') and mimeType = 'application/vnd.google-apps.folder')"
+    glue::as_glue("((name = 'a' or name = 'b') and mimeType = 'application/vnd.google-apps.folder')")
   )
   expect_identical(
     ## path = a/b
     form_query(c("a", "b"), FALSE),
-    "name = 'b' or ((name = 'a') and mimeType = 'application/vnd.google-apps.folder')"
+    glue::as_glue("name = 'b' or ((name = 'a') and mimeType = 'application/vnd.google-apps.folder')")
   )
   expect_identical(
     ## path = a/
     form_query("a", TRUE),
-    "((name = 'a') and mimeType = 'application/vnd.google-apps.folder')"
+    glue::as_glue("((name = 'a') and mimeType = 'application/vnd.google-apps.folder')")
   )
   expect_identical(
     ## path = a
     form_query("a", FALSE),
-    "name = 'a'"
+    glue::as_glue("name = 'a'")
   )
 })
 
