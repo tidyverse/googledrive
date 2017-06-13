@@ -30,6 +30,17 @@ test_that("drive_search() passes q correctly", {
   expect_true(all(mtypes == "application/vnd.google-apps.folder"))
 })
 
+test_that("drive_search() `type` works correctly", {
+  skip_on_appveyor()
+  skip_on_travis()
+
+  ## this should find at least 1 folder (foo), and all files found should
+  ## be folders
+  out <- drive_search(type = "folder")
+  mtypes <- purrr::map_chr(out$files_resource, "mimeType")
+  expect_true(all(mtypes == "application/vnd.google-apps.folder"))
+})
+
 test_that("drive_search() finds created file correctly", {
   skip_on_appveyor()
   skip_on_travis()
