@@ -44,3 +44,13 @@ redirect_id <- function(id, url) {
   url <- header$url
   drive_extract_id(url)
 }
+
+get_mime_type <- function(x) {
+  if (!(x %in% c("document", "spreadsheet", "folder", "presentation",
+                 "form", "drawing", "script"))) {
+    message(glue::glue("Input was not a Google Drive type: {x}"))
+    invisible(NULL)
+  } else {
+  paste0("application/vnd.google-apps.", x)
+  }
+}
