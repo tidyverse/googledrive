@@ -11,7 +11,9 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ## use a token from our development account
-googledrive::drive_auth("tidyverse-noncaching-token.rds")
+## special care with path because wd is docs/ during pkgdown::build_site()
+token_path <- rprojroot::find_package_root_file("tidyverse-noncaching-token.rds")
+googledrive::drive_auth(token_path)
 ```
 
 # googledrive

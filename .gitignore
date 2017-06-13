@@ -8,3 +8,4 @@ scratch.R
 .httr-oauth*
 .Rapp.history
 *token.rds
+inst/doc

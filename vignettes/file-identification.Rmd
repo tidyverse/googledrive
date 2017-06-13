@@ -1,0 +1,15 @@
+---
+title: "Identifying files on Google Drive"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Identifying files on Google Drive}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This will go over all the ways to identify Drive files with googledrive:
+
+  * `drive_search()`: Similar to what you can do at <https://drive.google.com>
+  * `drive_path()` and `drive_paths()`: Identify files by name or, more generally, path
+  * `drive_get()`: Identify files by their ID
+  * `drive_ls()`: List the contents of a folder on Drive
