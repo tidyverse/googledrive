@@ -1467,7 +1467,10 @@
         "type": ["string"],
         "repeated": [null],
         "format": [null],
-        "enum": ["json"],
+        "enum": [
+          ["json"],
+          ["media"]
+        ],
         "description": ["Data format for the response."]
       },
       "fields": {
@@ -1672,7 +1675,10 @@
         "type": ["string"],
         "repeated": [null],
         "format": [null],
-        "enum": ["json"],
+        "enum": [
+          ["json"],
+          ["media"]
+        ],
         "description": ["Data format for the response."]
       },
       "fields": {
@@ -1761,7 +1767,7 @@
         "type": ["string"],
         "repeated": [null],
         "format": [null],
-        "enum": ["domain"],
+        "enum": ["domain", "user"],
         "description": ["The source of files to list. Deprecated: use 'corpora' instead."]
       },
       "includeTeamDriveItems": {
@@ -2564,7 +2570,10 @@
         "type": ["string"],
         "repeated": [null],
         "format": [null],
-        "enum": ["json"],
+        "enum": [
+          ["json"],
+          ["media"]
+        ],
         "description": ["Data format for the response."]
       },
       "fields": {
@@ -3565,7 +3574,10 @@
         "type": ["string"],
         "repeated": [null],
         "format": [null],
-        "enum": ["json"],
+        "enum": [
+          ["json"],
+          ["media"]
+        ],
         "description": ["Data format for the response."]
       },
       "fields": {
