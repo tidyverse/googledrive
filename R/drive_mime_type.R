@@ -15,10 +15,6 @@
 #' @export
 drive_mime_type <- function(x, verbose = TRUE) {
   stopifnot(is.character(x))
-  purrr::map_chr(x, one_mime_type, verbose = verbose)
-}
-
-one_mime_type <- function(x, verbose = TRUE) {
   mime_type <- .drive$mime_tbl$mime_type[.drive$mime_tbl$mime_type == x |
                                            (!is.na(.drive$mime_tbl$human_type) &
                                               (.drive$mime_tbl$human_type == x))
@@ -27,7 +23,7 @@ one_mime_type <- function(x, verbose = TRUE) {
     if (verbose) {
       message(glue::glue("We do not have a mime type for files of type: {sq(x)}"))
     }
-    mime_type <- NA_character_
+    return(invisible(NULL))
   }
   mime_type
 }
