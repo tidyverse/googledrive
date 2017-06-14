@@ -1,0 +1,12 @@
+---
+title: "The Google Drive API"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The Google Drive API}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This is really here just to have an example of a non-vignette article.
+
+But I could imagine having an article about our use of the Drive API Discovery Document to create endpoints and how to use lower level functions in googledrive for general work with Drive API.

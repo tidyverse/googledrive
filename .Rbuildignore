@@ -15,3 +15,5 @@
 ^tidyverse-noncaching-token\.rds$
 ^jennyfbryan-noncaching-token\.rds$
 ^man-roxygen$
+^docs$
+^_pkgdown\.yml$

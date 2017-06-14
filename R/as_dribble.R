@@ -4,7 +4,7 @@
 #' the object used by googledrive to hold Drive file metadata. Files can be
 #' specified via
 #'   * File path
-#'   * File id (be sure to mark with [drive_id()] to distinguish from file path!)
+#'   * File id (be sure to mark with [as_id()] to distinguish from file path!)
 #'   * List representing [Files resource](https://developers.google.com/drive/v3/reference/files#resource)
 #'     objects (for internal use)
 #'   * Data frame or [`dribble`] (for internal use)
@@ -12,7 +12,7 @@
 #' This is a generic function.
 
 #' @param x A vector of Drive file paths, a vector of file ids marked
-#'   with [drive_id()], a list of Files Resource objects, or a suitable data
+#'   with [as_id()], a list of Files Resource objects, or a suitable data
 #'   frame.
 #' @param ... Other arguments passed down to methods.
 #' @export
@@ -23,7 +23,7 @@
 #' as_dribble("abc/def")
 #'
 #' ## specify the file id (substitute one of your own!)
-#' as_dribble(drive_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
+#' as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
 #' }
 as_dribble <- function(x, ...) UseMethod("as_dribble")
 
