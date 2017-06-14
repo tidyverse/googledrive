@@ -16,19 +16,6 @@ token_path <- rprojroot::find_package_root_file("tidyverse-noncaching-token.rds"
 googledrive::drive_auth(token_path)
 ```
 
-```{r data-setup, include = FALSE}
-run <- FALSE
-clean <- FALSE
-if (run) {
-  ## make sure directory is clean
-  if (clean) {
-    del <- drive_delete(c("README-chickwts.csv","abc"), verbose = FALSE)
-  }
-  drive_mkdir("abc")
-  drive_mkdir("def", path = "abc")
-}
-```
-
 # googledrive
 
 [![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master) 
@@ -53,6 +40,12 @@ devtools::install_github("tidyverse/googledrive")
 
 ```{r}
 library("googledrive")
+```
+
+```{r data-setup, include = FALSE}
+del <- drive_delete(c("README-chickwts.csv","~/abc"), verbose = FALSE)
+drive_mkdir("abc")
+drive_mkdir("def", path = "abc")
 ```
 
 ### Package conventions
@@ -86,7 +79,7 @@ You often want to store the result of a googledrive call, so you can act on thos
 
 #### Identify files
 
-In addition to `drive_search()`, you can also identify files by name (path, really) or Drive file id, using `drive_path()` and `drive_get()`, respectively.
+In addition to `drive_search()`, you can also identify files by name (path, really) or Drive file id, using `drive_path()` and `drive_get()`, respectively. You can also register a Google Drive id as a `drive_id` or convert a Google Drive URL to a `drive_id` using `as_id()`. These `drive_id` objects can be passed to any of our functions.
 
 ```{r}
 (x <- drive_path("~/abc/def"))
