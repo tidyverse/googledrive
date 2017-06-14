@@ -43,7 +43,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/file-identification.html">File identification</a>
+      <a href="articles/articles/file-identification.html">File identification</a>
     </li>
     <li>
       <a href="articles/articles/drive-api.html">The Drive API</a>
@@ -114,18 +114,18 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <p>Here’s how to list the most recently modified 100 files on your drive. This will kick off your authentication, so you will be sent to your browser to authorize your Google Drive access. The functions here are designed to be pipeable, using <code>%&gt;%</code>, however they obviously don’t require it.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_search.html">drive_search</a></span>()
 <span class="co">#&gt; # A tibble: 100 x 3</span>
-<span class="co">#&gt;                              name</span>
-<span class="co">#&gt;  *                          &lt;chr&gt;</span>
-<span class="co">#&gt;  1             another-share-test</span>
-<span class="co">#&gt;  2                       Untitled</span>
-<span class="co">#&gt;  3          b.txt-</span><span class="al">TEST</span><span class="co">-drive-path</span>
-<span class="co">#&gt;  4          a.txt-</span><span class="al">TEST</span><span class="co">-drive-path</span>
-<span class="co">#&gt;  5                       chickwts</span>
-<span class="co">#&gt;  6    letters.txt-</span><span class="al">TEST</span><span class="co">-as-dribble</span>
-<span class="co">#&gt;  7                             la</span>
-<span class="co">#&gt;  8 letters-n-z.txt-</span><span class="al">TEST</span><span class="co">-drive-get</span>
-<span class="co">#&gt;  9 letters-a-m.txt-</span><span class="al">TEST</span><span class="co">-drive-get</span>
-<span class="co">#&gt; 10              foo-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
+<span class="co">#&gt;                           name</span>
+<span class="co">#&gt;  *                       &lt;chr&gt;</span>
+<span class="co">#&gt;  1                    chickwts</span>
+<span class="co">#&gt;  2                chickwts.rda</span>
+<span class="co">#&gt;  3          chicken_little.jpg</span>
+<span class="co">#&gt;  4               chicken_small</span>
+<span class="co">#&gt;  5                      filler</span>
+<span class="co">#&gt;  6 chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt;  7          another-share-test</span>
+<span class="co">#&gt;  8                    Untitled</span>
+<span class="co">#&gt;  9       b.txt-</span><span class="al">TEST</span><span class="co">-drive-path</span>
+<span class="co">#&gt; 10       a.txt-</span><span class="al">TEST</span><span class="co">-drive-path</span>
 <span class="co">#&gt; # ... with 90 more rows, and 2 more variables: id &lt;chr&gt;,</span>
 <span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
 <p>You can narrow the query by specifying a <code>pattern</code> you’d like to match names against.</p>
@@ -148,7 +148,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;    name                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTMHhkaW8wR1FrVHM     &lt;list [6]&gt;</span>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTMHhkaW8wR1FrVHM    &lt;list [31]&gt;</span>
 ## let's grab that file id and retrieve it that way
 x<span class="op">$</span>id
 <span class="co">#&gt; [1] "0B0Gh-SuuA2nTMHhkaW8wR1FrVHM"</span>
@@ -172,7 +172,7 @@ x<span class="op">$</span>id
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;           name                           id files_resource</span>
 <span class="co">#&gt; *        &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 chickwts.csv 0B0Gh-SuuA2nTZ2pjYzBGZTZzUlk    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 chickwts.csv 0B0Gh-SuuA2nTM1hrU1RjRFhmUjA    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## example of using a dribble as input
 drive_chickwts &lt;-<span class="st"> </span>drive_chickwts <span class="op">%&gt;%</span>
@@ -198,7 +198,7 @@ drive_chickwts<span class="op">$</span>publish
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;            check_time revision published auto_publish</span>
 <span class="co">#&gt;                &lt;dttm&gt;    &lt;chr&gt;     &lt;lgl&gt;        &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 2017-06-13 14:47:50        1      TRUE         TRUE</span></code></pre></div>
+<span class="co">#&gt; 1 2017-06-14 14:05:25        1      TRUE         TRUE</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_is_published.html">drive_is_published</a></span>(drive_chickwts)
 <span class="co">#&gt; The latest revision of Google Drive file 'chickwts.csv' is published.</span></code></pre></div>
 </div>
@@ -216,7 +216,7 @@ drive_chickwts<span class="op">$</span>publish
 <p>We can then extract a share link.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drive_chickwts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_share_link.html">drive_share_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1QBWpMTfYvvZKSEonN9I5saWYKrgKMwbytptCC5x8HmM/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1C1bORh1rn10Pqt5fuPs4xwIgOpecvS_jwkhnjzr-vLo/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="clean-up" class="section level4">
 <h4 class="hasAnchor">
