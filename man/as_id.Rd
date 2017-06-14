@@ -2,7 +2,7 @@
 % Please edit documentation in R/as_id.R
 \name{as_id}
 \alias{as_id}
-\title{File id from string or URL}
+\title{File id from string or URL.}
 \usage{
 as_id(x)
 }

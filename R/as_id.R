@@ -1,4 +1,4 @@
-#' File id from string or URL
+#' File id from string or URL.
 #'
 #' Marks a character vector as holding Google Drive file ids, as opposed to file
 #' names or paths. User can supply either a Google Drive id or a Google Drive URL.
