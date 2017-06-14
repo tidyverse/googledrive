@@ -1,9 +1,13 @@
-#' Download a file from Google Drive
+#' Download a file from Google Drive.
 #'
 #' @template file
 #' @template verbose
 #'
-#' @example
+#' @return An object of class \code{dribble}, a tibble with
+#'    one row per file. A column `raw_file` is added with
+#'    raw data from your downloaded Google Drive file. This
+#'    can be extracted using [drive_extract_file()].
+#' @examples
 #' \dontrun{
 #' ## download a .csv file
 #' drive_download("chickwts.csv") %>%
@@ -12,8 +16,8 @@
 #'
 #' ## download an .rda file
 #' drive_download("chickwts.rda") %>%
-#'  drive_extract_file() %>%
-#'  writeBin("chickwts.rda")
+#'   drive_extract_file() %>%
+#'   writeBin("chickwts.rda")
 #' }
 #'
 #' @export
@@ -43,6 +47,25 @@ drive_download <- function(file = NULL, verbose = TRUE) {
   file
 }
 
+#' Extract raw file from `dribble`.
+#'
+#' @param x A [`dribble`] with one row and a `raw_file` column, obtained after
+#'   running [drive_download()].
+#'
+#' @examples
+#' \dontrun{
+#' ## download a .csv file
+#' drive_download("chickwts.csv") %>%
+#'   drive_extract_file() %>%
+#'   write.csv("chickwts.csv")
+#'
+#' ## download an .rda file
+#' drive_download("chickwts.rda") %>%
+#'   drive_extract_file() %>%
+#'   writeBin("chickwts.rda")
+#' }
+#'
+#' @export
 drive_extract_file <- function(x) {
   stopifnot(inherits(x, "dribble"))
   if (!("raw_file" %in% colnames(x))) {

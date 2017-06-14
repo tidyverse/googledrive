@@ -2,27 +2,38 @@
 % Please edit documentation in R/drive_download.R
 \name{drive_download}
 \alias{drive_download}
-\title{Download a file from Google Drive}
+\title{Download a file from Google Drive.}
 \usage{
-drive_download(file = NULL, to = NULL, overwrite = FALSE,
-  fun = writeBin, verbose = TRUE)
+drive_download(file = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{to}{Character, local path for the file download. Will default to
-saving to the working directory by its name on Google Drive.}
-
-\item{overwrite}{A logical scalar, do you want to overwrite a local file
-if such exists?}
-
-\item{fun}{Function used to write the downloaded file type.}
-
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
+\value{
+An object of class \code{dribble}, a tibble with
+one row per file. A column \code{raw_file} is added with
+raw data from your downloaded Google Drive file. This
+can be extracted using \code{\link[=drive_extract_file]{drive_extract_file()}}.
+}
 \description{
-Download a file from Google Drive
+Download a file from Google Drive.
+}
+\examples{
+\dontrun{
+## download a .csv file
+drive_download("chickwts.csv") \%>\%
+  drive_extract_file() \%>\%
+  write.csv("chickwts.csv")
+
+## download an .rda file
+drive_download("chickwts.rda") \%>\%
+  drive_extract_file() \%>\%
+  writeBin("chickwts.rda")
+}
+
 }
