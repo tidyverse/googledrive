@@ -43,18 +43,18 @@ Here's how to list the most recently modified 100 files on your drive. This will
 ``` r
 drive_search()
 #> # A tibble: 100 x 3
-#>                                name
-#>  *                            <chr>
-#>  1                foo-TEST-drive-ls
-#>  2  chickwts_txt-TEST-drive-publish
-#>  3 chickwts_gdoc-TEST-drive-publish
-#>  4           foo-TEST-drive-publish
-#>  5      letters.txt-TEST-as-dribble
-#>  6                     chickwts.csv
-#>  7            foo-TEST-drive-search
-#>  8                        DELETE-ME
-#>  9                        DELETE-ME
-#> 10                             test
+#>                           name
+#>  *                       <chr>
+#>  1                    chickwts
+#>  2                chickwts.rda
+#>  3          chicken_little.jpg
+#>  4               chicken_small
+#>  5                      filler
+#>  6 chickwts-TEST-drive-publish
+#>  7          another-share-test
+#>  8                    Untitled
+#>  9       b.txt-TEST-drive-path
+#> 10       a.txt-TEST-drive-path
 #> # ... with 90 more rows, and 2 more variables: id <chr>,
 #> #   files_resource <list>
 ```
@@ -89,7 +89,7 @@ In addition to `drive_search()`, you can also identify files by name (path, real
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTMHhkaW8wR1FrVHM     <list [6]>
+#> 1   def 0B0Gh-SuuA2nTMHhkaW8wR1FrVHM    <list [31]>
 ## let's grab that file id and retrieve it that way
 x$id
 #> [1] "0B0Gh-SuuA2nTMHhkaW8wR1FrVHM"
@@ -116,7 +116,7 @@ write.csv(chickwts, "chickwts.csv")
 #> # A tibble: 1 x 3
 #>           name                           id files_resource
 #> *        <chr>                        <chr>         <list>
-#> 1 chickwts.csv 0B0Gh-SuuA2nTTlFsUWVHUTM5aVU    <list [36]>
+#> 1 chickwts.csv 0B0Gh-SuuA2nTYS1nOS03ZlJ6UUk    <list [36]>
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -155,7 +155,7 @@ drive_chickwts$publish
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-06-03 09:10:55        1      TRUE         TRUE
+#> 1 2017-06-14 14:05:13        1      TRUE         TRUE
 ```
 
 ``` r
@@ -183,7 +183,7 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1dIe_gcqFZQpOs-9MKz4sNnlqe_vFBqqsGd9mUu3TK3E/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1jNgQr0l_RgUCJHNdPA949vGaeEJQuDmcS8mQfyUNUkA/edit?usp=drivesdk"
 ```
 
 #### Clean up

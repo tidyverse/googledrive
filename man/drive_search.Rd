@@ -35,22 +35,11 @@ drive_search(q = "'root' in parents")
 ## filter for folders
 drive_search(q = "mimeType = 'application/vnd.google-apps.folder'")
 
-## get contents of the folder 'abc' (non-recursive)
-## THIS WORKFLOW WILL GET SMOOTHER!
-## first, get the folder's id
-x <- drive_path("abc")
-## now, search for files with this folder as direct parent
-q_clause <- paste(shQuote(x$id), "in parents")
-drive_search(q = q_clause)
-
-## files whose names match a regex
-drive_search(pattern = "jt")
-
 ## filter for Google Sheets
 drive_search(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 
-## filter for folders
-drive_search(q = "mimeType='application/vnd.google-apps.folder'")
+## files whose names match a regex
+drive_search(pattern = "jt")
 }
 
 }

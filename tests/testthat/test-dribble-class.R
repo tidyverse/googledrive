@@ -170,20 +170,31 @@ test_that("as_dribble.list() catches bad input", {
 
 test_that("promote() works when elem present, absent, and input is trivial", {
   x <- tibble::tibble(
-    name = c("a", "b"),
-    id = c("1", "2"),
-    files_resource = list(list(foo = "a1"), list(foo = "b2"))
+    name = c("a", "b", "c"),
+    id = c("1", "2", "3"),
+    files_resource = list(
+      list(foo = "a1"),
+      list(foo = "b2"),
+      list(foo = "c3", baz = "c3")
+    )
   )
 
-  ## foo is present
+  ## foo is uniformly present
   out <- promote(x, "foo")
-  expect_identical(out, tibble::add_column(x, foo = c("a1", "b2")))
+  expect_identical(out, tibble::add_column(x, foo = c("a1", "b2", "c3")))
 
-  ## bar is not present
+  ## bar is uniformly absent
   out <- promote(x, "bar")
   expect_identical(
     out,
-    tibble::add_column(x, bar = list(NULL, NULL))
+    tibble::add_column(x, bar = list(NULL, NULL, NULL))
+  )
+
+  ## baz is present sometimes
+  out <- promote(x, "baz")
+  expect_identical(
+    out,
+    tibble::add_column(x, baz = list(NULL, NULL, "c3"))
   )
 
   ## input dribble has zero rows

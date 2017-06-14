@@ -1,0 +1,111 @@
+---
+title: "Identifying files on Google Drive"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Identifying files on Google Drive}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+## use a token from our development account
+## special care with path because wd is docs/ during pkgdown::build_site()
+token_path <- rprojroot::find_package_root_file("tidyverse-noncaching-token.rds")
+googledrive::drive_auth(token_path)
+```
+
+```{r}
+library(googledrive)
+```
+
+## `drive_search()` is like My Drive
+
+To see your Google Drive files in the browser, visit <https://drive.google.com>. This displays all your files and offers various ways to filter what you see based on file type, folder, starred vs not, etc.
+
+You can get similar results with `drive_search()`. By default, it gets info on the most recent 100 files.
+
+```{r}
+(x <- drive_search())
+```
+
+The object you get back holds the metadata for one or more Google Drive files. It is a `dribble`, which is just a `tibble` with Drive files in rows and at least these three variables:
+
+  * `name`: a character vector of file names
+  * `id`: a character vector of file ids
+  * `files_resource`: a list-column, each element of which holds a list corresponding to a [Files resource](https://developers.google.com/drive/v3/reference/files#resource), which is how the Drive API returns metadata representing a Drive file.
+  
+There are many ways to filter which files are retrieved, by specifying the `q` query parameter. A few examples:
+
+Just get folders or Google Sheets:
+
+```{r}
+## just folders
+drive_search(q = "mimeType = 'application/vnd.google-apps.folder'") %>% head(3)
+
+## just Sheets
+drive_search(q = "mimeType='application/vnd.google-apps.spreadsheet'") %>% head(3)
+```
+
+Files containing `'horsebean'` in their content:
+
+```{r}
+drive_search(q = "fullText contains 'horsebean'") %>% head(3)
+```
+
+Files in your "Shared with me" collection
+
+```{r}
+drive_search(q = "sharedWithMe = true") %>% head(3)
+```
+
+googledrive will provide some helpers for [writing these search clauses](https://developers.google.com/drive/v3/web/search-parameters) in due course ([GitHub issue](https://github.com/tidyverse/googledrive/issues/38)).
+
+There is also a `pattern` argument, which will filter the retrieved results for files whose names match a regular expression (which is not supported by the Drive `q` parameter).
+
+```{r}
+## this finds nothing because Drive's name search looks only at prefixes
+drive_search(q = "name contains 'wts'")
+
+## therefore we do regex matching on the R side
+drive_search(pattern = "wts")
+```
+
+If you know the exact name, you can use `drive_search()` or, less cumbersome, the `drive_path()` function described next.
+
+```{r}
+drive_search(q = "name = '538-star-wars-survey'")
+```
+
+## `drive_path()` works on a path
+
+An easier way to get the files that match a name is to use `drive_path()`.
+
+```{r}
+drive_path("538-star-wars-survey")
+```
+
+Notice that I said "files" with an "s". On Drive, you can have multiple files with the same name, even in the same folder! Furthermore, a file can have multiple parent folders and, therefore, can have more than one path. The functions `drive_path()` and `drive_paths()` operate on one or multiple input paths, respectively, but either of them can return multiple matches per path.
+
+If you want to identify a file by it's name or path, but also make sure that you got a unique match, insert the `confirm_single_file()` utility function in your workflow.
+
+```{r eval = FALSE}
+drive_path("538-star-wars-survey") %>% 
+  confirm_single_file() %>% 
+  drive_browse()
+## TO DO: I'd rather put drive_download() here, when it exists
+```
+
+To write:
+
+  * the use of `~/`
+  * show getting multiple files for one path?
+  * show one file can have multiple paths?
+
+## `drive_get()` works on file ids
+
+## `drive_ls()` lists folder contents
+

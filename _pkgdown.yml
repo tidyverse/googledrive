@@ -1,0 +1,20 @@
+template:
+  package: tidytemplate
+  default_assets: false
+
+home:
+  strip_header: true
+  links:
+  - text: Learn more
+    href: http://r4ds.had.co.nz/data-import.html
+
+navbar:
+  left:
+  - text: Reference
+    href: reference/index.html
+  - text: Articles
+    menu:
+    - text: File identification
+      href: articles/articles/file-identification.html
+    - text: The Drive API
+      href: articles/articles/drive-api.html

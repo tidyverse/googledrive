@@ -149,29 +149,26 @@ is_mine <- function(d) {
 }
 
 
-## promote elements in files_resource into a top-level variable
+## promote an element in files_resource into a top-level variable
 promote <- function(d, elem) {
 
   present <- any(purrr::map_lgl(d$files_resource, ~ elem %in% names(.x)))
 
   ## TO DO: do we really want promote() to be this forgiving?
-  ## add a placeholder column for elem
+  ## add a placeholder column for elem if not present in files_resource
   if (!present) {
     ## ensure elem is added, even if there are zero rows
     d[[elem]] <- rep_len(list(NULL), nrow(d))
     return(d)
   }
 
-  mp <- list(
-    character = purrr::map_chr,
-    numeric = purrr::map_dbl,
-    list = purrr::map,
-    logical = purrr::map_lgl
-  )
-  ## TO DO: should be using .default in the above fxns
-  cl <- class(d$files_resource[[1]][[elem]])
-
-  fn <- mp[[cl]]
-  d[[elem]] <- fn(d$files_resource, elem)
+  elem_vec <- purrr::map(d$files_resource, elem)
+  d[[elem]] <- purrr::simplify(elem_vec)
+  ## TO DO: find a way to emulate .default behavior from type-specific
+  ## mappers ... might need to create my own simplify()
+  ## https://github.com/tidyverse/purrr/issues/336
+  ## as this stands, you will get a list-column whenever there is at
+  ## least one NULL
   d
+
 }

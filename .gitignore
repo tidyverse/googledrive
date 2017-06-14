@@ -4,7 +4,7 @@ scratch.R
 .Rhistory
 .Rproj.user
 .RData
-*.Rproj
 .httr-oauth*
 .Rapp.history
 *token.rds
+inst/doc
