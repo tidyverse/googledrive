@@ -30,7 +30,7 @@ drive_download <- function(file = NULL, verbose = TRUE) {
                                             fileId = file$id))
   response <- make_request(request)
   httr::stop_for_status(response)
-  proc_res <- httr::content(response, encoding = "raw")
+  proc_res <- httr::content(response, encoding = "UTF-8")
 
   success <- response$status_code == 200
 
