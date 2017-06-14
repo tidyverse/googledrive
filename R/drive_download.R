@@ -1,39 +1,25 @@
 #' Download a file from Google Drive
 #'
 #' @template file
-#' @param to Character, local path for the file download. Will default to
-#'   saving to the working directory by its name on Google Drive.
-#' @param overwrite A logical scalar, do you want to overwrite a local file
-#'   if such exists?
-#' @param fun Function used to write the downloaded file type.
 #' @template verbose
 #'
 #' @example
 #' \dontrun{
 #' ## download a .csv file
-#' drive_download("chickwts.csv", fun = write.csv)
+#' drive_download("chickwts.csv") %>%
+#'   drive_extract_file() %>%
+#'   write.csv("chickwts.csv")
 #'
-#' ## download a .rda file
-#' drive_download("chickwts.rda", fun = writeBin)
+#' ## download an .rda file
+#' drive_download("chickwts.rda") %>%
+#'  drive_extract_file() %>%
+#'  writeBin("chickwts.rda")
 #' }
 #'
 #' @export
-drive_download <- function(file = NULL,
-                           to = NULL,
-                           overwrite = FALSE,
-                           fun = writeBin,
-                           verbose = TRUE) {
+drive_download <- function(file = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
-
-  if (is.null(to)) {
-    to <- file$name
-  }
-
-  if (file.exists(to) && overwrite == FALSE) {
-    stop(glue::glue("File already exists:\n{file}\nSet `overwrite = TRUE` to overwrite."),
-         call. = FALSE)
-  }
 
   request <- generate_request(endpoint = "drive.files.get",
                               params = list(alt = "media",
@@ -41,19 +27,26 @@ drive_download <- function(file = NULL,
   response <- make_request(request)
   httr::stop_for_status(response)
   proc_res <- httr::content(response, encoding = "raw")
-  fun(proc_res, to)
 
   success <- response$status_code == 200
 
   if (success) {
     if (verbose) {
       message(
-        glue::glue("File downloaded from Google Drive:\n{file$name}\n",
-                   "to local path:\n{to}")
+        glue::glue("File downloaded from Google Drive:\n{file$name}")
       )
     }
   } else {
     spf("Zoinks! the file doesn't seem to have downloaded")
   }
+  file <- tibble::add_column(file, raw_file = list(proc_res))
+  file
+}
 
+drive_extract_file <- function(x) {
+  stopifnot(inherits(x, "dribble"))
+  if (!("raw_file" %in% colnames(x))) {
+    stop("Input must be a `dribble` containing a downloaded `raw_file`. See `drive_download()`.")
+  }
+  x$raw_file[[1]]
 }
