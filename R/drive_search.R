@@ -53,11 +53,13 @@ drive_search <- function(pattern = NULL, type = NULL, ..., verbose = TRUE) {
   }
 
   if (!is.null(type)) {
-    mime_type <- drive_mime_type(type, verbose = verbose)
-    if (!is.null(mime_type)) {
-    params$q <- glue::collapse(c(params$q, paste0("mimeType = '", mime_type,"'")),
-                               sep = " and ")
-    }
+    mime_type <- drive_mime_type(type)
+    ## if they are all NA, this will error, because drive_mime_type
+    ## doesn't allow it, but if one is NA and the others aren't,
+    ## this will still pass the ok ones through.
+    params$q <- paste(c(params$q,
+                        paste0("mimeType = '", mime_type,"'", collapse = " or ")),
+                      collapse = " and ")
   }
   ## initialize q, if necessary
   ## by default, don't list items in trash

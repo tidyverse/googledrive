@@ -4,14 +4,11 @@
 \alias{drive_mime_type}
 \title{Lookup a mime type from a Google Drive type or file extension}
 \usage{
-drive_mime_type(type = NULL, verbose = TRUE)
+drive_mime_type(type = NULL)
 }
 \arguments{
 \item{type}{Character. The Google Drive type or file extension you would
 like to look up the mime type of.}
-
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
 }
 \value{
 Character. The mime type of input.
