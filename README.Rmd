@@ -42,6 +42,12 @@ devtools::install_github("tidyverse/googledrive")
 library("googledrive")
 ```
 
+```{r data-setup, include = FALSE}
+del <- drive_delete(c("README-chickwts.csv","~/abc"), verbose = FALSE)
+drive_mkdir("abc")
+drive_mkdir("def", path = "abc")
+```
+
 ### Package conventions
 
 * All functions begin with the prefix `drive_`
@@ -73,7 +79,7 @@ You often want to store the result of a googledrive call, so you can act on thos
 
 #### Identify files
 
-In addition to `drive_search()`, you can also identify files by name (path, really) or Drive file id, using `drive_path()` and `drive_get()`, respectively.
+In addition to `drive_search()`, you can also identify files by name (path, really) or Drive file id, using `drive_path()` and `drive_get()`, respectively. You can also register a Google Drive id as a `drive_id` or convert a Google Drive URL to a `drive_id` using `as_id()`. These `drive_id` objects can be passed to any of our functions.
 
 ```{r}
 (x <- drive_path("~/abc/def"))
@@ -89,8 +95,8 @@ In general, googledrive functions let you specify Drive file(s) by name (path), 
 We can upload any file type. 
 
 ```{r}
-write.csv(chickwts, "chickwts.csv")
-(drive_chickwts <- drive_upload("chickwts.csv"))
+write.csv(chickwts, "README-chickwts.csv")
+(drive_chickwts <- drive_upload("README-chickwts.csv"))
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -102,7 +108,7 @@ drive_chickwts <- drive_chickwts %>%
 ```
 
 ```{r}
-drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
+drive_chickwts <- drive_upload("README-chickwts.csv", type = "spreadsheet")
 ```
 
 Much better!
@@ -152,6 +158,6 @@ drive_chickwts %>%
 ```
 
 ```{r, echo = FALSE}
-rm <- file.remove("chickwts.csv")
+rm <- file.remove("README-chickwts.csv")
 ```
 

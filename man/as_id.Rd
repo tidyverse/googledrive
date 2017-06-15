@@ -2,7 +2,7 @@
 % Please edit documentation in R/as_id.R
 \name{as_id}
 \alias{as_id}
-\title{Mark as Google Drive id.}
+\title{File id from string or URL.}
 \usage{
 as_id(x)
 }
@@ -11,5 +11,5 @@ as_id(x)
 }
 \description{
 Marks a character vector as holding Google Drive file ids, as opposed to file
-names or paths.
+names or paths. User can supply either a Google Drive id or a Google Drive URL.
 }
