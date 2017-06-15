@@ -18,6 +18,9 @@ if (run) {
 
 test_that("drive_mkdir() places folder in the correct folder", {
 
+  skip_on_appveyor()
+  skip_on_travis()
+
   foo <- drive_path(nm_("foo"))
   ## foo
   ## |- bar

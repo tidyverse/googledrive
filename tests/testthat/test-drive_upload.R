@@ -26,6 +26,8 @@ test_that("drive_upload() detects non-existant file", {
 })
 
 test_that("drive_upload() places file in the correct folder", {
+  skip_on_appveyor()
+  skip_on_travis()
 
   foo <- drive_path(nm_("foo"))
   ## foo
