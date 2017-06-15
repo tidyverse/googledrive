@@ -74,7 +74,7 @@ drive_upload <- function(from = NULL,
   existing <- drive_search(q = qq)
 
   if (nrow(existing) > 0) {
-    out_path <- unsplit_path(folder %||% "", name)
+    out_path <- unsplit_path(up_parent$name %||% "", name)
     if (!overwrite) {
       stop(glue::glue("Path already exists:\n{out_path}", call. = FALSE))
     }

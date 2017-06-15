@@ -2,7 +2,6 @@
 #'
 #' @param type Character. The Google Drive type or file extension you would
 #'   like to look up the mime type of.
-#' @template verbose
 #'
 #' @return Character. The mime type of input.
 #'
@@ -13,21 +12,33 @@
 #' ## get the mime type for jpegs
 #' drive_mime_type("jpeg")
 #' @export
-drive_mime_type <- function(type = NULL, verbose = TRUE) {
+drive_mime_type <- function(type = NULL) {
 
-  if (!(is.character(type) && length(type) == 1)) {
+  if (!(is.character(type))) {
     stop("Please update `type` to be a character string.", call. = FALSE)
   }
+  if (is.null(type)) {
+    return(.drive$mime_tbl)
+  }
+  m <- match(
+    type,
+    .drive$mime_tbl$human_type,
+    nomatch = NA_character_,
+    incomparables = NA
+  )
+  m <- ifelse(is.na(m),
+              match(type,
+                    .drive$mime_tbl$mime_type,
+                    nomatch = NA_character_,
+                    incomparables = NA
+              ),
+              m
+  )
+  mime_type <- .drive$mime_tbl$mime_type[m]
 
-  mime_type <- .drive$mime_tbl$mime_type[.drive$mime_tbl$mime_type == type |
-                                           (!is.na(.drive$mime_tbl$human_type) &
-                                              (.drive$mime_tbl$human_type == type))
-                                         ]
-  if (length(mime_type) == 0L) {
-    if (verbose) {
-      message(glue::glue("Ignoring `type` input. We do not have a mime type for files of type: {sq(type)}"))
-    }
-    return(invisible(NULL))
+  if (all(is.na(mime_type))) {
+    stop(glue::glue("We do not know a mime type for files of type: {sq(type)}"),
+         call. = FALSE)
   }
   mime_type
 }
