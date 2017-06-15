@@ -1,10 +1,10 @@
-context("Upload files")
+context("Make folders")
 
 ## NOTE if you do not currently have the files needed,
 ## change run & clean below to TRUE to create files needed
 ## (CAUTION, this will delete files that will interfere)
 
-nm_ <- nm_fun("-TEST-drive-upload")
+nm_ <- nm_fun("-TEST-drive-mkdir")
 
 run <- FALSE
 clean <- FALSE
@@ -16,21 +16,12 @@ if (run) {
   drive_mkdir(nm_("foo"))
 }
 
-test_that("drive_upload() detects non-existant file", {
-  skip_on_appveyor()
-  skip_on_travis()
-
-  #the file should be a file that exists
-  input <- "this should not work"
-  expect_error(drive_upload(from = input), "File does not exist")
-})
-
-test_that("drive_upload() places file in the correct folder", {
+test_that("drive_mkdir() places folder in the correct folder", {
 
   foo <- drive_path(nm_("foo"))
   ## foo
   ## |- bar
-  bar <- drive_upload(system.file("DESCRIPTION"), name = nm_("bar"), folder = nm_("foo"))
+  bar <- drive_mkdir(nm_("bar"), path = nm_("foo"))
   expect_identical(bar$files_resource[[1]]$parents[[1]], foo$id)
 
   ## clean up
