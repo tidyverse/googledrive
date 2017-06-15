@@ -46,7 +46,7 @@ drive_search <- function(pattern = NULL, type = NULL, ..., verbose = TRUE) {
   }
 
   params <- list(...)
-  params$fields <- params$fields %||% drive_fields()
+  params$fields <- params$fields %||% prep_fields(drive_fields())
 
   if (!is.null(type)) {
     ## if they are all NA, this will error, because drive_mime_type
