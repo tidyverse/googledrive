@@ -10,6 +10,8 @@
 #'
 #' @param pattern Character. If provided, only the files whose names match this
 #'   regular expression are returned.
+#' @param type Character. If provided, only files of this type will be returned.
+#'   Can be anything that [drive_mime_type()] knows how to handle.
 #' @param ... Parameters to pass along to the API query.
 #' @template verbose
 #'
@@ -23,9 +25,11 @@
 #' drive_search(q = "'root' in parents")
 #'
 #' ## filter for folders
+#' drive_search(type = "folder")
 #' drive_search(q = "mimeType = 'application/vnd.google-apps.folder'")
 #'
 #' ## filter for Google Sheets
+#' drive_search(type = "spreadsheet")
 #' drive_search(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 #'
 #' ## files whose names match a regex
@@ -33,7 +37,7 @@
 #' }
 #'
 #' @export
-drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
+drive_search <- function(pattern = NULL, type = NULL, ..., verbose = TRUE) {
 
   if (!is.null(pattern)) {
     if (!(is.character(pattern) && length(pattern) == 1)) {
@@ -42,11 +46,31 @@ drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
   }
 
   params <- list(...)
+  params$fields <- params$fields %||% prep_fields(drive_fields())
 
-  if (is.null(params$fields)) {
-    params$fields <- paste0("files/", .drive$default_fields, collapse = ",")
+  if (!is.null(type)) {
+    ## if they are all NA, this will error, because drive_mime_type
+    ## doesn't allow it, otherwise we proceed with the non-NA mime types
+    mime_type <- drive_mime_type(type)
+    mime_type <- purrr::discard(mime_type, is.na)
+    params$q <- paste(
+      c(params$q,
+        paste0("mimeType = '", mime_type,"'", collapse = " or ")),
+      collapse = " and "
+    )
   }
 
+  if (!is.null(type)) {
+    ## if they are all NA, this will error, because drive_mime_type
+    ## doesn't allow it, otherwise we proceed with the non-NA mime types
+    mime_type <- drive_mime_type(type)
+    mime_type <- purrr::discard(mime_type, is.na)
+    params$q <- paste(
+      c(params$q,
+        paste0("mimeType = '", mime_type,"'", collapse = " or ")),
+      collapse = " and "
+    )
+  }
   ## initialize q, if necessary
   ## by default, don't list items in trash
   if (is.null(params$q) || !grepl("trashed", params$q)) {
@@ -71,49 +95,3 @@ drive_search <- function(pattern = NULL, ..., verbose = TRUE) {
   }
   as_dribble(res_tbl[keep_names, ]) ## TO DO change this once we get indexing working
 }
-
-.drive$default_fields <- c(
-  "appProperties",
-  "capabilities",
-  "contentHints",
-  "createdTime",
-  "description",
-  "explicitlyTrashed",
-  "fileExtension",
-  "folderColorRgb",
-  "fullFileExtension",
-  "headRevisionId",
-  "iconLink",
-  "id",
-  "imageMediaMetadata",
-  "kind",
-  "lastModifyingUser",
-  "md5Checksum",
-  "mimeType",
-  "modifiedByMeTime",
-  "modifiedTime",
-  "name",
-  "originalFilename",
-  "ownedByMe",
-  "owners",
-  "parents",
-  "permissions",
-  "properties",
-  "quotaBytesUsed",
-  "shared",
-  "sharedWithMeTime",
-  "sharingUser",
-  "size",
-  "spaces",
-  "starred",
-  "thumbnailLink",
-  "trashed",
-  "version",
-  "videoMediaMetadata",
-  "viewedByMe",
-  "viewedByMeTime",
-  "viewersCanCopyContent",
-  "webContentLink",
-  "webViewLink",
-  "writersCanShare"
-)

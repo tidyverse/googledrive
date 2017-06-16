@@ -62,7 +62,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/file-identification.html">File identification</a>
+      <a href="../articles/articles/file-identification.html">File identification</a>
     </li>
     <li>
       <a href="../articles/articles/drive-api.html">The Drive API</a>
@@ -125,7 +125,8 @@ Google Drive, if such exists?</p></td>
 determined from the file extension, if possible. If the source file is of a
 suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting <code>type</code> to <code>document</code>, <code>spreadsheet</code>, or <code>presentation</code>,
-respectively.</p></td>
+respectively. All non-<code>NULL</code> values for `type`` are pre-processed with
+<code><a href='drive_mime_type.html'>drive_mime_type()</a></code>.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -136,7 +137,7 @@ respectively.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code>dribble</code>, a tibble with
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with
    one row per file.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>

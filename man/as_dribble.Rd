@@ -29,7 +29,7 @@ as_dribble(x, ...)
 }
 \arguments{
 \item{x}{A vector of Drive file paths, a vector of file ids marked
-with \code{\link[=drive_id]{drive_id()}}, a list of Files Resource objects, or a suitable data
+with \code{\link[=as_id]{as_id()}}, a list of Files Resource objects, or a suitable data
 frame.}
 
 \item{...}{Other arguments passed down to methods.}
@@ -40,7 +40,7 @@ the object used by googledrive to hold Drive file metadata. Files can be
 specified via
 \itemize{
 \item File path
-\item File id (be sure to mark with \code{\link[=drive_id]{drive_id()}} to distinguish from file path!)
+\item File id (be sure to mark with \code{\link[=as_id]{as_id()}} to distinguish from file path!)
 \item List representing \href{https://developers.google.com/drive/v3/reference/files#resource}{Files resource}
 objects (for internal use)
 \item Data frame or \code{\link{dribble}} (for internal use)
@@ -56,6 +56,6 @@ as_dribble("abc")
 as_dribble("abc/def")
 
 ## specify the file id (substitute one of your own!)
-as_dribble(drive_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
+as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
 }
 }

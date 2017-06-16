@@ -62,7 +62,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/file-identification.html">File identification</a>
+      <a href="../articles/articles/file-identification.html">File identification</a>
     </li>
     <li>
       <a href="../articles/articles/drive-api.html">The Drive API</a>
@@ -94,7 +94,7 @@
 the object used by googledrive to hold Drive file metadata. Files can be
 specified via</p><ul>
 <li><p>File path</p></li>
-<li><p>File id (be sure to mark with <code><a href='drive_id.html'>drive_id()</a></code> to distinguish from file path!)</p></li>
+<li><p>File id (be sure to mark with <code><a href='as_id.html'>as_id()</a></code> to distinguish from file path!)</p></li>
 <li><p>List representing <a href = 'https://developers.google.com/drive/v3/reference/files#resource'>Files resource</a>
 objects (for internal use)</p></li>
 <li><p>Data frame or <code><a href='dribble.html'>dribble</a></code> (for internal use)</p></li>
@@ -130,7 +130,7 @@ objects (for internal use)</p></li>
     <tr>
       <th>x</th>
       <td><p>A vector of Drive file paths, a vector of file ids marked
-with <code><a href='drive_id.html'>drive_id()</a></code>, a list of Files Resource objects, or a suitable data
+with <code><a href='as_id.html'>as_id()</a></code>, a list of Files Resource objects, or a suitable data
 frame.</p></td>
     </tr>
     <tr>
@@ -151,7 +151,7 @@ frame.</p></td>
   <span class='fu'>as_dribble</span>(<span class='st'>"abc/def"</span>)
 
   <span class='co'>## specify the file id (substitute one of your own!)</span>
-  <span class='fu'>as_dribble</span>(<span class='fu'><a href='drive_id.html'>drive_id</a></span>(<span class='st'>"0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"</span>))
+  <span class='fu'>as_dribble</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"</span>))
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

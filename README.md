@@ -43,18 +43,18 @@ Here's how to list the most recently modified 100 files on your drive. This will
 ``` r
 drive_search()
 #> # A tibble: 100 x 3
-#>                              name
-#>  *                          <chr>
-#>  1             another-share-test
-#>  2                       Untitled
-#>  3          b.txt-TEST-drive-path
-#>  4          a.txt-TEST-drive-path
-#>  5                       chickwts
-#>  6    letters.txt-TEST-as-dribble
-#>  7                             la
-#>  8 letters-n-z.txt-TEST-drive-get
-#>  9 letters-a-m.txt-TEST-drive-get
-#> 10              foo-TEST-drive-ls
+#>                           name
+#>  *                       <chr>
+#>  1                         def
+#>  2                         abc
+#>  3                    chickwts
+#>  4                chickwts.rda
+#>  5          chicken_little.jpg
+#>  6               chicken_small
+#>  7                      filler
+#>  8 chickwts-TEST-drive-publish
+#>  9          another-share-test
+#> 10                    Untitled
 #> # ... with 90 more rows, and 2 more variables: id <chr>,
 #> #   files_resource <list>
 ```
@@ -82,22 +82,22 @@ You often want to store the result of a googledrive call, so you can act on thos
 
 #### Identify files
 
-In addition to `drive_search()`, you can also identify files by name (path, really) or Drive file id, using `drive_path()` and `drive_get()`, respectively.
+In addition to `drive_search()`, you can also identify files by name (path, really) or Drive file id, using `drive_path()` and `drive_get()`, respectively. You can also register a Google Drive id as a `drive_id` or convert a Google Drive URL to a `drive_id` using `as_id()`. These `drive_id` objects can be passed to any of our functions.
 
 ``` r
 (x <- drive_path("~/abc/def"))
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTMHhkaW8wR1FrVHM     <list [6]>
+#> 1   def 0B0Gh-SuuA2nTZ29nZ2tjRW1PN3c    <list [30]>
 ## let's grab that file id and retrieve it that way
 x$id
-#> [1] "0B0Gh-SuuA2nTMHhkaW8wR1FrVHM"
+#> [1] "0B0Gh-SuuA2nTZ29nZ2tjRW1PN3c"
 drive_get(x$id)
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTMHhkaW8wR1FrVHM    <list [31]>
+#> 1   def 0B0Gh-SuuA2nTZ29nZ2tjRW1PN3c    <list [30]>
 ```
 
 In general, googledrive functions let you specify Drive file(s) by name (path), file id, and `dribble`. See examples below.
@@ -107,16 +107,16 @@ In general, googledrive functions let you specify Drive file(s) by name (path), 
 We can upload any file type.
 
 ``` r
-write.csv(chickwts, "chickwts.csv")
-(drive_chickwts <- drive_upload("chickwts.csv"))
+write.csv(chickwts, "README-chickwts.csv")
+(drive_chickwts <- drive_upload("README-chickwts.csv"))
 #> File uploaded to Google Drive:
-#> chickwts.csv
+#> README-chickwts.csv
 #> with MIME type:
 #> text/csv
 #> # A tibble: 1 x 3
-#>           name                           id files_resource
-#> *        <chr>                        <chr>         <list>
-#> 1 chickwts.csv 0B0Gh-SuuA2nTNHFJU1ZEUVJlVGs    <list [36]>
+#>                  name                           id files_resource
+#> *               <chr>                        <chr>         <list>
+#> 1 README-chickwts.csv 0B0Gh-SuuA2nTdldEVUZWREFyc1k    <list [36]>
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -126,13 +126,13 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 drive_chickwts <- drive_chickwts %>%
   drive_delete()
 #> File deleted from Google Drive:
-#> chickwts.csv
+#> README-chickwts.csv
 ```
 
 ``` r
-drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
+drive_chickwts <- drive_upload("README-chickwts.csv", type = "spreadsheet")
 #> File uploaded to Google Drive:
-#> chickwts.csv
+#> README-chickwts.csv
 #> with MIME type:
 #> application/vnd.google-apps.spreadsheet
 ```
@@ -145,22 +145,22 @@ Versions of Google Documents, Sheets, and Presentations can be published online.
 
 ``` r
 drive_is_published(drive_chickwts)
-#> The latest revision of the Google Drive file 'chickwts.csv' is not published.
+#> The latest revision of the Google Drive file 'README-chickwts.csv' is not published.
 ```
 
 ``` r
 drive_chickwts <- drive_publish(drive_chickwts)
-#> You have changed the publication status of 'chickwts.csv'.
+#> You have changed the publication status of 'README-chickwts.csv'.
 drive_chickwts$publish
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-06-13 10:15:17        1      TRUE         TRUE
+#> 1 2017-06-16 18:58:19        1      TRUE         TRUE
 ```
 
 ``` r
 drive_is_published(drive_chickwts)
-#> The latest revision of Google Drive file 'chickwts.csv' is published.
+#> The latest revision of Google Drive file 'README-chickwts.csv' is published.
 ```
 
 #### Share files
@@ -170,7 +170,7 @@ Notice the access here says "Shared with specific people". To update the access,
 ``` r
 drive_chickwts <- drive_chickwts %>%
   drive_share(role = "reader", type = "anyone")
-#> The permissions for file 'chickwts.csv' have been updated.
+#> The permissions for file 'README-chickwts.csv' have been updated.
 #> id: anyoneWithLink
 #> type: anyone
 #> role: reader
@@ -183,7 +183,7 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/18wzIgQqctUXSq67NV1ThlN19E5ujCiWDQcly9tIq8Cc/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1peLr2KDiriYZMqMIjKpMmdJ5DcxitOwUCjC3FlFz3HI/edit?usp=drivesdk"
 ```
 
 #### Clean up
@@ -192,5 +192,5 @@ drive_chickwts %>%
 drive_chickwts %>%
   drive_delete()
 #> File deleted from Google Drive:
-#> chickwts.csv
+#> README-chickwts.csv
 ```

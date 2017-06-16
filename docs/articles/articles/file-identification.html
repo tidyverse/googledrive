@@ -6,10 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Identifying files on Google Drive • googledrive</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../tidyverse.css" rel="stylesheet">
+<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../../tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- tidyverse --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- tidyverse --><link href="../../pkgdown.css" rel="stylesheet">
+<script src="../../jquery.sticky-kit.min.js"></script><script src="../../pkgdown.js"></script><!-- mathjax --><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -26,14 +26,14 @@
       </button>
 
       <div class="navbar-brand-container">
-        <a class="navbar-brand" href="../index.html">googledrive</a>
+        <a class="navbar-brand" href="../../index.html">googledrive</a>
         <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -43,10 +43,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/file-identification.html">File identification</a>
+      <a href="../../articles/articles/file-identification.html">File identification</a>
     </li>
     <li>
-      <a href="../articles/articles/drive-api.html">The Drive API</a>
+      <a href="../../articles/articles/drive-api.html">The Drive API</a>
     </li>
   </ul>
 </li>
@@ -78,23 +78,23 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(googledrive)</code></pre></div>
 <div id="drive_search-is-like-my-drive" class="section level2">
 <h2 class="hasAnchor">
-<a href="#drive_search-is-like-my-drive" class="anchor"></a><code><a href="../reference/drive_search.html">drive_search()</a></code> is like My Drive</h2>
+<a href="#drive_search-is-like-my-drive" class="anchor"></a><code><a href="../../reference/drive_search.html">drive_search()</a></code> is like My Drive</h2>
 <p>To see your Google Drive files in the browser, visit <a href="https://drive.google.com" class="uri">https://drive.google.com</a>. This displays all your files and offers various ways to filter what you see based on file type, folder, starred vs not, etc.</p>
-<p>You can get similar results with <code><a href="../reference/drive_search.html">drive_search()</a></code>. By default, it gets info on the most recent 100 files.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/drive_search.html">drive_search</a></span>())
+<p>You can get similar results with <code><a href="../../reference/drive_search.html">drive_search()</a></code>. By default, it gets info on the most recent 100 files.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>())
 <span class="co">#&gt; # A tibble: 100 x 3</span>
-<span class="co">#&gt;                              name</span>
-<span class="co">#&gt;  *                          &lt;chr&gt;</span>
-<span class="co">#&gt;  1             another-share-test</span>
-<span class="co">#&gt;  2                       Untitled</span>
-<span class="co">#&gt;  3          b.txt-</span><span class="al">TEST</span><span class="co">-drive-path</span>
-<span class="co">#&gt;  4          a.txt-</span><span class="al">TEST</span><span class="co">-drive-path</span>
-<span class="co">#&gt;  5                       chickwts</span>
-<span class="co">#&gt;  6    letters.txt-</span><span class="al">TEST</span><span class="co">-as-dribble</span>
-<span class="co">#&gt;  7                             la</span>
-<span class="co">#&gt;  8 letters-n-z.txt-</span><span class="al">TEST</span><span class="co">-drive-get</span>
-<span class="co">#&gt;  9 letters-a-m.txt-</span><span class="al">TEST</span><span class="co">-drive-get</span>
-<span class="co">#&gt; 10              foo-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
+<span class="co">#&gt;                           name</span>
+<span class="co">#&gt;  *                       &lt;chr&gt;</span>
+<span class="co">#&gt;  1                         def</span>
+<span class="co">#&gt;  2                         abc</span>
+<span class="co">#&gt;  3                    chickwts</span>
+<span class="co">#&gt;  4                chickwts.rda</span>
+<span class="co">#&gt;  5          chicken_little.jpg</span>
+<span class="co">#&gt;  6               chicken_small</span>
+<span class="co">#&gt;  7                      filler</span>
+<span class="co">#&gt;  8 chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt;  9          another-share-test</span>
+<span class="co">#&gt; 10                    Untitled</span>
 <span class="co">#&gt; # ... with 90 more rows, and 2 more variables: id &lt;chr&gt;,</span>
 <span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
 <p>The object you get back holds the metadata for one or more Google Drive files. It is a <code>dribble</code>, which is just a <code>tibble</code> with Drive files in rows and at least these three variables:</p>
@@ -109,32 +109,32 @@
 <p>There are many ways to filter which files are retrieved, by specifying the <code>q</code> query parameter. A few examples:</p>
 <p>Just get folders or Google Sheets:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## just folders
-<span class="kw"><a href="../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"mimeType = 'application/vnd.google-apps.folder'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
+<span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"mimeType = 'application/vnd.google-apps.folder'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 3 x 3</span>
-<span class="co">#&gt;                     name                           id files_resource</span>
-<span class="co">#&gt; *                  &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1      foo-</span><span class="al">TEST</span><span class="co">-drive-ls 0B0Gh-SuuA2nTUDBqaXVRek5USzQ    &lt;list [27]&gt;</span>
-<span class="co">#&gt; 2 foo-</span><span class="al">TEST</span><span class="co">-drive-publish 0B0Gh-SuuA2nTUnZQTUVfQ1FsdW8    &lt;list [26]&gt;</span>
-<span class="co">#&gt; 3  foo-</span><span class="al">TEST</span><span class="co">-drive-search 0B0Gh-SuuA2nTblViNkxadWZYT2s    &lt;list [26]&gt;</span>
+<span class="co">#&gt;     name                           id files_resource</span>
+<span class="co">#&gt; *  &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
+<span class="co">#&gt; 1    def 0B0Gh-SuuA2nTRGRmNmQxRUg1RTQ    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 2    abc 0B0Gh-SuuA2nTVnVEQ0JSSHRNdzA    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 3 filler 0B0Gh-SuuA2nTUXdfUFdiR3NOeGM    &lt;list [27]&gt;</span>
 
 ## just Sheets
-<span class="kw"><a href="../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"mimeType='application/vnd.google-apps.spreadsheet'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
+<span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"mimeType='application/vnd.google-apps.spreadsheet'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                   name                                           id</span>
 <span class="co">#&gt; *                &lt;chr&gt;                                        &lt;chr&gt;</span>
 <span class="co">#&gt; 1 538-star-wars-survey 1xw_M2OBUdPjoOVrmWKWNu07BW_PHCh-EMSfJN5WEJDE</span>
 <span class="co">#&gt; # ... with 1 more variables: files_resource &lt;list&gt;</span></code></pre></div>
 <p>Files containing <code>'horsebean'</code> in their content:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'horsebean'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'horsebean'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 3 x 3</span>
 <span class="co">#&gt;                               name</span>
 <span class="co">#&gt; *                            &lt;chr&gt;</span>
-<span class="co">#&gt; 1                         chickwts</span>
-<span class="co">#&gt; 2 chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt; 3                           foobar</span>
+<span class="co">#&gt; 1 chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 2                         chickwts</span>
+<span class="co">#&gt; 3      chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
 <span class="co">#&gt; # ... with 2 more variables: id &lt;chr&gt;, files_resource &lt;list&gt;</span></code></pre></div>
 <p>Files in your “Shared with me” collection</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"sharedWithMe = true"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"sharedWithMe = true"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 2 x 3</span>
 <span class="co">#&gt;                 name                                           id</span>
 <span class="co">#&gt; *              &lt;chr&gt;                                        &lt;chr&gt;</span>
@@ -144,24 +144,24 @@
 <p>googledrive will provide some helpers for <a href="https://developers.google.com/drive/v3/web/search-parameters">writing these search clauses</a> in due course (<a href="https://github.com/tidyverse/googledrive/issues/38">GitHub issue</a>).</p>
 <p>There is also a <code>pattern</code> argument, which will filter the retrieved results for files whose names match a regular expression (which is not supported by the Drive <code>q</code> parameter).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## this finds nothing because Drive's name search looks only at prefixes
-<span class="kw"><a href="../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"name contains 'wts'"</span>)
+<span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"name contains 'wts'"</span>)
 <span class="co">#&gt; # A tibble: 0 x 3</span>
 <span class="co">#&gt; # ... with 3 variables: name &lt;chr&gt;, id &lt;chr&gt;, files_resource &lt;list&gt;</span>
 
 ## therefore we do regex matching on the R side
-<span class="kw"><a href="../reference/drive_search.html">drive_search</a></span>(<span class="dt">pattern =</span> <span class="st">"wts"</span>)
+<span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">pattern =</span> <span class="st">"wts"</span>)
 <span class="co">#&gt; # A tibble: 6 x 3</span>
 <span class="co">#&gt;                               name</span>
 <span class="co">#&gt; *                            &lt;chr&gt;</span>
 <span class="co">#&gt; 1                         chickwts</span>
-<span class="co">#&gt; 2  chickwts_txt-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt; 3 chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt; 4                     chickwts.csv</span>
-<span class="co">#&gt; 5      chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 2                     chickwts.rda</span>
+<span class="co">#&gt; 3      chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 4  chickwts_txt-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 5 chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
 <span class="co">#&gt; 6    chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-list</span>
 <span class="co">#&gt; # ... with 2 more variables: id &lt;chr&gt;, files_resource &lt;list&gt;</span></code></pre></div>
-<p>If you know the exact name, you can use <code><a href="../reference/drive_search.html">drive_search()</a></code> or, less cumbersome, the <code><a href="../reference/paths.html">drive_path()</a></code> function described next.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"name = '538-star-wars-survey'"</span>)
+<p>If you know the exact name, you can use <code><a href="../../reference/drive_search.html">drive_search()</a></code> or, less cumbersome, the <code><a href="../../reference/paths.html">drive_path()</a></code> function described next.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"name = '538-star-wars-survey'"</span>)
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                   name                                           id</span>
 <span class="co">#&gt; *                &lt;chr&gt;                                        &lt;chr&gt;</span>
@@ -170,19 +170,19 @@
 </div>
 <div id="drive_path-works-on-a-path" class="section level2">
 <h2 class="hasAnchor">
-<a href="#drive_path-works-on-a-path" class="anchor"></a><code><a href="../reference/paths.html">drive_path()</a></code> works on a path</h2>
-<p>An easier way to get the files that match a name is to use <code><a href="../reference/paths.html">drive_path()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/paths.html">drive_path</a></span>(<span class="st">"538-star-wars-survey"</span>)
+<a href="#drive_path-works-on-a-path" class="anchor"></a><code><a href="../../reference/paths.html">drive_path()</a></code> works on a path</h2>
+<p>An easier way to get the files that match a name is to use <code><a href="../../reference/paths.html">drive_path()</a></code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/paths.html">drive_path</a></span>(<span class="st">"538-star-wars-survey"</span>)
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                   name                                           id</span>
 <span class="co">#&gt; *                &lt;chr&gt;                                        &lt;chr&gt;</span>
 <span class="co">#&gt; 1 538-star-wars-survey 1xw_M2OBUdPjoOVrmWKWNu07BW_PHCh-EMSfJN5WEJDE</span>
 <span class="co">#&gt; # ... with 1 more variables: files_resource &lt;list&gt;</span></code></pre></div>
-<p>Notice that I said “files” with an “s”. On Drive, you can have multiple files with the same name, even in the same folder! Furthermore, a file can have multiple parent folders and, therefore, can have more than one path. The functions <code><a href="../reference/paths.html">drive_path()</a></code> and <code><a href="../reference/paths.html">drive_paths()</a></code> operate on one or multiple input paths, respectively, but either of them can return multiple matches per path.</p>
-<p>If you want to identify a file by it’s name or path, but also make sure that you got a unique match, insert the <code><a href="../reference/dribble-checks.html">confirm_single_file()</a></code> utility function in your workflow.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/paths.html">drive_path</a></span>(<span class="st">"538-star-wars-survey"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/dribble-checks.html">confirm_single_file</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/drive_browse.html">drive_browse</a></span>()
+<p>Notice that I said “files” with an “s”. On Drive, you can have multiple files with the same name, even in the same folder! Furthermore, a file can have multiple parent folders and, therefore, can have more than one path. The functions <code><a href="../../reference/paths.html">drive_path()</a></code> and <code><a href="../../reference/paths.html">drive_paths()</a></code> operate on one or multiple input paths, respectively, but either of them can return multiple matches per path.</p>
+<p>If you want to identify a file by it’s name or path, but also make sure that you got a unique match, insert the <code><a href="../../reference/dribble-checks.html">confirm_single_file()</a></code> utility function in your workflow.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/paths.html">drive_path</a></span>(<span class="st">"538-star-wars-survey"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../../reference/dribble-checks.html">confirm_single_file</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../../reference/drive_browse.html">drive_browse</a></span>()
 ## TO DO: I'd rather put drive_download() here, when it exists</code></pre></div>
 <p>To write:</p>
 <ul>
@@ -194,11 +194,11 @@
 </div>
 <div id="drive_get-works-on-file-ids" class="section level2">
 <h2 class="hasAnchor">
-<a href="#drive_get-works-on-file-ids" class="anchor"></a><code><a href="../reference/drive_get.html">drive_get()</a></code> works on file ids</h2>
+<a href="#drive_get-works-on-file-ids" class="anchor"></a><code><a href="../../reference/drive_get.html">drive_get()</a></code> works on file ids</h2>
 </div>
 <div id="drive_ls-lists-folder-contents" class="section level2">
 <h2 class="hasAnchor">
-<a href="#drive_ls-lists-folder-contents" class="anchor"></a><code><a href="../reference/drive_ls.html">drive_ls()</a></code> lists folder contents</h2>
+<a href="#drive_ls-lists-folder-contents" class="anchor"></a><code><a href="../../reference/drive_ls.html">drive_ls()</a></code> lists folder contents</h2>
 </div>
 </div>
   </div>
@@ -207,10 +207,10 @@
         <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#drive_search-is-like-my-drive"><code><a href="../reference/drive_search.html">drive_search()</a></code> is like My Drive</a></li>
-      <li><a href="#drive_path-works-on-a-path"><code><a href="../reference/paths.html">drive_path()</a></code> works on a path</a></li>
-      <li><a href="#drive_get-works-on-file-ids"><code><a href="../reference/drive_get.html">drive_get()</a></code> works on file ids</a></li>
-      <li><a href="#drive_ls-lists-folder-contents"><code><a href="../reference/drive_ls.html">drive_ls()</a></code> lists folder contents</a></li>
+<li><a href="#drive_search-is-like-my-drive"><code><a href="../../reference/drive_search.html">drive_search()</a></code> is like My Drive</a></li>
+      <li><a href="#drive_path-works-on-a-path"><code><a href="../../reference/paths.html">drive_path()</a></code> works on a path</a></li>
+      <li><a href="#drive_get-works-on-file-ids"><code><a href="../../reference/drive_get.html">drive_get()</a></code> works on file ids</a></li>
+      <li><a href="#drive_ls-lists-folder-contents"><code><a href="../../reference/drive_ls.html">drive_ls()</a></code> lists folder contents</a></li>
       </ul>
 </div>
       </div>

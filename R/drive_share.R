@@ -68,6 +68,6 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
       )
     }
   }
-  file <- as_dribble(drive_id(file$id))
+  file <- as_dribble(as_id(file$id))
   invisible(file)
 }
