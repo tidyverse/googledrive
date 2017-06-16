@@ -1,2 +1,2 @@
-#' @return An object of class \code{dribble}, a tibble with
+#' @return An object of class \code{\link{dribble}}, a tibble with
 #'    one row per file.

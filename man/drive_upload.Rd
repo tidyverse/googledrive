@@ -31,7 +31,7 @@ respectively. All non-\code{NULL} values for `type`` are pre-processed with
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{dribble}, a tibble with
+An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{

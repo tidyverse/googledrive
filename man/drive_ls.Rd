@@ -20,7 +20,7 @@ Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how
 \item{...}{Parameters to pass along to the API query.}
 }
 \value{
-An object of class \code{dribble}, a tibble with
+An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
