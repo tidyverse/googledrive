@@ -29,10 +29,10 @@ there is a file of the same name (yes this is possible on Drive!).}
 
 \code{drive_paths_exist()}: Logical vector of same length as input
 
-An object of class \code{dribble}, a tibble with
+An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 
-An object of class \code{dribble}, a tibble with
+An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{

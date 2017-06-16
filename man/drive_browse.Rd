@@ -12,7 +12,7 @@ on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 }
 \value{
-An object of class \code{dribble}, a tibble with
+An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{

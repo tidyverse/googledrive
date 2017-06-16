@@ -15,7 +15,7 @@ drive_mkdir(name = NULL, path = NULL, verbose = TRUE)
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{dribble}, a tibble with
+An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
