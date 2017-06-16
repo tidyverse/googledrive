@@ -59,6 +59,18 @@ drive_search <- function(pattern = NULL, type = NULL, ..., verbose = TRUE) {
       collapse = " and "
     )
   }
+
+  if (!is.null(type)) {
+    ## if they are all NA, this will error, because drive_mime_type
+    ## doesn't allow it, otherwise we proceed with the non-NA mime types
+    mime_type <- drive_mime_type(type)
+    mime_type <- purrr::discard(mime_type, is.na)
+    params$q <- paste(
+      c(params$q,
+        paste0("mimeType = '", mime_type,"'", collapse = " or ")),
+      collapse = " and "
+    )
+  }
   ## initialize q, if necessary
   ## by default, don't list items in trash
   if (is.null(params$q) || !grepl("trashed", params$q)) {
