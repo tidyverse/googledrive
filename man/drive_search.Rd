@@ -11,8 +11,7 @@ drive_search(pattern = NULL, type = NULL, ..., verbose = TRUE)
 regular expression are returned.}
 
 \item{type}{Character. If provided, only files of this type will be returned.
-This is either a Google Drive file type (document, spreadsheet, presentation, folder,
-form) or a file extension (jpeg, pdf, etc.)}
+Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle.}
 
 \item{...}{Parameters to pass along to the API query.}
 

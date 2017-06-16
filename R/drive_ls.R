@@ -1,13 +1,9 @@
 #' List contents of a folder.
 #'
-#' @param path Character. A single path on Google Drive whose contents you
-#'   want to list.
-#' @param pattern Character. If provided, only the files whose names match this
-#'   regular expression are returned.
-#' @param type Character. If provided, only files of this type will be returned.
-#'   This is either a Google Drive file type (document, spreadsheet, presentation, folder,
-#'   form) or a file extension (jpeg, pdf, etc.)
-#' @param ... Parameters to pass along to the API query.
+#' @param path Character. A single folder on Google Drive whose contents you
+#'   want to list. Can be an actual path, a file id marked with [as_id()], or
+#'   a [`dribble`].
+#' @inheritParams drive_search
 #'
 #' @template dribble-return
 #' @export
