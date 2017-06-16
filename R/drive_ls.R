@@ -28,19 +28,16 @@
 drive_ls <- function(path = "~/", pattern = NULL, type = NULL, ...) {
 
   x <- list(...)
-  q_clause <- NULL
 
-  if (!is.null(path)) {
-    if (is.character(path)) {
-      path <- append_slash(path)
-    }
-    path <- as_dribble(path)
-    path <- confirm_single_file(path)
+  if (is.character(path)) {
+    path <- append_slash(path)
+  }
+  path <- as_dribble(path)
+  path <- confirm_single_file(path)
 
-    q_clause <- paste(sq(path$id), "in parents")
-    if (!is.null(x$q)) {
-      q_clause <- paste(x$q, "and", q_clause)
-    }
+  q_clause <- paste(sq(path$id), "in parents")
+  if (!is.null(x$q)) {
+    q_clause <- paste(x$q, "and", q_clause)
   }
 
   drive_search(pattern = pattern, type = type, q = q_clause)
