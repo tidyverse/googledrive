@@ -46,9 +46,18 @@ drive_search <- function(pattern = NULL, type = NULL, ..., verbose = TRUE) {
   }
 
   params <- list(...)
+  params$fields <- params$fields %||% prep_fields(drive_fields())
 
-  if (is.null(params$fields)) {
-    params$fields <- paste0("files/", .drive$default_fields, collapse = ",")
+  if (!is.null(type)) {
+    ## if they are all NA, this will error, because drive_mime_type
+    ## doesn't allow it, otherwise we proceed with the non-NA mime types
+    mime_type <- drive_mime_type(type)
+    mime_type <- purrr::discard(mime_type, is.na)
+    params$q <- paste(
+      c(params$q,
+        paste0("mimeType = '", mime_type,"'", collapse = " or ")),
+      collapse = " and "
+    )
   }
 
   if (!is.null(type)) {
@@ -86,49 +95,3 @@ drive_search <- function(pattern = NULL, type = NULL, ..., verbose = TRUE) {
   }
   as_dribble(res_tbl[keep_names, ]) ## TO DO change this once we get indexing working
 }
-
-.drive$default_fields <- c(
-  "appProperties",
-  "capabilities",
-  "contentHints",
-  "createdTime",
-  "description",
-  "explicitlyTrashed",
-  "fileExtension",
-  "folderColorRgb",
-  "fullFileExtension",
-  "headRevisionId",
-  "iconLink",
-  "id",
-  "imageMediaMetadata",
-  "kind",
-  "lastModifyingUser",
-  "md5Checksum",
-  "mimeType",
-  "modifiedByMeTime",
-  "modifiedTime",
-  "name",
-  "originalFilename",
-  "ownedByMe",
-  "owners",
-  "parents",
-  "permissions",
-  "properties",
-  "quotaBytesUsed",
-  "shared",
-  "sharedWithMeTime",
-  "sharingUser",
-  "size",
-  "spaces",
-  "starred",
-  "thumbnailLink",
-  "trashed",
-  "version",
-  "videoMediaMetadata",
-  "viewedByMe",
-  "viewedByMeTime",
-  "viewersCanCopyContent",
-  "webContentLink",
-  "webViewLink",
-  "writersCanShare"
-)

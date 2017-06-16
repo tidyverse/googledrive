@@ -22,6 +22,11 @@ NULL
   read.csv(stringsAsFactors = FALSE) %>%
   tibble::as_tibble()
 
+.drive$files_fields <-
+  system.file("extdata", "files_fields.csv", package = "googledrive") %>%
+  read.csv(stringsAsFactors = FALSE) %>%
+  tibble::as_tibble()
+
 # environment to store credentials
 .state <- new.env(parent = emptyenv())
 
