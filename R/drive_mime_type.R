@@ -14,12 +14,13 @@
 #' @export
 drive_mime_type <- function(type = NULL) {
 
-  if (!(is.character(type))) {
-    stop("Please update `type` to be a character string.", call. = FALSE)
-  }
   if (is.null(type)) {
     return(.drive$mime_tbl)
   }
+  if (!(is.character(type))) {
+    stop("`type` must be a character", call. = FALSE)
+  }
+
   m <- match(
     type,
     .drive$mime_tbl$human_type,

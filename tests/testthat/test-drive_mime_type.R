@@ -1,4 +1,10 @@
-context("Lookup mime type")
+context("MIME type helper")
+
+test_that("drive_mime_type() returns table if no input", {
+  out <- drive_mime_type()
+  expect_is(out, "tbl_df")
+  expect_gt(nrow(out), 0)
+})
 
 test_that("drive_mime_type() returns the a mime type if given a Google type",{
   expect_identical(drive_mime_type(c("spreadsheet", "document")),
