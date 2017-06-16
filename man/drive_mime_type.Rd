@@ -2,19 +2,32 @@
 % Please edit documentation in R/drive_mime_type.R
 \name{drive_mime_type}
 \alias{drive_mime_type}
-\title{Lookup a mime type from a Google Drive type or file extension}
+\title{Lookup MIME type}
 \usage{
 drive_mime_type(type = NULL)
 }
 \arguments{
-\item{type}{Character. The Google Drive type or file extension you would
-like to look up the mime type of.}
+\item{type}{Character. Google Drive file type, file extension, or MIME type.}
 }
 \value{
-Character. The mime type of input.
+Character. MIME type.
 }
 \description{
-Lookup a mime type from a Google Drive type or file extension
+This is a helper to determinine which MIME type should be used for a file.
+Three specific types of input are acceptable:
+\itemize{
+\item Google Drive "native" file types. Important examples:
+  \itemize{
+  \item "document" for Google Docs
+  \item "folder" for folders
+  \item "presentation" for Google Slides
+  \item "spreadsheet" for Google Sheets
+  }
+\item File extensions, such as "pdf", "csv", etc.
+\item MIME types accepted by Google Drive (these are simply passed through).
+}
+If no input is provided, function returns the full tibble used for lookup,
+i.e. a tibble of MIME types known to be relevant to the Drive API.
 }
 \examples{
 ## get the mime type for Google Spreadsheets
@@ -22,4 +35,7 @@ drive_mime_type("spreadsheet")
 
 ## get the mime type for jpegs
 drive_mime_type("jpeg")
+
+## it's vectorized
+drive_mime_type(c("presentation", "pdf", "image/gif"))
 }
