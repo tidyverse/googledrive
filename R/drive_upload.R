@@ -13,7 +13,8 @@
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,
-#'   respectively.
+#'   respectively. All non-`NULL` values for `type`` are pre-processed with
+#'   [drive_mime_type()].
 #' @template verbose
 #'
 #' @template dribble-return
@@ -45,10 +46,7 @@ drive_upload <- function(from = NULL,
 
   name <- name %||% basename(from)
 
-  mimeType <- NULL
-  if (!is.null(type)) {
-    mimeType <- drive_mime_type(type)
-  }
+  mimeType <- if (is.null(type)) NULL else drive_mime_type(type)
 
   ## parent folder
   ## TO DO: be willing to create the bits of folder that don't yet exist

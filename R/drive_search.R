@@ -11,8 +11,7 @@
 #' @param pattern Character. If provided, only the files whose names match this
 #'   regular expression are returned.
 #' @param type Character. If provided, only files of this type will be returned.
-#'   This is either a Google Drive file type (document, spreadsheet, presentation, folder,
-#'   form) or a file extension (jpeg, pdf, etc.)
+#'   Can be anything that [drive_mime_type()] knows how to handle.
 #' @param ... Parameters to pass along to the API query.
 #' @template verbose
 #'
