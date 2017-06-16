@@ -15,10 +15,8 @@ or a \code{dribble}.}
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{dribble}, a tibble with
-one row per file. A column \code{raw_file} is added with
-raw data from your downloaded Google Drive file. This
-can be extracted using \code{\link[=drive_extract_file]{drive_extract_file()}}.
+An object of class \code{drive_file} containing raw data from
+your downloaded Google Drive file.
 }
 \description{
 Download a file from Google Drive.
@@ -27,12 +25,10 @@ Download a file from Google Drive.
 \dontrun{
 ## download a .csv file
 drive_download("chickwts.csv") \%>\%
-  drive_extract_file() \%>\%
   write.csv("chickwts.csv")
 
 ## download an .rda file
 drive_download("chickwts.rda") \%>\%
-  drive_extract_file() \%>\%
   writeBin("chickwts.rda")
 }
 

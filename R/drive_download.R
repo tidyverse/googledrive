@@ -3,20 +3,17 @@
 #' @template file
 #' @template verbose
 #'
-#' @return An object of class \code{dribble}, a tibble with
-#'    one row per file. A column `raw_file` is added with
-#'    raw data from your downloaded Google Drive file. This
-#'    can be extracted using [drive_extract_file()].
+#' @return An object of class `drive_file` containing raw data from
+#'   your downloaded Google Drive file.
+#'
 #' @examples
 #' \dontrun{
 #' ## download a .csv file
 #' drive_download("chickwts.csv") %>%
-#'   drive_extract_file() %>%
 #'   write.csv("chickwts.csv")
 #'
 #' ## download an .rda file
 #' drive_download("chickwts.rda") %>%
-#'   drive_extract_file() %>%
 #'   writeBin("chickwts.rda")
 #' }
 #'
@@ -43,33 +40,21 @@ drive_download <- function(file = NULL, verbose = TRUE) {
   } else {
     spf("Zoinks! the file doesn't seem to have downloaded")
   }
-  file <- tibble::add_column(file, raw_file = list(proc_res))
-  file
+  structure(proc_res, class = c(class(proc_res), "drive_file"))
 }
 
-#' Extract raw file from `dribble`.
+#' Write Google File as a csv
 #'
-#' @param x A [`dribble`] with one row and a `raw_file` column, obtained after
-#'   running [drive_download()].
-#'
-#' @examples
-#' \dontrun{
-#' ## download a .csv file
-#' drive_download("chickwts.csv") %>%
-#'   drive_extract_file() %>%
-#'   write.csv("chickwts.csv")
-#'
-#' ## download an .rda file
-#' drive_download("chickwts.rda") %>%
-#'   drive_extract_file() %>%
-#'   writeBin("chickwts.rda")
-#' }
+#' @template file
+#' @param path Character. Path to write to.
+#' @template verbose
 #'
 #' @export
-drive_extract_file <- function(x) {
-  stopifnot(inherits(x, "dribble"))
-  if (!("raw_file" %in% colnames(x))) {
-    stop("Input must be a `dribble` containing a downloaded `raw_file`. See `drive_download()`.")
+drive_write_csv <- function(file = NULL, path = NULL, verbose = TRUE) {
+  file <- drive_download(file, verbose = verbose)
+  if (!inherits(file, "data.frame")) {
+    stop(glue::glue("File cannot be written as a .csv: {file$name}"))
   }
-  x$raw_file[[1]]
+  write.csv(file, file = path)
+  invisible(file)
 }
