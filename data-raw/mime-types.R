@@ -4,6 +4,7 @@
 library("dplyr")
 library("rprojroot")
 library("readr")
+library("googledrive")
 
 url <- "https://developers.google.com/drive/v3/web/mime-types"
 
@@ -14,23 +15,33 @@ google_mime_types <- httr::GET(url) %>%
   tibble::as_tibble() %>%
   select(mime_type = `MIME Type`)
 
-fmts <- generate_request(endpoint = "drive.about.get",
-                      params = list(fields = "importFormats,exportFormats")) %>%
+fmts <- generate_request(
+  endpoint = "drive.about.get",
+  params = list(fields = "importFormats,exportFormats")
+  ) %>%
   make_request() %>%
   process_response()
 
-imports <- tibble::enframe(fmts$importFormats,
-                           name = "mime_type_local",
-                           value = "mime_type_google") %>%
-  mutate(mime_type_google = purrr::simplify_all(mime_type_google),
-         action = "import") %>%
+imports <- tibble::enframe(
+  fmts$importFormats,
+  name = "mime_type_local",
+  value = "mime_type_google"
+  ) %>%
+  mutate(
+    mime_type_google = purrr::simplify_all(mime_type_google),
+    action = "import"
+  ) %>%
   tidyr::unnest()
 
-exports <- tibble::enframe(fmts$exportFormats,
-                           name = "mime_type_google",
-                           value = "mime_type_local") %>%
-  mutate(mime_type_local = purrr::simplify_all(mime_type_local),
-         action = "export") %>%
+exports <- tibble::enframe(
+  fmts$exportFormats,
+  name = "mime_type_google",
+  value = "mime_type_local"
+  ) %>%
+  mutate(
+    mime_type_local = purrr::simplify_all(mime_type_local),
+    action = "export"
+  ) %>%
   tidyr::unnest()
 
 translate_mime_types <- bind_rows(imports, exports)
