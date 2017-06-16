@@ -52,7 +52,7 @@ generate_request <- function(endpoint = character(),
   ## use the spec to vet and rework request parameters
   params <-   match_params(params, ept$parameters)
   params <- handle_repeats(params, ept$parameters)
-  params <- check_enums(params, ept$parameters)
+#  params <- check_enums(params, ept$parameters)
   params <- partition_body(params,
                            extract_body_names(ept$parameters))
 
@@ -191,31 +191,31 @@ handle_repeats <- function(provided, spec) {
   return(provided)
 }
 
-## a few parameters have fixed lists of possible values -- a.k.a the "enums"
-check_enums <- function(provided, spec) {
-  values <- spec %>% purrr::map("enum")
-  if (length(provided) == 0 | length(values) == 0) {
-    return(provided)
-  }
-  check_it <- tibble::tibble(
-    pname = names(provided),
-    pdata = purrr::flatten_chr(provided)
-  )
-  check_it$values = values[check_it$pname]
-  not_an_enum <- check_it$values %>% purrr::map(is.na) %>% purrr::map_lgl(all)
-  check_it <- check_it[!not_an_enum, ]
-  ok <- purrr::map2_lgl(check_it$pdata, check_it$values, ~ .x %in% .y)
-  if (any(!ok)) {
-    problems <- check_it[!ok, ]
-    problems$values <- problems$values %>% purrr::map_chr(paste, collapse = " | ")
-    template <- paste0("Parameter '{pname}' has value '{pdata}', ",
-                       "but it must be one of these:\n{values}\n\n")
-    msgs <- glue::glue_data(problems, template)
-    msgs %>% purrr::walk(message)
-    stop("Invalid parameter value(s).", call. = FALSE)
-  }
-  return(provided)
-}
+# ## a few parameters have fixed lists of possible values -- a.k.a the "enums"
+# check_enums <- function(provided, spec) {
+#   values <- spec %>% purrr::map("enum")
+#   if (length(provided) == 0 | length(values) == 0) {
+#     return(provided)
+#   }
+#   check_it <- tibble::tibble(
+#     pname = names(provided),
+#     pdata = purrr::flatten_chr(provided)
+#   )
+#   check_it$values = values[check_it$pname]
+#   not_an_enum <- check_it$values %>% purrr::map(is.na) %>% purrr::map_lgl(all)
+#   check_it <- check_it[!not_an_enum, ]
+#   ok <- purrr::map2_lgl(check_it$pdata, check_it$values, ~ .x %in% .y)
+#   if (any(!ok)) {
+#     problems <- check_it[!ok, ]
+#     problems$values <- problems$values %>% purrr::map_chr(paste, collapse = " | ")
+#     template <- paste0("Parameter '{pname}' has value '{pdata}', ",
+#                        "but it must be one of these:\n{values}\n\n")
+#     msgs <- glue::glue_data(problems, template)
+#     msgs %>% purrr::walk(message)
+#     stop("Invalid parameter value(s).", call. = FALSE)
+#   }
+#   return(provided)
+# }
 
 partition_body <- function(provided, body_param_names) {
   remaining_params <- provided

@@ -13,7 +13,8 @@
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,
-#'   respectively.
+#'   respectively. All non-`NULL` values for `type`` are pre-processed with
+#'   [drive_mime_type()].
 #' @template verbose
 #'
 #' @template dribble-return
@@ -45,15 +46,7 @@ drive_upload <- function(from = NULL,
 
   name <- name %||% basename(from)
 
-  ## mimeType
-  if (!is.null(type) &&
-      type %in% c("document", "spreadsheet", "presentation", "folder")) {
-    type <- paste0("application/vnd.google-apps.", type)
-  }
-  mimeType <- type
-  ## TO REVISIT: this is quite naive! assumes mimeType is sensible
-  ## use mimeType helpers as soon as they exist
-  ## the whole issue of upload vs "upload & convert" still needs thought
+  mimeType <- if (is.null(type)) NULL else drive_mime_type(type)
 
   ## parent folder
   ## TO DO: be willing to create the bits of folder that don't yet exist
@@ -63,7 +56,7 @@ drive_upload <- function(from = NULL,
     folder <- append_slash(folder)
   }
   up_parent <- as_dribble(folder)
-  up_parent <- confirm_single_file(folder)
+  up_parent <- confirm_single_file(up_parent)
   if (!is_folder(up_parent)) {
     stop(
       glue::glue_data(up_parent, "'folder' is not a folder:\n{name}"),
@@ -79,7 +72,7 @@ drive_upload <- function(from = NULL,
   existing <- drive_search(q = qq)
 
   if (nrow(existing) > 0) {
-    out_path <- unsplit_path(folder %||% "", name)
+    out_path <- unsplit_path(up_parent$name %||% "", name)
     if (!overwrite) {
       stop(glue::glue("Path already exists:\n{out_path}", call. = FALSE))
     }
@@ -95,7 +88,7 @@ drive_upload <- function(from = NULL,
       endpoint = "drive.files.create",
       params = list(
         name = name,
-        parents = list(up_parent_id),
+        parents = list(list(up_parent_id)),
         mimeType = mimeType
       )
     )
@@ -106,10 +99,10 @@ drive_upload <- function(from = NULL,
   }
 
   request <- generate_request(endpoint = "drive.files.update.media",
-                           params = list(fileId = up_id,
-                                         uploadType = "media",
-                                         fields = "*")
-                           )
+                              params = list(fileId = up_id,
+                                            uploadType = "media",
+                                            fields = "*")
+  )
 
   ## media uploads have unique body situations, so customizing here.
   request$body <- httr::upload_file(path = from,

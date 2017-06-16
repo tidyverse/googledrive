@@ -24,13 +24,14 @@ Google Drive, if such exists?}
 determined from the file extension, if possible. If the source file is of a
 suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting \code{type} to \code{document}, \code{spreadsheet}, or \code{presentation},
-respectively.}
+respectively. All non-\code{NULL} values for `type`` are pre-processed with
+\code{\link[=drive_mime_type]{drive_mime_type()}}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{dribble}, a tibble with
+An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{

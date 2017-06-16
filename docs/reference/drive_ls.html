@@ -62,7 +62,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/file-identification.html">File identification</a>
+      <a href="../articles/articles/file-identification.html">File identification</a>
     </li>
     <li>
       <a href="../articles/articles/drive-api.html">The Drive API</a>
@@ -93,20 +93,26 @@
     <p>List contents of a folder.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_ls</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"~/"</span>, <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_ls</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"~/"</span>, <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>Character. A single path on Google Drive whose contents you
-want to list.</p></td>
+      <td><p>Character. A single folder on Google Drive whose contents you
+want to list. Can be an actual path, a file id marked with <code><a href='as_id.html'>as_id()</a></code>, or
+a <code><a href='dribble.html'>dribble</a></code>.</p></td>
     </tr>
     <tr>
       <th>pattern</th>
       <td><p>Character. If provided, only the files whose names match this
 regular expression are returned.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>Character. If provided, only files of this type will be returned.
+Can be anything that <code><a href='drive_mime_type.html'>drive_mime_type()</a></code> knows how to handle.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -116,7 +122,7 @@ regular expression are returned.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code>dribble</code>, a tibble with
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with
    one row per file.</p>
     
 
@@ -128,6 +134,10 @@ regular expression are returned.</p></td>
   <span class='co'>## get contents of folder 'abc' that contain the</span>
   <span class='co'>## letters 'def'</span>
   <span class='fu'>drive_ls</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"abc"</span>, <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"def"</span>)
+
+  <span class='co'>## get all Google spreadsheets in folder 'abc'</span>
+  <span class='co'>## that contain the letters 'def'</span>
+  <span class='fu'>drive_ls</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"abc"</span>, <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"def"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -62,7 +62,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/file-identification.html">File identification</a>
+      <a href="../articles/articles/file-identification.html">File identification</a>
     </li>
     <li>
       <a href="../articles/articles/drive-api.html">The Drive API</a>
@@ -95,7 +95,7 @@ example, to get 200 instead, specify the <code>pageSize</code>, i.e.
 <code>drive_ls(pageSize = 200)</code>.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -104,6 +104,11 @@ example, to get 200 instead, specify the <code>pageSize</code>, i.e.
       <th>pattern</th>
       <td><p>Character. If provided, only the files whose names match this
 regular expression are returned.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>Character. If provided, only files of this type will be returned.
+Can be anything that <code><a href='drive_mime_type.html'>drive_mime_type()</a></code> knows how to handle.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -118,7 +123,7 @@ regular expression are returned.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code>dribble</code>, a tibble with
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with
    one row per file.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -138,9 +143,11 @@ regular expression are returned.</p></td>
   <span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"'root' in parents"</span>)
 
   <span class='co'>## filter for folders</span>
+  <span class='fu'>drive_search</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"folder"</span>)
   <span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType = 'application/vnd.google-apps.folder'"</span>)
 
   <span class='co'>## filter for Google Sheets</span>
+  <span class='fu'>drive_search</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
   <span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType='application/vnd.google-apps.spreadsheet'"</span>)
 
   <span class='co'>## files whose names match a regex</span>
