@@ -56,7 +56,7 @@ drive_upload <- function(from = NULL,
     folder <- append_slash(folder)
   }
   up_parent <- as_dribble(folder)
-  up_parent <- confirm_single_file(folder)
+  up_parent <- confirm_single_file(up_parent)
   if (!is_folder(up_parent)) {
     stop(
       glue::glue_data(up_parent, "'folder' is not a folder:\n{name}"),
@@ -88,7 +88,7 @@ drive_upload <- function(from = NULL,
       endpoint = "drive.files.create",
       params = list(
         name = name,
-        parents = list(up_parent_id),
+        parents = list(list(up_parent_id)),
         mimeType = mimeType
       )
     )

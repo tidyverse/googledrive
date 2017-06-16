@@ -20,3 +20,4 @@ collapse2 <- function(x, sep = "", width = Inf, last = "") {
 last_all <- function(x) {
   Position(isTRUE, as.logical(cumprod(x)), right = TRUE, nomatch = 0)
 }
+

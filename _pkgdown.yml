@@ -15,6 +15,6 @@ navbar:
   - text: Articles
     menu:
     - text: File identification
-      href: articles/file-identification.html
+      href: articles/articles/file-identification.html
     - text: The Drive API
       href: articles/articles/drive-api.html

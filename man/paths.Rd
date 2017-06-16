@@ -40,8 +40,8 @@ These functions query files that match one or more paths. The plural \code{s} of
 \code{paths} conveys whether you are allowed to provide more than one input path.
 Be aware that you can get more than one file back even when the input is a
 single path! Drive file and folder names need not be unique, even at a given
-level of the hierarchy. Note also that a folder is just a specific type of
-file on Drive.
+level of the hierarchy. A file or folder can also have multiple parents. Note
+also that a folder is just a specific type of file on Drive.
 }
 \examples{
 \dontrun{
@@ -56,6 +56,9 @@ drive_path("abc")
 ## be more specific: consider only folder(s) that match 'abc'
 drive_path_exists("abc/")
 drive_path("abc/")
+
+## limit to files with your My Drive root folder as direct parent
+drive_path("~/def")
 
 ## use the plural forms to query multiple paths at once
 drive_paths_exist(c("abc", "def"))

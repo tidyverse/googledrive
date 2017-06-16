@@ -62,7 +62,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/file-identification.html">File identification</a>
+      <a href="../articles/articles/file-identification.html">File identification</a>
     </li>
     <li>
       <a href="../articles/articles/drive-api.html">The Drive API</a>
@@ -94,8 +94,8 @@
 <code>paths</code> conveys whether you are allowed to provide more than one input path.
 Be aware that you can get more than one file back even when the input is a
 single path! Drive file and folder names need not be unique, even at a given
-level of the hierarchy. Note also that a folder is just a specific type of
-file on Drive.</p>
+level of the hierarchy. A file or folder can also have multiple parents. Note
+also that a folder is just a specific type of file on Drive.</p>
     
 
     <pre class="usage"><span class='fu'>drive_path_exists</span>(<span class='no'>path</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
@@ -151,6 +151,9 @@ general searching, use <code><a href='drive_search.html'>drive_search()</a></cod
   <span class='co'>## be more specific: consider only folder(s) that match 'abc'</span>
   <span class='fu'>drive_path_exists</span>(<span class='st'>"abc/"</span>)
   <span class='fu'>drive_path</span>(<span class='st'>"abc/"</span>)
+
+  <span class='co'>## limit to files with your My Drive root folder as direct parent</span>
+  <span class='fu'>drive_path</span>(<span class='st'>"~/def"</span>)
 
   <span class='co'>## use the plural forms to query multiple paths at once</span>
   <span class='fu'>drive_paths_exist</span>(<span class='fu'>c</span>(<span class='st'>"abc"</span>, <span class='st'>"def"</span>))
