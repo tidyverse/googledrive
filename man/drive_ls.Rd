@@ -4,19 +4,23 @@
 \alias{drive_ls}
 \title{List contents of a folder.}
 \usage{
-drive_ls(path = "~/", pattern = NULL, ...)
+drive_ls(path = "~/", pattern = NULL, type = NULL, ...)
 }
 \arguments{
-\item{path}{Character. A single path on Google Drive whose contents you
-want to list.}
+\item{path}{Character. A single folder on Google Drive whose contents you
+want to list. Can be an actual path, a file id marked with \code{\link[=as_id]{as_id()}}, or
+a \code{\link{dribble}}.}
 
 \item{pattern}{Character. If provided, only the files whose names match this
 regular expression are returned.}
 
+\item{type}{Character. If provided, only files of this type will be returned.
+Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle.}
+
 \item{...}{Parameters to pass along to the API query.}
 }
 \value{
-An object of class \code{dribble}, a tibble with
+An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
@@ -30,5 +34,9 @@ drive_ls("abc")
 ## get contents of folder 'abc' that contain the
 ## letters 'def'
 drive_ls(path = "abc", pattern = "def")
+
+## get all Google spreadsheets in folder 'abc'
+## that contain the letters 'def'
+drive_ls(path = "abc", pattern = "def", type = "spreadsheet")
 }
 }
