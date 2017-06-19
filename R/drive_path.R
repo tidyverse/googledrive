@@ -84,7 +84,7 @@ drive_paths <- function(path = "~/", verbose = TRUE) {
 ## output:
 ##   a dribble of Drive files whose paths match the target
 ##   if partial_ok = FALSE, match(es) is/are exact
-##   if partial_ok = TRUE, match(es) is/are on the maximally existing partial path
+##   if partial_ok = TRUE, match(es) is/are on maximally existing partial path
 ##   output contains an extra column, `path`, with the effective target path
 get_paths <- function(path = NULL,
                       partial_ok = FALSE,
@@ -157,7 +157,10 @@ get_paths <- function(path = NULL,
     ## form the path, as a string
     leaf_tbl$path <- purrr::map_chr(
       leaf_tbl$pths,
-      ~ make_path(.x, ids = .rships$id, nms = .rships$name, rooted = rooted, d = d)
+      ~ make_path(
+        .x,
+        ids = .rships$id, nms = .rships$name, rooted = rooted, d = d
+      )
     )
 
     ## require path to match target, in manner appropriate to partial_ok

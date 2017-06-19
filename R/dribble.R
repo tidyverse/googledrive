@@ -117,8 +117,11 @@ some_files <- function(d) {
 #' @rdname dribble-checks
 confirm_single_file <- function(d) {
   if (!single_file(d)) {
-    stop("Input does not hold exactly one Drive file:\n", deparse(substitute(d)),
-         call. = FALSE)
+    stop(
+      "Input does not hold exactly one Drive file:\n",
+      deparse(substitute(d)),
+      call. = FALSE
+    )
   }
   d
 }
@@ -127,8 +130,11 @@ confirm_single_file <- function(d) {
 #' @rdname dribble-checks
 confirm_some_files <- function(d) {
   if (!some_files(d)) {
-    stop("Input does not hold at least one Drive file:\n", deparse(substitute(d)),
-         call. = FALSE)
+    stop(
+      "Input does not hold at least one Drive file:\n",
+      deparse(substitute(d)),
+      call. = FALSE
+    )
   }
   d
 }
