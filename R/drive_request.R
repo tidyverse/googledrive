@@ -284,6 +284,7 @@ make_request <- function(x, ...){
                  "DELETE" = httr::DELETE)[[x$method]]
   method(url = x$url,
          x$token,
+         drive_ua(),
          query = x$query,
          body = x$body, ...)
 }
@@ -306,4 +307,13 @@ process_response <- function(res,
   }
   httr::stop_for_status(res)
   jsonlite::fromJSON(httr::content(res, "text"), simplifyVector = FALSE)
+}
+
+drive_ua <- function() {
+  httr::user_agent(paste0(
+    "googledrive/", utils::packageVersion("googledrive"), " ",
+    ## TO DO: uncomment this once we use gargle
+    #"gargle/", utils::packageVersion("gargle"), " ",
+    "httr/", utils::packageVersion("httr")
+  ))
 }
