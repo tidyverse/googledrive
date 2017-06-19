@@ -1,6 +1,16 @@
 #' Download a file from Google Drive.
 #'
 #' @template file
+#' @param out_path Character. Path for output file. If `NULL`, we will
+#'    default to save a file to working directory by name of the Google
+#'    Drive file.
+#' @param type Character. If the file is a Google Drive type (Google Doc,
+#'    Google Sheet, Google Slide, etc.), you must specify the type of file
+#'    you would like to save (by file exension). This can be specified either
+#'    by using the `type` parameter, or by specifying the extension with the
+#'    `out_path` parameter.
+#' @param overwrite A logical scalar, do you want to overwrite a file that already
+#'    exists locally?
 #' @template verbose
 #'
 #' @return An object of class `drive_file` containing raw data from
@@ -8,53 +18,67 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## download a .csv file
-#' drive_download("chickwts.csv") %>%
-#'   write.csv("chickwts.csv")
+#' ## save "chickwts.csv" to the working directory as "chickwts.csv".
+#' drive_download(file = "chickwts.csv")
 #'
-#' ## download an .rda file
-#' drive_download("chickwts.rda") %>%
-#'   writeBin("chickwts.rda")
+#' ## save Google Sheet named "chickwts" to the working directory as
+#' ## chickwts.csv
+#' drive_download(file = "chickwts", out_file = "chickwts.csv")
 #' }
 #'
 #' @export
-drive_download <- function(file = NULL, verbose = TRUE) {
+drive_download <- function(file = NULL,
+                           out_path = NULL,
+                           type = NULL,
+                           overwrite = FALSE,
+                           verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
+
+  if (is.null(out_path)) {
+    out_path <- file$name
+  }
+
+  mime_type <- file$files_resource[[1]]$mimeType
+
+  if (!grepl("google", mime_type)) {
 
   request <- generate_request(endpoint = "drive.files.get",
                               params = list(alt = "media",
                                             fileId = file$id))
-  response <- make_request(request)
-  httr::stop_for_status(response)
-  proc_res <- httr::content(response, encoding = "UTF-8")
+  } else {
+    ## TODO make sure the type is compatable.
+    type <- type %||% tools::file_ext(out_path)
+    if (type == "") {
+      ## TODO, be able to guess type by default (for example saving sheets
+      ## as csvs..)
+      stop("We cannot guess type yet")
+    }
+    mime_type <- drive_mime_type(type)
+    request <- generate_request(endpoint = "drive.files.export",
+                                params = list(fileId = file$id,
+                                              mimeType = mime_type ))
+  }
 
+  ## it seems that it needs an extenstion to save properly
+  ext <- tools::file_ext(out_path)
+  if (ext == "") {
+    ext <- .drive$mime_tbl$ext[.drive$mime_tbl$mime_type == mime_type]
+    out_path <- paste0(out_path, ".", ext)
+  }
+
+  response <- make_request(request, httr::write_disk(out_path, overwrite = overwrite))
   success <- response$status_code == 200
 
   if (success) {
     if (verbose) {
       message(
-        glue::glue("File downloaded from Google Drive:\n{file$name}")
+        glue::glue("File downloaded from Google Drive:\n{file$name}\nSaved locally as:\n{out_path}")
       )
     }
   } else {
     spf("Zoinks! the file doesn't seem to have downloaded")
   }
-  structure(proc_res, class = c(class(proc_res), "drive_file"))
-}
-
-#' Write Google File as a csv
-#'
-#' @template file
-#' @param path Character. Path to write to.
-#' @template verbose
-#'
-#' @export
-drive_write_csv <- function(file = NULL, path = NULL, verbose = TRUE) {
-  file <- drive_download(file, verbose = verbose)
-  if (!inherits(file, "data.frame")) {
-    stop(glue::glue("File cannot be written as a .csv: {file$name}"))
-  }
-  write.csv(file, file = path)
   invisible(file)
 }
+
