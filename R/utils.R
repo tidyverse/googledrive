@@ -21,3 +21,9 @@ last_all <- function(x) {
   Position(isTRUE, as.logical(cumprod(x)), right = TRUE, nomatch = 0)
 }
 
+## Sys.getenv() but for exactly 1 env var and returns NULL if unset
+Sys_getenv <- function(x) {
+  stopifnot(length(x) == 1)
+  out <- Sys.getenv(x = x, unset = NA_character_)
+  if (is.na(out)) NULL else out
+}
