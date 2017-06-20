@@ -4,23 +4,16 @@
 \alias{drive_download}
 \title{Download a file from Google Drive.}
 \usage{
-drive_download(file = NULL, out_path = NULL, type = NULL,
-  overwrite = FALSE, verbose = TRUE)
+drive_download(file = NULL, out_path = NULL, overwrite = FALSE,
+  verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{out_path}{Character. Path for output file. If \code{NULL}, we will
-default to save a file to working directory by name of the Google
-Drive file.}
-
-\item{type}{Character. If the file is a Google Drive type (Google Doc,
-Google Sheet, Google Slide, etc.), you must specify the type of file
-you would like to save (by file exension). This can be specified either
-by using the \code{type} parameter, or by specifying the extension with the
-\code{out_path} parameter.}
+\item{out_path}{Character. Path for output file. Google files can
+be downloaded to types specified \href{https://developers.google.com/drive/v3/web/manage-downloads}{here}.}
 
 \item{overwrite}{A logical scalar, do you want to overwrite a file that already
 exists locally?}
@@ -28,21 +21,16 @@ exists locally?}
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
-\value{
-An object of class \code{drive_file} containing raw data from
-your downloaded Google Drive file.
-}
 \description{
 Download a file from Google Drive.
 }
 \examples{
 \dontrun{
-## save "chickwts.csv" to the working directory as "chickwts.csv".
-drive_download(file = "chickwts.csv")
+## Save "chickwts.csv" to the working directory as "chickwts.csv".
+drive_download(file = "chickwts.csv", out_path = "chickwts.csv")
 
-## save Google Sheet named "chickwts" to the working directory as
-## chickwts.csv
-drive_download(file = "chickwts", out_file = "chickwts.csv")
+## Save Google Sheet named "chickwts" to the working directory as
+## "chickwts.csv".
+drive_download(file = "chickwts", out_path = "chickwts.csv")
 }
-
 }
