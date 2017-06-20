@@ -33,8 +33,7 @@ drive_download <- function(file = NULL,
   ## it seems that it needs an extenstion to save properly
   ext <- tools::file_ext(out_path)
   if (ext == "") {
-    ext <- .drive$mime_tbl$ext[.drive$mime_tbl$mime_type == mime_type]
-    out_path <- paste0(out_path, ".", ext)
+    stop("Your file name in `out_path` must have an extension.")
   }
 
   if (!grepl("google", mime_type)) {
