@@ -244,7 +244,7 @@ form_query <- function(path_pieces, leaf_is_folder = FALSE) {
   leaf_q <- utils::tail(nms, !leaf_is_folder)
   dirs_q <- glue::glue(
     "(({dir_pieces}) and mimeType = 'application/vnd.google-apps.folder')",
-    dir_pieces = collapse2(crop(nms, !leaf_is_folder), sep = " or ")
+    dir_pieces = glue::collapse(crop(nms, !leaf_is_folder), sep = " or ")
   )
   glue::collapse(c(leaf_q, dirs_q), last = " or ")
 }
@@ -260,5 +260,5 @@ make_path <- function(pth, ids, nms, rooted, d) {
     pth_nms <- pth_nms[-1]
   }
   pth_nms <- utils::tail(pth_nms, d + rooted)
-  collapse2(pth_nms, sep = "/")
+  glue::collapse(pth_nms, sep = "/")
 }

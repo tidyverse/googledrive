@@ -12,11 +12,11 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-Imports: httr,
+Imports: glue (>= 1.1.0),
+    httr,
+    jsonlite,
     purrr,
-    tibble,
-    glue,
-    jsonlite
+    tibble
 Suggests: covr,
     knitr,
     rmarkdown,
@@ -24,6 +24,5 @@ Suggests: covr,
     testthat
 URL: https://github.com/tidyverse/googledrive
 BugReports: https://github.com/tidyverse/googledrive/issues
-Remotes: tidyverse/glue
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
