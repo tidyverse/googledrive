@@ -29,7 +29,7 @@ drive_mkdir <- function(name = NULL, path = NULL, verbose = TRUE) {
     params = list(
       name = name,
       mimeType =  "application/vnd.google-apps.folder",
-      parents = list(list(parent)),
+      parents = list(parent),
       fields = "*"
     )
   )

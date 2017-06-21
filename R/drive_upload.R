@@ -88,7 +88,7 @@ drive_upload <- function(from = NULL,
       endpoint = "drive.files.create",
       params = list(
         name = name,
-        parents = list(list(up_parent_id)),
+        parents = list(up_parent_id),
         mimeType = mimeType
       )
     )
