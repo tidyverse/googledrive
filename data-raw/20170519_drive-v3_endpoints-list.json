@@ -4,6 +4,15 @@
     "httpMethod": ["GET"],
     "path": ["drive/v3/about"],
     "parameters": {
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -11,7 +20,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -534,6 +588,15 @@
         "enum": [null],
         "description": ["Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -541,7 +604,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.photos.readonly"],
@@ -1064,6 +1172,15 @@
         "enum": [null],
         "description": ["Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -1071,7 +1188,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
@@ -1121,6 +1283,15 @@
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -1128,7 +1299,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
@@ -1147,6 +1363,15 @@
     "httpMethod": ["DELETE"],
     "path": ["drive/v3/files/trash"],
     "parameters": {
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -1154,7 +1379,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive"],
@@ -1191,6 +1461,15 @@
         "enum": [null],
         "description": ["The MIME type of the format requested for this export."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -1198,7 +1477,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.file, drive.readonly"],
@@ -1235,6 +1559,15 @@
         "enum": [null],
         "description": ["The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -1242,7 +1575,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
@@ -1288,6 +1666,15 @@
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -1295,7 +1682,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -1404,6 +1836,15 @@
         "enum": [null],
         "description": ["ID of Team Drive to search."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -1411,7 +1852,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -1952,6 +2438,15 @@
         "enum": [null],
         "description": ["Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -1959,7 +2454,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.scripts"],
@@ -2018,6 +2558,15 @@
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -2025,7 +2574,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -2197,6 +2791,15 @@
         "enum": [null],
         "description": ["The type of the grantee. Valid values are:  \n- user \n- group \n- domain \n- anyone"]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -2204,7 +2807,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.file"],
@@ -2250,6 +2898,15 @@
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -2257,7 +2914,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.file"],
@@ -2303,6 +3005,15 @@
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -2310,7 +3021,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -2365,6 +3121,15 @@
         "enum": [null],
         "description": ["Whether the requesting application supports Team Drives."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -2372,7 +3137,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -2544,6 +3354,15 @@
         "enum": [null],
         "description": ["The type of the grantee. Valid values are:  \n- user \n- group \n- domain \n- anyone"]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -2551,7 +3370,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.file"],
@@ -2588,6 +3452,15 @@
         "enum": [null],
         "description": ["The ID of the revision."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -2595,7 +3468,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
@@ -2641,6 +3559,15 @@
         "enum": [null],
         "description": ["The ID of the revision."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -2648,7 +3575,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -2694,6 +3666,15 @@
         "enum": [null],
         "description": ["The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -2701,7 +3682,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
@@ -2846,6 +3872,15 @@
         "enum": [null],
         "description": ["The size of the revision's content in bytes. This is only applicable to files with binary content in Drive."]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -2853,7 +3888,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file"],
@@ -2944,6 +4024,15 @@
         "enum": [null],
         "description": [null]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -2951,7 +4040,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.scripts"],
@@ -3042,6 +4176,15 @@
         "enum": [null],
         "description": [null]
       },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
       "fields": {
         "location": ["query"],
         "required": [null],
@@ -3049,7 +4192,52 @@
         "repeated": [null],
         "format": [null],
         "enum": [null],
-        "description": [null]
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
       }
     },
     "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.scripts"],
