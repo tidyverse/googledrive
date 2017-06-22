@@ -14,7 +14,6 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 Imports: glue (>= 1.1.0),
     httr,
-    jsonlite,
     purrr,
     tibble
 Suggests: covr,

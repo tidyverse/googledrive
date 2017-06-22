@@ -11,32 +11,27 @@ drive_delete <- function(file = NULL, verbose = TRUE) {
   if (!some_files(del_file) && verbose) {
     message(glue::glue("No such files found to delete."))
   }
-  out <- purrr::map2_lgl(
-    del_file$id, del_file$name,
-    delete_one, verbose = verbose
-  )
+
+  out <- purrr::map_lgl(del_file$id, delete_one)
+
+  if (verbose) {
+    if (any(out)) {
+      successes <- glue::glue_data(del_file[out, ], "  * {name}: {id}")
+      message(glue::collapse(c("Files deleted:", successes), sep = "\n"))
+    }
+    if (any(!out)) {
+      failures <- glue::glue_data(del_file[!out, ], "  * {name}: {id}")
+      message(glue::collapse(c("Files NOT deleted:", failures), sep = "\n"))
+    }
+  }
   invisible(out)
 }
 
-delete_one <- function(id, name, verbose = TRUE) {
+delete_one <- function(id) {
   request <- generate_request(
     endpoint = "drive.files.delete",
     params = list(fileId = id)
   )
   response <- make_request(request)
-
-  ## note, delete does not send a response header, so we
-  ## will just stop for status & check the status code
-  ## rather than using process_response()
-
-  httr::stop_for_status(response)
-
-  if (verbose) {
-    if (httr::status_code(response) == 204L) {
-      message(glue::glue("File deleted from Google Drive:\n{name}"))
-    } else {
-      message(glue::glue("Zoinks! File NOT deleted:\n{name}"))
-    }
-  }
-  response$status_code == 204L
+  process_response(response)
 }
