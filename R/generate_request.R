@@ -113,7 +113,7 @@ build_request <- function(path = "",
 
   out <- list(
     method = method,
-    path = glue::glue_data(params$matched, path),
+    path = glue_data(params$matched, path),
     query = params$unmatched,
     body = body,
     token = token
@@ -138,7 +138,7 @@ match_params <- function(provided, spec) {
   required <- spec %>% purrr::keep("required") %>% names()
   missing <- setdiff(required, names(provided))
   if (length(missing)) {
-    stop(glue::collapse(
+    stop(collapse(
       c("Required parameter(s) are missing:", missing), sep = "\n"),
       call. = FALSE
     )
@@ -149,7 +149,7 @@ match_params <- function(provided, spec) {
     m <- names(provided) %in% unknown
     msgs <- c(
       "Ignoring these unrecognized parameters:",
-      glue::glue_data(tibble::enframe(provided[m]), "{name}: {value}")
+      glue_data(tibble::enframe(provided[m]), "{name}: {value}")
     )
     message(paste(msgs, collapse = "\n"))
     provided <- provided[!m]

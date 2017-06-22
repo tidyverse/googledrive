@@ -31,8 +31,8 @@ validate_dribble <- function(x) {
 
   required_nms <- c("name", "id", "files_resource")
   if (!all(required_nms %in% colnames(x))) {
-    msg <- glue::glue("Invalid dribble. These column names are required:\n{x}",
-                      x = glue::collapse(required_nms, "\n"))
+    msg <- glue("Invalid dribble. These column names are required:\n{x}",
+                x = collapse(required_nms, "\n"))
     stop(msg, call. = FALSE)
   }
 

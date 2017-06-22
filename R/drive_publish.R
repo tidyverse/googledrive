@@ -62,14 +62,14 @@ drive_change_publish <- function(file = NULL,
   if (verbose) {
     if (httr::status_code(response) == 200L) {
       message(
-        glue::glue_data(
+        glue_data(
           file_update,
           "You have changed the publication status of {sq(name)}."
         )
       )
     } else
       message(
-        glue::glue_data(
+        glue_data(
           file_update, "Uh oh, something went wrong. The publication status of {sq(name)} was not changed.")
       )
   }
@@ -100,10 +100,10 @@ drive_is_published <- function(file = NULL, verbose = TRUE) {
   mime_types <- purrr::map_chr(file$files_resource, "mimeType")
   if (!all(grepl("application/vnd.google-apps.", mime_types)) || is_folder(file)) {
     stop(
-      glue::glue(
+      glue(
         "Only Google Drive files can be published.",
         "Your file is of type:",
-        "{glue::collapse(mime_types, sep = '\n')}",
+        "{collapse(mime_types, sep = '\n')}",
         "Check out `drive_share()` to change sharing permissions.",
         .sep = "\n"
       ),
@@ -131,12 +131,11 @@ is_published_one <- function(id, name, verbose = TRUE) {
   if (verbose) {
     if (proc_res$published) {
       message(
-        glue::glue(
-          "The latest revision of Google Drive file '{name}' is published."
-        ))
+        glue("The latest revision of Google Drive file '{name}' is published.")
+      )
     } else
       message(
-        glue::glue(
+        glue(
           "The latest revision of the Google Drive file '{name}' is not published."
         )
       )

@@ -54,14 +54,14 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
   if (verbose) {
     if (proc_req$type == type && proc_req$role == role) {
       message(
-        glue::glue_data(
+        glue_data(
           proc_req,
           "The permissions for file '{file$name}' have been updated.\n id: {id}\n type: {type}\n role: {role}"
         )
       )
     } else {
       message(
-        glue::glue_data(
+        glue_data(
           file,
           "Zoinks! Something went wrong, '{name}' permissions were not updated."
         )

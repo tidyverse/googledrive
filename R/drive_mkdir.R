@@ -17,7 +17,7 @@ drive_mkdir <- function(name = NULL, path = NULL, verbose = TRUE) {
     path <- confirm_single_file(path)
     if (!is_folder(path)) {
       stop(
-        glue::glue_data(path, "'path' is not a folder:\n{name}"),
+        glue_data(path, "'path' is not a folder:\n{name}"),
         call. = FALSE
       )
     }
@@ -42,9 +42,9 @@ drive_mkdir <- function(name = NULL, path = NULL, verbose = TRUE) {
   success <- folder$name == name
   if (verbose) {
     if (success) {
-      message(glue::glue_data(folder, "Folder created:\n{name}"))
+      message(glue_data(folder, "Folder created:\n{name}"))
     } else {
-      message(glue::glue_data(folder, "Uh oh, folder NOT created:\n{name}"))
+      message(glue_data(folder, "Uh oh, folder NOT created:\n{name}"))
     }
   }
   invisible(folder)

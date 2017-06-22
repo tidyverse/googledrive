@@ -16,7 +16,7 @@ drive_mv <- function(file = NULL,
 
   if (!is_mine(file)) {
     stop(
-      glue::glue_data(
+      glue_data(
         file,
         "You do not own and, therefore cannot move, this file:\n{name}"
       ),
@@ -25,7 +25,7 @@ drive_mv <- function(file = NULL,
   }
   if (!is_folder(folder)) {
     stop(
-      glue::glue_data(folder, "'folder' is not a folder:\n{name}"),
+      glue_data(folder, "'folder' is not a folder:\n{name}"),
       call. = FALSE
     )
   }
@@ -46,13 +46,11 @@ drive_mv <- function(file = NULL,
   if (verbose) {
     if (httr::status_code(response) == 200L) {
       message(
-        glue::glue(
-          "This file:\n{file$name}\nwas moved to folder:\n{folder$name}"
-        )
+        glue("This file:\n{file$name}\nwas moved to folder:\n{folder$name}")
       )
     } else {
       message(
-        glue::glue_data(file, "Oh dear! this file was not moved:\n{name}")
+        glue_data(file, "Oh dear! this file was not moved:\n{name}")
       )
     }
   }

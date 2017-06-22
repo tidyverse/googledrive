@@ -164,9 +164,9 @@ get_paths <- function(path = NULL,
     )
 
     ## require path to match target, in manner appropriate to partial_ok
-    ## glue::glue() gives me this: length 0 in --> length 0 out
+    ## glue() gives me this: length 0 in --> length 0 out
     path_matches <- purrr::map_lgl(
-      glue::glue("^{leaf_tbl$path}{if (partial_ok) '' else '$'}"),
+      glue("^{leaf_tbl$path}{if (partial_ok) '' else '$'}"),
       grepl, x = strip_slash(path)
     )
     leaf_tbl <- leaf_tbl[path_matches, ]
@@ -240,13 +240,13 @@ pth <- function(id, kids, elders, stop_value) {
 ## a/    a            a
 ## a     a                        a
 form_query <- function(path_pieces, leaf_is_folder = FALSE) {
-  nms <- glue::glue("name = {sq(path_pieces)}")
+  nms <- glue("name = {sq(path_pieces)}")
   leaf_q <- utils::tail(nms, !leaf_is_folder)
-  dirs_q <- glue::glue(
+  dirs_q <- glue(
     "(({dir_pieces}) and mimeType = 'application/vnd.google-apps.folder')",
-    dir_pieces = glue::collapse(crop(nms, !leaf_is_folder), sep = " or ")
+    dir_pieces = collapse(crop(nms, !leaf_is_folder), sep = " or ")
   )
-  glue::collapse(c(leaf_q, dirs_q), last = " or ")
+  collapse(c(leaf_q, dirs_q), last = " or ")
 }
 
 ## pth is a character vector of ids produced by pth() aboven
@@ -260,5 +260,5 @@ make_path <- function(pth, ids, nms, rooted, d) {
     pth_nms <- pth_nms[-1]
   }
   pth_nms <- utils::tail(pth_nms, d + rooted)
-  glue::collapse(pth_nms, sep = "/")
+  collapse(pth_nms, sep = "/")
 }

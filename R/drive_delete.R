@@ -9,19 +9,19 @@
 drive_delete <- function(file = NULL, verbose = TRUE) {
   del_file <- as_dribble(file)
   if (!some_files(del_file) && verbose) {
-    message(glue::glue("No such files found to delete."))
+    message(glue("No such files found to delete."))
   }
 
   out <- purrr::map_lgl(del_file$id, delete_one)
 
   if (verbose) {
     if (any(out)) {
-      successes <- glue::glue_data(del_file[out, ], "  * {name}: {id}")
-      message(glue::collapse(c("Files deleted:", successes), sep = "\n"))
+      successes <- glue_data(del_file[out, ], "  * {name}: {id}")
+      message(collapse(c("Files deleted:", successes), sep = "\n"))
     }
     if (any(!out)) {
-      failures <- glue::glue_data(del_file[!out, ], "  * {name}: {id}")
-      message(glue::collapse(c("Files NOT deleted:", failures), sep = "\n"))
+      failures <- glue_data(del_file[!out, ], "  * {name}: {id}")
+      message(collapse(c("Files NOT deleted:", failures), sep = "\n"))
     }
   }
   invisible(out)

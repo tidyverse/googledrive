@@ -35,7 +35,7 @@ drive_upload <- function(from = NULL,
                          verbose = TRUE) {
 
   if (!file.exists(from)) {
-    stop(glue::glue("File does not exist:\n{from}"), call. = FALSE)
+    stop(glue("File does not exist:\n{from}"), call. = FALSE)
   }
 
   ## upload meta-data:
@@ -59,25 +59,25 @@ drive_upload <- function(from = NULL,
   up_parent <- confirm_single_file(up_parent)
   if (!is_folder(up_parent)) {
     stop(
-      glue::glue_data(up_parent, "'folder' is not a folder:\n{name}"),
+      glue_data(up_parent, "'folder' is not a folder:\n{name}"),
       call. = FALSE
     )
   }
   up_parent_id <- up_parent$id
 
   ## is there a pre-existing file at destination?
-  q_name <- glue::glue("name = {sq(name)}")
-  q_parent <- glue::glue("{sq(up_parent_id)} in parents")
-  qq <- glue::collapse(c(q_name, q_parent), sep = " and ")
+  q_name <- glue("name = {sq(name)}")
+  q_parent <- glue("{sq(up_parent_id)} in parents")
+  qq <- collapse(c(q_name, q_parent), sep = " and ")
   existing <- drive_search(q = qq)
 
   if (nrow(existing) > 0) {
     out_path <- unsplit_path(up_parent$name %||% "", name)
     if (!overwrite) {
-      stop(glue::glue("Path already exists:\n{out_path}", call. = FALSE))
+      stop(glue("Path already exists:\n{out_path}", call. = FALSE))
     }
     if (nrow(existing) > 1) {
-      stop(glue::glue("Path to overwrite is not unique:\n{out_path}", call. = FALSE))
+      stop(glue("Path to overwrite is not unique:\n{out_path}", call. = FALSE))
     }
   }
   ## id for the uploaded file
@@ -118,8 +118,8 @@ drive_upload <- function(from = NULL,
   if (success) {
     if (verbose) {
       message(
-        glue::glue("File uploaded to Google Drive:\n{proc_res$name}\n",
-                   "with MIME type:\n{proc_res$mimeType}")
+        glue("File uploaded to Google Drive:\n{proc_res$name}\n",
+             "with MIME type:\n{proc_res$mimeType}")
       )
     }
   } else {
