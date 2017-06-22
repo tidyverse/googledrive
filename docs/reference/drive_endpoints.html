@@ -92,10 +92,11 @@
     
     <p>Returns a list of selected Drive API v3 endpoints, as stored inside the
 googledrive package. The names of this list (or the <code>id</code> sub-elements) are
-the nicknames that can be used to specify an endpoint in <code><a href='generate_request.html'>generate_request()</a></code>.
-For each endpoint, we store its nickname or <code>id</code>, the associated HTTP
-verb, the <code>path</code>, and details about the parameters. This list is derived from
-the <a href = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'>Drive API v3 Discovery Document</a>.</p>
+the nicknames that can be used to specify an endpoint in
+<code><a href='generate_request.html'>generate_request()</a></code>. For each endpoint, we store its nickname or <code>id</code>, the
+associated HTTP verb, the <code>path</code>, and details about the parameters. This list
+is derived from the
+<a href = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'>Drive API v3 Discovery Document</a>.</p>
     
 
     <pre class="usage"><span class='fu'>drive_endpoints</span>()</pre>
@@ -112,112 +113,112 @@ used internally by googledrive.</p>
 #&gt;   ..$ id        : chr "drive.about.get"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/about"
-#&gt;   ..$ parameters:List of 1
+#&gt;   ..$ parameters:List of 7
 #&gt;  $ drive.files.copy                  :List of 4
 #&gt;   ..$ id        : chr "drive.files.copy"
 #&gt;   ..$ method    : chr "POST"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/copy"
-#&gt;   ..$ parameters:List of 57
+#&gt;   ..$ parameters:List of 63
 #&gt;  $ drive.files.create                :List of 4
 #&gt;   ..$ id        : chr "drive.files.create"
 #&gt;   ..$ method    : chr "POST"
 #&gt;   ..$ path      : chr "drive/v3/files"
-#&gt;   ..$ parameters:List of 57
+#&gt;   ..$ parameters:List of 63
 #&gt;  $ drive.files.delete                :List of 4
 #&gt;   ..$ id        : chr "drive.files.delete"
 #&gt;   ..$ method    : chr "DELETE"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}"
-#&gt;   ..$ parameters:List of 3
+#&gt;   ..$ parameters:List of 9
 #&gt;  $ drive.files.emptyTrash            :List of 4
 #&gt;   ..$ id        : chr "drive.files.emptyTrash"
 #&gt;   ..$ method    : chr "DELETE"
 #&gt;   ..$ path      : chr "drive/v3/files/trash"
-#&gt;   ..$ parameters:List of 1
+#&gt;   ..$ parameters:List of 7
 #&gt;  $ drive.files.export                :List of 4
 #&gt;   ..$ id        : chr "drive.files.export"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/export"
-#&gt;   ..$ parameters:List of 3
+#&gt;   ..$ parameters:List of 9
 #&gt;  $ drive.files.generateIds           :List of 4
 #&gt;   ..$ id        : chr "drive.files.generateIds"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/generateIds"
-#&gt;   ..$ parameters:List of 3
+#&gt;   ..$ parameters:List of 9
 #&gt;  $ drive.files.get                   :List of 4
 #&gt;   ..$ id        : chr "drive.files.get"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}"
-#&gt;   ..$ parameters:List of 4
+#&gt;   ..$ parameters:List of 10
 #&gt;  $ drive.files.list                  :List of 4
 #&gt;   ..$ id        : chr "drive.files.list"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files"
-#&gt;   ..$ parameters:List of 11
+#&gt;   ..$ parameters:List of 17
 #&gt;  $ drive.files.update                :List of 4
 #&gt;   ..$ id        : chr "drive.files.update"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}"
-#&gt;   ..$ parameters:List of 59
+#&gt;   ..$ parameters:List of 65
 #&gt;  $ drive.files.watch                 :List of 4
 #&gt;   ..$ id        : chr "drive.files.watch"
 #&gt;   ..$ method    : chr "POST"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/watch"
-#&gt;   ..$ parameters:List of 4
+#&gt;   ..$ parameters:List of 10
 #&gt;  $ drive.permissions.create          :List of 4
 #&gt;   ..$ id        : chr "drive.permissions.create"
 #&gt;   ..$ method    : chr "POST"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions"
-#&gt;   ..$ parameters:List of 18
+#&gt;   ..$ parameters:List of 24
 #&gt;  $ drive.permissions.delete          :List of 4
 #&gt;   ..$ id        : chr "drive.permissions.delete"
 #&gt;   ..$ method    : chr "DELETE"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters:List of 4
+#&gt;   ..$ parameters:List of 10
 #&gt;  $ drive.permissions.get             :List of 4
 #&gt;   ..$ id        : chr "drive.permissions.get"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters:List of 4
+#&gt;   ..$ parameters:List of 10
 #&gt;  $ drive.permissions.list            :List of 4
 #&gt;   ..$ id        : chr "drive.permissions.list"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions"
-#&gt;   ..$ parameters:List of 5
+#&gt;   ..$ parameters:List of 11
 #&gt;  $ drive.permissions.update          :List of 4
 #&gt;   ..$ id        : chr "drive.permissions.update"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters:List of 18
+#&gt;   ..$ parameters:List of 24
 #&gt;  $ drive.revisions.delete            :List of 4
 #&gt;   ..$ id        : chr "drive.revisions.delete"
 #&gt;   ..$ method    : chr "DELETE"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions/{revisionId}"
-#&gt;   ..$ parameters:List of 3
+#&gt;   ..$ parameters:List of 9
 #&gt;  $ drive.revisions.get               :List of 4
 #&gt;   ..$ id        : chr "drive.revisions.get"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions/{revisionId}"
-#&gt;   ..$ parameters:List of 4
+#&gt;   ..$ parameters:List of 10
 #&gt;  $ drive.revisions.list              :List of 4
 #&gt;   ..$ id        : chr "drive.revisions.list"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions"
-#&gt;   ..$ parameters:List of 4
+#&gt;   ..$ parameters:List of 10
 #&gt;  $ drive.revisions.update            :List of 4
 #&gt;   ..$ id        : chr "drive.revisions.update"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions/{revisionId}"
-#&gt;   ..$ parameters:List of 15
+#&gt;   ..$ parameters:List of 21
 #&gt;  $ drive.files.update.media          :List of 4
 #&gt;   ..$ id        : chr "drive.files.update.media"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "/upload/drive/v3/files/{fileId}"
-#&gt;   ..$ parameters:List of 9
+#&gt;   ..$ parameters:List of 15
 #&gt;  $ drive.files.update.media.resumable:List of 4
 #&gt;   ..$ id        : chr "drive.files.update.media.resumable"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "/resumable/upload/drive/v3/files/{fileId}"
-#&gt;   ..$ parameters:List of 9</div><div class='input'><span class='fu'>drive_endpoints</span>()$<span class='no'>`drive.files.delete`</span></div><div class='output co'>#&gt; $id
+#&gt;   ..$ parameters:List of 15</div><div class='input'><span class='fu'>drive_endpoints</span>()$<span class='no'>`drive.files.delete`</span></div><div class='output co'>#&gt; $id
 #&gt; [1] "drive.files.delete"
 #&gt; 
 #&gt; $method
@@ -273,6 +274,29 @@ used internally by googledrive.</p>
 #&gt; [1] "Whether the requesting application supports Team Drives."
 #&gt; 
 #&gt; 
+#&gt; $parameters$alt
+#&gt; $parameters$alt$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $parameters$alt$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$alt$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $parameters$alt$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$alt$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$alt$enum
+#&gt; [1] "json"
+#&gt; 
+#&gt; $parameters$alt$description
+#&gt; [1] "Data format for the response."
+#&gt; 
+#&gt; 
 #&gt; $parameters$fields
 #&gt; $parameters$fields$location
 #&gt; [1] "query"
@@ -293,7 +317,122 @@ used internally by googledrive.</p>
 #&gt; [1] NA
 #&gt; 
 #&gt; $parameters$fields$description
+#&gt; [1] "Selector specifying which fields to include in a partial response."
+#&gt; 
+#&gt; 
+#&gt; $parameters$key
+#&gt; $parameters$key$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $parameters$key$required
 #&gt; [1] NA
+#&gt; 
+#&gt; $parameters$key$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $parameters$key$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$key$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$key$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$key$description
+#&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+#&gt; 
+#&gt; 
+#&gt; $parameters$oauth_token
+#&gt; $parameters$oauth_token$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $parameters$oauth_token$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$oauth_token$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $parameters$oauth_token$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$oauth_token$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$oauth_token$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$oauth_token$description
+#&gt; [1] "OAuth 2.0 token for the current user."
+#&gt; 
+#&gt; 
+#&gt; $parameters$prettyPrint
+#&gt; $parameters$prettyPrint$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $parameters$prettyPrint$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$prettyPrint$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $parameters$prettyPrint$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$prettyPrint$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$prettyPrint$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$prettyPrint$description
+#&gt; [1] "Returns response with indentations and line breaks."
+#&gt; 
+#&gt; 
+#&gt; $parameters$quotaUser
+#&gt; $parameters$quotaUser$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $parameters$quotaUser$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$quotaUser$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $parameters$quotaUser$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$quotaUser$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$quotaUser$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$quotaUser$description
+#&gt; [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."
+#&gt; 
+#&gt; 
+#&gt; $parameters$userIp
+#&gt; $parameters$userIp$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $parameters$userIp$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$userIp$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $parameters$userIp$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$userIp$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$userIp$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $parameters$userIp$description
+#&gt; [1] "IP address of the site where the request originates. Use this if you want to enforce per-user limits."
 #&gt; 
 #&gt; 
 #&gt; </div></pre>

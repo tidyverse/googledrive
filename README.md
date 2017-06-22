@@ -43,20 +43,19 @@ Here's how to list the most recently modified 100 files on your drive. This will
 ``` r
 drive_search()
 #> # A tibble: 100 x 3
-#>                           name
-#>  *                       <chr>
-#>  1                         def
-#>  2                         abc
-#>  3                    chickwts
-#>  4                chickwts.rda
-#>  5          chicken_little.jpg
-#>  6               chicken_small
-#>  7                      filler
-#>  8 chickwts-TEST-drive-publish
-#>  9          another-share-test
-#> 10                    Untitled
-#> # ... with 90 more rows, and 2 more variables: id <chr>,
-#> #   files_resource <list>
+#>                     name                           id files_resource
+#>  *                 <chr>                        <chr>         <list>
+#>  1                   def 0B0Gh-SuuA2nTOFgxRUJIX2hlWWM    <list [26]>
+#>  2                   abc 0B0Gh-SuuA2nTUzA2ZDBQaFFRVFE    <list [26]>
+#>  3 bar-TEST-drive-upload 0B0Gh-SuuA2nTcFdFSEtBRU9kZkU    <list [33]>
+#>  4 bar-TEST-drive-upload 0B0Gh-SuuA2nTSWJQNXhpdE5BRXM    <list [33]>
+#>  5 bar-TEST-drive-upload 0B0Gh-SuuA2nTeDlRNjRaZTA0bVE    <list [33]>
+#>  6              chickwts 0B0Gh-SuuA2nTN05CNjk3bG8xbWs    <list [33]>
+#>  7          chickwts.rda 0B0Gh-SuuA2nTay1Vc0VQaHp2Qms    <list [32]>
+#>  8    chicken_little.jpg 0B0Gh-SuuA2nTbElsQUprMVZLYkE    <list [35]>
+#>  9         chicken_small 0B0Gh-SuuA2nTeDQzRUFXWU5hRGs    <list [34]>
+#> 10                filler 0B0Gh-SuuA2nTUXdfUFdiR3NOeGM    <list [27]>
+#> # ... with 90 more rows
 ```
 
 You can narrow the query by specifying a `pattern` you'd like to match names against.
@@ -89,15 +88,15 @@ In addition to `drive_search()`, you can also identify files by name (path, real
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTZ29nZ2tjRW1PN3c    <list [30]>
+#> 1   def 0B0Gh-SuuA2nTOFgxRUJIX2hlWWM    <list [30]>
 ## let's grab that file id and retrieve it that way
 x$id
-#> [1] "0B0Gh-SuuA2nTZ29nZ2tjRW1PN3c"
+#> [1] "0B0Gh-SuuA2nTOFgxRUJIX2hlWWM"
 drive_get(x$id)
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTZ29nZ2tjRW1PN3c    <list [30]>
+#> 1   def 0B0Gh-SuuA2nTOFgxRUJIX2hlWWM    <list [30]>
 ```
 
 In general, googledrive functions let you specify Drive file(s) by name (path), file id, and `dribble`. See examples below.
@@ -116,7 +115,7 @@ write.csv(chickwts, "README-chickwts.csv")
 #> # A tibble: 1 x 3
 #>                  name                           id files_resource
 #> *               <chr>                        <chr>         <list>
-#> 1 README-chickwts.csv 0B0Gh-SuuA2nTdldEVUZWREFyc1k    <list [36]>
+#> 1 README-chickwts.csv 0B0Gh-SuuA2nTNml4SXYybEtuV0E    <list [36]>
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -125,8 +124,8 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 ## example of using a dribble as input
 drive_chickwts <- drive_chickwts %>%
   drive_delete()
-#> File deleted from Google Drive:
-#> README-chickwts.csv
+#> Files deleted:
+#>   * README-chickwts.csv: 0B0Gh-SuuA2nTNml4SXYybEtuV0E
 ```
 
 ``` r
@@ -155,7 +154,7 @@ drive_chickwts$publish
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-06-16 18:58:19        1      TRUE         TRUE
+#> 1 2017-06-22 14:08:59        1      TRUE         TRUE
 ```
 
 ``` r
@@ -183,7 +182,7 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1peLr2KDiriYZMqMIjKpMmdJ5DcxitOwUCjC3FlFz3HI/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1bRICw5NA-ankc7icdPiAK2a3YBIR1zB4sY8upwGccc4/edit?usp=drivesdk"
 ```
 
 #### Clean up
@@ -191,6 +190,6 @@ drive_chickwts %>%
 ``` r
 drive_chickwts %>%
   drive_delete()
-#> File deleted from Google Drive:
-#> README-chickwts.csv
+#> Files deleted:
+#>   * README-chickwts.csv: 1bRICw5NA-ankc7icdPiAK2a3YBIR1zB4sY8upwGccc4
 ```
