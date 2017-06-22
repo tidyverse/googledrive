@@ -18,31 +18,14 @@ context("Process responses")
 wrong <- readRDS(rprojroot::find_testthat_root_file("test-files/wrong-content.rds"))
 right <- readRDS(rprojroot::find_testthat_root_file("test-files/right-content.rds"))
 
-test_that("process_response properly errors on wrong content type with default expected type", {
-
-  ## create fake res with the wrong content type
-  actual <- wrong$headers$`content-type`
-  expect_error(process_response(wrong),
-               sprintf(paste0("Expected content-type:\n%s",
-                              "\n",
-                              "Actual content-type:\n%s"
-               ),
-               "application/json; charset=UTF-8",
-               actual)
+test_that("stop_for_content_type() catches wrong content type", {
+  expect_error(
+    stop_for_content_type(wrong),
+    "Expected content-type.*Actual content-type"
   )
-})
-
-test_that("process_response properly errors on wrong content type with inserted expected type", {
-
-  actual <- wrong$headers$`content-type`
-  expected <- "something else"
-  expect_error(process_response(wrong, expected = expected),
-               sprintf(paste0("Expected content-type:\n%s",
-                              "\n",
-                              "Actual content-type:\n%s"
-               ),
-               expected,
-               actual)
+  expect_error(
+    stop_for_content_type(wrong, expected = "whatever"),
+    "Expected content-type:\nwhatever.*Actual content-type"
   )
 })
 
