@@ -9,29 +9,32 @@
 #' There are two functions:
 #' * `generate_request()` takes a nickname for an endpoint and uses the API spec
 #' to look up the `path` and `method`. The `params` are checked for validity and
-#' completeness with respect to the endpoint. It then passes things along to
-#' `gs_build_request()`. Use [drive_endpoints()] to see which endpoints can be
-#' accessed this way.
+#' completeness with respect to the endpoint. Body parameters are separated from
+#' those destined for path substitution or the query. If `params` does not
+#' already specify an API key, the argument `key` is used. `generate_request()`
+#' then passes things along to `gs_build_request()`. Use [drive_endpoints()] to
+#' see which endpoints can be accessed this way.
 #' * `build_request()` builds a request from explicit parts. It is quite
 #' dumb, only doing URL endpoint substitution and URL formation. It's up to the
-#' caller to make sure the `path`, `method`, `params`, and `body` are valid. Use
-#' this to call a Drive API endpoint that doesn't appear in the list returned
-#' by [drive_endpoints()].
+#' caller to make sure the `path`, `method`, `params`, `body`, and `token` are
+#' valid. Use this to call a Drive API endpoint that doesn't appear in the list
+#' returned by [drive_endpoints()].
 #'
 #' @param endpoint Character. Nickname for one of the selected Drive v3 API
 #'   endpoints built into googledrive. Inspect via [drive_endpoints()].
 #' @param params Named list. Parameters destined for endpoint URL substitution,
-#'   the query, or body.
-#' @param token Drive token, obtained from [drive_auth()].
-#' @param .api_key *not in use yet*
+#'   the query, or, for `generate_request()` only, the body.
+#' @param key API key, if none is already present in `params`. Set to `NULL` to
+#'   suppress the inclusion of an API key.
+#' @param token Drive token, obtained from [drive_auth()]. Set to `NULL` to
+#'   suppress the inclusion of a token.
 #'
-
-#' @return `list()`\cr Components are `method`, `path`, `query`, `body`, and
-#'   `url`, suitable as input for [make_request()]. The `path` is
-#'   post-substitution and the `query` is a named list of all the non-body
-#'   `params` that were not used during this substitution. `url` is the full URL
-#'   after prepending the base URL for the Drive v3 API and appending an API key
-#'   to the query.
+#' @return `list()`\cr Components are `method`, `path`, `query`, `body`,
+#'   `token`, and `url`, suitable as input for [make_request()]. The
+#'   `path` is post-substitution and the `query` is a named list of all the
+#'   non-body `params` that were not used during this substitution. `url` is the
+#'   full URL after prepending the base URL for the Drive v3 API and appending
+#'   the query.
 #' @export
 #' @examples
 #' req <- generate_request(
@@ -42,23 +45,26 @@
 #' req
 generate_request <- function(endpoint = character(),
                              params = list(),
-                             token = drive_token(),
-                             .api_key = NULL) {
+                             key = drive_api_key(),
+                             token = drive_token()) {
   ept <- .endpoints[[endpoint]]
   if (is.null(ept)) {
     stop("Endpoint not recognized:\n", endpoint, call. = FALSE)
   }
 
-  params <-   match_params(params, ept$parameters)
+  params <- match_params(params, ept$parameters)
   params <- partition_params(params, extract_body_names(ept$parameters))
+  ## preserve explicit `key = NULL` in params
+  if (!"key" %in% names(params$unmatched)) {
+    params[["unmatched"]][["key"]] <- key
+  }
 
   build_request(
     path = ept$path,
     method = ept$method,
     params = params$unmatched,
     body = params$matched,
-    token = token,
-    .api_key = .api_key
+    token = token
   )
 }
 
@@ -76,7 +82,7 @@ generate_request <- function(endpoint = character(),
 #' req <- build_request(
 #'   path = "drive/v3/files/{fileId}",
 #'   method = "GET",
-#'   list(fileId = "abc"),
+#'   list(fileId = "abc", key = drive_api_key()),
 #'   token = NULL
 #' )
 #' req
@@ -89,28 +95,27 @@ generate_request <- function(endpoint = character(),
 #'   path = "drive/v3/files/{fileId}/comments",
 #'   method = "GET",
 #'   params = list(
-#'     fileId = "file-id-goes-here",
+#'     fileId = "your-file-id-goes-here",
 #'     fields = "*"
 #'   ),
 #'   token = googledrive:::drive_token()
 #' )
-#' make_request(req)
+#' process_response(make_request(req))
 #' }
-build_request <- function(path,
+build_request <- function(path = "",
                           method,
                           params = list(),
                           body = list(),
-                          token = NULL,
-                          .api_key = NULL) {
+                          token = NULL) {
 
   params <- partition_params(params, extract_path_names(path))
+
   out <- list(
     method = method,
     path = glue::glue_data(params$matched, path),
     query = params$unmatched,
     body = body,
-    token = token,
-    .api_key = .api_key
+    token = token
   )
 
   out$url <- httr::modify_url(
@@ -186,4 +191,35 @@ extract_path_names <- function(path) {
 
 extract_body_names <- function(params) {
   names(params)[purrr::map_lgl(params, ~ .x[["location"]] == "body")]
+}
+
+#' Get an API key
+#'
+#' Pass through an API key that is explicitly provided. Otherwise, consult the
+#' environment variable `GOOGLEDRIVE_API_KEY` and the API key built-into
+#' googledrive, in that order.
+#'
+#' @param key Character, optional. A Google API key.
+#'
+#' @return A Google API key
+#' @export
+#'
+#' @examples
+#' ## specify explicitly
+#' drive_api_key("I_have_my_own_key")
+#'
+#' ## specify via env var
+#' tryCatch({
+#'   Sys.setenv(GOOGLEDRIVE_API_KEY = "a1b2c3d4e5f7")
+#'   drive_api_key()
+#'   },
+#'   finally = Sys.unsetenv("GOOGLEDRIVE_API_KEY")
+#' )
+#'
+#' ## use the built-in API key
+#' drive_api_key()
+drive_api_key <- function(key = NULL) {
+  key %||%
+    Sys_getenv("GOOGLEDRIVE_API_KEY") %||%
+    getOption("googledrive.api_key")
 }

@@ -6,21 +6,23 @@
 \title{Build a request for the Google Drive v3 API}
 \usage{
 generate_request(endpoint = character(), params = list(),
-  token = drive_token(), .api_key = NULL)
+  key = drive_api_key(), token = drive_token())
 
-build_request(path, method, params = list(), body = list(), token = NULL,
-  .api_key = NULL)
+build_request(path = "", method, params = list(), body = list(),
+  token = NULL)
 }
 \arguments{
 \item{endpoint}{Character. Nickname for one of the selected Drive v3 API
 endpoints built into googledrive. Inspect via \code{\link[=drive_endpoints]{drive_endpoints()}}.}
 
 \item{params}{Named list. Parameters destined for endpoint URL substitution,
-the query, or body.}
+the query, or, for \code{generate_request()} only, the body.}
 
-\item{token}{Drive token, obtained from \code{\link[=drive_auth]{drive_auth()}}.}
+\item{key}{API key, if none is already present in \code{params}. Set to \code{NULL} to
+suppress the inclusion of an API key.}
 
-\item{.api_key}{\emph{not in use yet}}
+\item{token}{Drive token, obtained from \code{\link[=drive_auth]{drive_auth()}}. Set to \code{NULL} to
+suppress the inclusion of a token.}
 
 \item{path}{Character, e.g.,
 \code{"drive/v3/files/{fileId}"}. It can include
@@ -33,12 +35,12 @@ using named parameters found in the \code{params} argument.}
 \item{body}{List, values to pass to the API request body.}
 }
 \value{
-\code{list()}\cr Components are \code{method}, \code{path}, \code{query}, \code{body}, and
-\code{url}, suitable as input for \code{\link[=make_request]{make_request()}}. The \code{path} is
-post-substitution and the \code{query} is a named list of all the non-body
-\code{params} that were not used during this substitution. \code{url} is the full URL
-after prepending the base URL for the Drive v3 API and appending an API key
-to the query.
+\code{list()}\cr Components are \code{method}, \code{path}, \code{query}, \code{body},
+\code{token}, and \code{url}, suitable as input for \code{\link[=make_request]{make_request()}}. The
+\code{path} is post-substitution and the \code{query} is a named list of all the
+non-body \code{params} that were not used during this substitution. \code{url} is the
+full URL after prepending the base URL for the Drive v3 API and appending
+the query.
 }
 \description{
 Build a request, using some knowledge of the
@@ -52,14 +54,16 @@ There are two functions:
 \itemize{
 \item \code{generate_request()} takes a nickname for an endpoint and uses the API spec
 to look up the \code{path} and \code{method}. The \code{params} are checked for validity and
-completeness with respect to the endpoint. It then passes things along to
-\code{gs_build_request()}. Use \code{\link[=drive_endpoints]{drive_endpoints()}} to see which endpoints can be
-accessed this way.
+completeness with respect to the endpoint. Body parameters are separated from
+those destined for path substitution or the query. If \code{params} does not
+already specify an API key, the argument \code{key} is used. \code{generate_request()}
+then passes things along to \code{gs_build_request()}. Use \code{\link[=drive_endpoints]{drive_endpoints()}} to
+see which endpoints can be accessed this way.
 \item \code{build_request()} builds a request from explicit parts. It is quite
 dumb, only doing URL endpoint substitution and URL formation. It's up to the
-caller to make sure the \code{path}, \code{method}, \code{params}, and \code{body} are valid. Use
-this to call a Drive API endpoint that doesn't appear in the list returned
-by \code{\link[=drive_endpoints]{drive_endpoints()}}.
+caller to make sure the \code{path}, \code{method}, \code{params}, \code{body}, and \code{token} are
+valid. Use this to call a Drive API endpoint that doesn't appear in the list
+returned by \code{\link[=drive_endpoints]{drive_endpoints()}}.
 }
 }
 \examples{
@@ -73,7 +77,7 @@ req
 req <- build_request(
   path = "drive/v3/files/{fileId}",
   method = "GET",
-  list(fileId = "abc"),
+  list(fileId = "abc", key = drive_api_key()),
   token = NULL
 )
 req
@@ -86,11 +90,11 @@ req <- build_request(
   path = "drive/v3/files/{fileId}/comments",
   method = "GET",
   params = list(
-    fileId = "file-id-goes-here",
+    fileId = "your-file-id-goes-here",
     fields = "*"
   ),
   token = googledrive:::drive_token()
 )
-make_request(req)
+process_response(make_request(req))
 }
 }
