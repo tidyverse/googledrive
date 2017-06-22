@@ -36,6 +36,7 @@
 #'   full URL after prepending the base URL for the Drive v3 API and appending
 #'   the query.
 #' @export
+#' @family low-level API functions
 #' @examples
 #' req <- generate_request(
 #'   "drive.files.get",

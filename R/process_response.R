@@ -1,3 +1,10 @@
+#' Process a response from the Google Drive v3 API
+#'
+#' @param res Object of class `response` from [httr].
+#'
+#' @return List.
+#' @export
+#' @family low-level API functions
 process_response <- function(res) {
 
   if (httr::status_code(res) == 204) {

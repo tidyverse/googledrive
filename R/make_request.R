@@ -6,6 +6,7 @@
 #'
 #' @return Object of class `response` from [httr].
 #' @export
+#' @family low-level API functions
 make_request <- function(x, ...){
   method <- list("GET" = httr::GET,
                  "POST" = httr::POST,

@@ -98,3 +98,7 @@ req <- build_request(
 process_response(make_request(req))
 }
 }
+\seealso{
+Other low-level API functions: \code{\link{make_request}},
+  \code{\link{process_response}}
+}
