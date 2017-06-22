@@ -94,12 +94,12 @@ generate_request <- function(endpoint = character(),
 #'   ),
 #'   token = googledrive:::drive_token()
 #' )
-#' make_request(x)
+#' make_request(req)
 #' }
 build_request <- function(path,
                           method,
                           params = list(),
-                          body = NULL,
+                          body = list(),
                           token = NULL,
                           .api_key = NULL) {
 
@@ -116,7 +116,7 @@ build_request <- function(path,
   out$url <- httr::modify_url(
     url = .drive$base_url,
     path = out$path,
-    ## prevent a trailing `?` when the query is trivial, e.g. list() or
+    ## prevent a trailing `?` or `?=` when the query is trivial, e.g. list() or
     ## contains a single element which is NULL
     ## https://github.com/r-lib/httr/issues/451
     query = if (length(unlist(out$query)) == 0) NULL else out$query
@@ -151,6 +151,8 @@ match_params <- function(provided, spec) {
   return(provided)
 }
 
+## partition a parameter list into two parts, using names to identify
+## components destined for the second part
 ## example input:
 # partition_params(
 #   list(a = "a", b = "b", c = "c", d = "d"),
@@ -164,7 +166,7 @@ match_params <- function(provided, spec) {
 partition_params <- function(input, nms_to_match) {
   out <- list(
     unmatched = input,
-    matched = NULL
+    matched = list()
   )
   if (length(nms_to_match) && length(input)) {
     m <- names(out$unmatched) %in% nms_to_match

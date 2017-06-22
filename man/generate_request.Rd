@@ -8,7 +8,7 @@
 generate_request(endpoint = character(), params = list(),
   token = drive_token(), .api_key = NULL)
 
-build_request(path, method, params = list(), body = NULL, token = NULL,
+build_request(path, method, params = list(), body = list(), token = NULL,
   .api_key = NULL)
 }
 \arguments{
@@ -91,6 +91,6 @@ req <- build_request(
   ),
   token = googledrive:::drive_token()
 )
-make_request(x)
+make_request(req)
 }
 }
