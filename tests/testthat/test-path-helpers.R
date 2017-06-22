@@ -179,3 +179,32 @@ test_that("get_paths() works, with name duplication & multiple parents", {
   bac <- get_paths(path = "b/a/c", .rships = df, partial_ok = TRUE)
   expect_false(identical(abc, bac))
 })
+
+test_that("pth() detects and errors for cycle", {
+  #   a
+  # /  \
+  # \  /
+  #  b
+  df <- tibble::tribble(
+    ~ id, ~ parents,
+     "a",       "b",
+     "b",       "a"
+  )
+  expect_error(
+    pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT"),
+    "Cycles are not allowed"
+  )
+
+  #   a
+  # /  \
+  # \  /
+  #  -
+  df <- tibble::tribble(
+    ~ id, ~ parents,
+     "a",       "a"
+  )
+  expect_error(
+    pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT"),
+    "Cycles are not allowed"
+  )
+})

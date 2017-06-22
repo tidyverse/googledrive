@@ -214,10 +214,19 @@ pth <- function(id, kids, elders, stop_value) {
   this <- last(id)
   i <- which(kids == this)
   if (length(i) < 1) {
-    ## parent not found, end it here with sentinel NA
+    ## id not present as a 'kid', end it here with sentinel NA
     list(c(id, NA))
   } else {
     parents <- elders[[i]]
+    seen_before <- intersect(id, parents)
+    if (length(seen_before)) {
+      msg <- c(
+        "This id has itself as parent, possibly indirect:",
+        sq(seen_before),
+        "Cycles are not allowed."
+      )
+      stop(collapse(msg, sep = "\n"), call. = FALSE)
+    }
     if (is.null(parents)) {
       ## parents not given, end it here with sentinel NA
       return(list(c(id, NA)))
