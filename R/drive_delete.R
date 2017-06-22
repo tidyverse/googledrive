@@ -11,7 +11,10 @@ drive_delete <- function(file = NULL, verbose = TRUE) {
   if (!some_files(del_file) && verbose) {
     message(glue::glue("No such files found to delete."))
   }
-  out <- purrr::map2_lgl(del_file$id, del_file$name, delete_one, verbose = verbose)
+  out <- purrr::map2_lgl(
+    del_file$id, del_file$name,
+    delete_one, verbose = verbose
+  )
   invisible(out)
 }
 

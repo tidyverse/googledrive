@@ -24,7 +24,10 @@ drive_unpublish <- function(file = NULL, ..., verbose = TRUE) {
   drive_change_publish(file = file, publish = FALSE, ..., verbose = verbose)
 }
 
-drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRUE) {
+drive_change_publish <- function(file = NULL,
+                                 publish = TRUE,
+                                 ...,
+                                 verbose = TRUE) {
   file_update <- drive_is_published(file = file, verbose = FALSE)
 
   file_update <- confirm_single_file(file_update)
@@ -59,11 +62,15 @@ drive_change_publish <- function(file = NULL, publish = TRUE, ..., verbose = TRU
   if (verbose) {
     if (httr::status_code(response) == 200L) {
       message(
-        glue::glue_data(file_update, "You have changed the publication status of {sq(name)}.")
+        glue::glue_data(
+          file_update,
+          "You have changed the publication status of {sq(name)}."
+        )
       )
     } else
       message(
-        glue::glue_data(file_update, "Uh oh, something went wrong. The publication status of {sq(name)} was not changed.")
+        glue::glue_data(
+          file_update, "Uh oh, something went wrong. The publication status of {sq(name)} was not changed.")
       )
   }
 

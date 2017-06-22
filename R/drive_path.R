@@ -84,7 +84,7 @@ drive_paths <- function(path = "~/", verbose = TRUE) {
 ## output:
 ##   a dribble of Drive files whose paths match the target
 ##   if partial_ok = FALSE, match(es) is/are exact
-##   if partial_ok = TRUE, match(es) is/are on the maximally existing partial path
+##   if partial_ok = TRUE, match(es) is/are on maximally existing partial path
 ##   output contains an extra column, `path`, with the effective target path
 get_paths <- function(path = NULL,
                       partial_ok = FALSE,
@@ -157,7 +157,10 @@ get_paths <- function(path = NULL,
     ## form the path, as a string
     leaf_tbl$path <- purrr::map_chr(
       leaf_tbl$pths,
-      ~ make_path(.x, ids = .rships$id, nms = .rships$name, rooted = rooted, d = d)
+      ~ make_path(
+        .x,
+        ids = .rships$id, nms = .rships$name, rooted = rooted, d = d
+      )
     )
 
     ## require path to match target, in manner appropriate to partial_ok
@@ -241,7 +244,7 @@ form_query <- function(path_pieces, leaf_is_folder = FALSE) {
   leaf_q <- utils::tail(nms, !leaf_is_folder)
   dirs_q <- glue::glue(
     "(({dir_pieces}) and mimeType = 'application/vnd.google-apps.folder')",
-    dir_pieces = collapse2(crop(nms, !leaf_is_folder), sep = " or ")
+    dir_pieces = glue::collapse(crop(nms, !leaf_is_folder), sep = " or ")
   )
   glue::collapse(c(leaf_q, dirs_q), last = " or ")
 }
@@ -257,5 +260,5 @@ make_path <- function(pth, ids, nms, rooted, d) {
     pth_nms <- pth_nms[-1]
   }
   pth_nms <- utils::tail(pth_nms, d + rooted)
-  collapse2(pth_nms, sep = "/")
+  glue::collapse(pth_nms, sep = "/")
 }

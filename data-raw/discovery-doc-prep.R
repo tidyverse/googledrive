@@ -2,7 +2,6 @@ library(rprojroot)
 library(jsonlite)
 library(httr)
 library(tidyverse)
-library(stringr)
 
 ## load the API spec, including download if necessary
 dd_cache <- find_package_root_file("data-raw") %>%
@@ -70,9 +69,10 @@ endpoints <- c(
       httpMethod = endpoints$files.update$httpMethod,
       parameters = c(
         endpoints$files.update$parameters,
-        uploadType = list(list(type = "string",
-                               required = TRUE,
-                               location = "query")
+        uploadType = list(
+          list(type = "string",
+               required = TRUE,
+               location = "query")
         )
       ),
       parameterOrder = endpoints$files.update$parameterOrder,
@@ -93,7 +93,7 @@ add_schema_params <- function(endpoint, nm) {
 }
 endpoints <- imap(endpoints, add_schema_params)
 
-## add general parameters to all endpoints
+## add API-wide params to all endpoints
 add_params <- function(x) {
   x[["parameters"]] <- c(x[["parameters"]], dd_content[["parameters"]])
   if (isTRUE(x$supportsMediaDownload)) {
@@ -101,7 +101,7 @@ add_params <- function(x) {
   }
   x
 }
-endpoints <- map(endpoints, add_params)
+endpoints <- map(endpoints, add_global_params)
 
 nms <- endpoints %>%
   map(names) %>%
@@ -201,7 +201,8 @@ View(edf)
 out_fname <- str_replace(
   json_fname,
   "discovery-document.json",
-  "endpoints-tibble.rds")
+  "endpoints-tibble.rds"
+)
 saveRDS(edf, file = out_fname)
 
 ## full spec as list
@@ -209,18 +210,20 @@ saveRDS(edf, file = out_fname)
 elist <- edf %>%
   pmap(list) %>%
   set_names(edf$id)
-listviewer::jsonedit(elist)
+##View(elist)
 
 out_fname <- str_replace(
   json_fname,
   "discovery-document.json",
-  "endpoints-list.rds")
+  "endpoints-list.rds"
+)
 saveRDS(elist, file = out_fname)
 
 out_fname <- str_replace(
   json_fname,
   "discovery-document.json",
-  "endpoints-list.json")
+  "endpoints-list.json"
+)
 elist %>%
   toJSON(pretty = TRUE) %>%
   writeLines(out_fname)
@@ -232,6 +235,6 @@ elist %>%
   select(id, method = httpMethod, path, parameters) %>%
   pmap(list) %>%
   set_names(edf$id)
-listviewer::jsonedit(.endpoints)
+## View(.endpoints)
 
 devtools::use_data(.endpoints, internal = TRUE, overwrite = TRUE)

@@ -40,16 +40,6 @@ test_that("generate_request() catches input valid for another endpoint", {
   )
 })
 
-test_that("generate_request() catches illegal parameter replication", {
-  params <- list(fileId = "abc", fileId = "def")
-  expect_error(
-    generate_request(
-      endpoint = "drive.files.get",
-      params = params, token = NULL),
-    "These parameter\\(s\\) are not allowed to appear more than once"
-  )
-})
-
 test_that("generate_request() and build_request() can deliver same result", {
   gen <- generate_request("drive.files.get", list(fileId = "abc"), token = NULL)
   build <- build_request(
