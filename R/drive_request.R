@@ -49,15 +49,14 @@ generate_request <- function(endpoint = character(),
     stop("Endpoint not recognized:\n", endpoint, call. = FALSE)
   }
 
-  ## use the spec to vet and rework request parameters
   params <-   match_params(params, ept$parameters)
-  params <- partition_body(params, extract_body_names(ept$parameters))
+  params <- partition_params(params, extract_body_names(ept$parameters))
 
   build_request(
     path = ept$path,
     method = ept$method,
-    params = params$remaining_params,
-    body = params$body_params,
+    params = params$unmatched,
+    body = params$matched,
     token = token,
     .api_key = .api_key
   )
@@ -107,8 +106,8 @@ build_request <- function(path,
   params <- partition_params(params, extract_path_names(path))
   out <- list(
     method = method,
-    path = glue::glue_data(params$path_params, path),
-    query = params$query_params,
+    path = glue::glue_data(params$matched, path),
+    query = params$unmatched,
     body = body,
     token = token,
     .api_key = .api_key
@@ -117,7 +116,10 @@ build_request <- function(path,
   out$url <- httr::modify_url(
     url = .drive$base_url,
     path = out$path,
-    query = out$query
+    ## prevent a trailing `?` when the query is trivial, e.g. list() or
+    ## contains a single element which is NULL
+    ## https://github.com/r-lib/httr/issues/451
+    query = if (length(unlist(out$query)) == 0) NULL else out$query
   )
   out
 }
@@ -149,43 +151,27 @@ match_params <- function(provided, spec) {
   return(provided)
 }
 
-partition_body <- function(provided, body_param_names) {
-  remaining_params <- provided
-  body_params <- NULL
-  if (length(body_param_names) && length(remaining_params)) {
-    m <- names(remaining_params) %in% body_param_names
-    body_params <- remaining_params[m]
-    remaining_params <- remaining_params[!m]
-  }
-  list(
-    remaining_params = remaining_params,
-    body_params = body_params
+## example input:
+# partition_params(
+#   list(a = "a", b = "b", c = "c", d = "d"),
+#   c("b", "c")
+# )
+## example output:
+# list(
+#   unmatched = list(a = "a", d = "d"),
+#   matched = list(b = "b", c = "c")
+# )
+partition_params <- function(input, nms_to_match) {
+  out <- list(
+    unmatched = input,
+    matched = NULL
   )
-}
-
-## extract the path params by name and put the leftovers in query
-## why is this correct?
-## if the endpoint was specified, we have already matched against spec
-## if the endpoint was unspecified, we have no choice
-partition_params <- function(provided, path_param_names) {
-  query_params <- provided
-  path_params <- NULL
-  if (length(path_param_names) && length(query_params)) {
-    m <- names(provided) %in% path_param_names
-    path_params <- query_params[m]
-    query_params <- query_params[!m]
+  if (length(nms_to_match) && length(input)) {
+    m <- names(out$unmatched) %in% nms_to_match
+    out$matched <- out$unmatched[m]
+    out$unmatched <- out$unmatched[!m]
   }
-
-  ## if no query_params, NULL is preferred to list() for the sake of
-  ## downstream URLs, though the API key will generally imply there are
-  ## no empty queries
-  if (length(query_params) == 0) {
-    query_params <- NULL
-  }
-  list(
-    path_params = path_params,
-    query_params = query_params
-  )
+  out
 }
 
 ##  input: /v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo
