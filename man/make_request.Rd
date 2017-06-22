@@ -18,3 +18,7 @@ Object of class \code{response} from \link{httr}.
 \description{
 Make a request for the Google Drive v3 API
 }
+\seealso{
+Other low-level API functions: \code{\link{generate_request}},
+  \code{\link{process_response}}
+}

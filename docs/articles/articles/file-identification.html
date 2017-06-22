@@ -83,20 +83,19 @@
 <p>You can get similar results with <code><a href="../../reference/drive_search.html">drive_search()</a></code>. By default, it gets info on the most recent 100 files.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>())
 <span class="co">#&gt; # A tibble: 100 x 3</span>
-<span class="co">#&gt;                           name</span>
-<span class="co">#&gt;  *                       &lt;chr&gt;</span>
-<span class="co">#&gt;  1                         def</span>
-<span class="co">#&gt;  2                         abc</span>
-<span class="co">#&gt;  3                    chickwts</span>
-<span class="co">#&gt;  4                chickwts.rda</span>
-<span class="co">#&gt;  5          chicken_little.jpg</span>
-<span class="co">#&gt;  6               chicken_small</span>
-<span class="co">#&gt;  7                      filler</span>
-<span class="co">#&gt;  8 chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt;  9          another-share-test</span>
-<span class="co">#&gt; 10                    Untitled</span>
-<span class="co">#&gt; # ... with 90 more rows, and 2 more variables: id &lt;chr&gt;,</span>
-<span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
+<span class="co">#&gt;                     name                           id files_resource</span>
+<span class="co">#&gt;  *                 &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
+<span class="co">#&gt;  1                   def 0B0Gh-SuuA2nTRWRtSHJxeUFPWEU    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  2                   abc 0B0Gh-SuuA2nTYzBOc0FCdGhUTWM    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  3 bar-</span><span class="al">TEST</span><span class="co">-drive-upload 0B0Gh-SuuA2nTcFdFSEtBRU9kZkU    &lt;list [33]&gt;</span>
+<span class="co">#&gt;  4 bar-</span><span class="al">TEST</span><span class="co">-drive-upload 0B0Gh-SuuA2nTSWJQNXhpdE5BRXM    &lt;list [33]&gt;</span>
+<span class="co">#&gt;  5 bar-</span><span class="al">TEST</span><span class="co">-drive-upload 0B0Gh-SuuA2nTeDlRNjRaZTA0bVE    &lt;list [33]&gt;</span>
+<span class="co">#&gt;  6              chickwts 0B0Gh-SuuA2nTN05CNjk3bG8xbWs    &lt;list [33]&gt;</span>
+<span class="co">#&gt;  7          chickwts.rda 0B0Gh-SuuA2nTay1Vc0VQaHp2Qms    &lt;list [32]&gt;</span>
+<span class="co">#&gt;  8    chicken_little.jpg 0B0Gh-SuuA2nTbElsQUprMVZLYkE    &lt;list [35]&gt;</span>
+<span class="co">#&gt;  9         chicken_small 0B0Gh-SuuA2nTeDQzRUFXWU5hRGs    &lt;list [34]&gt;</span>
+<span class="co">#&gt; 10                filler 0B0Gh-SuuA2nTUXdfUFdiR3NOeGM    &lt;list [27]&gt;</span>
+<span class="co">#&gt; # ... with 90 more rows</span></code></pre></div>
 <p>The object you get back holds the metadata for one or more Google Drive files. It is a <code>dribble</code>, which is just a <code>tibble</code> with Drive files in rows and at least these three variables:</p>
 <ul>
 <li>
@@ -113,8 +112,8 @@
 <span class="co">#&gt; # A tibble: 3 x 3</span>
 <span class="co">#&gt;     name                           id files_resource</span>
 <span class="co">#&gt; *  &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1    def 0B0Gh-SuuA2nTRGRmNmQxRUg1RTQ    &lt;list [26]&gt;</span>
-<span class="co">#&gt; 2    abc 0B0Gh-SuuA2nTVnVEQ0JSSHRNdzA    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 1    def 0B0Gh-SuuA2nTRWRtSHJxeUFPWEU    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 2    abc 0B0Gh-SuuA2nTYzBOc0FCdGhUTWM    &lt;list [26]&gt;</span>
 <span class="co">#&gt; 3 filler 0B0Gh-SuuA2nTUXdfUFdiR3NOeGM    &lt;list [27]&gt;</span>
 
 ## just Sheets

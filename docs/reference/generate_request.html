@@ -98,10 +98,10 @@ intended for internal use and for programming around the Drive API.</p>
     
 
     <pre class="usage"><span class='fu'>generate_request</span>(<span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='fu'>character</span>(), <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(),
-  <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='drive_token.html'>drive_token</a></span>(), <span class='kw'>.api_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+  <span class='kw'>key</span> <span class='kw'>=</span> <span class='fu'><a href='drive_api_key.html'>drive_api_key</a></span>(), <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='drive_token.html'>drive_token</a></span>())
 
-<span class='fu'>build_request</span>(<span class='no'>path</span>, <span class='no'>method</span>, <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(), <span class='kw'>body</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>.api_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>build_request</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='no'>method</span>, <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(), <span class='kw'>body</span> <span class='kw'>=</span> <span class='fu'>list</span>(),
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -114,15 +114,17 @@ endpoints built into googledrive. Inspect via <code><a href='drive_endpoints.htm
     <tr>
       <th>params</th>
       <td><p>Named list. Parameters destined for endpoint URL substitution,
-the query, or body.</p></td>
+the query, or, for <code>generate_request()</code> only, the body.</p></td>
+    </tr>
+    <tr>
+      <th>key</th>
+      <td><p>API key, if none is already present in <code>params</code>. Set to <code>NULL</code> to
+suppress the inclusion of an API key.</p></td>
     </tr>
     <tr>
       <th>token</th>
-      <td><p>Drive token, obtained from <code><a href='drive_auth.html'>drive_auth()</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>.api_key</th>
-      <td><p><em>not in use yet</em></p></td>
+      <td><p>Drive token, obtained from <code><a href='drive_auth.html'>drive_auth()</a></code>. Set to <code>NULL</code> to
+suppress the inclusion of a token.</p></td>
     </tr>
     <tr>
       <th>path</th>
@@ -144,27 +146,34 @@ using named parameters found in the <code>params</code> argument.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>list()</code> Components are <code>method</code>, <code>path</code>, <code>query</code>, <code>body</code>, and
-<code>url</code>, suitable as input for <code><a href='make_request.html'>make_request()</a></code>. The <code>path</code> is
-post-substitution and the <code>query</code> is a named list of all the non-body
-<code>params</code> that were not used during this substitution. <code>url</code> is the full URL
-after prepending the base URL for the Drive v3 API and appending an API key
-to the query.</p>
+    <p><code>list()</code> Components are <code>method</code>, <code>path</code>, <code>query</code>, <code>body</code>,
+<code>token</code>, and <code>url</code>, suitable as input for <code><a href='make_request.html'>make_request()</a></code>. The
+<code>path</code> is post-substitution and the <code>query</code> is a named list of all the
+non-body <code>params</code> that were not used during this substitution. <code>url</code> is the
+full URL after prepending the base URL for the Drive v3 API and appending
+the query.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>There are two functions:</p><ul>
 <li><p><code>generate_request()</code> takes a nickname for an endpoint and uses the API spec
 to look up the <code>path</code> and <code>method</code>. The <code>params</code> are checked for validity and
-completeness with respect to the endpoint. It then passes things along to
-<code>gs_build_request()</code>. Use <code><a href='drive_endpoints.html'>drive_endpoints()</a></code> to see which endpoints can be
-accessed this way.</p></li>
+completeness with respect to the endpoint. Body parameters are separated from
+those destined for path substitution or the query. If <code>params</code> does not
+already specify an API key, the argument <code>key</code> is used. <code>generate_request()</code>
+then passes things along to <code>gs_build_request()</code>. Use <code><a href='drive_endpoints.html'>drive_endpoints()</a></code> to
+see which endpoints can be accessed this way.</p></li>
 <li><p><code>build_request()</code> builds a request from explicit parts. It is quite
 dumb, only doing URL endpoint substitution and URL formation. It's up to the
-caller to make sure the <code>path</code>, <code>method</code>, <code>params</code>, and <code>body</code> are valid. Use
-this to call a Drive API endpoint that doesn't appear in the list returned
-by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</p></li>
+caller to make sure the <code>path</code>, <code>method</code>, <code>params</code>, <code>body</code>, and <code>token</code> are
+valid. Use this to call a Drive API endpoint that doesn't appear in the list
+returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</p></li>
 </ul>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other low-level API functions: <code><a href='make_request.html'>make_request</a></code>,
+  <code><a href='process_response.html'>process_response</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -180,24 +189,23 @@ by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</p></li>
 #&gt; drive/v3/files/abc
 #&gt; 
 #&gt; $query
-#&gt; NULL
+#&gt; $query$key
+#&gt; [1] "AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
+#&gt; 
 #&gt; 
 #&gt; $body
-#&gt; NULL
+#&gt; list()
 #&gt; 
 #&gt; $token
 #&gt; NULL
 #&gt; 
-#&gt; $.api_key
-#&gt; NULL
-#&gt; 
 #&gt; $url
-#&gt; [1] "https://www.googleapis.com/drive/v3/files/abc"
+#&gt; [1] "https://www.googleapis.com/drive/v3/files/abc?key=AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
 #&gt; </div><div class='input'><span class='co'>## re-create the previous request, but the hard way, i.e. "by hand"</span>
 <span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'>build_request</span>(
   <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"drive/v3/files/{fileId}"</span>,
   <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"GET"</span>,
-  <span class='fu'>list</span>(<span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>),
+  <span class='fu'>list</span>(<span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='fu'><a href='drive_api_key.html'>drive_api_key</a></span>()),
   <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )
 <span class='no'>req</span></div><div class='output co'>#&gt; $method
@@ -207,19 +215,18 @@ by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</p></li>
 #&gt; drive/v3/files/abc
 #&gt; 
 #&gt; $query
-#&gt; NULL
+#&gt; $query$key
+#&gt; [1] "AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
+#&gt; 
 #&gt; 
 #&gt; $body
-#&gt; NULL
+#&gt; list()
 #&gt; 
 #&gt; $token
 #&gt; NULL
 #&gt; 
-#&gt; $.api_key
-#&gt; NULL
-#&gt; 
 #&gt; $url
-#&gt; [1] "https://www.googleapis.com/drive/v3/files/abc"
+#&gt; [1] "https://www.googleapis.com/drive/v3/files/abc?key=AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
 #&gt; </div><div class='input'>
 <span class='co'>## call an endpoint not used by googledrive</span>
 <span class='co'>## List a file's comments</span>
@@ -229,12 +236,12 @@ by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</p></li>
     <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"drive/v3/files/{fileId}/comments"</span>,
     <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"GET"</span>,
     <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(
-      <span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"file-id-goes-here"</span>,
+      <span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"your-file-id-goes-here"</span>,
       <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"*"</span>
     ),
     <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>googledrive</span><span class='kw'>:::</span><span class='fu'><a href='drive_token.html'>drive_token</a></span>()
   )
-  <span class='fu'><a href='make_request.html'>make_request</a></span>(<span class='no'>x</span>)
+  <span class='fu'><a href='process_response.html'>process_response</a></span>(<span class='fu'><a href='make_request.html'>make_request</a></span>(<span class='no'>req</span>))
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -245,6 +252,8 @@ by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</p></li>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

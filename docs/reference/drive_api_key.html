@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make a request for the Google Drive v3 API — make_request • googledrive</title>
+<title>Get an API key — drive_api_key • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,39 +86,43 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make a request for the Google Drive v3 API</h1>
+    <h1>Get an API key</h1>
     </div>
 
     
-    <p>Make a request for the Google Drive v3 API</p>
+    <p>Pass through an API key that is explicitly provided. Otherwise, consult the
+environment variable <code>GOOGLEDRIVE_API_KEY</code> and the API key built-into
+googledrive, in that order.</p>
     
 
-    <pre class="usage"><span class='fu'>make_request</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_api_key</span>(<span class='kw'>key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>List, contains the  <code>method</code>, <code>path</code>, <code>query</code>, and <code>url</code>, to make
-the API request obtained from <code><a href='generate_request.html'>build_request()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>List, Name-value pairs to query the API</p></td>
+      <th>key</th>
+      <td><p>Character, optional. A Google API key.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Object of class <code>response</code> from httr.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>Other low-level API functions: <code><a href='generate_request.html'>generate_request</a></code>,
-  <code><a href='process_response.html'>process_response</a></code></p>
+    <p>A Google API key</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## specify explicitly</span>
+<span class='fu'>drive_api_key</span>(<span class='st'>"I_have_my_own_key"</span>)</div><div class='output co'>#&gt; [1] "I_have_my_own_key"</div><div class='input'>
+<span class='co'>## specify via env var</span>
+<span class='fu'>tryCatch</span>({
+  <span class='fu'>Sys.setenv</span>(<span class='kw'>GOOGLEDRIVE_API_KEY</span> <span class='kw'>=</span> <span class='st'>"a1b2c3d4e5f7"</span>)
+  <span class='fu'>drive_api_key</span>()
+  },
+  <span class='kw'>finally</span> <span class='kw'>=</span> <span class='fu'>Sys.unsetenv</span>(<span class='st'>"GOOGLEDRIVE_API_KEY"</span>)
+)</div><div class='output co'>#&gt; [1] "a1b2c3d4e5f7"</div><div class='input'>
+<span class='co'>## use the built-in API key</span>
+<span class='fu'>drive_api_key</span>()</div><div class='output co'>#&gt; [1] "AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -126,9 +130,9 @@ the API request obtained from <code><a href='generate_request.html'>build_reques
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
