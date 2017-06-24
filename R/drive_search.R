@@ -1,18 +1,20 @@
 #' Search for files on Google Drive.
 #'
-#'   This will default to the most recent 100 files on your Google Drive. For
-#'   example, to get 200 instead, specify the `pageSize`, i.e.
-#'   `drive_ls(pageSize = 200)`.
+#' This is the closest googledrive function to what you get from
+#' <https://drive.google.com>: by default, you just get a listing of your files.
+#' You can also narrow the search in various ways, such as by file type, whether
+#' it's yours or shared with you, starred status, etc.
 
-#' @seealso Helpful links for forming queries:
-#'   * <https://developers.google.com/drive/v3/web/search-parameters>
-#'   * <https://developers.google.com/drive/v3/reference/files/list>
+#' @seealso Helpful links for forming queries: *
+#'   <https://developers.google.com/drive/v3/web/search-parameters> *
+#'   <https://developers.google.com/drive/v3/reference/files/list>
 #'
 #' @param pattern Character. If provided, only the files whose names match this
 #'   regular expression are returned.
 #' @param type Character. If provided, only files of this type will be returned.
-#'   Can be anything that [drive_mime_type()] knows how to handle.
-#' @param ... Parameters to pass along to the API query.
+#'   Can be anything that [drive_mime_type()] knows how to handle. This is
+#'   processed by googledrive and sent as a query parameter.
+#' @param ... Query parameters to pass along to the API query.
 #' @template verbose
 #'
 #' @template dribble-return
@@ -34,6 +36,9 @@
 #'
 #' ## files whose names match a regex
 #' drive_search(pattern = "jt")
+#'
+#' ## stuff about pagination
+#' drive_search(pageSize = 50)
 #' }
 #'
 #' @export
@@ -68,10 +73,9 @@ drive_search <- function(pattern = NULL, type = NULL, ..., verbose = TRUE) {
   }
 
   request <- generate_request(endpoint = "drive.files.list", params = params)
-  response <- make_request(request)
-  proc_res <- process_response(response)
+  proc_res_list <- do_paginated_request(request)
 
-  res_tbl <- as_dribble(proc_res$files)
+  res_tbl <- as_dribble(purrr::map(proc_res_list, "files") %>% purrr::flatten())
 
   if (is.null(pattern)) {
     return(res_tbl)

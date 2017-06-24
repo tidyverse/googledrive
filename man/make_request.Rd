@@ -2,13 +2,19 @@
 % Please edit documentation in R/make_request.R
 \name{make_request}
 \alias{make_request}
+\alias{do_request}
+\alias{do_paginated_request}
 \title{Make a request for the Google Drive v3 API}
 \usage{
 make_request(x, ...)
+
+do_request(x, ...)
+
+do_paginated_request(x, ...)
 }
 \arguments{
-\item{x}{List, contains the  \code{method}, \code{path}, \code{query}, and \code{url}, to make
-the API request obtained from \code{\link[=build_request]{build_request()}}}
+\item{x}{List, contains the  \code{method}, \code{path}, \code{query}, \code{body}, \code{token}, and
+\code{url}, to make the API request, presumably created with \code{\link[=build_request]{build_request()}}.}
 
 \item{...}{List, Name-value pairs to query the API}
 }

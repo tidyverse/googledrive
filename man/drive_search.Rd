@@ -11,9 +11,10 @@ drive_search(pattern = NULL, type = NULL, ..., verbose = TRUE)
 regular expression are returned.}
 
 \item{type}{Character. If provided, only files of this type will be returned.
-Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle.}
+Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle. This is
+processed by googledrive and sent as a query parameter.}
 
-\item{...}{Parameters to pass along to the API query.}
+\item{...}{Query parameters to pass along to the API query.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -23,9 +24,10 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-This will default to the most recent 100 files on your Google Drive. For
-example, to get 200 instead, specify the \code{pageSize}, i.e.
-\code{drive_ls(pageSize = 200)}.
+This is the closest googledrive function to what you get from
+\url{https://drive.google.com}: by default, you just get a listing of your files.
+You can also narrow the search in various ways, such as by file type, whether
+it's yours or shared with you, starred status, etc.
 }
 \examples{
 \dontrun{
@@ -45,13 +47,14 @@ drive_search(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 
 ## files whose names match a regex
 drive_search(pattern = "jt")
+
+## stuff about pagination
+drive_search(pageSize = 50)
 }
 
 }
 \seealso{
-Helpful links for forming queries:
-\itemize{
-\item \url{https://developers.google.com/drive/v3/web/search-parameters}
-\item \url{https://developers.google.com/drive/v3/reference/files/list}
-}
+Helpful links for forming queries: *
+\url{https://developers.google.com/drive/v3/web/search-parameters} *
+\url{https://developers.google.com/drive/v3/reference/files/list}
 }
