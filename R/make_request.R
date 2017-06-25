@@ -59,6 +59,30 @@ do_request <- function(x, ...) {
 #' @export
 #' @return `do_pagintated_request()`: List of lists, representing the returned
 #'   content, one component per page.
+#' @examples
+#' \dontrun{
+#' ## build a request for an endpoint that is:
+#' ##   * paginated
+#' ##   * NOT privileged in googledrive, i.e. not covered by generate_request()
+#' ## "comments" are a great example
+#' ## https://developers.google.com/drive/v3/reference/comments
+#' ##
+#' ## Practice with a target file with > 2 comments
+#' ## Note that we request 2 items (comments) per page
+#' req <- build_request(
+#'   path = "drive/v3/files/{fileId}/comments",
+#'   method = "GET",
+#'   params = list(
+#'     fileId = "your-file-id-goes-here",
+#'     fields = "*",
+#'     pageSize = 2
+#'   ),
+#'   token = googledrive:::drive_token()
+#' )
+#' ## make the paginated request, but cap it at 1 page
+#' ## should get back exactly two comments
+#' do_paginated_request(req, n_max = 1)
+#' }
 do_paginated_request <- function(x, ..., n_max = Inf, n = function(res) 1) {
   ## when traversing pages, you can't cleanly separate the task into
   ## make_request() and process_response(), because you need to process
@@ -66,7 +90,9 @@ do_paginated_request <- function(x, ..., n_max = Inf, n = function(res) 1) {
   ## so this function does both
   stopifnot(identical(x$method, "GET"))
 
-  x$query$fields <- x$query$fields %||% ""
+  ## if fields does not exist yet, you will need something to preprend
+  ## "nextPageToken" to ... "all fields" seems like best default choice
+  x$query$fields <- x$query$fields %||% "*"
   if (!grepl("nextPageToken", x$query$fields)) {
     x$query$fields <- glue("nextPageToken,{x$query$fields}")
   }
