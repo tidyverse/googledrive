@@ -5,9 +5,9 @@
 #' You can also narrow the search in various ways, such as by file type, whether
 #' it's yours or shared with you, starred status, etc.
 
-#' @seealso Helpful links for forming queries: *
-#'   <https://developers.google.com/drive/v3/web/search-parameters> *
-#'   <https://developers.google.com/drive/v3/reference/files/list>
+#' @seealso Helpful links for forming queries:
+#'   * <https://developers.google.com/drive/v3/web/search-parameters>
+#'   * <https://developers.google.com/drive/v3/reference/files/list>
 #'
 #' @param pattern Character. If provided, only the files whose names match this
 #'   regular expression are returned.

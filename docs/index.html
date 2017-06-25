@@ -113,20 +113,21 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <a href="#quick-demo" class="anchor"></a>Quick demo</h3>
 <p>Here’s how to list the most recently modified 100 files on your drive. This will kick off your authentication, so you will be sent to your browser to authorize your Google Drive access. The functions here are designed to be pipeable, using <code>%&gt;%</code>, however they obviously don’t require it.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_search.html">drive_search</a></span>()
-<span class="co">#&gt; # A tibble: 100 x 3</span>
-<span class="co">#&gt;                     name                           id files_resource</span>
-<span class="co">#&gt;  *                 &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt;  1                   def 0B0Gh-SuuA2nTRWRtSHJxeUFPWEU    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  2                   abc 0B0Gh-SuuA2nTYzBOc0FCdGhUTWM    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  3 bar-</span><span class="al">TEST</span><span class="co">-drive-upload 0B0Gh-SuuA2nTcFdFSEtBRU9kZkU    &lt;list [33]&gt;</span>
-<span class="co">#&gt;  4 bar-</span><span class="al">TEST</span><span class="co">-drive-upload 0B0Gh-SuuA2nTSWJQNXhpdE5BRXM    &lt;list [33]&gt;</span>
-<span class="co">#&gt;  5 bar-</span><span class="al">TEST</span><span class="co">-drive-upload 0B0Gh-SuuA2nTeDlRNjRaZTA0bVE    &lt;list [33]&gt;</span>
-<span class="co">#&gt;  6              chickwts 0B0Gh-SuuA2nTN05CNjk3bG8xbWs    &lt;list [33]&gt;</span>
-<span class="co">#&gt;  7          chickwts.rda 0B0Gh-SuuA2nTay1Vc0VQaHp2Qms    &lt;list [32]&gt;</span>
-<span class="co">#&gt;  8    chicken_little.jpg 0B0Gh-SuuA2nTbElsQUprMVZLYkE    &lt;list [35]&gt;</span>
-<span class="co">#&gt;  9         chicken_small 0B0Gh-SuuA2nTeDQzRUFXWU5hRGs    &lt;list [34]&gt;</span>
-<span class="co">#&gt; 10                filler 0B0Gh-SuuA2nTUXdfUFdiR3NOeGM    &lt;list [27]&gt;</span>
-<span class="co">#&gt; # ... with 90 more rows</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 132 x 3</span>
+<span class="co">#&gt;                           name</span>
+<span class="co">#&gt;  *                       &lt;chr&gt;</span>
+<span class="co">#&gt;  1                         def</span>
+<span class="co">#&gt;  2                         abc</span>
+<span class="co">#&gt;  3                      foobar</span>
+<span class="co">#&gt;  4                    chickwts</span>
+<span class="co">#&gt;  5                chickwts.rda</span>
+<span class="co">#&gt;  6          chicken_little.jpg</span>
+<span class="co">#&gt;  7               chicken_small</span>
+<span class="co">#&gt;  8                      filler</span>
+<span class="co">#&gt;  9 chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 10          another-share-test</span>
+<span class="co">#&gt; # ... with 122 more rows, and 2 more variables: id &lt;chr&gt;,</span>
+<span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
 <p>You can narrow the query by specifying a <code>pattern</code> you’d like to match names against.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_search.html">drive_search</a></span>(<span class="dt">pattern =</span> <span class="st">"baz"</span>)</code></pre></div>
 <p>Alternatively, you can refine the search using the <code>q</code> query parameter. Accepted search clauses can be found in the <a href="https://developers.google.com/drive/v3/web/search-parameters">Google Drive API documentation</a>. For example, if I wanted to search for all spreadsheets, I could run the following.</p>
@@ -147,15 +148,15 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;    name                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTRWRtSHJxeUFPWEU    &lt;list [30]&gt;</span>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTWlhOVWxLRENmOE0    &lt;list [30]&gt;</span>
 ## let's grab that file id and retrieve it that way
 x<span class="op">$</span>id
-<span class="co">#&gt; [1] "0B0Gh-SuuA2nTRWRtSHJxeUFPWEU"</span>
+<span class="co">#&gt; [1] "0B0Gh-SuuA2nTWlhOVWxLRENmOE0"</span>
 <span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(x<span class="op">$</span>id)
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;    name                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTRWRtSHJxeUFPWEU    &lt;list [30]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTWlhOVWxLRENmOE0    &lt;list [30]&gt;</span></code></pre></div>
 <p>In general, googledrive functions let you specify Drive file(s) by name (path), file id, and <code>dribble</code>. See examples below.</p>
 </div>
 <div id="upload-files" class="section level4">
@@ -171,13 +172,13 @@ x<span class="op">$</span>id
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                  name                           id files_resource</span>
 <span class="co">#&gt; *               &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-chickwts.csv 0B0Gh-SuuA2nTTUpvMFl0NmJwOXM    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 README-chickwts.csv 0B0Gh-SuuA2nTQXRZMzh1TGRKWk0    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## example of using a dribble as input
 drive_chickwts &lt;-<span class="st"> </span>drive_chickwts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_delete.html">drive_delete</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chickwts.csv: 0B0Gh-SuuA2nTTUpvMFl0NmJwOXM</span></code></pre></div>
+<span class="co">#&gt;   * README-chickwts.csv: 0B0Gh-SuuA2nTQXRZMzh1TGRKWk0</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drive_chickwts &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(<span class="st">"README-chickwts.csv"</span>, <span class="dt">type =</span> <span class="st">"spreadsheet"</span>)
 <span class="co">#&gt; File uploaded to Google Drive:</span>
 <span class="co">#&gt; README-chickwts.csv</span>
@@ -197,7 +198,7 @@ drive_chickwts<span class="op">$</span>publish
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;            check_time revision published auto_publish</span>
 <span class="co">#&gt;                &lt;dttm&gt;    &lt;chr&gt;     &lt;lgl&gt;        &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 2017-06-22 14:09:10        1      TRUE         TRUE</span></code></pre></div>
+<span class="co">#&gt; 1 2017-06-25 09:39:22        1      TRUE         TRUE</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_is_published.html">drive_is_published</a></span>(drive_chickwts)
 <span class="co">#&gt; The latest revision of Google Drive file 'README-chickwts.csv' is published.</span></code></pre></div>
 </div>
@@ -215,7 +216,7 @@ drive_chickwts<span class="op">$</span>publish
 <p>We can then extract a share link.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drive_chickwts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_share_link.html">drive_share_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1CBujsb94x80OW-2BN0F_FD8C7Q2JJx2p7npgLWz4G_8/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1YJAA62nX2n4_sJQ0N1rJiamnzdNbXCcleBz6DrLPqiY/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="clean-up" class="section level4">
 <h4 class="hasAnchor">
@@ -223,7 +224,7 @@ drive_chickwts<span class="op">$</span>publish
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drive_chickwts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_delete.html">drive_delete</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chickwts.csv: 1CBujsb94x80OW-2BN0F_FD8C7Q2JJx2p7npgLWz4G_8</span></code></pre></div>
+<span class="co">#&gt;   * README-chickwts.csv: 1YJAA62nX2n4_sJQ0N1rJiamnzdNbXCcleBz6DrLPqiY</span></code></pre></div>
 </div>
 </div>
 </div>

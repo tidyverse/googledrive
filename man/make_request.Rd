@@ -81,7 +81,7 @@ req <- build_request(
 )
 ## make the paginated request, but cap it at 1 page
 ## should get back exactly two comments
-do_paginated_request(req, n_max = 1) \%>\% View()
+do_paginated_request(req, n_max = 1)
 }
 }
 \seealso{
