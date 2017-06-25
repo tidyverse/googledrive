@@ -94,8 +94,11 @@ add_schema_params <- function(endpoint, nm) {
 endpoints <- imap(endpoints, add_schema_params)
 
 ## add API-wide params to all endpoints
-add_global_params <- function(x) {
+add_params <- function(x) {
   x[["parameters"]] <- c(x[["parameters"]], dd_content[["parameters"]])
+  if (isTRUE(x$supportsMediaDownload)) {
+    x$parameters$alt$enum = list("json", "media")
+  }
   x
 }
 endpoints <- map(endpoints, add_global_params)
@@ -166,7 +169,7 @@ params <- params %>%
     type = type %>% map(1, .null = NA) %>% flatten_chr(),
     repeated = repeated %>% map(1, .null = NA) %>% flatten_lgl(),
     format = format %>%  map(1, .null = NA) %>% flatten_chr(),
-    enum = enum %>% map(1, .null = NA) %>% flatten_chr(),
+    enum = enum %>%  modify_if(is_null, ~ NA),
     description = description %>% map(1, .null = NA) %>% flatten_chr()
   )
 ## repack all the info for each parameter into a list
