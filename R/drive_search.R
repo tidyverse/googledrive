@@ -14,6 +14,9 @@
 #' @param type Character. If provided, only files of this type will be returned.
 #'   Can be anything that [drive_mime_type()] knows how to handle. This is
 #'   processed by googledrive and sent as a query parameter.
+#' @param n_max Integer. An upper bound on the number of files to return. This
+#'   applies to the results returned by the API, which may be further filtered
+#'   locally, via the `pattern` argument.
 #' @param ... Query parameters to pass along to the API query.
 #' @template verbose
 #'
@@ -37,12 +40,18 @@
 #' ## files whose names match a regex
 #' drive_search(pattern = "jt")
 #'
-#' ## stuff about pagination
+#' ## control page size or cap the number of files returned
 #' drive_search(pageSize = 50)
+#' drive_search(n_max = 75)
+#' drive_search(pageSize = 5, n_max = 15)
 #' }
 #'
 #' @export
-drive_search <- function(pattern = NULL, type = NULL, ..., verbose = TRUE) {
+drive_search <- function(pattern = NULL,
+                         type = NULL,
+                         n_max = Inf,
+                         ...,
+                         verbose = TRUE) {
 
   if (!is.null(pattern)) {
     if (!(is.character(pattern) && length(pattern) == 1)) {
@@ -73,9 +82,16 @@ drive_search <- function(pattern = NULL, type = NULL, ..., verbose = TRUE) {
   }
 
   request <- generate_request(endpoint = "drive.files.list", params = params)
-  proc_res_list <- do_paginated_request(request)
+  proc_res_list <- do_paginated_request(
+    request,
+    n_max = n_max,
+    n = function(x) length(x$files)
+  )
 
   res_tbl <- as_dribble(purrr::map(proc_res_list, "files") %>% purrr::flatten())
+  if (n_max < Inf) {
+    res_tbl <- res_tbl[seq_len(n_max), ]
+  }
 
   if (is.null(pattern)) {
     return(res_tbl)

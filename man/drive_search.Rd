@@ -4,7 +4,8 @@
 \alias{drive_search}
 \title{Search for files on Google Drive.}
 \usage{
-drive_search(pattern = NULL, type = NULL, ..., verbose = TRUE)
+drive_search(pattern = NULL, type = NULL, n_max = Inf, ...,
+  verbose = TRUE)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the files whose names match this
@@ -13,6 +14,10 @@ regular expression are returned.}
 \item{type}{Character. If provided, only files of this type will be returned.
 Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle. This is
 processed by googledrive and sent as a query parameter.}
+
+\item{n_max}{Integer. An upper bound on the number of files to return. This
+applies to the results returned by the API, which may be further filtered
+locally, via the \code{pattern} argument.}
 
 \item{...}{Query parameters to pass along to the API query.}
 
@@ -48,8 +53,10 @@ drive_search(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 ## files whose names match a regex
 drive_search(pattern = "jt")
 
-## stuff about pagination
+## control page size or cap the number of files returned
 drive_search(pageSize = 50)
+drive_search(n_max = 75)
+drive_search(pageSize = 5, n_max = 15)
 }
 
 }
