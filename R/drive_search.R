@@ -58,12 +58,14 @@ drive_search <- function(pattern = NULL,
       stop("Please update `pattern` to be a character string.", call. = FALSE)
     }
   }
+  stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
+  if (n_max < 1) return(dribble())
 
   params <- list(...)
   params$fields <- params$fields %||% prep_fields(drive_fields())
 
   if (!is.null(type)) {
-    ## if they are all NA, this will error, because drive_mime_type
+    ## if they are all NA, this will error, because drive_mime_type()
     ## doesn't allow it, otherwise we proceed with the non-NA mime types
     mime_type <- drive_mime_type(type)
     mime_type <- purrr::discard(mime_type, is.na)
@@ -94,13 +96,8 @@ drive_search <- function(pattern = NULL,
   }
 
   if (is.null(pattern)) {
-    return(res_tbl)
+    res_tbl
+  } else {
+    res_tbl[grep(pattern, res_tbl$name), ]
   }
-
-  keep_names <- grep(pattern, res_tbl$name)
-  if (length(keep_names) == 0L) {
-    if (verbose) message(sprintf("No file names match the pattern: '%s'.", pattern))
-    return(invisible())
-  }
-  as_dribble(res_tbl[keep_names, ]) ## TO DO change this once we get indexing working
 }

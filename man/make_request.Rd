@@ -14,8 +14,8 @@ do_paginated_request(x, ..., n_max = Inf, n = function(res) 1)
 }
 \arguments{
 \item{x}{List, holding the components for an HTTP request, presumably created
-with \code{\link[=build_request]{build_request()}}. Should contain the  \code{method}, \code{path}, \code{query},
-\code{body}, \code{token}, and \code{url}.}
+with \code{\link[=generate_request]{generate_request()}} or \code{\link[=build_request]{build_request()}}. Should contain the
+\code{method}, \code{path}, \code{query}, \code{body}, \code{token}, and \code{url}.}
 
 \item{...}{Optional arguments passed through to the HTTP method.}
 
@@ -25,8 +25,8 @@ is no limit and we keep making requests until we get all items.}
 \item{n}{Function that computes the number of items in one response or page.
 The default function always returns \code{1} and therefore treats each page as
 an item. If you know more about the structure of the response, you can
-pass another function to count, for example, the number of files or
-comments.}
+pass another function to count and threshhold, for example, the number of
+files or comments.}
 }
 \value{
 \code{make_request()}: Object of class \code{response} from \link{httr}.
@@ -42,7 +42,7 @@ Low-level functions to execute one or more Drive API requests and, perhaps,
 process the response(s). Most users should, instead, use higher-level
 wrappers that facilitate common tasks, such as uploading or downloading Drive
 files. The functions here are intended for internal use and for programming
-around the Drive API. There are three functions:
+around the Drive API. Three functions are documented here:
 \itemize{
 \item \code{make_request()} does the bare minimum: just calls an HTTP method, only
 adding the googledrive user agent. Typically the input is created with

@@ -4,7 +4,7 @@
 #' process the response(s). Most users should, instead, use higher-level
 #' wrappers that facilitate common tasks, such as uploading or downloading Drive
 #' files. The functions here are intended for internal use and for programming
-#' around the Drive API. There are three functions:
+#' around the Drive API. Three functions are documented here:
 #'   * `make_request()` does the bare minimum: just calls an HTTP method, only
 #'     adding the googledrive user agent. Typically the input is created with
 #'     [`generate_request()`] or [`build_request()`] and the output is
@@ -20,8 +20,8 @@
 #'     responses, one per page.
 #'
 #' @param x List, holding the components for an HTTP request, presumably created
-#'   with [build_request()]. Should contain the  `method`, `path`, `query`,
-#'   `body`, `token`, and `url`.
+#'   with [`generate_request()`] or [build_request()]. Should contain the
+#'    `method`, `path`, `query`, `body`, `token`, and `url`.
 #' @param ... Optional arguments passed through to the HTTP method.
 #'
 #' @return `make_request()`: Object of class `response` from [httr].
@@ -54,8 +54,8 @@ do_request <- function(x, ...) {
 #' @param n Function that computes the number of items in one response or page.
 #'   The default function always returns `1` and therefore treats each page as
 #'   an item. If you know more about the structure of the response, you can
-#'   pass another function to count, for example, the number of files or
-#'   comments.
+#'   pass another function to count and threshhold, for example, the number of
+#'   files or comments.
 #' @export
 #' @return `do_pagintated_request()`: List of lists, representing the returned
 #'   content, one component per page.
@@ -80,11 +80,11 @@ do_paginated_request <- function(x, ..., n_max = Inf, n = function(res) 1) {
     x$query$pageToken <- responses[[i]]$nextPageToken
     total <- total + n(responses[[i]])
     if (is.null(x$query$pageToken) || total >= n_max) {
-      if (i > 1) message(" .")
+      # if (i > 1) message(" .")
       break
     }
-    if (i == 1) message("Traversing pages", appendLF = FALSE)
-    message(" .", appendLF = FALSE)
+    # if (i == 1) message("Traversing pages", appendLF = FALSE)
+    # message(" .", appendLF = FALSE)
     i <- i + 1
   }
 

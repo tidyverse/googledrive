@@ -46,15 +46,6 @@ test_that("drive_search() finds created file correctly", {
   skip_on_travis()
 
   ## this should be able to find the folder we created, foo-TEST-drive-search
-
   expect_identical(drive_search(pattern = nm_("foo"))$name, nm_("foo"))
 
-})
-
-test_that("drive_search() gives sensible message if a file does not exist", {
-  skip_on_appveyor()
-  skip_on_travis()
-
-  expect_message(drive_search(pattern = nm_("this-should-not-exist")),
-                 "No file names match the pattern")
 })
