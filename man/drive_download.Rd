@@ -13,9 +13,7 @@ on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
 \item{out_path}{Character. Path for output file. Will default to its Google Drive
-name. Google files must include the intended extension. This can be specified by the
-\code{out_path} or the \code{type} parameter. Google files can be downloaded to types
-specified in the \href{https://developers.google.com/drive/v3/web/manage-downloads}{Drive API documentation}.}
+name.}
 
 \item{type}{Character. Extension you would like for the local file.}
 
@@ -26,7 +24,11 @@ exists locally?}
 (default \code{TRUE}).}
 }
 \description{
-Download a file from Google Drive.
+This function downloads files from Google Drive. Google type files (i.e.: Google Documents,
+Google Sheets, Google Slides, etc.) must indicate the intended extension for the local file.
+This can be indicated by specifying the full file name with the \code{out_path} parameter or indended
+exension with the \code{type} parameter. Google type files can be downloaded to types specified in the
+\href{https://developers.google.com/drive/v3/web/manage-downloads}{Drive API documentation}.
 }
 \examples{
 \dontrun{

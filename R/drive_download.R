@@ -1,10 +1,13 @@
 #' Download a file from Google Drive.
 #'
+#' This function downloads files from Google Drive. Google type files (i.e.: Google Documents,
+#' Google Sheets, Google Slides, etc.) must indicate the intended extension for the local file.
+#' This can be indicated by specifying the full file name with the `out_path` parameter or indended
+#' exension with the `type` parameter. Google type files can be downloaded to types specified in the
+#' [Drive API documentation](https://developers.google.com/drive/v3/web/manage-downloads).
 #' @template file
 #' @param out_path Character. Path for output file. Will default to its Google Drive
-#'   name. Google files must include the intended extension. This can be specified by the
-#'   `out_path` or the `type` parameter. Google files can be downloaded to types
-#'   specified in the [Drive API documentation](https://developers.google.com/drive/v3/web/manage-downloads).
+#'   name.
 #' @param type Character. Extension you would like for the local file.
 #' @param overwrite A logical scalar, do you want to overwrite a file that already
 #'    exists locally?
