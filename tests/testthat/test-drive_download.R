@@ -18,6 +18,8 @@ if (run) {
   drive_upload(system.file("DESCRIPTION"), nm_("foo"), verbose = FALSE)
 }
 test_that("drive_download properly downloads",{
+  skip_on_appveyor()
+  skip_on_travis()
   expect_message(drive_download(file = nm_("foo"), out_path = "description.txt"),
                  "File downloaded from Google Drive:")
   expect_true(file.exists("description.txt"))
@@ -25,6 +27,8 @@ test_that("drive_download properly downloads",{
 })
 
 test_that("drive_download properly errors if file does not exist on Drive",{
+  skip_on_appveyor()
+  skip_on_travis()
   expect_error(drive_download(file = nm_("this-should-not-exist"),
                               out_path = "empty.txt"),
                "No file names on your Drive match:")
