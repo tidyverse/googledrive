@@ -15,9 +15,10 @@ a \code{\link{dribble}}.}
 regular expression are returned.}
 
 \item{type}{Character. If provided, only files of this type will be returned.
-Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle.}
+Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle. This is
+processed by googledrive and sent as a query parameter.}
 
-\item{...}{Parameters to pass along to the API query.}
+\item{...}{Query parameters to pass along to the API query.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with

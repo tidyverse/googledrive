@@ -42,20 +42,21 @@ Here's how to list the most recently modified 100 files on your drive. This will
 
 ``` r
 drive_search()
-#> # A tibble: 100 x 3
-#>                       name                                           id
-#>  *                   <chr>                                        <chr>
-#>  1                     def                 0B0Gh-SuuA2nTSHNoNDJqRmJobWc
-#>  2                     abc                 0B0Gh-SuuA2nTQTFPNThDQms3ek0
-#>  3                     def                 0B0Gh-SuuA2nTUkF2bDlndndlbWs
-#>  4 foo-TEST-drive-download                 0B0Gh-SuuA2nTSlZ1elNuZi1Ecms
-#>  5                  foobar 1qoA3kr9DmSTtsG9hoicP7ylCLGq_qDRRod-NS3vAk38
-#>  6                chickwts                 0B0Gh-SuuA2nTN05CNjk3bG8xbWs
-#>  7            chickwts.rda                 0B0Gh-SuuA2nTay1Vc0VQaHp2Qms
-#>  8      chicken_little.jpg                 0B0Gh-SuuA2nTbElsQUprMVZLYkE
-#>  9           chicken_small                 0B0Gh-SuuA2nTeDQzRUFXWU5hRGs
-#> 10                  filler                 0B0Gh-SuuA2nTUXdfUFdiR3NOeGM
-#> # ... with 90 more rows, and 1 more variables: files_resource <list>
+#> # A tibble: 132 x 3
+#>                           name
+#>  *                       <chr>
+#>  1                         def
+#>  2                         abc
+#>  3                      foobar
+#>  4                    chickwts
+#>  5                chickwts.rda
+#>  6          chicken_little.jpg
+#>  7               chicken_small
+#>  8                      filler
+#>  9 chickwts-TEST-drive-publish
+#> 10          another-share-test
+#> # ... with 122 more rows, and 2 more variables: id <chr>,
+#> #   files_resource <list>
 ```
 
 You can narrow the query by specifying a `pattern` you'd like to match names against.
@@ -92,6 +93,7 @@ In addition to `drive_search()`, you can also identify files by name (path, real
 ## let's grab that file id and retrieve it that way
 x$id
 #> [1] "0B0Gh-SuuA2nTSHNoNDJqRmJobWc"
+
 drive_get(x$id)
 #> # A tibble: 1 x 3
 #>    name                           id files_resource

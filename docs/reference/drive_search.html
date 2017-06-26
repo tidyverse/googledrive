@@ -90,12 +90,14 @@
     </div>
 
     
-    <p>This will default to the most recent 100 files on your Google Drive. For
-example, to get 200 instead, specify the <code>pageSize</code>, i.e.
-<code>drive_ls(pageSize = 200)</code>.</p>
+    <p>This is the closest googledrive function to what you get from
+<a href = 'https://drive.google.com'>https://drive.google.com</a>: by default, you just get a listing of your files.
+You can also narrow the search in various ways, such as by file type, whether
+it's yours or shared with you, starred status, etc.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='no'>...</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -108,11 +110,18 @@ regular expression are returned.</p></td>
     <tr>
       <th>type</th>
       <td><p>Character. If provided, only files of this type will be returned.
-Can be anything that <code><a href='drive_mime_type.html'>drive_mime_type()</a></code> knows how to handle.</p></td>
+Can be anything that <code><a href='drive_mime_type.html'>drive_mime_type()</a></code> knows how to handle. This is
+processed by googledrive and sent as a query parameter.</p></td>
+    </tr>
+    <tr>
+      <th>n_max</th>
+      <td><p>Integer. An upper bound on the number of files to return. This
+applies to the results returned by the API, which may be further filtered
+locally, via the <code>pattern</code> argument.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Parameters to pass along to the API query.</p></td>
+      <td><p>Query parameters to pass along to the API query.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -128,10 +137,9 @@ Can be anything that <code><a href='drive_mime_type.html'>drive_mime_type()</a><
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Helpful links for forming queries:</p><ul>
-<li><p><a href = 'https://developers.google.com/drive/v3/web/search-parameters'>https://developers.google.com/drive/v3/web/search-parameters</a></p></li>
-<li><p><a href = 'https://developers.google.com/drive/v3/reference/files/list'>https://developers.google.com/drive/v3/reference/files/list</a></p></li>
-</ul>
+    <p>Helpful links for forming queries: *
+<a href = 'https://developers.google.com/drive/v3/web/search-parameters'>https://developers.google.com/drive/v3/web/search-parameters</a> *
+<a href = 'https://developers.google.com/drive/v3/reference/files/list'>https://developers.google.com/drive/v3/reference/files/list</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -152,6 +160,11 @@ Can be anything that <code><a href='drive_mime_type.html'>drive_mime_type()</a><
 
   <span class='co'>## files whose names match a regex</span>
   <span class='fu'>drive_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"jt"</span>)
+
+  <span class='co'>## control page size or cap the number of files returned</span>
+  <span class='fu'>drive_search</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>50</span>)
+  <span class='fu'>drive_search</span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>75</span>)
+  <span class='fu'>drive_search</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>15</span>)
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
