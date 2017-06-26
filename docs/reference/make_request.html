@@ -90,28 +90,70 @@
     </div>
 
     
-    <p>Make a request for the Google Drive v3 API</p>
+    <p>Low-level functions to execute one or more Drive API requests and, perhaps,
+process the response(s). Most users should, instead, use higher-level
+wrappers that facilitate common tasks, such as uploading or downloading Drive
+files. The functions here are intended for internal use and for programming
+around the Drive API. Three functions are documented here:</p><ul>
+<li><p><code>make_request()</code> does the bare minimum: just calls an HTTP method, only
+adding the googledrive user agent. Typically the input is created with
+<code><a href='generate_request.html'>generate_request()</a></code> or <code><a href='generate_request.html'>build_request()</a></code> and the output is
+processed with <code><a href='process_response.html'>process_response()</a></code>.</p></li>
+<li><p><code>do_request()</code> is simply <code>process_response(make_request(x, ...))</code>. It
+exists only because we had to make <code>do_paginated_request()</code> and it felt
+weird to not make the equivalent for a single request.</p></li>
+<li><p><code>do_paginated_request()</code> executes the input request <strong>with page
+traversal</strong>. It is impossible to separate paginated requests into a "make
+request" step and a "process request" step, because the token for the
+next page must be extracted from the content of the current page.
+Therefore this function does both and returns a list of processed
+responses, one per page.</p></li>
+</ul>
     
 
-    <pre class="usage"><span class='fu'>make_request</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>make_request</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>do_request</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>do_paginated_request</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>res</span>) <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>List, contains the  <code>method</code>, <code>path</code>, <code>query</code>, and <code>url</code>, to make
-the API request obtained from <code><a href='generate_request.html'>build_request()</a></code></p></td>
+      <td><p>List, holding the components for an HTTP request, presumably created
+with <code><a href='generate_request.html'>generate_request()</a></code> or <code><a href='generate_request.html'>build_request()</a></code>. Should contain the
+<code>method</code>, <code>path</code>, <code>query</code>, <code>body</code>, <code>token</code>, and <code>url</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>List, Name-value pairs to query the API</p></td>
+      <td><p>Optional arguments passed through to the HTTP method.</p></td>
+    </tr>
+    <tr>
+      <th>n_max</th>
+      <td><p>Maximum number of items to return. Defaults to <code>Inf</code>, i.e. there
+is no limit and we keep making requests until we get all items.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>Function that computes the number of items in one response or page.
+The default function always returns <code>1</code> and therefore treats each page as
+an item. If you know more about the structure of the response, you can
+pass another function to count and threshhold, for example, the number of
+files or comments.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Object of class <code>response</code> from httr.</p>
+    <p><code>make_request()</code>: Object of class <code>response</code> from httr.
+
+<code>do_request()</code>: List representing the content returned by a single
+request.
+
+<code>do_pagintated_request()</code>: List of lists, representing the returned
+content, one component per page.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -119,6 +161,30 @@ the API request obtained from <code><a href='generate_request.html'>build_reques
   <code><a href='process_response.html'>process_response</a></code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
+  <span class='co'>## build a request for an endpoint that is:</span>
+  <span class='co'>##   * paginated</span>
+  <span class='co'>##   * NOT privileged in googledrive, i.e. not covered by generate_request()</span>
+  <span class='co'>## "comments" are a great example</span>
+  <span class='co'>## https://developers.google.com/drive/v3/reference/comments</span>
+  <span class='co'>##</span>
+  <span class='co'>## Practice with a target file with &gt; 2 comments</span>
+  <span class='co'>## Note that we request 2 items (comments) per page</span>
+  <span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate_request.html'>build_request</a></span>(
+    <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"drive/v3/files/{fileId}/comments"</span>,
+    <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"GET"</span>,
+    <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(
+      <span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"your-file-id-goes-here"</span>,
+      <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"*"</span>,
+      <span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>2</span>
+    ),
+    <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>googledrive</span><span class='kw'>:::</span><span class='fu'><a href='drive_token.html'>drive_token</a></span>()
+  )
+  <span class='co'>## make the paginated request, but cap it at 1 page</span>
+  <span class='co'>## should get back exactly two comments</span>
+  <span class='fu'>do_paginated_request</span>(<span class='no'>req</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -128,7 +194,9 @@ the API request obtained from <code><a href='generate_request.html'>build_reques
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
