@@ -90,14 +90,16 @@ drive_search <- function(pattern = NULL,
     n = function(x) length(x$files)
   )
 
-  res_tbl <- as_dribble(purrr::map(proc_res_list, "files") %>% purrr::flatten())
-  if (n_max < Inf) {
+  res_tbl <- proc_res_list %>%
+    purrr::map("files") %>%
+    purrr::flatten() %>%
+    as_dribble()
+
+  if (!is.null(pattern)) {
+    res_tbl <- res_tbl[grep(pattern, res_tbl$name), ]
+  }
+  if (n_max < nrow(res_tbl)) {
     res_tbl <- res_tbl[seq_len(n_max), ]
   }
-
-  if (is.null(pattern)) {
-    res_tbl
-  } else {
-    res_tbl[grep(pattern, res_tbl$name), ]
-  }
+  res_tbl
 }

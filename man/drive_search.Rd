@@ -61,7 +61,9 @@ drive_search(pageSize = 5, n_max = 15)
 
 }
 \seealso{
-Helpful links for forming queries: *
-\url{https://developers.google.com/drive/v3/web/search-parameters} *
-\url{https://developers.google.com/drive/v3/reference/files/list}
+Helpful links for forming queries:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/web/search-parameters}
+\item \url{https://developers.google.com/drive/v3/reference/files/list}
+}
 }
