@@ -21,14 +21,19 @@ drive_download <- function(file = NULL,
                            out_path = NULL,
                            overwrite = FALSE,
                            verbose = TRUE) {
-  file <- as_dribble(file)
-  file <- confirm_single_file(file)
+  in_file <- as_dribble(file)
+
+  if (nrow(in_file) == 0L) {
+    stop(glue::glue("No file names on your Drive match: {sq(file)}"))
+  }
+
+  in_file <- confirm_single_file(in_file)
 
   if (is.null(out_path)) {
     stop("You must specify `out_path`.")
   }
 
-  mime_type <- file$files_resource[[1]]$mimeType
+  mime_type <- in_file$files_resource[[1]]$mimeType
 
   ## it seems that it needs an extenstion to save properly
   ext <- tools::file_ext(out_path)
@@ -40,13 +45,13 @@ drive_download <- function(file = NULL,
 
   request <- generate_request(endpoint = "drive.files.get",
                               params = list(alt = "media",
-                                            fileId = file$id))
+                                            fileId = in_file$id))
   } else {
     ## TODO check that extension is actually allowed per
     ## https://developers.google.com/drive/v3/web/manage-downloads
     mime_type <- drive_mime_type(ext)
     request <- generate_request(endpoint = "drive.files.export",
-                                params = list(fileId = file$id,
+                                params = list(fileId = in_file$id,
                                               mimeType = mime_type ))
   }
 
@@ -56,12 +61,12 @@ drive_download <- function(file = NULL,
   if (success) {
     if (verbose) {
       message(
-        glue::glue("File downloaded from Google Drive:\n{sq(file$name)}\nSaved locally as:\n{sq(out_path)}")
+        glue::glue("File downloaded from Google Drive:\n{sq(in_file$name)}\nSaved locally as:\n{sq(out_path)}")
       )
     }
   } else {
     spf("Zoinks! the file doesn't seem to have downloaded")
   }
-  invisible(file)
+  invisible(in_file)
 }
 
