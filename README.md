@@ -43,19 +43,19 @@ Here's how to list the most recently modified 100 files on your drive. This will
 ``` r
 drive_search()
 #> # A tibble: 100 x 3
-#>                     name                           id files_resource
-#>  *                 <chr>                        <chr>         <list>
-#>  1                   def 0B0Gh-SuuA2nTOFgxRUJIX2hlWWM    <list [26]>
-#>  2                   abc 0B0Gh-SuuA2nTUzA2ZDBQaFFRVFE    <list [26]>
-#>  3 bar-TEST-drive-upload 0B0Gh-SuuA2nTcFdFSEtBRU9kZkU    <list [33]>
-#>  4 bar-TEST-drive-upload 0B0Gh-SuuA2nTSWJQNXhpdE5BRXM    <list [33]>
-#>  5 bar-TEST-drive-upload 0B0Gh-SuuA2nTeDlRNjRaZTA0bVE    <list [33]>
-#>  6              chickwts 0B0Gh-SuuA2nTN05CNjk3bG8xbWs    <list [33]>
-#>  7          chickwts.rda 0B0Gh-SuuA2nTay1Vc0VQaHp2Qms    <list [32]>
-#>  8    chicken_little.jpg 0B0Gh-SuuA2nTbElsQUprMVZLYkE    <list [35]>
-#>  9         chicken_small 0B0Gh-SuuA2nTeDQzRUFXWU5hRGs    <list [34]>
-#> 10                filler 0B0Gh-SuuA2nTUXdfUFdiR3NOeGM    <list [27]>
-#> # ... with 90 more rows
+#>                       name                                           id
+#>  *                   <chr>                                        <chr>
+#>  1                     def                 0B0Gh-SuuA2nTSHNoNDJqRmJobWc
+#>  2                     abc                 0B0Gh-SuuA2nTQTFPNThDQms3ek0
+#>  3                     def                 0B0Gh-SuuA2nTUkF2bDlndndlbWs
+#>  4 foo-TEST-drive-download                 0B0Gh-SuuA2nTSlZ1elNuZi1Ecms
+#>  5                  foobar 1qoA3kr9DmSTtsG9hoicP7ylCLGq_qDRRod-NS3vAk38
+#>  6                chickwts                 0B0Gh-SuuA2nTN05CNjk3bG8xbWs
+#>  7            chickwts.rda                 0B0Gh-SuuA2nTay1Vc0VQaHp2Qms
+#>  8      chicken_little.jpg                 0B0Gh-SuuA2nTbElsQUprMVZLYkE
+#>  9           chicken_small                 0B0Gh-SuuA2nTeDQzRUFXWU5hRGs
+#> 10                  filler                 0B0Gh-SuuA2nTUXdfUFdiR3NOeGM
+#> # ... with 90 more rows, and 1 more variables: files_resource <list>
 ```
 
 You can narrow the query by specifying a `pattern` you'd like to match names against.
@@ -88,15 +88,15 @@ In addition to `drive_search()`, you can also identify files by name (path, real
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTOFgxRUJIX2hlWWM    <list [30]>
+#> 1   def 0B0Gh-SuuA2nTSHNoNDJqRmJobWc    <list [30]>
 ## let's grab that file id and retrieve it that way
 x$id
-#> [1] "0B0Gh-SuuA2nTOFgxRUJIX2hlWWM"
+#> [1] "0B0Gh-SuuA2nTSHNoNDJqRmJobWc"
 drive_get(x$id)
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTOFgxRUJIX2hlWWM    <list [30]>
+#> 1   def 0B0Gh-SuuA2nTSHNoNDJqRmJobWc    <list [30]>
 ```
 
 In general, googledrive functions let you specify Drive file(s) by name (path), file id, and `dribble`. See examples below.
@@ -115,7 +115,7 @@ write.csv(chickwts, "README-chickwts.csv")
 #> # A tibble: 1 x 3
 #>                  name                           id files_resource
 #> *               <chr>                        <chr>         <list>
-#> 1 README-chickwts.csv 0B0Gh-SuuA2nTNml4SXYybEtuV0E    <list [36]>
+#> 1 README-chickwts.csv 0B0Gh-SuuA2nTWGlUdXBBcEhQSm8    <list [36]>
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -125,7 +125,7 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 drive_chickwts <- drive_chickwts %>%
   drive_delete()
 #> Files deleted:
-#>   * README-chickwts.csv: 0B0Gh-SuuA2nTNml4SXYybEtuV0E
+#>   * README-chickwts.csv: 0B0Gh-SuuA2nTWGlUdXBBcEhQSm8
 ```
 
 ``` r
@@ -154,7 +154,7 @@ drive_chickwts$publish
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-06-22 14:08:59        1      TRUE         TRUE
+#> 1 2017-06-26 17:30:21        1      TRUE         TRUE
 ```
 
 ``` r
@@ -182,7 +182,47 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1bRICw5NA-ankc7icdPiAK2a3YBIR1zB4sY8upwGccc4/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/18On30CltNkW2b_wWu9GPE7CI0GCfH6SAn7LB0dUyoeA/edit?usp=drivesdk"
+```
+
+#### Download files
+
+##### Google files
+
+We can download files from Google Drive. Google type files (such as Google Documents, Google Sheets, Google Slides, etc.) need to have the file local file extension specified either with the `type` or `out_path` parameters. For example, if I would like to download the "538-star-wars-survey" Google Sheet as a `.csv` I could run the following.
+
+``` r
+drive_download("538-star-wars-survey", type = "csv")
+#> File downloaded from Google Drive:
+#> '538-star-wars-survey'
+#> Saved locally as:
+#> '538-star-wars-survey.csv'
+```
+
+Alternatively, I could specify the `out_path` parameter.
+
+``` r
+drive_download("538-star-wars-survey",
+               out_path = "538-star-wars-survey.csv",
+               overwrite = TRUE)
+#> File downloaded from Google Drive:
+#> '538-star-wars-survey'
+#> Saved locally as:
+#> '538-star-wars-survey.csv'
+```
+
+Notice in the example above, I specified `overwrite = TRUE`. This allowed me to overwrite the file previously saved.
+
+##### All other files
+
+Downloading files that are *not* Google type files (for example a file uploaded as a `.csv`, `.rda`, or `.txt`) does not require the extension specification. You can still specify the desired local file name and location using `out_path` or allow the function to default to the file name on Google Drive and save to your working directory. For example, I can download the `drive_chickwts` csv we just uploaded in the following manner.
+
+``` r
+drive_download(drive_chickwts, overwrite = TRUE)
+#> File downloaded from Google Drive:
+#> 'README-chickwts.csv'
+#> Saved locally as:
+#> 'README-chickwts.csv'
 ```
 
 #### Clean up
@@ -191,5 +231,5 @@ drive_chickwts %>%
 drive_chickwts %>%
   drive_delete()
 #> Files deleted:
-#>   * README-chickwts.csv: 1bRICw5NA-ankc7icdPiAK2a3YBIR1zB4sY8upwGccc4
+#>   * README-chickwts.csv: 18On30CltNkW2b_wWu9GPE7CI0GCfH6SAn7LB0dUyoeA
 ```

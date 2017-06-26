@@ -150,6 +150,33 @@ drive_chickwts %>%
   drive_share_link()
 ```
 
+#### Download files
+
+##### Google files
+
+We can download files from Google Drive. Google type files (such as Google Documents, Google Sheets, Google Slides, etc.) need to have the file local file extension specified either with the `type` or `out_path` parameters. For example, if I would like to download the "538-star-wars-survey" Google Sheet as a `.csv` I could run the following.
+
+```{r}
+drive_download("538-star-wars-survey", type = "csv")
+```
+
+Alternatively, I could specify the `out_path` parameter.
+```{r}
+drive_download("538-star-wars-survey",
+               out_path = "538-star-wars-survey.csv",
+               overwrite = TRUE)
+```
+
+Notice in the example above, I specified `overwrite = TRUE`. This allowed me to overwrite the file previously saved.
+
+##### All other files
+
+Downloading files that are *not* Google type files (for example a file uploaded as a `.csv`, `.rda`, or `.txt`) does not require the extension specification. You can still specify the desired local file name and location using `out_path` or allow the function to default to the file name on Google Drive and save to your working directory. For example, I can download the `drive_chickwts` csv we just uploaded in the following manner.
+
+```{r}
+drive_download(drive_chickwts, overwrite = TRUE)
+```
+
 #### Clean up
 
 ```{r}
@@ -159,5 +186,6 @@ drive_chickwts %>%
 
 ```{r, echo = FALSE}
 rm <- file.remove("README-chickwts.csv")
+rm <- file.remove("538-star-wars-survey.csv")
 ```
 
