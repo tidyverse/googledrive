@@ -39,10 +39,10 @@ drive_download <- function(file = NULL,
     ext <- tools::file_ext(out_path)
     if (ext == "") {
       stop(
-        glue::glue(
+        glue(
           "We don't know how to save the Google file: {sq(out_path)} \nPlease specify a file name with an exension in `out_path`."
-          )
         )
+      )
     }
     mime_type <- drive_mime_type(ext)
     request <- generate_request(endpoint = "drive.files.export",
@@ -60,7 +60,7 @@ drive_download <- function(file = NULL,
   if (success) {
     if (verbose) {
       message(
-        glue::glue("File downloaded from Google Drive:\n{sq(file$name)}\nSaved locally as:\n{sq(out_path)}")
+        glue("File downloaded from Google Drive:\n{sq(file$name)}\nSaved locally as:\n{sq(out_path)}")
       )
     }
   } else {
