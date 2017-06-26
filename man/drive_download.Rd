@@ -4,8 +4,8 @@
 \alias{drive_download}
 \title{Download a file from Google Drive.}
 \usage{
-drive_download(file = NULL, out_path = NULL, overwrite = FALSE,
-  verbose = TRUE)
+drive_download(file = NULL, out_path = NULL, type = NULL,
+  overwrite = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
@@ -13,8 +13,11 @@ on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
 \item{out_path}{Character. Path for output file. Will default to its Google Drive
-name. Google files must include the intended extension and can be downloaded to types
+name. Google files must include the intended extension. This can be specified by the
+\code{out_path} or the \code{type} parameter. Google files can be downloaded to types
 specified in the \href{https://developers.google.com/drive/v3/web/manage-downloads}{Drive API documentation}.}
+
+\item{type}{Character. Extension you would like for the local file.}
 
 \item{overwrite}{A logical scalar, do you want to overwrite a file that already
 exists locally?}
@@ -34,8 +37,16 @@ drive_download(file = "chickwts.csv")
 ## "chickwts.csv".
 drive_download(file = "chickwts", out_path = "chickwts.csv")
 
+## This will also export a Google Sheet named "chickwts" to the working
+## directory as "chickwts.csv".
+drive_download(file = "chickwts", type = "csv")
+
 ## Export a Google Document named "foobar" to the working directory as
-## "foobar.docx"
+## "foobar.docx".
 drive_download(file = "foobar", out_path = "foobar.docx")
+
+## This will also export a Google Document named "foobar" to the working
+## directory as "foobar.docx".
+drive_download(file = "foobar", type = "docx")
 }
 }
