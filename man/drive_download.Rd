@@ -12,8 +12,9 @@ drive_download(file = NULL, out_path = NULL, overwrite = FALSE,
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{out_path}{Character. Path for output file. Google files can
-be downloaded to types specified \href{https://developers.google.com/drive/v3/web/manage-downloads}{here}.}
+\item{out_path}{Character. Path for output file. Will default to its Google Drive
+name. Google files must include the intended extension and can be downloaded to types
+specified in the \href{https://developers.google.com/drive/v3/web/manage-downloads}{Drive API documentation}.}
 
 \item{overwrite}{A logical scalar, do you want to overwrite a file that already
 exists locally?}
@@ -27,10 +28,14 @@ Download a file from Google Drive.
 \examples{
 \dontrun{
 ## Save "chickwts.csv" to the working directory as "chickwts.csv".
-drive_download(file = "chickwts.csv", out_path = "chickwts.csv")
+drive_download(file = "chickwts.csv")
 
-## Save Google Sheet named "chickwts" to the working directory as
+## Export a Google Sheet named "chickwts" to the working directory as
 ## "chickwts.csv".
 drive_download(file = "chickwts", out_path = "chickwts.csv")
+
+## Export a Google Document named "foobar" to the working directory as
+## "foobar.docx"
+drive_download(file = "foobar", out_path = "foobar.docx")
 }
 }

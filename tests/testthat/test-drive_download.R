@@ -31,5 +31,5 @@ test_that("drive_download properly errors if file does not exist on Drive",{
   skip_on_travis()
   expect_error(drive_download(file = nm_("this-should-not-exist"),
                               out_path = "empty.txt"),
-               "No file names on your Drive match:")
+               "Input does not hold exactly one Drive file")
 })
