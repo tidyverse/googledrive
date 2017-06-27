@@ -19,3 +19,6 @@ Sys_getenv <- function(x) {
   out <- Sys.getenv(x = x, unset = NA_character_)
   if (is.na(out)) NULL else out
 }
+
+## vectorized isTRUE()
+is_true <- function(x) vapply(x, isTRUE, logical(1))

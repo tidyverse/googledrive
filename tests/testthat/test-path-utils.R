@@ -84,3 +84,10 @@ test_that("is_root() recognizes requests for root folder", {
   expect_false(is_root("/abc"))
   expect_false(is_root("~/abc"))
 })
+
+test_that("file_ext_safe() returns NULL unless there's a usable extension", {
+  expect_null(file_ext_safe(NULL))
+  expect_null(file_ext_safe("foo"))
+  expect_null(file_ext_safe("a/b/c/foo"))
+  expect_identical(file_ext_safe("foo.wut"), "wut")
+})
