@@ -30,6 +30,17 @@ unsplit_path <- function(...) {
   gsub("^/*", "", file.path(...))
 }
 
+## tools::file_ext(), except return NULL for non-extensions
+file_ext_safe <- function(x) {
+  stopifnot(length(x) <= 1)
+  ext <- tools::file_ext(x)
+  if (length(ext) > 0 && nzchar(ext)) {
+    ext
+  } else {
+    NULL
+  }
+}
+
 is_root <- function(path) {
   length(path) == 1 && is.character(path) && grepl("^~$|^/$|^~/$", path)
 }

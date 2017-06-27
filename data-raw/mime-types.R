@@ -1,26 +1,18 @@
 #mime-types tables
 #https://developers.google.com/drive/v3/web/mime-types
 #https://developers.google.com/drive/v3/web/manage-downloads
-library("dplyr")
+library("tidyverse")
+library("httr")
+library("rvest")
 library("rprojroot")
-library("readr")
 library("googledrive")
 
-url <- "https://developers.google.com/drive/v3/web/mime-types"
-
-google_mime_types <- httr::GET(url) %>%
-  httr::content() %>%
-  rvest::html_table(fill = TRUE) %>%
-  purrr::flatten() %>%
-  tibble::as_tibble() %>%
-  select(mime_type = `MIME Type`)
-
+## MIME types for local file <--> Drive file
 fmts <- generate_request(
   endpoint = "drive.about.get",
   params = list(fields = "importFormats,exportFormats")
   ) %>%
-  make_request() %>%
-  process_response()
+  do_request()
 
 imports <- tibble::enframe(
   fmts$importFormats,
@@ -46,6 +38,37 @@ exports <- tibble::enframe(
 
 translate_mime_types <- bind_rows(imports, exports)
 
+defaults <- read_csv(
+  find_package_root_file("data-raw", "export-mime-type-defaults.csv")
+  ) %>%
+  mutate(action = "export",
+         default = TRUE)
+
+translate_mime_types <- translate_mime_types %>%
+  left_join(defaults) %>%
+  mutate(default = case_when(
+    action == "import" ~ NA,
+    is.na(default) ~ FALSE,
+    TRUE ~ TRUE
+  ))
+
+write_csv(
+  translate_mime_types,
+  path = find_package_root_file("inst", "extdata", "translate_mime_types.csv")
+)
+
+## general table of MIME types Google knows about
+
+## The following table lists MIME types that are specific to G Suite and Google
+## Drive.
+url <- "https://developers.google.com/drive/v3/web/mime-types"
+
+google_mime_types <- GET(url) %>%
+  content() %>%
+  html_table(fill = TRUE) %>%
+  flatten() %>%
+  as_tibble() %>%
+  select(mime_type = `MIME Type`)
 
 ## use mime::mimemap map extensions
 mime_ext <- tibble::tibble(
@@ -65,6 +88,4 @@ mime_tbl <- mime_ext %>%
                              gsub("application/vnd.google-apps.", "", mime_type),
                              ext))
 
-
-write_csv(translate_mime_types, path = find_package_root_file("inst", "extdata", "translate_mime_types.csv"))
 write_csv(mime_tbl, path = find_package_root_file("inst", "extdata", "mime_tbl.csv"))
