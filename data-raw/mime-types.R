@@ -88,4 +88,17 @@ mime_tbl <- mime_ext %>%
                              gsub("application/vnd.google-apps.", "", mime_type),
                              ext))
 
+default_ext <- read_csv(
+  find_package_root_file("data-raw", "extension-mime-type-defaults.csv")
+) %>%
+  mutate(default = TRUE)
+
+mime_tbl <- mime_tbl %>%
+  left_join(default_ext) %>%
+  mutate(default = case_when(
+    is.na(ext) ~ NA,
+    is.na(default) ~ FALSE,
+    TRUE ~ TRUE
+  ))
+
 write_csv(mime_tbl, path = find_package_root_file("inst", "extdata", "mime_tbl.csv"))
