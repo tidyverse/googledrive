@@ -1,18 +1,24 @@
 #' Download a file from Google Drive.
 #'
-#' This function downloads files from Google Drive. Google type files (i.e.: Google Documents,
-#' Google Sheets, Google Slides, etc.) must indicate the intended extension for the local file.
-#' This can be indicated by specifying the full file name with the `out_path` parameter or indended
-#' exension with the `type` parameter. Google type files can be downloaded to types specified in the
-#' [Drive API documentation](https://developers.google.com/drive/v3/web/manage-downloads).
+#' This function downloads files from Google Drive. Native Google files, such as
+#' Google Docs, Google Sheets, Google Slides, must be exported to a conventional
+#' local file type. This can be specified explicitly via `type` or, otherwise,
+#' implicitly via the file extension of `out_path`, if provided. If all else
+#' fails, a valid default is used. Native Google files can be downloaded to
+#' types specified in the
+#' [Drive API documentation](https://developers.google.com/drive/v3/web/manage-downloads#downloading_google_documents).
 #' @template file
-#' @param out_path Character. Path for output file. Will default to its Google Drive
-#'   name.
-#' @param type Character. Extension you would like for the local file.
-#' @param overwrite A logical scalar, do you want to overwrite a file that already
-#'    exists locally?
+#' @param out_path Character. Path for output file. If absent, the default file
+#'   name is the file's name on Google Drive and the default location is working
+#'   directory, possibly with an added file extension.
+#' @param type Character. Only consulted if `file` is a native Google file.
+#'   Specifies the desired type of the downloaded file. Will be processed via
+#'   [drive_mime_type()], so either a file extension like `"pdf"` or a full MIME
+#'   type like `"application/pdf"` is acceptable.
+#' @param overwrite A logical scalar. If `out_path` already exists, do you want
+#'   to overwrite it?
 #' @template verbose
-#'
+
 #' @examples
 #' \dontrun{
 #' ## Save "chickwts.csv" to the working directory as "chickwts.csv".
@@ -33,7 +39,7 @@
 #' ## This will also export a Google Document named "foobar" to the working
 #' ## directory as "foobar.docx".
 #' drive_download(file = "foobar", type = "docx")
-#'}
+#' }
 #' @export
 drive_download <- function(file = NULL,
                            out_path = NULL,
