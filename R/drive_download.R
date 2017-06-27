@@ -124,7 +124,7 @@ verify_export_mime_type <- function(mime_type, export_type) {
   ok <- export_type %in% .drive$translate_mime_types$mime_type_local[m]
   if (!ok) {
     ## to be really nice, we would look these up in drive_mime_type() tibble
-    ## and use the human_below, if found
+    ## and use the human_type, if found
     stop(
       glue(
         "Cannot export Google file of type:\n{mime_type}\n",
