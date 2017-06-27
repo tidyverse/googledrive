@@ -141,9 +141,13 @@ verify_export_mime_type <- function(mime_type, export_type) {
 apply_extension <- function(out_path, mime_type) {
   mime_tbl <- drive_mime_type()
   m <- mime_tbl$mime_type == mime_type
-  if (sum(m) != 1) return(out_path)
+  if (sum(m) == 0) return(out_path)
 
   ext <- mime_tbl$ext[m]
+  ## TO DO: this is janky but "html" tipped me off that we need to do sthg
+  if (length(ext) > 1) {
+    ext <- ext[1]
+  }
   ext_orig <- file_ext_safe(out_path)
   if (!identical(ext, ext_orig)) {
     out_path <- paste(out_path, ext, sep = ".")
