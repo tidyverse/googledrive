@@ -82,20 +82,20 @@
 <p>To see your Google Drive files in the browser, visit <a href="https://drive.google.com" class="uri">https://drive.google.com</a>. This displays all your files and offers various ways to filter what you see based on file type, folder, starred vs not, etc.</p>
 <p>You can get similar results with <code><a href="../../reference/drive_search.html">drive_search()</a></code>. By default, it gets info on the most recent 100 files.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>())
-<span class="co">#&gt; # A tibble: 132 x 3</span>
-<span class="co">#&gt;                           name</span>
-<span class="co">#&gt;  *                       &lt;chr&gt;</span>
-<span class="co">#&gt;  1                         def</span>
-<span class="co">#&gt;  2                         abc</span>
-<span class="co">#&gt;  3                      foobar</span>
-<span class="co">#&gt;  4                    chickwts</span>
-<span class="co">#&gt;  5                chickwts.rda</span>
-<span class="co">#&gt;  6          chicken_little.jpg</span>
-<span class="co">#&gt;  7               chicken_small</span>
-<span class="co">#&gt;  8                      filler</span>
-<span class="co">#&gt;  9 chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt; 10          another-share-test</span>
-<span class="co">#&gt; # ... with 122 more rows, and 2 more variables: id &lt;chr&gt;,</span>
+<span class="co">#&gt; # A tibble: 136 x 3</span>
+<span class="co">#&gt;                             name</span>
+<span class="co">#&gt;  *                         &lt;chr&gt;</span>
+<span class="co">#&gt;  1                           def</span>
+<span class="co">#&gt;  2                           abc</span>
+<span class="co">#&gt;  3       bar-</span><span class="al">TEST</span><span class="co">-drive-download</span>
+<span class="co">#&gt;  4                         jenny</span>
+<span class="co">#&gt;  5 export-mime-type-defaults.csv</span>
+<span class="co">#&gt;  6       foo-</span><span class="al">TEST</span><span class="co">-drive-download</span>
+<span class="co">#&gt;  7                        foobar</span>
+<span class="co">#&gt;  8                      chickwts</span>
+<span class="co">#&gt;  9                  chickwts.rda</span>
+<span class="co">#&gt; 10            chicken_little.jpg</span>
+<span class="co">#&gt; # ... with 126 more rows, and 2 more variables: id &lt;chr&gt;,</span>
 <span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
 <p>The object you get back holds the metadata for one or more Google Drive files. It is a <code>dribble</code>, which is just a <code>tibble</code> with Drive files in rows and at least these three variables:</p>
 <ul>
@@ -113,25 +113,27 @@
 <span class="co">#&gt; # A tibble: 3 x 3</span>
 <span class="co">#&gt;     name                           id files_resource</span>
 <span class="co">#&gt; *  &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1    def 0B0Gh-SuuA2nTWlhOVWxLRENmOE0    &lt;list [26]&gt;</span>
-<span class="co">#&gt; 2    abc 0B0Gh-SuuA2nTcGtNTGdzVDRmMUk    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 1    def 0B0Gh-SuuA2nTaWRXSDRtbVpYdkU    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 2    abc 0B0Gh-SuuA2nTMTl0Q2xyemo3SjA    &lt;list [26]&gt;</span>
 <span class="co">#&gt; 3 filler 0B0Gh-SuuA2nTUXdfUFdiR3NOeGM    &lt;list [27]&gt;</span>
 
 ## just Sheets
 <span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"mimeType='application/vnd.google-apps.spreadsheet'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
-<span class="co">#&gt; # A tibble: 1 x 3</span>
-<span class="co">#&gt;                   name                                           id</span>
-<span class="co">#&gt; *                &lt;chr&gt;                                        &lt;chr&gt;</span>
-<span class="co">#&gt; 1 538-star-wars-survey 1xw_M2OBUdPjoOVrmWKWNu07BW_PHCh-EMSfJN5WEJDE</span>
-<span class="co">#&gt; # ... with 1 more variables: files_resource &lt;list&gt;</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 3 x 3</span>
+<span class="co">#&gt;                            name</span>
+<span class="co">#&gt; *                         &lt;chr&gt;</span>
+<span class="co">#&gt; 1                         jenny</span>
+<span class="co">#&gt; 2 export-mime-type-defaults.csv</span>
+<span class="co">#&gt; 3          538-star-wars-survey</span>
+<span class="co">#&gt; # ... with 2 more variables: id &lt;chr&gt;, files_resource &lt;list&gt;</span></code></pre></div>
 <p>Files containing <code>'horsebean'</code> in their content:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'horsebean'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 3 x 3</span>
 <span class="co">#&gt;                               name</span>
 <span class="co">#&gt; *                            &lt;chr&gt;</span>
 <span class="co">#&gt; 1                           foobar</span>
-<span class="co">#&gt; 2                           foobar</span>
-<span class="co">#&gt; 3 chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 2 chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 3                           foobar</span>
 <span class="co">#&gt; # ... with 2 more variables: id &lt;chr&gt;, files_resource &lt;list&gt;</span></code></pre></div>
 <p>Files in your “Shared with me” collection</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"sharedWithMe = true"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)

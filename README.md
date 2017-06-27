@@ -32,76 +32,86 @@ library("googledrive")
 
 ### Package conventions
 
--   All functions begin with the prefix `drive_`
+-   Almost all functions begin with the prefix `drive_`
 -   Functions and parameters attempt to mimic convetions for working with local files in R, such as `list.files()`.
 -   The metadata for one or more Drive files is held in a `dribble`, a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive.
+-   googledrive is "pipe-friendly" and, in fact, re-exports `%>%`, but does not require its use.
 
 ### Quick demo
 
-Here's how to list the most recently modified 100 files on your drive. This will kick off your authentication, so you will be sent to your browser to authorize your Google Drive access. The functions here are designed to be pipeable, using `%>%`, however they obviously don't require it.
+Here's how to list the files you see in [My Drive](https://drive.google.com). You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.
 
 ``` r
 drive_search()
-#> # A tibble: 132 x 3
-#>                           name
-#>  *                       <chr>
-#>  1                         def
-#>  2                         abc
-#>  3                      foobar
-#>  4                    chickwts
-#>  5                chickwts.rda
-#>  6          chicken_little.jpg
-#>  7               chicken_small
-#>  8                      filler
-#>  9 chickwts-TEST-drive-publish
-#> 10          another-share-test
-#> # ... with 122 more rows, and 2 more variables: id <chr>,
+#> # A tibble: 136 x 3
+#>                             name
+#>  *                         <chr>
+#>  1                           def
+#>  2                           abc
+#>  3       bar-TEST-drive-download
+#>  4                         jenny
+#>  5 export-mime-type-defaults.csv
+#>  6       foo-TEST-drive-download
+#>  7                        foobar
+#>  8                      chickwts
+#>  9                  chickwts.rda
+#> 10            chicken_little.jpg
+#> # ... with 126 more rows, and 2 more variables: id <chr>,
 #> #   files_resource <list>
 ```
 
-You can narrow the query by specifying a `pattern` you'd like to match names against.
+You can narrow the query by specifying a `pattern` you'd like to match names against. Or by specifying a file type: the `type` argument understands MIME types, file extensions, and a few human-friendly keywords.
 
 ``` r
-drive_search(pattern = "baz")
+drive_search(pattern = "chicken")
+drive_search(type = "spreadsheet")     ## Google Sheets!
+drive_search(type = "csv")             ## MIME type = "text/csv"
+drive_search(type = "application/pdf") ## MIME type = "application/pdf"
 ```
 
-Alternatively, you can refine the search using the `q` query parameter. Accepted search clauses can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, if I wanted to search for all spreadsheets, I could run the following.
+Alternatively, you can refine the search using the `q` query parameter. Accepted search clauses can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, to get all files with `'horsebean'` somewhere in their full text (such as files based on the `chickwts` dataset!), do this:
 
 ``` r
-(sheets <- drive_search(q = "mimeType = 'application/vnd.google-apps.spreadsheet'"))
-#> # A tibble: 1 x 3
-#>                   name                                           id
-#> *                <chr>                                        <chr>
-#> 1 538-star-wars-survey 1xw_M2OBUdPjoOVrmWKWNu07BW_PHCh-EMSfJN5WEJDE
-#> # ... with 1 more variables: files_resource <list>
-class(sheets)
-#> [1] "dribble"    "tbl_df"     "tbl"        "data.frame"
+(fls <- drive_search(q = "fullText contains 'horsebean'"))
+#> # A tibble: 8 x 3
+#>                               name
+#> *                            <chr>
+#> 1                           foobar
+#> 2 chickwts_gdoc-TEST-drive-publish
+#> 3                           foobar
+#> 4                         chickwts
+#> 5      chickwts-TEST-drive-publish
+#> 6                         Untitled
+#> 7    chickwts_gdoc-TEST-drive-list
+#> 8  chickwts_txt-TEST-drive-publish
+#> # ... with 2 more variables: id <chr>, files_resource <list>
 ```
 
 You often want to store the result of a googledrive call, so you can act on those files in the future.
 
 #### Identify files
 
-In addition to `drive_search()`, you can also identify files by name (path, really) or Drive file id, using `drive_path()` and `drive_get()`, respectively. You can also register a Google Drive id as a `drive_id` or convert a Google Drive URL to a `drive_id` using `as_id()`. These `drive_id` objects can be passed to any of our functions.
+In addition to `drive_search()`, you can also identify files by name (path, really) using `drive_path()` or by Drive file id using `drive_get()`.
 
 ``` r
+## identify file by path
 (x <- drive_path("~/abc/def"))
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTSHNoNDJqRmJobWc    <list [30]>
+#> 1   def 0B0Gh-SuuA2nTdkF6SkZJVzdsTDg    <list [30]>
+
 ## let's grab that file id and retrieve it that way
 x$id
-#> [1] "0B0Gh-SuuA2nTSHNoNDJqRmJobWc"
-
+#> [1] "0B0Gh-SuuA2nTdkF6SkZJVzdsTDg"
 drive_get(x$id)
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTSHNoNDJqRmJobWc    <list [30]>
+#> 1   def 0B0Gh-SuuA2nTdkF6SkZJVzdsTDg    <list [30]>
 ```
 
-In general, googledrive functions let you specify Drive file(s) by name (path), file id, and `dribble`. See examples below.
+In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a `dribble`. If it's ambiguous, use `as_id()` to flag a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.
 
 #### Upload files
 
@@ -117,7 +127,7 @@ write.csv(chickwts, "README-chickwts.csv")
 #> # A tibble: 1 x 3
 #>                  name                           id files_resource
 #> *               <chr>                        <chr>         <list>
-#> 1 README-chickwts.csv 0B0Gh-SuuA2nTWGlUdXBBcEhQSm8    <list [36]>
+#> 1 README-chickwts.csv 0B0Gh-SuuA2nTRGdmcmM5Z2lSMHM    <list [36]>
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -127,10 +137,8 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 drive_chickwts <- drive_chickwts %>%
   drive_delete()
 #> Files deleted:
-#>   * README-chickwts.csv: 0B0Gh-SuuA2nTWGlUdXBBcEhQSm8
-```
+#>   * README-chickwts.csv: 0B0Gh-SuuA2nTRGdmcmM5Z2lSMHM
 
-``` r
 drive_chickwts <- drive_upload("README-chickwts.csv", type = "spreadsheet")
 #> File uploaded to Google Drive:
 #> README-chickwts.csv
@@ -156,7 +164,7 @@ drive_chickwts$publish
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-06-26 17:30:21        1      TRUE         TRUE
+#> 1 2017-06-27 14:52:41        1      TRUE         TRUE
 ```
 
 ``` r
@@ -184,14 +192,14 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/18On30CltNkW2b_wWu9GPE7CI0GCfH6SAn7LB0dUyoeA/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1F_zkCA3PWtPiVbFFQdCVcdv4bkQ2WMXR8C96W6BKAn8/edit?usp=drivesdk"
 ```
 
 #### Download files
 
 ##### Google files
 
-We can download files from Google Drive. Google type files (such as Google Documents, Google Sheets, Google Slides, etc.) need to have the file local file extension specified either with the `type` or `out_path` parameters. For example, if I would like to download the "538-star-wars-survey" Google Sheet as a `.csv` I could run the following.
+We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. Specify this explicitly via `type` or implicitly via the file extension in `out_path`. There is also a default export type, as a last resort. For example, if I would like to download the "538-star-wars-survey" Google Sheet as a `.csv` I could run the following.
 
 ``` r
 drive_download("538-star-wars-survey", type = "csv")
@@ -204,9 +212,11 @@ drive_download("538-star-wars-survey", type = "csv")
 Alternatively, I could specify the `out_path` parameter.
 
 ``` r
-drive_download("538-star-wars-survey",
-               out_path = "538-star-wars-survey.csv",
-               overwrite = TRUE)
+drive_download(
+  "538-star-wars-survey",
+  out_path = "538-star-wars-survey.csv",
+  overwrite = TRUE
+)
 #> File downloaded from Google Drive:
 #> '538-star-wars-survey'
 #> Saved locally as:
@@ -215,16 +225,41 @@ drive_download("538-star-wars-survey",
 
 Notice in the example above, I specified `overwrite = TRUE`. This allowed me to overwrite the file previously saved.
 
-##### All other files
-
-Downloading files that are *not* Google type files (for example a file uploaded as a `.csv`, `.rda`, or `.txt`) does not require the extension specification. You can still specify the desired local file name and location using `out_path` or allow the function to default to the file name on Google Drive and save to your working directory. For example, I can download the `drive_chickwts` csv we just uploaded in the following manner.
+Finally, you could allow it to be downloaded as an Excel workbook, which is the default:
 
 ``` r
-drive_download(drive_chickwts, overwrite = TRUE)
+drive_download("538-star-wars-survey", overwrite = TRUE)
 #> File downloaded from Google Drive:
-#> 'README-chickwts.csv'
+#> '538-star-wars-survey'
 #> Saved locally as:
-#> 'README-chickwts.csv'
+#> '538-star-wars-survey.xlsx'
+```
+
+##### All other files
+
+Downloading files that are *not* Google type files is even simpler, i.e. it does not require any conversion or type info.
+
+``` r
+## upload something we can download
+boring <- drive_upload(system.file("DESCRIPTION"), name = "boring-text.txt")
+#> File uploaded to Google Drive:
+#> boring-text.txt
+#> with MIME type:
+#> text/plain
+
+## download it and prove we got it
+drive_download("boring-text.txt")
+#> File downloaded from Google Drive:
+#> 'boring-text.txt'
+#> Saved locally as:
+#> 'boring-text.txt'
+readLines("boring-text.txt") %>% head()
+#> [1] "Package: base"                                 
+#> [2] "Version: 3.3.2"                                
+#> [3] "Priority: base"                                
+#> [4] "Title: The R Base Package"                     
+#> [5] "Author: R Core Team and contributors worldwide"
+#> [6] "Maintainer: R Core Team <R-core@r-project.org>"
 ```
 
 #### Clean up
@@ -233,5 +268,9 @@ drive_download(drive_chickwts, overwrite = TRUE)
 drive_chickwts %>%
   drive_delete()
 #> Files deleted:
-#>   * README-chickwts.csv: 18On30CltNkW2b_wWu9GPE7CI0GCfH6SAn7LB0dUyoeA
+#>   * README-chickwts.csv: 1F_zkCA3PWtPiVbFFQdCVcdv4bkQ2WMXR8C96W6BKAn8
+boring %>%
+  drive_delete()
+#> Files deleted:
+#>   * boring-text.txt: 0B0Gh-SuuA2nTeEhBOFYyXzNfcnc
 ```
