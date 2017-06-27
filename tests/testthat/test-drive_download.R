@@ -63,6 +63,9 @@ test_that("drive_download() properly converts with out_path argument", {
 })
 
 test_that("drive_download() properly converts with defaults", {
+  skip_on_appveyor()
+  skip_on_travis()
+
   nm <- paste0(nm_("bar"), ".docx")
   expect_message(drive_download(file = nm_("bar")),
                  "File downloaded from Google Drive:"
