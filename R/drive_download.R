@@ -63,7 +63,7 @@ drive_download <- function(file = NULL,
     export_type <- type %||% ext %||% get_export_mime_type(mime_type)
     export_type <- drive_mime_type(export_type)
     verify_export_mime_type(mime_type, export_type)
-    path <- apply_extension(path, export_type)
+    path <- apply_extension(path, drive_extension(export_type))
 
     request <- generate_request(
       endpoint = "drive.files.export",
@@ -134,17 +134,4 @@ verify_export_mime_type <- function(mime_type, export_type) {
     )
   }
   export_type
-}
-
-## determine file extension from mime_type
-
-## apply to path if not already present
-apply_extension <- function(path, mime_type) {
-  ext <- drive_extension(mime_type)
-  ext_orig <- file_ext_safe(path)
-
-  if (!identical(ext, ext_orig)) {
-    path <- paste(path, ext, sep = ".")
-  }
-  path
 }
