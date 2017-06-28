@@ -13,9 +13,9 @@ drive_upload(from = NULL, name = NULL, path = NULL, overwrite = FALSE,
 \item{name}{Character, name the file should have on Google Drive. Will
 default to its local name.}
 
-\item{path}{Drive File, something that identifies the where the file should
-live on your Google Drive. Can be an actual path (character), a file id marked with [as_id()], or
-a [`dribble`].}
+\item{path}{Drive File, something that identifies where the file should live
+on your Google Drive. Can be an actual path (character), a file id marked
+with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{overwrite}{A logical scalar, do you want to overwrite a file already on
 Google Drive, if such exists?}

@@ -1,5 +1,3 @@
-# fx
-
 last <- function(x) x[length(x)]
 
 sq <- function(x) glue::single_quote(x)

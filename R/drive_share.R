@@ -23,7 +23,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
   file <- confirm_single_file(file)
 
   if (is.null(role) || is.null(type)) {
-    stop("`role` and `type` must be specified.")
+    stop("`role` and `type` must be specified.", call. = FALSE)
   }
 
   ok_roles <- c("organizer", "owner", "writer", "commenter", "reader")
@@ -31,14 +31,20 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
 
   if (!(role %in% ok_roles)) {
     stop(
-      glue("`role` must be one of the following: {paste(ok_roles, collapse = ", ")}.")
-      )
+      glue(
+        "`role` must be one of the following: {paste(ok_roles, collapse = ", ")}."
+      ),
+      call. = FALSE
+    )
   }
 
   if (!(type %in% ok_types)) {
     stop(
-      glue("`type` must be one of the following: {paste(ok_types, collapse = ", ")}.")
-       )
+      glue(
+        "`type` must be one of the following: {paste(ok_types, collapse = ", ")}."
+      ),
+      call. = FALSE
+    )
   }
 
   request <- generate_request(

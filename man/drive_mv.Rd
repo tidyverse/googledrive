@@ -11,9 +11,9 @@ drive_mv(file = NULL, path = NULL, verbose = TRUE)
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{path}{Drive File, something that identifies the where the file should
-live on your Google Drive. Can be an actual path (character), a file id marked with [as_id()], or
-a [`dribble`].}
+\item{path}{Drive File, something that identifies where the file should live
+on your Google Drive. Can be an actual path (character), a file id marked
+with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
