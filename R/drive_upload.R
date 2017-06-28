@@ -46,7 +46,7 @@ drive_upload <- function(from = NULL,
 
   name <- name %||% basename(from)
 
-  mimeType <- if (is.null(type)) NULL else drive_mime_type(type)
+  mimeType <- drive_mime_type(type)
 
   ## parent folder
   ## TO DO: be willing to create the bits of folder that don't yet exist

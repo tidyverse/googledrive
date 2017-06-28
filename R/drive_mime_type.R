@@ -1,4 +1,4 @@
-#' Lookup MIME type
+#' Lookup MIME type.
 #'
 #' @description This is a helper to determinine which MIME type should be used
 #' for a file. Three types of input are acceptable:
@@ -38,7 +38,6 @@ drive_mime_type <- function(type = NULL) {
   if (is_expose(type)) {
     return(.drive$mime_tbl)
   }
-
   if (!(is.character(type))) {
     stop("`type` must be character", call. = FALSE)
   }
@@ -67,4 +66,44 @@ drive_mime_type <- function(type = NULL) {
     )
   }
   mime_type
+}
+
+#' Lookup extension from MIME type.
+#'
+#' @description This is a helper to determinine which extension should be used
+#' for a file. Two types of input are acceptable:
+#'   * MIME types accepted by Google Drive.
+#'   * File extensions, such as "pdf", "csv", etc. (these are simply passed through).
+#'
+#' @param type Character. MIME type or file extension.
+#'
+#' @return Character. File extension.
+#'
+#' @examples
+#'
+#' ## get the extension for mime type image/jpeg
+#' drive_extension("image/jpeg")
+#'
+#' ## it's vectorized
+#' drive_extension(c("text/plain", "pdf", "image/gif"))
+#' @export
+drive_extension <- function(type = NULL) {
+
+  if (is.null(type)) {
+    return(invisible())
+  }
+  stopifnot(is.character(type))
+
+  type <- drive_mime_type(type)
+  m <- purrr::map_int(type, one_ext)
+  .drive$mime_tbl$ext[m]
+}
+
+one_ext <- function(type) {
+  m <- which(.drive$mime_tbl$mime_type %in% type &
+               is_true(.drive$mime_tbl$default))
+  if (length(m) == 0L) {
+    m <- NA_integer_
+  }
+  m
 }
