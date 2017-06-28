@@ -13,7 +13,7 @@
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,
-#'   respectively. All non-`NULL` values for `type`` are pre-processed with
+#'   respectively. All non-`NULL` values for `type` are pre-processed with
 #'   [drive_mime_type()].
 #' @template verbose
 #'
