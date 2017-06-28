@@ -90,21 +90,20 @@ drive_mime_type <- function(type = NULL) {
 drive_extension <- function(type = NULL) {
 
   if (is.null(type)) {
-    return(invisible(NULL))
+    return(invisible())
   }
-  if (!(is.character(type))) {
-    stop("`type` must be character", call. = FALSE)
-  }
+  stopifnot(is.character(type))
 
   type <- drive_mime_type(type)
-  m <- purrr::map_dbl(type, one_ext)
+  m <- purrr::map_int(type, one_ext)
   .drive$mime_tbl$ext[m]
 }
 
 one_ext <- function(type) {
-  m <- which(.drive$mime_tbl$mime_type %in% type & is_true(.drive$mime_tbl$default))
+  m <- which(.drive$mime_tbl$mime_type %in% type &
+               is_true(.drive$mime_tbl$default))
   if (length(m) == 0L) {
-    m <- NA
+    m <- NA_integer_
   }
   m
 }

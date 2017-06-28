@@ -11,11 +11,6 @@ test_that("drive_mime_type(expose()) returns the full tibble", {
   )
 })
 
-test_that("drive_mime_type() returns NULL if input NULL", {
-  out <- drive_mime_type()
-  expect_null(out)
-})
-
 test_that("drive_mime_type() returns MIME type for Drive native type",{
   expect_identical(
     drive_mime_type(c("spreadsheet", "document")),
@@ -53,12 +48,9 @@ test_that("drive_mime_type() errors for single unrecognized input",{
   expect_error(drive_mime_type("nonsense"), "Unrecognized `type`")
 })
 
-
-test_that("drive_extension() returns NULL if input NULL", {
-  out <- drive_extension()
-  expect_null(out)
+test_that("drive_extension() returns NULL if no input", {
+  expect_null(drive_extension())
 })
-
 
 test_that("drive_extension() returns file extension for MIME type",{
   expect_identical(
@@ -80,13 +72,11 @@ test_that("drive_extension() returns file extension for mixed input",{
   )
 })
 
-test_that("drive_extension() errors for invalid input",{
-  expect_error(drive_extension(1), "`type` must be character")
-  expect_error(drive_extension(dribble()), "`type` must be character")
+test_that("drive_extension() errors for invalid input", {
+  expect_error(drive_extension(1), "is\\.character\\(type\\) is not TRUE")
+  expect_error(drive_extension(dribble()), "is\\.character\\(type\\) is not TRUE")
 })
 
 test_that("drive_extension() errors for single unrecognized input",{
   expect_error(drive_extension("nonsense"), "Unrecognized `type`")
 })
-
-
