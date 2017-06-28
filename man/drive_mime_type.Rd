@@ -7,7 +7,10 @@
 drive_mime_type(type = NULL)
 }
 \arguments{
-\item{type}{Character. Google Drive file type, file extension, or MIME type.}
+\item{type}{Character. Google Drive file type, file extension, or MIME type.
+Pass the sentinel \code{\link[=expose]{expose()}} if you want to get the full table used for
+validation and lookup, i.e. all MIME types known to be relevant to the
+Drive API.}
 }
 \value{
 Character. MIME type.
@@ -16,7 +19,7 @@ Character. MIME type.
 This is a helper to determinine which MIME type should be used
 for a file. Three types of input are acceptable:
 \itemize{
-\item Google Drive "native" file types. Important examples:
+\item Native Google Drive file types. Important examples:
 \itemize{
 \item "document" for Google Docs
 \item "folder" for folders
@@ -26,10 +29,6 @@ for a file. Three types of input are acceptable:
 \item File extensions, such as "pdf", "csv", etc.
 \item MIME types accepted by Google Drive (these are simply passed through).
 }
-
-If no input is provided, function returns the full table used
-for lookup, i.e. all MIME types known to be relevant to the Drive
-API.
 }
 \examples{
 ## get the mime type for Google Spreadsheets
@@ -40,4 +39,7 @@ drive_mime_type("jpeg")
 
 ## it's vectorized
 drive_mime_type(c("presentation", "pdf", "image/gif"))
+
+## see the internal tibble of MIME types known to the Drive API
+drive_mime_type(expose())
 }

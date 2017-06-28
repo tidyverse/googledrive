@@ -5,44 +5,49 @@
 \alias{prep_fields}
 \title{Request partial resources}
 \usage{
-drive_fields(fields = NULL, resource = "files", which = c("default",
-  "all"))
+drive_fields(fields = NULL, resource = "files")
 
 prep_fields(fields, resource = "files")
 }
 \arguments{
-\item{fields}{Character vector of field names. Optional.}
+\item{fields}{Character vector of field names. Optional. If provided, and
+\code{resource = "files"}, they are checked for validity.}
 
-\item{resource}{Character, naming the API resource of interest.}
-
-\item{which}{Consulted only when \code{resource = "files"} and \code{fields = NULL},
-dictates whether all fields are returned or the googledrive defaults.}
+\item{resource}{Character, naming the API resource of interest. Currently,
+only the Files resource is anticipated.}
 }
 \value{
-Character vector of field names or a single string.
+\code{drive_fields()}: Character vector of field names. \code{prep_fields()}: a
+string.
 }
 \description{
-You may be able to improve the performance of your API calls by requesting
-only the metadata that you actually need. This function is primarily for
-internal use and is geared towards the
+You may be able to improve the performance of your API calls by
+requesting only the metadata that you actually need. This function is
+primarily for internal use and is currently focused on the
 \href{https://developers.google.com/drive/v3/reference/files}{Files resource}.
-Assuming that \code{resource = "files"}, \code{drive_fields()} returns the \code{default}
-fields, \code{all} fields, or, if \code{fields} is non-\code{NULL}, the subset of the input
-fields that are recognized as valid fields. \code{prep_fields()} prepares fields
-for inclusion as query parameters.
+Assuming that \code{resource = "files"} (the default), \code{drive_fields()} returns
+a character vector of googledrive's default fields. If input is provided
+via \code{fields}, it's checked for validity against the known fields. To see a
+tibble containing all possible fields and a variable indicating which are
+googledrive defaults, call \code{drive_fields(expose())}.
+
+\code{prep_fields()} prepares fields for inclusion as query
+parameters.
 }
 \examples{
-## to get default fields or all fields for the Files resource
+## to get default fields for the Files resource
 drive_fields()
-drive_fields(which = "all")
+
+## get a tibble of all fields for the Files resource + indicator of defaults
+drive_fields(expose())
 
 ## invalid fields are removed and throw warning
 drive_fields(c("name", "parents", "ownedByMe", "pancakes!"))
 
-## fields for query
+## prepare fields for query
 prep_fields(c("name", "parents", "ownedByMe"))
 }
 \seealso{
-\href{https://developers.google.com/drive/v3/web/performance#partial}{Working with partial resources},
+\href{https://developers.google.com/drive/v3/web/performance#partial}{Working with partialresources},
 in the Drive API documentation
 }
