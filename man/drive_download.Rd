@@ -4,7 +4,7 @@
 \alias{drive_download}
 \title{Download a file from Google Drive.}
 \usage{
-drive_download(file = NULL, out_path = NULL, type = NULL,
+drive_download(file = NULL, where = NULL, type = NULL,
   overwrite = FALSE, verbose = TRUE)
 }
 \arguments{
@@ -12,7 +12,7 @@ drive_download(file = NULL, out_path = NULL, type = NULL,
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{out_path}{Character. Path for output file. If absent, the default file
+\item{where}{Character. Path for output file. If absent, the default file
 name is the file's name on Google Drive and the default location is working
 directory, possibly with an added file extension.}
 
@@ -21,7 +21,7 @@ Specifies the desired type of the downloaded file. Will be processed via
 \code{\link[=drive_mime_type]{drive_mime_type()}}, so either a file extension like \code{"pdf"} or a full MIME
 type like \code{"application/pdf"} is acceptable.}
 
-\item{overwrite}{A logical scalar. If \code{out_path} already exists, do you want
+\item{overwrite}{A logical scalar. If \code{where} already exists, do you want
 to overwrite it?}
 
 \item{verbose}{Logical, indicating whether to print informative messages
@@ -31,7 +31,7 @@ to overwrite it?}
 This function downloads files from Google Drive. Native Google files, such as
 Google Docs, Google Sheets, Google Slides, must be exported to a conventional
 local file type. This can be specified explicitly via \code{type} or, otherwise,
-implicitly via the file extension of \code{out_path}, if provided. If all else
+implicitly via the file extension of \code{where}, if provided. If all else
 fails, a valid default is used. Native Google files can be downloaded to
 types specified in the
 \href{https://developers.google.com/drive/v3/web/manage-downloads#downloading_google_documents}{Drive API documentation}.
@@ -43,7 +43,7 @@ drive_download(file = "chickwts.csv")
 
 ## Export a Google Sheet named "chickwts" to the working directory as
 ## "chickwts.csv".
-drive_download(file = "chickwts", out_path = "chickwts.csv")
+drive_download(file = "chickwts", where = "chickwts.csv")
 
 ## This will also export a Google Sheet named "chickwts" to the working
 ## directory as "chickwts.csv".
@@ -51,7 +51,7 @@ drive_download(file = "chickwts", type = "csv")
 
 ## Export a Google Document named "foobar" to the working directory as
 ## "foobar.docx".
-drive_download(file = "foobar", out_path = "foobar.docx")
+drive_download(file = "foobar", where = "foobar.docx")
 
 ## This will also export a Google Document named "foobar" to the working
 ## directory as "foobar.docx".

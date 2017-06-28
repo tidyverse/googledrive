@@ -170,7 +170,7 @@ Alternatively, I could specify the `out_path` parameter.
 ```{r}
 drive_download(
   "538-star-wars-survey",
-  out_path = "538-star-wars-survey.csv",
+  where = "538-star-wars-survey.csv",
   overwrite = TRUE
 )
 ```
@@ -180,7 +180,7 @@ Notice in the example above, I specified `overwrite = TRUE`. This allowed me to 
 Finally, you could allow it to be downloaded as an Excel workbook, which is the default:
 
 ```{r}
-drive_download("538-star-wars-survey", overwrite = TRUE)
+drive_download("538-star-wars-survey")
 ```
 
 ##### All other files
