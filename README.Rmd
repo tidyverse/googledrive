@@ -170,7 +170,7 @@ Alternatively, I could specify the `out_path` parameter.
 ```{r}
 drive_download(
   "538-star-wars-survey",
-  where = "538-star-wars-survey.csv",
+  path = "538-star-wars-survey.csv",
   overwrite = TRUE
 )
 ```
