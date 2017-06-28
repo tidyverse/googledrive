@@ -76,8 +76,8 @@ Alternatively, you can refine the search using the `q` query parameter. Accepted
 #> # A tibble: 8 x 3
 #>                               name
 #> *                            <chr>
-#> 1                           foobar
-#> 2 chickwts_gdoc-TEST-drive-publish
+#> 1 chickwts_gdoc-TEST-drive-publish
+#> 2                           foobar
 #> 3                           foobar
 #> 4                         chickwts
 #> 5      chickwts-TEST-drive-publish
@@ -99,16 +99,16 @@ In addition to `drive_search()`, you can also identify files by name (path, real
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTdkF6SkZJVzdsTDg    <list [30]>
+#> 1   def 0B0Gh-SuuA2nTXzNMLVdObjJUZHc    <list [30]>
 
 ## let's grab that file id and retrieve it that way
 x$id
-#> [1] "0B0Gh-SuuA2nTdkF6SkZJVzdsTDg"
+#> [1] "0B0Gh-SuuA2nTXzNMLVdObjJUZHc"
 drive_get(x$id)
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTdkF6SkZJVzdsTDg    <list [30]>
+#> 1   def 0B0Gh-SuuA2nTXzNMLVdObjJUZHc    <list [30]>
 ```
 
 In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a `dribble`. If it's ambiguous, use `as_id()` to flag a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.
@@ -127,7 +127,7 @@ write.csv(chickwts, "README-chickwts.csv")
 #> # A tibble: 1 x 3
 #>                  name                           id files_resource
 #> *               <chr>                        <chr>         <list>
-#> 1 README-chickwts.csv 0B0Gh-SuuA2nTRGdmcmM5Z2lSMHM    <list [36]>
+#> 1 README-chickwts.csv 0B0Gh-SuuA2nTUGtTT3Bxb1JKNU0    <list [36]>
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -137,7 +137,7 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 drive_chickwts <- drive_chickwts %>%
   drive_delete()
 #> Files deleted:
-#>   * README-chickwts.csv: 0B0Gh-SuuA2nTRGdmcmM5Z2lSMHM
+#>   * README-chickwts.csv: 0B0Gh-SuuA2nTUGtTT3Bxb1JKNU0
 
 drive_chickwts <- drive_upload("README-chickwts.csv", type = "spreadsheet")
 #> File uploaded to Google Drive:
@@ -164,7 +164,7 @@ drive_chickwts$publish
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-06-27 14:52:41        1      TRUE         TRUE
+#> 1 2017-06-28 11:27:46        1      TRUE         TRUE
 ```
 
 ``` r
@@ -192,7 +192,7 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1F_zkCA3PWtPiVbFFQdCVcdv4bkQ2WMXR8C96W6BKAn8/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1ZCvvVppFv5ERZlZNCgb0GTpvhEKST0nLa8rLDYBFGpI/edit?usp=drivesdk"
 ```
 
 #### Download files
@@ -214,7 +214,7 @@ Alternatively, I could specify the `out_path` parameter.
 ``` r
 drive_download(
   "538-star-wars-survey",
-  out_path = "538-star-wars-survey.csv",
+  path = "538-star-wars-survey.csv",
   overwrite = TRUE
 )
 #> File downloaded from Google Drive:
@@ -228,7 +228,7 @@ Notice in the example above, I specified `overwrite = TRUE`. This allowed me to 
 Finally, you could allow it to be downloaded as an Excel workbook, which is the default:
 
 ``` r
-drive_download("538-star-wars-survey", overwrite = TRUE)
+drive_download("538-star-wars-survey")
 #> File downloaded from Google Drive:
 #> '538-star-wars-survey'
 #> Saved locally as:
@@ -255,7 +255,7 @@ drive_download("boring-text.txt")
 #> 'boring-text.txt'
 readLines("boring-text.txt") %>% head()
 #> [1] "Package: base"                                 
-#> [2] "Version: 3.3.2"                                
+#> [2] "Version: 3.3.3"                                
 #> [3] "Priority: base"                                
 #> [4] "Title: The R Base Package"                     
 #> [5] "Author: R Core Team and contributors worldwide"
@@ -268,9 +268,9 @@ readLines("boring-text.txt") %>% head()
 drive_chickwts %>%
   drive_delete()
 #> Files deleted:
-#>   * README-chickwts.csv: 1F_zkCA3PWtPiVbFFQdCVcdv4bkQ2WMXR8C96W6BKAn8
+#>   * README-chickwts.csv: 1ZCvvVppFv5ERZlZNCgb0GTpvhEKST0nLa8rLDYBFGpI
 boring %>%
   drive_delete()
 #> Files deleted:
-#>   * boring-text.txt: 0B0Gh-SuuA2nTeEhBOFYyXzNfcnc
+#>   * boring-text.txt: 0B0Gh-SuuA2nTX2dvUS1acHJYc00
 ```

@@ -1,7 +1,7 @@
 #' Create a folder on Google Drive.
 #'
 #' @param name Character. The name of the folder you would like to create.
-#' @param path Character. The path of the parent folder.
+#' @template path
 #' @template verbose
 #'
 #' @template dribble-return

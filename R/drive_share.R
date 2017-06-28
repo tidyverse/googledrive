@@ -23,20 +23,28 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
   file <- confirm_single_file(file)
 
   if (is.null(role) || is.null(type)) {
-    spf("`role` and `type` must be specified.")
+    stop("`role` and `type` must be specified.", call. = FALSE)
   }
 
   ok_roles <- c("organizer", "owner", "writer", "commenter", "reader")
   ok_types <- c("user", "group", "domain", "anyone")
 
   if (!(role %in% ok_roles)) {
-    spf("`role` must be one of the following: %s.",
-        paste(ok_roles, collapse = ", "))
+    stop(
+      glue(
+        "`role` must be one of the following: {paste(ok_roles, collapse = ", ")}."
+      ),
+      call. = FALSE
+    )
   }
 
   if (!(type %in% ok_types)) {
-    spf("`type` must be one of the following: %s.",
-        paste(ok_types, collapse = ", "))
+    stop(
+      glue(
+        "`type` must be one of the following: {paste(ok_types, collapse = ", ")}."
+      ),
+      call. = FALSE
+    )
   }
 
   request <- generate_request(
@@ -63,7 +71,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
       message(
         glue_data(
           file,
-          "Zoinks! Something went wrong, '{name}' permissions were not updated."
+          "Something went wrong, '{name}' permissions were not updated."
         )
       )
     }

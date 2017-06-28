@@ -1,7 +1,7 @@
 #' List contents of a folder.
 #'
 #' @param path Character. A single folder on Google Drive whose contents you
-#'   want to list. Can be an actual path, a file id marked with [as_id()], or
+#'   want to list. Can be an actual path (character), a file id marked with [as_id()], or
 #'   a [`dribble`].
 #' @inheritParams drive_search
 #'

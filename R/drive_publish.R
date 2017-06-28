@@ -70,7 +70,7 @@ drive_change_publish <- function(file = NULL,
     } else
       message(
         glue_data(
-          file_update, "Uh oh, something went wrong. The publication status of {sq(name)} was not changed.")
+          file_update, "Something went wrong. The publication status of {sq(name)} was not changed.")
       )
   }
 

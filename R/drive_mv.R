@@ -1,17 +1,17 @@
 #' Move Google Drive file.
 #'
 #' @template file
-#' @template folder
+#' @template path
 #' @template verbose
 #'
 #' @template dribble-return
 #' @export
 drive_mv <- function(file = NULL,
-                     folder = NULL,
+                     path = NULL,
                      verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
-  folder <- as_dribble(folder)
+  folder <- as_dribble(path)
   folder <- confirm_single_file(folder)
 
   if (!is_mine(file)) {
