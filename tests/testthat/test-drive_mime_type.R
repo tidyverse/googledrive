@@ -1,9 +1,14 @@
 context("MIME type helper")
 
-test_that("drive_mime_type() returns table if no input", {
-  out <- drive_mime_type()
-  expect_is(out, "tbl_df")
-  expect_gt(nrow(out), 0)
+test_that("drive_mime_type() returns NULL if no input", {
+  expect_null(drive_mime_type())
+})
+
+test_that("drive_mime_type(expose()) returns the full tibble", {
+  expect_identical(
+    drive_mime_type(expose()),
+    .drive$mime_tbl
+  )
 })
 
 test_that("drive_mime_type() returns MIME type for Drive native type",{

@@ -1,10 +1,39 @@
 context("Fields")
 
-test_that("drive_fields() returns built in Files fields", {
+test_that("drive_fields() returns vector of default Files fields", {
   expect_identical(
-    drive_fields(which = "all"),
-    .drive$files_fields[["name"]]
+    drive_fields(),
+    .drive$files_fields$name[.drive$files_fields$default]
   )
+})
+
+test_that("drive_fields(expose()) returns full tibble of Files fields", {
+  expect_identical(
+    drive_fields(expose()),
+    .drive$files_fields
+  )
+
+  expect_message(
+    out <- drive_fields(expose(), resource = "foo"),
+    "ALERT! Only fields for the `files` resource are built-in."
+  )
+  expect_identical(out, drive_fields(expose()))
+})
+
+test_that("drive_fields() admits it only knows about Files fields", {
+
+  expect_message(
+    out <- drive_fields(NULL, resource = "foo"),
+    "ALERT! Only fields for the `files` resource are built-in."
+  )
+  expect_identical(out, drive_fields())
+
+  x <- letters[1:6]
+  expect_message(
+    out <- drive_fields(x, resource = "foo"),
+    "ALERT! Only fields for the `files` resource are built-in."
+  )
+  expect_identical(out, x)
 })
 
 test_that("drive_fields() detects bad fields", {

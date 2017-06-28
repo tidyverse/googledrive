@@ -24,12 +24,12 @@ if (run) {
 test_that("drive_download() downloads a file", {
   skip_on_appveyor()
   skip_on_travis()
+  on.exit(unlink("description.txt"))
   expect_message(
     drive_download(file = nm_("foo"), out_path = "description.txt"),
     "File downloaded from Google Drive:"
   )
   expect_true(file.exists("description.txt"))
-  on.exit(unlink("description.txt"))
 })
 
 test_that("drive_download() errors if file does not exist on Drive", {

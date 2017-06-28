@@ -4,11 +4,15 @@
 \alias{drive_endpoints}
 \title{List Drive endpoints}
 \usage{
-drive_endpoints()
+drive_endpoints(i = NULL)
+}
+\arguments{
+\item{i}{The name(s) or integer index(ices) of the endpoints to return.
+Optional. By default, the entire list is returned.}
 }
 \value{
-A list containing the subset of the Drive API v3 endpoints that are
-used internally by googledrive.
+A list containing some or all of the subset of the Drive API v3
+endpoints that are used internally by googledrive.
 }
 \description{
 Returns a list of selected Drive API v3 endpoints, as stored inside the
@@ -16,10 +20,11 @@ googledrive package. The names of this list (or the \code{id} sub-elements) are
 the nicknames that can be used to specify an endpoint in
 \code{\link[=generate_request]{generate_request()}}. For each endpoint, we store its nickname or \code{id}, the
 associated HTTP verb, the \code{path}, and details about the parameters. This list
-is derived from the
+is derived programmatically from the
 \href{https://www.googleapis.com/discovery/v1/apis/drive/v3/rest}{Drive API v3 Discovery Document}.
 }
 \examples{
 str(drive_endpoints(), max.level = 2)
-drive_endpoints()$`drive.files.delete`
+drive_endpoints("drive.files.delete")
+drive_endpoints(4)
 }
