@@ -65,7 +65,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
       message(
         glue_data(
           file,
-          "Zoinks! Something went wrong, '{name}' permissions were not updated."
+          "Something went wrong, '{name}' permissions were not updated."
         )
       )
     }
