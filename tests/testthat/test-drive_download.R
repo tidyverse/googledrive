@@ -25,7 +25,7 @@ test_that("drive_download() downloads a file", {
   skip_on_appveyor()
   skip_on_travis()
   expect_message(
-    drive_download(file = nm_("foo"), where = "description.txt"),
+    drive_download(file = nm_("foo"), path = "description.txt"),
     "File downloaded from Google Drive:"
   )
   expect_true(file.exists("description.txt"))
@@ -55,7 +55,7 @@ test_that("drive_download() converts with explicit `type`", {
   expect_true(file.exists(nm))
 })
 
-test_that("drive_download() converts with type implicit in `where`", {
+test_that("drive_download() converts with type implicit in `path`", {
   skip_on_appveyor()
   skip_on_travis()
 
@@ -63,7 +63,7 @@ test_that("drive_download() converts with type implicit in `where`", {
   on.exit(unlink(nm))
 
   expect_message(
-    drive_download(file = nm_("bar"), where = nm),
+    drive_download(file = nm_("bar"), path = nm),
     "File downloaded from Google Drive:"
   )
   expect_true(file.exists(nm))

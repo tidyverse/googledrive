@@ -4,14 +4,14 @@
 \alias{drive_mkdir}
 \title{Create a folder on Google Drive.}
 \usage{
-drive_mkdir(name = NULL, folder = NULL, verbose = TRUE)
+drive_mkdir(name = NULL, path = NULL, verbose = TRUE)
 }
 \arguments{
 \item{name}{Character. The name of the folder you would like to create.}
 
-\item{folder}{Drive File, something that identifies the where the file should
-live on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a \code{dribble}.}
+\item{path}{Drive File, something that identifies the where the file should
+live on your Google Drive. Can be an actual path (character), a file id marked with [as_id()], or
+a [`dribble`].}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

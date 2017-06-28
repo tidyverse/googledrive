@@ -4,16 +4,16 @@
 \alias{drive_mv}
 \title{Move Google Drive file.}
 \usage{
-drive_mv(file = NULL, folder = NULL, verbose = TRUE)
+drive_mv(file = NULL, path = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{folder}{Drive File, something that identifies the where the file should
-live on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a \code{dribble}.}
+\item{path}{Drive File, something that identifies the where the file should
+live on your Google Drive. Can be an actual path (character), a file id marked with [as_id()], or
+a [`dribble`].}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

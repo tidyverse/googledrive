@@ -4,7 +4,7 @@
 \alias{drive_upload}
 \title{Upload a file to Google Drive.}
 \usage{
-drive_upload(from = NULL, name = NULL, folder = NULL, overwrite = FALSE,
+drive_upload(from = NULL, name = NULL, path = NULL, overwrite = FALSE,
   type = NULL, verbose = TRUE)
 }
 \arguments{
@@ -13,9 +13,9 @@ drive_upload(from = NULL, name = NULL, folder = NULL, overwrite = FALSE,
 \item{name}{Character, name the file should have on Google Drive. Will
 default to its local name.}
 
-\item{folder}{Drive File, something that identifies the where the file should
-live on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a \code{dribble}.}
+\item{path}{Drive File, something that identifies the where the file should
+live on your Google Drive. Can be an actual path (character), a file id marked with [as_id()], or
+a [`dribble`].}
 
 \item{overwrite}{A logical scalar, do you want to overwrite a file already on
 Google Drive, if such exists?}

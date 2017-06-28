@@ -6,7 +6,7 @@
 #' @param from Character, local path to the file to upload.
 #' @param name Character, name the file should have on Google Drive. Will
 #'   default to its local name.
-#' @template folder
+#' @template path
 #' @param overwrite A logical scalar, do you want to overwrite a file already on
 #'   Google Drive, if such exists?
 #' @param type Character. If type = `NULL`, a MIME type is automatically
@@ -29,7 +29,7 @@
 #' }
 drive_upload <- function(from = NULL,
                          name = NULL,
-                         folder = NULL,
+                         path = NULL,
                          overwrite = FALSE,
                          type = NULL,
                          verbose = TRUE) {
@@ -51,7 +51,7 @@ drive_upload <- function(from = NULL,
   ## parent folder
   ## TO DO: be willing to create the bits of folder that don't yet exist
   ## for now, user must make sure folder already exists and is unique
-  folder <- folder %||% root_folder()
+  folder <- path %||% root_folder()
   if (is.character(folder)) {
     folder <- append_slash(folder)
   }
