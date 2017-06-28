@@ -38,12 +38,8 @@ drive_mime_type <- function(type = NULL) {
   if (is_expose(type)) {
     return(.drive$mime_tbl)
   }
-
   if (!(is.character(type))) {
     stop("`type` must be character", call. = FALSE)
-  }
-  if (length(type) == 1 && type == "all") {
-    return(.drive$mime_tbl)
   }
 
   human_m <- match(
