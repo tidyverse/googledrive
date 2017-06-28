@@ -1,4 +1,5 @@
 # fx
+
 last <- function(x) x[length(x)]
 
 sq <- function(x) glue::single_quote(x)
@@ -20,3 +21,24 @@ Sys_getenv <- function(x) {
 
 ## vectorized isTRUE()
 is_true <- function(x) vapply(x, isTRUE, logical(1))
+
+#' An expose object.
+#'
+#' `expose()` returns a sentinel object, similar in spirit to `NULL`, that tells
+#' the calling function to return its internal data structure. googledrive
+#' stores alot of information about the Drive API, MIME types, etc., internally
+#' and then exploits it in helper functions, like [`drive_mime_type()`],
+#' [`drive_fields()`], [`drive_endpoints()`], etc. We use these objects to
+#' provide nice defaults, check input validity, or lookup something cryptic,
+#' like MIME type, based on something friendlier, like a file extension. Pass
+#' `expose()` to such a function if you want to inspect its internal object, in
+#' its full glory. This is inspired by the `waiver()` object in ggplot2.
+#'
+#' @export
+#' @keywords internal
+#' @examples
+#' drive_mime_type(expose())
+#' drive_fields(expose())
+expose <- function() structure(list(), class = "expose")
+
+is_expose <- function(x) inherits(x, "expose")

@@ -137,9 +137,10 @@ verify_export_mime_type <- function(mime_type, export_type) {
 }
 
 ## determine file extension from mime_type
-## apply to path if not already present
-apply_extension <- function(path, mime_type) {
-  mime_tbl <- drive_mime_type()
+
+## apply to out_path if not already present
+apply_extension <- function(out_path, mime_type) {
+  mime_tbl <- drive_mime_type(expose())
   m <- mime_tbl$mime_type == mime_type
   if (sum(m) == 0) return(path)
 
