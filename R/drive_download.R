@@ -140,7 +140,6 @@ verify_export_mime_type <- function(mime_type, export_type) {
 ## apply to out_path if not already present
 apply_extension <- function(out_path, mime_type) {
   ext <- drive_extension(mime_type)
-
   ext_orig <- file_ext_safe(out_path)
   if (!identical(ext, ext_orig)) {
     out_path <- paste(out_path, ext, sep = ".")
