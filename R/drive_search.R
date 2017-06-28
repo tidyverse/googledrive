@@ -71,7 +71,7 @@ drive_search <- function(pattern = NULL,
     mime_type <- purrr::discard(mime_type, is.na)
     params$q <- paste(
       c(params$q,
-        paste0("mimeType = '", mime_type,"'", collapse = " or ")),
+        paste0("mimeType = '", mime_type, "'", collapse = " or ")),
       collapse = " and "
     )
   }
