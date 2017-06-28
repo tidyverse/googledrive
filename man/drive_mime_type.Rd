@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_mime_type.R
 \name{drive_mime_type}
 \alias{drive_mime_type}
-\title{Lookup MIME type}
+\title{Lookup MIME type.}
 \usage{
 drive_mime_type(type = NULL)
 }
@@ -27,7 +27,7 @@ for a file. Three types of input are acceptable:
 \item MIME types accepted by Google Drive (these are simply passed through).
 }
 
-If no input is provided, function returns the full table used
+If \code{type = all}, function returns the full table used
 for lookup, i.e. all MIME types known to be relevant to the Drive
 API.
 }
@@ -40,4 +40,7 @@ drive_mime_type("jpeg")
 
 ## it's vectorized
 drive_mime_type(c("presentation", "pdf", "image/gif"))
+
+## get tibble of all mime types recognized by Google Drive
+drive_mime_type("all")
 }

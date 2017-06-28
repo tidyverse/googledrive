@@ -1,9 +1,14 @@
 context("MIME type helper")
 
-test_that("drive_mime_type() returns table if no input", {
-  out <- drive_mime_type()
+test_that("drive_mime_type() returns table if `type = 'all'`", {
+  out <- drive_mime_type(type = "all")
   expect_is(out, "tbl_df")
   expect_gt(nrow(out), 0)
+})
+
+test_that("drive_mime_type() returns NULL if input NULL", {
+  out <- drive_mime_type()
+  expect_null(out)
 })
 
 test_that("drive_mime_type() returns MIME type for Drive native type",{
@@ -42,3 +47,41 @@ test_that("drive_mime_type() errors for invalid input",{
 test_that("drive_mime_type() errors for single unrecognized input",{
   expect_error(drive_mime_type("nonsense"), "Unrecognized `type`")
 })
+
+
+test_that("drive_extension() returns NULL if input NULL", {
+  out <- drive_extension()
+  expect_null(out)
+})
+
+
+test_that("drive_extension() returns file extension for MIME type",{
+  expect_identical(
+    drive_extension(c("application/pdf", "image/jpeg")),
+    c("pdf","jpeg")
+  )
+})
+
+test_that("drive_extension() returns file extension for file extension",{
+  input <- c("xlsx","html")
+  expect_identical(drive_extension(input), input)
+})
+
+test_that("drive_extension() returns file extension for mixed input",{
+  input <- c("text/html", NA, "application/vnd.google-apps.folder", "csv")
+  expect_identical(
+    drive_extension(input),
+    c("html", NA, NA, "csv")
+  )
+})
+
+test_that("drive_extension() errors for invalid input",{
+  expect_error(drive_extension(1), "`type` must be character")
+  expect_error(drive_extension(dribble()), "`type` must be character")
+})
+
+test_that("drive_extension() errors for single unrecognized input",{
+  expect_error(drive_extension("nonsense"), "Unrecognized `type`")
+})
+
+
