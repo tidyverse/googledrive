@@ -123,7 +123,7 @@ drive_upload <- function(from = NULL,
       )
     }
   } else {
-    spf("Zoinks! the file doesn't seem to have uploaded")
+    stop("The file doesn't seem to have uploaded.", call. = FALSE)
   }
 
   invisible(uploaded_doc)

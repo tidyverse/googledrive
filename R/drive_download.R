@@ -98,7 +98,7 @@ drive_download <- function(file = NULL,
       )
     }
   } else {
-    stop("Zoinks! the file doesn't seem to have downloaded", call. = FALSE)
+    stop("The file doesn't seem to have downloaded", call. = FALSE)
   }
   invisible(file)
 }
