@@ -1,27 +1,27 @@
 #' Create a folder on Google Drive.
 #'
 #' @param name Character. The name of the folder you would like to create.
-#' @param path Character. The path of the parent folder.
+#' @template folder
 #' @template verbose
 #'
 #' @template dribble-return
 #' @export
-drive_mkdir <- function(name = NULL, path = NULL, verbose = TRUE) {
+drive_mkdir <- function(name = NULL, folder = NULL, verbose = TRUE) {
   parent <- NULL
 
-  if (!is.null(path)) {
-    if (inherits(path, "character")) {
-      path <- append_slash(path)
+  if (!is.null(folder)) {
+    if (inherits(folder, "character")) {
+      folder <- append_slash(folder)
     }
-    path <- as_dribble(path)
-    path <- confirm_single_file(path)
-    if (!is_folder(path)) {
+    folder <- as_dribble(folder)
+    folder <- confirm_single_file(folder)
+    if (!is_folder(folder)) {
       stop(
-        glue_data(path, "'path' is not a folder:\n{name}"),
+        glue_data(folder, "'folder' is not a folder:\n{name}"),
         call. = FALSE
       )
     }
-    parent <- path$id
+    parent <- folder$id
   }
 
   request <- generate_request(
