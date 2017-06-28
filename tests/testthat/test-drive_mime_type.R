@@ -1,11 +1,5 @@
 context("MIME type helper")
 
-<<<<<<< HEAD
-test_that("drive_mime_type() returns table if `type = 'all'`", {
-  out <- drive_mime_type(type = "all")
-  expect_is(out, "tbl_df")
-  expect_gt(nrow(out), 0)
-=======
 test_that("drive_mime_type() returns NULL if no input", {
   expect_null(drive_mime_type())
 })
@@ -15,7 +9,6 @@ test_that("drive_mime_type(expose()) returns the full tibble", {
     drive_mime_type(expose()),
     .drive$mime_tbl
   )
->>>>>>> a32282f1dc988eb917681f52d62452e11b046985
 })
 
 test_that("drive_mime_type() returns NULL if input NULL", {
