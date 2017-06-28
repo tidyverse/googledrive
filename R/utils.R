@@ -1,6 +1,3 @@
-## TO DO: remove all use of spf() and then delete it
-spf <- function(...) stop(sprintf(...), call. = FALSE)
-
 last <- function(x) x[length(x)]
 
 sq <- function(x) glue::single_quote(x)
