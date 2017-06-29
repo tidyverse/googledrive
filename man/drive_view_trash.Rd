@@ -6,6 +6,10 @@
 \usage{
 drive_view_trash()
 }
+\value{
+An object of class \code{\link{dribble}}, a tibble with
+   one row per file.
+}
 \description{
 View files in Google Drive Trash.
 }

@@ -10,10 +10,6 @@ drive_empty_trash(verbose = TRUE)
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
-\value{
-An object of class \code{\link{dribble}}, a tibble with
-   one row per file.
-}
 \description{
 Caution: this will permanently delete files in your
 Google Drive trash.
