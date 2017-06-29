@@ -22,6 +22,7 @@ An object of class \code{\link{dribble}}, a tibble with
 Copy a Google Drive file.
 }
 \examples{
+\dontrun{
 ## this will make a copy of the file "chickwts.rda"
 ## in the same folder as the original file named
 ## "Copy of chickwts.rda".
@@ -31,4 +32,5 @@ drive_copy("chickwts.rda")
 ## "Copy of chickwts.rda" and "Copy of chickwts.csv"
 ## in their same folder as the respective original files.
 drive_copy(c("chickwts.rda", "chickwts.csv"))
+}
 }

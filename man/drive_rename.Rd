@@ -24,5 +24,7 @@ An object of class \code{\link{dribble}}, a tibble with
 Rename Google Drive file
 }
 \examples{
+\dontrun{
 drive_rename("chickwts.csv", name = "my_chickwts.csv")
+}
 }

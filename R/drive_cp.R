@@ -6,6 +6,7 @@
 #' @template dribble-return
 #'
 #' @examples
+#' \dontrun{
 #' ## Copy the file "chickwts.rda" in the same folder as the
 #' ## original file as "Copy of chickwts.rda".
 #' drive_cp("chickwts.rda")
@@ -14,6 +15,7 @@
 #' ## "Copy of chickwts.rda" and "Copy of chickwts.csv"
 #' ## in their same folder as the respective original files.
 #' drive_cp(c("chickwts.rda", "chickwts.csv"))
+#' }
 #' @export
 drive_cp <- function(file = NULL, verbose = TRUE) {
   files <- as_dribble(file)
@@ -58,6 +60,7 @@ copy_one <- function(id, name, verbose) {
 #' Copy a Google Drive file.
 #' @inherit drive_cp
 #' @examples
+#' \dontrun{
 #' ## this will make a copy of the file "chickwts.rda"
 #' ## in the same folder as the original file named
 #' ## "Copy of chickwts.rda".
@@ -67,6 +70,7 @@ copy_one <- function(id, name, verbose) {
 #' ## "Copy of chickwts.rda" and "Copy of chickwts.csv"
 #' ## in their same folder as the respective original files.
 #' drive_copy(c("chickwts.rda", "chickwts.csv"))
+#' }
 #' @export
 drive_copy <- function(file = NULL, verbose = TRUE) {
   drive_cp(file = file, verbose = verbose)
