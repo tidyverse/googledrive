@@ -38,3 +38,23 @@ drive_ls <- function(path = "~/", pattern = NULL, type = NULL, ...) {
 
   drive_search(pattern = pattern, type = type, q = q_clause)
 }
+
+#' List contents of a folder.
+#' @inherit drive_ls
+#' @examples
+#' \dontrun{
+#' ## get contents of the folder 'abc' (non-recursive)
+#' drive_list("abc")
+#'
+#' ## get contents of folder 'abc' that contain the
+#' ## letters 'def'
+#' drive_list(path = "abc", pattern = "def")
+#'
+#' ## get all Google spreadsheets in folder 'abc'
+#' ## that contain the letters 'def'
+#' drive_list(path = "abc", pattern = "def", type = "spreadsheet")
+#' }
+#' @export
+drive_list <- function(path = "~/", pattern = NULL, type = NULL, ...) {
+  drive_ls(path = path, pattern = pattern, type = type, ...)
+}
