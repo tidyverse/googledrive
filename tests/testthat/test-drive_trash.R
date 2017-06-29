@@ -2,7 +2,7 @@ context("Trash files")
 
 ## WARNING: this will empty your drive trash. If you do
 ## not want that to happen, set EMPTY_TRASH = FALSE
-EMPTY_TRASH = TRUE
+# EMPTY_TRASH = TRUE
 
 ## NOTE if you do not currently have the files needed,
 ## change run & clean below to TRUE to create files needed
@@ -43,10 +43,10 @@ test_that("drive_untrash() moves object out of the trash", {
   expect_false(foo$trashed)
 })
 
-test_that("drive_empty_trash() empties trash", {
-  skip_on_travis()
-  skip_on_appveyor()
-  skip_if_not(EMPTY_TRASH)
-  expect_message(drive_empty_trash())
-  expect_identical(nrow(drive_view_trash()), 0L)
-})
+# test_that("drive_empty_trash() empties trash", {
+#   skip_on_travis()
+#   skip_on_appveyor()
+#   skip_if_not(EMPTY_TRASH)
+#   expect_message(drive_empty_trash())
+#   expect_identical(nrow(drive_view_trash()), 0L)
+# })

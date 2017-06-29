@@ -92,6 +92,8 @@ drive_view_trash <- function() {
 
 #' Empty Google Drive Trash.
 #'
+#' @template verbose
+#' @template dribble-return
 #' @description Caution: this will permanently delete files in your
 #'    Google Drive trash.
 #' @export
