@@ -17,7 +17,7 @@ if (run) {
   }
 
   drive_mkdir(nm_("foo"))
-  drive_mkdir(nm_("bar"), path = nm_("foo"))
+  drive_mkdir(nm_("bar"), path = append_slash(nm_("foo")))
   drive_mkdir(nm_("baz"))
 
 }
@@ -33,7 +33,7 @@ test_that("drive_mv() can move and rename a folder", {
   ## baz
   ## |- bar2 (where bar2 is renamed bar)
   files <- drive_search(paste(nm_("foo"), nm_("bar"), nm_("baz"), sep = "|"))
-  bar_mv <- drive_mv(nm_("bar"), name = "bar2", path = nm_("baz"))
+  bar_mv <- drive_mv(nm_("bar"), path = append_slash(nm_("baz")), name = "bar2")
 
   ## the ids are identical
   expect_identical(files[grepl("bar", files$name), ]$id, bar_mv$id)
@@ -46,6 +46,17 @@ test_that("drive_mv() can move and rename a folder", {
   expect_identical(parent, files[grepl("baz", files$name), ]$id)
 
   ## move back
-  expect_message(drive_mv("bar2", name = nm_("bar"), path = nm_("foo")),
+  expect_message(drive_mv("bar2", path = append_slash(nm_("foo")), name = nm_("bar")),
                  "File moved")
+})
+
+test_that("drive_mv() path handling", {
+
+  ## messages if you give both a path and name with no slash
+  expect_message(drive_mv(nm_("bar"), path = nm_("bar2"), name = nm_("bar2")),
+                          "Ignoring `name`:")
+
+  expect_message(drive_mv(nm_("bar2"), path = nm_("bar")),
+                "File moved:")
+
 })
