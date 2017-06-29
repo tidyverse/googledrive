@@ -21,7 +21,8 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-Rename Google Drive file
+This is a wrapper for \code{\link[=drive_mv]{drive_mv()}} that only renames a file.
+If you would like to rename AND move the file, see \code{\link[=drive_mv]{drive_mv()}}.
 }
 \examples{
 \dontrun{

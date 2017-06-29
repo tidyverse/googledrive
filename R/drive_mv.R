@@ -61,13 +61,9 @@ drive_mv <- function(file = NULL, name = NULL, path = NULL, verbose = TRUE) {
 
   if (verbose) {
     if (proc_res$name == name) {
-      message(
-        glue("This file:\n{sq(file$name)}\nis now: \n{sq(paste0(folder_name, name))}")
-      )
+      message(glue("File moved: \n  * {file$name} -> {paste0(folder_name, name)}"))
     } else {
-      message(
-        glue_data(file, "Oh dear! this file was not moved:\n{sq(file$name)}")
-      )
+      message(glue("File NOT moved: \n * {file$name}"))
     }
   }
 
