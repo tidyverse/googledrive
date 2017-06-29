@@ -32,7 +32,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
   if (!(role %in% ok_roles)) {
     stop(
       glue(
-        "`role` must be one of the following: {paste(ok_roles, collapse = ", ")}."
+        "`role` must be one of the following: \n{paste(ok_roles, collapse = ', ')}."
       ),
       call. = FALSE
     )
@@ -41,7 +41,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
   if (!(type %in% ok_types)) {
     stop(
       glue(
-        "`type` must be one of the following: {paste(ok_types, collapse = ", ")}."
+        "`type` must be one of the following: \n{paste(ok_types, collapse = ', ')}."
       ),
       call. = FALSE
     )
@@ -68,12 +68,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
         )
       )
     } else {
-      message(
-        glue_data(
-          file,
-          "Something went wrong, '{name}' permissions were not updated."
-        )
-      )
+      message(glue_data(file, "Permissions were NOT updated: '{name}'"))
     }
   }
   file <- as_dribble(as_id(file$id))
