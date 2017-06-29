@@ -20,6 +20,13 @@
 drive_cp <- function(file = NULL, verbose = TRUE) {
   files <- as_dribble(file)
   files <- confirm_some_files(files)
+  if (any(is_folder(files))) {
+    stop(glue_data(files[is_folder(files), ],
+                   "The Drive API cannot copy folders: {name}"
+                   ),
+         call. = FALSE
+    )
+  }
   cp_files <- purrr::map(files$id, copy_one, verbose = verbose)
   cp_files <- do.call(rbind, cp_files)
   success <- purrr::map_lgl(file, ~grepl(.x, cp_files$name))
