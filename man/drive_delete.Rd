@@ -18,5 +18,5 @@ or a \code{dribble}.}
 Logical, indicating whether the delete succeeded.
 }
 \description{
-Delete file from Google Drive.
+Caution: this will permanently delete your files.
 }

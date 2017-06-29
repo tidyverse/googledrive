@@ -1,5 +1,6 @@
 #' Delete file from Google Drive.
 #'
+#' @description Caution: this will permanently delete your files.
 #' @template file
 #' @template verbose
 #'
@@ -32,6 +33,5 @@ delete_one <- function(id) {
     endpoint = "drive.files.delete",
     params = list(fileId = id)
   )
-  response <- make_request(request)
-  process_response(response)
+  do_request(request)
 }
