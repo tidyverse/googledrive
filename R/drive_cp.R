@@ -1,5 +1,6 @@
 #' Copy a Google Drive file.
 #'
+#' @description [`drive_copy()`] is an alias for [`drive_cp()`].
 #' @template file
 #' @template verbose
 #'
@@ -64,21 +65,6 @@ copy_one <- function(id, name, verbose) {
   return(file)
 }
 
-#' Copy a Google Drive file.
-#' @inherit drive_cp
-#' @examples
-#' \dontrun{
-#' ## this will make a copy of the file "chickwts.rda"
-#' ## in the same folder as the original file named
-#' ## "Copy of chickwts.rda".
-#' drive_copy("chickwts.rda")
-#'
-#' ## Copy multiple files - this will create files
-#' ## "Copy of chickwts.rda" and "Copy of chickwts.csv"
-#' ## in their same folder as the respective original files.
-#' drive_copy(c("chickwts.rda", "chickwts.csv"))
-#' }
+#' @rdname drive_cp
 #' @export
-drive_copy <- function(file = NULL, verbose = TRUE) {
-  drive_cp(file = file, verbose = verbose)
-}
+drive_copy <- drive_cp

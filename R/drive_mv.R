@@ -1,5 +1,6 @@
 #' Move Google Drive file.
 #'
+#' @description [`drive_move()`] is an alias for [`drive_mv()`].
 #' @template file
 #' @param name Character, name you would like the moved file to have. Will
 #'    default to its current name.
@@ -71,9 +72,6 @@ drive_mv <- function(file = NULL, name = NULL, path = NULL, verbose = TRUE) {
   invisible(file)
 }
 
-#' Move Google Drive file.
-#' @inherit drive_mv
+#' @rdname drive_mv
 #' @export
-drive_move <- function(file = NULL, name = NULL, path = NULL, verbose = TRUE) {
-  drive_mv(file = file, name = name, path = path, verbose = verbose)
-}
+drive_move <- drive_mv

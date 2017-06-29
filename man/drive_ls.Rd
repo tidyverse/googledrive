@@ -2,9 +2,12 @@
 % Please edit documentation in R/drive_ls.R
 \name{drive_ls}
 \alias{drive_ls}
+\alias{drive_list}
 \title{List contents of a folder.}
 \usage{
 drive_ls(path = "~/", pattern = NULL, type = NULL, ...)
+
+drive_list(path = "~/", pattern = NULL, type = NULL, ...)
 }
 \arguments{
 \item{path}{Character. A single folder on Google Drive whose contents you
@@ -25,7 +28,7 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-List contents of a folder.
+\code{\link[=drive_list]{drive_list()}} is an alias for \code{\link[=drive_ls]{drive_ls()}}.
 }
 \examples{
 \dontrun{

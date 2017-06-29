@@ -2,9 +2,12 @@
 % Please edit documentation in R/drive_mv.R
 \name{drive_mv}
 \alias{drive_mv}
+\alias{drive_move}
 \title{Move Google Drive file.}
 \usage{
 drive_mv(file = NULL, name = NULL, path = NULL, verbose = TRUE)
+
+drive_move(file = NULL, name = NULL, path = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
@@ -26,5 +29,5 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-Move Google Drive file.
+\code{\link[=drive_move]{drive_move()}} is an alias for \code{\link[=drive_mv]{drive_mv()}}.
 }

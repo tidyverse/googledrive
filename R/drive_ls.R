@@ -1,5 +1,6 @@
 #' List contents of a folder.
 #'
+#' @description [`drive_list()`] is an alias for [`drive_ls()`].
 #' @param path Character. A single folder on Google Drive whose contents you
 #'   want to list. Can be an actual path (character), a file id marked with [as_id()], or
 #'   a [`dribble`].
@@ -39,22 +40,6 @@ drive_ls <- function(path = "~/", pattern = NULL, type = NULL, ...) {
   drive_search(pattern = pattern, type = type, q = q_clause)
 }
 
-#' List contents of a folder.
-#' @inherit drive_ls
-#' @examples
-#' \dontrun{
-#' ## get contents of the folder 'abc' (non-recursive)
-#' drive_list("abc")
-#'
-#' ## get contents of folder 'abc' that contain the
-#' ## letters 'def'
-#' drive_list(path = "abc", pattern = "def")
-#'
-#' ## get all Google spreadsheets in folder 'abc'
-#' ## that contain the letters 'def'
-#' drive_list(path = "abc", pattern = "def", type = "spreadsheet")
-#' }
+#' @rdname drive_ls
 #' @export
-drive_list <- function(path = "~/", pattern = NULL, type = NULL, ...) {
-  drive_ls(path = path, pattern = pattern, type = type, ...)
-}
+drive_list <- drive_ls
