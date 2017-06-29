@@ -86,7 +86,7 @@ drive_untrash <- function(file = NULL, verbose = TRUE) {
 
 #' View files in Google Drive Trash.
 #' @export
-view_trash <- function() {
+drive_view_trash <- function() {
   drive_search(q = "trashed = true")
 }
 
@@ -94,7 +94,16 @@ view_trash <- function() {
 #'
 #' @description Caution: this will permanently delete files in your
 #'    Google Drive trash.
-empty_trash <- function() {
-  files <- view_trash()
-  drive_delete(files)
+#' @export
+drive_empty_trash <- function(verbose = TRUE) {
+  files <- drive_view_trash()
+  del <- drive_delete(files, verbose = FALSE)
+  n <- sum(del)
+  if (verbose) {
+    if (n > 0L) {
+    message(glue("You have successfully deleted {n} files from your Google Drive trash."))
+    } else {
+      message("Your trash was already empty.")
+    }
+  }
 }
