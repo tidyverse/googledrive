@@ -62,6 +62,12 @@ copy_one <- function(id, name, verbose) {
 #' ## in the same folder as the original file named
 #' ## "Copy of chickwts.rda".
 #' drive_copy("chickwts.rda")
+#'
+#' ## Copy multiple files - this will create files
+#' ## "Copy of chickwts.rda" and "Copy of chickwts.csv"
+#' ## in their same folder as the respective original files.
+#' drive_copy(c("chickwts.rda", "chickwts.csv"))
+#' @export
 drive_copy <- function(file = NULL, verbose = TRUE) {
   drive_cp(file = file, verbose = verbose)
 }

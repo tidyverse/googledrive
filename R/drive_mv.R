@@ -77,6 +77,7 @@ drive_mv <- function(file = NULL, name = NULL, path = NULL, verbose = TRUE) {
 
 #' Move Google Drive file.
 #' @inherit drive_mv
+#' @export
 drive_move <- function(file = NULL, name = NULL, path = NULL, verbose = TRUE) {
   drive_mv(file = file, name = name, path = path, verbose = verbose)
 }
