@@ -29,3 +29,19 @@ An object of class \code{\link{dribble}}, a tibble with
 \description{
 Create a folder on Google Drive.
 }
+\examples{
+\dontrun{
+## Create folder named "def" in folder "abc".
+drive_mkdir(path = "abc/def")
+
+## This will also create a folder named "def" in folder
+## "abc".
+drive_mkdir(path = "abc/", name = "def")
+
+## If we already have a `dribble` with folder content,
+## we can pipe it into the function.
+abc <- as_dribble("abc")
+abc \%>\%
+ drive_mkdir(name = "def")
+}
+}

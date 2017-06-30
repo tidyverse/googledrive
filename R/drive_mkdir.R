@@ -6,6 +6,22 @@
 #' @template verbose
 #'
 #' @template dribble-return
+#'
+#' @examples
+#' \dontrun{
+#' ## Create folder named "def" in folder "abc".
+#' drive_mkdir(path = "abc/def")
+#'
+#' ## This will also create a folder named "def" in folder
+#' ## "abc".
+#' drive_mkdir(path = "abc/", name = "def")
+#'
+#' ## If we already have a `dribble` with folder content,
+#' ## we can pipe it into the function.
+#' abc <- as_dribble("abc")
+#' abc %>%
+#'  drive_mkdir(name = "def")
+#'}
 #' @export
 drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   parent <- NULL
@@ -49,7 +65,7 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
     if (success) {
       message(glue_data(folder, "Folder created:\n{name}"))
     } else {
-      message(glue_data(folder, "Uh oh, folder NOT created:\n{name}"))
+      message(glue_data(folder, "Folder NOT created:\n{name}"))
     }
   }
   invisible(folder)

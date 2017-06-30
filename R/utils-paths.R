@@ -62,14 +62,15 @@ split_path_name <- function(path, name, verbose = TRUE) {
   if (!is.character(path) || grepl("/$", path)) {
     return(list(path = path, name = name))
   }
-  if (!grepl("^/|~", path)) {
-    path <- paste0("/", path)
-  }
   pth <- split_path(path)
-  pth_name <- pth[length(pth)]
-  path <- collapse(pth[-length(pth)], sep = "/")
+  pth_n <- length(pth)
+  pth_name <- pth[pth_n]
+  path <- NULL
+  if (pth_n > 1) {
+    path <- collapse(pth[-pth_n], sep = "/")
+  }
   if (!is.null(name) && verbose) {
-    message(glue("Ignoring `name`: {name} ",
+    message(glue("Ignoring `name`: {name}",
                  "\nin favor of name specified in `path`: {pth_name}"))
   }
   name <- pth_name
