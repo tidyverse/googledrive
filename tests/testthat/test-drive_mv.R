@@ -17,7 +17,7 @@ if (run) {
   }
 
   drive_mkdir(nm_("foo"))
-  drive_mkdir(nm_("bar"), path = append_slash(nm_("foo")))
+  drive_mkdir(path = append_slash(nm_("foo")), name = nm_("bar"))
   drive_mkdir(nm_("baz"))
 
 }
@@ -52,6 +52,8 @@ test_that("drive_mv() can move and rename a folder", {
 
 test_that("drive_mv() path handling", {
 
+  skip_on_appveyor()
+  skip_on_travis()
   ## messages if you give both a path and name with no slash
   expect_message(drive_mv(nm_("bar"), path = nm_("bar2"), name = nm_("bar2")),
                           "Ignoring `name`:")

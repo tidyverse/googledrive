@@ -29,7 +29,7 @@ test_that("drive_upload() places file in the correct folder", {
 
   ## foo
   ## |- bar
-  bar <- drive_upload(system.file("DESCRIPTION"), name = nm_("bar"), path = nm_("foo"))
+  bar <- drive_upload(system.file("DESCRIPTION"), path = file.path(nm_("foo"), nm_("bar")))
   expect_identical(bar$files_resource[[1]]$parents[[1]], foo$id)
 
   ## clean up

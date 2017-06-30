@@ -3,8 +3,8 @@
 #' @description [`drive_move()`] is an alias for [`drive_mv()`].
 #' @template file
 #' @template path
-#' @param name Character, name you would like the moved file to have. Will
-#'    default to its current name.
+#' @param name Character, name you would like the moved file to have if not
+#'   specified in `path`. Will default to its current name.
 #' @template verbose
 #'
 #' @template dribble-return
@@ -13,20 +13,11 @@ drive_mv <- function(file = NULL, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
 
-  if (is.character(path) && !grepl("/$", path)) {
-    if (!grepl("^/", path)) {
-      path <- paste0("/", path)
-    }
-    pth <- split_path(path)
-    pth_name <- pth[length(pth)]
-    path <- unsplit_path(pth[-length(pth)])
-    if (!is.null(name) && verbose) {
-      message(glue("Ignoring `name`: {name}",
-                   "in favor of name specified in `path`: {pth_name}"))
-    }
-    name <- pth_name
-  }
-  name <- name %||% file$name
+  path_name <- split_path_name(path, name, verbose)
+  path <- path_name[["path"]]
+  name <- path_name[["name"]]
+
+  name %||% file$name
 
   if (!is_mine(file)) {
     stop(

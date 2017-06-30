@@ -19,7 +19,7 @@ test_that("drive_mkdir() places folder in the correct folder", {
   foo <- drive_mkdir(nm_("foo"))
   ## foo
   ## |- bar
-  bar <- drive_mkdir(nm_("bar"), path = nm_("foo"))
+  bar <- drive_mkdir(path = file.path(nm_("foo"), nm_("bar")))
   expect_identical(bar$files_resource[[1]]$parents[[1]], foo$id)
 
   ## clean up

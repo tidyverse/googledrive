@@ -4,18 +4,23 @@
 \alias{drive_upload}
 \title{Upload a file to Google Drive.}
 \usage{
-drive_upload(from = NULL, name = NULL, path = NULL, overwrite = FALSE,
+drive_upload(from = NULL, path = NULL, name = NULL, overwrite = FALSE,
   type = NULL, verbose = TRUE)
 }
 \arguments{
 \item{from}{Character, local path to the file to upload.}
 
-\item{name}{Character, name the file should have on Google Drive. Will
-default to its local name.}
-
 \item{path}{Drive File, something that identifies where the file should live
 on your Google Drive. Can be an actual path (character), a file id marked
-with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+with \code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
+actual path, you can include the name, indicated by not appending a final
+slash (i.e.: "abc/def" would indicate the file will be named "def" and placed
+in "abc", where as "abc/def/" indicates the file will be placed in folder "def"
+which is located in folder "abc"), or you can specify the name with the
+\code{name} parameter.}
+
+\item{name}{Character, name the file should have on Google Drive if not specified
+in \code{path}. Will default to its local name.}
 
 \item{overwrite}{A logical scalar, do you want to overwrite a file already on
 Google Drive, if such exists?}

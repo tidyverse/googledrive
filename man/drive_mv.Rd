@@ -5,21 +5,26 @@
 \alias{drive_move}
 \title{Move Google Drive file.}
 \usage{
-drive_mv(file = NULL, name = NULL, path = NULL, verbose = TRUE)
+drive_mv(file = NULL, path = NULL, name = NULL, verbose = TRUE)
 
-drive_move(file = NULL, name = NULL, path = NULL, verbose = TRUE)
+drive_move(file = NULL, path = NULL, name = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{name}{Character, name you would like the moved file to have. Will
-default to its current name.}
-
 \item{path}{Drive File, something that identifies where the file should live
 on your Google Drive. Can be an actual path (character), a file id marked
-with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+with \code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
+actual path, you can include the name, indicated by not appending a final
+slash (i.e.: "abc/def" would indicate the file will be named "def" and placed
+in "abc", where as "abc/def/" indicates the file will be placed in folder "def"
+which is located in folder "abc"), or you can specify the name with the
+\code{name} parameter.}
+
+\item{name}{Character, name you would like the moved file to have if not
+specified in \code{path}. Will default to its current name.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

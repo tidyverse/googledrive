@@ -4,9 +4,9 @@
 #'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
 #'
 #' @param from Character, local path to the file to upload.
-#' @param name Character, name the file should have on Google Drive. Will
-#'   default to its local name.
 #' @template path
+#' @param name Character, name the file should have on Google Drive if not specified
+#'   in `path`. Will default to its local name.
 #' @param overwrite A logical scalar, do you want to overwrite a file already on
 #'   Google Drive, if such exists?
 #' @param type Character. If type = `NULL`, a MIME type is automatically
@@ -28,8 +28,8 @@
 #' drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
 #' }
 drive_upload <- function(from = NULL,
-                         name = NULL,
                          path = NULL,
+                         name = NULL,
                          overwrite = FALSE,
                          type = NULL,
                          verbose = TRUE) {
@@ -43,6 +43,10 @@ drive_upload <- function(from = NULL,
   ##   * mimeType
   ##   * parent
   ##   * id
+
+  path_name <- split_path_name(path, name, verbose)
+  path <- path_name[["path"]]
+  name <- path_name[["name"]]
 
   name <- name %||% basename(from)
 
