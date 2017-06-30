@@ -62,7 +62,7 @@ split_path_name <- function(path, name, verbose = TRUE) {
   if (!is.character(path) || grepl("/$", path)) {
     return(list(path = path, name = name))
   }
-  if (!grepl("^/", path)) {
+  if (!grepl("^/|~", path)) {
     path <- paste0("/", path)
   }
   pth <- split_path(path)
