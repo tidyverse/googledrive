@@ -1,9 +1,13 @@
 #' List contents of a folder.
 #'
-#' @description [`drive_list()`] is an alias for [`drive_ls()`].
+#' List the contents of a folder on Google Drive, nonrecursively. Optionally,
+#' filter for a regex in the file names and/or on MIME type. This is a thin
+#' wrapper around [`drive_search()`]. `drive_list()` is an alias for
+#' `drive_ls()`.
+#'
 #' @param path Character. A single folder on Google Drive whose contents you
-#'   want to list. Can be an actual path (character), a file id marked with [as_id()], or
-#'   a [`dribble`].
+#'   want to list. Can be an actual path (character), a file id marked with
+#'   [as_id()], or a [`dribble`].
 #' @inheritParams drive_search
 #'
 #' @template dribble-return
