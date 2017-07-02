@@ -132,3 +132,32 @@ test_that("split_path_name() returns input if not character", {
   expect_null(path_name[["name"]])
 })
 
+test_that("partition_path() works", {
+  f <- function(x, y) list(parent = x, name = y)
+
+  expect_identical(partition_path(NULL), f(NULL, NULL))
+  expect_identical(partition_path(character(0)), f(NULL, NULL))
+
+  expect_identical(partition_path(""), f(NULL, ""))
+
+  expect_identical(partition_path("~"), f("~/", NULL))
+  expect_identical(partition_path("~/"), f("~/", NULL))
+  expect_identical(partition_path("/"), f("~/", NULL))
+
+  expect_identical(partition_path("~/a"), f("~/", "a"))
+  expect_identical(partition_path("/a"), f("~/", "a"))
+  expect_identical(partition_path("/a/"), f("~/a/", NULL))
+  expect_identical(partition_path("a/"), f("a/", NULL))
+  expect_identical(partition_path("a"), f(NULL, "a"))
+
+  expect_identical(partition_path("~/a/b/"), f("~/a/b/", NULL))
+  expect_identical(partition_path("/a/b/"), f("~/a/b/", NULL))
+  expect_identical(partition_path("a/b/"), f("a/b/", NULL))
+  expect_identical(partition_path("a/b"), f("a/", "b"))
+})
+
+test_that("partition_path() fails for bad input", {
+  expect_error(partition_path(letters), "length\\(x\\) == 1 is not TRUE")
+  expect_error(partition_path(dribble()), "is\\.character\\(x\\) is not TRUE")
+  expect_error(partition_path(as_id("123"), '!inherits\\(x, "drive_id"\\) is not TRUE'))
+})
