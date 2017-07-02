@@ -30,7 +30,7 @@ drive_ls <- function(path = "~/", pattern = NULL, type = NULL, ...) {
 
   x <- list(...)
 
-  if (is.character(path)) {
+  if (is_path(path)) {
     path <- append_slash(path)
   }
   path <- as_dribble(path)

@@ -29,7 +29,7 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   name <- path_name[["name"]]
 
   if (!is.null(path)) {
-    if (is.character(path)) {
+    if (is_path(path)) {
       path <- append_slash(path)
     }
     path <- as_dribble(path)

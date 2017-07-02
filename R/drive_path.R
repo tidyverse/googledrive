@@ -42,7 +42,7 @@ NULL
 #' @rdname paths
 #' @return `drive_path_exists()`: a single `TRUE` or `FALSE`
 drive_path_exists <- function(path, verbose = TRUE) {
-  stopifnot(is.character(path))
+  stopifnot(is_path(path))
   if (length(path) < 1) return(logical(0))
   nrow(get_paths(path = path, partial_ok = FALSE)) > 0
 }
@@ -58,7 +58,7 @@ drive_paths_exist <- function(path, verbose = TRUE) {
 #' @rdname paths
 #' @template dribble-return
 drive_path <- function(path = "~/", verbose = TRUE) {
-  stopifnot(is.character(path))
+  stopifnot(is_path(path))
   if (length(path) < 1) return(dribble())
   stopifnot(length(path) == 1)
   path_tbl <- get_paths(path = path, partial_ok = FALSE)
@@ -69,7 +69,7 @@ drive_path <- function(path = "~/", verbose = TRUE) {
 #' @rdname paths
 #' @template dribble-return
 drive_paths <- function(path = "~/", verbose = TRUE) {
-  stopifnot(is.character(path))
+  stopifnot(is_path(path))
   if (length(path) < 1) return(dribble())
   do.call(rbind, purrr::map(path, drive_path))
 }
@@ -90,7 +90,7 @@ get_paths <- function(path = NULL,
                       partial_ok = FALSE,
                       .rships = NULL,
                       .root = "ROOT") {
-  stopifnot(is.character(path), length(path) == 1)
+  stopifnot(is_path(path), length(path) == 1)
   path <- rootize_path(path)
   if (is_root(path)) {
     return(tibble::add_column(root_folder(), path = path))

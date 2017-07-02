@@ -1,10 +1,6 @@
 ## path utilities -----------------------------------------------------
 
-## ensure we can interpret x as a single path
-confirm_single_path <- function(x) {
-  stopifnot(is.character(x), length(x) == 1, !inherits(x, "drive_id"))
-  x
-}
+is_path <- function(x) is.character(x) && !inherits(x, "drive_id")
 
 ## turn '~' into `~/`
 ## turn leading `/` into leading `~/`
@@ -45,7 +41,7 @@ partition_path <- function(path) {
   if (length(path) < 1) {
     return(out)
   }
-  confirm_single_path(path)
+  stopifnot(is_path(path), length(path) == 1)
   path <- rootize_path(path)
   last_slash <- last(unlist(gregexpr(pattern = "/", path)))
   if (last_slash < 1) {

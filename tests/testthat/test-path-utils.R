@@ -132,7 +132,7 @@ test_that("split_path_name() returns input if not character", {
   expect_null(path_name[["name"]])
 })
 
-test_that("partition_path() works", {
+test_that("partition_path() splits into stuff before/after last slash", {
   f <- function(x, y) list(parent = x, name = y)
 
   expect_identical(partition_path(NULL), f(NULL, NULL))
@@ -157,7 +157,15 @@ test_that("partition_path() works", {
 })
 
 test_that("partition_path() fails for bad input", {
-  expect_error(partition_path(letters), "length\\(x\\) == 1 is not TRUE")
-  expect_error(partition_path(dribble()), "is\\.character\\(x\\) is not TRUE")
+  expect_error(partition_path(letters), "length\\(path\\) == 1 is not TRUE")
+  expect_error(partition_path(dribble()), "is_path\\(path\\) is not TRUE")
   expect_error(partition_path(as_id("123"), '!inherits\\(x, "drive_id"\\) is not TRUE'))
+})
+
+test_that("is_path() works", {
+  expect_true(is_path("a"))
+  expect_true(is_path(letters))
+  expect_false(is_path(as_id("a")))
+  expect_false(is_path(as_id(letters)))
+  expect_false(is_path(dribble()))
 })
