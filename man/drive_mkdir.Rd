@@ -32,14 +32,18 @@ Create a folder on Google Drive.
 \examples{
 \dontrun{
 ## Create folder named "def" in existing folder "abc".
-drive_mkdir(path = "abc/def")
+drive_mkdir("abc/def")
 
 ## This will also create a folder named "def" in folder "abc".
-drive_mkdir(path = "abc/", name = "def")
+drive_mkdir(path = "abc", name = "def")
 
-## Yet another way to create a folder named "def" in folder "abc",
+## Another way to create a folder named "def" in folder "abc",
 ## this time with parent folder stored in a dribble.
 abc <- as_dribble("abc")
 drive_mkdir(path = abc, name = "def")
+
+## Yet another way to do this,
+## this time with parent folder provide via id.
+drive_mkdir(path = as_id(abc$id), name = "def")
 }
 }

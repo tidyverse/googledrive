@@ -10,37 +10,51 @@
 #' @examples
 #' \dontrun{
 #' ## Create folder named "def" in existing folder "abc".
-#' drive_mkdir(path = "abc/def")
+#' drive_mkdir("abc/def")
 #'
 #' ## This will also create a folder named "def" in folder "abc".
-#' drive_mkdir(path = "abc/", name = "def")
+#' drive_mkdir(path = "abc", name = "def")
 #'
-#' ## Yet another way to create a folder named "def" in folder "abc",
+#' ## Another way to create a folder named "def" in folder "abc",
 #' ## this time with parent folder stored in a dribble.
 #' abc <- as_dribble("abc")
 #' drive_mkdir(path = abc, name = "def")
+#'
+#' ## Yet another way to do this,
+#' ## this time with parent folder provide via id.
+#' drive_mkdir(path = as_id(abc$id), name = "def")
 #'}
 #' @export
 drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
-  parent <- NULL
+  if (!is.null(name)) {
+    stopifnot(is_path(name), length(name) == 1)
+  }
 
-  path_name <- split_path_name(path, name, verbose)
-  path <- path_name[["path"]]
-  name <- path_name[["name"]]
-
-  if (!is.null(path)) {
-    if (is_path(path)) {
+  if (is_path(path)) {
+    if (is.null(name)) {
+      path <- strip_slash(path)
+    } else {
       path <- append_slash(path)
     }
-    path <- as_dribble(path)
-    path <- confirm_single_file(path)
-    if (!is_folder(path)) {
-      stop(
-        glue_data(path, "'path' is not a folder:\n{name}"),
-        call. = FALSE
-      )
-    }
-    parent <- path$id
+    path_parts <- partition_path(path)
+    path <- path_parts$parent
+    name <- name %||% path_parts$name
+  }
+
+  if (is.null(name)) {
+    stop(
+      "New folder's name must be specified either via `path` or `name`.",
+      call. = FALSE
+    )
+  }
+  ## note that there are no API calls above here
+  ## it means we can test more on travis/appveyor
+
+  path <- path %||% "~/"
+  path <- as_dribble(path)
+  confirm_single_file(path)
+  if (!is_folder(path)) {
+    stop("`path` must be a single, pre-existing folder", call. = FALSE)
   }
 
   request <- generate_request(
@@ -48,7 +62,7 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
     params = list(
       name = name,
       mimeType = "application/vnd.google-apps.folder",
-      parents = list(parent),
+      parents = list(path$id),
       fields = "*"
     )
   )
@@ -60,11 +74,7 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
 
   success <- folder$name == name
   if (verbose) {
-    if (success) {
-      message(glue_data(folder, "Folder created:\n{name}"))
-    } else {
-      message(glue_data(folder, "Folder NOT created:\n{name}"))
-    }
+    message(glue("Folder {if (success) '' else 'NOT '}created:\n{folder$name}"))
   }
   invisible(folder)
 }
