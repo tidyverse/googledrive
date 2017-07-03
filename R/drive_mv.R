@@ -57,7 +57,7 @@ drive_mv <- function(file = NULL, path = NULL, name = NULL, verbose = TRUE) {
       path <- path_parts$parent
       name <- path_parts$name
       ## TO DO:
-      ## if `name = NULL`, we could check if there's a directory at the
+      ## if `parent = NULL`, we could check if there's a directory at the
       ## original path and infer we should move, instead of rename
       ## i.e. detect this is an append_slash() case
     } else {

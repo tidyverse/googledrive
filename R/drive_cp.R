@@ -54,7 +54,7 @@ drive_cp <- function(file = NULL, path = NULL, name = NULL,  verbose = TRUE) {
       path <- path_parts$parent
       name <- path_parts$name
       ## TO DO:
-      ## if `name = NULL`, we could check if there's a directory at the
+      ## if `parent = NULL`, we could check if there's a directory at the
       ## original path and infer we should copy into that directory, instead of
       ## onto a file of the same name
       ## i.e. detect this is an append_slash() case
@@ -111,8 +111,3 @@ drive_cp <- function(file = NULL, path = NULL, name = NULL,  verbose = TRUE) {
 #' @rdname drive_cp
 #' @export
 drive_copy <- drive_cp
-
-## Jenny notes:
-## have ..., like drive_search() for query or body params
-## revisit the reporting message
-## since we aren't using safely() could we ever have non-successes?
