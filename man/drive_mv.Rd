@@ -45,10 +45,19 @@ file <- drive_mv(file, "DESC-renamed")
 ## create a folder to move the file into
 folder <- drive_mkdir("new-folder")
 
-## move the file and rename it again
-file <- drive_mv(file, folder, "DESC-re-renamed")
+## move the file and rename it again,
+## specify destination as a dribble
+file <- drive_mv(file, path = folder, name = "DESC-re-renamed")
 
-## verify it's in the folder
+## verify renamed file is now in the folder
 drive_ls(folder)
+
+## move the file back to root folder
+file <- drive_mv(file, "~/")
+
+## move it again
+## specify destination as path with trailing slash
+## to ensure we get a move vs. renaming it to "new-folder"
+file <- drive_mv(file, "new-folder/")
 }
 }
