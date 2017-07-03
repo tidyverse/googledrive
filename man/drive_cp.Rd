@@ -22,7 +22,7 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-\code{\link[=drive_copy]{drive_copy()}} is an alias for \code{\link[=drive_cp]{drive_cp()}}.
+\code{drive_copy()} is an alias for \code{drive_cp()}.
 }
 \examples{
 \dontrun{

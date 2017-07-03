@@ -1,6 +1,7 @@
 #' Copy a Google Drive file.
 #'
-#' @description [`drive_copy()`] is an alias for [`drive_cp()`].
+#' `drive_copy()` is an alias for `drive_cp()`.
+#'
 #' @template file
 #' @template verbose
 #'
@@ -22,15 +23,17 @@ drive_cp <- function(file = NULL, verbose = TRUE) {
   files <- as_dribble(file)
   files <- confirm_some_files(files)
   if (any(is_folder(files))) {
-    stop(glue_data(files[is_folder(files), ],
-                   "The Drive API cannot copy folders: {name}"
-                   ),
-         call. = FALSE
+    folders <- glue_data(files[is_folder(files), ], "  * {name}: {id}")
+    msg <- collapse(
+      c("The Drive API does not copy folders:", folders),
+      sep = "\n"
     )
+    stop(msg, call. = FALSE)
   }
+
   cp_files <- purrr::map(files$id, copy_one, verbose = verbose)
   cp_files <- do.call(rbind, cp_files)
-  success <- purrr::map_lgl(file, ~grepl(.x, cp_files$name))
+  success <- purrr::map_lgl(cp_files$name, ~ grepl(files$name[1], .x))
   if (verbose) {
     if (any(success)) {
       successes <- glue("  * {file[success]} -> {cp_files$name[success]}")
@@ -44,7 +47,7 @@ drive_cp <- function(file = NULL, verbose = TRUE) {
   invisible(cp_files)
 }
 
-copy_one <- function(id, name, verbose) {
+copy_one <- function(id, verbose) {
   request <-  generate_request(
     endpoint = "drive.files.copy",
     params = list(
@@ -52,14 +55,17 @@ copy_one <- function(id, name, verbose) {
       fields = "*"
     )
   )
-  proc_res <- do_request(request)
+  res <- make_request(request)
+  proc_res <- process_response(res)
 
   file <- as_dribble(list(proc_res))
 
   if (!grepl("Copy of", file$name)) {
-    file <- drive_rename(file,
-                         paste("Copy of", file$name),
-                         verbose = FALSE)
+    file <- drive_rename(
+      file,
+      paste("Copy of", file$name),
+      verbose = FALSE
+    )
   }
 
   return(file)
