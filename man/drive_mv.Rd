@@ -14,11 +14,12 @@ drive_move(file = NULL, path = NULL, name = NULL, verbose = TRUE)
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{path}{Specifies target destination for `file` on Google Drive. Can be
-an actual path (character), a file id marked with \code{\link{as_id}()}, or
-a \code{\link{dribble}}. If specified as an actual path, it is best to
-explicitly indicate if it's a folder by including a trailing slash, since
-it cannot always be worked out from the context of the call.}
+\item{path}{Specifies target destination for `file` or copy of `file` on
+Google Drive. Can be an actual path (character), a file id marked with
+\code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
+actual path, it is best to explicitly indicate if it's a folder by
+including a trailing slash, since it cannot always be worked out from the
+context of the call.}
 
 \item{name}{Character, new file name if not specified as part of \code{path}. Any
 name obtained from \code{path} overrides this argument. Defaults to current

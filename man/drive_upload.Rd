@@ -10,11 +10,12 @@ drive_upload(from = NULL, path = NULL, name = NULL, overwrite = FALSE,
 \arguments{
 \item{from}{Character, local path to the file to upload.}
 
-\item{path}{Specifies target destination for `file` on Google Drive. Can be
-an actual path (character), a file id marked with \code{\link{as_id}()}, or
-a \code{\link{dribble}}. If specified as an actual path, it is best to
-explicitly indicate if it's a folder by including a trailing slash, since
-it cannot always be worked out from the context of the call.}
+\item{path}{Specifies target destination for `file` or copy of `file` on
+Google Drive. Can be an actual path (character), a file id marked with
+\code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
+actual path, it is best to explicitly indicate if it's a folder by
+including a trailing slash, since it cannot always be worked out from the
+context of the call.}
 
 \item{name}{Character, name the file should have on Google Drive if not specified
 in \code{path}. Will default to its local name.}
