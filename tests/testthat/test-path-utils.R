@@ -92,46 +92,6 @@ test_that("file_ext_safe() returns NULL unless there's a usable extension", {
   expect_identical(file_ext_safe("foo.wut"), "wut")
 })
 
-
-test_that("split_path_name() works with `name = NULL`", {
-
-  ## with trailing slash, a/ is a folder
-  path_name <- split_path_name(path = "a/", name = NULL)
-  expect_identical(path_name[["path"]], "a/")
-  expect_null(path_name[["name"]])
-
-  ## without trailing slash, a is the name, path is NULL
-  path_name <- split_path_name(path = "a", name = NULL)
-  expect_null(path_name[["path"]])
-  expect_identical(path_name[["name"]], "a")
-})
-
-test_that("split_path_name() works with `name != NULL`", {
-
-  ## with trailing slash, a/ is a folder, b is name
-  path_name <- split_path_name(path = "a/", name = "b")
-  expect_identical(path_name[["path"]], "a/")
-  expect_identical(path_name[["name"]], "b")
-
-  ## without trailing slash, a is the name, b is ignored
-  expect_message(path_name <- split_path_name(path = "a", name = "b"),
-                 "Ignoring `name`:")
-  expect_null(path_name[["path"]])
-  expect_identical(path_name[["name"]], "a")
-})
-
-test_that("split_path_name() returns input if not character", {
-
-  path_name <- split_path_name(path = 1, name = "a")
-  expect_identical(path_name[["path"]], 1)
-  expect_identical(path_name[["name"]], "a")
-
-  ## returns NULL if both are NULL
-  path_name <- split_path_name(path = NULL, name = NULL)
-  expect_null(path_name[["path"]])
-  expect_null(path_name[["name"]])
-})
-
 test_that("partition_path() splits into stuff before/after last slash", {
   f <- function(x, y) list(parent = x, name = y)
 

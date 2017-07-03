@@ -83,22 +83,3 @@ is_root <- function(path) {
 root_folder <- function() drive_get("root")
 
 root_id <- function() root_folder()$id
-
-split_path_name <- function(path, name, verbose = TRUE) {
-  if (!is.character(path) || grepl("/$", path)) {
-    return(list(path = path, name = name))
-  }
-  pth <- split_path(path)
-  pth_n <- length(pth)
-  pth_name <- pth[pth_n]
-  path <- NULL
-  if (pth_n > 1) {
-    path <- collapse(pth[-pth_n], sep = "/")
-  }
-  if (!is.null(name) && verbose) {
-    message(glue("Ignoring `name`: {name}",
-                 "\nin favor of name specified in `path`: {pth_name}"))
-  }
-  name <- pth_name
-  list(path = path, name = name)
-}
