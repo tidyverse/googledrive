@@ -74,7 +74,10 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
 
   success <- folder$name == name
   if (verbose) {
-    message(glue("Folder {if (success) '' else 'NOT '}created:\n{folder$name}"))
+    ## not entirely sure why this placement of `\n` helps glue do the right
+    ## thing and yet ... it does
+    message(glue("\nFolder {if (success) '' else 'NOT '}created:\n",
+                 "  * {folder$name}"))
   }
   invisible(folder)
 }

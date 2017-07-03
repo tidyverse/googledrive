@@ -88,15 +88,15 @@ drive_mv <- function(file = NULL, path = NULL, name = NULL, verbose = TRUE) {
   out <- as_dribble(list(proc_res))
 
   if (verbose) {
-    if (proc_res$name == name) {
-      ## TO DO: we aren't actually checking the parentage here ... do that?
-      ## not entirely sure why this placement of `\n` helps glue do the right
-      ## thing and yet ... it does
-      new_path <- paste0(append_slash(path$name), out$name)
-      message(glue("\nFile moved:\n  * {file$name} -> {new_path}"))
-    } else {
-      message(glue("\nFile NOT moved:\n  * {file$name}"))
-    }
+    renamed <- !identical(params$name, file$name)
+    moved <- !is.null(params[["addParents"]])
+    action <- glue("{if (renamed) 'renamed' else ''}",
+                   "{if (renamed && moved) ' and ' else ''}",
+                   "{if (moved) 'moved' else ''}")
+    ## not entirely sure why this placement of `\n` helps glue do the right
+    ## thing and yet ... it does
+    new_path <- paste0(append_slash(path$name), out$name)
+    message(glue("\nFile {action}:\n  * {file$name} -> {new_path}"))
   }
   invisible(out)
 }

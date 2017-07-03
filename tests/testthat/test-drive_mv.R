@@ -37,7 +37,7 @@ test_that("drive_mv() can rename file", {
   )
   expect_message(
     out <- drive_mv(renamee, name = nm_("DESC-renamed")),
-    "File moved"
+    "File renamed"
   )
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)
@@ -96,7 +96,7 @@ test_that("drive_mv() can rename and move, using `path` and `name`", {
 
   expect_message(
     out <- drive_mv(movee, nm_("move-files-into-me"), nm_("DESC-renamed")),
-    "File moved"
+    "File renamed and moved"
   )
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)
@@ -118,7 +118,7 @@ test_that("drive_mv() can rename and move, using `path` only", {
       movee,
       file.path(nm_("move-files-into-me"), nm_("DESC-renamed"))
     ),
-    "File moved"
+    "File renamed and moved"
   )
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)
