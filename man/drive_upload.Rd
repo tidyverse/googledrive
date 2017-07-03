@@ -42,11 +42,21 @@ Upload a file to Google Drive.
 }
 \examples{
 \dontrun{
-write.csv(chickwts, "chickwts.csv")
-drive_chickwts <- drive_upload("chickwts.csv")
+## upload a csv file
+mirrors_csv <- drive_upload(R.home('doc/BioC_mirrors.csv'))
 
 ## or convert it to a Google Sheet
-drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
+mirrors_sheet <- drive_upload(
+  R.home('doc/BioC_mirrors.csv'),
+  name = "BioC_mirrors",
+  type = "spreadsheet"
+)
+
+## check out the new Sheet!
+drive_browse(mirrors_sheet)
+
+## clean-up
+drive_search("BioC_mirrors") \%>\% drive_delete()
 }
 }
 \seealso{

@@ -21,11 +21,21 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' write.csv(chickwts, "chickwts.csv")
-#' drive_chickwts <- drive_upload("chickwts.csv")
+#' ## upload a csv file
+#' mirrors_csv <- drive_upload(R.home('doc/BioC_mirrors.csv'))
 #'
 #' ## or convert it to a Google Sheet
-#' drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
+#' mirrors_sheet <- drive_upload(
+#'   R.home('doc/BioC_mirrors.csv'),
+#'   name = "BioC_mirrors",
+#'   type = "spreadsheet"
+#' )
+#'
+#' ## check out the new Sheet!
+#' drive_browse(mirrors_sheet)
+#'
+#' ## clean-up
+#' drive_search("BioC_mirrors") %>% drive_delete()
 #' }
 drive_upload <- function(file = NULL,
                          path = NULL,
@@ -38,45 +48,50 @@ drive_upload <- function(file = NULL,
     stop(glue("File does not exist:\n{file}"), call. = FALSE)
   }
 
-  ## upload meta-data:
-  ##   * name
-  ##   * mimeType
-  ##   * parent
-  ##   * id
-
-  path_name <- split_path_name(path, name, verbose)
-  path <- path_name[["path"]]
-  name <- path_name[["name"]]
-
-  name <- name %||% basename(file)
-
-  mimeType <- drive_mime_type(type)
-
-  ## parent folder
-  ## TO DO: be willing to create the bits of folder that don't yet exist
-  ## for now, user must make sure folder already exists and is unique
-  folder <- path %||% root_folder()
-  if (is.character(folder)) {
-    folder <- append_slash(folder)
+  if (!is.null(name)) {
+    stopifnot(is_path(name), length(name) == 1)
   }
-  up_parent <- as_dribble(folder)
-  up_parent <- confirm_single_file(up_parent)
-  if (!is_folder(up_parent)) {
+
+  if (is_path(path)) {
+    if (is.null(name)) {
+      path_parts <- partition_path(path)
+      path <- path_parts$parent
+      name <- path_parts$name
+      ## TO DO:
+      ## if `parent = NULL`, we could check if there's a directory at the
+      ## original path and infer we should upload into it, instead of onto
+      ## a file with the same name
+      ## i.e. detect this is an append_slash() case
+    } else {
+      path <- append_slash(path)
+    }
+  }
+
+  ## vet the parent folder
+  ## easier to default to root vs keeping track of whether parent is specified
+  path <- path %||% root_folder()
+  path <- as_dribble(path)
+  confirm_single_file(path)
+  if (!is_folder(path)) {
     stop(
-      glue_data(up_parent, "'folder' is not a folder:\n{name}"),
+      glue(
+        "Requested parent folder does not exist:\n{path$name}"
+      ),
       call. = FALSE
     )
   }
-  up_parent_id <- up_parent$id
+
+  name <- name %||% basename(file)
+  mimeType <- drive_mime_type(type)
 
   ## is there a pre-existing file at destination?
   q_name <- glue("name = {sq(name)}")
-  q_parent <- glue("{sq(up_parent_id)} in parents")
+  q_parent <- glue("{sq(path$id)} in parents")
   qq <- collapse(c(q_name, q_parent), sep = " and ")
   existing <- drive_search(q = qq)
 
   if (nrow(existing) > 0) {
-    out_path <- unsplit_path(up_parent$name %||% "", name)
+    out_path <- unsplit_path(path$name %||% "", name)
     if (!overwrite) {
       stop(glue("Path already exists:\n{out_path}", call. = FALSE))
     }
@@ -92,7 +107,7 @@ drive_upload <- function(file = NULL,
       endpoint = "drive.files.create",
       params = list(
         name = name,
-        parents = list(up_parent_id),
+        parents = list(path$id),
         mimeType = mimeType
       )
     )
@@ -102,15 +117,18 @@ drive_upload <- function(file = NULL,
     up_id <- proc_res$id
   }
 
-  request <- generate_request(endpoint = "drive.files.update.media",
-                              params = list(fileId = up_id,
-                                            uploadType = "media",
-                                            fields = "*")
+  request <- generate_request(
+    endpoint = "drive.files.update.media",
+    params = list(fileId = up_id,
+                  uploadType = "media",
+                  fields = "*")
   )
 
   ## media uploads have unique body situations, so customizing here.
-  request$body <- httr::upload_file(path = file,
-                                    type = mimeType)
+  request$body <- httr::upload_file(
+    path = file,
+    type = mimeType
+  )
 
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
@@ -122,8 +140,8 @@ drive_upload <- function(file = NULL,
   if (success) {
     if (verbose) {
       message(
-        glue("File uploaded to Google Drive:\n{proc_res$name}\n",
-             "with MIME type:\n{proc_res$mimeType}")
+        glue("\nFile uploaded:\n  * {proc_res$name}\n",
+             "with MIME type:\n  * {proc_res$mimeType}")
       )
     }
   } else {
