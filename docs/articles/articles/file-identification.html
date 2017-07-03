@@ -82,21 +82,20 @@
 <p>To see your Google Drive files in the browser, visit <a href="https://drive.google.com" class="uri">https://drive.google.com</a>. This displays all your files and offers various ways to filter what you see based on file type, folder, starred vs not, etc.</p>
 <p>You can get similar results with <code><a href="../../reference/drive_search.html">drive_search()</a></code>. By default, it gets info on the most recent 100 files.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>())
-<span class="co">#&gt; # A tibble: 136 x 3</span>
-<span class="co">#&gt;                             name</span>
-<span class="co">#&gt;  *                         &lt;chr&gt;</span>
-<span class="co">#&gt;  1                           def</span>
-<span class="co">#&gt;  2                           abc</span>
-<span class="co">#&gt;  3       bar-</span><span class="al">TEST</span><span class="co">-drive-download</span>
-<span class="co">#&gt;  4                         jenny</span>
-<span class="co">#&gt;  5 export-mime-type-defaults.csv</span>
-<span class="co">#&gt;  6       foo-</span><span class="al">TEST</span><span class="co">-drive-download</span>
-<span class="co">#&gt;  7                        foobar</span>
-<span class="co">#&gt;  8                      chickwts</span>
-<span class="co">#&gt;  9                  chickwts.rda</span>
-<span class="co">#&gt; 10            chicken_little.jpg</span>
-<span class="co">#&gt; # ... with 126 more rows, and 2 more variables: id &lt;chr&gt;,</span>
-<span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 283 x 3</span>
+<span class="co">#&gt;     name                           id files_resource</span>
+<span class="co">#&gt;  * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
+<span class="co">#&gt;  1   def 0B0Gh-SuuA2nTNTAxeDNVdUdxb0U    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  2   abc 0B0Gh-SuuA2nTYktNdGVvanphUU0    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  3     f 0B0Gh-SuuA2nTM0dqOUV3bGNocnc    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  4     e 0B0Gh-SuuA2nTbWlyLTYwMVN2OXM    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  5     d 0B0Gh-SuuA2nTR1J1MlZkR2w4T2c    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  6     c 0B0Gh-SuuA2nTck9IVVVHQVdNTzQ    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  7     b 0B0Gh-SuuA2nTUFRVenR0RkdIbWc    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  8     a 0B0Gh-SuuA2nTT1BNUklzWmlFejQ    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  9     f 0B0Gh-SuuA2nTczRlcWJDaGlWQzg    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 10     e 0B0Gh-SuuA2nTY1NOSE50N3lrN28    &lt;list [26]&gt;</span>
+<span class="co">#&gt; # ... with 273 more rows</span></code></pre></div>
 <p>The object you get back holds the metadata for one or more Google Drive files. It is a <code>dribble</code>, which is just a <code>tibble</code> with Drive files in rows and at least these three variables:</p>
 <ul>
 <li>
@@ -111,30 +110,29 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## just folders
 <span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"mimeType = 'application/vnd.google-apps.folder'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 3 x 3</span>
-<span class="co">#&gt;     name                           id files_resource</span>
-<span class="co">#&gt; *  &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1    def 0B0Gh-SuuA2nTaWRXSDRtbVpYdkU    &lt;list [26]&gt;</span>
-<span class="co">#&gt; 2    abc 0B0Gh-SuuA2nTMTl0Q2xyemo3SjA    &lt;list [26]&gt;</span>
-<span class="co">#&gt; 3 filler 0B0Gh-SuuA2nTUXdfUFdiR3NOeGM    &lt;list [27]&gt;</span>
+<span class="co">#&gt;    name                           id files_resource</span>
+<span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTNTAxeDNVdUdxb0U    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 2   abc 0B0Gh-SuuA2nTYktNdGVvanphUU0    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 3     f 0B0Gh-SuuA2nTM0dqOUV3bGNocnc    &lt;list [26]&gt;</span>
 
 ## just Sheets
 <span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"mimeType='application/vnd.google-apps.spreadsheet'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 3 x 3</span>
 <span class="co">#&gt;                            name</span>
 <span class="co">#&gt; *                         &lt;chr&gt;</span>
-<span class="co">#&gt; 1                         jenny</span>
-<span class="co">#&gt; 2 export-mime-type-defaults.csv</span>
-<span class="co">#&gt; 3          538-star-wars-survey</span>
+<span class="co">#&gt; 1  foo_sheet-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 2                         jenny</span>
+<span class="co">#&gt; 3 export-mime-type-defaults.csv</span>
 <span class="co">#&gt; # ... with 2 more variables: id &lt;chr&gt;, files_resource &lt;list&gt;</span></code></pre></div>
 <p>Files containing <code>'horsebean'</code> in their content:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'horsebean'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 3 x 3</span>
-<span class="co">#&gt;                               name</span>
-<span class="co">#&gt; *                            &lt;chr&gt;</span>
-<span class="co">#&gt; 1                           foobar</span>
-<span class="co">#&gt; 2 chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt; 3                           foobar</span>
-<span class="co">#&gt; # ... with 2 more variables: id &lt;chr&gt;, files_resource &lt;list&gt;</span></code></pre></div>
+<span class="co">#&gt;           name                                           id files_resource</span>
+<span class="co">#&gt; *        &lt;chr&gt;                                        &lt;chr&gt;         &lt;list&gt;</span>
+<span class="co">#&gt; 1 test12334556 1oZneoAX9X0dbJtL4tV3OZhMHvPoerbabdesIPO4S0kg    &lt;list [27]&gt;</span>
+<span class="co">#&gt; 2       foobar 1qoA3kr9DmSTtsG9hoicP7ylCLGq_qDRRod-NS3vAk38    &lt;list [27]&gt;</span>
+<span class="co">#&gt; 3       foobar                 0B0Gh-SuuA2nTa01CaXZZOWZXZzg    &lt;list [34]&gt;</span></code></pre></div>
 <p>Files in your “Shared with me” collection</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"sharedWithMe = true"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 2 x 3</span>
@@ -152,15 +150,16 @@
 
 ## therefore we do regex matching on the R side
 <span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">pattern =</span> <span class="st">"wts"</span>)
-<span class="co">#&gt; # A tibble: 6 x 3</span>
+<span class="co">#&gt; # A tibble: 7 x 3</span>
 <span class="co">#&gt;                               name</span>
 <span class="co">#&gt; *                            &lt;chr&gt;</span>
-<span class="co">#&gt; 1                         chickwts</span>
-<span class="co">#&gt; 2                     chickwts.rda</span>
-<span class="co">#&gt; 3      chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt; 4  chickwts_txt-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt; 5 chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt; 6    chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-list</span>
+<span class="co">#&gt; 1  chickwts_txt-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 2 chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 3             Copy of chickwts.rda</span>
+<span class="co">#&gt; 4                         chickwts</span>
+<span class="co">#&gt; 5                     chickwts.rda</span>
+<span class="co">#&gt; 6      chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 7    chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-list</span>
 <span class="co">#&gt; # ... with 2 more variables: id &lt;chr&gt;, files_resource &lt;list&gt;</span></code></pre></div>
 <p>If you know the exact name, you can use <code><a href="../../reference/drive_search.html">drive_search()</a></code> or, less cumbersome, the <code><a href="../../reference/paths.html">drive_path()</a></code> function described next.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"name = '538-star-wars-survey'"</span>)

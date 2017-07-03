@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Upload a file to Google Drive. — drive_upload • googledrive</title>
+<title>Rename Google Drive file — drive_rename • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,50 +86,28 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Upload a file to Google Drive.</h1>
+    <h1>Rename Google Drive file</h1>
     </div>
 
     
-    <p>Upload a file to Google Drive.</p>
+    <p>This is a wrapper for <code><a href='drive_mv.html'>drive_mv()</a></code> that only renames a file.
+If you would like to rename AND move the file, see <code><a href='drive_mv.html'>drive_mv()</a></code>.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_upload</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_rename</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file</th>
-      <td><p>Character, path to the local file to upload.</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>Specifies target destination for `file` or copy of `file` on
-Google Drive. Can be an actual path (character), a file id marked with
-<code><a href='as_id.html'>as_id</a>()</code>, or a <code><a href='dribble.html'>dribble</a></code>. If specified as an
-actual path, it is best to explicitly indicate if it's a folder by
-including a trailing slash, since it cannot always be worked out from the
-context of the call.</p></td>
+      <td><p>Drive File, something that identifies the file of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a <code>dribble</code>.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>Character, name the file should have on Google Drive if not
-specified in <code>path</code>. Will default to its local name.</p></td>
-    </tr>
-    <tr>
-      <th>overwrite</th>
-      <td><p>A logical scalar, do you want to overwrite a file already on
-Google Drive, if such exists?</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>Character. If type = <code>NULL</code>, a MIME type is automatically
-determined from the file extension, if possible. If the source file is of a
-suitable type, you can request conversion to Google Doc, Sheet or Slides by
-setting <code>type</code> to <code>document</code>, <code>spreadsheet</code>, or <code>presentation</code>,
-respectively. All non-<code>NULL</code> values for <code>type</code> are pre-processed with
-<code><a href='drive_mime_type.html'>drive_mime_type()</a></code>.</p></td>
+      <td><p>Character. Name you would like the file to have.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -143,30 +121,10 @@ respectively. All non-<code>NULL</code> values for <code>type</code> are pre-pro
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with
    one row per file.</p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>MIME types that can be converted to native Google formats:</p><ul>
-<li><p><a href = 'https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19'>https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19</a></p></li>
-</ul>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='co'>## upload a csv file</span>
-  <span class='no'>mirrors_csv</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_upload</span>(<span class='fu'>R.home</span>(<span class='st'>'doc/BioC_mirrors.csv'</span>))
-
-  <span class='co'>## or convert it to a Google Sheet</span>
-  <span class='no'>mirrors_sheet</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_upload</span>(
-    <span class='fu'>R.home</span>(<span class='st'>'doc/BioC_mirrors.csv'</span>),
-    <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"BioC_mirrors"</span>,
-    <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>
-  )
-
-  <span class='co'>## check out the new Sheet!</span>
-  <span class='fu'><a href='drive_browse.html'>drive_browse</a></span>(<span class='no'>mirrors_sheet</span>)
-
-  <span class='co'>## clean-up</span>
-  <span class='fu'><a href='drive_search.html'>drive_search</a></span>(<span class='st'>"BioC_mirrors"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_delete.html'>drive_delete</a></span>()
+  <span class='fu'>drive_rename</span>(<span class='st'>"chickwts.csv"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"my_chickwts.csv"</span>)
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -175,8 +133,6 @@ respectively. All non-<code>NULL</code> values for <code>type</code> are pre-pro
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

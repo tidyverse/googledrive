@@ -43,21 +43,20 @@ Here's how to list the files you see in [My Drive](https://drive.google.com). Yo
 
 ``` r
 drive_search()
-#> # A tibble: 152 x 3
-#>                            name
-#>  *                        <chr>
-#>  1                          def
-#>  2                          abc
-#>  3            bar-TEST-drive-mv
-#>  4            baz-TEST-drive-mv
-#>  5            foo-TEST-drive-mv
-#>  6       foo-TEST-drive-publish
-#>  7   foo_pdf-TEST-drive-publish
-#>  8 foo_sheet-TEST-drive-publish
-#>  9   foo_doc-TEST-drive-publish
-#> 10         bar-TEST-drive-share
-#> # ... with 142 more rows, and 2 more variables: id <chr>,
-#> #   files_resource <list>
+#> # A tibble: 283 x 3
+#>     name                           id files_resource
+#>  * <chr>                        <chr>         <list>
+#>  1   def 0B0Gh-SuuA2nTSEN6a0ZIeDV4SXM    <list [26]>
+#>  2   abc 0B0Gh-SuuA2nTMUw1aThSVXBKTkU    <list [26]>
+#>  3     f 0B0Gh-SuuA2nTM0dqOUV3bGNocnc    <list [26]>
+#>  4     e 0B0Gh-SuuA2nTbWlyLTYwMVN2OXM    <list [26]>
+#>  5     d 0B0Gh-SuuA2nTR1J1MlZkR2w4T2c    <list [26]>
+#>  6     c 0B0Gh-SuuA2nTck9IVVVHQVdNTzQ    <list [26]>
+#>  7     b 0B0Gh-SuuA2nTUFRVenR0RkdIbWc    <list [26]>
+#>  8     a 0B0Gh-SuuA2nTT1BNUklzWmlFejQ    <list [26]>
+#>  9     f 0B0Gh-SuuA2nTczRlcWJDaGlWQzg    <list [26]>
+#> 10     e 0B0Gh-SuuA2nTY1NOSE50N3lrN28    <list [26]>
+#> # ... with 273 more rows
 ```
 
 You can narrow the query by specifying a `pattern` you'd like to match names against. Or by specifying a file type: the `type` argument understands MIME types, file extensions, and a few human-friendly keywords.
@@ -73,16 +72,17 @@ Alternatively, you can refine the search using the `q` query parameter. Accepted
 
 ``` r
 (fls <- drive_search(q = "fullText contains 'horsebean'"))
-#> # A tibble: 7 x 3
-#>                            name
-#> *                         <chr>
-#> 1                  test12334556
-#> 2                        foobar
-#> 3                        foobar
-#> 4                      chickwts
-#> 5   chickwts-TEST-drive-publish
-#> 6                      Untitled
-#> 7 chickwts_gdoc-TEST-drive-list
+#> # A tibble: 8 x 3
+#>                              name
+#> *                           <chr>
+#> 1                    test12334556
+#> 2                          foobar
+#> 3                          foobar
+#> 4                        chickwts
+#> 5     chickwts-TEST-drive-publish
+#> 6                        Untitled
+#> 7   chickwts_gdoc-TEST-drive-list
+#> 8 chickwts_txt-TEST-drive-publish
 #> # ... with 2 more variables: id <chr>, files_resource <list>
 ```
 
@@ -98,16 +98,16 @@ In addition to `drive_search()`, you can also identify files by name (path, real
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTMzc3eXlCRVFvbjA    <list [30]>
+#> 1   def 0B0Gh-SuuA2nTSEN6a0ZIeDV4SXM    <list [30]>
 
 ## let's grab that file id and retrieve it that way
 x$id
-#> [1] "0B0Gh-SuuA2nTMzc3eXlCRVFvbjA"
+#> [1] "0B0Gh-SuuA2nTSEN6a0ZIeDV4SXM"
 drive_get(x$id)
 #> # A tibble: 1 x 3
 #>    name                           id files_resource
 #> * <chr>                        <chr>         <list>
-#> 1   def 0B0Gh-SuuA2nTMzc3eXlCRVFvbjA    <list [30]>
+#> 1   def 0B0Gh-SuuA2nTSEN6a0ZIeDV4SXM    <list [30]>
 ```
 
 In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a `dribble`. If it's ambiguous, use `as_id()` to flag a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.
@@ -119,14 +119,14 @@ We can upload any file type.
 ``` r
 write.csv(chickwts, "README-chickwts.csv")
 (drive_chickwts <- drive_upload("README-chickwts.csv"))
-#> File uploaded to Google Drive:
-#> README-chickwts.csv
+#> File uploaded:
+#>   * README-chickwts.csv
 #> with MIME type:
-#> text/csv
+#>   * text/csv
 #> # A tibble: 1 x 3
 #>                  name                           id files_resource
 #> *               <chr>                        <chr>         <list>
-#> 1 README-chickwts.csv 0B0Gh-SuuA2nTc3dLU290LUdlb28    <list [36]>
+#> 1 README-chickwts.csv 0B0Gh-SuuA2nTWmlmdjN2RjF3VUk    <list [36]>
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -136,13 +136,13 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 drive_chickwts <- drive_chickwts %>%
   drive_delete()
 #> Files deleted:
-#>   * README-chickwts.csv: 0B0Gh-SuuA2nTc3dLU290LUdlb28
+#>   * README-chickwts.csv: 0B0Gh-SuuA2nTWmlmdjN2RjF3VUk
 
 drive_chickwts <- drive_upload("README-chickwts.csv", type = "spreadsheet")
-#> File uploaded to Google Drive:
-#> README-chickwts.csv
+#> File uploaded:
+#>   * README-chickwts.csv
 #> with MIME type:
-#> application/vnd.google-apps.spreadsheet
+#>   * application/vnd.google-apps.spreadsheet
 ```
 
 Much better!
@@ -153,7 +153,7 @@ Versions of Google Documents, Sheets, and Presentations can be published online.
 
 ``` r
 drive_is_published(drive_chickwts)
-#> The latest revision of the Google Drive file 'README-chickwts.csv' is not published.
+#> The latest revision of file 'README-chickwts.csv' is NOT published.
 ```
 
 ``` r
@@ -163,12 +163,12 @@ drive_chickwts$publish
 #> # A tibble: 1 x 4
 #>            check_time revision published auto_publish
 #>                <dttm>    <chr>     <lgl>        <lgl>
-#> 1 2017-06-29 22:08:33        1      TRUE         TRUE
+#> 1 2017-07-03 16:58:23        1      TRUE         TRUE
 ```
 
 ``` r
 drive_is_published(drive_chickwts)
-#> The latest revision of Google Drive file 'README-chickwts.csv' is published.
+#> The latest revision of file 'README-chickwts.csv' is published.
 ```
 
 #### Share files
@@ -191,7 +191,7 @@ We can then extract a share link.
 ``` r
 drive_chickwts %>%
   drive_share_link()
-#> [1] "https://docs.google.com/spreadsheets/d/1L3jP5C3vK5wznjrcLlcJbjzjD_q3l0DSSjOR02RoEA4/edit?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/12vxGrGAfXg9oxrd6raFM94Y-nliNUsudGq2OryLBZco/edit?usp=drivesdk"
 ```
 
 #### Download files
@@ -208,7 +208,7 @@ drive_download("538-star-wars-survey", type = "csv")
 #> '538-star-wars-survey.csv'
 ```
 
-Alternatively, I could specify the `out_path` parameter.
+Alternatively, I could specify the `path` parameter.
 
 ``` r
 drive_download(
@@ -241,10 +241,10 @@ Downloading files that are *not* Google type files is even simpler, i.e. it does
 ``` r
 ## upload something we can download
 boring <- drive_upload(system.file("DESCRIPTION"), name = "boring-text.txt")
-#> File uploaded to Google Drive:
-#> boring-text.txt
+#> File uploaded:
+#>   * boring-text.txt
 #> with MIME type:
-#> text/plain
+#>   * text/plain
 
 ## download it and prove we got it
 drive_download("boring-text.txt")
@@ -254,7 +254,7 @@ drive_download("boring-text.txt")
 #> 'boring-text.txt'
 readLines("boring-text.txt") %>% head()
 #> [1] "Package: base"                                 
-#> [2] "Version: 3.3.3"                                
+#> [2] "Version: 3.3.2"                                
 #> [3] "Priority: base"                                
 #> [4] "Title: The R Base Package"                     
 #> [5] "Author: R Core Team and contributors worldwide"
@@ -267,9 +267,9 @@ readLines("boring-text.txt") %>% head()
 drive_chickwts %>%
   drive_delete()
 #> Files deleted:
-#>   * README-chickwts.csv: 1L3jP5C3vK5wznjrcLlcJbjzjD_q3l0DSSjOR02RoEA4
+#>   * README-chickwts.csv: 12vxGrGAfXg9oxrd6raFM94Y-nliNUsudGq2OryLBZco
 boring %>%
   drive_delete()
 #> Files deleted:
-#>   * boring-text.txt: 0B0Gh-SuuA2nTNVRSQVBFdktCTVk
+#>   * boring-text.txt: 0B0Gh-SuuA2nTaEc0WXpTYkIxajA
 ```
