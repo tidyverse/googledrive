@@ -129,15 +129,12 @@ is_published_one <- function(id, name, verbose = TRUE) {
   proc_res <- process_response(response)
 
   if (verbose) {
-    if (proc_res$published) {
-      message(
-        glue("The latest revision of Google Drive file '{name}' is published.")
+    message(
+      glue(
+        "The latest revision of file {sq(name)} is ",
+        "{if (proc_res$published) '' else 'NOT '}published."
       )
-    } else {
-      message(
-        glue("The latest revision of the Google Drive file '{name}' is not published.")
-      )
-    }
+    )
   }
   publish_tbl(proc_res)
 }
