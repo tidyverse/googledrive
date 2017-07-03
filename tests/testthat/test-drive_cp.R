@@ -10,50 +10,66 @@ nm_ <- nm_fun("-TEST-drive-cp")
 run <- FALSE
 clean <- FALSE
 if (run) {
-  ## make sure directory is clean
   if (clean) {
-    del <- drive_delete(c(nm_("foo"), nm_("bar"), nm_("baz")),
-                        verbose = FALSE)
+    del <- drive_delete(c(
+      nm_("i-am-a-folder"),
+      nm_("non-google-file"),
+      nm_("google-doc")
+    ), verbose = FALSE)
   }
 
-  drive_mkdir(nm_("foo"))
-  drive_upload(system.file("DESCRIPTION"), nm_("bar"), verbose = FALSE)
-  drive_upload(system.file("DESCRIPTION"),
-               nm_("baz"),
-               type = "document",
-               verbose = FALSE)
+  drive_mkdir(nm_("i-am-a-folder"))
+  drive_upload(
+    system.file("DESCRIPTION"),
+    nm_("non-google-file"),
+    verbose = FALSE
+  )
+  drive_upload(
+    system.file("DESCRIPTION"),
+    nm_("google-doc"),
+    type = "document",
+    verbose = FALSE
+  )
 
 }
 
 test_that("drive_cp() can copy a non-Google file", {
   skip_on_appveyor()
   skip_on_travis()
+  on.exit(drive_delete(paste("Copy of", nm_("non-google-file"))))
 
-  bar <- drive_search(nm_("bar"))
-  expect_message(bar_cp <- drive_cp(nm_("bar")), "Files copied")
-  expect_identical(bar_cp$name, paste("Copy of", nm_("bar")))
+  non_goog <- drive_path(nm_("non-google-file"))
+  expect_message(
+    non_goog_cp <- drive_cp(nm_("non-google-file")),
+    "File copied"
+  )
+  expect_identical(non_goog_cp$name, paste("Copy of", nm_("non-google-file")))
 
   ## should have the same parent
-  expect_identical(bar$files_resource[[1]]$parents,
-                   bar_cp$files_resource[[1]]$parents)
+  expect_identical(non_goog$files_resource[[1]]$parents,
+                   non_goog_cp$files_resource[[1]]$parents)
 })
 
 test_that("drive_cp() can copy a Google file", {
   skip_on_appveyor()
   skip_on_travis()
+  on.exit(drive_delete(paste("Copy of", nm_("google-doc"))))
 
-  baz <- drive_search(nm_("baz"))
-  expect_message(baz_cp <- drive_cp(nm_("baz")), "Files copied")
-  expect_identical(baz_cp$name, paste("Copy of", nm_("baz")))
+  gdoc <- drive_path(nm_("google-doc"))
+  expect_message(gdoc_cp <- drive_cp(nm_("google-doc")), "File copied")
+  expect_identical(gdoc_cp$name, paste("Copy of", nm_("google-doc")))
 
   ## should have the same parent
-  expect_identical(baz$files_resource[[1]]$parents,
-                   baz_cp$files_resource[[1]]$parents)
+  expect_identical(gdoc$files_resource[[1]]$parents,
+                   gdoc_cp$files_resource[[1]]$parents)
 })
 
 test_that("drive_cp() errors if given a folder", {
   skip_on_appveyor()
   skip_on_travis()
 
-  expect_error(drive_cp(nm_("foo")), "The Drive API cannot copy folders")
+  expect_error(
+    drive_cp(nm_("i-am-a-folder")),
+    "The Drive API does not copy folders"
+  )
 })

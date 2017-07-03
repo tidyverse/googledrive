@@ -2,75 +2,117 @@
 #'
 #' `drive_copy()` is an alias for `drive_cp()`.
 #'
-#' @template file
-#' @template verbose
+#' @seealso Wraps the
+#' [drive.files.copy](https://developers.google.com/drive/v3/reference/files/copy)
+#' endpoint
 #'
+#' @template file
+#' @template path
+#' @param name Character, new file name if not specified as part of `path`. Any
+#'   name obtained from `path` overrides this argument. Defaults to "Copy of
+#'   {CURRENT-FILE-NAME}."
+#' @template verbose
 #' @template dribble-return
 #'
 #' @examples
 #' \dontrun{
-#' ## Copy the file "chickwts.rda" in the same folder as the
-#' ## original file as "Copy of chickwts.rda".
-#' drive_cp("chickwts.rda")
+#' ## create a file to copy
+#' file <- drive_upload(system.file("DESCRIPTION"), "DESC")
 #'
-#' ## Copy multiple files - this will create files
-#' ## "Copy of chickwts.rda" and "Copy of chickwts.csv"
-#' ## in their same folder as the respective original files.
-#' drive_cp(c("chickwts.rda", "chickwts.csv"))
+#' ## Make a "Copy of" copy in same folder as the original
+#' drive_cp("DESC")
+#'
+#' ## Make an explicitly named copy in same folder as the original
+#' drive_cp("DESC", "DESC-two")
+#'
+#' ## Make an explicitly named copy in a different folder
+#' folder <- drive_mkdir("new-folder")
+#' drive_cp("DESC", folder, "DESC-three")
+#'
+#' ## Behold all of our copies!
+#' drive_search("DESC")
+#'
+#' ## Delete all of our copies and the new folder!
+#' drive_search("DESC") %>% drive_delete()
+#' drive_delete(folder)
 #' }
 #' @export
-drive_cp <- function(file = NULL, verbose = TRUE) {
-  files <- as_dribble(file)
-  files <- confirm_some_files(files)
-  if (any(is_folder(files))) {
-    folders <- glue_data(files[is_folder(files), ], "  * {name}: {id}")
-    msg <- collapse(
-      c("The Drive API does not copy folders:", folders),
-      sep = "\n"
-    )
-    stop(msg, call. = FALSE)
+drive_cp <- function(file = NULL, path = NULL, name = NULL,  verbose = TRUE) {
+  file <- as_dribble(file)
+  file <- confirm_single_file(file)
+  if (is_folder(file)) {
+    stop("The Drive API does not copy folders.", call. = FALSE)
   }
 
-  cp_files <- purrr::map(files$id, copy_one, verbose = verbose)
-  cp_files <- do.call(rbind, cp_files)
-  success <- purrr::map_lgl(cp_files$name, ~ grepl(files$name[1], .x))
-  if (verbose) {
-    if (any(success)) {
-      successes <- glue("  * {file[success]} -> {cp_files$name[success]}")
-      message(collapse(c("Files copied:", successes), sep = "\n"))
-    }
-    if (any(!success)) {
-      failures <- glue("  * {file[!success]}")
-      message(collapse(c("Files NOT copied:", failures), sep = "\n"))
+  if (!is.null(name)) {
+    stopifnot(is_path(name), length(name) == 1)
+  }
+
+  if (is_path(path)) {
+    if (is.null(name)) {
+      path_parts <- partition_path(path)
+      path <- path_parts$parent
+      name <- path_parts$name
+      ## TO DO:
+      ## if `name = NULL`, we could check if there's a directory at the
+      ## original path and infer we should copy into that directory, instead of
+      ## onto a file of the same name
+      ## i.e. detect this is an append_slash() case
+    } else {
+      path <- append_slash(path)
     }
   }
-  invisible(cp_files)
-}
 
-copy_one <- function(id, verbose) {
+  name <- name %||% glue("Copy of {file$name}")
+
+  params <- list(
+    fileId = file$id,
+    fields = "*"
+  )
+
+  ## if copying to a specific directory, specify the parent
+  if (!is.null(path)) {
+    path <- as_dribble(path)
+    confirm_single_file(path)
+    if (!is_folder(path)) {
+      stop(
+        glue(
+          "Requested parent folder does not exist:\n{path$name}"
+        ),
+        call. = FALSE
+      )
+    }
+    params[["parents"]] <- path$id
+  }
+
+  ## if new name is specified, send it
+  if (!is.null(name)) {
+    params[["name"]] <- name
+  }
+
   request <-  generate_request(
     endpoint = "drive.files.copy",
-    params = list(
-      fileId = id,
-      fields = "*"
-    )
+    params = params
   )
-  res <- make_request(request)
+  res <- make_request(request, encode = "json")
   proc_res <- process_response(res)
 
-  file <- as_dribble(list(proc_res))
+  out <- as_dribble(list(proc_res))
 
-  if (!grepl("Copy of", file$name)) {
-    file <- drive_rename(
-      file,
-      paste("Copy of", file$name),
-      verbose = FALSE
-    )
+  if (verbose) {
+    ## not entirely sure why this placement of `\n` helps glue do the right
+    ## thing and yet ... it does
+    new_path <- paste0(append_slash(path$name), out$name)
+    message(glue("\nFile copied:\n  * {file$name} -> {new_path}"))
   }
-
-  return(file)
+  invisible(out)
 }
 
 #' @rdname drive_cp
 #' @export
 drive_copy <- drive_cp
+
+## Jenny notes:
+## have ..., like drive_search() for query or body params
+## revisit the reporting message
+## since we aren't using safely() could we ever have non-successes?

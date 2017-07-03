@@ -5,14 +5,25 @@
 \alias{drive_copy}
 \title{Copy a Google Drive file.}
 \usage{
-drive_cp(file = NULL, verbose = TRUE)
+drive_cp(file = NULL, path = NULL, name = NULL, verbose = TRUE)
 
-drive_copy(file = NULL, verbose = TRUE)
+drive_copy(file = NULL, path = NULL, name = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
+
+\item{path}{Specifies target destination for `file` or copy of `file` on
+Google Drive. Can be an actual path (character), a file id marked with
+\code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
+actual path, it is best to explicitly indicate if it's a folder by
+including a trailing slash, since it cannot always be worked out from the
+context of the call.}
+
+\item{name}{Character, new file name if not specified as part of \code{path}. Any
+name obtained from \code{path} overrides this argument. Defaults to "Copy of
+{CURRENT-FILE-NAME}."}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -26,13 +37,29 @@ An object of class \code{\link{dribble}}, a tibble with
 }
 \examples{
 \dontrun{
-## Copy the file "chickwts.rda" in the same folder as the
-## original file as "Copy of chickwts.rda".
-drive_cp("chickwts.rda")
+## create a file to copy
+file <- drive_upload(system.file("DESCRIPTION"), "DESC")
 
-## Copy multiple files - this will create files
-## "Copy of chickwts.rda" and "Copy of chickwts.csv"
-## in their same folder as the respective original files.
-drive_cp(c("chickwts.rda", "chickwts.csv"))
+## Make a "Copy of" copy in same folder as the original
+drive_cp("DESC")
+
+## Make an explicitly named copy in same folder as the original
+drive_cp("DESC", "DESC-two")
+
+## Make an explicitly named copy in a different folder
+folder <- drive_mkdir("new-folder")
+drive_cp("DESC", folder, "DESC-three")
+
+## Behold all of our copies!
+drive_search("DESC")
+
+## Delete all of our copies and the new folder!
+drive_search("DESC") \%>\% drive_delete()
+drive_delete(folder)
 }
+}
+\seealso{
+Wraps the
+\href{https://developers.google.com/drive/v3/reference/files/copy}{drive.files.copy}
+endpoint
 }
