@@ -1,79 +1,104 @@
 #' Move Google Drive file.
 #'
-#' @description [`drive_move()`] is an alias for [`drive_mv()`].
+#' Move a Drive file to a different folder, give it a different name, or both.
+#'
 #' @template file
 #' @template path
-#' @param name Character, name you would like the moved file to have if not
-#'   specified in `path`. Will default to its current name.
+#' @param name Character, new file name if not specified as part of `path`. Any
+#'   name obtained from `path` overrides this argument. Defaults to current
+#'   name.
 #' @template verbose
 #'
 #' @template dribble-return
 #' @export
+#' @examples
+#' \dontrun{
+#' ## create a file to move
+#' file <- drive_upload(system.file("DESCRIPTION"), "DESC")
+#'
+#' ## rename it, but leave in current folder (root folder, in this case)
+#' file <- drive_mv(file, "DESC-renamed")
+#'
+#' ## create a folder to move the file into
+#' folder <- drive_mkdir("new-folder")
+#'
+#' ## move the file and rename it again
+#' file <- drive_mv(file, folder, "DESC-re-renamed")
+#'
+#' ## verify it's in the folder
+#' drive_ls(folder)
+#' }
 drive_mv <- function(file = NULL, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
-
-  path_name <- split_path_name(path, name, verbose)
-  path <- path_name[["path"]]
-  name <- path_name[["name"]]
-
-  name %||% file$name
-
   if (!is_mine(file)) {
     stop(
-      glue_data(
-        file,
-        "You do not own and, therefore cannot move, this file:\n{name}"
-      ),
+      glue("Can't move this file because you don't own it:\n{file$name}"),
       call. = FALSE
     )
   }
 
-  folder_name <- NULL
+  if (!is.null(name)) {
+    stopifnot(is_path(name), length(name) == 1)
+  }
+
+  if (is_path(path)) {
+    if (is.null(name)) {
+      path_parts <- partition_path(path)
+      path <- path_parts$parent
+      name <- path_parts$name
+    } else {
+      path <- append_slash(path)
+    }
+  }
+
+  name <- name %||% file$name
+
+  params <- list(
+    fileId = file$id,
+    name = name,
+    fields = "*"
+  )
+
+  ## if moving the file, modify the parent
   if (!is.null(path)) {
-    folder <- as_dribble(path)
-    folder <- confirm_single_file(folder)
-    folder_name <- paste0(folder$name, "/")
-    if (!is_folder(folder)) {
+    path <- as_dribble(path)
+    confirm_single_file(path)
+    if (!is_folder(path)) {
       stop(
-        glue_data(folder, "'folder' is not a folder:\n{name}"),
+        glue(
+          "Requested parent folder does not exist:\n{path$name}"
+        ),
         call. = FALSE
       )
     }
-
-    request <- generate_request(
-      endpoint = "drive.files.update",
-      params = list(
-        fileId = file$id,
-        name = name,
-        addParents = folder$id,
-        removeParents = file$files_resource[[1]]$parents,
-        fields = "*"
-      )
-    )
-  } else {
-    request <- generate_request(
-      endpoint = "drive.files.update",
-      params = list(
-        fileId = file$id,
-        name = name,
-        fields = "*"
-      )
-    )
-  }
-
-  proc_res <- do_request(request, encode = "json")
-
-  if (verbose) {
-    if (proc_res$name == name) {
-      message(glue("File moved: \n  * {file$name} -> {paste0(folder_name, name)}"))
-    } else {
-      message(glue("File NOT moved: \n * {file$name}"))
+    current_parents <- file$files_resource[[1]][["parents"]][[1]]
+    if (!path$id %in% current_parents) {
+      params[["addParents"]] <- path$id
+      params[["removeParents"]] <- current_parents
     }
   }
 
-  file <- as_dribble(list(proc_res))
-  invisible(file)
+  request <- generate_request(
+    endpoint = "drive.files.update",
+    params = params
+  )
+  res <- make_request(request, encode = "json")
+  proc_res <- process_response(res)
+  out <- as_dribble(list(proc_res))
+
+  if (verbose) {
+    if (proc_res$name == name) {
+      ## TO DO: we aren't actually checking the parentage here ... do that?
+      ## not entirely sure why this placement of `\n` helps glue do the right
+      ## thing and yet ... it does
+      new_path <- paste0(append_slash(path$name), out$name)
+      message(glue("\nFile moved:\n  * {file$name} -> {new_path}"))
+    } else {
+      message(glue("\nFile NOT moved:\n  * {file$name}"))
+    }
+  }
+  invisible(out)
 }
 
 #' @rdname drive_mv

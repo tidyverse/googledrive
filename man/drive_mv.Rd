@@ -23,8 +23,9 @@ in "abc", where as "abc/def/" indicates the file will be placed in folder "def"
 which is located in folder "abc"), or you can specify the name with the
 \code{name} parameter.}
 
-\item{name}{Character, name you would like the moved file to have if not
-specified in \code{path}. Will default to its current name.}
+\item{name}{Character, new file name if not specified as part of \code{path}. Any
+name obtained from \code{path} overrides this argument. Defaults to current
+name.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -34,5 +35,23 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-\code{\link[=drive_move]{drive_move()}} is an alias for \code{\link[=drive_mv]{drive_mv()}}.
+Move a Drive file to a different folder, give it a different name, or both.
+}
+\examples{
+\dontrun{
+## create a file to move
+file <- drive_upload(system.file("DESCRIPTION"), "DESC")
+
+## rename it, but leave in current folder (root folder, in this case)
+file <- drive_mv(file, "DESC-renamed")
+
+## create a folder to move the file into
+folder <- drive_mkdir("new-folder")
+
+## move the file and rename it again
+file <- drive_mv(file, folder, "DESC-re-renamed")
+
+## verify it's in the folder
+drive_ls(folder)
+}
 }

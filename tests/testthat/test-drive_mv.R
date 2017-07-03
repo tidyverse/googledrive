@@ -12,53 +12,114 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del <- drive_delete(c(nm_("foo"), nm_("bar"), nm_("baz")),
-                        verbose = FALSE)
+    del <- drive_delete(c(
+      nm_("move-files-into-me"),
+      nm_("DESC"),
+      nm_("DESC-renamed")
+    ),
+    verbose = FALSE
+    )
   }
 
-  drive_mkdir(nm_("foo"))
-  drive_mkdir(path = append_slash(nm_("foo")), name = nm_("bar"))
-  drive_mkdir(nm_("baz"))
+  drive_mkdir(nm_("move-files-into-me"))
 
 }
 
-test_that("drive_mv() can move and rename a folder", {
-
-  skip_on_appveyor()
+test_that("drive_mv() can rename file", {
   skip_on_travis()
-  ## currently:
-  ## foo
-  ## |- bar
-  ## want:
-  ## baz
-  ## |- bar2 (where bar2 is renamed bar)
-  files <- drive_search(paste(nm_("foo"), nm_("bar"), nm_("baz"), sep = "|"))
-  bar_mv <- drive_mv(nm_("bar"), path = append_slash(nm_("baz")), name = "bar2")
+  skip_on_appveyor()
+  on.exit(drive_delete(nm_("DESC-renamed")))
 
-  ## the ids are identical
-  expect_identical(files[grepl("bar", files$name), ]$id, bar_mv$id)
-
-  ## bar2 is the name
-  expect_identical(bar_mv$name, "bar2")
-
-  ## baz is the parent
-  parent <- unlist(promote(bar_mv, "parents")$parents)
-  expect_identical(parent, files[grepl("baz", files$name), ]$id)
-
-  ## move back
-  expect_message(drive_mv("bar2", path = append_slash(nm_("foo")), name = nm_("bar")),
-                 "File moved")
+  renamee <- drive_upload(
+    system.file("DESCRIPTION"),
+    nm_("DESC"),
+    verbose = FALSE
+  )
+  expect_message(
+    out <- drive_mv(renamee, name = nm_("DESC-renamed")),
+    "File moved"
+  )
+  expect_s3_class(out, "dribble")
+  expect_identical(nrow(out), 1L)
 })
 
-test_that("drive_mv() path handling", {
-
-  skip_on_appveyor()
+test_that("drive_mv() can move a file into a folder given as path", {
   skip_on_travis()
-  ## messages if you give both a path and name with no slash
-  expect_message(drive_mv(nm_("bar"), path = nm_("bar2"), name = nm_("bar2")),
-                          "Ignoring `name`:")
+  skip_on_appveyor()
+  on.exit(drive_delete(nm_("DESC")))
 
-  expect_message(drive_mv(nm_("bar2"), path = nm_("bar")),
-                "File moved:")
+  movee <- drive_upload(
+    system.file("DESCRIPTION"),
+    nm_("DESC"),
+    verbose = FALSE
+  )
 
+  ## trailing slash signals path is folder
+  expect_message(
+    out <- drive_mv(movee, append_slash(nm_("move-files-into-me"))),
+    "File moved"
+  )
+  expect_s3_class(out, "dribble")
+  expect_identical(nrow(out), 1L)
+})
+
+test_that("drive_mv() can move a file into a folder given as dribble", {
+  skip_on_travis()
+  skip_on_appveyor()
+  on.exit(drive_delete(nm_("DESC")))
+
+  movee <- drive_upload(
+    system.file("DESCRIPTION"),
+    nm_("DESC"),
+    verbose = FALSE
+  )
+
+  destination <- drive_path(nm_("move-files-into-me"))
+  expect_message(
+    out <- drive_mv(movee, as_id(destination$id)),
+    "File moved"
+  )
+  expect_s3_class(out, "dribble")
+  expect_identical(nrow(out), 1L)
+})
+
+test_that("drive_mv() can rename and move, using `path` and `name`", {
+  skip_on_travis()
+  skip_on_appveyor()
+  on.exit(drive_delete(nm_("DESC-renamed")))
+
+  movee <- drive_upload(
+    system.file("DESCRIPTION"),
+    nm_("DESC"),
+    verbose = FALSE
+  )
+
+  expect_message(
+    out <- drive_mv(movee, nm_("move-files-into-me"), nm_("DESC-renamed")),
+    "File moved"
+  )
+  expect_s3_class(out, "dribble")
+  expect_identical(nrow(out), 1L)
+})
+
+test_that("drive_mv() can rename and move, using `path` only", {
+  skip_on_travis()
+  skip_on_appveyor()
+  on.exit(drive_delete(nm_("DESC-renamed")))
+
+  movee <- drive_upload(
+    system.file("DESCRIPTION"),
+    nm_("DESC"),
+    verbose = FALSE
+  )
+
+  expect_message(
+    out <- drive_mv(
+      movee,
+      file.path(nm_("move-files-into-me"), nm_("DESC-renamed"))
+    ),
+    "File moved"
+  )
+  expect_s3_class(out, "dribble")
+  expect_identical(nrow(out), 1L)
 })
