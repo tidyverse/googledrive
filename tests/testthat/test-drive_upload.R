@@ -12,13 +12,13 @@ if (clean) {
   del <- drive_delete(c(nm_("foo"), nm_("bar")))
 }
 
-test_that("drive_upload() detects non-existant file", {
+test_that("drive_upload() detects non-existent file", {
   skip_on_appveyor()
   skip_on_travis()
 
   #the file should be a file that exists
   input <- "this should not work"
-  expect_error(drive_upload(from = input), "File does not exist")
+  expect_error(drive_upload(input), "File does not exist")
 })
 
 test_that("drive_upload() places file in the correct folder", {

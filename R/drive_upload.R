@@ -3,10 +3,10 @@
 #' @seealso MIME types that can be converted to native Google formats:
 #'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
 #'
-#' @param from Character, local path to the file to upload.
+#' @param file Character, path to the local file to upload.
 #' @template path
-#' @param name Character, name the file should have on Google Drive if not specified
-#'   in `path`. Will default to its local name.
+#' @param name Character, name the file should have on Google Drive if not
+#'   specified in `path`. Will default to its local name.
 #' @param overwrite A logical scalar, do you want to overwrite a file already on
 #'   Google Drive, if such exists?
 #' @param type Character. If type = `NULL`, a MIME type is automatically
@@ -27,15 +27,15 @@
 #' ## or convert it to a Google Sheet
 #' drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
 #' }
-drive_upload <- function(from = NULL,
+drive_upload <- function(file = NULL,
                          path = NULL,
                          name = NULL,
                          overwrite = FALSE,
                          type = NULL,
                          verbose = TRUE) {
 
-  if (!file.exists(from)) {
-    stop(glue("File does not exist:\n{from}"), call. = FALSE)
+  if (!file.exists(file)) {
+    stop(glue("File does not exist:\n{file}"), call. = FALSE)
   }
 
   ## upload meta-data:
@@ -48,7 +48,7 @@ drive_upload <- function(from = NULL,
   path <- path_name[["path"]]
   name <- path_name[["name"]]
 
-  name <- name %||% basename(from)
+  name <- name %||% basename(file)
 
   mimeType <- drive_mime_type(type)
 
@@ -109,7 +109,7 @@ drive_upload <- function(from = NULL,
   )
 
   ## media uploads have unique body situations, so customizing here.
-  request$body <- httr::upload_file(path = from,
+  request$body <- httr::upload_file(path = file,
                                     type = mimeType)
 
   response <- make_request(request, encode = "json")
