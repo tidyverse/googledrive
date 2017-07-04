@@ -56,52 +56,57 @@ test_that("drive_mkdir() creates a folder in root folder", {
 test_that("drive_mkdir() accepts parent folder given as dribble", {
   skip_on_travis()
   skip_on_appveyor()
+  on.exit(drive_delete(nm_("a")))
 
   PARENT <- drive_path(nm_("OMNI-PARENT"))
-  out <- drive_mkdir(PARENT, "a")
+  out <- drive_mkdir(PARENT, nm_("a"))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, "a")
+  expect_identical(out$name, nm_("a"))
 })
 
 test_that("drive_mkdir() accepts parent folder given as file id", {
   skip_on_travis()
   skip_on_appveyor()
+  on.exit(drive_delete(nm_("b")))
 
   PARENT <- drive_path(nm_("OMNI-PARENT"))
-  out <- drive_mkdir(as_id(PARENT$id), "b")
+  out <- drive_mkdir(as_id(PARENT$id), nm_("b"))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, "b")
+  expect_identical(out$name, nm_("b"))
 })
 
 test_that("drive_mkdir() accepts name as part of path", {
   skip_on_travis()
   skip_on_appveyor()
+  on.exit(drive_delete(nm_("c")))
 
-  out <- drive_mkdir(file.path(nm_("OMNI-PARENT"), "c"))
+  out <- drive_mkdir(file.path(nm_("OMNI-PARENT"), nm_("c")))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, "c")
+  expect_identical(out$name, nm_("c"))
 })
 
 test_that("drive_mkdir() accepts name as part of path with trailing slash", {
   skip_on_travis()
   skip_on_appveyor()
+  on.exit(drive_delete(nm_("d")))
 
-  out <- drive_mkdir(file.path(nm_("OMNI-PARENT"), "d", ""))
+  out <- drive_mkdir(file.path(nm_("OMNI-PARENT"), nm_("d"), ""))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, "d")
+  expect_identical(out$name, nm_("d"))
 })
 
 test_that("drive_mkdir() accepts path and name", {
   skip_on_travis()
   skip_on_appveyor()
+  on.exit(drive_delete(c(nm_("e"), nm_("f"))))
 
   ## no trailing slash on path
-  out <- drive_mkdir(nm_("OMNI-PARENT"), "e")
+  out <- drive_mkdir(nm_("OMNI-PARENT"), nm_("e"))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, "e")
+  expect_identical(out$name, nm_("e"))
 
   ## yes trailing slash on path
-  out <- drive_mkdir(file.path(nm_("OMNI-PARENT"), ""), "f")
+  out <- drive_mkdir(file.path(nm_("OMNI-PARENT"), ""), nm_("f"))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, "f")
+  expect_identical(out$name, nm_("f"))
 })
