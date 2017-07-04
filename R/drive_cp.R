@@ -78,7 +78,7 @@ drive_cp <- function(file = NULL, path = NULL, name = NULL,  verbose = TRUE) {
         call. = FALSE
       )
     }
-    params[["parents"]] <- path$id
+    params[["parents"]] <- list(path$id)
   }
 
   ## if new name is specified, send it

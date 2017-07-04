@@ -13,58 +13,54 @@ if (run) {
   if (clean) {
     del <- drive_delete(c(
       nm_("i-am-a-folder"),
-      nm_("non-google-file"),
-      nm_("google-doc")
+      nm_("i-am-a-file")
     ), verbose = FALSE)
   }
 
   drive_mkdir(nm_("i-am-a-folder"))
   drive_upload(
     system.file("DESCRIPTION"),
-    nm_("non-google-file"),
-    verbose = FALSE
-  )
-  drive_upload(
-    system.file("DESCRIPTION"),
-    nm_("google-doc"),
-    type = "document",
+    nm_("i-am-a-file"),
     verbose = FALSE
   )
 
 }
 
-test_that("drive_cp() can copy a non-Google file", {
+test_that("drive_cp() can copy file in place", {
   skip_on_appveyor()
   skip_on_travis()
-  on.exit(drive_delete(paste("Copy of", nm_("non-google-file"))))
+  on.exit(drive_delete(paste("Copy of", nm_("i-am-a-file"))))
 
-  non_goog <- drive_path(nm_("non-google-file"))
+  file <- drive_path(nm_("i-am-a-file"))
   expect_message(
-    non_goog_cp <- drive_cp(nm_("non-google-file")),
+    file_cp <- drive_cp(file),
     "File copied"
   )
-  expect_identical(non_goog_cp$name, paste("Copy of", nm_("non-google-file")))
+  expect_identical(file_cp$name, paste("Copy of", nm_("i-am-a-file")))
 
   ## should have the same parent
-  expect_identical(non_goog$files_resource[[1]]$parents,
-                   non_goog_cp$files_resource[[1]]$parents)
+  expect_identical(file$files_resource[[1]]$parents,
+                   file_cp$files_resource[[1]]$parents)
 })
 
-test_that("drive_cp() can copy a Google file", {
+test_that("drive_cp() can copy a file into a different folder", {
   skip_on_appveyor()
   skip_on_travis()
-  on.exit(drive_delete(paste("Copy of", nm_("google-doc"))))
+  on.exit(drive_delete(paste("Copy of", nm_("i-am-a-file"))))
 
-  gdoc <- drive_path(nm_("google-doc"))
-  expect_message(gdoc_cp <- drive_cp(nm_("google-doc")), "File copied")
-  expect_identical(gdoc_cp$name, paste("Copy of", nm_("google-doc")))
+  file <- drive_path(nm_("i-am-a-file"))
+  folder <- drive_path(nm_("i-am-a-folder"))
+  expect_message(
+    file_cp <- drive_cp(file, folder),
+    "File copied"
+  )
+  expect_identical(file_cp$name, paste("Copy of", nm_("i-am-a-file")))
 
-  ## should have the same parent
-  expect_identical(gdoc$files_resource[[1]]$parents,
-                   gdoc_cp$files_resource[[1]]$parents)
+  ## should have folder as parent
+  expect_identical(file_cp$files_resource[[1]]$parents[[1]], folder$id)
 })
 
-test_that("drive_cp() errors if given a folder", {
+test_that("drive_cp() errors if asked to copy a folder", {
   skip_on_appveyor()
   skip_on_travis()
 
