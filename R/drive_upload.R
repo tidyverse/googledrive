@@ -53,14 +53,12 @@ drive_upload <- function(file = NULL,
   }
 
   if (is_path(path)) {
+    if (is.null(name) && drive_path_exists(append_slash(path))) {
+      path <- append_slash(path)
+    }
     path_parts <- partition_path(path, maybe_name = is.null(name))
     path <- path_parts$parent
     name <- name %||% path_parts$name
-    ## TO DO:
-    ## if `parent = NULL`, we could check if there's a directory at the
-    ## original path and infer we should upload into it, instead of onto
-    ## a file with the same name
-    ## i.e. detect this is an append_slash() case
   }
 
   ## vet the parent folder

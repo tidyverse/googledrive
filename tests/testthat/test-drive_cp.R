@@ -60,6 +60,25 @@ test_that("drive_cp() can copy a file into a different folder", {
   expect_identical(file_cp$files_resource[[1]]$parents[[1]], folder$id)
 })
 
+test_that("drive_cp() elects to copy into a folder vs onto file of same name", {
+  skip_on_appveyor()
+  skip_on_travis()
+  on.exit(drive_delete(paste("Copy of", nm_("i-am-a-file"))))
+
+  file <- drive_path(nm_("i-am-a-file"))
+  ## does drive_cp() detect that path is a folder, despite lack of trailing
+  ## slash?
+  expect_message(
+    file_cp <- drive_cp(file, nm_("i-am-a-folder")),
+    "File copied"
+  )
+  expect_identical(file_cp$name, paste("Copy of", nm_("i-am-a-file")))
+
+  ## should have folder as parent
+  folder <- drive_path(nm_("i-am-a-folder"))
+  expect_identical(file_cp$files_resource[[1]]$parents[[1]], folder$id)
+})
+
 test_that("drive_cp() errors if asked to copy a folder", {
   skip_on_appveyor()
   skip_on_travis()

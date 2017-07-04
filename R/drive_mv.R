@@ -52,13 +52,12 @@ drive_mv <- function(file = NULL, path = NULL, name = NULL, verbose = TRUE) {
   }
 
   if (is_path(path)) {
+    if (is.null(name) && drive_path_exists(append_slash(path))) {
+      path <- append_slash(path)
+    }
     path_parts <- partition_path(path, maybe_name = is.null(name))
     path <- path_parts$parent
     name <- name %||% path_parts$name
-    ## TO DO:
-    ## if `parent = NULL`, we could check if there's a directory at the
-    ## original path and infer we should move, instead of rename
-    ## i.e. detect this is an append_slash() case
   }
 
   name <- name %||% file$name
