@@ -1,4 +1,4 @@
-#' Create a folder on Google Drive.
+#' Create a folder on Drive.
 #'
 #' @param path Specifies target destination for the new folder to create. Can be
 #'   an actual path (character), a file id marked with [as_id()], or a

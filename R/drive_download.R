@@ -1,4 +1,4 @@
-#' Download a file from Google Drive.
+#' Download a file from Drive.
 #'
 #' This function downloads files from Google Drive. Native Google files, such as
 #' Google Docs, Google Sheets, Google Slides, must be exported to a conventional

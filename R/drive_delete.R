@@ -1,4 +1,4 @@
-#' Delete file from Google Drive.
+#' Delete file from Drive.
 #'
 #' @template file
 #' @template verbose

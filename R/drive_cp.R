@@ -1,4 +1,4 @@
-#' Copy a Google Drive file.
+#' Copy a Drive file.
 #'
 #' `drive_copy()` is an alias for `drive_cp()`.
 #'

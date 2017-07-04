@@ -1,4 +1,4 @@
-#' Move Google Drive file.
+#' Move a Drive file.
 #'
 #' Move a Drive file to a different folder, give it a different name, or both.
 #'

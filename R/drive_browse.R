@@ -1,4 +1,4 @@
-#' Visit Google Drive file in browser.
+#' Visit Drive file in browser.
 #'
 #' @template file
 #'

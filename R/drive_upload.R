@@ -1,4 +1,4 @@
-#' Upload a file to Google Drive.
+#' Upload a file to Drive.
 #'
 #' @seealso MIME types that can be converted to native Google formats:
 #'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>

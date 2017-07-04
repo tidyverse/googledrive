@@ -1,4 +1,4 @@
-#' Information the user and user's Drive.
+#' Information on the user and user's Drive.
 #'
 #' Reveals information about the user associated with the current token.
 #'
@@ -34,7 +34,7 @@ drive_user <- function(fields = "user", ..., verbose = TRUE) {
 #' @param fields fields to query, default is `user`.
 #' @param ... name-value pairs to query the API
 #'
-#' @return list of class \code{guser} with user's information
+#' @return list of class `guser` with user's information
 #' @keywords internal
 
 guser <- function(fields = "user", ...) {
