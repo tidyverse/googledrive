@@ -82,20 +82,21 @@
 <p>To see your Google Drive files in the browser, visit <a href="https://drive.google.com" class="uri">https://drive.google.com</a>. This displays all your files and offers various ways to filter what you see based on file type, folder, starred vs not, etc.</p>
 <p>You can get similar results with <code><a href="../../reference/drive_search.html">drive_search()</a></code>. By default, it gets info on the most recent 100 files.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>())
-<span class="co">#&gt; # A tibble: 283 x 3</span>
-<span class="co">#&gt;     name                           id files_resource</span>
-<span class="co">#&gt;  * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt;  1   def 0B0Gh-SuuA2nTNTAxeDNVdUdxb0U    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  2   abc 0B0Gh-SuuA2nTYktNdGVvanphUU0    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  3     f 0B0Gh-SuuA2nTM0dqOUV3bGNocnc    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  4     e 0B0Gh-SuuA2nTbWlyLTYwMVN2OXM    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  5     d 0B0Gh-SuuA2nTR1J1MlZkR2w4T2c    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  6     c 0B0Gh-SuuA2nTck9IVVVHQVdNTzQ    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  7     b 0B0Gh-SuuA2nTUFRVenR0RkdIbWc    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  8     a 0B0Gh-SuuA2nTT1BNUklzWmlFejQ    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  9     f 0B0Gh-SuuA2nTczRlcWJDaGlWQzg    &lt;list [26]&gt;</span>
-<span class="co">#&gt; 10     e 0B0Gh-SuuA2nTY1NOSE50N3lrN28    &lt;list [26]&gt;</span>
-<span class="co">#&gt; # ... with 273 more rows</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 70 x 3</span>
+<span class="co">#&gt;                                name</span>
+<span class="co">#&gt;  *                            &lt;chr&gt;</span>
+<span class="co">#&gt;  1                              def</span>
+<span class="co">#&gt;  2                              abc</span>
+<span class="co">#&gt;  3      i-am-a-folder-</span><span class="al">TEST</span><span class="co">-drive-cp</span>
+<span class="co">#&gt;  4         google-doc-</span><span class="al">TEST</span><span class="co">-drive-cp</span>
+<span class="co">#&gt;  5    non-google-file-</span><span class="al">TEST</span><span class="co">-drive-cp</span>
+<span class="co">#&gt;  6 move-files-into-me-</span><span class="al">TEST</span><span class="co">-drive-mv</span>
+<span class="co">#&gt;  7                             bar2</span>
+<span class="co">#&gt;  8                baz-</span><span class="al">TEST</span><span class="co">-drive-mv</span>
+<span class="co">#&gt;  9                foo-</span><span class="al">TEST</span><span class="co">-drive-mv</span>
+<span class="co">#&gt; 10     OMNI-PARENT-</span><span class="al">TEST</span><span class="co">-drive-mkdir</span>
+<span class="co">#&gt; # ... with 60 more rows, and 2 more variables: id &lt;chr&gt;,</span>
+<span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
 <p>The object you get back holds the metadata for one or more Google Drive files. It is a <code>dribble</code>, which is just a <code>tibble</code> with Drive files in rows and at least these three variables:</p>
 <ul>
 <li>
@@ -110,11 +111,11 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## just folders
 <span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"mimeType = 'application/vnd.google-apps.folder'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 3 x 3</span>
-<span class="co">#&gt;    name                           id files_resource</span>
-<span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTNTAxeDNVdUdxb0U    &lt;list [26]&gt;</span>
-<span class="co">#&gt; 2   abc 0B0Gh-SuuA2nTYktNdGVvanphUU0    &lt;list [26]&gt;</span>
-<span class="co">#&gt; 3     f 0B0Gh-SuuA2nTM0dqOUV3bGNocnc    &lt;list [26]&gt;</span>
+<span class="co">#&gt;                          name                           id files_resource</span>
+<span class="co">#&gt; *                       &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
+<span class="co">#&gt; 1                         def 0B0Gh-SuuA2nTUVRGNlpESjc4azg    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 2                         abc 0B0Gh-SuuA2nTcTFMMlR3RnFVNGM    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 3 i-am-a-folder-</span><span class="al">TEST</span><span class="co">-drive-cp 0B0Gh-SuuA2nTbXN1QkNJb1djMnM    &lt;list [26]&gt;</span>
 
 ## just Sheets
 <span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"mimeType='application/vnd.google-apps.spreadsheet'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)

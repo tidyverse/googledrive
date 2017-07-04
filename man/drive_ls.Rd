@@ -10,9 +10,9 @@ drive_ls(path = "~/", pattern = NULL, type = NULL, ...)
 drive_list(path = "~/", pattern = NULL, type = NULL, ...)
 }
 \arguments{
-\item{path}{Character. A single folder on Google Drive whose contents you
-want to list. Can be an actual path (character), a file id marked with
-\code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}.}
+\item{path}{Specifies a single folder on Google Drive whose contents you want
+to list. Can be an actual path (character), a file id marked with
+\code{\link[=as_id]{as_id()}}, or a \link{dribble}.}
 
 \item{pattern}{Character. If provided, only the files whose names match this
 regular expression are returned.}

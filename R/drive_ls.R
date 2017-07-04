@@ -5,9 +5,9 @@
 #' wrapper around [`drive_search()`]. `drive_list()` is an alias for
 #' `drive_ls()`.
 #'
-#' @param path Character. A single folder on Google Drive whose contents you
-#'   want to list. Can be an actual path (character), a file id marked with
-#'   [as_id()], or a [`dribble`].
+#' @param path Specifies a single folder on Google Drive whose contents you want
+#'   to list. Can be an actual path (character), a file id marked with
+#'   [as_id()], or a [dribble].
 #' @inheritParams drive_search
 #'
 #' @template dribble-return

@@ -114,20 +114,21 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <a href="#quick-demo" class="anchor"></a>Quick demo</h3>
 <p>Here’s how to list the files you see in <a href="https://drive.google.com">My Drive</a>. You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_search.html">drive_search</a></span>()
-<span class="co">#&gt; # A tibble: 284 x 3</span>
-<span class="co">#&gt;     name                           id files_resource</span>
-<span class="co">#&gt;  * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt;  1   def 0B0Gh-SuuA2nTNTAxeDNVdUdxb0U    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  2   abc 0B0Gh-SuuA2nTYktNdGVvanphUU0    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  3   def 0B0Gh-SuuA2nTSEN6a0ZIeDV4SXM    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  4     f 0B0Gh-SuuA2nTM0dqOUV3bGNocnc    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  5     e 0B0Gh-SuuA2nTbWlyLTYwMVN2OXM    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  6     d 0B0Gh-SuuA2nTR1J1MlZkR2w4T2c    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  7     c 0B0Gh-SuuA2nTck9IVVVHQVdNTzQ    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  8     b 0B0Gh-SuuA2nTUFRVenR0RkdIbWc    &lt;list [26]&gt;</span>
-<span class="co">#&gt;  9     a 0B0Gh-SuuA2nTT1BNUklzWmlFejQ    &lt;list [26]&gt;</span>
-<span class="co">#&gt; 10     f 0B0Gh-SuuA2nTczRlcWJDaGlWQzg    &lt;list [26]&gt;</span>
-<span class="co">#&gt; # ... with 274 more rows</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 70 x 3</span>
+<span class="co">#&gt;                                name</span>
+<span class="co">#&gt;  *                            &lt;chr&gt;</span>
+<span class="co">#&gt;  1                              def</span>
+<span class="co">#&gt;  2                              abc</span>
+<span class="co">#&gt;  3      i-am-a-folder-</span><span class="al">TEST</span><span class="co">-drive-cp</span>
+<span class="co">#&gt;  4         google-doc-</span><span class="al">TEST</span><span class="co">-drive-cp</span>
+<span class="co">#&gt;  5    non-google-file-</span><span class="al">TEST</span><span class="co">-drive-cp</span>
+<span class="co">#&gt;  6 move-files-into-me-</span><span class="al">TEST</span><span class="co">-drive-mv</span>
+<span class="co">#&gt;  7                             bar2</span>
+<span class="co">#&gt;  8                baz-</span><span class="al">TEST</span><span class="co">-drive-mv</span>
+<span class="co">#&gt;  9                foo-</span><span class="al">TEST</span><span class="co">-drive-mv</span>
+<span class="co">#&gt; 10     OMNI-PARENT-</span><span class="al">TEST</span><span class="co">-drive-mkdir</span>
+<span class="co">#&gt; # ... with 60 more rows, and 2 more variables: id &lt;chr&gt;,</span>
+<span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
 <p>You can narrow the query by specifying a <code>pattern</code> you’d like to match names against. Or by specifying a file type: the <code>type</code> argument understands MIME types, file extensions, and a few human-friendly keywords.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_search.html">drive_search</a></span>(<span class="dt">pattern =</span> <span class="st">"chicken"</span>)
 <span class="kw"><a href="reference/drive_search.html">drive_search</a></span>(<span class="dt">type =</span> <span class="st">"spreadsheet"</span>)     ## Google Sheets!
@@ -135,7 +136,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <span class="kw"><a href="reference/drive_search.html">drive_search</a></span>(<span class="dt">type =</span> <span class="st">"application/pdf"</span>) ## MIME type = "application/pdf"</code></pre></div>
 <p>Alternatively, you can refine the search using the <code>q</code> query parameter. Accepted search clauses can be found in the <a href="https://developers.google.com/drive/v3/web/search-parameters">Google Drive API documentation</a>. For example, to get all files with <code>'horsebean'</code> somewhere in their full text (such as files based on the <code>chickwts</code> dataset!), do this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(fls &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'horsebean'"</span>))
-<span class="co">#&gt; # A tibble: 8 x 3</span>
+<span class="co">#&gt; # A tibble: 7 x 3</span>
 <span class="co">#&gt;                              name</span>
 <span class="co">#&gt; *                           &lt;chr&gt;</span>
 <span class="co">#&gt; 1                    test12334556</span>
@@ -143,9 +144,8 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <span class="co">#&gt; 3                          foobar</span>
 <span class="co">#&gt; 4                        chickwts</span>
 <span class="co">#&gt; 5     chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt; 6                        Untitled</span>
-<span class="co">#&gt; 7   chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-list</span>
-<span class="co">#&gt; 8 chickwts_txt-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 6   chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-list</span>
+<span class="co">#&gt; 7 chickwts_txt-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
 <span class="co">#&gt; # ... with 2 more variables: id &lt;chr&gt;, files_resource &lt;list&gt;</span></code></pre></div>
 <p>You often want to store the result of a googledrive call, so you can act on those files in the future.</p>
 <div id="identify-files" class="section level4">
@@ -157,16 +157,16 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;    name                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTNTAxeDNVdUdxb0U    &lt;list [30]&gt;</span>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTUVRGNlpESjc4azg    &lt;list [30]&gt;</span>
 
 ## let's grab that file id and retrieve it that way
 x<span class="op">$</span>id
-<span class="co">#&gt; [1] "0B0Gh-SuuA2nTNTAxeDNVdUdxb0U"</span>
+<span class="co">#&gt; [1] "0B0Gh-SuuA2nTUVRGNlpESjc4azg"</span>
 <span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(x<span class="op">$</span>id)
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;    name                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTNTAxeDNVdUdxb0U    &lt;list [30]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTUVRGNlpESjc4azg    &lt;list [30]&gt;</span></code></pre></div>
 <p>In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a <code>dribble</code>. If it’s ambiguous, use <code><a href="reference/as_id.html">as_id()</a></code> to flag a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.</p>
 </div>
 <div id="upload-files" class="section level4">
@@ -182,13 +182,13 @@ x<span class="op">$</span>id
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                  name                           id files_resource</span>
 <span class="co">#&gt; *               &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-chickwts.csv 0B0Gh-SuuA2nTM2VFRTdvSTlhV2c    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 README-chickwts.csv 0B0Gh-SuuA2nTcjVSREJmbnEydlU    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## example of using a dribble as input
 drive_chickwts &lt;-<span class="st"> </span>drive_chickwts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_delete.html">drive_delete</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chickwts.csv: 0B0Gh-SuuA2nTM2VFRTdvSTlhV2c</span>
+<span class="co">#&gt;   * README-chickwts.csv: 0B0Gh-SuuA2nTcjVSREJmbnEydlU</span>
 
 drive_chickwts &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(<span class="st">"README-chickwts.csv"</span>, <span class="dt">type =</span> <span class="st">"spreadsheet"</span>)
 <span class="co">#&gt; File uploaded:</span>
@@ -209,7 +209,7 @@ drive_chickwts<span class="op">$</span>publish
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;            check_time revision published auto_publish</span>
 <span class="co">#&gt;                &lt;dttm&gt;    &lt;chr&gt;     &lt;lgl&gt;        &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 2017-07-03 16:58:53        1      TRUE         TRUE</span></code></pre></div>
+<span class="co">#&gt; 1 2017-07-03 22:14:07        1      TRUE         TRUE</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_is_published.html">drive_is_published</a></span>(drive_chickwts)
 <span class="co">#&gt; The latest revision of file 'README-chickwts.csv' is published.</span></code></pre></div>
 </div>
@@ -227,7 +227,7 @@ drive_chickwts<span class="op">$</span>publish
 <p>We can then extract a share link.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drive_chickwts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_share_link.html">drive_share_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1QCmenItzdBfD-yXNxayi6Uv0SC2JqCqQ1kIR9GXlBxE/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1SpACn83JnHcihjqrKkXbPxaqNQKRhFflAhLkzdefD4I/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="download-files" class="section level4">
 <h4 class="hasAnchor">
@@ -291,11 +291,11 @@ boring &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_u
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drive_chickwts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_delete.html">drive_delete</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chickwts.csv: 1QCmenItzdBfD-yXNxayi6Uv0SC2JqCqQ1kIR9GXlBxE</span>
+<span class="co">#&gt;   * README-chickwts.csv: 1SpACn83JnHcihjqrKkXbPxaqNQKRhFflAhLkzdefD4I</span>
 boring <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_delete.html">drive_delete</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * boring-text.txt: 0B0Gh-SuuA2nTQ1ZNRXRXNDBYWk0</span></code></pre></div>
+<span class="co">#&gt;   * boring-text.txt: 0B0Gh-SuuA2nTTnFqaHlmaUhEQUU</span></code></pre></div>
 </div>
 </div>
 </div>

@@ -7,12 +7,11 @@
 drive_mkdir(path = NULL, name = NULL, verbose = TRUE)
 }
 \arguments{
-\item{path}{Specifies target destination for `file` or copy of `file` on
-Google Drive. Can be an actual path (character), a file id marked with
-\code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
-actual path, it is best to explicitly indicate if it's a folder by
-including a trailing slash, since it cannot always be worked out from the
-context of the call.}
+\item{path}{Specifies target destination for the new folder to create. Can be
+an actual path (character), a file id marked with \code{\link[=as_id]{as_id()}}, or a
+\link{dribble}. If specified as an actual path, it is best to explicitly
+indicate if it's a folder by including a trailing slash, since it cannot
+always be worked out from the context of the call.}
 
 \item{name}{Character. The name of the folder you would like to create, if
 not already specified in \code{path}.}
