@@ -2,14 +2,17 @@
 % Please edit documentation in R/drive_ls.R
 \name{drive_ls}
 \alias{drive_ls}
+\alias{drive_list}
 \title{List contents of a folder.}
 \usage{
 drive_ls(path = "~/", pattern = NULL, type = NULL, ...)
+
+drive_list(path = "~/", pattern = NULL, type = NULL, ...)
 }
 \arguments{
-\item{path}{Character. A single folder on Google Drive whose contents you
-want to list. Can be an actual path (character), a file id marked with \code{\link[=as_id]{as_id()}}, or
-a \code{\link{dribble}}.}
+\item{path}{Specifies a single folder on Google Drive whose contents you want
+to list. Can be an actual path (character), a file id marked with
+\code{\link[=as_id]{as_id()}}, or a \link{dribble}.}
 
 \item{pattern}{Character. If provided, only the files whose names match this
 regular expression are returned.}
@@ -25,7 +28,10 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-List contents of a folder.
+List the contents of a folder on Google Drive, nonrecursively. Optionally,
+filter for a regex in the file names and/or on MIME type. This is a thin
+wrapper around \code{\link[=drive_search]{drive_search()}}. \code{drive_list()} is an alias for
+\code{drive_ls()}.
 }
 \examples{
 \dontrun{

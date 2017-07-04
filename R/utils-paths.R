@@ -1,5 +1,7 @@
 ## path utilities -----------------------------------------------------
 
+is_path <- function(x) is.character(x) && !inherits(x, "drive_id")
+
 ## turn '~' into `~/`
 ## turn leading `/` into leading `~/`
 rootize_path <- function(path) {
@@ -28,6 +30,36 @@ split_path <- function(path = "") {
 
 unsplit_path <- function(...) {
   gsub("^/*", "", file.path(...))
+}
+
+## partitions path into
+##   * name = substring after the last `/`
+##   * parent = substring up to the last `/`, processed with rootize_path()
+## if there is no `/`, put the input into `name`
+## use maybe_name if you have external info re: how to interpret the path
+## maybe_name = TRUE --> path could end in a name
+## maybe_name = FALSE --> path is known to be a directory
+partition_path <- function(path, maybe_name = FALSE) {
+  out <- list(parent = NULL, name = NULL)
+  if (length(path) < 1) {
+    return(out)
+  }
+  stopifnot(is_path(path), length(path) == 1)
+  path <- rootize_path(path)
+  if (!maybe_name) {
+    path <- append_slash(path)
+  }
+  last_slash <- last(unlist(gregexpr(pattern = "/", path)))
+  if (last_slash < 1) {
+    out[["name"]] <- path
+    return(out)
+  }
+  out[["parent"]] <- substr(path, 1, last_slash)
+  if (last_slash == nchar(path)) {
+    return(out)
+  }
+  out[["name"]] <- substr(path, last_slash + 1, nchar(path))
+  out
 }
 
 ## tools::file_ext(), except return NULL for non-extensions

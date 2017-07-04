@@ -4,14 +4,17 @@
 \alias{drive_mkdir}
 \title{Create a folder on Google Drive.}
 \usage{
-drive_mkdir(name = NULL, path = NULL, verbose = TRUE)
+drive_mkdir(path = NULL, name = NULL, verbose = TRUE)
 }
 \arguments{
-\item{name}{Character. The name of the folder you would like to create.}
+\item{path}{Specifies target destination for the new folder to create. Can be
+an actual path (character), a file id marked with \code{\link[=as_id]{as_id()}}, or a
+\link{dribble}. If specified as an actual path, it is best to explicitly
+indicate if it's a folder by including a trailing slash, since it cannot
+always be worked out from the context of the call.}
 
-\item{path}{Drive File, something that identifies where the file should live
-on your Google Drive. Can be an actual path (character), a file id marked
-with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+\item{name}{Character. The name of the folder you would like to create, if
+not already specified in \code{path}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -22,4 +25,22 @@ An object of class \code{\link{dribble}}, a tibble with
 }
 \description{
 Create a folder on Google Drive.
+}
+\examples{
+\dontrun{
+## Create folder named "def" in existing folder "abc".
+drive_mkdir("abc/def")
+
+## This will also create a folder named "def" in folder "abc".
+drive_mkdir(path = "abc", name = "def")
+
+## Another way to create a folder named "def" in folder "abc",
+## this time with parent folder stored in a dribble.
+abc <- as_dribble("abc")
+drive_mkdir(path = abc, name = "def")
+
+## Yet another way to do this,
+## this time with parent folder provide via id.
+drive_mkdir(path = as_id(abc$id), name = "def")
+}
 }

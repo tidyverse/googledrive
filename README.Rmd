@@ -48,7 +48,7 @@ del <- drive_delete(
   verbose = FALSE
 )
 drive_mkdir("abc")
-drive_mkdir("def", path = "abc")
+drive_mkdir(path = "abc/def")
 ```
 
 ### Package conventions
@@ -166,7 +166,8 @@ We can download files from Google Drive. Native Google file types (such as Googl
 drive_download("538-star-wars-survey", type = "csv")
 ```
 
-Alternatively, I could specify the `out_path` parameter.
+Alternatively, I could specify the `path` parameter.
+
 ```{r}
 drive_download(
   "538-star-wars-survey",
@@ -211,4 +212,3 @@ rm <- file.remove("538-star-wars-survey.csv")
 rm <- file.remove("538-star-wars-survey.xlsx")
 rm <- file.remove("boring-text.txt")
 ```
-

@@ -6,32 +6,36 @@ context("Upload files")
 
 nm_ <- nm_fun("-TEST-drive-upload")
 
-clean <- FALSE
-
-if (clean) {
-  del <- drive_delete(c(nm_("foo"), nm_("bar")))
+## clean
+if (FALSE) {
+  del <- drive_delete(c(
+    nm_("upload-into-me"),
+    nm_("DESCRIPTION")
+  ))
 }
 
-test_that("drive_upload() detects non-existant file", {
-  skip_on_appveyor()
-  skip_on_travis()
+## setup
+if (FALSE) {
+  drive_mkdir(nm_("upload-into-me"))
+}
 
-  #the file should be a file that exists
-  input <- "this should not work"
-  expect_error(drive_upload(from = input), "File does not exist")
+test_that("drive_upload() detects non-existent file", {
+  expect_error(drive_upload("no-such-file"), "File does not exist")
 })
 
-test_that("drive_upload() places file in the correct folder", {
+test_that("drive_upload() places file in non-root folder, with new name", {
   skip_on_appveyor()
   skip_on_travis()
+  on.exit(drive_delete(nm_("DESCRIPTION")))
 
-  foo <- drive_mkdir(nm_("foo"))
+  destination <- drive_path(nm_("upload-into-me"))
+  uploadee <- drive_upload(
+    system.file("DESCRIPTION"),
+    path = destination,
+    name = nm_("DESCRIPTION")
+  )
 
-  ## foo
-  ## |- bar
-  bar <- drive_upload(system.file("DESCRIPTION"), name = nm_("bar"), path = nm_("foo"))
-  expect_identical(bar$files_resource[[1]]$parents[[1]], foo$id)
-
-  ## clean up
-  drive_delete(nm_("foo"))
+  expect_s3_class(uploadee, "dribble")
+  expect_identical(nrow(uploadee), 1L)
+  expect_identical(uploadee$files_resource[[1]]$parents[[1]], destination$id)
 })

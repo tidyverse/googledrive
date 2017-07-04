@@ -4,18 +4,21 @@
 \alias{drive_upload}
 \title{Upload a file to Google Drive.}
 \usage{
-drive_upload(from = NULL, name = NULL, path = NULL, overwrite = FALSE,
+drive_upload(file = NULL, path = NULL, name = NULL, overwrite = FALSE,
   type = NULL, verbose = TRUE)
 }
 \arguments{
-\item{from}{Character, local path to the file to upload.}
+\item{file}{Character, path to the local file to upload.}
 
-\item{name}{Character, name the file should have on Google Drive. Will
-default to its local name.}
+\item{path}{Specifies target destination for \code{file} or copy of
+\code{file} on Google Drive. Can be an actual path (character), a file id
+marked with \code{\link{as_id}()}, or a \code{\link{dribble}}. If specified
+as an actual path, it is best to explicitly indicate if it's a folder by
+including a trailing slash, since it cannot always be worked out from the
+context of the call.}
 
-\item{path}{Drive File, something that identifies where the file should live
-on your Google Drive. Can be an actual path (character), a file id marked
-with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+\item{name}{Character, name the file should have on Google Drive if not
+specified in \code{path}. Will default to its local name.}
 
 \item{overwrite}{A logical scalar, do you want to overwrite a file already on
 Google Drive, if such exists?}
@@ -39,11 +42,21 @@ Upload a file to Google Drive.
 }
 \examples{
 \dontrun{
-write.csv(chickwts, "chickwts.csv")
-drive_chickwts <- drive_upload("chickwts.csv")
+## upload a csv file
+mirrors_csv <- drive_upload(R.home('doc/BioC_mirrors.csv'))
 
 ## or convert it to a Google Sheet
-drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
+mirrors_sheet <- drive_upload(
+  R.home('doc/BioC_mirrors.csv'),
+  name = "BioC_mirrors",
+  type = "spreadsheet"
+)
+
+## check out the new Sheet!
+drive_browse(mirrors_sheet)
+
+## clean-up
+drive_search("BioC_mirrors") \%>\% drive_delete()
 }
 }
 \seealso{

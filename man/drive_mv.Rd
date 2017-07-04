@@ -2,18 +2,28 @@
 % Please edit documentation in R/drive_mv.R
 \name{drive_mv}
 \alias{drive_mv}
+\alias{drive_move}
 \title{Move Google Drive file.}
 \usage{
-drive_mv(file = NULL, path = NULL, verbose = TRUE)
+drive_mv(file = NULL, path = NULL, name = NULL, verbose = TRUE)
+
+drive_move(file = NULL, path = NULL, name = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
 on your Google Drive. This can be name(s)/path(s), marked file id(s),
 or a \code{dribble}.}
 
-\item{path}{Drive File, something that identifies where the file should live
-on your Google Drive. Can be an actual path (character), a file id marked
-with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+\item{path}{Specifies target destination for \code{file} or copy of
+\code{file} on Google Drive. Can be an actual path (character), a file id
+marked with \code{\link{as_id}()}, or a \code{\link{dribble}}. If specified
+as an actual path, it is best to explicitly indicate if it's a folder by
+including a trailing slash, since it cannot always be worked out from the
+context of the call.}
+
+\item{name}{Character, new file name if not specified as part of \code{path}. Any
+name obtained from \code{path} overrides this argument. Defaults to current
+name.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -23,5 +33,32 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-Move Google Drive file.
+Move a Drive file to a different folder, give it a different name, or both.
+}
+\examples{
+\dontrun{
+## create a file to move
+file <- drive_upload(system.file("DESCRIPTION"), "DESC")
+
+## rename it, but leave in current folder (root folder, in this case)
+file <- drive_mv(file, "DESC-renamed")
+
+## create a folder to move the file into
+folder <- drive_mkdir("new-folder")
+
+## move the file and rename it again,
+## specify destination as a dribble
+file <- drive_mv(file, path = folder, name = "DESC-re-renamed")
+
+## verify renamed file is now in the folder
+drive_ls(folder)
+
+## move the file back to root folder
+file <- drive_mv(file, "~/")
+
+## move it again
+## specify destination as path with trailing slash
+## to ensure we get a move vs. renaming it to "new-folder"
+file <- drive_mv(file, "new-folder/")
+}
 }
