@@ -40,8 +40,12 @@ drive_ls <- function(path = "~/", pattern = NULL, type = NULL, ...) {
   if (!is.null(x$q)) {
     q_clause <- paste(x$q, "and", q_clause)
   }
+  x$q <- q_clause
 
-  drive_search(pattern = pattern, type = type, q = q_clause)
+  do.call(
+    drive_search,
+    c(pattern = pattern, type = type, x)
+  )
 }
 
 #' @rdname drive_ls
