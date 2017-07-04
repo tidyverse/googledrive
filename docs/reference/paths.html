@@ -139,26 +139,26 @@ general searching, use <code><a href='drive_search.html'>drive_search()</a></cod
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## get info about your "My Drive" root folder</span>
-<span class='fu'>drive_path</span>()
-<span class='fu'>drive_path</span>(<span class='st'>"~/"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
+  <span class='co'>## get info about your "My Drive" root folder</span>
+  <span class='fu'>drive_path</span>()
+  <span class='fu'>drive_path</span>(<span class='st'>"~/"</span>)
 
-<span class='co'>## determine if path 'abc' exists and list matching paths</span>
-<span class='fu'>drive_path_exists</span>(<span class='st'>"abc"</span>)
-<span class='fu'>drive_path</span>(<span class='st'>"abc"</span>)
+  <span class='co'>## determine if path 'abc' exists and list matching paths</span>
+  <span class='fu'>drive_path_exists</span>(<span class='st'>"abc"</span>)
+  <span class='fu'>drive_path</span>(<span class='st'>"abc"</span>)
 
-<span class='co'>## be more specific: consider only folder(s) that match 'abc'</span>
-<span class='fu'>drive_path_exists</span>(<span class='st'>"abc/"</span>)
-<span class='fu'>drive_path</span>(<span class='st'>"abc/"</span>)
+  <span class='co'>## be more specific: consider only folder(s) that match 'abc'</span>
+  <span class='fu'>drive_path_exists</span>(<span class='st'>"abc/"</span>)
+  <span class='fu'>drive_path</span>(<span class='st'>"abc/"</span>)
 
-<span class='co'>## limit to files with your My Drive root folder as direct parent</span>
-<span class='fu'>drive_path</span>(<span class='st'>"~/def"</span>)
+  <span class='co'>## limit to files with your My Drive root folder as direct parent</span>
+  <span class='fu'>drive_path</span>(<span class='st'>"~/def"</span>)
 
-<span class='co'>## use the plural forms to query multiple paths at once</span>
-<span class='fu'>drive_paths_exist</span>(<span class='fu'>c</span>(<span class='st'>"abc"</span>, <span class='st'>"def"</span>))
-<span class='fu'>drive_paths</span>(<span class='fu'>c</span>(<span class='st'>"abc"</span>, <span class='st'>"def"</span>))
-<span class='co'># }</span></pre>
+  <span class='co'>## use the plural forms to query multiple paths at once</span>
+  <span class='fu'>drive_paths_exist</span>(<span class='fu'>c</span>(<span class='st'>"abc"</span>, <span class='st'>"def"</span>))
+  <span class='fu'>drive_paths</span>(<span class='fu'>c</span>(<span class='st'>"abc"</span>, <span class='st'>"def"</span>))
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

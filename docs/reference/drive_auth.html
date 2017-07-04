@@ -146,7 +146,7 @@ suffice. However, when necessary, this function allows the user to</p><ul>
 file</p></li>
 <li><p>read the token from an object or from an <code>.rds</code> file</p></li>
 <li><p>provide your own app key and secret -- this requires setting up a new
-project in <a href='https://console.developers.google.com'>Google Developers Console</a></p></li>
+project in <a href = 'https://console.developers.google.com'>Google Developers Console</a></p></li>
 <li><p>prevent caching of credentials in <code>.httr-oauth</code></p></li>
 </ul>
     <p>In a direct call to <code>drive_auth</code>, the user can provide the token, app key
@@ -169,7 +169,7 @@ options(googledrive.client_id = "FOO",
 </pre><p>See <code><a href='http://www.rdocumentation.org/packages/base/topics/Startup'>Startup</a></code> for possible locations for this file and the
 implications thereof.</p>
 <p>More detail is available from
-<a href='https://developers.google.com/identity/protocols/OAuth2InstalledApp'>Using
+<a href = 'https://developers.google.com/identity/protocols/OAuth2InstalledApp'>Using
 OAuth 2.0 for Installed Applications</a>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -178,22 +178,22 @@ OAuth 2.0 for Installed Applications</a>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## load/refresh existing credentials, if available</span>
-<span class='co'>## otherwise, go to browser for authentication and authorization</span>
-<span class='fu'>drive_auth</span>()
+    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
+  <span class='co'>## load/refresh existing credentials, if available</span>
+  <span class='co'>## otherwise, go to browser for authentication and authorization</span>
+  <span class='fu'>drive_auth</span>()
 
-<span class='co'>## force a new token to be obtained</span>
-<span class='fu'>drive_auth</span>(<span class='kw'>new_user</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='co'>## force a new token to be obtained</span>
+  <span class='fu'>drive_auth</span>(<span class='kw'>new_user</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='co'>## store token in an object and then to file</span>
-<span class='no'>ttt</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_auth</span>()
-<span class='fu'>saveRDS</span>(<span class='no'>ttt</span>, <span class='st'>"ttt.rds"</span>)
+  <span class='co'>## store token in an object and then to file</span>
+  <span class='no'>ttt</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_auth</span>()
+  <span class='fu'>saveRDS</span>(<span class='no'>ttt</span>, <span class='st'>"ttt.rds"</span>)
 
-<span class='co'>## load a pre-existing token</span>
-<span class='fu'>drive_auth</span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='no'>ttt</span>)       <span class='co'># from an object</span>
-<span class='fu'>drive_auth</span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='st'>"ttt.rds"</span>) <span class='co'># from .rds file</span>
-<span class='co'># }</span></pre>
+  <span class='co'>## load a pre-existing token</span>
+  <span class='fu'>drive_auth</span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='no'>ttt</span>)       <span class='co'># from an object</span>
+  <span class='fu'>drive_auth</span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='st'>"ttt.rds"</span>) <span class='co'># from .rds file</span>
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

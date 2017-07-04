@@ -87,7 +87,7 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Obtain the the development version from GitHub:</span>
 <span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"tidyverse/googledrive"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"tidyverse/googledrive"</span>)</code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -117,8 +117,8 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="co">#&gt; # A tibble: 70 x 3</span>
 <span class="co">#&gt;                                name                           id</span>
 <span class="co">#&gt;  *                            &lt;chr&gt;                        &lt;chr&gt;</span>
-<span class="co">#&gt;  1                              def 0B0Gh-SuuA2nTU19RbjRuWW9PVms</span>
-<span class="co">#&gt;  2                              abc 0B0Gh-SuuA2nTTFRlZ1h1Z3FaUVE</span>
+<span class="co">#&gt;  1                              def 0B0Gh-SuuA2nTX09zVngwVVVzY0U</span>
+<span class="co">#&gt;  2                              abc 0B0Gh-SuuA2nTQnhMTnVFSG9lOTQ</span>
 <span class="co">#&gt;  3 upload-into-me-</span><span class="al">TEST</span><span class="co">-drive-upload 0B0Gh-SuuA2nTaDJNckJJWXA5Rms</span>
 <span class="co">#&gt;  4        i-am-a-file-</span><span class="al">TEST</span><span class="co">-drive-cp 0B0Gh-SuuA2nTVmJNcUt6QlJBVUE</span>
 <span class="co">#&gt;  5      i-am-a-folder-</span><span class="al">TEST</span><span class="co">-drive-cp 0B0Gh-SuuA2nTczF5SlBSLUpQNE0</span>
@@ -156,16 +156,16 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;    name                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTU19RbjRuWW9PVms    &lt;list [30]&gt;</span>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTX09zVngwVVVzY0U    &lt;list [30]&gt;</span>
 
 ## let's grab that file id and retrieve it that way
 x<span class="op">$</span>id
-<span class="co">#&gt; [1] "0B0Gh-SuuA2nTU19RbjRuWW9PVms"</span>
+<span class="co">#&gt; [1] "0B0Gh-SuuA2nTX09zVngwVVVzY0U"</span>
 <span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(x<span class="op">$</span>id)
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;    name                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTU19RbjRuWW9PVms    &lt;list [30]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTX09zVngwVVVzY0U    &lt;list [30]&gt;</span></code></pre></div>
 <p>In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a <code>dribble</code>. If it’s ambiguous, use <code><a href="reference/as_id.html">as_id()</a></code> to flag a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.</p>
 </div>
 <div id="upload-files" class="section level4">
@@ -181,13 +181,13 @@ x<span class="op">$</span>id
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                  name                           id files_resource</span>
 <span class="co">#&gt; *               &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-chickwts.csv 0B0Gh-SuuA2nTc2hHUmdHQkJDSW8    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 README-chickwts.csv 0B0Gh-SuuA2nTb0RUc19RSGdrNnc    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## example of using a dribble as input
 drive_chickwts &lt;-<span class="st"> </span>drive_chickwts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_delete.html">drive_delete</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chickwts.csv: 0B0Gh-SuuA2nTc2hHUmdHQkJDSW8</span>
+<span class="co">#&gt;   * README-chickwts.csv: 0B0Gh-SuuA2nTb0RUc19RSGdrNnc</span>
 
 drive_chickwts &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(<span class="st">"README-chickwts.csv"</span>, <span class="dt">type =</span> <span class="st">"spreadsheet"</span>)
 <span class="co">#&gt; File uploaded:</span>
@@ -208,7 +208,7 @@ drive_chickwts<span class="op">$</span>publish
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;            check_time revision published auto_publish</span>
 <span class="co">#&gt;                &lt;dttm&gt;    &lt;chr&gt;     &lt;lgl&gt;        &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 2017-07-04 11:37:16        1      TRUE         TRUE</span></code></pre></div>
+<span class="co">#&gt; 1 2017-07-04 14:35:44        1      TRUE         TRUE</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_is_published.html">drive_is_published</a></span>(drive_chickwts)
 <span class="co">#&gt; The latest revision of file 'README-chickwts.csv' is published.</span></code></pre></div>
 </div>
@@ -226,7 +226,7 @@ drive_chickwts<span class="op">$</span>publish
 <p>We can then extract a share link.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drive_chickwts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_share_link.html">drive_share_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1Q37CB-m-VJ95iIvYMIPR3qzTkM4xSEFS_ihxCPOBlpQ/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1qHt_P9iFhVperiQLTkxMkEm3icNdwthqYhZcNP2jO6g/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="download-files" class="section level4">
 <h4 class="hasAnchor">
@@ -290,11 +290,11 @@ boring &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_u
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drive_chickwts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_delete.html">drive_delete</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chickwts.csv: 1Q37CB-m-VJ95iIvYMIPR3qzTkM4xSEFS_ihxCPOBlpQ</span>
+<span class="co">#&gt;   * README-chickwts.csv: 1qHt_P9iFhVperiQLTkxMkEm3icNdwthqYhZcNP2jO6g</span>
 boring <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_delete.html">drive_delete</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * boring-text.txt: 0B0Gh-SuuA2nTQzMtd0YzcEl4T0E</span></code></pre></div>
+<span class="co">#&gt;   * boring-text.txt: 0B0Gh-SuuA2nTbGtoR0JjYnVKbTg</span></code></pre></div>
 </div>
 </div>
 </div>
