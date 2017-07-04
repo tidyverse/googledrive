@@ -36,13 +36,19 @@ unsplit_path <- function(...) {
 ##   * name = substring after the last `/`
 ##   * parent = substring up to the last `/`, processed with rootize_path()
 ## if there is no `/`, put the input into `name`
-partition_path <- function(path) {
+## use maybe_name if you have external info re: how to interpret the path
+## maybe_name = TRUE --> path could end in a name
+## maybe_name = FALSE --> path is known to be a directory
+partition_path <- function(path, maybe_name = FALSE) {
   out <- list(parent = NULL, name = NULL)
   if (length(path) < 1) {
     return(out)
   }
   stopifnot(is_path(path), length(path) == 1)
   path <- rootize_path(path)
+  if (!maybe_name) {
+    path <- append_slash(path)
+  }
   last_slash <- last(unlist(gregexpr(pattern = "/", path)))
   if (last_slash < 1) {
     out[["name"]] <- path

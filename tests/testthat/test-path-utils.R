@@ -104,16 +104,17 @@ test_that("partition_path() splits into stuff before/after last slash", {
   expect_identical(partition_path("~/"), f("~/", NULL))
   expect_identical(partition_path("/"), f("~/", NULL))
 
-  expect_identical(partition_path("~/a"), f("~/", "a"))
-  expect_identical(partition_path("/a"), f("~/", "a"))
-  expect_identical(partition_path("/a/"), f("~/a/", NULL))
-  expect_identical(partition_path("a/"), f("a/", NULL))
-  expect_identical(partition_path("a"), f(NULL, "a"))
+  ## maybe_name = TRUE --> use `path` as is, don't append slash
+  expect_identical(partition_path("~/a", TRUE), f("~/", "a"))
+  expect_identical(partition_path("/a", TRUE), f("~/", "a"))
+  expect_identical(partition_path("/a/", TRUE), f("~/a/", NULL))
+  expect_identical(partition_path("a/", TRUE), f("a/", NULL))
+  expect_identical(partition_path("a", TRUE), f(NULL, "a"))
 
-  expect_identical(partition_path("~/a/b/"), f("~/a/b/", NULL))
-  expect_identical(partition_path("/a/b/"), f("~/a/b/", NULL))
-  expect_identical(partition_path("a/b/"), f("a/b/", NULL))
-  expect_identical(partition_path("a/b"), f("a/", "b"))
+  expect_identical(partition_path("~/a/b/", TRUE), f("~/a/b/", NULL))
+  expect_identical(partition_path("/a/b/", TRUE), f("~/a/b/", NULL))
+  expect_identical(partition_path("a/b/", TRUE), f("a/b/", NULL))
+  expect_identical(partition_path("a/b", TRUE), f("a/", "b"))
 })
 
 test_that("partition_path() fails for bad input", {

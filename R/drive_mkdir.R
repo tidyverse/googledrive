@@ -37,10 +37,8 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   if (is_path(path)) {
     if (is.null(name)) {
       path <- strip_slash(path)
-    } else {
-      path <- append_slash(path)
     }
-    path_parts <- partition_path(path)
+    path_parts <- partition_path(path, maybe_name = is.null(name))
     path <- path_parts$parent
     name <- name %||% path_parts$name
   }

@@ -49,18 +49,14 @@ drive_cp <- function(file = NULL, path = NULL, name = NULL,  verbose = TRUE) {
   }
 
   if (is_path(path)) {
-    if (is.null(name)) {
-      path_parts <- partition_path(path)
-      path <- path_parts$parent
-      name <- path_parts$name
-      ## TO DO:
-      ## if `parent = NULL`, we could check if there's a directory at the
-      ## original path and infer we should copy into that directory, instead of
-      ## onto a file of the same name
-      ## i.e. detect this is an append_slash() case
-    } else {
-      path <- append_slash(path)
-    }
+    path_parts <- partition_path(path, maybe_name = is.null(name))
+    path <- path_parts$parent
+    name <- name %||% path_parts$name
+    ## TO DO:
+    ## if `parent = NULL`, we could check if there's a directory at the
+    ## original path and infer we should copy into that directory, instead of
+    ## onto a file of the same name
+    ## i.e. detect this is an append_slash() case
   }
 
   name <- name %||% glue("Copy of {file$name}")
