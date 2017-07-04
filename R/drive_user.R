@@ -1,4 +1,9 @@
-#' Pull information about the Google Drive user.
+#' Information the user and user's Drive.
+#'
+#' Reveals information about the user associated with the current token.
+#'
+#' @seealso This hits the
+#'   [drive.about.get endpoint](https://developers.google.com/drive/v3/reference/about/get)
 #'
 #' @param fields The fields the user would like output - by default only `user`,
 #'   which will display as detailed above.
