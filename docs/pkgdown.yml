@@ -1,0 +1,8 @@
+urls:
+  reference: https://tidyverse.github.io/googledrive/reference
+  article: https://tidyverse.github.io/googledrive/articles
+articles:
+  drive-api: articles/drive-api.html
+  file-identification: articles/file-identification.html
+  placeholder-vignette: placeholder-vignette.html
+

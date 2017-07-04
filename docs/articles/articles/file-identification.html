@@ -83,20 +83,19 @@
 <p>You can get similar results with <code><a href="../../reference/drive_search.html">drive_search()</a></code>. By default, it gets info on the most recent 100 files.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>())
 <span class="co">#&gt; # A tibble: 70 x 3</span>
-<span class="co">#&gt;                                name</span>
-<span class="co">#&gt;  *                            &lt;chr&gt;</span>
-<span class="co">#&gt;  1                              def</span>
-<span class="co">#&gt;  2                              abc</span>
-<span class="co">#&gt;  3      i-am-a-folder-</span><span class="al">TEST</span><span class="co">-drive-cp</span>
-<span class="co">#&gt;  4         google-doc-</span><span class="al">TEST</span><span class="co">-drive-cp</span>
-<span class="co">#&gt;  5    non-google-file-</span><span class="al">TEST</span><span class="co">-drive-cp</span>
-<span class="co">#&gt;  6 move-files-into-me-</span><span class="al">TEST</span><span class="co">-drive-mv</span>
-<span class="co">#&gt;  7                             bar2</span>
-<span class="co">#&gt;  8                baz-</span><span class="al">TEST</span><span class="co">-drive-mv</span>
-<span class="co">#&gt;  9                foo-</span><span class="al">TEST</span><span class="co">-drive-mv</span>
-<span class="co">#&gt; 10     OMNI-PARENT-</span><span class="al">TEST</span><span class="co">-drive-mkdir</span>
-<span class="co">#&gt; # ... with 60 more rows, and 2 more variables: id &lt;chr&gt;,</span>
-<span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
+<span class="co">#&gt;                                name                           id</span>
+<span class="co">#&gt;  *                            &lt;chr&gt;                        &lt;chr&gt;</span>
+<span class="co">#&gt;  1                              def 0B0Gh-SuuA2nTZkk3ODRhV2MyMjg</span>
+<span class="co">#&gt;  2                              abc 0B0Gh-SuuA2nTMTlWNWd5RHctRWs</span>
+<span class="co">#&gt;  3 upload-into-me-</span><span class="al">TEST</span><span class="co">-drive-upload 0B0Gh-SuuA2nTaDJNckJJWXA5Rms</span>
+<span class="co">#&gt;  4        i-am-a-file-</span><span class="al">TEST</span><span class="co">-drive-cp 0B0Gh-SuuA2nTVmJNcUt6QlJBVUE</span>
+<span class="co">#&gt;  5      i-am-a-folder-</span><span class="al">TEST</span><span class="co">-drive-cp 0B0Gh-SuuA2nTczF5SlBSLUpQNE0</span>
+<span class="co">#&gt;  6 move-files-into-me-</span><span class="al">TEST</span><span class="co">-drive-mv 0B0Gh-SuuA2nTZUliMFJMYjRDbXc</span>
+<span class="co">#&gt;  7         about-html-</span><span class="al">TEST</span><span class="co">-drive-ls 0B0Gh-SuuA2nTXy10LVNKYnRZclk</span>
+<span class="co">#&gt;  8        DESCRIPTION-</span><span class="al">TEST</span><span class="co">-drive-ls 0B0Gh-SuuA2nTbzJDT3VHZUFYSFk</span>
+<span class="co">#&gt;  9            list-me-</span><span class="al">TEST</span><span class="co">-drive-ls 0B0Gh-SuuA2nTSkk5R2M5cDhKUW8</span>
+<span class="co">#&gt; 10                             bar2 0B0Gh-SuuA2nTVWsyOHJSVHp3SDg</span>
+<span class="co">#&gt; # ... with 60 more rows, and 1 more variables: files_resource &lt;list&gt;</span></code></pre></div>
 <p>The object you get back holds the metadata for one or more Google Drive files. It is a <code>dribble</code>, which is just a <code>tibble</code> with Drive files in rows and at least these three variables:</p>
 <ul>
 <li>
@@ -111,11 +110,12 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## just folders
 <span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"mimeType = 'application/vnd.google-apps.folder'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 3 x 3</span>
-<span class="co">#&gt;                          name                           id files_resource</span>
-<span class="co">#&gt; *                       &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1                         def 0B0Gh-SuuA2nTUVRGNlpESjc4azg    &lt;list [26]&gt;</span>
-<span class="co">#&gt; 2                         abc 0B0Gh-SuuA2nTcTFMMlR3RnFVNGM    &lt;list [26]&gt;</span>
-<span class="co">#&gt; 3 i-am-a-folder-</span><span class="al">TEST</span><span class="co">-drive-cp 0B0Gh-SuuA2nTbXN1QkNJb1djMnM    &lt;list [26]&gt;</span>
+<span class="co">#&gt;                               name                           id</span>
+<span class="co">#&gt; *                            &lt;chr&gt;                        &lt;chr&gt;</span>
+<span class="co">#&gt; 1                              def 0B0Gh-SuuA2nTZkk3ODRhV2MyMjg</span>
+<span class="co">#&gt; 2                              abc 0B0Gh-SuuA2nTMTlWNWd5RHctRWs</span>
+<span class="co">#&gt; 3 upload-into-me-</span><span class="al">TEST</span><span class="co">-drive-upload 0B0Gh-SuuA2nTaDJNckJJWXA5Rms</span>
+<span class="co">#&gt; # ... with 1 more variables: files_resource &lt;list&gt;</span>
 
 ## just Sheets
 <span class="kw"><a href="../../reference/drive_search.html">drive_search</a></span>(<span class="dt">q =</span> <span class="st">"mimeType='application/vnd.google-apps.spreadsheet'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
@@ -207,12 +207,13 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#drive_search-is-like-my-drive"><code><a href="../../reference/drive_search.html">drive_search()</a></code> is like My Drive</a></li>
-      <li><a href="#drive_path-works-on-a-path"><code><a href="../../reference/paths.html">drive_path()</a></code> works on a path</a></li>
-      <li><a href="#drive_get-works-on-file-ids"><code><a href="../../reference/drive_get.html">drive_get()</a></code> works on file ids</a></li>
-      <li><a href="#drive_ls-lists-folder-contents"><code><a href="../../reference/drive_ls.html">drive_ls()</a></code> lists folder contents</a></li>
+<li><a href="#drive_search-is-like-my-drive"><code><a href="--/--/reference/drive_search-html">drive_search()</a></code> is like My Drive</a></li>
+      <li><a href="#drive_path-works-on-a-path"><code><a href="--/--/reference/paths-html">drive_path()</a></code> works on a path</a></li>
+      <li><a href="#drive_get-works-on-file-ids"><code><a href="--/--/reference/drive_get-html">drive_get()</a></code> works on file ids</a></li>
+      <li><a href="#drive_ls-lists-folder-contents"><code><a href="--/--/reference/drive_ls-html">drive_ls()</a></code> lists folder contents</a></li>
       </ul>
 </div>
       </div>

@@ -95,7 +95,7 @@ the object used by googledrive to hold Drive file metadata. Files can be
 specified via</p><ul>
 <li><p>File path</p></li>
 <li><p>File id (be sure to mark with <code><a href='as_id.html'>as_id()</a></code> to distinguish from file path!)</p></li>
-<li><p>List representing <a href = 'https://developers.google.com/drive/v3/reference/files#resource'>Files resource</a>
+<li><p>List representing <a href='https://developers.google.com/drive/v3/reference/files#resource'>Files resource</a>
 objects (for internal use)</p></li>
 <li><p>Data frame or <code><a href='dribble.html'>dribble</a></code> (for internal use)</p></li>
 </ul>
@@ -145,14 +145,14 @@ frame.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='co'>## specify the path</span>
-  <span class='fu'>as_dribble</span>(<span class='st'>"abc"</span>)
-  <span class='fu'>as_dribble</span>(<span class='st'>"abc/def"</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## specify the path</span>
+<span class='fu'>as_dribble</span>(<span class='st'>"abc"</span>)
+<span class='fu'>as_dribble</span>(<span class='st'>"abc/def"</span>)
 
-  <span class='co'>## specify the file id (substitute one of your own!)</span>
-  <span class='fu'>as_dribble</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"</span>))
-})</div></pre>
+<span class='co'>## specify the file id (substitute one of your own!)</span>
+<span class='fu'>as_dribble</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"</span>))
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
