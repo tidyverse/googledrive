@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_mkdir.R
 \name{drive_mkdir}
 \alias{drive_mkdir}
-\title{Create a folder on Google Drive.}
+\title{Create a folder on Drive.}
 \usage{
 drive_mkdir(path = NULL, name = NULL, verbose = TRUE)
 }
@@ -24,7 +24,7 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-Create a folder on Google Drive.
+Create a folder on Drive.
 }
 \examples{
 \dontrun{

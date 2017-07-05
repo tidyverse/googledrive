@@ -1,5 +1,3 @@
-url: https://tidyverse.github.io/googledrive
-
 template:
   package: tidytemplate
   default_assets: false

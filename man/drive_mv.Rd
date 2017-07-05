@@ -3,7 +3,7 @@
 \name{drive_mv}
 \alias{drive_mv}
 \alias{drive_move}
-\title{Move Google Drive file.}
+\title{Move a Drive file.}
 \usage{
 drive_mv(file = NULL, path = NULL, name = NULL, verbose = TRUE)
 

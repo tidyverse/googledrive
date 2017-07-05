@@ -91,7 +91,7 @@
 
     
     <p>This is the closest googledrive function to what you get from
-<a href = 'https://drive.google.com'>https://drive.google.com</a>: by default, you just get a listing of your files.
+<a href='https://drive.google.com'>https://drive.google.com</a>: by default, you just get a listing of your files.
 You can also narrow the search in various ways, such as by file type, whether
 it's yours or shared with you, starred status, etc.</p>
     
@@ -138,35 +138,36 @@ locally, via the <code>pattern</code> argument.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Helpful links for forming queries:</p><ul>
-<li><p><a href = 'https://developers.google.com/drive/v3/web/search-parameters'>https://developers.google.com/drive/v3/web/search-parameters</a></p></li>
-<li><p><a href = 'https://developers.google.com/drive/v3/reference/files/list'>https://developers.google.com/drive/v3/reference/files/list</a></p></li>
+<li><p><a href='https://developers.google.com/drive/v3/web/search-parameters'>https://developers.google.com/drive/v3/web/search-parameters</a></p></li>
+<li><p><a href='https://developers.google.com/drive/v3/reference/files/list'>https://developers.google.com/drive/v3/reference/files/list</a></p></li>
 </ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='co'>## list "My Drive" w/o regard for folder hierarchy</span>
-  <span class='fu'>drive_search</span>()
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## list "My Drive" w/o regard for folder hierarchy</span>
+<span class='fu'>drive_search</span>()
 
-  <span class='co'>## search for files located directly in your root folder</span>
-  <span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"'root' in parents"</span>)
+<span class='co'>## search for files located directly in your root folder</span>
+<span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"'root' in parents"</span>)
 
-  <span class='co'>## filter for folders</span>
-  <span class='fu'>drive_search</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"folder"</span>)
-  <span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType = 'application/vnd.google-apps.folder'"</span>)
+<span class='co'>## filter for folders</span>
+<span class='fu'>drive_search</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"folder"</span>)
+<span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType = 'application/vnd.google-apps.folder'"</span>)
 
-  <span class='co'>## filter for Google Sheets</span>
-  <span class='fu'>drive_search</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
-  <span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType='application/vnd.google-apps.spreadsheet'"</span>)
+<span class='co'>## filter for Google Sheets</span>
+<span class='fu'>drive_search</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
+<span class='fu'>drive_search</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType='application/vnd.google-apps.spreadsheet'"</span>)
 
-  <span class='co'>## files whose names match a regex</span>
-  <span class='fu'>drive_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"jt"</span>)
+<span class='co'>## files whose names match a regex</span>
+<span class='fu'>drive_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"jt"</span>)
 
-  <span class='co'>## control page size or cap the number of files returned</span>
-  <span class='fu'>drive_search</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>50</span>)
-  <span class='fu'>drive_search</span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>75</span>)
-  <span class='fu'>drive_search</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>15</span>)
-})</div></pre>
+<span class='co'>## control page size or cap the number of files returned</span>
+<span class='fu'>drive_search</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>50</span>)
+<span class='fu'>drive_search</span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>75</span>)
+<span class='fu'>drive_search</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>15</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

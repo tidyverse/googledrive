@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_download.R
 \name{drive_download}
 \alias{drive_download}
-\title{Download a file from Google Drive.}
+\title{Download a file from Drive.}
 \usage{
 drive_download(file = NULL, path = NULL, type = NULL, overwrite = FALSE,
   verbose = TRUE)

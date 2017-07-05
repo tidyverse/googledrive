@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_rename.R
 \name{drive_rename}
 \alias{drive_rename}
-\title{Rename Google Drive file}
+\title{Rename a Drive file}
 \usage{
 drive_rename(file = NULL, name = NULL, verbose = TRUE)
 }

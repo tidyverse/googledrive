@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_user.R
 \name{drive_user}
 \alias{drive_user}
-\title{Information the user and user's Drive.}
+\title{Information on the user and user's Drive.}
 \usage{
 drive_user(fields = "user", ..., verbose = TRUE)
 }

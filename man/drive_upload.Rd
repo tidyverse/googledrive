@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_upload.R
 \name{drive_upload}
 \alias{drive_upload}
-\title{Upload a file to Google Drive.}
+\title{Upload a file to Drive.}
 \usage{
 drive_upload(file = NULL, path = NULL, name = NULL, overwrite = FALSE,
   type = NULL, verbose = TRUE)
@@ -38,7 +38,7 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-Upload a file to Google Drive.
+Upload a file to Drive.
 }
 \examples{
 \dontrun{

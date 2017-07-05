@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_auth.R
 \name{drive_deauth}
 \alias{drive_deauth}
-\title{Suspend authorization}
+\title{Suspend authorization.}
 \usage{
 drive_deauth(clear_cache = TRUE, verbose = TRUE)
 }
@@ -15,8 +15,8 @@ to \code{.httr-oauth-SUSPENDED}}
 (default \code{TRUE}).}
 }
 \description{
-Suspend \code{googledrive}' authorization to place requests to the
-Drive and Sheets APIs on behalf of the authenticated user.
+Suspend googledrive's authorization to place requests to the Drive API on
+behalf of the authenticated user.
 }
 \examples{
 \dontrun{

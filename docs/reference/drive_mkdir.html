@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a folder on Google Drive. — drive_mkdir • googledrive</title>
+<title>Create a folder on Drive. — drive_mkdir • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,11 +86,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a folder on Google Drive.</h1>
+    <h1>Create a folder on Drive.</h1>
     </div>
 
     
-    <p>Create a folder on Google Drive.</p>
+    <p>Create a folder on Drive.</p>
     
 
     <pre class="usage"><span class='fu'>drive_mkdir</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
@@ -125,22 +125,22 @@ not already specified in <code>path</code>.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='co'>## Create folder named "def" in existing folder "abc".</span>
-  <span class='fu'>drive_mkdir</span>(<span class='st'>"abc/def"</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## Create folder named "def" in existing folder "abc".</span>
+<span class='fu'>drive_mkdir</span>(<span class='st'>"abc/def"</span>)
 
-  <span class='co'>## This will also create a folder named "def" in folder "abc".</span>
-  <span class='fu'>drive_mkdir</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"abc"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"def"</span>)
+<span class='co'>## This will also create a folder named "def" in folder "abc".</span>
+<span class='fu'>drive_mkdir</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"abc"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"def"</span>)
 
-  <span class='co'>## Another way to create a folder named "def" in folder "abc",</span>
-  <span class='co'>## this time with parent folder stored in a dribble.</span>
-  <span class='no'>abc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_dribble.html'>as_dribble</a></span>(<span class='st'>"abc"</span>)
-  <span class='fu'>drive_mkdir</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>abc</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"def"</span>)
+<span class='co'>## Another way to create a folder named "def" in folder "abc",</span>
+<span class='co'>## this time with parent folder stored in a dribble.</span>
+<span class='no'>abc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_dribble.html'>as_dribble</a></span>(<span class='st'>"abc"</span>)
+<span class='fu'>drive_mkdir</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>abc</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"def"</span>)
 
-  <span class='co'>## Yet another way to do this,</span>
-  <span class='co'>## this time with parent folder provide via id.</span>
-  <span class='fu'>drive_mkdir</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='no'>abc</span>$<span class='no'>id</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"def"</span>)
-})</div></pre>
+<span class='co'>## Yet another way to do this,</span>
+<span class='co'>## this time with parent folder provide via id.</span>
+<span class='fu'>drive_mkdir</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='no'>abc</span>$<span class='no'>id</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"def"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -3,7 +3,7 @@
 \name{drive_cp}
 \alias{drive_cp}
 \alias{drive_copy}
-\title{Copy a Google Drive file.}
+\title{Copy a Drive file.}
 \usage{
 drive_cp(file = NULL, path = NULL, name = NULL, verbose = TRUE)
 
