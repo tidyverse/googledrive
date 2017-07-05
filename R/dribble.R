@@ -1,17 +1,19 @@
 #' dribble object
 #'
-#' googledrive stores the metadata for one or more Google Drive files as a
-#' `dribble`. It is a [tibble][tibble::tibble-package] with one row per file
-#' and, at a minimum, these variables:
+#' @description googledrive stores the metadata for one or more Drive files as a
+#'   `dribble`. It is a "Drive [tibble][tibble::tibble-package]" with one row
+#'   per file and, at a minimum, these variables:
 #'   * `name`: a character variable containing file names
-#'   * `id`: a character variable of Google Drive file ids
+#'   * `id`: a character variable of Drive file ids
 #'   * `files_resource`: a list-column of
 #'   [Files resource](https://developers.google.com/drive/v3/reference/files#resource)
 #'   objects. Note there is no guarantee that all documented fields are always
-#'   present.
+#'   present. We do check if the `kind` field is present and equal to
+#'   `drive#file`.
 #'
-#' In general, the dribble class will be retained even after subsetting, as
-#' long as the required variables are present and of the correct type.
+#' @description In general, the dribble class will be retained even after
+#'   subsetting, as long as the required variables are present and of the
+#'   correct type.
 #'
 #' @export
 #' @name dribble
@@ -29,22 +31,33 @@ new_dribble <- function(x) {
 validate_dribble <- function(x) {
   stopifnot(inherits(x, "dribble"))
 
-  required_nms <- c("name", "id", "files_resource")
-  if (!all(required_nms %in% colnames(x))) {
-    msg <- glue("Invalid dribble. These column names are required:\n{x}",
-                x = collapse(required_nms, "\n"))
+  if (!has_dribble_cols(x)) {
+    missing_cols <- setdiff(dribble_cols, colnames(x))
+    msg <- collapse(
+      c("Invalid dribble. These required column names are missing:",
+        missing_cols),
+      sep = "\n"
+    )
     stop(msg, call. = FALSE)
   }
 
-  if (!all(is.character(x$name) &&
-           is.character(x$id) &&
-           inherits(x$files_resource, "list"))) {
-    stop("Invalid dribble. Column types are incorrect.", call. = FALSE)
+  if (!has_dribble_coltypes(x)) {
+    mistyped_cols <- dribble_cols[!dribble_coltypes_ok(x)]
+    msg <- collapse(
+      c("Invalid dribble. These columns have the wrong type:",
+        mistyped_cols),
+      sep = "\n"
+    )
+    stop(msg, call. = FALSE)
   }
 
-  kind <- purrr::map_chr(x$files_resource, "kind", .null = NA_character_)
-  stopifnot(all(kind == "drive#file"))
-
+  if (!has_files_resource(x)) {
+    stop(glue(
+      "Invalid dribble. Can't confirm `kind = \"drive#file\"` ",
+      "for all elements of the nominal `files_resource` column",
+      call. = FALSE
+    ))
+  }
   x
 }
 
@@ -59,13 +72,42 @@ dribble <- function(x = NULL) {
 
 #' @export
 `[.dribble` <- function(x, i, j, drop = FALSE) {
-  out <- NextMethod()
   ## allow dribble class to be lost if subsetted object is no longer valid
   ## dribble
-  tryCatch(
-    validate_dribble(new_dribble(out)),
-    error = function(e) out,
-    silent = TRUE)
+  maybe_dribble(NextMethod())
+}
+
+maybe_dribble <- function(x) {
+  ok <- is.data.frame(x) &&
+    has_dribble_cols(x) &&
+    has_dribble_coltypes(x) &&
+    has_files_resource(x)
+  if (all(ok)) {
+    new_dribble(x)
+  } else {
+    x
+  }
+}
+
+dribble_cols <- c("name", "id", "files_resource")
+
+has_dribble_cols <- function(x) {
+  all(dribble_cols %in% colnames(x))
+}
+
+dribble_coltypes_ok <- function(x) {
+  c(name = is.character(x$name),
+    id = is.character(x$id),
+    files_resource = inherits(x$files_resource, "list"))
+}
+
+has_dribble_coltypes <- function(x) {
+  all(dribble_coltypes_ok(x))
+}
+
+has_files_resource <- function(x) {
+  kind <- purrr::map_chr(x$files_resource, "kind", .null = NA_character_)
+  all(!is.na(kind) & kind == "drive#file")
 }
 
 #' Check facts about a dribble
