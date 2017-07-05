@@ -91,10 +91,8 @@ drive_download <- function(file = NULL,
   if (success) {
     if (verbose) {
       message(
-        glue(
-          "File downloaded from Google Drive:\n{sq(file$name)}\n",
-          "Saved locally as:\n{sq(path)}"
-        )
+        glue("\nFile downloaded:\n  * {file$name}\n",
+             "Saved locally as:\n  * {path}")
       )
     }
   } else {

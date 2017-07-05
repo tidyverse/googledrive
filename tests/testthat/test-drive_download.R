@@ -6,19 +6,21 @@ context("Download files")
 
 nm_ <- nm_fun("-TEST-drive-download")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  ## make sure directory is clean
-  if (clean) {
-    del <- drive_delete(c(nm_("foo"), nm_("bar"), nm_("this-should-not-exist")),
-                        verbose = FALSE)
-  }
+## clean
+if (FALSE) {
+  del <- drive_delete(c(nm_("foo"), nm_("bar"), nm_("this-should-not-exist")),
+                      verbose = FALSE)
+}
+
+## setup
+if (FALSE) {
   drive_upload(system.file("DESCRIPTION"), nm_("foo"), verbose = FALSE)
-  drive_upload(system.file("DESCRIPTION"),
-               nm_("bar"),
-               type = "document",
-               verbose = FALSE)
+  drive_upload(
+    system.file("DESCRIPTION"),
+    nm_("bar"),
+    type = "document",
+    verbose = FALSE
+  )
 }
 
 test_that("drive_download() downloads a file", {
@@ -27,7 +29,7 @@ test_that("drive_download() downloads a file", {
   on.exit(unlink("description.txt"))
   expect_message(
     drive_download(file = nm_("foo"), path = "description.txt"),
-    "File downloaded from Google Drive:"
+    "File downloaded"
   )
   expect_true(file.exists("description.txt"))
 })
@@ -50,7 +52,7 @@ test_that("drive_download() converts with explicit `type`", {
 
   expect_message(
     drive_download(file = nm_("bar"), type = "docx"),
-    "File downloaded from Google Drive:"
+    "File downloaded"
   )
   expect_true(file.exists(nm))
 })
@@ -64,7 +66,7 @@ test_that("drive_download() converts with type implicit in `path`", {
 
   expect_message(
     drive_download(file = nm_("bar"), path = nm),
-    "File downloaded from Google Drive:"
+    "File downloaded"
   )
   expect_true(file.exists(nm))
 })
@@ -78,7 +80,7 @@ test_that("drive_download() converts using default MIME type, if necessary", {
 
   expect_message(
     drive_download(file = nm_("bar")),
-    "File downloaded from Google Drive:"
+    "File downloaded"
   )
   expect_true(file.exists(nm))
 })
