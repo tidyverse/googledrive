@@ -9,33 +9,12 @@ test_that("generate_request() basically works", {
   )
 })
 
-test_that("generate_request() messages for incorrect inputs", {
+test_that("generate_request() errors for unrecognized parameters", {
   params <- list(chicken = "muffin", bunny = "pippin")
-  expect_message(
+  expect_error(
     generate_request(endpoint = "drive.files.list",
                      params = params, token = NULL),
-    "Ignoring these unrecognized parameters:\nchicken: muffin\nbunny: pippin"
-  )
-})
-
-test_that("generate_request() handles a mix of correct/incorrect input", {
-  params <- list(chicken = "muffin", q = "fields='files/id'")
-  expect_message(
-    req <- generate_request(endpoint = "drive.files.list",
-                            params = params, token = NULL),
-    "Ignoring these unrecognized parameters:\nchicken: muffin"
-  )
-  expect_identical(req[["query"]][["q"]], "fields='files/id'")
-})
-
-test_that("generate_request() catches input valid for another endpoint", {
-  params <- list(q = "abc", fileId = "def")
-  expect_message(
-    generate_request(
-      endpoint = "drive.permissions.list",
-      params = params,
-      token = NULL),
-    "Ignoring these unrecognized parameters:\nq: abc"
+    "These parameters are not recognized for this endpoint:\nchicken\nbunny"
   )
 })
 
