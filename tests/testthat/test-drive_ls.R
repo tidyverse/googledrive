@@ -53,7 +53,7 @@ test_that("drive_ls() outputs contents of folder", {
   expect_identical(out[c("name", "id")], out3[c("name", "id")])
 })
 
-test_that("drive_ls() passes ... through to drive_search()", {
+test_that("drive_ls() passes ... through to drive_find()", {
   skip_on_appveyor()
   skip_on_travis()
 

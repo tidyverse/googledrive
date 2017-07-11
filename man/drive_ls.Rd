@@ -27,7 +27,7 @@ An object of class \code{\link{dribble}}, a tibble with
 \description{
 List the contents of a folder on Google Drive, nonrecursively. Optionally,
 filter for a regex in the file names and/or on MIME type. This is a thin
-wrapper around \code{\link[=drive_search]{drive_search()}}.
+wrapper around \code{\link[=drive_find]{drive_find()}}.
 }
 \examples{
 \dontrun{

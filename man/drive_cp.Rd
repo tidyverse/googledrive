@@ -48,10 +48,10 @@ folder <- drive_mkdir("new-folder")
 drive_cp("DESC", folder, "DESC-three")
 
 ## Behold all of our copies!
-drive_search("DESC")
+drive_find("DESC")
 
 ## Delete all of our copies and the new folder!
-drive_search("DESC") \%>\% drive_rm()
+drive_find("DESC") \%>\% drive_rm()
 drive_rm(folder)
 }
 }

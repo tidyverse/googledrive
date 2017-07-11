@@ -2,12 +2,12 @@
 #'
 #' List the contents of a folder on Google Drive, nonrecursively. Optionally,
 #' filter for a regex in the file names and/or on MIME type. This is a thin
-#' wrapper around [`drive_search()`].
+#' wrapper around [`drive_find()`].
 #'
 #' @param path Specifies a single folder on Google Drive whose contents you want
 #'   to list. Can be an actual path (character), a file id marked with
 #'   [as_id()], or a [dribble].
-#' @inheritParams drive_search
+#' @inheritParams drive_find
 #'
 #' @template dribble-return
 #' @export
@@ -42,7 +42,7 @@ drive_ls <- function(path = "~/", pattern = NULL, type = NULL, ...) {
   x$q <- q_clause
 
   do.call(
-    drive_search,
+    drive_find,
     c(pattern = pattern, type = type, x)
   )
 }

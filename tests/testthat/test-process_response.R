@@ -6,7 +6,7 @@ context("Process responses")
 ## saveRDS(res, rprojroot::find_testthat_root_file("test-files/wrong-content.rds"))
 ##
 ## right content:
-## x <- drive_search()[1, ] # grab most recent thing on drive
+## x <- drive_find()[1, ] # grab most recent thing on drive
 ## request <- generate_request(
 ##   endpoint = "drive.files.get",
 ##   params = list(

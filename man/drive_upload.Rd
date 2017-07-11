@@ -56,7 +56,7 @@ mirrors_sheet <- drive_upload(
 drive_browse(mirrors_sheet)
 
 ## clean-up
-drive_search("BioC_mirrors") \%>\% drive_rm()
+drive_find("BioC_mirrors") \%>\% drive_rm()
 }
 }
 \seealso{

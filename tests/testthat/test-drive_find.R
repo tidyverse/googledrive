@@ -19,74 +19,74 @@ if (run) {
   drive_mkdir(nm_("foo"), verbose = FALSE)
 }
 
-test_that("drive_search() passes q", {
+test_that("drive_find() passes q", {
   skip_on_appveyor()
   skip_on_travis()
 
   ## this should find at least 1 folder (foo), and all files found should
   ## be folders
-  out <- drive_search(q = "mimeType='application/vnd.google-apps.folder'")
+  out <- drive_find(q = "mimeType='application/vnd.google-apps.folder'")
   mtypes <- purrr::map_chr(out$files_resource, "mimeType")
   expect_true(all(mtypes == "application/vnd.google-apps.folder"))
 })
 
-test_that("drive_search() `type` filters for MIME type", {
+test_that("drive_find() `type` filters for MIME type", {
   skip_on_appveyor()
   skip_on_travis()
 
   ## this should find at least 1 folder (foo), and all files found should
   ## be folders
-  out <- drive_search(type = "folder")
+  out <- drive_find(type = "folder")
   mtypes <- purrr::map_chr(out$files_resource, "mimeType")
   expect_true(all(mtypes == "application/vnd.google-apps.folder"))
 })
 
-test_that("drive_search() filters for the regex in `pattern`", {
+test_that("drive_find() filters for the regex in `pattern`", {
   skip_on_appveyor()
   skip_on_travis()
 
   ## this should be able to find the folder we created, foo-TEST-drive-search
-  expect_identical(drive_search(pattern = nm_("foo"))$name, nm_("foo"))
+  expect_identical(drive_find(pattern = nm_("foo"))$name, nm_("foo"))
 
 })
 
-test_that("drive_search() errors for nonsense in `n_max`", {
-  expect_error(drive_search(n_max = "a"))
-  expect_error(drive_search(n_max = 1:3))
-  expect_error(drive_search(n_max = -2))
+test_that("drive_find() errors for nonsense in `n_max`", {
+  expect_error(drive_find(n_max = "a"))
+  expect_error(drive_find(n_max = 1:3))
+  expect_error(drive_find(n_max = -2))
 })
 
-test_that("drive_search() returns early if n_max < 1", {
-  expect_identical(drive_search(n_max = 0.5), dribble())
+test_that("drive_find() returns early if n_max < 1", {
+  expect_identical(drive_find(n_max = 0.5), dribble())
 })
 
-test_that("drive_search() returns empty dribble if no match for `pattern`", {
+test_that("drive_find() returns empty dribble if no match for `pattern`", {
   skip_on_appveyor()
   skip_on_travis()
 
   expect_identical(
-    drive_search(pattern = nm_("this-should-not-exist")),
+    drive_find(pattern = nm_("this-should-not-exist")),
     dribble()
   )
 })
 
-test_that("drive_search() tolerates specification of pageSize", {
+test_that("drive_find() tolerates specification of pageSize", {
   skip_on_appveyor()
   skip_on_travis()
 
   expect_silent({
-    default <- drive_search()
-    page_size <- drive_search(pageSize = 49)
+    default <- drive_find()
+    page_size <- drive_find(pageSize = 49)
   })
   ## weird little things deep in the files resource can vary but
   ## I really don't care, e.g. thumbnailLink seems very volatile
   expect_identical(default[c("name", "id")], page_size[c("name", "id")])
 })
 
-test_that("drive_search() honors n_max", {
+test_that("drive_find() honors n_max", {
   skip_on_appveyor()
   skip_on_travis()
 
-  out <- drive_search(n_max = 4)
+  out <- drive_find(n_max = 4)
   expect_equal(nrow(out), 4)
 })

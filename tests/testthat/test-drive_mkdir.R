@@ -33,7 +33,7 @@ test_that("drive_mkdir() errors if parent path does not exist", {
 test_that("drive_mkdir() errors if parent exists but is not a folder", {
   skip_on_travis()
   skip_on_appveyor()
-  x <- drive_search(
+  x <- drive_find(
     q = "mimeType != 'application/vnd.google-apps.folder'",
     n_max = 1
   )

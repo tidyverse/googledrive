@@ -44,7 +44,7 @@ test_that("drive_get() gives n-row output for n-row input", {
   skip_on_appveyor()
   skip_on_travis()
 
-  two_files_search <- drive_search(pattern = "letters-[an]-[mz].txt")
+  two_files_search <- drive_find(pattern = "letters-[an]-[mz].txt")
   two_files_get <- drive_get(two_files_search$id)
   expect_identical(
     two_files_search[c("name", "id")],
