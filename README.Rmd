@@ -43,5 +43,5 @@ Here's a teaser that uses googledrive to list the files you see on <https://driv
 
 ```{r}
 library("googledrive")
-drive_list()
+drive_ls()
 ```
