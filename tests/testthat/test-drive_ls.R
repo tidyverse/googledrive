@@ -46,7 +46,7 @@ test_that("drive_ls() outputs contents of folder", {
   expect_identical(out$name, c(nm_("about-html"), nm_("DESCRIPTION")))
 
   ## dribble
-  d <- drive_path(nm_("list-me"))
+  d <- drive_get(nm_("list-me"))
   out2 <- drive_ls(d)
   expect_identical(out[c("name", "id")], out2[c("name", "id")])
 
@@ -60,11 +60,11 @@ test_that("drive_ls() passes ... through to drive_find()", {
   skip_on_travis()
   skip_if_offline()
 
-  d <- drive_path(nm_("list-me"))
+  d <- drive_get(nm_("list-me"))
 
   ## does user-specified q get appended to vs clobbered?
   ## if so, only about-html is listed here
-  about <- drive_path(nm_("about-html"))
+  about <- drive_get(nm_("about-html"))
   out <- drive_ls(d, q = "fullText contains 'portable'")
   expect_identical(
     about[c("name", "id")],

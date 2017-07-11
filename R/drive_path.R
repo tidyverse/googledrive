@@ -1,77 +1,8 @@
-#' Query paths.
-#'
-#' These functions query files that match one or more paths. The plural `s` of
-#' `paths` conveys whether you are allowed to provide more than one input path.
-#' Be aware that you can get more than one file back even when the input is a
-#' single path! Drive file and folder names need not be unique, even at a given
-#' level of the hierarchy. A file or folder can also have multiple parents. Note
-#' also that a folder is just a specific type of file on Drive.
-#'
-#' @param path Character vector of path(s) to query. Use a trailing slash to
-#'   indicate explicitly that the path is a folder, which can disambiguate if
-#'   there is a file of the same name (yes this is possible on Drive!).
-#' @template verbose
-#'
-#' @name paths
-#' @seealso If you want to list the contents of a folder, use [drive_ls()]. For
-#'   general searching, use [drive_find()].
-#' @examples
-#' \dontrun{
-#' ## get info about your "My Drive" root folder
-#' drive_path()
-#' drive_path("~/")
-#'
-#' ## determine if path 'abc' exists and list matching paths
-#' drive_path_exists("abc")
-#' drive_path("abc")
-#'
-#' ## be more specific: consider only folder(s) that match 'abc'
-#' drive_path_exists("abc/")
-#' drive_path("abc/")
-#'
-#' ## limit to files with your My Drive root folder as direct parent
-#' drive_path("~/def")
-#'
-#' ## use the plural forms to query multiple paths at once
-#' drive_paths_exist(c("abc", "def"))
-#' drive_paths(c("abc", "def"))
-#' }
-NULL
-
-#' @export
-#' @rdname paths
-#' @return `drive_path_exists()`: a single `TRUE` or `FALSE`
 drive_path_exists <- function(path, verbose = TRUE) {
   stopifnot(is_path(path))
   if (length(path) < 1) return(logical(0))
-  nrow(get_paths(path = path, partial_ok = FALSE)) > 0
-}
-
-#' @export
-#' @rdname paths
-#' @return `drive_paths_exist()`: Logical vector of same length as input
-drive_paths_exist <- function(path, verbose = TRUE) {
-  purrr::map_lgl(path, drive_path_exists)
-}
-
-#' @export
-#' @rdname paths
-#' @template dribble-return
-drive_path <- function(path = "~/", verbose = TRUE) {
-  stopifnot(is_path(path))
-  if (length(path) < 1) return(dribble())
   stopifnot(length(path) == 1)
-  path_tbl <- get_paths(path = path, partial_ok = FALSE)
-  as_dribble(path_tbl[names(path_tbl) != "path"])
-}
-
-#' @export
-#' @rdname paths
-#' @template dribble-return
-drive_paths <- function(path = "~/", verbose = TRUE) {
-  stopifnot(is_path(path))
-  if (length(path) < 1) return(dribble())
-  do.call(rbind, purrr::map(path, drive_path))
+  nrow(drive_get(path = path)) > 0
 }
 
 ## path helpers -------------------------------------------------------

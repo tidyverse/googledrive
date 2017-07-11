@@ -33,7 +33,6 @@ reference:
     contents:
       - drive_find
       - drive_ls
-      - drive_path
       - drive_get
       - drive_browse
       - drive_view_trash

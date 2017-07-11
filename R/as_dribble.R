@@ -47,11 +47,11 @@ as_dribble.NULL <- function(x, ...) dribble()
 
 #' @export
 #' @rdname as_dribble
-as_dribble.character <- function(x, ...) drive_paths(x)
+as_dribble.character <- function(x, ...) drive_get(path = x)
 
 #' @export
 #' @rdname as_dribble
-as_dribble.drive_id <- function(x, ...) drive_get(x)
+as_dribble.drive_id <- function(x, ...) drive_get(id = x)
 
 #' @export
 #' @rdname as_dribble

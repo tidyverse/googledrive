@@ -86,6 +86,6 @@ is_root <- function(path) {
   length(path) == 1 && is.character(path) && grepl("^~$|^/$|^~/$", path)
 }
 
-root_folder <- function() drive_get("root")
+root_folder <- function() drive_get(id = "root")
 
 root_id <- function() root_folder()$id
