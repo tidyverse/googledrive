@@ -2,25 +2,26 @@ Package: googledrive
 Title: Manage Google Drive from R
 Version: 0.0.0.9000
 Authors@R: c(
-          person("Lucy", "D'Agostino McGowan", email = "ld.mcgowan@vanderbilt.edu", role = c("aut", "cre")),
-          person("Jennifer", "Bryan", email = "jenny@rstudio.com", role = c("aut"))
-          )
+  person("Lucy", "D'Agostino McGowan", email = "ld.mcgowan@vanderbilt.edu", role = c("aut", "cre")),
+  person("Jennifer", "Bryan", email = "jenny@rstudio.com", role = c("aut")),
+  person("RStudio", role = c("cph", "fnd"))          
+  )
 Description: Manage Google Drive from R.
 Depends:
-    R (>= 3.3.2)
+  R (>= 3.3.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 Imports: glue (>= 1.1.0),
-    httr,
-    purrr,
-    tibble
+  httr,
+  purrr,
+  tibble
 Suggests: covr,
-    knitr,
-    rmarkdown,
-    rprojroot,
-    testthat
+  knitr,
+  rmarkdown,
+  rprojroot,
+  testthat
 URL: https://github.com/tidyverse/googledrive
 BugReports: https://github.com/tidyverse/googledrive/issues
 VignetteBuilder: knitr
