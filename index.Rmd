@@ -43,7 +43,7 @@ library("googledrive")
 ```
 
 ```{r data-setup, include = FALSE}
-del <- drive_delete(
+del <- drive_rm(
   c("README-chickwts.csv", "~/abc", "boring-text.txt"),
   verbose = FALSE
 )
@@ -112,7 +112,7 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 ```{r}
 ## example of using a dribble as input
 drive_chickwts <- drive_chickwts %>%
-  drive_delete()
+  drive_rm()
 
 drive_chickwts <- drive_upload("README-chickwts.csv", type = "spreadsheet")
 ```
@@ -201,9 +201,9 @@ readLines("boring-text.txt") %>% head()
 
 ```{r}
 drive_chickwts %>%
-  drive_delete()
+  drive_rm()
 boring %>%
-  drive_delete()
+  drive_rm()
 ```
 
 ```{r, echo = FALSE}

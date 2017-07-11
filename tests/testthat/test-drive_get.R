@@ -11,7 +11,7 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del <- drive_delete(c(nm_("letters-a-m.txt"), nm_("letters-n-z.txt")),
+    del <- drive_rm(c(nm_("letters-a-m.txt"), nm_("letters-n-z.txt")),
                         verbose = FALSE)
   }
   writeLines(letters[1:13], "letters-a-m.txt")

@@ -6,7 +6,7 @@ run <- FALSE
 clean <- FALSE
 if (run) {
   if (clean) {
-    del <- drive_delete(c(
+    del <- drive_rm(c(
       nm_("list-me"),
       nm_("this-should-not-exist"
       )),

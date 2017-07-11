@@ -35,7 +35,7 @@
 #' drive_browse(mirrors_sheet)
 #'
 #' ## clean-up
-#' drive_search("BioC_mirrors") %>% drive_delete()
+#' drive_search("BioC_mirrors") %>% drive_rm()
 #' }
 drive_upload <- function(file = NULL,
                          path = NULL,

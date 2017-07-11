@@ -44,5 +44,5 @@ test_that("drive_share doesn't explicitly fail", {
   expect_identical(perms[c("role", "type")], list(role = role, type = type))
 
   ## clean up
-  drive_delete(drive_chickwts)
+  drive_rm(drive_chickwts)
 })

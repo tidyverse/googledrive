@@ -33,8 +33,8 @@
 #' drive_search("DESC")
 #'
 #' ## Delete all of our copies and the new folder!
-#' drive_search("DESC") %>% drive_delete()
-#' drive_delete(folder)
+#' drive_search("DESC") %>% drive_rm()
+#' drive_rm(folder)
 #' }
 #' @export
 drive_cp <- function(file = NULL, path = NULL, name = NULL,  verbose = TRUE) {

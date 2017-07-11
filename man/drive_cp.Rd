@@ -54,8 +54,8 @@ drive_cp("DESC", folder, "DESC-three")
 drive_search("DESC")
 
 ## Delete all of our copies and the new folder!
-drive_search("DESC") \%>\% drive_delete()
-drive_delete(folder)
+drive_search("DESC") \%>\% drive_rm()
+drive_rm(folder)
 }
 }
 \seealso{

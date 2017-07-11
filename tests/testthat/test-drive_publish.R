@@ -11,8 +11,8 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del <- drive_delete(c(nm_("chickwts_txt"), nm_("chickwts_gdoc")),
-                        verbose = FALSE)
+    del <- drive_rm(c(nm_("chickwts_txt"), nm_("chickwts_gdoc")),
+                    verbose = FALSE)
   }
   write.table(chickwts, "chickwts.txt")
   drive_upload("chickwts.txt",

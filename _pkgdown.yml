@@ -41,7 +41,7 @@ reference:
       Create or delete Drive files and folders
     contents:
       - drive_cp
-      - drive_delete
+      - drive_rm
       - drive_mkdir
       - drive_mv
       - drive_rename
