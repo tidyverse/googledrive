@@ -11,7 +11,7 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del <- drive_delete(c(nm_("a.txt"), nm_("b.txt")), verbose = FALSE)
+    del <- drive_rm(c(nm_("a.txt"), nm_("b.txt")), verbose = FALSE)
   }
   writeLines(letters[1:13], "a1.txt")
   ## TO DO: we should allow upload to same name

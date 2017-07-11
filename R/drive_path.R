@@ -14,7 +14,7 @@
 #'
 #' @name paths
 #' @seealso If you want to list the contents of a folder, use [drive_ls()]. For
-#'   general searching, use [drive_search()].
+#'   general searching, use [drive_find()].
 #' @examples
 #' \dontrun{
 #' ## get info about your "My Drive" root folder
@@ -107,7 +107,7 @@ get_paths <- function(path = NULL,
   if (is.null(.rships)) {
     ## query restricts to names in path_pieces and, for all pieces that are
     ## known to be folder, to mimeType = folder
-    .rships <- drive_search(
+    .rships <- drive_find(
       fields = "*",
       q = form_query(path_pieces, leaf_is_folder = grepl("/$", path)),
       verbose = FALSE

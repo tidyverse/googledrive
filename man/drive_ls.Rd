@@ -2,12 +2,9 @@
 % Please edit documentation in R/drive_ls.R
 \name{drive_ls}
 \alias{drive_ls}
-\alias{drive_list}
 \title{List contents of a folder.}
 \usage{
 drive_ls(path = "~/", pattern = NULL, type = NULL, ...)
-
-drive_list(path = "~/", pattern = NULL, type = NULL, ...)
 }
 \arguments{
 \item{path}{Specifies a single folder on Google Drive whose contents you want
@@ -30,8 +27,7 @@ An object of class \code{\link{dribble}}, a tibble with
 \description{
 List the contents of a folder on Google Drive, nonrecursively. Optionally,
 filter for a regex in the file names and/or on MIME type. This is a thin
-wrapper around \code{\link[=drive_search]{drive_search()}}. \code{drive_list()} is an alias for
-\code{drive_ls()}.
+wrapper around \code{\link[=drive_find]{drive_find()}}.
 }
 \examples{
 \dontrun{

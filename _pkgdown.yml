@@ -31,7 +31,7 @@ reference:
     desc: >
       Retrieve metadata on your Drive files so you can act on them
     contents:
-      - drive_search
+      - drive_find
       - drive_ls
       - drive_path
       - drive_get
@@ -41,7 +41,7 @@ reference:
       Create or delete Drive files and folders
     contents:
       - drive_cp
-      - drive_delete
+      - drive_rm
       - drive_mkdir
       - drive_mv
       - drive_rename

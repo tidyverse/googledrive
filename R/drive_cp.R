@@ -1,7 +1,5 @@
 #' Copy a Drive file.
 #'
-#' `drive_copy()` is an alias for `drive_cp()`.
-#'
 #' @seealso Wraps the
 #' [drive.files.copy](https://developers.google.com/drive/v3/reference/files/copy)
 #' endpoint
@@ -30,11 +28,11 @@
 #' drive_cp("DESC", folder, "DESC-three")
 #'
 #' ## Behold all of our copies!
-#' drive_search("DESC")
+#' drive_find("DESC")
 #'
 #' ## Delete all of our copies and the new folder!
-#' drive_search("DESC") %>% drive_delete()
-#' drive_delete(folder)
+#' drive_find("DESC") %>% drive_rm()
+#' drive_rm(folder)
 #' }
 #' @export
 drive_cp <- function(file = NULL, path = NULL, name = NULL,  verbose = TRUE) {
@@ -101,7 +99,3 @@ drive_cp <- function(file = NULL, path = NULL, name = NULL,  verbose = TRUE) {
   }
   invisible(out)
 }
-
-#' @rdname drive_cp
-#' @export
-drive_copy <- drive_cp

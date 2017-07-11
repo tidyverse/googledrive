@@ -12,7 +12,7 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del <- drive_delete(c(
+    del <- drive_rm(c(
       nm_("move-files-into-me"),
       nm_("DESC"),
       nm_("DESC-renamed")
@@ -28,7 +28,7 @@ if (run) {
 test_that("drive_mv() can rename file", {
   skip_on_travis()
   skip_on_appveyor()
-  on.exit(drive_delete(nm_("DESC-renamed")))
+  on.exit(drive_rm(nm_("DESC-renamed")))
 
   renamee <- drive_upload(
     system.file("DESCRIPTION"),
@@ -46,7 +46,7 @@ test_that("drive_mv() can rename file", {
 test_that("drive_mv() can move a file into a folder given as path", {
   skip_on_travis()
   skip_on_appveyor()
-  on.exit(drive_delete(nm_("DESC")))
+  on.exit(drive_rm(nm_("DESC")))
 
   movee <- drive_upload(
     system.file("DESCRIPTION"),
@@ -68,7 +68,7 @@ test_that("drive_mv() can move a file into a folder given as path", {
 test_that("drive_mv() can move a file into a folder given as dribble", {
   skip_on_travis()
   skip_on_appveyor()
-  on.exit(drive_delete(nm_("DESC")))
+  on.exit(drive_rm(nm_("DESC")))
 
   movee <- drive_upload(
     system.file("DESCRIPTION"),
@@ -89,7 +89,7 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
 test_that("drive_mv() can rename and move, using `path` and `name`", {
   skip_on_travis()
   skip_on_appveyor()
-  on.exit(drive_delete(nm_("DESC-renamed")))
+  on.exit(drive_rm(nm_("DESC-renamed")))
 
   movee <- drive_upload(
     system.file("DESCRIPTION"),
@@ -108,7 +108,7 @@ test_that("drive_mv() can rename and move, using `path` and `name`", {
 test_that("drive_mv() can rename and move, using `path` only", {
   skip_on_travis()
   skip_on_appveyor()
-  on.exit(drive_delete(nm_("DESC-renamed")))
+  on.exit(drive_rm(nm_("DESC-renamed")))
 
   movee <- drive_upload(
     system.file("DESCRIPTION"),

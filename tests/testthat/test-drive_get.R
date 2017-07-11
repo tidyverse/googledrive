@@ -11,7 +11,7 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del <- drive_delete(c(nm_("letters-a-m.txt"), nm_("letters-n-z.txt")),
+    del <- drive_rm(c(nm_("letters-a-m.txt"), nm_("letters-n-z.txt")),
                         verbose = FALSE)
   }
   writeLines(letters[1:13], "letters-a-m.txt")
@@ -44,7 +44,7 @@ test_that("drive_get() gives n-row output for n-row input", {
   skip_on_appveyor()
   skip_on_travis()
 
-  two_files_search <- drive_search(pattern = "letters-[an]-[mz].txt")
+  two_files_search <- drive_find(pattern = "letters-[an]-[mz].txt")
   two_files_get <- drive_get(two_files_search$id)
   expect_identical(
     two_files_search[c("name", "id")],

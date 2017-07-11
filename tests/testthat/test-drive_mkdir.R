@@ -10,7 +10,7 @@ run <- FALSE
 clean <- FALSE
 if (run) {
   if (clean) {
-    del <- drive_delete(c(
+    del <- drive_rm(c(
       nm_("OMNI-PARENT"),
       nm_("I-live-in-root")
     ))
@@ -33,7 +33,7 @@ test_that("drive_mkdir() errors if parent path does not exist", {
 test_that("drive_mkdir() errors if parent exists but is not a folder", {
   skip_on_travis()
   skip_on_appveyor()
-  x <- drive_search(
+  x <- drive_find(
     q = "mimeType != 'application/vnd.google-apps.folder'",
     n_max = 1
   )
@@ -47,7 +47,7 @@ test_that("drive_mkdir() creates a folder in root folder", {
   skip_on_travis()
   skip_on_appveyor()
 
-  on.exit(drive_delete(nm_("I-live-in-root")))
+  on.exit(drive_rm(nm_("I-live-in-root")))
   out <- drive_mkdir(nm_("I-live-in-root"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, nm_("I-live-in-root"))
@@ -56,7 +56,7 @@ test_that("drive_mkdir() creates a folder in root folder", {
 test_that("drive_mkdir() accepts parent folder given as dribble", {
   skip_on_travis()
   skip_on_appveyor()
-  on.exit(drive_delete(nm_("a")))
+  on.exit(drive_rm(nm_("a")))
 
   PARENT <- drive_path(nm_("OMNI-PARENT"))
   out <- drive_mkdir(PARENT, nm_("a"))
@@ -67,7 +67,7 @@ test_that("drive_mkdir() accepts parent folder given as dribble", {
 test_that("drive_mkdir() accepts parent folder given as file id", {
   skip_on_travis()
   skip_on_appveyor()
-  on.exit(drive_delete(nm_("b")))
+  on.exit(drive_rm(nm_("b")))
 
   PARENT <- drive_path(nm_("OMNI-PARENT"))
   out <- drive_mkdir(as_id(PARENT$id), nm_("b"))
@@ -78,7 +78,7 @@ test_that("drive_mkdir() accepts parent folder given as file id", {
 test_that("drive_mkdir() accepts name as part of path", {
   skip_on_travis()
   skip_on_appveyor()
-  on.exit(drive_delete(nm_("c")))
+  on.exit(drive_rm(nm_("c")))
 
   out <- drive_mkdir(file.path(nm_("OMNI-PARENT"), nm_("c")))
   expect_s3_class(out, "dribble")
@@ -88,7 +88,7 @@ test_that("drive_mkdir() accepts name as part of path", {
 test_that("drive_mkdir() accepts name as part of path with trailing slash", {
   skip_on_travis()
   skip_on_appveyor()
-  on.exit(drive_delete(nm_("d")))
+  on.exit(drive_rm(nm_("d")))
 
   out <- drive_mkdir(file.path(nm_("OMNI-PARENT"), nm_("d"), ""))
   expect_s3_class(out, "dribble")
@@ -98,7 +98,7 @@ test_that("drive_mkdir() accepts name as part of path with trailing slash", {
 test_that("drive_mkdir() accepts path and name", {
   skip_on_travis()
   skip_on_appveyor()
-  on.exit(drive_delete(c(nm_("e"), nm_("f"))))
+  on.exit(drive_rm(c(nm_("e"), nm_("f"))))
 
   ## no trailing slash on path
   out <- drive_mkdir(nm_("OMNI-PARENT"), nm_("e"))

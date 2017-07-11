@@ -8,7 +8,7 @@ nm_ <- nm_fun("-TEST-drive-download")
 
 ## clean
 if (FALSE) {
-  del <- drive_delete(c(nm_("foo"), nm_("bar"), nm_("this-should-not-exist")),
+  del <- drive_rm(c(nm_("foo"), nm_("bar"), nm_("this-should-not-exist")),
                       verbose = FALSE)
 }
 

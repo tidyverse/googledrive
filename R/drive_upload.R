@@ -35,7 +35,7 @@
 #' drive_browse(mirrors_sheet)
 #'
 #' ## clean-up
-#' drive_search("BioC_mirrors") %>% drive_delete()
+#' drive_find("BioC_mirrors") %>% drive_rm()
 #' }
 drive_upload <- function(file = NULL,
                          path = NULL,
@@ -82,7 +82,7 @@ drive_upload <- function(file = NULL,
   q_name <- glue("name = {sq(name)}")
   q_parent <- glue("{sq(path$id)} in parents")
   qq <- collapse(c(q_name, q_parent), sep = " and ")
-  existing <- drive_search(q = qq)
+  existing <- drive_find(q = qq)
 
   if (nrow(existing) > 0) {
     out_path <- unsplit_path(path$name %||% "", name)

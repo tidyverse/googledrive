@@ -67,5 +67,5 @@ drive_paths(c("abc", "def"))
 }
 \seealso{
 If you want to list the contents of a folder, use \code{\link[=drive_ls]{drive_ls()}}. For
-general searching, use \code{\link[=drive_search]{drive_search()}}.
+general searching, use \code{\link[=drive_find]{drive_find()}}.
 }

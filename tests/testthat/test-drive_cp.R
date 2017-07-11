@@ -11,7 +11,7 @@ run <- FALSE
 clean <- FALSE
 if (run) {
   if (clean) {
-    del <- drive_delete(c(
+    del <- drive_rm(c(
       nm_("i-am-a-folder"),
       nm_("i-am-a-file")
     ), verbose = FALSE)
@@ -29,7 +29,7 @@ if (run) {
 test_that("drive_cp() can copy file in place", {
   skip_on_appveyor()
   skip_on_travis()
-  on.exit(drive_delete(paste("Copy of", nm_("i-am-a-file"))))
+  on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
 
   file <- drive_path(nm_("i-am-a-file"))
   expect_message(
@@ -46,7 +46,7 @@ test_that("drive_cp() can copy file in place", {
 test_that("drive_cp() can copy a file into a different folder", {
   skip_on_appveyor()
   skip_on_travis()
-  on.exit(drive_delete(paste("Copy of", nm_("i-am-a-file"))))
+  on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
 
   file <- drive_path(nm_("i-am-a-file"))
   folder <- drive_path(nm_("i-am-a-folder"))
@@ -63,7 +63,7 @@ test_that("drive_cp() can copy a file into a different folder", {
 test_that("drive_cp() elects to copy into a folder vs onto file of same name", {
   skip_on_appveyor()
   skip_on_travis()
-  on.exit(drive_delete(paste("Copy of", nm_("i-am-a-file"))))
+  on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
 
   file <- drive_path(nm_("i-am-a-file"))
   ## does drive_cp() detect that path is a folder, despite lack of trailing
