@@ -2,12 +2,9 @@
 % Please edit documentation in R/drive_cp.R
 \name{drive_cp}
 \alias{drive_cp}
-\alias{drive_copy}
 \title{Copy a Drive file.}
 \usage{
 drive_cp(file = NULL, path = NULL, name = NULL, verbose = TRUE)
-
-drive_copy(file = NULL, path = NULL, name = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
@@ -33,7 +30,7 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-\code{drive_copy()} is an alias for \code{drive_cp()}.
+Copy a Drive file.
 }
 \examples{
 \dontrun{

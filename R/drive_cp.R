@@ -1,7 +1,5 @@
 #' Copy a Drive file.
 #'
-#' `drive_copy()` is an alias for `drive_cp()`.
-#'
 #' @seealso Wraps the
 #' [drive.files.copy](https://developers.google.com/drive/v3/reference/files/copy)
 #' endpoint
@@ -101,7 +99,3 @@ drive_cp <- function(file = NULL, path = NULL, name = NULL,  verbose = TRUE) {
   }
   invisible(out)
 }
-
-#' @rdname drive_cp
-#' @export
-drive_copy <- drive_cp
