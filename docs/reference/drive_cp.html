@@ -90,12 +90,10 @@
     </div>
 
     
-    <p><code>drive_copy()</code> is an alias for <code>drive_cp()</code>.</p>
+    <p>Copy a Drive file.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_cp</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>drive_copy</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_cp</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -156,11 +154,11 @@ endpoint</p>
 <span class='fu'>drive_cp</span>(<span class='st'>"DESC"</span>, <span class='no'>folder</span>, <span class='st'>"DESC-three"</span>)
 
 <span class='co'>## Behold all of our copies!</span>
-<span class='fu'><a href='drive_search.html'>drive_search</a></span>(<span class='st'>"DESC"</span>)
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"DESC"</span>)
 
 <span class='co'>## Delete all of our copies and the new folder!</span>
-<span class='fu'><a href='drive_search.html'>drive_search</a></span>(<span class='st'>"DESC"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_delete.html'>drive_delete</a></span>()
-<span class='fu'><a href='drive_delete.html'>drive_delete</a></span>(<span class='no'>folder</span>)
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"DESC"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>()
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>folder</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

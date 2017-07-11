@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Delete file from Drive. — drive_delete • googledrive</title>
+<title>Search for files on Google Drive. — drive_find • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,23 +86,42 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Delete file from Drive.</h1>
+    <h1>Search for files on Google Drive.</h1>
     </div>
 
     
-    <p>Delete file from Drive.</p>
+    <p>This is the closest googledrive function to what you get from
+<a href='https://drive.google.com'>https://drive.google.com</a>: by default, you just get a listing of your files.
+You can also narrow the search in various ways, such as by file type, whether
+it's yours or shared with you, starred status, etc.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_delete</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_find</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='no'>...</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>Drive File, something that identifies the file of interest
-on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a <code>dribble</code>.</p></td>
+      <th>pattern</th>
+      <td><p>Character. If provided, only the files whose names match this
+regular expression are returned.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>Character. If provided, only files of this type will be returned.
+Can be anything that <code><a href='drive_mime_type.html'>drive_mime_type()</a></code> knows how to handle. This is
+processed by googledrive and sent as a query parameter.</p></td>
+    </tr>
+    <tr>
+      <th>n_max</th>
+      <td><p>Integer. An upper bound on the number of files to return. This
+applies to the results returned by the API, which may be further filtered
+locally, via the <code>pattern</code> argument.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Query parameters to pass along to the API query.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -113,9 +132,42 @@ or a <code>dribble</code>.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Logical, indicating whether the delete succeeded.</p>
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with
+   one row per file.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Helpful links for forming queries:</p><ul>
+<li><p><a href='https://developers.google.com/drive/v3/web/search-parameters'>https://developers.google.com/drive/v3/web/search-parameters</a></p></li>
+<li><p><a href='https://developers.google.com/drive/v3/reference/files/list'>https://developers.google.com/drive/v3/reference/files/list</a></p></li>
+</ul>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## list "My Drive" w/o regard for folder hierarchy</span>
+<span class='fu'>drive_find</span>()
+
+<span class='co'>## search for files located directly in your root folder</span>
+<span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"'root' in parents"</span>)
+
+<span class='co'>## filter for folders</span>
+<span class='fu'>drive_find</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"folder"</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType = 'application/vnd.google-apps.folder'"</span>)
+
+<span class='co'>## filter for Google Sheets</span>
+<span class='fu'>drive_find</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType='application/vnd.google-apps.spreadsheet'"</span>)
+
+<span class='co'>## files whose names match a regex</span>
+<span class='fu'>drive_find</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"jt"</span>)
+
+<span class='co'>## control page size or cap the number of files returned</span>
+<span class='fu'>drive_find</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>50</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>75</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>15</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -123,7 +175,11 @@ or a <code>dribble</code>.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
