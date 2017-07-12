@@ -10,7 +10,7 @@ if (FALSE) {
   ))
 }
 
-## setup
+## set up
 if (FALSE) {
   drive_mkdir(nm_("list-me"), verbose = FALSE)
   drive_upload(

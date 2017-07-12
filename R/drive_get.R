@@ -1,7 +1,7 @@
 #' Get Drive files by path or id
 #'
-#' @description Retrieve metadata for files that match one or more paths or file
-#' ids. Note that Google Drive does NOT behave like your local file system:
+#' @description Retrieve metadata for files specified via path or via file id.
+#'   Note that Google Drive does NOT behave like your local file system:
 #'   * You can get zero, one, or more files back for each file name or path! On
 #'     Google Drive, file and folder names need not be unique, even at a given
 #'     level of the hierarchy.
@@ -11,14 +11,18 @@
 #' file. Finally, note also that a folder is just a specific type of file on
 #' Drive.
 #'
+#' If the files are specified via `path`, versus `id`, the returned
+#' [`dribble`] will include a `path` variable. To add path information to any
+#' [`dribble`] that lacks it, use [drive_add_path()].
+#'
 #' @param path Character vector of path(s) to get. Use a trailing slash to
 #'   indicate explicitly that a path is a folder, which can disambiguate if
 #'   there is a file of the same name (yes this is possible on Drive!). A
-#'   character vector explicitly marked with [as_id()] is treated as if it was
-#'   provided via the `id` argument.
-#' @param id Character vector of Drive file ids, such as you might see in the
-#'   URL when visiting a file on Google Drive. If both `path` and `id` are
-#'   non-`NULL`, `id` is silently ignored.
+#'   character vector marked with [as_id()] is treated as if it was provided via
+#'   the `id` argument.
+#' @param id Character vector of Drive file ids or URLs (it is first processed
+#'   with [as_id()]). If both `path` and `id` are non-`NULL`, `id` is silently
+#'   ignored.
 #' @template verbose
 #'
 #' @return dribble-return
@@ -32,21 +36,13 @@
 #' drive_get("~/")
 #' ## the API reserves the file id "root" for your root folder
 #' drive_get(id = "root")
-#'
-#' ## file(s) named 'abc'
-#' drive_get("abc")
-#'
-#' ## folder(s) named 'abc'
-#' drive_get("abc/")
-#'
-#' ## file(s) named 'def' with your My Drive root folder as direct parent
-#' drive_get("~/def")
+#' drive_get(id = "root") %>% drive_add_path()
 #'
 #' ## multiple names
 #' drive_get(c("abc", "def"))
 #'
-#' ## multiple folders
-#' drive_get(c("abc/", "def/"))
+#' ## multiple names, one of which must be a folder
+#' drive_get(c("abc", "def/"))
 #'
 #' ## query by file id(s)
 #' drive_get(id = "abcdefgeh123456789")
@@ -55,7 +51,7 @@
 #'
 #' }
 drive_get <- function(path = NULL, id = NULL, verbose = TRUE) {
-  if (length(path) + length(id) < 1) return(dribble())
+  if (length(path) + length(id) == 0) return(dribble_with_path())
 
   if (!is.null(path) && inherits(path, "drive_id")) {
     id <- path
@@ -63,17 +59,21 @@ drive_get <- function(path = NULL, id = NULL, verbose = TRUE) {
   }
 
   if (!is.null(path)) {
-    return(do.call(rbind, purrr::map(path, get_one_path)))
+    stopifnot(is_path(path))
+    return(dribble_from_path(path))
   }
 
-  as_dribble(purrr::map(id, get_one_id))
+  stopifnot(is.character(id))
+  as_dribble(purrr::map(as_id(id), get_one_id))
 }
 
 get_one_id <- function(id) {
-  stopifnot(is.character(id))
   ## when id = "", drive.files.get actually becomes a call to drive.files.list
-  ## and, therefore, returns 100 files by default
-  stopifnot(nzchar(id, keepNA = TRUE))
+  ## and, therefore, returns 100 files by default ... don't let that happen
+  if (!isTRUE(nzchar(id, keepNA = TRUE))) {
+    stop("File ids must not be NA and cannot be the empty string.",
+         call. = FALSE)
+  }
   request <- generate_request(
     endpoint = "drive.files.get",
     params = list(
@@ -83,12 +83,4 @@ get_one_id <- function(id) {
   )
   response <- make_request(request)
   process_response(response)
-}
-
-get_one_path <- function(path = "~/", verbose = TRUE) {
-  stopifnot(is_path(path))
-  if (length(path) < 1) return(dribble())
-  stopifnot(length(path) == 1, !is.na(path))
-  path_tbl <- get_paths(path = path, partial_ok = FALSE)
-  as_dribble(path_tbl[names(path_tbl) != "path"])
 }

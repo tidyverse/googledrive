@@ -1,14 +1,18 @@
-## path utilities -----------------------------------------------------
+## path utilities that are "mechanical"
 
 is_path <- function(x) is.character(x) && !inherits(x, "drive_id")
+
+is_rootpath <- function(path) {
+  length(path) == 1 && is.character(path) && grepl("^~$|^/$|^~/$", path)
+}
+
+is_rooted <- function(path) grepl("^~", path)
 
 ## turn '~' into `~/`
 ## turn leading `/` into leading `~/`
 rootize_path <- function(path) {
-  if (is.null(path)) return(path)
-  if (!(is.character(path) && length(path) == 1)) {
-    stop("'path' must be a character string.", call. = FALSE)
-  }
+  if (length(path) == 0) return(path)
+  stopifnot(is.character(path))
   sub("^~$|^/", "~/", path)
 }
 
@@ -81,11 +85,3 @@ apply_extension <- function(path, ext) {
   }
   path
 }
-
-is_root <- function(path) {
-  length(path) == 1 && is.character(path) && grepl("^~$|^/$|^~/$", path)
-}
-
-root_folder <- function() drive_get(id = "root")
-
-root_id <- function() root_folder()$id

@@ -32,7 +32,7 @@ test_that("drive_publish() publishes Google Documents", {
   skip_on_travis()
   skip_if_offline()
 
-  drive_doc <- drive_path(nm_("foo_doc"))
+  drive_doc <- drive_get(nm_("foo_doc"))
 
   ## since we haven't checked the publication status,
   ## this should be NULL
@@ -63,7 +63,7 @@ test_that("drive_publish() publishes Google Sheets", {
   skip_on_travis()
   skip_if_offline()
 
-  drive_sheet <- drive_path(nm_("foo_sheet"))
+  drive_sheet <- drive_get(nm_("foo_sheet"))
 
   ## since we haven't checked the publication status,
   ## this should be NULL
@@ -87,7 +87,7 @@ test_that("drive_publish() fails if the file input is not a Google Drive type", 
   skip_on_travis()
   skip_if_offline()
 
-  drive_pdf <- drive_path(nm_("foo_pdf"))
+  drive_pdf <- drive_get(nm_("foo_pdf"))
 
   expect_error(drive_publish(drive_pdf, verbose = FALSE),
                "Only Google Drive files can be published."

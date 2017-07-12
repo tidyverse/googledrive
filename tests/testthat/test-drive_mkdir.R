@@ -50,8 +50,8 @@ test_that("drive_mkdir() creates a folder in root folder", {
   skip_on_travis()
   skip_on_appveyor()
   skip_if_offline()
-
   on.exit(drive_rm(nm_("I-live-in-root")))
+
   out <- drive_mkdir(nm_("I-live-in-root"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, nm_("I-live-in-root"))
