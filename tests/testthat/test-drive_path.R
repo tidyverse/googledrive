@@ -27,6 +27,7 @@ if (run) {
 test_that("get_path() can return info on root folder", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   out <- get_paths("~/")
   expect_length(nrow(out), 1)
@@ -37,6 +38,7 @@ test_that("get_path() can return info on root folder", {
 test_that("get_path() works", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   expect_identical(drive_path("this-should-give-empty"), dribble())
   expect_identical(drive_path(character(0)), dribble())
@@ -51,6 +53,7 @@ test_that("get_path() works", {
 test_that("get_paths() works", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   expect_identical(drive_paths("this-should-give-empty"), dribble())
   expect_identical(drive_paths(character(0)), dribble())

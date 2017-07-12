@@ -26,6 +26,7 @@ if (FALSE) {
 test_that("drive_download() downloads a file", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
   on.exit(unlink("description.txt"))
   expect_message(
     drive_download(file = nm_("foo"), path = "description.txt"),
@@ -37,6 +38,7 @@ test_that("drive_download() downloads a file", {
 test_that("drive_download() errors if file does not exist on Drive", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
   expect_error(
     drive_download(file = nm_("this-should-not-exist")),
     "Input does not hold exactly one Drive file"
@@ -46,6 +48,7 @@ test_that("drive_download() errors if file does not exist on Drive", {
 test_that("drive_download() converts with explicit `type`", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   nm <- paste0(nm_("bar"), ".docx")
   on.exit(unlink(nm))
@@ -60,6 +63,7 @@ test_that("drive_download() converts with explicit `type`", {
 test_that("drive_download() converts with type implicit in `path`", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   nm <- paste0(nm_("bar"), ".docx")
   on.exit(unlink(nm))
@@ -74,6 +78,7 @@ test_that("drive_download() converts with type implicit in `path`", {
 test_that("drive_download() converts using default MIME type, if necessary", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   nm <- paste0(nm_("bar"), ".docx")
   on.exit(unlink(nm))

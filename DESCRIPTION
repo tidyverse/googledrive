@@ -19,6 +19,7 @@ Imports: glue (>= 1.1.0),
   tibble
 Suggests: covr,
   knitr,
+  pingr,
   rmarkdown,
   rprojroot,
   testthat

@@ -27,6 +27,7 @@ if (run) {
 test_that("drive_ls() errors if file does not exist", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   expect_error(
     drive_ls(nm_("this-should-not-exist")),
@@ -37,6 +38,7 @@ test_that("drive_ls() errors if file does not exist", {
 test_that("drive_ls() outputs contents of folder", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   ## path
   out <- drive_ls(nm_("list-me"))
@@ -56,6 +58,7 @@ test_that("drive_ls() outputs contents of folder", {
 test_that("drive_ls() passes ... through to drive_find()", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   d <- drive_path(nm_("list-me"))
 

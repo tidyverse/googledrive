@@ -28,6 +28,7 @@ if (run) {
 test_that("drive_get() 'no input' edge cases", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   expect_identical(drive_get(character(0)), dribble())
   expect_error(
@@ -43,6 +44,7 @@ test_that("drive_get() 'no input' edge cases", {
 test_that("drive_get() gives n-row output for n-row input", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   two_files_search <- drive_find(pattern = "letters-[an]-[mz].txt")
   two_files_get <- drive_get(two_files_search$id)

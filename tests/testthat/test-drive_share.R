@@ -8,6 +8,7 @@ nm_ <- nm_fun("-TEST-drive-share")
 test_that("drive_share doesn't explicitly fail", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   write.table(chickwts, "chickwts.txt")
   on.exit(unlink("chickwts.txt"))

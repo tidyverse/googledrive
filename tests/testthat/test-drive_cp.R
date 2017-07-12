@@ -29,6 +29,7 @@ if (run) {
 test_that("drive_cp() can copy file in place", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
   on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
 
   file <- drive_path(nm_("i-am-a-file"))
@@ -46,6 +47,7 @@ test_that("drive_cp() can copy file in place", {
 test_that("drive_cp() can copy a file into a different folder", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
   on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
 
   file <- drive_path(nm_("i-am-a-file"))
@@ -63,6 +65,7 @@ test_that("drive_cp() can copy a file into a different folder", {
 test_that("drive_cp() elects to copy into a folder vs onto file of same name", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
   on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
 
   file <- drive_path(nm_("i-am-a-file"))
@@ -82,6 +85,7 @@ test_that("drive_cp() elects to copy into a folder vs onto file of same name", {
 test_that("drive_cp() errors if asked to copy a folder", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   expect_error(
     drive_cp(nm_("i-am-a-folder")),

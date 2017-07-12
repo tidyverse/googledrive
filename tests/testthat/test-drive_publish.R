@@ -30,6 +30,7 @@ test_that("drive_publish doesn't explicitly fail", {
 
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   drive_chickwts <- drive_path(nm_("chickwts_gdoc"))
 
@@ -53,6 +54,7 @@ test_that("drive_publish fails if the file input is not a Google Drive type", {
 
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   drive_chickwts <- drive_path(nm_("chickwts_txt"))
 
