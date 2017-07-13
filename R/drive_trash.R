@@ -31,10 +31,6 @@ drive_trash <- function(file = NULL, verbose = TRUE) {
       successes <- glue_data(trash_file[out, ], "  * {name}: {id}")
       message(collapse(c("Files trashed:", successes), sep = "\n"))
     }
-    if (any(!out)) {
-      failures <- glue_data(trash_file[!out, ], "  * {name}: {id}")
-      message(collapse(c("Files NOT trashed:", failures), sep = "\n"))
-    }
   }
   invisible(out)
 }
@@ -92,13 +88,13 @@ drive_view_trash <- function() {
 #' @export
 drive_empty_trash <- function(verbose = TRUE) {
   files <- drive_view_trash()
+  n <- nrow(files)
+  if (n == 0L) {
+    message("Your trash was already empty.")
+    return(invisible(NULL))
+  }
   del <- drive_rm(files, verbose = FALSE)
-  n <- sum(del)
   if (verbose) {
-    if (n > 0L) {
-    message(glue("You have successfully deleted {n} files from your Google Drive trash."))
-    } else {
-      message("Your trash was already empty.")
-    }
+    message(glue("You have successfully deleted {n} file(s) from your Google Drive trash."))
   }
 }
