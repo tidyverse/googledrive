@@ -6,6 +6,11 @@ context("Share files")
 
 nm_ <- nm_fun("-TEST-drive-share")
 
+## clean
+if (FALSE) {
+  del <- drive_delete(c(nm_("foo"), nm_("bar")), verbose = FALSE)
+}
+
 ## setup
 if (FALSE) {
   drive_upload(system.file("DESCRIPTION"), nm_("foo"), verbose = FALSE)
@@ -14,12 +19,6 @@ if (FALSE) {
                type = "document",
                verbose = FALSE)
 }
-
-## clean
-if (FALSE) {
-  del <- drive_delete(c(nm_("foo"), nm_("bar")), verbose = FALSE)
-}
-
 
 test_that("drive_share doesn't explicitly fail", {
   skip_on_appveyor()

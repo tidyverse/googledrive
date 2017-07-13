@@ -6,13 +6,13 @@ context("Query paths")
 
 nm_ <- nm_fun("-TEST-drive-path")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  ## make sure directory is clean
-  if (clean) {
-    del <- drive_rm(c(nm_("a.txt"), nm_("b.txt")), verbose = FALSE)
-  }
+## clean
+if (FALSE) {
+  del <- drive_rm(c(nm_("a.txt"), nm_("b.txt")), verbose = FALSE)
+}
+
+## setup
+if (FALSE) {
   writeLines(letters[1:13], "a1.txt")
   ## TO DO: we should allow upload to same name
   ##writeLines(letters[14:26], "a2.txt")
@@ -22,7 +22,6 @@ if (run) {
   drive_upload("b.txt", name = nm_("b.txt"), verbose = FALSE)
   rm <- unlink(c("a1.txt", "b.txt"))
 }
-
 
 test_that("get_path() can return info on root folder", {
   skip_on_appveyor()

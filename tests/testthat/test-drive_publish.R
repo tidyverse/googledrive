@@ -6,6 +6,11 @@ context("Publish files")
 
 nm_ <- nm_fun("-TEST-drive-publish")
 
+## clean
+if (FALSE) {
+  del <- drive_rm(c(nm_("foo_pdf"), nm_("foo_doc"), nm_("foo_sheet")),
+                  verbose = FALSE)
+}
 ## setup
 if (FALSE) {
   drive_upload(R.home('doc/html/about.html'),
@@ -20,13 +25,6 @@ if (FALSE) {
                name = nm_("foo_pdf"),
                verbose = FALSE)
 }
-## clean
-if (FALSE) {
-  del <- drive_rm(c(nm_("foo_pdf"), nm_("foo_doc"), nm_("foo_sheet")),
-                  verbose = FALSE)
-}
-
-
 
 test_that("drive_publish() publishes Google Documents", {
 

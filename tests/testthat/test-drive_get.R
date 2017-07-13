@@ -6,14 +6,14 @@ context("Get files by id")
 
 nm_ <- nm_fun("-TEST-drive-get")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  ## make sure directory is clean
-  if (clean) {
-    del <- drive_rm(c(nm_("letters-a-m.txt"), nm_("letters-n-z.txt")),
-                        verbose = FALSE)
-  }
+## clean
+if (FALSE) {
+  del <- drive_rm(c(nm_("letters-a-m.txt"), nm_("letters-n-z.txt")),
+                  verbose = FALSE)
+}
+
+## setup
+if (FALSE) {
   writeLines(letters[1:13], "letters-a-m.txt")
   writeLines(letters[14:26], "letters-n-z.txt")
   drive_upload("letters-a-m.txt",
