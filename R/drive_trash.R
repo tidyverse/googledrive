@@ -1,4 +1,4 @@
-#' Trash file on Google Drive.
+#' Trash file on Drive.
 #' @template file
 #' @template verbose
 #'
@@ -78,16 +78,16 @@ drive_untrash <- function(file = NULL, verbose = TRUE) {
   invisible(out)
 }
 
-#' View files in Google Drive Trash.
+#' View files in Drive Trash.
 #' @template dribble-return
 #' @export
 drive_view_trash <- function() {
   drive_find(q = "trashed = true")
 }
 
-#' Empty Google Drive Trash.
+#' Empty Drive Trash.
 #' Caution: this will permanently delete files in your
-#'    Google Drive trash.
+#'   Drive trash.
 #' @template verbose
 #' @export
 drive_empty_trash <- function(verbose = TRUE) {

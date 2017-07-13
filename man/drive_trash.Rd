@@ -3,7 +3,7 @@
 \name{drive_trash}
 \alias{drive_trash}
 \alias{drive_untrash}
-\title{Trash file on Google Drive.}
+\title{Trash file on Drive.}
 \usage{
 drive_trash(file = NULL, verbose = TRUE)
 
@@ -21,7 +21,7 @@ or a \code{dribble}.}
 Logical, indicating whether the trashing/untrashing succeeded.
 }
 \description{
-Trash file on Google Drive.
+Trash file on Drive.
 }
 \examples{
 \dontrun{
