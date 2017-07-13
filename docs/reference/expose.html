@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mark as Google Drive id. — drive_id • googledrive</title>
+<title>An expose object. — expose • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -62,7 +62,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/file-identification.html">File identification</a>
+      <a href="../articles/articles/file-identification.html">File identification</a>
     </li>
     <li>
       <a href="../articles/articles/drive-api.html">The Drive API</a>
@@ -86,32 +86,60 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Mark as Google Drive id.</h1>
+    <h1>An expose object.</h1>
     </div>
 
     
-    <p>Marks a character vector as holding Google Drive file ids, as opposed to file
-names or paths.</p>
+    <p><code>expose()</code> returns a sentinel object, similar in spirit to <code>NULL</code>, that tells
+the calling function to return its internal data structure. googledrive
+stores alot of information about the Drive API, MIME types, etc., internally
+and then exploits it in helper functions, like <code><a href='drive_mime_type.html'>drive_mime_type()</a></code>,
+<code><a href='drive_fields.html'>drive_fields()</a></code>, <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>, etc. We use these objects to
+provide nice defaults, check input validity, or lookup something cryptic,
+like MIME type, based on something friendlier, like a file extension. Pass
+<code>expose()</code> to such a function if you want to inspect its internal object, in
+its full glory. This is inspired by the <code>waiver()</code> object in ggplot2.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_id</span>(<span class='no'>x</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>Character vector of Google Drive ids</p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>expose</span>()</pre>
+        
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='drive_mime_type.html'>drive_mime_type</a></span>(<span class='fu'>expose</span>())</div><div class='output co'>#&gt; # A tibble: 77 x 4
+#&gt;                                                                  mime_type
+#&gt;                                                                      &lt;chr&gt;
+#&gt;  1                       application/x-vnd.oasis.opendocument.presentation
+#&gt;  2                                               text/tab-separated-values
+#&gt;  3                                                              image/jpeg
+#&gt;  4                                                              image/jpeg
+#&gt;  5                                                              image/jpeg
+#&gt;  6                                                               image/bmp
+#&gt;  7                                                               image/gif
+#&gt;  8                          application/vnd.ms-excel.sheet.macroenabled.12
+#&gt;  9 application/vnd.openxmlformats-officedocument.wordprocessingml.template
+#&gt; 10              application/vnd.ms-powerpoint.presentation.macroenabled.12
+#&gt; # ... with 67 more rows, and 3 more variables: ext &lt;chr&gt;, human_type &lt;chr&gt;,
+#&gt; #   default &lt;lgl&gt;</div><div class='input'><span class='fu'><a href='drive_fields.html'>drive_fields</a></span>(<span class='fu'>expose</span>())</div><div class='output co'>#&gt; # A tibble: 51 x 3
+#&gt;                       name default
+#&gt;                      &lt;chr&gt;   &lt;lgl&gt;
+#&gt;  1           appProperties    TRUE
+#&gt;  2            capabilities    TRUE
+#&gt;  3            contentHints    TRUE
+#&gt;  4             createdTime    TRUE
+#&gt;  5             description    TRUE
+#&gt;  6       explicitlyTrashed    TRUE
+#&gt;  7           fileExtension    TRUE
+#&gt;  8          folderColorRgb    TRUE
+#&gt;  9       fullFileExtension    TRUE
+#&gt; 10 hasAugmentedPermissions   FALSE
+#&gt; # ... with 41 more rows, and 1 more variables: desc &lt;chr&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

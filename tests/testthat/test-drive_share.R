@@ -6,13 +6,8 @@ context("Share files")
 
 nm_ <- nm_fun("-TEST-drive-share")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  ## make sure directory is clean
-  if (clean) {
-    del <- drive_delete(c(nm_("foo"), nm_("bar")), verbose = FALSE)
-  }
+## setup
+if (FALSE) {
   drive_upload(system.file("DESCRIPTION"), nm_("foo"), verbose = FALSE)
   drive_upload(system.file("DESCRIPTION"),
                nm_("bar"),
@@ -20,9 +15,16 @@ if (run) {
                verbose = FALSE)
 }
 
+## clean
+if (FALSE) {
+  del <- drive_delete(c(nm_("foo"), nm_("bar")), verbose = FALSE)
+}
+
+
 test_that("drive_share doesn't explicitly fail", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   file <- drive_upload(
     R.home('doc/BioC_mirrors.csv'),
@@ -56,13 +58,14 @@ test_that("drive_share doesn't explicitly fail", {
   expect_identical(perms[c("role", "type")], list(role = role, type = type))
 
   ## clean up
-  drive_delete(file)
+  drive_rm(file)
 })
 
 test_that("drive_share() informatively errors if given an unknown `role` or `type`", {
 
   skip_on_travis()
   skip_on_appveyor()
+  skip_if_offline()
 
   expect_error(drive_share(nm_("foo")), "`role` and `type` must be specified.")
 

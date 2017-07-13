@@ -6,15 +6,8 @@ context("Publish files")
 
 nm_ <- nm_fun("-TEST-drive-publish")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  ## make sure directory is clean
-  if (clean) {
-    del <- drive_delete(c(nm_("foo_pdf"), nm_("foo_doc"), nm_("foo_sheet")),
-                        verbose = FALSE)
-  }
-
+## setup
+if (FALSE) {
   drive_upload(R.home('doc/html/about.html'),
                name = nm_("foo_doc"),
                type = "document",
@@ -26,14 +19,20 @@ if (run) {
   drive_upload(R.home('doc/html/Rlogo.pdf'),
                name = nm_("foo_pdf"),
                verbose = FALSE)
-
 }
+## clean
+if (FALSE) {
+  del <- drive_rm(c(nm_("foo_pdf"), nm_("foo_doc"), nm_("foo_sheet")),
+                  verbose = FALSE)
+}
+
 
 
 test_that("drive_publish() publishes Google Documents", {
 
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   drive_doc <- drive_path(nm_("foo_doc"))
 
@@ -47,7 +46,7 @@ test_that("drive_publish() publishes Google Documents", {
   expect_true(drive_doc$publish$published)
 
   expect_message(drive_is_published(drive_doc),
-                 "The latest revision of Google Drive file 'foo_doc-TEST-drive-publish' is published.\n")
+                 "The latest revision of file 'foo_doc-TEST-drive-publish' is published.\n")
 
   ## let's unpublish it
   drive_doc <- drive_unpublish(drive_doc)
@@ -55,7 +54,7 @@ test_that("drive_publish() publishes Google Documents", {
   ## now this sould be false
   expect_false(drive_doc$publish$published)
   expect_message(drive_is_published(drive_doc),
-                 "The latest revision of the Google Drive file 'foo_doc-TEST-drive-publish' is not published.")
+                 "The latest revision of file 'foo_doc-TEST-drive-publish' is NOT published.")
 })
 
 test_that("drive_publish() publishes Google Sheets", {
@@ -64,6 +63,7 @@ test_that("drive_publish() publishes Google Sheets", {
   ## history is a bit different for Sheets
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   drive_sheet <- drive_path(nm_("foo_sheet"))
 
@@ -87,6 +87,7 @@ test_that("drive_publish() fails if the file input is not a Google Drive type", 
 
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   drive_pdf <- drive_path(nm_("foo_pdf"))
 

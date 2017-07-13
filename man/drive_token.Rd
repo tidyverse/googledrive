@@ -16,9 +16,6 @@ omit_token_if(cond)
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
-\value{
-a \code{request} object (an S3 class provided by \code{httr})
-}
 \description{
 If token is not already available, call \code{\link[=drive_auth]{drive_auth()}} to either load
 from cache or initiate OAuth2.0 flow. Return the token -- not "bare" but,

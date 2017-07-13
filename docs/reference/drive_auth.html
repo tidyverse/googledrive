@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Authorize <code>googledrive</code> — drive_auth • googledrive</title>
+<title>Authorize googledrive. — drive_auth • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,16 +86,16 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Authorize <code>googledrive</code></h1>
+    <h1>Authorize googledrive.</h1>
     </div>
 
     
-    <p>Authorize <code>googledrive</code> to view and manage your files. You will be
-directed to a web browser, asked to sign in to your Google account, and to
-grant <code>googledrive</code> permission to operate on your behalf with Google
-Sheets and Google Drive. By default, these user credentials are cached in a
-file named .<code>httr-oauth</code> in the current working directory, from where
-they can be automatically refreshed, as necessary.</p>
+    <p>Authorize googledrive to view and manage your files. You will be directed to
+a web browser, asked to sign in to your Google account, and to grant
+googledrive permission to operate on your behalf with Google Sheets and
+Google Drive. By default, these user credentials are cached in a file named
+<code>.httr-oauth</code> in the current working directory, from where they can be
+automatically refreshed, as necessary.</p>
     
 
     <pre class="usage"><span class='fu'>drive_auth</span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>new_user</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -113,20 +113,20 @@ stored as an <code>.rds</code> file</p></td>
     </tr>
     <tr>
       <th>new_user</th>
-      <td><p>logical, defaults to <code>FALSE</code>. Set to <code>TRUE</code> if you
-want to wipe the slate clean and re-authenticate with the same or different
-Google account. This disables the <code>.httr-oauth</code> file in current
-working directory.</p></td>
+      <td><p>logical, defaults to <code>FALSE</code>. Set to <code>TRUE</code> if you want to
+wipe the slate clean and re-authenticate with the same or different Google
+account. This disables the <code>.httr-oauth</code> file in current working
+directory.</p></td>
     </tr>
     <tr>
       <th>key, secret</th>
       <td><p>the "Client ID" and "Client secret" for the application;
-defaults to the ID and secret built into the <code>googledrive</code> package</p></td>
+defaults to the ID and secret built into the googledrive package</p></td>
     </tr>
     <tr>
       <th>cache</th>
-      <td><p>logical indicating if <code>googledrive</code> should cache
-credentials in the default cache file <code>.httr-oauth</code></p></td>
+      <td><p>logical indicating if googledrive should cache credentials in
+the default cache file <code>.httr-oauth</code></p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -137,40 +137,40 @@ credentials in the default cache file <code>.httr-oauth</code></p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Most users, most of the time, do not need to call this function
-explicitly -- it will be triggered by the first action that
-requires authorization. Even when called, the default arguments will often
-suffice. However, when necessary, this function allows the user to</p><ul>
+    <p>Most users, most of the time, do not need to call this function explicitly --
+it will be triggered by the first action that requires authorization. Even
+when called, the default arguments will often suffice. However, when
+necessary, this function allows the user to</p><ul>
 <li><p>force the creation of a new token</p></li>
 <li><p>retrieve current token as an object, for possible storage to an <code>.rds</code>
 file</p></li>
 <li><p>read the token from an object or from an <code>.rds</code> file</p></li>
 <li><p>provide your own app key and secret -- this requires setting up a new
-project in <a href = 'https://console.developers.google.com'>Google Developers Console</a></p></li>
+project in
+<a href='https://console.developers.google.com'>Google Developers Console</a></p></li>
 <li><p>prevent caching of credentials in <code>.httr-oauth</code></p></li>
 </ul>
-    <p>In a direct call to <code>drive_auth</code>, the user can provide the token, app key
+    <p>In a direct call to <code>drive_auth()</code>, the user can provide the token, app key
 and secret explicitly and can dictate whether interactively-obtained
-credentials will be cached in<code>.httr_oauth</code>. If unspecified, these
-arguments are controlled via options, which, if undefined at the time
-<code>googledrive</code> is loaded, are defined like so:</p><dl class='dl-horizontal'>
-<dt>key</dt><dd><p>Set to option <code>googledrive.client_id</code>, which defaults to
-a client ID that ships with the package</p></dd>
-<dt>secret</dt><dd><p>Set to option <code>googledrive.client_secret</code>, which
-defaults to a client secret that ships with the package</p></dd>
-<dt>cache</dt><dd><p>Set to option <code>googledrive.httr_oauth_cache</code>, which
-defaults to <code>TRUE</code></p></dd>
-</dl>
+credentials will be cached in <code>.httr_oauth</code>. If unspecified, these arguments
+are controlled via options, which, if undefined at the time googledrive is
+loaded, are defined like so:</p><ul>
+<li><p><strong>key</strong> Set to option <code>googledrive.client_id</code>, which defaults to a
+client ID that ships with the package</p></li>
+<li><p><strong>secret</strong> Set to option <code>googledrive.client_secret</code>, which defaults to
+a client secret that ships with the package</p></li>
+<li><p><strong>cache</strong> Set to option <code>googledrive.httr_oauth_cache</code>, which defaults
+to <code>TRUE</code></p></li>
+</ul>
     <p>To override these defaults in persistent way, predefine one or more of
-them with lines like this in a <code>.Rprofile</code> file:</p><pre>
-options(googledrive.client_id = "FOO",
+them with lines like this in a <code>.Rprofile</code> file:</p><pre>options(googledrive.client_id = "FOO",
         googledrive.client_secret = "BAR",
         googledrive.httr_oauth_cache = FALSE)
-</pre><p>See <code><a href='http://www.rdocumentation.org/packages/base/topics/Startup'>Startup</a></code> for possible locations for this file and the
+</pre>
+    <p>See <a href='http://www.rdocumentation.org/packages/base/topics/Startup'>base::Startup</a> for possible locations for this file and the
 implications thereof.</p>
 <p>More detail is available from
-<a href = 'https://developers.google.com/identity/protocols/OAuth2InstalledApp'>Using
-OAuth 2.0 for Installed Applications</a>.</p>
+<a href='https://developers.google.com/identity/protocols/OAuth2InstalledApp'>Using OAuth 2.0 for Installed Applications</a></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -178,22 +178,22 @@ OAuth 2.0 for Installed Applications</a>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='co'>## load/refresh existing credentials, if available</span>
-  <span class='co'>## otherwise, go to browser for authentication and authorization</span>
-  <span class='fu'>drive_auth</span>()
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## load/refresh existing credentials, if available</span>
+<span class='co'>## otherwise, go to browser for authentication and authorization</span>
+<span class='fu'>drive_auth</span>()
 
-  <span class='co'>## force a new token to be obtained</span>
-  <span class='fu'>drive_auth</span>(<span class='kw'>new_user</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='co'>## force a new token to be obtained</span>
+<span class='fu'>drive_auth</span>(<span class='kw'>new_user</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-  <span class='co'>## store token in an object and then to file</span>
-  <span class='no'>ttt</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_auth</span>()
-  <span class='fu'>saveRDS</span>(<span class='no'>ttt</span>, <span class='st'>"ttt.rds"</span>)
+<span class='co'>## store token in an object and then to file</span>
+<span class='no'>ttt</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_auth</span>()
+<span class='fu'>saveRDS</span>(<span class='no'>ttt</span>, <span class='st'>"ttt.rds"</span>)
 
-  <span class='co'>## load a pre-existing token</span>
-  <span class='fu'>drive_auth</span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='no'>ttt</span>)       <span class='co'># from an object</span>
-  <span class='fu'>drive_auth</span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='st'>"ttt.rds"</span>) <span class='co'># from .rds file</span>
-})</div></pre>
+<span class='co'>## load a pre-existing token</span>
+<span class='fu'>drive_auth</span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='no'>ttt</span>)       <span class='co'># from an object</span>
+<span class='fu'>drive_auth</span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='st'>"ttt.rds"</span>) <span class='co'># from .rds file</span>
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -40,7 +40,7 @@ represents, such as:
 \examples{
 \dontrun{
 ## most of us have multiple files or folders on Google Drive
-d <- drive_search()
+d <- drive_find()
 no_file(d)
 single_file(d)
 some_files(d)

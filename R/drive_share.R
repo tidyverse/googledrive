@@ -32,7 +32,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
   if (!(role %in% ok_roles)) {
     stop(
       glue(
-        "`role` must be one of the following: \n{paste(ok_roles, collapse = ', ')}."
+        "`role` must be one of the following: \n{collapse(ok_roles, sep = ', ')}."
       ),
       call. = FALSE
     )
@@ -41,7 +41,7 @@ drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TR
   if (!(type %in% ok_types)) {
     stop(
       glue(
-        "`type` must be one of the following: \n{paste(ok_types, collapse = ', ')}."
+        "`type` must be one of the following: \n{collapse(ok_types, sep = ', ')}."
       ),
       call. = FALSE
     )

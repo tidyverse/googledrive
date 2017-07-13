@@ -90,18 +90,21 @@
     </div>
 
     
-    <p>You may be able to improve the performance of your API calls by requesting
-only the metadata that you actually need. This function is primarily for
-internal use and is geared towards the
-<a href = 'https://developers.google.com/drive/v3/reference/files'>Files resource</a>.
-Assuming that <code>resource = "files"</code>, <code>drive_fields()</code> returns the <code>default</code>
-fields, <code>all</code> fields, or, if <code>fields</code> is non-<code>NULL</code>, the subset of the input
-fields that are recognized as valid fields. <code>prep_fields()</code> prepares fields
-for inclusion as query parameters.</p>
+    <p>You may be able to improve the performance of your API calls by
+requesting only the metadata that you actually need. This function is
+primarily for internal use and is currently focused on the
+<a href='https://developers.google.com/drive/v3/reference/files'>Files resource</a>.
+Assuming that <code>resource = "files"</code> (the default), <code>drive_fields()</code> returns
+a character vector of googledrive's default fields. If input is provided
+via <code>fields</code>, it's checked for validity against the known fields. To see a
+tibble containing all possible fields and a variable indicating which are
+googledrive defaults, call <code>drive_fields(expose())</code>.
+
+    <code>prep_fields()</code> prepares fields for inclusion as query
+parameters.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_fields</span>(<span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource</span> <span class='kw'>=</span> <span class='st'>"files"</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"default"</span>,
-  <span class='st'>"all"</span>))
+    <pre class="usage"><span class='fu'>drive_fields</span>(<span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource</span> <span class='kw'>=</span> <span class='st'>"files"</span>)
 
 <span class='fu'>prep_fields</span>(<span class='no'>fields</span>, <span class='kw'>resource</span> <span class='kw'>=</span> <span class='st'>"files"</span>)</pre>
     
@@ -110,31 +113,29 @@ for inclusion as query parameters.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fields</th>
-      <td><p>Character vector of field names. Optional.</p></td>
+      <td><p>Character vector of field names. Optional. If provided, and
+<code>resource = "files"</code>, they are checked for validity.</p></td>
     </tr>
     <tr>
       <th>resource</th>
-      <td><p>Character, naming the API resource of interest.</p></td>
-    </tr>
-    <tr>
-      <th>which</th>
-      <td><p>Consulted only when <code>resource = "files"</code> and <code>fields = NULL</code>,
-dictates whether all fields are returned or the googledrive defaults.</p></td>
+      <td><p>Character, naming the API resource of interest. Currently,
+only the Files resource is anticipated.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Character vector of field names or a single string.</p>
+    <p><code>drive_fields()</code>: Character vector of field names. <code>prep_fields()</code>: a
+string.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href = 'https://developers.google.com/drive/v3/web/performance#partial'>Working with partial resources</a>,
+    <p><a href='https://developers.google.com/drive/v3/web/performance#partial'>Working with partialresources</a>,
 in the Drive API documentation</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## to get default fields or all fields for the Files resource</span>
+    <pre class="examples"><div class='input'><span class='co'>## to get default fields for the Files resource</span>
 <span class='fu'>drive_fields</span>()</div><div class='output co'>#&gt;  [1] "appProperties"         "capabilities"          "contentHints"         
 #&gt;  [4] "createdTime"           "description"           "explicitlyTrashed"    
 #&gt;  [7] "fileExtension"         "folderColorRgb"        "fullFileExtension"    
@@ -149,36 +150,26 @@ in the Drive API documentation</p>
 #&gt; [34] "thumbnailLink"         "trashed"               "version"              
 #&gt; [37] "videoMediaMetadata"    "viewedByMe"            "viewedByMeTime"       
 #&gt; [40] "viewersCanCopyContent" "webContentLink"        "webViewLink"          
-#&gt; [43] "writersCanShare"      </div><div class='input'><span class='fu'>drive_fields</span>(<span class='kw'>which</span> <span class='kw'>=</span> <span class='st'>"all"</span>)</div><div class='output co'>#&gt;  [1] "appProperties"           "capabilities"           
-#&gt;  [3] "contentHints"            "createdTime"            
-#&gt;  [5] "description"             "explicitlyTrashed"      
-#&gt;  [7] "fileExtension"           "folderColorRgb"         
-#&gt;  [9] "fullFileExtension"       "hasAugmentedPermissions"
-#&gt; [11] "hasThumbnail"            "headRevisionId"         
-#&gt; [13] "iconLink"                "id"                     
-#&gt; [15] "imageMediaMetadata"      "isAppAuthorized"        
-#&gt; [17] "kind"                    "lastModifyingUser"      
-#&gt; [19] "md5Checksum"             "mimeType"               
-#&gt; [21] "modifiedByMe"            "modifiedByMeTime"       
-#&gt; [23] "modifiedTime"            "name"                   
-#&gt; [25] "originalFilename"        "ownedByMe"              
-#&gt; [27] "owners"                  "parents"                
-#&gt; [29] "permissions"             "properties"             
-#&gt; [31] "quotaBytesUsed"          "shared"                 
-#&gt; [33] "sharedWithMeTime"        "sharingUser"            
-#&gt; [35] "size"                    "spaces"                 
-#&gt; [37] "starred"                 "teamDriveId"            
-#&gt; [39] "thumbnailLink"           "thumbnailVersion"       
-#&gt; [41] "trashed"                 "trashedTime"            
-#&gt; [43] "trashingUser"            "version"                
-#&gt; [45] "videoMediaMetadata"      "viewedByMe"             
-#&gt; [47] "viewedByMeTime"          "viewersCanCopyContent"  
-#&gt; [49] "webContentLink"          "webViewLink"            
-#&gt; [51] "writersCanShare"        </div><div class='input'>
+#&gt; [43] "writersCanShare"      </div><div class='input'>
+<span class='co'>## get a tibble of all fields for the Files resource + indicator of defaults</span>
+<span class='fu'>drive_fields</span>(<span class='fu'><a href='expose.html'>expose</a></span>())</div><div class='output co'>#&gt; # A tibble: 51 x 3
+#&gt;                       name default
+#&gt;                      &lt;chr&gt;   &lt;lgl&gt;
+#&gt;  1           appProperties    TRUE
+#&gt;  2            capabilities    TRUE
+#&gt;  3            contentHints    TRUE
+#&gt;  4             createdTime    TRUE
+#&gt;  5             description    TRUE
+#&gt;  6       explicitlyTrashed    TRUE
+#&gt;  7           fileExtension    TRUE
+#&gt;  8          folderColorRgb    TRUE
+#&gt;  9       fullFileExtension    TRUE
+#&gt; 10 hasAugmentedPermissions   FALSE
+#&gt; # ... with 41 more rows, and 1 more variables: desc &lt;chr&gt;</div><div class='input'>
 <span class='co'>## invalid fields are removed and throw warning</span>
 <span class='fu'>drive_fields</span>(<span class='fu'>c</span>(<span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"ownedByMe"</span>, <span class='st'>"pancakes!"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring fields that are non-standard for the Files resource:</span>
 #&gt; <span class='warning'>pancakes!</span></div><div class='output co'>#&gt; [1] "name"      "parents"   "ownedByMe"</div><div class='input'>
-<span class='co'>## fields for query</span>
+<span class='co'>## prepare fields for query</span>
 <span class='fu'>prep_fields</span>(<span class='fu'>c</span>(<span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"ownedByMe"</span>))</div><div class='output co'>#&gt; [1] "files/name,files/parents,files/ownedByMe"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

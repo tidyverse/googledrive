@@ -1,4 +1,4 @@
-#' Download a file from Google Drive.
+#' Download a file from Drive.
 #'
 #' This function downloads files from Google Drive. Native Google files, such as
 #' Google Docs, Google Sheets, Google Slides, must be exported to a conventional
@@ -91,10 +91,8 @@ drive_download <- function(file = NULL,
   if (success) {
     if (verbose) {
       message(
-        glue(
-          "File downloaded from Google Drive:\n{sq(file$name)}\n",
-          "Saved locally as:\n{sq(path)}"
-        )
+        glue("\nFile downloaded:\n  * {file$name}\n",
+             "Saved locally as:\n  * {path}")
       )
     }
   } else {

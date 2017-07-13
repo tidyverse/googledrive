@@ -132,7 +132,7 @@ build_request <- function(path = "",
 
 ## match params provided by user to spec
 ##   * error if required params are missing
-##   * message and drop unknown params
+##   * error for unknown params
 match_params <- function(provided, spec) {
   ## .endpoints %>% map("parameters") %>% flatten() %>% map_lgl("required")
   required <- spec %>% purrr::keep("required") %>% names()
@@ -146,15 +146,14 @@ match_params <- function(provided, spec) {
 
   unknown <- setdiff(names(provided), names(spec))
   if (length(unknown)) {
-    m <- names(provided) %in% unknown
-    msgs <- c(
-      "Ignoring these unrecognized parameters:",
-      glue_data(tibble::enframe(provided[m]), "{name}: {value}")
+    stop(collapse(
+      c("These parameters are not recognized for this endpoint:", unknown),
+      sep = "\n"),
+      call. = FALSE
     )
-    message(paste(msgs, collapse = "\n"))
-    provided <- provided[!m]
   }
-  return(provided)
+
+  provided
 }
 
 ## partition a parameter list into two parts, using names to identify

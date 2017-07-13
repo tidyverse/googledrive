@@ -10,7 +10,6 @@ token_available(verbose = TRUE)
 logical
 }
 \description{
-Check if a token is available in \code{googledrive}' internal
-\code{.state} environment.
+Check if a token is available in googledrive internal \code{.state} environment.
 }
 \keyword{internal}

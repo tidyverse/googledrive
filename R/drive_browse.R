@@ -1,10 +1,10 @@
-#' Visit Google Drive file in browser.
+#' Visit Drive file in browser.
 #'
 #' @template file
 #'
 #' @template dribble-return
 #' @export
-drive_browse <- function(file) {
+drive_browse <- function(file = .Last.value) {
   if (!interactive()) return(invisible(file))
 
   ## TO DO: do we really want to require a 1 row dribble?

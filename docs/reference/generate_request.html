@@ -91,7 +91,7 @@
 
     
     <p>Build a request, using some knowledge of the
-<a href = 'https://developers.google.com/drive/v3/web/about-sdk'>Drive v3 API</a>. Most
+<a href='https://developers.google.com/drive/v3/web/about-sdk'>Drive v3 API</a>. Most
 users should, instead, use higher-level wrappers that facilitate common
 tasks, such as uploading or downloading Drive files. The functions here are
 intended for internal use and for programming around the Drive API.</p>
@@ -228,21 +228,21 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
 #&gt; $url
 #&gt; [1] "https://www.googleapis.com/drive/v3/files/abc?key=AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
 #&gt; </div><div class='input'>
-<span class='co'>## call an endpoint not used by googledrive</span>
-<span class='co'>## List a file's comments</span>
-<span class='co'>## https://developers.google.com/drive/v3/reference/comments/list</span>
-<span class='fu'>not_run</span>({
-  <span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'>build_request</span>(
-    <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"drive/v3/files/{fileId}/comments"</span>,
-    <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"GET"</span>,
-    <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(
-      <span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"your-file-id-goes-here"</span>,
-      <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"*"</span>
-    ),
-    <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>googledrive</span><span class='kw'>:::</span><span class='fu'><a href='drive_token.html'>drive_token</a></span>()
-  )
-  <span class='fu'><a href='process_response.html'>process_response</a></span>(<span class='fu'><a href='make_request.html'>make_request</a></span>(<span class='no'>req</span>))
-})</div></pre>
+## call an endpoint not used by googledrive
+## List a file's comments
+## https://developers.google.com/drive/v3/reference/comments/list
+</div><span class='co'># NOT RUN {</span>
+<span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'>build_request</span>(
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"drive/v3/files/{fileId}/comments"</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"GET"</span>,
+  <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(
+    <span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"your-file-id-goes-here"</span>,
+    <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"*"</span>
+  ),
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>:::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/googledrive/topics/drive_token'>drive_token</a></span>()
+)
+<span class='fu'><a href='process_response.html'>process_response</a></span>(<span class='fu'><a href='make_request.html'>make_request</a></span>(<span class='no'>req</span>))
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

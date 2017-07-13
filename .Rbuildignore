@@ -17,3 +17,4 @@
 ^man-roxygen$
 ^docs$
 ^_pkgdown\.yml$
+^index\.Rmd$

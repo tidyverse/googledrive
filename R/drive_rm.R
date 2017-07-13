@@ -1,4 +1,4 @@
-#' Delete file from Google Drive.
+#' Delete file from Drive.
 #'
 #' @template file
 #' @template verbose
@@ -6,7 +6,7 @@
 #' @return Logical, indicating whether the delete succeeded.
 #' @export
 #'
-drive_delete <- function(file = NULL, verbose = TRUE) {
+drive_rm <- function(file = NULL, verbose = TRUE) {
   del_file <- as_dribble(file)
   if (!some_files(del_file) && verbose) {
     message(glue("No such files found to delete."))
