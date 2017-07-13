@@ -5,13 +5,6 @@ matrix:
   include:
     - os: linux
       dist: precise
-      r: 3.1
-      sudo: false
-      warnings_are_errors: false
-      r_build_args: '--no-build-vignettes'
-      r_check_args: '--ignore-vignettes --no-examples'
-    - os: linux
-      dist: precise
       r: 3.2
       sudo: false
       warnings_are_errors: false
