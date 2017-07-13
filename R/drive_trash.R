@@ -52,6 +52,7 @@ toggle_trash_one <- function(id, trash = TRUE) {
 drive_untrash <- function(file = NULL, verbose = TRUE) {
   if (is_path(file)) {
     paths <- collapse(file, sep = "|")
+    ## TODO this won't take file paths like a/b/c :(
     file <- drive_find(paths, q = "trashed = true")
   }
   trash_file <- as_dribble(file)
