@@ -95,16 +95,26 @@ googledrive package. The names of this list (or the <code>id</code> sub-elements
 the nicknames that can be used to specify an endpoint in
 <code><a href='generate_request.html'>generate_request()</a></code>. For each endpoint, we store its nickname or <code>id</code>, the
 associated HTTP verb, the <code>path</code>, and details about the parameters. This list
-is derived from the
-<a href = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'>Drive API v3 Discovery Document</a>.</p>
+is derived programmatically from the
+<a href='https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'>Drive API v3 Discovery Document</a>.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_endpoints</span>()</pre>
-        
+    <pre class="usage"><span class='fu'>drive_endpoints</span>(<span class='kw'>i</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>i</th>
+      <td><p>The name(s) or integer index(ices) of the endpoints to return.
+Optional. By default, the entire list is returned.</p></td>
+    </tr>
+    </table>
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list containing the subset of the Drive API v3 endpoints that are
-used internally by googledrive.</p>
+    <p>A list containing some or all of the subset of the Drive API v3
+endpoints that are used internally by googledrive.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -218,221 +228,442 @@ used internally by googledrive.</p>
 #&gt;   ..$ id        : chr "drive.files.update.media.resumable"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "/resumable/upload/drive/v3/files/{fileId}"
-#&gt;   ..$ parameters:List of 15</div><div class='input'><span class='fu'>drive_endpoints</span>()$<span class='no'>`drive.files.delete`</span></div><div class='output co'>#&gt; $id
+#&gt;   ..$ parameters:List of 15</div><div class='input'><span class='fu'>drive_endpoints</span>(<span class='st'>"drive.files.delete"</span>)</div><div class='output co'>#&gt; $drive.files.delete
+#&gt; $drive.files.delete$id
 #&gt; [1] "drive.files.delete"
 #&gt; 
-#&gt; $method
+#&gt; $drive.files.delete$method
 #&gt; [1] "DELETE"
 #&gt; 
-#&gt; $path
+#&gt; $drive.files.delete$path
 #&gt; [1] "drive/v3/files/{fileId}"
 #&gt; 
-#&gt; $parameters
-#&gt; $parameters$fileId
-#&gt; $parameters$fileId$location
+#&gt; $drive.files.delete$parameters
+#&gt; $drive.files.delete$parameters$fileId
+#&gt; $drive.files.delete$parameters$fileId$location
 #&gt; [1] "path"
 #&gt; 
-#&gt; $parameters$fileId$required
+#&gt; $drive.files.delete$parameters$fileId$required
 #&gt; [1] TRUE
 #&gt; 
-#&gt; $parameters$fileId$type
+#&gt; $drive.files.delete$parameters$fileId$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $parameters$fileId$repeated
+#&gt; $drive.files.delete$parameters$fileId$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$fileId$format
+#&gt; $drive.files.delete$parameters$fileId$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$fileId$enum
+#&gt; $drive.files.delete$parameters$fileId$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$fileId$description
+#&gt; $drive.files.delete$parameters$fileId$description
 #&gt; [1] "The ID of the file."
 #&gt; 
 #&gt; 
-#&gt; $parameters$supportsTeamDrives
-#&gt; $parameters$supportsTeamDrives$location
+#&gt; $drive.files.delete$parameters$supportsTeamDrives
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $parameters$supportsTeamDrives$required
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$supportsTeamDrives$type
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $parameters$supportsTeamDrives$repeated
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$supportsTeamDrives$format
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$supportsTeamDrives$enum
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$supportsTeamDrives$description
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$description
 #&gt; [1] "Whether the requesting application supports Team Drives."
 #&gt; 
 #&gt; 
-#&gt; $parameters$alt
-#&gt; $parameters$alt$location
+#&gt; $drive.files.delete$parameters$alt
+#&gt; $drive.files.delete$parameters$alt$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $parameters$alt$required
+#&gt; $drive.files.delete$parameters$alt$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$alt$type
+#&gt; $drive.files.delete$parameters$alt$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $parameters$alt$repeated
+#&gt; $drive.files.delete$parameters$alt$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$alt$format
+#&gt; $drive.files.delete$parameters$alt$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$alt$enum
+#&gt; $drive.files.delete$parameters$alt$enum
 #&gt; [1] "json"
 #&gt; 
-#&gt; $parameters$alt$description
+#&gt; $drive.files.delete$parameters$alt$description
 #&gt; [1] "Data format for the response."
 #&gt; 
 #&gt; 
-#&gt; $parameters$fields
-#&gt; $parameters$fields$location
+#&gt; $drive.files.delete$parameters$fields
+#&gt; $drive.files.delete$parameters$fields$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $parameters$fields$required
+#&gt; $drive.files.delete$parameters$fields$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$fields$type
+#&gt; $drive.files.delete$parameters$fields$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $parameters$fields$repeated
+#&gt; $drive.files.delete$parameters$fields$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$fields$format
+#&gt; $drive.files.delete$parameters$fields$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$fields$enum
+#&gt; $drive.files.delete$parameters$fields$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$fields$description
+#&gt; $drive.files.delete$parameters$fields$description
 #&gt; [1] "Selector specifying which fields to include in a partial response."
 #&gt; 
 #&gt; 
-#&gt; $parameters$key
-#&gt; $parameters$key$location
+#&gt; $drive.files.delete$parameters$key
+#&gt; $drive.files.delete$parameters$key$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $parameters$key$required
+#&gt; $drive.files.delete$parameters$key$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$key$type
+#&gt; $drive.files.delete$parameters$key$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $parameters$key$repeated
+#&gt; $drive.files.delete$parameters$key$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$key$format
+#&gt; $drive.files.delete$parameters$key$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$key$enum
+#&gt; $drive.files.delete$parameters$key$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$key$description
+#&gt; $drive.files.delete$parameters$key$description
 #&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
 #&gt; 
 #&gt; 
-#&gt; $parameters$oauth_token
-#&gt; $parameters$oauth_token$location
+#&gt; $drive.files.delete$parameters$oauth_token
+#&gt; $drive.files.delete$parameters$oauth_token$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $parameters$oauth_token$required
+#&gt; $drive.files.delete$parameters$oauth_token$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$oauth_token$type
+#&gt; $drive.files.delete$parameters$oauth_token$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $parameters$oauth_token$repeated
+#&gt; $drive.files.delete$parameters$oauth_token$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$oauth_token$format
+#&gt; $drive.files.delete$parameters$oauth_token$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$oauth_token$enum
+#&gt; $drive.files.delete$parameters$oauth_token$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$oauth_token$description
+#&gt; $drive.files.delete$parameters$oauth_token$description
 #&gt; [1] "OAuth 2.0 token for the current user."
 #&gt; 
 #&gt; 
-#&gt; $parameters$prettyPrint
-#&gt; $parameters$prettyPrint$location
+#&gt; $drive.files.delete$parameters$prettyPrint
+#&gt; $drive.files.delete$parameters$prettyPrint$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $parameters$prettyPrint$required
+#&gt; $drive.files.delete$parameters$prettyPrint$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$prettyPrint$type
+#&gt; $drive.files.delete$parameters$prettyPrint$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $parameters$prettyPrint$repeated
+#&gt; $drive.files.delete$parameters$prettyPrint$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$prettyPrint$format
+#&gt; $drive.files.delete$parameters$prettyPrint$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$prettyPrint$enum
+#&gt; $drive.files.delete$parameters$prettyPrint$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$prettyPrint$description
+#&gt; $drive.files.delete$parameters$prettyPrint$description
 #&gt; [1] "Returns response with indentations and line breaks."
 #&gt; 
 #&gt; 
-#&gt; $parameters$quotaUser
-#&gt; $parameters$quotaUser$location
+#&gt; $drive.files.delete$parameters$quotaUser
+#&gt; $drive.files.delete$parameters$quotaUser$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $parameters$quotaUser$required
+#&gt; $drive.files.delete$parameters$quotaUser$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$quotaUser$type
+#&gt; $drive.files.delete$parameters$quotaUser$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $parameters$quotaUser$repeated
+#&gt; $drive.files.delete$parameters$quotaUser$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$quotaUser$format
+#&gt; $drive.files.delete$parameters$quotaUser$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$quotaUser$enum
+#&gt; $drive.files.delete$parameters$quotaUser$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$quotaUser$description
+#&gt; $drive.files.delete$parameters$quotaUser$description
 #&gt; [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."
 #&gt; 
 #&gt; 
-#&gt; $parameters$userIp
-#&gt; $parameters$userIp$location
+#&gt; $drive.files.delete$parameters$userIp
+#&gt; $drive.files.delete$parameters$userIp$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $parameters$userIp$required
+#&gt; $drive.files.delete$parameters$userIp$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$userIp$type
+#&gt; $drive.files.delete$parameters$userIp$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $parameters$userIp$repeated
+#&gt; $drive.files.delete$parameters$userIp$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$userIp$format
+#&gt; $drive.files.delete$parameters$userIp$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$userIp$enum
+#&gt; $drive.files.delete$parameters$userIp$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $parameters$userIp$description
+#&gt; $drive.files.delete$parameters$userIp$description
 #&gt; [1] "IP address of the site where the request originates. Use this if you want to enforce per-user limits."
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </div><div class='input'><span class='fu'>drive_endpoints</span>(<span class='fl'>4</span>)</div><div class='output co'>#&gt; $drive.files.delete
+#&gt; $drive.files.delete$id
+#&gt; [1] "drive.files.delete"
+#&gt; 
+#&gt; $drive.files.delete$method
+#&gt; [1] "DELETE"
+#&gt; 
+#&gt; $drive.files.delete$path
+#&gt; [1] "drive/v3/files/{fileId}"
+#&gt; 
+#&gt; $drive.files.delete$parameters
+#&gt; $drive.files.delete$parameters$fileId
+#&gt; $drive.files.delete$parameters$fileId$location
+#&gt; [1] "path"
+#&gt; 
+#&gt; $drive.files.delete$parameters$fileId$required
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $drive.files.delete$parameters$fileId$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.delete$parameters$fileId$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$fileId$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$fileId$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$fileId$description
+#&gt; [1] "The ID of the file."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.delete$parameters$supportsTeamDrives
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$supportsTeamDrives$description
+#&gt; [1] "Whether the requesting application supports Team Drives."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.delete$parameters$alt
+#&gt; $drive.files.delete$parameters$alt$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.delete$parameters$alt$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$alt$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.delete$parameters$alt$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$alt$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$alt$enum
+#&gt; [1] "json"
+#&gt; 
+#&gt; $drive.files.delete$parameters$alt$description
+#&gt; [1] "Data format for the response."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.delete$parameters$fields
+#&gt; $drive.files.delete$parameters$fields$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.delete$parameters$fields$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$fields$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.delete$parameters$fields$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$fields$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$fields$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$fields$description
+#&gt; [1] "Selector specifying which fields to include in a partial response."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.delete$parameters$key
+#&gt; $drive.files.delete$parameters$key$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.delete$parameters$key$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$key$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.delete$parameters$key$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$key$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$key$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$key$description
+#&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.delete$parameters$oauth_token
+#&gt; $drive.files.delete$parameters$oauth_token$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.delete$parameters$oauth_token$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$oauth_token$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.delete$parameters$oauth_token$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$oauth_token$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$oauth_token$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$oauth_token$description
+#&gt; [1] "OAuth 2.0 token for the current user."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.delete$parameters$prettyPrint
+#&gt; $drive.files.delete$parameters$prettyPrint$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.delete$parameters$prettyPrint$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$prettyPrint$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.delete$parameters$prettyPrint$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$prettyPrint$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$prettyPrint$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$prettyPrint$description
+#&gt; [1] "Returns response with indentations and line breaks."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.delete$parameters$quotaUser
+#&gt; $drive.files.delete$parameters$quotaUser$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.delete$parameters$quotaUser$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$quotaUser$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.delete$parameters$quotaUser$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$quotaUser$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$quotaUser$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$quotaUser$description
+#&gt; [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.delete$parameters$userIp
+#&gt; $drive.files.delete$parameters$userIp$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.delete$parameters$userIp$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$userIp$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.delete$parameters$userIp$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$userIp$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$userIp$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.delete$parameters$userIp$description
+#&gt; [1] "IP address of the site where the request originates. Use this if you want to enforce per-user limits."
+#&gt; 
 #&gt; 
 #&gt; 
 #&gt; </div></pre>
@@ -440,6 +671,7 @@ used internally by googledrive.</p>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
       

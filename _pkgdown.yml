@@ -18,3 +18,74 @@ navbar:
       href: articles/articles/file-identification.html
     - text: The Drive API
       href: articles/articles/drive-api.html
+
+reference:
+  - title: "Authentication"
+    desc: >
+      Take explicit control of the Google auth status or examine current state
+    contents:
+      - drive_auth
+      - drive_deauth
+      - drive_user
+  - title: "Reach out and touch your files"
+    desc: >
+      Retrieve metadata on your Drive files so you can act on them
+    contents:
+      - drive_find
+      - drive_ls
+      - drive_path
+      - drive_get
+      - drive_browse
+  - title: "File creation and deletion"
+    desc: >
+      Create or delete Drive files and folders
+    contents:
+      - drive_cp
+      - drive_rm
+      - drive_mkdir
+      - drive_mv
+      - drive_rename
+      - drive_upload
+  - title: "Upload and download"
+    desc: >
+      Create Drive files from local and vice versa
+    contents:
+      - drive_upload
+      - drive_download
+  - title: "Dribble object"
+    desc: >
+      Metadata about Drive files is stored in a "Drive tibble" a.k.a. a dribble
+    contents:
+      - dribble
+      - as_dribble
+      - as_id
+      - dribble-checks
+  - title: "Share your files with the world"
+    desc: >
+      View or change the sharing and publishing status of Drive files
+    contents:
+      - drive_publish
+      - drive_unpublish
+      - drive_share
+      - drive_is_published
+      - drive_share_link
+  - title: "Drive API spec"
+    desc: >
+      Summon info about or check input against the Drive API spec
+    contents:
+      - drive_endpoints
+      - drive_extension
+      - drive_fields
+      - drive_mime_type
+      - expose
+  - title: "Programming around the Drive API"
+    desc: >
+      Low-level functions used internally and made available for programming
+    contents:
+      - generate_request
+      - build_request
+      - make_request
+      - do_request
+      - do_paginated_request
+      - process_response
+      - drive_api_key

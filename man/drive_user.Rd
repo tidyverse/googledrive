@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_user.R
 \name{drive_user}
 \alias{drive_user}
-\title{Pull information about the Google Drive user.}
+\title{Information on the user and user's Drive.}
 \usage{
 drive_user(fields = "user", ..., verbose = TRUE)
 }
@@ -19,5 +19,9 @@ which will display as detailed above.}
 A list of class \code{drive_user} with user's data.
 }
 \description{
-Pull information about the Google Drive user.
+Reveals information about the user associated with the current token.
+}
+\seealso{
+This hits the
+\href{https://developers.google.com/drive/v3/reference/about/get}{drive.about.get endpoint}
 }

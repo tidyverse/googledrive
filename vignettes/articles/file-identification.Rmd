@@ -22,14 +22,14 @@ googledrive::drive_auth(token_path)
 library(googledrive)
 ```
 
-## `drive_search()` is like My Drive
+## `drive_find()` is like My Drive
 
 To see your Google Drive files in the browser, visit <https://drive.google.com>. This displays all your files and offers various ways to filter what you see based on file type, folder, starred vs not, etc.
 
-You can get similar results with `drive_search()`. By default, it gets info on the most recent 100 files.
+You can get similar results with `drive_find()`. By default, it gets info on the most recent 100 files.
 
 ```{r}
-(x <- drive_search())
+(x <- drive_find())
 ```
 
 The object you get back holds the metadata for one or more Google Drive files. It is a `dribble`, which is just a `tibble` with Drive files in rows and at least these three variables:
@@ -44,22 +44,22 @@ Just get folders or Google Sheets:
 
 ```{r}
 ## just folders
-drive_search(q = "mimeType = 'application/vnd.google-apps.folder'") %>% head(3)
+drive_find(q = "mimeType = 'application/vnd.google-apps.folder'") %>% head(3)
 
 ## just Sheets
-drive_search(q = "mimeType='application/vnd.google-apps.spreadsheet'") %>% head(3)
+drive_find(q = "mimeType='application/vnd.google-apps.spreadsheet'") %>% head(3)
 ```
 
 Files containing `'horsebean'` in their content:
 
 ```{r}
-drive_search(q = "fullText contains 'horsebean'") %>% head(3)
+drive_find(q = "fullText contains 'horsebean'") %>% head(3)
 ```
 
 Files in your "Shared with me" collection
 
 ```{r}
-drive_search(q = "sharedWithMe = true") %>% head(3)
+drive_find(q = "sharedWithMe = true") %>% head(3)
 ```
 
 googledrive will provide some helpers for [writing these search clauses](https://developers.google.com/drive/v3/web/search-parameters) in due course ([GitHub issue](https://github.com/tidyverse/googledrive/issues/38)).
@@ -68,16 +68,16 @@ There is also a `pattern` argument, which will filter the retrieved results for 
 
 ```{r}
 ## this finds nothing because Drive's name search looks only at prefixes
-drive_search(q = "name contains 'wts'")
+drive_find(q = "name contains 'wts'")
 
 ## therefore we do regex matching on the R side
-drive_search(pattern = "wts")
+drive_find(pattern = "wts")
 ```
 
-If you know the exact name, you can use `drive_search()` or, less cumbersome, the `drive_path()` function described next.
+If you know the exact name, you can use `drive_find()` or, less cumbersome, the `drive_path()` function described next.
 
 ```{r}
-drive_search(q = "name = '538-star-wars-survey'")
+drive_find(q = "name = '538-star-wars-survey'")
 ```
 
 ## `drive_path()` works on a path

@@ -91,3 +91,42 @@ test_that("file_ext_safe() returns NULL unless there's a usable extension", {
   expect_null(file_ext_safe("a/b/c/foo"))
   expect_identical(file_ext_safe("foo.wut"), "wut")
 })
+
+test_that("partition_path() splits into stuff before/after last slash", {
+  f <- function(x, y) list(parent = x, name = y)
+
+  expect_identical(partition_path(NULL), f(NULL, NULL))
+  expect_identical(partition_path(character(0)), f(NULL, NULL))
+
+  expect_identical(partition_path(""), f(NULL, ""))
+
+  expect_identical(partition_path("~"), f("~/", NULL))
+  expect_identical(partition_path("~/"), f("~/", NULL))
+  expect_identical(partition_path("/"), f("~/", NULL))
+
+  ## maybe_name = TRUE --> use `path` as is, don't append slash
+  expect_identical(partition_path("~/a", TRUE), f("~/", "a"))
+  expect_identical(partition_path("/a", TRUE), f("~/", "a"))
+  expect_identical(partition_path("/a/", TRUE), f("~/a/", NULL))
+  expect_identical(partition_path("a/", TRUE), f("a/", NULL))
+  expect_identical(partition_path("a", TRUE), f(NULL, "a"))
+
+  expect_identical(partition_path("~/a/b/", TRUE), f("~/a/b/", NULL))
+  expect_identical(partition_path("/a/b/", TRUE), f("~/a/b/", NULL))
+  expect_identical(partition_path("a/b/", TRUE), f("a/b/", NULL))
+  expect_identical(partition_path("a/b", TRUE), f("a/", "b"))
+})
+
+test_that("partition_path() fails for bad input", {
+  expect_error(partition_path(letters), "length\\(path\\) == 1 is not TRUE")
+  expect_error(partition_path(dribble()), "is_path\\(path\\) is not TRUE")
+  expect_error(partition_path(as_id("123"), '!inherits\\(x, "drive_id"\\) is not TRUE'))
+})
+
+test_that("is_path() works", {
+  expect_true(is_path("a"))
+  expect_true(is_path(letters))
+  expect_false(is_path(as_id("a")))
+  expect_false(is_path(as_id(letters)))
+  expect_false(is_path(dribble()))
+})

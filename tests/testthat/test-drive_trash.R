@@ -11,34 +11,30 @@ context("Trash files")
 
 nm_ <- nm_fun("-TEST-drive-trash")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  ## make sure directory is clean
-  if (clean) {
-    del <- drive_delete(nm_("foo"), verbose = FALSE)
-  }
+## setup
+if (FALSE) {
   drive_mkdir(nm_("foo"))
 }
 
-test_that("drive_trash() moves object to the trash", {
+## clean
+if (FALSE) {
+  del <- drive_rm(nm_("foo"), verbose = FALSE)
+}
+
+
+test_that("drive_trash() moves object to the trash and drive_untrash() undoes", {
 
   skip_on_travis()
   skip_on_appveyor()
+  skip_if_offline()
 
   expect_true(drive_trash(nm_("foo")))
-  foo <- drive_search(nm_("foo"), q = "trashed = true")
+  foo <- drive_find(nm_("foo"), q = "trashed = true")
   foo <- promote(foo, "trashed")
   expect_true(foo$trashed)
-})
-
-test_that("drive_untrash() moves object out of the trash", {
-
-  skip_on_travis()
-  skip_on_appveyor()
 
   expect_true(drive_untrash(nm_("foo")))
-  foo <- drive_search(nm_("foo"))
+  foo <- drive_find(nm_("foo"))
   foo <- promote(foo, "trashed")
   expect_false(foo$trashed)
 })
@@ -46,6 +42,7 @@ test_that("drive_untrash() moves object out of the trash", {
 # test_that("drive_empty_trash() empties trash", {
 #   skip_on_travis()
 #   skip_on_appveyor()
+#   skip_if_offline()
 #   skip_if_not(EMPTY_TRASH)
 #   expect_message(drive_empty_trash())
 #   expect_identical(nrow(drive_view_trash()), 0L)

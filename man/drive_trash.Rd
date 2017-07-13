@@ -2,9 +2,12 @@
 % Please edit documentation in R/drive_trash.R
 \name{drive_trash}
 \alias{drive_trash}
+\alias{drive_untrash}
 \title{Trash file on Google Drive.}
 \usage{
 drive_trash(file = NULL, verbose = TRUE)
+
+drive_untrash(file = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
@@ -15,17 +18,23 @@ or a \code{dribble}.}
 (default \code{TRUE}).}
 }
 \value{
-Logical, indicating whether the trashing succeeded.
+Logical, indicating whether the trashing/untrashing succeeded.
 }
 \description{
 Trash file on Google Drive.
 }
 \examples{
 \dontrun{
-## Trash a single file in the trash.
-drive_trash("chickwts.csv")
+## Create a file to trash.
+file <- drive_upload(system.file("DESCRIPTION"), "DESC")
+## Put a single file in the trash.
+drive_trash("DESC")
+drive_untrash("DESC")
 
-## Trash multiple files in trash.
-drive_trash(c("abc", "def"))
+## Put multiple files in trash.
+file_a <- drive_upload(system.file("DESCRIPTION"), "file_a")
+file_b <- drive_upload(system.file("DESCRIPTION"), "file_b")
+drive_trash(c("file_a", "file_b"))
+drive_untrash(c("file_a", "file_b"))
 }
 }

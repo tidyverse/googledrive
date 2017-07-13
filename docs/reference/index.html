@@ -103,11 +103,145 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
+            <h2 id="section-authentication" class="hasAnchor"><a href="#section-authentication" class="anchor"></a>Authentication</h2>
+            <p class="section-desc"><p>Take explicit control of the Google auth status or examine current state</p></p>
           </th>
         </tr>
         <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_auth.html">drive_auth</a></code> </p>
+          </td>
+          <td><p>Authorize googledrive.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_deauth.html">drive_deauth</a></code> </p>
+          </td>
+          <td><p>Suspend authorization.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_user.html">drive_user</a></code> </p>
+          </td>
+          <td><p>Information on the user and user's Drive.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-reach-out-and-touch-your-files" class="hasAnchor"><a href="#section-reach-out-and-touch-your-files" class="anchor"></a>Reach out and touch your files</h2>
+            <p class="section-desc"><p>Retrieve metadata on your Drive files so you can act on them</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_find.html">drive_find</a></code> </p>
+          </td>
+          <td><p>Search for files on Google Drive.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_ls.html">drive_ls</a></code> </p>
+          </td>
+          <td><p>List contents of a folder.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="paths.html">drive_path_exists</a></code> <code><a href="paths.html">drive_paths_exist</a></code> <code><a href="paths.html">drive_path</a></code> <code><a href="paths.html">drive_paths</a></code> </p>
+          </td>
+          <td><p>Query paths.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_get.html">drive_get</a></code> </p>
+          </td>
+          <td><p>Get Drive files by id</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_browse.html">drive_browse</a></code> </p>
+          </td>
+          <td><p>Visit Drive file in browser.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-file-creation-and-deletion" class="hasAnchor"><a href="#section-file-creation-and-deletion" class="anchor"></a>File creation and deletion</h2>
+            <p class="section-desc"><p>Create or delete Drive files and folders</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_cp.html">drive_cp</a></code> </p>
+          </td>
+          <td><p>Copy a Drive file.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_rm.html">drive_rm</a></code> </p>
+          </td>
+          <td><p>Delete file from Drive.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_mkdir.html">drive_mkdir</a></code> </p>
+          </td>
+          <td><p>Create a folder on Drive.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_mv.html">drive_mv</a></code> <code><a href="drive_mv.html">drive_move</a></code> </p>
+          </td>
+          <td><p>Move a Drive file.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_rename.html">drive_rename</a></code> </p>
+          </td>
+          <td><p>Rename a Drive file</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_upload.html">drive_upload</a></code> </p>
+          </td>
+          <td><p>Upload a file to Drive.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-upload-and-download" class="hasAnchor"><a href="#section-upload-and-download" class="anchor"></a>Upload and download</h2>
+            <p class="section-desc"><p>Create Drive files from local and vice versa</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_upload.html">drive_upload</a></code> </p>
+          </td>
+          <td><p>Upload a file to Drive.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_download.html">drive_download</a></code> </p>
+          </td>
+          <td><p>Download a file from Drive.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-dribble-object" class="hasAnchor"><a href="#section-dribble-object" class="anchor"></a>Dribble object</h2>
+            <p class="section-desc"><p>Metadata about Drive files is stored in a “Drive tibble” a.k.a. a dribble</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p></p>
+          </td>
+          <td><p>dribble object</p></td>
+        </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="as_dribble.html">as_dribble</a></code> </p>
@@ -125,120 +259,20 @@
             <p><code><a href="dribble-checks.html">no_file</a></code> <code><a href="dribble-checks.html">single_file</a></code> <code><a href="dribble-checks.html">some_files</a></code> <code><a href="dribble-checks.html">confirm_single_file</a></code> <code><a href="dribble-checks.html">confirm_some_files</a></code> <code><a href="dribble-checks.html">is_folder</a></code> <code><a href="dribble-checks.html">is_mine</a></code> </p>
           </td>
           <td><p>Check facts about a dribble</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dribble.html">dribble</a></code> </p>
-          </td>
-          <td><p>dribble object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_api_key.html">drive_api_key</a></code> </p>
-          </td>
-          <td><p>Get an API key</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_auth.html">drive_auth</a></code> </p>
-          </td>
-          <td><p>Authorize <code>googledrive</code></p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_browse.html">drive_browse</a></code> </p>
-          </td>
-          <td><p>Visit Google Drive file in browser.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_deauth.html">drive_deauth</a></code> </p>
-          </td>
-          <td><p>Suspend authorization</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_delete.html">drive_delete</a></code> </p>
-          </td>
-          <td><p>Delete file from Google Drive.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_download.html">drive_download</a></code> </p>
-          </td>
-          <td><p>Download a file from Google Drive.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_endpoints.html">drive_endpoints</a></code> </p>
-          </td>
-          <td><p>List Drive endpoints</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_fields.html">drive_fields</a></code> <code><a href="drive_fields.html">prep_fields</a></code> </p>
-          </td>
-          <td><p>Request partial resources</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_get.html">drive_get</a></code> </p>
-          </td>
-          <td><p>Get Drive files by id</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_is_published.html">drive_is_published</a></code> </p>
-          </td>
-          <td><p>Check if Google Drive file is published</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_ls.html">drive_ls</a></code> </p>
-          </td>
-          <td><p>List contents of a folder.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_mime_type.html">drive_mime_type</a></code> </p>
-          </td>
-          <td><p>Lookup MIME type</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_mkdir.html">drive_mkdir</a></code> </p>
-          </td>
-          <td><p>Create a folder on Google Drive.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_mv.html">drive_mv</a></code> </p>
-          </td>
-          <td><p>Move Google Drive file.</p></td>
-        </tr><tr>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-share-your-files-with-the-world" class="hasAnchor"><a href="#section-share-your-files-with-the-world" class="anchor"></a>Share your files with the world</h2>
+            <p class="section-desc"><p>View or change the sharing and publishing status of Drive files</p></p>
+          </th>
+        </tr>
+        <tr>
           <!--  -->
           <td>
             <p><code><a href="drive_publish.html">drive_publish</a></code> </p>
           </td>
           <td><p>Publish Google Drive file.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_search.html">drive_search</a></code> </p>
-          </td>
-          <td><p>Search for files on Google Drive.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_share_link.html">drive_share_link</a></code> </p>
-          </td>
-          <td><p>Retrieve a file's share link.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="drive_share.html">drive_share</a></code> </p>
-          </td>
-          <td><p>Update Google Drive file share permissions.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -248,27 +282,73 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="drive_upload.html">drive_upload</a></code> </p>
+            <p><code><a href="drive_share.html">drive_share</a></code> </p>
           </td>
-          <td><p>Upload a file to Google Drive.</p></td>
+          <td><p>Update Google Drive file share permissions.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="drive_user.html">drive_user</a></code> </p>
+            <p><code><a href="drive_is_published.html">drive_is_published</a></code> </p>
           </td>
-          <td><p>Pull information about the Google Drive user.</p></td>
+          <td><p>Check if Google Drive file is published</p></td>
         </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_share_link.html">drive_share_link</a></code> </p>
+          </td>
+          <td><p>Retrieve a file's share link.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-drive-api-spec" class="hasAnchor"><a href="#section-drive-api-spec" class="anchor"></a>Drive API spec</h2>
+            <p class="section-desc"><p>Summon info about or check input against the Drive API spec</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_endpoints.html">drive_endpoints</a></code> </p>
+          </td>
+          <td><p>List Drive endpoints</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_extension.html">drive_extension</a></code> </p>
+          </td>
+          <td><p>Lookup extension from MIME type.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_fields.html">drive_fields</a></code> <code><a href="drive_fields.html">prep_fields</a></code> </p>
+          </td>
+          <td><p>Request partial resources</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_mime_type.html">drive_mime_type</a></code> </p>
+          </td>
+          <td><p>Lookup MIME type.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="expose.html">expose</a></code> </p>
+          </td>
+          <td><p>An expose object.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-programming-around-the-drive-api" class="hasAnchor"><a href="#section-programming-around-the-drive-api" class="anchor"></a>Programming around the Drive API</h2>
+            <p class="section-desc"><p>Low-level functions used internally and made available for programming</p></p>
+          </th>
+        </tr>
+        <tr>
           <!--  -->
           <td>
             <p><code><a href="generate_request.html">generate_request</a></code> <code><a href="generate_request.html">build_request</a></code> </p>
           </td>
           <td><p>Build a request for the Google Drive v3 API</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="googledrive.html">googledrive</a></code> </p>
-          </td>
-          <td><p>googledrive.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -278,15 +358,15 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="paths.html">drive_path_exists</a></code> <code><a href="paths.html">drive_paths_exist</a></code> <code><a href="paths.html">drive_path</a></code> <code><a href="paths.html">drive_paths</a></code> </p>
-          </td>
-          <td><p>Query paths.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="process_response.html">process_response</a></code> </p>
           </td>
           <td><p>Process a response from the Google Drive v3 API</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drive_api_key.html">drive_api_key</a></code> </p>
+          </td>
+          <td><p>Get an API key</p></td>
         </tr>
       </tbody>
       </table>
@@ -296,7 +376,14 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-authentication">Authentication</a></li>
+      <li><a href="#section-reach-out-and-touch-your-files">Reach out and touch your files</a></li>
+      <li><a href="#section-file-creation-and-deletion">File creation and deletion</a></li>
+      <li><a href="#section-upload-and-download">Upload and download</a></li>
+      <li><a href="#section-dribble-object">Dribble object</a></li>
+      <li><a href="#section-share-your-files-with-the-world">Share your files with the world</a></li>
+      <li><a href="#section-drive-api-spec">Drive API spec</a></li>
+      <li><a href="#section-programming-around-the-drive-api">Programming around the Drive API</a></li>
     </ul>
   </div>
 </div>

@@ -2,9 +2,9 @@
 % Please edit documentation in R/drive_browse.R
 \name{drive_browse}
 \alias{drive_browse}
-\title{Visit Google Drive file in browser.}
+\title{Visit Drive file in browser.}
 \usage{
-drive_browse(file)
+drive_browse(file = .Last.value)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest
@@ -16,5 +16,5 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-Visit Google Drive file in browser.
+Visit Drive file in browser.
 }

@@ -1,4 +1,9 @@
-#' Pull information about the Google Drive user.
+#' Information on the user and user's Drive.
+#'
+#' Reveals information about the user associated with the current token.
+#'
+#' @seealso This hits the
+#'   [drive.about.get endpoint](https://developers.google.com/drive/v3/reference/about/get)
 #'
 #' @param fields The fields the user would like output - by default only `user`,
 #'   which will display as detailed above.
@@ -29,7 +34,7 @@ drive_user <- function(fields = "user", ..., verbose = TRUE) {
 #' @param fields fields to query, default is `user`.
 #' @param ... name-value pairs to query the API
 #'
-#' @return list of class \code{guser} with user's information
+#' @return list of class `guser` with user's information
 #' @keywords internal
 
 guser <- function(fields = "user", ...) {

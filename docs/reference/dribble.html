@@ -90,24 +90,24 @@
     </div>
 
     
-    <p>googledrive stores the metadata for one or more Google Drive files as a
-<code>dribble</code>. It is a <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble-package'>tibble</a> with one row per file
-and, at a minimum, these variables:</p><ul>
+    <p>googledrive stores the metadata for one or more Drive files as a
+<code>dribble</code>. It is a "Drive <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble-package'>tibble</a>" with one row
+per file and, at a minimum, these variables:</p><ul>
 <li><p><code>name</code>: a character variable containing file names</p></li>
-<li><p><code>id</code>: a character variable of Google Drive file ids</p></li>
+<li><p><code>id</code>: a character variable of Drive file ids</p></li>
 <li><p><code>files_resource</code>: a list-column of
-<a href = 'https://developers.google.com/drive/v3/reference/files#resource'>Files resource</a>
+<a href='https://developers.google.com/drive/v3/reference/files#resource'>Files resource</a>
 objects. Note there is no guarantee that all documented fields are always
-present.</p></li>
+present. We do check if the <code>kind</code> field is present and equal to
+<code>drive#file</code>.</p></li>
 </ul>
+
+    <p>In general, the dribble class will be retained even after
+subsetting, as long as the required variables are present and of the
+correct type.</p>
     
 
         
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>In general, the dribble class will be retained even after subsetting, as
-long as the required variables are present and of the correct type.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code><a href='as_dribble.html'>as_dribble()</a></code></p>
@@ -118,8 +118,6 @@ long as the required variables are present and of the correct type.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
           </ul>
 

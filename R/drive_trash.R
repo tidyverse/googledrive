@@ -1,17 +1,22 @@
 #' Trash file on Google Drive.
-#'
 #' @template file
 #' @template verbose
 #'
-#' @return Logical, indicating whether the trashing succeeded.
+#' @return Logical, indicating whether the trashing/untrashing succeeded.
 #' @export
 #' @examples
 #' \dontrun{
-#' ## Trash a single file in the trash.
-#' drive_trash("chickwts.csv")
+#' ## Create a file to trash.
+#' file <- drive_upload(system.file("DESCRIPTION"), "DESC")
+#' ## Put a single file in the trash.
+#' drive_trash("DESC")
+#' drive_untrash("DESC")
 #'
-#' ## Trash multiple files in trash.
-#' drive_trash(c("abc", "def"))
+#' ## Put multiple files in trash.
+#' file_a <- drive_upload(system.file("DESCRIPTION"), "file_a")
+#' file_b <- drive_upload(system.file("DESCRIPTION"), "file_b")
+#' drive_trash(c("file_a", "file_b"))
+#' drive_untrash(c("file_a", "file_b"))
 #' }
 drive_trash <- function(file = NULL, verbose = TRUE) {
   trash_file <- as_dribble(file)
@@ -40,33 +45,22 @@ trash_one <- function(id, trash = TRUE) {
     params = list(fileId = id,
                   trashed = trash)
   )
-  proc_res <- do_request(request, encode = "json")
+  response <- make_request(request, encode = "json")
+  proc_res <- process_response(response)
   identical(proc_res$id, id)
 }
 
-#' Untrash file on Google Drive.
-#'
-#' @template file
-#' @template verbose
-#'
-#' @return Logical, indicating whether the untrashing succeeded.
+#' @rdname drive_trash
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' ## Untrash a single file in the trash.
-#' drive_untrash("chickwts.csv")
-#'
-#' ## Untrash multiple files in trash.
-#' drive_untrash(c("abc", "def"))
-#' }
 drive_untrash <- function(file = NULL, verbose = TRUE) {
-  if (is.character(file)) {
-    file <- drive_search(file, q = "trashed = true")
+  if (is_path(file)) {
+    paths <- collapse(file, sep = "|")
+    file <- drive_find(paths, q = "trashed = true")
   }
   trash_file <- as_dribble(file)
   if (!some_files(trash_file) && verbose) {
     message(glue("No such files found to trash"))
+    return(invisible(FALSE))
   }
 
   out <- purrr::map_lgl(trash_file$id, trash_one, trash = FALSE)
@@ -88,18 +82,17 @@ drive_untrash <- function(file = NULL, verbose = TRUE) {
 #' @template dribble-return
 #' @export
 drive_view_trash <- function() {
-  drive_search(q = "trashed = true")
+  drive_find(q = "trashed = true")
 }
 
 #' Empty Google Drive Trash.
-#'
-#' @template verbose
-#' @description Caution: this will permanently delete files in your
+#' Caution: this will permanently delete files in your
 #'    Google Drive trash.
+#' @template verbose
 #' @export
 drive_empty_trash <- function(verbose = TRUE) {
   files <- drive_view_trash()
-  del <- drive_delete(files, verbose = FALSE)
+  del <- drive_rm(files, verbose = FALSE)
   n <- sum(del)
   if (verbose) {
     if (n > 0L) {

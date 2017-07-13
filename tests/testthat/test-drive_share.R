@@ -5,9 +5,14 @@ context("Share files")
 
 nm_ <- nm_fun("-TEST-drive-share")
 
+## clean
+if (FALSE) {
+  del <- drive_rm(nm_("chickwts"))
+}
 test_that("drive_share doesn't explicitly fail", {
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   write.table(chickwts, "chickwts.txt")
   on.exit(unlink("chickwts.txt"))
@@ -44,5 +49,5 @@ test_that("drive_share doesn't explicitly fail", {
   expect_identical(perms[c("role", "type")], list(role = role, type = type))
 
   ## clean up
-  drive_delete(drive_chickwts)
+  drive_rm(drive_chickwts)
 })

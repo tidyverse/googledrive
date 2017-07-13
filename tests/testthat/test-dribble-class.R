@@ -24,7 +24,7 @@ test_that("validate_dribble() checks class, var names, var types", {
   d$id <- numeric()
   expect_error(
     validate_dribble(d),
-    "Invalid dribble. Column types are incorrect."
+    "Invalid dribble. These columns have the wrong type"
   )
 
   ## missing a required variable
@@ -32,7 +32,7 @@ test_that("validate_dribble() checks class, var names, var types", {
   d$name <- NULL
   expect_error(
     validate_dribble(d),
-    "Invalid dribble. These column names are required:"
+    "Invalid dribble. These required column names are missing"
   )
 
   ## list-col elements do not have `kind = "drive#file"`
@@ -45,7 +45,7 @@ test_that("validate_dribble() checks class, var names, var types", {
   )
   expect_error(
     validate_dribble(d),
-    'all\\(kind == "drive#file"\\) is not TRUE'
+    "Invalid dribble. Can't confirm `kind = \"drive#file\"`"
   )
 })
 

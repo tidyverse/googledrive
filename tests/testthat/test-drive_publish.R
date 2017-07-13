@@ -11,8 +11,8 @@ clean <- FALSE
 if (run) {
   ## make sure directory is clean
   if (clean) {
-    del <- drive_delete(c(nm_("chickwts_txt"), nm_("chickwts_gdoc")),
-                        verbose = FALSE)
+    del <- drive_rm(c(nm_("chickwts_txt"), nm_("chickwts_gdoc")),
+                    verbose = FALSE)
   }
   write.table(chickwts, "chickwts.txt")
   drive_upload("chickwts.txt",
@@ -30,6 +30,7 @@ test_that("drive_publish doesn't explicitly fail", {
 
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   drive_chickwts <- drive_path(nm_("chickwts_gdoc"))
 
@@ -53,6 +54,7 @@ test_that("drive_publish fails if the file input is not a Google Drive type", {
 
   skip_on_appveyor()
   skip_on_travis()
+  skip_if_offline()
 
   drive_chickwts <- drive_path(nm_("chickwts_txt"))
 
