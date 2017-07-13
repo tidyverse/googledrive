@@ -11,7 +11,7 @@
 #' @template verbose
 #'
 #' @return a `request` object (an S3 class provided by
-#'   [`httr`][httr:httr-package])
+#'   [httr][httr::httr])
 #'
 #' @keywords internal
 drive_token <- function(verbose = FALSE) {
