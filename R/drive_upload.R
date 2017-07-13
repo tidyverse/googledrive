@@ -78,23 +78,23 @@ drive_upload <- function(file = NULL,
   name <- name %||% basename(file)
   mimeType <- drive_mime_type(type)
 
-  ## is there a pre-existing file at destination?
-  q_name <- glue("name = {sq(name)}")
-  q_parent <- glue("{sq(path$id)} in parents")
-  qq <- collapse(c(q_name, q_parent), sep = " and ")
-  existing <- drive_find(q = qq)
+  up_id <- NULL
+  if (overwrite) {
+    ## is there a pre-existing file at destination?
+    q_name <- glue("name = {sq(name)}")
+    q_parent <- glue("{sq(path$id)} in parents")
+    qq <- collapse(c(q_name, q_parent), sep = " and ")
+    existing <- drive_find(q = qq)
 
-  if (nrow(existing) > 0) {
-    out_path <- unsplit_path(path$name %||% "", name)
-    if (!overwrite) {
-      stop(glue("Path already exists:\n{out_path}", call. = FALSE))
+    if (nrow(existing) > 0) {
+      out_path <- unsplit_path(path$name %||% "", name)
+      if (nrow(existing) > 1) {
+        stop(glue("Path to overwrite is not unique:\n{out_path}", call. = FALSE))
+      }
     }
-    if (nrow(existing) > 1) {
-      stop(glue("Path to overwrite is not unique:\n{out_path}", call. = FALSE))
-    }
+    ## id for the uploaded file
+    up_id <- existing$id
   }
-  ## id for the uploaded file
-  up_id <- existing$id
 
   if (length(up_id) == 0) {
     request <- generate_request(
