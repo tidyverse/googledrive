@@ -1,8 +1,8 @@
-#' Trash file on Drive.
+#' Move Drive files to the trash.
 #' @template file
 #' @template verbose
 #'
-#' @return Logical, indicating whether the trashing/untrashing succeeded.
+#' @return Logical vector, indicating whether the trashing/untrashing succeeded.
 #' @export
 #' @examples
 #' \dontrun{
@@ -20,11 +20,12 @@
 #' }
 drive_trash <- function(file = NULL, verbose = TRUE) {
   trash_file <- as_dribble(file)
-  if (!some_files(trash_file) && verbose) {
+  if (no_file(trash_file) && verbose) {
     message(glue("No such files found to trash"))
+    return(invisible(logical(0)))
   }
 
-  out <- purrr::map_lgl(trash_file$id, trash_one)
+  out <- purrr::map_lgl(trash_file$id, toggle_trash_one)
 
   if (verbose) {
     if (any(out)) {
@@ -35,7 +36,7 @@ drive_trash <- function(file = NULL, verbose = TRUE) {
   invisible(out)
 }
 
-trash_one <- function(id, trash = TRUE) {
+toggle_trash_one <- function(id, trash = TRUE) {
   request <- generate_request(
     endpoint = "drive.files.update",
     params = list(fileId = id,
@@ -54,21 +55,17 @@ drive_untrash <- function(file = NULL, verbose = TRUE) {
     file <- drive_find(paths, q = "trashed = true")
   }
   trash_file <- as_dribble(file)
-  if (!some_files(trash_file) && verbose) {
+  if (no_file(trash_file) && verbose) {
     message(glue("No such files found to trash"))
-    return(invisible(FALSE))
+    return(invisible(logical(0)))
   }
 
-  out <- purrr::map_lgl(trash_file$id, trash_one, trash = FALSE)
+  out <- purrr::map_lgl(trash_file$id, toggle_trash_one, trash = FALSE)
 
   if (verbose) {
     if (any(out)) {
       successes <- glue_data(trash_file[out, ], "  * {name}: {id}")
       message(collapse(c("Files untrashed:", successes), sep = "\n"))
-    }
-    if (any(!out)) {
-      failures <- glue_data(trash_file[!out, ], "  * {name}: {id}")
-      message(collapse(c("Files NOT untrashed:", failures), sep = "\n"))
     }
   }
   invisible(out)
@@ -82,8 +79,7 @@ drive_view_trash <- function() {
 }
 
 #' Empty Drive Trash.
-#' Caution: this will permanently delete files in your
-#'   Drive trash.
+#' Caution: this will permanently delete files in your Drive trash.
 #' @template verbose
 #' @export
 drive_empty_trash <- function(verbose = TRUE) {
@@ -91,10 +87,11 @@ drive_empty_trash <- function(verbose = TRUE) {
   n <- nrow(files)
   if (n == 0L) {
     message("Your trash was already empty.")
-    return(invisible(NULL))
+    return(invisible(logical(0)))
   }
   del <- drive_rm(files, verbose = FALSE)
   if (verbose) {
     message(glue("You have successfully deleted {n} file(s) from your Google Drive trash."))
+    return(invisible(TRUE))
   }
 }
