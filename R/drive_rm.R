@@ -33,5 +33,6 @@ delete_one <- function(id) {
     endpoint = "drive.files.delete",
     params = list(fileId = id)
   )
-  do_request(request)
+  response <- make_request(request)
+  process_response(response)
 }
