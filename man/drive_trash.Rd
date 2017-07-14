@@ -3,7 +3,7 @@
 \name{drive_trash}
 \alias{drive_trash}
 \alias{drive_untrash}
-\title{Move Drive files to the trash.}
+\title{Move files to or from trash.}
 \usage{
 drive_trash(file = NULL, verbose = TRUE)
 
@@ -21,7 +21,7 @@ or a \code{dribble}.}
 Logical vector, indicating whether the trashing/untrashing succeeded.
 }
 \description{
-Move Drive files to the trash.
+Move files to or from trash.
 }
 \examples{
 \dontrun{

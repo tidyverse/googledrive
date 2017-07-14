@@ -1,4 +1,4 @@
-#' Move Drive files to the trash.
+#' Move files to or from trash.
 #' @template file
 #' @template verbose
 #'
@@ -72,7 +72,7 @@ drive_untrash <- function(file = NULL, verbose = TRUE) {
   invisible(out)
 }
 
-#' View files in Drive Trash.
+#' Get files in Drive Trash.
 #' @template dribble-return
 #' @export
 drive_view_trash <- function() {
@@ -85,14 +85,16 @@ drive_view_trash <- function() {
 #' @export
 drive_empty_trash <- function(verbose = TRUE) {
   files <- drive_view_trash()
-  n <- nrow(files)
-  if (n == 0L) {
+  if (no_file(files)) {
     message("Your trash was already empty.")
     return(invisible(logical(0)))
   }
   del <- drive_rm(files, verbose = FALSE)
   if (verbose) {
-    message(glue("You have successfully deleted {n} file(s) from your Google Drive trash."))
+    message(glue(
+      "You have successfully deleted {sum(del)} file(s) ",
+      "from your Google Drive trash."
+    ))
     return(invisible(TRUE))
   }
 }

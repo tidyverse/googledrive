@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_rm.R
 \name{drive_rm}
 \alias{drive_rm}
-\title{Delete file from Drive.}
+\title{Delete files from Drive.}
 \usage{
 drive_rm(file = NULL, verbose = TRUE)
 }
@@ -15,8 +15,9 @@ or a \code{dribble}.}
 (default \code{TRUE}).}
 }
 \value{
-Logical, indicating whether the delete succeeded.
+Logical vector, indicating whether the delete succeeded.
 }
 \description{
-Caution: this will permanently delete your files.
+Caution: this will permanently delete your files! For a safer,
+reversible option, see \code{\link[=drive_trash]{drive_trash()}}.
 }
