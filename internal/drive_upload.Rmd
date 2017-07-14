@@ -121,9 +121,10 @@ expect_error(
 
 Note: *if you want to overwrite AND give it a new name, you have to use `drive_rename()`.
 
+
 ## clean up
 
 ```{r}
-drive_rm("test-upload-lucy")
+drive_rm(c("test-upload-lucy", "test-folder-lucy"))
 ```
 

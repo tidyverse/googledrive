@@ -45,7 +45,7 @@ drive_upload <- function(file = NULL,
                          verbose = TRUE) {
 
   if (!file.exists(file)) {
-    stop(glue("File does not exist:\n{file}"), call. = FALSE)
+    stop(glue("File does not exist:\n  * {file}"), call. = FALSE)
   }
 
   if (!is.null(name)) {
@@ -66,48 +66,44 @@ drive_upload <- function(file = NULL,
   path <- path %||% root_folder()
   path <- as_dribble(path)
   confirm_single_file(path)
-  existing <- NULL
+  up_id <- NULL
   if (!is_folder(path)) {
     if (!is.null(name)) {
       stop(
         glue(
-          "Requested parent folder does not exist:\n{path$name}"
+          "Requested parent folder does not exist:\n  * {path$name}"
         ),
         call. = FALSE
       )
     }
     if (!overwrite) {
       stop(
-        glue("File already exists:\n{path$name}"),
+        glue("\nFile already exists:\n  * {path$name}\n",
+             "Use `overwrite = TRUE` to upload new content into this file id."),
         call. = FALSE
       )
     }
-    existing <- path
-    path <- unlist(promote(path, "parents")$parents)
+    up_id <- path
   }
 
   name <- name %||% basename(file)
   mimeType <- drive_mime_type(type)
 
-  up_id <- NULL
   if (overwrite) {
-    if (is.null(existing)) {
+    if (is.null(up_id)) {
       ## is there a pre-existing file at destination?
       q_name <- glue("name = {sq(name)}")
       q_parent <- glue("{sq(path$id)} in parents")
       qq <- collapse(c(q_name, q_parent), sep = " and ")
       existing <- drive_find(q = qq)
 
-      if (nrow(existing) > 0) {
+      if (nrow(existing) > 1) {
         out_path <- unsplit_path(path$name %||% "", name)
-        if (nrow(existing) > 1) {
-          stop(glue("Path to overwrite is not unique:\n{out_path}", call. = FALSE))
-        }
+        stop(glue("Path to overwrite is not unique:\n  * {out_path}", call. = FALSE))
       }
     }
     ## id for the uploaded file
     up_id <- existing$id
-
   }
 
   if (length(up_id) == 0) {
