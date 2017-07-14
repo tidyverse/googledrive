@@ -7,23 +7,21 @@ context("Copy files")
 
 nm_ <- nm_fun("-TEST-drive-cp")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  if (clean) {
-    del <- drive_rm(c(
-      nm_("i-am-a-folder"),
-      nm_("i-am-a-file")
-    ), verbose = FALSE)
-  }
-
+## clean
+if (FALSE) {
+  del <- drive_rm(c(
+    nm_("i-am-a-folder"),
+    nm_("i-am-a-file")
+  ), verbose = FALSE)
+}
+## setup
+if (FALSE) {
   drive_mkdir(nm_("i-am-a-folder"))
   drive_upload(
     system.file("DESCRIPTION"),
     nm_("i-am-a-file"),
     verbose = FALSE
   )
-
 }
 
 test_that("drive_cp() can copy file in place", {

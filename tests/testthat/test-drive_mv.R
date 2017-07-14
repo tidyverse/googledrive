@@ -7,22 +7,20 @@ context("Move files")
 
 nm_ <- nm_fun("-TEST-drive-mv")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  ## make sure directory is clean
-  if (clean) {
-    del <- drive_rm(c(
-      nm_("move-files-into-me"),
-      nm_("DESC"),
-      nm_("DESC-renamed")
-    ),
-    verbose = FALSE
-    )
-  }
+## clean
+if (FALSE) {
+  del <- drive_rm(c(
+    nm_("move-files-into-me"),
+    nm_("DESC"),
+    nm_("DESC-renamed")
+  ),
+  verbose = FALSE
+  )
+}
 
+## setup
+if (FALSE) {
   drive_mkdir(nm_("move-files-into-me"))
-
 }
 
 test_that("drive_mv() can rename file", {

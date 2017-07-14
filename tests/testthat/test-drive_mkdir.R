@@ -6,15 +6,16 @@ context("Make folders")
 
 nm_ <- nm_fun("-TEST-drive-mkdir")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  if (clean) {
-    del <- drive_rm(c(
-      nm_("OMNI-PARENT"),
-      nm_("I-live-in-root")
-    ))
-  }
+## clean
+if (FALSE) {
+  del <- drive_rm(c(
+    nm_("OMNI-PARENT"),
+    nm_("I-live-in-root")
+  ))
+}
+
+## setup
+if (FALSE) {
   drive_mkdir(nm_("OMNI-PARENT"))
 }
 

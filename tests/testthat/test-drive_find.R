@@ -6,16 +6,14 @@ context("Search files")
 
 nm_ <- nm_fun("-TEST-drive-search")
 
+## clean
+if (FALSE) {
+  del <- drive_rm(c(nm_("foo"), nm_("this-should-not-exist")),
+                  verbose = FALSE)
+}
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  ## make sure directory is clean
-  if (clean) {
-    del <- drive_rm(c(nm_("foo"), nm_("this-should-not-exist")),
-                    verbose = FALSE)
-  }
-  ## test that it finds at least a folder
+## setup
+if (FALSE) {
   drive_mkdir(nm_("foo"), verbose = FALSE)
 }
 

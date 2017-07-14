@@ -2,17 +2,17 @@ context("List files")
 
 nm_ <- nm_fun("-TEST-drive-ls")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  if (clean) {
-    del <- drive_rm(c(
-      nm_("list-me"),
-      nm_("this-should-not-exist"
-      )),
-      verbose = FALSE)
-  }
+## clean
+if (FALSE) {
+  del <- drive_rm(c(
+    nm_("list-me"),
+    nm_("this-should-not-exist"
+    )),
+    verbose = FALSE)
+}
 
+## setup
+if (FALSE) {
   drive_mkdir(nm_("list-me"), verbose = FALSE)
   drive_upload(
     system.file("DESCRIPTION"),
@@ -23,6 +23,7 @@ if (run) {
     path = file.path(nm_("list-me"), nm_("about-html"))
   )
 }
+
 
 test_that("drive_ls() errors if file does not exist", {
   skip_on_appveyor()

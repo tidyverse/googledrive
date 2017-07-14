@@ -6,59 +6,90 @@ context("Publish files")
 
 nm_ <- nm_fun("-TEST-drive-publish")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  ## make sure directory is clean
-  if (clean) {
-    del <- drive_rm(c(nm_("chickwts_txt"), nm_("chickwts_gdoc")),
-                    verbose = FALSE)
-  }
-  write.table(chickwts, "chickwts.txt")
-  drive_upload("chickwts.txt",
-               name = nm_("chickwts_gdoc"),
+## clean
+if (FALSE) {
+  del <- drive_rm(c(nm_("foo_pdf"), nm_("foo_doc"), nm_("foo_sheet")),
+                  verbose = FALSE)
+}
+## setup
+if (FALSE) {
+  drive_upload(R.home('doc/html/about.html'),
+               name = nm_("foo_doc"),
                type = "document",
                verbose = FALSE)
-  drive_upload("chickwts.txt",
-               name = nm_("chickwts_txt"),
+  drive_upload(R.home('doc/BioC_mirrors.csv'),
+               name = nm_("foo_sheet"),
+               type = "spreadsheet",
                verbose = FALSE)
-  rm <- unlink("chickwts.txt")
+  drive_upload(R.home('doc/html/Rlogo.pdf'),
+               name = nm_("foo_pdf"),
+               verbose = FALSE)
 }
 
-
-test_that("drive_publish doesn't explicitly fail", {
+test_that("drive_publish() publishes Google Documents", {
 
   skip_on_appveyor()
   skip_on_travis()
   skip_if_offline()
 
-  drive_chickwts <- drive_path(nm_("chickwts_gdoc"))
+  drive_doc <- drive_path(nm_("foo_doc"))
 
   ## since we haven't checked the publication status,
   ## this should be NULL
-  expect_null(drive_chickwts[["files_resource"]][[1]][["publish"]])
+  expect_null(drive_doc[["files_resource"]][[1]][["publish"]])
 
-  drive_chickwts <- drive_publish(drive_chickwts)
+  drive_doc <- drive_publish(drive_doc)
 
   ## the published column should be TRUE
-  expect_true(drive_chickwts$publish$published)
+  expect_true(drive_doc$publish$published)
+
+  expect_message(drive_is_published(drive_doc),
+                 "The latest revision of file 'foo_doc-TEST-drive-publish' is published.\n")
 
   ## let's unpublish it
-  drive_chickwts <- drive_unpublish(drive_chickwts)
+  drive_doc <- drive_unpublish(drive_doc)
 
   ## now this sould be false
-  expect_false(drive_chickwts$publish$published)
+  expect_false(drive_doc$publish$published)
+  expect_message(drive_is_published(drive_doc),
+                 "The latest revision of file 'foo_doc-TEST-drive-publish' is NOT published.")
 })
 
-test_that("drive_publish fails if the file input is not a Google Drive type", {
+test_that("drive_publish() publishes Google Sheets", {
+
+  ## we are testing this seperately because revision
+  ## history is a bit different for Sheets
+  skip_on_appveyor()
+  skip_on_travis()
+  skip_if_offline()
+
+  drive_sheet <- drive_path(nm_("foo_sheet"))
+
+  ## since we haven't checked the publication status,
+  ## this should be NULL
+  expect_null(drive_sheet[["files_resource"]][[1]][["publish"]])
+
+  drive_sheet <- drive_publish(drive_sheet)
+
+  ## the published column should be TRUE
+  expect_true(drive_sheet$publish$published)
+
+  ## let's unpublish it
+  drive_sheet <- drive_unpublish(drive_sheet)
+
+  ## now this sould be false
+  expect_false(drive_sheet$publish$published)
+})
+
+test_that("drive_publish() fails if the file input is not a Google Drive type", {
 
   skip_on_appveyor()
   skip_on_travis()
   skip_if_offline()
 
-  drive_chickwts <- drive_path(nm_("chickwts_txt"))
+  drive_pdf <- drive_path(nm_("foo_pdf"))
 
-  expect_error(drive_publish(drive_chickwts, verbose = FALSE),
+  expect_error(drive_publish(drive_pdf, verbose = FALSE),
                "Only Google Drive files can be published."
   )
 })
