@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>File id from string or URL. — as_id • googledrive</title>
+<title>Empty Drive Trash. — drive_empty_trash • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,22 +86,22 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>File id from string or URL.</h1>
+    <h1>Empty Drive Trash.</h1>
     </div>
 
     
-    <p>Marks a character vector as holding Google Drive file ids, as opposed to file
-names or paths. User can supply either a Google Drive id or a Google Drive URL.</p>
+    <p>Caution, this will permanently delete files in your Drive trash.</p>
     
 
-    <pre class="usage"><span class='fu'>as_id</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_empty_trash</span>(<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Character vector of Google Drive ids or Google Drive URLs</p></td>
+      <th>verbose</th>
+      <td><p>Logical, indicating whether to print informative messages
+(default <code>TRUE</code>).</p></td>
     </tr>
     </table>
     

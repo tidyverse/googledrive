@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>File id from string or URL. — as_id • googledrive</title>
+<title>Move files to or from trash. — drive_trash • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,32 +86,62 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>File id from string or URL.</h1>
+    <h1>Move files to or from trash.</h1>
     </div>
 
     
-    <p>Marks a character vector as holding Google Drive file ids, as opposed to file
-names or paths. User can supply either a Google Drive id or a Google Drive URL.</p>
+    <p>Move files to or from trash.</p>
     
 
-    <pre class="usage"><span class='fu'>as_id</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_trash</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>drive_untrash</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Character vector of Google Drive ids or Google Drive URLs</p></td>
+      <th>file</th>
+      <td><p>Drive File, something that identifies the file of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a <code>dribble</code>.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Logical, indicating whether to print informative messages
+(default <code>TRUE</code>).</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Logical vector, indicating whether the trashing/untrashing succeeded.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## Create a file to trash.</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='st'>"DESC"</span>)
+<span class='co'>## Put a single file in the trash.</span>
+<span class='fu'>drive_trash</span>(<span class='st'>"DESC"</span>)
+<span class='fu'>drive_untrash</span>(<span class='st'>"DESC"</span>)
+
+<span class='co'>## Put multiple files in trash.</span>
+<span class='no'>file_a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='st'>"file_a"</span>)
+<span class='no'>file_b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='st'>"file_b"</span>)
+<span class='fu'>drive_trash</span>(<span class='fu'>c</span>(<span class='st'>"file_a"</span>, <span class='st'>"file_b"</span>))
+<span class='fu'>drive_untrash</span>(<span class='fu'>c</span>(<span class='st'>"file_a"</span>, <span class='st'>"file_b"</span>))
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

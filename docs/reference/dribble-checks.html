@@ -92,13 +92,16 @@
     
     <p>Sometimes you need to check things about a dribble or about the files it
 represents, such as:</p><ul>
+<li><p>Is it even a dribble?</p></li>
 <li><p>Size: Does the dribble hold exactly one file? At least one file? No file?</p></li>
 <li><p>File type: Is this file a folder?</p></li>
 <li><p>File ownership and access: Is it mine? Published? Shared?</p></li>
 </ul>
     
 
-    <pre class="usage"><span class='fu'>no_file</span>(<span class='no'>d</span>)
+    <pre class="usage"><span class='fu'>is_dribble</span>(<span class='no'>d</span>)
+
+<span class='fu'>no_file</span>(<span class='no'>d</span>)
 
 <span class='fu'>single_file</span>(<span class='no'>d</span>)
 
@@ -126,6 +129,7 @@ represents, such as:</p><ul>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'>## most of us have multiple files or folders on Google Drive</span>
 <span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>()
+<span class='fu'>is_dribble</span>(<span class='no'>d</span>)
 <span class='fu'>no_file</span>(<span class='no'>d</span>)
 <span class='fu'>single_file</span>(<span class='no'>d</span>)
 <span class='fu'>some_files</span>(<span class='no'>d</span>)
@@ -152,7 +156,7 @@ represents, such as:</p><ul>
 </div>
 
 <div class="author">
-  <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan.</p>
+  <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 

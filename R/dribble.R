@@ -114,6 +114,7 @@ has_files_resource <- function(x) {
 #'
 #' Sometimes you need to check things about a dribble or about the files it
 #' represents, such as:
+#'   * Is it even a dribble?
 #'   * Size: Does the dribble hold exactly one file? At least one file? No file?
 #'   * File type: Is this file a folder?
 #'   * File ownership and access: Is it mine? Published? Shared?
@@ -124,6 +125,7 @@ has_files_resource <- function(x) {
 #' \dontrun{
 #' ## most of us have multiple files or folders on Google Drive
 #' d <- drive_find()
+#' is_dribble(d)
 #' no_file(d)
 #' single_file(d)
 #' some_files(d)
@@ -133,6 +135,12 @@ has_files_resource <- function(x) {
 #' is_mine(d)
 #' }
 NULL
+
+#' @export
+#' @rdname dribble-checks
+is_dribble <- function(d) {
+  inherits(d, "dribble")
+}
 
 #' @export
 #' @rdname dribble-checks

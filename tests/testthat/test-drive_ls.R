@@ -1,14 +1,13 @@
-context("List files")
+context("List folder contents")
 
 nm_ <- nm_fun("-TEST-drive-ls")
 
 ## clean
 if (FALSE) {
-  del <- drive_rm(c(
+  drive_rm(c(
     nm_("list-me"),
-    nm_("this-should-not-exist"
-    )),
-    verbose = FALSE)
+    nm_("this-should-not-exist")
+  ))
 }
 
 ## setup

@@ -1,4 +1,4 @@
-#' Search for files on Google Drive.
+#' Find files on Google Drive.
 #'
 #' This is the closest googledrive function to what you get from
 #' <https://drive.google.com>: by default, you just get a listing of your files.
@@ -10,13 +10,14 @@
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
 #'
 #' @param pattern Character. If provided, only the files whose names match this
-#'   regular expression are returned.
+#'   regular expression are returned. This is implemented locally on the results
+#'   returned by the API.
 #' @param type Character. If provided, only files of this type will be returned.
 #'   Can be anything that [drive_mime_type()] knows how to handle. This is
 #'   processed by googledrive and sent as a query parameter.
 #' @param n_max Integer. An upper bound on the number of files to return. This
-#'   applies to the results returned by the API, which may be further filtered
-#'   locally, via the `pattern` argument.
+#'   applies to the results requested from the API, which may be further
+#'   filtered locally, via the `pattern` argument.
 #' @param ... Query parameters to pass along to the API query.
 #' @template verbose
 #'
@@ -29,11 +30,11 @@
 #' ## search for files located directly in your root folder
 #' drive_find(q = "'root' in parents")
 #'
-#' ## filter for folders
+#' ## filter for folders, the easy way and the hard way
 #' drive_find(type = "folder")
 #' drive_find(q = "mimeType = 'application/vnd.google-apps.folder'")
 #'
-#' ## filter for Google Sheets
+#' ## filter for Google Sheets, the easy way and the hard way
 #' drive_find(type = "spreadsheet")
 #' drive_find(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 #'
@@ -42,16 +43,16 @@
 #'
 #' ## control page size or cap the number of files returned
 #' drive_find(pageSize = 50)
-#' drive_find(n_max = 75)
+#' drive_find(n_max = 58)
 #' drive_find(pageSize = 5, n_max = 15)
 #' }
 #'
 #' @export
 drive_find <- function(pattern = NULL,
-                         type = NULL,
-                         n_max = Inf,
-                         ...,
-                         verbose = TRUE) {
+                       type = NULL,
+                       n_max = Inf,
+                       ...,
+                       verbose = TRUE) {
 
   if (!is.null(pattern)) {
     if (!(is.character(pattern) && length(pattern) == 1)) {

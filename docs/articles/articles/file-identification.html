@@ -82,21 +82,20 @@
 <p>To see your Google Drive files in the browser, visit <a href="https://drive.google.com" class="uri">https://drive.google.com</a>. This displays all your files and offers various ways to filter what you see based on file type, folder, starred vs not, etc.</p>
 <p>You can get similar results with <code><a href="../../reference/drive_find.html">drive_find()</a></code>. By default, it gets info on the most recent 100 files.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>())
-<span class="co">#&gt; # A tibble: 70 x 3</span>
-<span class="co">#&gt;                                name</span>
-<span class="co">#&gt;  *                            &lt;chr&gt;</span>
-<span class="co">#&gt;  1                              def</span>
-<span class="co">#&gt;  2                              abc</span>
-<span class="co">#&gt;  3          hadley-googledrive-tour</span>
-<span class="co">#&gt;  4 upload-into-me-</span><span class="al">TEST</span><span class="co">-drive-upload</span>
-<span class="co">#&gt;  5        i-am-a-file-</span><span class="al">TEST</span><span class="co">-drive-cp</span>
-<span class="co">#&gt;  6      i-am-a-folder-</span><span class="al">TEST</span><span class="co">-drive-cp</span>
-<span class="co">#&gt;  7 move-files-into-me-</span><span class="al">TEST</span><span class="co">-drive-mv</span>
-<span class="co">#&gt;  8         about-html-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
-<span class="co">#&gt;  9        DESCRIPTION-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
-<span class="co">#&gt; 10            list-me-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
-<span class="co">#&gt; # ... with 60 more rows, and 2 more variables: id &lt;chr&gt;,</span>
-<span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 80 x 3</span>
+<span class="co">#&gt;                 name                           id files_resource</span>
+<span class="co">#&gt;  *             &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
+<span class="co">#&gt;  1               def 0B0Gh-SuuA2nTSzZZMUZmcWtVZms    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  2               abc 0B0Gh-SuuA2nTa19iY3lGUkdmc3c    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  3                 a 0B0Gh-SuuA2nTS0hPdUhrTmdxN0U    &lt;list [33]&gt;</span>
+<span class="co">#&gt;  4                 b 0B0Gh-SuuA2nTZXYtVG9ac1ZlTHM    &lt;list [33]&gt;</span>
+<span class="co">#&gt;  5                 b 0B0Gh-SuuA2nTYW5JclNfektZWnM    &lt;list [27]&gt;</span>
+<span class="co">#&gt;  6                 a 0B0Gh-SuuA2nTRDlrY0lPZDBnOWs    &lt;list [27]&gt;</span>
+<span class="co">#&gt;  7  test-upload-lucy 0B0Gh-SuuA2nTUmt3aWNSeDVKcGc    &lt;list [33]&gt;</span>
+<span class="co">#&gt;  8 test-folder-lucy3 0B0Gh-SuuA2nTNVJVekJBNWpjT1E    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  9 test-folder-lucy2 0B0Gh-SuuA2nTOHEzLUx3SGwyNTQ    &lt;list [27]&gt;</span>
+<span class="co">#&gt; 10  test-folder-lucy 0B0Gh-SuuA2nTLXpDUnE1Q2tIVWM    &lt;list [27]&gt;</span>
+<span class="co">#&gt; # ... with 70 more rows</span></code></pre></div>
 <p>The object you get back holds the metadata for one or more Google Drive files. It is a <code>dribble</code>, which is just a <code>tibble</code> with Drive files in rows and at least these three variables:</p>
 <ul>
 <li>
@@ -111,12 +110,11 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## just folders
 <span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"mimeType = 'application/vnd.google-apps.folder'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 3 x 3</span>
-<span class="co">#&gt;                               name                           id</span>
-<span class="co">#&gt; *                            &lt;chr&gt;                        &lt;chr&gt;</span>
-<span class="co">#&gt; 1                              def 0B0Gh-SuuA2nTZHJCdGM2cUNjZ2c</span>
-<span class="co">#&gt; 2                              abc 0B0Gh-SuuA2nTM184enM1NXZGeUk</span>
-<span class="co">#&gt; 3 upload-into-me-</span><span class="al">TEST</span><span class="co">-drive-upload 0B0Gh-SuuA2nTaDJNckJJWXA5Rms</span>
-<span class="co">#&gt; # ... with 1 more variables: files_resource &lt;list&gt;</span>
+<span class="co">#&gt;    name                           id files_resource</span>
+<span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTSzZZMUZmcWtVZms    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 2   abc 0B0Gh-SuuA2nTa19iY3lGUkdmc3c    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 3     b 0B0Gh-SuuA2nTYW5JclNfektZWnM    &lt;list [27]&gt;</span>
 
 ## just Sheets
 <span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"mimeType='application/vnd.google-apps.spreadsheet'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
@@ -125,16 +123,16 @@
 <span class="co">#&gt; *                         &lt;chr&gt;</span>
 <span class="co">#&gt; 1  foo_sheet-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
 <span class="co">#&gt; 2 export-mime-type-defaults.csv</span>
-<span class="co">#&gt; 3                  test12334556</span>
+<span class="co">#&gt; 3          538-star-wars-survey</span>
 <span class="co">#&gt; # ... with 2 more variables: id &lt;chr&gt;, files_resource &lt;list&gt;</span></code></pre></div>
 <p>Files containing <code>'horsebean'</code> in their content:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'horsebean'"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 3 x 3</span>
-<span class="co">#&gt;           name                                           id files_resource</span>
-<span class="co">#&gt; *        &lt;chr&gt;                                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 test12334556 1oZneoAX9X0dbJtL4tV3OZhMHvPoerbabdesIPO4S0kg    &lt;list [27]&gt;</span>
-<span class="co">#&gt; 2       foobar 1qoA3kr9DmSTtsG9hoicP7ylCLGq_qDRRod-NS3vAk38    &lt;list [27]&gt;</span>
-<span class="co">#&gt; 3       foobar                 0B0Gh-SuuA2nTa01CaXZZOWZXZzg    &lt;list [34]&gt;</span></code></pre></div>
+<span class="co">#&gt;       name                                           id files_resource</span>
+<span class="co">#&gt; *    &lt;chr&gt;                                        &lt;chr&gt;         &lt;list&gt;</span>
+<span class="co">#&gt; 1   foobar 1qoA3kr9DmSTtsG9hoicP7ylCLGq_qDRRod-NS3vAk38    &lt;list [27]&gt;</span>
+<span class="co">#&gt; 2   foobar                 0B0Gh-SuuA2nTa01CaXZZOWZXZzg    &lt;list [34]&gt;</span>
+<span class="co">#&gt; 3 chickwts                 0B0Gh-SuuA2nTN05CNjk3bG8xbWs    &lt;list [33]&gt;</span></code></pre></div>
 <p>Files in your “Shared with me” collection</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"sharedWithMe = true"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)
 <span class="co">#&gt; # A tibble: 2 x 3</span>
@@ -227,7 +225,7 @@
 </div>
 
 <div class="author">
-  <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan.</p>
+  <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a>.</p>
   <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 

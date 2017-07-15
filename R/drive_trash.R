@@ -80,7 +80,9 @@ drive_view_trash <- function() {
 }
 
 #' Empty Drive Trash.
-#' Caution: this will permanently delete files in your Drive trash.
+#'
+#' @description Caution, this will permanently delete files in your Drive trash.
+#'
 #' @template verbose
 #' @export
 drive_empty_trash <- function(verbose = TRUE) {

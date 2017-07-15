@@ -2,8 +2,7 @@
 % Please edit documentation in R/drive_trash.R
 \name{drive_empty_trash}
 \alias{drive_empty_trash}
-\title{Empty Drive Trash.
-Caution: this will permanently delete files in your Drive trash.}
+\title{Empty Drive Trash.}
 \usage{
 drive_empty_trash(verbose = TRUE)
 }
@@ -12,6 +11,5 @@ drive_empty_trash(verbose = TRUE)
 (default \code{TRUE}).}
 }
 \description{
-Empty Drive Trash.
-Caution: this will permanently delete files in your Drive trash.
+Caution, this will permanently delete files in your Drive trash.
 }

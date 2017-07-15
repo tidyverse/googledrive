@@ -36,11 +36,14 @@ reference:
       - drive_path
       - drive_get
       - drive_browse
+      - drive_view_trash
   - title: "File creation and deletion"
     desc: >
       Create or delete Drive files and folders
     contents:
       - drive_cp
+      - drive_trash
+      - drive_empty_trash
       - drive_rm
       - drive_mkdir
       - drive_mv
