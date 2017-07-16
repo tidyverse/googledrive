@@ -118,6 +118,9 @@ test_that("drive_get(path = ...) is correct wrt folder-ness, path config, rooted
 })
 
 test_that("drive_get() gets root folder", {
+  skip_on_appveyor()
+  skip_on_travis()
+
   from_path <- drive_get("~/")
   from_path$path <- NULL
   from_id <- drive_get(id = "root")
@@ -127,6 +130,9 @@ test_that("drive_get() gets root folder", {
 })
 
 test_that("drive_get(path = ...) puts trailing slash on a folder", {
+  skip_on_appveyor()
+  skip_on_travis()
+
   out <- drive_get(nm_("thing01"))
   out <- out %>% promote("mimeType")
   out <- out[out$mimeType == "application/vnd.google-apps.folder", ]
@@ -134,6 +140,9 @@ test_that("drive_get(path = ...) puts trailing slash on a folder", {
 })
 
 test_that("drive_add_path() put trailing slash on a folder", {
+  skip_on_appveyor()
+  skip_on_travis()
+
   out <- drive_find(nm_("thing01"), type = "folder")
   out <- out %>% drive_add_path()
   out <- out %>% promote("mimeType")
@@ -141,6 +150,9 @@ test_that("drive_add_path() put trailing slash on a folder", {
 })
 
 test_that("drive_get()+drive_add_path() <--> drive_get() roundtrip", {
+  skip_on_appveyor()
+  skip_on_travis()
+
   file <- drive_find(nm_("thing04"))
 
   file_from_id <- drive_get(as_id(file$id))
