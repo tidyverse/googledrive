@@ -1,32 +1,79 @@
-#' Get Drive files by id
+#' Get Drive files by path or id
 #'
-#' Warning: the name of this function is likely to change.
+#' @description Retrieve metadata for files specified via path or via file id.
+#'   Note that Google Drive does NOT behave like your local file system:
+#'   * You can get zero, one, or more files back for each file name or path! On
+#'     Google Drive, file and folder names need not be unique, even at a given
+#'     level of the hierarchy.
+#'   * A file or folder can also have multiple direct parents, so a single Drive
+#'     file can potentially be represented by multiple paths.
+#' @description In contrast, a file id will always identify at most one Drive
+#' file. Finally, note also that a folder is just a specific type of file on
+#' Drive.
 #'
-#' @param id Character vector of Drive file ids, such as you might see in the
-#'   URL when visiting a file on Google Drive.
+#' If the files are specified via `path`, versus `id`, the returned
+#' [`dribble`] will include a `path` variable. To add path information to any
+#' [`dribble`] that lacks it, use [drive_add_path()].
+#'
+#' @param path Character vector of path(s) to get. Use a trailing slash to
+#'   indicate explicitly that a path is a folder, which can disambiguate if
+#'   there is a file of the same name (yes this is possible on Drive!). A
+#'   character vector marked with [as_id()] is treated as if it was provided via
+#'   the `id` argument.
+#' @param id Character vector of Drive file ids or URLs (it is first processed
+#'   with [as_id()]). If both `path` and `id` are non-`NULL`, `id` is silently
+#'   ignored.
+#' @template verbose
 #'
 #' @return dribble-return
 #' @export
+#' @seealso If you want to list the contents of a folder, use [drive_ls()]. For
+#'   general searching, use [drive_find()].
 #'
 #' @examples
 #' \dontrun{
-#' drive_get("abcdefgeh123456789")
+#' ## get info about your "My Drive" root folder
+#' drive_get("~/")
+#' ## the API reserves the file id "root" for your root folder
+#' drive_get(id = "root")
+#' drive_get(id = "root") %>% drive_add_path()
 #'
-#' drive_get(c("abcdefgh123456789", "jklmnopq123456789"))
+#' ## multiple names
+#' drive_get(c("abc", "def"))
 #'
-#' ## the id "root" is an alias for your root folder on My Drive
-#' drive_get("root")
+#' ## multiple names, one of which must be a folder
+#' drive_get(c("abc", "def/"))
+#'
+#' ## query by file id(s)
+#' drive_get(id = "abcdefgeh123456789")
+#' drive_get(as_id("abcdefgeh123456789"))
+#' drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
+#'
 #' }
-drive_get <- function(id) {
+drive_get <- function(path = NULL, id = NULL, verbose = TRUE) {
+  if (length(path) + length(id) == 0) return(dribble_with_path())
+
+  if (!is.null(path) && inherits(path, "drive_id")) {
+    id <- path
+    path <- NULL
+  }
+
+  if (!is.null(path)) {
+    stopifnot(is_path(path))
+    return(dribble_from_path(path))
+  }
+
   stopifnot(is.character(id))
-  if (length(id) < 1) return(dribble())
-  ## when id = "", drive.files.get actually becomes a call to drive.files.list
-  ## and, therefore, returns 100 files by default
-  stopifnot(all(nzchar(id, keepNA = TRUE)))
-  as_dribble(purrr::map(id, get_one))
+  as_dribble(purrr::map(as_id(id), get_one_id))
 }
 
-get_one <- function(id) {
+get_one_id <- function(id) {
+  ## when id = "", drive.files.get actually becomes a call to drive.files.list
+  ## and, therefore, returns 100 files by default ... don't let that happen
+  if (!isTRUE(nzchar(id, keepNA = TRUE))) {
+    stop("File ids must not be NA and cannot be the empty string.",
+         call. = FALSE)
+  }
   request <- generate_request(
     endpoint = "drive.files.get",
     params = list(

@@ -1,10 +1,5 @@
 context("Copy files")
 
-
-## NOTE if you do not currently have the files needed,
-## change run & clean below to TRUE to create files needed
-## (CAUTION, this will delete files that will interfere)
-
 nm_ <- nm_fun("-TEST-drive-cp")
 
 ## clean
@@ -14,6 +9,7 @@ if (FALSE) {
     nm_("i-am-a-file")
   ), verbose = FALSE)
 }
+
 ## setup
 if (FALSE) {
   drive_mkdir(nm_("i-am-a-folder"))
@@ -30,7 +26,7 @@ test_that("drive_cp() can copy file in place", {
   skip_if_offline()
   on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
 
-  file <- drive_path(nm_("i-am-a-file"))
+  file <- drive_get(nm_("i-am-a-file"))
   expect_message(
     file_cp <- drive_cp(file),
     "File copied"
@@ -48,8 +44,8 @@ test_that("drive_cp() can copy a file into a different folder", {
   skip_if_offline()
   on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
 
-  file <- drive_path(nm_("i-am-a-file"))
-  folder <- drive_path(nm_("i-am-a-folder"))
+  file <- drive_get(nm_("i-am-a-file"))
+  folder <- drive_get(nm_("i-am-a-folder"))
   expect_message(
     file_cp <- drive_cp(file, folder),
     "File copied"
@@ -66,7 +62,7 @@ test_that("drive_cp() elects to copy into a folder vs onto file of same name", {
   skip_if_offline()
   on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
 
-  file <- drive_path(nm_("i-am-a-file"))
+  file <- drive_get(nm_("i-am-a-file"))
   ## does drive_cp() detect that path is a folder, despite lack of trailing
   ## slash?
   expect_message(
@@ -76,7 +72,7 @@ test_that("drive_cp() elects to copy into a folder vs onto file of same name", {
   expect_identical(file_cp$name, paste("Copy of", nm_("i-am-a-file")))
 
   ## should have folder as parent
-  folder <- drive_path(nm_("i-am-a-folder"))
+  folder <- drive_get(nm_("i-am-a-folder"))
   expect_identical(file_cp$files_resource[[1]]$parents[[1]], folder$id)
 })
 

@@ -61,7 +61,7 @@ test_that("drive_mv() can move a file into a folder given as path", {
   )
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)
-  destination <- drive_path(nm_("move-files-into-me"))
+  destination <- drive_get(nm_("move-files-into-me"))
   expect_identical(out$files_resource[[1]]$parents[[1]], destination$id)
 })
 
@@ -77,7 +77,7 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
     verbose = FALSE
   )
 
-  destination <- drive_path(nm_("move-files-into-me"))
+  destination <- drive_get(nm_("move-files-into-me"))
   expect_message(
     out <- drive_mv(movee, destination),
     "File moved"

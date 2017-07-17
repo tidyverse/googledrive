@@ -10,19 +10,17 @@ nm_ <- nm_fun("-TEST-drive-download")
 if (FALSE) {
   del <- drive_rm(c(
     nm_("DESC"),
-    nm_("DESC-doc"),
-    nm_("this-should-not-exist")
+    nm_("DESC-doc")
   ))
 }
 
 ## setup
 if (FALSE) {
-  drive_upload(system.file("DESCRIPTION"), nm_("DESC"), verbose = FALSE)
+  drive_upload(system.file("DESCRIPTION"), nm_("DESC"))
   drive_upload(
     system.file("DESCRIPTION"),
     nm_("DESC-doc"),
-    type = "document",
-    verbose = FALSE
+    type = "document"
   )
 }
 
@@ -43,7 +41,7 @@ test_that("drive_download() errors if file does not exist on Drive", {
   skip_on_travis()
   skip_if_offline()
   expect_error(
-    drive_download(file = nm_("this-should-not-exist")),
+    drive_download(nm_("this-should-not-exist")),
     "Input does not hold exactly one Drive file"
   )
 })
