@@ -161,13 +161,13 @@ mirrors %>%
 
 ##### Google files
 
-We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. Specify this explicitly via `type` or implicitly via the file extension in `out_path`. There is also a default export type, as a last resort. For example, if I would like to download the "538-star-wars-survey" Google Sheet as a `.csv` I could run the following.
+We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. Specify this explicitly via `type` or implicitly via the file extension in `out_path`. For example, if I would like to download the "538-star-wars-survey" Google Sheet as a `.csv` I could run the following.
 
 ```{r}
 drive_download("538-star-wars-survey", type = "csv")
 ```
 
-Alternatively, I could specify the `path` parameter.
+Alternatively, I could specify type via the `path` parameter.
 
 ```{r}
 drive_download(
@@ -177,9 +177,9 @@ drive_download(
 )
 ```
 
-Notice in the example above, I specified `overwrite = TRUE`. This allowed me to overwrite the file previously saved.
+Notice in the example above, I specified `overwrite = TRUE`, in order to overwrite the file previously saved.
 
-Finally, you could allow it to be downloaded as an Excel workbook, which is the default:
+Finally, you could just allow export to the default type. In the case of Google Sheets, this is an Excel workbook:
 
 ```{r}
 drive_download("538-star-wars-survey")

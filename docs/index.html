@@ -99,19 +99,20 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <p>Here’s how to list the first 50 files you see in <a href="https://drive.google.com">My Drive</a>. You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">n_max =</span> <span class="dv">50</span>)
 <span class="co">#&gt; # A tibble: 50 x 3</span>
-<span class="co">#&gt;                                 name                           id</span>
-<span class="co">#&gt;  *                             &lt;chr&gt;                        &lt;chr&gt;</span>
-<span class="co">#&gt;  1                               def 0B0Gh-SuuA2nTV05VUDExWlBCVWc</span>
-<span class="co">#&gt;  2                               abc 0B0Gh-SuuA2nTaWs1ZW14b1gwRVk</span>
-<span class="co">#&gt;  3 child_of_2_parents-</span><span class="al">TEST</span><span class="co">-drive-get 0B0Gh-SuuA2nTTlBFc285S21DZ00</span>
-<span class="co">#&gt;  4           parent02-</span><span class="al">TEST</span><span class="co">-drive-get 0B0Gh-SuuA2nTU1Bzem9Zd1N3Zk0</span>
-<span class="co">#&gt;  5           parent01-</span><span class="al">TEST</span><span class="co">-drive-get 0B0Gh-SuuA2nTbGMyWWo0ODFXcDg</span>
-<span class="co">#&gt;  6            thing04-</span><span class="al">TEST</span><span class="co">-drive-get 0B0Gh-SuuA2nTLXpuWlFkSzRtQjA</span>
-<span class="co">#&gt;  7            thing03-</span><span class="al">TEST</span><span class="co">-drive-get 0B0Gh-SuuA2nTUE5KTWhWcTZGWE0</span>
-<span class="co">#&gt;  8            thing01-</span><span class="al">TEST</span><span class="co">-drive-get 0B0Gh-SuuA2nTQWZUSHpDWTN0aUE</span>
-<span class="co">#&gt;  9            thing01-</span><span class="al">TEST</span><span class="co">-drive-get 0B0Gh-SuuA2nTRGh1MkFqNGNTVFE</span>
-<span class="co">#&gt; 10            thing01-</span><span class="al">TEST</span><span class="co">-drive-get 0B0Gh-SuuA2nTMndiSG1OMDYtbVU</span>
-<span class="co">#&gt; # ... with 40 more rows, and 1 more variables: files_resource &lt;list&gt;</span></code></pre></div>
+<span class="co">#&gt;                                 name</span>
+<span class="co">#&gt;  *                             &lt;chr&gt;</span>
+<span class="co">#&gt;  1                               def</span>
+<span class="co">#&gt;  2                               abc</span>
+<span class="co">#&gt;  3         DESCRIPTION-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
+<span class="co">#&gt;  4             DESC-</span><span class="al">TEST</span><span class="co">-drive-share</span>
+<span class="co">#&gt;  5      DESC-doc-</span><span class="al">TEST</span><span class="co">-drive-download</span>
+<span class="co">#&gt;  6          DESC-</span><span class="al">TEST</span><span class="co">-drive-download</span>
+<span class="co">#&gt;  7 child_of_2_parents-</span><span class="al">TEST</span><span class="co">-drive-get</span>
+<span class="co">#&gt;  8           parent02-</span><span class="al">TEST</span><span class="co">-drive-get</span>
+<span class="co">#&gt;  9           parent01-</span><span class="al">TEST</span><span class="co">-drive-get</span>
+<span class="co">#&gt; 10            thing04-</span><span class="al">TEST</span><span class="co">-drive-get</span>
+<span class="co">#&gt; # ... with 40 more rows, and 2 more variables: id &lt;chr&gt;,</span>
+<span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
 <p>You can narrow the query by specifying a <code>pattern</code> you’d like to match names against. Or by specifying a file type: the <code>type</code> argument understands MIME types, file extensions, and a few human-friendly keywords.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">pattern =</span> <span class="st">"chicken"</span>)
 <span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"spreadsheet"</span>)     ## Google Sheets!
@@ -140,16 +141,16 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;    name       path                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;      &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def ~/abc/def/ 0B0Gh-SuuA2nTV05VUDExWlBCVWc    &lt;list [30]&gt;</span>
+<span class="co">#&gt; 1   def ~/abc/def/ 0B0Gh-SuuA2nTdzlWVzJVRW45LUk    &lt;list [30]&gt;</span>
 
 ## let's grab that file id and retrieve it that way
 x<span class="op">$</span>id
-<span class="co">#&gt; [1] "0B0Gh-SuuA2nTV05VUDExWlBCVWc"</span>
+<span class="co">#&gt; [1] "0B0Gh-SuuA2nTdzlWVzJVRW45LUk"</span>
 <span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="reference/as_id.html">as_id</a></span>(x<span class="op">$</span>id))
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;    name                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTV05VUDExWlBCVWc    &lt;list [30]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTdzlWVzJVRW45LUk    &lt;list [30]&gt;</span></code></pre></div>
 <p>In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a <code>dribble</code>. If it’s ambiguous, use <code><a href="reference/as_id.html">as_id()</a></code> to flag a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.</p>
 </div>
 <div id="upload-files" class="section level4">
@@ -164,12 +165,12 @@ x<span class="op">$</span>id
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                 name                           id files_resource</span>
 <span class="co">#&gt; *              &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-mirrors.csv 0B0Gh-SuuA2nTX1ZhdFF6MU9rYTg    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 README-mirrors.csv 0B0Gh-SuuA2nTQkdiazdrWFZYLWs    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## example of using a dribble as input
 mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(mirrors)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTX1ZhdFF6MU9rYTg</span>
+<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTQkdiazdrWFZYLWs</span>
 
 mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
   <span class="kw">R.home</span>(<span class="st">'doc/BioC_mirrors.csv'</span>),
@@ -194,7 +195,7 @@ mirrors<span class="op">$</span>publish
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;            check_time revision published auto_publish</span>
 <span class="co">#&gt;                &lt;dttm&gt;    &lt;chr&gt;     &lt;lgl&gt;        &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 2017-07-16 21:29:31        1      TRUE         TRUE</span></code></pre></div>
+<span class="co">#&gt; 1 2017-07-17 07:44:19        1      TRUE         TRUE</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_is_published.html">drive_is_published</a></span>(mirrors)
 <span class="co">#&gt; The latest revision of file 'README-mirrors.csv' is published.</span></code></pre></div>
 </div>
@@ -212,7 +213,7 @@ mirrors<span class="op">$</span>publish
 <p>We can then extract a share link.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mirrors <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_share_link.html">drive_share_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1Rwmnqk9jaavIp3BOZxspqlw25dstaxkow_uXopGw7So/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1QZ2jxn9c9V8_4fTse7NYfLGuPTaUZU9vANAE6zgILd8/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="download-files" class="section level4">
 <h4 class="hasAnchor">
@@ -220,13 +221,13 @@ mirrors<span class="op">$</span>publish
 <div id="google-files" class="section level5">
 <h5 class="hasAnchor">
 <a href="#google-files" class="anchor"></a>Google files</h5>
-<p>We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. Specify this explicitly via <code>type</code> or implicitly via the file extension in <code>out_path</code>. There is also a default export type, as a last resort. For example, if I would like to download the “538-star-wars-survey” Google Sheet as a <code>.csv</code> I could run the following.</p>
+<p>We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. Specify this explicitly via <code>type</code> or implicitly via the file extension in <code>out_path</code>. For example, if I would like to download the “538-star-wars-survey” Google Sheet as a <code>.csv</code> I could run the following.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_download.html">drive_download</a></span>(<span class="st">"538-star-wars-survey"</span>, <span class="dt">type =</span> <span class="st">"csv"</span>)
 <span class="co">#&gt; File downloaded:</span>
 <span class="co">#&gt;   * 538-star-wars-survey</span>
 <span class="co">#&gt; Saved locally as:</span>
 <span class="co">#&gt;   * 538-star-wars-survey.csv</span></code></pre></div>
-<p>Alternatively, I could specify the <code>path</code> parameter.</p>
+<p>Alternatively, I could specify type via the <code>path</code> parameter.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_download.html">drive_download</a></span>(
   <span class="st">"538-star-wars-survey"</span>,
   <span class="dt">path =</span> <span class="st">"538-star-wars-survey.csv"</span>,
@@ -236,8 +237,8 @@ mirrors<span class="op">$</span>publish
 <span class="co">#&gt;   * 538-star-wars-survey</span>
 <span class="co">#&gt; Saved locally as:</span>
 <span class="co">#&gt;   * 538-star-wars-survey.csv</span></code></pre></div>
-<p>Notice in the example above, I specified <code>overwrite = TRUE</code>. This allowed me to overwrite the file previously saved.</p>
-<p>Finally, you could allow it to be downloaded as an Excel workbook, which is the default:</p>
+<p>Notice in the example above, I specified <code>overwrite = TRUE</code>, in order to overwrite the file previously saved.</p>
+<p>Finally, you could just allow export to the default type. In the case of Google Sheets, this is an Excel workbook:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_download.html">drive_download</a></span>(<span class="st">"538-star-wars-survey"</span>)
 <span class="co">#&gt; File downloaded:</span>
 <span class="co">#&gt;   * 538-star-wars-survey</span>
@@ -276,11 +277,11 @@ boring &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_u
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mirrors <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 1Rwmnqk9jaavIp3BOZxspqlw25dstaxkow_uXopGw7So</span>
+<span class="co">#&gt;   * README-mirrors.csv: 1QZ2jxn9c9V8_4fTse7NYfLGuPTaUZU9vANAE6zgILd8</span>
 boring <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * boring-text.txt: 0B0Gh-SuuA2nTa3BsTGwyYXlWdXM</span></code></pre></div>
+<span class="co">#&gt;   * boring-text.txt: 0B0Gh-SuuA2nTTGxCaGNZVkVsRlE</span></code></pre></div>
 </div>
 </div>
 </div>
