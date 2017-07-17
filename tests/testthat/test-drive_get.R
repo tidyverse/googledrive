@@ -25,6 +25,16 @@ if (FALSE) {
     path = folder_in_root,
     name = nm_("thing04")
   )
+
+  folder_1_of_2 <- drive_mkdir(nm_("parent01"))
+  folder_2_of_2 <- drive_mkdir(nm_("parent02"))
+  child_of_2_parents <- drive_upload(
+    system.file("DESCRIPTION"),
+    path = folder_1_of_2,
+    name = nm_("child_of_2_parents")
+  )
+  ## not an exported function
+  drive_add_parent(child_of_2_parents, folder_2_of_2)
 }
 
 test_that("drive_get() 'no input' edge cases", {
@@ -161,4 +171,19 @@ test_that("drive_get()+drive_add_path() <--> drive_get() roundtrip", {
 
   expect_identical(file_from_id$id, file_from_path$id)
   expect_identical(path_from_file$path, file_from_path$path)
+})
+
+test_that("we understand behavior with multiple parents", {
+  ## one file with two paths --> one path in, two rows out
+  res <- drive_get(nm_("child_of_2_parents"))
+  expect_identical(nrow(res), 2L)
+  expect_identical(
+    sort(res$path),
+    file.path(
+      "~",
+      c(nm_("parent01"), nm_("parent02")),
+      nm_("child_of_2_parents")
+    )
+  )
+  expect_identical(res$id[1], res$id[2])
 })
