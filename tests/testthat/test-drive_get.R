@@ -174,6 +174,9 @@ test_that("drive_get()+drive_add_path() <--> drive_get() roundtrip", {
 })
 
 test_that("we understand behavior with multiple parents", {
+  skip_on_appveyor()
+  skip_on_travis()
+
   ## one file with two paths --> one path in, two rows out
   res <- drive_get(nm_("child_of_2_parents"))
   expect_identical(nrow(res), 2L)
