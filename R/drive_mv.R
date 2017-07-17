@@ -108,7 +108,3 @@ drive_mv <- function(file = NULL, path = NULL, name = NULL, verbose = TRUE) {
   }
   invisible(out)
 }
-
-#' @rdname drive_mv
-#' @export
-drive_move <- drive_mv

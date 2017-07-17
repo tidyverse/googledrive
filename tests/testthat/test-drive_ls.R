@@ -43,7 +43,7 @@ test_that("drive_ls() outputs contents of folder", {
   ## path
   out <- drive_ls(nm_("list-me"))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, c(nm_("about-html"), nm_("DESCRIPTION")))
+  expect_true(setequal(out$name, c(nm_("about-html"), nm_("DESCRIPTION"))))
 
   ## dribble
   d <- drive_get(nm_("list-me"))

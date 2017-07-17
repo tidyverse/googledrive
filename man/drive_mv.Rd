@@ -2,12 +2,9 @@
 % Please edit documentation in R/drive_mv.R
 \name{drive_mv}
 \alias{drive_mv}
-\alias{drive_move}
 \title{Move a Drive file.}
 \usage{
 drive_mv(file = NULL, path = NULL, name = NULL, verbose = TRUE)
-
-drive_move(file = NULL, path = NULL, name = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest

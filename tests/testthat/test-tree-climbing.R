@@ -1,7 +1,5 @@
 context("Tree climbing")
 
-## test case when an id appears more than once
-
 test_that("pth() walks the tree", {
  #   ROOT
  #  /    \

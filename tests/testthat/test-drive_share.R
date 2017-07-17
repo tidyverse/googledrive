@@ -13,7 +13,7 @@ if (FALSE) {
 
 ## setup
 if (FALSE) {
-  drive_upload(system.file("DESCRIPTION"), nm_("DESC"), verbose = FALSE)
+  drive_upload(system.file("DESCRIPTION"), nm_("DESC"))
 }
 
 test_that("drive_share doesn't explicitly fail", {
