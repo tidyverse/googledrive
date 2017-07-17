@@ -12,12 +12,6 @@ navbar:
   left:
   - text: Reference
     href: reference/index.html
-  - text: Articles
-    menu:
-    - text: File identification
-      href: articles/articles/file-identification.html
-    - text: The Drive API
-      href: articles/articles/drive-api.html
 
 reference:
   - title: "Authentication"
