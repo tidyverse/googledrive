@@ -181,24 +181,51 @@ test_that("promote() works when elem present, absent, and input is trivial", {
 
   ## foo is uniformly present
   out <- promote(x, "foo")
-  expect_identical(out, tibble::add_column(x, foo = c("a1", "b2", "c3")))
+  expect_identical(
+    out,
+    tibble::tibble(
+      name = x$name,
+      foo = c("a1", "b2", "c3"),
+      id = x$id,
+      files_resource = x$files_resource
+    )
+  )
 
   ## bar is uniformly absent
   out <- promote(x, "bar")
   expect_identical(
     out,
-    tibble::add_column(x, bar = list(NULL, NULL, NULL))
+    tibble::tibble(
+      name = x$name,
+      bar = list(NULL, NULL, NULL),
+      id = x$id,
+      files_resource = x$files_resource
+    )
   )
 
   ## baz is present sometimes
   out <- promote(x, "baz")
   expect_identical(
     out,
-    tibble::add_column(x, baz = list(NULL, NULL, "c3"))
+    tibble::tibble(
+      name = x$name,
+      baz = list(NULL, NULL, "c3"),
+      id = x$id,
+      files_resource = x$files_resource
+    )
   )
 
   ## input dribble has zero rows
-  x <- dribble()
-  out <- promote(x, "bar")
-  expect_identical(out, tibble::add_column(x, bar = list()))
+  out <- promote(dribble(), "bar")
+  expect_identical(
+    out,
+    as_dribble(
+      tibble::tibble(
+        name = character(0),
+        bar = list(),
+        id = character(0),
+        files_resource = list()
+      )
+    )
+  )
 })

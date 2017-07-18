@@ -62,10 +62,10 @@ test_that("drive_get() gives n-row output for n ids as input", {
   skip_on_travis()
   skip_if_offline()
 
-  two_files_search <- drive_find(pattern = nm_("DESC-0[12]"))
-  two_files_get <- drive_get(id = two_files_search$id)
+  two_files_find <- drive_find(pattern = nm_("DESC-0[12]"))
+  two_files_get <- drive_get(id = two_files_find$id)
   expect_identical(
-    two_files_search[c("name", "id")],
+    two_files_find[c("name", "id")],
     two_files_get[c("name", "id")]
   )
 })
