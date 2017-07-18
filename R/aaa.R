@@ -51,6 +51,15 @@ NULL
   toset <- !(names(op.googledrive) %in% names(op))
   if (any(toset)) options(op.googledrive[toset])
 
+  if (requireNamespace("dplyr", quietly = TRUE)) {
+    register_s3_method("dplyr", "arrange", "dribble")
+    register_s3_method("dplyr", "filter", "dribble")
+    register_s3_method("dplyr", "mutate", "dribble")
+    register_s3_method("dplyr", "rename", "dribble")
+    register_s3_method("dplyr", "select", "dribble")
+    register_s3_method("dplyr", "slice", "dribble")
+  }
+
   invisible()
 
 }

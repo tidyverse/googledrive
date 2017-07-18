@@ -85,7 +85,7 @@ maybe_dribble <- function(x) {
   if (all(ok)) {
     new_dribble(x)
   } else {
-    x
+    structure(x, class = class(tibble::tibble()))
   }
 }
 
