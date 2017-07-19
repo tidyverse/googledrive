@@ -88,7 +88,12 @@ maybe_dribble <- function(x) {
 
 #' @export
 #' @importFrom tibble as_tibble
-as_tibble.dribble <- function(x) structure(x, class = class(tibble::tibble()))
+as_tibble.dribble <- function(x) {
+  as_tibble(
+    structure(x, class = class(tibble::tibble())),
+    validate = TRUE
+  )
+}
 
 dribble_cols <- c("name", "id", "files_resource")
 
