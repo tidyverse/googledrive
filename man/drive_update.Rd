@@ -4,7 +4,7 @@
 \alias{drive_update}
 \title{Update a file on Drive with new content.}
 \usage{
-drive_update(file = NULL, path = NULL, verbose = TRUE)
+drive_update(file = NULL, path = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{Character, path to the local file to upload.}
@@ -15,6 +15,8 @@ marked with \code{\link{as_id}()}, or a \code{\link{dribble}}. If specified
 as an actual path, it is best to explicitly indicate if it's a folder by
 including a trailing slash, since it cannot always be worked out from the
 context of the call.}
+
+\item{...}{Query parameters to pass along to the API query.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
