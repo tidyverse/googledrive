@@ -20,11 +20,9 @@ x <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy")
 ## overwrite using a `dribble`
 
 Let's try to upload a file into that same location, using the `x` dribble object.
-```{r}
+```{r, error = TRUE}
 ## this should error
-expect_error(y <- drive_upload(system.file("DESCRIPTION"), x),
-             "File already exists"
-)
+y <- drive_upload(system.file("DESCRIPTION"), x)
 ```
 
 Let's add set the parameter `overwrite = TRUE`. Now this should work.
@@ -34,20 +32,20 @@ y <- drive_upload(system.file("DESCRIPTION"), x, overwrite = TRUE)
 
 The `id`s for `x` and `y` should be identical. 
 ```{r}
-expect_identical(y$id, x$id)
+identical(y$id, x$id)
 ```
 
-## overwrite using a `name`
+## overwrite using a character `path`
 
 ```{r}
 y <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy", overwrite = TRUE)
 ```
 
 ```{r}
-expect_identical(y$id, x$id)
+identical(y$id, x$id)
 ```
 
-If we do not set the parameter `overwrite = TRUE`, it should still create the file. Now we will have 2 files in the same location with the same name.
+If we do not set the parameter `overwrite = TRUE`, it should still create the file when `path` is character. Now we will have 2 files in the same location with the same name.
 
 ```{r}
 y <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy")
@@ -55,7 +53,7 @@ y <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy")
 
 Now the `id`s should no longer be identical.
 ```{r}
-expect_false(x$id == y$id)
+!identical(x$id, y$id)
 ```
 
 ```{r}
@@ -64,23 +62,28 @@ drive_find("test-upload-lucy")
 
 If we try to overwrite *again*, we should receive an error, since we don't know which to overwrite.
 
-```{r}
-expect_error(
-  z <- drive_upload(system.file("DESCRIPTION"),
-                    "test-upload-lucy",
-                    overwrite = TRUE),
-  "Path to overwrite is not unique"
-)
+```{r, error = TRUE}
+z <- drive_upload(system.file("DESCRIPTION"),
+                  "test-upload-lucy",
+                  overwrite = TRUE)
 ```
 
-If we use the `x` or `y` `dribble`, however, we should still be able to overwrite.
+If we specify the `x` or `y` `dribble` as the `path`, however, we should still be able to overwrite.
 
 ```{r}
 z <- drive_upload(system.file("DESCRIPTION"), x, overwrite = TRUE)
 ```
 
 ```{r}
-expect_equal(z$id, x$id)
+identical(z$id, x$id)
+```
+
+If we specify the `x` `dribble` as a `path`, AND specify a `name`, it will error that `x` is not a folder. If you specify BOTH a `path` and a `name`, the expectation is that the `path` is intended to be a folder. 
+
+You will receive the following error if you give a `name` AND you give something in `path` that DOES exist on your Drive, but that is NOT a folder.
+
+```{r, error = TRUE}
+z <- drive_upload(system.file("DESCRIPTION"), x, name = "new name", overwrite = TRUE)
 ```
 
 ## folders
@@ -93,10 +96,11 @@ folder <- drive_mkdir("test-folder-lucy")
 ```{r}
 a <- drive_upload(system.file("DESCRIPTION"), folder, "test-upload-lucy")
 ```
+
 Let's make sure `a` is actually in `folder`.
 ```{r}
 a_parent <- unlist(a$files_resource[[1]]$parents)
-expect_equal(a_parent, folder$id)
+identical(a_parent, folder$id)
 ```
 
 ```{r}
@@ -107,19 +111,20 @@ b <- drive_upload(system.file("DESCRIPTION"), a, overwrite = TRUE)
 
 ```{r}
 b_parent <- unlist(b$files_resource[[1]]$parents)
-expect_equal(b_parent, folder$id)
+identical(b_parent, folder$id)
 ```
 
-If I try to give it a new name, it should error.
+If I try to give it a new name, it should be okay now, since `folder` is a valid folder.
 ```{r}
-expect_error(
-  c <- drive_upload(system.file("DESCRIPTION"), b, name = "new_name", overwrite = TRUE),
-  "Requested parent folder does not exist"
-)
+c <- drive_upload(system.file("DESCRIPTION"), folder, name = "new_name", overwrite = TRUE)
 ```
-*hmm is this a sensible error? it definitely makes sense in some circumstances but...*
 
-Note: *if you want to overwrite AND give it a new name, you have to use `drive_rename()`.
+If I try to stick it in a folder that does not exist, it should complain that the path is not on Drive. You will receive this error if you give any `path` but it does not exist on your Drive.
+```{r, error = TRUE}
+c <- drive_upload(system.file("DESCRIPTION"), "this is not a real folder", name = "new_name", overwrite = TRUE)
+```
+
+Note: *if you want to overwrite AND give it a new name, you have to use* `drive_rename()`.
 
 
 ## clean up

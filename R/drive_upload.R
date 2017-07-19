@@ -67,7 +67,7 @@ drive_upload <- function(file = NULL,
   ## easier to default to root vs keeping track of whether parent is specified
   path <- path %||% root_folder()
   path <- as_dribble(path)
-  confirm_single_file(path)
+  path <- confirm_single_file(path)
   up_id <- NULL
   if (!is_folder(path)) {
     if (!is.null(name)) {
@@ -85,7 +85,7 @@ drive_upload <- function(file = NULL,
         call. = FALSE
       )
     }
-    up_id <- path
+    up_id <- path$id
   }
 
   name <- name %||% basename(file)
@@ -103,9 +103,9 @@ drive_upload <- function(file = NULL,
         out_path <- unsplit_path(path$name %||% "", name)
         stop(glue("Path to overwrite is not unique:\n  * {out_path}", call. = FALSE))
       }
+      ## id for the uploaded file
+      up_id <- existing$id
     }
-    ## id for the uploaded file
-    up_id <- existing$id
   }
 
   if (length(up_id) == 0) {

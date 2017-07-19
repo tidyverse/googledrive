@@ -12,6 +12,11 @@ Let's upload a file.
 
 ``` r
 drive_auth("drive-token.rds")
+```
+
+    ## Auto-refreshing stale OAuth token.
+
+``` r
 x <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy")
 ```
 
@@ -27,10 +32,12 @@ Let's try to upload a file into that same location, using the `x` dribble object
 
 ``` r
 ## this should error
-expect_error(y <- drive_upload(system.file("DESCRIPTION"), x),
-             "File already exists"
-)
+y <- drive_upload(system.file("DESCRIPTION"), x)
 ```
+
+    ## Error: File already exists:
+    ##   * test-upload-lucy
+    ## Use `overwrite = TRUE` to upload new content into this file id.
 
 Let's add set the parameter `overwrite = TRUE`. Now this should work.
 
@@ -46,11 +53,13 @@ y <- drive_upload(system.file("DESCRIPTION"), x, overwrite = TRUE)
 The `id`s for `x` and `y` should be identical.
 
 ``` r
-expect_identical(y$id, x$id)
+identical(y$id, x$id)
 ```
 
-overwrite using a `name`
-------------------------
+    ## [1] TRUE
+
+overwrite using a character `path`
+----------------------------------
 
 ``` r
 y <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy", overwrite = TRUE)
@@ -62,10 +71,12 @@ y <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy", overwrite = TR
     ##   * text/plain
 
 ``` r
-expect_identical(y$id, x$id)
+identical(y$id, x$id)
 ```
 
-If we do not set the parameter `overwrite = TRUE`, it should still create the file. Now we will have 2 files in the same location with the same name.
+    ## [1] TRUE
+
+If we do not set the parameter `overwrite = TRUE`, it should still create the file when `path` is character. Now we will have 2 files in the same location with the same name.
 
 ``` r
 y <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy")
@@ -79,8 +90,10 @@ y <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy")
 Now the `id`s should no longer be identical.
 
 ``` r
-expect_false(x$id == y$id)
+!identical(x$id, y$id)
 ```
+
+    ## [1] TRUE
 
 ``` r
 drive_find("test-upload-lucy")
@@ -89,21 +102,21 @@ drive_find("test-upload-lucy")
     ## # A tibble: 2 x 3
     ##               name                           id files_resource
     ## *            <chr>                        <chr>         <list>
-    ## 1 test-upload-lucy 0B0Gh-SuuA2nTTnRKWkRsLTJ1LUE    <list [32]>
-    ## 2 test-upload-lucy 0B0Gh-SuuA2nTdXRiOUl4N2F4VXc    <list [33]>
+    ## 1 test-upload-lucy 0B0Gh-SuuA2nTZVdYb2M2RXJIX1U    <list [32]>
+    ## 2 test-upload-lucy 0B0Gh-SuuA2nTQkdSdC1FT0ZPYTg    <list [33]>
 
 If we try to overwrite *again*, we should receive an error, since we don't know which to overwrite.
 
 ``` r
-expect_error(
-  z <- drive_upload(system.file("DESCRIPTION"),
-                    "test-upload-lucy",
-                    overwrite = TRUE),
-  "Path to overwrite is not unique"
-)
+z <- drive_upload(system.file("DESCRIPTION"),
+                  "test-upload-lucy",
+                  overwrite = TRUE)
 ```
 
-If we use the `x` or `y` `dribble`, however, we should still be able to overwrite.
+    ## Error in drive_upload(system.file("DESCRIPTION"), "test-upload-lucy", : Path to overwrite is not unique:
+    ## * My Drive/test-upload-lucy
+
+If we specify the `x` or `y` `dribble` as the `path`, however, we should still be able to overwrite.
 
 ``` r
 z <- drive_upload(system.file("DESCRIPTION"), x, overwrite = TRUE)
@@ -115,8 +128,21 @@ z <- drive_upload(system.file("DESCRIPTION"), x, overwrite = TRUE)
     ##   * text/plain
 
 ``` r
-expect_equal(z$id, x$id)
+identical(z$id, x$id)
 ```
+
+    ## [1] TRUE
+
+If we specify the `x` `dribble` as a `path`, AND specify a `name`, it will error that `x` is not a folder. If you specify BOTH a `path` and a `name`, the expectation is that the `path` is intended to be a folder.
+
+You will receive the following error if you give a `name` AND you give something in `path` that DOES exist on your Drive, but that is NOT a folder.
+
+``` r
+z <- drive_upload(system.file("DESCRIPTION"), x, name = "new name", overwrite = TRUE)
+```
+
+    ## Error: Requested parent folder does not exist:
+    ## * test-upload-lucy
 
 folders
 -------
@@ -143,8 +169,10 @@ Let's make sure `a` is actually in `folder`.
 
 ``` r
 a_parent <- unlist(a$files_resource[[1]]$parents)
-expect_equal(a_parent, folder$id)
+identical(a_parent, folder$id)
 ```
+
+    ## [1] TRUE
 
 ``` r
 b <- drive_upload(system.file("DESCRIPTION"), a, overwrite = TRUE)
@@ -159,30 +187,42 @@ b <- drive_upload(system.file("DESCRIPTION"), a, overwrite = TRUE)
 
 ``` r
 b_parent <- unlist(b$files_resource[[1]]$parents)
-expect_equal(b_parent, folder$id)
+identical(b_parent, folder$id)
 ```
 
-If I try to give it a new name, it should error.
+    ## [1] TRUE
+
+If I try to give it a new name, it should be okay now, since `folder` is a valid folder.
 
 ``` r
-expect_error(
-  c <- drive_upload(system.file("DESCRIPTION"), b, name = "new_name", overwrite = TRUE),
-  "Requested parent folder does not exist"
-)
+c <- drive_upload(system.file("DESCRIPTION"), folder, name = "new_name", overwrite = TRUE)
 ```
 
-*hmm is this a sensible error? it definitely makes sense in some circumstances but...*
+    ## File uploaded:
+    ##   * new_name
+    ## with MIME type:
+    ##   * text/plain
 
-Note: \*if you want to overwrite AND give it a new name, you have to use `drive_rename()`.
+If I try to stick it in a folder that does not exist, it should complain that the path is not on Drive. You will receive this error if you give any `path` but it does not exist on your Drive.
+
+``` r
+c <- drive_upload(system.file("DESCRIPTION"), "this is not a real folder", name = "new_name", overwrite = TRUE)
+```
+
+    ## Error: Input does not hold exactly one Drive file:
+    ## path
+
+Note: *if you want to overwrite AND give it a new name, you have to use* `drive_rename()`.
 
 clean up
 --------
 
 ``` r
-drive_rm("test-upload-lucy")
+drive_rm(c("test-upload-lucy", "test-folder-lucy"))
 ```
 
     ## Files deleted:
-    ##   * test-upload-lucy: 0B0Gh-SuuA2nTdUZ1Q3QxOEE0VEE
-    ##   * test-upload-lucy: 0B0Gh-SuuA2nTTnRKWkRsLTJ1LUE
-    ##   * test-upload-lucy: 0B0Gh-SuuA2nTdXRiOUl4N2F4VXc
+    ##   * test-upload-lucy: 0B0Gh-SuuA2nTSEU5ZnRzcFNtRDQ
+    ##   * test-upload-lucy: 0B0Gh-SuuA2nTZVdYb2M2RXJIX1U
+    ##   * test-upload-lucy: 0B0Gh-SuuA2nTQkdSdC1FT0ZPYTg
+    ##   * test-folder-lucy: 0B0Gh-SuuA2nTRTQ0eFRRMWVyTm8
