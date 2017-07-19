@@ -72,22 +72,23 @@ dribble <- function(x = NULL) {
 
 #' @export
 `[.dribble` <- function(x, i, j, drop = FALSE) {
-  ## allow dribble class to be lost if subsetted object is no longer valid
-  ## dribble
   maybe_dribble(NextMethod())
 }
 
 maybe_dribble <- function(x) {
-  ok <- is.data.frame(x) &&
-    has_dribble_cols(x) &&
-    has_dribble_coltypes(x) &&
-    has_files_resource(x)
-  if (all(ok)) {
+  if (is.data.frame(x) &&
+      has_dribble_cols(x) &&
+      has_dribble_coltypes(x) &&
+      has_files_resource(x)) {
     new_dribble(x)
   } else {
-    structure(x, class = class(tibble::tibble()))
+    as_tibble(x)
   }
 }
+
+#' @export
+#' @importFrom tibble as_tibble
+as_tibble.dribble <- function(x) structure(x, class = class(tibble::tibble()))
 
 dribble_cols <- c("name", "id", "files_resource")
 

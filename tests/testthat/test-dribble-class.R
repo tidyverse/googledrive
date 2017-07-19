@@ -49,6 +49,10 @@ test_that("validate_dribble() checks class, var names, var types", {
   )
 })
 
+test_that("as_tibble() drops the dribble class", {
+  expect_false(inherits(as_tibble(dribble()), "dribble"))
+})
+
 test_that("`[` retains dribble class when possible", {
   d <- new_dribble(
     tibble::tibble(
