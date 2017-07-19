@@ -12,12 +12,6 @@ navbar:
   left:
   - text: Reference
     href: reference/index.html
-  - text: Articles
-    menu:
-    - text: File identification
-      href: articles/articles/file-identification.html
-    - text: The Drive API
-      href: articles/articles/drive-api.html
 
 reference:
   - title: "Authentication"
@@ -33,14 +27,17 @@ reference:
     contents:
       - drive_find
       - drive_ls
-      - drive_path
       - drive_get
+      - drive_add_path
       - drive_browse
+      - drive_view_trash
   - title: "File creation and deletion"
     desc: >
       Create or delete Drive files and folders
     contents:
       - drive_cp
+      - drive_trash
+      - drive_empty_trash
       - drive_rm
       - drive_mkdir
       - drive_mv

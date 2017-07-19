@@ -1,26 +1,29 @@
-#' Delete file from Drive.
+#' Delete files from Drive.
+#'
+#' @description Caution: this will permanently delete your files! For a safer,
+#'   reversible option, see [drive_trash()].
 #'
 #' @template file
 #' @template verbose
 #'
-#' @return Logical, indicating whether the delete succeeded.
+#' @return Logical vector, indicating whether the delete succeeded.
 #' @export
 #'
 drive_rm <- function(file = NULL, verbose = TRUE) {
-  del_file <- as_dribble(file)
-  if (!some_files(del_file) && verbose) {
+  file <- as_dribble(file)
+  if (no_file(file) && verbose) {
     message(glue("No such files found to delete."))
   }
 
-  out <- purrr::map_lgl(del_file$id, delete_one)
+  out <- purrr::map_lgl(file$id, delete_one)
 
   if (verbose) {
     if (any(out)) {
-      successes <- glue_data(del_file[out, ], "  * {name}: {id}")
+      successes <- glue_data(file[out, ], "  * {name}: {id}")
       message(collapse(c("Files deleted:", successes), sep = "\n"))
     }
     if (any(!out)) {
-      failures <- glue_data(del_file[!out, ], "  * {name}: {id}")
+      failures <- glue_data(file[!out, ], "  * {name}: {id}")
       message(collapse(c("Files NOT deleted:", failures), sep = "\n"))
     }
   }

@@ -2,6 +2,7 @@
 % Please edit documentation in R/dribble.R
 \name{dribble-checks}
 \alias{dribble-checks}
+\alias{is_dribble}
 \alias{no_file}
 \alias{single_file}
 \alias{some_files}
@@ -11,6 +12,8 @@
 \alias{is_mine}
 \title{Check facts about a dribble}
 \usage{
+is_dribble(d)
+
 no_file(d)
 
 single_file(d)
@@ -32,6 +35,7 @@ is_mine(d)
 Sometimes you need to check things about a dribble or about the files it
 represents, such as:
 \itemize{
+\item Is it even a dribble?
 \item Size: Does the dribble hold exactly one file? At least one file? No file?
 \item File type: Is this file a folder?
 \item File ownership and access: Is it mine? Published? Shared?
@@ -41,6 +45,7 @@ represents, such as:
 \dontrun{
 ## most of us have multiple files or folders on Google Drive
 d <- drive_find()
+is_dribble(d)
 no_file(d)
 single_file(d)
 some_files(d)

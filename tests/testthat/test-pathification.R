@@ -1,42 +1,8 @@
-context("Path helpers")
+context("Pathification")
 
-test_that("pth() walks the tree", {
- #   ROOT
- #  /    \
- # a      b    d
- #  \    /     |
- #    c        e    f
-  df <- tibble::tribble(
-    ~ id,   ~ parents,
-     "c", c("a", "b"),
-     "a",      "ROOT",
-     "b",      "ROOT",
-     "e",         "d",
-     "f",        NULL
-  )
-  ## multiple rooted paths
-  expect_identical(
-    pth("c", kids = df$id, elders = df$parents, stop_value = "ROOT"),
-    list(c("c", "a", "ROOT"), c("c", "b", "ROOT"))
-  )
-  ## unrooted path, parent id not present in ids
-  expect_identical(
-    pth("e", kids = df$id, elders = df$parents, stop_value = "ROOT"),
-    list(c("e", "d", NA))
-  )
-  ## unrooted path, parent is NULL
-  expect_identical(
-    pth("f", kids = df$id, elders = df$parents, stop_value = "ROOT"),
-    list(c("f", NA))
-  )
-  ## id not present
-  expect_identical(
-    pth("g", kids = df$id, elders = df$parents, stop_value = "ROOT"),
-    list(c("g", NA))
-  )
-})
 
 test_that("get_paths() correctly reports paths, no name duplication", {
+  skip("rework this")
   #   ROOT
   #  /    \
   # a      b    d
@@ -44,11 +10,11 @@ test_that("get_paths() correctly reports paths, no name duplication", {
   #    c        e
   df <- tibble::tribble(
     ~ name,   ~ parents,
-       "c", c("a", "b"),
-       "a",      "ROOT",
-       "b",      "ROOT",
-       "e",         "d",
-       "d",        NULL
+    "c", c("a", "b"),
+    "a",      "ROOT",
+    "b",      "ROOT",
+    "e",         "d",
+    "d",        NULL
   )
   df$id <- df$name
   df$files_resource <- list(list(kind = "drive#file"))
@@ -106,6 +72,7 @@ test_that("get_paths() correctly reports paths, no name duplication", {
 })
 
 test_that("get_paths() works, with name duplication & multiple parents", {
+  skip("rework this")
   #     name(id)
   #      --(ROOT)  __
   #     /        \   \
@@ -116,15 +83,15 @@ test_that("get_paths() works, with name duplication & multiple parents", {
   # c(8)                   c(9)
   df <- tibble::tribble(
     ~ name, ~ id,   ~ parents,
-       "a",  "3", c("1", "4"),
-       "a",  "5",         "4",
-       "b",  "2",         "1",
-       "a",  "1",      "ROOT",
-       "a",  "4",      "ROOT",
-       "b",  "6",      "ROOT",
-       "a",  "7",         "6",
-       "c",  "8",         "2",
-       "c",  "9",         "7"
+    "a",  "3", c("1", "4"),
+    "a",  "5",         "4",
+    "b",  "2",         "1",
+    "a",  "1",      "ROOT",
+    "a",  "4",      "ROOT",
+    "b",  "6",      "ROOT",
+    "a",  "7",         "6",
+    "c",  "8",         "2",
+    "c",  "9",         "7"
   )
   df$files_resource <- list(list(kind = "drive#file"))
 
@@ -137,12 +104,12 @@ test_that("get_paths() works, with name duplication & multiple parents", {
   expect_equivalent(
     get_paths(path = "a", .rships = df[df$name == "a", ]),
     tibble::tribble(
-     ~ name, ~ id,          ~ files_resource, ~ path,
-        "a",  "3", list(kind = "drive#file"),    "a",
-        "a",  "5", list(kind = "drive#file"),    "a",
-        "a",  "1", list(kind = "drive#file"),    "a",
-        "a",  "4", list(kind = "drive#file"),    "a",
-        "a",  "7", list(kind = "drive#file"),    "a"
+      ~ name, ~ id,          ~ files_resource, ~ path,
+      "a",  "3", list(kind = "drive#file"),    "a",
+      "a",  "5", list(kind = "drive#file"),    "a",
+      "a",  "1", list(kind = "drive#file"),    "a",
+      "a",  "4", list(kind = "drive#file"),    "a",
+      "a",  "7", list(kind = "drive#file"),    "a"
     )
   )
 
@@ -151,8 +118,8 @@ test_that("get_paths() works, with name duplication & multiple parents", {
     get_paths(path = "a/a", .rships = df),
     tibble::tribble(
       ~ name, ~ id,          ~ files_resource, ~ path,
-         "a",  "3", list(kind = "drive#file"),  "a/a",
-         "a",  "5", list(kind = "drive#file"),  "a/a"
+      "a",  "3", list(kind = "drive#file"),  "a/a",
+      "a",  "5", list(kind = "drive#file"),  "a/a"
     )
   )
 
@@ -166,11 +133,11 @@ test_that("get_paths() works, with name duplication & multiple parents", {
     get_paths(path = "a/f", .rships = df, partial_ok = TRUE),
     tibble::tribble(
       ~ name, ~ id,          ~ files_resource, ~ path,
-         "a",  "3", list(kind = "drive#file"),    "a",
-         "a",  "5", list(kind = "drive#file"),    "a",
-         "a",  "1", list(kind = "drive#file"),    "a",
-         "a",  "4", list(kind = "drive#file"),    "a",
-         "a",  "7", list(kind = "drive#file"),    "a"
+      "a",  "3", list(kind = "drive#file"),    "a",
+      "a",  "5", list(kind = "drive#file"),    "a",
+      "a",  "1", list(kind = "drive#file"),    "a",
+      "a",  "4", list(kind = "drive#file"),    "a",
+      "a",  "7", list(kind = "drive#file"),    "a"
     )
   )
 
@@ -180,31 +147,3 @@ test_that("get_paths() works, with name duplication & multiple parents", {
   expect_false(identical(abc, bac))
 })
 
-test_that("pth() detects and errors for cycle", {
-  #   a
-  # /  \
-  # \  /
-  #  b
-  df <- tibble::tribble(
-    ~ id, ~ parents,
-     "a",       "b",
-     "b",       "a"
-  )
-  expect_error(
-    pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT"),
-    "Cycles are not allowed"
-  )
-
-  #   a
-  # /  \
-  # \  /
-  #  -
-  df <- tibble::tribble(
-    ~ id, ~ parents,
-     "a",       "a"
-  )
-  expect_error(
-    pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT"),
-    "Cycles are not allowed"
-  )
-})

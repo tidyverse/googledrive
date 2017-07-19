@@ -6,15 +6,16 @@ context("Make folders")
 
 nm_ <- nm_fun("-TEST-drive-mkdir")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  if (clean) {
-    del <- drive_rm(c(
-      nm_("OMNI-PARENT"),
-      nm_("I-live-in-root")
-    ))
-  }
+## clean
+if (FALSE) {
+  del <- drive_rm(c(
+    nm_("OMNI-PARENT"),
+    nm_("I-live-in-root")
+  ))
+}
+
+## setup
+if (FALSE) {
   drive_mkdir(nm_("OMNI-PARENT"))
 }
 
@@ -49,8 +50,8 @@ test_that("drive_mkdir() creates a folder in root folder", {
   skip_on_travis()
   skip_on_appveyor()
   skip_if_offline()
-
   on.exit(drive_rm(nm_("I-live-in-root")))
+
   out <- drive_mkdir(nm_("I-live-in-root"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, nm_("I-live-in-root"))
@@ -62,7 +63,7 @@ test_that("drive_mkdir() accepts parent folder given as dribble", {
   skip_if_offline()
   on.exit(drive_rm(nm_("a")))
 
-  PARENT <- drive_path(nm_("OMNI-PARENT"))
+  PARENT <- drive_get(nm_("OMNI-PARENT"))
   out <- drive_mkdir(PARENT, nm_("a"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, nm_("a"))
@@ -74,7 +75,7 @@ test_that("drive_mkdir() accepts parent folder given as file id", {
   skip_if_offline()
   on.exit(drive_rm(nm_("b")))
 
-  PARENT <- drive_path(nm_("OMNI-PARENT"))
+  PARENT <- drive_get(nm_("OMNI-PARENT"))
   out <- drive_mkdir(as_id(PARENT$id), nm_("b"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, nm_("b"))

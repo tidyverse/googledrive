@@ -1,18 +1,17 @@
-context("List files")
+context("List folder contents")
 
 nm_ <- nm_fun("-TEST-drive-ls")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  if (clean) {
-    del <- drive_rm(c(
-      nm_("list-me"),
-      nm_("this-should-not-exist"
-      )),
-      verbose = FALSE)
-  }
+## clean
+if (FALSE) {
+  drive_rm(c(
+    nm_("list-me"),
+    nm_("this-should-not-exist")
+  ))
+}
 
+## set up
+if (FALSE) {
   drive_mkdir(nm_("list-me"), verbose = FALSE)
   drive_upload(
     system.file("DESCRIPTION"),
@@ -23,6 +22,7 @@ if (run) {
     path = file.path(nm_("list-me"), nm_("about-html"))
   )
 }
+
 
 test_that("drive_ls() errors if file does not exist", {
   skip_on_appveyor()
@@ -43,10 +43,10 @@ test_that("drive_ls() outputs contents of folder", {
   ## path
   out <- drive_ls(nm_("list-me"))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, c(nm_("about-html"), nm_("DESCRIPTION")))
+  expect_true(setequal(out$name, c(nm_("about-html"), nm_("DESCRIPTION"))))
 
   ## dribble
-  d <- drive_path(nm_("list-me"))
+  d <- drive_get(nm_("list-me"))
   out2 <- drive_ls(d)
   expect_identical(out[c("name", "id")], out2[c("name", "id")])
 
@@ -60,11 +60,11 @@ test_that("drive_ls() passes ... through to drive_find()", {
   skip_on_travis()
   skip_if_offline()
 
-  d <- drive_path(nm_("list-me"))
+  d <- drive_get(nm_("list-me"))
 
   ## does user-specified q get appended to vs clobbered?
   ## if so, only about-html is listed here
-  about <- drive_path(nm_("about-html"))
+  about <- drive_get(nm_("about-html"))
   out <- drive_ls(d, q = "fullText contains 'portable'")
   expect_identical(
     about[c("name", "id")],

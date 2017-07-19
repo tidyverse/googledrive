@@ -52,7 +52,7 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   ## note that there are no API calls above here
   ## it means we can test more on travis/appveyor
 
-  path <- path %||% "~/"
+  path <- path %||% root_folder()
   path <- as_dribble(path)
   confirm_single_file(path)
   if (!is_folder(path)) {

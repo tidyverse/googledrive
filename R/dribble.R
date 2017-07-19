@@ -114,6 +114,7 @@ has_files_resource <- function(x) {
 #'
 #' Sometimes you need to check things about a dribble or about the files it
 #' represents, such as:
+#'   * Is it even a dribble?
 #'   * Size: Does the dribble hold exactly one file? At least one file? No file?
 #'   * File type: Is this file a folder?
 #'   * File ownership and access: Is it mine? Published? Shared?
@@ -124,6 +125,7 @@ has_files_resource <- function(x) {
 #' \dontrun{
 #' ## most of us have multiple files or folders on Google Drive
 #' d <- drive_find()
+#' is_dribble(d)
 #' no_file(d)
 #' single_file(d)
 #' some_files(d)
@@ -133,6 +135,12 @@ has_files_resource <- function(x) {
 #' is_mine(d)
 #' }
 NULL
+
+#' @export
+#' @rdname dribble-checks
+is_dribble <- function(d) {
+  inherits(d, "dribble")
+}
 
 #' @export
 #' @rdname dribble-checks
@@ -198,25 +206,23 @@ is_mine <- function(d) {
 
 
 ## promote an element in files_resource into a top-level variable
+## it will be the second column, presumably after `name``
 promote <- function(d, elem) {
-
   present <- any(purrr::map_lgl(d$files_resource, ~ elem %in% names(.x)))
-
-  ## TO DO: do we really want promote() to be this forgiving?
-  ## add a placeholder column for elem if not present in files_resource
-  if (!present) {
+  if (present) {
+    new <- purrr::simplify(purrr::map(d$files_resource, elem))
+  } else {
+    ## TO DO: do we really want promote() to be this forgiving?
+    ## adds a placeholder column for elem if not present in files_resource
     ## ensure elem is added, even if there are zero rows
-    d[[elem]] <- rep_len(list(NULL), nrow(d))
-    return(d)
+    new <- rep_len(list(NULL), nrow(d))
+    ## TO DO: find a way to emulate .default behavior from type-specific
+    ## mappers ... might need to create my own simplify()
+    ## https://github.com/tidyverse/purrr/issues/336
+    ## as this stands, you will get a list-column whenever there is at
+    ## least one NULL
   }
-
-  elem_vec <- purrr::map(d$files_resource, elem)
-  d[[elem]] <- purrr::simplify(elem_vec)
-  ## TO DO: find a way to emulate .default behavior from type-specific
-  ## mappers ... might need to create my own simplify()
-  ## https://github.com/tidyverse/purrr/issues/336
-  ## as this stands, you will get a list-column whenever there is at
-  ## least one NULL
+  d <- tibble::add_column(d, new, .after = 1)
+  names(d)[2] <- elem
   d
-
 }

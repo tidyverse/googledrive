@@ -12,7 +12,8 @@ to list. Can be an actual path (character), a file id marked with
 \code{\link[=as_id]{as_id()}}, or a \link{dribble}.}
 
 \item{pattern}{Character. If provided, only the files whose names match this
-regular expression are returned.}
+regular expression are returned. This is implemented locally on the results
+returned by the API.}
 
 \item{type}{Character. If provided, only files of this type will be returned.
 Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle. This is

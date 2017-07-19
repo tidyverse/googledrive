@@ -7,22 +7,20 @@ context("Move files")
 
 nm_ <- nm_fun("-TEST-drive-mv")
 
-run <- FALSE
-clean <- FALSE
-if (run) {
-  ## make sure directory is clean
-  if (clean) {
-    del <- drive_rm(c(
-      nm_("move-files-into-me"),
-      nm_("DESC"),
-      nm_("DESC-renamed")
-    ),
-    verbose = FALSE
-    )
-  }
+## clean
+if (FALSE) {
+  del <- drive_rm(c(
+    nm_("move-files-into-me"),
+    nm_("DESC"),
+    nm_("DESC-renamed")
+  ),
+  verbose = FALSE
+  )
+}
 
+## setup
+if (FALSE) {
   drive_mkdir(nm_("move-files-into-me"))
-
 }
 
 test_that("drive_mv() can rename file", {
@@ -63,7 +61,7 @@ test_that("drive_mv() can move a file into a folder given as path", {
   )
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)
-  destination <- drive_path(nm_("move-files-into-me"))
+  destination <- drive_get(nm_("move-files-into-me"))
   expect_identical(out$files_resource[[1]]$parents[[1]], destination$id)
 })
 
@@ -79,7 +77,7 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
     verbose = FALSE
   )
 
-  destination <- drive_path(nm_("move-files-into-me"))
+  destination <- drive_get(nm_("move-files-into-me"))
   expect_message(
     out <- drive_mv(movee, destination),
     "File moved"

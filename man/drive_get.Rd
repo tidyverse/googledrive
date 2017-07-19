@@ -2,27 +2,68 @@
 % Please edit documentation in R/drive_get.R
 \name{drive_get}
 \alias{drive_get}
-\title{Get Drive files by id}
+\title{Get Drive files by path or id}
 \usage{
-drive_get(id)
+drive_get(path = NULL, id = NULL, verbose = TRUE)
 }
 \arguments{
-\item{id}{Character vector of Drive file ids, such as you might see in the
-URL when visiting a file on Google Drive.}
+\item{path}{Character vector of path(s) to get. Use a trailing slash to
+indicate explicitly that a path is a folder, which can disambiguate if
+there is a file of the same name (yes this is possible on Drive!). A
+character vector marked with \code{\link[=as_id]{as_id()}} is treated as if it was provided via
+the \code{id} argument.}
+
+\item{id}{Character vector of Drive file ids or URLs (it is first processed
+with \code{\link[=as_id]{as_id()}}). If both \code{path} and \code{id} are non-\code{NULL}, \code{id} is silently
+ignored.}
+
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
 dribble-return
 }
 \description{
-Warning: the name of this function is likely to change.
+Retrieve metadata for files specified via path or via file id.
+Note that Google Drive does NOT behave like your local file system:
+\itemize{
+\item You can get zero, one, or more files back for each file name or path! On
+Google Drive, file and folder names need not be unique, even at a given
+level of the hierarchy.
+\item A file or folder can also have multiple direct parents, so a single Drive
+file can potentially be represented by multiple paths.
+}
+
+In contrast, a file id will always identify at most one Drive
+file. Finally, note also that a folder is just a specific type of file on
+Drive.
+
+If the files are specified via \code{path}, versus \code{id}, the returned
+\code{\link{dribble}} will include a \code{path} variable. To add path information to any
+\code{\link{dribble}} that lacks it, use \code{\link[=drive_add_path]{drive_add_path()}}.
 }
 \examples{
 \dontrun{
-drive_get("abcdefgeh123456789")
+## get info about your "My Drive" root folder
+drive_get("~/")
+## the API reserves the file id "root" for your root folder
+drive_get(id = "root")
+drive_get(id = "root") \%>\% drive_add_path()
 
-drive_get(c("abcdefgh123456789", "jklmnopq123456789"))
+## multiple names
+drive_get(c("abc", "def"))
 
-## the id "root" is an alias for your root folder on My Drive
-drive_get("root")
+## multiple names, one of which must be a folder
+drive_get(c("abc", "def/"))
+
+## query by file id(s)
+drive_get(id = "abcdefgeh123456789")
+drive_get(as_id("abcdefgeh123456789"))
+drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
+
 }
+}
+\seealso{
+If you want to list the contents of a folder, use \code{\link[=drive_ls]{drive_ls()}}. For
+general searching, use \code{\link[=drive_find]{drive_find()}}.
 }

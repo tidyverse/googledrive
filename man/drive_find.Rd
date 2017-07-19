@@ -2,22 +2,23 @@
 % Please edit documentation in R/drive_find.R
 \name{drive_find}
 \alias{drive_find}
-\title{Search for files on Google Drive.}
+\title{Find files on Google Drive.}
 \usage{
 drive_find(pattern = NULL, type = NULL, n_max = Inf, ...,
   verbose = TRUE)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the files whose names match this
-regular expression are returned.}
+regular expression are returned. This is implemented locally on the results
+returned by the API.}
 
 \item{type}{Character. If provided, only files of this type will be returned.
 Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle. This is
 processed by googledrive and sent as a query parameter.}
 
 \item{n_max}{Integer. An upper bound on the number of files to return. This
-applies to the results returned by the API, which may be further filtered
-locally, via the \code{pattern} argument.}
+applies to the results requested from the API, which may be further
+filtered locally, via the \code{pattern} argument.}
 
 \item{...}{Query parameters to pass along to the API query.}
 
@@ -42,11 +43,11 @@ drive_find()
 ## search for files located directly in your root folder
 drive_find(q = "'root' in parents")
 
-## filter for folders
+## filter for folders, the easy way and the hard way
 drive_find(type = "folder")
 drive_find(q = "mimeType = 'application/vnd.google-apps.folder'")
 
-## filter for Google Sheets
+## filter for Google Sheets, the easy way and the hard way
 drive_find(type = "spreadsheet")
 drive_find(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 
@@ -55,7 +56,7 @@ drive_find(pattern = "jt")
 
 ## control page size or cap the number of files returned
 drive_find(pageSize = 50)
-drive_find(n_max = 75)
+drive_find(n_max = 58)
 drive_find(pageSize = 5, n_max = 15)
 }
 
