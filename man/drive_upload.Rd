@@ -35,7 +35,8 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-Upload a file to Drive.
+This will upload a new file on Drive. If you are interested in updating an existing
+file, see \code{\link[=drive_update]{drive_update()}}.
 }
 \examples{
 \dontrun{
