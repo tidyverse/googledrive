@@ -28,11 +28,17 @@ test_that("drive_update() updates file", {
 })
 
 test_that("drive_update() informatively errors if the path is not unique",{
+  skip_on_appveyor()
+  skip_on_travis()
+  skip_if_offline()
   expect_error(drive_update(system.file("DESCRIPTION"), nm_("not-unique")),
                "Path to update is not unique")
 })
 
 test_that("drive_update() informatively errors if the path does not exist",{
+  skip_on_appveyor()
+  skip_on_travis()
+  skip_if_offline()
   expect_error(drive_update(system.file("DESCRIPTION"), nm_("does-not-exist")),
                "Input does not hold at least one Drive file")
 })
