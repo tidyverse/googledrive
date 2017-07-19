@@ -21,7 +21,9 @@ context of the call.}
 specified in \code{path}. Will default to its local name.}
 
 \item{overwrite}{A logical scalar, do you want to overwrite a file already on
-Google Drive, if such exists?}
+Google Drive, if such exists? If you intend to overwrite an existing
+\code{dribble} by specifying it using \code{path} and \code{overwrite = TRUE}, leave
+\code{name} \code{NULL}. You can rename this file using \code{drive_rename()}.}
 
 \item{type}{Character. If type = \code{NULL}, a MIME type is automatically
 determined from the file extension, if possible. If the source file is of a
