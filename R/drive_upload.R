@@ -10,7 +10,7 @@
 #' @param overwrite A logical scalar, do you want to overwrite a file already on
 #'   Google Drive, if such exists? If you intend to overwrite an existing
 #'   `dribble` by specifying it using `path` and `overwrite = TRUE`, leave
-#'   `name` `NULL`. You can rename this file using `drive_rename()`.
+#'   `name` `NULL`. You can rename this file using [drive_rename()].
 #' @param type Character. If type = `NULL`, a MIME type is automatically
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
