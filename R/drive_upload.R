@@ -90,6 +90,7 @@ drive_upload <- function(file = NULL,
 
   name <- name %||% basename(file)
   mimeType <- drive_mime_type(type)
+  is_overwrite <- FALSE
 
   if (overwrite) {
     if (is.null(up_id)) {
@@ -106,9 +107,10 @@ drive_upload <- function(file = NULL,
       ## id for the uploaded file
       up_id <- existing$id
     }
+    is_overwrite <- (length(up_id) != 0)
   }
 
-  if (length(up_id) == 0) {
+  if (!is_overwrite) {
     request <- generate_request(
       endpoint = "drive.files.create",
       params = list(
@@ -145,10 +147,18 @@ drive_upload <- function(file = NULL,
 
   if (success) {
     if (verbose) {
-      message(
-        glue("\nFile uploaded:\n  * {proc_res$name}\n",
-             "with MIME type:\n  * {proc_res$mimeType}")
-      )
+      if (is_overwrite) {
+        message(
+          glue("\nFile updated with new media:\n  * {proc_res$name}\n",
+               "with id:\n  * {proc_res$id}")
+        )
+      } else {
+        message(
+          glue("\nFile uploaded:\n  * {proc_res$name}\n",
+               "with MIME type:\n  * {proc_res$mimeType}")
+        )
+      }
+
     }
   } else {
     stop("The file doesn't seem to have uploaded.", call. = FALSE)

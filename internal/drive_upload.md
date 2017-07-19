@@ -45,10 +45,10 @@ Let's add set the parameter `overwrite = TRUE`. Now this should work.
 y <- drive_upload(system.file("DESCRIPTION"), x, overwrite = TRUE)
 ```
 
-    ## File uploaded:
+    ## File updated with new media:
     ##   * test-upload-lucy
-    ## with MIME type:
-    ##   * text/plain
+    ## with id:
+    ##   * 0B0Gh-SuuA2nTVGVHczc4N1hCME0
 
 The `id`s for `x` and `y` should be identical.
 
@@ -65,10 +65,10 @@ overwrite using a character `path`
 y <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy", overwrite = TRUE)
 ```
 
-    ## File uploaded:
+    ## File updated with new media:
     ##   * test-upload-lucy
-    ## with MIME type:
-    ##   * text/plain
+    ## with id:
+    ##   * 0B0Gh-SuuA2nTVGVHczc4N1hCME0
 
 ``` r
 identical(y$id, x$id)
@@ -102,8 +102,8 @@ drive_find("test-upload-lucy")
     ## # A tibble: 2 x 3
     ##               name                           id files_resource
     ## *            <chr>                        <chr>         <list>
-    ## 1 test-upload-lucy 0B0Gh-SuuA2nTZVdYb2M2RXJIX1U    <list [32]>
-    ## 2 test-upload-lucy 0B0Gh-SuuA2nTQkdSdC1FT0ZPYTg    <list [33]>
+    ## 1 test-upload-lucy 0B0Gh-SuuA2nTV1NzYWRKY2ttS28    <list [32]>
+    ## 2 test-upload-lucy 0B0Gh-SuuA2nTVGVHczc4N1hCME0    <list [33]>
 
 If we try to overwrite *again*, we should receive an error, since we don't know which to overwrite.
 
@@ -122,10 +122,10 @@ If we specify the `x` or `y` `dribble` as the `path`, however, we should still b
 z <- drive_upload(system.file("DESCRIPTION"), x, overwrite = TRUE)
 ```
 
-    ## File uploaded:
+    ## File updated with new media:
     ##   * test-upload-lucy
-    ## with MIME type:
-    ##   * text/plain
+    ## with id:
+    ##   * 0B0Gh-SuuA2nTVGVHczc4N1hCME0
 
 ``` r
 identical(z$id, x$id)
@@ -178,10 +178,10 @@ identical(a_parent, folder$id)
 b <- drive_upload(system.file("DESCRIPTION"), a, overwrite = TRUE)
 ```
 
-    ## File uploaded:
+    ## File updated with new media:
     ##   * test-upload-lucy
-    ## with MIME type:
-    ##   * text/plain
+    ## with id:
+    ##   * 0B0Gh-SuuA2nTbmJ2MnBBYUtxOU0
 
 `b` should also exist in `folder`.
 
@@ -222,7 +222,7 @@ drive_rm(c("test-upload-lucy", "test-folder-lucy"))
 ```
 
     ## Files deleted:
-    ##   * test-upload-lucy: 0B0Gh-SuuA2nTSEU5ZnRzcFNtRDQ
-    ##   * test-upload-lucy: 0B0Gh-SuuA2nTZVdYb2M2RXJIX1U
-    ##   * test-upload-lucy: 0B0Gh-SuuA2nTQkdSdC1FT0ZPYTg
-    ##   * test-folder-lucy: 0B0Gh-SuuA2nTRTQ0eFRRMWVyTm8
+    ##   * test-upload-lucy: 0B0Gh-SuuA2nTbmJ2MnBBYUtxOU0
+    ##   * test-upload-lucy: 0B0Gh-SuuA2nTV1NzYWRKY2ttS28
+    ##   * test-upload-lucy: 0B0Gh-SuuA2nTVGVHczc4N1hCME0
+    ##   * test-folder-lucy: 0B0Gh-SuuA2nTWTJ4ZDZKcFFtRTQ
