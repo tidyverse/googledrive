@@ -1,5 +1,5 @@
 ---
-title: "Playing with `drive_upload()`"
+title: "Playing with `drive_upload()` and `drive_update()`"
 author: "Lucy D’Agostino McGowan"
 date: "7/14/2017"
 output: github_document
@@ -17,17 +17,17 @@ drive_auth("drive-token.rds")
 x <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy")
 ```
 
-## overwrite using a `dribble`
+## Overwrite using a `dribble`
 
-Let's try to upload a file into that same location, using the `x` dribble object.
+Let's try to upload a file into that same location, using the `x` dribble object. This won't work with `drive_upload()`.
 ```{r, error = TRUE}
 ## this should error
 y <- drive_upload(system.file("DESCRIPTION"), x)
 ```
 
-Let's add set the parameter `overwrite = TRUE`. Now this should work.
+Let's use `drive_update()`. Now this should work.
 ```{r}
-y <- drive_upload(system.file("DESCRIPTION"), x, overwrite = TRUE)
+y <- drive_update(system.file("DESCRIPTION"), x)
 ```
 
 The `id`s for `x` and `y` should be identical. 
@@ -35,17 +35,17 @@ The `id`s for `x` and `y` should be identical.
 identical(y$id, x$id)
 ```
 
-## overwrite using a character `path`
+## Overwrite using a character `path`
 
 ```{r}
-y <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy", overwrite = TRUE)
+y <- drive_update(system.file("DESCRIPTION"), "test-upload-lucy")
 ```
 
 ```{r}
 identical(y$id, x$id)
 ```
 
-If we do not set the parameter `overwrite = TRUE`, it should still create the file when `path` is character. Now we will have 2 files in the same location with the same name.
+If we use `drive_upload()`, it should still create the file. Now we will have 2 files in the same location with the same name.
 
 ```{r}
 y <- drive_upload(system.file("DESCRIPTION"), "test-upload-lucy")
@@ -63,30 +63,11 @@ drive_find("test-upload-lucy")
 If we try to overwrite *again*, we should receive an error, since we don't know which to overwrite.
 
 ```{r, error = TRUE}
-z <- drive_upload(system.file("DESCRIPTION"),
-                  "test-upload-lucy",
-                  overwrite = TRUE)
+z <- drive_update(system.file("DESCRIPTION"),
+                  "test-upload-lucy")
 ```
 
-If we specify the `x` or `y` `dribble` as the `path`, however, we should still be able to overwrite.
-
-```{r}
-z <- drive_upload(system.file("DESCRIPTION"), x, overwrite = TRUE)
-```
-
-```{r}
-identical(z$id, x$id)
-```
-
-If we specify the `x` `dribble` as a `path`, AND specify a `name`, it will error that `x` is not a folder. If you specify BOTH a `path` and a `name`, the expectation is that the `path` is intended to be a folder. 
-
-You will receive the following error if you give a `name` AND you give something in `path` that DOES exist on your Drive, but that is NOT a folder.
-
-```{r, error = TRUE}
-z <- drive_upload(system.file("DESCRIPTION"), x, name = "new name", overwrite = TRUE)
-```
-
-## folders
+## Folders
 
 Let's make sure this plays nice with folders
 ```{r}
@@ -104,7 +85,7 @@ identical(a_parent, folder$id)
 ```
 
 ```{r}
-b <- drive_upload(system.file("DESCRIPTION"), a, overwrite = TRUE)
+b <- drive_update(system.file("DESCRIPTION"), a)
 ```
 
 `b` should also exist in `folder`.
@@ -114,17 +95,13 @@ b_parent <- unlist(b$files_resource[[1]]$parents)
 identical(b_parent, folder$id)
 ```
 
-If I try to give it a new name, it should be okay now, since `folder` is a valid folder.
-```{r}
-c <- drive_upload(system.file("DESCRIPTION"), folder, name = "new_name", overwrite = TRUE)
-```
 
 If I try to stick it in a folder that does not exist, it should complain that the path is not on Drive. You will receive this error if you give any `path` but it does not exist on your Drive.
 ```{r, error = TRUE}
-c <- drive_upload(system.file("DESCRIPTION"), "this is not a real folder", name = "new_name", overwrite = TRUE)
+c <- drive_upload(system.file("DESCRIPTION"), "this is not a real folder", name = "new_name")
 ```
 
-Note: *if you want to overwrite AND give it a new name, you have to use* `drive_rename()`.
+Note: *if you want to update AND give it a new name, you have to use* `drive_rename()`.
 
 
 ## clean up

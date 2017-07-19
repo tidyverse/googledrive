@@ -4,8 +4,8 @@
 \alias{drive_upload}
 \title{Upload a file to Drive.}
 \usage{
-drive_upload(file = NULL, path = NULL, name = NULL, overwrite = FALSE,
-  type = NULL, verbose = TRUE)
+drive_upload(file = NULL, path = NULL, name = NULL, type = NULL,
+  verbose = TRUE)
 }
 \arguments{
 \item{file}{Character, path to the local file to upload.}
@@ -19,11 +19,6 @@ context of the call.}
 
 \item{name}{Character, name the file should have on Google Drive if not
 specified in \code{path}. Will default to its local name.}
-
-\item{overwrite}{A logical scalar, do you want to overwrite a file already on
-Google Drive, if such exists? If you intend to overwrite an existing
-\code{dribble} by specifying it using \code{path} and \code{overwrite = TRUE}, leave
-\code{name} \code{NULL}. You can rename this file using \code{\link[=drive_rename]{drive_rename()}}.}
 
 \item{type}{Character. If type = \code{NULL}, a MIME type is automatically
 determined from the file extension, if possible. If the source file is of a
