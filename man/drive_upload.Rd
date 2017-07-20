@@ -10,17 +10,16 @@ drive_upload(media = NULL, path = NULL, name = NULL, type = NULL,
 \arguments{
 \item{media}{Character, path to the local file to upload.}
 
-\item{path}{Specifies target destination for \code{file} or copy of
-\code{file} on Google Drive. Can be an actual path (character), a file id
-marked with \code{\link{as_id}()}, or a \code{\link{dribble}}. If specified
-as an actual path, it is best to explicitly indicate if it's a folder by
+\item{path}{Specifies target destination for the new file on Google Drive.
+Can be an actual path (character), a file id marked with
+\code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
 including a trailing slash, since it cannot always be worked out from the
 context of the call.}
 
 \item{name}{Character, name the file should have on Google Drive if not
 specified in \code{path}. Will default to its local name.}
 
-\item{type}{Character. If type = \code{NULL}, a MIME type is automatically
+\item{type}{Character. If \code{type = NULL}, a MIME type is automatically
 determined from the file extension, if possible. If the source file is of a
 suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting \code{type} to \code{document}, \code{spreadsheet}, or \code{presentation},

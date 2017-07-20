@@ -43,11 +43,13 @@ reference:
       - drive_mv
       - drive_rename
       - drive_upload
+      - drive_update
   - title: "Upload and download"
     desc: >
       Create Drive files from local and vice versa
     contents:
       - drive_upload
+      - drive_update
       - drive_download
   - title: "Dribble object"
     desc: >

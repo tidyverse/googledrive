@@ -10,7 +10,7 @@
 #' @template path
 #' @param name Character, name the file should have on Google Drive if not
 #'   specified in `path`. Will default to its local name.
-#' @param type Character. If type = `NULL`, a MIME type is automatically
+#' @param type Character. If `type = NULL`, a MIME type is automatically
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,

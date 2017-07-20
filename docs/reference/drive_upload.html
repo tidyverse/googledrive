@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Upload a file to Drive. — drive_upload • googledrive</title>
+<title>Upload into a new Drive file — drive_upload • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -71,29 +71,29 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Upload a file to Drive.</h1>
+    <h1>Upload into a new Drive file</h1>
     </div>
 
     
-    <p>Upload a file to Drive.</p>
+    <p>Uploads a local file into a new Drive file. To update the content or metadata
+of an existing Drive file, use <code><a href='drive_update.html'>drive_update()</a></code>.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_upload</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_upload</span>(<span class='kw'>media</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
+      <th>media</th>
       <td><p>Character, path to the local file to upload.</p></td>
     </tr>
     <tr>
       <th>path</th>
-      <td><p>Specifies target destination for <code>file</code> or copy of
-<code>file</code> on Google Drive. Can be an actual path (character), a file id
-marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <code><a href='dribble.html'>dribble</a></code>. If specified
-as an actual path, it is best to explicitly indicate if it's a folder by
+      <td><p>Specifies target destination for the new file on Google Drive.
+Can be an actual path (character), a file id marked with
+<code><a href='as_id.html'>as_id</a>()</code>, or a <code><a href='dribble.html'>dribble</a></code>. If specified as an
 including a trailing slash, since it cannot always be worked out from the
 context of the call.</p></td>
     </tr>
@@ -103,13 +103,8 @@ context of the call.</p></td>
 specified in <code>path</code>. Will default to its local name.</p></td>
     </tr>
     <tr>
-      <th>overwrite</th>
-      <td><p>A logical scalar, do you want to overwrite a file already on
-Google Drive, if such exists?</p></td>
-    </tr>
-    <tr>
       <th>type</th>
-      <td><p>Character. If type = <code>NULL</code>, a MIME type is automatically
+      <td><p>Character. If <code>type = NULL</code>, a MIME type is automatically
 determined from the file extension, if possible. If the source file is of a
 suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting <code>type</code> to <code>document</code>, <code>spreadsheet</code>, or <code>presentation</code>,
