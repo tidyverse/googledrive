@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_upload.R
 \name{drive_upload}
 \alias{drive_upload}
-\title{Upload a file to Drive.}
+\title{Upload into a new Drive file}
 \usage{
 drive_upload(file = NULL, path = NULL, name = NULL, type = NULL,
   verbose = TRUE)
@@ -35,8 +35,8 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-This will upload a new file on Drive. If you are interested in updating an existing
-file, see \code{\link[=drive_update]{drive_update()}}.
+Uploads a local file into a new Drive file. To update the content or metadata
+of an existing Drive file, use \code{\link[=drive_update]{drive_update()}}.
 }
 \examples{
 \dontrun{

@@ -1,7 +1,8 @@
-#' Upload a file to Drive.
+#' Upload into a new Drive file
 #'
-#' This will upload a new file on Drive. If you are interested in updating an existing
-#'   file, see [drive_update()].
+#' Uploads a local file into a new Drive file. To update the content or metadata
+#' of an existing Drive file, use [drive_update()].
+#'
 #' @seealso MIME types that can be converted to native Google formats:
 #'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
 #'
@@ -68,9 +69,7 @@ drive_upload <- function(file = NULL,
 
   if (!is_folder(path)) {
     stop(
-      glue(
-        "Requested parent folder does not exist:\n * {path$name}"
-      ),
+      glue("\n`path` specifies a file that is not a folder:\n * {path$name}"),
       call. = FALSE
     )
   }
@@ -90,20 +89,14 @@ drive_upload <- function(file = NULL,
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
-  uploaded_file <- drive_update(file, as_id(proc_res$id), verbose = FALSE)
-  ## TO DO: this is a pretty weak test for success...
-  success <- proc_res$id == uploaded_file$id[1]
+  out <- drive_update(file, as_id(proc_res$id), verbose = FALSE)
 
-  if (success) {
-    if (verbose) {
-      message(
-        glue("\nFile uploaded:\n  * {uploaded_file$name}\n",
-             "with MIME type:\n  * {uploaded_file$files_resource[[1]]$mimeType}")
-      )
-    }
-  } else {
-    stop("The file doesn't seem to have uploaded.", call. = FALSE)
+  if (verbose) {
+    message(
+      glue("\nLocal file:\n  * {file}\n",
+           "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
+           "with MIME type:\n  * {out$files_resource[[1]]$mimeType}")
+    )
   }
-
-  invisible(uploaded_file)
+  invisible(out)
 }
