@@ -7,9 +7,9 @@
 drive_unpublish(file, ..., verbose = TRUE)
 }
 \arguments{
-\item{file}{Drive File, something that identifies the file of interest
-on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a \code{dribble}.}
+\item{file}{Something that identifies the file(s) of interest on your Google
+Drive. Can be a character vector of names/paths, a character vector of file
+ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{...}{Name-value pairs to add to the API request body.}
 
@@ -17,8 +17,8 @@ or a \code{dribble}.}
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with
-   one row per file.
+An object of class \code{\link{dribble}}, a tibble with one row per
+  file.
 }
 \description{
 Unpublish Google Drive file

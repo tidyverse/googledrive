@@ -22,8 +22,8 @@ processed by googledrive and sent as a query parameter.}
 \item{...}{Query parameters to pass along to the API query.}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with
-   one row per file.
+An object of class \code{\link{dribble}}, a tibble with one row per
+  file.
 }
 \description{
 List the contents of a folder on Google Drive, nonrecursively. Optionally,

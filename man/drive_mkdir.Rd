@@ -20,8 +20,8 @@ not already specified in \code{path}.}
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with
-   one row per file.
+An object of class \code{\link{dribble}}, a tibble with one row per
+  file.
 }
 \description{
 Create a folder on Drive.

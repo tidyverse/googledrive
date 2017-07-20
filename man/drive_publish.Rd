@@ -7,9 +7,9 @@
 drive_publish(file, ..., verbose = TRUE)
 }
 \arguments{
-\item{file}{Drive File, something that identifies the file of interest
-on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a \code{dribble}.}
+\item{file}{Something that identifies the file(s) of interest on your Google
+Drive. Can be a character vector of names/paths, a character vector of file
+ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{...}{Name-value pairs to add to the API request body, for example
 \code{publishAuto = FALSE} will ensure that each subsequent revision will not be
@@ -19,8 +19,8 @@ automatically published (default here is \code{publishAuto = TRUE}).}
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with
-   one row per file.
+An object of class \code{\link{dribble}}, a tibble with one row per
+  file.
 }
 \description{
 Publish Google Drive file.

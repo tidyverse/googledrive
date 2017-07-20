@@ -26,8 +26,8 @@ filtered locally, via the \code{pattern} argument.}
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with
-   one row per file.
+An object of class \code{\link{dribble}}, a tibble with one row per
+  file.
 }
 \description{
 This is the closest googledrive function to what you get from

@@ -7,13 +7,14 @@
 drive_cp(file, path = NULL, name = NULL, verbose = TRUE)
 }
 \arguments{
-\item{file}{Drive File, something that identifies the file of interest
-on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a \code{dribble}.}
+\item{file}{Something that identifies the file(s) of interest on your Google
+Drive. Can be a character vector of names/paths, a character vector of file
+ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{path}{Specifies target destination for the new file on Google Drive.
 Can be an actual path (character), a file id marked with
 \code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
+actual path, it is best to explicitly indicate if it's a folder by
 including a trailing slash, since it cannot always be worked out from the
 context of the call.}
 
@@ -25,8 +26,8 @@ name obtained from \code{path} overrides this argument. Defaults to "Copy of
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with
-   one row per file.
+An object of class \code{\link{dribble}}, a tibble with one row per
+  file.
 }
 \description{
 Copy a Drive file.

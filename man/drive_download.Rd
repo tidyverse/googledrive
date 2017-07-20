@@ -8,9 +8,9 @@ drive_download(file, path = NULL, type = NULL, overwrite = FALSE,
   verbose = TRUE)
 }
 \arguments{
-\item{file}{Drive File, something that identifies the file of interest
-on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a \code{dribble}.}
+\item{file}{Something that identifies the file(s) of interest on your Google
+Drive. Can be a character vector of names/paths, a character vector of file
+ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{path}{Character. Path for output file. If absent, the default file
 name is the file's name on Google Drive and the default location is working
