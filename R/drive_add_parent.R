@@ -6,7 +6,7 @@
 ## i.e. one file with multiple "paths"
 ##
 ## both file and new_parent must be single-file dribble or drive_id
-drive_add_parent <- function(file = NULL, new_parent = NULL) {
+drive_add_parent <- function(file, new_parent) {
   if (is_dribble(file)) {
     file <- as_id(file$id)
   }

@@ -8,7 +8,7 @@
 #'
 #' @template dribble-return
 #' @export
-drive_publish <- function(file = NULL, ..., verbose = TRUE) {
+drive_publish <- function(file, ..., verbose = TRUE) {
   drive_change_publish(file = file, publish = TRUE, ..., verbose = verbose)
 }
 
@@ -20,11 +20,11 @@ drive_publish <- function(file = NULL, ..., verbose = TRUE) {
 #'
 #' @template dribble-return
 #' @export
-drive_unpublish <- function(file = NULL, ..., verbose = TRUE) {
+drive_unpublish <- function(file, ..., verbose = TRUE) {
   drive_change_publish(file = file, publish = FALSE, ..., verbose = verbose)
 }
 
-drive_change_publish <- function(file = NULL,
+drive_change_publish <- function(file,
                                  publish = TRUE,
                                  ...,
                                  verbose = TRUE) {
@@ -92,7 +92,7 @@ drive_change_publish <- function(file = NULL,
 #'
 #' @template dribble-return
 #' @export
-drive_is_published <- function(file = NULL, verbose = TRUE) {
+drive_is_published <- function(file, verbose = TRUE) {
 
   file <- as_dribble(file)
   file <- confirm_some_files(file)

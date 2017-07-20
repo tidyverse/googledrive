@@ -4,7 +4,7 @@
 \alias{drive_rename}
 \title{Rename a Drive file}
 \usage{
-drive_rename(file = NULL, name = NULL, verbose = TRUE)
+drive_rename(file, name = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest

@@ -41,7 +41,7 @@
 #' drive_download(file = "foobar", type = "docx")
 #' }
 #' @export
-drive_download <- function(file = NULL,
+drive_download <- function(file,
                            path = NULL,
                            type = NULL,
                            overwrite = FALSE,

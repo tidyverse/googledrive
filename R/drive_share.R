@@ -17,7 +17,7 @@
 #'
 #' @template dribble-return
 #' @export
-drive_share <- function(file = NULL, role = NULL, type = NULL, ..., verbose = TRUE) {
+drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
 
   file <- as_dribble(file)
   file <- confirm_single_file(file)

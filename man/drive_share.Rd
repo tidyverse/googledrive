@@ -4,7 +4,7 @@
 \alias{drive_share}
 \title{Update Google Drive file share permissions.}
 \usage{
-drive_share(file = NULL, role = NULL, type = NULL, ..., verbose = TRUE)
+drive_share(file, role = NULL, type = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest

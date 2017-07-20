@@ -4,7 +4,7 @@
 \alias{drive_mv}
 \title{Move a Drive file.}
 \usage{
-drive_mv(file = NULL, path = NULL, name = NULL, verbose = TRUE)
+drive_mv(file, path = NULL, name = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest

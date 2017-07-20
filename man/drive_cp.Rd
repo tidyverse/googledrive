@@ -4,7 +4,7 @@
 \alias{drive_cp}
 \title{Copy a Drive file.}
 \usage{
-drive_cp(file = NULL, path = NULL, name = NULL, verbose = TRUE)
+drive_cp(file, path = NULL, name = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest

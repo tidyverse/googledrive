@@ -4,7 +4,7 @@
 \alias{drive_is_published}
 \title{Check if Google Drive file is published}
 \usage{
-drive_is_published(file = NULL, verbose = TRUE)
+drive_is_published(file, verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest

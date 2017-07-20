@@ -4,7 +4,7 @@
 \alias{drive_update}
 \title{Update an existing Drive file}
 \usage{
-drive_update(file = NULL, media = NULL, ..., verbose = TRUE)
+drive_update(file, media = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest

@@ -14,6 +14,6 @@
 #' drive_rename("chickwts.csv", name = "my_chickwts.csv")
 #' }
 #' @export
-drive_rename <- function(file = NULL, name = NULL, verbose = TRUE) {
+drive_rename <- function(file, name = NULL, verbose = TRUE) {
   drive_mv(file = file, name = name, verbose = verbose)
 }

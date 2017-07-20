@@ -4,7 +4,7 @@
 \alias{drive_add_path}
 \title{Get paths to Drive files.}
 \usage{
-drive_add_path(file = NULL)
+drive_add_path(file)
 }
 \arguments{
 \item{file}{A \code{\link{dribble}} or vector of file ids or URLs.}

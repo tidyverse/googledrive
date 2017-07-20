@@ -4,7 +4,7 @@
 \alias{drive_unpublish}
 \title{Unpublish Google Drive file}
 \usage{
-drive_unpublish(file = NULL, ..., verbose = TRUE)
+drive_unpublish(file, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{Drive File, something that identifies the file of interest

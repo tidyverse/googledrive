@@ -35,7 +35,7 @@
 #' drive_rm(folder)
 #' }
 #' @export
-drive_cp <- function(file = NULL, path = NULL, name = NULL, verbose = TRUE) {
+drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_folder(file)) {

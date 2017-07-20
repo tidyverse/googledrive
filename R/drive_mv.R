@@ -37,7 +37,7 @@
 #' ## to ensure we get a move vs. renaming it to "new-folder"
 #' file <- drive_mv(file, "new-folder/")
 #' }
-drive_mv <- function(file = NULL, path = NULL, name = NULL, verbose = TRUE) {
+drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (!is_mine(file)) {

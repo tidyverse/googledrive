@@ -38,7 +38,7 @@
 #' ## clean-up
 #' drive_find("BioC_mirrors") %>% drive_rm()
 #' }
-drive_upload <- function(media = NULL,
+drive_upload <- function(media,
                          path = NULL,
                          name = NULL,
                          type = NULL,

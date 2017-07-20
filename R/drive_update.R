@@ -24,7 +24,7 @@
 #' ## clean-up
 #' drive_rm(x)
 #' }
-drive_update <- function(file = NULL,
+drive_update <- function(file,
                          media = NULL,
                          ...,
                          verbose = TRUE) {

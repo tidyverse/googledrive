@@ -13,6 +13,7 @@ drive_rm <- function(file = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   if (no_file(file) && verbose) {
     message(glue("No such files found to delete."))
+    return(invisible(logical(0)))
   }
 
   out <- purrr::map_lgl(file$id, delete_one)

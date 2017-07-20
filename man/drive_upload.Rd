@@ -4,7 +4,7 @@
 \alias{drive_upload}
 \title{Upload into a new Drive file}
 \usage{
-drive_upload(media = NULL, path = NULL, name = NULL, type = NULL,
+drive_upload(media, path = NULL, name = NULL, type = NULL,
   verbose = TRUE)
 }
 \arguments{
