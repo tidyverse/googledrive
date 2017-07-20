@@ -4,17 +4,14 @@
 \alias{drive_update}
 \title{Update an existing Drive file}
 \usage{
-drive_update(file = NULL, path = NULL, ..., verbose = TRUE)
+drive_update(file = NULL, media = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{file}{Character, path to the local file to upload.}
+\item{file}{Drive File, something that identifies the file of interest
+on your Google Drive. This can be name(s)/path(s), marked file id(s),
+or a \code{dribble}.}
 
-\item{path}{Specifies target destination for \code{file} or copy of
-\code{file} on Google Drive. Can be an actual path (character), a file id
-marked with \code{\link{as_id}()}, or a \code{\link{dribble}}. If specified
-as an actual path, it is best to explicitly indicate if it's a folder by
-including a trailing slash, since it cannot always be worked out from the
-context of the call.}
+\item{media}{Character, path to the local file to upload.}
 
 \item{...}{Parameters to pass along to the API query. NOT IMPLEMENTED YET.}
 
@@ -34,7 +31,8 @@ Update an existing Drive file
 x <- drive_upload(R.home("doc/NEWS"))
 
 ## Update the file with new content.
-x <- drive_update(R.home("doc/NEWS.2"), x)
+x <- x \%>\%
+  drive_update(R.home("doc/NEWS.2"))
 
 ## clean-up
 drive_rm(x)

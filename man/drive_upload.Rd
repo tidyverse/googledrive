@@ -4,11 +4,11 @@
 \alias{drive_upload}
 \title{Upload into a new Drive file}
 \usage{
-drive_upload(file = NULL, path = NULL, name = NULL, type = NULL,
+drive_upload(media = NULL, path = NULL, name = NULL, type = NULL,
   verbose = TRUE)
 }
 \arguments{
-\item{file}{Character, path to the local file to upload.}
+\item{media}{Character, path to the local file to upload.}
 
 \item{path}{Specifies target destination for \code{file} or copy of
 \code{file} on Google Drive. Can be an actual path (character), a file id

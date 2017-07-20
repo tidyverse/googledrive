@@ -6,7 +6,7 @@
 #' @seealso MIME types that can be converted to native Google formats:
 #'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
 #'
-#' @param file Character, path to the local file to upload.
+#' @template media
 #' @template path
 #' @param name Character, name the file should have on Google Drive if not
 #'   specified in `path`. Will default to its local name.
@@ -38,14 +38,14 @@
 #' ## clean-up
 #' drive_find("BioC_mirrors") %>% drive_rm()
 #' }
-drive_upload <- function(file = NULL,
+drive_upload <- function(media = NULL,
                          path = NULL,
                          name = NULL,
                          type = NULL,
                          verbose = TRUE) {
 
-  if (!file.exists(file)) {
-    stop(glue("File does not exist:\n  * {file}"), call. = FALSE)
+  if (!file.exists(media)) {
+    stop(glue("File does not exist:\n  * {media}"), call. = FALSE)
   }
 
   if (!is.null(name)) {
@@ -74,7 +74,7 @@ drive_upload <- function(file = NULL,
     )
   }
 
-  name <- name %||% basename(file)
+  name <- name %||% basename(media)
   mimeType <- drive_mime_type(type)
 
   request <- generate_request(
@@ -89,11 +89,11 @@ drive_upload <- function(file = NULL,
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
-  out <- drive_update(file, as_id(proc_res$id), verbose = FALSE)
+  out <- drive_update(as_id(proc_res$id), media, verbose = FALSE)
 
   if (verbose) {
     message(
-      glue("\nLocal file:\n  * {file}\n",
+      glue("\nLocal file:\n  * {media}\n",
            "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
            "with MIME type:\n  * {out$files_resource[[1]]$mimeType}")
     )
