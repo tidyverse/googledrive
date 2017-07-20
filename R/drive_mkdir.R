@@ -66,7 +66,7 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
     )
   }
   if (!is_folder(path)) {
-    stop("`path` must be a single, pre-existing folder", call. = FALSE)
+    stop("`path` must be a single, pre-existing folder.", call. = FALSE)
   }
 
   request <- generate_request(

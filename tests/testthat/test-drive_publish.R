@@ -90,6 +90,6 @@ test_that("drive_publish() fails if the file input is not a Google Drive type", 
   drive_pdf <- drive_get(nm_("foo_pdf"))
 
   expect_error(drive_publish(drive_pdf, verbose = FALSE),
-               "Only Google Drive files can be published."
+               "Only Google Drive type files can be published."
   )
 })

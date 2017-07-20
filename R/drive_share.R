@@ -17,6 +17,21 @@
 #'
 #' @template dribble-return
 #' @export
+#' @examples
+#' \dontrun{
+#' ## Upload a file to share
+#' file <- drive_upload(
+#'    system.file("DESCRIPTION"),
+#'    type = "document"
+#'    )
+#'
+#' ## Share file
+#' file %>%
+#'   drive_share(role = "reader", type = "anyone")
+#'
+#' ## Clean up
+#' drive_rm(file)
+#' }
 drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
 
   file <- as_dribble(file)
@@ -64,11 +79,14 @@ drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
       message(
         glue_data(
           proc_req,
-          "The permissions for file '{file$name}' have been updated.\n id: {id}\n type: {type}\n role: {role}"
+          "The permissions for file '{file$name}' have been updated.\n",
+          "  * id: {id}\n",
+          "  * type: {type}\n",
+          "  * role: {role}"
         )
       )
     } else {
-      message(glue_data(file, "Permissions were NOT updated: '{name}'"))
+      message(glue_data(file, "Permissions were NOT updated:\n  * '{name}'"))
     }
   }
   file <- as_dribble(as_id(file$id))
