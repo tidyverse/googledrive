@@ -1,15 +1,16 @@
-#' Upload a file to Drive.
+#' Upload into a new Drive file
+#'
+#' Uploads a local file into a new Drive file. To update the content or metadata
+#' of an existing Drive file, use [drive_update()].
 #'
 #' @seealso MIME types that can be converted to native Google formats:
 #'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
 #'
-#' @param file Character, path to the local file to upload.
+#' @template media
 #' @template path
 #' @param name Character, name the file should have on Google Drive if not
 #'   specified in `path`. Will default to its local name.
-#' @param overwrite A logical scalar, do you want to overwrite a file already on
-#'   Google Drive, if such exists?
-#' @param type Character. If type = `NULL`, a MIME type is automatically
+#' @param type Character. If `type = NULL`, a MIME type is automatically
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,
@@ -37,15 +38,14 @@
 #' ## clean-up
 #' drive_find("BioC_mirrors") %>% drive_rm()
 #' }
-drive_upload <- function(file = NULL,
+drive_upload <- function(media = NULL,
                          path = NULL,
                          name = NULL,
-                         overwrite = FALSE,
                          type = NULL,
                          verbose = TRUE) {
 
-  if (!file.exists(file)) {
-    stop(glue("File does not exist:\n{file}"), call. = FALSE)
+  if (!file.exists(media)) {
+    stop(glue("File does not exist:\n  * {media}"), call. = FALSE)
   }
 
   if (!is.null(name)) {
@@ -65,82 +65,38 @@ drive_upload <- function(file = NULL,
   ## easier to default to root vs keeping track of whether parent is specified
   path <- path %||% root_folder()
   path <- as_dribble(path)
-  confirm_single_file(path)
+  path <- confirm_single_file(path)
+
   if (!is_folder(path)) {
     stop(
-      glue(
-        "Requested parent folder does not exist:\n{path$name}"
-      ),
+      glue("\n`path` specifies a file that is not a folder:\n * {path$name}"),
       call. = FALSE
     )
   }
 
-  name <- name %||% basename(file)
+  name <- name %||% basename(media)
   mimeType <- drive_mime_type(type)
 
-  ## is there a pre-existing file at destination?
-  q_name <- glue("name = {sq(name)}")
-  q_parent <- glue("{sq(path$id)} in parents")
-  qq <- collapse(c(q_name, q_parent), sep = " and ")
-  existing <- drive_find(q = qq)
-
-  if (nrow(existing) > 0) {
-    out_path <- unsplit_path(path$name %||% "", name)
-    if (!overwrite) {
-      stop(glue("Path already exists:\n{out_path}", call. = FALSE))
-    }
-    if (nrow(existing) > 1) {
-      stop(glue("Path to overwrite is not unique:\n{out_path}", call. = FALSE))
-    }
-  }
-  ## id for the uploaded file
-  up_id <- existing$id
-
-  if (length(up_id) == 0) {
-    request <- generate_request(
-      endpoint = "drive.files.create",
-      params = list(
-        name = name,
-        parents = list(path$id),
-        mimeType = mimeType
-      )
-    )
-
-    response <- make_request(request, encode = "json")
-    proc_res <- process_response(response)
-    up_id <- proc_res$id
-  }
-
   request <- generate_request(
-    endpoint = "drive.files.update.media",
-    params = list(fileId = up_id,
-                  uploadType = "media",
-                  fields = "*")
-  )
-
-  ## media uploads have unique body situations, so customizing here.
-  request$body <- httr::upload_file(
-    path = file,
-    type = mimeType
+    endpoint = "drive.files.create",
+    params = list(
+      name = name,
+      parents = list(path$id),
+      mimeType = mimeType
+    )
   )
 
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
-  uploaded_doc <- as_dribble(list(proc_res))
-  ## TO DO: this is a pretty weak test for success...
-  success <- proc_res$id == uploaded_doc$id[1]
+  out <- drive_update(as_id(proc_res$id), media, verbose = FALSE)
 
-  if (success) {
-    if (verbose) {
-      message(
-        glue("\nFile uploaded:\n  * {proc_res$name}\n",
-             "with MIME type:\n  * {proc_res$mimeType}")
-      )
-    }
-  } else {
-    stop("The file doesn't seem to have uploaded.", call. = FALSE)
+  if (verbose) {
+    message(
+      glue("\nLocal file:\n  * {media}\n",
+           "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
+           "with MIME type:\n  * {out$files_resource[[1]]$mimeType}")
+    )
   }
-
-  invisible(uploaded_doc)
+  invisible(out)
 }

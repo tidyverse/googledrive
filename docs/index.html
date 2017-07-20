@@ -99,18 +99,18 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <p>Here’s how to list the first 50 files you see in <a href="https://drive.google.com">My Drive</a>. You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">n_max =</span> <span class="dv">50</span>)
 <span class="co">#&gt; # A tibble: 50 x 3</span>
-<span class="co">#&gt;                                 name</span>
-<span class="co">#&gt;  *                             &lt;chr&gt;</span>
-<span class="co">#&gt;  1                               def</span>
-<span class="co">#&gt;  2                               abc</span>
-<span class="co">#&gt;  3         DESCRIPTION-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
-<span class="co">#&gt;  4             DESC-</span><span class="al">TEST</span><span class="co">-drive-share</span>
-<span class="co">#&gt;  5      DESC-doc-</span><span class="al">TEST</span><span class="co">-drive-download</span>
-<span class="co">#&gt;  6          DESC-</span><span class="al">TEST</span><span class="co">-drive-download</span>
-<span class="co">#&gt;  7 child_of_2_parents-</span><span class="al">TEST</span><span class="co">-drive-get</span>
-<span class="co">#&gt;  8           parent02-</span><span class="al">TEST</span><span class="co">-drive-get</span>
-<span class="co">#&gt;  9           parent01-</span><span class="al">TEST</span><span class="co">-drive-get</span>
-<span class="co">#&gt; 10            thing04-</span><span class="al">TEST</span><span class="co">-drive-get</span>
+<span class="co">#&gt;                            name</span>
+<span class="co">#&gt;  *                        &lt;chr&gt;</span>
+<span class="co">#&gt;  1                          def</span>
+<span class="co">#&gt;  2                          abc</span>
+<span class="co">#&gt;  3  update_me-</span><span class="al">TEST</span><span class="co">-drive-update</span>
+<span class="co">#&gt;  4                         NEWS</span>
+<span class="co">#&gt;  5 not-unique-</span><span class="al">TEST</span><span class="co">-drive-update</span>
+<span class="co">#&gt;  6 not-unique-</span><span class="al">TEST</span><span class="co">-drive-update</span>
+<span class="co">#&gt;  7                 jenny-fiddle</span>
+<span class="co">#&gt;  8    DESCRIPTION-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
+<span class="co">#&gt;  9        DESC-</span><span class="al">TEST</span><span class="co">-drive-share</span>
+<span class="co">#&gt; 10 DESC-doc-</span><span class="al">TEST</span><span class="co">-drive-download</span>
 <span class="co">#&gt; # ... with 40 more rows, and 2 more variables: id &lt;chr&gt;,</span>
 <span class="co">#&gt; #   files_resource &lt;list&gt;</span></code></pre></div>
 <p>You can narrow the query by specifying a <code>pattern</code> you’d like to match names against. Or by specifying a file type: the <code>type</code> argument understands MIME types, file extensions, and a few human-friendly keywords.</p>
@@ -141,16 +141,16 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;    name       path                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;      &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def ~/abc/def/ 0B0Gh-SuuA2nTdzlWVzJVRW45LUk    &lt;list [30]&gt;</span>
+<span class="co">#&gt; 1   def ~/abc/def/ 0B0Gh-SuuA2nTclNnOTV4aDg0YzA    &lt;list [30]&gt;</span>
 
 ## let's grab that file id and retrieve it that way
 x<span class="op">$</span>id
-<span class="co">#&gt; [1] "0B0Gh-SuuA2nTdzlWVzJVRW45LUk"</span>
+<span class="co">#&gt; [1] "0B0Gh-SuuA2nTclNnOTV4aDg0YzA"</span>
 <span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="reference/as_id.html">as_id</a></span>(x<span class="op">$</span>id))
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;    name                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTdzlWVzJVRW45LUk    &lt;list [30]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTclNnOTV4aDg0YzA    &lt;list [30]&gt;</span></code></pre></div>
 <p>In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a <code>dribble</code>. If it’s ambiguous, use <code><a href="reference/as_id.html">as_id()</a></code> to flag a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.</p>
 </div>
 <div id="upload-files" class="section level4">
@@ -165,12 +165,12 @@ x<span class="op">$</span>id
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                 name                           id files_resource</span>
 <span class="co">#&gt; *              &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-mirrors.csv 0B0Gh-SuuA2nTQkdiazdrWFZYLWs    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 README-mirrors.csv 0B0Gh-SuuA2nTS0xoTnB5NllPRVU    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## example of using a dribble as input
 mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(mirrors)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTQkdiazdrWFZYLWs</span>
+<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTS0xoTnB5NllPRVU</span>
 
 mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
   <span class="kw">R.home</span>(<span class="st">'doc/BioC_mirrors.csv'</span>),
@@ -195,7 +195,7 @@ mirrors<span class="op">$</span>publish
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;            check_time revision published auto_publish</span>
 <span class="co">#&gt;                &lt;dttm&gt;    &lt;chr&gt;     &lt;lgl&gt;        &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 2017-07-17 07:44:19        1      TRUE         TRUE</span></code></pre></div>
+<span class="co">#&gt; 1 2017-07-19 20:31:30        1      TRUE         TRUE</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_is_published.html">drive_is_published</a></span>(mirrors)
 <span class="co">#&gt; The latest revision of file 'README-mirrors.csv' is published.</span></code></pre></div>
 </div>
@@ -213,7 +213,7 @@ mirrors<span class="op">$</span>publish
 <p>We can then extract a share link.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mirrors <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_share_link.html">drive_share_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1QZ2jxn9c9V8_4fTse7NYfLGuPTaUZU9vANAE6zgILd8/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1u3mLpSgJFAh3UYyII-3qGD7zalEDTvNRT0RN6nrjy94/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="download-files" class="section level4">
 <h4 class="hasAnchor">
@@ -277,11 +277,11 @@ boring &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_u
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mirrors <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 1QZ2jxn9c9V8_4fTse7NYfLGuPTaUZU9vANAE6zgILd8</span>
+<span class="co">#&gt;   * README-mirrors.csv: 1u3mLpSgJFAh3UYyII-3qGD7zalEDTvNRT0RN6nrjy94</span>
 boring <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * boring-text.txt: 0B0Gh-SuuA2nTTGxCaGNZVkVsRlE</span></code></pre></div>
+<span class="co">#&gt;   * boring-text.txt: 0B0Gh-SuuA2nTaGwyS3FNTzZQMVE</span></code></pre></div>
 </div>
 </div>
 </div>
