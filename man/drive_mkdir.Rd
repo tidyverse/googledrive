@@ -13,8 +13,9 @@ an actual path (character), a file id marked with \code{\link[=as_id]{as_id()}},
 indicate if it's a folder by including a trailing slash, since it cannot
 always be worked out from the context of the call.}
 
-\item{name}{Character. The name of the folder you would like to create, if
-not already specified in \code{path}.}
+\item{name}{Character. The name of the folder you would like to create. This
+will force \code{path} to be treated as a folder, even if it is character and lacks
+a trailing slash.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

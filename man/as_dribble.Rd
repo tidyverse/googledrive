@@ -47,6 +47,18 @@ objects (for internal use)
 }
 }
 \details{
+For maximum clarity, always specify files via id or \code{\link{dribble}}.
+If specifying via path, include trailing slash whenever describing a folder,
+for maximum clarity.
+
+Some functions, such as \code{\link[=drive_cp]{drive_cp()}}, \code{\link[=drive_mkdir]{drive_mkdir()}}, \code{\link[=drive_mv]{drive_mv()}}, and \code{\link[=drive_upload]{drive_upload()}}
+allow the specification of a \code{path} and/or \code{name}. If \code{name} is specified, \code{path} is
+expected to be a folder. If \code{path} is specified without a trailing slash, \code{name} is not
+specified, and a folder by the same name exists on Drive, the functions will error. If you
+intend \code{path} to be a folder, you must specify this by adding a trailing slash. If you
+intend to add a file with the same name as an existing folder, you must specify this by
+indicating the name in \code{name}.
+
 This is a generic function.
 }
 \examples{

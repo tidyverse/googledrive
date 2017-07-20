@@ -8,8 +8,9 @@
 #'
 #' @template media
 #' @template path
-#' @param name Character, name the file should have on Google Drive if not
-#'   specified in `path`. Will default to its local name.
+#' @param name Character. The name the file should have on Drive. This will force
+#'   `path` to be treated as a folder, even if it is character and lacks
+#'   a trailing slash. Will default to its local name.
 #' @param type Character. If `type = NULL`, a MIME type is automatically
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
@@ -53,8 +54,13 @@ drive_upload <- function(media,
   }
 
   if (is_path(path)) {
-    if (is.null(name) && drive_path_exists(append_slash(path))) {
-      path <- append_slash(path)
+    if (is.null(name) && !has_slash(path) && drive_path_exists(append_slash(path))) {
+      stop(
+        "Unclear if `path` specifies parent folder or full path\n",
+        "to the new file, including its name. ",
+        "See ?as_dribble() for details.",
+        call. = FALSE
+      )
     }
     path_parts <- partition_path(path, maybe_name = is.null(name))
     path <- path_parts$parent
@@ -65,8 +71,17 @@ drive_upload <- function(media,
   ## easier to default to root vs keeping track of whether parent is specified
   path <- path %||% root_folder()
   path <- as_dribble(path)
-  path <- confirm_single_file(path)
 
+  if (!single_file(path)) {
+    paths <- glue_data(path, "  * {name}: {id}")
+    stop(
+      collapse(
+        c("Requested parent folder identifies multiple files:", paths),
+        sep = "\n"
+      ),
+      call. = FALSE
+    )
+  }
   if (!is_folder(path)) {
     stop(
       glue("\n`path` specifies a file that is not a folder:\n * {path$name}"),

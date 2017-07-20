@@ -9,6 +9,18 @@
 #'     objects (for internal use)
 #'   * Data frame or [`dribble`] (for internal use)
 #'
+#' For maximum clarity, always specify files via id or [`dribble`].
+#' If specifying via path, include trailing slash whenever describing a folder,
+#' for maximum clarity.
+#'
+#' Some functions, such as [drive_cp()], [drive_mkdir()], [drive_mv()], and [drive_upload()]
+#' allow the specification of a `path` and/or `name`. If `name` is specified, `path` is
+#' expected to be a folder. If `path` is specified without a trailing slash, `name` is not
+#' specified, and a folder by the same name exists on Drive, the functions will error. If you
+#' intend `path` to be a folder, you must specify this by adding a trailing slash. If you
+#' intend to add a file with the same name as an existing folder, you must specify this by
+#' indicating the name in `name`.
+#'
 #' This is a generic function.
 
 #' @param x A vector of Drive file paths, a vector of file ids marked

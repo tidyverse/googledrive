@@ -17,8 +17,9 @@ actual path, it is best to explicitly indicate if it's a folder by
 including a trailing slash, since it cannot always be worked out from the
 context of the call.}
 
-\item{name}{Character, name the file should have on Google Drive if not
-specified in \code{path}. Will default to its local name.}
+\item{name}{Character. The name the file should have on Drive. This will force
+\code{path} to be treated as a folder, even if it is character and lacks
+a trailing slash. Will default to its local name.}
 
 \item{type}{Character. If \code{type = NULL}, a MIME type is automatically
 determined from the file extension, if possible. If the source file is of a

@@ -16,10 +16,15 @@ rootize_path <- function(path) {
   sub("^~$|^/", "~/", path)
 }
 
+## does path have a trailing slash?
+has_slash <- function(path) {
+  grepl("/$", path)
+}
+
 ## "a/b/" and "a/b" both return "a/b/"
 append_slash <- function(path) {
   if (length(path) < 1 || path == "") return(path)
-  ifelse(grepl("/$", path), path, paste0(path, "/"))
+  ifelse(has_slash(path), path, paste0(path, "/"))
 }
 
 ## "a/b/" and "a/b" both return "a/b"

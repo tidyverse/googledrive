@@ -5,8 +5,9 @@
 #'   [dribble]. If specified as an actual path, it is best to explicitly
 #'   indicate if it's a folder by including a trailing slash, since it cannot
 #'   always be worked out from the context of the call.
-#' @param name Character. The name of the folder you would like to create, if
-#'   not already specified in `path`.
+#' @param name Character. The name of the folder you would like to create. This
+#'   will force `path` to be treated as a folder, even if it is character and lacks
+#'   a trailing slash.
 #' @template verbose
 #'
 #' @template dribble-return
@@ -54,7 +55,16 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
 
   path <- path %||% root_folder()
   path <- as_dribble(path)
-  confirm_single_file(path)
+  if (!single_file(path)) {
+    paths <- glue_data(path, "  * {name}: {id}")
+    stop(
+      collapse(
+        c("Requested parent folder identifies multiple files:", paths),
+        sep = "\n"
+      ),
+      call. = FALSE
+    )
+  }
   if (!is_folder(path)) {
     stop("`path` must be a single, pre-existing folder", call. = FALSE)
   }

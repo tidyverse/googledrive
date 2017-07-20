@@ -6,9 +6,9 @@
 #'
 #' @template file
 #' @template path
-#' @param name Character, new file name if not specified as part of `path`. Any
-#'   name obtained from `path` overrides this argument. Defaults to "Copy of
-#'   {CURRENT-FILE-NAME}."
+#' @param name Character, new file name if not specified as part of `path`. This
+#'   will force `path` to be treated as a folder, even if it is character and lacks
+#'   a trailing slash. Defaults to "Copy of {CURRENT-FILE-NAME}."
 #' @template verbose
 #' @template dribble-return
 #'
@@ -47,8 +47,13 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   }
 
   if (is_path(path)) {
-    if (is.null(name) && drive_path_exists(append_slash(path))) {
-      path <- append_slash(path)
+    if (is.null(name) && !has_slash(path) && drive_path_exists(append_slash(path))) {
+      stop(
+        "Unclear if `path` specifies parent folder or full path\n",
+        "to the new file, including its name. ",
+        "See ?as_dribble() for details.",
+        call. = FALSE
+      )
     }
     path_parts <- partition_path(path, maybe_name = is.null(name))
     path <- path_parts$parent
@@ -65,12 +70,23 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   ## if copying to a specific directory, specify the parent
   if (!is.null(path)) {
     path <- as_dribble(path)
-    confirm_single_file(path)
+    if (!some_files(path)) {
+      stop("Requested parent folder does not exist.", call. = FALSE)
+    }
+    if (!single_file(path)) {
+      paths <- glue_data(path, "  * {name}: {id}")
+      stop(
+        collapse(
+          c("Requested parent folder identifies multiple files:", paths),
+          sep = "\n"
+          ),
+        call. = FALSE
+      )
+    }
+    ## if path was input as a dribble or id, still need to be sure it's a folder
     if (!is_folder(path)) {
       stop(
-        glue(
-          "Requested parent folder does not exist:\n{path$name}"
-        ),
+        glue("\n`path` specifies a file that is not a folder:\n * {path$name}"),
         call. = FALSE
       )
     }
