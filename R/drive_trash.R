@@ -2,7 +2,7 @@
 #' @template file
 #' @template verbose
 #'
-#' @return Logical vector, indicating whether the trashing/untrashing succeeded.
+#' @template dribble-return
 #' @export
 #' @examples
 #' \dontrun{
@@ -18,20 +18,36 @@
 #' drive_trash(c("file_a", "file_b"))
 #' drive_untrash(c("file_a", "file_b"))
 #' }
-drive_trash <- function(file = NULL, verbose = TRUE) {
-  trash_file <- as_dribble(file)
-  if (no_file(trash_file) && verbose) {
-    message(glue("No such files found to trash"))
-    return(invisible(logical(0)))
+drive_trash <- function(file, verbose = TRUE) {
+  invisible(drive_toggle_trash(file, trash = TRUE, verbose = verbose))
+}
+
+#' @rdname drive_trash
+#' @export
+drive_untrash <- function(file, verbose = TRUE) {
+  if (is_path(file)) {
+    trash <- drive_view_trash()
+    file <- trash[trash$name %in% file, ]
+  }
+  invisible(drive_toggle_trash(file, trash = FALSE, verbose = verbose))
+}
+
+drive_toggle_trash <- function(file, trash, verbose = TRUE) {
+  VERB <- if (trash) "trash" else "untrash"
+  VERBED <- paste0(VERB, "ed")
+
+  file <- as_dribble(file)
+  if (no_file(file)) {
+    if (verbose) message(glue("No such files found to {VERB}."))
+    return(invisible(dribble()))
   }
 
-  out <- purrr::map_lgl(trash_file$id, toggle_trash_one)
+  out <- purrr::map(file$id, toggle_trash_one, trash = trash)
+  out <- do.call(rbind, out)
 
   if (verbose) {
-    if (any(out)) {
-      successes <- glue_data(trash_file[out, ], "  * {name}: {id}")
-      message(collapse(c("Files trashed:", successes), sep = "\n"))
-    }
+    files <- glue_data(out, "  * {name}: {id}")
+    message(collapse(c(glue("Files {VERBED}:"), files), sep = "\n"))
   }
   invisible(out)
 }
@@ -40,36 +56,12 @@ toggle_trash_one <- function(id, trash = TRUE) {
   request <- generate_request(
     endpoint = "drive.files.update",
     params = list(fileId = id,
-                  trashed = trash)
+                  trashed = trash,
+                  fields = "*")
   )
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
-  identical(proc_res$id, id)
-}
-
-#' @rdname drive_trash
-#' @export
-drive_untrash <- function(file = NULL, verbose = TRUE) {
-  if (is_path(file)) {
-    paths <- collapse(file, sep = "|")
-    ## TODO this won't take file paths like a/b/c :(
-    file <- drive_find(paths, q = "trashed = true")
-  }
-  trash_file <- as_dribble(file)
-  if (no_file(trash_file) && verbose) {
-    message(glue("No such files found to trash"))
-    return(invisible(logical(0)))
-  }
-
-  out <- purrr::map_lgl(trash_file$id, toggle_trash_one, trash = FALSE)
-
-  if (verbose) {
-    if (any(out)) {
-      successes <- glue_data(trash_file[out, ], "  * {name}: {id}")
-      message(collapse(c("Files untrashed:", successes), sep = "\n"))
-    }
-  }
-  invisible(out)
+  as_dribble(list(proc_res))
 }
 
 #' Get files in Drive Trash.
@@ -88,15 +80,14 @@ drive_view_trash <- function() {
 drive_empty_trash <- function(verbose = TRUE) {
   files <- drive_view_trash()
   if (no_file(files)) {
-    message("Your trash was already empty.")
-    return(invisible(logical(0)))
+    if (verbose) message("Your trash was already empty.")
+    return(invisible(TRUE))
   }
   del <- drive_rm(files, verbose = FALSE)
   if (verbose) {
     message(glue(
-      "You have successfully deleted {sum(del)} file(s) ",
-      "from your Google Drive trash."
+      "{sum(del)} file(s) deleted from your Google Drive trash."
     ))
-    return(invisible(TRUE))
   }
+  return(invisible(TRUE))
 }

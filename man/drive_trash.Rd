@@ -5,20 +5,21 @@
 \alias{drive_untrash}
 \title{Move files to or from trash.}
 \usage{
-drive_trash(file = NULL, verbose = TRUE)
+drive_trash(file, verbose = TRUE)
 
-drive_untrash(file = NULL, verbose = TRUE)
+drive_untrash(file, verbose = TRUE)
 }
 \arguments{
-\item{file}{Drive File, something that identifies the file of interest
-on your Google Drive. This can be name(s)/path(s), marked file id(s),
-or a \code{dribble}.}
+\item{file}{Something that identifies the file(s) of interest on your Google
+Drive. Can be a character vector of names/paths, a character vector of file
+ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
 \value{
-Logical vector, indicating whether the trashing/untrashing succeeded.
+An object of class \code{\link{dribble}}, a tibble with one row per
+  file.
 }
 \description{
 Move files to or from trash.

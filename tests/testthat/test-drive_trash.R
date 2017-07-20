@@ -4,7 +4,6 @@ context("Trash files")
 ## change run & clean below to TRUE to create files needed
 ## (CAUTION, this will delete files that will interfere)
 
-
 nm_ <- nm_fun("-TEST-drive-trash")
 
 ## setup
@@ -14,25 +13,23 @@ if (FALSE) {
 
 ## clean
 if (FALSE) {
-  del <- drive_rm(nm_("foo"), verbose = FALSE)
+  drive_rm(nm_("foo"))
 }
 
-
-test_that("drive_trash() moves object to the trash and drive_untrash() undoes", {
-
+test_that("drive_trash() moves file to trash and drive_untrash() undoes", {
   skip_on_travis()
   skip_on_appveyor()
   skip_if_offline()
 
-  expect_true(drive_trash(nm_("foo")))
-  foo <- drive_find(nm_("foo"), q = "trashed = true")
-  foo <- promote(foo, "trashed")
-  expect_true(foo$trashed)
+  out <- drive_trash(nm_("foo"))
+  expect_s3_class(out, "dribble")
+  expect_identical(out$name, nm_("foo"))
+  expect_true(out[["files_resource"]][[1]][["trashed"]])
 
-  expect_true(drive_untrash(nm_("foo")))
-  foo <- drive_find(nm_("foo"))
-  foo <- promote(foo, "trashed")
-  expect_false(foo$trashed)
+  out <- drive_untrash(nm_("foo"))
+  expect_s3_class(out, "dribble")
+  expect_identical(out$name, nm_("foo"))
+  expect_false(out[["files_resource"]][[1]][["trashed"]])
 })
 
 ## WARNING: this will empty your drive trash. If you do
