@@ -24,6 +24,15 @@ if (FALSE) {
   )
 }
 
+test_that("drive_download() won't overwrite existing file", {
+  on.exit(unlink("save_me.txt"))
+  writeLines("I exist", "save_me.txt")
+  expect_error(
+    drive_download(dribble(), path = "save_me.txt"),
+    "Path exists and overwrite is FALSE"
+  )
+})
+
 test_that("drive_download() downloads a file", {
   skip_on_appveyor()
   skip_on_travis()

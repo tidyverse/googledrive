@@ -46,6 +46,13 @@ drive_download <- function(file,
                            type = NULL,
                            overwrite = FALSE,
                            verbose = TRUE) {
+  if (!is.null(path) && file.exists(path) && !overwrite) {
+    stop(
+      glue("\nPath exists and overwrite is FALSE:\n  * {path}"),
+      call. = FALSE
+    )
+  }
+
   file <- as_dribble(file)
   file <- confirm_single_file(file)
 
