@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_update.R
 \name{drive_update}
 \alias{drive_update}
-\title{Update a file on Drive with new content.}
+\title{Update an existing Drive file}
 \usage{
 drive_update(file = NULL, path = NULL, ..., verbose = TRUE)
 }
@@ -16,7 +16,7 @@ as an actual path, it is best to explicitly indicate if it's a folder by
 including a trailing slash, since it cannot always be worked out from the
 context of the call.}
 
-\item{...}{Query parameters to pass along to the API query.}
+\item{...}{Parameters to pass along to the API query. NOT IMPLEMENTED YET.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -26,17 +26,22 @@ An object of class \code{\link{dribble}}, a tibble with
    one row per file.
 }
 \description{
-Update a file on Drive with new content.
+Update an existing Drive file
 }
 \examples{
 \dontrun{
-## Upload a file to update.
+## Create a new file, so we can update it.
 x <- drive_upload(R.home("doc/NEWS"))
 
-## Update the file.
+## Update the file with new content.
 x <- drive_update(R.home("doc/NEWS.2"), x)
 
 ## clean-up
 drive_rm(x)
 }
+}
+\seealso{
+Wraps the
+\href{https://developers.google.com/drive/v3/reference/files/update}{drive.files.update}
+endpoint. In particular, does \href{https://developers.google.com/drive/v3/web/manage-uploads}{media upload}.
 }

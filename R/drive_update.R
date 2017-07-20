@@ -1,8 +1,12 @@
-#' Update a file on Drive with new content.
+#' Update an existing Drive file
+#'
+#' @seealso Wraps the
+#' [drive.files.update](https://developers.google.com/drive/v3/reference/files/update)
+#' endpoint. In particular, does [media upload](https://developers.google.com/drive/v3/web/manage-uploads).
 #'
 #' @param file Character, path to the local file to upload.
 #' @template path
-#' @param ... Query parameters to pass along to the API query.
+#' @param ... Parameters to pass along to the API query. NOT IMPLEMENTED YET.
 #' @template verbose
 #'
 #' @template dribble-return
@@ -10,10 +14,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## Upload a file to update.
+#' ## Create a new file, so we can update it.
 #' x <- drive_upload(R.home("doc/NEWS"))
 #'
-#' ## Update the file.
+#' ## Update the file with new content.
 #' x <- drive_update(R.home("doc/NEWS.2"), x)
 #'
 #' ## clean-up
@@ -25,7 +29,7 @@ drive_update <- function(file = NULL,
                          verbose = TRUE) {
 
   if (!file.exists(file)) {
-    stop(glue("File does not exist:\n  * {file}"), call. = FALSE)
+    stop(glue("\nLocal file does not exist:\n  * {file}"), call. = FALSE)
   }
 
   path <- as_dribble(path)
@@ -35,8 +39,8 @@ drive_update <- function(file = NULL,
     paths <- glue_data(path, "  * {name}: {id}")
     stop(
       collapse(c("Path to update is not unique:", paths), sep = "\n"),
-         call. = FALSE
-      )
+      call. = FALSE
+    )
   }
 
   request <- generate_request(
@@ -53,20 +57,10 @@ drive_update <- function(file = NULL,
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
-  updated_file <- as_dribble(list(proc_res))
-  ## TO DO: this is a pretty weak test for success...
-  success <- proc_res$id == updated_file$id[1]
+  out <- as_dribble(list(proc_res))
 
-  if (success) {
-    if (verbose) {
-      message(
-        glue("\nFile updated with new media:\n  * {proc_res$name}\n",
-             "with id:\n  * {proc_res$id}")
-      )
-    }
-  } else {
-    stop("The file doesn't seem to have updated.", call. = FALSE)
+  if (verbose) {
+    message(glue("\nFile updated:\n  * {out$name}: {out$id}"))
   }
-
-  invisible(updated_file)
+  invisible(out)
 }

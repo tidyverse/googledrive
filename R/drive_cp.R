@@ -92,8 +92,6 @@ drive_cp <- function(file = NULL, path = NULL, name = NULL, verbose = TRUE) {
   out <- as_dribble(list(proc_res))
 
   if (verbose) {
-    ## not entirely sure why this placement of `\n` helps glue do the right
-    ## thing and yet ... it does
     new_path <- paste0(append_slash(path$name), out$name)
     message(glue("\nFile copied:\n  * {file$name} -> {new_path}"))
   }
