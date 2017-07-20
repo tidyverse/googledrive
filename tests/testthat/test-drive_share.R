@@ -40,7 +40,7 @@ test_that("drive_share doesn't explicitly fail", {
       role = role,
       type = type
     ),
-    glue::glue("The permissions for file {sq(file$name)} have been updated")
+    glue::glue("\nThe permissions for file {sq(file$name)} have been updated")
   )
 
   ## this should now have a larger tibble

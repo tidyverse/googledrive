@@ -59,7 +59,7 @@ drive_mime_type <- function(type = NULL) {
 
   if (all(is.na(mime_type))) {
     stop(glue(
-      "Unrecognized `type`:\n{problems}",
+      "\n Unrecognized `type`:\n  * {problems}",
       problems = collapse(type[is.na(mime_type)], sep = "\n")
     ),
     call. = FALSE

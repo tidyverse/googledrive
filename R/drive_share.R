@@ -79,14 +79,14 @@ drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
       message(
         glue_data(
           proc_req,
-          "The permissions for file '{file$name}' have been updated.\n",
+          "\nThe permissions for file {sq(file$name)} have been updated.\n",
           "  * id: {id}\n",
           "  * type: {type}\n",
           "  * role: {role}"
         )
       )
     } else {
-      message(glue_data(file, "Permissions were NOT updated:\n  * '{name}'"))
+      message(glue_data(file, "\nPermissions were NOT updated:\n  * '{name}'"))
     }
   }
   file <- as_dribble(as_id(file$id))

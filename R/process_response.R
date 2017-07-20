@@ -41,8 +41,8 @@ stop_for_content_type <- function(response,
   actual <- response$headers$`Content-Type`
   if (actual != expected) {
     stop(
-      glue("Expected content-type:\n{expected}\n",
-           "Actual content-type:\n{actual}"),
+      glue("\n\nExpected content-type:\n  * {expected}\n",
+           "Actual content-type:\n  * {actual}"),
       call. = FALSE
     )
   }

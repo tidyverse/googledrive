@@ -46,7 +46,7 @@ drive_upload <- function(media,
                          verbose = TRUE) {
 
   if (!file.exists(media)) {
-    stop(glue("File does not exist:\n  * {media}"), call. = FALSE)
+    stop(glue("\nFile does not exist:\n  * {media}"), call. = FALSE)
   }
 
   if (!is.null(name)) {

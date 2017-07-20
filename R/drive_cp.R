@@ -15,23 +15,23 @@
 #' @examples
 #' \dontrun{
 #' ## create a file to copy
-#' file <- drive_upload(system.file("DESCRIPTION"), "DESC")
+#' file <- drive_upload(system.file("DESCRIPTION"), "DESC-ex")
 #'
 #' ## Make a "Copy of" copy in same folder as the original
-#' drive_cp("DESC")
+#' drive_cp("DESC-ex")
 #'
 #' ## Make an explicitly named copy in same folder as the original
-#' drive_cp("DESC", "DESC-two")
+#' drive_cp("DESC-ex", "DESC-ex-two")
 #'
 #' ## Make an explicitly named copy in a different folder
 #' folder <- drive_mkdir("new-folder")
-#' drive_cp("DESC", folder, "DESC-three")
+#' drive_cp("DESC-ex", folder, "DESC-ex-three")
 #'
 #' ## Behold all of our copies!
-#' drive_find("DESC")
+#' drive_find("DESC-ex")
 #'
 #' ## Delete all of our copies and the new folder!
-#' drive_find("DESC") %>% drive_rm()
+#' drive_find("DESC-ex") %>% drive_rm()
 #' drive_rm(folder)
 #' }
 #' @export

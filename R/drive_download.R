@@ -117,7 +117,7 @@ get_export_mime_type <- function(mime_type) {
   m <- .drive$translate_mime_types$mime_type_google == mime_type &
     is_true(.drive$translate_mime_types$default)
   if (!any(m)) {
-    stop(glue("Not a recognized Google MIME type:\n  * {mime_type}"), call. = FALSE)
+    stop(glue("\nNot a recognized Google MIME type:\n  * {mime_type}"), call. = FALSE)
   }
   .drive$translate_mime_types$mime_type_local[m]
 }
@@ -132,7 +132,7 @@ verify_export_mime_type <- function(mime_type, export_type) {
     ## and use the human_type, if found
     stop(
       glue(
-        "Cannot export Google file of type:\n  * {mime_type}\n",
+        "\nCannot export Google file of type:\n  * {mime_type}\n",
         "as a file of type:\n  * {export_type}"
       ),
       call. = FALSE

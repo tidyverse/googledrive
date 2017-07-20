@@ -74,7 +74,7 @@ drive_change_publish <- function(file,
       message(
         glue_data(
           file_update,
-          "You have changed the publication status of file:\n",
+          "\nYou have changed the publication status of file:\n",
           "  * {sq(name)}."
         )
       )
@@ -82,7 +82,7 @@ drive_change_publish <- function(file,
       message(
         glue_data(
           file_update,
-          "Something went wrong. The publication status of file:\n",
+          "\nSomething went wrong. The publication status of file:\n",
           "  * {sq(name)}\n was not changed.")
       )
   }
