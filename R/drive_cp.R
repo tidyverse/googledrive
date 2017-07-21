@@ -47,14 +47,7 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   }
 
   if (is_path(path)) {
-    if (is.null(name) && !has_slash(path) && drive_path_exists(append_slash(path))) {
-      stop(
-        "Unclear if `path` specifies parent folder or full path\n",
-        "to the new file, including its name. ",
-        "See ?as_dribble() for details.",
-        call. = FALSE
-      )
-    }
+    confirm_clear_path(path, name)
     path_parts <- partition_path(path, maybe_name = is.null(name))
     path <- path_parts$parent
     name <- name %||% path_parts$name
