@@ -38,7 +38,7 @@ drive_toggle_trash <- function(file, trash, verbose = TRUE) {
 
   file <- as_dribble(file)
   if (no_file(file)) {
-    if (verbose) mglue("No such files found to {VERB}.")
+    if (verbose) message_glue("No such files found to {VERB}.")
     return(invisible(dribble()))
   }
 
@@ -47,7 +47,7 @@ drive_toggle_trash <- function(file, trash, verbose = TRUE) {
 
   if (verbose) {
     files <- glue::glue_data(out, "  * {name}: {id}")
-    mcollapse(c(glue::glue("Files {VERBED}:"), files), sep = "\n")
+    message_collapse(c(glue::glue("Files {VERBED}:"), files))
   }
   invisible(out)
 }
@@ -85,7 +85,7 @@ drive_empty_trash <- function(verbose = TRUE) {
   }
   del <- drive_rm(files, verbose = FALSE)
   if (verbose) {
-    mglue(
+    message_glue(
       "{sum(del)} file(s) deleted from your Google Drive trash."
     )
   }

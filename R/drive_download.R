@@ -47,7 +47,7 @@ drive_download <- function(file,
                            overwrite = FALSE,
                            verbose = TRUE) {
   if (!is.null(path) && file.exists(path) && !overwrite) {
-    sglue("\nPath exists and overwrite is FALSE:\n  * {path}")
+    stop_glue("\nPath exists and overwrite is FALSE:\n  * {path}")
   }
 
   file <- as_dribble(file)
@@ -94,7 +94,7 @@ drive_download <- function(file,
 
   if (success) {
     if (verbose) {
-      mglue("\nFile downloaded:\n  * {file$name}\n",
+      message_glue("\nFile downloaded:\n  * {file$name}\n",
             "Saved locally as:\n  * {path}"
       )
     }
@@ -113,7 +113,7 @@ get_export_mime_type <- function(mime_type) {
   m <- .drive$translate_mime_types$mime_type_google == mime_type &
     is_true(.drive$translate_mime_types$default)
   if (!any(m)) {
-    sglue("\nNot a recognized Google MIME type:\n  * {mime_type}")
+    stop_glue("\nNot a recognized Google MIME type:\n  * {mime_type}")
   }
   .drive$translate_mime_types$mime_type_local[m]
 }
@@ -126,7 +126,7 @@ verify_export_mime_type <- function(mime_type, export_type) {
   if (!ok) {
     ## to be really nice, we would look these up in drive_mime_type() tibble
     ## and use the human_type, if found
-    sglue(
+    stop_glue(
       "\nCannot export Google file of type:\n  * {mime_type}\n",
       "as a file of type:\n  * {export_type}"
     )

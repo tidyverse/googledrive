@@ -43,7 +43,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (!is_mine(file)) {
-    sglue("Can't move this file because you don't own it:\n{file$name}")
+    stop_glue("Can't move this file because you don't own it:\n{file$name}")
   }
 
   if (!is.null(name)) {
@@ -69,17 +69,16 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   if (!is.null(path)) {
     path <- as_dribble(path)
     if (!some_files(path)) {
-      sglue("Requested parent folder does not exist.")
+      stop_glue("Requested parent folder does not exist.")
     }
     if (!single_file(path)) {
       paths <- glue::glue_data(path, "  * {name}: {id}")
-      scollapse(
-        c("Requested parent folder identifies multiple files:", paths),
-        sep = "\n"
+      stop_collapse(
+        c("Requested parent folder identifies multiple files:", paths)
       )
     }
     if (!is_folder(path)) {
-      sglue("Requested parent folder does not exist:\n{path$name}")
+      stop_glue("Requested parent folder does not exist:\n{path$name}")
     }
     current_parents <- file$files_resource[[1]][["parents"]][[1]]
     if (!path$id %in% current_parents) {
@@ -105,7 +104,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     ## not entirely sure why this placement of `\n` helps glue do the right
     ## thing and yet ... it does
     new_path <- paste0(append_slash(path$name), out$name)
-    mglue("\nFile {action}:\n  * {file$name} -> {new_path}")
+    message_glue("\nFile {action}:\n  * {file$name} -> {new_path}")
   }
   invisible(out)
 }

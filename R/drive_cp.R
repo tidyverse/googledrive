@@ -7,7 +7,7 @@
 #' @template file
 #' @template path
 #' @templateVar name file
-#' @templateVar default If not given or unknown, will default to the `file`'s current folder.
+#' @templateVar default {}
 #' @template name
 #' @templateVar name file
 #' @templateVar default Defaults to "Copy of `FILE-NAME`".
@@ -63,24 +63,23 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   )
 
   ## if copying to a specific directory, specify the parent
-  ## defaults to the current file's directory
-  path <- path %||% as_id(file$files_resource[[1]]$parents[[1]])
-  path <- as_dribble(path)
-  if (!some_files(path)) {
-    sglue("Requested parent folder does not exist.")
+  if (!is.null(path)) {
+    path <- as_dribble(path)
+    if (!some_files(path)) {
+      stop_glue("Requested parent folder does not exist.")
+    }
+    if (!single_file(path)) {
+      paths <- glue::glue_data(path, "  * {name}: {id}")
+      stop_collapse(
+        c("Requested parent folder identifies multiple files:", paths)
+      )
+    }
+    ## if path was input as a dribble or id, still need to be sure it's a folder
+    if (!is_folder(path)) {
+      stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
+    }
+    params[["parents"]] <- list(path$id)
   }
-  if (!single_file(path)) {
-    paths <- glue::glue_data(path, "  * {name}: {id}")
-    scollapse(
-      c("Requested parent folder identifies multiple files:", paths),
-      sep = "\n"
-    )
-  }
-  ## if path was input as a dribble or id, still need to be sure it's a folder
-  if (!is_folder(path)) {
-    sglue("\n`path` specifies a file that is not a folder:\n * {path$name}")
-  }
-  params[["parents"]] <- list(path$id)
 
 
   ## if new name is specified, send it
@@ -99,7 +98,7 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   if (verbose) {
     new_path <- paste0(append_slash(path$name), out$name)
-    mglue("\nFile copied:\n  * {file$name} -> {new_path}")
+    message_glue("\nFile copied:\n  * {file$name} -> {new_path}")
   }
   invisible(out)
 }

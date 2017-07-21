@@ -138,17 +138,15 @@ match_params <- function(provided, spec) {
   required <- spec %>% purrr::keep("required") %>% names()
   missing <- setdiff(required, names(provided))
   if (length(missing)) {
-    scollapse(
-      c("Required parameter(s) are missing:", missing),
-      sep = "\n"
+    stop_collapse(
+      c("Required parameter(s) are missing:", missing)
     )
   }
 
   unknown <- setdiff(names(provided), names(spec))
   if (length(unknown)) {
-    scollapse(
-      c("These parameters are not recognized for this endpoint:", unknown),
-      sep = "\n"
+    stop_collapse(
+      c("These parameters are not recognized for this endpoint:", unknown)
     )
   }
 

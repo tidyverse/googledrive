@@ -48,7 +48,7 @@ drive_upload <- function(media,
                          verbose = TRUE) {
 
   if (!file.exists(media)) {
-    sglue("\nFile does not exist:\n  * {media}")
+    stop_glue("\nFile does not exist:\n  * {media}")
   }
 
   if (!is.null(name)) {
@@ -67,17 +67,16 @@ drive_upload <- function(media,
   path <- path %||% root_folder()
   path <- as_dribble(path)
   if (!some_files(path)) {
-    sglue("Requested parent folder does not exist.")
+    stop_glue("Requested parent folder does not exist.")
   }
   if (!single_file(path)) {
     paths <- glue::glue_data(path, "  * {name}: {id}")
-    scollapse(
-      c("Requested parent folder identifies multiple files:", paths),
-      sep = "\n"
+    stop_collapse(
+      c("Requested parent folder identifies multiple files:", paths)
     )
   }
   if (!is_folder(path)) {
-    sglue("\n`path` specifies a file that is not a folder:\n * {path$name}")
+    stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
   }
 
   name <- name %||% basename(media)
@@ -98,7 +97,7 @@ drive_upload <- function(media,
   out <- drive_update(as_id(proc_res$id), media, verbose = FALSE)
 
   if (verbose) {
-    mglue("\nLocal file:\n  * {media}\n",
+    message_glue("\nLocal file:\n  * {media}\n",
           "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
           "with MIME type:\n  * {out$files_resource[[1]]$mimeType}"
     )

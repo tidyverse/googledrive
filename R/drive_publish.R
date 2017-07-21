@@ -73,12 +73,12 @@ drive_change_publish <- function(file,
 
   if (verbose) {
     if (httr::status_code(response) == 200L) {
-      mglue(
+      message_glue(
         "\nYou have changed the publication status of file:\n",
         "  * {sq(file_update$name)}"
       )
     } else
-      mglue(
+      message_glue(
         "\nSomething went wrong. You have NOT changed the publication status of file:\n",
         "  * {sq(file_update$name)}"
       )
@@ -131,14 +131,12 @@ drive_is_published <- function(file, verbose = TRUE) {
   mime_types <- purrr::map_chr(file$files_resource, "mimeType")
   if (!all(grepl("application/vnd.google-apps.", mime_types)) || is_folder(file)) {
     all_mime_types <- glue::glue_data(file, "  * {name}: {mime_types}")
-    scollapse(c(
+    stop_collapse(c(
       "Only Google Drive type files can be published.",
       "Your file(s) and type:",
       all_mime_types,
       "Check out `drive_share()` to change sharing permissions."
-    ),
-    sep = "\n"
-    )
+    ))
   }
 
   published <- purrr::map2(file$id, file$name, is_published_one, verbose = verbose)
@@ -159,7 +157,7 @@ is_published_one <- function(id, name, verbose = TRUE) {
   proc_res <- process_response(response)
 
   if (verbose) {
-    mglue(
+    message_glue(
       "The latest revision of file {sq(name)} is ",
       "{if (proc_res$published) '' else 'NOT '}published."
     )

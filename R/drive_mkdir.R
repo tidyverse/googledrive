@@ -53,13 +53,12 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   path <- path %||% root_folder()
   path <- as_dribble(path)
   if (!some_files(path)) {
-    sglue("Requested parent folder does not exist.")
+    stop_glue("Requested parent folder does not exist.")
   }
   if (!single_file(path)) {
     paths <- glue::glue_data(path, "  * {name}: {id}")
-    scollapse(
-      c("Requested parent folder identifies multiple files:", paths),
-      sep = "\n"
+    stop_collapse(
+      c("Requested parent folder identifies multiple files:", paths)
     )
   }
   if (!is_folder(path)) {
@@ -85,7 +84,7 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   if (verbose) {
     ## not entirely sure why this placement of `\n` helps glue do the right
     ## thing and yet ... it does
-    mglue("\nFolder {if (success) '' else 'NOT '}created:\n",
+    message_glue("\nFolder {if (success) '' else 'NOT '}created:\n",
           "  * {folder$name}"
     )
   }

@@ -40,7 +40,7 @@ stop_for_content_type <- function(response,
                                   expected = "application/json; charset=UTF-8") {
   actual <- response$headers$`Content-Type`
   if (actual != expected) {
-    sglue("\n\nExpected content-type:\n  * {expected}\n",
+    stop_glue("\n\nExpected content-type:\n  * {expected}\n",
           "Actual content-type:\n  * {actual}"
     )
   }

@@ -2,15 +2,35 @@ last <- function(x) x[length(x)]
 
 sq <- function(x) glue::single_quote(x)
 
-sglue <- function(...) stop(glue::glue(..., .envir = parent.frame()), call. = FALSE)
-sglue_data <- function(...) stop(glue::glue_data(..., .envir = parent.frame()), call. = FALSE)
-scollapse <- function(...) stop(glue::collapse(...), call. = FALSE)
-mglue <- function(...) message(glue::glue(..., .envir = parent.frame()))
-mglue_data <- function(...) message(glue::glue_data(..., .envir = parent.frame()))
-mcollapse <- function(...) message(glue::collapse(...))
-wglue <- function(...) warning(glue::glue(..., .envir = parent.frame()))
-wglue_data <- function(...) warning(glue::glue_data(..., .envir = parent.frame()))
-wcollapse <- function(...) warning(glue::collapse(...))
+stop_glue <- function(..., .sep = "", .envir = parent.frame(), .call = FALSE, .domain = NA) {
+  stop(glue(..., .sep = .sep, .envir = .envir), .call = .call, domain = .domain)
+}
+
+stop_glue_data <- function(..., .sep = "", .envir = parent.frame(), .call = FALSE, .domain = NA) {
+  stop(glue_data(..., .sep = .sep, .envir = .envir), .call = .call, domain = .domain)
+}
+
+stop_collapse <- function(...) stop(collapse(..., sep = "\n"), call. = FALSE)
+
+message_glue <- function(..., .sep = "", .envir = parent.frame(), .domain = NA) {
+  message(glue(..., .sep = .sep, .envir = .envir), domain = .domain)
+}
+
+message_glue_data <- function(..., .sep = "", .envir = parent.frame(), .domain = NA) {
+  message(glue_data(..., .sep = .sep, .envir = .envir), domain = .domain)
+}
+
+message_collapse <- function(...) message(glue::collapse(..., sep = "\n"))
+
+warning_glue <- function(..., .sep = "", .envir = parent.frame(), .call = FALSE, .domain = NA) {
+  warning(glue(..., .sep = .sep, .envir = .envir), .call = .call, domain = .domain)
+}
+
+warning_glue_data <- function(..., .sep = "", .envir = parent.frame(), .call = FALSE, .domain = NA) {
+  warning(glue_data(..., .sep = .sep, .envir = .envir), .call = .call, domain = .domain)
+}
+
+warning_collapse <- function(...) warning(collapse(..., sep = "\n"))
 
 
 ## removes last abs(n) elements

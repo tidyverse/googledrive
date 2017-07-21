@@ -33,24 +33,22 @@ validate_dribble <- function(x) {
 
   if (!has_dribble_cols(x)) {
     missing_cols <- setdiff(dribble_cols, colnames(x))
-    scollapse(
+    stop_collapse(
       c("Invalid dribble. These required column names are missing:",
-        missing_cols),
-      sep = "\n"
+        missing_cols)
     )
   }
 
   if (!has_dribble_coltypes(x)) {
     mistyped_cols <- dribble_cols[!dribble_coltypes_ok(x)]
-    scollapse(
+    stop_collapse(
       c("Invalid dribble. These columns have the wrong type:",
-        mistyped_cols),
-      sep = "\n"
+        mistyped_cols)
     )
   }
 
   if (!has_files_resource(x)) {
-    sglue(
+    stop_glue(
       "Invalid dribble. Can't confirm `kind = \"drive#file\"` ",
       "for all elements of the nominal `files_resource` column"
     )

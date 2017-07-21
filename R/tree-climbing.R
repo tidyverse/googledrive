@@ -13,7 +13,7 @@ pth <- function(id, kids, elders, stop_value) {
   i <- which(kids == this)
 
   if (length(i) > 1) {
-    sglue("\nThis id appears more than once in the role of 'kid':\n",
+    stop_glue("\nThis id appears more than once in the role of 'kid':\n",
           "  * {sq(kids[i[1]])}")
   }
 
@@ -25,7 +25,7 @@ pth <- function(id, kids, elders, stop_value) {
 
   seen_before <- intersect(id, parents)
   if (length(seen_before)) {
-    scollapse(c(
+    stop_collapse(c(
       "This id has itself as parent, possibly indirect:",
       sq(seen_before),
       "Cycles are not allowed."

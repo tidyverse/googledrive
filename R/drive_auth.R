@@ -133,13 +133,13 @@ drive_auth <- function(token = NULL,
 
     drive_token <- try(suppressWarnings(readRDS(token)), silent = TRUE)
     if (inherits(drive_token, "try-error")) {
-      sglue("\nCannot read token from alleged .rds file:\n  * {token}")
+      stop_glue("\nCannot read token from alleged .rds file:\n  * {token}")
     } else if (!is_legit_token(drive_token, verbose = TRUE)) {
-      sglue("\nFile does not contain a proper token:\n  * {token}")
+      stop_glue("\nFile does not contain a proper token:\n  * {token}")
     }
     .state$token <- drive_token
   } else {
-    sglue(
+    stop_glue(
       "Input provided via 'token' is neither a token,\n",
       "nor a path to an .rds file containing a token."
     )
