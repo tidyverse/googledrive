@@ -50,9 +50,8 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   }
   ## note that there are no API calls above here
   ## it means we can test more on travis/appveyor
-
-  path <- path %||% root_folder()
   path <- as_dribble(path)
+  path <- default_root(path, verbose)
   if (!single_file(path)) {
     paths <- glue::glue_data(path, "  * {name}: {id}")
     scollapse(

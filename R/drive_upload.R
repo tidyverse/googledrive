@@ -64,9 +64,8 @@ drive_upload <- function(media,
 
   ## vet the parent folder
   ## easier to default to root vs keeping track of whether parent is specified
-  path <- path %||% root_folder()
   path <- as_dribble(path)
-
+  path <- default_root(path, verbose)
   if (!single_file(path)) {
     paths <- glue::glue_data(path, "  * {name}: {id}")
     scollapse(
