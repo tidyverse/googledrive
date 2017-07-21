@@ -130,7 +130,7 @@ drive_is_published <- function(file, verbose = TRUE) {
 
   mime_types <- purrr::map_chr(file$files_resource, "mimeType")
   if (!all(grepl("application/vnd.google-apps.", mime_types)) || is_folder(file)) {
-    all_mime_types <- glue::glue_data(file, "  * {name}: {mime_types}")
+    all_mime_types <- glue_data(file, "  * {name}: {mime_types}")
     stop_collapse(c(
       "Only Google Drive type files can be published.",
       "Your file(s) and type:",

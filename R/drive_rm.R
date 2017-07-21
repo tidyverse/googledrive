@@ -20,11 +20,11 @@ drive_rm <- function(file = NULL, verbose = TRUE) {
 
   if (verbose) {
     if (any(out)) {
-      successes <- glue::glue_data(file[out, ], "  * {name}: {id}")
+      successes <- glue_data(file[out, ], "  * {name}: {id}")
       message_collapse(c("Files deleted:", successes))
     }
     if (any(!out)) {
-      failures <- glue::glue_data(file[!out, ], "  * {name}: {id}")
+      failures <- glue_data(file[!out, ], "  * {name}: {id}")
       message_collapse(c("Files NOT deleted:", failures))
     }
   }

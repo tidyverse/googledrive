@@ -56,7 +56,7 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
     stop_glue("Requested parent folder does not exist.")
   }
   if (!single_file(path)) {
-    paths <- glue::glue_data(path, "  * {name}: {id}")
+    paths <- glue_data(path, "  * {name}: {id}")
     stop_collapse(
       c("Requested parent folder identifies multiple files:", paths)
     )

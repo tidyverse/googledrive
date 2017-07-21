@@ -99,9 +99,9 @@ get_nodes <- function(path) {
   name <- purrr::map_chr(path_parts, "name", .default = NA)
   names <- unique(name)
   names <- names[!is.na(names)]
-  names <- glue::glue("name = {sq(names)}")
+  names <- glue("name = {sq(names)}")
   folders <- "mimeType = 'application/vnd.google-apps.folder'"
-  q_clauses <- glue::collapse(c(folders, names), sep = " or ")
+  q_clauses <- collapse(c(folders, names), sep = " or ")
 
   nodes <- dribble()
   if (length(q_clauses)) {

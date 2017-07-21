@@ -27,9 +27,9 @@ process_response <- function(res) {
   out <- httr::content(res, as = "parsed", type = "application/json")
   out <- out$error
   errors <- out$errors[[1]]
-  msg <- glue::glue("HTTP error [{out$code}] {out$message}")
-  details <- glue::glue_data(errors, "  * {names(errors)}: {errors}")
-  err_msg <- glue::collapse(c(msg, details), sep = "\n")
+  msg <- glue("HTTP error [{out$code}] {out$message}")
+  details <- glue_data(errors, "  * {names(errors)}: {errors}")
+  err_msg <- collapse(c(msg, details), sep = "\n")
   cl <- c("googledrive_error", paste0("http_error_", out$code),
           "error", "condition")
   cond <- structure(list(message = err_msg), class = cl)

@@ -69,7 +69,7 @@ drive_fields <- function(fields = NULL,
 #' @rdname drive_fields
 #' @export
 prep_fields <- function(fields, resource = "files") {
-  resource <- glue::glue("{resource}/")
+  resource <- glue("{resource}/")
   paste0(resource, fields, collapse = ",")
 }
 ## usage:

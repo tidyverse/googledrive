@@ -47,14 +47,14 @@ drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
   if (!(role %in% ok_roles)) {
     stop_glue(
       "\n`role` must be one of the following:\n",
-      "  * {glue::collapse(ok_roles, sep = ', ')}."
+      "  * {collapse(ok_roles, sep = ', ')}."
     )
   }
 
   if (!(type %in% ok_types)) {
     stop_glue(
       "\n`type` must be one of the following:\n",
-      "  * {glue::collapse(ok_types, sep = ', ')}."
+      "  * {collapse(ok_types, sep = ', ')}."
     )
   }
 

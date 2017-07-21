@@ -94,7 +94,7 @@ do_paginated_request <- function(x, ..., n_max = Inf, n = function(res) 1) {
   ## "nextPageToken" to ... "all fields" seems like best default choice
   x$query$fields <- x$query$fields %||% "*"
   if (!grepl("nextPageToken", x$query$fields)) {
-    x$query$fields <- glue::glue("nextPageToken,{x$query$fields}")
+    x$query$fields <- glue("nextPageToken,{x$query$fields}")
   }
 
   responses <- list()

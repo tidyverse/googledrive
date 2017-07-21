@@ -46,8 +46,8 @@ drive_toggle_trash <- function(file, trash, verbose = TRUE) {
   out <- do.call(rbind, out)
 
   if (verbose) {
-    files <- glue::glue_data(out, "  * {name}: {id}")
-    message_collapse(c(glue::glue("Files {VERBED}:"), files))
+    files <- glue_data(out, "  * {name}: {id}")
+    message_collapse(c(glue("Files {VERBED}:"), files))
   }
   invisible(out)
 }

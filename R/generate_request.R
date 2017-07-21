@@ -113,7 +113,7 @@ build_request <- function(path = "",
 
   out <- list(
     method = method,
-    path = glue::glue_data(params$matched, path),
+    path = glue_data(params$matched, path),
     query = params$unmatched,
     body = body,
     token = token

@@ -81,7 +81,7 @@ drive_find <- function(pattern = NULL,
   ## by default, don't list items in trash
   if (is.null(params$q) || !grepl("trashed", params$q)) {
     ## TO DO: scrutinize what happens here when params$q is NULL
-    params$q <- glue::collapse(c(params$q, "trashed = false"), sep = " and ")
+    params$q <- collapse(c(params$q, "trashed = false"), sep = " and ")
   }
 
   request <- generate_request(endpoint = "drive.files.list", params = params)

@@ -55,7 +55,7 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     name <- name %||% path_parts$name
   }
 
-  name <- name %||% glue::glue("Copy of {file$name}")
+  name <- name %||% glue("Copy of {file$name}")
 
   params <- list(
     fileId = file$id,
@@ -69,7 +69,7 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
       stop_glue("Requested parent folder does not exist.")
     }
     if (!single_file(path)) {
-      paths <- glue::glue_data(path, "  * {name}: {id}")
+      paths <- glue_data(path, "  * {name}: {id}")
       stop_collapse(
         c("Requested parent folder identifies multiple files:", paths)
       )

@@ -72,7 +72,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
       stop_glue("Requested parent folder does not exist.")
     }
     if (!single_file(path)) {
-      paths <- glue::glue_data(path, "  * {name}: {id}")
+      paths <- glue_data(path, "  * {name}: {id}")
       stop_collapse(
         c("Requested parent folder identifies multiple files:", paths)
       )
@@ -98,9 +98,9 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   if (verbose) {
     renamed <- !identical(params$name, file$name)
     moved <- !is.null(params[["addParents"]])
-    action <- glue::glue("{if (renamed) 'renamed' else ''}",
-                         "{if (renamed && moved) ' and ' else ''}",
-                         "{if (moved) 'moved' else ''}")
+    action <- glue("{if (renamed) 'renamed' else ''}",
+                   "{if (renamed && moved) ' and ' else ''}",
+                   "{if (moved) 'moved' else ''}")
     ## not entirely sure why this placement of `\n` helps glue do the right
     ## thing and yet ... it does
     new_path <- paste0(append_slash(path$name), out$name)

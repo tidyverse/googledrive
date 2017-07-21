@@ -37,7 +37,7 @@ drive_update <- function(file,
   file <- confirm_some_files(file)
 
   if (!single_file(file)) {
-    files <- glue::glue_data(file, "  * {name}: {id}")
+    files <- glue_data(file, "  * {name}: {id}")
     stop_collapse(c("Path to update is not unique:", files))
   }
 
