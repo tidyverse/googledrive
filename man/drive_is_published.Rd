@@ -22,6 +22,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 Check if Google Drive file is published
 }
 \examples{
+\dontrun{
 ## Upload file to check publication status
 file <- drive_upload(R.home('doc/BioC_mirrors.csv'),
   type = "spreadsheet")
@@ -40,4 +41,5 @@ drive_unpublish(file)
 
 ## Clean up
 drive_rm(file)
+}
 }

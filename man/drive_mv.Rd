@@ -18,6 +18,10 @@ actual path, it is best to explicitly indicate if it's a folder by
 including a trailing slash, since it cannot always be worked out from the
 context of the call. Defaults to current name.}
 
+\item{name}{Character, new file  name if not specified as part of `path`. This
+will force `path` to be treated as a folder, even if it is character and lacks
+a trailing slash. Defaults to current name.}
+
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }

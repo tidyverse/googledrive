@@ -9,6 +9,7 @@
 #' @template dribble-return
 #' @export
 #' @examples
+#' \dontrun{
 #' ## Upload file to publish
 #' file <- drive_upload(R.home('doc/BioC_mirrors.csv'),
 #'   type = "spreadsheet")
@@ -18,6 +19,7 @@
 #'
 #' ## Clean up
 #' drive_rm(file)
+#' }
 drive_publish <- function(file, ..., verbose = TRUE) {
   drive_change_publish(file = file, publish = TRUE, ..., verbose = verbose)
 }
@@ -101,6 +103,7 @@ drive_change_publish <- function(file,
 #' @template dribble-return
 #' @export
 #' @examples
+#' \dontrun{
 #' ## Upload file to check publication status
 #' file <- drive_upload(R.home('doc/BioC_mirrors.csv'),
 #'   type = "spreadsheet")
@@ -119,6 +122,7 @@ drive_change_publish <- function(file,
 #'
 #' ## Clean up
 #' drive_rm(file)
+#' }
 drive_is_published <- function(file, verbose = TRUE) {
 
   file <- as_dribble(file)
