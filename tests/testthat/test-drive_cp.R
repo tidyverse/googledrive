@@ -107,10 +107,9 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
   )
   expect_identical(file_cp$name, nm_("file-name"))
 
-  ## if `path` is not a folder, will copy to parent of file
-  expect_message(
-    file_cp <- drive_cp(nm_("i-am-a-file"), nm_("file-name"), nm_("file-name")),
-    "Defaulting to save in the parent of `file`"
+  ## if `path` is not a folder, will error
+  expect_error(
+    file_cp <- drive_cp(nm_("i-am-a-file"), nm_("file-name"), nm_("file-name"))
   )
 
   ## if `path` identifies multiple files, it will error

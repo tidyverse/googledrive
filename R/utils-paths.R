@@ -101,13 +101,3 @@ confirm_clear_path <- function(path, name) {
     )
   }
 }
-
-default_root <- function(path, verbose) {
-  if (!some_files(path)) {
-    path <- root_folder()
-    if (verbose) {
-      mglue("\nDefaulting to save in the \"My Drive\" root folder")
-    }
-  }
-  invisible(path)
-}

@@ -68,7 +68,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   if (!is.null(path)) {
     path <- as_dribble(path)
     if (!some_files(path)) {
-      stop("Requested parent folder does not exist.", call. = FALSE)
+      sglue("Requested parent folder does not exist.")
     }
     if (!single_file(path)) {
       paths <- glue::glue_data(path, "  * {name}: {id}")

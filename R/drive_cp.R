@@ -64,13 +64,10 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   ## if copying to a specific directory, specify the parent
   ## defaults to the current file's directory
+  path <- path %||% as_id(file$files_resource[[1]]$parents[[1]])
   path <- as_dribble(path)
   if (!some_files(path)) {
-    path <- as_dribble(as_id(file$files_resource[[1]]$parents[[1]]))
-    if (verbose) {
-      mglue("\nDefaulting to save in the parent of `file`:\n",
-            "  * {path$name}")
-    }
+    sglue("Requested parent folder does not exist.")
   }
   if (!single_file(path)) {
     paths <- glue::glue_data(path, "  * {name}: {id}")
