@@ -40,3 +40,19 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 \description{
 Update Google Drive file share permissions.
 }
+\examples{
+\dontrun{
+## Upload a file to share
+file <- drive_upload(
+   system.file("DESCRIPTION"),
+   type = "document"
+   )
+
+## Share file
+file \%>\%
+  drive_share(role = "reader", type = "anyone")
+
+## Clean up
+drive_rm(file)
+}
+}

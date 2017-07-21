@@ -5,9 +5,9 @@
 #'   [dribble]. If specified as an actual path, it is best to explicitly
 #'   indicate if it's a folder by including a trailing slash, since it cannot
 #'   always be worked out from the context of the call.
-#' @param name Character. The name of the folder you would like to create. This
-#'   will force `path` to be treated as a folder, even if it is character and lacks
-#'   a trailing slash.
+#' @template name
+#' @templateVar name folder
+#' @templateVar default {}
 #' @template verbose
 #'
 #' @template dribble-return
@@ -56,13 +56,10 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   path <- path %||% root_folder()
   path <- as_dribble(path)
   if (!single_file(path)) {
-    paths <- glue_data(path, "  * {name}: {id}")
-    stop(
-      collapse(
-        c("Requested parent folder identifies multiple files:", paths),
-        sep = "\n"
-      ),
-      call. = FALSE
+    paths <- glue::glue_data(path, "  * {name}: {id}")
+    scollapse(
+      c("Requested parent folder identifies multiple files:", paths),
+      sep = "\n"
     )
   }
   if (!is_folder(path)) {
@@ -88,8 +85,9 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   if (verbose) {
     ## not entirely sure why this placement of `\n` helps glue do the right
     ## thing and yet ... it does
-    message(glue("\nFolder {if (success) '' else 'NOT '}created:\n",
-                 "  * {folder$name}"))
+    mglue("\nFolder {if (success) '' else 'NOT '}created:\n",
+          "  * {folder$name}"
+    )
   }
   invisible(folder)
 }

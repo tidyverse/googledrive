@@ -6,9 +6,9 @@
 #'
 #' @template file
 #' @template path
-#' @param name Character, new file name if not specified as part of `path`. This
-#'   will force `path` to be treated as a folder, even if it is character and lacks
-#'   a trailing slash. Defaults to "Copy of {CURRENT-FILE-NAME}."
+#' @template name
+#' @templateVar name file
+#' @templateVar default Defaults to "Copy of `FILE-NAME`".
 #' @template verbose
 #' @template dribble-return
 #'
@@ -60,7 +60,7 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     name <- name %||% path_parts$name
   }
 
-  name <- name %||% glue("Copy of {file$name}")
+  name <- name %||% glue::glue("Copy of {file$name}")
 
   params <- list(
     fileId = file$id,
@@ -74,21 +74,15 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
       stop("Requested parent folder does not exist.", call. = FALSE)
     }
     if (!single_file(path)) {
-      paths <- glue_data(path, "  * {name}: {id}")
-      stop(
-        collapse(
-          c("Requested parent folder identifies multiple files:", paths),
-          sep = "\n"
-          ),
-        call. = FALSE
+      paths <- glue::glue_data(path, "  * {name}: {id}")
+      scollapse(
+        c("Requested parent folder identifies multiple files:", paths),
+        sep = "\n"
       )
     }
     ## if path was input as a dribble or id, still need to be sure it's a folder
     if (!is_folder(path)) {
-      stop(
-        glue("\n`path` specifies a file that is not a folder:\n * {path$name}"),
-        call. = FALSE
-      )
+      sglue("\n`path` specifies a file that is not a folder:\n * {path$name}")
     }
     params[["parents"]] <- list(path$id)
   }
@@ -109,7 +103,7 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   if (verbose) {
     new_path <- paste0(append_slash(path$name), out$name)
-    message(glue("\nFile copied:\n  * {file$name} -> {new_path}"))
+    mglue("\nFile copied:\n  * {file$name} -> {new_path}")
   }
   invisible(out)
 }

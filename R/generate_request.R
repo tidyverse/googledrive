@@ -113,7 +113,7 @@ build_request <- function(path = "",
 
   out <- list(
     method = method,
-    path = glue_data(params$matched, path),
+    path = glue::glue_data(params$matched, path),
     query = params$unmatched,
     body = body,
     token = token
@@ -138,18 +138,17 @@ match_params <- function(provided, spec) {
   required <- spec %>% purrr::keep("required") %>% names()
   missing <- setdiff(required, names(provided))
   if (length(missing)) {
-    stop(collapse(
-      c("Required parameter(s) are missing:", missing), sep = "\n"),
-      call. = FALSE
+    scollapse(
+      c("Required parameter(s) are missing:", missing),
+      sep = "\n"
     )
   }
 
   unknown <- setdiff(names(provided), names(spec))
   if (length(unknown)) {
-    stop(collapse(
+    scollapse(
       c("These parameters are not recognized for this endpoint:", unknown),
-      sep = "\n"),
-      call. = FALSE
+      sep = "\n"
     )
   }
 

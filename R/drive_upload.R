@@ -8,9 +8,9 @@
 #'
 #' @template media
 #' @template path
-#' @param name Character. The name the file should have on Drive. This will force
-#'   `path` to be treated as a folder, even if it is character and lacks
-#'   a trailing slash. Will default to its local name.
+#' @template name
+#' @templateVar name file
+#' @templateVar default Will default to its local name.
 #' @param type Character. If `type = NULL`, a MIME type is automatically
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
@@ -46,7 +46,7 @@ drive_upload <- function(media,
                          verbose = TRUE) {
 
   if (!file.exists(media)) {
-    stop(glue("\nFile does not exist:\n  * {media}"), call. = FALSE)
+    sglue("\nFile does not exist:\n  * {media}")
   }
 
   if (!is.null(name)) {
@@ -73,20 +73,14 @@ drive_upload <- function(media,
   path <- as_dribble(path)
 
   if (!single_file(path)) {
-    paths <- glue_data(path, "  * {name}: {id}")
-    stop(
-      collapse(
-        c("Requested parent folder identifies multiple files:", paths),
-        sep = "\n"
-      ),
-      call. = FALSE
+    paths <- glue::glue_data(path, "  * {name}: {id}")
+    scollapse(
+      c("Requested parent folder identifies multiple files:", paths),
+      sep = "\n"
     )
   }
   if (!is_folder(path)) {
-    stop(
-      glue("\n`path` specifies a file that is not a folder:\n * {path$name}"),
-      call. = FALSE
-    )
+    sglue("\n`path` specifies a file that is not a folder:\n * {path$name}")
   }
 
   name <- name %||% basename(media)
@@ -107,10 +101,9 @@ drive_upload <- function(media,
   out <- drive_update(as_id(proc_res$id), media, verbose = FALSE)
 
   if (verbose) {
-    message(
-      glue("\nLocal file:\n  * {media}\n",
-           "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
-           "with MIME type:\n  * {out$files_resource[[1]]$mimeType}")
+    mglue("\nLocal file:\n  * {media}\n",
+          "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
+          "with MIME type:\n  * {out$files_resource[[1]]$mimeType}"
     )
   }
   invisible(out)

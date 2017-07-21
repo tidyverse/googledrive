@@ -12,7 +12,7 @@
 drive_rm <- function(file = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   if (no_file(file) && verbose) {
-    message(glue("No such files found to delete."))
+    mglue("No such files found to delete.")
     return(invisible(logical(0)))
   }
 
@@ -20,12 +20,12 @@ drive_rm <- function(file = NULL, verbose = TRUE) {
 
   if (verbose) {
     if (any(out)) {
-      successes <- glue_data(file[out, ], "  * {name}: {id}")
-      message(collapse(c("Files deleted:", successes), sep = "\n"))
+      successes <- glue::glue_data(file[out, ], "  * {name}: {id}")
+      mcollapse(c("Files deleted:", successes), sep = "\n")
     }
     if (any(!out)) {
-      failures <- glue_data(file[!out, ], "  * {name}: {id}")
-      message(collapse(c("Files NOT deleted:", failures), sep = "\n"))
+      failures <- glue::glue_data(file[!out, ], "  * {name}: {id}")
+      mcollapse(c("Files NOT deleted:", failures), sep = "\n")
     }
   }
   invisible(out)

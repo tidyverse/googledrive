@@ -45,20 +45,16 @@ drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
   ok_types <- c("user", "group", "domain", "anyone")
 
   if (!(role %in% ok_roles)) {
-    stop(
-      glue(
-        "`role` must be one of the following: \n{collapse(ok_roles, sep = ', ')}."
-      ),
-      call. = FALSE
+    sglue(
+      "\n`role` must be one of the following:\n",
+      "  * {glue::collapse(ok_roles, sep = ', ')}."
     )
   }
 
   if (!(type %in% ok_types)) {
-    stop(
-      glue(
-        "`type` must be one of the following: \n{collapse(ok_types, sep = ', ')}."
-      ),
-      call. = FALSE
+    sglue(
+      "\n`type` must be one of the following:\n",
+      "  * {glue::collapse(ok_types, sep = ', ')}."
     )
   }
 
@@ -76,17 +72,15 @@ drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
 
   if (verbose) {
     if (proc_req$type == type && proc_req$role == role) {
-      message(
-        glue_data(
-          proc_req,
-          "\nThe permissions for file {sq(file$name)} have been updated.\n",
-          "  * id: {id}\n",
-          "  * type: {type}\n",
-          "  * role: {role}"
-        )
+      mglue_data(
+        proc_req,
+        "\nThe permissions for file {sq(file$name)} have been updated.\n",
+        "  * id: {id}\n",
+        "  * type: {type}\n",
+        "  * role: {role}"
       )
     } else {
-      message(glue_data(file, "\nPermissions were NOT updated:\n  * '{name}'"))
+      mglue_data(file, "\nPermissions were NOT updated:\n  * '{name}'")
     }
   }
   file <- as_dribble(as_id(file$id))

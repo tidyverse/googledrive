@@ -4,9 +4,9 @@
 #'
 #' @template file
 #' @template path
-#' @param name Character, new file name if not specified as part of `path`. This
-#'   will force `path` to be treated as a folder, even if it is character and lacks
-#'   a trailing slash. Defaults to current name.
+#' @template name
+#' @templateVar name file
+#' @templateVar default Defaults to current name.
 #' @template verbose
 #'
 #' @template dribble-return
@@ -41,10 +41,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (!is_mine(file)) {
-    stop(
-      glue("Can't move this file because you don't own it:\n{file$name}"),
-      call. = FALSE
-    )
+    sglue("Can't move this file because you don't own it:\n{file$name}")
   }
 
   if (!is.null(name)) {
@@ -80,22 +77,14 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
       stop("Requested parent folder does not exist.", call. = FALSE)
     }
     if (!single_file(path)) {
-      paths <- glue_data(path, "  * {name}: {id}")
-      stop(
-        collapse(
-          c("Requested parent folder identifies multiple files:", paths),
-          sep = "\n"
-        ),
-        call. = FALSE
+      paths <- glue::glue_data(path, "  * {name}: {id}")
+      scollapse(
+        c("Requested parent folder identifies multiple files:", paths),
+        sep = "\n"
       )
     }
     if (!is_folder(path)) {
-      stop(
-        glue(
-          "Requested parent folder does not exist:\n{path$name}"
-        ),
-        call. = FALSE
-      )
+      sglue("Requested parent folder does not exist:\n{path$name}")
     }
     current_parents <- file$files_resource[[1]][["parents"]][[1]]
     if (!path$id %in% current_parents) {
@@ -115,13 +104,13 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   if (verbose) {
     renamed <- !identical(params$name, file$name)
     moved <- !is.null(params[["addParents"]])
-    action <- glue("{if (renamed) 'renamed' else ''}",
-                   "{if (renamed && moved) ' and ' else ''}",
-                   "{if (moved) 'moved' else ''}")
+    action <- glue::glue("{if (renamed) 'renamed' else ''}",
+                         "{if (renamed && moved) ' and ' else ''}",
+                         "{if (moved) 'moved' else ''}")
     ## not entirely sure why this placement of `\n` helps glue do the right
     ## thing and yet ... it does
     new_path <- paste0(append_slash(path$name), out$name)
-    message(glue("\nFile {action}:\n  * {file$name} -> {new_path}"))
+    mglue("\nFile {action}:\n  * {file$name} -> {new_path}")
   }
   invisible(out)
 }

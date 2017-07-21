@@ -57,12 +57,10 @@ drive_fields <- function(fields = NULL,
 
   out <- intersect(fields, .drive$files_fields$name)
   if (!setequal(fields, out)) {
-    warning(
-      collapse(
+    wcollapse(
         c("Ignoring fields that are non-standard for the Files resource:",
           setdiff(fields, out)),
         sep = "\n"
-      )
     )
   }
   out
@@ -72,7 +70,7 @@ drive_fields <- function(fields = NULL,
 #' @rdname drive_fields
 #' @export
 prep_fields <- function(fields, resource = "files") {
-  resource <- glue("{resource}/")
+  resource <- glue::glue("{resource}/")
   paste0(resource, fields, collapse = ",")
 }
 ## usage:

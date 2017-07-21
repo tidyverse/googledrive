@@ -30,18 +30,15 @@ drive_update <- function(file,
                          verbose = TRUE) {
 
   if (!file.exists(media)) {
-    stop(glue("\nLocal file does not exist:\n  * {media}"), call. = FALSE)
+    sglue("\nLocal file does not exist:\n  * {media}")
   }
 
   file <- as_dribble(file)
   file <- confirm_some_files(file)
 
   if (!single_file(file)) {
-    files <- glue_data(file, "  * {name}: {id}")
-    stop(
-      collapse(c("Path to update is not unique:", files), sep = "\n"),
-      call. = FALSE
-    )
+    files <- glue::glue_data(file, "  * {name}: {id}")
+    scollapse(c("Path to update is not unique:", files), sep = "\n")
   }
 
   request <- generate_request(
@@ -61,7 +58,7 @@ drive_update <- function(file,
   out <- as_dribble(list(proc_res))
 
   if (verbose) {
-    message(glue("\nFile updated:\n  * {out$name}: {out$id}"))
+    mglue("\nFile updated:\n  * {out$name}: {out$id}")
   }
   invisible(out)
 }
