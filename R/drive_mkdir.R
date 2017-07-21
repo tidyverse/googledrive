@@ -1,10 +1,8 @@
 #' Create a folder on Drive.
 #'
-#' @param path Specifies target destination for the new folder to create. Can be
-#'   an actual path (character), a file id marked with [as_id()], or a
-#'   [dribble]. If specified as an actual path, it is best to explicitly
-#'   indicate if it's a folder by including a trailing slash, since it cannot
-#'   always be worked out from the context of the call.
+#' @template path
+#' @templateVar name folder
+#' @templateVar default If not given or unknown, will default to the "My Drive" root folder.
 #' @template name
 #' @templateVar name folder
 #' @templateVar default {}

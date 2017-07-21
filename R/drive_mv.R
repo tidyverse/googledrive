@@ -4,7 +4,8 @@
 #'
 #' @template file
 #' @template path
-#' @template name
+#' @templateVar name file
+#' @templateVar default {}
 #' @templateVar name file
 #' @templateVar default Defaults to current name.
 #' @template verbose

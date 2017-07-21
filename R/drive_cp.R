@@ -6,6 +6,8 @@
 #'
 #' @template file
 #' @template path
+#' @templateVar name file
+#' @templateVar default If not given or unknown, will default to the `file`'s current folder.
 #' @template name
 #' @templateVar name file
 #' @templateVar default Defaults to "Copy of `FILE-NAME`".
@@ -61,24 +63,22 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   )
 
   ## if copying to a specific directory, specify the parent
-  if (!is.null(path)) {
-    path <- as_dribble(path)
-    if (!some_files(path)) {
-      stop("Requested parent folder does not exist.", call. = FALSE)
-    }
-    if (!single_file(path)) {
-      paths <- glue::glue_data(path, "  * {name}: {id}")
-      scollapse(
-        c("Requested parent folder identifies multiple files:", paths),
-        sep = "\n"
-      )
-    }
-    ## if path was input as a dribble or id, still need to be sure it's a folder
-    if (!is_folder(path)) {
-      sglue("\n`path` specifies a file that is not a folder:\n * {path$name}")
-    }
-    params[["parents"]] <- list(path$id)
+  ## defaults to the current file's directory
+  path <- path %||% as_id(file$files_resource[[1]]$parents[[1]])
+  path <- as_dribble(path)
+  if (!single_file(path)) {
+    paths <- glue::glue_data(path, "  * {name}: {id}")
+    scollapse(
+      c("Requested parent folder identifies multiple files:", paths),
+      sep = "\n"
+    )
   }
+  ## if path was input as a dribble or id, still need to be sure it's a folder
+  if (!is_folder(path)) {
+    sglue("\n`path` specifies a file that is not a folder:\n * {path$name}")
+  }
+  params[["parents"]] <- list(path$id)
+
 
   ## if new name is specified, send it
   if (!is.null(name)) {

@@ -8,6 +8,8 @@
 #'
 #' @template media
 #' @template path
+#' @templateVar name file
+#' @templateVar default If not given or unknown, will default to the "My Drive" root folder.
 #' @template name
 #' @templateVar name file
 #' @templateVar default Will default to its local name.
