@@ -25,7 +25,7 @@ test_that("drive_mkdir() errors for bad input (before hitting Drive API)", {
   expect_error(drive_mkdir(name = letters), "length\\(name\\) == 1 is not TRUE")
 })
 
-test_that("drive_mkdir() erros if parent path does not exist", {
+test_that("drive_mkdir() errors if parent path does not exist", {
   skip_on_travis()
   skip_on_appveyor()
   skip_if_offline()
