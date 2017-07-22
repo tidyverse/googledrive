@@ -34,7 +34,7 @@ x <- drive_upload(R.home("doc/NEWS"))
 x <- x \%>\%
   drive_update(R.home("doc/NEWS.2"))
 
-## clean-up
+## Clean up
 drive_rm(x)
 }
 }

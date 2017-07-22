@@ -9,7 +9,7 @@
 #' @return Logical vector, indicating whether the delete succeeded.
 #' @export
 #'
-#' @example
+#' @examples
 #' \dontrun{
 #' ## Create a folder to remove
 #' folder <- drive_mkdir("folder-to-remove")
