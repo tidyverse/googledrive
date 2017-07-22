@@ -11,7 +11,15 @@
 #'
 #' @examples
 #' \dontrun{
-#' drive_rename("chickwts.csv", name = "my_chickwts.csv")
+#' ## Create a folder to rename
+#' folder <- drive_mkdir("folder-to-rename")
+#'
+#' ## Rename folder
+#' folder <- folder %>%
+#'   drive_rename(name = "renamed-folder")
+#'
+#' ## Clean up
+#' drive_rm(folder)
 #' }
 #' @export
 drive_rename <- function(file, name = NULL, verbose = TRUE) {
