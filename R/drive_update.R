@@ -21,7 +21,7 @@
 #' x <- x %>%
 #'   drive_update(R.home("doc/NEWS.2"))
 #'
-#' ## clean-up
+#' ## Clean up
 #' drive_rm(x)
 #' }
 drive_update <- function(file,

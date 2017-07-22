@@ -9,6 +9,14 @@
 #' @return Logical vector, indicating whether the delete succeeded.
 #' @export
 #'
+#' @example
+#' \dontrun{
+#' ## Create a folder to remove
+#' folder <- drive_mkdir("folder-to-remove")
+#'
+#' ## Remove folder
+#' drive_rm(folder)
+#' }
 drive_rm <- function(file = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   if (no_file(file) && verbose) {
