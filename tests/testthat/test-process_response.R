@@ -23,11 +23,11 @@ right <- readRDS(rprojroot::find_testthat_root_file("test-files/right-content.rd
 test_that("stop_for_content_type() catches wrong content type", {
   expect_error(
     stop_for_content_type(wrong),
-    "Expected content-type.*Actual content-type"
+    "\nExpected content-type.*Actual content-type"
   )
   expect_error(
     stop_for_content_type(wrong, expected = "whatever"),
-    "Expected content-type:\nwhatever.*Actual content-type"
+    "\nExpected content-type"
   )
 })
 

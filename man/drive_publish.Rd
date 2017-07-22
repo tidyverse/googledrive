@@ -25,3 +25,16 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 \description{
 Publish Google Drive file.
 }
+\examples{
+\dontrun{
+## Upload file to publish
+file <- drive_upload(R.home('doc/BioC_mirrors.csv'),
+  type = "spreadsheet")
+
+## Publish file
+drive_publish(file)
+
+## Clean up
+drive_rm(file)
+}
+}

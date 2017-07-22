@@ -9,10 +9,18 @@
 #' @return Logical vector, indicating whether the delete succeeded.
 #' @export
 #'
+#' @examples
+#' \dontrun{
+#' ## Create a folder to remove
+#' folder <- drive_mkdir("folder-to-remove")
+#'
+#' ## Remove folder
+#' drive_rm(folder)
+#' }
 drive_rm <- function(file = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   if (no_file(file) && verbose) {
-    message(glue("No such files found to delete."))
+    message_glue("No such files found to delete.")
     return(invisible(logical(0)))
   }
 
@@ -21,11 +29,11 @@ drive_rm <- function(file = NULL, verbose = TRUE) {
   if (verbose) {
     if (any(out)) {
       successes <- glue_data(file[out, ], "  * {name}: {id}")
-      message(collapse(c("Files deleted:", successes), sep = "\n"))
+      message_collapse(c("Files deleted:", successes))
     }
     if (any(!out)) {
       failures <- glue_data(file[!out, ], "  * {name}: {id}")
-      message(collapse(c("Files NOT deleted:", failures), sep = "\n"))
+      message_collapse(c("Files NOT deleted:", failures))
     }
   }
   invisible(out)

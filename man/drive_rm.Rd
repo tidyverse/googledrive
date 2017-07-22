@@ -21,3 +21,12 @@ Logical vector, indicating whether the delete succeeded.
 Caution: this will permanently delete your files! For a safer,
 reversible option, see \code{\link[=drive_trash]{drive_trash()}}.
 }
+\examples{
+\dontrun{
+## Create a folder to remove
+folder <- drive_mkdir("folder-to-remove")
+
+## Remove folder
+drive_rm(folder)
+}
+}

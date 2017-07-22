@@ -16,11 +16,11 @@ Can be an actual path (character), a file id marked with
 \code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
 actual path, it is best to explicitly indicate if it's a folder by
 including a trailing slash, since it cannot always be worked out from the
-context of the call.}
+context of the call. Defaults to "Copy of \code{FILE-NAME}".}
 
-\item{name}{Character, new file name if not specified as part of \code{path}. Any
-name obtained from \code{path} overrides this argument. Defaults to "Copy of
-{CURRENT-FILE-NAME}."}
+\item{name}{Character, new file name if not specified as part of `path`. This
+will force `path` to be treated as a folder, even if it is character and lacks
+a trailing slash. Defaults to "Copy of \code{FILE-NAME}".}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -35,23 +35,23 @@ Copy a Drive file.
 \examples{
 \dontrun{
 ## create a file to copy
-file <- drive_upload(system.file("DESCRIPTION"), "DESC")
+file <- drive_upload(system.file("DESCRIPTION"), "DESC-ex")
 
 ## Make a "Copy of" copy in same folder as the original
-drive_cp("DESC")
+drive_cp("DESC-ex")
 
 ## Make an explicitly named copy in same folder as the original
-drive_cp("DESC", "DESC-two")
+drive_cp("DESC-ex", "DESC-ex-two")
 
 ## Make an explicitly named copy in a different folder
 folder <- drive_mkdir("new-folder")
-drive_cp("DESC", folder, "DESC-three")
+drive_cp("DESC-ex", folder, "DESC-ex-three")
 
 ## Behold all of our copies!
-drive_find("DESC")
+drive_find("DESC-ex")
 
 ## Delete all of our copies and the new folder!
-drive_find("DESC") \%>\% drive_rm()
+drive_find("DESC-ex") \%>\% drive_rm()
 drive_rm(folder)
 }
 }

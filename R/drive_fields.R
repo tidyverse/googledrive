@@ -57,12 +57,9 @@ drive_fields <- function(fields = NULL,
 
   out <- intersect(fields, .drive$files_fields$name)
   if (!setequal(fields, out)) {
-    warning(
-      collapse(
-        c("Ignoring fields that are non-standard for the Files resource:",
-          setdiff(fields, out)),
-        sep = "\n"
-      )
+    warning_collapse(
+      c("Ignoring fields that are non-standard for the Files resource:",
+        setdiff(fields, out))
     )
   }
   out

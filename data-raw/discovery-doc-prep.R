@@ -84,7 +84,7 @@ endpoints <- c(
 add_schema_params <- function(endpoint, nm) {
   req <- endpoint$request$`$ref`
   if (is.null(req) || req == "Channel") return(endpoint)
-  message(glue::glue("{nm} gains {req} schema params\n"))
+  message_glue("{nm} gains {req} schema params\n")
   endpoint$parameters <- c(
     endpoint$parameters,
     dd_content[[c("schemas",  req, "properties")]]

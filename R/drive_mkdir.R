@@ -1,12 +1,11 @@
 #' Create a folder on Drive.
 #'
-#' @param path Specifies target destination for the new folder to create. Can be
-#'   an actual path (character), a file id marked with [as_id()], or a
-#'   [dribble]. If specified as an actual path, it is best to explicitly
-#'   indicate if it's a folder by including a trailing slash, since it cannot
-#'   always be worked out from the context of the call.
-#' @param name Character. The name of the folder you would like to create, if
-#'   not already specified in `path`.
+#' @template path
+#' @templateVar name folder
+#' @templateVar default If not given or unknown, will default to the "My Drive" root folder.
+#' @template name
+#' @templateVar name folder
+#' @templateVar default {}
 #' @template verbose
 #'
 #' @template dribble-return
@@ -51,12 +50,19 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   }
   ## note that there are no API calls above here
   ## it means we can test more on travis/appveyor
-
   path <- path %||% root_folder()
   path <- as_dribble(path)
-  confirm_single_file(path)
+  if (!some_files(path)) {
+    stop_glue("Requested parent folder does not exist.")
+  }
+  if (!single_file(path)) {
+    paths <- glue_data(path, "  * {name}: {id}")
+    stop_collapse(
+      c("Requested parent folder identifies multiple files:", paths)
+    )
+  }
   if (!is_folder(path)) {
-    stop("`path` must be a single, pre-existing folder", call. = FALSE)
+    stop("`path` must be a single, pre-existing folder.", call. = FALSE)
   }
 
   request <- generate_request(
@@ -78,8 +84,9 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   if (verbose) {
     ## not entirely sure why this placement of `\n` helps glue do the right
     ## thing and yet ... it does
-    message(glue("\nFolder {if (success) '' else 'NOT '}created:\n",
-                 "  * {folder$name}"))
+    message_glue("\nFolder {if (success) '' else 'NOT '}created:\n",
+          "  * {folder$name}"
+    )
   }
   invisible(folder)
 }

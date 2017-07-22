@@ -17,6 +17,21 @@
 #'
 #' @template dribble-return
 #' @export
+#' @examples
+#' \dontrun{
+#' ## Upload a file to share
+#' file <- drive_upload(
+#'    system.file("DESCRIPTION"),
+#'    type = "document"
+#'    )
+#'
+#' ## Share file
+#' file %>%
+#'   drive_share(role = "reader", type = "anyone")
+#'
+#' ## Clean up
+#' drive_rm(file)
+#' }
 drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
 
   file <- as_dribble(file)
@@ -30,20 +45,16 @@ drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
   ok_types <- c("user", "group", "domain", "anyone")
 
   if (!(role %in% ok_roles)) {
-    stop(
-      glue(
-        "`role` must be one of the following: \n{collapse(ok_roles, sep = ', ')}."
-      ),
-      call. = FALSE
+    stop_glue(
+      "\n`role` must be one of the following:\n",
+      "  * {collapse(ok_roles, sep = ', ')}."
     )
   }
 
   if (!(type %in% ok_types)) {
-    stop(
-      glue(
-        "`type` must be one of the following: \n{collapse(ok_types, sep = ', ')}."
-      ),
-      call. = FALSE
+    stop_glue(
+      "\n`type` must be one of the following:\n",
+      "  * {collapse(ok_types, sep = ', ')}."
     )
   }
 
@@ -61,14 +72,15 @@ drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
 
   if (verbose) {
     if (proc_req$type == type && proc_req$role == role) {
-      message(
-        glue_data(
-          proc_req,
-          "The permissions for file '{file$name}' have been updated.\n id: {id}\n type: {type}\n role: {role}"
-        )
+      message_glue_data(
+        proc_req,
+        "\nThe permissions for file {sq(file$name)} have been updated.\n",
+        "  * id: {id}\n",
+        "  * type: {type}\n",
+        "  * role: {role}"
       )
     } else {
-      message(glue_data(file, "Permissions were NOT updated: '{name}'"))
+      message_glue_data(file, "\nPermissions were NOT updated:\n  * '{name}'")
     }
   }
   file <- as_dribble(as_id(file$id))

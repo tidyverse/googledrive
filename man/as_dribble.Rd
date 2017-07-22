@@ -9,7 +9,7 @@
 \alias{as_dribble.drive_id}
 \alias{as_dribble.data.frame}
 \alias{as_dribble.list}
-\title{Identify files on Google Drive.}
+\title{Identify files on Google Drive}
 \usage{
 as_dribble(x, ...)
 
@@ -32,22 +32,35 @@ as_dribble(x, ...)
 with \code{\link[=as_id]{as_id()}}, a list of Files Resource objects, or a suitable data
 frame.}
 
-\item{...}{Other arguments passed down to methods.}
+\item{...}{Other arguments passed down to methods. (Not used.)}
 }
 \description{
-Converts various representations of Google Drive files into a \code{\link{dribble}},
-the object used by googledrive to hold Drive file metadata. Files can be
-specified via
+Converts various representations of Google Drive files into a
+\code{\link{dribble}}, the object used by googledrive to hold Drive file metadata.
+Files can be specified via
 \itemize{
-\item File path
-\item File id (be sure to mark with \code{\link[=as_id]{as_id()}} to distinguish from file path!)
+\item File path. File name is an important special case.
+\item File id. Mark with \code{\link[=as_id]{as_id()}} to distinguish from file path.
+\item Data frame or \code{\link{dribble}}. Once you've successfully used googledrive to
+identify the files of interest, you'll have a \code{\link{dribble}}. Pass it into
+downstream functions.
 \item List representing \href{https://developers.google.com/drive/v3/reference/files#resource}{Files resource}
-objects (for internal use)
-\item Data frame or \code{\link{dribble}} (for internal use)
+objects. Mostly for internal use.
 }
-}
-\details{
+
 This is a generic function.
+
+For maximum clarity, get your files into a \code{\link{dribble}} (or capture file id)
+as early as possible. When specifying via path, it's best to include the
+trailing slash when you're targetting a folder. If you want the folder \code{foo},
+say \code{foo/}, not \code{foo}.
+
+Some functions, such as \code{\link[=drive_cp]{drive_cp()}}, \code{\link[=drive_mkdir]{drive_mkdir()}}, \code{\link[=drive_mv]{drive_mv()}}, and
+\code{\link[=drive_upload]{drive_upload()}}, can accept the new file or folder name as the last part of
+\code{path}, when \code{name} is not given. But if you say \code{a/b/c} (no trailing slash)
+and a folder \code{a/b/c/} already exists, it's unclear what you want. A file
+named \code{c} in \code{a/b/} or a file with default name in \code{a/b/c/}? You get an
+error and must make your intent clear.
 }
 \examples{
 \dontrun{

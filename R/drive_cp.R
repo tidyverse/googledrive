@@ -6,32 +6,34 @@
 #'
 #' @template file
 #' @template path
-#' @param name Character, new file name if not specified as part of `path`. Any
-#'   name obtained from `path` overrides this argument. Defaults to "Copy of
-#'   {CURRENT-FILE-NAME}."
+#' @templateVar name file
+#' @templateVar default {}
+#' @template name
+#' @templateVar name file
+#' @templateVar default Defaults to "Copy of `FILE-NAME`".
 #' @template verbose
 #' @template dribble-return
 #'
 #' @examples
 #' \dontrun{
 #' ## create a file to copy
-#' file <- drive_upload(system.file("DESCRIPTION"), "DESC")
+#' file <- drive_upload(system.file("DESCRIPTION"), "DESC-ex")
 #'
 #' ## Make a "Copy of" copy in same folder as the original
-#' drive_cp("DESC")
+#' drive_cp("DESC-ex")
 #'
 #' ## Make an explicitly named copy in same folder as the original
-#' drive_cp("DESC", "DESC-two")
+#' drive_cp("DESC-ex", "DESC-ex-two")
 #'
 #' ## Make an explicitly named copy in a different folder
 #' folder <- drive_mkdir("new-folder")
-#' drive_cp("DESC", folder, "DESC-three")
+#' drive_cp("DESC-ex", folder, "DESC-ex-three")
 #'
 #' ## Behold all of our copies!
-#' drive_find("DESC")
+#' drive_find("DESC-ex")
 #'
 #' ## Delete all of our copies and the new folder!
-#' drive_find("DESC") %>% drive_rm()
+#' drive_find("DESC-ex") %>% drive_rm()
 #' drive_rm(folder)
 #' }
 #' @export
@@ -47,9 +49,7 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   }
 
   if (is_path(path)) {
-    if (is.null(name) && drive_path_exists(append_slash(path))) {
-      path <- append_slash(path)
-    }
+    confirm_clear_path(path, name)
     path_parts <- partition_path(path, maybe_name = is.null(name))
     path <- path_parts$parent
     name <- name %||% path_parts$name
@@ -65,17 +65,22 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   ## if copying to a specific directory, specify the parent
   if (!is.null(path)) {
     path <- as_dribble(path)
-    confirm_single_file(path)
-    if (!is_folder(path)) {
-      stop(
-        glue(
-          "Requested parent folder does not exist:\n{path$name}"
-        ),
-        call. = FALSE
+    if (!some_files(path)) {
+      stop_glue("Requested parent folder does not exist.")
+    }
+    if (!single_file(path)) {
+      paths <- glue_data(path, "  * {name}: {id}")
+      stop_collapse(
+        c("Requested parent folder identifies multiple files:", paths)
       )
+    }
+    ## if path was input as a dribble or id, still need to be sure it's a folder
+    if (!is_folder(path)) {
+      stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
     }
     params[["parents"]] <- list(path$id)
   }
+
 
   ## if new name is specified, send it
   if (!is.null(name)) {
@@ -93,7 +98,7 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   if (verbose) {
     new_path <- paste0(append_slash(path$name), out$name)
-    message(glue("\nFile copied:\n  * {file$name} -> {new_path}"))
+    message_glue("\nFile copied:\n  * {file$name} -> {new_path}")
   }
   invisible(out)
 }

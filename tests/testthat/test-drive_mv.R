@@ -54,9 +54,9 @@ test_that("drive_mv() can move a file into a folder given as path", {
     verbose = FALSE
   )
 
-  ## path is detected as folder despite lack of trailing slash
+  ## path is detected as folder (must have trailing slash)
   expect_message(
-    out <- drive_mv(movee, nm_("move-files-into-me")),
+    out <- drive_mv(movee, paste0(nm_("move-files-into-me"), "/")),
     "File moved"
   )
   expect_s3_class(out, "dribble")

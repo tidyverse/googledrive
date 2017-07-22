@@ -4,9 +4,11 @@
 #'
 #' @template file
 #' @template path
-#' @param name Character, new file name if not specified as part of `path`. Any
-#'   name obtained from `path` overrides this argument. Defaults to current
-#'   name.
+#' @templateVar name file
+#' @templateVar default {}
+#' @template name
+#' @templateVar name file
+#' @templateVar default Defaults to current name.
 #' @template verbose
 #'
 #' @template dribble-return
@@ -41,10 +43,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (!is_mine(file)) {
-    stop(
-      glue("Can't move this file because you don't own it:\n{file$name}"),
-      call. = FALSE
-    )
+    stop_glue("Can't move this file because you don't own it:\n{file$name}")
   }
 
   if (!is.null(name)) {
@@ -52,9 +51,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   }
 
   if (is_path(path)) {
-    if (is.null(name) && drive_path_exists(append_slash(path))) {
-      path <- append_slash(path)
-    }
+    confirm_clear_path(path, name)
     path_parts <- partition_path(path, maybe_name = is.null(name))
     path <- path_parts$parent
     name <- name %||% path_parts$name
@@ -71,14 +68,17 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   ## if moving the file, modify the parent
   if (!is.null(path)) {
     path <- as_dribble(path)
-    confirm_single_file(path)
-    if (!is_folder(path)) {
-      stop(
-        glue(
-          "Requested parent folder does not exist:\n{path$name}"
-        ),
-        call. = FALSE
+    if (!some_files(path)) {
+      stop_glue("Requested parent folder does not exist.")
+    }
+    if (!single_file(path)) {
+      paths <- glue_data(path, "  * {name}: {id}")
+      stop_collapse(
+        c("Requested parent folder identifies multiple files:", paths)
       )
+    }
+    if (!is_folder(path)) {
+      stop_glue("Requested parent folder does not exist:\n{path$name}")
     }
     current_parents <- file$files_resource[[1]][["parents"]][[1]]
     if (!path$id %in% current_parents) {
@@ -104,7 +104,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     ## not entirely sure why this placement of `\n` helps glue do the right
     ## thing and yet ... it does
     new_path <- paste0(append_slash(path$name), out$name)
-    message(glue("\nFile {action}:\n  * {file$name} -> {new_path}"))
+    message_glue("\nFile {action}:\n  * {file$name} -> {new_path}")
   }
   invisible(out)
 }

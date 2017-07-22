@@ -8,8 +8,11 @@
 #'
 #' @template media
 #' @template path
-#' @param name Character, name the file should have on Google Drive if not
-#'   specified in `path`. Will default to its local name.
+#' @templateVar name file
+#' @templateVar default If not given or unknown, will default to the "My Drive" root folder.
+#' @template name
+#' @templateVar name file
+#' @templateVar default Will default to its local name.
 #' @param type Character. If `type = NULL`, a MIME type is automatically
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by
@@ -45,7 +48,7 @@ drive_upload <- function(media,
                          verbose = TRUE) {
 
   if (!file.exists(media)) {
-    stop(glue("File does not exist:\n  * {media}"), call. = FALSE)
+    stop_glue("\nFile does not exist:\n  * {media}")
   }
 
   if (!is.null(name)) {
@@ -53,9 +56,7 @@ drive_upload <- function(media,
   }
 
   if (is_path(path)) {
-    if (is.null(name) && drive_path_exists(append_slash(path))) {
-      path <- append_slash(path)
-    }
+    confirm_clear_path(path, name)
     path_parts <- partition_path(path, maybe_name = is.null(name))
     path <- path_parts$parent
     name <- name %||% path_parts$name
@@ -65,13 +66,17 @@ drive_upload <- function(media,
   ## easier to default to root vs keeping track of whether parent is specified
   path <- path %||% root_folder()
   path <- as_dribble(path)
-  path <- confirm_single_file(path)
-
-  if (!is_folder(path)) {
-    stop(
-      glue("\n`path` specifies a file that is not a folder:\n * {path$name}"),
-      call. = FALSE
+  if (!some_files(path)) {
+    stop_glue("Requested parent folder does not exist.")
+  }
+  if (!single_file(path)) {
+    paths <- glue_data(path, "  * {name}: {id}")
+    stop_collapse(
+      c("Requested parent folder identifies multiple files:", paths)
     )
+  }
+  if (!is_folder(path)) {
+    stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
   }
 
   name <- name %||% basename(media)
@@ -92,10 +97,9 @@ drive_upload <- function(media,
   out <- drive_update(as_id(proc_res$id), media, verbose = FALSE)
 
   if (verbose) {
-    message(
-      glue("\nLocal file:\n  * {media}\n",
-           "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
-           "with MIME type:\n  * {out$files_resource[[1]]$mimeType}")
+    message_glue("\nLocal file:\n  * {media}\n",
+          "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
+          "with MIME type:\n  * {out$files_resource[[1]]$mimeType}"
     )
   }
   invisible(out)
