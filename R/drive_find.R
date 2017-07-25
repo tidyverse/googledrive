@@ -131,10 +131,7 @@ marshal_q_clauses <- function(params) {
   stopifnot(all(vapply(q_bits, is.character, logical(1))))
   params[iq] <- NULL
   q_bits <- unlist(q_bits, use.names = FALSE)
-  ## necessary for purrr < 0.2.2.9000
-  if (!is.null(q_bits)) {
-    q_bits <- purrr::keep(q_bits, ~ length(.x) > 0)
-  }
+  q_bits <- q_bits[lengths(q_bits) > 0]
 
   ## by default, exclude files in trash
   ## but stay out of it if user has provided a trash clause
