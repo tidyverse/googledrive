@@ -94,3 +94,46 @@ test_that("drive_find() honors n_max", {
   out <- drive_find(n_max = 4)
   expect_equal(nrow(out), 4)
 })
+
+test_that("marshal_q_clauses() works in the absence of q", {
+  ## works = adds 'q = "trashed = false"'
+  expect_identical(marshal_q_clauses(list()), list(q = "trashed = false"))
+
+  params <- list(a = "a", b = "b")
+  expect_identical(
+    marshal_q_clauses(params),
+    c(params, q = "trashed = false")
+  )
+})
+
+test_that("marshal_q_clauses() handles multiple q and vector q", {
+  ## non-q params present
+  params <- list(a = "a", q = as.character(1:2), q = "3")
+  expect_identical(
+    marshal_q_clauses(params),
+    list(a = "a", q = c(as.character(1:3), "trashed = false"))
+  )
+
+  ## non-q params absent
+  params <- list(q = as.character(1:2), q = "3")
+  expect_identical(
+    marshal_q_clauses(params),
+    list(q = c(as.character(1:3), "trashed = false"))
+  )
+})
+
+test_that("marshal_q_clauses() doesn't clobber user's trash wishes", {
+  params <- list(q = "trashed = true")
+  expect_identical(marshal_q_clauses(params), params)
+
+  params <- list(q = c("trashed = true", "trashed = false"))
+  expect_identical(marshal_q_clauses(params), params)
+
+  ## funky whitespace
+  params <- list(q = "  trashed= true")
+  expect_identical(marshal_q_clauses(params), params)
+
+  ## funky whitespace + not equal
+  params <- list(q = "trashed !=false ")
+  expect_identical(marshal_q_clauses(params), params)
+})

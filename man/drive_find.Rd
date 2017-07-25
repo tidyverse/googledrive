@@ -20,7 +20,9 @@ processed by googledrive and sent as a query parameter.}
 applies to the results requested from the API, which may be further
 filtered locally, via the \code{pattern} argument.}
 
-\item{...}{Query parameters to pass along to the API query.}
+\item{...}{Other parameters to pass along in the request. The most likely
+candidate is \code{q}. See the examples and the API's
+\href{https://developers.google.com/drive/v3/web/search-parameters}{Search for Files guide}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -31,9 +33,19 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 }
 \description{
 This is the closest googledrive function to what you get from
-\url{https://drive.google.com}: by default, you just get a listing of your files.
-You can also narrow the search in various ways, such as by file type, whether
-it's yours or shared with you, starred status, etc.
+\url{https://drive.google.com}: by default, you just get a listing of your
+files. You can also narrow the search in various ways, such as by file
+type, whether it's yours or shared with you, starred status, etc.
+
+By default, \code{drive_find()} does not show files in the trash: it adds
+\code{q = "trashed = false"} to the query. However, it will not do so if the
+user specifies a \code{q} search clause for trash inclusion or exclusion. To see
+only files in the trash, use \code{\link[=drive_view_trash]{drive_view_trash()}}, which is a shortcut for
+\code{drive_find(q = "trashed = true")}. To see files regardless of trash
+status, use \code{drive_find(q = "trashed = true or trashed = false")}.
+
+\code{drive_find()} will accept multiple \code{q} clauses and/or a vector \code{q} of
+several search clauses. These clauses are combined with \code{and}.
 }
 \examples{
 \dontrun{
@@ -58,6 +70,16 @@ drive_find(pattern = "jt")
 drive_find(pageSize = 50)
 drive_find(n_max = 58)
 drive_find(pageSize = 5, n_max = 15)
+
+## various ways to specify q search clauses
+## multiple q's
+drive_find(q = "name contains 'TEST'",
+           q = "modifiedTime > '2017-07-21T12:00:00'")
+## vector q
+drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
+
+## override the default to get files regardless of trash status
+drive_find(q = "trashed = true or trashed = false")
 }
 
 }
