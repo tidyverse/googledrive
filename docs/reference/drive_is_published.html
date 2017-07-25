@@ -102,6 +102,27 @@ ids marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <code><a hre
   file.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## Upload file to check publication status</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>R.home</span>(<span class='st'>'doc/BioC_mirrors.csv'</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
+
+<span class='co'>## Check publication status</span>
+<span class='fu'>drive_is_published</span>(<span class='no'>file</span>)
+
+<span class='co'>## Publish file</span>
+<span class='fu'><a href='drive_publish.html'>drive_publish</a></span>(<span class='no'>file</span>)
+
+<span class='co'>## Check publication status agian</span>
+<span class='fu'>drive_is_published</span>(<span class='no'>file</span>)
+
+<span class='co'>## Unpublish file</span>
+<span class='fu'><a href='drive_unpublish.html'>drive_unpublish</a></span>(<span class='no'>file</span>)
+
+<span class='co'>## Clean up</span>
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>file</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -109,7 +130,9 @@ ids marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <code><a hre
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

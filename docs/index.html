@@ -99,19 +99,19 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <p>Here’s how to list the first 50 files you see in <a href="https://drive.google.com">My Drive</a>. You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">n_max =</span> <span class="dv">50</span>)
 <span class="co">#&gt; # A tibble: 50 x 3</span>
-<span class="co">#&gt;                            name                           id</span>
-<span class="co">#&gt;  *                        &lt;chr&gt;                        &lt;chr&gt;</span>
-<span class="co">#&gt;  1                          def 0B0Gh-SuuA2nTdUZiWmY5MWdMTmM</span>
-<span class="co">#&gt;  2                          abc 0B0Gh-SuuA2nTZl9hYUZrWWpvS1U</span>
-<span class="co">#&gt;  3  update_me-</span><span class="al">TEST</span><span class="co">-drive-update 0B0Gh-SuuA2nTV05MdVlMSzhnQUU</span>
-<span class="co">#&gt;  4                         NEWS 0B0Gh-SuuA2nTZldhODdQYmdmaW8</span>
-<span class="co">#&gt;  5 not-unique-</span><span class="al">TEST</span><span class="co">-drive-update 0B0Gh-SuuA2nTT0FkaTBGSGI1UHc</span>
-<span class="co">#&gt;  6 not-unique-</span><span class="al">TEST</span><span class="co">-drive-update 0B0Gh-SuuA2nTZ0tQdlVTUDZNUms</span>
-<span class="co">#&gt;  7                       NEWS.1 0B0Gh-SuuA2nTdVE4YWl0TkN1UXM</span>
-<span class="co">#&gt;  8                  DESCRIPTION 0B0Gh-SuuA2nTNExQS19jS3dvNHc</span>
-<span class="co">#&gt;  9                 jenny-fiddle 0B0Gh-SuuA2nTVUo5T0dzNTcwWkk</span>
-<span class="co">#&gt; 10    DESCRIPTION-</span><span class="al">TEST</span><span class="co">-drive-ls 0B0Gh-SuuA2nTcVhBaVNsWGk4M1U</span>
-<span class="co">#&gt; # ... with 40 more rows, and 1 more variables: files_resource &lt;list&gt;</span></code></pre></div>
+<span class="co">#&gt;                           name                           id files_resource</span>
+<span class="co">#&gt;  *                       &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
+<span class="co">#&gt;  1                         def 0B0Gh-SuuA2nTTXBsckdkU0poU00    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  2                         abc 0B0Gh-SuuA2nTSmVRLVYwb1FIVzg    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  3 update_me-</span><span class="al">TEST</span><span class="co">-drive-update 0B0Gh-SuuA2nTV05MdVlMSzhnQUU    &lt;list [33]&gt;</span>
+<span class="co">#&gt;  4                        NEWS 0B0Gh-SuuA2nTZldhODdQYmdmaW8    &lt;list [33]&gt;</span>
+<span class="co">#&gt;  5                           a 0B0Gh-SuuA2nTUGF1cUxvb0stMWM    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  6                           a 0B0Gh-SuuA2nTMnZuWlk1NDk0cE0    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  7                           a 0B0Gh-SuuA2nTeE9fNElyekluSzA    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  8                           a 0B0Gh-SuuA2nTd1NEX19Wb2owaUE    &lt;list [26]&gt;</span>
+<span class="co">#&gt;  9                           a 0B0Gh-SuuA2nTdTE3bmFla1M3ZFk    &lt;list [26]&gt;</span>
+<span class="co">#&gt; 10   i-am-a-file-</span><span class="al">TEST</span><span class="co">-drive-cp 0B0Gh-SuuA2nTWXJYRjUzeDdXc2c    &lt;list [33]&gt;</span>
+<span class="co">#&gt; # ... with 40 more rows</span></code></pre></div>
 <p>You can narrow the query by specifying a <code>pattern</code> you’d like to match names against. Or by specifying a file type: the <code>type</code> argument understands MIME types, file extensions, and a few human-friendly keywords.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">pattern =</span> <span class="st">"chicken"</span>)
 <span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"spreadsheet"</span>)     ## Google Sheets!
@@ -119,16 +119,17 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"application/pdf"</span>) ## MIME type = "application/pdf"</code></pre></div>
 <p>Alternatively, you can refine the search using the <code>q</code> query parameter. Accepted search clauses can be found in the <a href="https://developers.google.com/drive/v3/web/search-parameters">Google Drive API documentation</a>. For example, to get all files with <code>'horsebean'</code> somewhere in their full text (such as files based on the <code>chickwts</code> dataset!), do this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(fls &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'horsebean'"</span>))
-<span class="co">#&gt; # A tibble: 7 x 3</span>
-<span class="co">#&gt;                              name</span>
-<span class="co">#&gt; *                           &lt;chr&gt;</span>
-<span class="co">#&gt; 1                          foobar</span>
-<span class="co">#&gt; 2                          foobar</span>
-<span class="co">#&gt; 3                        chickwts</span>
-<span class="co">#&gt; 4     chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt; 5   chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-list</span>
-<span class="co">#&gt; 6 chickwts_txt-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
-<span class="co">#&gt; 7         hadley-googledrive-tour</span>
+<span class="co">#&gt; # A tibble: 8 x 3</span>
+<span class="co">#&gt;                               name</span>
+<span class="co">#&gt; *                            &lt;chr&gt;</span>
+<span class="co">#&gt; 1 chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 2                           foobar</span>
+<span class="co">#&gt; 3                           foobar</span>
+<span class="co">#&gt; 4                         chickwts</span>
+<span class="co">#&gt; 5      chickwts-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 6    chickwts_gdoc-</span><span class="al">TEST</span><span class="co">-drive-list</span>
+<span class="co">#&gt; 7  chickwts_txt-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
+<span class="co">#&gt; 8          hadley-googledrive-tour</span>
 <span class="co">#&gt; # ... with 2 more variables: id &lt;chr&gt;, files_resource &lt;list&gt;</span></code></pre></div>
 <p>You often want to store the result of a googledrive call, as we do with <code>fls</code> above, so you can act on those files in the future.</p>
 <div id="identify-files" class="section level4">
@@ -140,16 +141,16 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;    name       path                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;      &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def ~/abc/def/ 0B0Gh-SuuA2nTdUZiWmY5MWdMTmM    &lt;list [30]&gt;</span>
+<span class="co">#&gt; 1   def ~/abc/def/ 0B0Gh-SuuA2nTTXBsckdkU0poU00    &lt;list [30]&gt;</span>
 
 ## let's grab that file id and retrieve it that way
 x<span class="op">$</span>id
-<span class="co">#&gt; [1] "0B0Gh-SuuA2nTdUZiWmY5MWdMTmM"</span>
+<span class="co">#&gt; [1] "0B0Gh-SuuA2nTTXBsckdkU0poU00"</span>
 <span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="reference/as_id.html">as_id</a></span>(x<span class="op">$</span>id))
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;    name                           id files_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTdUZiWmY5MWdMTmM    &lt;list [30]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1   def 0B0Gh-SuuA2nTTXBsckdkU0poU00    &lt;list [30]&gt;</span></code></pre></div>
 <p>In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a <code>dribble</code>. If it’s ambiguous, use <code><a href="reference/as_id.html">as_id()</a></code> to flag a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.</p>
 </div>
 <div id="upload-files" class="section level4">
@@ -157,27 +158,31 @@ x<span class="op">$</span>id
 <a href="#upload-files" class="anchor"></a>Upload files</h4>
 <p>We can upload any file type.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(<span class="kw">R.home</span>(<span class="st">'doc/BioC_mirrors.csv'</span>), <span class="st">"README-mirrors.csv"</span>))
-<span class="co">#&gt; File uploaded:</span>
-<span class="co">#&gt;   * README-mirrors.csv</span>
+<span class="co">#&gt; Local file:</span>
+<span class="co">#&gt;   * /Library/Frameworks/R.framework/Resources/doc/BioC_mirrors.csv</span>
+<span class="co">#&gt; uploaded into Drive file:</span>
+<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTelNaZVh5QlJGeG8</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/csv</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                 name                           id files_resource</span>
 <span class="co">#&gt; *              &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-mirrors.csv 0B0Gh-SuuA2nTemlYVThlLWZkdGM    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 README-mirrors.csv 0B0Gh-SuuA2nTelNaZVh5QlJGeG8    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## example of using a dribble as input
 mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(mirrors)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTemlYVThlLWZkdGM</span>
+<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTelNaZVh5QlJGeG8</span>
 
 mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
   <span class="kw">R.home</span>(<span class="st">'doc/BioC_mirrors.csv'</span>),
   <span class="st">"README-mirrors.csv"</span>,
   <span class="dt">type =</span> <span class="st">"spreadsheet"</span>
 )
-<span class="co">#&gt; File uploaded:</span>
-<span class="co">#&gt;   * README-mirrors.csv</span>
+<span class="co">#&gt; Local file:</span>
+<span class="co">#&gt;   * /Library/Frameworks/R.framework/Resources/doc/BioC_mirrors.csv</span>
+<span class="co">#&gt; uploaded into Drive file:</span>
+<span class="co">#&gt;   * README-mirrors.csv: 1ziaOdioWhRAez9jYOKQk1pbkyuKyNBvTsfdRqWpdRH0</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span></code></pre></div>
 <p>Much better!</p>
@@ -189,12 +194,13 @@ mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_is_published.html">drive_is_published</a></span>(mirrors)
 <span class="co">#&gt; The latest revision of file 'README-mirrors.csv' is NOT published.</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_publish.html">drive_publish</a></span>(mirrors)
-<span class="co">#&gt; You have changed the publication status of 'README-mirrors.csv'.</span>
+<span class="co">#&gt; You have changed the publication status of file:</span>
+<span class="co">#&gt;   * 'README-mirrors.csv'</span>
 mirrors<span class="op">$</span>publish
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;            check_time revision published auto_publish</span>
 <span class="co">#&gt;                &lt;dttm&gt;    &lt;chr&gt;     &lt;lgl&gt;        &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 2017-07-19 23:32:22        1      TRUE         TRUE</span></code></pre></div>
+<span class="co">#&gt; 1 2017-07-24 21:27:57        1      TRUE         TRUE</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_is_published.html">drive_is_published</a></span>(mirrors)
 <span class="co">#&gt; The latest revision of file 'README-mirrors.csv' is published.</span></code></pre></div>
 </div>
@@ -205,14 +211,14 @@ mirrors<span class="op">$</span>publish
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mirrors &lt;-<span class="st"> </span>mirrors <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_share.html">drive_share</a></span>(<span class="dt">role =</span> <span class="st">"reader"</span>, <span class="dt">type =</span> <span class="st">"anyone"</span>)
 <span class="co">#&gt; The permissions for file 'README-mirrors.csv' have been updated.</span>
-<span class="co">#&gt; id: anyoneWithLink</span>
-<span class="co">#&gt; type: anyone</span>
-<span class="co">#&gt; role: reader</span></code></pre></div>
+<span class="co">#&gt;   * id: anyoneWithLink</span>
+<span class="co">#&gt;   * type: anyone</span>
+<span class="co">#&gt;   * role: reader</span></code></pre></div>
 <p>We always assign the return value of googledrive functions back into an R object. This object is of type <code>dribble</code>, which holds metadata on one or more Drive files. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.</p>
 <p>We can then extract a share link.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mirrors <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_share_link.html">drive_share_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1u4qWYg664MA1MtwilIeXdNKo0fiPPEKByLrYqYt8R10/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1ziaOdioWhRAez9jYOKQk1pbkyuKyNBvTsfdRqWpdRH0/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="download-files" class="section level4">
 <h4 class="hasAnchor">
@@ -250,8 +256,10 @@ mirrors<span class="op">$</span>publish
 <p>Downloading files that are <em>not</em> Google type files is even simpler, i.e. it does not require any conversion or type info.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## upload something we can download
 boring &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(<span class="kw">system.file</span>(<span class="st">"DESCRIPTION"</span>), <span class="dt">name =</span> <span class="st">"boring-text.txt"</span>)
-<span class="co">#&gt; File uploaded:</span>
-<span class="co">#&gt;   * boring-text.txt</span>
+<span class="co">#&gt; Local file:</span>
+<span class="co">#&gt;   * /Library/Frameworks/R.framework/Resources/library/base/DESCRIPTION</span>
+<span class="co">#&gt; uploaded into Drive file:</span>
+<span class="co">#&gt;   * boring-text.txt: 0B0Gh-SuuA2nTSTJoR0J0UHo4TWc</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/plain</span>
 
@@ -276,11 +284,11 @@ boring &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_u
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mirrors <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 1u4qWYg664MA1MtwilIeXdNKo0fiPPEKByLrYqYt8R10</span>
+<span class="co">#&gt;   * README-mirrors.csv: 1ziaOdioWhRAez9jYOKQk1pbkyuKyNBvTsfdRqWpdRH0</span>
 boring <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>()
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * boring-text.txt: 0B0Gh-SuuA2nTckpDT3R1UU9rVFk</span></code></pre></div>
+<span class="co">#&gt;   * boring-text.txt: 0B0Gh-SuuA2nTSTJoR0J0UHo4TWc</span></code></pre></div>
 </div>
 </div>
 </div>

@@ -109,7 +109,15 @@ ids marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <code><a hre
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>drive_rename</span>(<span class='st'>"chickwts.csv"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"my_chickwts.csv"</span>)
+<span class='co'>## Create a folder to rename</span>
+<span class='no'>folder</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"folder-to-rename"</span>)
+
+<span class='co'>## Rename folder</span>
+<span class='no'>folder</span> <span class='kw'>&lt;-</span> <span class='no'>folder</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>drive_rename</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"renamed-folder"</span>)
+
+<span class='co'>## Clean up</span>
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>folder</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

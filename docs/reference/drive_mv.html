@@ -96,13 +96,13 @@ Can be an actual path (character), a file id marked with
 <code><a href='as_id.html'>as_id</a>()</code>, or a <code><a href='dribble.html'>dribble</a></code>. If specified as an
 actual path, it is best to explicitly indicate if it's a folder by
 including a trailing slash, since it cannot always be worked out from the
-context of the call.</p></td>
+context of the call. Defaults to current name.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>Character, new file name if not specified as part of <code>path</code>. Any
-name obtained from <code>path</code> overrides this argument. Defaults to current
-name.</p></td>
+      <td><p>Character, new file name if not specified as part of `path`. This
+will force `path` to be treated as a folder, even if it is character and lacks
+a trailing slash. Defaults to current name.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
