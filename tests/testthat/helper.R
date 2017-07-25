@@ -1,11 +1,12 @@
-OFFLINE <- function() {
+offline <- function() {
   ping_res <- tryCatch(
     pingr::ping_port("google.com", count = 1, timeout = 0.2),
     error = function(e) NA
   )
   is.na(ping_res)
 }
-skip_if_offline <- function() if (OFFLINE()) skip("Offline")
+OFFLINE <- offline()
+skip_if_offline <- function() if (OFFLINE) skip("Offline")
 
 ## in a session and directory where you are willing to authenticate or have
 ## an existing .httr-oauth, do this:
@@ -14,7 +15,7 @@ skip_if_offline <- function() if (OFFLINE()) skip("Offline")
 ## folders and files will be created AND DELETED!
 ## drive_user()
 ## saveRDS(token, rprojroot::find_testthat_root_file("testing-token.rds"))
-if (OFFLINE() ||
+if (OFFLINE ||
     identical(Sys.getenv("APPVEYOR"), "True") ||
     identical(Sys.getenv("TRAVIS"), "true")) {
   message("No token available for testing")
