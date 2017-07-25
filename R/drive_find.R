@@ -1,9 +1,19 @@
 #' Find files on Google Drive.
 #'
-#' This is the closest googledrive function to what you get from
-#' <https://drive.google.com>: by default, you just get a listing of your files.
-#' You can also narrow the search in various ways, such as by file type, whether
-#' it's yours or shared with you, starred status, etc.
+#' @description This is the closest googledrive function to what you get from
+#'   <https://drive.google.com>: by default, you just get a listing of your
+#'   files. You can also narrow the search in various ways, such as by file
+#'   type, whether it's yours or shared with you, starred status, etc.
+#'
+#' By default, `drive_find()` does not show files in the trash: it adds
+#'   `q = "trashed = false"` to the query. However, it will not do so if the
+#'   user specifies a `q` search clause for trash inclusion or exclusion. To see
+#'   only files in the trash, use [drive_view_trash()], which is a shortcut for
+#'   `drive_find(q = "trashed = true")`. To see files regardless of trash
+#'   status, use `drive_find(q = "trashed = true or trashed = false")`.
+#'
+#' `drive_find()` will accept multiple `q` clauses and/or a vector `q` of
+#'   several search clauses. These clauses are combined with `and`.
 
 #' @seealso Helpful links for forming queries:
 #'   * <https://developers.google.com/drive/v3/web/search-parameters>
@@ -18,7 +28,9 @@
 #' @param n_max Integer. An upper bound on the number of files to return. This
 #'   applies to the results requested from the API, which may be further
 #'   filtered locally, via the `pattern` argument.
-#' @param ... Query parameters to pass along to the API query.
+#' @param ... Other parameters to pass along in the request. The most likely
+#'   candidate is `q`. See the examples and the API's
+#'   [Search for Files guide](https://developers.google.com/drive/v3/web/search-parameters).
 #' @template verbose
 #'
 #' @template dribble-return
@@ -45,6 +57,16 @@
 #' drive_find(pageSize = 50)
 #' drive_find(n_max = 58)
 #' drive_find(pageSize = 5, n_max = 15)
+#'
+#' ## various ways to specify q search clauses
+#' ## multiple q's
+#' drive_find(q = "name contains 'TEST'",
+#'            q = "modifiedTime > '2017-07-21T12:00:00'")
+#' ## vector q
+#' drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
+#'
+#' ## override the default to get files regardless of trash status
+#' drive_find(q = "trashed = true or trashed = false")
 #' }
 #'
 #' @export
@@ -64,25 +86,17 @@ drive_find <- function(pattern = NULL,
 
   params <- list(...)
   params$fields <- params$fields %||% prep_fields(drive_fields())
+  params <- marshal_q_clauses(params)
 
   if (!is.null(type)) {
     ## if they are all NA, this will error, because drive_mime_type()
     ## doesn't allow it, otherwise we proceed with the non-NA mime types
     mime_type <- drive_mime_type(type)
     mime_type <- purrr::discard(mime_type, is.na)
-    params$q <- paste(
-      c(params$q,
-        paste0("mimeType = '", mime_type, "'", collapse = " or ")),
-      collapse = " and "
-    )
+    params$q <- append(params$q, or(glue("mimeType = {sq(mime_type)}")))
   }
 
-  ## initialize q, if necessary
-  ## by default, don't list items in trash
-  if (is.null(params$q) || !grepl("trashed", params$q)) {
-    ## TO DO: scrutinize what happens here when params$q is NULL
-    params$q <- collapse(c(params$q, "trashed = false"), sep = " and ")
-  }
+  params$q <- and(params$q)
 
   request <- generate_request(endpoint = "drive.files.list", params = params)
   proc_res_list <- do_paginated_request(
@@ -103,4 +117,28 @@ drive_find <- function(pattern = NULL,
     res_tbl <- res_tbl[seq_len(n_max), ]
   }
   res_tbl
+}
+
+and <- function(x) collapse(x, sep = " and ")
+or <- function(x) collapse(x, sep = " or ")
+
+## finds all the q clauses and collapses into one character vector of clauses
+## these are destined to be and'ed to form q in the query
+## also enacts our default of excluding files in trash
+marshal_q_clauses <- function(params) {
+  iq <- names(params) == "q"
+  q_bits <- params[iq]
+  stopifnot(all(vapply(q_bits, is.character, logical(1))))
+  params[iq] <- NULL
+  q_bits <- unlist(q_bits, use.names = FALSE)
+  q_bits <- purrr::keep(q_bits, ~ length(.x) > 0)
+
+  ## by default, exclude files in trash
+  ## but stay out of it if user has provided a trash clause
+  if (!any(grepl("trashed\\s*!?=\\s*true|false", trim_ws(q_bits %||% "")))) {
+    q_bits <- c(q_bits, "trashed = false")
+  }
+
+  params$q <- unique(q_bits)
+  params
 }

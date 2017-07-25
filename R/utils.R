@@ -2,6 +2,10 @@ last <- function(x) x[length(x)]
 
 sq <- function(x) glue::single_quote(x)
 
+trim_ws <- function(x) {
+  sub("\\s*$", "", sub("^\\s*", "", x))
+}
+
 stop_glue <- function(..., .sep = "", .envir = parent.frame(), .call = FALSE, .domain = NA) {
   stop(glue(..., .sep = .sep, .envir = .envir), .call = .call, domain = .domain)
 }

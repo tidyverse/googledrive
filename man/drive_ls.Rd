@@ -19,7 +19,9 @@ returned by the API.}
 Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle. This is
 processed by googledrive and sent as a query parameter.}
 
-\item{...}{Query parameters to pass along to the API query.}
+\item{...}{Other parameters to pass along in the request. The most likely
+candidate is \code{q}. See the examples and the API's
+\href{https://developers.google.com/drive/v3/web/search-parameters}{Search for Files guide}.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
