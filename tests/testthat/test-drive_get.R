@@ -38,8 +38,8 @@ if (SETUP) {
     path = folder_1_of_2,
     name = nm_("child_of_2_parents")
   )
-  ## not an exported function
-  drive_add_parent(child_of_2_parents, folder_2_of_2)
+  ## not an exported function; namespace it for sake of setup script
+  googledrive:::drive_add_parent(child_of_2_parents, folder_2_of_2)
 }
 
 # ---- tests ----
