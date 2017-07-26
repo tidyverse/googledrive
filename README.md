@@ -30,19 +30,25 @@ Here's a teaser that uses googledrive to list the files you see on <https://driv
 
 ``` r
 library("googledrive")
-drive_list()
-#> # A tibble: 52 x 3
-#>                                name                           id
-#>  *                            <chr>                        <chr>
-#>  1                              abc 0B0Gh-SuuA2nTdE1MaG1rOWpkR28
-#>  2 upload-into-me-TEST-drive-upload 0B0Gh-SuuA2nTaDJNckJJWXA5Rms
-#>  3        i-am-a-file-TEST-drive-cp 0B0Gh-SuuA2nTVmJNcUt6QlJBVUE
-#>  4      i-am-a-folder-TEST-drive-cp 0B0Gh-SuuA2nTczF5SlBSLUpQNE0
-#>  5 move-files-into-me-TEST-drive-mv 0B0Gh-SuuA2nTZUliMFJMYjRDbXc
-#>  6            list-me-TEST-drive-ls 0B0Gh-SuuA2nTSkk5R2M5cDhKUW8
-#>  7                baz-TEST-drive-mv 0B0Gh-SuuA2nTUVJzU2ZzSUMtUkU
-#>  8                foo-TEST-drive-mv 0B0Gh-SuuA2nTNUhHSjRTWmpWME0
-#>  9     OMNI-PARENT-TEST-drive-mkdir 0B0Gh-SuuA2nTZlA0aWtMczVkMmM
-#> 10                         test1234 0B0Gh-SuuA2nTXzVmSjRTS2JkUGM
-#> # ... with 42 more rows, and 1 more variables: files_resource <list>
+drive_ls()
+#> # A tibble: 88 x 3
+#>                                name
+#>  *                            <chr>
+#>  1      update-me-TEST-drive-update
+#>  2 upload-into-me-TEST-drive-upload
+#>  3     not-unique-TEST-drive-update
+#>  4     not-unique-TEST-drive-update
+#>  5             foo-TEST-drive-trash
+#>  6            DESC-TEST-drive-share
+#>  7       foo_pdf-TEST-drive-publish
+#>  8     foo_sheet-TEST-drive-publish
+#>  9       foo_doc-TEST-drive-publish
+#> 10 move-files-into-me-TEST-drive-mv
+#> # ... with 78 more rows, and 2 more variables: id <chr>,
+#> #   files_resource <list>
 ```
+
+Contributing
+------------
+
+If you'd like to contribute to the development of googledrive, please read [these guidelines](CONTRIBUTING.md).
