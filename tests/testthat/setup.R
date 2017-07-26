@@ -117,7 +117,7 @@ if (SETUP) {
 #' ## test-drive_update.R
 nm_ <- nm_fun("-TEST-drive-update")
 if (SETUP) {
-  drive_upload(system.file("DESCRIPTION"), nm_("update_me"))
+  drive_upload(system.file("DESCRIPTION"), nm_("update-me"))
   drive_upload(system.file("DESCRIPTION"), nm_("not-unique"))
   drive_upload(system.file("DESCRIPTION"), nm_("not-unique"))
 }

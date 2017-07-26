@@ -10,7 +10,7 @@ whoami <- drive_user()$user
 whoami[c('displayName', 'emailAddress')]
 
 ## change this to TRUE when you are really ready to do this!
-CLEAN <- TRUE
+CLEAN <- FALSE
 #' ## test-drive_cp.R
 nm_ <- nm_fun("-TEST-drive-cp")
 if (CLEAN) {
@@ -41,6 +41,7 @@ nm_ <- nm_fun("-TEST-drive-get")
 if (CLEAN) {
   files <- drive_find(nm_("thing0[1234]"))
   drive_rm(files)
+  drive_rm(nm_("child_of_2_parents"))
 }
 #' ## test-drive_ls.R
 nm_ <- nm_fun("-TEST-drive-ls")
