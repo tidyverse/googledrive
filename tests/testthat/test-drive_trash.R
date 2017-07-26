@@ -10,7 +10,7 @@ if (SETUP) {
 
 # ---- clean ----
 if (CLEAN) {
-  drive_rm(nm_("foo"))
+  drive_trash(nm_("foo"))
 }
 
 # ---- tests ----

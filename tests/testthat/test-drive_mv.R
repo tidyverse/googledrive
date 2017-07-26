@@ -5,7 +5,7 @@ nm_ <- nm_fun("-TEST-drive-mv")
 
 # ---- clean ----
 if (CLEAN) {
-  drive_rm(c(
+  drive_trash(c(
     nm_("move-files-into-me"),
     nm_("DESC"),
     nm_("DESC-renamed")

@@ -5,7 +5,7 @@ nm_ <- nm_fun("-TEST-drive-download")
 
 # ---- clean ----
 if (CLEAN) {
-  drive_rm(c(
+  drive_trash(c(
     nm_("DESC"),
     nm_("DESC-doc")
   ))

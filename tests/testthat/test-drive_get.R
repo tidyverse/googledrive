@@ -6,8 +6,8 @@ nm_ <- nm_fun("-TEST-drive-get")
 # ---- clean ----
 if (CLEAN) {
   files <- drive_find(nm_("thing0[1234]"))
-  drive_rm(files)
-  drive_rm(nm_("child_of_2_parents"))
+  drive_trash(files)
+  drive_trash(nm_("child_of_2_parents"))
 }
 
 # ---- setup ----

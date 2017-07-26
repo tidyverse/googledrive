@@ -5,7 +5,7 @@ nm_ <- nm_fun("-TEST-drive-upload")
 
 # ---- clean ----
 if (CLEAN) {
-  drive_rm(c(
+  drive_trash(c(
     nm_("upload-into-me"),
     nm_("DESCRIPTION")
   ))

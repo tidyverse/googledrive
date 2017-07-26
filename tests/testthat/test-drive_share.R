@@ -5,7 +5,7 @@ nm_ <- nm_fun("-TEST-drive-share")
 
 # ---- clean ----
 if (CLEAN) {
-  drive_rm(c(
+  drive_trash(c(
     nm_("mirrors-to-share"),
     nm_("DESC")
   ))

@@ -5,7 +5,7 @@ nm_ <- nm_fun("-TEST-drive-mkdir")
 
 # ---- clean ----
 if (CLEAN) {
-  drive_rm(c(
+  drive_trash(c(
     nm_("OMNI-PARENT"),
     nm_("I-live-in-root")
   ))

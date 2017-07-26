@@ -5,7 +5,7 @@ nm_ <- nm_fun("-TEST-drive-find")
 
 # ---- clean ----
 if (CLEAN) {
-  drive_rm(c(
+  drive_trash(c(
     nm_("foo"),
     nm_("this-should-not-exist")
   ))

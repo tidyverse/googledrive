@@ -5,7 +5,7 @@ nm_ <- nm_fun("-TEST-drive-publish")
 
 # ---- clean ----
 if (CLEAN) {
-  drive_rm(c(
+  drive_trash(c(
     nm_("foo_pdf"),
     nm_("foo_doc"),
     nm_("foo_sheet")

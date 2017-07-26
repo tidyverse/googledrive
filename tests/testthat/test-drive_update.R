@@ -5,7 +5,7 @@ nm_ <- nm_fun("-TEST-drive-update")
 
 # ---- clean ----
 if (CLEAN) {
-  drive_rm(c(
+  drive_trash(c(
     nm_("update-me"),
     nm_("not-unique"),
     nm_("does-not-exist")

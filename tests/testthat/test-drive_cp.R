@@ -5,7 +5,7 @@ nm_ <- nm_fun("-TEST-drive-cp")
 
 # ---- clean ----
 if (CLEAN) {
-  drive_rm(c(
+  drive_trash(c(
     nm_("i-am-a-folder"),
     nm_("not-unique-folder"),
     nm_("i-am-a-file")
