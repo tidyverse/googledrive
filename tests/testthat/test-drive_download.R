@@ -1,21 +1,18 @@
 context("Download files")
 
-## NOTE if you do not currently have the files needed,
-## change run & clean below to TRUE to create files needed
-## (CAUTION, this will delete files that will interfere)
-
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-download")
 
-## clean
-if (FALSE) {
-  del <- drive_rm(c(
+# ---- clean ----
+if (CLEAN) {
+  drive_rm(c(
     nm_("DESC"),
     nm_("DESC-doc")
   ))
 }
 
-## setup
-if (FALSE) {
+# ---- setup ----
+if (SETUP) {
   drive_upload(system.file("DESCRIPTION"), nm_("DESC"))
   drive_upload(
     system.file("DESCRIPTION"),
@@ -24,6 +21,7 @@ if (FALSE) {
   )
 }
 
+# ---- tests ----
 test_that("drive_download() won't overwrite existing file", {
   on.exit(unlink("save_me.txt"))
   writeLines("I exist", "save_me.txt")

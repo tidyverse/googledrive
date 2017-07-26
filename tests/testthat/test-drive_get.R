@@ -1,16 +1,20 @@
 context("Get files by path or id")
 
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-get")
 
-## clean
-if (FALSE) {
+# ---- clean ----
+if (CLEAN) {
   files <- drive_find(nm_("thing0[1234]"))
   drive_rm(files)
 }
 
-## setup
-if (FALSE) {
-  file_in_root <- drive_upload(system.file("DESCRIPTION"), name = nm_("thing01"))
+# ---- setup ----
+if (SETUP) {
+  file_in_root <- drive_upload(
+    system.file("DESCRIPTION"),
+    name = nm_("thing01")
+  )
   drive_upload(system.file("DESCRIPTION"), name = nm_("thing02"))
   drive_upload(system.file("DESCRIPTION"), name = nm_("thing03"))
   folder_in_root <- drive_mkdir(nm_("thing01"))
@@ -37,6 +41,7 @@ if (FALSE) {
   drive_add_parent(child_of_2_parents, folder_2_of_2)
 }
 
+# ---- tests ----
 test_that("drive_get() 'no input' edge cases", {
   skip_on_appveyor()
   skip_on_travis()

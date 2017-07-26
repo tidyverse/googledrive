@@ -1,31 +1,30 @@
 context("Publish files")
 
-## NOTE if you do not currently have the files needed,
-## change run & clean below to TRUE to create files needed
-## (CAUTION, this will delete files that will interfere)
-
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-publish")
 
-## clean
-if (FALSE) {
-  del <- drive_rm(c(nm_("foo_pdf"), nm_("foo_doc"), nm_("foo_sheet")),
-                  verbose = FALSE)
-}
-## setup
-if (FALSE) {
-  drive_upload(R.home('doc/html/about.html'),
-               name = nm_("foo_doc"),
-               type = "document",
-               verbose = FALSE)
-  drive_upload(R.home('doc/BioC_mirrors.csv'),
-               name = nm_("foo_sheet"),
-               type = "spreadsheet",
-               verbose = FALSE)
-  drive_upload(R.home('doc/html/Rlogo.pdf'),
-               name = nm_("foo_pdf"),
-               verbose = FALSE)
+# ---- clean ----
+if (CLEAN) {
+  drive_rm(c(
+    nm_("foo_pdf"),
+    nm_("foo_doc"),
+    nm_("foo_sheet")
+  ))
 }
 
+# ---- setup ----
+if (SETUP) {
+  drive_upload(R.home('doc/html/about.html'),
+               name = nm_("foo_doc"),
+               type = "document")
+  drive_upload(R.home('doc/BioC_mirrors.csv'),
+               name = nm_("foo_sheet"),
+               type = "spreadsheet")
+  drive_upload(R.home('doc/html/Rlogo.pdf'),
+               name = nm_("foo_pdf"))
+}
+
+# ---- tests ----
 test_that("drive_publish() publishes Google Documents", {
 
   skip_on_appveyor()

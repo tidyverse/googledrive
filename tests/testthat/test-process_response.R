@@ -1,5 +1,7 @@
 context("Process responses")
 
+# ---- other ----
+## how the testing files were made:
 ## for testing process_response()
 ## wrong content:
 ## res <- httr::GET("https://httpbin.org")
@@ -17,6 +19,7 @@ context("Process responses")
 ## res <- make_request(request)
 ## saveRDS(res, rprojroot::find_testthat_root_file("test-files/right-content.rds"))
 
+# ---- tests ----
 wrong <- readRDS(rprojroot::find_testthat_root_file("test-files/wrong-content.rds"))
 right <- readRDS(rprojroot::find_testthat_root_file("test-files/right-content.rds"))
 

@@ -1,21 +1,22 @@
 context("Share files")
 
-## NOTE if you do not currently have the files needed,
-## change run & clean below to TRUE to create files needed
-## (CAUTION, this will delete files that will interfere)
-
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-share")
 
-## clean
-if (FALSE) {
-  drive_rm(c(nm_("mirrors-to-share"), nm_("DESC")))
+# ---- clean ----
+if (CLEAN) {
+  drive_rm(c(
+    nm_("mirrors-to-share"),
+    nm_("DESC")
+  ))
 }
 
-## setup
-if (FALSE) {
+# ---- setup ----
+if (SETUP) {
   drive_upload(system.file("DESCRIPTION"), nm_("DESC"))
 }
 
+# ---- tests ----
 test_that("drive_share doesn't explicitly fail", {
   skip_on_appveyor()
   skip_on_travis()

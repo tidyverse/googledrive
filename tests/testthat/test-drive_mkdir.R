@@ -1,24 +1,22 @@
 context("Make folders")
 
-## NOTE if you do not currently have the files needed,
-## change run & clean below to TRUE to create files needed
-## (CAUTION, this will delete files that will interfere)
-
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-mkdir")
 
-## clean
-if (FALSE) {
-  del <- drive_rm(c(
+# ---- clean ----
+if (CLEAN) {
+  drive_rm(c(
     nm_("OMNI-PARENT"),
     nm_("I-live-in-root")
   ))
 }
 
-## setup
-if (FALSE) {
+# ---- setup ----
+if (SETUP) {
   drive_mkdir(nm_("OMNI-PARENT"))
 }
 
+# ---- tests ----
 test_that("drive_mkdir() errors for bad input (before hitting Drive API)", {
   expect_error(drive_mkdir(), "name must be specified")
   expect_error(drive_mkdir(letters), "length\\(path\\) == 1 is not TRUE")

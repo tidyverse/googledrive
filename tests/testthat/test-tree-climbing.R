@@ -1,5 +1,6 @@
 context("Tree climbing")
 
+# ---- tests ----
 test_that("pth() walks the tree", {
  #   ROOT
  #  /    \

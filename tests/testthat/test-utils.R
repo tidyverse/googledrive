@@ -1,5 +1,6 @@
 context("Utils")
 
+# ---- tests ----
 test_that("Sys_getenv() requires length 1 input", {
   expect_error(Sys_getenv(letters), "length(x) == 1 is not TRUE", fixed = TRUE)
 })

@@ -1,5 +1,6 @@
 context("Path utilities")
 
+# ---- tests ----
 test_that("rootize_path() standardizes root", {
   expect_identical(rootize_path("~"), "~/")
   expect_identical(rootize_path("~/"), "~/")

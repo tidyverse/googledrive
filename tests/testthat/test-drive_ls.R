@@ -1,18 +1,19 @@
 context("List folder contents")
 
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-ls")
 
-## clean
-if (FALSE) {
+# ---- clean ----
+if (CLEAN) {
   drive_rm(c(
     nm_("list-me"),
     nm_("this-should-not-exist")
   ))
 }
 
-## set up
-if (FALSE) {
-  drive_mkdir(nm_("list-me"), verbose = FALSE)
+# ---- setup ----
+if (SETUP) {
+  drive_mkdir(nm_("list-me"))
   drive_upload(
     system.file("DESCRIPTION"),
     path = file.path(nm_("list-me"), nm_("DESCRIPTION"))
@@ -23,7 +24,7 @@ if (FALSE) {
   )
 }
 
-
+# ---- tests ----
 test_that("drive_ls() errors if file does not exist", {
   skip_on_appveyor()
   skip_on_travis()

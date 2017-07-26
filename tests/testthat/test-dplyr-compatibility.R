@@ -1,13 +1,15 @@
 context("dplyr compatibility")
 
-## setup
+# ---- other ----
 if (FALSE) {
+  ## how the test file was created
   saveRDS(
     drive_find(n_max = 10),
     rprojroot::find_testthat_root_file("test-files/just_a_dribble.rds")
   )
 }
 
+# ---- tests ----
 test_that("dribble class can be retained by dplyr verbs", {
   skip_if_not_installed("dplyr")
 

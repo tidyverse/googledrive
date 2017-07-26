@@ -1,24 +1,22 @@
 context("Upload files")
 
-## NOTE if you do not currently have the files needed,
-## change run & clean below to TRUE to create files needed
-## (CAUTION, this will delete files that will interfere)
-
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-upload")
 
-## clean
-if (FALSE) {
-  del <- drive_rm(c(
+# ---- clean ----
+if (CLEAN) {
+  drive_rm(c(
     nm_("upload-into-me"),
     nm_("DESCRIPTION")
   ))
 }
 
-## setup
-if (FALSE) {
+# ---- setup ----
+if (SETUP) {
   drive_mkdir(nm_("upload-into-me"))
 }
 
+# ---- tests ----
 test_that("drive_upload() detects non-existent file", {
   expect_error(drive_upload("no-such-file"), "File does not exist")
 })

@@ -1,5 +1,6 @@
 context("Generate requests")
 
+# ---- tests ----
 test_that("generate_request() basically works", {
   req <- generate_request(endpoint = "drive.files.list", token = NULL)
   expect_type(req, "list")

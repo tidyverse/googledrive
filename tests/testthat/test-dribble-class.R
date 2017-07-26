@@ -1,5 +1,6 @@
 context("Dribble class")
 
+# ---- tests ----
 test_that("dribble() creates empty dribble", {
   expect_s3_class(dribble(), "dribble")
   expect_equal(nrow(dribble()), 0)

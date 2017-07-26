@@ -1,5 +1,6 @@
 context("API key")
 
+# ---- tests ----
 test_that("Explicit API key is passed through", {
   expect_identical(drive_api_key("abc"), "abc")
 })

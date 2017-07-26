@@ -1,28 +1,29 @@
 context("Copy files")
 
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-cp")
 
-## clean
-if (FALSE) {
-  del <- drive_rm(c(
+# ---- clean ----
+if (CLEAN) {
+  drive_rm(c(
     nm_("i-am-a-folder"),
     nm_("not-unique-folder"),
     nm_("i-am-a-file")
-  ), verbose = FALSE)
+  ))
 }
 
-## setup
-if (FALSE) {
+# ---- setup ----
+if (SETUP) {
   drive_mkdir(nm_("i-am-a-folder"))
   drive_mkdir(nm_("not-unique-folder"))
   drive_mkdir(nm_("not-unique-folder"))
   drive_upload(
     system.file("DESCRIPTION"),
-    nm_("i-am-a-file"),
-    verbose = FALSE
+    nm_("i-am-a-file")
   )
 }
 
+# ---- tests ----
 test_that("drive_cp() can copy file in place", {
   skip_on_appveyor()
   skip_on_travis()

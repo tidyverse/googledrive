@@ -1,22 +1,22 @@
-context("Search files")
+context("Find files")
 
-## NOTE if you do not currently have the files needed,
-## change run & clean below to TRUE to create files needed
-## (CAUTION, this will delete files that will interfere)
+# ---- nm_fun ----
+nm_ <- nm_fun("-TEST-drive-find")
 
-nm_ <- nm_fun("-TEST-drive-search")
-
-## clean
-if (FALSE) {
-  del <- drive_rm(c(nm_("foo"), nm_("this-should-not-exist")),
-                  verbose = FALSE)
+# ---- clean ----
+if (CLEAN) {
+  drive_rm(c(
+    nm_("foo"),
+    nm_("this-should-not-exist")
+  ))
 }
 
-## setup
-if (FALSE) {
-  drive_mkdir(nm_("foo"), verbose = FALSE)
+# ---- setup ----
+if (SETUP) {
+  drive_mkdir(nm_("foo"))
 }
 
+# ---- tests ----
 test_that("drive_find() passes q", {
   skip_on_appveyor()
   skip_on_travis()
