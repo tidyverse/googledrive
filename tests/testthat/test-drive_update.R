@@ -14,7 +14,7 @@ if (CLEAN) {
 
 # ---- setup ----
 if (SETUP) {
-  drive_upload(system.file("DESCRIPTION"), nm_("update_me"))
+  drive_upload(system.file("DESCRIPTION"), nm_("update-me"))
   drive_upload(system.file("DESCRIPTION"), nm_("not-unique"))
   drive_upload(system.file("DESCRIPTION"), nm_("not-unique"))
 }
@@ -25,7 +25,7 @@ test_that("drive_update() updates file", {
   skip_on_travis()
   skip_if_offline()
 
-  updatee <- drive_find(nm_("update_me"))
+  updatee <- drive_find(nm_("update-me"))
   tmp <- tempfile()
   now <- as.character(Sys.time())
   writeLines(now, tmp)

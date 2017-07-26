@@ -1,3 +1,5 @@
+CLEAN <- SETUP <- FALSE
+
 offline <- function() {
   ping_res <- tryCatch(
     pingr::ping_port("google.com", count = 1, timeout = 0.2),
