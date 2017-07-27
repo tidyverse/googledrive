@@ -1,5 +1,6 @@
 language: R
 cache: packages
+dist: trusty
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_9859da42e62f_key -iv $encrypted_9859da42e62f_iv
@@ -12,13 +13,11 @@ env:
 matrix:
   include:
   - os: linux
-    dist: trusty
     r: 3.2
     warnings_are_errors: false
     r_build_args: --no-build-vignettes
     r_check_args: --ignore-vignettes --no-examples
   - os: linux
-    dist: trusty
     r: oldrel
     r_build_args: --no-build-vignettes
     r_check_args: --ignore-vignettes --no-examples
@@ -26,7 +25,6 @@ matrix:
     r: release
     env: GOOGLEDRIVE_LOAD_TOKEN=true
   - os: linux
-    dist: trusty
     r: devel
     r_build_args: --no-build-vignettes
     r_check_args: --ignore-vignettes --no-examples
