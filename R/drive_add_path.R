@@ -96,11 +96,10 @@ pathify_one_path <- function(op, nodes, root_id) {
 ## retrieves metadata for all files that could be needed to resolve paths
 get_nodes <- function(path) {
   path_parts <- purrr::map(path, partition_path, maybe_name = TRUE)
-  if (is.null(path_parts)) {
-    name <- NULL
-  } else {
-    name <- purrr::map_chr(path_parts, "name", .default = NA)
-  }
+  ## workaround for purrr <= 0.2.2.2
+  name <- purrr::map(path_parts, "name")
+  name <- purrr::flatten_chr(purrr::map_if(name, is.null, ~ NA_character_))
+  #name <- purrr::map_chr(path_parts, "name", .default = NA)
   names <- unique(name)
   names <- names[!is.na(names)]
   names <- glue("name = {sq(names)}")
