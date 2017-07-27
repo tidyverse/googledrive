@@ -21,7 +21,7 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("drive_update() updates file", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
 
   updatee <- drive_find(nm_("update-me"))
@@ -37,7 +37,7 @@ test_that("drive_update() updates file", {
 })
 
 test_that("drive_update() informatively errors if the path is not unique",{
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   expect_error(
     drive_update(nm_("not-unique"), system.file("DESCRIPTION")),
@@ -46,7 +46,7 @@ test_that("drive_update() informatively errors if the path is not unique",{
 })
 
 test_that("drive_update() informatively errors if the path does not exist",{
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   expect_error(
     drive_update(nm_("does-not-exist"), system.file("DESCRIPTION")),
