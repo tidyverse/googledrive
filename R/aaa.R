@@ -60,6 +60,16 @@ NULL
     register_s3_method("dplyr", "slice", "dribble")
   }
 
+  if (requireNamespace("curl", quietly = TRUE) &&
+      utils::packageVersion("curl") == "2.7") {
+      warning_glue(
+        "You have version 2.7 of the curl package, which is known to ",
+        "not work with googledrive. Please upgrade curl to version 2.8 or ",
+        "higher or downgrade to version 2.6."
+      )
+    }
+  }
+
   invisible()
 
 }

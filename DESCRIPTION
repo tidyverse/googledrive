@@ -16,7 +16,8 @@ Roxygen: list(markdown = TRUE)
 Imports: glue (>= 1.1.0),
   httr,
   purrr,
-  tibble
+  tibble,
+  utils
 Suggests: covr,
   dplyr,
   knitr,
