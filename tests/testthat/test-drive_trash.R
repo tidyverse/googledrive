@@ -15,7 +15,6 @@ if (CLEAN) {
 
 # ---- tests ----
 test_that("drive_trash() moves file to trash and drive_untrash() undoes", {
-  skip_on_travis()
   skip_on_appveyor()
   skip_if_offline()
 

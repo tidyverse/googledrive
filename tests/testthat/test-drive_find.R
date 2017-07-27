@@ -19,7 +19,6 @@ if (SETUP) {
 # ---- tests ----
 test_that("drive_find() passes q", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   ## this should find at least 1 folder (foo), and all files found should
@@ -31,7 +30,6 @@ test_that("drive_find() passes q", {
 
 test_that("drive_find() `type` filters for MIME type", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   ## this should find at least 1 folder (foo), and all files found should
@@ -43,7 +41,6 @@ test_that("drive_find() `type` filters for MIME type", {
 
 test_that("drive_find() filters for the regex in `pattern`", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   ## this should be able to find the folder we created, foo-TEST-drive-search
@@ -63,7 +60,6 @@ test_that("drive_find() returns early if n_max < 1", {
 
 test_that("drive_find() returns empty dribble if no match for `pattern`", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   expect_identical(
@@ -74,7 +70,6 @@ test_that("drive_find() returns empty dribble if no match for `pattern`", {
 
 test_that("drive_find() tolerates specification of pageSize", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   expect_silent({
@@ -88,7 +83,6 @@ test_that("drive_find() tolerates specification of pageSize", {
 
 test_that("drive_find() honors n_max", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   out <- drive_find(n_max = 4)

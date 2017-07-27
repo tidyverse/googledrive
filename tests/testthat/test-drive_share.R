@@ -19,7 +19,6 @@ if (SETUP) {
 # ---- tests ----
 test_that("drive_share doesn't explicitly fail", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
   on.exit(drive_rm(nm_("mirrors-to-share")))
 
@@ -56,8 +55,6 @@ test_that("drive_share doesn't explicitly fail", {
 })
 
 test_that("drive_share() informatively errors if given an unknown `role` or `type`", {
-
-  skip_on_travis()
   skip_on_appveyor()
   skip_if_offline()
 

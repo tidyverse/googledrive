@@ -28,7 +28,6 @@ if (SETUP) {
 test_that("drive_publish() publishes Google Documents", {
 
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   drive_doc <- drive_get(nm_("foo_doc"))
@@ -59,7 +58,6 @@ test_that("drive_publish() publishes Google Sheets", {
   ## we are testing this seperately because revision
   ## history is a bit different for Sheets
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   drive_sheet <- drive_get(nm_("foo_sheet"))
@@ -83,7 +81,6 @@ test_that("drive_publish() publishes Google Sheets", {
 test_that("drive_publish() fails if the file input is not a Google Drive type", {
 
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   drive_pdf <- drive_get(nm_("foo_pdf"))

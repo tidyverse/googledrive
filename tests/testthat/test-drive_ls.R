@@ -27,7 +27,6 @@ if (SETUP) {
 # ---- tests ----
 test_that("drive_ls() errors if file does not exist", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   expect_error(
@@ -38,7 +37,6 @@ test_that("drive_ls() errors if file does not exist", {
 
 test_that("drive_ls() outputs contents of folder", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   ## path
@@ -58,7 +56,6 @@ test_that("drive_ls() outputs contents of folder", {
 
 test_that("drive_ls() passes ... through to drive_find()", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   d <- drive_get(nm_("list-me"))

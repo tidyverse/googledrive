@@ -14,8 +14,7 @@ if (OFFLINE) {
 }
 
 if (OFFLINE ||
-    identical(Sys.getenv("APPVEYOR"), "True") ||
-    identical(Sys.getenv("TRAVIS"), "true")) {
+    identical(Sys.getenv("APPVEYOR"), "True")) {
   message("No token available for testing")
 } else {
   drive_auth(rprojroot::find_testthat_root_file("testing-token.rds"))

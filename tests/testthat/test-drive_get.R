@@ -47,7 +47,6 @@ if (SETUP) {
 # ---- tests ----
 test_that("drive_get() 'no input' edge cases", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   expect_identical(drive_get(), dribble_with_path())
@@ -67,7 +66,6 @@ test_that("drive_get() 'no input' edge cases", {
 
 test_that("drive_get() gives n-row output for n ids as input", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   two_files_find <- drive_find(pattern = nm_("DESC-0[12]"))
@@ -80,7 +78,6 @@ test_that("drive_get() gives n-row output for n ids as input", {
 
 test_that("drive_get(path = ...) works", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   one_file <- drive_get(nm_("thing02"))
@@ -94,14 +91,12 @@ test_that("drive_get(path = ...) works", {
 
 test_that("drive_get() for non-existent file", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
   expect_identical(drive_get("this-should-give-empty"), dribble_with_path())
 })
 
 test_that("drive_get(path = ...) is correct wrt folder-ness, path config, rooted-ness", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   ## files with these names exist, but not in this path configuration
@@ -140,7 +135,6 @@ test_that("drive_get(path = ...) is correct wrt folder-ness, path config, rooted
 
 test_that("drive_get() gets root folder", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   from_path <- drive_get("~/")
@@ -153,7 +147,6 @@ test_that("drive_get() gets root folder", {
 
 test_that("drive_get(path = ...) puts trailing slash on a folder", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   out <- drive_get(nm_("thing01"))
@@ -164,7 +157,6 @@ test_that("drive_get(path = ...) puts trailing slash on a folder", {
 
 test_that("drive_add_path() put trailing slash on a folder", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   out <- drive_find(nm_("thing01"), type = "folder")
@@ -175,7 +167,6 @@ test_that("drive_add_path() put trailing slash on a folder", {
 
 test_that("drive_get()+drive_add_path() <--> drive_get() roundtrip", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   file <- drive_find(nm_("thing04"))
@@ -190,7 +181,6 @@ test_that("drive_get()+drive_add_path() <--> drive_get() roundtrip", {
 
 test_that("we understand behavior with multiple parents", {
   skip_on_appveyor()
-  skip_on_travis()
   skip_if_offline()
 
   ## one file with two paths --> one path in, two rows out
