@@ -20,3 +20,4 @@
 ^index\.Rmd$
 ^CONDUCT\.md$
 ^CONTRIBUTING\.[R]?md$
+^tests/testthat/testing-token\.rds\.enc$
