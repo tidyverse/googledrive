@@ -26,25 +26,25 @@ Usage
 
 Please see the package website: <https://tidyverse.github.io/googledrive/>
 
-Here's a teaser that uses googledrive to list the files you see on <https://drive.google.com>:
+Here's a teaser that uses googledrive to view the files you see on <https://drive.google.com>:
 
 ``` r
 library("googledrive")
-drive_ls()
-#> # A tibble: 88 x 3
+drive_find()
+#> # A tibble: 114 x 3
 #>                                name
 #>  *                            <chr>
-#>  1      update-me-TEST-drive-update
-#>  2 upload-into-me-TEST-drive-upload
-#>  3     not-unique-TEST-drive-update
-#>  4     not-unique-TEST-drive-update
-#>  5             foo-TEST-drive-trash
-#>  6            DESC-TEST-drive-share
-#>  7       foo_pdf-TEST-drive-publish
-#>  8     foo_sheet-TEST-drive-publish
-#>  9       foo_doc-TEST-drive-publish
-#> 10 move-files-into-me-TEST-drive-mv
-#> # ... with 78 more rows, and 2 more variables: id <chr>,
+#>  1                              def
+#>  2                              abc
+#>  3      update-me-TEST-drive-update
+#>  4     DESC-doc-TEST-drive-download
+#>  5       foo_doc-TEST-drive-publish
+#>  6 upload-into-me-TEST-drive-upload
+#>  7     not-unique-TEST-drive-update
+#>  8     not-unique-TEST-drive-update
+#>  9             foo-TEST-drive-trash
+#> 10            DESC-TEST-drive-share
+#> # ... with 104 more rows, and 2 more variables: id <chr>,
 #> #   files_resource <list>
 ```
 

@@ -39,11 +39,11 @@ devtools::install_github("tidyverse/googledrive")
 Please see the package website:
 <https://tidyverse.github.io/googledrive/>
 
-Here's a teaser that uses googledrive to list the files you see on <https://drive.google.com>:
+Here's a teaser that uses googledrive to view the files you see on <https://drive.google.com>:
 
 ```{r}
 library("googledrive")
-drive_ls()
+drive_find()
 ```
 
 ## Contributing
