@@ -15,7 +15,7 @@ if (CLEAN) {
 
 # ---- tests ----
 test_that("drive_trash() moves file to trash and drive_untrash() undoes", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
 
   out <- drive_trash(nm_("foo"))
@@ -31,13 +31,12 @@ test_that("drive_trash() moves file to trash and drive_untrash() undoes", {
 
 ## WARNING: this will empty your drive trash. If you do
 ## not want that to happen, set EMPTY_TRASH = FALSE
-# EMPTY_TRASH = TRUE
+# EMPTY_TRASH = FALSE
 
 # test_that("drive_empty_trash() empties trash", {
-#   skip_on_travis()
-#   skip_on_appveyor()
-#   skip_if_offline()
-#   skip_if_not(EMPTY_TRASH)
-#   expect_message(drive_empty_trash())
-#   expect_identical(nrow(drive_view_trash()), 0L)
+# skip_if_no_token()
+# skip_if_offline()
+# skip_if_not(EMPTY_TRASH)
+# expect_message(drive_empty_trash())
+# expect_identical(nrow(drive_view_trash()), 0L)
 # })

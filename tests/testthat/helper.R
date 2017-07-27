@@ -1,24 +1,38 @@
 CLEAN <- SETUP <- FALSE
 
-offline <- function() {
-  ping_res <- tryCatch(
-    pingr::ping_port("google.com", count = 1, timeout = 1),
-    error = function(e) NA
-  )
-  is.na(ping_res)
-}
-OFFLINE <- offline()
-skip_if_offline <- function() if (OFFLINE) skip("Offline")
-if (OFFLINE) {
-  message("We are OFFLINE.")
-}
+## inspired by developments over in gh
+## https://github.com/r-lib/gh/blob/master/tests/testthat/helper-offline.R
+skip_if_offline <- (function() {
+  offline <- NA
+  function() {
+    if (is.na(offline)) {
+      offline <<- tryCatch(
+        is.na(pingr::ping_port("google.com", count = 1, timeout = 1)),
+        error = function(e) TRUE
+      )
+    }
+    if (offline) skip("Offline")
+  }
+})()
 
-if (OFFLINE ||
-    identical(Sys.getenv("APPVEYOR"), "True")) {
-  message("No token available for testing")
-} else {
-  drive_auth(rprojroot::find_testthat_root_file("testing-token.rds"))
-}
+skip_if_no_token <- (function() {
+  no_token <- NA
+  function() {
+    if (is.na(no_token)) {
+      env_var <- as.logical(Sys.getenv("GOOGLEDRIVE_LOAD_TOKEN", NA_character_))
+      if (isFALSE(env_var)) {
+        no_token <<- TRUE
+      } else {
+        token <- tryCatch(
+          drive_auth(rprojroot::find_testthat_root_file("testing-token.rds")),
+          error = function(e) FALSE
+        )
+        no_token <<- isFALSE(token)
+      }
+    }
+    if (no_token) skip("No Drive token")
+  }
+})()
 
 nm_fun <- function(slug) {
   function(x) paste(paste0(x, slug), collapse = "/")

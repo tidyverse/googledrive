@@ -22,7 +22,7 @@ test_that("drive_upload() detects non-existent file", {
 })
 
 test_that("drive_upload() places file in non-root folder, with new name", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(nm_("DESCRIPTION")))
 

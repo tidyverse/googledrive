@@ -24,13 +24,13 @@ test_that("drive_mkdir() errors for bad input (before hitting Drive API)", {
 })
 
 test_that("drive_mkdir() errors if parent path does not exist", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   expect_error(drive_mkdir("qweruiop", "a"))
 })
 
 test_that("drive_mkdir() errors if parent exists but is not a folder", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   x <- drive_find(
     q = "mimeType != 'application/vnd.google-apps.folder'",
@@ -43,7 +43,7 @@ test_that("drive_mkdir() errors if parent exists but is not a folder", {
 })
 
 test_that("drive_mkdir() creates a folder in root folder", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(nm_("I-live-in-root")))
 
@@ -53,7 +53,7 @@ test_that("drive_mkdir() creates a folder in root folder", {
 })
 
 test_that("drive_mkdir() accepts parent folder given as dribble", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(nm_("a")))
 
@@ -64,7 +64,7 @@ test_that("drive_mkdir() accepts parent folder given as dribble", {
 })
 
 test_that("drive_mkdir() accepts parent folder given as file id", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(nm_("b")))
 
@@ -75,7 +75,7 @@ test_that("drive_mkdir() accepts parent folder given as file id", {
 })
 
 test_that("drive_mkdir() accepts name as part of path", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(nm_("c")))
 
@@ -85,7 +85,7 @@ test_that("drive_mkdir() accepts name as part of path", {
 })
 
 test_that("drive_mkdir() accepts name as part of path with trailing slash", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(nm_("d")))
 
@@ -95,7 +95,7 @@ test_that("drive_mkdir() accepts name as part of path with trailing slash", {
 })
 
 test_that("drive_mkdir() accepts path and name", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(c(nm_("e"), nm_("f"))))
 

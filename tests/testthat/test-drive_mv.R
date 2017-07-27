@@ -19,7 +19,7 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("drive_mv() can rename file", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(nm_("DESC-renamed")))
 
@@ -37,7 +37,7 @@ test_that("drive_mv() can rename file", {
 })
 
 test_that("drive_mv() can move a file into a folder given as path", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(nm_("DESC")))
 
@@ -59,7 +59,7 @@ test_that("drive_mv() can move a file into a folder given as path", {
 })
 
 test_that("drive_mv() can move a file into a folder given as dribble", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(nm_("DESC")))
 
@@ -80,7 +80,7 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
 })
 
 test_that("drive_mv() can rename and move, using `path` and `name`", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(nm_("DESC-renamed")))
 
@@ -99,7 +99,7 @@ test_that("drive_mv() can rename and move, using `path` and `name`", {
 })
 
 test_that("drive_mv() can rename and move, using `path` only", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(nm_("DESC-renamed")))
 

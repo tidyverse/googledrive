@@ -2,7 +2,7 @@ context("Delete files")
 
 # ---- tests ----
 test_that("drive_rm() when there are no matching files", {
-  skip_on_appveyor()
+  skip_if_no_token()
   skip_if_offline()
 
   expect_identical(
