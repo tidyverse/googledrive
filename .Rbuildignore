@@ -18,3 +18,5 @@
 ^docs$
 ^_pkgdown\.yml$
 ^index\.Rmd$
+^CONDUCT\.md$
+^CONTRIBUTING\.[R]?md$

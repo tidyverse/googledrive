@@ -1,6 +1,6 @@
 context("Pathification")
 
-
+# ---- tests ----
 test_that("get_paths() correctly reports paths, no name duplication", {
   skip("rework this")
   #   ROOT

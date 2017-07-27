@@ -1,29 +1,31 @@
 context("Update files")
 
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-update")
 
-## clean
-if (FALSE) {
-  del <- drive_rm(c(
+# ---- clean ----
+if (CLEAN) {
+  drive_trash(c(
     nm_("update-me"),
     nm_("not-unique"),
     nm_("does-not-exist")
   ))
 }
 
-## setup
-if (FALSE) {
-  drive_upload(system.file("DESCRIPTION"), nm_("update_me"))
+# ---- setup ----
+if (SETUP) {
+  drive_upload(system.file("DESCRIPTION"), nm_("update-me"))
   drive_upload(system.file("DESCRIPTION"), nm_("not-unique"))
   drive_upload(system.file("DESCRIPTION"), nm_("not-unique"))
 }
 
+# ---- tests ----
 test_that("drive_update() updates file", {
   skip_on_appveyor()
   skip_on_travis()
   skip_if_offline()
 
-  updatee <- drive_find(nm_("update_me"))
+  updatee <- drive_find(nm_("update-me"))
   tmp <- tempfile()
   now <- as.character(Sys.time())
   writeLines(now, tmp)

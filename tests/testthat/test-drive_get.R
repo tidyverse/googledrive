@@ -1,16 +1,23 @@
 context("Get files by path or id")
 
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-get")
 
-## clean
-if (FALSE) {
+# ---- clean ----
+if (CLEAN) {
   files <- drive_find(nm_("thing0[1234]"))
-  drive_rm(files)
+  drive_trash(files)
+  parents <- drive_find(nm_("parent0[12]"))
+  drive_trash(parents)
+  drive_trash(nm_("child_of_2_parents"))
 }
 
-## setup
-if (FALSE) {
-  file_in_root <- drive_upload(system.file("DESCRIPTION"), name = nm_("thing01"))
+# ---- setup ----
+if (SETUP) {
+  file_in_root <- drive_upload(
+    system.file("DESCRIPTION"),
+    name = nm_("thing01")
+  )
   drive_upload(system.file("DESCRIPTION"), name = nm_("thing02"))
   drive_upload(system.file("DESCRIPTION"), name = nm_("thing03"))
   folder_in_root <- drive_mkdir(nm_("thing01"))
@@ -33,10 +40,11 @@ if (FALSE) {
     path = folder_1_of_2,
     name = nm_("child_of_2_parents")
   )
-  ## not an exported function
-  drive_add_parent(child_of_2_parents, folder_2_of_2)
+  ## not an exported function; namespace it for sake of setup script
+  googledrive:::drive_add_parent(child_of_2_parents, folder_2_of_2)
 }
 
+# ---- tests ----
 test_that("drive_get() 'no input' edge cases", {
   skip_on_appveyor()
   skip_on_travis()

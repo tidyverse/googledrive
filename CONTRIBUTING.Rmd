@@ -1,0 +1,105 @@
+---
+title: "Contributing to googledrive"
+output:
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+## Making a pull request
+
+  * Uphold the design principles and package mechanics outlined below.
+  * When in doubt, discuss in an issue before doing lots of work.
+  * Make sure the package still passes `R CMD check` locally for you.
+  * Match the existing code style. Our intent is to follow <http://style.tidyverse.org>.
+  * Tests: please *try* to run our tests or at least those that exercise your PR. Add tests, if relevant. If things go sideways, just say so. We are painfully aware that it's not easy to test API-wrapping, auth-requiring packages like googledrive and are open to constructive feedback. More below.
+  * Documentation: Update the documentation source, if your PR changes any behavior. We use [roxygen2](https://cran.r-project.org/package=roxygen2), so you must edit the roxygen comments above the function; never edit `NAMESPACE` or `.Rd` files by hand. More below.
+  * Website: Do not update the pkgdown-created website, i.e. the files generated below `docs/`. We'll take care of that.
+  * If the PR is related to an issue, link to it in the description, with [the `#15` syntax](https://help.github.com/articles/autolinked-references-and-urls/) and the issue slug for context. If the PR is meant to close an issue, make sure one of the commit messages includes [text like `closes #44` or `fixes #101`](https://help.github.com/articles/closing-issues-using-keywords/). Provide the issue number and slug in the description, even if the issue is mentioned in the title, because auto-linking does not work in the PR title.
+    - GOOD issue title: "Obtain user's intent via mind-reading; fixes #86".
+    - BAD issue title: "Fixes #1043". Please remind us all what issue #1043 is about!
+    - BAD issue title: "Something about #345". This will not actually close issue #345 upon merging. [Use the magic wording!](https://help.github.com/articles/closing-issues-using-keywords/).
+  * Add a bullet to `NEWS.md` with a concise description of the change, if it's something a user would want to know when updating the package. [dplyr's `NEWS.md`](https://github.com/tidyverse/dplyr/blob/master/NEWS.md) is a good source of examples. Note the sentence format, the inclusion of GitHub username, and links to relevant issue(s)/PR(s). We will handle any organization into sub-sections just prior to a release. What merits a bullet?
+    - Fixing a typo in the docs does not, but it is still awesome and deeply appreciated.
+    - Fixing a bug or adding a new feature is bullet-worthy.
+
+## Package philosophy
+
+  * When in doubt, take a cue from the Unix file system commands or the Google Drive browser UI.
+  * Have a reasonable default whenever humanly possible. This applies to auth, file name, file location, etc.
+  * Be pipe-friendly.
+  * If it's not well-documented (e.g. working example!), it doesn't really exist.
+  * Accommodate initial file specification via path or name, but constantly push downstream work to be based on file id.
+  * Return a tidy tibble, probably a [`dribble`](https://tidyverse.github.io/googledrive/reference/dribble.html), whenever it makes sense.
+
+There is a high-level interface for the typical user. These functions help you accomplish the most common tasks, hopefully in a natural way. Examples: `drive_find()`, `drive_upload()`, `drive_download()`. A few hand-picked functions support passing extra parameters through to the API request via `...`, but we don't do this across the board.
+
+There is also a low-level interface that is used internally. These are functions like `generate_request()` and `process_response()`. These functions are exported for use by programming-oriented users who are willing to read [Drive API docs](https://developers.google.com/drive/v3/web/about-sdk) and want to do things we haven't made available in the high-level interface.
+
+## Package mechanics
+
+### Documentation
+
+We use [roxygen2](https://cran.r-project.org/package=roxygen2), specifically with the [Markdown syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html), to create `NAMESPACE` and all `.Rd` files. All edits to documentation should be done in roxygen comments above the associated function 
+or object.
+
+Use templates or inheritance to repeat documentation whenever it is helpful, but without actually repeating its source.
+
+Use internal and external links liberally, i.e. to other docs in googledrive or to Drive API resources.
+
+We encourage working examples that include any necessary setup and teardown. In most cases, you'll have to put them inside a `\dontrun{}`.
+
+It's nice if a pull request includes the result of running `devtools::document()`, to update `NAMESPACE` and the `.Rd` files, but that's optional. A good reason to NOT `document()` is if you have a different version of roxygen2 installed and that sprays minor formatting changes across `.Rd` files that have nothing to do with the PR.
+
+### Testing
+
+We use [testthat](https://cran.r-project.org/package=testthat).
+
+We have many tests that require authorization and that rely on the existence of specific files and folders. Therefore, to run googledrive tests, you'll have to store an OAuth token in a specific place and you'll have to do some setup. We've tried to make it fairly easy to do this setup and to clean up those files when you're done.
+
+#### OAuth token for testing
+
+1. Obtain a new, non-caching token via browser flow.
+    ```{r eval = FALSE}
+    token <- drive_auth(new_user = TRUE, cache = FALSE)
+    ```
+2. Double-check that the user associated with the token is what you want.
+    ```{r eval = FALSE}
+    drive_user()
+    ```
+3. Write this token to file, to the location expected by googledrive's tests.
+    ```{r eval = FALSE}
+    saveRDS(token, rprojroot::find_testthat_root_file("testing-token.rds"))
+    ```
+
+#### R scripts for setup and clean
+
+For speed reasons, the googledrive tests expect to find certain pre-existing files and folders, i.e. we don't do full setup and tear down on each run. You do setup at the beginning of your googledrive development and leave these files in place while you work. When you're done, e.g., when your PR is complete, you can clean up these files. Each test run also creates and destroys files, both locally and on Drive, but that is different and not what we're talking about here.
+
+1. Source `tests/testthat/driver.R` to extract and aggregate the current setup and clean code across all test files.
+    - This will create two R scripts: `tests/testthat/setup.R` and `tests/testthat/clean.R`. Inspect them.
+1. When you are truly ready to perform setup or clean, edit the code to set the `SETUP` or `CLEAN` variable to `TRUE` instead of `FALSE`. This friction is intentional, so you don't accidentally create or delete lots of Drive files without meaning to.
+1. Render `setup.R` with the Knit button in RStudio or like so:
+```{r eval = FALSE}
+rmarkdown::render("setup.R")
+```
+You could also just source it, but it's nice to have a report that records what actually happened.
+
+You should now be able to run the tests via *Build > Test Package* or *Build > Check Package* in RStudio or via `devtools::test()`.
+
+You can leave the setup in place for as long as you're working on googledrive, i.e. you don't need to do this for every test run. In fact, that is the whole point!
+
+When your googledrive development is over, render the clean script:
+```{r eval = FALSE}
+rmarkdown::render("clean.R")
+```
+
+Again, read the report to look over what happened, in case anything was trashed that should not have been (btw, let us know about that so we can fix!). Once you're satisfied that your own files were not touched, you can `drive_empty_trash()` to truly delete the test files.
+
+### Continuous integration
+
+*Come back here when the dust has settled re: token encryption and skipping, so I can say what PRs can expect re: info from travis and appveyor.*
+
+## Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

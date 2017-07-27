@@ -1,28 +1,23 @@
 context("Move files")
 
-
-## NOTE if you do not currently have the files needed,
-## change run & clean below to TRUE to create files needed
-## (CAUTION, this will delete files that will interfere)
-
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-mv")
 
-## clean
-if (FALSE) {
-  del <- drive_rm(c(
+# ---- clean ----
+if (CLEAN) {
+  drive_trash(c(
     nm_("move-files-into-me"),
     nm_("DESC"),
     nm_("DESC-renamed")
-  ),
-  verbose = FALSE
-  )
+  ))
 }
 
-## setup
-if (FALSE) {
+# ---- setup ----
+if (SETUP) {
   drive_mkdir(nm_("move-files-into-me"))
 }
 
+# ---- tests ----
 test_that("drive_mv() can rename file", {
   skip_on_travis()
   skip_on_appveyor()

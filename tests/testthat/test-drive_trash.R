@@ -1,21 +1,19 @@
 context("Trash files")
 
-## NOTE if you do not currently have the files needed,
-## change run & clean below to TRUE to create files needed
-## (CAUTION, this will delete files that will interfere)
-
+# ---- nm_fun ----
 nm_ <- nm_fun("-TEST-drive-trash")
 
-## setup
-if (FALSE) {
+# ---- setup ----
+if (SETUP) {
   drive_mkdir(nm_("foo"))
 }
 
-## clean
-if (FALSE) {
-  drive_rm(nm_("foo"))
+# ---- clean ----
+if (CLEAN) {
+  drive_trash(nm_("foo"))
 }
 
+# ---- tests ----
 test_that("drive_trash() moves file to trash and drive_untrash() undoes", {
   skip_on_travis()
   skip_on_appveyor()

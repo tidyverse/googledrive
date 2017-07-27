@@ -1,5 +1,6 @@
 context("MIME type helper")
 
+# ---- tests ----
 test_that("drive_mime_type() returns NULL if no input", {
   expect_null(drive_mime_type())
 })
