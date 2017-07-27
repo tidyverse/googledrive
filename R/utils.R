@@ -6,12 +6,12 @@ trim_ws <- function(x) {
   sub("\\s*$", "", sub("^\\s*", "", x))
 }
 
-stop_glue <- function(..., .sep = "", .envir = parent.frame(), .call = FALSE, .domain = NA) {
-  stop(glue(..., .sep = .sep, .envir = .envir), .call = .call, domain = .domain)
+stop_glue <- function(..., .sep = "", .envir = parent.frame(), call. = FALSE, .domain = NA) {
+  stop(glue(..., .sep = .sep, .envir = .envir), call. = call., domain = .domain)
 }
 
-stop_glue_data <- function(..., .sep = "", .envir = parent.frame(), .call = FALSE, .domain = NA) {
-  stop(glue_data(..., .sep = .sep, .envir = .envir), .call = .call, domain = .domain)
+stop_glue_data <- function(..., .sep = "", .envir = parent.frame(), call. = FALSE, .domain = NA) {
+  stop(glue_data(..., .sep = .sep, .envir = .envir), call. = call., domain = .domain)
 }
 
 stop_collapse <- function(...) stop(collapse(..., sep = "\n"), call. = FALSE)
@@ -26,12 +26,12 @@ message_glue_data <- function(..., .sep = "", .envir = parent.frame(), .domain =
 
 message_collapse <- function(...) message(glue::collapse(..., sep = "\n"))
 
-warning_glue <- function(..., .sep = "", .envir = parent.frame(), .call = FALSE, .domain = NA) {
-  warning(glue(..., .sep = .sep, .envir = .envir), .call = .call, domain = .domain)
+warning_glue <- function(..., .sep = "", .envir = parent.frame(), call. = FALSE, .domain = NA) {
+  warning(glue(..., .sep = .sep, .envir = .envir), call. = call., domain = .domain)
 }
 
-warning_glue_data <- function(..., .sep = "", .envir = parent.frame(), .call = FALSE, .domain = NA) {
-  warning(glue_data(..., .sep = .sep, .envir = .envir), .call = .call, domain = .domain)
+warning_glue_data <- function(..., .sep = "", .envir = parent.frame(), call. = FALSE, .domain = NA) {
+  warning(glue_data(..., .sep = .sep, .envir = .envir), call. = call., domain = .domain)
 }
 
 warning_collapse <- function(...) warning(collapse(..., sep = "\n"))
