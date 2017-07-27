@@ -1,12 +1,13 @@
 ## this script extracts code from all individual test files to do:
 ##   * test setup = create the files/folders our tests expect to find on Drive
 ##   * test cleanup = delete the above files/folder from Drive
-## execture this to get two R scripts:
+## execute this to get two R scripts:
 ##   * setup.R
 ##   * clean.R
 
 library(purrr)
 library(glue)
+library(rprojroot)
 
 ## grabs code from two chunks: 'nm_fun' and chunk ('clean' or 'setup')
 do_one <- function(r_file, chunk) {
@@ -22,7 +23,11 @@ do_one <- function(r_file, chunk) {
   c(paste("#' ##", basename(r_file)), out)
 }
 
-test_files <- list.files(pattern = "test-.+\\.R")
+test_files <- list.files(
+  path = find_testthat_root_file(),
+  pattern = "test-.+\\.R",
+  full.names = TRUE
+)
 
 clean_code <- test_files %>%
   map(do_one, chunk = "clean") %>%
@@ -35,25 +40,28 @@ header <- "
 #' ---
 #' title: googledrive test {action}
 #' date: '`r format(Sys.time())`'
-#' output: github_document
+#' output: html_document
 #' ---
+
 #' This script aggregates the test-related {action} code from all test files.
+
 library(googledrive)
-source('helper.R')
+source(rprojroot::find_testthat_root_file('helper.R'))
 whoami <- drive_user()$user
 whoami[c('displayName', 'emailAddress')]
 
 ## change this to TRUE when you are really ready to do this!
 {ACTION} <- FALSE
+
 "
 
 writeLines(
   c(glue_data(list(action = "clean", ACTION = "CLEAN"), header),
     unlist(clean_code)),
-  "clean.R"
+  find_testthat_root_file("clean.R")
 )
 writeLines(
   c(glue_data(list(action = "setup", ACTION = "SETUP"), header),
     unlist(setup_code)),
-  "setup.R"
+  find_testthat_root_file("setup.R")
 )
