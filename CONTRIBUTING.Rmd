@@ -10,15 +10,15 @@ output:
 
   * Uphold the design principles and package mechanics outlined below.
   * When in doubt, discuss in an issue before doing lots of work.
-  * Make sure the package still passes `R CMD check` locally for you.
+  * Make sure the package still passes `R CMD check` locally for you. It's a good idea to do that before you touch anything, so you have a baseline.
   * Match the existing code style. Our intent is to follow <http://style.tidyverse.org>.
   * Tests: please *try* to run our tests or at least those that exercise your PR. Add tests, if relevant. If things go sideways, just say so. We are painfully aware that it's not easy to test API-wrapping, auth-requiring packages like googledrive and are open to constructive feedback. More below.
   * Documentation: Update the documentation source, if your PR changes any behavior. We use [roxygen2](https://cran.r-project.org/package=roxygen2), so you must edit the roxygen comments above the function; never edit `NAMESPACE` or `.Rd` files by hand. More below.
   * Website: Do not update the pkgdown-created website, i.e. the files generated below `docs/`. We'll take care of that.
   * If the PR is related to an issue, link to it in the description, with [the `#15` syntax](https://help.github.com/articles/autolinked-references-and-urls/) and the issue slug for context. If the PR is meant to close an issue, make sure one of the commit messages includes [text like `closes #44` or `fixes #101`](https://help.github.com/articles/closing-issues-using-keywords/). Provide the issue number and slug in the description, even if the issue is mentioned in the title, because auto-linking does not work in the PR title.
-    - GOOD issue title: "Obtain user's intent via mind-reading; fixes #86".
-    - BAD issue title: "Fixes #1043". Please remind us all what issue #1043 is about!
-    - BAD issue title: "Something about #345". This will not actually close issue #345 upon merging. [Use the magic wording!](https://help.github.com/articles/closing-issues-using-keywords/).
+    - GOOD PR title: "Obtain user's intent via mind-reading; fixes #86".
+    - BAD PR title: "Fixes #1043". Please remind us all what issue #1043 is about!
+    - BAD PR title: "Something about #345". This will not actually close issue #345 upon merging. [Use the magic words!](https://help.github.com/articles/closing-issues-using-keywords/).
   * Add a bullet to `NEWS.md` with a concise description of the change, if it's something a user would want to know when updating the package. [dplyr's `NEWS.md`](https://github.com/tidyverse/dplyr/blob/master/NEWS.md) is a good source of examples. Note the sentence format, the inclusion of GitHub username, and links to relevant issue(s)/PR(s). We will handle any organization into sub-sections just prior to a release. What merits a bullet?
     - Fixing a typo in the docs does not, but it is still awesome and deeply appreciated.
     - Fixing a bug or adding a new feature is bullet-worthy.
