@@ -1,8 +1,10 @@
 #' Copy a Drive file.
 #'
 #' @seealso Wraps the
-#' [drive.files.copy](https://developers.google.com/drive/v3/reference/files/copy)
-#' endpoint
+#'   [drive.files.copy](https://developers.google.com/drive/v3/reference/files/copy)
+#'    endpoint. You can affect the metadata of the new copy by specifying
+#'   properties of the Files resource via `...`. See the "Request body" section
+#'   in the docs linked above.
 #'
 #' @template file
 #' @template path
@@ -30,9 +32,10 @@
 #' folder <- drive_mkdir("new-folder")
 #' drive_cp("DESC-ex", folder, "DESC-ex-three")
 #'
-#' ## Make an explicitly named copy and change the metadata by
-#' ## starring it! Notice `starred` is not a parameter, we are
-#' ## passing it through the ...
+#' ## Make an explicitly named copy and star it.
+#' ## The starring is an example of providing metadata via `...`.
+#' ## `starred` is not an actual argument to `drive_cp()`,
+#' ## it just gets passed through to the API.
 #' drive_cp("DESC-ex", name = "DESC-ex-starred", starred = TRUE)
 #'
 #' ## Behold all of our copies!
