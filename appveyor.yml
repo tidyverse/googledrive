@@ -8,6 +8,8 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
+  - nuget install secure-file -ExcludeVersion
+  - secure-file\tools\secure-file -decrypt tests/testthat/av_testing-token.rds.enc -secret %my_secret% -out tests/testthat/testing-token.rds
   ps: Bootstrap
 
 # Adapt as necessary starting from here
@@ -15,6 +17,8 @@ install:
 environment:
   global:
     USE_RTOOLS: true
+  my_secret:
+    secure: affAoLl6SeDDOnNFrWExKQ==
 
 build_script:
   - travis-tool.sh install_deps
