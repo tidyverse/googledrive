@@ -46,3 +46,5 @@ nm_fun <- function(slug, user = Sys.info()["user"]) {
   y <- purrr::compact(list(slug, user))
   function(x) as.character(glue::collapse(c(x, y), sep = "-"))
 }
+
+message("Test file naming scheme:\n  * ", nm_fun("TEST-FILE-SLUG")("foo"))
