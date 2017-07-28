@@ -1,19 +1,19 @@
 context("Find files")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("-TEST-drive-find")
+nm_ <- nm_fun("TEST-drive-find", NULL)
 
 # ---- clean ----
 if (CLEAN) {
   drive_trash(c(
-    nm_("foo"),
+    nm_("find-me"),
     nm_("this-should-not-exist")
   ))
 }
 
 # ---- setup ----
 if (SETUP) {
-  drive_mkdir(nm_("foo"))
+  drive_mkdir(nm_("find-me"))
 }
 
 # ---- tests ----
@@ -43,9 +43,10 @@ test_that("drive_find() filters for the regex in `pattern`", {
   skip_if_no_token()
   skip_if_offline()
 
-  ## this should be able to find the folder we created, foo-TEST-drive-search
-  expect_identical(drive_find(pattern = nm_("foo"))$name, nm_("foo"))
-
+  expect_identical(
+    drive_find(pattern = nm_("find-me"))$name,
+    nm_("find-me")
+  )
 })
 
 test_that("drive_find() errors for nonsense in `n_max`", {

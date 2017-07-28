@@ -1,12 +1,13 @@
 context("Update files")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("-TEST-drive-update")
+me_ <- nm_fun("TEST-drive-update")
+nm_ <- nm_fun("TEST-drive-update", NULL)
 
 # ---- clean ----
 if (CLEAN) {
   drive_trash(c(
-    nm_("update-me"),
+    nm_("update-fodder"),
     nm_("not-unique"),
     nm_("does-not-exist")
   ))
@@ -14,7 +15,7 @@ if (CLEAN) {
 
 # ---- setup ----
 if (SETUP) {
-  drive_upload(system.file("DESCRIPTION"), nm_("update-me"))
+  drive_upload(system.file("DESCRIPTION"), nm_("update-fodder"))
   drive_upload(system.file("DESCRIPTION"), nm_("not-unique"))
   drive_upload(system.file("DESCRIPTION"), nm_("not-unique"))
 }
@@ -23,8 +24,9 @@ if (SETUP) {
 test_that("drive_update() updates file", {
   skip_if_no_token()
   skip_if_offline()
+  on.exit(drive_rm(me_("update-me")))
 
-  updatee <- drive_find(nm_("update-me"))
+  updatee <- drive_cp(nm_("update-fodder"), name = me_("update-me"))
   tmp <- tempfile()
   now <- as.character(Sys.time())
   writeLines(now, tmp)

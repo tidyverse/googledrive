@@ -1,7 +1,8 @@
 context("Copy files")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("-TEST-drive-cp")
+me_ <- nm_fun("TEST-drive-cp")
+nm_ <- nm_fun("TEST-drive-cp", NULL)
 
 # ---- clean ----
 if (CLEAN) {
@@ -27,14 +28,14 @@ if (SETUP) {
 test_that("drive_cp() can copy file in place", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
+  on.exit(drive_rm(me_("i-am-a-file")))
 
   file <- drive_get(nm_("i-am-a-file"))
   expect_message(
-    file_cp <- drive_cp(file),
+    file_cp <- drive_cp(file, name = me_("i-am-a-file")),
     "File copied"
   )
-  expect_identical(file_cp$name, paste("Copy of", nm_("i-am-a-file")))
+  expect_identical(file_cp$name, me_("i-am-a-file"))
 
   ## should have the same parent
   expect_identical(file$files_resource[[1]]$parents,
@@ -44,41 +45,31 @@ test_that("drive_cp() can copy file in place", {
 test_that("drive_cp() can copy a file into a different folder", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
+  on.exit(drive_rm(me_("i-am-a-file")))
 
   file <- drive_get(nm_("i-am-a-file"))
   folder <- drive_get(nm_("i-am-a-folder"))
   expect_message(
-    file_cp <- drive_cp(file, folder),
+    file_cp <- drive_cp(file, path = folder, name = me_("i-am-a-file")),
     "File copied"
   )
-  expect_identical(file_cp$name, paste("Copy of", nm_("i-am-a-file")))
+  expect_identical(file_cp$name, me_("i-am-a-file"))
 
   ## should have folder as parent
   expect_identical(file_cp$files_resource[[1]]$parents[[1]], folder$id)
 })
 
-test_that("drive_cp() elects to copy into a folder vs onto file of same name", {
+test_that("drive_cp() doesn't tolerate ambiguity in `path`", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(paste("Copy of", nm_("i-am-a-file"))))
 
   file <- drive_get(nm_("i-am-a-file"))
-  ## does drive_cp() detect that path is a folder, despite lack of trailing
-  ## slash? No.
+  ## `path` lacks trailing slash, so ambiguous if it's parent folder or
+  ## folder + name
   expect_error(
     file_cp <- drive_cp(file, nm_("i-am-a-folder")),
     "Unclear if `path` specifies parent folder or full path"
   )
-
-  ## does drive_cp() work with trailing slash? Yes.
-  expect_message(
-    file_cp <- drive_cp(file, paste0(nm_("i-am-a-folder"), "/")),
-    "File copied"
-  )
-  ## should have folder as parent
-  folder <- drive_get(nm_("i-am-a-folder"))
-  expect_identical(file_cp$files_resource[[1]]$parents[[1]], folder$id)
 })
 
 test_that("drive_cp() errors if asked to copy a folder", {
@@ -98,19 +89,30 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
 
   ## if given `path` and `name`, assumes `path` is a folder
   expect_message(
-    file_cp <- drive_cp(nm_("i-am-a-file"), nm_("i-am-a-folder"), nm_("file-name")),
+    file_cp <- drive_cp(
+      nm_("i-am-a-file"),
+      path = nm_("i-am-a-folder"),
+      name = me_("file-name")
+    ),
     "File copied"
   )
-  expect_identical(file_cp$name, nm_("file-name"))
+  expect_identical(file_cp$name, me_("file-name"))
 
   ## if `path` is not a folder, will error
   expect_error(
-    file_cp <- drive_cp(nm_("i-am-a-file"), nm_("file-name"), nm_("file-name"))
+    file_cp <- drive_cp(
+      nm_("i-am-a-file"),
+      nm_("file-name"),
+      nm_("file-name")
+    )
   )
 
   ## if `path` identifies multiple files, it will error
   expect_error(
-    file_cp <- drive_cp(nm_("i-am-a-file"), paste0(nm_("not-unique-folder"), "/")),
+    file_cp <- drive_cp(
+      nm_("i-am-a-file"),
+      paste0(nm_("not-unique-folder"), "/")
+    ),
     "Requested parent folder identifies multiple files"
   )
 })

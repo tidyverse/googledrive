@@ -1,7 +1,8 @@
 context("Move files")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("-TEST-drive-mv")
+me_ <- nm_fun("TEST-drive-mv")
+nm_ <- nm_fun("TEST-drive-mv", NULL)
 
 # ---- clean ----
 if (CLEAN) {
@@ -21,15 +22,15 @@ if (SETUP) {
 test_that("drive_mv() can rename file", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(nm_("DESC-renamed")))
+  on.exit(drive_rm(me_("DESC-renamed")))
 
   renamee <- drive_upload(
     system.file("DESCRIPTION"),
-    nm_("DESC"),
+    me_("DESC"),
     verbose = FALSE
   )
   expect_message(
-    out <- drive_mv(renamee, name = nm_("DESC-renamed")),
+    out <- drive_mv(renamee, name = me_("DESC-renamed")),
     "File renamed"
   )
   expect_s3_class(out, "dribble")
@@ -39,13 +40,9 @@ test_that("drive_mv() can rename file", {
 test_that("drive_mv() can move a file into a folder given as path", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(nm_("DESC")))
+  on.exit(drive_rm(me_("DESC")))
 
-  movee <- drive_upload(
-    system.file("DESCRIPTION"),
-    nm_("DESC"),
-    verbose = FALSE
-  )
+  movee <- drive_upload(system.file("DESCRIPTION"), me_("DESC"))
 
   ## path is detected as folder (must have trailing slash)
   expect_message(
@@ -61,13 +58,9 @@ test_that("drive_mv() can move a file into a folder given as path", {
 test_that("drive_mv() can move a file into a folder given as dribble", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(nm_("DESC")))
+  on.exit(drive_rm(me_("DESC")))
 
-  movee <- drive_upload(
-    system.file("DESCRIPTION"),
-    nm_("DESC"),
-    verbose = FALSE
-  )
+  movee <- drive_upload(system.file("DESCRIPTION"), me_("DESC"))
 
   destination <- drive_get(nm_("move-files-into-me"))
   expect_message(
@@ -82,16 +75,12 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
 test_that("drive_mv() can rename and move, using `path` and `name`", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(nm_("DESC-renamed")))
+  on.exit(drive_rm(me_("DESC-renamed")))
 
-  movee <- drive_upload(
-    system.file("DESCRIPTION"),
-    nm_("DESC"),
-    verbose = FALSE
-  )
+  movee <- drive_upload(system.file("DESCRIPTION"), me_("DESC"))
 
   expect_message(
-    out <- drive_mv(movee, nm_("move-files-into-me"), nm_("DESC-renamed")),
+    out <- drive_mv(movee, nm_("move-files-into-me"), me_("DESC-renamed")),
     "File renamed and moved"
   )
   expect_s3_class(out, "dribble")
@@ -101,18 +90,14 @@ test_that("drive_mv() can rename and move, using `path` and `name`", {
 test_that("drive_mv() can rename and move, using `path` only", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(nm_("DESC-renamed")))
+  on.exit(drive_rm(me_("DESC-renamed")))
 
-  movee <- drive_upload(
-    system.file("DESCRIPTION"),
-    nm_("DESC"),
-    verbose = FALSE
-  )
+  movee <- drive_upload(system.file("DESCRIPTION"), me_("DESC"))
 
   expect_message(
     out <- drive_mv(
       movee,
-      file.path(nm_("move-files-into-me"), nm_("DESC-renamed"))
+      file.path(nm_("move-files-into-me"), me_("DESC-renamed"))
     ),
     "File renamed and moved"
   )

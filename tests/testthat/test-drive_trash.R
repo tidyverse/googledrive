@@ -1,31 +1,41 @@
 context("Trash files")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("-TEST-drive-trash")
+me_ <- nm_fun("TEST-drive-trash")
+nm_ <- nm_fun("TEST-drive-trash", NULL)
 
 # ---- setup ----
 if (SETUP) {
-  drive_mkdir(nm_("foo"))
+  drive_upload(
+    system.file("DESCRIPTION"),
+    nm_("trash-fodder")
+  )
 }
 
 # ---- clean ----
 if (CLEAN) {
-  drive_trash(nm_("foo"))
+  drive_trash(c(
+    nm_("trash-fodder"),
+    me_("trashee")
+  ))
 }
 
 # ---- tests ----
 test_that("drive_trash() moves file to trash and drive_untrash() undoes", {
   skip_if_no_token()
   skip_if_offline()
+  on.exit(drive_rm(me_("trashee")))
 
-  out <- drive_trash(nm_("foo"))
+  trashee <- drive_cp(nm_("trash-fodder"), name = me_("trashee"))
+
+  out <- drive_trash(me_("trashee"))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, nm_("foo"))
+  expect_identical(out$name, me_("trashee"))
   expect_true(out[["files_resource"]][[1]][["trashed"]])
 
-  out <- drive_untrash(nm_("foo"))
+  out <- drive_untrash(me_("trashee"))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, nm_("foo"))
+  expect_identical(out$name, me_("trashee"))
   expect_false(out[["files_resource"]][[1]][["trashed"]])
 })
 
