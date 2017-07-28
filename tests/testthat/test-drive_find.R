@@ -1,12 +1,12 @@
 context("Find files")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("TEST-drive-find")
+nm_ <- nm_fun("TEST-drive-find", NULL)
 
 # ---- clean ----
 if (CLEAN) {
   drive_trash(c(
-    nm_("foo"),
+    nm_("find-me"),
     nm_("this-should-not-exist")
   ))
 }
