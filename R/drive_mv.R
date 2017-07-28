@@ -1,6 +1,12 @@
 #' Move a Drive file.
 #'
 #' Move a Drive file to a different folder, give it a different name, or both.
+#' Note that folders on Google Drive are not like folders on your local
+#' filesystem. They are more like a label, which implies that a Drive file can
+#' have multiple folders as direct parent! However, most people still use and
+#' think of them like "regular" folders. When we say "move a Drive file", it
+#' actually means: "add a new folder to this file's parents and remove the old
+#' one".
 #'
 #' @template file
 #' @template path
@@ -38,6 +44,8 @@
 #' ## specify destination as path with trailing slash
 #' ## to ensure we get a move vs. renaming it to "new-folder"
 #' file <- drive_mv(file, "new-folder/")
+#'
+#' ## TO DO: clean up
 #' }
 drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
@@ -99,15 +107,15 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   out <- as_dribble(list(proc_res))
 
   if (verbose) {
-    renamed <- !identical(params$name, file$name)
-    moved <- !is.null(params[["addParents"]])
-    action <- glue("{if (renamed) 'renamed' else ''}",
-                   "{if (renamed && moved) ' and ' else ''}",
-                   "{if (moved) 'moved' else ''}")
-    ## not entirely sure why this placement of `\n` helps glue do the right
-    ## thing and yet ... it does
+    actions <- c(
+      renamed = !identical(params$name, file$name),
+      moved = !is.null(params[["removeParents"]])
+    )
     new_path <- paste0(append_slash(path$name), out$name)
-    message_glue("\nFile {action}:\n  * {file$name} -> {new_path}")
+    message_glue(
+      "\nFile {action}:\n  * {file$name} -> {new_path}",
+      action = collapse(names(actions)[actions], last = " and ")
+    )
   }
   invisible(out)
 }
