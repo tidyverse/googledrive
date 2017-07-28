@@ -41,9 +41,15 @@
 #' }
 drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
-  file <- confirm_single_file(file)
+  file <- confirm_some_files(file)
+
+  if (!single_file(file)) {
+    files <- glue_data(file, "  * {name}: {id}")
+    stop_collapse(c("Path to move is not unique:", files))
+  }
+
   if (!is_mine(file)) {
-    stop_glue("Can't move this file because you don't own it:\n{file$name}")
+    stop_glue("\nCan't move this file because you don't own it:\n  * {file$name}")
   }
 
   if (!is.null(name)) {

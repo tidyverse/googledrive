@@ -11,13 +11,13 @@
 #' @template name
 #' @templateVar name file
 #' @templateVar default Defaults to "Copy of `FILE-NAME`".
-#' @param ... Parameters to pass along to the API query.
+#' @template dots
 #' @template verbose
 #' @template dribble-return
 #'
 #' @examples
 #' \dontrun{
-#' ## create a file to copy
+#' ## Create a file to copy
 #' file <- drive_upload(system.file("DESCRIPTION"), "DESC-ex")
 #'
 #' ## Make a "Copy of" copy in same folder as the original
@@ -29,6 +29,11 @@
 #' ## Make an explicitly named copy in a different folder
 #' folder <- drive_mkdir("new-folder")
 #' drive_cp("DESC-ex", folder, "DESC-ex-three")
+#'
+#' ## Make an explicitly named copy and change the metadata by
+#' ## starring it! Notice `starred` is not a parameter, we are
+#' ## passing it through the ...
+#' drive_cp("DESC-ex", name = "DESC-ex-starred", starred = TRUE)
 #'
 #' ## Behold all of our copies!
 #' drive_find("DESC-ex")

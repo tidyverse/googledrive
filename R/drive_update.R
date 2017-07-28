@@ -6,8 +6,7 @@
 #'
 #' @template file
 #' @template media
-#' @param ... Parameters to pass along to the [API query](https://developers.google.com/drive/v3/reference/files/update).
-#'   These parameters can be used to update metadata.
+#' @template dots
 #' @template verbose
 #'
 #' @template dribble-return
@@ -15,12 +14,22 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## Create a new file, so we can update it.
+#' ## Create a new file, so we can update it
 #' x <- drive_upload(R.home("doc/NEWS"))
 #'
-#' ## Update the file with new content.
+#' ## Update the file with new media
 #' x <- x %>%
-#'   drive_update(R.home("doc/NEWS.2"))
+#'   drive_update(R.home("doc/NEWS.1"))
+#'
+#' ## Update the file with new metadata.
+#' ## Notice here `name` is not a parameter, we are passing
+#' ## this through the ...
+#' x <- x %>%
+#'   drive_update(name = "NEWS-1")
+#'
+#' ## Update the file with new media AND new metadata
+#' x <- x %>%
+#'   drive_update(R.home("doc/NEWS.2"), name = "NEWS-2")
 #'
 #' ## Clean up
 #' drive_rm(x)
@@ -39,7 +48,7 @@ drive_update <- function(file,
   }
 
   if (!is_mine(file)) {
-    stop_glue("Can't update this file because you don't own it:\n{file$name}")
+    stop_glue("\nCan't update this file because you don't own it:\n  * {file$name}")
   }
 
   params <- list(
@@ -47,7 +56,7 @@ drive_update <- function(file,
     fields = "*",
     ...)
 
-  if (length(params) == 2L) {
+  if (identical(names(params), c("fileId", "fields"))) {
     response <- drive_update_media(file = file, media = media)
   } else if (is.null(media)) {
     response <- drive_update_metadata(params)

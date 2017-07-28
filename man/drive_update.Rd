@@ -13,7 +13,7 @@ ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{media}{Character, path to the local file to upload.}
 
-\item{...}{Parameters to pass along to the \href{https://developers.google.com/drive/v3/reference/files/update}{API query}.
+\item{...}{Parameters to pass along to the [API query](https://developers.google.com/drive/v3/reference/files/update).
 These parameters can be used to update metadata.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
@@ -28,12 +28,22 @@ Update an existing Drive file
 }
 \examples{
 \dontrun{
-## Create a new file, so we can update it.
+## Create a new file, so we can update it
 x <- drive_upload(R.home("doc/NEWS"))
 
-## Update the file with new content.
+## Update the file with new media
 x <- x \%>\%
-  drive_update(R.home("doc/NEWS.2"))
+  drive_update(R.home("doc/NEWS.1"))
+
+## Update the file with new metadata.
+## Notice here `name` is not a parameter, we are passing
+## this through the ...
+x <- x \%>\%
+  drive_update(name = "NEWS-1")
+
+## Update the file with new media AND new metadata
+x <- x \%>\%
+  drive_update(R.home("doc/NEWS.2"), name = "NEWS-2")
 
 ## Clean up
 drive_rm(x)

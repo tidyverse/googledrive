@@ -22,7 +22,8 @@ context of the call. Defaults to "Copy of \code{FILE-NAME}".}
 will force `path` to be treated as a folder, even if it is character and lacks
 a trailing slash. Defaults to "Copy of \code{FILE-NAME}".}
 
-\item{...}{Parameters to pass along to the API query.}
+\item{...}{Parameters to pass along to the [API query](https://developers.google.com/drive/v3/reference/files/update).
+These parameters can be used to update metadata.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -36,7 +37,7 @@ Copy a Drive file.
 }
 \examples{
 \dontrun{
-## create a file to copy
+## Create a file to copy
 file <- drive_upload(system.file("DESCRIPTION"), "DESC-ex")
 
 ## Make a "Copy of" copy in same folder as the original
@@ -48,6 +49,11 @@ drive_cp("DESC-ex", "DESC-ex-two")
 ## Make an explicitly named copy in a different folder
 folder <- drive_mkdir("new-folder")
 drive_cp("DESC-ex", folder, "DESC-ex-three")
+
+## Make an explicitly named copy and change the metadata by
+## starring it! Notice `starred` is not a parameter, we are
+## passing it through the ...
+drive_cp("DESC-ex", name = "DESC-ex-starred", starred = TRUE)
 
 ## Behold all of our copies!
 drive_find("DESC-ex")
