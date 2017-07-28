@@ -1,5 +1,7 @@
 #' Update an existing Drive file
 #'
+#' TO DO: document me with more words.
+#'
 #' @seealso Wraps the
 #' [drive.files.update](https://developers.google.com/drive/v3/reference/files/update)
 #' endpoint. In particular, does [media upload](https://developers.google.com/drive/v3/web/manage-uploads).
@@ -44,28 +46,34 @@ drive_update <- function(file,
 
   if (!single_file(file)) {
     files <- glue_data(file, "  * {name}: {id}")
-    stop_collapse(c("Path to update is not unique:", files))
+    stop_collapse(c("File to update is not unique:", files))
   }
 
   if (!is_mine(file)) {
     stop_glue("\nCan't update this file because you don't own it:\n  * {file$name}")
   }
 
-  params <- list(
-    fileId = file$id,
-    fields = "*",
-    ...)
-
-  if (identical(names(params), c("fileId", "fields"))) {
-    response <- drive_update_media(file = file, media = media)
-  } else if (is.null(media)) {
-    response <- drive_update_metadata(params)
-  } else {
-    response <- drive_update_multipart(file = file, media = media, ...)
+  if (!is.null(media) && !file.exists(media)) {
+    stop_glue("\nLocal file does not exist:\n  * {media}")
   }
+  meta <- list(...)
+  ## TO DO: what if user puts fields in `...`?
+  ## we deal with that in drive_find() FWIW, but I'm not sure it's best way
 
+  if (is.null(media)) {
+    if (length(meta) == 0) {
+      if (verbose) message("No updates specified.")
+    } else {
+      response <- drive_update_metadata(file, meta)
+    }
+  } else {
+    if (length(meta) == 0) {
+      response <- drive_update_media(file, media)
+    } else {
+      response <- drive_update_multipart(file, media, meta)
+    }
+  }
   proc_res <- process_response(response)
-
   out <- as_dribble(list(proc_res))
 
   if (verbose) {
@@ -77,14 +85,12 @@ drive_update <- function(file,
 
 
 drive_update_media <- function(file, media) {
-  if (!file.exists(media)) {
-    stop_glue("\nLocal file does not exist:\n  * {media}")
-  }
   request <- generate_request(
     endpoint = "drive.files.update.media",
-    params = list(fileId = file$id,
-                  uploadType = "media",
-                  fields = "*"
+    params = list(
+      fileId = file$id,
+      uploadType = "media",
+      fields = "*"
     )
   )
 
@@ -93,39 +99,40 @@ drive_update_media <- function(file, media) {
   make_request(request, encode = "json")
 }
 
-drive_update_metadata <- function(params) {
+drive_update_metadata <- function(file, meta) {
   request <- generate_request(
     endpoint = "drive.files.update",
-    params = params
+    params = c(
+      fileId = file$id,
+      fields = "*",
+      meta
+    )
   )
   make_request(request, encode = "json")
 }
 
-drive_update_multipart <- function(file, media, ...) {
-
-  if (!file.exists(media)) {
-    stop_glue("\nLocal file does not exist:\n  * {media}")
-  }
+drive_update_multipart <- function(file, media, meta) {
   request <- generate_request(
     endpoint = "drive.files.update.media",
-    params = list(fileId = file$id,
-                  uploadType = "multipart",
-                  fields = "*",
-                  ## We are putting this (...) here even though they will be overwritten
-                  ## because our generate_request() function vets the input parameters
-                  ## for this endpoint.
-                  ...
-
+    params = c(
+      fileId = file$id,
+      uploadType = "multipart",
+      fields = "*",
+      ## We provide the metadata here even though it's overwritten below,
+      ## so that generate_request() still validates it.
+      meta
     )
   )
-  metadata <- tempfile()
-  writeLines(jsonlite::toJSON(list(...)), metadata)
+  meta_file <- tempfile()
+  on.exit(unlink(meta_file))
+  writeLines(jsonlite::toJSON(meta), meta_file)
   ## media uploads have unique body situations, so customizing here.
   request$body <- list(
-    metadata = httr::upload_file(path = metadata, type = "application/json; charset=UTF-8"),
+    metadata = httr::upload_file(
+      path = meta_file,
+      type = "application/json; charset=UTF-8"
+    ),
     media = httr::upload_file(path = media)
   )
-  response <- make_request(request)
-  unlink(metadata)
-  response
+  make_request(request)
 }

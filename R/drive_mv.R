@@ -73,10 +73,10 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   name <- name %||% file$name
 
-  params <- list(
-    fileId = file$id,
-    name = name,
-    fields = "*"
+  ## TO DO: I think this should be initialized as list()
+  ## and we only add name if name is non-NULL
+  meta <- list(
+    name = name
   )
 
   ## if moving the file, modify the parent
@@ -96,20 +96,21 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     }
     current_parents <- file$files_resource[[1]][["parents"]][[1]]
     if (!path$id %in% current_parents) {
-      params[["addParents"]] <- path$id
-      params[["removeParents"]] <- current_parents
+      meta[["addParents"]] <- path$id
+      meta[["removeParents"]] <- current_parents
     }
   }
 
-  res <- drive_update_metadata(params)
+  ## TO DO: check here that meta has length? otherwise, no need to call
+  res <- drive_update_metadata(file, meta)
 
   proc_res <- process_response(res)
   out <- as_dribble(list(proc_res))
 
   if (verbose) {
     actions <- c(
-      renamed = !identical(params$name, file$name),
-      moved = !is.null(params[["removeParents"]])
+      renamed = !identical(meta$name, file$name),
+      moved = !is.null(meta[["removeParents"]])
     )
     new_path <- paste0(append_slash(path$name), out$name)
     message_glue(

@@ -43,7 +43,7 @@ test_that("drive_update() informatively errors if the path is not unique",{
   skip_if_offline()
   expect_error(
     drive_update(nm_("not-unique"), system.file("DESCRIPTION")),
-    "Path to update is not unique"
+    "File to update is not unique"
   )
 })
 
