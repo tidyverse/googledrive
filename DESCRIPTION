@@ -17,7 +17,8 @@ Imports: glue (>= 1.1.0),
   httr,
   purrr,
   tibble,
-  utils
+  utils,
+    jsonlite
 Suggests: covr,
   curl,
   dplyr,

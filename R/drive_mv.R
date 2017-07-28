@@ -87,11 +87,8 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     }
   }
 
-  request <- generate_request(
-    endpoint = "drive.files.update",
-    params = params
-  )
-  res <- make_request(request, encode = "json")
+  res <- drive_update_metadata(params)
+
   proc_res <- process_response(res)
   out <- as_dribble(list(proc_res))
 

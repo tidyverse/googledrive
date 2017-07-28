@@ -4,7 +4,7 @@
 \alias{drive_cp}
 \title{Copy a Drive file.}
 \usage{
-drive_cp(file, path = NULL, name = NULL, verbose = TRUE)
+drive_cp(file, path = NULL, name = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
@@ -21,6 +21,8 @@ context of the call. Defaults to "Copy of \code{FILE-NAME}".}
 \item{name}{Character, new file name if not specified as part of `path`. This
 will force `path` to be treated as a folder, even if it is character and lacks
 a trailing slash. Defaults to "Copy of \code{FILE-NAME}".}
+
+\item{...}{Parameters to pass along to the API query.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

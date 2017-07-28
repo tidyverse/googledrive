@@ -11,6 +11,7 @@
 #' @template name
 #' @templateVar name file
 #' @templateVar default Defaults to "Copy of `FILE-NAME`".
+#' @param ... Parameters to pass along to the API query.
 #' @template verbose
 #' @template dribble-return
 #'
@@ -37,7 +38,7 @@
 #' drive_rm(folder)
 #' }
 #' @export
-drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
+drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_folder(file)) {
@@ -59,7 +60,8 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   params <- list(
     fileId = file$id,
-    fields = "*"
+    fields = "*",
+    ...
   )
 
   ## if copying to a specific directory, specify the parent

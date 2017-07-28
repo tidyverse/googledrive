@@ -6,7 +6,8 @@
 #'
 #' @template file
 #' @template media
-#' @param ... Parameters to pass along to the API query. NOT IMPLEMENTED YET.
+#' @param ... Parameters to pass along to the [API query](https://developers.google.com/drive/v3/reference/files/update).
+#'   These parameters can be used to update metadata.
 #' @template verbose
 #'
 #' @template dribble-return
@@ -37,11 +38,19 @@ drive_update <- function(file,
     stop_collapse(c("Path to update is not unique:", files))
   }
 
-  x <- list(...)
-  if (length(x) == 0L) {
+  if (!is_mine(file)) {
+    stop_glue("Can't update this file because you don't own it:\n{file$name}")
+  }
+
+  params <- list(
+    fileId = file$id,
+    fields = "*",
+    ...)
+
+  if (length(params) == 2L) {
     response <- drive_update_media(file = file, media = media)
   } else if (is.null(media)) {
-    response <- drive_update_metadata(file = file, ...)
+    response <- drive_update_metadata(params)
   } else {
     response <- drive_update_multipart(file = file, media = media, ...)
   }
@@ -75,13 +84,10 @@ drive_update_media <- function(file, media) {
   make_request(request, encode = "json")
 }
 
-drive_update_metadata <- function(file, ...) {
+drive_update_metadata <- function(params) {
   request <- generate_request(
     endpoint = "drive.files.update",
-    params = list(fileId = file$id,
-                  fields = "*",
-                  ...
-    )
+    params = params
   )
   make_request(request, encode = "json")
 }
@@ -95,7 +101,12 @@ drive_update_multipart <- function(file, media, ...) {
     endpoint = "drive.files.update.media",
     params = list(fileId = file$id,
                   uploadType = "multipart",
-                  fields = "*"
+                  fields = "*",
+                  ## We are putting this (...) here even though they will be overwritten
+                  ## because our generate_request() function vets the input parameters
+                  ## for this endpoint.
+                  ...
+
     )
   )
   metadata <- tempfile()
