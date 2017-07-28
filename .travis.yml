@@ -35,7 +35,7 @@ notifications:
     on_failure: change
 
 after_success:
-  - test $TRAVIS_R_VERSION_STRING = "release" && Rscript -e 'covr::codecov()'
+  - test $TRAVIS_R_VERSION_STRING = "release" && Rscript -e 'covr::codecov(line_exclusions = c("R/aaa.R", "R/drive_browse.R"))'
   - find . -name testthat.Rout | xargs cat
 
 after_failure:
