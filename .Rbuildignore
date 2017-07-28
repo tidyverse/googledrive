@@ -21,3 +21,4 @@
 ^CONDUCT\.md$
 ^CONTRIBUTING\.[R]?md$
 ^tests/testthat/testing-token\.rds\.enc$
+^tests/testthat/av_testing-token\.rds\.enc$

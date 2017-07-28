@@ -62,6 +62,30 @@ We use [testthat](https://cran.r-project.org/package=testthat).
 
 We have many tests that require authorization and that rely on the existence of specific files and folders. Therefore, to fully test googledrive, you'll have to store an OAuth token in a specific place and you'll have to do some setup. We've tried to make it fairly easy to do this setup and to clean up those files when you're done.
 
+TL;DR with more detail below:
+
+``` r
+## store an OAuth token
+token <- drive_auth(new_user = TRUE, cache = FALSE)
+saveRDS(token, rprojroot::find_testthat_root_file("testing-token.rds"))
+
+## gather all the test setup and clean code from individual test files
+source(rprojroot::find_testthat_root_file("driver.R"))
+## leaves behind:
+##   * setup.R
+##   * clean.R
+
+## "activate" by editing, e.g., SETUP <- TRUE vs SETUP <- FALSE
+
+## source or, I prefer, render the setup script
+rmarkdown::render(rprojroot::find_testthat_root_file("setup.R"))
+
+## do all development work that requires tests HERE
+
+## source or, I prefer, render the clean script
+rmarkdown::render(rprojroot::find_testthat_root_file("clean.R"))
+```
+
 #### OAuth token for testing
 
 1.  Obtain a new, non-caching token via browser flow.
@@ -109,9 +133,29 @@ rmarkdown::render("clean.R")
 
 Again, read the report to look over what happened, in case anything was trashed that should not have been (btw, let us know about that so we can fix!). Once you're satisfied that your own files were not touched, you can `drive_empty_trash()` to truly delete the test files.
 
+#### Adding tests
+
+If you're going to add or modify tests, follow these conventions:
+
+-   Test files are marked up with knitr chunk headers in comments, e.g. `# ---- clean ----` or `# ---- tests ----`. This is what enables the `driver.R` script to isolate the setup or cleaning code. Don't break that.
+-   Any file that is truly necessary and can be setup in advance and persist? Do it, in order to make future test runs faster. Put the associated setup and clean code at the top of the test file.
+-   All test files should have a name that documents why they exist and who made them. Use the `# ---- nm_fun ----` chunk to define naming functions used in that test file (see existing files for examples). Always use one of these functions to generate file names. Use `nm_()` for test files that persist. Use `me_()` for ephemeral test files that are created and destroyed in one test run.
+
+Example and structure of a self-documenting name for a persistent test file:
+
+    move-files-into-me-TEST-drive-mv
+    <informative-slug>-TEST-<test-context>
+
+Example and structure of a self-documenting name for an ephemeral test file:
+
+    DESCRIPTION-TEST-drive-upload-travis
+    <informative-slug>-TEST-<test-context>-<user>
+
+Note that the current user is appended! This is so that concurrent test runs do not attempt to edit the same files.
+
 ### Continuous integration
 
-googledrive is checked on the current R release on Windows, via [AppVeyor](https://ci.appveyor.com/project/tidyverse/googledrive), and on several versions of R on Linux, via [Travis CI](https://travis-ci.org/tidyverse/googledrive). We use [codecov](https://codecov.io/github/tidyverse/googledrive?branch=master) to track the test coverage. In general, the package is subjected to `R CMD check`, unit tests, and test coverage analysis after every push to GitHub. There are encrypted OAuth tokens on both AppVeyor (*soon to be true*) and Travis CI, so tests against the Drive API can be run.
+googledrive is checked on the current R release on Windows, via [AppVeyor](https://ci.appveyor.com/project/tidyverse/googledrive), and on several versions of R on Linux, via [Travis CI](https://travis-ci.org/tidyverse/googledrive). We use [codecov](https://codecov.io/github/tidyverse/googledrive?branch=master) to track the test coverage. In general, the package is subjected to `R CMD check`, unit tests, and test coverage analysis after every push to GitHub. There are encrypted OAuth tokens on both AppVeyor and Travis CI, so tests against the Drive API can be run.
 
 Things are a bit different for pull requests from outside contributors, however. These PRs do not have access to the encrypted tokens, therefore many tests must be skipped. The PR will still be vetted via `R CMD check` and tests that do not call the Drive API can still be run. After you make a PR, it's a good idea to check back after a few minutes to see all of these results. If there are problems, read the log and try to correct the problem proactively. We "squash and merge" most pull requests, internal or external, so don't agonize over the commit history.
 

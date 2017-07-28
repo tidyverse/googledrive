@@ -1,7 +1,7 @@
 context("Download files")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("-TEST-drive-download")
+nm_ <- nm_fun("TEST-drive-download", NULL)
 
 # ---- clean ----
 if (CLEAN) {
@@ -35,6 +35,7 @@ test_that("drive_download() downloads a file", {
   skip_if_no_token()
   skip_if_offline()
   on.exit(unlink("description.txt"))
+
   expect_message(
     drive_download(file = nm_("DESC"), path = "description.txt"),
     "File downloaded"

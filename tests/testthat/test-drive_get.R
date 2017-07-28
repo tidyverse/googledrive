@@ -1,7 +1,7 @@
 context("Get files by path or id")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("-TEST-drive-get")
+nm_ <- nm_fun("TEST-drive-get", NULL)
 
 # ---- clean ----
 if (CLEAN) {

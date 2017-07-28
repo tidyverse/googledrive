@@ -1,7 +1,7 @@
 context("List folder contents")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("-TEST-drive-ls")
+nm_ <- nm_fun("TEST-drive-ls", NULL)
 
 # ---- clean ----
 if (CLEAN) {

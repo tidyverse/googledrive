@@ -1,7 +1,7 @@
 context("Publish files")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("-TEST-drive-publish")
+nm_ <- nm_fun("TEST-drive-publish", NULL)
 
 # ---- clean ----
 if (CLEAN) {
@@ -26,7 +26,6 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("drive_publish() publishes Google Documents", {
-
   skip_if_no_token()
   skip_if_offline()
 
@@ -54,8 +53,7 @@ test_that("drive_publish() publishes Google Documents", {
 })
 
 test_that("drive_publish() publishes Google Sheets", {
-
-  ## we are testing this seperately because revision
+  ## we are testing this separately because revision
   ## history is a bit different for Sheets
   skip_if_no_token()
   skip_if_offline()
@@ -79,7 +77,6 @@ test_that("drive_publish() publishes Google Sheets", {
 })
 
 test_that("drive_publish() fails if the file input is not a Google Drive type", {
-
   skip_if_no_token()
   skip_if_offline()
 
