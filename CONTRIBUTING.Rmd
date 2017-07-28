@@ -18,7 +18,7 @@ output:
   * If the PR is related to an issue, link to it in the description, with [the `#15` syntax](https://help.github.com/articles/autolinked-references-and-urls/) and the issue slug for context. If the PR is meant to close an issue, make sure one of the commit messages includes [text like `closes #44` or `fixes #101`](https://help.github.com/articles/closing-issues-using-keywords/). Provide the issue number and slug in the description, even if the issue is mentioned in the title, because auto-linking does not work in the PR title.
     - GOOD PR title: "Obtain user's intent via mind-reading; fixes #86".
     - BAD PR title: "Fixes #1043". Please remind us all what issue #1043 is about!
-    - BAD PR title: "Something about #345". This will not actually close issue #345 upon merging. [Use the magic words!](https://help.github.com/articles/closing-issues-using-keywords/).
+    - BAD PR title: "Something about #345". This will not actually close issue #345 upon merging. [Use the magic words](https://help.github.com/articles/closing-issues-using-keywords/).
   * Add a bullet to `NEWS.md` with a concise description of the change, if it's something a user would want to know when updating the package. [dplyr's `NEWS.md`](https://github.com/tidyverse/dplyr/blob/master/NEWS.md) is a good source of examples. Note the sentence format, the inclusion of GitHub username, and links to relevant issue(s)/PR(s). We will handle any organization into sub-sections just prior to a release. What merits a bullet?
     - Fixing a typo in the docs does not, but it is still awesome and deeply appreciated.
     - Fixing a bug or adding a new feature is bullet-worthy.
@@ -55,7 +55,7 @@ It's nice if a pull request includes the result of running `devtools::document()
 
 We use [testthat](https://cran.r-project.org/package=testthat).
 
-We have many tests that require authorization and that rely on the existence of specific files and folders. Therefore, to run googledrive tests, you'll have to store an OAuth token in a specific place and you'll have to do some setup. We've tried to make it fairly easy to do this setup and to clean up those files when you're done.
+We have many tests that require authorization and that rely on the existence of specific files and folders. Therefore, to fully test googledrive, you'll have to store an OAuth token in a specific place and you'll have to do some setup. We've tried to make it fairly easy to do this setup and to clean up those files when you're done.
 
 #### OAuth token for testing
 
@@ -98,7 +98,9 @@ Again, read the report to look over what happened, in case anything was trashed 
 
 ### Continuous integration
 
-*Come back here when the dust has settled re: token encryption and skipping, so I can say what PRs can expect re: info from travis and appveyor.*
+googledrive is checked on the current R release on Windows, via [AppVeyor](https://ci.appveyor.com/project/tidyverse/googledrive), and on several versions of R on Linux, via [Travis CI](https://travis-ci.org/tidyverse/googledrive). We use [codecov](https://codecov.io/github/tidyverse/googledrive?branch=master) to track the test coverage. In general, the package is subjected to `R CMD check`, unit tests, and test coverage analysis after every push to GitHub. There are encrypted OAuth tokens on both AppVeyor (*soon to be true*) and Travis CI, so tests against the Drive API can be run.
+
+Things are a bit different for pull requests from outside contributors, however. These PRs do not have access to the encrypted tokens, therefore many tests must be skipped. The PR will still be vetted via `R CMD check` and tests that do not call the Drive API can still be run. After you make a PR, it's a good idea to check back after a few minutes to see all of these results. If there are problems, read the log and try to correct the problem proactively. We "squash and merge" most pull requests, internal or external, so don't agonize over the commit history.
 
 ## Code of Conduct
 
