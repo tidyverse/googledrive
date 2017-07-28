@@ -2,7 +2,7 @@ library(rprojroot)
 library(jsonlite)
 library(httr)
 library(tidyverse)
-
+library(stringr)
 ## load the API spec, including download if necessary
 dd_cache <- find_package_root_file("data-raw") %>%
   list.files(pattern = "discovery-document.json$", full.names = TRUE)
@@ -42,6 +42,26 @@ endpoints <- c(about, files, permissions, revisions)
 # str(endpoints, max.level = 1)
 # listviewer::jsonedit(endpoints)
 
+add_schema_params <- function(endpoint, nm) {
+  req <- endpoint$request$`$ref`
+  if (is.null(req) || req == "Channel") return(endpoint)
+  message_glue("{nm} gains {req} schema params\n")
+  endpoint$parameters <- c(
+    endpoint$parameters,
+    dd_content[[c("schemas",  req, "properties")]]
+  )
+  endpoint
+}
+endpoints <- imap(endpoints, add_schema_params)
+
+## add API-wide params to all endpoints
+add_global_params <- function(x) {
+  x[["parameters"]] <- c(x[["parameters"]], dd_content[["parameters"]])
+  x
+}
+endpoints <- map(endpoints, add_global_params)
+
+
 ## add in simple upload and resumable upload
 endpoints <- c(
   endpoints,
@@ -80,25 +100,6 @@ endpoints <- c(
     )
   )
 )
-
-add_schema_params <- function(endpoint, nm) {
-  req <- endpoint$request$`$ref`
-  if (is.null(req) || req == "Channel") return(endpoint)
-  message_glue("{nm} gains {req} schema params\n")
-  endpoint$parameters <- c(
-    endpoint$parameters,
-    dd_content[[c("schemas",  req, "properties")]]
-  )
-  endpoint
-}
-endpoints <- imap(endpoints, add_schema_params)
-
-## add API-wide params to all endpoints
-add_global_params <- function(x) {
-  x[["parameters"]] <- c(x[["parameters"]], dd_content[["parameters"]])
-  x
-}
-endpoints <- map(endpoints, add_global_params)
 
 nms <- endpoints %>%
   map(names) %>%
