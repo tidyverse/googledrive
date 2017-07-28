@@ -1,7 +1,8 @@
 context("Share files")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("-TEST-drive-share")
+me_ <- nm_fun("TEST-drive-share")
+nm_ <- nm_fun("TEST-drive-share", NULL)
 
 # ---- clean ----
 if (CLEAN) {
@@ -20,12 +21,11 @@ if (SETUP) {
 test_that("drive_share doesn't explicitly fail", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(nm_("mirrors-to-share")))
+  on.exit(drive_rm(me_("mirrors-to-share")))
 
   file <- drive_upload(
     R.home('doc/BioC_mirrors.csv'),
-    name = nm_("mirrors-to-share"),
-    verbose = FALSE
+    name = me_("mirrors-to-share")
   )
   ## since we haven't updated the permissions, the permissions
   ## tibble should be just 1 row

@@ -1,7 +1,8 @@
 context("Upload files")
 
 # ---- nm_fun ----
-nm_ <- nm_fun("-TEST-drive-upload")
+me_ <- nm_fun("TEST-drive-upload")
+nm_ <- nm_fun("TEST-drive-upload", NULL)
 
 # ---- clean ----
 if (CLEAN) {
@@ -24,13 +25,13 @@ test_that("drive_upload() detects non-existent file", {
 test_that("drive_upload() places file in non-root folder, with new name", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(nm_("DESCRIPTION")))
+  on.exit(drive_rm(me_("DESCRIPTION")))
 
   destination <- drive_get(nm_("upload-into-me"))
   uploadee <- drive_upload(
     system.file("DESCRIPTION"),
     path = destination,
-    name = nm_("DESCRIPTION")
+    name = me_("DESCRIPTION")
   )
 
   expect_s3_class(uploadee, "dribble")
