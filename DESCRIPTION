@@ -13,14 +13,14 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-Imports: glue (>= 1.1.0),
+Imports: curl (>= 2.8.1),
+  glue (>= 1.1.0),
   httr,
   jsonlite,
   purrr,
   tibble,
   utils
 Suggests: covr,
-  curl,
   dplyr,
   knitr,
   pingr,
