@@ -8,7 +8,7 @@
 #'
 #' @template file
 #' @template media
-#' @template dots
+#' @template dots-metadata
 #' @template verbose
 #'
 #' @template dribble-return
@@ -24,10 +24,21 @@
 #'   drive_update(R.home("doc/NEWS.1"))
 #'
 #' ## Update the file with new metadata.
-#' ## Notice here `name` is not a parameter, we are passing
-#' ## this through the ...
+#' ## Notice here `name` is not a parameter in `drive_update()`, we are passing
+#' ## this to the API via the `...``
 #' x <- x %>%
 #'   drive_update(name = "NEWS-1")
+#'
+#' ## We can also add additional parent folders by passing `addParents` to the `...`.
+#' ## This will mean the file now will exist in two folders.
+#' ## First create a folder "new-folder" to place the file `x` in.
+#' folder <- drive_mkdir("new-folder")
+#' ## Add the parent to the file `x`.
+#' x <- x %>%
+#'   drive_update(addParents = folder$id)
+#'
+#' ## Verify the file now has multiple parents
+#' x$files_resource[[1]]$parents
 #'
 #' ## Update the file with new media AND new metadata
 #' x <- x %>%
@@ -35,6 +46,7 @@
 #'
 #' ## Clean up
 #' drive_rm(x)
+#' drive_rm(folder)
 #' }
 drive_update <- function(file,
                          media = NULL,
@@ -64,17 +76,15 @@ drive_update <- function(file,
     if (length(meta) == 0) {
       if (verbose) message("No updates specified.")
     } else {
-      response <- drive_update_metadata(file, meta)
+      out <- drive_update_metadata(file, meta)
     }
   } else {
     if (length(meta) == 0) {
-      response <- drive_update_media(file, media)
+      out <- drive_update_media(file, media)
     } else {
-      response <- drive_update_multipart(file, media, meta)
+      out <- drive_update_multipart(file, media, meta)
     }
   }
-  proc_res <- process_response(response)
-  out <- as_dribble(list(proc_res))
 
   if (verbose) {
     message_glue("\nFile updated:\n  * {out$name}: {out$id}")
@@ -96,7 +106,8 @@ drive_update_media <- function(file, media) {
 
   ## media uploads have unique body situations, so customizing here.
   request$body <- httr::upload_file(path = media)
-  make_request(request, encode = "json")
+  response <- make_request(request, encode = "json")
+  as_dribble(list(process_response(response)))
 }
 
 drive_update_metadata <- function(file, meta) {
@@ -108,7 +119,8 @@ drive_update_metadata <- function(file, meta) {
       meta
     )
   )
-  make_request(request, encode = "json")
+  response <- make_request(request, encode = "json")
+  as_dribble(list(process_response(response)))
 }
 
 drive_update_multipart <- function(file, media, meta) {
@@ -134,5 +146,6 @@ drive_update_multipart <- function(file, media, meta) {
     ),
     media = httr::upload_file(path = media)
   )
-  make_request(request)
+  response <- make_request(request)
+  as_dribble(list(process_response(response)))
 }

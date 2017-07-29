@@ -13,7 +13,7 @@
 #' @template name
 #' @templateVar name file
 #' @templateVar default Defaults to "Copy of `FILE-NAME`".
-#' @template dots
+#' @template dots-metadata
 #' @template verbose
 #' @template dribble-return
 #'

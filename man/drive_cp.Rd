@@ -50,9 +50,10 @@ drive_cp("DESC-ex", "DESC-ex-two")
 folder <- drive_mkdir("new-folder")
 drive_cp("DESC-ex", folder, "DESC-ex-three")
 
-## Make an explicitly named copy and change the metadata by
-## starring it! Notice `starred` is not a parameter, we are
-## passing it through the ...
+## Make an explicitly named copy and star it.
+## The starring is an example of providing metadata via `...`.
+## `starred` is not an actual argument to `drive_cp()`,
+## it just gets passed through to the API.
 drive_cp("DESC-ex", name = "DESC-ex-starred", starred = TRUE)
 
 ## Behold all of our copies!
@@ -66,5 +67,7 @@ drive_rm(folder)
 \seealso{
 Wraps the
 \href{https://developers.google.com/drive/v3/reference/files/copy}{drive.files.copy}
-endpoint
+endpoint. You can affect the metadata of the new copy by specifying
+properties of the Files resource via \code{...}. See the "Request body" section
+in the docs linked above.
 }

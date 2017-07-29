@@ -24,7 +24,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   file.
 }
 \description{
-Update an existing Drive file
+TO DO: document me with more words.
 }
 \examples{
 \dontrun{
@@ -36,10 +36,21 @@ x <- x \%>\%
   drive_update(R.home("doc/NEWS.1"))
 
 ## Update the file with new metadata.
-## Notice here `name` is not a parameter, we are passing
-## this through the ...
+## Notice here `name` is not a parameter in `drive_update()`, we are passing
+## this to the API via the `...``
 x <- x \%>\%
   drive_update(name = "NEWS-1")
+
+## We can also add additional parent folders by passing `addParents` to the `...`.
+## This will mean the file now will exist in two folders.
+## First create a folder "new-folder" to place the file `x` in.
+folder <- drive_mkdir("new-folder")
+## Add the parent to the file `x`.
+x <- x \%>\%
+  drive_update(addParents = folder$id)
+
+## Verify the file now has multiple parents
+x$files_resource[[1]]$parents
 
 ## Update the file with new media AND new metadata
 x <- x \%>\%
@@ -47,6 +58,7 @@ x <- x \%>\%
 
 ## Clean up
 drive_rm(x)
+drive_rm(folder)
 }
 }
 \seealso{

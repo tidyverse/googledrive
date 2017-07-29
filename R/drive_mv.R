@@ -45,7 +45,9 @@
 #' ## to ensure we get a move vs. renaming it to "new-folder"
 #' file <- drive_mv(file, "new-folder/")
 #'
-#' ## TO DO: clean up
+#' ## Clean up
+#' dplyr::bind_rows(file, folder) %>%
+#'   drive_rm()
 #' }
 drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
@@ -94,18 +96,17 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     if (!is_folder(path)) {
       stop_glue("Requested parent folder does not exist:\n{path$name}")
     }
-    current_parents <- file$files_resource[[1]][["parents"]][[1]]
+    current_parents <- file$files_resource[[1]][["parents"]]
     if (!path$id %in% current_parents) {
       meta[["addParents"]] <- path$id
+      if (length(current_parents) == 1) {
       meta[["removeParents"]] <- current_parents
+      }
     }
   }
 
   ## TO DO: check here that meta has length? otherwise, no need to call
-  res <- drive_update_metadata(file, meta)
-
-  proc_res <- process_response(res)
-  out <- as_dribble(list(proc_res))
+  out <- drive_update_metadata(file, meta)
 
   if (verbose) {
     actions <- c(
