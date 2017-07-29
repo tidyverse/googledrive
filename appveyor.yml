@@ -8,9 +8,13 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  - nuget install secure-file -ExcludeVersion
-  - secure-file\tools\secure-file -decrypt tests/testthat/av_testing-token.rds.enc -secret %my_secret% -out tests/testthat/testing-token.rds
-  - ps: Bootstrap
+  - ps: |
+      Bootstrap
+      if (-not $env:APPVEYOR_PULL_REQUEST_NUMBER)
+      {
+        nuget install secure-file -ExcludeVersion
+        secure-file\tools\secure-file -decrypt tests/testthat/av_testing-token.rds.enc -secret %my_secret% -out tests/testthat/testing-token.rds
+      }
 
 # Adapt as necessary starting from here
 
