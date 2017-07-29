@@ -55,3 +55,21 @@ test_that("drive_update() informatively errors if the path does not exist",{
     "Input does not hold at least one Drive file"
   )
 })
+
+test_that("drive_update() works for multipart updates",{
+  skip_if_no_token()
+  skip_if_offline()
+  on.exit(drive_rm(c(me_("update-me"), me_("update-me-new"))))
+
+  updatee <- drive_cp(nm_("update-fodder"), name = me_("update-me"))
+  tmp <- tempfile()
+  now <- as.character(Sys.time())
+  writeLines(now, tmp)
+
+  out <- drive_update(updatee, tmp, name = me_("update-me-new"))
+  expect_identical(out$id, updatee$id)
+  drive_download(updatee, tmp, overwrite = TRUE)
+  now_out <- readLines(tmp)
+  expect_identical(now, now_out)
+  expect_identical(out$name, me_("update-me-new"))
+})
