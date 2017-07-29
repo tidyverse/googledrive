@@ -13,8 +13,10 @@ ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{media}{Character, path to the local file to upload.}
 
-\item{...}{Parameters to pass along to the [API query](https://developers.google.com/drive/v3/reference/files/update).
-These parameters can be used to update metadata.}
+\item{...}{Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via `...`. See the "Request body" section of the Drive API docs
+for the associated endpoint.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -64,5 +66,6 @@ drive_rm(folder)
 \seealso{
 Wraps the
 \href{https://developers.google.com/drive/v3/reference/files/update}{drive.files.update}
-endpoint. In particular, does \href{https://developers.google.com/drive/v3/web/manage-uploads}{media upload}.
+endpoint. This function does
+\href{https://developers.google.com/drive/v3/web/manage-uploads}{media upload}.
 }

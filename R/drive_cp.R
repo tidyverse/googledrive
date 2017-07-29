@@ -1,10 +1,10 @@
 #' Copy a Drive file.
 #'
+#' Copies an existing Drive file into a new file id.
+#'
 #' @seealso Wraps the
-#'   [drive.files.copy](https://developers.google.com/drive/v3/reference/files/copy)
-#'    endpoint. You can affect the metadata of the new copy by specifying
-#'   properties of the Files resource via `...`. See the "Request body" section
-#'   in the docs linked above.
+#' [drive.files.copy]<https://developers.google.com/drive/v3/reference/files/copy>
+#' endpoint.
 #'
 #' @template file
 #' @template path

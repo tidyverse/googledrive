@@ -1,2 +1,4 @@
-#' @param ... Parameters to pass along to the [API query](https://developers.google.com/drive/v3/reference/files/update).
-#'   These parameters can be used to update metadata.
+#' @param ... Named parameters to pass along to the Drive API. You can affect
+#'   the metadata of the target file by specifying properties of the Files
+#'   resource via `...`. See the "Request body" section of the Drive API docs
+#'   for the associated endpoint.

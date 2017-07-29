@@ -4,7 +4,8 @@
 #'
 #' @seealso Wraps the
 #' [drive.files.update](https://developers.google.com/drive/v3/reference/files/update)
-#' endpoint. In particular, does [media upload](https://developers.google.com/drive/v3/web/manage-uploads).
+#' endpoint. This function does
+#' [media upload](https://developers.google.com/drive/v3/web/manage-uploads).
 #'
 #' @template file
 #' @template media

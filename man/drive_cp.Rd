@@ -22,8 +22,10 @@ context of the call. Defaults to "Copy of \code{FILE-NAME}".}
 will force `path` to be treated as a folder, even if it is character and lacks
 a trailing slash. Defaults to "Copy of \code{FILE-NAME}".}
 
-\item{...}{Parameters to pass along to the [API query](https://developers.google.com/drive/v3/reference/files/update).
-These parameters can be used to update metadata.}
+\item{...}{Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via `...`. See the "Request body" section of the Drive API docs
+for the associated endpoint.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -33,7 +35,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   file.
 }
 \description{
-Copy a Drive file.
+Copies an existing Drive file into a new file id.
 }
 \examples{
 \dontrun{
@@ -66,8 +68,6 @@ drive_rm(folder)
 }
 \seealso{
 Wraps the
-\href{https://developers.google.com/drive/v3/reference/files/copy}{drive.files.copy}
-endpoint. You can affect the metadata of the new copy by specifying
-properties of the Files resource via \code{...}. See the "Request body" section
-in the docs linked above.
+\link{drive.files.copy}\url{https://developers.google.com/drive/v3/reference/files/copy}
+endpoint.
 }
