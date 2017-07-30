@@ -12,9 +12,10 @@ install:
       if (-not $env:APPVEYOR_PULL_REQUEST_NUMBER)
       {
         nuget install secure-file -ExcludeVersion
-        secure-file\tools\secure-file -decrypt tests/testthat/av_testing-token.rds.enc -secret %my_secret% -out tests/testthat/testing-token.rds
+        secure-file\tools\secure-file -decrypt tests/testthat/av_testing-token.rds.enc -secret $env:my_secret -out tests/testthat/testing-token.rds
       }
-      Bootstrap
+  - ps: Test-Path tests/testthat/testing-token.rds -PathType Leaf
+  - ps: Bootstrap
 
 # Adapt as necessary starting from here
 
