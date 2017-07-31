@@ -44,6 +44,23 @@
 #' ## Delete all of our copies and the new folder!
 #' drive_find("DESC-ex") %>% drive_rm()
 #' drive_rm(folder)
+#'
+#' ## upload a csv file to copy
+#' csv_file <- drive_upload(R.home('doc/BioC_mirrors.csv'))
+#'
+#' ## copy AND AT THE SAME TIME convert it to a Google Sheet
+#' mirrors_sheet <- drive_cp(
+#'   file,
+#'   name = "BioC_mirrors",
+#'   mimeType = drive_mime_type("spreadsheet")
+#' )
+#'
+#' ## go see the new Sheet in the browser
+#' ## drive_browse(mirrors_sheet)
+#'
+#' ## clean up
+#' drive_rm(csv_file)
+#' drive_rm(mirrors_sheet)
 #' }
 #' @export
 drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
