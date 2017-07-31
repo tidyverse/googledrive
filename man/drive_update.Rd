@@ -13,7 +13,10 @@ ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{media}{Character, path to the local file to upload.}
 
-\item{...}{Parameters to pass along to the API query. NOT IMPLEMENTED YET.}
+\item{...}{Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via `...`. See the "Request body" section of the Drive API docs
+for the associated endpoint.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -23,23 +26,43 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   file.
 }
 \description{
-Update an existing Drive file
+Update an existing Drive file id with new content ("media" in Drive
+API-speak), new metadata, or both.
 }
 \examples{
 \dontrun{
-## Create a new file, so we can update it.
+## Create a new file, so we can update it
 x <- drive_upload(R.home("doc/NEWS"))
 
-## Update the file with new content.
+## Update the file with new media
 x <- x \%>\%
-  drive_update(R.home("doc/NEWS.2"))
+  drive_update(R.home("doc/NEWS.1"))
+
+## Update the file with new metadata.
+## Notice here `name` is not a parameter in `drive_update()`, we are passing
+## this to the API via the `...``
+x <- x \%>\%
+  drive_update(name = "NEWS-1")
+
+## We can add a parent folder by passing `addParents` via `...`.
+folder <- drive_mkdir("second-parent-folder")
+x <- x \%>\%
+  drive_update(addParents = folder$id)
+## Verify the file now has multiple parents
+x$files_resource[[1]]$parents
+
+## Update the file with new media AND new metadata
+x <- x \%>\%
+  drive_update(R.home("doc/NEWS.2"), name = "NEWS-2")
 
 ## Clean up
 drive_rm(x)
+drive_rm(folder)
 }
 }
 \seealso{
 Wraps the
 \href{https://developers.google.com/drive/v3/reference/files/update}{drive.files.update}
-endpoint. In particular, does \href{https://developers.google.com/drive/v3/web/manage-uploads}{media upload}.
+endpoint. This function supports
+\href{https://developers.google.com/drive/v3/web/manage-uploads}{media upload}.
 }

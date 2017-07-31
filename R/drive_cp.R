@@ -1,8 +1,10 @@
 #' Copy a Drive file.
 #'
+#' Copies an existing Drive file into a new file id.
+#'
 #' @seealso Wraps the
 #' [drive.files.copy](https://developers.google.com/drive/v3/reference/files/copy)
-#' endpoint
+#' endpoint.
 #'
 #' @template file
 #' @template path
@@ -11,12 +13,13 @@
 #' @template name
 #' @templateVar name file
 #' @templateVar default Defaults to "Copy of `FILE-NAME`".
+#' @template dots-metadata
 #' @template verbose
 #' @template dribble-return
 #'
 #' @examples
 #' \dontrun{
-#' ## create a file to copy
+#' ## Create a file to copy
 #' file <- drive_upload(system.file("DESCRIPTION"), "DESC-ex")
 #'
 #' ## Make a "Copy of" copy in same folder as the original
@@ -29,15 +32,38 @@
 #' folder <- drive_mkdir("new-folder")
 #' drive_cp("DESC-ex", folder, "DESC-ex-three")
 #'
+#' ## Make an explicitly named copy and star it.
+#' ## The starring is an example of providing metadata via `...`.
+#' ## `starred` is not an actual argument to `drive_cp()`,
+#' ## it just gets passed through to the API.
+#' drive_cp("DESC-ex", name = "DESC-ex-starred", starred = TRUE)
+#'
 #' ## Behold all of our copies!
 #' drive_find("DESC-ex")
 #'
 #' ## Delete all of our copies and the new folder!
 #' drive_find("DESC-ex") %>% drive_rm()
 #' drive_rm(folder)
+#'
+#' ## upload a csv file to copy
+#' csv_file <- drive_upload(R.home('doc/BioC_mirrors.csv'))
+#'
+#' ## copy AND AT THE SAME TIME convert it to a Google Sheet
+#' mirrors_sheet <- drive_cp(
+#'   file,
+#'   name = "BioC_mirrors",
+#'   mimeType = drive_mime_type("spreadsheet")
+#' )
+#'
+#' ## go see the new Sheet in the browser
+#' ## drive_browse(mirrors_sheet)
+#'
+#' ## clean up
+#' drive_rm(csv_file)
+#' drive_rm(mirrors_sheet)
 #' }
 #' @export
-drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
+drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_folder(file)) {
@@ -57,9 +83,11 @@ drive_cp <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   name <- name %||% glue("Copy of {file$name}")
 
-  params <- list(
+  dots <- list(...)
+  dots$fields <- dots$fields %||% "*"
+  params <- c(
     fileId = file$id,
-    fields = "*"
+    dots
   )
 
   ## if copying to a specific directory, specify the parent

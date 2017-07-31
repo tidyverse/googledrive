@@ -1,0 +1,5172 @@
+{
+  "drive.about.get": {
+    "id": ["drive.about.get"],
+    "httpMethod": ["GET"],
+    "path": ["drive/v3/about"],
+    "parameters": {
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
+    "description": ["Gets information about the user, the user's Drive, and system capabilities."],
+    "response": ["About"],
+    "parameterOrder": [null],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.files.copy": {
+    "id": ["drive.files.copy"],
+    "httpMethod": ["POST"],
+    "path": ["drive/v3/files/{fileId}/copy"],
+    "parameters": {
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "ignoreDefaultVisibility": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders."]
+      },
+      "keepRevisionForever": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive."]
+      },
+      "ocrLanguage": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A language hint for OCR processing during image import (ISO 639-1 code)."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "appProperties": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A collection of arbitrary key-value pairs which are private to the requesting app.\nEntries with null values are cleared in update and copy requests."]
+      },
+      "capabilities": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take."]
+      },
+      "contentHints": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional information about the content of the file. These fields are never populated in responses."]
+      },
+      "createdTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which the file was created (RFC 3339 date-time)."]
+      },
+      "description": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short description of the file."]
+      },
+      "explicitlyTrashed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been explicitly trashed, as opposed to recursively trashed from a parent folder."]
+      },
+      "fileExtension": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The final component of fullFileExtension. This is only available for files with binary content in Drive."]
+      },
+      "folderColorRgb": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.\nIf an unsupported color is specified, the closest color in the palette will be used instead."]
+      },
+      "fullFileExtension": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Drive.\nThis is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension."]
+      },
+      "hasAugmentedPermissions": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether any users are granted file access directly on this file. This field is only populated for Team Drive files."]
+      },
+      "hasThumbnail": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field."]
+      },
+      "headRevisionId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file's head revision. This is currently only available for files with binary content in Drive."]
+      },
+      "iconLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A static, unauthenticated link to the file's icon."]
+      },
+      "id": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "imageMediaMetadata": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional metadata about image media, if available."]
+      },
+      "isAppAuthorized": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file was created or opened by the requesting app."]
+      },
+      "kind": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Identifies what kind of resource this is. Value: the fixed string \"drive#file\"."]
+      },
+      "lastModifyingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The last user to modify the file."]
+      },
+      "md5Checksum": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MD5 checksum for the content of the file. This is only applicable to files with binary content in Drive."]
+      },
+      "mimeType": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MIME type of the file.\nDrive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.\nIf a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource."]
+      },
+      "modifiedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been modified by this user."]
+      },
+      "modifiedByMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was modified by the user (RFC 3339 date-time)."]
+      },
+      "modifiedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was modified by anyone (RFC 3339 date-time).\nNote that setting modifiedTime will also update modifiedByMeTime for the user."]
+      },
+      "name": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant."]
+      },
+      "originalFilename": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Drive."]
+      },
+      "ownedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user owns the file. Not populated for Team Drive files."]
+      },
+      "owners": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The owners of the file. Currently, only certain legacy files may have more than one owner. Not populated for Team Drive files."]
+      },
+      "parents": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The IDs of the parent folders which contain the file.\nIf not specified as part of a create request, the file will be placed directly in the My Drive folder. Update requests must use the addParents and removeParents parameters to modify the values."]
+      },
+      "permissions": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The full list of permissions for the file. This is only available if the requesting user can share the file. Not populated for Team Drive files."]
+      },
+      "properties": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A collection of arbitrary key-value pairs which are visible to all apps.\nEntries with null values are cleared in update and copy requests."]
+      },
+      "quotaBytesUsed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The number of storage quota bytes used by the file. This includes the head revision as well as previous revisions with keepForever enabled."]
+      },
+      "shared": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been shared. Not populated for Team Drive files."]
+      },
+      "sharedWithMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which the file was shared with the user, if applicable (RFC 3339 date-time)."]
+      },
+      "sharingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The user who shared the file with the requesting user, if applicable."]
+      },
+      "size": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The size of the file's content in bytes. This is only applicable to files with binary content in Drive."]
+      },
+      "spaces": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The list of spaces which contain the file. The currently supported values are 'drive', 'appDataFolder' and 'photos'."]
+      },
+      "starred": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user has starred the file."]
+      },
+      "teamDriveId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["ID of the Team Drive the file resides in."]
+      },
+      "thumbnailLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short-lived link to the file's thumbnail, if available. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content."]
+      },
+      "thumbnailVersion": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The thumbnail version for use in thumbnail cache invalidation."]
+      },
+      "trashed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file, and other users cannot see files in the owner's trash."]
+      },
+      "trashedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time that the item was trashed (RFC 3339 date-time). Only populated for Team Drive files."]
+      },
+      "trashingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["If the file has been explicitly trashed, the user who trashed it. Only populated for Team Drive files."]
+      },
+      "version": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the user."]
+      },
+      "videoMediaMetadata": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional metadata about video media. This may not be available immediately upon upload."]
+      },
+      "viewedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been viewed by this user."]
+      },
+      "viewedByMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was viewed by the user (RFC 3339 date-time)."]
+      },
+      "viewersCanCopyContent": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations."]
+      },
+      "webContentLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link for downloading the content of the file in a browser. This is only available for files with binary content in Drive."]
+      },
+      "webViewLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link for opening the file in a relevant Google editor or viewer in a browser."]
+      },
+      "writersCanShare": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.photos.readonly"],
+    "description": ["Creates a copy of a file and applies any requested updates with patch semantics."],
+    "response": ["File"],
+    "parameterOrder": ["fileId"],
+    "request": ["File"],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.files.create": {
+    "id": ["drive.files.create"],
+    "httpMethod": ["POST"],
+    "path": ["drive/v3/files"],
+    "parameters": {
+      "ignoreDefaultVisibility": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders."]
+      },
+      "keepRevisionForever": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive."]
+      },
+      "ocrLanguage": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A language hint for OCR processing during image import (ISO 639-1 code)."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "useContentAsIndexableText": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to use the uploaded content as indexable text."]
+      },
+      "appProperties": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A collection of arbitrary key-value pairs which are private to the requesting app.\nEntries with null values are cleared in update and copy requests."]
+      },
+      "capabilities": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take."]
+      },
+      "contentHints": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional information about the content of the file. These fields are never populated in responses."]
+      },
+      "createdTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which the file was created (RFC 3339 date-time)."]
+      },
+      "description": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short description of the file."]
+      },
+      "explicitlyTrashed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been explicitly trashed, as opposed to recursively trashed from a parent folder."]
+      },
+      "fileExtension": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The final component of fullFileExtension. This is only available for files with binary content in Drive."]
+      },
+      "folderColorRgb": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.\nIf an unsupported color is specified, the closest color in the palette will be used instead."]
+      },
+      "fullFileExtension": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Drive.\nThis is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension."]
+      },
+      "hasAugmentedPermissions": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether any users are granted file access directly on this file. This field is only populated for Team Drive files."]
+      },
+      "hasThumbnail": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field."]
+      },
+      "headRevisionId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file's head revision. This is currently only available for files with binary content in Drive."]
+      },
+      "iconLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A static, unauthenticated link to the file's icon."]
+      },
+      "id": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "imageMediaMetadata": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional metadata about image media, if available."]
+      },
+      "isAppAuthorized": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file was created or opened by the requesting app."]
+      },
+      "kind": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Identifies what kind of resource this is. Value: the fixed string \"drive#file\"."]
+      },
+      "lastModifyingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The last user to modify the file."]
+      },
+      "md5Checksum": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MD5 checksum for the content of the file. This is only applicable to files with binary content in Drive."]
+      },
+      "mimeType": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MIME type of the file.\nDrive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.\nIf a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource."]
+      },
+      "modifiedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been modified by this user."]
+      },
+      "modifiedByMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was modified by the user (RFC 3339 date-time)."]
+      },
+      "modifiedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was modified by anyone (RFC 3339 date-time).\nNote that setting modifiedTime will also update modifiedByMeTime for the user."]
+      },
+      "name": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant."]
+      },
+      "originalFilename": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Drive."]
+      },
+      "ownedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user owns the file. Not populated for Team Drive files."]
+      },
+      "owners": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The owners of the file. Currently, only certain legacy files may have more than one owner. Not populated for Team Drive files."]
+      },
+      "parents": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The IDs of the parent folders which contain the file.\nIf not specified as part of a create request, the file will be placed directly in the My Drive folder. Update requests must use the addParents and removeParents parameters to modify the values."]
+      },
+      "permissions": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The full list of permissions for the file. This is only available if the requesting user can share the file. Not populated for Team Drive files."]
+      },
+      "properties": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A collection of arbitrary key-value pairs which are visible to all apps.\nEntries with null values are cleared in update and copy requests."]
+      },
+      "quotaBytesUsed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The number of storage quota bytes used by the file. This includes the head revision as well as previous revisions with keepForever enabled."]
+      },
+      "shared": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been shared. Not populated for Team Drive files."]
+      },
+      "sharedWithMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which the file was shared with the user, if applicable (RFC 3339 date-time)."]
+      },
+      "sharingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The user who shared the file with the requesting user, if applicable."]
+      },
+      "size": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The size of the file's content in bytes. This is only applicable to files with binary content in Drive."]
+      },
+      "spaces": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The list of spaces which contain the file. The currently supported values are 'drive', 'appDataFolder' and 'photos'."]
+      },
+      "starred": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user has starred the file."]
+      },
+      "teamDriveId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["ID of the Team Drive the file resides in."]
+      },
+      "thumbnailLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short-lived link to the file's thumbnail, if available. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content."]
+      },
+      "thumbnailVersion": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The thumbnail version for use in thumbnail cache invalidation."]
+      },
+      "trashed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file, and other users cannot see files in the owner's trash."]
+      },
+      "trashedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time that the item was trashed (RFC 3339 date-time). Only populated for Team Drive files."]
+      },
+      "trashingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["If the file has been explicitly trashed, the user who trashed it. Only populated for Team Drive files."]
+      },
+      "version": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the user."]
+      },
+      "videoMediaMetadata": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional metadata about video media. This may not be available immediately upon upload."]
+      },
+      "viewedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been viewed by this user."]
+      },
+      "viewedByMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was viewed by the user (RFC 3339 date-time)."]
+      },
+      "viewersCanCopyContent": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations."]
+      },
+      "webContentLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link for downloading the content of the file in a browser. This is only available for files with binary content in Drive."]
+      },
+      "webViewLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link for opening the file in a relevant Google editor or viewer in a browser."]
+      },
+      "writersCanShare": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file"],
+    "description": ["Creates a new file."],
+    "response": ["File"],
+    "parameterOrder": [null],
+    "request": ["File"],
+    "supportsMediaUpload": [true],
+    "mediaUpload": {
+      "accept": ["*/*"],
+      "maxSize": ["5120GB"],
+      "protocols": {
+        "simple": {
+          "multipart": [true],
+          "path": ["/upload/drive/v3/files"]
+        },
+        "resumable": {
+          "multipart": [true],
+          "path": ["/resumable/upload/drive/v3/files"]
+        }
+      }
+    },
+    "supportsSubscription": [true],
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.files.delete": {
+    "id": ["drive.files.delete"],
+    "httpMethod": ["DELETE"],
+    "path": ["drive/v3/files/{fileId}"],
+    "parameters": {
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file"],
+    "description": ["Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a Team Drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted."],
+    "response": [null],
+    "parameterOrder": ["fileId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.files.emptyTrash": {
+    "id": ["drive.files.emptyTrash"],
+    "httpMethod": ["DELETE"],
+    "path": ["drive/v3/files/trash"],
+    "parameters": {
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive"],
+    "description": ["Permanently deletes all of the user's trashed files."],
+    "response": [null],
+    "parameterOrder": [null],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.files.export": {
+    "id": ["drive.files.export"],
+    "httpMethod": ["GET"],
+    "path": ["drive/v3/files/{fileId}/export"],
+    "parameters": {
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "mimeType": {
+        "location": ["query"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MIME type of the format requested for this export."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.file, drive.readonly"],
+    "description": ["Exports a Google Doc to the requested MIME type and returns the exported content. Please note that the exported content is limited to 10MB."],
+    "response": [null],
+    "parameterOrder": ["fileId, mimeType"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": [true],
+    "useMediaDownloadService": {}
+  },
+  "drive.files.generateIds": {
+    "id": ["drive.files.generateIds"],
+    "httpMethod": ["GET"],
+    "path": ["drive/v3/files/generateIds"],
+    "parameters": {
+      "count": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["integer"],
+        "repeated": [null],
+        "format": ["int32"],
+        "enum": [null],
+        "description": ["The number of IDs to return."]
+      },
+      "space": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file"],
+    "description": ["Generates a set of file IDs which can be provided in create requests."],
+    "response": ["GeneratedIds"],
+    "parameterOrder": [null],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.files.get": {
+    "id": ["drive.files.get"],
+    "httpMethod": ["GET"],
+    "path": ["drive/v3/files/{fileId}"],
+    "parameters": {
+      "acknowledgeAbuse": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media."]
+      },
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
+    "description": ["Gets a file's metadata or content by ID."],
+    "response": ["File"],
+    "parameterOrder": ["fileId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": [true],
+    "supportsMediaDownload": [true],
+    "useMediaDownloadService": [true]
+  },
+  "drive.files.list": {
+    "id": ["drive.files.list"],
+    "httpMethod": ["GET"],
+    "path": ["drive/v3/files"],
+    "parameters": {
+      "corpora": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Comma-separated list of bodies of items (files/documents) to which the query applies. Supported bodies are 'user', 'domain', 'teamDrive' and 'allTeamDrives'. 'allTeamDrives' must be combined with 'user'; all other values must be used in isolation. Prefer 'user' or 'teamDrive' to 'allTeamDrives' for efficiency."]
+      },
+      "corpus": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["domain"],
+        "description": ["The source of files to list. Deprecated: use 'corpora' instead."]
+      },
+      "includeTeamDriveItems": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether Team Drive items should be included in results."]
+      },
+      "orderBy": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored."]
+      },
+      "pageSize": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["integer"],
+        "repeated": [null],
+        "format": ["int32"],
+        "enum": [null],
+        "description": ["The maximum number of files to return per page. Partial or empty result pages are possible even before the end of the files list has been reached."]
+      },
+      "pageToken": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."]
+      },
+      "q": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A query for filtering the file results. See the \"Search for Files\" guide for supported syntax."]
+      },
+      "spaces": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of spaces to query within the corpus. Supported values are 'drive', 'appDataFolder' and 'photos'."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "teamDriveId": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["ID of Team Drive to search."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
+    "description": ["Lists or searches files."],
+    "response": ["FileList"],
+    "parameterOrder": [null],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.files.update": {
+    "id": ["drive.files.update"],
+    "httpMethod": ["PATCH"],
+    "path": ["drive/v3/files/{fileId}"],
+    "parameters": {
+      "addParents": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of parent IDs to add."]
+      },
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "keepRevisionForever": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive."]
+      },
+      "ocrLanguage": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A language hint for OCR processing during image import (ISO 639-1 code)."]
+      },
+      "removeParents": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of parent IDs to remove."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "useContentAsIndexableText": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to use the uploaded content as indexable text."]
+      },
+      "appProperties": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A collection of arbitrary key-value pairs which are private to the requesting app.\nEntries with null values are cleared in update and copy requests."]
+      },
+      "capabilities": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take."]
+      },
+      "contentHints": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional information about the content of the file. These fields are never populated in responses."]
+      },
+      "createdTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which the file was created (RFC 3339 date-time)."]
+      },
+      "description": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short description of the file."]
+      },
+      "explicitlyTrashed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been explicitly trashed, as opposed to recursively trashed from a parent folder."]
+      },
+      "fileExtension": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The final component of fullFileExtension. This is only available for files with binary content in Drive."]
+      },
+      "folderColorRgb": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.\nIf an unsupported color is specified, the closest color in the palette will be used instead."]
+      },
+      "fullFileExtension": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Drive.\nThis is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension."]
+      },
+      "hasAugmentedPermissions": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether any users are granted file access directly on this file. This field is only populated for Team Drive files."]
+      },
+      "hasThumbnail": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field."]
+      },
+      "headRevisionId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file's head revision. This is currently only available for files with binary content in Drive."]
+      },
+      "iconLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A static, unauthenticated link to the file's icon."]
+      },
+      "id": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "imageMediaMetadata": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional metadata about image media, if available."]
+      },
+      "isAppAuthorized": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file was created or opened by the requesting app."]
+      },
+      "kind": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Identifies what kind of resource this is. Value: the fixed string \"drive#file\"."]
+      },
+      "lastModifyingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The last user to modify the file."]
+      },
+      "md5Checksum": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MD5 checksum for the content of the file. This is only applicable to files with binary content in Drive."]
+      },
+      "mimeType": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MIME type of the file.\nDrive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.\nIf a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource."]
+      },
+      "modifiedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been modified by this user."]
+      },
+      "modifiedByMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was modified by the user (RFC 3339 date-time)."]
+      },
+      "modifiedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was modified by anyone (RFC 3339 date-time).\nNote that setting modifiedTime will also update modifiedByMeTime for the user."]
+      },
+      "name": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant."]
+      },
+      "originalFilename": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Drive."]
+      },
+      "ownedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user owns the file. Not populated for Team Drive files."]
+      },
+      "owners": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The owners of the file. Currently, only certain legacy files may have more than one owner. Not populated for Team Drive files."]
+      },
+      "parents": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The IDs of the parent folders which contain the file.\nIf not specified as part of a create request, the file will be placed directly in the My Drive folder. Update requests must use the addParents and removeParents parameters to modify the values."]
+      },
+      "permissions": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The full list of permissions for the file. This is only available if the requesting user can share the file. Not populated for Team Drive files."]
+      },
+      "properties": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A collection of arbitrary key-value pairs which are visible to all apps.\nEntries with null values are cleared in update and copy requests."]
+      },
+      "quotaBytesUsed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The number of storage quota bytes used by the file. This includes the head revision as well as previous revisions with keepForever enabled."]
+      },
+      "shared": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been shared. Not populated for Team Drive files."]
+      },
+      "sharedWithMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which the file was shared with the user, if applicable (RFC 3339 date-time)."]
+      },
+      "sharingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The user who shared the file with the requesting user, if applicable."]
+      },
+      "size": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The size of the file's content in bytes. This is only applicable to files with binary content in Drive."]
+      },
+      "spaces": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The list of spaces which contain the file. The currently supported values are 'drive', 'appDataFolder' and 'photos'."]
+      },
+      "starred": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user has starred the file."]
+      },
+      "teamDriveId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["ID of the Team Drive the file resides in."]
+      },
+      "thumbnailLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short-lived link to the file's thumbnail, if available. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content."]
+      },
+      "thumbnailVersion": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The thumbnail version for use in thumbnail cache invalidation."]
+      },
+      "trashed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file, and other users cannot see files in the owner's trash."]
+      },
+      "trashedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time that the item was trashed (RFC 3339 date-time). Only populated for Team Drive files."]
+      },
+      "trashingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["If the file has been explicitly trashed, the user who trashed it. Only populated for Team Drive files."]
+      },
+      "version": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the user."]
+      },
+      "videoMediaMetadata": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional metadata about video media. This may not be available immediately upon upload."]
+      },
+      "viewedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been viewed by this user."]
+      },
+      "viewedByMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was viewed by the user (RFC 3339 date-time)."]
+      },
+      "viewersCanCopyContent": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations."]
+      },
+      "webContentLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link for downloading the content of the file in a browser. This is only available for files with binary content in Drive."]
+      },
+      "webViewLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link for opening the file in a relevant Google editor or viewer in a browser."]
+      },
+      "writersCanShare": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.scripts"],
+    "description": ["Updates a file's metadata and/or content with patch semantics."],
+    "response": ["File"],
+    "parameterOrder": ["fileId"],
+    "request": ["File"],
+    "supportsMediaUpload": [true],
+    "mediaUpload": {
+      "accept": ["*/*"],
+      "maxSize": ["5120GB"],
+      "protocols": {
+        "simple": {
+          "multipart": [true],
+          "path": ["/upload/drive/v3/files/{fileId}"]
+        },
+        "resumable": {
+          "multipart": [true],
+          "path": ["/resumable/upload/drive/v3/files/{fileId}"]
+        }
+      }
+    },
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.files.watch": {
+    "id": ["drive.files.watch"],
+    "httpMethod": ["POST"],
+    "path": ["drive/v3/files/{fileId}/watch"],
+    "parameters": {
+      "acknowledgeAbuse": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media."]
+      },
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
+    "description": ["Subscribes to changes to a file"],
+    "response": ["Channel"],
+    "parameterOrder": ["fileId"],
+    "request": ["Channel"],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": [true],
+    "supportsMediaDownload": [true],
+    "useMediaDownloadService": [true]
+  },
+  "drive.permissions.create": {
+    "id": ["drive.permissions.create"],
+    "httpMethod": ["POST"],
+    "path": ["drive/v3/files/{fileId}/permissions"],
+    "parameters": {
+      "emailMessage": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A custom message to include in the notification email."]
+      },
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file or Team Drive."]
+      },
+      "sendNotificationEmail": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to send a notification email when sharing to users or groups. This defaults to true for users and groups, and is not allowed for other requests. It must not be disabled for ownership transfers."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "transferOwnership": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect."]
+      },
+      "allowFileDiscovery": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the permission allows the file to be discovered through search. This is only applicable for permissions of type domain or anyone."]
+      },
+      "deleted": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the account associated with this permission has been deleted. This field only pertains to user and group permissions."]
+      },
+      "displayName": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A displayable name for users, groups or domains."]
+      },
+      "domain": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The domain to which this permission refers."]
+      },
+      "emailAddress": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The email address of the user or group to which this permission refers."]
+      },
+      "expirationTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:  \n- They can only be set on user and group permissions \n- The time must be in the future \n- The time cannot be more than a year in the future"]
+      },
+      "id": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of this permission. This is a unique identifier for the grantee, and is published in User resources as permissionId."]
+      },
+      "kind": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Identifies what kind of resource this is. Value: the fixed string \"drive#permission\"."]
+      },
+      "photoLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link to the user's profile photo, if available."]
+      },
+      "role": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The role granted by this permission. While new values may be supported in the future, the following are currently allowed:  \n- organizer \n- owner \n- writer \n- commenter \n- reader"]
+      },
+      "teamDrivePermissionDetails": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Details of whether the permissions on this Team Drive item are inherited or directly on this item. This is an output-only field which is present only for Team Drive items."]
+      },
+      "type": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The type of the grantee. Valid values are:  \n- user \n- group \n- domain \n- anyone"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.file"],
+    "description": ["Creates a permission for a file or Team Drive."],
+    "response": ["Permission"],
+    "parameterOrder": ["fileId"],
+    "request": ["Permission"],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.permissions.delete": {
+    "id": ["drive.permissions.delete"],
+    "httpMethod": ["DELETE"],
+    "path": ["drive/v3/files/{fileId}/permissions/{permissionId}"],
+    "parameters": {
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file or Team Drive."]
+      },
+      "permissionId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the permission."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.file"],
+    "description": ["Deletes a permission."],
+    "response": [null],
+    "parameterOrder": ["fileId, permissionId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.permissions.get": {
+    "id": ["drive.permissions.get"],
+    "httpMethod": ["GET"],
+    "path": ["drive/v3/files/{fileId}/permissions/{permissionId}"],
+    "parameters": {
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "permissionId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the permission."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
+    "description": ["Gets a permission by ID."],
+    "response": ["Permission"],
+    "parameterOrder": ["fileId, permissionId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.permissions.list": {
+    "id": ["drive.permissions.list"],
+    "httpMethod": ["GET"],
+    "path": ["drive/v3/files/{fileId}/permissions"],
+    "parameters": {
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file or Team Drive."]
+      },
+      "pageSize": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["integer"],
+        "repeated": [null],
+        "format": ["int32"],
+        "enum": [null],
+        "description": ["The maximum number of permissions to return per page. When not set for files in a Team Drive, at most 100 results will be returned. When not set for files that are not in a Team Drive, the entire list will be returned."]
+      },
+      "pageToken": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
+    "description": ["Lists a file's or Team Drive's permissions."],
+    "response": ["PermissionList"],
+    "parameterOrder": ["fileId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.permissions.update": {
+    "id": ["drive.permissions.update"],
+    "httpMethod": ["PATCH"],
+    "path": ["drive/v3/files/{fileId}/permissions/{permissionId}"],
+    "parameters": {
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file or Team Drive."]
+      },
+      "permissionId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the permission."]
+      },
+      "removeExpiration": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to remove the expiration date."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "transferOwnership": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect."]
+      },
+      "allowFileDiscovery": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the permission allows the file to be discovered through search. This is only applicable for permissions of type domain or anyone."]
+      },
+      "deleted": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the account associated with this permission has been deleted. This field only pertains to user and group permissions."]
+      },
+      "displayName": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A displayable name for users, groups or domains."]
+      },
+      "domain": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The domain to which this permission refers."]
+      },
+      "emailAddress": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The email address of the user or group to which this permission refers."]
+      },
+      "expirationTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:  \n- They can only be set on user and group permissions \n- The time must be in the future \n- The time cannot be more than a year in the future"]
+      },
+      "id": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of this permission. This is a unique identifier for the grantee, and is published in User resources as permissionId."]
+      },
+      "kind": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Identifies what kind of resource this is. Value: the fixed string \"drive#permission\"."]
+      },
+      "photoLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link to the user's profile photo, if available."]
+      },
+      "role": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The role granted by this permission. While new values may be supported in the future, the following are currently allowed:  \n- organizer \n- owner \n- writer \n- commenter \n- reader"]
+      },
+      "teamDrivePermissionDetails": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Details of whether the permissions on this Team Drive item are inherited or directly on this item. This is an output-only field which is present only for Team Drive items."]
+      },
+      "type": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The type of the grantee. Valid values are:  \n- user \n- group \n- domain \n- anyone"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.file"],
+    "description": ["Updates a permission with patch semantics."],
+    "response": ["Permission"],
+    "parameterOrder": ["fileId, permissionId"],
+    "request": ["Permission"],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.revisions.delete": {
+    "id": ["drive.revisions.delete"],
+    "httpMethod": ["DELETE"],
+    "path": ["drive/v3/files/{fileId}/revisions/{revisionId}"],
+    "parameters": {
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "revisionId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the revision."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file"],
+    "description": ["Permanently deletes a revision. This method is only applicable to files with binary content in Drive."],
+    "response": [null],
+    "parameterOrder": ["fileId, revisionId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.revisions.get": {
+    "id": ["drive.revisions.get"],
+    "httpMethod": ["GET"],
+    "path": ["drive/v3/files/{fileId}/revisions/{revisionId}"],
+    "parameters": {
+      "acknowledgeAbuse": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media."]
+      },
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "revisionId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the revision."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
+    "description": ["Gets a revision's metadata or content by ID."],
+    "response": ["Revision"],
+    "parameterOrder": ["fileId, revisionId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": [true],
+    "useMediaDownloadService": [true]
+  },
+  "drive.revisions.list": {
+    "id": ["drive.revisions.list"],
+    "httpMethod": ["GET"],
+    "path": ["drive/v3/files/{fileId}/revisions"],
+    "parameters": {
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "pageSize": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["integer"],
+        "repeated": [null],
+        "format": ["int32"],
+        "enum": [null],
+        "description": ["The maximum number of revisions to return per page."]
+      },
+      "pageToken": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"],
+    "description": ["Lists a file's revisions."],
+    "response": ["RevisionList"],
+    "parameterOrder": ["fileId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.revisions.update": {
+    "id": ["drive.revisions.update"],
+    "httpMethod": ["PATCH"],
+    "path": ["drive/v3/files/{fileId}/revisions/{revisionId}"],
+    "parameters": {
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "revisionId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the revision."]
+      },
+      "id": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the revision."]
+      },
+      "keepForever": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to keep this revision forever, even if it is no longer the head revision. If not set, the revision will be automatically purged 30 days after newer content is uploaded. This can be set on a maximum of 200 revisions for a file.\nThis field is only applicable to files with binary content in Drive."]
+      },
+      "kind": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Identifies what kind of resource this is. Value: the fixed string \"drive#revision\"."]
+      },
+      "lastModifyingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The last user to modify this revision."]
+      },
+      "md5Checksum": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MD5 checksum of the revision's content. This is only applicable to files with binary content in Drive."]
+      },
+      "mimeType": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MIME type of the revision."]
+      },
+      "modifiedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the revision was modified (RFC 3339 date-time)."]
+      },
+      "originalFilename": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The original filename used to create this revision. This is only applicable to files with binary content in Drive."]
+      },
+      "publishAuto": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether subsequent revisions will be automatically republished. This is only applicable to Google Docs."]
+      },
+      "published": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether this revision is published. This is only applicable to Google Docs."]
+      },
+      "publishedOutsideDomain": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether this revision is published outside the domain. This is only applicable to Google Docs."]
+      },
+      "size": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The size of the revision's content in bytes. This is only applicable to files with binary content in Drive."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file"],
+    "description": ["Updates a revision with patch semantics."],
+    "response": ["Revision"],
+    "parameterOrder": ["fileId, revisionId"],
+    "request": ["Revision"],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.files.update.media": {
+    "id": ["drive.files.update.media"],
+    "httpMethod": ["PATCH"],
+    "path": ["/upload/drive/v3/files/{fileId}"],
+    "parameters": {
+      "addParents": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of parent IDs to add."]
+      },
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "keepRevisionForever": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive."]
+      },
+      "ocrLanguage": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A language hint for OCR processing during image import (ISO 639-1 code)."]
+      },
+      "removeParents": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of parent IDs to remove."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "useContentAsIndexableText": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to use the uploaded content as indexable text."]
+      },
+      "appProperties": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A collection of arbitrary key-value pairs which are private to the requesting app.\nEntries with null values are cleared in update and copy requests."]
+      },
+      "capabilities": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take."]
+      },
+      "contentHints": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional information about the content of the file. These fields are never populated in responses."]
+      },
+      "createdTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which the file was created (RFC 3339 date-time)."]
+      },
+      "description": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short description of the file."]
+      },
+      "explicitlyTrashed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been explicitly trashed, as opposed to recursively trashed from a parent folder."]
+      },
+      "fileExtension": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The final component of fullFileExtension. This is only available for files with binary content in Drive."]
+      },
+      "folderColorRgb": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.\nIf an unsupported color is specified, the closest color in the palette will be used instead."]
+      },
+      "fullFileExtension": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Drive.\nThis is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension."]
+      },
+      "hasAugmentedPermissions": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether any users are granted file access directly on this file. This field is only populated for Team Drive files."]
+      },
+      "hasThumbnail": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field."]
+      },
+      "headRevisionId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file's head revision. This is currently only available for files with binary content in Drive."]
+      },
+      "iconLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A static, unauthenticated link to the file's icon."]
+      },
+      "id": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "imageMediaMetadata": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional metadata about image media, if available."]
+      },
+      "isAppAuthorized": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file was created or opened by the requesting app."]
+      },
+      "kind": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Identifies what kind of resource this is. Value: the fixed string \"drive#file\"."]
+      },
+      "lastModifyingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The last user to modify the file."]
+      },
+      "md5Checksum": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MD5 checksum for the content of the file. This is only applicable to files with binary content in Drive."]
+      },
+      "mimeType": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MIME type of the file.\nDrive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.\nIf a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource."]
+      },
+      "modifiedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been modified by this user."]
+      },
+      "modifiedByMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was modified by the user (RFC 3339 date-time)."]
+      },
+      "modifiedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was modified by anyone (RFC 3339 date-time).\nNote that setting modifiedTime will also update modifiedByMeTime for the user."]
+      },
+      "name": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant."]
+      },
+      "originalFilename": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Drive."]
+      },
+      "ownedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user owns the file. Not populated for Team Drive files."]
+      },
+      "owners": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The owners of the file. Currently, only certain legacy files may have more than one owner. Not populated for Team Drive files."]
+      },
+      "parents": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The IDs of the parent folders which contain the file.\nIf not specified as part of a create request, the file will be placed directly in the My Drive folder. Update requests must use the addParents and removeParents parameters to modify the values."]
+      },
+      "permissions": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The full list of permissions for the file. This is only available if the requesting user can share the file. Not populated for Team Drive files."]
+      },
+      "properties": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A collection of arbitrary key-value pairs which are visible to all apps.\nEntries with null values are cleared in update and copy requests."]
+      },
+      "quotaBytesUsed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The number of storage quota bytes used by the file. This includes the head revision as well as previous revisions with keepForever enabled."]
+      },
+      "shared": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been shared. Not populated for Team Drive files."]
+      },
+      "sharedWithMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which the file was shared with the user, if applicable (RFC 3339 date-time)."]
+      },
+      "sharingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The user who shared the file with the requesting user, if applicable."]
+      },
+      "size": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The size of the file's content in bytes. This is only applicable to files with binary content in Drive."]
+      },
+      "spaces": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The list of spaces which contain the file. The currently supported values are 'drive', 'appDataFolder' and 'photos'."]
+      },
+      "starred": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user has starred the file."]
+      },
+      "teamDriveId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["ID of the Team Drive the file resides in."]
+      },
+      "thumbnailLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short-lived link to the file's thumbnail, if available. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content."]
+      },
+      "thumbnailVersion": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The thumbnail version for use in thumbnail cache invalidation."]
+      },
+      "trashed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file, and other users cannot see files in the owner's trash."]
+      },
+      "trashedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time that the item was trashed (RFC 3339 date-time). Only populated for Team Drive files."]
+      },
+      "trashingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["If the file has been explicitly trashed, the user who trashed it. Only populated for Team Drive files."]
+      },
+      "version": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the user."]
+      },
+      "videoMediaMetadata": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional metadata about video media. This may not be available immediately upon upload."]
+      },
+      "viewedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been viewed by this user."]
+      },
+      "viewedByMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was viewed by the user (RFC 3339 date-time)."]
+      },
+      "viewersCanCopyContent": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations."]
+      },
+      "webContentLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link for downloading the content of the file in a browser. This is only available for files with binary content in Drive."]
+      },
+      "webViewLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link for opening the file in a relevant Google editor or viewer in a browser."]
+      },
+      "writersCanShare": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.scripts"],
+    "description": {},
+    "response": [null],
+    "parameterOrder": ["fileId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.files.update.media.resumable": {
+    "id": ["drive.files.update.media.resumable"],
+    "httpMethod": ["PATCH"],
+    "path": ["/resumable/upload/drive/v3/files/{fileId}"],
+    "parameters": {
+      "addParents": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of parent IDs to add."]
+      },
+      "fileId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "keepRevisionForever": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive."]
+      },
+      "ocrLanguage": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A language hint for OCR processing during image import (ISO 639-1 code)."]
+      },
+      "removeParents": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A comma-separated list of parent IDs to remove."]
+      },
+      "supportsTeamDrives": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the requesting application supports Team Drives."]
+      },
+      "useContentAsIndexableText": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether to use the uploaded content as indexable text."]
+      },
+      "appProperties": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A collection of arbitrary key-value pairs which are private to the requesting app.\nEntries with null values are cleared in update and copy requests."]
+      },
+      "capabilities": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take."]
+      },
+      "contentHints": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional information about the content of the file. These fields are never populated in responses."]
+      },
+      "createdTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which the file was created (RFC 3339 date-time)."]
+      },
+      "description": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short description of the file."]
+      },
+      "explicitlyTrashed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been explicitly trashed, as opposed to recursively trashed from a parent folder."]
+      },
+      "fileExtension": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The final component of fullFileExtension. This is only available for files with binary content in Drive."]
+      },
+      "folderColorRgb": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.\nIf an unsupported color is specified, the closest color in the palette will be used instead."]
+      },
+      "fullFileExtension": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Drive.\nThis is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension."]
+      },
+      "hasAugmentedPermissions": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether any users are granted file access directly on this file. This field is only populated for Team Drive files."]
+      },
+      "hasThumbnail": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field."]
+      },
+      "headRevisionId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file's head revision. This is currently only available for files with binary content in Drive."]
+      },
+      "iconLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A static, unauthenticated link to the file's icon."]
+      },
+      "id": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the file."]
+      },
+      "imageMediaMetadata": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional metadata about image media, if available."]
+      },
+      "isAppAuthorized": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file was created or opened by the requesting app."]
+      },
+      "kind": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Identifies what kind of resource this is. Value: the fixed string \"drive#file\"."]
+      },
+      "lastModifyingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The last user to modify the file."]
+      },
+      "md5Checksum": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MD5 checksum for the content of the file. This is only applicable to files with binary content in Drive."]
+      },
+      "mimeType": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The MIME type of the file.\nDrive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.\nIf a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource."]
+      },
+      "modifiedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been modified by this user."]
+      },
+      "modifiedByMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was modified by the user (RFC 3339 date-time)."]
+      },
+      "modifiedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was modified by anyone (RFC 3339 date-time).\nNote that setting modifiedTime will also update modifiedByMeTime for the user."]
+      },
+      "name": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant."]
+      },
+      "originalFilename": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Drive."]
+      },
+      "ownedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user owns the file. Not populated for Team Drive files."]
+      },
+      "owners": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The owners of the file. Currently, only certain legacy files may have more than one owner. Not populated for Team Drive files."]
+      },
+      "parents": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The IDs of the parent folders which contain the file.\nIf not specified as part of a create request, the file will be placed directly in the My Drive folder. Update requests must use the addParents and removeParents parameters to modify the values."]
+      },
+      "permissions": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The full list of permissions for the file. This is only available if the requesting user can share the file. Not populated for Team Drive files."]
+      },
+      "properties": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A collection of arbitrary key-value pairs which are visible to all apps.\nEntries with null values are cleared in update and copy requests."]
+      },
+      "quotaBytesUsed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The number of storage quota bytes used by the file. This includes the head revision as well as previous revisions with keepForever enabled."]
+      },
+      "shared": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been shared. Not populated for Team Drive files."]
+      },
+      "sharedWithMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time at which the file was shared with the user, if applicable (RFC 3339 date-time)."]
+      },
+      "sharingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The user who shared the file with the requesting user, if applicable."]
+      },
+      "size": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The size of the file's content in bytes. This is only applicable to files with binary content in Drive."]
+      },
+      "spaces": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["array"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The list of spaces which contain the file. The currently supported values are 'drive', 'appDataFolder' and 'photos'."]
+      },
+      "starred": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the user has starred the file."]
+      },
+      "teamDriveId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["ID of the Team Drive the file resides in."]
+      },
+      "thumbnailLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short-lived link to the file's thumbnail, if available. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content."]
+      },
+      "thumbnailVersion": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["The thumbnail version for use in thumbnail cache invalidation."]
+      },
+      "trashed": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file, and other users cannot see files in the owner's trash."]
+      },
+      "trashedTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The time that the item was trashed (RFC 3339 date-time). Only populated for Team Drive files."]
+      },
+      "trashingUser": {
+        "location": ["body"],
+        "required": [null],
+        "type": [null],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["If the file has been explicitly trashed, the user who trashed it. Only populated for Team Drive files."]
+      },
+      "version": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["int64"],
+        "enum": [null],
+        "description": ["A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the user."]
+      },
+      "videoMediaMetadata": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Additional metadata about video media. This may not be available immediately upon upload."]
+      },
+      "viewedByMe": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether the file has been viewed by this user."]
+      },
+      "viewedByMeTime": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": ["date-time"],
+        "enum": [null],
+        "description": ["The last time the file was viewed by the user (RFC 3339 date-time)."]
+      },
+      "viewersCanCopyContent": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations."]
+      },
+      "webContentLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link for downloading the content of the file in a browser. This is only available for files with binary content in Drive."]
+      },
+      "webViewLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A link for opening the file in a relevant Google editor or viewer in a browser."]
+      },
+      "writersCanShare": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": [null]
+      }
+    },
+    "scopes": ["drive, drive.appdata, drive.file, drive.metadata, drive.scripts"],
+    "description": {},
+    "response": [null],
+    "parameterOrder": ["fileId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  }
+}

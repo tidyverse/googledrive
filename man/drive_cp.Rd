@@ -4,7 +4,7 @@
 \alias{drive_cp}
 \title{Copy a Drive file.}
 \usage{
-drive_cp(file, path = NULL, name = NULL, verbose = TRUE)
+drive_cp(file, path = NULL, name = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
@@ -22,6 +22,11 @@ context of the call. Defaults to "Copy of \code{FILE-NAME}".}
 will force `path` to be treated as a folder, even if it is character and lacks
 a trailing slash. Defaults to "Copy of \code{FILE-NAME}".}
 
+\item{...}{Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via `...`. See the "Request body" section of the Drive API docs
+for the associated endpoint.}
+
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
@@ -30,11 +35,11 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   file.
 }
 \description{
-Copy a Drive file.
+Copies an existing Drive file into a new file id.
 }
 \examples{
 \dontrun{
-## create a file to copy
+## Create a file to copy
 file <- drive_upload(system.file("DESCRIPTION"), "DESC-ex")
 
 ## Make a "Copy of" copy in same folder as the original
@@ -47,16 +52,39 @@ drive_cp("DESC-ex", "DESC-ex-two")
 folder <- drive_mkdir("new-folder")
 drive_cp("DESC-ex", folder, "DESC-ex-three")
 
+## Make an explicitly named copy and star it.
+## The starring is an example of providing metadata via `...`.
+## `starred` is not an actual argument to `drive_cp()`,
+## it just gets passed through to the API.
+drive_cp("DESC-ex", name = "DESC-ex-starred", starred = TRUE)
+
 ## Behold all of our copies!
 drive_find("DESC-ex")
 
 ## Delete all of our copies and the new folder!
 drive_find("DESC-ex") \%>\% drive_rm()
 drive_rm(folder)
+
+## upload a csv file to copy
+csv_file <- drive_upload(R.home('doc/BioC_mirrors.csv'))
+
+## copy AND AT THE SAME TIME convert it to a Google Sheet
+mirrors_sheet <- drive_cp(
+  file,
+  name = "BioC_mirrors",
+  mimeType = drive_mime_type("spreadsheet")
+)
+
+## go see the new Sheet in the browser
+## drive_browse(mirrors_sheet)
+
+## clean up
+drive_rm(csv_file)
+drive_rm(mirrors_sheet)
 }
 }
 \seealso{
 Wraps the
 \href{https://developers.google.com/drive/v3/reference/files/copy}{drive.files.copy}
-endpoint
+endpoint.
 }

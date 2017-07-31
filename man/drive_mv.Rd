@@ -31,21 +31,27 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 }
 \description{
 Move a Drive file to a different folder, give it a different name, or both.
+Note that folders on Google Drive are not like folders on your local
+filesystem. They are more like a label, which implies that a Drive file can
+have multiple folders as direct parent! However, most people still use and
+think of them like "regular" folders. When we say "move a Drive file", it
+actually means: "add a new folder to this file's parents and remove the old
+one".
 }
 \examples{
 \dontrun{
 ## create a file to move
-file <- drive_upload(system.file("DESCRIPTION"), "DESC")
+file <- drive_upload(system.file("DESCRIPTION"), "DESC-mv")
 
 ## rename it, but leave in current folder (root folder, in this case)
-file <- drive_mv(file, "DESC-renamed")
+file <- drive_mv(file, "DESC-mv-renamed")
 
 ## create a folder to move the file into
-folder <- drive_mkdir("new-folder")
+folder <- drive_mkdir("mv-folder")
 
 ## move the file and rename it again,
 ## specify destination as a dribble
-file <- drive_mv(file, path = folder, name = "DESC-re-renamed")
+file <- drive_mv(file, path = folder, name = "DESC-mv-re-renamed")
 
 ## verify renamed file is now in the folder
 drive_ls(folder)
@@ -55,7 +61,11 @@ file <- drive_mv(file, "~/")
 
 ## move it again
 ## specify destination as path with trailing slash
-## to ensure we get a move vs. renaming it to "new-folder"
-file <- drive_mv(file, "new-folder/")
+## to ensure we get a move vs. renaming it to "mv-folder"
+file <- drive_mv(file, "mv-folder/")
+
+## Clean up
+drive_rm(file)
+drive_rm(folder)
 }
 }

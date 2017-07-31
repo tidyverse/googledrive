@@ -16,6 +16,7 @@ Roxygen: list(markdown = TRUE)
 Imports: curl (>= 2.8.1),
   glue (>= 1.1.0),
   httr,
+  jsonlite,
   purrr,
   tibble,
   utils

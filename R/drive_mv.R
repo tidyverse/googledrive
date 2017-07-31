@@ -1,6 +1,12 @@
 #' Move a Drive file.
 #'
 #' Move a Drive file to a different folder, give it a different name, or both.
+#' Note that folders on Google Drive are not like folders on your local
+#' filesystem. They are more like a label, which implies that a Drive file can
+#' have multiple folders as direct parent! However, most people still use and
+#' think of them like "regular" folders. When we say "move a Drive file", it
+#' actually means: "add a new folder to this file's parents and remove the old
+#' one".
 #'
 #' @template file
 #' @template path
@@ -16,17 +22,17 @@
 #' @examples
 #' \dontrun{
 #' ## create a file to move
-#' file <- drive_upload(system.file("DESCRIPTION"), "DESC")
+#' file <- drive_upload(system.file("DESCRIPTION"), "DESC-mv")
 #'
 #' ## rename it, but leave in current folder (root folder, in this case)
-#' file <- drive_mv(file, "DESC-renamed")
+#' file <- drive_mv(file, "DESC-mv-renamed")
 #'
 #' ## create a folder to move the file into
-#' folder <- drive_mkdir("new-folder")
+#' folder <- drive_mkdir("mv-folder")
 #'
 #' ## move the file and rename it again,
 #' ## specify destination as a dribble
-#' file <- drive_mv(file, path = folder, name = "DESC-re-renamed")
+#' file <- drive_mv(file, path = folder, name = "DESC-mv-re-renamed")
 #'
 #' ## verify renamed file is now in the folder
 #' drive_ls(folder)
@@ -36,14 +42,29 @@
 #'
 #' ## move it again
 #' ## specify destination as path with trailing slash
-#' ## to ensure we get a move vs. renaming it to "new-folder"
-#' file <- drive_mv(file, "new-folder/")
+#' ## to ensure we get a move vs. renaming it to "mv-folder"
+#' file <- drive_mv(file, "mv-folder/")
+#'
+#' ## Clean up
+#' drive_rm(file)
+#' drive_rm(folder)
 #' }
 drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
-  file <- confirm_single_file(file)
+  file <- confirm_some_files(file)
+
+  if (!single_file(file)) {
+    files <- glue_data(file, "  * {name}: {id}")
+    stop_collapse(c("Path to move is not unique:", files))
+  }
+
   if (!is_mine(file)) {
-    stop_glue("Can't move this file because you don't own it:\n{file$name}")
+    stop_glue("\nCan't move this file because you don't own it:\n  * {file$name}")
+  }
+
+  if (is.null(path) && is.null(name)) {
+    if (verbose) message("Nothing to be done.")
+    return(invisible(file))
   }
 
   if (!is.null(name)) {
@@ -54,16 +75,14 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     confirm_clear_path(path, name)
     path_parts <- partition_path(path, maybe_name = is.null(name))
     path <- path_parts$parent
-    name <- name %||% path_parts$name
+    name <- name %||% path_parts$name %||% file$name
   }
 
-  name <- name %||% file$name
+  meta <- list()
 
-  params <- list(
-    fileId = file$id,
-    name = name,
-    fields = "*"
-  )
+  if (!is.null(name)) {
+    meta[["name"]] <- name
+  }
 
   ## if moving the file, modify the parent
   if (!is.null(path)) {
@@ -80,31 +99,37 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     if (!is_folder(path)) {
       stop_glue("Requested parent folder does not exist:\n{path$name}")
     }
-    current_parents <- file$files_resource[[1]][["parents"]][[1]]
+    current_parents <- file$files_resource[[1]][["parents"]]
     if (!path$id %in% current_parents) {
-      params[["addParents"]] <- path$id
-      params[["removeParents"]] <- current_parents
+      meta[["addParents"]] <- path$id
+      if (length(current_parents) == 1) {
+        meta[["removeParents"]] <- current_parents
+      } else {
+        warning(
+          "File started with multiple parents!\n",
+          "New parent folder has been added, but no existing parent has been removed.\n",
+          "Not clear which parent(s) should be removed."
+        )
+      }
     }
   }
 
-  request <- generate_request(
-    endpoint = "drive.files.update",
-    params = params
-  )
-  res <- make_request(request, encode = "json")
-  proc_res <- process_response(res)
-  out <- as_dribble(list(proc_res))
+  if (length(meta) == 0) {
+    if (verbose) message("Nothing to be done.")
+    return(invisible(file))
+  }
+  out <- drive_update_metadata(file, meta)
 
   if (verbose) {
-    renamed <- !identical(params$name, file$name)
-    moved <- !is.null(params[["addParents"]])
-    action <- glue("{if (renamed) 'renamed' else ''}",
-                   "{if (renamed && moved) ' and ' else ''}",
-                   "{if (moved) 'moved' else ''}")
-    ## not entirely sure why this placement of `\n` helps glue do the right
-    ## thing and yet ... it does
+    actions <- c(
+      renamed = !identical(out$name, file$name),
+      moved = !is.null(meta[["removeParents"]])
+    )
     new_path <- paste0(append_slash(path$name), out$name)
-    message_glue("\nFile {action}:\n  * {file$name} -> {new_path}")
+    message_glue(
+      "\nFile {action}:\n  * {file$name} -> {new_path}",
+      action = collapse(names(actions)[actions], last = " and ")
+    )
   }
   invisible(out)
 }

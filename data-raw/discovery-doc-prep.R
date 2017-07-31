@@ -31,16 +31,34 @@ about <- dd_content[[c("resources", "about", "methods")]]
 names(about) <- paste("about", names(about), sep = ".")
 files <- dd_content[[c("resources", "files", "methods")]]
 names(files) <- paste("files", names(files), sep = ".")
-permissions <-
-  dd_content[[c("resources", "permissions", "methods")]]
+permissions <- dd_content[[c("resources", "permissions", "methods")]]
 names(permissions) <- paste("permissions", names(permissions), sep = ".")
-revisions <-
-  dd_content[[c("resources", "revisions", "methods")]]
+revisions <- dd_content[[c("resources", "revisions", "methods")]]
 names(revisions) <- paste("revisions", names(revisions), sep = ".")
 
 endpoints <- c(about, files, permissions, revisions)
 # str(endpoints, max.level = 1)
 # listviewer::jsonedit(endpoints)
+
+add_schema_params <- function(endpoint, nm) {
+  req <- endpoint$request$`$ref`
+  if (is.null(req) || req == "Channel") return(endpoint)
+  message_glue("{nm} gains {req} schema params\n")
+  endpoint$parameters <- c(
+    endpoint$parameters,
+    dd_content[[c("schemas",  req, "properties")]]
+  )
+  endpoint
+}
+endpoints <- imap(endpoints, add_schema_params)
+
+## add API-wide params to all endpoints
+add_global_params <- function(x) {
+  x[["parameters"]] <- c(x[["parameters"]], dd_content[["parameters"]])
+  x
+}
+endpoints <- map(endpoints, add_global_params)
+
 
 ## add in simple upload and resumable upload
 endpoints <- c(
@@ -80,25 +98,6 @@ endpoints <- c(
     )
   )
 )
-
-add_schema_params <- function(endpoint, nm) {
-  req <- endpoint$request$`$ref`
-  if (is.null(req) || req == "Channel") return(endpoint)
-  message_glue("{nm} gains {req} schema params\n")
-  endpoint$parameters <- c(
-    endpoint$parameters,
-    dd_content[[c("schemas",  req, "properties")]]
-  )
-  endpoint
-}
-endpoints <- imap(endpoints, add_schema_params)
-
-## add API-wide params to all endpoints
-add_global_params <- function(x) {
-  x[["parameters"]] <- c(x[["parameters"]], dd_content[["parameters"]])
-  x
-}
-endpoints <- map(endpoints, add_global_params)
 
 nms <- endpoints %>%
   map(names) %>%
