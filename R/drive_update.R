@@ -1,10 +1,12 @@
 #' Update an existing Drive file
 #'
-#' TO DO: document me with more words.
+#' Update an existing Drive file id with new content ("media" in Drive
+#' API-speak), new metadata, or both.
+
 #'
 #' @seealso Wraps the
 #' [drive.files.update](https://developers.google.com/drive/v3/reference/files/update)
-#' endpoint. This function does
+#' endpoint. This function supports
 #' [media upload](https://developers.google.com/drive/v3/web/manage-uploads).
 #'
 #' @template file
@@ -69,9 +71,9 @@ drive_update <- function(file,
   if (!is.null(media) && !file.exists(media)) {
     stop_glue("\nLocal file does not exist:\n  * {media}")
   }
+
   meta <- list(...)
-  ## TO DO: what if user puts fields in `...`?
-  ## we deal with that in drive_find() FWIW, but I'm not sure it's best way
+  meta$fields <- meta$fields %||% "*"
 
   if (is.null(media)) {
     if (length(meta) == 0) {

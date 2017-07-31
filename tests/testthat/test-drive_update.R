@@ -66,7 +66,7 @@ test_that("drive_update() works for multipart updates",{
   now <- as.character(Sys.time())
   writeLines(now, tmp)
 
-  out <- drive_update(updatee, tmp, name = me_("update-me-new"))
+  out <- drive_update(updatee, media = tmp, name = me_("update-me-new"))
   expect_identical(out$id, updatee$id)
   drive_download(updatee, tmp, overwrite = TRUE)
   now_out <- readLines(tmp)

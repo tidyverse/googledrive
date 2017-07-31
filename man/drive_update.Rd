@@ -26,7 +26,8 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   file.
 }
 \description{
-TO DO: document me with more words.
+Update an existing Drive file id with new content ("media" in Drive
+API-speak), new metadata, or both.
 }
 \examples{
 \dontrun{
@@ -66,6 +67,6 @@ drive_rm(folder)
 \seealso{
 Wraps the
 \href{https://developers.google.com/drive/v3/reference/files/update}{drive.files.update}
-endpoint. This function does
+endpoint. This function supports
 \href{https://developers.google.com/drive/v3/web/manage-uploads}{media upload}.
 }
