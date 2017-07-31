@@ -85,7 +85,7 @@ drive_find <- function(pattern = NULL,
   if (n_max < 1) return(dribble())
 
   params <- list(...)
-  params$fields <- params$fields %||% prep_fields(drive_fields())
+  params$fields <- params$fields %||% "*"
   params <- marshal_q_clauses(params)
 
   if (!is.null(type)) {

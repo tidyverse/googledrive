@@ -3,7 +3,7 @@
 #' Copies an existing Drive file into a new file id.
 #'
 #' @seealso Wraps the
-#' [drive.files.copy]<https://developers.google.com/drive/v3/reference/files/copy>
+#' [drive.files.copy](https://developers.google.com/drive/v3/reference/files/copy)
 #' endpoint.
 #'
 #' @template file
@@ -66,10 +66,11 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
 
   name <- name %||% glue("Copy of {file$name}")
 
-  params <- list(
+  dots <- list(...)
+  dots$fields <- dots$fields %||% "*"
+  params <- c(
     fileId = file$id,
-    fields = "*",
-    ...
+    dots
   )
 
   ## if copying to a specific directory, specify the parent

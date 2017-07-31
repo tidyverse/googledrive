@@ -68,6 +68,6 @@ drive_rm(folder)
 }
 \seealso{
 Wraps the
-\link{drive.files.copy}\url{https://developers.google.com/drive/v3/reference/files/copy}
+\href{https://developers.google.com/drive/v3/reference/files/copy}{drive.files.copy}
 endpoint.
 }
