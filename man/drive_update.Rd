@@ -44,14 +44,10 @@ x <- x \%>\%
 x <- x \%>\%
   drive_update(name = "NEWS-1")
 
-## We can also add additional parent folders by passing `addParents` to the `...`.
-## This will mean the file now will exist in two folders.
-## First create a folder "new-folder" to place the file `x` in.
-folder <- drive_mkdir("new-folder")
-## Add the parent to the file `x`.
+## We can add a parent folder by passing `addParents` via `...`.
+folder <- drive_mkdir("second-parent-folder")
 x <- x \%>\%
   drive_update(addParents = folder$id)
-
 ## Verify the file now has multiple parents
 x$files_resource[[1]]$parents
 
