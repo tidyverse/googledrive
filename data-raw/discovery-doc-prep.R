@@ -2,7 +2,7 @@ library(rprojroot)
 library(jsonlite)
 library(httr)
 library(tidyverse)
-library(stringr)
+
 ## load the API spec, including download if necessary
 dd_cache <- find_package_root_file("data-raw") %>%
   list.files(pattern = "discovery-document.json$", full.names = TRUE)
@@ -31,11 +31,9 @@ about <- dd_content[[c("resources", "about", "methods")]]
 names(about) <- paste("about", names(about), sep = ".")
 files <- dd_content[[c("resources", "files", "methods")]]
 names(files) <- paste("files", names(files), sep = ".")
-permissions <-
-  dd_content[[c("resources", "permissions", "methods")]]
+permissions <- dd_content[[c("resources", "permissions", "methods")]]
 names(permissions) <- paste("permissions", names(permissions), sep = ".")
-revisions <-
-  dd_content[[c("resources", "revisions", "methods")]]
+revisions <- dd_content[[c("resources", "revisions", "methods")]]
 names(revisions) <- paste("revisions", names(revisions), sep = ".")
 
 endpoints <- c(about, files, permissions, revisions)
