@@ -75,10 +75,10 @@
     </div>
 
     
-    <p>Copy a Drive file.</p>
+    <p>Copies an existing Drive file into a new file id.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_cp</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_cp</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -105,6 +105,13 @@ will force `path` to be treated as a folder, even if it is character and lacks
 a trailing slash. Defaults to "Copy of <code>FILE-NAME</code>".</p></td>
     </tr>
     <tr>
+      <th>...</th>
+      <td><p>Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via `...`. See the "Request body" section of the Drive API docs
+for the associated endpoint.</p></td>
+    </tr>
+    <tr>
       <th>verbose</th>
       <td><p>Logical, indicating whether to print informative messages
 (default <code>TRUE</code>).</p></td>
@@ -120,12 +127,12 @@ a trailing slash. Defaults to "Copy of <code>FILE-NAME</code>".</p></td>
 
     <p>Wraps the
 <a href='https://developers.google.com/drive/v3/reference/files/copy'>drive.files.copy</a>
-endpoint</p>
+endpoint.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## create a file to copy</span>
+<span class='co'>## Create a file to copy</span>
 <span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='st'>"DESC-ex"</span>)
 
 <span class='co'>## Make a "Copy of" copy in same folder as the original</span>
@@ -138,12 +145,35 @@ endpoint</p>
 <span class='no'>folder</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"new-folder"</span>)
 <span class='fu'>drive_cp</span>(<span class='st'>"DESC-ex"</span>, <span class='no'>folder</span>, <span class='st'>"DESC-ex-three"</span>)
 
+<span class='co'>## Make an explicitly named copy and star it.</span>
+<span class='co'>## The starring is an example of providing metadata via `...`.</span>
+<span class='co'>## `starred` is not an actual argument to `drive_cp()`,</span>
+<span class='co'>## it just gets passed through to the API.</span>
+<span class='fu'>drive_cp</span>(<span class='st'>"DESC-ex"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"DESC-ex-starred"</span>, <span class='kw'>starred</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
 <span class='co'>## Behold all of our copies!</span>
 <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"DESC-ex"</span>)
 
 <span class='co'>## Delete all of our copies and the new folder!</span>
 <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"DESC-ex"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>()
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>folder</span>)
+
+<span class='co'>## upload a csv file to copy</span>
+<span class='no'>csv_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>R.home</span>(<span class='st'>'doc/BioC_mirrors.csv'</span>))
+
+<span class='co'>## copy AND AT THE SAME TIME convert it to a Google Sheet</span>
+<span class='no'>mirrors_sheet</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_cp</span>(
+  <span class='no'>file</span>,
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"BioC_mirrors"</span>,
+  <span class='kw'>mimeType</span> <span class='kw'>=</span> <span class='fu'><a href='drive_mime_type.html'>drive_mime_type</a></span>(<span class='st'>"spreadsheet"</span>)
+)
+
+<span class='co'>## go see the new Sheet in the browser</span>
+<span class='co'>## drive_browse(mirrors_sheet)</span>
+
+<span class='co'>## clean up</span>
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>csv_file</span>)
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>mirrors_sheet</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -75,7 +75,8 @@
     </div>
 
     
-    <p>Update an existing Drive file</p>
+    <p>Update an existing Drive file id with new content ("media" in Drive
+API-speak), new metadata, or both.</p>
     
 
     <pre class="usage"><span class='fu'>drive_update</span>(<span class='no'>file</span>, <span class='kw'>media</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
@@ -95,7 +96,10 @@ ids marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <code><a hre
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Parameters to pass along to the API query. NOT IMPLEMENTED YET.</p></td>
+      <td><p>Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via `...`. See the "Request body" section of the Drive API docs
+for the associated endpoint.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -113,20 +117,39 @@ ids marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <code><a hre
 
     <p>Wraps the
 <a href='https://developers.google.com/drive/v3/reference/files/update'>drive.files.update</a>
-endpoint. In particular, does <a href='https://developers.google.com/drive/v3/web/manage-uploads'>media upload</a>.</p>
+endpoint. This function supports
+<a href='https://developers.google.com/drive/v3/web/manage-uploads'>media upload</a>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## Create a new file, so we can update it.</span>
+<span class='co'>## Create a new file, so we can update it</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>R.home</span>(<span class='st'>"doc/NEWS"</span>))
 
-<span class='co'>## Update the file with new content.</span>
+<span class='co'>## Update the file with new media</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>drive_update</span>(<span class='fu'>R.home</span>(<span class='st'>"doc/NEWS.2"</span>))
+  <span class='fu'>drive_update</span>(<span class='fu'>R.home</span>(<span class='st'>"doc/NEWS.1"</span>))
+
+<span class='co'>## Update the file with new metadata.</span>
+<span class='co'>## Notice here `name` is not a parameter in `drive_update()`, we are passing</span>
+<span class='co'>## this to the API via the `...``</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>drive_update</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"NEWS-1"</span>)
+
+<span class='co'>## We can add a parent folder by passing `addParents` via `...`.</span>
+<span class='no'>folder</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"second-parent-folder"</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>drive_update</span>(<span class='kw'>addParents</span> <span class='kw'>=</span> <span class='no'>folder</span>$<span class='no'>id</span>)
+<span class='co'>## Verify the file now has multiple parents</span>
+<span class='no'>x</span>$<span class='no'>files_resource</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>parents</span>
+
+<span class='co'>## Update the file with new media AND new metadata</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>drive_update</span>(<span class='fu'>R.home</span>(<span class='st'>"doc/NEWS.2"</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"NEWS-2"</span>)
 
 <span class='co'>## Clean up</span>
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>folder</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
