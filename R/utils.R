@@ -53,7 +53,7 @@ warning_glue <- function(..., .sep = "", .envir = parent.frame(),
 }
 
 warning_glue_data <- function(..., .sep = "", .envir = parent.frame(),
-                              call. = FALSE, .domain = NA) {
+                              call. = FALSE, .domain = NULL) {
   warning(
     glue_data(..., .sep = .sep, .envir = .envir),
     call. = call., domain = .domain

@@ -75,10 +75,8 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     confirm_clear_path(path, name)
     path_parts <- partition_path(path, maybe_name = is.null(name))
     path <- path_parts$parent
-    name <- name %||% path_parts$name
+    name <- name %||% path_parts$name %||% file$name
   }
-
-  name <- name %||% file$name
 
   meta <- list()
 
@@ -116,11 +114,15 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     }
   }
 
+  if (length(meta) == 0) {
+    if (verbose) message("Nothing to be done.")
+    return(invisible(file))
+  }
   out <- drive_update_metadata(file, meta)
 
   if (verbose) {
     actions <- c(
-      renamed = !identical(meta$name, file$name),
+      renamed = !identical(out$name, file$name),
       moved = !is.null(meta[["removeParents"]])
     )
     new_path <- paste0(append_slash(path$name), out$name)
