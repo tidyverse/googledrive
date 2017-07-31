@@ -22,17 +22,17 @@
 #' @examples
 #' \dontrun{
 #' ## create a file to move
-#' file <- drive_upload(system.file("DESCRIPTION"), "DESC")
+#' file <- drive_upload(system.file("DESCRIPTION"), "DESC-mv")
 #'
 #' ## rename it, but leave in current folder (root folder, in this case)
-#' file <- drive_mv(file, "DESC-renamed")
+#' file <- drive_mv(file, "DESC-mv-renamed")
 #'
 #' ## create a folder to move the file into
-#' folder <- drive_mkdir("new-folder")
+#' folder <- drive_mkdir("mv-folder")
 #'
 #' ## move the file and rename it again,
 #' ## specify destination as a dribble
-#' file <- drive_mv(file, path = folder, name = "DESC-re-renamed")
+#' file <- drive_mv(file, path = folder, name = "DESC-mv-re-renamed")
 #'
 #' ## verify renamed file is now in the folder
 #' drive_ls(folder)
@@ -42,12 +42,12 @@
 #'
 #' ## move it again
 #' ## specify destination as path with trailing slash
-#' ## to ensure we get a move vs. renaming it to "new-folder"
-#' file <- drive_mv(file, "new-folder/")
+#' ## to ensure we get a move vs. renaming it to "mv-folder"
+#' file <- drive_mv(file, "mv-folder/")
 #'
 #' ## Clean up
-#' dplyr::bind_rows(file, folder) %>%
-#'   drive_rm()
+#' drive_rm(file)
+#' drive_rm(folder)
 #' }
 drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
@@ -60,6 +60,11 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   if (!is_mine(file)) {
     stop_glue("\nCan't move this file because you don't own it:\n  * {file$name}")
+  }
+
+  if (is.null(path) && is.null(name)) {
+    if (verbose) message("Nothing to be done.")
+    return(invisible(file))
   }
 
   if (!is.null(name)) {
@@ -75,11 +80,11 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   name <- name %||% file$name
 
-  ## TO DO: I think this should be initialized as list()
-  ## and we only add name if name is non-NULL
-  meta <- list(
-    name = name
-  )
+  meta <- list()
+
+  if (!is.null(name)) {
+    meta[["name"]] <- name
+  }
 
   ## if moving the file, modify the parent
   if (!is.null(path)) {
@@ -100,12 +105,17 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     if (!path$id %in% current_parents) {
       meta[["addParents"]] <- path$id
       if (length(current_parents) == 1) {
-      meta[["removeParents"]] <- current_parents
+        meta[["removeParents"]] <- current_parents
+      } else {
+        warning(
+          "File started with multiple parents!\n",
+          "New parent folder has been added, but no existing parent has been removed.\n",
+          "Not clear which parent(s) should be removed."
+        )
       }
     }
   }
 
-  ## TO DO: check here that meta has length? otherwise, no need to call
   out <- drive_update_metadata(file, meta)
 
   if (verbose) {
