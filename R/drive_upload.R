@@ -19,6 +19,7 @@
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,
 #'   respectively. All non-`NULL` values for `type` are pre-processed with
 #'   [drive_mime_type()].
+#' @template dots-metadata
 #' @template verbose
 #'
 #' @template dribble-return
@@ -40,11 +41,33 @@
 #'
 #' ## clean-up
 #' drive_find("BioC_mirrors") %>% drive_rm()
+#'
+#' ## Upload a file with multiple parents
+#'
+#' ## Create mutltiple parent directories
+#' folder_1 <- drive_mkdir("folder_one")
+#' folder_2 <- drive_mkdir("folder_two")
+#'
+#' ## Upload the file into multiple parents. Notice here we are using
+#' ## the `addParents` parameter via the `...`.
+#' logo <- drive_upload(
+#'   R.home('doc/html/logo.jpg'),
+#'   folder_1,
+#'   addParents = folder_2$id
+#' )
+#'
+#' ## Examine the multiple parents
+#' drive_add_path(logo)
+#'
+#' ## Clean up
+#' bind_rows(folder_1, folder_2, logo) %>%
+#'   drive_rm()
 #' }
 drive_upload <- function(media,
                          path = NULL,
                          name = NULL,
                          type = NULL,
+                         ...,
                          verbose = TRUE) {
 
   if (!file.exists(media)) {
@@ -94,7 +117,7 @@ drive_upload <- function(media,
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
-  out <- drive_update(as_id(proc_res$id), media, verbose = FALSE)
+  out <- drive_update(as_id(proc_res$id), media, ..., verbose = FALSE)
 
   if (verbose) {
     message_glue("\nLocal file:\n  * {media}\n",

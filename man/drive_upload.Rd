@@ -4,7 +4,7 @@
 \alias{drive_upload}
 \title{Upload into a new Drive file}
 \usage{
-drive_upload(media, path = NULL, name = NULL, type = NULL,
+drive_upload(media, path = NULL, name = NULL, type = NULL, ...,
   verbose = TRUE)
 }
 \arguments{
@@ -27,6 +27,11 @@ suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting \code{type} to \code{document}, \code{spreadsheet}, or \code{presentation},
 respectively. All non-\code{NULL} values for \code{type} are pre-processed with
 \code{\link[=drive_mime_type]{drive_mime_type()}}.}
+
+\item{...}{Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via `...`. See the "Request body" section of the Drive API docs
+for the associated endpoint.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -56,6 +61,27 @@ drive_browse(mirrors_sheet)
 
 ## clean-up
 drive_find("BioC_mirrors") \%>\% drive_rm()
+
+## Upload a file with multiple parents
+
+## Create mutltiple parent directories
+folder_1 <- drive_mkdir("folder_one")
+folder_2 <- drive_mkdir("folder_two")
+
+## Upload the file into multiple parents. Notice here we are using
+## the `addParents` parameter via the `...`.
+logo <- drive_upload(
+  R.home('doc/html/logo.jpg'),
+  folder_1,
+  addParents = folder_2$id
+)
+
+## Examine the multiple parents
+drive_add_path(logo)
+
+## Clean up
+bind_rows(folder_1, folder_2, logo) \%>\%
+  drive_rm()
 }
 }
 \seealso{
