@@ -38,3 +38,40 @@ test_that("drive_upload() places file in non-root folder, with new name", {
   expect_identical(nrow(uploadee), 1L)
   expect_identical(uploadee$files_resource[[1]]$parents[[1]], destination$id)
 })
+
+test_that("drive_upload() accepts body metadata via ...", {
+  skip_if_no_token()
+  skip_if_offline()
+  on.exit(drive_rm(me_("DESCRIPTION")))
+
+  uploadee <- drive_upload(
+    system.file("DESCRIPTION"),
+    name = me_("DESCRIPTION"),
+    starred = TRUE
+  )
+  expect_s3_class(uploadee, "dribble")
+  expect_identical(nrow(uploadee), 1L)
+  expect_true(uploadee$files_resource[[1]]$starred)
+
+})
+
+test_that("drive_upload() accepts query metadata via ...", {
+  skip_if_no_token()
+  skip_if_offline()
+  on.exit(drive_rm(me_("DESCRIPTION")))
+
+  ## To ensure query metadata gets passed, we are going to add this
+  ## parent, so the file should be both in My Drive and "upload-into-me"
+  destination <- drive_get(nm_("upload-into-me"))
+
+  uploadee <- drive_upload(
+    system.file("DESCRIPTION"),
+    name = me_("DESCRIPTION"),
+    addParents = destination$id
+  )
+  expect_s3_class(uploadee, "dribble")
+  expect_identical(nrow(uploadee), 1L)
+
+  expect_identical(length(uploadee$files_resource[[1]]$parents), 2L)
+})
+
