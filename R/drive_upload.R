@@ -85,44 +85,59 @@ drive_upload <- function(media,
     name <- name %||% path_parts$name
   }
 
-  ## vet the parent folder
-  ## easier to default to root vs keeping track of whether parent is specified
-  path <- path %||% root_folder()
-  path <- as_dribble(path)
-  if (!some_files(path)) {
-    stop_glue("Requested parent folder does not exist.")
-  }
-  if (!single_file(path)) {
-    paths <- glue_data(path, "  * {name}: {id}")
-    stop_collapse(
-      c("Requested parent folder identifies multiple files:", paths)
-    )
-  }
-  if (!is_folder(path)) {
-    stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
+  dots <- list(...)
+  dots$fields <- dots$fields %||% "*"
+
+  params <- c(
+    fileId = file$id,
+    uploadType = "multipart",
+    dots
+  )
+
+  if (!is.null(path)) {
+    path <- as_dribble(path)
+    if (!some_files(path)) {
+      stop_glue("Requested parent folder does not exist.")
+    }
+    if (!single_file(path)) {
+      paths <- glue_data(path, "  * {name}: {id}")
+      stop_collapse(
+        c("Requested parent folder identifies multiple files:", paths)
+      )
+    }
+    if (!is_folder(path)) {
+      stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
+    }
+    params[["parents"]] <- list(path$id)
   }
 
-  name <- name %||% basename(media)
-  mimeType <- drive_mime_type(type)
+  params[["name"]] <- name %||% basename(media)
+  params[["mimeType"]] <- drive_mime_type(type)
 
   request <- generate_request(
-    endpoint = "drive.files.create",
-    params = list(
-      name = name,
-      parents = list(path$id),
-      mimeType = mimeType
-    )
+    endpoint = "drive.files.create.media",
+    params = params
+  )
+
+  meta_file <- tempfile()
+  on.exit(unlink(meta_file))
+  writeLines(jsonlite::toJSON(meta), meta_file)
+  ## media uploads have unique body situations, so customizing here.
+  request$body <- list(
+    metadata = httr::upload_file(
+      path = meta_file,
+      type = "application/json; charset=UTF-8"
+    ),
+    media = httr::upload_file(path = media)
   )
 
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
-  out <- drive_update(as_id(proc_res$id), media, ..., verbose = FALSE)
-
   if (verbose) {
     message_glue("\nLocal file:\n  * {media}\n",
-          "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
-          "with MIME type:\n  * {out$files_resource[[1]]$mimeType}"
+                 "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
+                 "with MIME type:\n  * {out$files_resource[[1]]$mimeType}"
     )
   }
   invisible(out)
