@@ -2,8 +2,10 @@
 
 is_path <- function(x) is.character(x) && !inherits(x, "drive_id")
 
+is_string <- function(x) length(x) == 1L && is_path(x)
+
 is_rootpath <- function(path) {
-  length(path) == 1 && is.character(path) && grepl("^~$|^/$|^~/$", path)
+  is_string(path) && grepl("^~$|^/$|^~/$", path)
 }
 
 is_rooted <- function(path) grepl("^~", path)
@@ -53,7 +55,7 @@ partition_path <- function(path, maybe_name = FALSE) {
   if (length(path) < 1) {
     return(out)
   }
-  stopifnot(is_path(path), length(path) == 1)
+  stopifnot(is_string(path))
   path <- rootize_path(path)
   if (!maybe_name) {
     path <- append_slash(path)

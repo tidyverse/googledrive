@@ -68,7 +68,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   }
 
   if (!is.null(name)) {
-    stopifnot(is_path(name), length(name) == 1)
+    stopifnot(is_string(name))
   }
 
   if (is_path(path)) {

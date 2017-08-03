@@ -96,8 +96,8 @@ test_that("partition_path() splits into stuff before/after last slash", {
 })
 
 test_that("partition_path() fails for bad input", {
-  expect_error(partition_path(letters), "length\\(path\\) == 1 is not TRUE")
-  expect_error(partition_path(dribble()), "is_path\\(path\\) is not TRUE")
+  expect_error(partition_path(letters), "is_string\\(path\\) is not TRUE")
+  expect_error(partition_path(dribble()), "is_string\\(path\\) is not TRUE")
   expect_error(partition_path(as_id("123"), '!inherits\\(x, "drive_id"\\) is not TRUE'))
 })
 
