@@ -57,7 +57,7 @@ drive_download <- function(file,
   ext <- file_ext_safe(path)
   path <- path %||% file$name
 
-  mime_type <- file$files_resource[[1]]$mimeType
+  mime_type <- file$drive_resource[[1]]$mimeType
 
   if (!grepl("google", mime_type) && !is.null(type)) {
     message("Ignoring `type`. Only consulted for native Google file types.")

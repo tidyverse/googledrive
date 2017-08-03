@@ -99,7 +99,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     if (!is_folder(path)) {
       stop_glue("Requested parent folder does not exist:\n{path$name}")
     }
-    current_parents <- file$files_resource[[1]][["parents"]]
+    current_parents <- file$drive_resource[[1]][["parents"]]
     if (!path$id %in% current_parents) {
       meta[["addParents"]] <- path$id
       if (length(current_parents) == 1) {

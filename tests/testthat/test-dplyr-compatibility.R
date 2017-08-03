@@ -24,7 +24,7 @@ test_that("dribble class can be retained by dplyr verbs", {
 
   x_augmented <- dplyr::mutate(x, new = name)
   expect_s3_class(dplyr::rename(x_augmented, new2 = new), "dribble")
-  expect_s3_class(dplyr::select(x_augmented, name, id, files_resource), "dribble")
+  expect_s3_class(dplyr::select(x_augmented, name, id, drive_resource), "dribble")
 })
 
 test_that("dribble class can be dropped by dplyr verbs", {

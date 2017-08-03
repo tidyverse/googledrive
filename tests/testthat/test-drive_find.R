@@ -24,7 +24,7 @@ test_that("drive_find() passes q", {
   ## this should find at least 1 folder (foo), and all files found should
   ## be folders
   out <- drive_find(q = "mimeType='application/vnd.google-apps.folder'")
-  mtypes <- purrr::map_chr(out$files_resource, "mimeType")
+  mtypes <- purrr::map_chr(out$drive_resource, "mimeType")
   expect_true(all(mtypes == "application/vnd.google-apps.folder"))
 })
 
@@ -35,7 +35,7 @@ test_that("drive_find() `type` filters for MIME type", {
   ## this should find at least 1 folder (foo), and all files found should
   ## be folders
   out <- drive_find(type = "folder")
-  mtypes <- purrr::map_chr(out$files_resource, "mimeType")
+  mtypes <- purrr::map_chr(out$drive_resource, "mimeType")
   expect_true(all(mtypes == "application/vnd.google-apps.folder"))
 })
 

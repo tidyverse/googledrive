@@ -52,7 +52,7 @@ test_that("drive_mv() can move a file into a folder given as path", {
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)
   destination <- drive_get(nm_("move-files-into-me"))
-  expect_identical(out$files_resource[[1]]$parents[[1]], destination$id)
+  expect_identical(out$drive_resource[[1]]$parents[[1]], destination$id)
 })
 
 test_that("drive_mv() can move a file into a folder given as dribble", {
@@ -69,7 +69,7 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
   )
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)
-  expect_identical(out$files_resource[[1]]$parents[[1]], destination$id)
+  expect_identical(out$drive_resource[[1]]$parents[[1]], destination$id)
 })
 
 test_that("drive_mv() can rename and move, using `path` and `name`", {

@@ -99,7 +99,7 @@ drive_upload <- function(media,
   if (verbose) {
     message_glue("\nLocal file:\n  * {media}\n",
           "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
-          "with MIME type:\n  * {out$files_resource[[1]]$mimeType}"
+          "with MIME type:\n  * {out$drive_resource[[1]]$mimeType}"
     )
   }
   invisible(out)

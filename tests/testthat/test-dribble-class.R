@@ -41,7 +41,7 @@ test_that("validate_dribble() checks class, var names, var types", {
     tibble::tibble(
       name = "a",
       id = "1",
-      files_resource = list(kind = "whatever")
+      drive_resource = list(kind = "whatever")
     )
   )
   expect_error(
@@ -59,7 +59,7 @@ test_that("`[` retains dribble class when possible", {
     tibble::tibble(
       name = letters[1:4],
       id = letters[4:1],
-      files_resource = list(list(kind = "drive#file"))
+      drive_resource = list(list(kind = "drive#file"))
     )
   )
   expect_s3_class(d, "dribble")
@@ -76,7 +76,7 @@ test_that("`[` drops dribble class when not valid", {
     tibble::tibble(
       name = letters[1:4],
       id = letters[4:1],
-      files_resource = list(list(kind = "drive#file"))
+      drive_resource = list(list(kind = "drive#file"))
     )
   )
   expect_s3_class(d, "dribble")
@@ -101,7 +101,7 @@ test_that("dribble nrow checkers work", {
     tibble::tibble(
       name = "a",
       id = "b",
-      files_resource = list(list(kind = "drive#file"))
+      drive_resource = list(list(kind = "drive#file"))
     )
   )
   expect_false(no_file(d))
@@ -125,7 +125,7 @@ test_that("is_folder() works", {
   expect_identical(is_folder(dribble()), logical(0))
   d <- new_dribble(
     tibble::tribble(
-      ~ name, ~ id, ~ files_resource,
+      ~ name, ~ id, ~ drive_resource,
       "a", "aa", list(mimeType = "application/vnd.google-apps.folder"),
       "b", "bb", list(mimeType = "foo")
     )
@@ -177,7 +177,7 @@ test_that("promote() works when elem present, absent, and input is trivial", {
   x <- tibble::tibble(
     name = c("a", "b", "c"),
     id = c("1", "2", "3"),
-    files_resource = list(
+    drive_resource = list(
       list(foo = "a1"),
       list(foo = "b2"),
       list(foo = "c3", baz = "c3")
@@ -192,7 +192,7 @@ test_that("promote() works when elem present, absent, and input is trivial", {
       name = x$name,
       foo = c("a1", "b2", "c3"),
       id = x$id,
-      files_resource = x$files_resource
+      drive_resource = x$drive_resource
     )
   )
 
@@ -204,7 +204,7 @@ test_that("promote() works when elem present, absent, and input is trivial", {
       name = x$name,
       bar = list(NULL, NULL, NULL),
       id = x$id,
-      files_resource = x$files_resource
+      drive_resource = x$drive_resource
     )
   )
 
@@ -216,7 +216,7 @@ test_that("promote() works when elem present, absent, and input is trivial", {
       name = x$name,
       baz = list(NULL, NULL, "c3"),
       id = x$id,
-      files_resource = x$files_resource
+      drive_resource = x$drive_resource
     )
   )
 
@@ -229,7 +229,7 @@ test_that("promote() works when elem present, absent, and input is trivial", {
         name = character(0),
         bar = list(),
         id = character(0),
-        files_resource = list()
+        drive_resource = list()
       )
     )
   )

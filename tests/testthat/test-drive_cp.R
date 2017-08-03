@@ -38,8 +38,8 @@ test_that("drive_cp() can copy file in place", {
   expect_identical(file_cp$name, me_("i-am-a-file"))
 
   ## should have the same parent
-  expect_identical(file$files_resource[[1]]$parents,
-                   file_cp$files_resource[[1]]$parents)
+  expect_identical(file$drive_resource[[1]]$parents,
+                   file_cp$drive_resource[[1]]$parents)
 })
 
 test_that("drive_cp() can copy a file into a different folder", {
@@ -56,7 +56,7 @@ test_that("drive_cp() can copy a file into a different folder", {
   expect_identical(file_cp$name, me_("i-am-a-file"))
 
   ## should have folder as parent
-  expect_identical(file_cp$files_resource[[1]]$parents[[1]], folder$id)
+  expect_identical(file_cp$drive_resource[[1]]$parents[[1]], folder$id)
 })
 
 test_that("drive_cp() doesn't tolerate ambiguity in `path`", {

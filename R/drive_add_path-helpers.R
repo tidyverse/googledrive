@@ -24,7 +24,7 @@ pathify_prune_unnest <- function(nodes, root_id, leaf = NULL) {
   nodes$path <- ifelse(folder, append_slash(nodes$path), nodes$path)
 
   ## drop working variables
-  nodes[c("name", "path", "id", "files_resource")]
+  nodes[c("name", "path", "id", "drive_resource")]
 }
 
 ## construct file paths, in terms of file ids

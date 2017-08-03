@@ -7,5 +7,5 @@
 drive_share_link <- function(file) {
   file <- as_dribble(file)
   file <- confirm_some_files(file)
-  purrr::map_chr(file$files_resource, "webViewLink")
+  purrr::map_chr(file$drive_resource, "webViewLink")
 }

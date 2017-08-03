@@ -1,15 +1,17 @@
 #' dribble object
 #'
-#' @description googledrive stores the metadata for one or more Drive files as a
-#'   `dribble`. It is a "Drive [tibble][tibble::tibble-package]" with one row
-#'   per file and, at a minimum, these variables:
-#'   * `name`: a character variable containing file names
-#'   * `id`: a character variable of Drive file ids
-#'   * `files_resource`: a list-column of
-#'   [Files resource](https://developers.google.com/drive/v3/reference/files#resource)
-#'   objects. Note there is no guarantee that all documented fields are always
-#'   present. We do check if the `kind` field is present and equal to
-#'   `drive#file`.
+#' @description googledrive stores the metadata for one or more Drive files or
+#'   Team Drives as a `dribble`. It is a "Drive
+#'   [tibble][tibble::tibble-package]" with one row per file or Team Drive and,
+#'   at a minimum, these variables:
+#'   * `name`: a character variable containing file or Team Drive names
+#'   * `id`: a character variable of file or Team Drive ids
+#'   * `drive_resource`: a list-column, each element of which is either a
+#'   [Files resource](https://developers.google.com/drive/v3/reference/files#resource-representations)
+#'   or [Team Drive resource](https://developers.google.com/drive/v3/reference/teamdrives#resource-representations)
+#'   object. Note there is no guarantee that all documented fields are always
+#'   present. We do check if the `kind` field is present and equal to one of
+#'   `drive#file` or `drive#teamDrive`.
 #'
 #' @description In general, the dribble class will be retained even after
 #'   subsetting, as long as the required variables are present and of the
@@ -47,10 +49,11 @@ validate_dribble <- function(x) {
     )
   }
 
-  if (!has_files_resource(x)) {
+  if (!has_drive_resource(x)) {
     stop_glue(
-      "Invalid dribble. Can't confirm `kind = \"drive#file\"` ",
-      "for all elements of the nominal `files_resource` column"
+      "Invalid dribble. Can't confirm `kind = \"drive#file\"` or ",
+      "`kind = \"drive#teamDrive\"` for all elements of the nominal ",
+      "`drive_resource` column"
     )
   }
   x
@@ -60,7 +63,7 @@ dribble <- function(x = NULL) {
   x <- x %||% tibble::tibble(
     name = character(),
     id = character(),
-    files_resource = list()
+    drive_resource = list()
   )
   validate_dribble(new_dribble(x))
 }
@@ -74,7 +77,7 @@ maybe_dribble <- function(x) {
   if (is.data.frame(x) &&
       has_dribble_cols(x) &&
       has_dribble_coltypes(x) &&
-      has_files_resource(x)) {
+      has_drive_resource(x)) {
     new_dribble(x)
   } else {
     as_tibble(x)
@@ -90,7 +93,7 @@ as_tibble.dribble <- function(x) {
   )
 }
 
-dribble_cols <- c("name", "id", "files_resource")
+dribble_cols <- c("name", "id", "drive_resource")
 
 has_dribble_cols <- function(x) {
   all(dribble_cols %in% colnames(x))
@@ -99,16 +102,16 @@ has_dribble_cols <- function(x) {
 dribble_coltypes_ok <- function(x) {
   c(name = is.character(x$name),
     id = is.character(x$id),
-    files_resource = inherits(x$files_resource, "list"))
+    drive_resource = inherits(x$drive_resource, "list"))
 }
 
 has_dribble_coltypes <- function(x) {
   all(dribble_coltypes_ok(x))
 }
 
-has_files_resource <- function(x) {
-  kind <- purrr::map_chr(x$files_resource, "kind", .null = NA_character_)
-  all(!is.na(kind) & kind == "drive#file")
+has_drive_resource <- function(x) {
+  kind <- purrr::map_chr(x$drive_resource, "kind", .null = NA_character_)
+  all(!is.na(kind) & kind %in% c("drive#file", "drive#teamDrive"))
 }
 
 #' Check facts about a dribble
@@ -194,27 +197,28 @@ confirm_some_files <- function(d) {
 #' @rdname dribble-checks
 is_folder <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  purrr::map_chr(d$files_resource, "mimeType") ==
+  purrr::map_chr(d$drive_resource, "mimeType") ==
     "application/vnd.google-apps.folder"
 }
 
 #' @export
 #' @rdname dribble-checks
+## TO DO: handle team drives here
 is_mine <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  purrr::map_lgl(d$files_resource, list("owners", 1, "me"))
+  purrr::map_lgl(d$drive_resource, list("owners", 1, "me"))
 }
 
 
-## promote an element in files_resource into a top-level variable
+## promote an element in drive_resource into a top-level variable
 ## it will be the second column, presumably after `name``
 promote <- function(d, elem) {
-  present <- any(purrr::map_lgl(d$files_resource, ~ elem %in% names(.x)))
+  present <- any(purrr::map_lgl(d$drive_resource, ~ elem %in% names(.x)))
   if (present) {
-    new <- purrr::simplify(purrr::map(d$files_resource, elem))
+    new <- purrr::simplify(purrr::map(d$drive_resource, elem))
   } else {
     ## TO DO: do we really want promote() to be this forgiving?
-    ## adds a placeholder column for elem if not present in files_resource
+    ## adds a placeholder column for elem if not present in drive_resource
     ## ensure elem is added, even if there are zero rows
     new <- rep_len(list(NULL), nrow(d))
     ## TO DO: find a way to emulate .default behavior from type-specific
