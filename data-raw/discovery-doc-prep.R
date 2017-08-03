@@ -27,13 +27,11 @@ dd_content <- fromJSON(json_fname)
 ##listviewer::jsonedit(dd_content)
 
 ## extract the method collections and bring to same level of hierarchy
-collections <- c("about", "files", "permissions", "revisions", "teamdrives") %>%
-  set_names()
-endpoints <- collections %>%
+endpoints <- c("about", "files", "permissions", "revisions", "teamdrives") %>%
+  set_names() %>%
   map(~ dd_content[[c("resources", .x, "methods")]]) %>%
   imap(function(.x, nm) set_names(.x, ~ paste(nm, ., sep = "."))) %>%
   flatten()
-str(endpoints, max.level = 2)
 # str(endpoints, max.level = 1)
 # listviewer::jsonedit(endpoints)
 
@@ -57,44 +55,14 @@ add_global_params <- function(x) {
 endpoints <- map(endpoints, add_global_params)
 
 
-## add in simple upload and resumable upload
-## TO DO: add a description for each of these
-endpoints <- c(
-  endpoints,
-  files.update.media = list(
-    list(
-      id = "drive.files.update.media",
-      path = "/upload/drive/v3/files/{fileId}",
-      httpMethod = endpoints$files.update$httpMethod,
-      parameters = c(
-        endpoints$files.update$parameters,
-        uploadType = list(
-          list(type = "string",
-               required = TRUE,
-               location = "query")
-        )
-      ),
-      parameterOrder = endpoints$files.update$parameterOrder,
-      scopes = endpoints$files.update$scopes
-    )
-  ),
-  files.update.media.resumable = list(
-    list(
-      id = "drive.files.update.media.resumable",
-      path = "/resumable/upload/drive/v3/files/{fileId}",
-      httpMethod = endpoints$files.update$httpMethod,
-      parameters = c(
-        endpoints$files.update$parameters,
-        uploadType = list(
-          list(type = "string",
-               required = TRUE,
-               location = "query")
-        )
-      ),
-      parameterOrder = endpoints$files.update$parameterOrder,
-      scopes = endpoints$files.update$scopes
-    )
-  )
+## duplicate files.update endpoint so we can hold URI for media update
+endpoints[["files.update.media"]] <- endpoints[["files.update"]]
+endpoints[[c("files.update.media", "id")]] <- "drive.files.update.media"
+endpoints[[c("files.update.media", "path")]] <-
+  endpoints[[c("files.update", "mediaUpload", "protocols", "simple", "path")]]
+endpoints[[c("files.update.media", "parameters")]] <- c(
+  endpoints[[c("files.update.media", "parameters")]],
+  uploadType = list(list(type = "string", required = TRUE, location = "query"))
 )
 
 nms <- endpoints %>%
@@ -105,7 +73,8 @@ nms <- endpoints %>%
 edf <- endpoints %>%
   transpose(.names = nms) %>%
   simplify_all(.type = character(1)) %>%
-  as_tibble()
+  as_tibble() %>%
+  arrange(id)
 View(edf)
 
 ## clean up individual variables
@@ -131,8 +100,9 @@ edf$request <- edf$request %>%
   map_chr("$ref", .null = NA_character_)
 View(edf)
 
-## loooong side journey to clean up parameters
-## give them common sub-elements, in a common order
+## loooong side journey to clean up parameters; give them
+##   * common sub-elements, even if sparsely unpopulated
+##   * common order
 params <- edf %>%
   select(id, parameters) %>% {
     ## unnest() won't work with a list ... doing it manually
@@ -145,7 +115,7 @@ params <- edf %>%
   select(id, pname, parameters)
 #params$parameters %>% map(names) %>% reduce(union)
 
-## keeping repeated and enum so it can generalize to sheets in the future..
+## keeping repeated and enum so it can generalize to sheets in the future.
 nms <-
   c("location", "required", "type", "repeated", "format", "enum", "description")
 
@@ -185,8 +155,6 @@ edf <- edf %>%
   left_join(params) %>%
   select(id, httpMethod, path, parameters, everything())
 View(edf)
-
-## TO DO: sort these in some principled way, for better diffs in future
 
 ## WE ARE DONE (THANK YOU JENNY!!)
 ## saving in various forms
