@@ -89,7 +89,6 @@ drive_upload <- function(media,
   dots$fields <- dots$fields %||% "*"
 
   params <- c(
-    fileId = file$id,
     uploadType = "multipart",
     dots
   )
@@ -121,7 +120,7 @@ drive_upload <- function(media,
 
   meta_file <- tempfile()
   on.exit(unlink(meta_file))
-  writeLines(jsonlite::toJSON(meta), meta_file)
+  writeLines(jsonlite::toJSON(params), meta_file)
   ## media uploads have unique body situations, so customizing here.
   request$body <- list(
     metadata = httr::upload_file(
@@ -131,8 +130,8 @@ drive_upload <- function(media,
     media = httr::upload_file(path = media)
   )
 
-  response <- make_request(request, encode = "json")
-  proc_res <- process_response(response)
+  response <- make_request(request)
+  out <- as_dribble(list(process_response(response)))
 
   if (verbose) {
     message_glue("\nLocal file:\n  * {media}\n",
