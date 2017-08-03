@@ -62,26 +62,14 @@ drive_browse(mirrors_sheet)
 ## clean-up
 drive_find("BioC_mirrors") \%>\% drive_rm()
 
-## Upload a file with multiple parents
-
-## Create mutltiple parent directories
-folder_1 <- drive_mkdir("folder_one")
-folder_2 <- drive_mkdir("folder_two")
-
-## Upload the file into multiple parents. Notice here we are using
-## the `addParents` parameter via the `...`.
+## Upload a file that is starred
 logo <- drive_upload(
   R.home('doc/html/logo.jpg'),
-  folder_1,
-  addParents = folder_2$id
+  starred = "true"
 )
 
-## Examine the multiple parents
-drive_add_path(logo)
-
 ## Clean up
-bind_rows(folder_1, folder_2, logo) \%>\%
-  drive_rm()
+drive_rm(logo)
 }
 }
 \seealso{
