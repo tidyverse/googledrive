@@ -1,10 +1,8 @@
 #' Find Team Drives
 #'
 #' @description This is the closest googledrive function to what you get from
-#'   visiting <https://drive.google.com> and clicking "Team Drives". Note:
-#'   [Team Drives](https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/)
-#'   are only available to users of certain enhanced Google services, such as
-#'   G Suite Enterprise, G Suite Business, or G Suite for Education.
+#'   visiting <https://drive.google.com> and clicking "Team Drives".
+#' @template team-drives-description
 
 #' @seealso Wraps the `teamdrives.list` endpoint::
 #'   * <https://developers.google.com/drive/v3/reference/teamdrives/list>

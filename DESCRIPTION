@@ -19,7 +19,8 @@ Imports: curl (>= 2.8.1),
   jsonlite,
   purrr,
   tibble,
-  utils
+  utils,
+  uuid
 Suggests: covr,
   dplyr,
   knitr,
