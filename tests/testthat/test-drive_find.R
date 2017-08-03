@@ -74,8 +74,8 @@ test_that("drive_find() tolerates specification of pageSize", {
   skip_if_offline()
 
   expect_silent({
-    default <- drive_find()
-    page_size <- drive_find(pageSize = 49)
+    default <- drive_find(verbose = FALSE)
+    page_size <- drive_find(pageSize = 49, verbose = FALSE)
   })
   ## weird little things deep in the files resource can vary but
   ## I really don't care, e.g. thumbnailLink seems very volatile

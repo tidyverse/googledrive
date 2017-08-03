@@ -10,7 +10,8 @@ make_request(x, ...)
 
 do_request(x, ...)
 
-do_paginated_request(x, ..., n_max = Inf, n = function(res) 1)
+do_paginated_request(x, ..., n_max = Inf, n = function(res) 1,
+  verbose = TRUE)
 }
 \arguments{
 \item{x}{List, holding the components for an HTTP request, presumably created
@@ -27,6 +28,9 @@ The default function always returns \code{1} and therefore treats each page as
 an item. If you know more about the structure of the response, you can
 pass another function to count and threshhold, for example, the number of
 files or comments.}
+
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
 \code{make_request()}: Object of class \code{response} from \link{httr}.
@@ -34,7 +38,7 @@ files or comments.}
 \code{do_request()}: List representing the content returned by a single
 request.
 
-\code{do_pagintated_request()}: List of lists, representing the returned
+\code{do_paginated_request()}: List of lists, representing the returned
 content, one component per page.
 }
 \description{

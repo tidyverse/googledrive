@@ -27,10 +27,10 @@ stop_glue_data <- function(..., .sep = "", .envir = parent.frame(),
 stop_collapse <- function(x) stop(collapse(x, sep = "\n"), call. = FALSE)
 
 message_glue <- function(..., .sep = "", .envir = parent.frame(),
-                         .domain = NULL) {
+                         .domain = NULL, .appendLF = TRUE) {
   message(
     glue(..., .sep = .sep, .envir = .envir),
-    domain = .domain
+    domain = .domain, appendLF = .appendLF
   )
 }
 

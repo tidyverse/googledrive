@@ -32,7 +32,7 @@ docs for the associated endpoint.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
-  file.
+  item.
 }
 \description{
 Copies an existing Drive file into a new file id.

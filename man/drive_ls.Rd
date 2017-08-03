@@ -15,7 +15,7 @@ to list. Can be an actual path (character), a file id or URL marked with
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
-  file.
+  item.
 }
 \description{
 List the contents of a folder on Google Drive, nonrecursively. This is a thin

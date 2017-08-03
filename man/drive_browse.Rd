@@ -13,7 +13,7 @@ ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
-  file.
+  item.
 }
 \description{
 Visit Drive file in browser.

@@ -8,7 +8,7 @@ drive_find(pattern = NULL, type = NULL, n_max = Inf, ...,
   verbose = TRUE)
 }
 \arguments{
-\item{pattern}{Character. If provided, only the files whose names match this
+\item{pattern}{Character. If provided, only the items whose names match this
 regular expression are returned. This is implemented locally on the results
 returned by the API.}
 
@@ -16,7 +16,7 @@ returned by the API.}
 Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle. This is
 processed by googledrive and sent as a query parameter.}
 
-\item{n_max}{Integer. An upper bound on the number of files to return. This
+\item{n_max}{Integer. An upper bound on the number of items to return. This
 applies to the results requested from the API, which may be further
 filtered locally, via the \code{pattern} argument.}
 
@@ -29,7 +29,7 @@ candidate is \code{q}. See the examples and the API's
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
-  file.
+  item.
 }
 \description{
 This is the closest googledrive function to what you get from

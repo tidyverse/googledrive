@@ -21,15 +21,11 @@
 #' Helpful resource for forming your own queries:
 #'   * <https://developers.google.com/drive/v3/web/search-parameters>
 #'
-#' @param pattern Character. If provided, only the files whose names match this
-#'   regular expression are returned. This is implemented locally on the results
-#'   returned by the API.
+#' @template pattern
 #' @param type Character. If provided, only files of this type will be returned.
 #'   Can be anything that [drive_mime_type()] knows how to handle. This is
 #'   processed by googledrive and sent as a query parameter.
-#' @param n_max Integer. An upper bound on the number of files to return. This
-#'   applies to the results requested from the API, which may be further
-#'   filtered locally, via the `pattern` argument.
+#' @template n_max
 #' @param ... Other parameters to pass along in the request. The most likely
 #'   candidate is `q`. See the examples and the API's
 #'   [Search for Files guide](https://developers.google.com/drive/v3/web/search-parameters).
@@ -102,7 +98,8 @@ drive_find <- function(pattern = NULL,
   proc_res_list <- do_paginated_request(
     request,
     n_max = n_max,
-    n = function(x) length(x$files)
+    n = function(x) length(x$files),
+    verbose = verbose
   )
 
   res_tbl <- proc_res_list %>%
