@@ -3947,6 +3947,604 @@
     "supportsMediaDownload": {},
     "useMediaDownloadService": {}
   },
+  "drive.teamdrives.create": {
+    "id": ["drive.teamdrives.create"],
+    "httpMethod": ["POST"],
+    "path": ["drive/v3/teamdrives"],
+    "parameters": {
+      "requestId": {
+        "location": ["query"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned."]
+      },
+      "backgroundImageFile": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set."]
+      },
+      "backgroundImageLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short-lived link to this Team Drive's background image."]
+      },
+      "capabilities": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Capabilities the current user has on this Team Drive."]
+      },
+      "colorRgb": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The color of this Team Drive as an RGB hex string. It can only be set on a drive.teamdrives.update request that does not set themeId."]
+      },
+      "id": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of this Team Drive which is also the ID of the top level folder for this Team Drive."]
+      },
+      "kind": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Identifies what kind of resource this is. Value: the fixed string \"drive#teamDrive\"."]
+      },
+      "name": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The name of this Team Drive."]
+      },
+      "themeId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the theme from which the background image and color will be set. The set of possible teamDriveThemes can be retrieved from a drive.about.get response. When not specified on a drive.teamdrives.create request, a random theme is chosen from which the background image and color are set. This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive"],
+    "description": ["Creates a new Team Drive."],
+    "response": ["TeamDrive"],
+    "parameterOrder": ["requestId"],
+    "request": ["TeamDrive"],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.teamdrives.delete": {
+    "id": ["drive.teamdrives.delete"],
+    "httpMethod": ["DELETE"],
+    "path": ["drive/v3/teamdrives/{teamDriveId}"],
+    "parameters": {
+      "teamDriveId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the Team Drive"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive"],
+    "description": ["Permanently deletes a Team Drive for which the user is an organizer. The Team Drive cannot contain any untrashed items."],
+    "response": [null],
+    "parameterOrder": ["teamDriveId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.teamdrives.get": {
+    "id": ["drive.teamdrives.get"],
+    "httpMethod": ["GET"],
+    "path": ["drive/v3/teamdrives/{teamDriveId}"],
+    "parameters": {
+      "teamDriveId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the Team Drive"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.readonly"],
+    "description": ["Gets a Team Drive's metadata by ID."],
+    "response": ["TeamDrive"],
+    "parameterOrder": ["teamDriveId"],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.teamdrives.list": {
+    "id": ["drive.teamdrives.list"],
+    "httpMethod": ["GET"],
+    "path": ["drive/v3/teamdrives"],
+    "parameters": {
+      "pageSize": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["integer"],
+        "repeated": [null],
+        "format": ["int32"],
+        "enum": [null],
+        "description": ["Maximum number of Team Drives to return."]
+      },
+      "pageToken": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Page token for Team Drives."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive, drive.readonly"],
+    "description": ["Lists the user's Team Drives."],
+    "response": ["TeamDriveList"],
+    "parameterOrder": [null],
+    "request": [null],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
+  "drive.teamdrives.update": {
+    "id": ["drive.teamdrives.update"],
+    "httpMethod": ["PATCH"],
+    "path": ["drive/v3/teamdrives/{teamDriveId}"],
+    "parameters": {
+      "teamDriveId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the Team Drive"]
+      },
+      "backgroundImageFile": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set."]
+      },
+      "backgroundImageLink": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["A short-lived link to this Team Drive's background image."]
+      },
+      "capabilities": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["object"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Capabilities the current user has on this Team Drive."]
+      },
+      "colorRgb": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The color of this Team Drive as an RGB hex string. It can only be set on a drive.teamdrives.update request that does not set themeId."]
+      },
+      "id": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of this Team Drive which is also the ID of the top level folder for this Team Drive."]
+      },
+      "kind": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Identifies what kind of resource this is. Value: the fixed string \"drive#teamDrive\"."]
+      },
+      "name": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The name of this Team Drive."]
+      },
+      "themeId": {
+        "location": ["body"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["The ID of the theme from which the background image and color will be set. The set of possible teamDriveThemes can be retrieved from a drive.about.get response. When not specified on a drive.teamdrives.create request, a random theme is chosen from which the background image and color are set. This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile."]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": ["json"],
+        "description": ["Data format for the response."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."]
+      },
+      "userIp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "format": [null],
+        "enum": [null],
+        "description": ["IP address of the site where the request originates. Use this if you want to enforce per-user limits."]
+      }
+    },
+    "scopes": ["drive"],
+    "description": ["Updates a Team Drive's metadata"],
+    "response": ["TeamDrive"],
+    "parameterOrder": ["teamDriveId"],
+    "request": ["TeamDrive"],
+    "supportsMediaUpload": {},
+    "mediaUpload": {},
+    "supportsSubscription": {},
+    "supportsMediaDownload": {},
+    "useMediaDownloadService": {}
+  },
   "drive.files.update.media": {
     "id": ["drive.files.update.media"],
     "httpMethod": ["PATCH"],

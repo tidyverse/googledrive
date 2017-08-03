@@ -27,16 +27,13 @@ dd_content <- fromJSON(json_fname)
 ##listviewer::jsonedit(dd_content)
 
 ## extract the method collections and bring to same level of hierarchy
-about <- dd_content[[c("resources", "about", "methods")]]
-names(about) <- paste("about", names(about), sep = ".")
-files <- dd_content[[c("resources", "files", "methods")]]
-names(files) <- paste("files", names(files), sep = ".")
-permissions <- dd_content[[c("resources", "permissions", "methods")]]
-names(permissions) <- paste("permissions", names(permissions), sep = ".")
-revisions <- dd_content[[c("resources", "revisions", "methods")]]
-names(revisions) <- paste("revisions", names(revisions), sep = ".")
-
-endpoints <- c(about, files, permissions, revisions)
+collections <- c("about", "files", "permissions", "revisions", "teamdrives") %>%
+  set_names()
+endpoints <- collections %>%
+  map(~ dd_content[[c("resources", .x, "methods")]]) %>%
+  imap(function(.x, nm) set_names(.x, ~ paste(nm, ., sep = "."))) %>%
+  flatten()
+str(endpoints, max.level = 2)
 # str(endpoints, max.level = 1)
 # listviewer::jsonedit(endpoints)
 
@@ -61,6 +58,7 @@ endpoints <- map(endpoints, add_global_params)
 
 
 ## add in simple upload and resumable upload
+## TO DO: add a description for each of these
 endpoints <- c(
   endpoints,
   files.update.media = list(
@@ -117,7 +115,7 @@ edf <- edf %>%
   select(id, httpMethod, path, parameters, scopes, description, everything())
 
 edf$path <- edf$path %>%
-  modify_if(~ !grepl("upload", .x), ~ paste0("drive/v3/", .x))
+  modify_if(~ !grepl("drive/v3", .x), ~ paste0("drive/v3/", .x))
 
 edf$scopes <- edf$scopes %>%
   map(~ gsub("https://www.googleapis.com/auth/", "", .)) %>%
@@ -188,7 +186,7 @@ edf <- edf %>%
   select(id, httpMethod, path, parameters, everything())
 View(edf)
 
-
+## TO DO: sort these in some principled way, for better diffs in future
 
 ## WE ARE DONE (THANK YOU JENNY!!)
 ## saving in various forms
