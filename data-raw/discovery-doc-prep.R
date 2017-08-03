@@ -65,6 +65,16 @@ endpoints[[c("files.update.media", "parameters")]] <- c(
   uploadType = list(list(type = "string", required = TRUE, location = "query"))
 )
 
+## duplicate files.create endpoint so we can hold URI for media upload
+endpoints[["files.create.media"]] <- endpoints[["files.create"]]
+endpoints[[c("files.create.media", "id")]] <- "drive.files.create.media"
+endpoints[[c("files.create.media", "path")]] <-
+  endpoints[[c("files.create", "mediaUpload", "protocols", "simple", "path")]]
+endpoints[[c("files.create.media", "parameters")]] <- c(
+  endpoints[[c("files.create.media", "parameters")]],
+  uploadType = list(list(type = "string", required = TRUE, location = "query"))
+)
+
 nms <- endpoints %>%
   map(names) %>%
   reduce(union)
