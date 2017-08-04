@@ -2,7 +2,7 @@
 #'
 #' @description This is the closest googledrive function to what you get from
 #'   visiting <https://drive.google.com> and clicking "Team Drives".
-#' @template team-drives-description
+#' @template teamdrives-description
 
 #' @seealso Wraps the `teamdrives.list` endpoint::
 #'   * <https://developers.google.com/drive/v3/reference/teamdrives/list>
@@ -16,9 +16,9 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' team_drive_find()
+#' teamdrive_find()
 #' }
-team_drive_find <- function(pattern = NULL,
+teamdrive_find <- function(pattern = NULL,
                             n_max = Inf,
                             ...,
                             verbose = TRUE) {

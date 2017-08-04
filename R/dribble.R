@@ -210,7 +210,7 @@ is_mine <- function(d) {
 
 #' @export
 #' @rdname dribble-checks
-is_team_drive <- function(d) {
+is_teamdrive <- function(d) {
   stopifnot(inherits(d, "dribble"))
   purrr::map_chr(d$drive_resource, "kind") == "drive#teamDrive"
 }

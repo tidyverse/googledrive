@@ -10,7 +10,7 @@
 \alias{confirm_some_files}
 \alias{is_folder}
 \alias{is_mine}
-\alias{is_team_drive}
+\alias{is_teamdrive}
 \title{Check facts about a dribble}
 \usage{
 is_dribble(d)
@@ -29,7 +29,7 @@ is_folder(d)
 
 is_mine(d)
 
-is_team_drive(d)
+is_teamdrive(d)
 }
 \arguments{
 \item{d}{A \code{\link{dribble}}.}
