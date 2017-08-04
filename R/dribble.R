@@ -208,6 +208,12 @@ is_mine <- function(d) {
   purrr::map_lgl(d$drive_resource, list("owners", 1, "me"))
 }
 
+#' @export
+#' @rdname dribble-checks
+is_team_drive <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  purrr::map_chr(d$drive_resource, "kind") == "drive#teamDrive"
+}
 
 ## promote an element in drive_resource into a top-level variable
 ## it will be the second column, presumably after `name``
