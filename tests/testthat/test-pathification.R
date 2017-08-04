@@ -17,7 +17,7 @@ test_that("get_paths() correctly reports paths, no name duplication", {
     "d",        NULL
   )
   df$id <- df$name
-  df$files_resource <- list(list(kind = "drive#file"))
+  df$drive_resource <- list(list(kind = "drive#file"))
 
   ## rooted path exists
   out <- get_paths(path = "a/c", .rships = df)
@@ -34,21 +34,21 @@ test_that("get_paths() correctly reports paths, no name duplication", {
   ## rooted version does not exist
   out <- get_paths(path = "~/d/e", .rships = df)
   expect_equivalent(
-    out[c("name", "id", "files_resource")],
+    out[c("name", "id", "drive_resource")],
     dribble()
   )
 
   ## path does not exist, names do not exist
   out <- get_paths(path = "x/y/z", .rships = df)
   expect_equivalent(
-    out[c("name", "id", "files_resource")],
+    out[c("name", "id", "drive_resource")],
     dribble()
   )
 
   ## path only partially exists, partial_ok = FALSE
   out <- get_paths(path = "a/f", .rships = df, partial_ok = FALSE)
   expect_equivalent(
-    out[c("name", "id", "files_resource")],
+    out[c("name", "id", "drive_resource")],
     dribble()
   )
 
@@ -60,7 +60,7 @@ test_that("get_paths() correctly reports paths, no name duplication", {
   ## path partially exists, but all names exist, partial_ok = FALSE
   out <- get_paths(path = "a/e", .rships = df, partial_ok = FALSE)
   expect_equivalent(
-    out[c("name", "id", "files_resource")],
+    out[c("name", "id", "drive_resource")],
     dribble()
   )
 
@@ -93,7 +93,7 @@ test_that("get_paths() works, with name duplication & multiple parents", {
     "c",  "8",         "2",
     "c",  "9",         "7"
   )
-  df$files_resource <- list(list(kind = "drive#file"))
+  df$drive_resource <- list(list(kind = "drive#file"))
 
   ## single path exists
   out <- get_paths(path = "a/b", .rships = df)
@@ -104,7 +104,7 @@ test_that("get_paths() works, with name duplication & multiple parents", {
   expect_equivalent(
     get_paths(path = "a", .rships = df[df$name == "a", ]),
     tibble::tribble(
-      ~ name, ~ id,          ~ files_resource, ~ path,
+      ~ name, ~ id,          ~ drive_resource, ~ path,
       "a",  "3", list(kind = "drive#file"),    "a",
       "a",  "5", list(kind = "drive#file"),    "a",
       "a",  "1", list(kind = "drive#file"),    "a",
@@ -117,7 +117,7 @@ test_that("get_paths() works, with name duplication & multiple parents", {
   expect_equivalent(
     get_paths(path = "a/a", .rships = df),
     tibble::tribble(
-      ~ name, ~ id,          ~ files_resource, ~ path,
+      ~ name, ~ id,          ~ drive_resource, ~ path,
       "a",  "3", list(kind = "drive#file"),  "a/a",
       "a",  "5", list(kind = "drive#file"),  "a/a"
     )
@@ -126,13 +126,13 @@ test_that("get_paths() works, with name duplication & multiple parents", {
   ## multiple partial paths exist at depth > 1
   out <- get_paths(path = "a/f", .rships = df, partial_ok = FALSE)
   expect_equivalent(
-    out[c("name", "id", "files_resource")],
+    out[c("name", "id", "drive_resource")],
     dribble()
   )
   expect_equivalent(
     get_paths(path = "a/f", .rships = df, partial_ok = TRUE),
     tibble::tribble(
-      ~ name, ~ id,          ~ files_resource, ~ path,
+      ~ name, ~ id,          ~ drive_resource, ~ path,
       "a",  "3", list(kind = "drive#file"),    "a",
       "a",  "5", list(kind = "drive#file"),    "a",
       "a",  "1", list(kind = "drive#file"),    "a",

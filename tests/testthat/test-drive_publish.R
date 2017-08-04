@@ -33,7 +33,7 @@ test_that("drive_publish() publishes Google Documents", {
 
   ## since we haven't checked the publication status,
   ## this should be NULL
-  expect_null(drive_doc[["files_resource"]][[1]][["publish"]])
+  expect_null(drive_doc[["drive_resource"]][[1]][["publish"]])
 
   drive_doc <- drive_publish(drive_doc)
 
@@ -62,7 +62,7 @@ test_that("drive_publish() publishes Google Sheets", {
 
   ## since we haven't checked the publication status,
   ## this should be NULL
-  expect_null(drive_sheet[["files_resource"]][[1]][["publish"]])
+  expect_null(drive_sheet[["drive_resource"]][[1]][["publish"]])
 
   drive_sheet <- drive_publish(drive_sheet)
 

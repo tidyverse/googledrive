@@ -76,10 +76,8 @@ drive_find <- function(pattern = NULL,
                        ...,
                        verbose = TRUE) {
 
-  if (!is.null(pattern)) {
-    if (!(is.character(pattern) && length(pattern) == 1)) {
-      stop("Please update `pattern` to be a character string.", call. = FALSE)
-    }
+  if (!is.null(pattern) && !(is_string(pattern))) {
+      stop_glue("Please update `pattern` to be a character string.")
   }
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
   if (n_max < 1) return(dribble())

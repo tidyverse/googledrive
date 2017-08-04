@@ -63,7 +63,7 @@ drive_upload <- function(media,
   }
 
   if (!is.null(name)) {
-    stopifnot(is_path(name), length(name) == 1)
+    stopifnot(is_string(name))
   }
 
   if (is_path(path)) {
@@ -123,8 +123,8 @@ drive_upload <- function(media,
 
   if (verbose) {
     message_glue("\nLocal file:\n  * {media}\n",
-                 "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
-                 "with MIME type:\n  * {out$files_resource[[1]]$mimeType}"
+          "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
+          "with MIME type:\n  * {out$drive_resource[[1]]$mimeType}"
     )
   }
   invisible(out)

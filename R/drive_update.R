@@ -37,7 +37,7 @@
 #' x <- x %>%
 #'   drive_update(addParents = folder$id)
 #' ## Verify the file now has multiple parents
-#' x$files_resource[[1]]$parents
+#' x$drive_resource[[1]]$parents
 #'
 #' ## Update the file with new media AND new metadata
 #' x <- x %>%

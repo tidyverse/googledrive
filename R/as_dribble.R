@@ -83,7 +83,7 @@ as_dribble.list <- function(x, ...) {
     tibble::tibble(
       name = purrr::map_chr(x, "name"),
       id = purrr::map_chr(x, "id"),
-      files_resource = x
+      drive_resource = x
     )
   )
 }

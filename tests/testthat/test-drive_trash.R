@@ -31,12 +31,12 @@ test_that("drive_trash() moves file to trash and drive_untrash() undoes", {
   out <- drive_trash(me_("trashee"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("trashee"))
-  expect_true(out[["files_resource"]][[1]][["trashed"]])
+  expect_true(out[["drive_resource"]][[1]][["trashed"]])
 
   out <- drive_untrash(me_("trashee"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("trashee"))
-  expect_false(out[["files_resource"]][[1]][["trashed"]])
+  expect_false(out[["drive_resource"]][[1]][["trashed"]])
 })
 
 ## WARNING: this will empty your drive trash. If you do

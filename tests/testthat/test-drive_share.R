@@ -29,7 +29,7 @@ test_that("drive_share doesn't explicitly fail", {
   )
   ## since we haven't updated the permissions, the permissions
   ## tibble should be just 1 row
-  expect_length(file[["files_resource"]][[1]][["permissions"]], 1)
+  expect_length(file[["drive_resource"]][[1]][["permissions"]], 1)
 
   role <- "reader"
   type <- "anyone"
@@ -44,13 +44,13 @@ test_that("drive_share doesn't explicitly fail", {
   )
 
   ## this should now have a larger tibble
-  expect_length(file[["files_resource"]][[1]][["permissions"]], 2)
+  expect_length(file[["drive_resource"]][[1]][["permissions"]], 2)
 
   ## this new tibble should have type "user" and the type
   ## defined above, and the roles should be "owner" and
   ## the role defined above
 
-  perms <- file[["files_resource"]][[1]][["permissions"]][[2]]
+  perms <- file[["drive_resource"]][[1]][["permissions"]][[2]]
   expect_identical(perms[c("role", "type")], list(role = role, type = type))
 })
 

@@ -36,7 +36,7 @@ test_that("drive_upload() places file in non-root folder, with new name", {
 
   expect_s3_class(uploadee, "dribble")
   expect_identical(nrow(uploadee), 1L)
-  expect_identical(uploadee$files_resource[[1]]$parents[[1]], destination$id)
+  expect_identical(uploadee$drive_resource[[1]]$parents[[1]], destination$id)
 })
 
 test_that("drive_upload() accepts body metadata via ...", {

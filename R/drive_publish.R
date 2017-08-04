@@ -54,7 +54,7 @@ drive_change_publish <- function(file,
 
   x$revisionId <- purrr::map_chr(file_update$publish, "revision")
 
-  mime_type <- purrr::map_chr(file_update$files_resource, "mimeType")
+  mime_type <- purrr::map_chr(file_update$drive_resource, "mimeType")
 
   x$revisionId <- if (grepl("application/vnd.google-apps.spreadsheet", mime_type)) {
     1
@@ -128,7 +128,7 @@ drive_is_published <- function(file, verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_some_files(file)
 
-  mime_types <- purrr::map_chr(file$files_resource, "mimeType")
+  mime_types <- purrr::map_chr(file$drive_resource, "mimeType")
   if (!all(grepl("application/vnd.google-apps.", mime_types)) || is_folder(file)) {
     all_mime_types <- glue_data(file, "  * {name}: {mime_types}")
     stop_collapse(c(

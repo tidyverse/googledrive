@@ -20,8 +20,8 @@ if (SETUP) {
 # ---- tests ----
 test_that("drive_mkdir() errors for bad input (before hitting Drive API)", {
   expect_error(drive_mkdir(), "name must be specified")
-  expect_error(drive_mkdir(letters), "length\\(path\\) == 1 is not TRUE")
-  expect_error(drive_mkdir(name = letters), "length\\(name\\) == 1 is not TRUE")
+  expect_error(drive_mkdir(letters), "is_string\\(path\\) is not TRUE")
+  expect_error(drive_mkdir(name = letters), "is_string\\(name\\) is not TRUE")
 })
 
 test_that("drive_mkdir() errors if parent path does not exist", {
