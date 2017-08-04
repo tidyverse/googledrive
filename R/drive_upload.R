@@ -95,7 +95,7 @@ drive_upload <- function(media,
     if (!is_folder(path)) {
       stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
     }
-    params[["parents"]] <- list(path$id)
+    params[["parents"]] <- path$id
   }
 
   params[["name"]] <- name %||% basename(media)
