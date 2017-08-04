@@ -1,7 +1,10 @@
-#' Delete files from Drive.
+#' Delete files from Drive
 #'
-#' @description Caution: this will permanently delete your files! For a safer,
-#'   reversible option, see [drive_trash()].
+#' Caution: this will permanently delete your files! For a safer, reversible
+#' option, see [drive_trash()].
+#'
+#' @seealso Wraps the `files.delete` endpoint:
+#'   * <https://developers.google.com/drive/v3/reference/files/delete>
 #'
 #' @template file
 #' @template verbose

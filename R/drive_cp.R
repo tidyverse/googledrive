@@ -2,9 +2,8 @@
 #'
 #' Copies an existing Drive file into a new file id.
 #'
-#' @seealso Wraps the
-#' [drive.files.copy](https://developers.google.com/drive/v3/reference/files/copy)
-#' endpoint.
+#' @seealso Wraps the `files.copy` endpoint:
+#'   * <https://developers.google.com/drive/v3/reference/files/copy>
 #'
 #' @template file
 #' @template path

@@ -9,7 +9,7 @@ drive_is_published(file, verbose = TRUE)
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
-ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

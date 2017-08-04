@@ -9,7 +9,7 @@ drive_publish(file, ..., verbose = TRUE)
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
-ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{...}{Name-value pairs to add to the API request body, for example
 \code{publishAuto = FALSE} will ensure that each subsequent revision will not be

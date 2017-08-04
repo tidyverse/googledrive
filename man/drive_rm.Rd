@@ -2,14 +2,14 @@
 % Please edit documentation in R/drive_rm.R
 \name{drive_rm}
 \alias{drive_rm}
-\title{Delete files from Drive.}
+\title{Delete files from Drive}
 \usage{
 drive_rm(file = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
-ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -18,8 +18,8 @@ ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 Logical vector, indicating whether the delete succeeded.
 }
 \description{
-Caution: this will permanently delete your files! For a safer,
-reversible option, see \code{\link[=drive_trash]{drive_trash()}}.
+Caution: this will permanently delete your files! For a safer, reversible
+option, see \code{\link[=drive_trash]{drive_trash()}}.
 }
 \examples{
 \dontrun{
@@ -28,5 +28,11 @@ folder <- drive_mkdir("folder-to-remove")
 
 ## Remove folder
 drive_rm(folder)
+}
+}
+\seealso{
+Wraps the \code{files.delete} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/files/delete}
 }
 }

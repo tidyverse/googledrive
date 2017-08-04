@@ -9,7 +9,7 @@ drive_cp(file, path = NULL, name = NULL, ..., verbose = TRUE)
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
-ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{path}{Specifies target destination for the new file on Google
 Drive. Can be an actual path (character), a file id marked with
@@ -84,7 +84,8 @@ drive_rm(mirrors_sheet)
 }
 }
 \seealso{
-Wraps the
-\href{https://developers.google.com/drive/v3/reference/files/copy}{drive.files.copy}
-endpoint.
+Wraps the \code{files.copy} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/files/copy}
+}
 }
