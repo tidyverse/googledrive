@@ -95,6 +95,12 @@ drive_upload <- function(media,
     if (!is_folder(path)) {
       stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
     }
+    if (!is.null(params[["parents"]])) {
+      stop_glue("\nYou have specified a parent folder both via `path` and `parents`:",
+                "\n  * `path`: {path$name}",
+                "\n  * `parents`: {params[['parents']]}",
+                "\nIf you intend to specify multiple parents, use the `parents` parameter only.")
+    }
     params[["parents"]] <- path$id
   }
 
