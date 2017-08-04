@@ -48,10 +48,9 @@ as_dribble.dribble <- function(x, ...) x
 #' @export
 #' @rdname as_dribble
 as_dribble.default <- function(x, ...) {
-  stop(
-    "Don't know how to coerce object of class ",
-    paste(class(x), collapse = "/"), " into a dribble",
-    call. = FALSE
+  stop_glue_data(
+    list(x = collapse(class(x), sep = "/")),
+    "Don't know how to coerce object of class {x} into a dribble"
   )
 }
 
