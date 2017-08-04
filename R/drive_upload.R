@@ -3,13 +3,17 @@
 #' Uploads a local file into a new Drive file. To update the content or metadata
 #' of an existing Drive file, use [drive_update()].
 #'
-#' @seealso MIME types that can be converted to native Google formats:
+#' @seealso Wraps the `files.create` endpoint:
+#'   * <https://developers.google.com/drive/v3/reference/files/create>
+#'
+#' MIME types that can be converted to native Google formats:
 #'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
 #'
 #' @template media
 #' @template path
 #' @templateVar name file
-#' @templateVar default If not given or unknown, will default to the "My Drive" root folder.
+#' @templateVar default If not given or unknown, will default to the "My Drive"
+#'   root folder.
 #' @template name
 #' @templateVar name file
 #' @templateVar default Will default to its local name.
@@ -19,6 +23,7 @@
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,
 #'   respectively. All non-`NULL` values for `type` are pre-processed with
 #'   [drive_mime_type()].
+#' @template dots-metadata
 #' @template verbose
 #'
 #' @template dribble-return
@@ -40,11 +45,21 @@
 #'
 #' ## clean-up
 #' drive_find("BioC_mirrors") %>% drive_rm()
+#'
+#' ## Upload a file and, at the same time, star it
+#' logo <- drive_upload(
+#'   R.home('doc/html/logo.jpg'),
+#'   starred = "true"
+#' )
+#'
+#' ## Clean up
+#' drive_rm(logo)
 #' }
 drive_upload <- function(media,
                          path = NULL,
                          name = NULL,
                          type = NULL,
+                         ...,
                          verbose = TRUE) {
 
   if (!file.exists(media)) {
@@ -62,39 +77,60 @@ drive_upload <- function(media,
     name <- name %||% path_parts$name
   }
 
-  ## vet the parent folder
-  ## easier to default to root vs keeping track of whether parent is specified
-  path <- path %||% root_folder()
-  path <- as_dribble(path)
-  if (!some_files(path)) {
-    stop_glue("Requested parent folder does not exist.")
-  }
-  if (!single_file(path)) {
-    paths <- glue_data(path, "  * {name}: {id}")
-    stop_collapse(
-      c("Requested parent folder identifies multiple files:", paths)
-    )
-  }
-  if (!is_folder(path)) {
-    stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
-  }
+  dots <- list(...)
+  dots$fields <- dots$fields %||% "*"
 
-  name <- name %||% basename(media)
-  mimeType <- drive_mime_type(type)
-
-  request <- generate_request(
-    endpoint = "drive.files.create",
-    params = list(
-      name = name,
-      parents = list(path$id),
-      mimeType = mimeType
-    )
+  params <- c(
+    uploadType = "multipart",
+    dots
   )
 
-  response <- make_request(request, encode = "json")
-  proc_res <- process_response(response)
+  if (!is.null(path)) {
+    path <- as_dribble(path)
+    if (!some_files(path)) {
+      stop_glue("Requested parent folder does not exist.")
+    }
+    if (!single_file(path)) {
+      paths <- glue_data(path, "  * {name}: {id}")
+      stop_collapse(
+        c("Requested parent folder identifies multiple files:", paths)
+      )
+    }
+    if (!is_folder(path)) {
+      stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
+    }
+    if (!is.null(params[["parents"]])) {
+      stop_collapse(c(
+        "You have specified parent folders via both `path` and `parents`.",
+        "Pick one.",
+        "If you want multiple parents, just use the `parents` parameter."
+      ))
+    }
+    params[["parents"]] <- path$id
+  }
 
-  out <- drive_update(as_id(proc_res$id), media, verbose = FALSE)
+  params[["name"]] <- name %||% basename(media)
+  params[["mimeType"]] <- drive_mime_type(type)
+
+  request <- generate_request(
+    endpoint = "drive.files.create.media",
+    params = params
+  )
+
+  meta_file <- tempfile()
+  on.exit(unlink(meta_file))
+  writeLines(jsonlite::toJSON(params), meta_file)
+  ## media uploads have unique body situations, so customizing here.
+  request$body <- list(
+    metadata = httr::upload_file(
+      path = meta_file,
+      type = "application/json; charset=UTF-8"
+    ),
+    media = httr::upload_file(path = media)
+  )
+
+  response <- make_request(request)
+  out <- as_dribble(list(process_response(response)))
 
   if (verbose) {
     message_glue("\nLocal file:\n  * {media}\n",

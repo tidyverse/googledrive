@@ -4,7 +4,7 @@
 \alias{drive_upload}
 \title{Upload into a new Drive file}
 \usage{
-drive_upload(media, path = NULL, name = NULL, type = NULL,
+drive_upload(media, path = NULL, name = NULL, type = NULL, ...,
   verbose = TRUE)
 }
 \arguments{
@@ -27,6 +27,11 @@ suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting \code{type} to \code{document}, \code{spreadsheet}, or \code{presentation},
 respectively. All non-\code{NULL} values for \code{type} are pre-processed with
 \code{\link[=drive_mime_type]{drive_mime_type()}}.}
+
+\item{...}{Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via \code{...}. See the "Request body" section of the Drive API
+docs for the associated endpoint.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -56,9 +61,23 @@ drive_browse(mirrors_sheet)
 
 ## clean-up
 drive_find("BioC_mirrors") \%>\% drive_rm()
+
+## Upload a file that is starred
+logo <- drive_upload(
+  R.home('doc/html/logo.jpg'),
+  starred = "true"
+)
+
+## Clean up
+drive_rm(logo)
 }
 }
 \seealso{
+Wraps the \code{files.create} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/files/create}
+}
+
 MIME types that can be converted to native Google formats:
 \itemize{
 \item \url{https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19}
