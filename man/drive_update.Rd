@@ -15,8 +15,8 @@ ids marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{...}{Named parameters to pass along to the Drive API. You can affect
 the metadata of the target file by specifying properties of the Files
-resource via `...`. See the "Request body" section of the Drive API docs
-for the associated endpoint.}
+resource via \code{...}. See the "Request body" section of the Drive API
+docs for the associated endpoint.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

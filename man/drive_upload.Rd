@@ -10,16 +10,16 @@ drive_upload(media, path = NULL, name = NULL, type = NULL, ...,
 \arguments{
 \item{media}{Character, path to the local file to upload.}
 
-\item{path}{Specifies target destination for the new file on Google Drive.
-Can be an actual path (character), a file id marked with
+\item{path}{Specifies target destination for the new file on Google
+Drive. Can be an actual path (character), a file id marked with
 \code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
 actual path, it is best to explicitly indicate if it's a folder by
 including a trailing slash, since it cannot always be worked out from the
 context of the call. Will default to its local name.}
 
-\item{name}{Character, new file name if not specified as part of `path`. This
-will force `path` to be treated as a folder, even if it is character and lacks
-a trailing slash. Will default to its local name.}
+\item{name}{Character, new file name if not specified as part of
+\code{path}. This will force \code{path} to be treated as a folder, even if
+it is character and lacks a trailing slash. Will default to its local name.}
 
 \item{type}{Character. If \code{type = NULL}, a MIME type is automatically
 determined from the file extension, if possible. If the source file is of a
