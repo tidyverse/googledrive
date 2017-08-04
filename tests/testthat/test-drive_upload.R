@@ -51,7 +51,7 @@ test_that("drive_upload() accepts body metadata via ...", {
   )
   expect_s3_class(uploadee, "dribble")
   expect_identical(nrow(uploadee), 1L)
-  expect_true(uploadee$files_resource[[1]]$starred)
+  expect_true(uploadee$drive_resource[[1]]$starred)
 
 })
 
