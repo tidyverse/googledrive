@@ -85,7 +85,7 @@ test_that("drive_cp() errors if asked to copy a folder", {
 test_that("drive_cp() takes name, assumes path is folder if both are specified", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(nm_("file-name")))
+  on.exit(drive_rm(me_("file-name")))
 
   ## if given `path` and `name`, assumes `path` is a folder
   expect_message(
