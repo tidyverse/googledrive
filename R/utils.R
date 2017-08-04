@@ -24,7 +24,7 @@ stop_glue_data <- function(..., .sep = "", .envir = parent.frame(),
   )
 }
 
-stop_collapse <- function(...) stop(collapse(..., sep = "\n"), call. = FALSE)
+stop_collapse <- function(x) stop(collapse(x, sep = "\n"), call. = FALSE)
 
 message_glue <- function(..., .sep = "", .envir = parent.frame(),
                          .domain = NULL) {
@@ -42,7 +42,7 @@ message_glue_data <- function(..., .sep = "", .envir = parent.frame(),
   )
 }
 
-message_collapse <- function(...) message(glue::collapse(..., sep = "\n"))
+message_collapse <- function(x) message(collapse(x, sep = "\n"))
 
 warning_glue <- function(..., .sep = "", .envir = parent.frame(),
                          call. = FALSE, .domain = NULL) {
@@ -60,7 +60,7 @@ warning_glue_data <- function(..., .sep = "", .envir = parent.frame(),
   )
 }
 
-warning_collapse <- function(...) warning(collapse(..., sep = "\n"))
+warning_collapse <- function(x) warning(collapse(x, sep = "\n"))
 
 
 ## removes last abs(n) elements

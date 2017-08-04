@@ -70,7 +70,7 @@ test_that("drive_upload() errors if given both `path` and `parents`", {
     name = me_("DESCRIPTION"),
     parents = destination2$id
     )},
-    "You have specified a parent folder both via `path` and `parents`:"
+    "You have specified parent folders via both `path` and `parents`"
   )
 })
 

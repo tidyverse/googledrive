@@ -46,7 +46,7 @@
 #' ## clean-up
 #' drive_find("BioC_mirrors") %>% drive_rm()
 #'
-#' ## Upload a file that is starred
+#' ## Upload a file and, at the same time, star it
 #' logo <- drive_upload(
 #'   R.home('doc/html/logo.jpg'),
 #'   starred = "true"
@@ -100,10 +100,11 @@ drive_upload <- function(media,
       stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
     }
     if (!is.null(params[["parents"]])) {
-      stop_glue("\nYou have specified a parent folder both via `path` and `parents`:",
-                "\n  * `path`: {path$name}",
-                "\n  * `parents`: {params[['parents']]}",
-                "\nIf you intend to specify multiple parents, use the `parents` parameter only.")
+      stop_collapse(c(
+        "You have specified parent folders via both `path` and `parents`.",
+        "Pick one.",
+        "If you want multiple parents, just use the `parents` parameter."
+      ))
     }
     params[["parents"]] <- path$id
   }

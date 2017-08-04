@@ -30,8 +30,8 @@ respectively. All non-\code{NULL} values for \code{type} are pre-processed with
 
 \item{...}{Named parameters to pass along to the Drive API. You can affect
 the metadata of the target file by specifying properties of the Files
-resource via `...`. See the "Request body" section of the Drive API docs
-for the associated endpoint.}
+resource via \code{...}. See the "Request body" section of the Drive API
+docs for the associated endpoint.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -73,6 +73,11 @@ drive_rm(logo)
 }
 }
 \seealso{
+Wraps the \code{files.create} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/files/create}
+}
+
 MIME types that can be converted to native Google formats:
 \itemize{
 \item \url{https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19}
