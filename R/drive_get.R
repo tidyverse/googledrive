@@ -75,8 +75,7 @@ get_one_id <- function(id) {
   ## when id = "", drive.files.get actually becomes a call to drive.files.list
   ## and, therefore, returns 100 files by default ... don't let that happen
   if (!isTRUE(nzchar(id, keepNA = TRUE))) {
-    stop("File ids must not be NA and cannot be the empty string.",
-         call. = FALSE)
+    stop_glue("File ids must not be NA and cannot be the empty string.")
   }
   request <- generate_request(
     endpoint = "drive.files.get",
