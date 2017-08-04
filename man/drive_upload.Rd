@@ -62,7 +62,7 @@ drive_browse(mirrors_sheet)
 ## clean-up
 drive_find("BioC_mirrors") \%>\% drive_rm()
 
-## Upload a file that is starred
+## Upload a file and, at the same time, star it
 logo <- drive_upload(
   R.home('doc/html/logo.jpg'),
   starred = "true"

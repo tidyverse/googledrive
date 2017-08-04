@@ -79,7 +79,7 @@
 of an existing Drive file, use <code><a href='drive_update.html'>drive_update()</a></code>.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_upload</span>(<span class='no'>media</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>drive_upload</span>(<span class='no'>media</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -91,8 +91,8 @@ of an existing Drive file, use <code><a href='drive_update.html'>drive_update()<
     </tr>
     <tr>
       <th>path</th>
-      <td><p>Specifies target destination for the new file on Google Drive.
-Can be an actual path (character), a file id marked with
+      <td><p>Specifies target destination for the new file on Google
+Drive. Can be an actual path (character), a file id marked with
 <code><a href='as_id.html'>as_id</a>()</code>, or a <code><a href='dribble.html'>dribble</a></code>. If specified as an
 actual path, it is best to explicitly indicate if it's a folder by
 including a trailing slash, since it cannot always be worked out from the
@@ -100,9 +100,9 @@ context of the call. Will default to its local name.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>Character, new file name if not specified as part of `path`. This
-will force `path` to be treated as a folder, even if it is character and lacks
-a trailing slash. Will default to its local name.</p></td>
+      <td><p>Character, new file name if not specified as part of
+<code>path</code>. This will force <code>path</code> to be treated as a folder, even if
+it is character and lacks a trailing slash. Will default to its local name.</p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -112,6 +112,13 @@ suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting <code>type</code> to <code>document</code>, <code>spreadsheet</code>, or <code>presentation</code>,
 respectively. All non-<code>NULL</code> values for <code>type</code> are pre-processed with
 <code><a href='drive_mime_type.html'>drive_mime_type()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via <code>...</code>. See the "Request body" section of the Drive API
+docs for the associated endpoint.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -127,6 +134,9 @@ respectively. All non-<code>NULL</code> values for <code>type</code> are pre-pro
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <p>Wraps the <code>files.create</code> endpoint:</p><ul>
+<li><p><a href='https://developers.google.com/drive/v3/reference/files/create'>https://developers.google.com/drive/v3/reference/files/create</a></p></li>
+</ul>
     <p>MIME types that can be converted to native Google formats:</p><ul>
 <li><p><a href='https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19'>https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19</a></p></li>
 </ul>
@@ -149,6 +159,15 @@ respectively. All non-<code>NULL</code> values for <code>type</code> are pre-pro
 
 <span class='co'>## clean-up</span>
 <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"BioC_mirrors"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>()
+
+<span class='co'>## Upload a file and, at the same time, star it</span>
+<span class='no'>logo</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_upload</span>(
+  <span class='fu'>R.home</span>(<span class='st'>'doc/html/logo.jpg'</span>),
+  <span class='kw'>starred</span> <span class='kw'>=</span> <span class='st'>"true"</span>
+)
+
+<span class='co'>## Clean up</span>
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>logo</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

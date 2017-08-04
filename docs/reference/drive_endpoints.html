@@ -103,117 +103,142 @@ endpoints that are used internally by googledrive.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>str</span>(<span class='fu'>drive_endpoints</span>(), <span class='kw'>max.level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; List of 22
-#&gt;  $ drive.about.get                   :List of 4
+    <pre class="examples"><div class='input'><span class='fu'>str</span>(<span class='fu'>drive_endpoints</span>(), <span class='kw'>max.level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; List of 27
+#&gt;  $ drive.about.get         :List of 4
 #&gt;   ..$ id        : chr "drive.about.get"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/about"
 #&gt;   ..$ parameters:List of 7
-#&gt;  $ drive.files.copy                  :List of 4
+#&gt;  $ drive.files.copy        :List of 4
 #&gt;   ..$ id        : chr "drive.files.copy"
 #&gt;   ..$ method    : chr "POST"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/copy"
 #&gt;   ..$ parameters:List of 63
-#&gt;  $ drive.files.create                :List of 4
+#&gt;  $ drive.files.create      :List of 4
 #&gt;   ..$ id        : chr "drive.files.create"
 #&gt;   ..$ method    : chr "POST"
 #&gt;   ..$ path      : chr "drive/v3/files"
 #&gt;   ..$ parameters:List of 63
-#&gt;  $ drive.files.delete                :List of 4
+#&gt;  $ drive.files.create.media:List of 4
+#&gt;   ..$ id        : chr "drive.files.create.media"
+#&gt;   ..$ method    : chr "POST"
+#&gt;   ..$ path      : chr "/upload/drive/v3/files"
+#&gt;   ..$ parameters:List of 64
+#&gt;  $ drive.files.delete      :List of 4
 #&gt;   ..$ id        : chr "drive.files.delete"
 #&gt;   ..$ method    : chr "DELETE"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}"
 #&gt;   ..$ parameters:List of 9
-#&gt;  $ drive.files.emptyTrash            :List of 4
+#&gt;  $ drive.files.emptyTrash  :List of 4
 #&gt;   ..$ id        : chr "drive.files.emptyTrash"
 #&gt;   ..$ method    : chr "DELETE"
 #&gt;   ..$ path      : chr "drive/v3/files/trash"
 #&gt;   ..$ parameters:List of 7
-#&gt;  $ drive.files.export                :List of 4
+#&gt;  $ drive.files.export      :List of 4
 #&gt;   ..$ id        : chr "drive.files.export"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/export"
 #&gt;   ..$ parameters:List of 9
-#&gt;  $ drive.files.generateIds           :List of 4
+#&gt;  $ drive.files.generateIds :List of 4
 #&gt;   ..$ id        : chr "drive.files.generateIds"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/generateIds"
 #&gt;   ..$ parameters:List of 9
-#&gt;  $ drive.files.get                   :List of 4
+#&gt;  $ drive.files.get         :List of 4
 #&gt;   ..$ id        : chr "drive.files.get"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}"
 #&gt;   ..$ parameters:List of 10
-#&gt;  $ drive.files.list                  :List of 4
+#&gt;  $ drive.files.list        :List of 4
 #&gt;   ..$ id        : chr "drive.files.list"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files"
 #&gt;   ..$ parameters:List of 17
-#&gt;  $ drive.files.update                :List of 4
+#&gt;  $ drive.files.update      :List of 4
 #&gt;   ..$ id        : chr "drive.files.update"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}"
 #&gt;   ..$ parameters:List of 65
-#&gt;  $ drive.files.watch                 :List of 4
-#&gt;   ..$ id        : chr "drive.files.watch"
-#&gt;   ..$ method    : chr "POST"
-#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/watch"
-#&gt;   ..$ parameters:List of 10
-#&gt;  $ drive.permissions.create          :List of 4
-#&gt;   ..$ id        : chr "drive.permissions.create"
-#&gt;   ..$ method    : chr "POST"
-#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions"
-#&gt;   ..$ parameters:List of 24
-#&gt;  $ drive.permissions.delete          :List of 4
-#&gt;   ..$ id        : chr "drive.permissions.delete"
-#&gt;   ..$ method    : chr "DELETE"
-#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters:List of 10
-#&gt;  $ drive.permissions.get             :List of 4
-#&gt;   ..$ id        : chr "drive.permissions.get"
-#&gt;   ..$ method    : chr "GET"
-#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters:List of 10
-#&gt;  $ drive.permissions.list            :List of 4
-#&gt;   ..$ id        : chr "drive.permissions.list"
-#&gt;   ..$ method    : chr "GET"
-#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions"
-#&gt;   ..$ parameters:List of 11
-#&gt;  $ drive.permissions.update          :List of 4
-#&gt;   ..$ id        : chr "drive.permissions.update"
-#&gt;   ..$ method    : chr "PATCH"
-#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters:List of 24
-#&gt;  $ drive.revisions.delete            :List of 4
-#&gt;   ..$ id        : chr "drive.revisions.delete"
-#&gt;   ..$ method    : chr "DELETE"
-#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions/{revisionId}"
-#&gt;   ..$ parameters:List of 9
-#&gt;  $ drive.revisions.get               :List of 4
-#&gt;   ..$ id        : chr "drive.revisions.get"
-#&gt;   ..$ method    : chr "GET"
-#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions/{revisionId}"
-#&gt;   ..$ parameters:List of 10
-#&gt;  $ drive.revisions.list              :List of 4
-#&gt;   ..$ id        : chr "drive.revisions.list"
-#&gt;   ..$ method    : chr "GET"
-#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions"
-#&gt;   ..$ parameters:List of 10
-#&gt;  $ drive.revisions.update            :List of 4
-#&gt;   ..$ id        : chr "drive.revisions.update"
-#&gt;   ..$ method    : chr "PATCH"
-#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions/{revisionId}"
-#&gt;   ..$ parameters:List of 21
-#&gt;  $ drive.files.update.media          :List of 4
+#&gt;  $ drive.files.update.media:List of 4
 #&gt;   ..$ id        : chr "drive.files.update.media"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "/upload/drive/v3/files/{fileId}"
 #&gt;   ..$ parameters:List of 66
-#&gt;  $ drive.files.update.media.resumable:List of 4
-#&gt;   ..$ id        : chr "drive.files.update.media.resumable"
+#&gt;  $ drive.files.watch       :List of 4
+#&gt;   ..$ id        : chr "drive.files.watch"
+#&gt;   ..$ method    : chr "POST"
+#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/watch"
+#&gt;   ..$ parameters:List of 10
+#&gt;  $ drive.permissions.create:List of 4
+#&gt;   ..$ id        : chr "drive.permissions.create"
+#&gt;   ..$ method    : chr "POST"
+#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions"
+#&gt;   ..$ parameters:List of 24
+#&gt;  $ drive.permissions.delete:List of 4
+#&gt;   ..$ id        : chr "drive.permissions.delete"
+#&gt;   ..$ method    : chr "DELETE"
+#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
+#&gt;   ..$ parameters:List of 10
+#&gt;  $ drive.permissions.get   :List of 4
+#&gt;   ..$ id        : chr "drive.permissions.get"
+#&gt;   ..$ method    : chr "GET"
+#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
+#&gt;   ..$ parameters:List of 10
+#&gt;  $ drive.permissions.list  :List of 4
+#&gt;   ..$ id        : chr "drive.permissions.list"
+#&gt;   ..$ method    : chr "GET"
+#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions"
+#&gt;   ..$ parameters:List of 11
+#&gt;  $ drive.permissions.update:List of 4
+#&gt;   ..$ id        : chr "drive.permissions.update"
 #&gt;   ..$ method    : chr "PATCH"
-#&gt;   ..$ path      : chr "/resumable/upload/drive/v3/files/{fileId}"
-#&gt;   ..$ parameters:List of 66</div><div class='input'><span class='fu'>drive_endpoints</span>(<span class='st'>"drive.files.delete"</span>)</div><div class='output co'>#&gt; $drive.files.delete
+#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
+#&gt;   ..$ parameters:List of 24
+#&gt;  $ drive.revisions.delete  :List of 4
+#&gt;   ..$ id        : chr "drive.revisions.delete"
+#&gt;   ..$ method    : chr "DELETE"
+#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions/{revisionId}"
+#&gt;   ..$ parameters:List of 9
+#&gt;  $ drive.revisions.get     :List of 4
+#&gt;   ..$ id        : chr "drive.revisions.get"
+#&gt;   ..$ method    : chr "GET"
+#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions/{revisionId}"
+#&gt;   ..$ parameters:List of 10
+#&gt;  $ drive.revisions.list    :List of 4
+#&gt;   ..$ id        : chr "drive.revisions.list"
+#&gt;   ..$ method    : chr "GET"
+#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions"
+#&gt;   ..$ parameters:List of 10
+#&gt;  $ drive.revisions.update  :List of 4
+#&gt;   ..$ id        : chr "drive.revisions.update"
+#&gt;   ..$ method    : chr "PATCH"
+#&gt;   ..$ path      : chr "drive/v3/files/{fileId}/revisions/{revisionId}"
+#&gt;   ..$ parameters:List of 21
+#&gt;  $ drive.teamdrives.create :List of 4
+#&gt;   ..$ id        : chr "drive.teamdrives.create"
+#&gt;   ..$ method    : chr "POST"
+#&gt;   ..$ path      : chr "drive/v3/teamdrives"
+#&gt;   ..$ parameters:List of 16
+#&gt;  $ drive.teamdrives.delete :List of 4
+#&gt;   ..$ id        : chr "drive.teamdrives.delete"
+#&gt;   ..$ method    : chr "DELETE"
+#&gt;   ..$ path      : chr "drive/v3/teamdrives/{teamDriveId}"
+#&gt;   ..$ parameters:List of 8
+#&gt;  $ drive.teamdrives.get    :List of 4
+#&gt;   ..$ id        : chr "drive.teamdrives.get"
+#&gt;   ..$ method    : chr "GET"
+#&gt;   ..$ path      : chr "drive/v3/teamdrives/{teamDriveId}"
+#&gt;   ..$ parameters:List of 8
+#&gt;  $ drive.teamdrives.list   :List of 4
+#&gt;   ..$ id        : chr "drive.teamdrives.list"
+#&gt;   ..$ method    : chr "GET"
+#&gt;   ..$ path      : chr "drive/v3/teamdrives"
+#&gt;   ..$ parameters:List of 9
+#&gt;  $ drive.teamdrives.update :List of 4
+#&gt;   ..$ id        : chr "drive.teamdrives.update"
+#&gt;   ..$ method    : chr "PATCH"
+#&gt;   ..$ path      : chr "drive/v3/teamdrives/{teamDriveId}"
+#&gt;   ..$ parameters:List of 16</div><div class='input'><span class='fu'>drive_endpoints</span>(<span class='st'>"drive.files.delete"</span>)</div><div class='output co'>#&gt; $drive.files.delete
 #&gt; $drive.files.delete$id
 #&gt; [1] "drive.files.delete"
 #&gt; 
@@ -432,222 +457,1487 @@ endpoints that are used internally by googledrive.</p>
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </div><div class='input'><span class='fu'>drive_endpoints</span>(<span class='fl'>4</span>)</div><div class='output co'>#&gt; $drive.files.delete
-#&gt; $drive.files.delete$id
-#&gt; [1] "drive.files.delete"
+#&gt; </div><div class='input'><span class='fu'>drive_endpoints</span>(<span class='fl'>4</span>)</div><div class='output co'>#&gt; $drive.files.create.media
+#&gt; $drive.files.create.media$id
+#&gt; [1] "drive.files.create.media"
 #&gt; 
-#&gt; $drive.files.delete$method
-#&gt; [1] "DELETE"
+#&gt; $drive.files.create.media$method
+#&gt; [1] "POST"
 #&gt; 
-#&gt; $drive.files.delete$path
-#&gt; [1] "drive/v3/files/{fileId}"
+#&gt; $drive.files.create.media$path
+#&gt; [1] "/upload/drive/v3/files"
 #&gt; 
-#&gt; $drive.files.delete$parameters
-#&gt; $drive.files.delete$parameters$fileId
-#&gt; $drive.files.delete$parameters$fileId$location
-#&gt; [1] "path"
-#&gt; 
-#&gt; $drive.files.delete$parameters$fileId$required
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $drive.files.delete$parameters$fileId$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $drive.files.delete$parameters$fileId$repeated
-#&gt; [1] NA
-#&gt; 
-#&gt; $drive.files.delete$parameters$fileId$format
-#&gt; [1] NA
-#&gt; 
-#&gt; $drive.files.delete$parameters$fileId$enum
-#&gt; [1] NA
-#&gt; 
-#&gt; $drive.files.delete$parameters$fileId$description
-#&gt; [1] "The ID of the file."
-#&gt; 
-#&gt; 
-#&gt; $drive.files.delete$parameters$supportsTeamDrives
-#&gt; $drive.files.delete$parameters$supportsTeamDrives$location
+#&gt; $drive.files.create.media$parameters
+#&gt; $drive.files.create.media$parameters$ignoreDefaultVisibility
+#&gt; $drive.files.create.media$parameters$ignoreDefaultVisibility$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsTeamDrives$required
+#&gt; $drive.files.create.media$parameters$ignoreDefaultVisibility$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsTeamDrives$type
+#&gt; $drive.files.create.media$parameters$ignoreDefaultVisibility$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsTeamDrives$repeated
+#&gt; $drive.files.create.media$parameters$ignoreDefaultVisibility$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsTeamDrives$format
+#&gt; $drive.files.create.media$parameters$ignoreDefaultVisibility$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsTeamDrives$enum
+#&gt; $drive.files.create.media$parameters$ignoreDefaultVisibility$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsTeamDrives$description
+#&gt; $drive.files.create.media$parameters$ignoreDefaultVisibility$description
+#&gt; [1] "Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$keepRevisionForever
+#&gt; $drive.files.create.media$parameters$keepRevisionForever$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$keepRevisionForever$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$keepRevisionForever$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$keepRevisionForever$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$keepRevisionForever$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$keepRevisionForever$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$keepRevisionForever$description
+#&gt; [1] "Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ocrLanguage
+#&gt; $drive.files.create.media$parameters$ocrLanguage$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ocrLanguage$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ocrLanguage$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ocrLanguage$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ocrLanguage$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ocrLanguage$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ocrLanguage$description
+#&gt; [1] "A language hint for OCR processing during image import (ISO 639-1 code)."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$supportsTeamDrives
+#&gt; $drive.files.create.media$parameters$supportsTeamDrives$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$supportsTeamDrives$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$supportsTeamDrives$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$supportsTeamDrives$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$supportsTeamDrives$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$supportsTeamDrives$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$supportsTeamDrives$description
 #&gt; [1] "Whether the requesting application supports Team Drives."
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt
-#&gt; $drive.files.delete$parameters$alt$location
+#&gt; $drive.files.create.media$parameters$useContentAsIndexableText
+#&gt; $drive.files.create.media$parameters$useContentAsIndexableText$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt$required
+#&gt; $drive.files.create.media$parameters$useContentAsIndexableText$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt$type
+#&gt; $drive.files.create.media$parameters$useContentAsIndexableText$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$useContentAsIndexableText$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$useContentAsIndexableText$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$useContentAsIndexableText$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$useContentAsIndexableText$description
+#&gt; [1] "Whether to use the uploaded content as indexable text."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$appProperties
+#&gt; $drive.files.create.media$parameters$appProperties$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$appProperties$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$appProperties$type
+#&gt; [1] "object"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$appProperties$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$appProperties$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$appProperties$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$appProperties$description
+#&gt; [1] "A collection of arbitrary key-value pairs which are private to the requesting app.\nEntries with null values are cleared in update and copy requests."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$capabilities
+#&gt; $drive.files.create.media$parameters$capabilities$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$capabilities$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$capabilities$type
+#&gt; [1] "object"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$capabilities$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$capabilities$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$capabilities$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$capabilities$description
+#&gt; [1] "Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$contentHints
+#&gt; $drive.files.create.media$parameters$contentHints$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$contentHints$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$contentHints$type
+#&gt; [1] "object"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$contentHints$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$contentHints$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$contentHints$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$contentHints$description
+#&gt; [1] "Additional information about the content of the file. These fields are never populated in responses."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$createdTime
+#&gt; $drive.files.create.media$parameters$createdTime$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$createdTime$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$createdTime$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt$repeated
+#&gt; $drive.files.create.media$parameters$createdTime$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt$format
+#&gt; $drive.files.create.media$parameters$createdTime$format
+#&gt; [1] "date-time"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$createdTime$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt$enum
+#&gt; $drive.files.create.media$parameters$createdTime$description
+#&gt; [1] "The time at which the file was created (RFC 3339 date-time)."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$description
+#&gt; $drive.files.create.media$parameters$description$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$description$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$description$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$description$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$description$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$description$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$description$description
+#&gt; [1] "A short description of the file."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$explicitlyTrashed
+#&gt; $drive.files.create.media$parameters$explicitlyTrashed$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$explicitlyTrashed$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$explicitlyTrashed$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$explicitlyTrashed$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$explicitlyTrashed$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$explicitlyTrashed$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$explicitlyTrashed$description
+#&gt; [1] "Whether the file has been explicitly trashed, as opposed to recursively trashed from a parent folder."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fileExtension
+#&gt; $drive.files.create.media$parameters$fileExtension$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fileExtension$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fileExtension$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fileExtension$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fileExtension$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fileExtension$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fileExtension$description
+#&gt; [1] "The final component of fullFileExtension. This is only available for files with binary content in Drive."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$folderColorRgb
+#&gt; $drive.files.create.media$parameters$folderColorRgb$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$folderColorRgb$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$folderColorRgb$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$folderColorRgb$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$folderColorRgb$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$folderColorRgb$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$folderColorRgb$description
+#&gt; [1] "The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.\nIf an unsupported color is specified, the closest color in the palette will be used instead."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fullFileExtension
+#&gt; $drive.files.create.media$parameters$fullFileExtension$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fullFileExtension$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fullFileExtension$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fullFileExtension$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fullFileExtension$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fullFileExtension$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$fullFileExtension$description
+#&gt; [1] "The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Drive.\nThis is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasAugmentedPermissions
+#&gt; $drive.files.create.media$parameters$hasAugmentedPermissions$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasAugmentedPermissions$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasAugmentedPermissions$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasAugmentedPermissions$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasAugmentedPermissions$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasAugmentedPermissions$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasAugmentedPermissions$description
+#&gt; [1] "Whether any users are granted file access directly on this file. This field is only populated for Team Drive files."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasThumbnail
+#&gt; $drive.files.create.media$parameters$hasThumbnail$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasThumbnail$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasThumbnail$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasThumbnail$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasThumbnail$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasThumbnail$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$hasThumbnail$description
+#&gt; [1] "Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$headRevisionId
+#&gt; $drive.files.create.media$parameters$headRevisionId$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$headRevisionId$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$headRevisionId$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$headRevisionId$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$headRevisionId$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$headRevisionId$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$headRevisionId$description
+#&gt; [1] "The ID of the file's head revision. This is currently only available for files with binary content in Drive."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$iconLink
+#&gt; $drive.files.create.media$parameters$iconLink$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$iconLink$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$iconLink$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$iconLink$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$iconLink$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$iconLink$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$iconLink$description
+#&gt; [1] "A static, unauthenticated link to the file's icon."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$id
+#&gt; $drive.files.create.media$parameters$id$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$id$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$id$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$id$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$id$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$id$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$id$description
+#&gt; [1] "The ID of the file."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$imageMediaMetadata
+#&gt; $drive.files.create.media$parameters$imageMediaMetadata$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$imageMediaMetadata$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$imageMediaMetadata$type
+#&gt; [1] "object"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$imageMediaMetadata$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$imageMediaMetadata$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$imageMediaMetadata$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$imageMediaMetadata$description
+#&gt; [1] "Additional metadata about image media, if available."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$isAppAuthorized
+#&gt; $drive.files.create.media$parameters$isAppAuthorized$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$isAppAuthorized$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$isAppAuthorized$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$isAppAuthorized$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$isAppAuthorized$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$isAppAuthorized$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$isAppAuthorized$description
+#&gt; [1] "Whether the file was created or opened by the requesting app."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$kind
+#&gt; $drive.files.create.media$parameters$kind$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$kind$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$kind$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$kind$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$kind$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$kind$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$kind$description
+#&gt; [1] "Identifies what kind of resource this is. Value: the fixed string \"drive#file\"."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$lastModifyingUser
+#&gt; $drive.files.create.media$parameters$lastModifyingUser$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$lastModifyingUser$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$lastModifyingUser$type
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$lastModifyingUser$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$lastModifyingUser$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$lastModifyingUser$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$lastModifyingUser$description
+#&gt; [1] "The last user to modify the file."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$md5Checksum
+#&gt; $drive.files.create.media$parameters$md5Checksum$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$md5Checksum$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$md5Checksum$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$md5Checksum$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$md5Checksum$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$md5Checksum$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$md5Checksum$description
+#&gt; [1] "The MD5 checksum for the content of the file. This is only applicable to files with binary content in Drive."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$mimeType
+#&gt; $drive.files.create.media$parameters$mimeType$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$mimeType$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$mimeType$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$mimeType$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$mimeType$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$mimeType$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$mimeType$description
+#&gt; [1] "The MIME type of the file.\nDrive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.\nIf a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMe
+#&gt; $drive.files.create.media$parameters$modifiedByMe$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMe$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMe$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMe$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMe$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMe$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMe$description
+#&gt; [1] "Whether the file has been modified by this user."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMeTime
+#&gt; $drive.files.create.media$parameters$modifiedByMeTime$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMeTime$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMeTime$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMeTime$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMeTime$format
+#&gt; [1] "date-time"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMeTime$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedByMeTime$description
+#&gt; [1] "The last time the file was modified by the user (RFC 3339 date-time)."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedTime
+#&gt; $drive.files.create.media$parameters$modifiedTime$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedTime$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedTime$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedTime$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedTime$format
+#&gt; [1] "date-time"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedTime$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$modifiedTime$description
+#&gt; [1] "The last time the file was modified by anyone (RFC 3339 date-time).\nNote that setting modifiedTime will also update modifiedByMeTime for the user."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$name
+#&gt; $drive.files.create.media$parameters$name$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$name$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$name$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$name$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$name$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$name$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$name$description
+#&gt; [1] "The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of Team Drives, My Drive root folder, and Application Data folder the name is constant."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$originalFilename
+#&gt; $drive.files.create.media$parameters$originalFilename$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$originalFilename$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$originalFilename$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$originalFilename$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$originalFilename$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$originalFilename$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$originalFilename$description
+#&gt; [1] "The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Drive."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ownedByMe
+#&gt; $drive.files.create.media$parameters$ownedByMe$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ownedByMe$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ownedByMe$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ownedByMe$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ownedByMe$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ownedByMe$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$ownedByMe$description
+#&gt; [1] "Whether the user owns the file. Not populated for Team Drive files."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$owners
+#&gt; $drive.files.create.media$parameters$owners$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$owners$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$owners$type
+#&gt; [1] "array"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$owners$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$owners$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$owners$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$owners$description
+#&gt; [1] "The owners of the file. Currently, only certain legacy files may have more than one owner. Not populated for Team Drive files."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$parents
+#&gt; $drive.files.create.media$parameters$parents$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$parents$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$parents$type
+#&gt; [1] "array"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$parents$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$parents$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$parents$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$parents$description
+#&gt; [1] "The IDs of the parent folders which contain the file.\nIf not specified as part of a create request, the file will be placed directly in the My Drive folder. Update requests must use the addParents and removeParents parameters to modify the values."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissions
+#&gt; $drive.files.create.media$parameters$permissions$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissions$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissions$type
+#&gt; [1] "array"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissions$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissions$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissions$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissions$description
+#&gt; [1] "The full list of permissions for the file. This is only available if the requesting user can share the file. Not populated for Team Drive files."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$properties
+#&gt; $drive.files.create.media$parameters$properties$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$properties$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$properties$type
+#&gt; [1] "object"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$properties$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$properties$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$properties$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$properties$description
+#&gt; [1] "A collection of arbitrary key-value pairs which are visible to all apps.\nEntries with null values are cleared in update and copy requests."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$quotaBytesUsed
+#&gt; $drive.files.create.media$parameters$quotaBytesUsed$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$quotaBytesUsed$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$quotaBytesUsed$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$quotaBytesUsed$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$quotaBytesUsed$format
+#&gt; [1] "int64"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$quotaBytesUsed$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$quotaBytesUsed$description
+#&gt; [1] "The number of storage quota bytes used by the file. This includes the head revision as well as previous revisions with keepForever enabled."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$shared
+#&gt; $drive.files.create.media$parameters$shared$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$shared$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$shared$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$shared$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$shared$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$shared$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$shared$description
+#&gt; [1] "Whether the file has been shared. Not populated for Team Drive files."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharedWithMeTime
+#&gt; $drive.files.create.media$parameters$sharedWithMeTime$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharedWithMeTime$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharedWithMeTime$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharedWithMeTime$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharedWithMeTime$format
+#&gt; [1] "date-time"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharedWithMeTime$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharedWithMeTime$description
+#&gt; [1] "The time at which the file was shared with the user, if applicable (RFC 3339 date-time)."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharingUser
+#&gt; $drive.files.create.media$parameters$sharingUser$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharingUser$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharingUser$type
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharingUser$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharingUser$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharingUser$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$sharingUser$description
+#&gt; [1] "The user who shared the file with the requesting user, if applicable."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$size
+#&gt; $drive.files.create.media$parameters$size$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$size$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$size$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$size$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$size$format
+#&gt; [1] "int64"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$size$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$size$description
+#&gt; [1] "The size of the file's content in bytes. This is only applicable to files with binary content in Drive."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$spaces
+#&gt; $drive.files.create.media$parameters$spaces$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$spaces$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$spaces$type
+#&gt; [1] "array"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$spaces$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$spaces$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$spaces$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$spaces$description
+#&gt; [1] "The list of spaces which contain the file. The currently supported values are 'drive', 'appDataFolder' and 'photos'."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$starred
+#&gt; $drive.files.create.media$parameters$starred$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$starred$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$starred$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$starred$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$starred$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$starred$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$starred$description
+#&gt; [1] "Whether the user has starred the file."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$teamDriveId
+#&gt; $drive.files.create.media$parameters$teamDriveId$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$teamDriveId$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$teamDriveId$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$teamDriveId$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$teamDriveId$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$teamDriveId$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$teamDriveId$description
+#&gt; [1] "ID of the Team Drive the file resides in."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailLink
+#&gt; $drive.files.create.media$parameters$thumbnailLink$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailLink$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailLink$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailLink$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailLink$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailLink$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailLink$description
+#&gt; [1] "A short-lived link to the file's thumbnail, if available. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailVersion
+#&gt; $drive.files.create.media$parameters$thumbnailVersion$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailVersion$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailVersion$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailVersion$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailVersion$format
+#&gt; [1] "int64"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailVersion$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$thumbnailVersion$description
+#&gt; [1] "The thumbnail version for use in thumbnail cache invalidation."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashed
+#&gt; $drive.files.create.media$parameters$trashed$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashed$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashed$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashed$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashed$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashed$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashed$description
+#&gt; [1] "Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file, and other users cannot see files in the owner's trash."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashedTime
+#&gt; $drive.files.create.media$parameters$trashedTime$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashedTime$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashedTime$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashedTime$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashedTime$format
+#&gt; [1] "date-time"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashedTime$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashedTime$description
+#&gt; [1] "The time that the item was trashed (RFC 3339 date-time). Only populated for Team Drive files."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashingUser
+#&gt; $drive.files.create.media$parameters$trashingUser$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashingUser$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashingUser$type
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashingUser$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashingUser$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashingUser$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$trashingUser$description
+#&gt; [1] "If the file has been explicitly trashed, the user who trashed it. Only populated for Team Drive files."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$version
+#&gt; $drive.files.create.media$parameters$version$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$version$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$version$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$version$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$version$format
+#&gt; [1] "int64"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$version$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$version$description
+#&gt; [1] "A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the user."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$videoMediaMetadata
+#&gt; $drive.files.create.media$parameters$videoMediaMetadata$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$videoMediaMetadata$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$videoMediaMetadata$type
+#&gt; [1] "object"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$videoMediaMetadata$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$videoMediaMetadata$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$videoMediaMetadata$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$videoMediaMetadata$description
+#&gt; [1] "Additional metadata about video media. This may not be available immediately upon upload."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMe
+#&gt; $drive.files.create.media$parameters$viewedByMe$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMe$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMe$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMe$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMe$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMe$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMe$description
+#&gt; [1] "Whether the file has been viewed by this user."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMeTime
+#&gt; $drive.files.create.media$parameters$viewedByMeTime$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMeTime$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMeTime$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMeTime$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMeTime$format
+#&gt; [1] "date-time"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMeTime$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewedByMeTime$description
+#&gt; [1] "The last time the file was viewed by the user (RFC 3339 date-time)."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewersCanCopyContent
+#&gt; $drive.files.create.media$parameters$viewersCanCopyContent$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewersCanCopyContent$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewersCanCopyContent$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewersCanCopyContent$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewersCanCopyContent$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewersCanCopyContent$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$viewersCanCopyContent$description
+#&gt; [1] "Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webContentLink
+#&gt; $drive.files.create.media$parameters$webContentLink$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webContentLink$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webContentLink$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webContentLink$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webContentLink$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webContentLink$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webContentLink$description
+#&gt; [1] "A link for downloading the content of the file in a browser. This is only available for files with binary content in Drive."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webViewLink
+#&gt; $drive.files.create.media$parameters$webViewLink$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webViewLink$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webViewLink$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webViewLink$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webViewLink$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webViewLink$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$webViewLink$description
+#&gt; [1] "A link for opening the file in a relevant Google editor or viewer in a browser."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$writersCanShare
+#&gt; $drive.files.create.media$parameters$writersCanShare$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$writersCanShare$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$writersCanShare$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$writersCanShare$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$writersCanShare$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$writersCanShare$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$writersCanShare$description
+#&gt; [1] "Whether users with only writer permission can modify the file's permissions. Not populated for Team Drive files."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$alt
+#&gt; $drive.files.create.media$parameters$alt$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$alt$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$alt$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$alt$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$alt$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$alt$enum
 #&gt; [1] "json"
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt$description
+#&gt; $drive.files.create.media$parameters$alt$description
 #&gt; [1] "Data format for the response."
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$fields
-#&gt; $drive.files.delete$parameters$fields$location
+#&gt; $drive.files.create.media$parameters$fields
+#&gt; $drive.files.create.media$parameters$fields$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $drive.files.delete$parameters$fields$required
+#&gt; $drive.files.create.media$parameters$fields$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$fields$type
+#&gt; $drive.files.create.media$parameters$fields$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$fields$repeated
+#&gt; $drive.files.create.media$parameters$fields$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$fields$format
+#&gt; $drive.files.create.media$parameters$fields$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$fields$enum
+#&gt; $drive.files.create.media$parameters$fields$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$fields$description
+#&gt; $drive.files.create.media$parameters$fields$description
 #&gt; [1] "Selector specifying which fields to include in a partial response."
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$key
-#&gt; $drive.files.delete$parameters$key$location
+#&gt; $drive.files.create.media$parameters$key
+#&gt; $drive.files.create.media$parameters$key$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $drive.files.delete$parameters$key$required
+#&gt; $drive.files.create.media$parameters$key$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$key$type
+#&gt; $drive.files.create.media$parameters$key$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$key$repeated
+#&gt; $drive.files.create.media$parameters$key$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$key$format
+#&gt; $drive.files.create.media$parameters$key$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$key$enum
+#&gt; $drive.files.create.media$parameters$key$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$key$description
+#&gt; $drive.files.create.media$parameters$key$description
 #&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$oauth_token
-#&gt; $drive.files.delete$parameters$oauth_token$location
+#&gt; $drive.files.create.media$parameters$oauth_token
+#&gt; $drive.files.create.media$parameters$oauth_token$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $drive.files.delete$parameters$oauth_token$required
+#&gt; $drive.files.create.media$parameters$oauth_token$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$oauth_token$type
+#&gt; $drive.files.create.media$parameters$oauth_token$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$oauth_token$repeated
+#&gt; $drive.files.create.media$parameters$oauth_token$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$oauth_token$format
+#&gt; $drive.files.create.media$parameters$oauth_token$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$oauth_token$enum
+#&gt; $drive.files.create.media$parameters$oauth_token$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$oauth_token$description
+#&gt; $drive.files.create.media$parameters$oauth_token$description
 #&gt; [1] "OAuth 2.0 token for the current user."
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$prettyPrint
-#&gt; $drive.files.delete$parameters$prettyPrint$location
+#&gt; $drive.files.create.media$parameters$prettyPrint
+#&gt; $drive.files.create.media$parameters$prettyPrint$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $drive.files.delete$parameters$prettyPrint$required
+#&gt; $drive.files.create.media$parameters$prettyPrint$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$prettyPrint$type
+#&gt; $drive.files.create.media$parameters$prettyPrint$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.files.delete$parameters$prettyPrint$repeated
+#&gt; $drive.files.create.media$parameters$prettyPrint$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$prettyPrint$format
+#&gt; $drive.files.create.media$parameters$prettyPrint$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$prettyPrint$enum
+#&gt; $drive.files.create.media$parameters$prettyPrint$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$prettyPrint$description
+#&gt; $drive.files.create.media$parameters$prettyPrint$description
 #&gt; [1] "Returns response with indentations and line breaks."
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$quotaUser
-#&gt; $drive.files.delete$parameters$quotaUser$location
+#&gt; $drive.files.create.media$parameters$quotaUser
+#&gt; $drive.files.create.media$parameters$quotaUser$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $drive.files.delete$parameters$quotaUser$required
+#&gt; $drive.files.create.media$parameters$quotaUser$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$quotaUser$type
+#&gt; $drive.files.create.media$parameters$quotaUser$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$quotaUser$repeated
+#&gt; $drive.files.create.media$parameters$quotaUser$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$quotaUser$format
+#&gt; $drive.files.create.media$parameters$quotaUser$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$quotaUser$enum
+#&gt; $drive.files.create.media$parameters$quotaUser$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$quotaUser$description
+#&gt; $drive.files.create.media$parameters$quotaUser$description
 #&gt; [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided."
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$userIp
-#&gt; $drive.files.delete$parameters$userIp$location
+#&gt; $drive.files.create.media$parameters$userIp
+#&gt; $drive.files.create.media$parameters$userIp$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $drive.files.delete$parameters$userIp$required
+#&gt; $drive.files.create.media$parameters$userIp$required
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$userIp$type
+#&gt; $drive.files.create.media$parameters$userIp$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$userIp$repeated
+#&gt; $drive.files.create.media$parameters$userIp$repeated
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$userIp$format
+#&gt; $drive.files.create.media$parameters$userIp$format
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$userIp$enum
+#&gt; $drive.files.create.media$parameters$userIp$enum
 #&gt; [1] NA
 #&gt; 
-#&gt; $drive.files.delete$parameters$userIp$description
+#&gt; $drive.files.create.media$parameters$userIp$description
 #&gt; [1] "IP address of the site where the request originates. Use this if you want to enforce per-user limits."
+#&gt; 
+#&gt; 
+#&gt; $drive.files.create.media$parameters$uploadType
+#&gt; $drive.files.create.media$parameters$uploadType$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$uploadType$required
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $drive.files.create.media$parameters$uploadType$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$uploadType$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$uploadType$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$uploadType$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$uploadType$description
+#&gt; [1] NA
 #&gt; 
 #&gt; 
 #&gt; 
