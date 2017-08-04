@@ -3,13 +3,17 @@
 #' Uploads a local file into a new Drive file. To update the content or metadata
 #' of an existing Drive file, use [drive_update()].
 #'
-#' @seealso MIME types that can be converted to native Google formats:
+#' @seealso Wraps the `files.create` endpoint:
+#'   * <https://developers.google.com/drive/v3/reference/files/create>
+#'
+#' MIME types that can be converted to native Google formats:
 #'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
 #'
 #' @template media
 #' @template path
 #' @templateVar name file
-#' @templateVar default If not given or unknown, will default to the "My Drive" root folder.
+#' @templateVar default If not given or unknown, will default to the "My Drive"
+#'   root folder.
 #' @template name
 #' @templateVar name file
 #' @templateVar default Will default to its local name.
