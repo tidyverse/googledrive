@@ -61,8 +61,8 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
       c("Requested parent folder identifies multiple files:", paths)
     )
   }
-  if (!is_folder(path)) {
-    stop("`path` must be a single, pre-existing folder.", call. = FALSE)
+  if (!is_parental(path)) {
+    stop_glue("`path` must be a single, pre-existing folder or Team Drive.")
   }
 
   request <- generate_request(

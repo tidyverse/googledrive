@@ -9,6 +9,7 @@
 \alias{confirm_single_file}
 \alias{confirm_some_files}
 \alias{is_folder}
+\alias{is_parental}
 \alias{is_mine}
 \alias{is_teamdrive}
 \title{Check facts about a dribble}
@@ -26,6 +27,8 @@ confirm_single_file(d)
 confirm_some_files(d)
 
 is_folder(d)
+
+is_parental(d)
 
 is_mine(d)
 

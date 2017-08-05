@@ -96,8 +96,8 @@ drive_upload <- function(media,
         c("Requested parent folder identifies multiple files:", paths)
       )
     }
-    if (!is_folder(path)) {
-      stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
+    if (!is_parental(path)) {
+      stop_glue("\n`path` is neither a folder nor a Team Drive:\n * {path$name}")
     }
     if (!is.null(params[["parents"]])) {
       stop_collapse(c(

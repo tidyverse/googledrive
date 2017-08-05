@@ -202,6 +202,15 @@ is_folder <- function(d) {
 
 #' @export
 #' @rdname dribble-checks
+is_parental <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  kind <- purrr::map_chr(d$drive_resource, "kind")
+  mime_type <- purrr::map_chr(d$drive_resource, "mimeType", .default = NA)
+  kind == "drive#teamDrive" | mime_type == "application/vnd.google-apps.folder"
+}
+
+#' @export
+#' @rdname dribble-checks
 ## TO DO: handle team drives here
 is_mine <- function(d) {
   stopifnot(inherits(d, "dribble"))
