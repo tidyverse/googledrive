@@ -2,12 +2,12 @@
 #'
 #' Update an existing Drive file id with new content ("media" in Drive
 #' API-speak), new metadata, or both.
-
 #'
-#' @seealso Wraps the
-#' [drive.files.update](https://developers.google.com/drive/v3/reference/files/update)
-#' endpoint. This function supports
-#' [media upload](https://developers.google.com/drive/v3/web/manage-uploads).
+#' @seealso Wraps the `files.update` endpoint:
+#'   * <https://developers.google.com/drive/v3/reference/files/update>
+#'
+#' This function supports media upload:
+#'   * <https://developers.google.com/drive/v3/web/manage-uploads>
 #'
 #' @template file
 #' @template media
@@ -74,6 +74,7 @@ drive_update <- function(file,
   if (is.null(media)) {
     if (length(meta) == 0) {
       if (verbose) message("No updates specified.")
+      return(invisible(file))
     } else {
       out <- drive_update_metadata(file, meta)
     }
@@ -114,7 +115,6 @@ drive_update_metadata <- function(file, meta) {
     endpoint = "drive.files.update",
     params = c(
       fileId = file$id,
-      fields = "*",
       meta
     )
   )
@@ -128,7 +128,6 @@ drive_update_multipart <- function(file, media, meta) {
     params = c(
       fileId = file$id,
       uploadType = "multipart",
-      fields = "*",
       ## We provide the metadata here even though it's overwritten below,
       ## so that generate_request() still validates it.
       meta

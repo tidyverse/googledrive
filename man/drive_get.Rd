@@ -21,7 +21,8 @@ ignored.}
 (default \code{TRUE}).}
 }
 \value{
-dribble-return
+An object of class \code{\link{dribble}}, a tibble with one row per
+  file.
 }
 \description{
 Retrieve metadata for files specified via path or via file id.
@@ -38,9 +39,10 @@ In contrast, a file id will always identify at most one Drive
 file. Finally, note also that a folder is just a specific type of file on
 Drive.
 
-If the files are specified via \code{path}, versus \code{id}, the returned
-\code{\link{dribble}} will include a \code{path} variable. To add path information to any
-\code{\link{dribble}} that lacks it, use \code{\link[=drive_add_path]{drive_add_path()}}.
+If the files are specified via \code{path}, versus \code{id}, the returned \code{\link{dribble}}
+will include a \code{path} variable. To add path information to any \code{\link{dribble}}
+that lacks it, use \code{\link[=drive_add_path]{drive_add_path()}}. If you want to list the contents of a
+folder, use \code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_find]{drive_find()}}.
 }
 \examples{
 \dontrun{
@@ -64,6 +66,10 @@ drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 }
 }
 \seealso{
-If you want to list the contents of a folder, use \code{\link[=drive_ls]{drive_ls()}}. For
-general searching, use \code{\link[=drive_find]{drive_find()}}.
+Wraps the \code{files.get} endpoint and, if you specify files by name or
+path, also calls \code{files.list}:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/files/update}
+\item \url{https://developers.google.com/drive/v3/reference/files/list}
+}
 }

@@ -84,9 +84,13 @@ drive_find(q = "trashed = true or trashed = false")
 
 }
 \seealso{
-Helpful links for forming queries:
+Wraps the \code{files.list} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/files/list}
+}
+
+Helpful resource for forming your own queries:
 \itemize{
 \item \url{https://developers.google.com/drive/v3/web/search-parameters}
-\item \url{https://developers.google.com/drive/v3/reference/files/list}
 }
 }

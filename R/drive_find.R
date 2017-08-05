@@ -15,9 +15,11 @@
 #' `drive_find()` will accept multiple `q` clauses and/or a vector `q` of
 #'   several search clauses. These clauses are combined with `and`.
 
-#' @seealso Helpful links for forming queries:
-#'   * <https://developers.google.com/drive/v3/web/search-parameters>
+#' @seealso Wraps the `files.list` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
+#'
+#' Helpful resource for forming your own queries:
+#'   * <https://developers.google.com/drive/v3/web/search-parameters>
 #'
 #' @param pattern Character. If provided, only the files whose names match this
 #'   regular expression are returned. This is implemented locally on the results

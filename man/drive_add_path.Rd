@@ -10,7 +10,8 @@ drive_add_path(file)
 \item{file}{A \code{\link{dribble}} or vector of file ids or URLs.}
 }
 \value{
-dribble-return
+An object of class \code{\link{dribble}}, a tibble with one row per
+  file.
 }
 \description{
 Even though you know a Drive file's name or id, you don't

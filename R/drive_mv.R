@@ -78,7 +78,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     name <- name %||% path_parts$name %||% file$name
   }
 
-  meta <- list()
+  meta <- list(fields = "*")
 
   if (!is.null(name)) {
     meta[["name"]] <- name

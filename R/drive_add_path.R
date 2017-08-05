@@ -15,7 +15,7 @@
 #'
 #' @param file A [`dribble`] or vector of file ids or URLs.
 #'
-#' @return dribble-return
+#' @template dribble-return
 #' @export
 #'
 #' @examples

@@ -87,9 +87,10 @@ file can potentially be represented by multiple paths.</p></li>
     <p>In contrast, a file id will always identify at most one Drive
 file. Finally, note also that a folder is just a specific type of file on
 Drive.</p>
-<p>If the files are specified via <code>path</code>, versus <code>id</code>, the returned
-<code><a href='dribble.html'>dribble</a></code> will include a <code>path</code> variable. To add path information to any
-<code><a href='dribble.html'>dribble</a></code> that lacks it, use <code><a href='drive_add_path.html'>drive_add_path()</a></code>.</p>
+<p>If the files are specified via <code>path</code>, versus <code>id</code>, the returned <code><a href='dribble.html'>dribble</a></code>
+will include a <code>path</code> variable. To add path information to any <code><a href='dribble.html'>dribble</a></code>
+that lacks it, use <code><a href='drive_add_path.html'>drive_add_path()</a></code>. If you want to list the contents of a
+folder, use <code><a href='drive_ls.html'>drive_ls()</a></code>. For general searching, use <code><a href='drive_find.html'>drive_find()</a></code>.</p>
     
 
     <pre class="usage"><span class='fu'>drive_get</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
@@ -120,12 +121,16 @@ ignored.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>dribble-return</p>
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
+  file.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>If you want to list the contents of a folder, use <code><a href='drive_ls.html'>drive_ls()</a></code>. For
-general searching, use <code><a href='drive_find.html'>drive_find()</a></code>.</p>
+    <p>Wraps the <code>files.get</code> endpoint and, if you specify files by name or
+path, also calls <code>files.list</code>:</p><ul>
+<li><p><a href='https://developers.google.com/drive/v3/reference/files/update'>https://developers.google.com/drive/v3/reference/files/update</a></p></li>
+<li><p><a href='https://developers.google.com/drive/v3/reference/files/list'>https://developers.google.com/drive/v3/reference/files/list</a></p></li>
+</ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

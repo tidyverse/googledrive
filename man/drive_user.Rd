@@ -22,6 +22,8 @@ A list of class \code{drive_user} with user's data.
 Reveals information about the user associated with the current token.
 }
 \seealso{
-This hits the
-\href{https://developers.google.com/drive/v3/reference/about/get}{drive.about.get endpoint}
+Wraps the \code{about.get} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/about/get}
+}
 }

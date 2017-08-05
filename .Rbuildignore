@@ -11,9 +11,9 @@
 ^README-.*\.png$
 ^\.httr-oauth-SUSPENDED$
 ^scratch.R$
-^tidyverse-token\.rds$
 ^tidyverse-noncaching-token\.rds$
-^jennyfbryan-noncaching-token\.rds$
+^jenny-f-bryan-noncaching-token\.rds$
+^jenny-at-bryanbc-noncaching-token\.rds$
 ^man-roxygen$
 ^docs$
 ^_pkgdown\.yml$

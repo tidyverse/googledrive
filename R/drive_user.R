@@ -2,14 +2,13 @@
 #'
 #' Reveals information about the user associated with the current token.
 #'
-#' @seealso This hits the
-#'   [drive.about.get endpoint](https://developers.google.com/drive/v3/reference/about/get)
+#' @seealso Wraps the `about.get` endpoint:
+#'   * <https://developers.google.com/drive/v3/reference/about/get>
 #'
 #' @param fields The fields the user would like output - by default only `user`,
 #'   which will display as detailed above.
 #' @param ... Name-value pairs to query the API.
-#' @param verbose Logical, indicating whether to print informative messages
-#'   (default `TRUE`).
+#' @template verbose
 #'
 #' @return A list of class `drive_user` with user's data.
 #' @export

@@ -11,9 +11,15 @@
 #' file. Finally, note also that a folder is just a specific type of file on
 #' Drive.
 #'
-#' If the files are specified via `path`, versus `id`, the returned
-#' [`dribble`] will include a `path` variable. To add path information to any
-#' [`dribble`] that lacks it, use [drive_add_path()].
+#' If the files are specified via `path`, versus `id`, the returned [`dribble`]
+#' will include a `path` variable. To add path information to any [`dribble`]
+#' that lacks it, use [drive_add_path()]. If you want to list the contents of a
+#' folder, use [drive_ls()]. For general searching, use [drive_find()].
+#'
+#' @seealso Wraps the `files.get` endpoint and, if you specify files by name or
+#'   path, also calls `files.list`:
+#'   * <https://developers.google.com/drive/v3/reference/files/update>
+#'   * <https://developers.google.com/drive/v3/reference/files/list>
 #'
 #' @param path Character vector of path(s) to get. Use a trailing slash to
 #'   indicate explicitly that a path is a folder, which can disambiguate if
@@ -25,10 +31,8 @@
 #'   ignored.
 #' @template verbose
 #'
-#' @return dribble-return
+#' @template dribble-return
 #' @export
-#' @seealso If you want to list the contents of a folder, use [drive_ls()]. For
-#'   general searching, use [drive_find()].
 #'
 #' @examples
 #' \dontrun{

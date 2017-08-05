@@ -61,8 +61,13 @@ drive_rm(folder)
 }
 }
 \seealso{
-Wraps the
-\href{https://developers.google.com/drive/v3/reference/files/update}{drive.files.update}
-endpoint. This function supports
-\href{https://developers.google.com/drive/v3/web/manage-uploads}{media upload}.
+Wraps the \code{files.update} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/files/update}
+}
+
+This function supports media upload:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/web/manage-uploads}
+}
 }
