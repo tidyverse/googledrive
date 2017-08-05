@@ -4,33 +4,23 @@
 \alias{drive_ls}
 \title{List contents of a folder.}
 \usage{
-drive_ls(path = "~/", pattern = NULL, type = NULL, ...)
+drive_ls(path = NULL, ...)
 }
 \arguments{
 \item{path}{Specifies a single folder on Google Drive whose contents you want
-to list. Can be an actual path (character), a file id marked with
+to list. Can be an actual path (character), a file id or URL marked with
 \code{\link[=as_id]{as_id()}}, or a \link{dribble}.}
 
-\item{pattern}{Character. If provided, only the files whose names match this
-regular expression are returned. This is implemented locally on the results
-returned by the API.}
-
-\item{type}{Character. If provided, only files of this type will be returned.
-Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle. This is
-processed by googledrive and sent as a query parameter.}
-
-\item{...}{Other parameters to pass along in the request. The most likely
-candidate is \code{q}. See the examples and the API's
-\href{https://developers.google.com/drive/v3/web/search-parameters}{Search for Files guide}.}
+\item{...}{Any parameters that are valid for \code{\link[=drive_find]{drive_find()}}.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
   file.
 }
 \description{
-List the contents of a folder on Google Drive, nonrecursively. Optionally,
-filter for a regex in the file names and/or on MIME type. This is a thin
-wrapper around \code{\link[=drive_find]{drive_find()}}.
+List the contents of a folder on Google Drive, nonrecursively. This is a thin
+wrapper around \code{\link[=drive_find]{drive_find()}}, that simply limits the search to a specific
+folder.
 }
 \examples{
 \dontrun{
