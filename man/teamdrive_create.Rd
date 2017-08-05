@@ -4,11 +4,14 @@
 \alias{teamdrive_create}
 \title{Create a new Team Drive}
 \usage{
-teamdrive_create(name)
+teamdrive_create(name, verbose = TRUE)
 }
 \arguments{
 \item{name}{Character. Name of the new Team Drive. Must be non-empty and not
 entirely whitespace.}
+
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
@@ -25,6 +28,9 @@ Note:
 \examples{
 \dontrun{
 teamdrive_create("my-awesome-team-drive")
+
+## clean up
+teamdrive_rm("my-awesome-team-drive")
 }
 }
 \seealso{
