@@ -59,6 +59,10 @@ generate_request <- function(endpoint = character(),
   if (!"key" %in% names(params$unmatched)) {
     params[["unmatched"]][["key"]] <- key
   }
+  ## support Team Drives
+  if (!is.null(ept[["parameters"]][["supportsTeamDrives"]])) {
+    params[["unmatched"]][["supportsTeamDrives"]] <- TRUE
+  }
 
   build_request(
     path = ept$path,

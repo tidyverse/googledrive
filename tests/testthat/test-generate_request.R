@@ -29,7 +29,7 @@ test_that("generate_request() and build_request() can deliver same result", {
   build <- build_request(
     path = "drive/v3/files/{fileId}",
     method = "GET",
-    list(fileId = "abc"),
+    params = list(fileId = "abc", supportsTeamDrives = TRUE),
     token = NULL
   )
   expect_identical(gen, build)
@@ -41,7 +41,7 @@ test_that("API key is added by default in generate_request()", {
     list(fileId = "abc"),
     token = NULL
   )
-  expect_match(req$url, paste0(drive_api_key(), "$"))
+  expect_match(req$url, drive_api_key())
 })
 
 test_that("Explicit key = NULL suppresses API key in generate_request()", {
