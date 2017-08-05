@@ -12,6 +12,7 @@
 \alias{is_parental}
 \alias{is_mine}
 \alias{is_teamdrive}
+\alias{is_teamdrivy}
 \title{Check facts about a dribble}
 \usage{
 is_dribble(d)
@@ -33,6 +34,8 @@ is_parental(d)
 is_mine(d)
 
 is_teamdrive(d)
+
+is_teamdrivy(d)
 }
 \arguments{
 \item{d}{A \code{\link{dribble}}.}

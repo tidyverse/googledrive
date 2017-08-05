@@ -224,6 +224,14 @@ is_teamdrive <- function(d) {
   purrr::map_chr(d$drive_resource, "kind") == "drive#teamDrive"
 }
 
+#' @export
+#' @rdname dribble-checks
+is_teamdrivy <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  is_teamdrive(d) |
+    purrr::map_lgl(d$drive_resource, ~ !is.null(.x[["teamDriveId"]]))
+}
+
 ## promote an element in drive_resource into a top-level variable
 ## it will be the second column, presumably after `name``
 promote <- function(d, elem) {
