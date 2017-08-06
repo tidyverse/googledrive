@@ -1,17 +1,17 @@
-#' List contents of a folder.
+#' List contents of a folder or Team Drive
 #'
-#' List the contents of a folder on Google Drive, nonrecursively. This is a thin
-#' wrapper around [drive_find()], that simply limits the search to a specific
-#' folder.
+#' List the contents of a folder or Team Drive, nonrecursively. This is a thin
+#' wrapper around [drive_find()], that simply limits the search to direct
+#' children of a specific folder or to top-level items of a Team Drive.
 #'
 #' @param path Specifies a single folder on Google Drive whose contents you want
 #'   to list. Can be an actual path (character), a file id or URL marked with
-#'   [as_id()], or a [`dribble`]
+#'   [as_id()], or a [`dribble`]. If it is a Team Drive or is a folder on a Team
+#'   Drive, it must be passed as a [`dribble`].
 #' @param ... Any parameters that are valid for [drive_find()].
 #'
 #' @template dribble-return
 #' @export
-#'
 #' @examples
 #' \dontrun{
 #' ## get contents of the folder 'abc' (non-recursive)
@@ -38,5 +38,15 @@ drive_ls <- function(path = NULL, ...) {
 
   params <- list(...)
   params <- append(params, c(q = paste(sq(path$id), "in parents")))
+  if (is_teamdrivy(path)) {
+    if (is_teamdrive(path)) {
+      params <- append(params, c(teamDriveId = path$id))
+    } else {
+      params <- append(
+        params,
+        c(teamDriveId = path$drive_resource[[1]][["teamDriveId"]])
+      )
+    }
+  }
   do.call(drive_find, params)
 }

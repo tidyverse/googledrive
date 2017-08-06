@@ -1,19 +1,36 @@
-#' Find files on Google Drive.
+#' Find files on Google Drive
 #'
-#' @description This is the closest googledrive function to what you get from
-#'   <https://drive.google.com>: by default, you just get a listing of your
-#'   files. You can also narrow the search in various ways, such as by file
-#'   type, whether it's yours or shared with you, starred status, etc.
+#' This is the closest googledrive function to what you can do at
+#' <https://drive.google.com>: by default, you just get a listing of your files.
+#' You can also search in various ways, e.g., filter by file type or ownership
+#' or even work with Team Drives, if you have access. This is a very powerful
+#' function. Together with the more specific [drive_get()], this is the main way
+#' to identify files to target for downstream work.
+
+#' @section File type:
 #'
-#' By default, `drive_find()` does not show files in the trash: it adds
-#'   `q = "trashed = false"` to the query. However, it will not do so if the
-#'   user specifies a `q` search clause for trash inclusion or exclusion. To see
-#'   only files in the trash, use [drive_view_trash()], which is a shortcut for
-#'   `drive_find(q = "trashed = true")`. To see files regardless of trash
-#'   status, use `drive_find(q = "trashed = true or trashed = false")`.
+#' Use `type` to filter on file type. Under the hood, this filters on MIME type.
+#' But the input is pre-processed with [drive_mime_type()], so you can use a few
+#' shortcuts and file extensions, in addition to full-blown MIME types.
+
+#' @section Search parameters:
 #'
-#' `drive_find()` will accept multiple `q` clauses and/or a vector `q` of
-#'   several search clauses. These clauses are combined with `and`.
+#' Do advanced search on file properties by providing search clauses to the
+#' `q` parameter that is passed to the API via `...`. Multiple `q` clauses or
+#' vector-valued `q` are combined via 'and'.
+
+#' @section Trash:
+#'
+#' By default, `drive_find()` does not include files in the trash: it adds `q =
+#' "trashed = false"` to the query. However, it will not do so if the user
+#' specifies a `q` search clause for trash inclusion or exclusion. To see only
+#' files in the trash, use [drive_view_trash()], which is a shortcut for
+#' `drive_find(q = "trashed = true")`. To see files regardless of trash status,
+#' use `drive_find(q = "trashed = true or trashed = false")`.
+
+#' @section Team Drives:
+#'
+#' I will be back!
 
 #' @seealso Wraps the `files.list` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
@@ -83,6 +100,7 @@ drive_find <- function(pattern = NULL,
   params <- list(...)
   params$fields <- params$fields %||% "*"
   params <- marshal_q_clauses(params)
+  params <- handle_teamdrives(params)
 
   if (!is.null(type)) {
     ## if they are all NA, this will error, because drive_mime_type()
@@ -139,4 +157,17 @@ marshal_q_clauses <- function(params) {
   }
 
   c(params[["unmatched"]], q = list(q_bits))
+}
+
+handle_teamdrives <- function(params) {
+  params <- partition_params(
+    params,
+    c("corpora", "teamDriveId", "includeTeamDriveItems")
+  )
+  if (length(params[["matched"]]) == 0) {
+    return(params[["unmatched"]])
+  }
+
+  params[["matched"]] <- do.call(drive_corpus, params[["matched"]])
+  c(params[["unmatched"]], params[["matched"]])
 }

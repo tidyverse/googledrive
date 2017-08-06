@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_find.R
 \name{drive_find}
 \alias{drive_find}
-\title{Find files on Google Drive.}
+\title{Find files on Google Drive}
 \usage{
 drive_find(pattern = NULL, type = NULL, n_max = Inf, ...,
   verbose = TRUE)
@@ -32,21 +32,45 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-This is the closest googledrive function to what you get from
-\url{https://drive.google.com}: by default, you just get a listing of your
-files. You can also narrow the search in various ways, such as by file
-type, whether it's yours or shared with you, starred status, etc.
-
-By default, \code{drive_find()} does not show files in the trash: it adds
-\code{q = "trashed = false"} to the query. However, it will not do so if the
-user specifies a \code{q} search clause for trash inclusion or exclusion. To see
-only files in the trash, use \code{\link[=drive_view_trash]{drive_view_trash()}}, which is a shortcut for
-\code{drive_find(q = "trashed = true")}. To see files regardless of trash
-status, use \code{drive_find(q = "trashed = true or trashed = false")}.
-
-\code{drive_find()} will accept multiple \code{q} clauses and/or a vector \code{q} of
-several search clauses. These clauses are combined with \code{and}.
+This is the closest googledrive function to what you can do at
+\url{https://drive.google.com}: by default, you just get a listing of your files.
+You can also search in various ways, e.g., filter by file type or ownership
+or even work with Team Drives, if you have access. This is a very powerful
+function. Together with the more specific \code{\link[=drive_get]{drive_get()}}, this is the main way
+to identify files to target for downstream work.
 }
+\section{File type}{
+
+
+Use \code{type} to filter on file type. Under the hood, this filters on MIME type.
+But the input is pre-processed with \code{\link[=drive_mime_type]{drive_mime_type()}}, so you can use a few
+shortcuts and file extensions, in addition to full-blown MIME types.
+}
+
+\section{Search parameters}{
+
+
+Do advanced search on file properties by providing search clauses to the
+\code{q} parameter that is passed to the API via \code{...}. Multiple \code{q} clauses or
+vector-valued \code{q} are combined via 'and'.
+}
+
+\section{Trash}{
+
+
+By default, \code{drive_find()} does not include files in the trash: it adds \code{q = "trashed = false"} to the query. However, it will not do so if the user
+specifies a \code{q} search clause for trash inclusion or exclusion. To see only
+files in the trash, use \code{\link[=drive_view_trash]{drive_view_trash()}}, which is a shortcut for
+\code{drive_find(q = "trashed = true")}. To see files regardless of trash status,
+use \code{drive_find(q = "trashed = true or trashed = false")}.
+}
+
+\section{Team Drives}{
+
+
+I will be back!
+}
+
 \examples{
 \dontrun{
 ## list "My Drive" w/o regard for folder hierarchy
