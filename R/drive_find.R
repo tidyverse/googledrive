@@ -79,7 +79,7 @@ drive_find <- function(pattern = NULL,
                        verbose = TRUE) {
 
   if (!is.null(pattern) && !(is_string(pattern))) {
-      stop_glue("Please update `pattern` to be a character string.")
+      stop_glue("`pattern` must be a character string.")
   }
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
   if (n_max < 1) return(dribble())
@@ -126,11 +126,13 @@ or <- function(x) collapse(x, sep = " or ")
 ## these are destined to be and'ed to form q in the query
 ## also enacts our default of excluding files in trash
 marshal_q_clauses <- function(params) {
-  iq <- names(params) == "q"
-  q_bits <- params[iq]
+  params <- partition_params(params, "q")
+  if (length(params[["matched"]]) == 0) {
+    return(c(params[["unmatched"]], c(q = "trashed = false")))
+  }
+  q_bits <- params[["matched"]]
   stopifnot(all(vapply(q_bits, is.character, logical(1))))
-  params[iq] <- NULL
-  q_bits <- unlist(q_bits, use.names = FALSE)
+  q_bits <- unique(unlist(q_bits, use.names = FALSE))
   q_bits <- q_bits[lengths(q_bits) > 0]
 
   ## by default, exclude files in trash
@@ -139,6 +141,5 @@ marshal_q_clauses <- function(params) {
     q_bits <- c(q_bits, "trashed = false")
   }
 
-  params$q <- unique(q_bits)
-  params
+  c(params[["unmatched"]], q = list(q_bits))
 }
