@@ -28,7 +28,7 @@
 #' teamdrive_rm(td03)
 #' }
 teamdrive_rm <- function(teamdrive = NULL, verbose = TRUE) {
-  teamdrive <- as_teamdrive_dribble(teamdrive)
+  teamdrive <- as_teamdrive(teamdrive)
   if (no_file(teamdrive) && verbose) {
     message("No such Team Drives found to delete.")
     return(invisible(logical(0)))

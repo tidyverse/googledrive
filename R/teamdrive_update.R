@@ -31,7 +31,7 @@
 #' teamdrive_rm(td)
 #' }
 teamdrive_update <- function(teamdrive, ..., verbose = TRUE) {
-  teamdrive <- as_teamdrive_dribble(teamdrive)
+  teamdrive <- as_teamdrive(teamdrive)
   if (no_file(teamdrive) && verbose) {
     message("No such Team Drives found to update.")
     return(invisible(dribble()))
