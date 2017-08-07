@@ -9,7 +9,7 @@ drive_ls(path = NULL, ...)
 \arguments{
 \item{path}{Specifies a single folder on Google Drive whose contents you want
 to list. Can be an actual path (character), a file id or URL marked with
-\code{\link[=as_id]{as_id()}}, or a \link{dribble}.}
+\code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}}
 
 \item{...}{Any parameters that are valid for \code{\link[=drive_find]{drive_find()}}.}
 }

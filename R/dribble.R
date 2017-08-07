@@ -17,7 +17,6 @@
 #'   subsetting, as long as the required variables are present and of the
 #'   correct type.
 #'
-#' @export
 #' @name dribble
 #' @seealso [as_dribble()]
 NULL
@@ -116,7 +115,7 @@ has_drive_resource <- function(x) {
 
 #' Check facts about a dribble
 #'
-#' Sometimes you need to check things about a dribble or about the files it
+#' Sometimes you need to check things about a [`dribble`]` or about the files it
 #' represents, such as:
 #'   * Is it even a dribble?
 #'   * Size: Does the dribble hold exactly one file? At least one file? No file?

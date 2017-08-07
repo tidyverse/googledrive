@@ -6,7 +6,7 @@
 #'
 #' @param path Specifies a single folder on Google Drive whose contents you want
 #'   to list. Can be an actual path (character), a file id or URL marked with
-#'   [as_id()], or a [dribble].
+#'   [as_id()], or a [`dribble`]
 #' @param ... Any parameters that are valid for [drive_find()].
 #'
 #' @template dribble-return

@@ -32,7 +32,7 @@ is_mine(d)
 \item{d}{A \code{\link{dribble}}.}
 }
 \description{
-Sometimes you need to check things about a dribble or about the files it
+Sometimes you need to check things about a \code{\link{dribble}}` or about the files it
 represents, such as:
 \itemize{
 \item Is it even a dribble?
