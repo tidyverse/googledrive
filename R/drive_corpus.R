@@ -1,47 +1,58 @@
-#' Search for Team Drive content
+#' Access a Team Drive
 #'
-#' @description The Drive API requires extra information if you want to search
-#'   for files within a specific Team Drive or across all Team Drives. This
-#'   matters for more functions than you might think, since many googledrive
-#'   calls do some file searching behind the scenes, for example, whenever there
-#'   is a need to resolve a file id based on a file's name or path.
+#' @description The Drive API requires extra information in order to look for
+#'   files on a Team Drive. [drive_find()] and [drive_get()] accept this
+#'   information via `...` and should be used to capture Team Drives files in a
+#'   [`dribble`], suitable for use in other googledrive functions.
 #'
-#' The extra information consists of:
-#'   * `corpora`: Where to search?
-#'   * `teamDriveId`: The id of a specific Team Drive. Only relevant if
-#'     `corpora = "teamDrive"`.
+#' @template teamdrives-description
+#'
+#' @description If you want to search a specific Team Drive, provide its id
+#' somewhere in the call, like so:
+#' ```
+#' drive_find(..., teamDriveId = "XXXXXXXXX")
+#' ```
+#'
+#' To search other collections, pass the `corpora` parameter somewhere in the
+#' call, like so:
+#' ```
+#' drive_find(..., corpora = "user,allTeamDrives")
+#' ```
 #'
 #' Possible values of `corpora` and what they mean:
 #'   * `"user"`: Queries files that the user has accessed, including both Team
 #'    and non-Team Drive files.
 #'   * `"teamDrive"`: Queries all items in one specific Team Drive.
-#'   `teamDriveId` must be also specified in the request.
+#'   `teamDriveId` must be also specified in the request. In fact, googledrive
+#'   infers the need to send `corpora = "teamDrive"` whenever `teamDriveId` is
+#'   set.
 #'   * `"user,allTeamDrives"`: Queries files that the user has accessed and all
-#'   Team Drives in which they are a member. Prefer `"user"` or `"teamDrive"`
-#'   to ` "allTeamDrives"` for efficiency.
+#'   Team Drives in which they are a member. Note that both `"user"` and
+#'   `"teamDrive"` are preferable to `"allTeamDrives"`, in terms of efficiency.
 #'   * `"domain"`: Queries files that are shared to the domain, including both
 #'   Team Drive and non-Team Drive files.
-#' @description googledrive adds `includeTeamDriveItems = TRUE` to the query
-#'    whenever `corpora` is specified. The user does not need to specify this
-#'    and indeed should not.
-
-#' @seealso Implements Team Drive access as described here:
+#'
+#' @details Team Drive support:
+#' googledrive implements Team Drive support as outlined here:
 #'   * <https://developers.google.com/drive/v3/web/enable-teamdrives#including_team_drive_content_fileslist>
 #'
+#' Users shouldn't need to know any of this, but here are details for the
+#' curious. The extra information needed to search Team Drives consists of:
+#'   * `corpora`: Where to search? Described above.
+#'   * `teamDriveId`: The id of a specific Team Drive. Only allowed -- and also
+#'     absolutely required -- when `corpora = "teamDrive"`. When user passes a
+#'     `teamDriveId`, googledrive sends it and also infers that `corpora` should
+#'     be set to `"teamDrive"` and sent.
+#'   * `includeTeamDriveItems`: Do you want to see Team Drive items? Obviously,
+#'     this should be `TRUE` and googledrive sends this whenever Team Drive
+#'     parameters are detected
+#'   * `supportsTeamDrives`: Does the sending application (googledrive, in this
+#'     case) know about Team Drives? Obviously, this should be `TRUE` and
+#'     googledrive sends it for all applicable endpoints, all the time.
+#' @seealso [drive_find()]
+#' @name teamdrives
+NULL
 
-#' @param corpora Character. One of `"user"`, `"teamDrive"`,
-#'   `"user,allTeamDrives"`, or `"domain"`
-#' @param teamDriveId Character. Supply a Team Drive id here if and only if
-#'   `corpora = "teamDrive"`.
-#' @param includeTeamDriveItems Logical. Should always be `TRUE` when addressing
-#'   Team Drives and, indeed, googledrive will make it so before calling the
-#'   API.
-#'
-#' @return A list with class `drive_corpus`.
-#' @export
-#'
-#' @examples
-#' drive_corpus("user")
 drive_corpus <- function(corpora = NULL,
                          teamDriveId = NULL,
                          includeTeamDriveItems = NULL) {
