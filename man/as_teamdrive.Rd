@@ -38,6 +38,6 @@ This is a generic function.
 as_teamdrive("abc")
 
 ## specify the id (substitute one of your own!)
-as_teamdrive(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
+as_teamdrive(as_id("0AOPK1X2jaNckUk9PVA"))
 }
 }
