@@ -4,8 +4,8 @@
 \alias{drive_find}
 \title{Find files on Google Drive}
 \usage{
-drive_find(pattern = NULL, type = NULL, n_max = Inf, ...,
-  verbose = TRUE)
+drive_find(pattern = NULL, type = NULL, n_max = Inf, team_drive = NULL,
+  corpora = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the items whose names match this
@@ -19,6 +19,14 @@ processed by googledrive and sent as a query parameter.}
 \item{n_max}{Integer. An upper bound on the number of items to return. This
 applies to the results requested from the API, which may be further
 filtered locally, via the \code{pattern} argument.}
+
+\item{team_drive}{Anything that identifies one specific Team Drive: its name,
+its id or URL marked with \code{\link{as_id}()}, or a
+\code{\link{dribble}}. Will be pre-processed with
+\code{\link{as_teamdrive}()}.}
+
+\item{corpora}{Character, specifying the search collection. Only relevant in
+the Team Drives context.}
 
 \item{...}{Other parameters to pass along in the request. The most likely
 candidate is \code{q}. See the examples and the API's

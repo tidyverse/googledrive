@@ -4,13 +4,13 @@
 \alias{teamdrive_update}
 \title{Update an existing Team Drive}
 \usage{
-teamdrive_update(teamdrive, ..., verbose = TRUE)
+teamdrive_update(team_drive, ..., verbose = TRUE)
 }
 \arguments{
-\item{teamdrive}{Something that identifies the Team Drive(s) of interest. Can
-be a character vector of names, a character vector of file ids or URLs
-marked with \code{\link{as_id}()}, or a \code{\link{dribble}} consisting
-only of Team Drives.}
+\item{team_drive}{Anything that identifies one specific Team Drive: its name,
+its id or URL marked with \code{\link{as_id}()}, or a
+\code{\link{dribble}}. Will be pre-processed with
+\code{\link{as_teamdrive}()}.}
 
 \item{...}{Named parameters to pass along to the Drive API. See the "Request
 body" section of the Drive API docs for the associated endpoint.}

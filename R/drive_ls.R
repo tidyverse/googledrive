@@ -38,13 +38,13 @@ drive_ls <- function(path = NULL, ...) {
 
   params <- list(...)
   params <- append(params, c(q = paste(sq(path$id), "in parents")))
+
   if (is_teamdrivy(path)) {
     if (is_teamdrive(path)) {
-      params <- append(params, c(teamDriveId = path$id))
+      params[["team_drive"]] <- as_id(path$id)
     } else {
-      params <- append(
-        params,
-        c(teamDriveId = path$drive_resource[[1]][["teamDriveId"]])
+      params[["team_drive"]] <- as_id(
+        path$drive_resource[[1]][["teamDriveId"]]
       )
     }
   }

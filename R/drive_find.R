@@ -43,6 +43,8 @@
 #'   Can be anything that [drive_mime_type()] knows how to handle. This is
 #'   processed by googledrive and sent as a query parameter.
 #' @template n_max
+#' @template team_drive-singular
+#' @template corpora
 #' @param ... Other parameters to pass along in the request. The most likely
 #'   candidate is `q`. See the examples and the API's
 #'   [Search for Files guide](https://developers.google.com/drive/v3/web/search-parameters).
@@ -88,6 +90,8 @@
 drive_find <- function(pattern = NULL,
                        type = NULL,
                        n_max = Inf,
+                       team_drive = NULL,
+                       corpora = NULL,
                        ...,
                        verbose = TRUE) {
 
@@ -100,7 +104,6 @@ drive_find <- function(pattern = NULL,
   params <- list(...)
   params$fields <- params$fields %||% "*"
   params <- marshal_q_clauses(params)
-  params <- handle_teamdrives(params)
 
   if (!is.null(type)) {
     ## if they are all NA, this will error, because drive_mime_type()
@@ -111,6 +114,8 @@ drive_find <- function(pattern = NULL,
   }
 
   params$q <- and(params$q)
+
+  params <- append(params, handle_team_drives(team_drive, corpora))
 
   request <- generate_request(endpoint = "drive.files.list", params = params)
   proc_res_list <- do_paginated_request(
@@ -159,15 +164,11 @@ marshal_q_clauses <- function(params) {
   c(params[["unmatched"]], q = list(q_bits))
 }
 
-handle_teamdrives <- function(params) {
-  params <- partition_params(
-    params,
-    c("corpora", "teamDriveId", "includeTeamDriveItems")
-  )
-  if (length(params[["matched"]]) == 0) {
-    return(params[["unmatched"]])
+handle_team_drives <- function(team_drive, corpora) {
+  if (is.null(team_drive) && is.null(corpora)) return(NULL)
+  tid <- as_id(as_teamdrive(team_drive))
+  if (length(tid) == 0) {
+    tid <- NULL
   }
-
-  params[["matched"]] <- do.call(drive_corpus, params[["matched"]])
-  c(params[["unmatched"]], params[["matched"]])
+  drive_corpus(teamDriveId = tid, corpora = corpora)
 }

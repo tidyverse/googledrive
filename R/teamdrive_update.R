@@ -7,7 +7,7 @@
 #' @seealso Wraps the `teamdrives.update` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/teamdrives/update>
 #'
-#' @template teamdrive
+#' @template team_drive-singular
 #' @param ... Named parameters to pass along to the Drive API. See the "Request
 #'   body" section of the Drive API docs for the associated endpoint.
 #' @template verbose
@@ -30,28 +30,28 @@
 #' ## clean up
 #' teamdrive_rm(td)
 #' }
-teamdrive_update <- function(teamdrive, ..., verbose = TRUE) {
-  teamdrive <- as_teamdrive(teamdrive)
-  if (no_file(teamdrive) && verbose) {
+teamdrive_update <- function(team_drive, ..., verbose = TRUE) {
+  team_drive <- as_teamdrive(team_drive)
+  if (no_file(team_drive) && verbose) {
     message("No such Team Drives found to update.")
     return(invisible(dribble()))
   }
-  if (!single_file(teamdrive)) {
-    drives <- glue_data(teamdrive, "  * {name}: {id}")
-    stop_collapse(c("Can't update multiple Team Drives at once:", teamdrive))
+  if (!single_file(team_drive)) {
+    drives <- glue_data(team_drive, "  * {name}: {id}")
+    stop_collapse(c("Can't update multiple Team Drives at once:", team_drive))
   }
 
   meta <- list(...)
   if (length(meta) == 0) {
     if (verbose) message("No updates specified.")
-    return(invisible(teamdrive))
+    return(invisible(team_drive))
   }
 
   meta$fields <- meta$fields %||% "*"
   request <- generate_request(
     endpoint = "drive.teamdrives.update",
     params = c(
-      teamDriveId = teamdrive$id,
+      teamDriveId = as_id(team_drive),
       meta
     )
   )
