@@ -92,7 +92,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
         c("Requested parent folder identifies multiple files:", paths)
       )
     }
-    if (!is_folder(path)) {
+    if (!is_parental(path)) {
       stop_glue("Requested parent folder does not exist:\n{path$name}")
     }
     current_parents <- file$drive_resource[[1]][["parents"]]

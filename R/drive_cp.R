@@ -65,8 +65,8 @@
 drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
-  if (is_folder(file)) {
-    stop("The Drive API does not copy folders.", call. = FALSE)
+  if (is_parental(file)) {
+    stop_glue("The Drive API does not copy folders or Team Drives.")
   }
 
   if (!is.null(name)) {
@@ -102,7 +102,7 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
       )
     }
     ## if path was input as a dribble or id, still need to be sure it's a folder
-    if (!is_folder(path)) {
+    if (!is_parental(path)) {
       stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
     }
     params[["parents"]] <- list(path$id)
