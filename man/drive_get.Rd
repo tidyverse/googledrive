@@ -4,7 +4,8 @@
 \alias{drive_get}
 \title{Get Drive files by path or id}
 \usage{
-drive_get(path = NULL, id = NULL, verbose = TRUE)
+drive_get(path = NULL, id = NULL, team_drive = NULL, corpora = NULL,
+  verbose = TRUE)
 }
 \arguments{
 \item{path}{Character vector of path(s) to get. Use a trailing slash to
@@ -16,6 +17,14 @@ the \code{id} argument.}
 \item{id}{Character vector of Drive file ids or URLs (it is first processed
 with \code{\link[=as_id]{as_id()}}). If both \code{path} and \code{id} are non-\code{NULL}, \code{id} is silently
 ignored.}
+
+\item{team_drive}{Anything that identifies one specific Team Drive: its name,
+its id or URL marked with \code{\link{as_id}()}, or a
+\code{\link{dribble}}. Will be pre-processed with
+\code{\link{as_teamdrive}()}.}
+
+\item{corpora}{Character, specifying the search collection. Only relevant in
+the Team Drives context.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

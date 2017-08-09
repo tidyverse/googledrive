@@ -29,6 +29,8 @@
 #' @param id Character vector of Drive file ids or URLs (it is first processed
 #'   with [as_id()]). If both `path` and `id` are non-`NULL`, `id` is silently
 #'   ignored.
+#' @template team_drive-singular
+#' @template corpora
 #' @template verbose
 #'
 #' @template dribble-return
@@ -54,7 +56,11 @@
 #' drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 #'
 #' }
-drive_get <- function(path = NULL, id = NULL, verbose = TRUE) {
+drive_get <- function(path = NULL,
+                      id = NULL,
+                      team_drive = NULL,
+                      corpora = NULL,
+                      verbose = TRUE) {
   if (length(path) + length(id) == 0) return(dribble_with_path())
 
   if (!is.null(path) && inherits(path, "drive_id")) {
@@ -64,7 +70,7 @@ drive_get <- function(path = NULL, id = NULL, verbose = TRUE) {
 
   if (!is.null(path)) {
     stopifnot(is_path(path))
-    return(dribble_from_path(path))
+    return(dribble_from_path(path, team_drive, corpora))
   }
 
   stopifnot(is.character(id))
