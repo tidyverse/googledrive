@@ -58,10 +58,6 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     stop_collapse(c("Path to move is not unique:", files))
   }
 
-  if (!is_mine(file)) {
-    stop_glue("\nCan't move this file because you don't own it:\n  * {file$name}")
-  }
-
   if (is.null(path) && is.null(name)) {
     if (verbose) message("Nothing to be done.")
     return(invisible(file))
