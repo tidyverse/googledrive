@@ -28,13 +28,24 @@ drive_add_path <- function(file) {
   if (is_dribble(file)) {
     file <- as_id(file$id)
   }
-  stopifnot(inherits(file, "drive_id"))
   file <- as_dribble(file)
   if (no_file(file)) return(dribble_with_path())
 
+  team_drive <- NULL
+  corpora <- NULL
+  tid <- purrr::map_chr(file$drive_resource, "teamDriveId", .default = NA)
+  tid <- unique(tid[!is.na(tid)])
+  if (length(tid) > 0) {
+    if (length(tid) == 1) {
+      team_drive <- as_id(tid)
+    } else {
+      corpora <- "user,allTeamDrives"
+    }
+  }
+
   nodes <- rbind(
     file,
-    drive_find(type = "folder"),
+    drive_find(type = "folder", team_drive = team_drive, corpora = corpora),
     make.row.names = FALSE
   ) %>% promote("parents")
   nodes <- nodes[!duplicated(nodes$id), ]
