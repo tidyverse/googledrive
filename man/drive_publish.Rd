@@ -20,7 +20,7 @@ automatically published (default here is \code{publishAuto = TRUE}).}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
-  file.
+  item.
 }
 \description{
 Publish Google Drive file.

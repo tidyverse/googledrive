@@ -16,6 +16,8 @@
 #' that lacks it, use [drive_add_path()]. If you want to list the contents of a
 #' folder, use [drive_ls()]. For general searching, use [drive_find()].
 #'
+#' @template teamdrives-description
+#'
 #' @seealso Wraps the `files.get` endpoint and, if you specify files by name or
 #'   path, also calls `files.list`:
 #'   * <https://developers.google.com/drive/v3/reference/files/update>
@@ -29,6 +31,8 @@
 #' @param id Character vector of Drive file ids or URLs (it is first processed
 #'   with [as_id()]). If both `path` and `id` are non-`NULL`, `id` is silently
 #'   ignored.
+#' @template team_drive-singular
+#' @template corpora
 #' @template verbose
 #'
 #' @template dribble-return
@@ -53,8 +57,19 @@
 #' drive_get(as_id("abcdefgeh123456789"))
 #' drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 #'
+#' ## access the Team Drive named "foo"
+#' foo <- teamdrive_get("foo")
+#' drive_get(c("this.jpg", "that-file"), team_drive = foo)
+#' drive_get(as_id("123456789"), team_drive = foo)
+#'
+#' ## search all Team Drives and other files user has accessed
+#' drive_get(c("this.jpg", "that-file"), corpora = "user,allTeamDrives")
 #' }
-drive_get <- function(path = NULL, id = NULL, verbose = TRUE) {
+drive_get <- function(path = NULL,
+                      id = NULL,
+                      team_drive = NULL,
+                      corpora = NULL,
+                      verbose = TRUE) {
   if (length(path) + length(id) == 0) return(dribble_with_path())
 
   if (!is.null(path) && inherits(path, "drive_id")) {
@@ -64,7 +79,7 @@ drive_get <- function(path = NULL, id = NULL, verbose = TRUE) {
 
   if (!is.null(path)) {
     stopifnot(is_path(path))
-    return(dribble_from_path(path))
+    return(dribble_from_path(path, team_drive, corpora))
   }
 
   stopifnot(is.character(id))
@@ -75,8 +90,7 @@ get_one_id <- function(id) {
   ## when id = "", drive.files.get actually becomes a call to drive.files.list
   ## and, therefore, returns 100 files by default ... don't let that happen
   if (!isTRUE(nzchar(id, keepNA = TRUE))) {
-    stop("File ids must not be NA and cannot be the empty string.",
-         call. = FALSE)
+    stop_glue("File ids must not be NA and cannot be the empty string.")
   }
   request <- generate_request(
     endpoint = "drive.files.get",

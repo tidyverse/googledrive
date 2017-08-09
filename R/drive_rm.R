@@ -23,7 +23,7 @@
 drive_rm <- function(file = NULL, verbose = TRUE) {
   file <- as_dribble(file)
   if (no_file(file) && verbose) {
-    message_glue("No such files found to delete.")
+    message("No such files found to delete.")
     return(invisible(logical(0)))
   }
 

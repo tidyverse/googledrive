@@ -60,10 +60,6 @@ drive_update <- function(file,
     stop_collapse(c("File to update is not unique:", files))
   }
 
-  if (!is_mine(file)) {
-    stop_glue("\nCan't update this file because you don't own it:\n  * {file$name}")
-  }
-
   if (!is.null(media) && !file.exists(media)) {
     stop_glue("\nLocal file does not exist:\n  * {media}")
   }

@@ -202,12 +202,35 @@ is_folder <- function(d) {
 
 #' @export
 #' @rdname dribble-checks
+is_parental <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  kind <- purrr::map_chr(d$drive_resource, "kind")
+  mime_type <- purrr::map_chr(d$drive_resource, "mimeType", .default = NA)
+  kind == "drive#teamDrive" | mime_type == "application/vnd.google-apps.folder"
+}
+
+#' @export
+#' @rdname dribble-checks
 ## TO DO: handle team drives here
 is_mine <- function(d) {
   stopifnot(inherits(d, "dribble"))
   purrr::map_lgl(d$drive_resource, list("owners", 1, "me"))
 }
 
+#' @export
+#' @rdname dribble-checks
+is_teamdrive <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  purrr::map_chr(d$drive_resource, "kind") == "drive#teamDrive"
+}
+
+#' @export
+#' @rdname dribble-checks
+is_teamdrivy <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  is_teamdrive(d) |
+    purrr::map_lgl(d$drive_resource, ~ !is.null(.x[["teamDriveId"]]))
+}
 
 ## promote an element in drive_resource into a top-level variable
 ## it will be the second column, presumably after `name``

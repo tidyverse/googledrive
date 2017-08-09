@@ -2,25 +2,26 @@
 % Please edit documentation in R/drive_ls.R
 \name{drive_ls}
 \alias{drive_ls}
-\title{List contents of a folder.}
+\title{List contents of a folder or Team Drive}
 \usage{
 drive_ls(path = NULL, ...)
 }
 \arguments{
 \item{path}{Specifies a single folder on Google Drive whose contents you want
 to list. Can be an actual path (character), a file id or URL marked with
-\code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}}
+\code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. If it is a Team Drive or is a folder on a Team
+Drive, it must be passed as a \code{\link{dribble}}.}
 
 \item{...}{Any parameters that are valid for \code{\link[=drive_find]{drive_find()}}.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
-  file.
+  item.
 }
 \description{
-List the contents of a folder on Google Drive, nonrecursively. This is a thin
-wrapper around \code{\link[=drive_find]{drive_find()}}, that simply limits the search to a specific
-folder.
+List the contents of a folder or Team Drive, nonrecursively. This is a thin
+wrapper around \code{\link[=drive_find]{drive_find()}}, that simply limits the search to direct
+children of a specific folder or to top-level items of a Team Drive.
 }
 \examples{
 \dontrun{

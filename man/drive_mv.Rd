@@ -27,7 +27,7 @@ it is character and lacks a trailing slash. Defaults to current name.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
-  file.
+  item.
 }
 \description{
 Move a Drive file to a different folder, give it a different name, or both.

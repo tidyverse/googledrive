@@ -1,19 +1,39 @@
-#' Find files on Google Drive.
+#' Find files on Google Drive
 #'
-#' @description This is the closest googledrive function to what you get from
-#'   <https://drive.google.com>: by default, you just get a listing of your
-#'   files. You can also narrow the search in various ways, such as by file
-#'   type, whether it's yours or shared with you, starred status, etc.
+#' This is the closest googledrive function to what you can do at
+#' <https://drive.google.com>: by default, you just get a listing of your files.
+#' You can also search in various ways, e.g., filter by file type or ownership
+#' or even work with Team Drives, if you have access. This is a very powerful
+#' function. Together with the more specific [drive_get()], this is the main way
+#' to identify files to target for downstream work.
 #'
-#' By default, `drive_find()` does not show files in the trash: it adds
-#'   `q = "trashed = false"` to the query. However, it will not do so if the
-#'   user specifies a `q` search clause for trash inclusion or exclusion. To see
-#'   only files in the trash, use [drive_view_trash()], which is a shortcut for
-#'   `drive_find(q = "trashed = true")`. To see files regardless of trash
-#'   status, use `drive_find(q = "trashed = true or trashed = false")`.
+#' @template teamdrives-description
+
+#' @section File type:
 #'
-#' `drive_find()` will accept multiple `q` clauses and/or a vector `q` of
-#'   several search clauses. These clauses are combined with `and`.
+#'   The `type` argument is pre-processed with [drive_mime_type()], so you can
+#'   use a few shortcuts and file extensions, in addition to full-blown MIME
+#'   types. googledrive forms a search clause to pass to `q`.
+
+#' @section Search parameters:
+#'
+#' Do advanced search on file properties by providing search clauses to the
+#' `q` parameter that is passed to the API via `...`. Multiple `q` clauses or
+#' vector-valued `q` are combined via 'and'.
+
+#' @section Trash:
+#'
+#' By default, `drive_find()` does not include files in the trash: it adds `q =
+#' "trashed = false"` to the query. However, it will not do so if the user
+#' specifies a `q` search clause for trash inclusion or exclusion. To see only
+#' files in the trash, use [drive_view_trash()], which is a shortcut for
+#' `drive_find(q = "trashed = true")`. To see files regardless of trash status,
+#' use `drive_find(q = "trashed = true or trashed = false")`.
+
+#' @section Team Drives:
+#'
+#'   If you have access to Team Drives, you'll know. Use `team_drive` and/or
+#'   `corpora` to search one or more Team Drives. See [drive_corpus()] for more.
 
 #' @seealso Wraps the `files.list` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
@@ -21,17 +41,15 @@
 #' Helpful resource for forming your own queries:
 #'   * <https://developers.google.com/drive/v3/web/search-parameters>
 #'
-#' @param pattern Character. If provided, only the files whose names match this
-#'   regular expression are returned. This is implemented locally on the results
-#'   returned by the API.
+#' @template pattern
 #' @param type Character. If provided, only files of this type will be returned.
 #'   Can be anything that [drive_mime_type()] knows how to handle. This is
 #'   processed by googledrive and sent as a query parameter.
-#' @param n_max Integer. An upper bound on the number of files to return. This
-#'   applies to the results requested from the API, which may be further
-#'   filtered locally, via the `pattern` argument.
+#' @template n_max
+#' @template team_drive-singular
+#' @template corpora
 #' @param ... Other parameters to pass along in the request. The most likely
-#'   candidate is `q`. See the examples and the API's
+#'   candidate is `q`. See below and the API's
 #'   [Search for Files guide](https://developers.google.com/drive/v3/web/search-parameters).
 #' @template verbose
 #'
@@ -75,6 +93,8 @@
 drive_find <- function(pattern = NULL,
                        type = NULL,
                        n_max = Inf,
+                       team_drive = NULL,
+                       corpora = NULL,
                        ...,
                        verbose = TRUE) {
 
@@ -98,11 +118,14 @@ drive_find <- function(pattern = NULL,
 
   params$q <- and(params$q)
 
+  params <- append(params, handle_team_drives(team_drive, corpora))
+
   request <- generate_request(endpoint = "drive.files.list", params = params)
   proc_res_list <- do_paginated_request(
     request,
     n_max = n_max,
-    n = function(x) length(x$files)
+    n = function(x) length(x$files),
+    verbose = verbose
   )
 
   res_tbl <- proc_res_list %>%
@@ -142,4 +165,13 @@ marshal_q_clauses <- function(params) {
   }
 
   c(params[["unmatched"]], q = list(q_bits))
+}
+
+handle_team_drives <- function(team_drive, corpora) {
+  if (is.null(team_drive) && is.null(corpora)) return(NULL)
+  tid <- as_id(as_teamdrive(team_drive))
+  if (length(tid) == 0) {
+    tid <- NULL
+  }
+  drive_corpus(teamDriveId = tid, corpora = corpora)
 }

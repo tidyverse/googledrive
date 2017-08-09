@@ -23,6 +23,7 @@
 #'   with [`generate_request()`] or [build_request()]. Should contain the
 #'    `method`, `path`, `query`, `body`, `token`, and `url`.
 #' @param ... Optional arguments passed through to the HTTP method.
+#' @template verbose
 #'
 #' @return `make_request()`: Object of class `response` from [httr].
 #' @export
@@ -57,7 +58,7 @@ do_request <- function(x, ...) {
 #'   pass another function to count and threshhold, for example, the number of
 #'   files or comments.
 #' @export
-#' @return `do_pagintated_request()`: List of lists, representing the returned
+#' @return `do_paginated_request()`: List of lists, representing the returned
 #'   content, one component per page.
 #' @examples
 #' \dontrun{
@@ -83,15 +84,19 @@ do_request <- function(x, ...) {
 #' ## should get back exactly two comments
 #' do_paginated_request(req, n_max = 1)
 #' }
-do_paginated_request <- function(x, ..., n_max = Inf, n = function(res) 1) {
+do_paginated_request <- function(x,
+                                 ...,
+                                 n_max = Inf,
+                                 n = function(res) 1,
+                                 verbose = TRUE) {
   ## when traversing pages, you can't cleanly separate the task into
   ## make_request() and process_response(), because you need to process
   ## response / page i to get the pageToken for request / page i + 1
   ## so this function does both
   stopifnot(identical(x$method, "GET"))
 
-  ## if fields does not exist yet, you will need something to preprend
-  ## "nextPageToken" to ... "all fields" seems like best default choice
+  ## if fields does not exist yet, you will need something to prepend
+  ## "nextPageToken" to ... "all fields" seems like best (only?) default choice
   x$query$fields <- x$query$fields %||% "*"
   if (!grepl("nextPageToken", x$query$fields)) {
     x$query$fields <- glue("nextPageToken,{x$query$fields}")
@@ -105,12 +110,12 @@ do_paginated_request <- function(x, ..., n_max = Inf, n = function(res) 1) {
     responses[[i]] <- process_response(page)
     x$query$pageToken <- responses[[i]]$nextPageToken
     total <- total + n(responses[[i]])
+    if (verbose && i == 2) message_glue("Items so far: ")
+    if (verbose && i > 1) message_glue("{total} ", .appendLF = FALSE)
     if (is.null(x$query$pageToken) || total >= n_max) {
-      # if (i > 1) message(" .")
+      if (verbose && i > 1) message("")
       break
     }
-    # if (i == 1) message("Traversing pages", appendLF = FALSE)
-    # message(" .", appendLF = FALSE)
     i <- i + 1
   }
 

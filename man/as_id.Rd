@@ -2,14 +2,55 @@
 % Please edit documentation in R/as_id.R
 \name{as_id}
 \alias{as_id}
-\title{File id from string or URL.}
+\alias{as_id.default}
+\alias{as_id.NULL}
+\alias{as_id.drive_id}
+\alias{as_id.dribble}
+\alias{as_id.data.frame}
+\alias{as_id.character}
+\title{Extract and/or mark as file id}
 \usage{
-as_id(x)
+as_id(x, ...)
+
+\method{as_id}{default}(x, ...)
+
+\method{as_id}{NULL}(x, ...)
+
+\method{as_id}{drive_id}(x, ...)
+
+\method{as_id}{dribble}(x, ...)
+
+\method{as_id}{data.frame}(x, ...)
+
+\method{as_id}{character}(x, ...)
 }
 \arguments{
-\item{x}{Character vector of Google Drive ids or Google Drive URLs}
+\item{x}{A character vector of file or Team Drive ids or URLs, a \code{\link{dribble}}
+or a suitable data frame.}
+
+\item{...}{Other arguments passed down to methods. (Not used.)}
+}
+\value{
+A character vector bearing the S3 class \code{drive_id}.
 }
 \description{
-Marks a character vector as holding Google Drive file ids, as opposed to file
-names or paths. User can supply either a Google Drive id or a Google Drive URL.
+Gets file ids from various inputs and marks them as such, to
+distinguish them from file names or paths.
+
+This is a generic function.
+}
+\examples{
+as_id("123abc")
+as_id("https://docs.google.com/spreadsheets/d/qawsedrf16273849/edit#gid=12345")
+
+\dontrun{
+x <- drive_find(n_max = 3)
+as_id(x)
+
+x <- drive_get("foofy")
+as_id(x)
+
+x <- teamdrive_find("work-stuff")
+as_id(x)
+}
 }

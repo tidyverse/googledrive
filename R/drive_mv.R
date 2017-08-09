@@ -58,10 +58,6 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     stop_collapse(c("Path to move is not unique:", files))
   }
 
-  if (!is_mine(file)) {
-    stop_glue("\nCan't move this file because you don't own it:\n  * {file$name}")
-  }
-
   if (is.null(path) && is.null(name)) {
     if (verbose) message("Nothing to be done.")
     return(invisible(file))
@@ -96,7 +92,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
         c("Requested parent folder identifies multiple files:", paths)
       )
     }
-    if (!is_folder(path)) {
+    if (!is_parental(path)) {
       stop_glue("Requested parent folder does not exist:\n{path$name}")
     }
     current_parents <- file$drive_resource[[1]][["parents"]]

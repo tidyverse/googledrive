@@ -4,7 +4,8 @@
 \alias{drive_get}
 \title{Get Drive files by path or id}
 \usage{
-drive_get(path = NULL, id = NULL, verbose = TRUE)
+drive_get(path = NULL, id = NULL, team_drive = NULL, corpora = NULL,
+  verbose = TRUE)
 }
 \arguments{
 \item{path}{Character vector of path(s) to get. Use a trailing slash to
@@ -17,12 +18,21 @@ the \code{id} argument.}
 with \code{\link[=as_id]{as_id()}}). If both \code{path} and \code{id} are non-\code{NULL}, \code{id} is silently
 ignored.}
 
+\item{team_drive}{Anything that identifies one specific Team Drive: its name,
+its id or URL marked with \code{\link{as_id}()}, or a
+\code{\link{dribble}}. Is pre-processed with
+\code{\link{as_teamdrive}()} and then \code{\link{drive_corpus}()}.}
+
+\item{corpora}{Character, specifying the search collection. Only relevant in
+the Team Drives context.  Is pre-processed together with \code{team_drive}
+by \code{\link{drive_corpus}()}.}
+
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
-  file.
+  item.
 }
 \description{
 Retrieve metadata for files specified via path or via file id.
@@ -43,6 +53,11 @@ If the files are specified via \code{path}, versus \code{id}, the returned \code
 will include a \code{path} variable. To add path information to any \code{\link{dribble}}
 that lacks it, use \code{\link[=drive_add_path]{drive_add_path()}}. If you want to list the contents of a
 folder, use \code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_find]{drive_find()}}.
+
+Note:
+  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+  are only available to users of certain enhanced Google services, such as G
+  Suite Enterprise, G Suite Business, or G Suite for Education.
 }
 \examples{
 \dontrun{
@@ -63,6 +78,13 @@ drive_get(id = "abcdefgeh123456789")
 drive_get(as_id("abcdefgeh123456789"))
 drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 
+## access the Team Drive named "foo"
+foo <- teamdrive_get("foo")
+drive_get(c("this.jpg", "that-file"), team_drive = foo)
+drive_get(as_id("123456789"), team_drive = foo)
+
+## search all Team Drives and other files user has accessed
+drive_get(c("this.jpg", "that-file"), corpora = "user,allTeamDrives")
 }
 }
 \seealso{

@@ -11,7 +11,7 @@ drive_add_path(file)
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
-  file.
+  item.
 }
 \description{
 Even though you know a Drive file's name or id, you don't

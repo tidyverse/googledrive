@@ -23,7 +23,7 @@ it is character and lacks a trailing slash. {}}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
-  file.
+  item.
 }
 \description{
 Create a folder on Drive.

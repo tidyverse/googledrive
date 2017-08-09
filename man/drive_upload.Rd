@@ -38,7 +38,7 @@ docs for the associated endpoint.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
-  file.
+  item.
 }
 \description{
 Uploads a local file into a new Drive file. To update the content or metadata

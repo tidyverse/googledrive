@@ -28,13 +28,24 @@ drive_add_path <- function(file) {
   if (is_dribble(file)) {
     file <- as_id(file$id)
   }
-  stopifnot(inherits(file, "drive_id"))
   file <- as_dribble(file)
   if (no_file(file)) return(dribble_with_path())
 
+  team_drive <- NULL
+  corpora <- NULL
+  tid <- purrr::map_chr(file$drive_resource, "teamDriveId", .default = NA)
+  tid <- unique(tid[!is.na(tid)])
+  if (length(tid) > 0) {
+    if (length(tid) == 1) {
+      team_drive <- as_id(tid)
+    } else {
+      corpora <- "user,allTeamDrives"
+    }
+  }
+
   nodes <- rbind(
     file,
-    drive_find(type = "folder"),
+    drive_find(type = "folder", team_drive = team_drive, corpora = corpora),
     make.row.names = FALSE
   ) %>% promote("parents")
   nodes <- nodes[!duplicated(nodes$id), ]
@@ -57,12 +68,14 @@ pathify_one_id <- function(id, nodes, root_id) {
 
 ## basically does the same as above, but for files specified via path
 ## does the actual work for drive_get(path = ...)
-dribble_from_path <- function(path = NULL) {
+dribble_from_path <- function(path = NULL,
+                              team_drive = NULL,
+                              corpora = NULL) {
   if (length(path) == 0) return(dribble_with_path())
   stopifnot(is_path(path))
   path <- rootize_path(path)
 
-  nodes <- get_nodes(path)
+  nodes <- get_nodes(path, team_drive, corpora)
   if (nrow(nodes) == 0) return(dribble_with_path())
 
   ROOT_ID <- root_id()
@@ -94,7 +107,9 @@ pathify_one_path <- function(op, nodes, root_id) {
 
 ## given a vector of paths,
 ## retrieves metadata for all files that could be needed to resolve paths
-get_nodes <- function(path) {
+get_nodes <- function(path,
+                      team_drive = NULL,
+                      corpora = NULL) {
   path_parts <- purrr::map(path, partition_path, maybe_name = TRUE)
   ## workaround for purrr <= 0.2.2.2
   name <- purrr::map(path_parts, "name")
@@ -111,6 +126,8 @@ get_nodes <- function(path) {
     nodes <- rbind(
       nodes,
       drive_find(
+        team_drive = team_drive,
+        corpora = corpora,
         fields = "*",
         q = q_clauses,
         verbose = FALSE
