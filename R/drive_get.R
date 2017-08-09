@@ -16,6 +16,8 @@
 #' that lacks it, use [drive_add_path()]. If you want to list the contents of a
 #' folder, use [drive_ls()]. For general searching, use [drive_find()].
 #'
+#' @template teamdrives-description
+#'
 #' @seealso Wraps the `files.get` endpoint and, if you specify files by name or
 #'   path, also calls `files.list`:
 #'   * <https://developers.google.com/drive/v3/reference/files/update>
@@ -55,6 +57,13 @@
 #' drive_get(as_id("abcdefgeh123456789"))
 #' drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 #'
+#' ## access the Team Drive named "foo"
+#' foo <- teamdrive_get("foo")
+#' drive_get(c("this.jpg", "that-file"), team_drive = foo)
+#' drive_get(as_id("123456789"), team_drive = foo)
+#'
+#' ## search all Team Drives and other files user has accessed
+#' drive_get(c("this.jpg", "that-file"), corpora = "user,allTeamDrives")
 #' }
 drive_get <- function(path = NULL,
                       id = NULL,

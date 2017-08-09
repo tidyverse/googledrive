@@ -20,11 +20,12 @@ ignored.}
 
 \item{team_drive}{Anything that identifies one specific Team Drive: its name,
 its id or URL marked with \code{\link{as_id}()}, or a
-\code{\link{dribble}}. Will be pre-processed with
-\code{\link{as_teamdrive}()}.}
+\code{\link{dribble}}. Is pre-processed with
+\code{\link{as_teamdrive}()} and then \code{\link{drive_corpus}()}.}
 
 \item{corpora}{Character, specifying the search collection. Only relevant in
-the Team Drives context.}
+the Team Drives context.  Is pre-processed together with \code{team_drive}
+by \code{\link{drive_corpus}()}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -52,6 +53,11 @@ If the files are specified via \code{path}, versus \code{id}, the returned \code
 will include a \code{path} variable. To add path information to any \code{\link{dribble}}
 that lacks it, use \code{\link[=drive_add_path]{drive_add_path()}}. If you want to list the contents of a
 folder, use \code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_find]{drive_find()}}.
+
+Note:
+  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+  are only available to users of certain enhanced Google services, such as G
+  Suite Enterprise, G Suite Business, or G Suite for Education.
 }
 \examples{
 \dontrun{
@@ -72,6 +78,13 @@ drive_get(id = "abcdefgeh123456789")
 drive_get(as_id("abcdefgeh123456789"))
 drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 
+## access the Team Drive named "foo"
+foo <- teamdrive_get("foo")
+drive_get(c("this.jpg", "that-file"), team_drive = foo)
+drive_get(as_id("123456789"), team_drive = foo)
+
+## search all Team Drives and other files user has accessed
+drive_get(c("this.jpg", "that-file"), corpora = "user,allTeamDrives")
 }
 }
 \seealso{

@@ -22,14 +22,15 @@ filtered locally, via the \code{pattern} argument.}
 
 \item{team_drive}{Anything that identifies one specific Team Drive: its name,
 its id or URL marked with \code{\link{as_id}()}, or a
-\code{\link{dribble}}. Will be pre-processed with
-\code{\link{as_teamdrive}()}.}
+\code{\link{dribble}}. Is pre-processed with
+\code{\link{as_teamdrive}()} and then \code{\link{drive_corpus}()}.}
 
 \item{corpora}{Character, specifying the search collection. Only relevant in
-the Team Drives context.}
+the Team Drives context.  Is pre-processed together with \code{team_drive}
+by \code{\link{drive_corpus}()}.}
 
 \item{...}{Other parameters to pass along in the request. The most likely
-candidate is \code{q}. See the examples and the API's
+candidate is \code{q}. See below and the API's
 \href{https://developers.google.com/drive/v3/web/search-parameters}{Search for Files guide}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
@@ -46,13 +47,18 @@ You can also search in various ways, e.g., filter by file type or ownership
 or even work with Team Drives, if you have access. This is a very powerful
 function. Together with the more specific \code{\link[=drive_get]{drive_get()}}, this is the main way
 to identify files to target for downstream work.
+
+Note:
+  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+  are only available to users of certain enhanced Google services, such as G
+  Suite Enterprise, G Suite Business, or G Suite for Education.
 }
 \section{File type}{
 
 
-Use \code{type} to filter on file type. Under the hood, this filters on MIME type.
-But the input is pre-processed with \code{\link[=drive_mime_type]{drive_mime_type()}}, so you can use a few
-shortcuts and file extensions, in addition to full-blown MIME types.
+The \code{type} argument is pre-processed with \code{\link[=drive_mime_type]{drive_mime_type()}}, so you can
+use a few shortcuts and file extensions, in addition to full-blown MIME
+types. googledrive forms a search clause to pass to \code{q}.
 }
 
 \section{Search parameters}{
@@ -76,7 +82,8 @@ use \code{drive_find(q = "trashed = true or trashed = false")}.
 \section{Team Drives}{
 
 
-I will be back!
+If you have access to Team Drives, you'll know. Use \code{team_drive} and/or
+\code{corpora} to search one or more Team Drives. See \code{\link[=drive_corpus]{drive_corpus()}} for more.
 }
 
 \examples{

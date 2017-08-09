@@ -6,12 +6,14 @@
 #' or even work with Team Drives, if you have access. This is a very powerful
 #' function. Together with the more specific [drive_get()], this is the main way
 #' to identify files to target for downstream work.
+#'
+#' @template teamdrives-description
 
 #' @section File type:
 #'
-#' Use `type` to filter on file type. Under the hood, this filters on MIME type.
-#' But the input is pre-processed with [drive_mime_type()], so you can use a few
-#' shortcuts and file extensions, in addition to full-blown MIME types.
+#'   The `type` argument is pre-processed with [drive_mime_type()], so you can
+#'   use a few shortcuts and file extensions, in addition to full-blown MIME
+#'   types. googledrive forms a search clause to pass to `q`.
 
 #' @section Search parameters:
 #'
@@ -30,7 +32,8 @@
 
 #' @section Team Drives:
 #'
-#' I will be back!
+#'   If you have access to Team Drives, you'll know. Use `team_drive` and/or
+#'   `corpora` to search one or more Team Drives. See [drive_corpus()] for more.
 
 #' @seealso Wraps the `files.list` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
@@ -46,7 +49,7 @@
 #' @template team_drive-singular
 #' @template corpora
 #' @param ... Other parameters to pass along in the request. The most likely
-#'   candidate is `q`. See the examples and the API's
+#'   candidate is `q`. See below and the API's
 #'   [Search for Files guide](https://developers.google.com/drive/v3/web/search-parameters).
 #' @template verbose
 #'
