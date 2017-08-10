@@ -38,17 +38,17 @@ test_that("drive_publish() publishes Google Documents", {
   drive_doc <- drive_publish(drive_doc)
 
   ## the published column should be TRUE
-  expect_true(drive_doc$publish$published)
+  expect_true(drive_doc$published)
 
-  expect_message(drive_is_published(drive_doc),
+  expect_message(drive_show_publish(drive_doc),
                  "The latest revision of file 'foo_doc-TEST-drive-publish' is published.\n")
 
   ## let's unpublish it
   drive_doc <- drive_unpublish(drive_doc)
 
   ## now this sould be false
-  expect_false(drive_doc$publish$published)
-  expect_message(drive_is_published(drive_doc),
+  expect_false(drive_doc$published)
+  expect_message(drive_show_publish(drive_doc),
                  "The latest revision of file 'foo_doc-TEST-drive-publish' is NOT published.")
 })
 
@@ -67,13 +67,13 @@ test_that("drive_publish() publishes Google Sheets", {
   drive_sheet <- drive_publish(drive_sheet)
 
   ## the published column should be TRUE
-  expect_true(drive_sheet$publish$published)
+  expect_true(drive_sheet$published)
 
   ## let's unpublish it
   drive_sheet <- drive_unpublish(drive_sheet)
 
   ## now this sould be false
-  expect_false(drive_sheet$publish$published)
+  expect_false(drive_sheet$published)
 })
 
 test_that("drive_publish() fails if the file input is not a Google Drive type", {
@@ -83,6 +83,28 @@ test_that("drive_publish() fails if the file input is not a Google Drive type", 
   drive_pdf <- drive_get(nm_("foo_pdf"))
 
   expect_error(drive_publish(drive_pdf, verbose = FALSE),
+               "Only Google Drive type files can be published."
+  )
+})
+
+test_that("drive_publish() is vectorized", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  files <- drive_get(c(nm_("foo_doc"), nm_("foo_sheet")))
+
+  files <- drive_publish(files)
+  expect_true(all(files$published))
+  files <- drive_unpublish(files)
+  expect_false(all(files$published))
+})
+
+test_that("drive_publish() fails if at least one is not a Google Drive type", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  files <- drive_get(c(nm_("foo_doc"), nm_("foo_sheet"), nm_("foo_pdf")))
+  expect_error(drive_publish(files, verbose = FALSE),
                "Only Google Drive type files can be published."
   )
 })

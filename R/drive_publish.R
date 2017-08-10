@@ -40,9 +40,28 @@ drive_change_publish <- function(file,
                                  publish = TRUE,
                                  ...,
                                  verbose = TRUE) {
-  file_update <- drive_is_published(file = file, verbose = FALSE)
-
-  file_update <- confirm_single_file(file_update)
+  file_update <- drive_show_publish(file = file, verbose = FALSE)
+  file_update <- confirm_some_files(file_update)
+  file_update <- split(file_update, 1:nrow(file_update))
+  file_update <- purrr::map(file_update,
+                            change_publish_one,
+                            publish = publish,
+                            ...,
+                            verbose = verbose)
+  file_update <- do.call(rbind, file_update)
+  if (verbose) {
+    success <- glue_data(file_update, "  * {name}: {id}")
+    message_collapse(c(
+      glue("\nFiles now {if (publish) '' else 'NOT '}published:\n"),
+      success
+    ))
+  }
+  invisible(file_update)
+}
+change_publish_one <- function(file,
+                               publish = TRUE,
+                               ...,
+                               verbose = TRUE) {
 
   x <- list(...)
   x$published <- publish
@@ -50,11 +69,9 @@ drive_change_publish <- function(file,
     x$publishAuto <- TRUE
   }
 
-  x$fileId <- file_update$id
-
-  x$revisionId <- purrr::map_chr(file_update$publish, "revision")
-
-  mime_type <- purrr::map_chr(file_update$drive_resource, "mimeType")
+  x$fileId <- file$id
+  x$revisionId <- file$revision_id
+  mime_type <- purrr::map_chr(file$drive_resource, "mimeType")
 
   x$revisionId <- if (grepl("application/vnd.google-apps.spreadsheet", mime_type)) {
     1
@@ -71,19 +88,6 @@ drive_change_publish <- function(file,
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
-  if (verbose) {
-    if (httr::status_code(response) == 200L) {
-      message_glue(
-        "\nYou have changed the publication status of file:\n",
-        "  * {sq(file_update$name)}"
-      )
-    } else
-      message_glue(
-        "\nSomething went wrong. You have NOT changed the publication status of file:\n",
-        "  * {sq(file_update$name)}"
-      )
-  }
-
   ## if we want to autopublish, it must have already been published, so
   ## we need to run again
   if (isTRUE(x$published) && isTRUE(x$publishAuto)) {
@@ -91,8 +95,7 @@ drive_change_publish <- function(file,
     proc_res <- process_response(response)
   }
 
-  file_update$publish <- publish_tbl(proc_res)
-  invisible(file_update)
+  publish_cols(file, proc_res)
 }
 
 #' Check if Google Drive file is published
@@ -109,13 +112,13 @@ drive_change_publish <- function(file,
 #'   type = "spreadsheet")
 #'
 #' ## Check publication status
-#' drive_is_published(file)
+#' drive_show_publish(file)
 #'
 #' ## Publish file
 #' drive_publish(file)
 #'
 #' ## Check publication status agian
-#' drive_is_published(file)
+#' drive_show_publish(file)
 #'
 #' ## Unpublish file
 #' drive_unpublish(file)
@@ -123,7 +126,7 @@ drive_change_publish <- function(file,
 #' ## Clean up
 #' drive_rm(file)
 #' }
-drive_is_published <- function(file, verbose = TRUE) {
+drive_show_publish <- function(file, verbose = TRUE) {
 
   file <- as_dribble(file)
   file <- confirm_some_files(file)
@@ -132,24 +135,24 @@ drive_is_published <- function(file, verbose = TRUE) {
   if (!all(grepl("application/vnd.google-apps.", mime_types)) || is_folder(file)) {
     all_mime_types <- glue_data(file, "  * {name}: {mime_types}")
     stop_collapse(c(
-      "Only Google Drive type files can be published.",
-      "Your file(s) and type:",
+      "\nOnly Google Drive type files can be published.",
+      "Your file(s) are type:",
       all_mime_types,
       "Check out `drive_share()` to change sharing permissions."
     ))
   }
 
-  published <- purrr::map2(file$id, file$name, is_published_one, verbose = verbose)
-  file$publish <- published
-
+  files <- split(file, 1:nrow(file))
+  files <- purrr::map(files, show_publish_one, verbose = verbose)
+  file <- do.call(rbind, files)
   invisible(file)
 }
 
-is_published_one <- function(id, name, verbose = TRUE) {
+show_publish_one <- function(file, verbose = TRUE) {
 
   request <- generate_request(
     endpoint = "drive.revisions.get",
-    params = list(fileId = id,
+    params = list(fileId = file$id,
                   revisionId = "head",
                   fields = "*")
   )
@@ -158,18 +161,26 @@ is_published_one <- function(id, name, verbose = TRUE) {
 
   if (verbose) {
     message_glue(
-      "The latest revision of file {sq(name)} is ",
+      "The latest revision of file {sq(file$name)} is ",
       "{if (proc_res$published) '' else 'NOT '}published."
     )
   }
-  publish_tbl(proc_res)
+  publish_cols(file, proc_res)
 }
 
-publish_tbl <- function(x) {
-  tibble::tibble(
-    check_time = Sys.time(),
-    revision = x$id,
-    published = x$published,
-    auto_publish = x$publishAuto %||% FALSE
+publish_cols <- function(d, x) {
+  if ("published" %in% names(d)) {
+    d$published_check_time <- Sys.time()
+    d$revision_id <- x$id
+    d$published <- x$published
+    d$auto_publish <- x$publishAuto %||% FALSE
+    return(d)
+  }
+  tibble::add_column(d,
+                     published_check_time = Sys.time(),
+                     revision_id = x$id,
+                     published = x$published,
+                     auto_publish = x$publishAuto %||% FALSE,
+                     .after = 1
   )
 }
