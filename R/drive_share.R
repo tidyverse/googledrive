@@ -35,7 +35,7 @@
 drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
 
   file <- as_dribble(file)
-  file <- confirm_single_file(file)
+  file <- confirm_some_files(file)
 
   if (is.null(role) || is.null(type)) {
     stop("`role` and `type` must be specified.", call. = FALSE)
@@ -58,6 +58,14 @@ drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
     )
   }
 
+  file <- split(file, 1:nrow(file))
+  files <- purrr::map(file, drive_share_one, role = role, type = type, ...)
+  file <- do.call(rbind, files)
+  file <- drive_show_sharing(file, role = role)
+  invisible(file)
+}
+
+drive_share_one <- function(file, role, type, ...) {
   request <- generate_request(
     endpoint = "drive.permissions.create",
     params = list(
@@ -83,6 +91,60 @@ drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
       message_glue_data(file, "\nPermissions were NOT updated:\n  * '{name}'")
     }
   }
-  file <- as_dribble(as_id(file$id))
-  invisible(file)
+  as_dribble(as_id(file))
 }
+
+drive_show_sharing <- function(file, role = "owner") {
+  ok_roles <- c("organizer", "owner", "writer", "commenter", "reader")
+  if (!all(role %in% ok_roles)) {
+    stop_glue(
+      "\n`role` must be one of the following:\n",
+      "  * {collapse(ok_roles, sep = ', ')}."
+    )
+  }
+  file <- as_dribble(file)
+  file <- confirm_some_files(file)
+  file <- split(file, 1:nrow(file))
+  files <- purrr::map(file, show_sharing_one, role = role)
+  do.call(rbind, files)
+}
+
+show_sharing_one <- function(file, role) {
+  request <- generate_request(
+    endpoint = "drive.permissions.list",
+    params = list(
+      fileId = file$id,
+      fields = "*"
+    )
+  )
+  response <- make_request(request, encode = "json")
+  proc_res <- process_response(response)
+  add_sharing_cols(file, proc_res$permissions, role)
+}
+
+add_sharing_cols <- function(d, x, role) {
+  ## there is a better way to do this
+  for (i in role) {
+    d <- add_sharing_emails(d, x, i)
+  }
+  d
+}
+
+add_sharing_emails <- function(d, x, role) {
+  keep <- purrr::map_lgl(x, ~ .x$role == role)
+  x <- x[keep]
+  if (length(x) == 0L) {
+    d[[role]] <- NA_character_
+    return(d)
+  }
+  # is_user <- purrr::map_lgl(x, ~ .x$type == "user")
+  # e <- x[is_user]
+  # ne <- x[!is_user]
+  emails <- collapse(
+    purrr::map(x, "emailAddress"),
+    sep = ",")
+  d[[role]] <- emails
+  ## reorder so this is after name.
+  d[, c(1, ncol(d), 2:(ncol(d) - 1))]
+}
+
