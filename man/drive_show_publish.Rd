@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_publish.R
 \name{drive_show_publish}
 \alias{drive_show_publish}
-\title{Check if Google Drive file is published}
+\title{Add a published column to your dribble}
 \usage{
 drive_show_publish(file, verbose = TRUE)
 }
@@ -19,7 +19,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Check if Google Drive file is published
+Add a published column to your dribble
 }
 \examples{
 \dontrun{

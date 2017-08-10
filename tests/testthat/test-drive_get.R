@@ -155,24 +155,24 @@ test_that("drive_get(path = ...) puts trailing slash on a folder", {
   expect_match(out$path, "/$")
 })
 
-test_that("drive_add_path() put trailing slash on a folder", {
+test_that("drive_show_path() put trailing slash on a folder", {
   skip_if_no_token()
   skip_if_offline()
 
   out <- drive_find(nm_("thing01"), type = "folder")
-  out <- out %>% drive_add_path()
+  out <- out %>% drive_show_path()
   out <- out %>% promote("mimeType")
   expect_match(out$path, "/$")
 })
 
-test_that("drive_get()+drive_add_path() <--> drive_get() roundtrip", {
+test_that("drive_get()+drive_show_path() <--> drive_get() roundtrip", {
   skip_if_no_token()
   skip_if_offline()
 
   file <- drive_find(nm_("thing04"))
 
   file_from_id <- drive_get(as_id(file$id))
-  path_from_file <- drive_add_path(file_from_id)
+  path_from_file <- drive_show_path(file_from_id)
   file_from_path <- drive_get(path_from_file$path)
 
   expect_identical(file_from_id$id, file_from_path$id)

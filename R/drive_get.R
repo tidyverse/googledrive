@@ -13,7 +13,7 @@
 #'
 #' If the files are specified via `path`, versus `id`, the returned [`dribble`]
 #' will include a `path` variable. To add path information to any [`dribble`]
-#' that lacks it, use [drive_add_path()]. If you want to list the contents of a
+#' that lacks it, use [drive_show_path()]. If you want to list the contents of a
 #' folder, use [drive_ls()]. For general searching, use [drive_find()].
 #'
 #' @template teamdrives-description
@@ -44,7 +44,7 @@
 #' drive_get("~/")
 #' ## the API reserves the file id "root" for your root folder
 #' drive_get(id = "root")
-#' drive_get(id = "root") %>% drive_add_path()
+#' drive_get(id = "root") %>% drive_show_path()
 #'
 #' ## multiple names
 #' drive_get(c("abc", "def"))

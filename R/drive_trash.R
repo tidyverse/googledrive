@@ -26,7 +26,7 @@ drive_trash <- function(file, verbose = TRUE) {
 #' @export
 drive_untrash <- function(file, verbose = TRUE) {
   if (is_path(file)) {
-    trash <- drive_view_trash()
+    trash <- drive_show_trash()
     file <- trash[trash$name %in% file, ]
   }
   invisible(drive_toggle_trash(file, trash = FALSE, verbose = verbose))
@@ -67,7 +67,7 @@ toggle_trash_one <- function(id, trash = TRUE) {
 #' Get files in Drive Trash.
 #' @template dribble-return
 #' @export
-drive_view_trash <- function() {
+drive_show_trash <- function() {
   drive_find(q = "trashed = true")
 }
 
@@ -78,7 +78,7 @@ drive_view_trash <- function() {
 #' @template verbose
 #' @export
 drive_empty_trash <- function(verbose = TRUE) {
-  files <- drive_view_trash()
+  files <- drive_show_trash()
   if (no_file(files)) {
     if (verbose) message("Your trash was already empty.")
     return(invisible(TRUE))

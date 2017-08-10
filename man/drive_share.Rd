@@ -4,14 +4,15 @@
 \alias{drive_share}
 \title{Update Google Drive file share permissions.}
 \usage{
-drive_share(file, role = NULL, type = NULL, ..., verbose = TRUE)
+drive_share(file, role = NULL, type = NULL, display = "name", ...,
+  verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
 ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
-\item{role}{The role granted by this permission. Valid values are:
+\item{role}{Character. The role granted by this permission. Valid values are:
 \itemize{
 \item organizer
 \item owner
@@ -20,12 +21,21 @@ ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 \item reader
 }}
 
-\item{type}{The type of the grantee. Valid values are:
+\item{type}{Character. The type of the grantee. Valid values are:
 \itemize{
 \item user
 \item group
 \item domain
 \item anyone
+}}
+
+\item{display}{Character. The value you'd like displayed for who has share permissions.
+Valid values are:
+\itemize{
+\item id
+\item name
+\item type
+\item email
 }}
 
 \item{...}{Name-value pairs to add to the API request body.}

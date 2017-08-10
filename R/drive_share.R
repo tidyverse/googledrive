@@ -1,17 +1,23 @@
 #' Update Google Drive file share permissions.
 #'
 #' @template file
-#' @param role The role granted by this permission. Valid values are:
+#' @param role Character. The role granted by this permission. Valid values are:
 #' * organizer
 #' * owner
 #' * writer
 #' * commenter
 #' * reader
-#' @param type The type of the grantee. Valid values are:
+#' @param type Character. The type of the grantee. Valid values are:
 #' * user
 #' * group
 #' * domain
 #' * anyone
+#' @param display Character. The value you'd like displayed for who has share permissions.
+#'   Valid values are:
+#'   * id
+#'   * name
+#'   * type
+#'   * email
 #' @param ... Name-value pairs to add to the API request body.
 #' @template verbose
 #'
@@ -32,7 +38,12 @@
 #' ## Clean up
 #' drive_rm(file)
 #' }
-drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
+drive_share <- function(file,
+                        role = NULL,
+                        type = NULL,
+                        display = "name",
+                        ...,
+                        verbose = TRUE) {
 
   file <- as_dribble(file)
   file <- confirm_some_files(file)
@@ -59,29 +70,35 @@ drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
   }
 
   file <- split(file, 1:nrow(file))
-  files <- purrr::map(file, drive_share_one, role = role, type = type, ...)
+  files <- purrr::map(file,
+                      drive_share_one,
+                      role = role,
+                      type = type,
+                      display = display,
+                      ...,
+                      verbose = TRUE)
   file <- do.call(rbind, files)
-  file <- drive_show_sharing(file, role = role)
   invisible(file)
 }
 
-drive_share_one <- function(file, role, type, ...) {
+drive_share_one <- function(file, role, display, type, ..., verbose) {
   request <- generate_request(
     endpoint = "drive.permissions.create",
     params = list(
       fileId = file$id,
       role = role,
       type = type,
+      fields = "*",
       ...
     )
   )
   response <- make_request(request, encode = "json")
-  proc_req <- process_response(response)
+  proc_res <- process_response(response)
 
   if (verbose) {
-    if (proc_req$type == type && proc_req$role == role) {
+    if (proc_res$type == type && proc_res$role == role) {
       message_glue_data(
-        proc_req,
+        proc_res,
         "\nThe permissions for file {sq(file$name)} have been updated.\n",
         "  * id: {id}\n",
         "  * type: {type}\n",
@@ -91,25 +108,74 @@ drive_share_one <- function(file, role, type, ...) {
       message_glue_data(file, "\nPermissions were NOT updated:\n  * '{name}'")
     }
   }
-  as_dribble(as_id(file))
+  file <- as_dribble(as_id(file))
+  share_tbl <- share_tbl(list(proc_res))
+  add_sharing_cols(file, share_tbl, display, role)
 }
 
-drive_show_sharing <- function(file, role = "owner") {
+#' Add sharing column(s) to your dribble
+#'
+#' @template file
+#' @param display Character. The value you'd like displayed for who has share permissions.
+#'   Defaults to "name". Valid values are:
+#'   * id
+#'   * name
+#'   * type
+#'   * email
+#' @param role Character. The role(s) you'd like to see the permissions for. A column with
+#'   permission information based on the `display` value chosen will be added for each role.
+#'   Defaults to "owner". Valid values are any combination of:
+#'   * organizer
+#'   * owner
+#'   * writer
+#'   * commenter
+#'   * reader
+#' @template dribble-return
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' ## Upload a file to view sharing permissions
+#' file <- drive_upload(
+#'    system.file("DESCRIPTION"),
+#'    type = "document"
+#'    )
+#'
+#' ## Add default sharing information (the name of the owner)
+#' drive_show_sharing(file)
+#'
+#' ## Add sharing information (name) for those with role "owner" and "commenter"
+#' drive_show_sharing(file, role = c("owner", "commenter"))
+#'
+#' ## Add sharing information (email address) for all "readers"
+#' drive_show_sharing(file, display = "email", role = "reader")
+#'
+#' ## Clean up
+#' drive_rm(file)
+#' }
+drive_show_sharing <- function(file, display = "name", role = "owner") {
   ok_roles <- c("organizer", "owner", "writer", "commenter", "reader")
+  ok_display <- c("id", "name", "type", "email")
   if (!all(role %in% ok_roles)) {
     stop_glue(
-      "\n`role` must be one of the following:\n",
+      "\n`role` may only include the following:\n",
       "  * {collapse(ok_roles, sep = ', ')}."
+    )
+  }
+  if (!(display %in% ok_display)) {
+    stop_glue(
+      "\n`display` must be one of the following:\n",
+      "  * {collapse(ok_display, sep = ', ')}."
     )
   }
   file <- as_dribble(file)
   file <- confirm_some_files(file)
   file <- split(file, 1:nrow(file))
-  files <- purrr::map(file, show_sharing_one, role = role)
+  files <- purrr::map(file, show_sharing_one, display = display, role = role)
   do.call(rbind, files)
 }
 
-show_sharing_one <- function(file, role) {
+show_sharing_one <- function(file, display, role) {
   request <- generate_request(
     endpoint = "drive.permissions.list",
     params = list(
@@ -119,32 +185,32 @@ show_sharing_one <- function(file, role) {
   )
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
-  add_sharing_cols(file, proc_res$permissions, role)
+  share_tbl <- share_tbl(proc_res$permissions)
+  file <- add_sharing_cols(file, share_tbl, display, role)
 }
 
-add_sharing_cols <- function(d, x, role) {
-  ## there is a better way to do this
+add_sharing_cols <- function(d, x, display, role) {
+  ## there must be a better way to do this
   for (i in role) {
-    d <- add_sharing_emails(d, x, i)
+    display_col <- collapse(x[[display]][x$role == i], sep = ",")
+    if (length(display_col) == 0L) {
+      d[[i]] <- NA_character_
+    } else d[[i]] <- display_col
+    ## reorder
+    d <- d[, c(1, ncol(d), 2:(ncol(d) - 1))]
   }
   d
 }
 
-add_sharing_emails <- function(d, x, role) {
-  keep <- purrr::map_lgl(x, ~ .x$role == role)
-  x <- x[keep]
-  if (length(x) == 0L) {
-    d[[role]] <- NA_character_
-    return(d)
-  }
-  # is_user <- purrr::map_lgl(x, ~ .x$type == "user")
-  # e <- x[is_user]
-  # ne <- x[!is_user]
-  emails <- collapse(
-    purrr::map(x, "emailAddress"),
-    sep = ",")
-  d[[role]] <- emails
-  ## reorder so this is after name.
-  d[, c(1, ncol(d), 2:(ncol(d) - 1))]
+share_tbl <- function(x) {
+  tbl <- tibble::tibble(
+    id = purrr::map_chr(x, "id"),
+    name = purrr::map_chr(x, "displayName", .null = NA_character_),
+    type = purrr::map_chr(x, "type", .null = NA_character_),
+    email = purrr::map_chr(x, "emailAddress", .null = NA_character_),
+    role = purrr::map_chr(x, "role", .null = NA_character_),
+    deleted = purrr::map_lgl(x, "deleted", .null = NA)
+  )
+  tbl$name <- ifelse(tbl$id == "anyoneWithLink", "anyone with link", tbl$name)
+  tbl
 }
-

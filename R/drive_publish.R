@@ -95,10 +95,10 @@ change_publish_one <- function(file,
     proc_res <- process_response(response)
   }
 
-  publish_cols(file, proc_res)
+  add_publish_cols(file, proc_res)
 }
 
-#' Check if Google Drive file is published
+#' Add a published column to your dribble
 #'
 #' @template file
 #' @template verbose
@@ -165,10 +165,10 @@ show_publish_one <- function(file, verbose = TRUE) {
       "{if (proc_res$published) '' else 'NOT '}published."
     )
   }
-  publish_cols(file, proc_res)
+  add_publish_cols(file, proc_res)
 }
 
-publish_cols <- function(d, x) {
+add_publish_cols <- function(d, x) {
   if ("published" %in% names(d)) {
     d$published_check_time <- Sys.time()
     d$revision_id <- x$id
