@@ -49,7 +49,7 @@
 #'
 #' ## copy AND AT THE SAME TIME convert it to a Google Sheet
 #' mirrors_sheet <- drive_cp(
-#'   file,
+#'   csv_file,
 #'   name = "BioC_mirrors",
 #'   mimeType = drive_mime_type("spreadsheet")
 #' )
@@ -58,8 +58,7 @@
 #' ## drive_browse(mirrors_sheet)
 #'
 #' ## clean up
-#' drive_rm(csv_file)
-#' drive_rm(mirrors_sheet)
+#' drive_rm(csv_file, mirrors_sheet)
 #' }
 #' @export
 drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {

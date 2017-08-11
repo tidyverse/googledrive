@@ -65,7 +65,6 @@ file <- drive_mv(file, "~/")
 file <- drive_mv(file, "mv-folder/")
 
 ## Clean up
-drive_rm(file)
-drive_rm(folder)
+drive_rm(file, folder)
 }
 }

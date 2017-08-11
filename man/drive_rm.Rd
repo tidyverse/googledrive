@@ -4,12 +4,13 @@
 \alias{drive_rm}
 \title{Delete files from Drive}
 \usage{
-drive_rm(file = NULL, verbose = TRUE)
+drive_rm(..., verbose = TRUE)
 }
 \arguments{
-\item{file}{Something that identifies the file(s) of interest on your Google
-Drive. Can be a character vector of names/paths, a character vector of file
-ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+\item{...}{One or more Drive files, specified in any valid way, i.e. as a
+\code{\link{dribble}}, by name or path, or by file id or URL marked with \code{\link[=as_id]{as_id()}}. Or
+any combination thereof. Elements are processed with \code{\link[=as_dribble]{as_dribble()}} and
+row-bound prior to deletion.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -23,11 +24,19 @@ option, see \code{\link[=drive_trash]{drive_trash()}}.
 }
 \examples{
 \dontrun{
-## Create a folder to remove
-folder <- drive_mkdir("folder-to-remove")
+## Create something to remove
+drive_upload(system.file("DESCRIPTION"), name = "abc-DESC")
 
-## Remove folder
-drive_rm(folder)
+## Remove it by name
+drive_rm("abc-DESC")
+
+## Create several things to remove
+x1 <- drive_upload(system.file("DESCRIPTION"), name = "abc-DESC")
+drive_upload(system.file("DESCRIPTION"), name = "def-DESC")
+x2 <- drive_upload(system.file("DESCRIPTION"), name = "ghi-DESC")
+
+## Remove them all at once, specified in different ways
+drive_rm(x1, "def-DESC", as_id(x2))
 }
 }
 \seealso{

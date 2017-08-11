@@ -133,7 +133,7 @@ docs for the associated endpoint.</p></td>
   <span class='fu'>drive_update</span>(<span class='fu'>R.home</span>(<span class='st'>"doc/NEWS.1"</span>))
 
 <span class='co'>## Update the file with new metadata.</span>
-<span class='co'>## Notice here `name` is not a parameter in `drive_update()`, we are passing</span>
+<span class='co'>## Notice here `name` is not an argument of `drive_update()`, we are passing</span>
 <span class='co'>## this to the API via the `...``</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>drive_update</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"NEWS-1"</span>)
@@ -150,8 +150,7 @@ docs for the associated endpoint.</p></td>
   <span class='fu'>drive_update</span>(<span class='fu'>R.home</span>(<span class='st'>"doc/NEWS.2"</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"NEWS-2"</span>)
 
 <span class='co'>## Clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>x</span>)
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>folder</span>)
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>x</span>, <span class='no'>folder</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

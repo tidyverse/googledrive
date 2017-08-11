@@ -46,8 +46,7 @@
 #' file <- drive_mv(file, "mv-folder/")
 #'
 #' ## Clean up
-#' drive_rm(file)
-#' drive_rm(folder)
+#' drive_rm(file, folder)
 #' }
 drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)

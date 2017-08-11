@@ -27,7 +27,7 @@
 #'   drive_update(R.home("doc/NEWS.1"))
 #'
 #' ## Update the file with new metadata.
-#' ## Notice here `name` is not a parameter in `drive_update()`, we are passing
+#' ## Notice here `name` is not an argument of `drive_update()`, we are passing
 #' ## this to the API via the `...``
 #' x <- x %>%
 #'   drive_update(name = "NEWS-1")
@@ -44,8 +44,7 @@
 #'   drive_update(R.home("doc/NEWS.2"), name = "NEWS-2")
 #'
 #' ## Clean up
-#' drive_rm(x)
-#' drive_rm(folder)
+#' drive_rm(x, folder)
 #' }
 drive_update <- function(file,
                          media = NULL,

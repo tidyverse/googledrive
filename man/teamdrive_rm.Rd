@@ -39,7 +39,7 @@ teamdrive_rm("testdrive-01")
 ## remove by id
 teamdrive_rm(as_id(td02))
 ## remove by URL (or, rather, id found in URL)
-teamdrive_rm(as_id("https://drive.google.com/drive/u/0/folders/0AIiC6R30d67hUk9PVA"))
+teamdrive_rm(as_id("https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"))
 ## remove by dribble
 teamdrive_rm(td04)
 }

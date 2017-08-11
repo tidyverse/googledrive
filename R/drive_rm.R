@@ -6,7 +6,10 @@
 #' @seealso Wraps the `files.delete` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/delete>
 #'
-#' @template file
+#' @param ... One or more Drive files, specified in any valid way, i.e. as a
+#' [`dribble`], by name or path, or by file id or URL marked with [as_id()]. Or
+#' any combination thereof. Elements are processed with [as_dribble()] and
+#' row-bound prior to deletion.
 #' @template verbose
 #'
 #' @return Logical vector, indicating whether the delete succeeded.
@@ -14,18 +17,32 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## Create a folder to remove
-#' folder <- drive_mkdir("folder-to-remove")
+#' ## Create something to remove
+#' drive_upload(system.file("DESCRIPTION"), name = "abc-DESC")
 #'
-#' ## Remove folder
-#' drive_rm(folder)
+#' ## Remove it by name
+#' drive_rm("abc-DESC")
+#'
+#' ## Create several things to remove
+#' x1 <- drive_upload(system.file("DESCRIPTION"), name = "abc-DESC")
+#' drive_upload(system.file("DESCRIPTION"), name = "def-DESC")
+#' x2 <- drive_upload(system.file("DESCRIPTION"), name = "ghi-DESC")
+#'
+#' ## Remove them all at once, specified in different ways
+#' drive_rm(x1, "def-DESC", as_id(x2))
 #' }
-drive_rm <- function(file = NULL, verbose = TRUE) {
-  file <- as_dribble(file)
-  if (no_file(file) && verbose) {
-    message("No such files found to delete.")
+drive_rm <- function(..., verbose = TRUE) {
+  dots <- list(...)
+  if (length(dots) == 0) {
+    if (verbose) message("Nothing to delete.")
     return(invisible(logical(0)))
   }
+
+  ## explicitly select on var name to exclude 'path', if present
+  file <- purrr::map(dots, ~ as_dribble(.x)[c("name", "id", "drive_resource")])
+  file <- do.call(rbind, file)
+
+  if (verbose) message("No such file(s) to delete.")
 
   out <- purrr::map_lgl(file$id, delete_one)
 

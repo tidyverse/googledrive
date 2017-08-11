@@ -163,7 +163,7 @@ docs for the associated endpoint.</p></td>
 
 <span class='co'>## copy AND AT THE SAME TIME convert it to a Google Sheet</span>
 <span class='no'>mirrors_sheet</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_cp</span>(
-  <span class='no'>file</span>,
+  <span class='no'>csv_file</span>,
   <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"BioC_mirrors"</span>,
   <span class='kw'>mimeType</span> <span class='kw'>=</span> <span class='fu'><a href='drive_mime_type.html'>drive_mime_type</a></span>(<span class='st'>"spreadsheet"</span>)
 )
@@ -172,8 +172,7 @@ docs for the associated endpoint.</p></td>
 <span class='co'>## drive_browse(mirrors_sheet)</span>
 
 <span class='co'>## clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>csv_file</span>)
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>mirrors_sheet</span>)
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>csv_file</span>, <span class='no'>mirrors_sheet</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
