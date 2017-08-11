@@ -34,8 +34,7 @@
 drive_rm <- function(..., verbose = TRUE) {
   dots <- list(...)
   if (length(dots) == 0) {
-    if (verbose) message("Nothing to delete.")
-    return(invisible(logical(0)))
+    dots <- list(NULL)
   }
 
   ## explicitly select on var name to exclude 'path', if present
