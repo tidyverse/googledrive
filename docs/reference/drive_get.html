@@ -91,9 +91,14 @@ Drive.</p>
 will include a <code>path</code> variable. To add path information to any <code><a href='dribble.html'>dribble</a></code>
 that lacks it, use <code><a href='drive_add_path.html'>drive_add_path()</a></code>. If you want to list the contents of a
 folder, use <code><a href='drive_ls.html'>drive_ls()</a></code>. For general searching, use <code><a href='drive_find.html'>drive_find()</a></code>.</p>
+<p>Note:
+  <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
+  are only available to users of certain enhanced Google services, such as G
+  Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_get</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_get</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>corpora</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -113,6 +118,19 @@ with <code><a href='as_id.html'>as_id()</a></code>). If both <code>path</code> a
 ignored.</p></td>
     </tr>
     <tr>
+      <th>team_drive</th>
+      <td><p>Anything that identifies one specific Team Drive: its name,
+its id or URL marked with <code><a href='as_id.html'>as_id</a>()</code>, or a
+<code><a href='dribble.html'>dribble</a></code>. Is pre-processed with
+<code><a href='as_teamdrive.html'>as_teamdrive</a>()</code> and then <code><a href='drive_corpus.html'>drive_corpus</a>()</code>.</p></td>
+    </tr>
+    <tr>
+      <th>corpora</th>
+      <td><p>Character, specifying the search collection. Only relevant in
+the Team Drives context.  Is pre-processed together with <code>team_drive</code>
+by <code><a href='drive_corpus.html'>drive_corpus</a>()</code>.</p></td>
+    </tr>
+    <tr>
       <th>verbose</th>
       <td><p>Logical, indicating whether to print informative messages
 (default <code>TRUE</code>).</p></td>
@@ -122,7 +140,7 @@ ignored.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
-  file.</p>
+  item.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -152,6 +170,13 @@ path, also calls <code>files.list</code>:</p><ul>
 <span class='fu'>drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"abcdefgeh123456789"</span>))
 <span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"abcdefgh123456789"</span>, <span class='st'>"jklmnopq123456789"</span>))
 
+<span class='co'>## access the Team Drive named "foo"</span>
+<span class='no'>foo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='teamdrive_get.html'>teamdrive_get</a></span>(<span class='st'>"foo"</span>)
+<span class='fu'>drive_get</span>(<span class='fu'>c</span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='no'>foo</span>)
+<span class='fu'>drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"123456789"</span>), <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='no'>foo</span>)
+
+<span class='co'>## search all Team Drives and other files user has accessed</span>
+<span class='fu'>drive_get</span>(<span class='fu'>c</span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>corpora</span> <span class='kw'>=</span> <span class='st'>"user,allTeamDrives"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -37,11 +37,11 @@ td04 <- teamdrive_create("testdrive-04")
 ## remove by name
 teamdrive_rm("testdrive-01")
 ## remove by id
-teamdrive_rm(as_id(td02$id))
+teamdrive_rm(as_id(td02))
 ## remove by URL (or, rather, id found in URL)
-teamdrive_rm(as_id("https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"))
+teamdrive_rm(as_id("https://drive.google.com/drive/u/0/folders/0AIiC6R30d67hUk9PVA"))
 ## remove by dribble
-teamdrive_rm(td03)
+teamdrive_rm(td04)
 }
 }
 \seealso{

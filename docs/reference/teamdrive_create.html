@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get files in Drive Trash. — drive_view_trash • googledrive</title>
+<title>Create a new Team Drive — teamdrive_create • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -71,28 +71,65 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get files in Drive Trash.</h1>
+    <h1>Create a new Team Drive</h1>
     </div>
 
     
-    <p>Get files in Drive Trash.</p>
+    <p>Create a new Team Drive</p>
+<p>Note:
+  <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
+  are only available to users of certain enhanced Google services, such as G
+  Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_view_trash</span>()</pre>
-        
+    <pre class="usage"><span class='fu'>teamdrive_create</span>(<span class='no'>name</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>name</th>
+      <td><p>Character. Name of the new Team Drive. Must be non-empty and not
+entirely whitespace.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Logical, indicating whether to print informative messages
+(default <code>TRUE</code>).</p></td>
+    </tr>
+    </table>
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
   item.</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <p>Wraps the <code>teamdrives.create</code> endpoint:</p><ul>
+<li><p><a href='https://developers.google.com/drive/v3/reference/teamdrives/create'>https://developers.google.com/drive/v3/reference/teamdrives/create</a></p></li>
+</ul>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>teamdrive_create</span>(<span class='st'>"my-awesome-team-drive"</span>)
+
+<span class='co'>## clean up</span>
+<span class='fu'><a href='teamdrive_rm.html'>teamdrive_rm</a></span>(<span class='st'>"my-awesome-team-drive"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

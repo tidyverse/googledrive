@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List contents of a folder. — drive_ls • googledrive</title>
+<title>List contents of a folder or Team Drive — drive_ls • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -71,16 +71,16 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List contents of a folder.</h1>
+    <h1>List contents of a folder or Team Drive</h1>
     </div>
 
     
-    <p>List the contents of a folder on Google Drive, nonrecursively. Optionally,
-filter for a regex in the file names and/or on MIME type. This is a thin
-wrapper around <code><a href='drive_find.html'>drive_find()</a></code>.</p>
+    <p>List the contents of a folder or Team Drive, nonrecursively. This is a thin
+wrapper around <code><a href='drive_find.html'>drive_find()</a></code>, that simply limits the search to direct
+children of a specific folder or to top-level items of a Team Drive.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_ls</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"~/"</span>, <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_ls</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -88,33 +88,20 @@ wrapper around <code><a href='drive_find.html'>drive_find()</a></code>.</p>
     <tr>
       <th>path</th>
       <td><p>Specifies a single folder on Google Drive whose contents you want
-to list. Can be an actual path (character), a file id marked with
-<code><a href='as_id.html'>as_id()</a></code>, or a <a href='dribble.html'>dribble</a>.</p></td>
-    </tr>
-    <tr>
-      <th>pattern</th>
-      <td><p>Character. If provided, only the files whose names match this
-regular expression are returned. This is implemented locally on the results
-returned by the API.</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>Character. If provided, only files of this type will be returned.
-Can be anything that <code><a href='drive_mime_type.html'>drive_mime_type()</a></code> knows how to handle. This is
-processed by googledrive and sent as a query parameter.</p></td>
+to list. Can be an actual path (character), a file id or URL marked with
+<code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. If it is a Team Drive or is a folder on a Team
+Drive, it must be passed as a <code><a href='dribble.html'>dribble</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other parameters to pass along in the request. The most likely
-candidate is <code>q</code>. See the examples and the API's
-<a href='https://developers.google.com/drive/v3/web/search-parameters'>Search for Files guide</a>.</p></td>
+      <td><p>Any parameters that are valid for <code><a href='drive_find.html'>drive_find()</a></code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
-  file.</p>
+  item.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

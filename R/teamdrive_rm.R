@@ -21,11 +21,11 @@
 #' ## remove by name
 #' teamdrive_rm("testdrive-01")
 #' ## remove by id
-#' teamdrive_rm(as_id(td02$id))
+#' teamdrive_rm(as_id(td02))
 #' ## remove by URL (or, rather, id found in URL)
 #' teamdrive_rm(as_id("https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"))
 #' ## remove by dribble
-#' teamdrive_rm(td03)
+#' teamdrive_rm(td04)
 #' }
 teamdrive_rm <- function(team_drive = NULL, verbose = TRUE) {
   team_drive <- as_teamdrive(team_drive)
