@@ -42,7 +42,7 @@ drive_rm <- function(..., verbose = TRUE) {
   file <- purrr::map(dots, ~ as_dribble(.x)[c("name", "id", "drive_resource")])
   file <- do.call(rbind, file)
 
-  if (verbose) message("No such file(s) to delete.")
+  if (no_file(file) && verbose) message("No such file(s) to delete.")
 
   out <- purrr::map_lgl(file$id, delete_one)
 
