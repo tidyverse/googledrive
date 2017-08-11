@@ -1,6 +1,6 @@
 #' Retrieve a file's share link.
 #'
-#' @template file
+#' @template file-plural
 #'
 #' @return Character. The link to Google Drive file.
 #' @export

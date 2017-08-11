@@ -1,5 +1,5 @@
 #' Move files to or from trash
-#' @template file
+#' @template file-plural
 #' @template verbose
 #'
 #' @template dribble-return
@@ -72,7 +72,7 @@ drive_view_trash <- function() {
 }
 
 #' Add trash column to your dribble
-#' @template file
+#' @template file-plural
 #' @template dribble-return
 #' @export
 drive_show_trash <- function(file) {

@@ -13,7 +13,7 @@
 #'     hierarchy. So `n` inputs could result in fewer than `n` unique values in
 #'     the `path` variable.
 #'
-#' @param file A [`dribble`] or vector of file ids or URLs.
+#' @template file-plural
 #'
 #' @template dribble-return
 #' @export

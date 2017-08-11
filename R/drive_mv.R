@@ -8,7 +8,7 @@
 #' actually means: "add a new folder to this file's parents and remove the old
 #' one".
 #'
-#' @template file
+#' @template file-singular
 #' @template path
 #' @templateVar name file
 #' @templateVar default {}

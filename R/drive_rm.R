@@ -6,7 +6,7 @@
 #' @seealso Wraps the `files.delete` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/delete>
 #'
-#' @template file
+#' @template file-plural
 #' @template verbose
 #'
 #' @return Logical vector, indicating whether the delete succeeded.

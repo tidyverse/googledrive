@@ -5,7 +5,7 @@
 #' @seealso Wraps the `files.copy` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/copy>
 #'
-#' @template file
+#' @template file-singular
 #' @template path
 #' @templateVar name file
 #' @templateVar default {}

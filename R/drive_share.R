@@ -1,6 +1,6 @@
 #' Update Google Drive file share permissions.
 #'
-#' @template file
+#' @template file-plural
 #' @param role Character. The role granted by this permission. Valid values are:
 #' * organizer
 #' * owner
@@ -114,7 +114,7 @@ drive_share_one <- function(id, role, display, type, ..., verbose) {
 
 #' Add sharing column(s) to your dribble
 #'
-#' @template file
+#' @template file-plural
 #' @param display Character. The value you'd like displayed for who has share permissions.
 #'   Defaults to "name". Valid values are:
 #'   * id

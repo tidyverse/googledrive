@@ -1,6 +1,6 @@
 #' Visit Drive file in browser.
 #'
-#' @template file
+#' @template file-singular
 #'
 #' @template dribble-return
 #' @export
