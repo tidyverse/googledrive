@@ -1,20 +1,13 @@
 #' Get Drive files by path or id
 #'
 #' @description Retrieve metadata for files specified via path or via file id.
-#'   Note that Google Drive does NOT behave like your local file system:
-#'   * You can get zero, one, or more files back for each file name or path! On
-#'     Google Drive, file and folder names need not be unique, even at a given
-#'     level of the hierarchy.
-#'   * A file or folder can also have multiple direct parents, so a single Drive
-#'     file can potentially be represented by multiple paths.
-#' @description In contrast, a file id will always identify at most one Drive
-#' file. Finally, note also that a folder is just a specific type of file on
-#' Drive.
 #'
-#' If the files are specified via `path`, versus `id`, the returned [`dribble`]
-#' will include a `path` variable. To add path information to any [`dribble`]
-#' that lacks it, use [drive_add_path()]. If you want to list the contents of a
-#' folder, use [drive_ls()]. For general searching, use [drive_find()].
+#' @template not-like-your-local-file-system
+#'
+#' @description If the files are specified via `path`, the returned [`dribble`]
+#'   will include a `path` variable. To add path information to any [`dribble`]
+#'   that lacks it, use [drive_add_path()]. If you want to list the contents of
+#'   a folder, use [drive_ls()]. For general searching, use [drive_find()].
 #'
 #' @template teamdrives-description
 #'

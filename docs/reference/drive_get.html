@@ -75,22 +75,26 @@
     </div>
 
     
-    <p>Retrieve metadata for files specified via path or via file id.
-Note that Google Drive does NOT behave like your local file system:</p><ul>
-<li><p>You can get zero, one, or more files back for each file name or path! On
-Google Drive, file and folder names need not be unique, even at a given
-level of the hierarchy.</p></li>
-<li><p>A file or folder can also have multiple direct parents, so a single Drive
-file can potentially be represented by multiple paths.</p></li>
+    <p>Retrieve metadata for files specified via path or via file id.</p>
+<p>Note that Google Drive does NOT behave like your local file
+  system:</p><ul>
+<li><p>File and folder names need not be unique, even at a given level of
+  the hierarchy. A single name or file path can be associated with multiple
+  files (or zero or exactly one).</p></li>
+<li><p>A file can have more than one direct parent. This implies that a
+  single file can be represented by multiple paths.</p></li>
 </ul>
 
-    <p>In contrast, a file id will always identify at most one Drive
-file. Finally, note also that a folder is just a specific type of file on
-Drive.</p>
-<p>If the files are specified via <code>path</code>, versus <code>id</code>, the returned <code><a href='dribble.html'>dribble</a></code>
+    <p>Bottom line: Do not assume there is a one-to-one relationship
+  between file name or path and a Drive file or folder. A file id is unique,
+  which is why googledrive workflows favor storage in a
+  <code><a href='dribble.html'>dribble</a></code>, which holds metadata aimed at computers (file id)
+  and humans (file name). Finally, note also that a folder is just a specific
+  type of file on Drive.</p>
+<p>If the files are specified via <code>path</code>, the returned <code><a href='dribble.html'>dribble</a></code>
 will include a <code>path</code> variable. To add path information to any <code><a href='dribble.html'>dribble</a></code>
-that lacks it, use <code><a href='drive_add_path.html'>drive_add_path()</a></code>. If you want to list the contents of a
-folder, use <code><a href='drive_ls.html'>drive_ls()</a></code>. For general searching, use <code><a href='drive_find.html'>drive_find()</a></code>.</p>
+that lacks it, use <code><a href='drive_add_path.html'>drive_add_path()</a></code>. If you want to list the contents of
+a folder, use <code><a href='drive_ls.html'>drive_ls()</a></code>. For general searching, use <code><a href='drive_find.html'>drive_find()</a></code>.</p>
 <p>Note:
   <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
   are only available to users of certain enhanced Google services, such as G

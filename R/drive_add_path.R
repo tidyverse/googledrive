@@ -3,15 +3,9 @@
 #' @description Even though you know a Drive file's name or id, you don't
 #'   necessarily know its path(s). This function takes Drive files, specified
 #'   via a [`dribble`] or a vector of file ids or URLs, and returns a dribble
-#'   that includes a `path` variable. Note that Google Drive does NOT behave
-#'   like your local file system:
-#'   * A single Drive file can potentially be represented by multiple paths,
-#'     since a file or folder can have multiple direct parents. So `n` inputs
-#'     could result in more than `n` outputs.
-#'   * Multiple Drive files could be associated with the same path, because
-#'     file and folder names need not be unique, even at a given level of the
-#'     hierarchy. So `n` inputs could result in fewer than `n` unique values in
-#'     the `path` variable.
+#'   that includes a `path` variable.
+#'
+#' @template not-like-your-local-file-system
 #'
 #' @param file A [`dribble`] or vector of file ids or URLs.
 #'

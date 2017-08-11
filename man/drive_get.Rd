@@ -36,23 +36,28 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 }
 \description{
 Retrieve metadata for files specified via path or via file id.
-Note that Google Drive does NOT behave like your local file system:
-\itemize{
-\item You can get zero, one, or more files back for each file name or path! On
-Google Drive, file and folder names need not be unique, even at a given
-level of the hierarchy.
-\item A file or folder can also have multiple direct parents, so a single Drive
-file can potentially be represented by multiple paths.
-}
 
-In contrast, a file id will always identify at most one Drive
-file. Finally, note also that a folder is just a specific type of file on
-Drive.
+Note that Google Drive does NOT behave like your local file
+  system:
+  \itemize{
+  \item File and folder names need not be unique, even at a given level of
+  the hierarchy. A single name or file path can be associated with multiple
+  files (or zero or exactly one).
+  \item A file can have more than one direct parent. This implies that a
+  single file can be represented by multiple paths.
+  }
 
-If the files are specified via \code{path}, versus \code{id}, the returned \code{\link{dribble}}
+Bottom line: Do not assume there is a one-to-one relationship
+  between file name or path and a Drive file or folder. A file id is unique,
+  which is why googledrive workflows favor storage in a
+  \code{\link{dribble}}, which holds metadata aimed at computers (file id)
+  and humans (file name). Finally, note also that a folder is just a specific
+  type of file on Drive.
+
+If the files are specified via \code{path}, the returned \code{\link{dribble}}
 will include a \code{path} variable. To add path information to any \code{\link{dribble}}
-that lacks it, use \code{\link[=drive_add_path]{drive_add_path()}}. If you want to list the contents of a
-folder, use \code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_find]{drive_find()}}.
+that lacks it, use \code{\link[=drive_add_path]{drive_add_path()}}. If you want to list the contents of
+a folder, use \code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_find]{drive_find()}}.
 
 Note:
   \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
