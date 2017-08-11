@@ -1,4 +1,4 @@
-#' Move files to or from trash.
+#' Move files to or from trash
 #' @template file
 #' @template verbose
 #'
@@ -26,7 +26,7 @@ drive_trash <- function(file, verbose = TRUE) {
 #' @export
 drive_untrash <- function(file, verbose = TRUE) {
   if (is_path(file)) {
-    trash <- drive_show_trash()
+    trash <- drive_view_trash()
     file <- trash[trash$name %in% file, ]
   }
   invisible(drive_toggle_trash(file, trash = FALSE, verbose = verbose))
@@ -64,21 +64,31 @@ toggle_trash_one <- function(id, trash = TRUE) {
   as_dribble(list(proc_res))
 }
 
-#' Get files in Drive Trash.
+#' Get files in Drive Trash
 #' @template dribble-return
 #' @export
-drive_show_trash <- function() {
+drive_view_trash <- function() {
   drive_find(q = "trashed = true")
 }
 
-#' Empty Drive Trash.
+#' Add trash column to your dribble
+#' @template file
+#' @template dribble-return
+#' @export
+drive_show_trash <- function(file) {
+  file <- as_dribble(file)
+  file <- confirm_some_files(file)
+  promote(file, "trashed")
+}
+
+#' Empty Drive Trash
 #'
 #' @description Caution, this will permanently delete files in your Drive trash.
 #'
 #' @template verbose
 #' @export
 drive_empty_trash <- function(verbose = TRUE) {
-  files <- drive_show_trash()
+  files <- drive_view_trash()
   if (no_file(files)) {
     if (verbose) message("Your trash was already empty.")
     return(invisible(TRUE))

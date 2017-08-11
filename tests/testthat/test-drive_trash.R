@@ -48,5 +48,5 @@ test_that("drive_trash() moves file to trash and drive_untrash() undoes", {
 # skip_if_offline()
 # skip_if_not(EMPTY_TRASH)
 # expect_message(drive_empty_trash())
-# expect_identical(nrow(drive_show_trash()), 0L)
+# expect_identical(nrow(drive_view_trash()), 0L)
 # })

@@ -69,8 +69,7 @@ drive_share <- function(file,
     )
   }
 
-  file <- split(file, 1:nrow(file))
-  files <- purrr::map(file,
+  files <- purrr::map(file$id,
                       drive_share_one,
                       role = role,
                       type = type,
@@ -81,11 +80,11 @@ drive_share <- function(file,
   invisible(file)
 }
 
-drive_share_one <- function(file, role, display, type, ..., verbose) {
+drive_share_one <- function(id, role, display, type, ..., verbose) {
   request <- generate_request(
     endpoint = "drive.permissions.create",
     params = list(
-      fileId = file$id,
+      fileId = id,
       role = role,
       type = type,
       fields = "*",
@@ -95,6 +94,7 @@ drive_share_one <- function(file, role, display, type, ..., verbose) {
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
+  file <- as_dribble(as_id(id))
   if (verbose) {
     if (proc_res$type == type && proc_res$role == role) {
       message_glue_data(
@@ -108,7 +108,6 @@ drive_share_one <- function(file, role, display, type, ..., verbose) {
       message_glue_data(file, "\nPermissions were NOT updated:\n  * '{name}'")
     }
   }
-  file <- as_dribble(as_id(file))
   share_tbl <- share_tbl(list(proc_res))
   add_sharing_cols(file, share_tbl, display, role)
 }
@@ -156,6 +155,7 @@ drive_share_one <- function(file, role, display, type, ..., verbose) {
 drive_show_sharing <- function(file, display = "name", role = "owner") {
   ok_roles <- c("organizer", "owner", "writer", "commenter", "reader")
   ok_display <- c("id", "name", "type", "email")
+
   if (!all(role %in% ok_roles)) {
     stop_glue(
       "\n`role` may only include the following:\n",
@@ -170,22 +170,23 @@ drive_show_sharing <- function(file, display = "name", role = "owner") {
   }
   file <- as_dribble(file)
   file <- confirm_some_files(file)
-  file <- split(file, 1:nrow(file))
-  files <- purrr::map(file, show_sharing_one, display = display, role = role)
-  do.call(rbind, files)
+  file <- purrr::map(file$id, show_sharing_one, display = display, role = role)
+  do.call(rbind, file)
 }
 
-show_sharing_one <- function(file, display, role) {
+show_sharing_one <- function(id, display, role) {
   request <- generate_request(
     endpoint = "drive.permissions.list",
     params = list(
-      fileId = file$id,
+      fileId = id,
       fields = "*"
     )
   )
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
   share_tbl <- share_tbl(proc_res$permissions)
+
+  file <- as_dribble(as_id(id))
   file <- add_sharing_cols(file, share_tbl, display, role)
 }
 

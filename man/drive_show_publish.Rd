@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_publish.R
 \name{drive_show_publish}
 \alias{drive_show_publish}
-\title{Add a published column to your dribble}
+\title{Add columns with publication information to your dribble}
 \usage{
 drive_show_publish(file, verbose = TRUE)
 }
@@ -19,7 +19,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Add a published column to your dribble
+Add columns with publication information to your dribble
 }
 \examples{
 \dontrun{

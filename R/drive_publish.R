@@ -40,29 +40,29 @@ drive_change_publish <- function(file,
                                  publish = TRUE,
                                  ...,
                                  verbose = TRUE) {
-  file_update <- drive_show_publish(file = file, verbose = FALSE)
-  file_update <- confirm_some_files(file_update)
-  file_update <- split(file_update, 1:nrow(file_update))
-  file_update <- purrr::map(file_update,
-                            change_publish_one,
-                            publish = publish,
-                            ...,
-                            verbose = verbose)
-  file_update <- do.call(rbind, file_update)
+
+  file <- as_dribble(file)
+  file <- confirm_some_files(file)
+  file <- purrr::map(file$id,
+                     change_publish_one,
+                     publish = publish,
+                     ...,
+                     verbose = verbose)
+  file <- do.call(rbind, file)
   if (verbose) {
-    success <- glue_data(file_update, "  * {name}: {id}")
+    success <- glue_data(file, "  * {name}: {id}")
     message_collapse(c(
       glue("\nFiles now {if (publish) '' else 'NOT '}published:\n"),
       success
     ))
   }
-  invisible(file_update)
+  invisible(file)
 }
-change_publish_one <- function(file,
+change_publish_one <- function(id,
                                publish = TRUE,
                                ...,
                                verbose = TRUE) {
-
+  file <- drive_show_publish(as_id(id), verbose = FALSE)
   x <- list(...)
   x$published <- publish
   if (!("publishAuto" %in% names(x))) {
@@ -98,7 +98,7 @@ change_publish_one <- function(file,
   add_publish_cols(file, proc_res)
 }
 
-#' Add a published column to your dribble
+#' Add columns with publication information to your dribble
 #'
 #' @template file
 #' @template verbose
@@ -142,22 +142,23 @@ drive_show_publish <- function(file, verbose = TRUE) {
     ))
   }
 
-  files <- split(file, 1:nrow(file))
-  files <- purrr::map(files, show_publish_one, verbose = verbose)
-  file <- do.call(rbind, files)
+  file <- purrr::map(file$id, show_publish_one, verbose = verbose)
+  file <- do.call(rbind, file)
   invisible(file)
 }
 
-show_publish_one <- function(file, verbose = TRUE) {
+show_publish_one <- function(id, verbose = TRUE) {
 
   request <- generate_request(
     endpoint = "drive.revisions.get",
-    params = list(fileId = file$id,
+    params = list(fileId = id,
                   revisionId = "head",
                   fields = "*")
   )
   response <- make_request(request)
   proc_res <- process_response(response)
+
+  file <- as_dribble(as_id(id))
 
   if (verbose) {
     message_glue(
@@ -176,11 +177,12 @@ add_publish_cols <- function(d, x) {
     d$auto_publish <- x$publishAuto %||% FALSE
     return(d)
   }
-  tibble::add_column(d,
-                     published_check_time = Sys.time(),
-                     revision_id = x$id,
-                     published = x$published,
-                     auto_publish = x$publishAuto %||% FALSE,
-                     .after = 1
+  tibble::add_column(
+    d,
+    published = x$published,
+    revision_id = x$id,
+    published_check_time = Sys.time(),
+    auto_publish = x$publishAuto %||% FALSE,
+    .after = 1
   )
 }

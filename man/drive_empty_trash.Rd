@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_trash.R
 \name{drive_empty_trash}
 \alias{drive_empty_trash}
-\title{Empty Drive Trash.}
+\title{Empty Drive Trash}
 \usage{
 drive_empty_trash(verbose = TRUE)
 }

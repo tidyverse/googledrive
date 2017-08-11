@@ -2,14 +2,19 @@
 % Please edit documentation in R/drive_trash.R
 \name{drive_show_trash}
 \alias{drive_show_trash}
-\title{Get files in Drive Trash.}
+\title{Add trash column to your dribble}
 \usage{
-drive_show_trash()
+drive_show_trash(file)
+}
+\arguments{
+\item{file}{Something that identifies the file(s) of interest on your Google
+Drive. Can be a character vector of names/paths, a character vector of file
+ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Get files in Drive Trash.
+Add trash column to your dribble
 }
