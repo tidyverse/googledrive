@@ -39,7 +39,7 @@ test_that("drive_mkdir() errors if parent exists but is not a folder", {
   )
   expect_error(
     drive_mkdir(x, "a"),
-    "`path` must be a single, pre-existing folder"
+    "Requested parent 'path' is invalid"
   )
 })
 
@@ -62,6 +62,10 @@ test_that("drive_mkdir() accepts parent folder given as dribble", {
   out <- drive_mkdir(PARENT, me_("a"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("a"))
+  expect_identical(
+    as_id(out$drive_resource[[1]]$parents[[1]]),
+    as_id(PARENT)
+  )
 })
 
 test_that("drive_mkdir() accepts parent folder given as file id", {

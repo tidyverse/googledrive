@@ -113,6 +113,27 @@ has_drive_resource <- function(x) {
   all(!is.na(kind) & kind %in% c("drive#file", "drive#teamDrive"))
 }
 
+as_parent <- function(d) {
+  in_var <- deparse(substitute(d))
+  d <- as_dribble(d)
+  ## wording chosen to work for folder and Team Drive
+  if (no_file(d)) {
+    stop_glue("Parent specified via {sq(in_var)} does not exist.")
+  }
+  if (!single_file(d)) {
+    stop_glue(
+      "Parent specified via {sq(in_var)} doesn't uniquely ",
+      "identify exactly one folder or Team Drive."
+    )
+  }
+  if (!is_parental(d)) {
+    stop_glue(
+      "Requested parent {sq(in_var)} is invalid: neither a folder ",
+      "nor a Team Drive.")
+  }
+  d
+}
+
 #' Check facts about a dribble
 #'
 #' Sometimes you need to check things about a [`dribble`]` or about the files it

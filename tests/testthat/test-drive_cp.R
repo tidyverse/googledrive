@@ -107,12 +107,11 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
     )
   )
 
-  ## if 'path' identifies multiple files, it will error
   expect_error(
     file_cp <- drive_cp(
       nm_("i-am-a-file"),
       paste0(nm_("not-unique-folder"), "/")
     ),
-    "Requested parent folder identifies multiple files"
+    "doesn't uniquely identify exactly one"
   )
 })

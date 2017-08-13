@@ -88,26 +88,11 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
     dots
   )
 
-  ## if copying to a specific directory, specify the parent
   if (!is.null(path)) {
-    path <- as_dribble(path)
-    if (!some_files(path)) {
-      stop_glue("Requested parent folder does not exist.")
-    }
-    if (!single_file(path)) {
-      paths <- glue_data(path, "  * {name}: {id}")
-      stop_collapse(
-        c("Requested parent folder identifies multiple files:", paths)
-      )
-    }
-    ## if path was input as a dribble or id, still need to be sure it's a folder
-    if (!is_parental(path)) {
-      stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
-    }
+    path <- as_parent(path)
     params[["parents"]] <- list(path$id)
   }
 
-  ## if new name is specified, send it
   if (!is.null(name)) {
     params[["name"]] <- name
   }

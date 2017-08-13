@@ -56,7 +56,7 @@ test_that("drive_upload() accepts body metadata via ...", {
 
 })
 
-test_that("drive_upload() errors if given both `path` and `parents`", {
+test_that("drive_upload() errors if given both 'path' and 'parents'", {
   skip_if_no_token()
   skip_if_offline()
 
@@ -70,7 +70,7 @@ test_that("drive_upload() errors if given both `path` and `parents`", {
     name = me_("DESCRIPTION"),
     parents = destination2$id
     )},
-    "You have specified parent folders via both `path` and `parents`"
+    "You have specified parent folders via both 'path' and 'parents'"
   )
 })
 

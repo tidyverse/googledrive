@@ -76,19 +76,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   ## if moving the file, modify the parent
   if (!is.null(path)) {
-    path <- as_dribble(path)
-    if (!some_files(path)) {
-      stop_glue("Requested parent folder does not exist.")
-    }
-    if (!single_file(path)) {
-      paths <- glue_data(path, "  * {name}: {id}")
-      stop_collapse(
-        c("Requested parent folder identifies multiple files:", paths)
-      )
-    }
-    if (!is_parental(path)) {
-      stop_glue("Requested parent folder does not exist:\n{path$name}")
-    }
+    path <- as_parent(path)
     current_parents <- file$drive_resource[[1]][["parents"]]
     if (!path$id %in% current_parents) {
       meta[["addParents"]] <- path$id

@@ -26,6 +26,9 @@
 #' ## Yet another way to do this,
 #' ## this time with parent folder provide via id.
 #' drive_mkdir(path = as_id(abc$id), name = "def")
+#'
+#' ## clean up
+#' drive_ls(path = "abc", pattern = "^def$", type = "folder") %>% drive_rm()
 #' }
 #' @export
 drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
@@ -45,33 +48,21 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   if (is.null(name)) {
     stop_glue("New folder's name must be specified either via 'path' or 'name'.")
   }
-  ## note that there are no API calls above here
-  ## it means we can test more on travis/appveyor
-  path <- path %||% root_folder()
-  path <- as_dribble(path)
-  if (!some_files(path)) {
-    stop_glue("Requested parent folder does not exist.")
-  }
-  if (!single_file(path)) {
-    paths <- glue_data(path, "  * {name}: {id}")
-    stop_collapse(
-      c("Requested parent folder identifies multiple files:", paths)
-    )
-  }
-  if (!is_parental(path)) {
-    stop_glue("`path` must be a single, pre-existing folder or Team Drive.")
+  params <- list(
+    name = name,
+    mimeType = "application/vnd.google-apps.folder",
+    fields = "*"
+  )
+
+  if (!is.null(path)) {
+    path <- as_parent(path)
+    params[["parents"]] <- list(path$id)
   }
 
   request <- generate_request(
     endpoint = "drive.files.create",
-    params = list(
-      name = name,
-      mimeType = "application/vnd.google-apps.folder",
-      parents = list(path$id),
-      fields = "*"
-    )
+    params = params
   )
-
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
 
@@ -79,10 +70,10 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
 
   success <- folder$name == name
   if (verbose) {
-    ## not entirely sure why this placement of `\n` helps glue do the right
-    ## thing and yet ... it does
-    message_glue("\nFolder {if (success) '' else 'NOT '}created:\n",
-          "  * {folder$name}"
+    new_path <- paste0(append_slash(path$name), folder$name)
+    message_glue(
+      "\nFolder {if (success) '' else 'NOT '}created:\n",
+      "  * {new_path}"
     )
   }
   invisible(folder)

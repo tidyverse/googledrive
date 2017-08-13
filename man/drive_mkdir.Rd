@@ -44,5 +44,8 @@ drive_mkdir(path = abc, name = "def")
 ## Yet another way to do this,
 ## this time with parent folder provide via id.
 drive_mkdir(path = as_id(abc$id), name = "def")
+
+## clean up
+drive_ls(path = "abc", pattern = "^def$", type = "folder") \%>\% drive_rm()
 }
 }

@@ -43,7 +43,7 @@ test_that("drive_update() informatively errors if the path is not unique",{
   skip_if_offline()
   expect_error(
     drive_update(nm_("not-unique"), system.file("DESCRIPTION")),
-    "File to update is not unique"
+    "more than one"
   )
 })
 
@@ -52,7 +52,7 @@ test_that("drive_update() informatively errors if the path does not exist",{
   skip_if_offline()
   expect_error(
     drive_update(nm_("does-not-exist"), system.file("DESCRIPTION")),
-    "Input does not hold at least one Drive file"
+    "does not identify at least one"
   )
 })
 
