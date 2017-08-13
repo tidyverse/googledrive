@@ -43,10 +43,7 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
   }
 
   if (is.null(name)) {
-    stop(
-      "New folder's name must be specified either via `path` or `name`.",
-      call. = FALSE
-    )
+    stop_glue("New folder's name must be specified either via 'path' or 'name'.")
   }
   ## note that there are no API calls above here
   ## it means we can test more on travis/appveyor

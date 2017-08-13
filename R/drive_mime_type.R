@@ -39,7 +39,7 @@ drive_mime_type <- function(type = NULL) {
     return(.drive$mime_tbl)
   }
   if (!(is.character(type))) {
-    stop("`type` must be character", call. = FALSE)
+    stop_glue("'type' must be character")
   }
 
   human_m <- match(
@@ -59,7 +59,7 @@ drive_mime_type <- function(type = NULL) {
 
   if (all(is.na(mime_type))) {
     stop_glue(
-      "\nUnrecognized `type`:\n  * {problems}",
+      "\nUnrecognized 'type':\n  * {problems}",
       problems = collapse(type[is.na(mime_type)], sep = "\n")
     )
   }

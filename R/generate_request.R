@@ -50,7 +50,7 @@ generate_request <- function(endpoint = character(),
                              token = drive_token()) {
   ept <- .endpoints[[endpoint]]
   if (is.null(ept)) {
-    stop("Endpoint not recognized:\n", endpoint, call. = FALSE)
+    stop_glue("\nEndpoint not recognized:\n  * {endpoint}")
   }
 
   params <- match_params(params, ept$parameters)

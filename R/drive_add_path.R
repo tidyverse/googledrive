@@ -20,7 +20,7 @@
 drive_add_path <- function(file) {
   ## refresh file metadata
   if (is_dribble(file)) {
-    file <- as_id(file$id)
+    file <- as_id(file)
   }
   file <- as_dribble(file)
   if (no_file(file)) return(dribble_with_path())

@@ -50,12 +50,7 @@
 #' }
 drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
-  file <- confirm_some_files(file)
-
-  if (!single_file(file)) {
-    files <- glue_data(file, "  * {name}: {id}")
-    stop_collapse(c("Path to move is not unique:", files))
-  }
+  file <- confirm_single_file(file)
 
   if (is.null(path) && is.null(name)) {
     if (verbose) message("Nothing to be done.")

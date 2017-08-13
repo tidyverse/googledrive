@@ -48,7 +48,7 @@ test_that("drive_download() errors if file does not exist on Drive", {
   skip_if_offline()
   expect_error(
     drive_download(nm_("this-should-not-exist")),
-    "Input does not hold exactly one Drive file"
+    "does not identify at least one"
   )
 })
 

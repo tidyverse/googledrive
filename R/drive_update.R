@@ -52,12 +52,7 @@ drive_update <- function(file,
                          verbose = TRUE) {
 
   file <- as_dribble(file)
-  file <- confirm_some_files(file)
-
-  if (!single_file(file)) {
-    files <- glue_data(file, "  * {name}: {id}")
-    stop_collapse(c("File to update is not unique:", files))
-  }
+  file <- confirm_single_file(file)
 
   if (!is.null(media) && !file.exists(media)) {
     stop_glue("\nLocal file does not exist:\n  * {media}")

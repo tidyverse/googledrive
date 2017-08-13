@@ -107,7 +107,6 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
     params[["parents"]] <- list(path$id)
   }
 
-
   ## if new name is specified, send it
   if (!is.null(name)) {
     params[["name"]] <- name

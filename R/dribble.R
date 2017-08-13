@@ -169,12 +169,12 @@ some_files <- function(d) {
 #' @export
 #' @rdname dribble-checks
 confirm_single_file <- function(d) {
+  in_var <- deparse(substitute(d))
+  if (no_file(d)) {
+    stop_glue("{sq(in_var)} does not identify at least one Drive file.")
+  }
   if (!single_file(d)) {
-    stop(
-      "Input does not hold exactly one Drive file:\n",
-      deparse(substitute(d)),
-      call. = FALSE
-    )
+    stop_glue("{sq(in_var)} identifies more than one Drive file.")
   }
   d
 }
@@ -182,12 +182,9 @@ confirm_single_file <- function(d) {
 #' @export
 #' @rdname dribble-checks
 confirm_some_files <- function(d) {
-  if (!some_files(d)) {
-    stop(
-      "Input does not hold at least one Drive file:\n",
-      deparse(substitute(d)),
-      call. = FALSE
-    )
+  in_var <- deparse(substitute(d))
+  if (no_file(d)) {
+    stop_glue("{sq(in_var)} does not identify at least one Drive file.")
   }
   d
 }
