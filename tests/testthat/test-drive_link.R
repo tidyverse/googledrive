@@ -5,7 +5,7 @@ if (FALSE) {
   ## how the test file was created
   ## using Team-Drive-capable token ...
   files <- drive_find(corpora = "user,allTeamDrives")
-  tds <- teamdrive_find()
+  tds <- team_drive_find()
   x <- rbind(files, tds)
   saveRDS(
     x,

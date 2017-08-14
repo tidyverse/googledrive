@@ -21,7 +21,7 @@
 #' x <- drive_get("foofy")
 #' as_id(x)
 #'
-#' x <- teamdrive_find("work-stuff")
+#' x <- team_drive_find("work-stuff")
 #' as_id(x)
 #' }
 as_id <- function(x, ...) UseMethod("as_id")

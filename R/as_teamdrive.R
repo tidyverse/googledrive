@@ -9,7 +9,7 @@
 #'   * List representing [Team Drive resource](https://developers.google.com/drive/v3/reference/teamdrives#resource-representations)
 #'     objects. Mostly for internal use.
 #'
-#' @template teamdrives-description
+#' @template team-drives-description
 #'
 #' @description This is a generic function.
 #'
@@ -21,46 +21,46 @@
 #' @examples
 #' \dontrun{
 #' ## specify the name
-#' as_teamdrive("abc")
+#' as_team_drive("abc")
 #'
 #' ## specify the id (substitute one of your own!)
-#' as_teamdrive(as_id("0AOPK1X2jaNckUk9PVA"))
+#' as_team_drive(as_id("0AOPK1X2jaNckUk9PVA"))
 #' }
-as_teamdrive <- function(x, ...) UseMethod("as_teamdrive")
+as_team_drive <- function(x, ...) UseMethod("as_team_drive")
 
 #' @export
-as_teamdrive.default <- function(x, ...) {
+as_team_drive.default <- function(x, ...) {
   stop_glue_data(
     list(x = collapse(class(x), sep = "/")),
-    "Don't know how to coerce object of class {x} into a teamdrive dribble"
+    "Don't know how to coerce object of class {x} into a Team Drive dribble."
   )
 }
 
 #' @export
-as_teamdrive.NULL <- function(x, ...) dribble()
+as_team_drive.NULL <- function(x, ...) dribble()
 
 #' @export
-as_teamdrive.character <- function(x, ...) teamdrive_get(name = x)
+as_team_drive.character <- function(x, ...) team_drive_get(name = x)
 
 #' @export
-as_teamdrive.drive_id <- function(x, ...) teamdrive_get(id = x)
+as_team_drive.drive_id <- function(x, ...) team_drive_get(id = x)
 
 #' @export
-as_teamdrive.dribble <- function(x, ...) validate_teamdrive_dribble(x)
+as_team_drive.dribble <- function(x, ...) validate_team_drive_dribble(x)
 
 #' @export
-as_teamdrive.data.frame <- function(x, ...) {
-  validate_teamdrive_dribble(as_dribble(x))
+as_team_drive.data.frame <- function(x, ...) {
+  validate_team_drive_dribble(as_dribble(x))
 }
 
 #' @export
-as_teamdrive.list <- function(x, ...) {
-  validate_teamdrive_dribble(as_dribble(x))
+as_team_drive.list <- function(x, ...) {
+  validate_team_drive_dribble(as_dribble(x))
 }
 
-validate_teamdrive_dribble <- function(x) {
+validate_team_drive_dribble <- function(x) {
   stopifnot(inherits(x, "dribble"))
-  if (!all(is_teamdrive(x))) {
+  if (!all(is_team_drive(x))) {
     stop_glue("All rows of Team Drive dribble must contain a Team Drive.")
   }
   x

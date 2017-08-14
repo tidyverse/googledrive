@@ -4,7 +4,7 @@
 \alias{drive_get}
 \title{Get Drive files by path or id}
 \usage{
-drive_get(path = NULL, id = NULL, team_drive = NULL, corpora = NULL,
+drive_get(path = NULL, id = NULL, team_drive = NULL, corpus = NULL,
   verbose = TRUE)
 }
 \arguments{
@@ -21,11 +21,13 @@ ignored.}
 \item{team_drive}{Anything that identifies one specific Team Drive: its name,
 its id or URL marked with \code{\link{as_id}()}, or a
 \code{\link{dribble}}. Is pre-processed with
-\code{\link{as_teamdrive}()} and then \code{\link{drive_corpus}()}.}
+\code{\link{as_team_drive}()}.  Read more about
+\link[=team_drives]{Team Drives}.}
 
-\item{corpora}{Character, specifying the search collection. Only relevant in
-the Team Drives context.  Is pre-processed together with \code{team_drive}
-by \code{\link{drive_corpus}()}.}
+\item{corpus}{Character, specifying the search collection. Only relevant in
+the Team Drives context. If specified, must be one of \code{"user"},
+\code{"all"}, or \code{"domain"}. Read more about
+\link[=team_drives]{Team Drives}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -84,12 +86,12 @@ drive_get(as_id("abcdefgeh123456789"))
 drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 
 ## access the Team Drive named "foo"
-foo <- teamdrive_get("foo")
+foo <- team_drive_get("foo")
 drive_get(c("this.jpg", "that-file"), team_drive = foo)
 drive_get(as_id("123456789"), team_drive = foo)
 
 ## search all Team Drives and other files user has accessed
-drive_get(c("this.jpg", "that-file"), corpora = "user,allTeamDrives")
+drive_get(c("this.jpg", "that-file"), corpus = "all")
 }
 }
 \seealso{

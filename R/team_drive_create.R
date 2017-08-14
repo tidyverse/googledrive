@@ -1,6 +1,6 @@
 #' Create a new Team Drive
 #'
-#' @template teamdrives-description
+#' @template team-drives-description
 #'
 #' @seealso Wraps the `teamdrives.create` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/teamdrives/create>
@@ -13,12 +13,12 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' teamdrive_create("my-awesome-team-drive")
+#' team_drive_create("my-awesome-team-drive")
 #'
 #' ## clean up
-#' teamdrive_rm("my-awesome-team-drive")
+#' team_drive_rm("my-awesome-team-drive")
 #' }
-teamdrive_create <- function(name, verbose = TRUE) {
+team_drive_create <- function(name, verbose = TRUE) {
   stopifnot(is_string(name), isTRUE(nzchar(name)))
   request <- generate_request(
     "drive.teamdrives.create",

@@ -24,7 +24,7 @@ drive_link <- function(file) {
   )
   ## no documented, programmatic way to get browser links for Team Drives
   ## but this seems to work ... I won't document it either, though
-  td <- is_teamdrive(file)
+  td <- is_team_drive(file)
   links[td] <- glue(
     "https://drive.google.com/drive/folders/{id}",
     id = as_id(file)[td]

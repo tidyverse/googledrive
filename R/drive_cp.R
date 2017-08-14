@@ -81,7 +81,7 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
 
   name <- name %||% glue("Copy of {file$name}")
 
-  dots <- list(...)
+  dots <- toCamel(list(...))
   dots$fields <- dots$fields %||% "*"
   params <- c(
     fileId = file$id,

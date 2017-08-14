@@ -239,16 +239,16 @@ is_mine <- function(d) {
 
 #' @export
 #' @rdname dribble-checks
-is_teamdrive <- function(d) {
+is_team_drive <- function(d) {
   stopifnot(inherits(d, "dribble"))
   purrr::map_chr(d$drive_resource, "kind") == "drive#teamDrive"
 }
 
 #' @export
 #' @rdname dribble-checks
-is_teamdrivy <- function(d) {
+is_team_drivy <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  is_teamdrive(d) |
+  is_team_drive(d) |
     purrr::map_lgl(d$drive_resource, ~ !is.null(.x[["teamDriveId"]]))
 }
 

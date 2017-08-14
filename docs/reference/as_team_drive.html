@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check facts about a dribble — dribble-checks • googledrive</title>
+<title>Identify Team Drives — as_team_drive • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -71,63 +71,52 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check facts about a dribble</h1>
+    <h1>Identify Team Drives</h1>
     </div>
 
     
-    <p>Sometimes you need to check things about a <code><a href='dribble.html'>dribble</a></code>` or about the files it
-represents, such as:</p><ul>
-<li><p>Is it even a dribble?</p></li>
-<li><p>Size: Does the dribble hold exactly one file? At least one file? No file?</p></li>
-<li><p>File type: Is this file a folder?</p></li>
-<li><p>File ownership and access: Is it mine? Published? Shared?</p></li>
+    <p>Converts various representations of Team Drive into a
+<code><a href='dribble.html'>dribble</a></code>, the object used by googledrive to hold Drive file metadata.
+Team Drives can be specified via</p><ul>
+<li><p>Name.</p></li>
+<li><p>Team Drive id. Mark with <code><a href='as_id.html'>as_id()</a></code> to distinguish from name.</p></li>
+<li><p>Data frame or <code><a href='dribble.html'>dribble</a></code> consisting solely of Team Drives.</p></li>
+<li><p>List representing <a href='https://developers.google.com/drive/v3/reference/teamdrives#resource-representations'>Team Drive resource</a>
+objects. Mostly for internal use.</p></li>
 </ul>
+
+    <p>Note:
+  <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
+  are only available to users of certain enhanced Google services, such as G
+  Suite Enterprise, G Suite Business, or G Suite for Education.</p>
+<p>This is a generic function.</p>
     
 
-    <pre class="usage"><span class='fu'>is_dribble</span>(<span class='no'>d</span>)
-
-<span class='fu'>no_file</span>(<span class='no'>d</span>)
-
-<span class='fu'>single_file</span>(<span class='no'>d</span>)
-
-<span class='fu'>some_files</span>(<span class='no'>d</span>)
-
-<span class='fu'>confirm_single_file</span>(<span class='no'>d</span>)
-
-<span class='fu'>confirm_some_files</span>(<span class='no'>d</span>)
-
-<span class='fu'>is_folder</span>(<span class='no'>d</span>)
-
-<span class='fu'>is_parental</span>(<span class='no'>d</span>)
-
-<span class='fu'>is_mine</span>(<span class='no'>d</span>)
-
-<span class='fu'>is_team_drive</span>(<span class='no'>d</span>)
-
-<span class='fu'>is_team_drivy</span>(<span class='no'>d</span>)</pre>
+    <pre class="usage"><span class='fu'>as_team_drive</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>d</th>
-      <td><p>A <code><a href='dribble.html'>dribble</a></code>.</p></td>
+      <th>x</th>
+      <td><p>A vector of Team Drive names, a vector of Team Drive ids marked
+with <code><a href='as_id.html'>as_id()</a></code>, a list of Team Drive Resource objects, or a suitable data
+frame.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments passed down to methods. (Not used.)</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## most of us have multiple files or folders on Google Drive</span>
-<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>()
-<span class='fu'>is_dribble</span>(<span class='no'>d</span>)
-<span class='fu'>no_file</span>(<span class='no'>d</span>)
-<span class='fu'>single_file</span>(<span class='no'>d</span>)
-<span class='fu'>some_files</span>(<span class='no'>d</span>)
-<span class='fu'>confirm_single_file</span>(<span class='no'>d</span>)
-<span class='fu'>confirm_some_files</span>(<span class='no'>d</span>)
-<span class='fu'>is_folder</span>(<span class='no'>d</span>)
-<span class='fu'>is_mine</span>(<span class='no'>d</span>)
+<span class='co'>## specify the name</span>
+<span class='fu'>as_team_drive</span>(<span class='st'>"abc"</span>)
+
+<span class='co'>## specify the id (substitute one of your own!)</span>
+<span class='fu'>as_team_drive</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"0AOPK1X2jaNckUk9PVA"</span>))
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

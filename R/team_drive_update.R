@@ -2,7 +2,7 @@
 #'
 #' Update the metadata of an existing Team Drive, e.g. its background image or
 #' theme.
-#' @template teamdrives-description
+#' @template team-drives-description
 #'
 #' @seealso Wraps the `teamdrives.update` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/teamdrives/update>
@@ -17,21 +17,21 @@
 #' @examples
 #' \dontrun{
 #' ## create a Team Drive
-#' td <- teamdrive_create("I love themes!")
+#' td <- team_drive_create("I love themes!")
 #'
 #' ## see the themes available to you
 #' themes <- drive_user(fields = "teamDriveThemes")$teamDriveThemes
 #' purrr::map_chr(themes, "id")
 #'
 #' ## cycle through various themes for this Team Drive
-#' td <- teamdrive_update(td, themeId = "bok_choy")
-#' td <- teamdrive_update(td, themeId = "cocktails")
+#' td <- team_drive_update(td, themeId = "bok_choy")
+#' td <- team_drive_update(td, themeId = "cocktails")
 #'
 #' ## clean up
-#' teamdrive_rm(td)
+#' team_drive_rm(td)
 #' }
-teamdrive_update <- function(team_drive, ..., verbose = TRUE) {
-  team_drive <- as_teamdrive(team_drive)
+team_drive_update <- function(team_drive, ..., verbose = TRUE) {
+  team_drive <- as_team_drive(team_drive)
   if (no_file(team_drive) && verbose) {
     message("No such Team Drives found to update.")
     return(invisible(dribble()))
@@ -41,7 +41,7 @@ teamdrive_update <- function(team_drive, ..., verbose = TRUE) {
     stop_collapse(c("Can't update multiple Team Drives at once:", team_drive))
   }
 
-  meta <- list(...)
+  meta <- toCamel(list(...))
   if (length(meta) == 0) {
     if (verbose) message("No updates specified.")
     return(invisible(team_drive))

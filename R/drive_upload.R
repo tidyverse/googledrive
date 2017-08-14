@@ -77,7 +77,7 @@ drive_upload <- function(media,
     name <- name %||% path_parts$name
   }
 
-  dots <- list(...)
+  dots <- toCamel(list(...))
   dots$fields <- dots$fields %||% "*"
 
   params <- c(

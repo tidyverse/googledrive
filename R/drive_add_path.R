@@ -26,20 +26,20 @@ drive_add_path <- function(file) {
   if (no_file(file)) return(dribble_with_path())
 
   team_drive <- NULL
-  corpora <- NULL
+  corpus <- NULL
   tid <- purrr::map_chr(file$drive_resource, "teamDriveId", .default = NA)
   tid <- unique(tid[!is.na(tid)])
   if (length(tid) > 0) {
     if (length(tid) == 1) {
       team_drive <- as_id(tid)
     } else {
-      corpora <- "user,allTeamDrives"
+      corpus <- "all"
     }
   }
 
   nodes <- rbind(
     file,
-    drive_find(type = "folder", team_drive = team_drive, corpora = corpora),
+    drive_find(type = "folder", team_drive = team_drive, corpus = corpus),
     make.row.names = FALSE
   ) %>% promote("parents")
   nodes <- nodes[!duplicated(nodes$id), ]
@@ -64,12 +64,12 @@ pathify_one_id <- function(id, nodes, root_id) {
 ## does the actual work for drive_get(path = ...)
 dribble_from_path <- function(path = NULL,
                               team_drive = NULL,
-                              corpora = NULL) {
+                              corpus = NULL) {
   if (length(path) == 0) return(dribble_with_path())
   stopifnot(is_path(path))
   path <- rootize_path(path)
 
-  nodes <- get_nodes(path, team_drive, corpora)
+  nodes <- get_nodes(path, team_drive, corpus)
   if (nrow(nodes) == 0) return(dribble_with_path())
 
   ROOT_ID <- root_id()
@@ -103,7 +103,7 @@ pathify_one_path <- function(op, nodes, root_id) {
 ## retrieves metadata for all files that could be needed to resolve paths
 get_nodes <- function(path,
                       team_drive = NULL,
-                      corpora = NULL) {
+                      corpus = NULL) {
   path_parts <- purrr::map(path, partition_path, maybe_name = TRUE)
   ## workaround for purrr <= 0.2.2.2
   name <- purrr::map(path_parts, "name")
@@ -121,7 +121,7 @@ get_nodes <- function(path,
       nodes,
       drive_find(
         team_drive = team_drive,
-        corpora = corpora,
+        corpus = corpus,
         fields = "*",
         q = q_clauses,
         verbose = FALSE

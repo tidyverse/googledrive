@@ -51,13 +51,13 @@ reference:
     desc: >
       Manipulate and explore Team Drives
     contents:
-      - teamdrive_find
-      - teamdrive_get
-      - drive_corpus
-      - teamdrive_create
-      - teamdrive_rm
-      - teamdrive_update
-      - as_teamdrive
+      - team_drives
+      - team_drive_find
+      - team_drive_get
+      - team_drive_create
+      - team_drive_rm
+      - team_drive_update
+      - as_team_drive
   - title: "Dribble object"
     desc: >
       Metadata about Drive files is stored in a "Drive tibble" a.k.a. a dribble

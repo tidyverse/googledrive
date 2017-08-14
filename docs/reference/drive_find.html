@@ -78,9 +78,9 @@
     <p>This is the closest googledrive function to what you can do at
 <a href='https://drive.google.com'>https://drive.google.com</a>: by default, you just get a listing of your files.
 You can also search in various ways, e.g., filter by file type or ownership
-or even work with Team Drives, if you have access. This is a very powerful
-function. Together with the more specific <code><a href='drive_get.html'>drive_get()</a></code>, this is the main way
-to identify files to target for downstream work.</p>
+or even work with <a href='team_drives.html'>Team Drive files</a>, if you have access. This
+is a very powerful function. Together with the more specific <code><a href='drive_get.html'>drive_get()</a></code>,
+this is the main way to identify files to target for downstream work.</p>
 <p>Note:
   <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
   are only available to users of certain enhanced Google services, such as G
@@ -88,7 +88,7 @@ to identify files to target for downstream work.</p>
     
 
     <pre class="usage"><span class='fu'>drive_find</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>corpora</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -116,13 +116,15 @@ filtered locally, via the <code>pattern</code> argument.</p></td>
       <td><p>Anything that identifies one specific Team Drive: its name,
 its id or URL marked with <code><a href='as_id.html'>as_id</a>()</code>, or a
 <code><a href='dribble.html'>dribble</a></code>. Is pre-processed with
-<code><a href='as_teamdrive.html'>as_teamdrive</a>()</code> and then <code><a href='drive_corpus.html'>drive_corpus</a>()</code>.</p></td>
+<code><a href='as_team_drive.html'>as_team_drive</a>()</code>.  Read more about
+<a href='team_drives.html'>Team Drives</a>.</p></td>
     </tr>
     <tr>
-      <th>corpora</th>
+      <th>corpus</th>
       <td><p>Character, specifying the search collection. Only relevant in
-the Team Drives context.  Is pre-processed together with <code>team_drive</code>
-by <code><a href='drive_corpus.html'>drive_corpus</a>()</code>.</p></td>
+the Team Drives context. If specified, must be one of <code>"user"</code>,
+<code>"all"</code>, or <code>"domain"</code>. Read more about
+<a href='team_drives.html'>Team Drives</a>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -168,8 +170,9 @@ use <code>drive_find(q = "trashed = true or trashed = false")</code>.</p>
     <h2 class="hasAnchor" id="team-drives"><a class="anchor" href="#team-drives"></a>Team Drives</h2>
 
     
-    <p>If you have access to Team Drives, you'll know. Use <code>team_drive</code> and/or
-<code>corpora</code> to search one or more Team Drives. See <code><a href='drive_corpus.html'>drive_corpus()</a></code> for more.</p>
+    <p>If you have access to Team Drives, you'll know. Use <code>team_drive</code> or <code>corpus</code>
+to search one or more Team Drives or a domain. See
+<a href='team_drives.html'>Access Team Drives</a> for more.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -202,8 +205,10 @@ use <code>drive_find(q = "trashed = true or trashed = false")</code>.</p>
 
 <span class='co'>## control page size or cap the number of files returned</span>
 <span class='fu'>drive_find</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>50</span>)
+<span class='co'>## all params passed through `...` can be camelCase or snake_case</span>
+<span class='fu'>drive_find</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>50</span>)
 <span class='fu'>drive_find</span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>58</span>)
-<span class='fu'>drive_find</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>15</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>15</span>)
 
 <span class='co'>## various ways to specify q search clauses</span>
 <span class='co'>## multiple q's</span>

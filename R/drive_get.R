@@ -9,7 +9,7 @@
 #'   that lacks it, use [drive_add_path()]. If you want to list the contents of
 #'   a folder, use [drive_ls()]. For general searching, use [drive_find()].
 #'
-#' @template teamdrives-description
+#' @template team-drives-description
 #'
 #' @seealso Wraps the `files.get` endpoint and, if you specify files by name or
 #'   path, also calls `files.list`:
@@ -25,7 +25,7 @@
 #'   with [as_id()]). If both `path` and `id` are non-`NULL`, `id` is silently
 #'   ignored.
 #' @template team_drive-singular
-#' @template corpora
+#' @template corpus
 #' @template verbose
 #'
 #' @template dribble-return
@@ -51,17 +51,17 @@
 #' drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 #'
 #' ## access the Team Drive named "foo"
-#' foo <- teamdrive_get("foo")
+#' foo <- team_drive_get("foo")
 #' drive_get(c("this.jpg", "that-file"), team_drive = foo)
 #' drive_get(as_id("123456789"), team_drive = foo)
 #'
 #' ## search all Team Drives and other files user has accessed
-#' drive_get(c("this.jpg", "that-file"), corpora = "user,allTeamDrives")
+#' drive_get(c("this.jpg", "that-file"), corpus = "all")
 #' }
 drive_get <- function(path = NULL,
                       id = NULL,
                       team_drive = NULL,
-                      corpora = NULL,
+                      corpus = NULL,
                       verbose = TRUE) {
   if (length(path) + length(id) == 0) return(dribble_with_path())
 
@@ -72,7 +72,7 @@ drive_get <- function(path = NULL,
 
   if (!is.null(path)) {
     stopifnot(is_path(path))
-    return(dribble_from_path(path, team_drive, corpora))
+    return(dribble_from_path(path, team_drive, corpus))
   }
 
   stopifnot(is.character(id))

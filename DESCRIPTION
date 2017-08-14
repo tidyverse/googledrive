@@ -28,7 +28,7 @@ Suggests: covr,
   rmarkdown,
   rprojroot,
   testthat
-URL: https://github.com/tidyverse/googledrive
+URL: http://googledrive.tidyverse.org, https://github.com/tidyverse/googledrive
 BugReports: https://github.com/tidyverse/googledrive/issues
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

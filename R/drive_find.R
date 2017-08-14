@@ -3,11 +3,11 @@
 #' This is the closest googledrive function to what you can do at
 #' <https://drive.google.com>: by default, you just get a listing of your files.
 #' You can also search in various ways, e.g., filter by file type or ownership
-#' or even work with Team Drives, if you have access. This is a very powerful
-#' function. Together with the more specific [drive_get()], this is the main way
-#' to identify files to target for downstream work.
+#' or even work with [Team Drive files][team_drives], if you have access. This
+#' is a very powerful function. Together with the more specific [drive_get()],
+#' this is the main way to identify files to target for downstream work.
 #'
-#' @template teamdrives-description
+#' @template team-drives-description
 
 #' @section File type:
 #'
@@ -32,8 +32,9 @@
 
 #' @section Team Drives:
 #'
-#'   If you have access to Team Drives, you'll know. Use `team_drive` and/or
-#'   `corpora` to search one or more Team Drives. See [drive_corpus()] for more.
+#' If you have access to Team Drives, you'll know. Use `team_drive` or `corpus`
+#' to search one or more Team Drives or a domain. See
+#' [Access Team Drives][team_drives] for more.
 
 #' @seealso Wraps the `files.list` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
@@ -47,7 +48,7 @@
 #'   processed by googledrive and sent as a query parameter.
 #' @template n_max
 #' @template team_drive-singular
-#' @template corpora
+#' @template corpus
 #' @param ... Other parameters to pass along in the request. The most likely
 #'   candidate is `q`. See below and the API's
 #'   [Search for Files guide](https://developers.google.com/drive/v3/web/search-parameters).
@@ -75,8 +76,10 @@
 #'
 #' ## control page size or cap the number of files returned
 #' drive_find(pageSize = 50)
+#' ## all params passed through `...` can be camelCase or snake_case
+#' drive_find(page_size = 50)
 #' drive_find(n_max = 58)
-#' drive_find(pageSize = 5, n_max = 15)
+#' drive_find(page_size = 5, n_max = 15)
 #'
 #' ## various ways to specify q search clauses
 #' ## multiple q's
@@ -94,7 +97,7 @@ drive_find <- function(pattern = NULL,
                        type = NULL,
                        n_max = Inf,
                        team_drive = NULL,
-                       corpora = NULL,
+                       corpus = NULL,
                        ...,
                        verbose = TRUE) {
 
@@ -104,7 +107,7 @@ drive_find <- function(pattern = NULL,
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
   if (n_max < 1) return(dribble())
 
-  params <- list(...)
+  params <- toCamel(list(...))
   params$fields <- params$fields %||% "*"
   params <- marshal_q_clauses(params)
 
@@ -118,7 +121,7 @@ drive_find <- function(pattern = NULL,
 
   params$q <- and(params$q)
 
-  params <- append(params, handle_team_drives(team_drive, corpora))
+  params <- append(params, handle_team_drives(team_drive, corpus))
 
   request <- generate_request(endpoint = "drive.files.list", params = params)
   proc_res_list <- do_paginated_request(
@@ -167,11 +170,13 @@ marshal_q_clauses <- function(params) {
   c(params[["unmatched"]], q = list(q_bits))
 }
 
-handle_team_drives <- function(team_drive, corpora) {
-  if (is.null(team_drive) && is.null(corpora)) return(NULL)
-  tid <- as_id(as_teamdrive(team_drive))
-  if (length(tid) == 0) {
-    tid <- NULL
+handle_team_drives <- function(team_drive, corpus) {
+  if (!is.null(team_drive)) {
+    team_drive <- as_id(as_team_drive(team_drive))
   }
-  drive_corpus(teamDriveId = tid, corpora = corpora)
+  if (identical(corpus, "all")) {
+    corpus <- "user,allTeamDrives"
+  }
+  if (is.null(team_drive) && is.null(corpus)) return(NULL)
+  team_drive_params(team_drive, corpus)
 }

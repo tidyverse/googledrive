@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check facts about a dribble — dribble-checks • googledrive</title>
+<title>Get Team Drives by name or id — team_drive_get • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -71,70 +71,68 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check facts about a dribble</h1>
+    <h1>Get Team Drives by name or id</h1>
     </div>
 
     
-    <p>Sometimes you need to check things about a <code><a href='dribble.html'>dribble</a></code>` or about the files it
-represents, such as:</p><ul>
-<li><p>Is it even a dribble?</p></li>
-<li><p>Size: Does the dribble hold exactly one file? At least one file? No file?</p></li>
-<li><p>File type: Is this file a folder?</p></li>
-<li><p>File ownership and access: Is it mine? Published? Shared?</p></li>
+    <p>Retrieve metadata for Team Drives specified via name or id. Note
+that Google Drive does NOT behave like your local file system:</p><ul>
+<li><p>You can get zero, one, or more Team Drives back for each name! Team Drive
+names need not be unique.</p></li>
 </ul>
+
+    <p>Note:
+  <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
+  are only available to users of certain enhanced Google services, such as G
+  Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     
 
-    <pre class="usage"><span class='fu'>is_dribble</span>(<span class='no'>d</span>)
-
-<span class='fu'>no_file</span>(<span class='no'>d</span>)
-
-<span class='fu'>single_file</span>(<span class='no'>d</span>)
-
-<span class='fu'>some_files</span>(<span class='no'>d</span>)
-
-<span class='fu'>confirm_single_file</span>(<span class='no'>d</span>)
-
-<span class='fu'>confirm_some_files</span>(<span class='no'>d</span>)
-
-<span class='fu'>is_folder</span>(<span class='no'>d</span>)
-
-<span class='fu'>is_parental</span>(<span class='no'>d</span>)
-
-<span class='fu'>is_mine</span>(<span class='no'>d</span>)
-
-<span class='fu'>is_team_drive</span>(<span class='no'>d</span>)
-
-<span class='fu'>is_team_drivy</span>(<span class='no'>d</span>)</pre>
+    <pre class="usage"><span class='fu'>team_drive_get</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>d</th>
-      <td><p>A <code><a href='dribble.html'>dribble</a></code>.</p></td>
+      <th>name</th>
+      <td><p>Character vector of names.  A character vector marked with
+<code><a href='as_id.html'>as_id()</a></code> is treated as if it was provided via the <code>id</code> argument.</p></td>
+    </tr>
+    <tr>
+      <th>id</th>
+      <td><p>Character vector of Team Drive ids or URLs (it is first processed
+with <code><a href='as_id.html'>as_id()</a></code>). If both <code>name</code> and <code>id</code> are non-<code>NULL</code>, <code>id</code> is silently
+ignored.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Logical, indicating whether to print informative messages
+(default <code>TRUE</code>).</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
+  item.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## most of us have multiple files or folders on Google Drive</span>
-<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>()
-<span class='fu'>is_dribble</span>(<span class='no'>d</span>)
-<span class='fu'>no_file</span>(<span class='no'>d</span>)
-<span class='fu'>single_file</span>(<span class='no'>d</span>)
-<span class='fu'>some_files</span>(<span class='no'>d</span>)
-<span class='fu'>confirm_single_file</span>(<span class='no'>d</span>)
-<span class='fu'>confirm_some_files</span>(<span class='no'>d</span>)
-<span class='fu'>is_folder</span>(<span class='no'>d</span>)
-<span class='fu'>is_mine</span>(<span class='no'>d</span>)
+<span class='fu'>team_drive_get</span>(<span class='st'>"my-awesome-team-drive"</span>)
+<span class='fu'>team_drive_get</span>(<span class='fu'>c</span>(<span class='st'>"apple"</span>, <span class='st'>"orange"</span>, <span class='st'>"banana"</span>))
+<span class='fu'>team_drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"KCmiHLXUk9PVA-0AJNG"</span>))
+<span class='fu'>team_drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"https://drive.google.com/drive/u/0/folders/KCmiHLXUk9PVA-0AJNG"</span>))
+<span class='fu'>team_drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"KCmiHLXUk9PVA-0AJNG"</span>)
+<span class='fu'>team_drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"https://drive.google.com/drive/u/0/folders/KCmiHLXUk9PVA-0AJNG"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#value">Value</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
