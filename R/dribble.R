@@ -113,6 +113,8 @@ has_drive_resource <- function(x) {
   all(!is.na(kind) & kind %in% c("drive#file", "drive#teamDrive"))
 }
 
+## used across several functions that create a file or modify "parentage"
+## processes a putative parent folder or Team Drive
 as_parent <- function(d) {
   in_var <- deparse(substitute(d))
   d <- as_dribble(d)

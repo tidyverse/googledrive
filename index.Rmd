@@ -150,11 +150,11 @@ mirrors <- mirrors %>%
 
 We always assign the return value of googledrive functions back into an R object. This object is of type `dribble`, which holds metadata on one or more Drive files. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.
 
-We can then extract a share link.
+We can then extract the file's hyperlink.
 
 ```{r}
 mirrors %>%
-  drive_share_link()
+  drive_link()
 ```
 
 #### Download files

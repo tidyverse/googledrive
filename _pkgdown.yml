@@ -46,7 +46,7 @@ reference:
       - drive_unpublish
       - drive_share
       - drive_is_published
-      - drive_share_link
+      - drive_link
   - title: "Team Drives"
     desc: >
       Manipulate and explore Team Drives
