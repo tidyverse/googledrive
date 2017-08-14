@@ -50,24 +50,24 @@ drive_update <- function(file,
                          media = NULL,
                          ...,
                          verbose = TRUE) {
-
-  file <- as_dribble(file)
-  file <- confirm_single_file(file)
-
   if (!is.null(media) && !file.exists(media)) {
     stop_glue("\nLocal file does not exist:\n  * {media}")
   }
 
+  file <- as_dribble(file)
+  file <- confirm_single_file(file)
+
   meta <- list(...)
-  meta$fields <- meta$fields %||% "*"
+
+  if (is.null(media) && length(meta) == 0) {
+    if (verbose) message("No updates specified.")
+    return(invisible(file))
+  }
+
+  meta[["fields"]] <- meta[["fields"]] %||% "*"
 
   if (is.null(media)) {
-    if (length(meta) == 0) {
-      if (verbose) message("No updates specified.")
-      return(invisible(file))
-    } else {
-      out <- drive_update_metadata(file, meta)
-    }
+    out <- drive_update_metadata(file, meta)
   } else {
     if (length(meta) == 0) {
       out <- drive_update_media(file, media)
@@ -83,7 +83,7 @@ drive_update <- function(file,
   invisible(out)
 }
 
-
+## currently this can never be called, because we always send fields
 drive_update_media <- function(file, media) {
   request <- generate_request(
     endpoint = "drive.files.update.media",
