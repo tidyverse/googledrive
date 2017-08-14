@@ -28,6 +28,7 @@
 #' }
 as_teamdrive <- function(x, ...) UseMethod("as_teamdrive")
 
+#' @export
 as_teamdrive.default <- function(x, ...) {
   stop_glue_data(
     list(x = collapse(class(x), sep = "/")),
@@ -35,14 +36,25 @@ as_teamdrive.default <- function(x, ...) {
   )
 }
 
+#' @export
 as_teamdrive.NULL <- function(x, ...) dribble()
+
+#' @export
 as_teamdrive.character <- function(x, ...) teamdrive_get(name = x)
+
+#' @export
 as_teamdrive.drive_id <- function(x, ...) teamdrive_get(id = x)
+
+#' @export
 as_teamdrive.dribble <- function(x, ...) validate_teamdrive_dribble(x)
+
+#' @export
 as_teamdrive.data.frame <- function(x, ...) {
   validate_teamdrive_dribble(as_dribble(x))
 }
-as_teamdrive.dribble.list <- function(x, ...) {
+
+#' @export
+as_teamdrive.list <- function(x, ...) {
   validate_teamdrive_dribble(as_dribble(x))
 }
 

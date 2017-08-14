@@ -2,27 +2,9 @@
 % Please edit documentation in R/as_id.R
 \name{as_id}
 \alias{as_id}
-\alias{as_id.default}
-\alias{as_id.NULL}
-\alias{as_id.drive_id}
-\alias{as_id.dribble}
-\alias{as_id.data.frame}
-\alias{as_id.character}
 \title{Extract and/or mark as file id}
 \usage{
 as_id(x, ...)
-
-\method{as_id}{default}(x, ...)
-
-\method{as_id}{NULL}(x, ...)
-
-\method{as_id}{drive_id}(x, ...)
-
-\method{as_id}{dribble}(x, ...)
-
-\method{as_id}{data.frame}(x, ...)
-
-\method{as_id}{character}(x, ...)
 }
 \arguments{
 \item{x}{A character vector of file or Team Drive ids or URLs, a \code{\link{dribble}}

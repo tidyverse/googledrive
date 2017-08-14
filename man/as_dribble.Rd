@@ -2,30 +2,9 @@
 % Please edit documentation in R/as_dribble.R
 \name{as_dribble}
 \alias{as_dribble}
-\alias{as_dribble.dribble}
-\alias{as_dribble.default}
-\alias{as_dribble.NULL}
-\alias{as_dribble.character}
-\alias{as_dribble.drive_id}
-\alias{as_dribble.data.frame}
-\alias{as_dribble.list}
 \title{Identify files on Google Drive}
 \usage{
 as_dribble(x, ...)
-
-\method{as_dribble}{dribble}(x, ...)
-
-\method{as_dribble}{default}(x, ...)
-
-\method{as_dribble}{NULL}(x, ...)
-
-\method{as_dribble}{character}(x, ...)
-
-\method{as_dribble}{drive_id}(x, ...)
-
-\method{as_dribble}{data.frame}(x, ...)
-
-\method{as_dribble}{list}(x, ...)
 }
 \arguments{
 \item{x}{A vector of Drive file paths, a vector of file ids marked

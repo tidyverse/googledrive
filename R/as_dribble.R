@@ -42,11 +42,9 @@
 as_dribble <- function(x, ...) UseMethod("as_dribble")
 
 #' @export
-#' @rdname as_dribble
 as_dribble.dribble <- function(x, ...) x
 
 #' @export
-#' @rdname as_dribble
 as_dribble.default <- function(x, ...) {
   stop_glue_data(
     list(x = collapse(class(x), sep = "/")),
@@ -55,23 +53,18 @@ as_dribble.default <- function(x, ...) {
 }
 
 #' @export
-#' @rdname as_dribble
 as_dribble.NULL <- function(x, ...) dribble()
 
 #' @export
-#' @rdname as_dribble
 as_dribble.character <- function(x, ...) drive_get(path = x)
 
 #' @export
-#' @rdname as_dribble
 as_dribble.drive_id <- function(x, ...) drive_get(id = x)
 
 #' @export
-#' @rdname as_dribble
 as_dribble.data.frame <- function(x, ...) validate_dribble(new_dribble(x))
 
 #' @export
-#' @rdname as_dribble
 as_dribble.list <- function(x, ...) {
   if (length(x) == 0) return(dribble())
 
