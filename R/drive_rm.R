@@ -6,7 +6,10 @@
 #' @seealso Wraps the `files.delete` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/delete>
 #'
-#' @template file-plural
+#' @param ... One or more Drive files, specified in any valid way, i.e. as a
+#' [`dribble`], by name or path, or by file id or URL marked with [as_id()]. Or
+#' any combination thereof. Elements are processed with [as_dribble()] and
+#' row-bound prior to deletion.
 #' @template verbose
 #'
 #' @return Logical vector, indicating whether the delete succeeded.

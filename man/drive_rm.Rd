@@ -7,12 +7,13 @@
 drive_rm(..., verbose = TRUE)
 }
 \arguments{
+\item{...}{One or more Drive files, specified in any valid way, i.e. as a
+\code{\link{dribble}}, by name or path, or by file id or URL marked with \code{\link[=as_id]{as_id()}}. Or
+any combination thereof. Elements are processed with \code{\link[=as_dribble]{as_dribble()}} and
+row-bound prior to deletion.}
+
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
-
-\item{file}{Something that identifies the file(s) of interest on your Google
-Drive. Can be a character vector of names/paths, a character vector of file
-ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 }
 \value{
 Logical vector, indicating whether the delete succeeded.

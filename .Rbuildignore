@@ -14,6 +14,7 @@
 ^tidyverse-noncaching-token\.rds$
 ^jenny-f-bryan-noncaching-token\.rds$
 ^jenny-at-bryanbc-noncaching-token\.rds$
+^jenny-at-rstudio-noncaching-token\.rds$
 ^man-roxygen$
 ^docs$
 ^_pkgdown\.yml$
