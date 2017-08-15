@@ -39,8 +39,8 @@ drive_ls <- function(path = NULL, ...) {
   params <- list(...)
   params <- append(params, c(q = paste(sq(path$id), "in parents")))
 
-  if (is_teamdrivy(path)) {
-    if (is_teamdrive(path)) {
+  if (is_team_drivy(path)) {
+    if (is_team_drive(path)) {
       params[["team_drive"]] <- as_id(path$id)
     } else {
       params[["team_drive"]] <- as_id(

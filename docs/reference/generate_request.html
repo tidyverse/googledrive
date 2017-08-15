@@ -177,6 +177,9 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
 #&gt; $query$key
 #&gt; [1] "AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
 #&gt; 
+#&gt; $query$supportsTeamDrives
+#&gt; [1] TRUE
+#&gt; 
 #&gt; 
 #&gt; $body
 #&gt; list()
@@ -185,7 +188,7 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
 #&gt; NULL
 #&gt; 
 #&gt; $url
-#&gt; [1] "https://www.googleapis.com/drive/v3/files/abc?key=AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
+#&gt; [1] "https://www.googleapis.com/drive/v3/files/abc?key=AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg&amp;supportsTeamDrives=TRUE"
 #&gt; </div><div class='input'><span class='co'>## re-create the previous request, but the hard way, i.e. "by hand"</span>
 <span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'>build_request</span>(
   <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"drive/v3/files/{fileId}"</span>,

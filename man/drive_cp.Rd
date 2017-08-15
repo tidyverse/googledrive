@@ -70,7 +70,7 @@ csv_file <- drive_upload(R.home('doc/BioC_mirrors.csv'))
 
 ## copy AND AT THE SAME TIME convert it to a Google Sheet
 mirrors_sheet <- drive_cp(
-  file,
+  csv_file,
   name = "BioC_mirrors",
   mimeType = drive_mime_type("spreadsheet")
 )
@@ -79,8 +79,7 @@ mirrors_sheet <- drive_cp(
 ## drive_browse(mirrors_sheet)
 
 ## clean up
-drive_rm(csv_file)
-drive_rm(mirrors_sheet)
+drive_rm(csv_file, mirrors_sheet)
 }
 }
 \seealso{

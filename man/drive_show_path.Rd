@@ -19,17 +19,24 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 Even though you know a Drive file's name or id, you don't
 necessarily know its path(s). This function takes Drive files, specified
 via a \code{\link{dribble}} or a vector of file ids or URLs, and returns a dribble
-that includes a \code{path} variable. Note that Google Drive does NOT behave
-like your local file system:
-\itemize{
-\item A single Drive file can potentially be represented by multiple paths,
-since a file or folder can have multiple direct parents. So \code{n} inputs
-could result in more than \code{n} outputs.
-\item Multiple Drive files could be associated with the same path, because
-file and folder names need not be unique, even at a given level of the
-hierarchy. So \code{n} inputs could result in fewer than \code{n} unique values in
-the \code{path} variable.
-}
+that includes a \code{path} variable.
+
+Note that Google Drive does NOT behave like your local file
+  system:
+  \itemize{
+  \item File and folder names need not be unique, even at a given level of
+  the hierarchy. A single name or file path can be associated with multiple
+  files (or zero or exactly one).
+  \item A file can have more than one direct parent. This implies that a
+  single file can be represented by multiple paths.
+  }
+
+Bottom line: Do not assume there is a one-to-one relationship
+  between file name or path and a Drive file or folder. A file id is unique,
+  which is why googledrive workflows favor storage in a
+  \code{\link{dribble}}, which holds metadata aimed at computers (file id)
+  and humans (file name). Finally, note also that a folder is just a specific
+  type of file on Drive.
 }
 \examples{
 \dontrun{

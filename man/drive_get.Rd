@@ -4,7 +4,7 @@
 \alias{drive_get}
 \title{Get Drive files by path or id}
 \usage{
-drive_get(path = NULL, id = NULL, team_drive = NULL, corpora = NULL,
+drive_get(path = NULL, id = NULL, team_drive = NULL, corpus = NULL,
   verbose = TRUE)
 }
 \arguments{
@@ -21,11 +21,13 @@ ignored.}
 \item{team_drive}{Anything that identifies one specific Team Drive: its name,
 its id or URL marked with \code{\link{as_id}()}, or a
 \code{\link{dribble}}. Is pre-processed with
-\code{\link{as_teamdrive}()} and then \code{\link{drive_corpus}()}.}
+\code{\link{as_team_drive}()}.  Read more about
+\link[=team_drives]{Team Drives}.}
 
-\item{corpora}{Character, specifying the search collection. Only relevant in
-the Team Drives context.  Is pre-processed together with \code{team_drive}
-by \code{\link{drive_corpus}()}.}
+\item{corpus}{Character, specifying the search collection. Only relevant in
+the Team Drives context. If specified, must be one of \code{"user"},
+\code{"all"}, or \code{"domain"}. Read more about
+\link[=team_drives]{Team Drives}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -36,23 +38,28 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 }
 \description{
 Retrieve metadata for files specified via path or via file id.
-Note that Google Drive does NOT behave like your local file system:
-\itemize{
-\item You can get zero, one, or more files back for each file name or path! On
-Google Drive, file and folder names need not be unique, even at a given
-level of the hierarchy.
-\item A file or folder can also have multiple direct parents, so a single Drive
-file can potentially be represented by multiple paths.
-}
 
-In contrast, a file id will always identify at most one Drive
-file. Finally, note also that a folder is just a specific type of file on
-Drive.
+Note that Google Drive does NOT behave like your local file
+  system:
+  \itemize{
+  \item File and folder names need not be unique, even at a given level of
+  the hierarchy. A single name or file path can be associated with multiple
+  files (or zero or exactly one).
+  \item A file can have more than one direct parent. This implies that a
+  single file can be represented by multiple paths.
+  }
 
-If the files are specified via \code{path}, versus \code{id}, the returned \code{\link{dribble}}
+Bottom line: Do not assume there is a one-to-one relationship
+  between file name or path and a Drive file or folder. A file id is unique,
+  which is why googledrive workflows favor storage in a
+  \code{\link{dribble}}, which holds metadata aimed at computers (file id)
+  and humans (file name). Finally, note also that a folder is just a specific
+  type of file on Drive.
+
+If the files are specified via \code{path}, the returned \code{\link{dribble}}
 will include a \code{path} variable. To add path information to any \code{\link{dribble}}
-that lacks it, use \code{\link[=drive_show_path]{drive_show_path()}}. If you want to list the contents of a
-folder, use \code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_find]{drive_find()}}.
+that lacks it, use \code{\link[=drive_add_path]{drive_add_path()}}. If you want to list the contents of
+a folder, use \code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_find]{drive_find()}}.
 
 Note:
   \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
@@ -79,12 +86,12 @@ drive_get(as_id("abcdefgeh123456789"))
 drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 
 ## access the Team Drive named "foo"
-foo <- teamdrive_get("foo")
+foo <- team_drive_get("foo")
 drive_get(c("this.jpg", "that-file"), team_drive = foo)
 drive_get(as_id("123456789"), team_drive = foo)
 
 ## search all Team Drives and other files user has accessed
-drive_get(c("this.jpg", "that-file"), corpora = "user,allTeamDrives")
+drive_get(c("this.jpg", "that-file"), corpus = "all")
 }
 }
 \seealso{

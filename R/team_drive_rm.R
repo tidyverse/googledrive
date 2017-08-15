@@ -1,6 +1,6 @@
 #' Delete Team Drives
 #'
-#' @template teamdrives-description
+#' @template team-drives-description
 #'
 #' @seealso Wraps the `teamdrives.delete` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/teamdrives/delete>
@@ -13,22 +13,22 @@
 #' @examples
 #' \dontrun{
 #' ## Create Team Drives to remove in various ways
-#' teamdrive_create("testdrive-01")
-#' td02 <- teamdrive_create("testdrive-02")
-#' teamdrive_create("testdrive-03")
-#' td04 <- teamdrive_create("testdrive-04")
+#' team_drive_create("testdrive-01")
+#' td02 <- team_drive_create("testdrive-02")
+#' team_drive_create("testdrive-03")
+#' td04 <- team_drive_create("testdrive-04")
 #'
 #' ## remove by name
-#' teamdrive_rm("testdrive-01")
+#' team_drive_rm("testdrive-01")
 #' ## remove by id
-#' teamdrive_rm(as_id(td02$id))
+#' team_drive_rm(as_id(td02))
 #' ## remove by URL (or, rather, id found in URL)
-#' teamdrive_rm(as_id("https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"))
+#' team_drive_rm(as_id("https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"))
 #' ## remove by dribble
-#' teamdrive_rm(td03)
+#' team_drive_rm(td04)
 #' }
-teamdrive_rm <- function(team_drive = NULL, verbose = TRUE) {
-  team_drive <- as_teamdrive(team_drive)
+team_drive_rm <- function(team_drive = NULL, verbose = TRUE) {
+  team_drive <- as_team_drive(team_drive)
   if (no_file(team_drive) && verbose) {
     message("No such Team Drives found to delete.")
     return(invisible(logical(0)))

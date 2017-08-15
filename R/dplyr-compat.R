@@ -2,7 +2,7 @@
 ## https://github.com/hadley/dtplyr/blob/2308ff25e88bb81fe84f9051e37ddd9d572189ee/R/compat-dplyr-0.6.0.R
 
 ## function is called in .onLoad()
-register_s3_method <- function(pkg, generic, class, fun = NULL) {
+register_s3_method <- function(pkg, generic, class, fun = NULL) { # nocov start
   stopifnot(is_string(pkg))
   envir <- asNamespace(pkg)
 
@@ -24,7 +24,7 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
       registerS3method(generic, class, fun, envir = envir)
     }
   )
-}
+} # nocov end
 
 ## googlesheets does not import any generics from dplyr,
 ## but if dplyr is loaded and main verbs are used on a dribble

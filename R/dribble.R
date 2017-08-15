@@ -113,6 +113,29 @@ has_drive_resource <- function(x) {
   all(!is.na(kind) & kind %in% c("drive#file", "drive#teamDrive"))
 }
 
+## used across several functions that create a file or modify "parentage"
+## processes a putative parent folder or Team Drive
+as_parent <- function(d) {
+  in_var <- deparse(substitute(d))
+  d <- as_dribble(d)
+  ## wording chosen to work for folder and Team Drive
+  if (no_file(d)) {
+    stop_glue("Parent specified via {sq(in_var)} does not exist.")
+  }
+  if (!single_file(d)) {
+    stop_glue(
+      "Parent specified via {sq(in_var)} doesn't uniquely ",
+      "identify exactly one folder or Team Drive."
+    )
+  }
+  if (!is_parental(d)) {
+    stop_glue(
+      "Requested parent {sq(in_var)} is invalid: neither a folder ",
+      "nor a Team Drive.")
+  }
+  d
+}
+
 #' Check facts about a dribble
 #'
 #' Sometimes you need to check things about a [`dribble`]` or about the files it
@@ -169,12 +192,12 @@ some_files <- function(d) {
 #' @export
 #' @rdname dribble-checks
 confirm_single_file <- function(d) {
+  in_var <- deparse(substitute(d))
+  if (no_file(d)) {
+    stop_glue("{sq(in_var)} does not identify at least one Drive file.")
+  }
   if (!single_file(d)) {
-    stop(
-      "Input does not hold exactly one Drive file:\n",
-      deparse(substitute(d)),
-      call. = FALSE
-    )
+    stop_glue("{sq(in_var)} identifies more than one Drive file.")
   }
   d
 }
@@ -182,12 +205,9 @@ confirm_single_file <- function(d) {
 #' @export
 #' @rdname dribble-checks
 confirm_some_files <- function(d) {
-  if (!some_files(d)) {
-    stop(
-      "Input does not hold at least one Drive file:\n",
-      deparse(substitute(d)),
-      call. = FALSE
-    )
+  in_var <- deparse(substitute(d))
+  if (no_file(d)) {
+    stop_glue("{sq(in_var)} does not identify at least one Drive file.")
   }
   d
 }
@@ -219,16 +239,16 @@ is_mine <- function(d) {
 
 #' @export
 #' @rdname dribble-checks
-is_teamdrive <- function(d) {
+is_team_drive <- function(d) {
   stopifnot(inherits(d, "dribble"))
   purrr::map_chr(d$drive_resource, "kind") == "drive#teamDrive"
 }
 
 #' @export
 #' @rdname dribble-checks
-is_teamdrivy <- function(d) {
+is_team_drivy <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  is_teamdrive(d) |
+  is_team_drive(d) |
     purrr::map_lgl(d$drive_resource, ~ !is.null(.x[["teamDriveId"]]))
 }
 

@@ -2,7 +2,7 @@
 #'
 #' @description This is the closest googledrive function to what you get from
 #'   visiting <https://drive.google.com> and clicking "Team Drives".
-#' @template teamdrives-description
+#' @template team-drives-description
 
 #' @seealso Wraps the `teamdrives.list` endpoint::
 #'   * <https://developers.google.com/drive/v3/reference/teamdrives/list>
@@ -16,9 +16,9 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' teamdrive_find()
+#' team_drive_find()
 #' }
-teamdrive_find <- function(pattern = NULL,
+team_drive_find <- function(pattern = NULL,
                             n_max = Inf,
                             ...,
                             verbose = TRUE) {
@@ -29,7 +29,7 @@ teamdrive_find <- function(pattern = NULL,
   if (n_max < 1) return(dribble())
 
   ## what could possibly come via `...` here? pageSize (or fields)
-  params <- list(...)
+  params <- toCamel(list(...))
   params$fields <- params$fields %||% "*"
 
   request <- generate_request("drive.teamdrives.list", params = params)

@@ -58,11 +58,11 @@ test_that("drive_share() informatively errors if given an unknown `role` or `typ
   skip_if_no_token()
   skip_if_offline()
 
-  expect_error(drive_share(nm_("DESC")), "`role` and `type` must be specified.")
+  expect_error(drive_share(nm_("DESC")), "'role' and 'type' must be specified.")
 
   expect_error(drive_share(nm_("DESC"), role = "nonsense", type = "user"),
-               "`role` must be one of the following:")
+               "'role' must be one of the following:")
 
   expect_error(drive_share(nm_("DESC"), role = "writer", type = "nonsense"),
-               "`type` must be one of the following:")
+               "'type' must be one of the following:")
 })

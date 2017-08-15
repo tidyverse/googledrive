@@ -21,13 +21,12 @@
 #' x <- drive_get("foofy")
 #' as_id(x)
 #'
-#' x <- teamdrive_find("work-stuff")
+#' x <- team_drive_find("work-stuff")
 #' as_id(x)
 #' }
 as_id <- function(x, ...) UseMethod("as_id")
 
 #' @export
-#' @rdname as_id
 as_id.default <- function(x, ...) {
   stop_glue_data(
     list(x = collapse(class(x), sep = "/")),
@@ -36,23 +35,18 @@ as_id.default <- function(x, ...) {
 }
 
 #' @export
-#' @rdname as_id
 as_id.NULL <- function(x, ...) NULL
 
 #' @export
-#' @rdname as_id
 as_id.drive_id <- function(x, ...) x
 
 #' @export
-#' @rdname as_id
 as_id.dribble <- function(x, ...) as_id(x$id)
 
 #' @export
-#' @rdname as_id
 as_id.data.frame <- function(x, ...) as_id(validate_dribble(new_dribble(x)))
 
 #' @export
-#' @rdname as_id
 as_id.character <- function(x, ...) {
   if (length(x) == 0L) return(x)
   structure(purrr::map_chr(x, one_id), class = "drive_id")

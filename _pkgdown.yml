@@ -14,13 +14,6 @@ navbar:
     href: reference/index.html
 
 reference:
-  - title: "Authentication"
-    desc: >
-      Take explicit control of the Google auth status or examine current state
-    contents:
-      - drive_auth
-      - drive_deauth
-      - drive_user
   - title: "Reach out and touch your files"
     desc: >
       Retrieve metadata on your Drive files so you can act on them
@@ -35,30 +28,16 @@ reference:
     desc: >
       Create or delete Drive files and folders
     contents:
+      - drive_upload
+      - drive_download
+      - drive_mkdir
       - drive_cp
+      - drive_mv
+      - drive_rename
+      - drive_update
       - drive_trash
       - drive_empty_trash
       - drive_rm
-      - drive_mkdir
-      - drive_mv
-      - drive_rename
-      - drive_upload
-      - drive_update
-  - title: "Upload and download"
-    desc: >
-      Create Drive files from local and vice versa
-    contents:
-      - drive_upload
-      - drive_update
-      - drive_download
-  - title: "Dribble object"
-    desc: >
-      Metadata about Drive files is stored in a "Drive tibble" a.k.a. a dribble
-    contents:
-      - dribble
-      - as_dribble
-      - as_id
-      - dribble-checks
   - title: "Share your files with the world"
     desc: >
       View or change the sharing and publishing status of Drive files
@@ -67,7 +46,33 @@ reference:
       - drive_unpublish
       - drive_share
       - drive_is_published
-      - drive_share_link
+      - drive_link
+  - title: "Team Drives"
+    desc: >
+      Manipulate and explore Team Drives
+    contents:
+      - team_drives
+      - team_drive_find
+      - team_drive_get
+      - team_drive_create
+      - team_drive_rm
+      - team_drive_update
+      - as_team_drive
+  - title: "Dribble object"
+    desc: >
+      Metadata about Drive files is stored in a "Drive tibble" a.k.a. a dribble
+    contents:
+      - dribble
+      - as_dribble
+      - as_id
+      - dribble-checks
+  - title: "Authentication"
+    desc: >
+      Take explicit control of the Google auth status or examine current state
+    contents:
+      - drive_auth
+      - drive_deauth
+      - drive_user
   - title: "Drive API spec"
     desc: >
       Summon info about or check input against the Drive API spec

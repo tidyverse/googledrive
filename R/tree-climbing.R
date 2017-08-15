@@ -5,11 +5,12 @@
 ## id --> parent of id --> grandparent of id --> ... END
 ## END is either stop_value (root folder id for us) or NA_character_
 pth <- function(id, kids, elders, stop_value) {
-  if (identical(id, stop_value)) {
+  this <- last(id)
+
+  if (identical(this, stop_value)) {
     return(list(id))
   }
 
-  this <- last(id)
   i <- which(kids == this)
 
   if (length(i) > 1) {
@@ -23,6 +24,10 @@ pth <- function(id, kids, elders, stop_value) {
 
   parents <- elders[[i]]
 
+  if (is.null(parents)) {
+    return(list(c(id, NA)))
+  }
+
   seen_before <- intersect(id, parents)
   if (length(seen_before)) {
     stop_collapse(c(
@@ -30,14 +35,6 @@ pth <- function(id, kids, elders, stop_value) {
       sq(seen_before),
       "Cycles are not allowed."
     ))
-  }
-
-  if (is.null(parents)) {
-    return(list(c(id, NA)))
-  }
-
-  if (stop_value %in% parents) {
-    return(list(c(id, stop_value)))
   }
 
   ## keep climbing

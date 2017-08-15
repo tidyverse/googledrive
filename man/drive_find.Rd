@@ -5,7 +5,7 @@
 \title{Find files on Google Drive}
 \usage{
 drive_find(pattern = NULL, type = NULL, n_max = Inf, team_drive = NULL,
-  corpora = NULL, ..., verbose = TRUE)
+  corpus = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the items whose names match this
@@ -23,11 +23,13 @@ filtered locally, via the \code{pattern} argument.}
 \item{team_drive}{Anything that identifies one specific Team Drive: its name,
 its id or URL marked with \code{\link{as_id}()}, or a
 \code{\link{dribble}}. Is pre-processed with
-\code{\link{as_teamdrive}()} and then \code{\link{drive_corpus}()}.}
+\code{\link{as_team_drive}()}.  Read more about
+\link[=team_drives]{Team Drives}.}
 
-\item{corpora}{Character, specifying the search collection. Only relevant in
-the Team Drives context.  Is pre-processed together with \code{team_drive}
-by \code{\link{drive_corpus}()}.}
+\item{corpus}{Character, specifying the search collection. Only relevant in
+the Team Drives context. If specified, must be one of \code{"user"},
+\code{"all"}, or \code{"domain"}. Read more about
+\link[=team_drives]{Team Drives}.}
 
 \item{...}{Other parameters to pass along in the request. The most likely
 candidate is \code{q}. See below and the API's
@@ -44,9 +46,9 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 This is the closest googledrive function to what you can do at
 \url{https://drive.google.com}: by default, you just get a listing of your files.
 You can also search in various ways, e.g., filter by file type or ownership
-or even work with Team Drives, if you have access. This is a very powerful
-function. Together with the more specific \code{\link[=drive_get]{drive_get()}}, this is the main way
-to identify files to target for downstream work.
+or even work with \link[=team_drives]{Team Drive files}, if you have access. This
+is a very powerful function. Together with the more specific \code{\link[=drive_get]{drive_get()}},
+this is the main way to identify files to target for downstream work.
 
 Note:
   \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
@@ -82,8 +84,9 @@ use \code{drive_find(q = "trashed = true or trashed = false")}.
 \section{Team Drives}{
 
 
-If you have access to Team Drives, you'll know. Use \code{team_drive} and/or
-\code{corpora} to search one or more Team Drives. See \code{\link[=drive_corpus]{drive_corpus()}} for more.
+If you have access to Team Drives, you'll know. Use \code{team_drive} or \code{corpus}
+to search one or more Team Drives or a domain. See
+\link[=team_drives]{Access Team Drives} for more.
 }
 
 \examples{
@@ -107,8 +110,10 @@ drive_find(pattern = "jt")
 
 ## control page size or cap the number of files returned
 drive_find(pageSize = 50)
+## all params passed through `...` can be camelCase or snake_case
+drive_find(page_size = 50)
 drive_find(n_max = 58)
-drive_find(pageSize = 5, n_max = 15)
+drive_find(page_size = 5, n_max = 15)
 
 ## various ways to specify q search clauses
 ## multiple q's

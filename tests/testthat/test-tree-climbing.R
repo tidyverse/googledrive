@@ -91,3 +91,20 @@ test_that("pth() errors for duplicated kid", {
     "Cycles are not allowed"
   )
 })
+
+test_that("pth() is correct for multiple parents, one of which is root", {
+  #   ROOT
+  #  /    \
+  # a      \
+  #  \    /
+  #    b
+  df <- tibble::tribble(
+    ~ id,     ~ parents,
+     "a",        "ROOT",
+     "b", c("a", "ROOT")
+  )
+  expect_identical(
+    pth("b", kids = df$id, elders = df$parents, stop_value = "ROOT"),
+    list(c("b", "a", "ROOT"), c("b", "ROOT"))
+  )
+})

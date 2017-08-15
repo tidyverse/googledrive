@@ -20,34 +20,34 @@ test_that("new_corpus() checks type and length, if not-NULL", {
 })
 
 test_that("`corpora` is checked for validity", {
-  expect_silent(drive_corpus(corpora = "user"))
-  expect_silent(drive_corpus(corpora = "user,allTeamDrives"))
-  expect_silent(drive_corpus(corpora = "domain"))
+  expect_silent(team_drive_params(corpora = "user"))
+  expect_silent(team_drive_params(corpora = "user,allTeamDrives"))
+  expect_silent(team_drive_params(corpora = "domain"))
   expect_error(
-    drive_corpus(corpora = "foo"),
+    team_drive_params(corpora = "foo"),
     "Invalid value for `corpora`"
   )
 })
 
 test_that('`corpora = "teamDrive"` requires team drive specification', {
   expect_error(
-    drive_corpus(corpora = "teamDrive"),
+    team_drive_params(corpora = "teamDrive"),
     "`team_drive` cannot be NULL"
   )
 })
 
 test_that('`corpora != "teamDrive"` rejects team drive specification', {
   expect_error(
-    drive_corpus(corpora = "user", teamDriveId = "123"),
+    team_drive_params(corpora = "user", teamDriveId = "123"),
     "don't specify a Team Drive"
   )
 })
 
 test_that("a team drive can be specified w/ corpora", {
-  expect_silent(drive_corpus(corpora = "teamDrive", teamDriveId = "123"))
+  expect_silent(team_drive_params(corpora = "teamDrive", teamDriveId = "123"))
 })
 
 test_that('`corpora = "teamDrive" is inferred from team drive specification', {
-  out <- drive_corpus(teamDriveId = "123")
+  out <- team_drive_params(teamDriveId = "123")
   expect_identical(out$corpora, "teamDrive")
 })

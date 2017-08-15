@@ -1,6 +1,6 @@
 ## given a tibble of known nodes, resolve paths for leaves
 ## if leaf-hood not specified, all nodes are assumed to be leaves
-## result = input, filtered down to leaves, unnested, with new `path` variable
+## result = input, filtered down to leaves, unnested, with new 'path' variable
 pathify_prune_unnest <- function(nodes, root_id, leaf = NULL) {
   ## pathify
   leaf <- leaf %||% rep.int(TRUE, nrow(nodes))

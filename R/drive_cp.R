@@ -49,7 +49,7 @@
 #'
 #' ## copy AND AT THE SAME TIME convert it to a Google Sheet
 #' mirrors_sheet <- drive_cp(
-#'   file,
+#'   csv_file,
 #'   name = "BioC_mirrors",
 #'   mimeType = drive_mime_type("spreadsheet")
 #' )
@@ -58,8 +58,7 @@
 #' ## drive_browse(mirrors_sheet)
 #'
 #' ## clean up
-#' drive_rm(csv_file)
-#' drive_rm(mirrors_sheet)
+#' drive_rm(csv_file, mirrors_sheet)
 #' }
 #' @export
 drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
@@ -82,34 +81,18 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
 
   name <- name %||% glue("Copy of {file$name}")
 
-  dots <- list(...)
+  dots <- toCamel(list(...))
   dots$fields <- dots$fields %||% "*"
   params <- c(
     fileId = file$id,
     dots
   )
 
-  ## if copying to a specific directory, specify the parent
   if (!is.null(path)) {
-    path <- as_dribble(path)
-    if (!some_files(path)) {
-      stop_glue("Requested parent folder does not exist.")
-    }
-    if (!single_file(path)) {
-      paths <- glue_data(path, "  * {name}: {id}")
-      stop_collapse(
-        c("Requested parent folder identifies multiple files:", paths)
-      )
-    }
-    ## if path was input as a dribble or id, still need to be sure it's a folder
-    if (!is_parental(path)) {
-      stop_glue("\n`path` specifies a file that is not a folder:\n * {path$name}")
-    }
+    path <- as_parent(path)
     params[["parents"]] <- list(path$id)
   }
 
-
-  ## if new name is specified, send it
   if (!is.null(name)) {
     params[["name"]] <- name
   }

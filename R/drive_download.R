@@ -99,7 +99,7 @@ drive_download <- function(file,
       )
     }
   } else {
-    stop("The file doesn't seem to have downloaded.", call. = FALSE)
+    stop_glue("The file doesn't seem to have downloaded.")
   }
   invisible(file)
 }

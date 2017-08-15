@@ -4,15 +4,15 @@
 \alias{drive_rm}
 \title{Delete files from Drive}
 \usage{
-drive_rm(file = NULL, verbose = TRUE)
+drive_rm(..., verbose = TRUE)
 }
 \arguments{
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
+
 \item{file}{Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
 ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
-
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
 }
 \value{
 Logical vector, indicating whether the delete succeeded.
@@ -23,11 +23,19 @@ option, see \code{\link[=drive_trash]{drive_trash()}}.
 }
 \examples{
 \dontrun{
-## Create a folder to remove
-folder <- drive_mkdir("folder-to-remove")
+## Create something to remove
+drive_upload(system.file("DESCRIPTION"), name = "abc-DESC")
 
-## Remove folder
-drive_rm(folder)
+## Remove it by name
+drive_rm("abc-DESC")
+
+## Create several things to remove
+x1 <- drive_upload(system.file("DESCRIPTION"), name = "abc-DESC")
+drive_upload(system.file("DESCRIPTION"), name = "def-DESC")
+x2 <- drive_upload(system.file("DESCRIPTION"), name = "ghi-DESC")
+
+## Remove them all at once, specified in different ways
+drive_rm(x1, "def-DESC", as_id(x2))
 }
 }
 \seealso{

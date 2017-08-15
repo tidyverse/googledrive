@@ -27,7 +27,7 @@
 #'   drive_update(R.home("doc/NEWS.1"))
 #'
 #' ## Update the file with new metadata.
-#' ## Notice here `name` is not a parameter in `drive_update()`, we are passing
+#' ## Notice here `name` is not an argument of `drive_update()`, we are passing
 #' ## this to the API via the `...``
 #' x <- x %>%
 #'   drive_update(name = "NEWS-1")
@@ -44,36 +44,30 @@
 #'   drive_update(R.home("doc/NEWS.2"), name = "NEWS-2")
 #'
 #' ## Clean up
-#' drive_rm(x)
-#' drive_rm(folder)
+#' drive_rm(x, folder)
 #' }
 drive_update <- function(file,
                          media = NULL,
                          ...,
                          verbose = TRUE) {
-
-  file <- as_dribble(file)
-  file <- confirm_some_files(file)
-
-  if (!single_file(file)) {
-    files <- glue_data(file, "  * {name}: {id}")
-    stop_collapse(c("File to update is not unique:", files))
-  }
-
   if (!is.null(media) && !file.exists(media)) {
     stop_glue("\nLocal file does not exist:\n  * {media}")
   }
 
-  meta <- list(...)
-  meta$fields <- meta$fields %||% "*"
+  file <- as_dribble(file)
+  file <- confirm_single_file(file)
+
+  meta <- toCamel(list(...))
+
+  if (is.null(media) && length(meta) == 0) {
+    if (verbose) message("No updates specified.")
+    return(invisible(file))
+  }
+
+  meta[["fields"]] <- meta[["fields"]] %||% "*"
 
   if (is.null(media)) {
-    if (length(meta) == 0) {
-      if (verbose) message("No updates specified.")
-      return(invisible(file))
-    } else {
-      out <- drive_update_metadata(file, meta)
-    }
+    out <- drive_update_metadata(file, meta)
   } else {
     if (length(meta) == 0) {
       out <- drive_update_media(file, media)
@@ -89,7 +83,7 @@ drive_update <- function(file,
   invisible(out)
 }
 
-
+## currently this can never be called, because we always send fields
 drive_update_media <- function(file, media) {
   request <- generate_request(
     endpoint = "drive.files.update.media",

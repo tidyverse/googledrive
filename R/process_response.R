@@ -21,7 +21,7 @@ process_response <- function(res) {
   type <- res$headers$`Content-type`
   if (!grepl("^application/json", type)) {
     out <- httr::content(res, as = "text")
-    stop("HTTP error [", res$status, "] ", out, call. = FALSE)
+    stop_glue("HTTP error [{res$status}] {out}")
   }
 
   out <- httr::content(res, as = "parsed", type = "application/json")

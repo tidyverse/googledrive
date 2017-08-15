@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find files on Google Drive. — drive_find • googledrive</title>
+<title>Find files on Google Drive — drive_find • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -71,34 +71,31 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Find files on Google Drive.</h1>
+    <h1>Find files on Google Drive</h1>
     </div>
 
     
-    <p>This is the closest googledrive function to what you get from
-<a href='https://drive.google.com'>https://drive.google.com</a>: by default, you just get a listing of your
-files. You can also narrow the search in various ways, such as by file
-type, whether it's yours or shared with you, starred status, etc.</p>
-<p>By default, <code>drive_find()</code> does not show files in the trash: it adds
-<code>q = "trashed = false"</code> to the query. However, it will not do so if the
-user specifies a <code>q</code> search clause for trash inclusion or exclusion. To see
-only files in the trash, use <code><a href='drive_view_trash.html'>drive_view_trash()</a></code>, which is a shortcut for
-<code>drive_find(q = "trashed = true")</code>. To see files regardless of trash
-status, use <code>drive_find(q = "trashed = true or trashed = false")</code>.
-
-    <code>drive_find()</code> will accept multiple <code>q</code> clauses and/or a vector <code>q</code> of
-several search clauses. These clauses are combined with <code>and</code>.</p>
+    <p>This is the closest googledrive function to what you can do at
+<a href='https://drive.google.com'>https://drive.google.com</a>: by default, you just get a listing of your files.
+You can also search in various ways, e.g., filter by file type or ownership
+or even work with <a href='team_drives.html'>Team Drive files</a>, if you have access. This
+is a very powerful function. Together with the more specific <code><a href='drive_get.html'>drive_get()</a></code>,
+this is the main way to identify files to target for downstream work.</p>
+<p>Note:
+  <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
+  are only available to users of certain enhanced Google services, such as G
+  Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_find</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='no'>...</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_find</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pattern</th>
-      <td><p>Character. If provided, only the files whose names match this
+      <td><p>Character. If provided, only the items whose names match this
 regular expression are returned. This is implemented locally on the results
 returned by the API.</p></td>
     </tr>
@@ -110,14 +107,29 @@ processed by googledrive and sent as a query parameter.</p></td>
     </tr>
     <tr>
       <th>n_max</th>
-      <td><p>Integer. An upper bound on the number of files to return. This
+      <td><p>Integer. An upper bound on the number of items to return. This
 applies to the results requested from the API, which may be further
 filtered locally, via the <code>pattern</code> argument.</p></td>
     </tr>
     <tr>
+      <th>team_drive</th>
+      <td><p>Anything that identifies one specific Team Drive: its name,
+its id or URL marked with <code><a href='as_id.html'>as_id</a>()</code>, or a
+<code><a href='dribble.html'>dribble</a></code>. Is pre-processed with
+<code><a href='as_team_drive.html'>as_team_drive</a>()</code>.  Read more about
+<a href='team_drives.html'>Team Drives</a>.</p></td>
+    </tr>
+    <tr>
+      <th>corpus</th>
+      <td><p>Character, specifying the search collection. Only relevant in
+the Team Drives context. If specified, must be one of <code>"user"</code>,
+<code>"all"</code>, or <code>"domain"</code>. Read more about
+<a href='team_drives.html'>Team Drives</a>.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Other parameters to pass along in the request. The most likely
-candidate is <code>q</code>. See the examples and the API's
+candidate is <code>q</code>. See below and the API's
 <a href='https://developers.google.com/drive/v3/web/search-parameters'>Search for Files guide</a>.</p></td>
     </tr>
     <tr>
@@ -130,7 +142,37 @@ candidate is <code>q</code>. See the examples and the API's
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
-  file.</p>
+  item.</p>
+    
+    <h2 class="hasAnchor" id="file-type"><a class="anchor" href="#file-type"></a>File type</h2>
+
+    
+    <p>The <code>type</code> argument is pre-processed with <code><a href='drive_mime_type.html'>drive_mime_type()</a></code>, so you can
+use a few shortcuts and file extensions, in addition to full-blown MIME
+types. googledrive forms a search clause to pass to <code>q</code>.</p>
+    
+    <h2 class="hasAnchor" id="search-parameters"><a class="anchor" href="#search-parameters"></a>Search parameters</h2>
+
+    
+    <p>Do advanced search on file properties by providing search clauses to the
+<code>q</code> parameter that is passed to the API via <code>...</code>. Multiple <code>q</code> clauses or
+vector-valued <code>q</code> are combined via 'and'.</p>
+    
+    <h2 class="hasAnchor" id="trash"><a class="anchor" href="#trash"></a>Trash</h2>
+
+    
+    <p>By default, <code>drive_find()</code> does not include files in the trash: it adds <code>q = "trashed = false"</code> to the query. However, it will not do so if the user
+specifies a <code>q</code> search clause for trash inclusion or exclusion. To see only
+files in the trash, use <code><a href='drive_view_trash.html'>drive_view_trash()</a></code>, which is a shortcut for
+<code>drive_find(q = "trashed = true")</code>. To see files regardless of trash status,
+use <code>drive_find(q = "trashed = true or trashed = false")</code>.</p>
+    
+    <h2 class="hasAnchor" id="team-drives"><a class="anchor" href="#team-drives"></a>Team Drives</h2>
+
+    
+    <p>If you have access to Team Drives, you'll know. Use <code>team_drive</code> or <code>corpus</code>
+to search one or more Team Drives or a domain. See
+<a href='team_drives.html'>Access Team Drives</a> for more.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -163,8 +205,10 @@ candidate is <code>q</code>. See the examples and the API's
 
 <span class='co'>## control page size or cap the number of files returned</span>
 <span class='fu'>drive_find</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>50</span>)
+<span class='co'>## all params passed through `...` can be camelCase or snake_case</span>
+<span class='fu'>drive_find</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>50</span>)
 <span class='fu'>drive_find</span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>58</span>)
-<span class='fu'>drive_find</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>15</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>15</span>)
 
 <span class='co'>## various ways to specify q search clauses</span>
 <span class='co'>## multiple q's</span>
@@ -184,6 +228,14 @@ candidate is <code>q</code>. See the examples and the API's
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#file-type">File type</a></li>
+
+      <li><a href="#search-parameters">Search parameters</a></li>
+
+      <li><a href="#trash">Trash</a></li>
+
+      <li><a href="#team-drives">Team Drives</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

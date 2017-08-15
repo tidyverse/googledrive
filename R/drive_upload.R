@@ -77,7 +77,7 @@ drive_upload <- function(media,
     name <- name %||% path_parts$name
   }
 
-  dots <- list(...)
+  dots <- toCamel(list(...))
   dots$fields <- dots$fields %||% "*"
 
   params <- c(
@@ -86,24 +86,12 @@ drive_upload <- function(media,
   )
 
   if (!is.null(path)) {
-    path <- as_dribble(path)
-    if (!some_files(path)) {
-      stop_glue("Requested parent folder does not exist.")
-    }
-    if (!single_file(path)) {
-      paths <- glue_data(path, "  * {name}: {id}")
-      stop_collapse(
-        c("Requested parent folder identifies multiple files:", paths)
-      )
-    }
-    if (!is_parental(path)) {
-      stop_glue("\n`path` is neither a folder nor a Team Drive:\n * {path$name}")
-    }
+    path <- as_parent(path)
     if (!is.null(params[["parents"]])) {
       stop_collapse(c(
-        "You have specified parent folders via both `path` and `parents`.",
+        "You have specified parent folders via both 'path' and 'parents'.",
         "Pick one.",
-        "If you want multiple parents, just use the `parents` parameter."
+        "If you want multiple parents, just use the 'parents' parameter."
       ))
     }
     params[["parents"]] <- path$id

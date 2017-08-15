@@ -46,17 +46,11 @@
 #' file <- drive_mv(file, "mv-folder/")
 #'
 #' ## Clean up
-#' drive_rm(file)
-#' drive_rm(folder)
+#' drive_rm(file, folder)
 #' }
 drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
   file <- as_dribble(file)
-  file <- confirm_some_files(file)
-
-  if (!single_file(file)) {
-    files <- glue_data(file, "  * {name}: {id}")
-    stop_collapse(c("Path to move is not unique:", files))
-  }
+  file <- confirm_single_file(file)
 
   if (is.null(path) && is.null(name)) {
     if (verbose) message("Nothing to be done.")
@@ -82,19 +76,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   ## if moving the file, modify the parent
   if (!is.null(path)) {
-    path <- as_dribble(path)
-    if (!some_files(path)) {
-      stop_glue("Requested parent folder does not exist.")
-    }
-    if (!single_file(path)) {
-      paths <- glue_data(path, "  * {name}: {id}")
-      stop_collapse(
-        c("Requested parent folder identifies multiple files:", paths)
-      )
-    }
-    if (!is_parental(path)) {
-      stop_glue("Requested parent folder does not exist:\n{path$name}")
-    }
+    path <- as_parent(path)
     current_parents <- file$drive_resource[[1]][["parents"]]
     if (!path$id %in% current_parents) {
       meta[["addParents"]] <- path$id

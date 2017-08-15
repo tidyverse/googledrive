@@ -90,11 +90,11 @@ test_that("dribble nrow checkers work", {
   expect_false(some_files(dribble()))
   expect_error(
     confirm_single_file(dribble()),
-    "Input does not hold exactly one Drive file"
+    "does not identify at least one"
   )
   expect_error(
     confirm_some_files(dribble()),
-    "Input does not hold at least one Drive file"
+    "does not identify at least one"
   )
 
   d <- new_dribble(
@@ -116,7 +116,7 @@ test_that("dribble nrow checkers work", {
   expect_true(some_files(d))
   expect_error(
     confirm_single_file(d),
-    "Input does not hold exactly one Drive file"
+    "identifies more than one"
   )
   expect_identical(confirm_some_files(d), d)
 })

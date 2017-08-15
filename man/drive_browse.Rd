@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_browse.R
 \name{drive_browse}
 \alias{drive_browse}
-\title{Visit Drive file in browser.}
+\title{Visit file in browser}
 \usage{
 drive_browse(file = .Last.value)
 }
@@ -12,9 +12,13 @@ Drive. Can be a character vector of names/paths, a character vector of file
 ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+Character vector of file hyperlinks, from \code{\link[=drive_link]{drive_link()}}, invisibly.
 }
 \description{
-Visit Drive file in browser.
+Visits a file on Google Drive in your default browser.
+}
+\examples{
+\dontrun{
+drive_find(n_max = 1) \%>\% drive_browse()
+}
 }
