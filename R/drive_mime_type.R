@@ -105,3 +105,9 @@ one_ext <- function(type) {
   }
   m
 }
+
+drive_show_mime_type <- function(file) {
+  file <- promote(file, "mimeType")
+  names(file)[names(file) == "mimeType"] <- "mime_type"
+  file
+}

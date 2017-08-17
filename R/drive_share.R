@@ -112,69 +112,14 @@ drive_share_one <- function(id, role, display, type, ..., verbose) {
   add_sharing_cols(file, share_tbl, display, role)
 }
 
-#' Add sharing column(s) to your dribble
-#'
-#' @template file-plural
-#' @param display Character. The value you'd like displayed for who has share permissions.
-#'   Defaults to "name". Valid values are:
-#'   * id
-#'   * name
-#'   * type
-#'   * email
-#' @param role Character. The role(s) you'd like to see the permissions for. A column with
-#'   permission information based on the `display` value chosen will be added for each role.
-#'   Defaults to "owner". Valid values are any combination of:
-#'   * organizer
-#'   * owner
-#'   * writer
-#'   * commenter
-#'   * reader
-#' @template dribble-return
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' ## Upload a file to view sharing permissions
-#' file <- drive_upload(
-#'    system.file("DESCRIPTION"),
-#'    type = "document"
-#'    )
-#'
-#' ## Add default sharing information (the name of the owner)
-#' drive_show_sharing(file)
-#'
-#' ## Add sharing information (name) for those with role "owner" and "commenter"
-#' drive_show_sharing(file, role = c("owner", "commenter"))
-#'
-#' ## Add sharing information (email address) for all "readers"
-#' drive_show_sharing(file, display = "email", role = "reader")
-#'
-#' ## Clean up
-#' drive_rm(file)
-#' }
-drive_show_sharing <- function(file, display = "name", role = "owner") {
-  ok_roles <- c("organizer", "owner", "writer", "commenter", "reader")
-  ok_display <- c("id", "name", "type", "email")
-
-  if (!all(role %in% ok_roles)) {
-    stop_glue(
-      "\n`role` may only include the following:\n",
-      "  * {collapse(ok_roles, sep = ', ')}."
-    )
-  }
-  if (!(display %in% ok_display)) {
-    stop_glue(
-      "\n`display` must be one of the following:\n",
-      "  * {collapse(ok_display, sep = ', ')}."
-    )
-  }
+drive_show_sharing <- function(file) {
   file <- as_dribble(file)
   file <- confirm_some_files(file)
-  file <- purrr::map(file$id, show_sharing_one, display = display, role = role)
+  file <- purrr::map(file$id, show_sharing_one)
   do.call(rbind, file)
 }
 
-show_sharing_one <- function(id, display, role) {
+show_sharing_one <- function(id) {
   request <- generate_request(
     endpoint = "drive.permissions.list",
     params = list(
@@ -184,25 +129,13 @@ show_sharing_one <- function(id, display, role) {
   )
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
-  share_tbl <- share_tbl(proc_res$permissions)
 
   file <- as_dribble(as_id(id))
-  file <- add_sharing_cols(file, share_tbl, display, role)
+  tibble::add_column(file, sharing = list(proc_res$permissions), .after = 1)
 }
 
-add_sharing_cols <- function(d, x, display, role) {
-  ## there must be a better way to do this
-  for (i in role) {
-    display_col <- collapse(x[[display]][x$role == i], sep = ",")
-    if (length(display_col) == 0L) {
-      d[[i]] <- NA_character_
-    } else d[[i]] <- display_col
-    ## reorder
-    d <- d[, c(1, ncol(d), 2:(ncol(d) - 1))]
-  }
-  d
-}
-
+## this is not currently used anywhere, but is a nice way to turn the
+## icky list-col from drive_reveal(what = "sharing") into a tibble.
 share_tbl <- function(x) {
   tbl <- tibble::tibble(
     id = purrr::map_chr(x, "id"),

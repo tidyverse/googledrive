@@ -43,6 +43,18 @@ drive_change_publish <- function(file,
 
   file <- as_dribble(file)
   file <- confirm_some_files(file)
+
+  mime_types <- purrr::map_chr(file$drive_resource, "mimeType")
+  if (!all(grepl("application/vnd.google-apps.", mime_types)) || any(is_folder(file))) {
+    all_mime_types <- glue_data(file, "  * {name}: {mime_types}")
+    stop_collapse(c(
+      "\nOnly Google Drive type files can be published.",
+      "Your file(s) are type:",
+      all_mime_types,
+      "Check out `drive_share()` to change sharing permissions."
+    ))
+  }
+
   file <- purrr::map(file$id,
                      change_publish_one,
                      publish = publish,
@@ -62,6 +74,7 @@ change_publish_one <- function(id,
                                publish = TRUE,
                                ...,
                                verbose = TRUE) {
+
   file <- drive_show_publish(as_id(id), verbose = FALSE)
   x <- list(...)
   x$published <- publish
@@ -98,53 +111,24 @@ change_publish_one <- function(id,
   add_publish_cols(file, proc_res)
 }
 
-#' Add columns with publication information to your dribble
-#'
-#' @template file-plural
-#' @template verbose
-#'
-#' @template dribble-return
-#' @export
-#' @examples
-#' \dontrun{
-#' ## Upload file to check publication status
-#' file <- drive_upload(R.home('doc/BioC_mirrors.csv'),
-#'   type = "spreadsheet")
-#'
-#' ## Check publication status
-#' drive_show_publish(file)
-#'
-#' ## Publish file
-#' drive_publish(file)
-#'
-#' ## Check publication status agian
-#' drive_show_publish(file)
-#'
-#' ## Unpublish file
-#' drive_unpublish(file)
-#'
-#' ## Clean up
-#' drive_rm(file)
-#' }
-drive_show_publish <- function(file, verbose = TRUE) {
+drive_show_publish <- function(file) {
 
   file <- as_dribble(file)
   file <- confirm_some_files(file)
 
   mime_types <- purrr::map_chr(file$drive_resource, "mimeType")
-  if (!all(grepl("application/vnd.google-apps.", mime_types)) || is_folder(file)) {
+  if (!all(grepl("application/vnd.google-apps.", mime_types)) || any(is_folder(file))) {
     all_mime_types <- glue_data(file, "  * {name}: {mime_types}")
-    stop_collapse(c(
-      "\nOnly Google Drive type files can be published.",
+    warning_collapse(c(
+      "\nPlease input only Google Drive files to view publishing information.",
       "Your file(s) are type:",
-      all_mime_types,
-      "Check out `drive_share()` to change sharing permissions."
+      all_mime_types
     ))
+    return(file)
   }
-
   file <- purrr::map(file$id, show_publish_one, verbose = verbose)
   file <- do.call(rbind, file)
-  invisible(file)
+  file
 }
 
 show_publish_one <- function(id, verbose = TRUE) {
@@ -159,13 +143,6 @@ show_publish_one <- function(id, verbose = TRUE) {
   proc_res <- process_response(response)
 
   file <- as_dribble(as_id(id))
-
-  if (verbose) {
-    message_glue(
-      "The latest revision of file {sq(file$name)} is ",
-      "{if (proc_res$published) '' else 'NOT '}published."
-    )
-  }
   add_publish_cols(file, proc_res)
 }
 
