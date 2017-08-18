@@ -26,9 +26,9 @@
 #' By default, `drive_find()` does not include files in the trash: it adds `q =
 #' "trashed = false"` to the query. However, it will not do so if the user
 #' specifies a `q` search clause for trash inclusion or exclusion. To see only
-#' files in the trash, use [drive_show_trash()], which is a shortcut for
-#' `drive_find(q = "trashed = true")`. To see files regardless of trash status,
-#' use `drive_find(q = "trashed = true or trashed = false")`.
+#' files in the trash, use `drive_find(q = "trashed = true")`. To see files
+#' regardless of trash status, use
+#' `drive_find(q = "trashed = true or trashed = false")`.
 
 #' @section Team Drives:
 #'

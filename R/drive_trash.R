@@ -74,7 +74,6 @@ drive_view_trash <- function() {
 #' Add trash column to your dribble
 #' @template file-plural
 #' @template dribble-return
-#' @export
 drive_show_trash <- function(file) {
   file <- as_dribble(file)
   file <- confirm_some_files(file)
