@@ -193,34 +193,3 @@ extract_path_names <- function(path) {
 extract_body_names <- function(params) {
   names(params)[purrr::map_lgl(params, ~ .x[["location"]] == "body")]
 }
-
-#' Get an API key
-#'
-#' Pass through an API key that is explicitly provided. Otherwise, consult the
-#' environment variable `GOOGLEDRIVE_API_KEY` and the API key built-into
-#' googledrive, in that order.
-#'
-#' @param key Character, optional. A Google API key.
-#'
-#' @return A Google API key
-#' @export
-#'
-#' @examples
-#' ## specify explicitly
-#' drive_api_key("I_have_my_own_key")
-#'
-#' ## specify via env var
-#' tryCatch({
-#'   Sys.setenv(GOOGLEDRIVE_API_KEY = "a1b2c3d4e5f7")
-#'   drive_api_key()
-#'   },
-#'   finally = Sys.unsetenv("GOOGLEDRIVE_API_KEY")
-#' )
-#'
-#' ## use the built-in API key
-#' drive_api_key()
-drive_api_key <- function(key = NULL) {
-  key %||%
-    Sys_getenv("GOOGLEDRIVE_API_KEY") %||%
-    getOption("googledrive.api_key")
-}

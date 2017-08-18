@@ -29,27 +29,23 @@ NULL
 
 # environment to store credentials
 .state <- new.env(parent = emptyenv())
+## we will outsource a great deal of this to gargle, but not in time for
+## the first CRAN release of googledrive
+## https://github.com/r-lib/gargle
+## these are the tidyverse-wide values, copied from gargle
+.state[["tidyverse_api_key"]] <- "AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
+.state[["tidyverse_app"]] <-
+  httr::oauth_app(
+    appname = "tidyverse",
+    key = "603366585132-nku3fbd298ma3925l12o2hq0cc1v8u11.apps.googleusercontent.com",
+    secret = "as_N12yfWLRL9RMz5nVpgCZt"
+  )
 
 .onLoad <- function(libname, pkgname) {
 
-  op <- options()
-  op.googledrive <- list(
-    ## httr_oauth_cache can be a path, but I'm only really thinking about and
-    ## supporting the simpler TRUE/FALSE usage, i.e. assuming that .httr-oauth
-    ## will live in current working directory if it exists at all
-    ## this is main reason for creating this googledrive-specific variant
-    googledrive.httr_oauth_cache = TRUE,
-    ## these are the tidyverse-wide values, copied from gargle
-    googledrive.client_id = "603366585132-nku3fbd298ma3925l12o2hq0cc1v8u11.apps.googleusercontent.com",
-    googledrive.client_secret = "as_N12yfWLRL9RMz5nVpgCZt",
-    googledrive.api_key = "AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg",
-    ## these are still copied over from googlesheets and not in use
-    googledrive.webapp.client_id = "178989665258-mbn7q84ai89if6ja59jmh8tqn5aqoe3n.apps.googleusercontent.com",
-    googledrive.webapp.client_secret = "UiF2uCHeMiUH0BeNbSAzzBxL",
-    googledrive.webapp.redirect_uri = "http://127.0.0.1:4642"
-  )
-  toset <- !(names(op.googledrive) %in% names(op))
-  if (any(toset)) options(op.googledrive[toset])
+  set_auth_active(TRUE)
+  set_api_key(.state[["tidyverse_api_key"]])
+  set_oauth_app(.state[["tidyverse_app"]])
 
   if (requireNamespace("dplyr", quietly = TRUE)) {
     register_s3_method("dplyr", "arrange", "dribble")

@@ -15,9 +15,9 @@
 #'
 drive_user <- function(fields = "user", ..., verbose = TRUE) {
 
-  if (!token_available(verbose = verbose) || !is_legit_token(.state$token)) {
+  if (!token_available(verbose = verbose) || !is_legit_token(.state$cred)) {
     if (verbose) {
-      message("To retrieve user info, please call gd_auth() explicitly.")
+      message("To retrieve user info, please call drive_auth() explicitly.")
     }
     return(invisible(NULL))
   }

@@ -24,5 +24,6 @@ drive_deauth()
 }
 }
 \seealso{
-Other auth functions: \code{\link{drive_auth}}
+Other auth functions: \code{\link{drive_auth_config}},
+  \code{\link{drive_auth}}
 }
