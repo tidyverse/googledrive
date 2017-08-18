@@ -1,15 +1,17 @@
-#' Publish Google Drive file
+#' Publish native Google files
 #'
-#' Publish a Google Drive file to the web. You can only publish "Google" files, such
-#' as Google Documents, Google Spreadsheets, or Google Slides.
+#' Publish (or un-publish) native Google files to the web. Native Google files
+#' include Google Docs, Google Sheets, and Google Slides. See the current status
+#' with `drive_reveal("publishing")`.
 #'
 #' @seealso Wraps the `revisions.update` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/revisions/update>
 #'
 #' @template file-plural
-#' @param ... Name-value pairs to add to the API request body, for example
-#'   `publishAuto = FALSE` will ensure that each subsequent revision will not be
-#'   automatically published (default here is `publishAuto = TRUE` and `publishedOutsideDomain = TRUE`).
+#' @param ... Name-value pairs to add to the API request body (see API docs
+#' linked below for details). For `drive_publish()`, we include
+#' `publishAuto = TRUE` and `publishedOutsideDomain = TRUE`, if user does not
+#' specify other values.
 #' @template verbose
 #'
 #' @template dribble-return
@@ -23,6 +25,9 @@
 #' ## Publish file
 #' file <- drive_publish(file)
 #'
+#' ## Unpublish file
+#' file <- drive_unpublish(file)
+#'
 #' ## Clean up
 #' drive_rm(file)
 #' }
@@ -30,36 +35,8 @@ drive_publish <- function(file, ..., verbose = TRUE) {
   drive_change_publish(file = file, publish = TRUE, ..., verbose = verbose)
 }
 
-#' Unpublish Google Drive file
-#'
-#' Unpublish a Google Drive file to the web. You can only publish "Google" files, such
-#' as Google Documents, Google Spreadsheets, or Google Slides, therefore you cannot
-#' (and there would be no need to) unpublish non-"Google" type files.
-#'
-#' @seealso Wraps the `revisions.update` endpoint:
-#'  * <https://developers.google.com/drive/v3/reference/revisions/update>
-#'
-#' @template file-plural
-#' @param ... Name-value pairs to add to the API request body.
-#' @template verbose
-#'
-#' @template dribble-return
+#' @rdname drive_publish
 #' @export
-#' @examples
-#' \dontrun{
-#' #' ## Upload file to publish
-#' file <- drive_upload(R.home('doc/BioC_mirrors.csv'),
-#'   type = "spreadsheet")
-#'
-#' ## Publish file
-#' file <- drive_publish(file)
-#'
-#' ## Unplublish file
-#' file <- drive_unpublish(file)
-#'
-#' ## Clean up
-#' drive_rm(file)
-#' }
 drive_unpublish <- function(file, ..., verbose = TRUE) {
   drive_change_publish(file = file, publish = FALSE, ..., verbose = verbose)
 }

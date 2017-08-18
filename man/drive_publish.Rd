@@ -2,18 +2,22 @@
 % Please edit documentation in R/drive_publish.R
 \name{drive_publish}
 \alias{drive_publish}
-\title{Publish Google Drive file}
+\alias{drive_unpublish}
+\title{Publish native Google files}
 \usage{
 drive_publish(file, ..., verbose = TRUE)
+
+drive_unpublish(file, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
 ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
-\item{...}{Name-value pairs to add to the API request body, for example
-\code{publishAuto = FALSE} will ensure that each subsequent revision will not be
-automatically published (default here is \code{publishAuto = TRUE} and \code{publishedOutsideDomain = TRUE}).}
+\item{...}{Name-value pairs to add to the API request body (see API docs
+linked below for details). For \code{drive_publish()}, we include
+\code{publishAuto = TRUE} and \code{publishedOutsideDomain = TRUE}, if user does not
+specify other values.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -23,8 +27,9 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Publish a Google Drive file to the web. You can only publish "Google" files, such
-as Google Documents, Google Spreadsheets, or Google Slides.
+Publish (or un-publish) native Google files to the web. Native Google files
+include Google Docs, Google Sheets, and Google Slides. See the current status
+with \code{drive_reveal("publishing")}.
 }
 \examples{
 \dontrun{
@@ -34,6 +39,9 @@ file <- drive_upload(R.home('doc/BioC_mirrors.csv'),
 
 ## Publish file
 file <- drive_publish(file)
+
+## Unpublish file
+file <- drive_unpublish(file)
 
 ## Clean up
 drive_rm(file)
