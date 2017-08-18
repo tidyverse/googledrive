@@ -6,8 +6,8 @@
 #'
 #' @description If the files are specified via `path`, the returned [`dribble`]
 #'   will include a `path` variable. To add path information to any [`dribble`]
-#'   that lacks it, use [drive_reveal()]. If you want to list the contents of
-#'   a folder, use [drive_ls()]. For general searching, use [drive_find()].
+#'   that lacks it, use [drive_reveal("path")]. If you want to list the contents
+#'   of a folder, use [drive_ls()]. For general searching, use [drive_find()].
 #'
 #' @template team-drives-description
 #'
