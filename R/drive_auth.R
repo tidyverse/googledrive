@@ -3,30 +3,142 @@
 ## https://github.com/r-lib/gargle
 
 ## current auth code is a mashup adapted from googlesheets, bigrquery, gmailr
-## https://github.com/jennybc/googlesheets
+## https://github.com/jennybc/googlesheets/blob/master/R/gs_auth.R
 ## https://github.com/rstats-db/bigrquery/blob/master/R/auth.r
 ## https://github.com/jimhester/gmailr/blob/master/R/gmailr.R
 
-#' Produce Google token
+
+
+#' Authorize googledrive
 #'
-#' If token is not already available, call [drive_auth()] to either load from
-#' cache or initiate OAuth2.0 flow. Return the token -- not "bare" but, rather,
-#' prepared for inclusion in downstream requests. Use `access_token()` to reveal
-#' the actual access token, suitable for use with curl.
+#' Authorize googledrive to view and manage your Drive files. By default, you
+#' are directed to a web browser, asked to sign in to your Google account,
+#' and to grant googledrive (the tidyverse, actually) permission to operate on
+#' your behalf with Google Drive. By default, these user credentials are cached
+#' in a file named `.httr-oauth` in the current working directory, from where
+#' they can be automatically refreshed, as necessary.
+#'
+#' Most users, most of the time, do not need to call `drive_auth()` explicitly
+#' -- it is triggered by the first action that requires authorization. Even when
+#' called, the default arguments will often suffice. However, when necessary,
+#' this function allows the user to
+#'   * force the adoption of a new token, via `reset = TRUE`
+#'   * retrieve current token, e.g., for storage to an `.rds` file
+#'   * put a pre-existing OAuth or service account token into force
+#'   * prevent the caching of new, interactively-obtained credentials in
+#'   `.httr-oauth`
+#'
+#' For even deeper control over auth, use [drive_auth_config()] to use your own
+#' oauth app or API key. [drive_auth_config()] also allows you to
+#' deactivate auth, sending only an API key in requests, which works if you
+#' only need to access public data.
+#'
+#' @seealso More detail is available from
+#' [Using OAuth 2.0 for Installed Applications](https://developers.google.com/identity/protocols/OAuth2InstalledApp)
+#'
+#' @param oauth_token Optional; path to an `.rds` file with a previously stored
+#'   oauth token.
+#' @param service_token Optional; a JSON string, URL, or path, giving or
+#'   pointing to the service token file.
+#' @param reset Logical, defaults to `FALSE`. Set to `TRUE` if you want to
+#'   forget any token previously used in this session and start afresh. Disables
+#'   the `.httr-oauth` file in current working directory by renaming to
+#'   `.httr-oauth-SUSPENDED`.
+#' @inheritParams httr::oauth2.0_token
 #'
 #' @template verbose
+#' @family auth functions
+#' @export
 #'
-#' @return a `request` object (an S3 class provided by [httr][httr::httr])
+#' @examples
+#' \dontrun{
+#' ## load/refresh existing credentials, if available
+#' ## otherwise, go to browser for authentication and authorization
+#' drive_auth()
 #'
-#' @keywords internal
-drive_token <- function(verbose = FALSE) {
-  if (!auth_active()) {
-    return(NULL)
+#' ## force a new oauth token to be obtained
+#' drive_auth(reset = TRUE)
+#'
+#' ## store token in an object and then to file
+#' ttt <- drive_auth()
+#' saveRDS(ttt, "ttt.rds")
+#'
+#' ## load a pre-existing token
+#' drive_auth("ttt.rds") # from .rds file
+#'
+#' ## use a service account token
+#' drive_auth(service_token = "foofy-83ee9e7c9c48.json")
+#' }
+drive_auth <- function(oauth_token = NULL,
+                       service_token = NULL,
+                       reset = FALSE,
+                       cache = getOption("httr_oauth_cache"),
+                       use_oob = getOption("httr_oob_default"),
+                       verbose = TRUE) {
+
+  if (reset) {
+    drive_deauth(clear_cache = TRUE, verbose = verbose)
   }
-  if (!token_available(verbose = verbose)) {
-    drive_auth(verbose = verbose)
+
+  if (is.null(oauth_token)) {
+    if (is.null(service_token)) {
+      set_oauth2.0_cred(app = oauth_app(), cache = cache, use_oob = use_oob)
+    } else {
+      stopifnot(is_string(service_token))
+      set_service_token(service_token)
+    }
+    return(invisible(access_cred()))
   }
-  httr::config(token = access_cred())
+
+  stopifnot(is_string(oauth_token))
+  drive_token <- tryCatch(
+    readRDS(oauth_token),
+    error = function(e) {
+      stop_glue("\nCannot read token from alleged .rds file:\n  * {token}")
+    }
+  )
+  if (!is_legit_token(drive_token, verbose = TRUE)) {
+    stop_glue("\nFile does not contain a proper oauth token:\n  * {token}")
+  }
+  invisible(set_access_cred(drive_token))
+}
+
+#' Suspend authorization.
+#'
+#' Suspend googledrive's authorization to place requests to the Drive API on
+#' behalf of the authenticated user.
+#'
+#' @param clear_cache logical indicating whether to disable the
+#'   `.httr-oauth` file in working directory, if such exists, by renaming
+#'   to `.httr-oauth-SUSPENDED`
+#' @template verbose
+#'
+#' @export
+#' @family auth functions
+#' @examples
+#' \dontrun{
+#' drive_deauth()
+#' }
+drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
+
+  if (clear_cache && file.exists(".httr-oauth")) {
+    if (verbose) {
+      message("Disabling .httr-oauth by renaming to .httr-oauth-SUSPENDED")
+    }
+    file.rename(".httr-oauth", ".httr-oauth-SUSPENDED")
+  }
+
+  if (token_available(verbose = FALSE)) {
+    if (verbose) {
+      message("Removing google token stashed internally in 'googledrive'.")
+    }
+    reset_access_cred()
+  } else {
+    message("No token currently in force.")
+  }
+
+  invisible(NULL)
+
 }
 
 #' View or set auth config
@@ -42,6 +154,7 @@ drive_token <- function(verbose = FALSE) {
 #'   resources.
 #' @template verbose
 #'
+#' @family auth functions
 #' @return `NULL`, invisibly
 #' @export
 #' @examples
@@ -77,99 +190,32 @@ drive_auth_config <- function(active = TRUE,
   invisible()
 }
 
-#' Authorize googledrive
+#' Produce Google token
 #'
-#' Authorize googledrive to view and manage your Drive files. By default, you
-#' are directed to a web browser, asked to sign in to your Google account,
-#' and to grant googledrive (the tidyverse, actually) permission to operate on
-#' your behalf with Google Drive. By default, these user credentials are cached
-#' in a file named `.httr-oauth` in the current working directory, from where
-#' they can be automatically refreshed, as necessary.
-
-#' Most users, most of the time, do not need to call `drive_auth()` explicitly
-#' -- it is triggered by the first action that requires authorization. Even when
-#' called, the default arguments will often suffice. However, when necessary,
-#' this function allows the user to
-#'   * force the adoption of a new token, via `reset = TRUE`
-#'   * retrieve current token, e.g., for storage to an `.rds` file
-#'   * put a pre-existing oauth or service account token into force
-#'   * prevent the caching of new, interactively-obtained credentials in
-#'   `.httr-oauth`
-
-#' For even deeper control over auth, use [drive_auth_config()] to use your own
-#' oauth app or API key. [drive_auth_config()] also allows you to
-#' deactivate auth, sending only an API key in requests, which works if you
-#' only need to access public data.
-#'
-#' More detail is available from
-#' [Using OAuth 2.0 for Installed Applications](https://developers.google.com/identity/protocols/OAuth2InstalledApp)
-#'
-
-#' @param oauth_token Optional; path to an `.rds` file with a previously stored
-#'   oauth token.
-
-#' @param service_token Optional; a JSON string, URL, or path, giving or
-#'   pointing to the service token file.
-
-#' @param reset Logical, defaults to `FALSE`. Set to `TRUE` if you want to
-#'   forget any token previously used in this session and start afresh. Disables
-#'   the `.httr-oauth` file in current working directory by renaming to
-#'   `.httr-oauth-SUSPENDED`.
-
-#' @inheritParams httr::oauth2.0_token
+#' If token is not already available, call [drive_auth()] to either load from
+#' cache or initiate OAuth2.0 flow. Return the token -- not "bare" but, rather,
+#' prepared for inclusion in downstream requests. Use `access_token()` to reveal
+#' the actual access token, suitable for use with curl.
 #'
 #' @template verbose
-#' @family auth functions
-#' @export
 #'
-#' @examples
-#' \dontrun{
-#' ## load/refresh existing credentials, if available
-#' ## otherwise, go to browser for authentication and authorization
-#' drive_auth()
+#' @return a `request` object (an S3 class provided by [httr][httr::httr])
 #'
-#' ## force a new token to be obtained
-#' drive_auth(reset = TRUE)
-#'
-#' ## store token in an object and then to file
-#' ttt <- drive_auth()
-#' saveRDS(ttt, "ttt.rds")
-#'
-#' ## load a pre-existing token
-#' drive_auth("ttt.rds") # from .rds file
-#' }
-drive_auth <- function(oauth_token = NULL,
-                       service_token = NULL,
-                       reset = FALSE,
-                       cache = getOption("httr_oauth_cache"),
-                       use_oob = getOption("httr_oob_default"),
-                       verbose = TRUE) {
-
-  if (reset) {
-    drive_deauth(clear_cache = TRUE, verbose = verbose)
+#' @keywords internal
+drive_token <- function(verbose = FALSE) {
+  if (!auth_active()) {
+    return(NULL)
   }
-
-  if (is.null(oauth_token)) {
-    if (is.null(service_token)) {
-      set_oauth2.0_cred(app = oauth_app(), cache = cache, use_oob = use_oob)
-    } else {
-      stopifnot(is_string(service_token))
-      set_service_token(service_token)
-    }
-    return(invisible(access_cred()))
+  if (!token_available(verbose = verbose)) {
+    drive_auth(verbose = verbose)
   }
+  httr::config(token = access_cred())
+}
 
-  stopifnot(is_string(oauth_token))
-  drive_token <- tryCatch(
-    readRDS(oauth_token),
-    error = function(e) {
-      stop_glue("\nCannot read token from alleged .rds file:\n  * {token}")
-    }
-  )
-  if (!is_legit_token(drive_token, verbose = TRUE)) {
-    stop_glue("\nFile does not contain a proper oauth token:\n  * {token}")
-  }
-  invisible(set_access_cred(drive_token))
+## useful when debugging
+access_token <- function() {
+  if (!token_available(verbose = TRUE)) return(NULL)
+  .state$cred$credentials$access_token
 }
 
 set_auth_active <- function(value) {
@@ -264,44 +310,6 @@ token_available <- function(verbose = TRUE) {
   TRUE
 }
 
-#' Suspend authorization.
-#'
-#' Suspend googledrive's authorization to place requests to the Drive API on
-#' behalf of the authenticated user.
-#'
-#' @param clear_cache logical indicating whether to disable the
-#'   `.httr-oauth` file in working directory, if such exists, by renaming
-#'   to `.httr-oauth-SUSPENDED`
-#' @template verbose
-#'
-#' @export
-#' @family auth functions
-#' @examples
-#' \dontrun{
-#' drive_deauth()
-#' }
-drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
-
-  if (clear_cache && file.exists(".httr-oauth")) {
-    if (verbose) {
-      message("Disabling .httr-oauth by renaming to .httr-oauth-SUSPENDED")
-    }
-    file.rename(".httr-oauth", ".httr-oauth-SUSPENDED")
-  }
-
-  if (token_available(verbose = FALSE)) {
-    if (verbose) {
-      message("Removing google token stashed internally in 'googledrive'.")
-    }
-    reset_access_cred()
-  } else {
-    message("No token currently in force.")
-  }
-
-  invisible(NULL)
-
-}
-
 #' Check that token appears to be legitimate
 #'
 #' @keywords internal
@@ -329,10 +337,4 @@ is_legit_token <- function(x, verbose = FALSE) {
 
   TRUE
 
-}
-
-## useful when debugging
-access_token <- function() {
-  if (!token_available(verbose = TRUE)) return(NULL)
-  .state$cred$credentials$access_token
 }

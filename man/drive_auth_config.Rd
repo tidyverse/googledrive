@@ -30,3 +30,7 @@ If you want to use your own app, setup a new project in
 \examples{
 drive_auth_config()
 }
+\seealso{
+Other auth functions: \code{\link{drive_auth}},
+  \code{\link{drive_deauth}}
+}

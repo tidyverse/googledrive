@@ -40,6 +40,8 @@ and to grant googledrive (the tidyverse, actually) permission to operate on
 your behalf with Google Drive. By default, these user credentials are cached
 in a file named \code{.httr-oauth} in the current working directory, from where
 they can be automatically refreshed, as necessary.
+}
+\details{
 Most users, most of the time, do not need to call \code{drive_auth()} explicitly
 -- it is triggered by the first action that requires authorization. Even when
 called, the default arguments will often suffice. However, when necessary,
@@ -47,18 +49,15 @@ this function allows the user to
 \itemize{
 \item force the adoption of a new token, via \code{reset = TRUE}
 \item retrieve current token, e.g., for storage to an \code{.rds} file
-\item put a pre-existing oauth or service account token into force
+\item put a pre-existing OAuth or service account token into force
 \item prevent the caching of new, interactively-obtained credentials in
 \code{.httr-oauth}
+}
+
 For even deeper control over auth, use \code{\link[=drive_auth_config]{drive_auth_config()}} to use your own
 oauth app or API key. \code{\link[=drive_auth_config]{drive_auth_config()}} also allows you to
 deactivate auth, sending only an API key in requests, which works if you
 only need to access public data.
-}
-}
-\details{
-More detail is available from
-\href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{Using OAuth 2.0 for Installed Applications}
 }
 \examples{
 \dontrun{
@@ -66,7 +65,7 @@ More detail is available from
 ## otherwise, go to browser for authentication and authorization
 drive_auth()
 
-## force a new token to be obtained
+## force a new oauth token to be obtained
 drive_auth(reset = TRUE)
 
 ## store token in an object and then to file
@@ -75,8 +74,15 @@ saveRDS(ttt, "ttt.rds")
 
 ## load a pre-existing token
 drive_auth("ttt.rds") # from .rds file
+
+## use a service account token
+drive_auth(service_token = "foofy-83ee9e7c9c48.json")
 }
 }
 \seealso{
-Other auth functions: \code{\link{drive_deauth}}
+More detail is available from
+\href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{Using OAuth 2.0 for Installed Applications}
+
+Other auth functions: \code{\link{drive_auth_config}},
+  \code{\link{drive_deauth}}
 }
