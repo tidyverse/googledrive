@@ -10,7 +10,6 @@
 #' @template file-plural
 #'
 #' @template dribble-return
-#' @export
 #'
 #' @examples
 #' \dontrun{

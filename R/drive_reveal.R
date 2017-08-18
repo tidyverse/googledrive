@@ -1,8 +1,9 @@
 #' Add columns with pertinent information to your dribble
+#'
 #' @template file-plural
 #' @param what Character.
 #'  * publish
-#'  * sharing
+#'  * permissions
 #'  * trash
 #'  * path
 #'  * mime_type
@@ -12,16 +13,29 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' ## Upload a file
+#' file <- drive_upload(R.home('doc/html/logo.jpg'))
+#'
+#' ## Reveal `trash` status
 #' drive_reveal(file, what = "trash")
+#'
+#' ## Reveal `permissions`
+#' drive_reveal(file, what = "permissions")
+#'
+#' ## Reveal `publish` status
+#' drive_reveal(file, what = "publish")
+#'
+#' ## Clean up
+#' drive_rm(file)
 #' }
-drive_reveal <- function(file, what) {
+drive_reveal <- function(file, what = "path") {
 
   reveal <- list("publish" = drive_show_publish,
-                 "sharing" = drive_show_sharing,
+                 "permissions" = drive_show_permissions,
                  "trash" = drive_show_trash,
                  "path" = drive_show_path,
                  "mime_type" = drive_show_mime_type)[[what]]
+  ## should it return an invisible file?
   reveal(file)
 }
-## should it return an invisible file?
 

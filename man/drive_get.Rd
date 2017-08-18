@@ -58,7 +58,7 @@ Bottom line: Do not assume there is a one-to-one relationship
 
 If the files are specified via \code{path}, the returned \code{\link{dribble}}
 will include a \code{path} variable. To add path information to any \code{\link{dribble}}
-that lacks it, use \code{\link[=drive_show_path]{drive_show_path()}}. If you want to list the contents of
+that lacks it, use \code{\link[=drive_reveal]{drive_reveal()}}. If you want to list the contents of
 a folder, use \code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_find]{drive_find()}}.
 
 Note:
@@ -72,7 +72,7 @@ Note:
 drive_get("~/")
 ## the API reserves the file id "root" for your root folder
 drive_get(id = "root")
-drive_get(id = "root") \%>\% drive_show_path()
+drive_get(id = "root") \%>\% drive_reveal("path")
 
 ## multiple names
 drive_get(c("abc", "def"))

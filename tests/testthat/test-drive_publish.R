@@ -40,16 +40,11 @@ test_that("drive_publish() publishes Google Documents", {
   ## the published column should be TRUE
   expect_true(drive_doc$published)
 
-  expect_message(drive_show_publish(drive_doc),
-                 "The latest revision of file 'foo_doc-TEST-drive-publish' is published.\n")
-
   ## let's unpublish it
   drive_doc <- drive_unpublish(drive_doc)
 
   ## now this sould be false
   expect_false(drive_doc$published)
-  expect_message(drive_show_publish(drive_doc),
-                 "The latest revision of file 'foo_doc-TEST-drive-publish' is NOT published.")
 })
 
 test_that("drive_publish() publishes Google Sheets", {

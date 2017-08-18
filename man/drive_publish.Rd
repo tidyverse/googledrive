@@ -13,7 +13,7 @@ ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
 \item{...}{Name-value pairs to add to the API request body, for example
 \code{publishAuto = FALSE} will ensure that each subsequent revision will not be
-automatically published (default here is \code{publishAuto = TRUE}).}
+automatically published (default here is \code{publishAuto = TRUE} and \code{publishedOutsideDomain = TRUE}).}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -32,9 +32,15 @@ file <- drive_upload(R.home('doc/BioC_mirrors.csv'),
   type = "spreadsheet")
 
 ## Publish file
-drive_publish(file)
+file <- drive_publish(file)
 
 ## Clean up
 drive_rm(file)
+}
+}
+\seealso{
+Wraps the \code{revisions.update} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/revisions/update}
 }
 }

@@ -107,6 +107,9 @@ one_ext <- function(type) {
 }
 
 drive_show_mime_type <- function(file) {
+  file <- as_dribble(file)
+  file <- confirm_some_files(file)
+  file[["mime_type"]] <- NULL
   file <- promote(file, "mimeType")
   names(file)[names(file) == "mimeType"] <- "mime_type"
   file

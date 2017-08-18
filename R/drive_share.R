@@ -1,5 +1,8 @@
 #' Update Google Drive file share permissions.
 #'
+#' #' @seealso Wraps the `permissions.update` endpoint:
+#'   * <https://developers.google.com/drive/v3/reference/permissions/update>
+#'
 #' @template file-plural
 #' @param role Character. The role granted by this permission. Valid values are:
 #' * organizer
@@ -12,12 +15,6 @@
 #' * group
 #' * domain
 #' * anyone
-#' @param display Character. The value you'd like displayed for who has share permissions.
-#'   Valid values are:
-#'   * id
-#'   * name
-#'   * type
-#'   * email
 #' @param ... Name-value pairs to add to the API request body.
 #' @template verbose
 #'
@@ -41,7 +38,6 @@
 drive_share <- function(file,
                         role = NULL,
                         type = NULL,
-                        display = "name",
                         ...,
                         verbose = TRUE) {
 
@@ -69,57 +65,52 @@ drive_share <- function(file,
     )
   }
 
-  files <- purrr::map(file$id,
-                      drive_share_one,
-                      role = role,
-                      type = type,
-                      display = display,
-                      ...,
-                      verbose = TRUE)
-  file <- do.call(rbind, files)
+  params <- list(...)
+  params[["role"]] <- role
+  params[["type"]] <- type
+  params[["fields"]] <- "*"
+  permissions_resource <- purrr::map(file$id,
+                                     drive_share_one,
+                                     params = params,
+                                     verbose = verbose)
+  file[["permissions_resource"]] <- NULL
+  file <- tibble::add_column(file, permissions_resource = permissions_resource, .after = 1)
+
+  out <- purrr::map_chr(permissions_resource, "type") == type
+  if (verbose) {
+    if (any(out)) {
+      successes <- glue_data(file[out, ], "  * {name}: {id}")
+      message_collapse(c(glue("Permissions updated\n  * `role` = {role}\n  * `type` = {type}\nFor files:"), successes))
+    }
+    if (any(!out)) {
+      failures <- glue_data(file[out, ], "  * {name}: {id}")
+      message_collapse(c("\nPermissions were NOT updated:", failures))
+    }
+  }
+
   invisible(file)
 }
 
-drive_share_one <- function(id, role, display, type, ..., verbose) {
+drive_share_one <- function(id, params, verbose) {
+  params[["fileId"]] <- id
   request <- generate_request(
     endpoint = "drive.permissions.create",
-    params = list(
-      fileId = id,
-      role = role,
-      type = type,
-      fields = "*",
-      ...
-    )
+    params = params
   )
-  response <- make_request(request, encode = "json")
-  proc_res <- process_response(response)
 
-  file <- as_dribble(as_id(id))
-  if (verbose) {
-    if (proc_res$type == type && proc_res$role == role) {
-      message_glue_data(
-        proc_res,
-        "\nThe permissions for file {sq(file$name)} have been updated.\n",
-        "  * id: {id}\n",
-        "  * type: {type}\n",
-        "  * role: {role}"
-      )
-    } else {
-      message_glue_data(file, "\nPermissions were NOT updated:\n  * '{name}'")
-    }
-  }
-  share_tbl <- share_tbl(list(proc_res))
-  add_sharing_cols(file, share_tbl, display, role)
+  response <- make_request(request, encode = "json")
+  process_response(response)
 }
 
-drive_show_sharing <- function(file) {
+drive_show_permissions <- function(file) {
   file <- as_dribble(file)
   file <- confirm_some_files(file)
-  file <- purrr::map(file$id, show_sharing_one)
-  do.call(rbind, file)
+  permissions_resource <- purrr::map(file$id, show_sharing_one)
+  file[["permissions_resource"]] <- NULL
+  tibble::add_column(file, permissions_resource = permissions_resource, .after = 1)
 }
 
-show_sharing_one <- function(id) {
+show_permissions_one <- function(id) {
   request <- generate_request(
     endpoint = "drive.permissions.list",
     params = list(
@@ -128,23 +119,5 @@ show_sharing_one <- function(id) {
     )
   )
   response <- make_request(request, encode = "json")
-  proc_res <- process_response(response)
-
-  file <- as_dribble(as_id(id))
-  tibble::add_column(file, sharing = list(proc_res$permissions), .after = 1)
-}
-
-## this is not currently used anywhere, but is a nice way to turn the
-## icky list-col from drive_reveal(what = "sharing") into a tibble.
-share_tbl <- function(x) {
-  tbl <- tibble::tibble(
-    id = purrr::map_chr(x, "id"),
-    name = purrr::map_chr(x, "displayName", .null = NA_character_),
-    type = purrr::map_chr(x, "type", .null = NA_character_),
-    email = purrr::map_chr(x, "emailAddress", .null = NA_character_),
-    role = purrr::map_chr(x, "role", .null = NA_character_),
-    deleted = purrr::map_lgl(x, "deleted", .null = NA)
-  )
-  tbl$name <- ifelse(tbl$id == "anyoneWithLink", "anyone with link", tbl$name)
-  tbl
+  process_response(response)
 }

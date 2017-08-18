@@ -4,8 +4,7 @@
 \alias{drive_share}
 \title{Update Google Drive file share permissions.}
 \usage{
-drive_share(file, role = NULL, type = NULL, display = "name", ...,
-  verbose = TRUE)
+drive_share(file, role = NULL, type = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
@@ -29,15 +28,6 @@ ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 \item anyone
 }}
 
-\item{display}{Character. The value you'd like displayed for who has share permissions.
-Valid values are:
-\itemize{
-\item id
-\item name
-\item type
-\item email
-}}
-
 \item{...}{Name-value pairs to add to the API request body.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
@@ -48,7 +38,10 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Update Google Drive file share permissions.
+#' @seealso Wraps the \code{permissions.update} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/permissions/update}
+}
 }
 \examples{
 \dontrun{

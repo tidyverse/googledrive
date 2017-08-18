@@ -27,9 +27,8 @@ test_that("drive_share doesn't explicitly fail", {
     R.home('doc/BioC_mirrors.csv'),
     name = me_("mirrors-to-share")
   )
-  ## since we haven't updated the permissions, the permissions
-  ## tibble should be just 1 row
-  expect_length(file[["drive_resource"]][[1]][["permissions"]], 1)
+
+  expect_null(file[["permissions_resource"]])
 
   role <- "reader"
   type <- "anyone"
@@ -40,18 +39,16 @@ test_that("drive_share doesn't explicitly fail", {
       role = role,
       type = type
     ),
-    glue::glue("\nThe permissions for file {sq(file$name)} have been updated")
+    glue::glue("\nPermissions updated")
   )
 
-  ## this should now have a larger tibble
-  expect_length(file[["drive_resource"]][[1]][["permissions"]], 2)
+  expect_is(file[["permissions_resource"]], "list")
 
-  ## this new tibble should have type "user" and the type
-  ## defined above, and the roles should be "owner" and
-  ## the role defined above
+  ## this new list should have "type" and the "role" as defined above
 
-  perms <- file[["drive_resource"]][[1]][["permissions"]][[2]]
-  expect_identical(perms[c("role", "type")], list(role = role, type = type))
+  expect_identical(file[["permissions_resource"]][[1]][["type"]], type)
+  expect_identical(file[["permissions_resource"]][[1]][["role"]], role)
+
 })
 
 test_that("drive_share() informatively errors if given an unknown `role` or `type`", {

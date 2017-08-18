@@ -23,3 +23,25 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 \description{
 Unpublish Google Drive file
 }
+\examples{
+\dontrun{
+#' ## Upload file to publish
+file <- drive_upload(R.home('doc/BioC_mirrors.csv'),
+  type = "spreadsheet")
+
+## Publish file
+file <- drive_publish(file)
+
+## Unplublish file
+file <- drive_unpublish(file)
+
+## Clean up
+drive_rm(file)
+}
+}
+\seealso{
+Wraps the \code{revisions.update} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/revisions/update}
+}
+}
