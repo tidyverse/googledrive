@@ -234,3 +234,19 @@ test_that("promote() works when elem present, absent, and input is trivial", {
     )
   )
 })
+
+test_that("promote() replaces existing element in situ", {
+  x <- tibble::tibble(
+    name = "a",
+    foo = "b",
+    bar = "c",
+    id = "1",
+    drive_resource = list(
+      list(foo = "d", bar = "e")
+    )
+  )
+  x2 <- promote(x, "foo")
+  x3 <- promote(x2, "bar")
+  expect_identical(x3$foo, "d")
+  expect_identical(x3$bar, "e")
+})

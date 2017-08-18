@@ -253,7 +253,8 @@ is_team_drivy <- function(d) {
 }
 
 ## promote an element in drive_resource into a top-level variable
-## it will be the second column, presumably after `name``
+## if new, it will be the second column, presumably after `name`
+## if variable by that name already exists, it is overwritten in place
 promote <- function(d, elem) {
   present <- any(purrr::map_lgl(d$drive_resource, ~ elem %in% names(.x)))
   if (present) {
@@ -269,7 +270,14 @@ promote <- function(d, elem) {
     ## as this stands, you will get a list-column whenever there is at
     ## least one NULL
   }
-  d <- tibble::add_column(d, new, .after = 1)
-  names(d)[2] <- elem
+
+  pos <- match(elem, names(d))
+  if (is.na(pos)) {
+    d <- tibble::add_column(d, new, .after = 1)
+    names(d)[2] <- elem
+  } else {
+    d[[pos]] <- new
+  }
+
   d
 }
