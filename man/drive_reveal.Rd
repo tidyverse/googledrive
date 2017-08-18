@@ -19,9 +19,6 @@ ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 \item path
 \item mime_type
 }}
-
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per

@@ -7,7 +7,6 @@
 #'  * trash
 #'  * path
 #'  * mime_type
-#' @template verbose
 #'
 #' @template dribble-return
 #' @export
