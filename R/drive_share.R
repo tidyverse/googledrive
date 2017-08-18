@@ -1,4 +1,4 @@
-#' Update Google Drive file share permissions.
+#' Update Google Drive file share permissions
 #'
 #' #' @seealso Wraps the `permissions.update` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/permissions/update>

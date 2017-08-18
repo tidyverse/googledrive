@@ -1,4 +1,7 @@
-#' Publish Google Drive file.
+#' Publish Google Drive file
+#'
+#' Publish a Google Drive file to the web. You can only publish "Google" files, such
+#' as Google Documents, Google Spreadsheets, or Google Slides.
 #'
 #' @seealso Wraps the `revisions.update` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/revisions/update>
@@ -28,6 +31,10 @@ drive_publish <- function(file, ..., verbose = TRUE) {
 }
 
 #' Unpublish Google Drive file
+#'
+#' Unpublish a Google Drive file to the web. You can only publish "Google" files, such
+#' as Google Documents, Google Spreadsheets, or Google Slides, therefore you cannot
+#' (and there would be no need to) unpublish non-"Google" type files.
 #'
 #' @seealso Wraps the `revisions.update` endpoint:
 #'  * <https://developers.google.com/drive/v3/reference/revisions/update>

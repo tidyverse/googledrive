@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_publish.R
 \name{drive_publish}
 \alias{drive_publish}
-\title{Publish Google Drive file.}
+\title{Publish Google Drive file}
 \usage{
 drive_publish(file, ..., verbose = TRUE)
 }
@@ -23,7 +23,8 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Publish Google Drive file.
+Publish a Google Drive file to the web. You can only publish "Google" files, such
+as Google Documents, Google Spreadsheets, or Google Slides.
 }
 \examples{
 \dontrun{

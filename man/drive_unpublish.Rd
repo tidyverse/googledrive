@@ -21,7 +21,9 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Unpublish Google Drive file
+Unpublish a Google Drive file to the web. You can only publish "Google" files, such
+as Google Documents, Google Spreadsheets, or Google Slides, therefore you cannot
+(and there would be no need to) unpublish non-"Google" type files.
 }
 \examples{
 \dontrun{

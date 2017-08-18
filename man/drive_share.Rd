@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_share.R
 \name{drive_share}
 \alias{drive_share}
-\title{Update Google Drive file share permissions.}
+\title{Update Google Drive file share permissions}
 \usage{
 drive_share(file, role = NULL, type = NULL, ..., verbose = TRUE)
 }
