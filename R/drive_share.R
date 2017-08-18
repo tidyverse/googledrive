@@ -105,7 +105,7 @@ drive_share_one <- function(id, params, verbose) {
 drive_show_permissions <- function(file) {
   file <- as_dribble(file)
   file <- confirm_some_files(file)
-  permissions_resource <- purrr::map(file$id, show_sharing_one)
+  permissions_resource <- purrr::map(file$id, show_permissions_one)
   file[["permissions_resource"]] <- NULL
   tibble::add_column(file, permissions_resource = permissions_resource, .after = 1)
 }
