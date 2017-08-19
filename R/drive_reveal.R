@@ -35,7 +35,7 @@ drive_reveal <- function(file, what = "path") {
                  "path" = drive_show_path,
                  "mime_type" = drive_show_mime_type)
 
-  if (!(what %in% names(reveal))) {
+  if (length(what) != 1L || !(what %in% names(reveal))) {
     stop_glue(
       "\n'what' must be one of the following:\n",
       "  * {collapse(names(reveal), sep = ', ')}."
