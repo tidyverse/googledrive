@@ -33,7 +33,16 @@ drive_reveal <- function(file, what = "path") {
                  "permissions" = drive_show_permissions,
                  "trash" = drive_show_trash,
                  "path" = drive_show_path,
-                 "mime_type" = drive_show_mime_type)[[what]]
+                 "mime_type" = drive_show_mime_type)
+
+  if (!(what %in% names(reveal))) {
+    stop_glue(
+      "\n'what' must be one of the following:\n",
+      "  * {collapse(names(reveal), sep = ', ')}."
+    )
+  }
+
+  reveal <- reveal[[what]]
   ## should it return an invisible file?
   reveal(file)
 }
