@@ -231,6 +231,14 @@ is_folder <- function(d) {
 
 #' @export
 #' @rdname dribble-checks
+is_native <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  d <- promote(d, "mimeType")
+  grepl("application/vnd.google-apps.", d$mimeType) & !is_folder(d)
+}
+
+#' @export
+#' @rdname dribble-checks
 is_parental <- function(d) {
   stopifnot(inherits(d, "dribble"))
   kind <- purrr::map_chr(d$drive_resource, "kind")

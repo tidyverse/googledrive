@@ -10,6 +10,7 @@
 \alias{confirm_single_file}
 \alias{confirm_some_files}
 \alias{is_folder}
+\alias{is_native}
 \alias{is_parental}
 \alias{is_mine}
 \alias{is_team_drive}
@@ -31,6 +32,8 @@ confirm_single_file(d)
 confirm_some_files(d)
 
 is_folder(d)
+
+is_native(d)
 
 is_parental(d)
 
