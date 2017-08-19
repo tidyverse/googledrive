@@ -28,8 +28,8 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 }
 \description{
 Publish (or un-publish) native Google files to the web. Native Google files
-include Google Docs, Google Sheets, and Google Slides. See the current status
-with \code{drive_reveal("publishing")}.
+include Google Docs, Google Sheets, and Google Slides. Use \code{\link[=drive_reveal]{drive_reveal()}}
+to see the current status, e.g., \code{drive_reveal(file, "publish")}.
 }
 \examples{
 \dontrun{

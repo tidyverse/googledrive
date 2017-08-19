@@ -58,8 +58,9 @@ Bottom line: Do not assume there is a one-to-one relationship
 
 If the files are specified via \code{path}, the returned \code{\link{dribble}}
 will include a \code{path} variable. To add path information to any \code{\link{dribble}}
-that lacks it, use \link{drive_reveal("path")}. If you want to list the contents
-of a folder, use \code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_find]{drive_find()}}.
+that lacks it, use \code{\link[=drive_reveal]{drive_reveal()}}, e.g., \code{drive_reveal(d, "path")}. If
+you want to list the contents of a folder, use \code{\link[=drive_ls]{drive_ls()}}. For general
+searching, use \code{\link[=drive_find]{drive_find()}}.
 
 Note:
   \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}

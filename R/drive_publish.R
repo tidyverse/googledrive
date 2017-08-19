@@ -1,8 +1,8 @@
 #' Publish native Google files
 #'
 #' Publish (or un-publish) native Google files to the web. Native Google files
-#' include Google Docs, Google Sheets, and Google Slides. See the current status
-#' with `drive_reveal("publishing")`.
+#' include Google Docs, Google Sheets, and Google Slides. Use [drive_reveal()]
+#' to see the current status, e.g., `drive_reveal(file, "publish")`.
 #'
 #' @seealso Wraps the `revisions.update` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/revisions/update>
