@@ -106,11 +106,10 @@ one_ext <- function(type) {
   m
 }
 
-drive_show_mime_type <- function(file) {
-  file <- as_dribble(file)
-  file <- confirm_some_files(file)
-  ## manually clear any pre-existing variable
-  ## promote() won't overwrite in situ because 'mimeType' vs 'mime_type'
+drive_reveal_mime_type <- function(file) {
+  confirm_dribble(file)
+  ## manually clear any pre-existing `mine_type` variable
+  ## promote() won't overwrite in situ because `mimeType`` vs `mime_type` :(
   file[["mime_type"]] <- NULL
   file <- promote(file, "mimeType")
   names(file)[names(file) == "mimeType"] <- "mime_type"

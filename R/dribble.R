@@ -191,6 +191,15 @@ some_files <- function(d) {
 
 #' @export
 #' @rdname dribble-checks
+confirm_dribble <- function(d) {
+  if (!is_dribble(d)) {
+    stop_glue("Input is not a dribble.")
+  }
+  d
+}
+
+#' @export
+#' @rdname dribble-checks
 confirm_single_file <- function(d) {
   in_var <- deparse(substitute(d))
   if (no_file(d)) {

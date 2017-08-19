@@ -102,12 +102,16 @@ drive_share_one <- function(id, params, verbose) {
   process_response(response)
 }
 
-drive_show_permissions <- function(file) {
-  file <- as_dribble(file)
-  file <- confirm_some_files(file)
+drive_reveal_permissions <- function(file) {
+  confirm_dribble(file)
+  ## TO DO: explicitly check that 0-row dribble will be handled gracefully
   permissions_resource <- purrr::map(file$id, show_permissions_one)
   file[["permissions_resource"]] <- NULL
-  tibble::add_column(file, permissions_resource = permissions_resource, .after = 1)
+  tibble::add_column(
+    file,
+    permissions_resource = permissions_resource,
+    .after = 1
+  )
 }
 
 show_permissions_one <- function(id) {

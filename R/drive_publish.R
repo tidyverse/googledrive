@@ -98,8 +98,9 @@ change_publish_one <- function(id, params) {
   process_response(response)
 }
 
-drive_show_publish <- function(file) {
-  file <- confirm_some_files(file)
+drive_reveal_published <- function(file) {
+  confirm_dribble(file)
+  ## TO DO: explicitly check that 0-row dribble will be handled gracefully
   revision_resource <- purrr::map(file$id, get_publish_one)
   ## Remove the columns if they already exist
   file[["published"]] <- NULL

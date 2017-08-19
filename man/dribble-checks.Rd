@@ -6,6 +6,7 @@
 \alias{no_file}
 \alias{single_file}
 \alias{some_files}
+\alias{confirm_dribble}
 \alias{confirm_single_file}
 \alias{confirm_some_files}
 \alias{is_folder}
@@ -22,6 +23,8 @@ no_file(d)
 single_file(d)
 
 some_files(d)
+
+confirm_dribble(d)
 
 confirm_single_file(d)
 

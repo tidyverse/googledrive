@@ -4,7 +4,8 @@
 \alias{drive_reveal}
 \title{Add columns with pertinent information to your dribble}
 \usage{
-drive_reveal(file, what = "path")
+drive_reveal(file, what = c("path", "trashed", "mime_type", "permissions",
+  "published"))
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google

@@ -14,9 +14,9 @@
 #' @examples
 #' \dontrun{
 #' ## 'root' is a special file id that always represents your root folder
-#' drive_get(id = "root") %>% drive_show_path()
+#' drive_get(id = "root") %>% drive_reveal("path")
 #' }
-drive_show_path <- function(file) {
+drive_reveal_path <- function(file) {
   ## refresh file metadata
   if (is_dribble(file)) {
     file <- as_id(file)

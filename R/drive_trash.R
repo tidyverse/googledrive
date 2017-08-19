@@ -71,12 +71,8 @@ drive_view_trash <- function() {
   drive_find(q = "trashed = true")
 }
 
-#' Add trash column to your dribble
-#' @template file-plural
-#' @template dribble-return
-drive_show_trash <- function(file) {
-  file <- as_dribble(file)
-  file <- confirm_some_files(file)
+drive_reveal_trash <- function(file) {
+  confirm_dribble(file)
   promote(file, "trashed")
 }
 

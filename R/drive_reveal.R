@@ -28,17 +28,17 @@
 #' drive_rm(file)
 #' }
 drive_reveal <- function(file,
-                         what = c("path", "trash", "mimetype",
-                                  "permissions", "publish")) {
+                         what = c("path", "trashed", "mime_type",
+                                  "permissions", "published")) {
   file <- as_dribble(file)
   what <- match.arg(what)
   reveal <- switch(
     what,
-    "path" = drive_show_path,
-    "trash" = drive_show_trash,
-    "mime_type" = drive_show_mime_type,
-    "permissions" = drive_show_permissions,
-    "publish" = drive_show_publish
+    "path" = drive_reveal_path,
+    "trashed" = drive_reveal_trash,
+    "mime_type" = drive_reveal_mime_type,
+    "permissions" = drive_reveal_permissions,
+    "published" = drive_reveal_published
   )
   reveal(file)
 }
