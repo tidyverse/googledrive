@@ -71,8 +71,11 @@ drive_view_trash <- function() {
   drive_find(q = "trashed = true")
 }
 
-drive_reveal_trash <- function(file) {
+drive_reveal_trashed <- function(file) {
   confirm_dribble(file)
+  if (no_file(file)) {
+    return(tibble::add_column(dribble(), trashed = logical(), .after = "name"))
+  }
   promote(file, "trashed")
 }
 
