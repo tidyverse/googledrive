@@ -12,21 +12,46 @@ drive_reveal(file, what = c("path", "trashed", "mime_type", "permissions",
 Drive. Can be a character vector of names/paths, a character vector of file
 ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
-\item{what}{Character, describing the type of info you want to add:
-\itemize{
-\item path. Warning: this can be slow, especially if called on many files.
-\item trashed
-\item mime_type
-\item permissions. Who is this file shared with and in which roles?
-\item published
-}}
+\item{what}{Character, describing the type of info you want to add: * path.
+Warning: this can be slow, especially if called on many files. * trashed *
+mime_type * permissions. Who is this file shared with and in which roles? *
+published}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Add column(s) with new information
+\code{drive_reveal()} adds extra information about your Drive files
+that is not automatically present in the default \code{\link{dribble}} produced by
+googledrive. Why is this info not always present?
+\enumerate{
+\item You don't always care about it.
+\item It often requires calliing totally different endpoints in the Drive API.
+Example: getting a file's sharing status.
+\item I might require additional API calls. Example: figuring out the path(s)
+associated with a specific file.
+}
+
+If you add path information, be aware that won't necessary get
+exactly one row back for each input row or file. More below.
+
+Note that Google Drive does NOT behave like your local file
+  system:
+  \itemize{
+  \item File and folder names need not be unique, even at a given level of
+  the hierarchy. A single name or file path can be associated with multiple
+  files (or zero or exactly one).
+  \item A file can have more than one direct parent. This implies that a
+  single file can be represented by multiple paths.
+  }
+
+Bottom line: Do not assume there is a one-to-one relationship
+  between file name or path and a Drive file or folder. A file id is unique,
+  which is why googledrive workflows favor storage in a
+  \code{\link{dribble}}, which holds metadata aimed at computers (file id)
+  and humans (file name). Finally, note also that a folder is just a specific
+  type of file on Drive.
 }
 \examples{
 \dontrun{
@@ -44,5 +69,8 @@ drive_reveal(files, "trashed")
 drive_reveal(files, "mime_type")
 drive_reveal(files, "permissions")
 drive_reveal(files, "published")
+
+## 'root' is a special file id that always represents your root folder
+drive_get(id = "root") \%>\% drive_reveal("path")
 }
 }
