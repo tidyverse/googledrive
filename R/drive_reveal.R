@@ -28,7 +28,7 @@
 #' drive_rm(file)
 #' }
 drive_reveal <- function(file, what = "path") {
-
+  file <- as_dribble(file)
   reveal <- list("publish" = drive_show_publish,
                  "permissions" = drive_show_permissions,
                  "trash" = drive_show_trash,

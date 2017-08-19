@@ -71,14 +71,15 @@ test_that("drive_publish() publishes Google Sheets", {
   expect_false(drive_sheet$published)
 })
 
-test_that("drive_publish() fails if the file input is not a Google Drive type", {
+test_that("drive_publish() fails for non-native file type", {
   skip_if_no_token()
   skip_if_offline()
 
   drive_pdf <- drive_get(nm_("foo_pdf"))
 
-  expect_error(drive_publish(drive_pdf, verbose = FALSE),
-               "Only Google Drive type files can be published."
+  expect_error(
+    drive_publish(drive_pdf),
+    "Only native Google files can be published"
   )
 })
 
@@ -92,14 +93,4 @@ test_that("drive_publish() is vectorized", {
   expect_true(all(files$published))
   files <- drive_unpublish(files)
   expect_false(all(files$published))
-})
-
-test_that("drive_publish() fails if at least one is not a Google Drive type", {
-  skip_if_no_token()
-  skip_if_offline()
-
-  files <- drive_get(c(nm_("foo_doc"), nm_("foo_sheet"), nm_("foo_pdf")))
-  expect_error(drive_publish(files, verbose = FALSE),
-               "Only Google Drive type files can be published."
-  )
 })

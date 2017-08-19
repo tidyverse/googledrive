@@ -49,40 +49,43 @@ drive_change_publish <- function(file,
   file <- as_dribble(file)
   file <- confirm_some_files(file)
 
-  mime_types <- purrr::map_chr(file$drive_resource, "mimeType")
-  if (!all(grepl("application/vnd.google-apps.", mime_types)) || any(is_folder(file))) {
-    all_mime_types <- glue_data(file, "  * {name}: {mime_types}")
+  file <- promote(file, "mimeType")
+  type_ok <-
+    grepl("application/vnd.google-apps.", file$mimeType) & !is_folder(file)
+  if (!all(type_ok)) {
+    bad_mime_types <- glue_data(file[!type_ok, ], "  * {name}: {mimeType}")
     stop_collapse(c(
-      "\nOnly Google Drive type files can be published.",
-      "Your file(s) are type:",
-      all_mime_types,
+      "Only native Google files can be published.",
+      "Files that do not qualify (or, at least, the first 10):",
+      utils::head(bad_mime_types, 10),
       "Check out `drive_share()` to change sharing permissions."
     ))
   }
+  file$mimeType <- NULL
 
-  params <- list(...)
+  params <- toCamel(list(...))
   params[["published"]] <- publish
   params[["publishAuto"]] <- params[["publishAuto"]] %||% TRUE
-  params[["publishedOutsideDomain"]] <- params[["publishedOutsideDomain"]] %||% TRUE
+  params[["publishedOutsideDomain"]] <-
+    params[["publishedOutsideDomain"]] %||% TRUE
   params[["revisionId"]] <- "head"
   params[["fields"]] <- "*"
 
-  revision_resource <- purrr::map(file$id,
-                                  change_publish_one,
-                                  params = params)
-  ## should we re-register the file here? technically when you publish,
-  ## the version increases by 1 (which is in drive_resource) so if
-  ## we don't re-register, the version will be incorrect.
-  file <- add_publish_cols(file, revision_resource)
+  revision_resource <- purrr::map(
+    file$id,
+    change_publish_one,
+    params = params
+  )
   if (verbose) {
     success <- glue_data(file, "  * {name}: {id}")
     message_collapse(c(
-      glue("\nFiles now {if (publish) '' else 'NOT '}published:\n"),
+      glue("Files now {if (publish) '' else 'NOT '}published:\n"),
       success
     ))
   }
-  invisible(file)
+  invisible(drive_reveal(file, "publish"))
 }
+
 change_publish_one <- function(id, params) {
 
   params[["fileId"]] <- id
@@ -96,32 +99,28 @@ change_publish_one <- function(id, params) {
 }
 
 drive_show_publish <- function(file) {
-
-  file <- as_dribble(file)
   file <- confirm_some_files(file)
   revision_resource <- purrr::map(file$id, get_publish_one)
-  add_publish_cols(file, revision_resource)
+  ## Remove the columns if they already exist
+  file[["published"]] <- NULL
+  file[["revision_resource"]] <- NULL
+  tibble::add_column(
+    file,
+    published = purrr::map_lgl(revision_resource, "published"),
+    revision_resource = revision_resource,
+    .after = 1
+  )
 }
 
 get_publish_one <- function(id) {
   request <- generate_request(
     endpoint = "drive.revisions.get",
-    params = list(fileId = id,
-                  revisionId = "head",
-                  fields = "*")
+    params = list(
+      fileId = id,
+      revisionId = "head",
+      fields = "*"
+    )
   )
   response <- make_request(request)
   process_response(response)
-}
-
-add_publish_cols <- function(d, x) {
-  ## Remove the columns if they already exist
-  d[["published"]] <- NULL
-  d[["revision_resource"]] <- NULL
-  tibble::add_column(
-    d,
-    published = purrr::map_lgl(x, "published"),
-    revision_resource = x,
-    .after = 1
-  )
 }
