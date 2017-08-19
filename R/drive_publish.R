@@ -50,8 +50,7 @@ drive_change_publish <- function(file,
   file <- confirm_some_files(file)
 
   file <- promote(file, "mimeType")
-  type_ok <-
-    grepl("application/vnd.google-apps.", file$mimeType) & !is_folder(file)
+  type_ok <- is_native(file)
   if (!all(type_ok)) {
     bad_mime_types <- glue_data(file[!type_ok, ], "  * {name}: {mimeType}")
     stop_collapse(c(
@@ -105,11 +104,14 @@ drive_reveal_published <- function(file) {
   ## Remove the columns if they already exist
   file[["published"]] <- NULL
   file[["revision_resource"]] <- NULL
+  file <- tibble::add_column(
+    file,
+    published = purrr::map_lgl(revision_resource, "published", .default = FALSE),
+    .after = 1
+  )
   tibble::add_column(
     file,
-    published = purrr::map_lgl(revision_resource, "published"),
-    revision_resource = revision_resource,
-    .after = 1
+    revision_resource = revision_resource
   )
 }
 
@@ -123,5 +125,9 @@ get_publish_one <- function(id) {
     )
   )
   response <- make_request(request)
+  ## folders generate a 403
+  if (httr::status_code(response) == 403) {
+    return(NULL)
+  }
   process_response(response)
 }
