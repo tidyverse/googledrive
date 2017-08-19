@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_reveal.R
 \name{drive_reveal}
 \alias{drive_reveal}
-\title{Add columns with pertinent information to your dribble}
+\title{Add column(s) with new information}
 \usage{
 drive_reveal(file, what = c("path", "trashed", "mime_type", "permissions",
   "published"))
@@ -12,13 +12,13 @@ drive_reveal(file, what = c("path", "trashed", "mime_type", "permissions",
 Drive. Can be a character vector of names/paths, a character vector of file
 ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
-\item{what}{Character.
+\item{what}{Character, describing the type of info you want to add:
 \itemize{
-\item publish
-\item permissions
-\item trash
-\item path
+\item path. Warning: this can be slow, especially if called on many files.
+\item trashed
 \item mime_type
+\item permissions. Who is this file shared with and in which roles?
+\item published
 }}
 }
 \value{
@@ -26,23 +26,23 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Add columns with pertinent information to your dribble
+Add column(s) with new information
 }
 \examples{
 \dontrun{
-## Upload a file
-file <- drive_upload(R.home('doc/html/logo.jpg'))
+## Get a nice, random selection of files
+files <- drive_find(n_max = 10, q = "trashed = true or trashed = false")
 
-## Reveal `trash` status
-drive_reveal(file, what = "trash")
-
-## Reveal `permissions`
-drive_reveal(file, what = "permissions")
-
-## Reveal `publish` status
-drive_reveal(file, what = "publish")
-
-## Clean up
-drive_rm(file)
+## Reveal
+##   * paths (warning: can be slow for many files!)
+##   * if `trashed` or not
+##   * MIME type
+##   * permissions, i.e. sharing status
+##   * if `published` or not
+drive_reveal(files, "path")
+drive_reveal(files, "trashed")
+drive_reveal(files, "mime_type")
+drive_reveal(files, "permissions")
+drive_reveal(files, "published")
 }
 }

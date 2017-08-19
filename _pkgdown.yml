@@ -21,7 +21,7 @@ reference:
       - drive_find
       - drive_ls
       - drive_get
-      - drive_show_path
+      - drive_reveal
       - drive_browse
       - drive_view_trash
   - title: "File creation and deletion"

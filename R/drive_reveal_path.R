@@ -18,6 +18,7 @@
 #' }
 drive_reveal_path <- function(file) {
   ## refresh file metadata
+  ## TO DO: is this really necessary? it makes things slow
   if (is_dribble(file)) {
     file <- as_id(file)
   }
