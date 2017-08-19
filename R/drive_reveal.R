@@ -27,23 +27,19 @@
 #' ## Clean up
 #' drive_rm(file)
 #' }
-drive_reveal <- function(file, what = "path") {
+drive_reveal <- function(file,
+                         what = c("path", "trash", "mimetype",
+                                  "permissions", "publish")) {
   file <- as_dribble(file)
-  reveal <- list("publish" = drive_show_publish,
-                 "permissions" = drive_show_permissions,
-                 "trash" = drive_show_trash,
-                 "path" = drive_show_path,
-                 "mime_type" = drive_show_mime_type)
-
-  if (length(what) != 1L || !(what %in% names(reveal))) {
-    stop_glue(
-      "\n'what' must be one of the following:\n",
-      "  * {collapse(names(reveal), sep = ', ')}."
-    )
-  }
-
-  reveal <- reveal[[what]]
-  ## should it return an invisible file?
+  what <- match.arg(what)
+  reveal <- switch(
+    what,
+    "path" = drive_show_path,
+    "trash" = drive_show_trash,
+    "mime_type" = drive_show_mime_type,
+    "permissions" = drive_show_permissions,
+    "publish" = drive_show_publish
+  )
   reveal(file)
 }
 
