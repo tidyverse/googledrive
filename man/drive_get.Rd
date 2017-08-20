@@ -39,8 +39,20 @@ An object of class \code{\link{dribble}}, a tibble with one row per
 \description{
 Retrieve metadata for files specified via path or via file id.
 
-Note that Google Drive does NOT behave like your local file
-  system:
+If the files are specified via \code{path}, the returned \code{\link{dribble}}
+will include a \code{path} variable. To add path information to any \code{\link{dribble}}
+that lacks it, use \code{\link[=drive_reveal]{drive_reveal()}}, e.g., \code{drive_reveal(d, "path")}. If
+you want to list the contents of a folder, use \code{\link[=drive_ls]{drive_ls()}}. For general
+searching, use \code{\link[=drive_find]{drive_find()}}.
+
+Note:
+  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+  are only available to users of certain enhanced Google services, such as G
+  Suite Enterprise, G Suite Business, or G Suite for Education.
+}
+\section{Special considerations for paths}{
+
+Note that Google Drive does NOT behave like your local file system:
   \itemize{
   \item File and folder names need not be unique, even at a given level of
   the hierarchy. A single name or file path can be associated with multiple
@@ -49,30 +61,19 @@ Note that Google Drive does NOT behave like your local file
   single file can be represented by multiple paths.
   }
 
-Bottom line: Do not assume there is a one-to-one relationship
-  between file name or path and a Drive file or folder. A file id is unique,
-  which is why googledrive workflows favor storage in a
-  \code{\link{dribble}}, which holds metadata aimed at computers (file id)
-  and humans (file name). Finally, note also that a folder is just a specific
-  type of file on Drive.
-
-If the files are specified via \code{path}, the returned \code{\link{dribble}}
-will include a \code{path} variable. To add path information to any \code{\link{dribble}}
-that lacks it, use \code{\link[=drive_add_path]{drive_add_path()}}. If you want to list the contents of
-a folder, use \code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_find]{drive_find()}}.
-
-Note:
-  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-  are only available to users of certain enhanced Google services, such as G
-  Suite Enterprise, G Suite Business, or G Suite for Education.
+Bottom line: Do not assume there is a one-to-one relationship between file
+name or path and a Drive file or folder. This implies the length of the input
+(i.e. the number of input paths or the number of rows in a dribble) will not
+necessarily equal the number rows in the output.
 }
+
 \examples{
 \dontrun{
 ## get info about your "My Drive" root folder
 drive_get("~/")
 ## the API reserves the file id "root" for your root folder
 drive_get(id = "root")
-drive_get(id = "root") \%>\% drive_add_path()
+drive_get(id = "root") \%>\% drive_reveal("path")
 
 ## multiple names
 drive_get(c("abc", "def"))

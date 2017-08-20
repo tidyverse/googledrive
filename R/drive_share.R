@@ -1,18 +1,28 @@
-#' Update Google Drive file share permissions.
+#' Share files
 #'
-#' @template file
-#' @param role The role granted by this permission. Valid values are:
-#' * organizer
-#' * owner
-#' * writer
-#' * commenter
-#' * reader
-#' @param type The type of the grantee. Valid values are:
-#' * user
-#' * group
-#' * domain
-#' * anyone
-#' @param ... Name-value pairs to add to the API request body.
+#' Grant individuals or other groups access to files, including permission to
+#' read, comment, or edit. The returned [`dribble`] will have extra columns,
+#' `shared` and `permissions_resource`. Read more in [drive_reveal()].
+#'
+#' @seealso Wraps the `permissions.update` endpoint:
+#'   * <https://developers.google.com/drive/v3/reference/permissions/create>
+#'
+#' @template file-plural
+#' @param role Character. The role to grant. Must be one of:
+#'   * organizer (applies only to Team Drives)
+#'   * owner
+#'   * writer
+#'   * commenter
+#'   * reader
+#' @param type Character. Describes the grantee. Must be one of:
+#'   * user
+#'   * group
+#'   * domain
+#'   * anyone
+#' @param ... Name-value pairs to add to the API request. This is where you
+#'   provide additional information, such as the `emailAddress` (when grantee
+#'   `type` is `"group"` or `"user"`) or the `domain` (when grantee type is
+#'   `"domain"`). Read the API docs linked below for more details.
 #' @template verbose
 #'
 #' @template dribble-return
@@ -22,67 +32,122 @@
 #' ## Upload a file to share
 #' file <- drive_upload(
 #'    system.file("DESCRIPTION"),
+#'    name = "DESC-share-ex",
 #'    type = "document"
-#'    )
+#' )
 #'
-#' ## Share file
-#' file %>%
+#' ## Let a specific person comment
+#' file <- file %>%
+#'   drive_share(
+#'     role = "commenter",
+#'     type = "user",
+#'     emailAddress = "susan@example.com"
+#' )
+#'
+#' ## Let a different specific person edit and customize the email notification
+#' file <- file %>%
+#'   drive_share(
+#'     role = "writer",
+#'     type = "user",
+#'     emailAddress = "carol@example.com",
+#'     emailMessage = "Would appreciate your feedback on this!"
+#' )
+#'
+#' ## Let anyone read the file
+#' file <- file %>%
 #'   drive_share(role = "reader", type = "anyone")
 #'
 #' ## Clean up
 #' drive_rm(file)
 #' }
-drive_share <- function(file, role = NULL, type = NULL, ..., verbose = TRUE) {
-
+drive_share <- function(file,
+                        role = c("reader", "commenter", "writer",
+                                 "owner", "organizer"),
+                        type = c("user", "group", "domain", "anyone"),
+                        ...,
+                        verbose = TRUE) {
+  role <- match.arg(role)
+  type <- match.arg(type)
   file <- as_dribble(file)
-  file <- confirm_single_file(file)
+  file <- confirm_some_files(file)
 
-  if (is.null(role) || is.null(type)) {
-    stop_glue("'role' and 'type' must be specified.")
-  }
-
-  ok_roles <- c("organizer", "owner", "writer", "commenter", "reader")
-  ok_types <- c("user", "group", "domain", "anyone")
-
-  if (!(role %in% ok_roles)) {
-    stop_glue(
-      "\n'role' must be one of the following:\n",
-      "  * {collapse(ok_roles, sep = ', ')}."
-    )
-  }
-
-  if (!(type %in% ok_types)) {
-    stop_glue(
-      "\n'type' must be one of the following:\n",
-      "  * {collapse(ok_types, sep = ', ')}."
-    )
-  }
-
-  request <- generate_request(
-    endpoint = "drive.permissions.create",
-    params = list(
-      fileId = file$id,
-      role = role,
-      type = type,
-      ...
-    )
+  params <- toCamel(list(...))
+  params[["role"]] <- role
+  params[["type"]] <- type
+  params[["fields"]] <- "*"
+  ## this resource pertains only to the affected permission
+  permission_out <- purrr::map(
+    file$id,
+    drive_share_one,
+    params = params,
+    verbose = verbose
   )
-  response <- make_request(request, encode = "json")
-  proc_req <- process_response(response)
 
   if (verbose) {
-    if (proc_req$type == type && proc_req$role == role) {
-      message_glue_data(
-        proc_req,
-        "\nThe permissions for file {sq(file$name)} have been updated.\n",
-        "  * id: {id}\n",
-        "  * type: {type}\n",
-        "  * role: {role}"
-      )
-    } else {
-      message_glue_data(file, "\nPermissions were NOT updated:\n  * '{name}'")
+    ok <- purrr::map_chr(permission_out, "type") == type
+    if (any(ok)) {
+      successes <- glue_data(file[ok, ], "  * {name}: {id}")
+      message_collapse(c(
+        "Permissions updated",
+        glue("  * role = {role}"),
+        glue("  * type = {type}"),
+        "For files:",
+        successes
+      ))
+    }
+    if (any(!ok)) {
+      failures <- glue_data(file[ok, ], "  * {name}: {id}")
+      message_collapse(c("Permissions were NOT updated:", failures))
     }
   }
-  file <- as_dribble(as_id(file$id))
-  invisible(file)
+
+  ## refresh drive_resource, get full permissions_resource
+  out <- drive_get(as_id(file))
+  invisible(drive_reveal(out, "permissions"))
+}
+
+drive_share_one <- function(id, params, verbose) {
+  params[["fileId"]] <- id
+  request <- generate_request(
+    endpoint = "drive.permissions.create",
+    params = params
+  )
+  response <- make_request(request, encode = "json")
+  process_response(response)
+}
+
+drive_reveal_permissions <- function(file) {
+  confirm_dribble(file)
+  permissions_resource <- purrr::map(file$id, list_permissions_one)
+  file[["permissions_resource"]] <- NULL
+  ## can't use promote() here (yet) because Team Drive files don't have
+  ## `shared` and their NULLs would force `shared` to be a list-column
+  file <- tibble::add_column(
+    file,
+    shared = purrr::map_lgl(file$drive_resource, "shared", .default = NA),
+    .after = 1
+  )
+  tibble::add_column(
+    file,
+    permissions_resource = permissions_resource
+  )
+}
+
+list_permissions_one <- function(id) {
+  request <- generate_request(
+    endpoint = "drive.permissions.list",
+    params = list(
+      fileId = id,
+      fields = "*"
+    )
+  )
+  ## TO DO: we aren't dealing with the fact that this endpoint is paginated
+  ## for Team Drives
+  response <- make_request(request, encode = "json")
+  ## if capabilities/canReadRevisions (present in File resource) is not true,
+  ## user will get a 403 "insufficientFilePermissions" here
+  if (httr::status_code(response) == 403) {
+    return(NULL)
+  }
+  process_response(response)
 }

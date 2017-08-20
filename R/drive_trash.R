@@ -1,5 +1,5 @@
-#' Move files to or from trash.
-#' @template file
+#' Move files to or from trash
+#' @template file-plural
 #' @template verbose
 #'
 #' @template dribble-return
@@ -64,14 +64,22 @@ toggle_trash_one <- function(id, trash = TRUE) {
   as_dribble(list(proc_res))
 }
 
-#' Get files in Drive Trash.
+#' Get files in Drive Trash
 #' @template dribble-return
 #' @export
 drive_view_trash <- function() {
   drive_find(q = "trashed = true")
 }
 
-#' Empty Drive Trash.
+drive_reveal_trashed <- function(file) {
+  confirm_dribble(file)
+  if (no_file(file)) {
+    return(tibble::add_column(dribble(), trashed = logical(), .after = "name"))
+  }
+  promote(file, "trashed")
+}
+
+#' Empty Drive Trash
 #'
 #' @description Caution, this will permanently delete files in your Drive trash.
 #'

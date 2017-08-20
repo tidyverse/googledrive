@@ -13,6 +13,10 @@
 #'   present. We do check if the `kind` field is present and equal to one of
 #'   `drive#file` or `drive#teamDrive`.
 #'
+#' @description The `dribble` format is handy because it exposes the file name,
+#'   which is good for humans, but keeps it bundled with the file's unique id
+#'   and other metadata, which are needed for API calls.
+#'
 #' @description In general, the dribble class will be retained even after
 #'   subsetting, as long as the required variables are present and of the
 #'   correct type.
@@ -191,6 +195,15 @@ some_files <- function(d) {
 
 #' @export
 #' @rdname dribble-checks
+confirm_dribble <- function(d) {
+  if (!is_dribble(d)) {
+    stop_glue("Input is not a dribble.")
+  }
+  d
+}
+
+#' @export
+#' @rdname dribble-checks
 confirm_single_file <- function(d) {
   in_var <- deparse(substitute(d))
   if (no_file(d)) {
@@ -218,6 +231,14 @@ is_folder <- function(d) {
   stopifnot(inherits(d, "dribble"))
   purrr::map_chr(d$drive_resource, "mimeType") ==
     "application/vnd.google-apps.folder"
+}
+
+#' @export
+#' @rdname dribble-checks
+is_native <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  d <- promote(d, "mimeType")
+  grepl("application/vnd.google-apps.", d$mimeType) & !is_folder(d)
 }
 
 #' @export
@@ -253,7 +274,8 @@ is_team_drivy <- function(d) {
 }
 
 ## promote an element in drive_resource into a top-level variable
-## it will be the second column, presumably after `name``
+## if new, it will be the second column, presumably after `name`
+## if variable by that name already exists, it is overwritten in place
 promote <- function(d, elem) {
   present <- any(purrr::map_lgl(d$drive_resource, ~ elem %in% names(.x)))
   if (present) {
@@ -269,7 +291,14 @@ promote <- function(d, elem) {
     ## as this stands, you will get a list-column whenever there is at
     ## least one NULL
   }
-  d <- tibble::add_column(d, new, .after = 1)
-  names(d)[2] <- elem
+
+  pos <- match(elem, names(d))
+  if (is.na(pos)) {
+    d <- tibble::add_column(d, new, .after = 1)
+    names(d)[2] <- elem
+  } else {
+    d[[pos]] <- new
+  }
+
   d
 }

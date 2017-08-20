@@ -105,3 +105,16 @@ one_ext <- function(type) {
   }
   m
 }
+
+drive_reveal_mime_type <- function(file) {
+  confirm_dribble(file)
+  if (no_file(file)) {
+    return(tibble::add_column(dribble(), mime_type = character(), .after = "name"))
+  }
+  ## manually clear any pre-existing `mine_type` variable
+  ## promote() won't overwrite in situ because `mimeType`` vs `mime_type` :(
+  file[["mime_type"]] <- NULL
+  file <- promote(file, "mimeType")
+  names(file)[names(file) == "mimeType"] <- "mime_type"
+  file
+}

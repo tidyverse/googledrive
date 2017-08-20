@@ -1,24 +1,6 @@
-#' Get paths to Drive files.
-#'
-#' @description Even though you know a Drive file's name or id, you don't
-#'   necessarily know its path(s). This function takes Drive files, specified
-#'   via a [`dribble`] or a vector of file ids or URLs, and returns a dribble
-#'   that includes a `path` variable.
-#'
-#' @template not-like-your-local-file-system
-#'
-#' @param file A [`dribble`] or vector of file ids or URLs.
-#'
-#' @template dribble-return
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' ## 'root' is a special file id that always represents your root folder
-#' drive_get(id = "root") %>% drive_add_path()
-#' }
-drive_add_path <- function(file) {
+drive_reveal_path <- function(file) {
   ## refresh file metadata
+  ## TO DO: is this really necessary? it makes things slow
   if (is_dribble(file)) {
     file <- as_id(file)
   }

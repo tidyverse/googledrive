@@ -3,7 +3,7 @@
 \name{drive_trash}
 \alias{drive_trash}
 \alias{drive_untrash}
-\title{Move files to or from trash.}
+\title{Move files to or from trash}
 \usage{
 drive_trash(file, verbose = TRUE)
 
@@ -22,7 +22,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Move files to or from trash.
+Move files to or from trash
 }
 \examples{
 \dontrun{

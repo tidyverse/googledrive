@@ -7,7 +7,7 @@
 #' fails, a valid default is used. Native Google files can be downloaded to
 #' types specified in the
 #' [Drive API documentation](https://developers.google.com/drive/v3/web/manage-downloads#downloading_google_documents).
-#' @template file
+#' @template file-singular
 #' @param path Character. Path for output file. If absent, the default file
 #'   name is the file's name on Google Drive and the default location is working
 #'   directory, possibly with an added file extension.

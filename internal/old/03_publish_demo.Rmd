@@ -30,29 +30,31 @@ Now, as the other user, try again to read it via googlesheets. You should succee
 ## Push a file into a Sheet
 ```{r}
 drive_auth("drive-token.rds")
-write_csv(chickwts, "chickwts.csv")
-drive_chickwts <- drive_upload("chickwts.csv", type = "spreadsheet")
+file <- drive_upload(
+  R.home('doc/BioC_mirrors.csv'),
+  type = "spreadsheet"
+)
 ```
 
 ## Check publication status (should be FALSE)
 ```{r}
-drive_check_publish(drive_chickwts)
+drive_show_publish(file)
 ```
 
 ## get URL
 ```{r}
-url <- drive_share_link(drive_chickwts)
+url <- drive_share_link(file)
 url
 ```
 
 ## it's published, not shared
 
 ```{r}
-drive_chickwts
+file
 ```
 
 ```{r}
-key <- drive_chickwts$id
+key <- file$id
 ```
 
 ## switch to different account
@@ -69,8 +71,8 @@ geterrmessage()
 
 ## publish it on Drive
 ```{r}
-drive_chickwts <- drive_publish(drive_chickwts)
-drive_check_publish(drive_chickwts)
+file <- drive_publish(file)
+drive_show_publish(file)
 ```
 
 ## try again!
@@ -78,19 +80,44 @@ drive_check_publish(drive_chickwts)
 gs_url(url, lookup  = FALSE)
 ```
 
-check again that the access is still just "Shared with specific people."
+check again that the access - it is not shared, but it is published.
 
 ```{r}
-drive_chickwts$access
+promote(file, "shared")
 ```
 
 ## clean up
 
 ```{r}
-#drive_delete(drive_chickwts)
+drive_rm(file)
 ```
 
-```{r, echo = FALSE}
-rm <- file.remove("chickwts.csv")
+## Now let's try shared but not published
+
+```{r}
+file <- drive_upload(
+  R.home('doc/BioC_mirrors.csv'),
+  type = "spreadsheet"
+)
+```
+
+```{r}
+file <- drive_share(file, role = "reader", type = "anyone")
+```
+
+```{r}
+url <- drive_share_link(file)
+url
+```
+
+## this should work!
+```{r}
+gs_url(url, visibility = "private", lookup = FALSE)
+```
+
+It is not published, but it is shared.
+
+```{r}
+file <- drive_show_publish(file)
 ```
 

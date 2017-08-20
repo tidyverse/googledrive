@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_trash.R
 \name{drive_view_trash}
 \alias{drive_view_trash}
-\title{Get files in Drive Trash.}
+\title{Get files in Drive Trash}
 \usage{
 drive_view_trash()
 }
@@ -11,5 +11,5 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Get files in Drive Trash.
+Get files in Drive Trash
 }

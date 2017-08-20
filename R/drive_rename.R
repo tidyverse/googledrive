@@ -3,7 +3,7 @@
 #' This is a wrapper for [`drive_mv()`] that only renames a file.
 #' If you would like to rename AND move the file, see [`drive_mv()`].
 #'
-#' @template file
+#' @template file-singular
 #' @param name Character. Name you would like the file to have.
 #' @template verbose
 #'

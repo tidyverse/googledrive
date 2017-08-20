@@ -9,7 +9,7 @@
 #' This function supports media upload:
 #'   * <https://developers.google.com/drive/v3/web/manage-uploads>
 #'
-#' @template file
+#' @template file-singular
 #' @template media
 #' @template dots-metadata
 #' @template verbose

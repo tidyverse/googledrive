@@ -3,7 +3,7 @@
 #' Returns the `"webViewLink"` for one or more files, which is the "link for
 #' opening the file in a relevant Google editor or viewer in a browser".
 #'
-#' @template file
+#' @template file-singular
 #'
 #' @return Character vector of file hyperlinks.
 #' @export
@@ -36,7 +36,7 @@ drive_link <- function(file) {
 #'
 #' Visits a file on Google Drive in your default browser.
 #'
-#' @template file
+#' @template file-singular
 #'
 #' @return Character vector of file hyperlinks, from [drive_link()], invisibly.
 #' @export
