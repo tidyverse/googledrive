@@ -12,32 +12,34 @@ drive_reveal(file, what = c("path", "trashed", "mime_type", "permissions",
 Drive. Can be a character vector of names/paths, a character vector of file
 ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
-\item{what}{Character, describing the type of info you want to add: * path.
-Warning: this can be slow, especially if called on many files. * trashed *
-mime_type * permissions. Who is this file shared with and in which roles? *
-published}
+\item{what}{Character, describing the type of info you want to add:
+\itemize{
+\item path. Warning: this can be slow, especially if called on many files.
+\item trashed
+\item mime_type
+\item permissions. Who is this file shared with and in which roles?
+\item published
+}}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-\code{drive_reveal()} adds extra information about your Drive files
-that is not automatically present in the default \code{\link{dribble}} produced by
-googledrive. Why is this info not always present?
+\code{drive_reveal()} adds extra information about your Drive files that is not
+automatically present in the default \code{\link{dribble}} produced by googledrive. Why
+is this info not always present?
 \enumerate{
 \item You don't always care about it.
-\item It often requires calliing totally different endpoints in the Drive API.
-Example: getting a file's sharing status.
-\item I might require additional API calls. Example: figuring out the path(s)
+\item It may require calling different endpoints in the Drive API. Example:
+getting a file's permissions.
+\item It might require additional API calls. Example: figuring out the path(s)
 associated with a specific file.
 }
+}
+\section{Special considerations for paths}{
 
-If you add path information, be aware that won't necessary get
-exactly one row back for each input row or file. More below.
-
-Note that Google Drive does NOT behave like your local file
-  system:
+Note that Google Drive does NOT behave like your local file system:
   \itemize{
   \item File and folder names need not be unique, even at a given level of
   the hierarchy. A single name or file path can be associated with multiple
@@ -46,13 +48,39 @@ Note that Google Drive does NOT behave like your local file
   single file can be represented by multiple paths.
   }
 
-Bottom line: Do not assume there is a one-to-one relationship
-  between file name or path and a Drive file or folder. A file id is unique,
-  which is why googledrive workflows favor storage in a
-  \code{\link{dribble}}, which holds metadata aimed at computers (file id)
-  and humans (file name). Finally, note also that a folder is just a specific
-  type of file on Drive.
+Bottom line: Do not assume there is a one-to-one relationship between file
+name or path and a Drive file or folder. This implies the length of the input
+(i.e. the number of input paths or the number of rows in a dribble) will not
+necessarily equal the number rows in the output.
 }
+
+\section{Trashed}{
+
+When \code{what = "trashed"}, the \code{\link{dribble}} gains a logical variable that
+indicates whether a file is in the trash..
+}
+
+\section{MIME type}{
+ When \code{what = "mime_type"}, the \code{\link{dribble}} gains a
+variable of MIME types.
+}
+
+\section{Permissions}{
+
+When \code{what = "permissions"} the \code{\link{dribble}} gains a logical variable \code{shared}
+that indicates whether a file is shared and a new list-column
+\code{permissions_resource} containing lists of
+\href{https://developers.google.com/drive/v3/reference/permissions#resource}{Permissions resources}.
+}
+
+\section{Publishing}{
+
+When \code{what = "publishing"} the \code{\link{dribble}} gains a logical variable
+\code{published} that indicates whether a file is published and a new list-column
+\code{revision_resource} containing lists of
+\href{https://developers.google.com/drive/v3/reference/revisions#resource}{Revisions resources}.
+}
+
 \examples{
 \dontrun{
 ## Get a nice, random selection of files

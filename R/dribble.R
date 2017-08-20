@@ -13,6 +13,10 @@
 #'   present. We do check if the `kind` field is present and equal to one of
 #'   `drive#file` or `drive#teamDrive`.
 #'
+#' @description The `dribble` format is handy because it exposes the file name,
+#'   which is good for humans, but keeps it bundled with the file's unique id
+#'   and other metadata, which are needed for API calls.
+#'
 #' @description In general, the dribble class will be retained even after
 #'   subsetting, as long as the required variables are present and of the
 #'   correct type.
