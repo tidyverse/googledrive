@@ -84,7 +84,7 @@ When \code{what = "publishing"} the \code{\link{dribble}} gains a logical variab
 \examples{
 \dontrun{
 ## Get a nice, random selection of files
-files <- drive_find(n_max = 10, q = "trashed = true or trashed = false")
+files <- drive_find(n_max = 10, trashed = NA)
 
 ## Reveal
 ##   * paths (warning: can be slow for many files!)

@@ -23,12 +23,11 @@
 
 #' @section Trash:
 #'
-#' By default, `drive_find()` does not include files in the trash: it adds `q =
-#' "trashed = false"` to the query. However, it will not do so if the user
-#' specifies a `q` search clause for trash inclusion or exclusion. To see only
-#' files in the trash, use `drive_find(q = "trashed = true")`. To see files
-#' regardless of trash status, use
-#' `drive_find(q = "trashed = true or trashed = false")`.
+#'   By default, `drive_find()` sets `trashed = FALSE` and does not include
+#'   files in the trash. Literally, it adds `q = "trashed = false"` to the
+#'   query. To search *only* the trash, set `trashed = TRUE`. To see files
+#'   regardless of trash status, set `trashed = NA`, which adds
+#'   `q = "(trashed = true or trashed = false)"` to the query.
 
 #' @section Team Drives:
 #'
@@ -43,6 +42,9 @@
 #'   * <https://developers.google.com/drive/v3/web/search-parameters>
 #'
 #' @template pattern
+#' @param trashed Logical. Whether to search files that are not in the trash
+#'   (the default), only files that are in the trash (`trashed = TRUE`), or to
+#'   search regardless of trashed status (`trashed = NA`).
 #' @param type Character. If provided, only files of this type will be returned.
 #'   Can be anything that [drive_mime_type()] knows how to handle. This is
 #'   processed by googledrive and sent as a query parameter.
@@ -50,8 +52,8 @@
 #' @template team_drive-singular
 #' @template corpus
 #' @param ... Other parameters to pass along in the request. The most likely
-#'   candidate is `q`. See below and the API's
-#'   [Search for Files guide](https://developers.google.com/drive/v3/web/search-parameters).
+#'   candidate is `q`. See below and the API's [Search for Files
+#'   guide](https://developers.google.com/drive/v3/web/search-parameters).
 #' @template verbose
 #'
 #' @template dribble-return
@@ -59,9 +61,6 @@
 #' \dontrun{
 #' ## list "My Drive" w/o regard for folder hierarchy
 #' drive_find()
-#'
-#' ## search for files located directly in your root folder
-#' drive_find(q = "'root' in parents")
 #'
 #' ## filter for folders, the easy way and the hard way
 #' drive_find(type = "folder")
@@ -73,6 +72,11 @@
 #'
 #' ## files whose names match a regex
 #' drive_find(pattern = "jt")
+#'
+#' ## search for files located directly in your root folder
+#' drive_find(q = "'root' in parents")
+#' ## FYI: this is equivalent to
+#' drive_ls("~/")
 #'
 #' ## control page size or cap the number of files returned
 #' drive_find(pageSize = 50)
@@ -88,12 +92,16 @@
 #' ## vector q
 #' drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
 #'
-#' ## override the default to get files regardless of trash status
-#' drive_find(q = "trashed = true or trashed = false")
+#' ## default `trashed = FALSE` excludes files in the trash
+#' ## `trashed = TRUE` consults ONLY file in the trash
+#' drive_find(trashed = TRUE)
+#' ## `trashed = NA` disregards trash status completely
+#' drive_find(trashed = NA)
 #' }
 #'
 #' @export
 drive_find <- function(pattern = NULL,
+                       trashed = FALSE,
                        type = NULL,
                        n_max = Inf,
                        team_drive = NULL,
@@ -102,14 +110,23 @@ drive_find <- function(pattern = NULL,
                        verbose = TRUE) {
 
   if (!is.null(pattern) && !(is_string(pattern))) {
-      stop_glue("`pattern` must be a character string.")
+    stop_glue("`pattern` must be a character string.")
   }
+  stopifnot(is.logical(trashed), length(trashed) == 1)
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
   if (n_max < 1) return(dribble())
 
   params <- toCamel(list(...))
-  params$fields <- params$fields %||% "*"
+  params[["fields"]] <- params[["fields"]] %||% "*"
   params <- marshal_q_clauses(params)
+
+  trash_clause <- switch(
+    as.character(trashed),
+    `TRUE` = "trashed = true",
+    `FALSE` = "trashed = false",
+    "(trashed = true or trashed = false)"
+  )
+  params$q <- append(params$q, trash_clause)
 
   if (!is.null(type)) {
     ## if they are all NA, this will error, because drive_mime_type()
@@ -150,23 +167,16 @@ or <- function(x) collapse(x, sep = " or ")
 
 ## finds all the q clauses and collapses into one character vector of clauses
 ## these are destined to be and'ed to form q in the query
-## also enacts our default of excluding files in trash
 marshal_q_clauses <- function(params) {
   params <- partition_params(params, "q")
   if (length(params[["matched"]]) == 0) {
-    return(c(params[["unmatched"]], c(q = "trashed = false")))
+    return(params[["unmatched"]])
   }
+
   q_bits <- params[["matched"]]
   stopifnot(all(vapply(q_bits, is.character, logical(1))))
   q_bits <- unique(unlist(q_bits, use.names = FALSE))
   q_bits <- q_bits[lengths(q_bits) > 0]
-
-  ## by default, exclude files in trash
-  ## but stay out of it if user has provided a trash clause
-  if (!any(grepl("trashed\\s*!?=\\s*true|false", trim_ws(q_bits %||% "")))) {
-    q_bits <- c(q_bits, "trashed = false")
-  }
-
   c(params[["unmatched"]], q = list(q_bits))
 }
 

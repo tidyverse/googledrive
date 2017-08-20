@@ -1,6 +1,7 @@
 context("Find files")
 
 # ---- nm_fun ----
+me_ <- nm_fun("TEST-drive-find")
 nm_ <- nm_fun("TEST-drive-find", NULL)
 
 # ---- clean ----
@@ -14,6 +15,10 @@ if (CLEAN) {
 # ---- setup ----
 if (SETUP) {
   drive_mkdir(nm_("find-me"))
+  drive_upload(
+    system.file("DESCRIPTION"),
+    nm_("copy-me")
+  )
 }
 
 # ---- tests ----
@@ -21,7 +26,7 @@ test_that("drive_find() passes q", {
   skip_if_no_token()
   skip_if_offline()
 
-  ## this should find at least 1 folder (foo), and all files found should
+  ## this should find at least 1 folder (find-me), and all files found should
   ## be folders
   out <- drive_find(q = "mimeType='application/vnd.google-apps.folder'")
   mtypes <- purrr::map_chr(out$drive_resource, "mimeType")
@@ -32,7 +37,7 @@ test_that("drive_find() `type` filters for MIME type", {
   skip_if_no_token()
   skip_if_offline()
 
-  ## this should find at least 1 folder (foo), and all files found should
+  ## this should find at least 1 folder (find-me), and all files found should
   ## be folders
   out <- drive_find(type = "folder")
   mtypes <- purrr::map_chr(out$drive_resource, "mimeType")
@@ -91,14 +96,8 @@ test_that("drive_find() honors n_max", {
 })
 
 test_that("marshal_q_clauses() works in the absence of q", {
-  ## works = adds 'q = "trashed = false"'
-  expect_identical(marshal_q_clauses(list()), list(q = "trashed = false"))
-
   params <- list(a = "a", b = "b")
-  expect_identical(
-    marshal_q_clauses(params),
-    c(params, q = "trashed = false")
-  )
+  expect_identical(marshal_q_clauses(params), params)
 })
 
 test_that("marshal_q_clauses() handles multiple q and vector q", {
@@ -106,29 +105,41 @@ test_that("marshal_q_clauses() handles multiple q and vector q", {
   params <- list(a = "a", q = as.character(1:2), q = "3")
   expect_identical(
     marshal_q_clauses(params),
-    list(a = "a", q = c(as.character(1:3), "trashed = false"))
+    list(a = "a", q = as.character(1:3))
   )
 
   ## non-q params absent
   params <- list(q = as.character(1:2), q = "3")
   expect_identical(
     marshal_q_clauses(params),
-    list(q = c(as.character(1:3), "trashed = false"))
+    list(q = as.character(1:3))
   )
 })
 
-test_that("marshal_q_clauses() doesn't clobber user's trash wishes", {
-  params <- list(q = "trashed = true")
-  expect_identical(marshal_q_clauses(params), params)
+test_that("trashed argument works", {
+  skip_if_no_token()
+  skip_if_offline()
+  on.exit(drive_rm(drive_find(me_("trashed"), trashed = NA)))
 
-  params <- list(q = c("trashed = true", "trashed = false"))
-  expect_identical(marshal_q_clauses(params), params)
+  trashed <- drive_cp(nm_("copy-me"), name = me_("trashed"))
+  drive_trash(trashed)
+  untrashed <- drive_cp(nm_("copy-me"), name = me_("untrashed"))
 
-  ## funky whitespace
-  params <- list(q = "  trashed= true")
-  expect_identical(marshal_q_clauses(params), params)
+  out <- drive_find()
+  expect_false(me_("trashed") %in% out$name)
+  expect_true(me_("untrashed") %in% out$name)
 
-  ## funky whitespace + not equal
-  params <- list(q = "trashed !=false ")
-  expect_identical(marshal_q_clauses(params), params)
+  out <- drive_find(trashed = TRUE)
+  expect_true(me_("trashed") %in% out$name)
+  expect_false(me_("untrashed") %in% out$name)
+
+  out <- drive_find(trashed = NA)
+  expect_true(me_("trashed") %in% out$name)
+  expect_true(me_("untrashed") %in% out$name)
+
+  ## make sure that `trashed = NA` is "inert", i.e. `trashed` can still be
+  ## used in user-written q clauses
+  out <- drive_find(trashed = NA, q = "trashed = true")
+  expect_true(me_("trashed") %in% out$name)
+  expect_false(me_("untrashed") %in% out$name)
 })

@@ -87,8 +87,8 @@ this is the main way to identify files to target for downstream work.</p>
   Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_find</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_find</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
+  <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -98,6 +98,12 @@ this is the main way to identify files to target for downstream work.</p>
       <td><p>Character. If provided, only the items whose names match this
 regular expression are returned. This is implemented locally on the results
 returned by the API.</p></td>
+    </tr>
+    <tr>
+      <th>trashed</th>
+      <td><p>Logical. Whether to search files that are not in the trash
+(the default), only files that are in the trash (<code>trashed = TRUE</code>), or to
+search regardless of trashed status (<code>trashed = NA</code>).</p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -129,8 +135,7 @@ the Team Drives context. If specified, must be one of <code>"user"</code>,
     <tr>
       <th>...</th>
       <td><p>Other parameters to pass along in the request. The most likely
-candidate is <code>q</code>. See below and the API's
-<a href='https://developers.google.com/drive/v3/web/search-parameters'>Search for Files guide</a>.</p></td>
+candidate is <code>q</code>. See below and the API's <a href='https://developers.google.com/drive/v3/web/search-parameters'>Search for Filesguide</a>.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -161,11 +166,11 @@ vector-valued <code>q</code> are combined via 'and'.</p>
     <h2 class="hasAnchor" id="trash"><a class="anchor" href="#trash"></a>Trash</h2>
 
     
-    <p>By default, <code>drive_find()</code> does not include files in the trash: it adds <code>q = "trashed = false"</code> to the query. However, it will not do so if the user
-specifies a <code>q</code> search clause for trash inclusion or exclusion. To see only
-files in the trash, use <code>drive_find(q = "trashed = true")</code>. To see files
-regardless of trash status, use
-<code>drive_find(q = "trashed = true or trashed = false")</code>.</p>
+    <p>By default, <code>drive_find()</code> sets <code>trashed = FALSE</code> and does not include
+files in the trash. Literally, it adds <code>q = "trashed = false"</code> to the
+query. To search <em>only</em> the trash, set <code>trashed = TRUE</code>. To see files
+regardless of trash status, set <code>trashed = NA</code>, which adds
+<code>q = "(trashed = true or trashed = false)"</code> to the query.</p>
     
     <h2 class="hasAnchor" id="team-drives"><a class="anchor" href="#team-drives"></a>Team Drives</h2>
 
@@ -189,9 +194,6 @@ to search one or more Team Drives or a domain. See
 <span class='co'>## list "My Drive" w/o regard for folder hierarchy</span>
 <span class='fu'>drive_find</span>()
 
-<span class='co'>## search for files located directly in your root folder</span>
-<span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"'root' in parents"</span>)
-
 <span class='co'>## filter for folders, the easy way and the hard way</span>
 <span class='fu'>drive_find</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"folder"</span>)
 <span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType = 'application/vnd.google-apps.folder'"</span>)
@@ -202,6 +204,11 @@ to search one or more Team Drives or a domain. See
 
 <span class='co'>## files whose names match a regex</span>
 <span class='fu'>drive_find</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"jt"</span>)
+
+<span class='co'>## search for files located directly in your root folder</span>
+<span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"'root' in parents"</span>)
+<span class='co'>## FYI: this is equivalent to</span>
+<span class='fu'><a href='drive_ls.html'>drive_ls</a></span>(<span class='st'>"~/"</span>)
 
 <span class='co'>## control page size or cap the number of files returned</span>
 <span class='fu'>drive_find</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>50</span>)
@@ -217,8 +224,11 @@ to search one or more Team Drives or a domain. See
 <span class='co'>## vector q</span>
 <span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"starred = true"</span>, <span class='st'>"visibility = 'anyoneWithLink'"</span>))
 
-<span class='co'>## override the default to get files regardless of trash status</span>
-<span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"trashed = true or trashed = false"</span>)
+<span class='co'>## default `trashed = FALSE` excludes files in the trash</span>
+<span class='co'>## `trashed = TRUE` consults ONLY file in the trash</span>
+<span class='fu'>drive_find</span>(<span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='co'>## `trashed = NA` disregards trash status completely</span>
+<span class='fu'>drive_find</span>(<span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>

@@ -4,13 +4,17 @@
 \alias{drive_find}
 \title{Find files on Google Drive}
 \usage{
-drive_find(pattern = NULL, type = NULL, n_max = Inf, team_drive = NULL,
-  corpus = NULL, ..., verbose = TRUE)
+drive_find(pattern = NULL, trashed = FALSE, type = NULL, n_max = Inf,
+  team_drive = NULL, corpus = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the items whose names match this
 regular expression are returned. This is implemented locally on the results
 returned by the API.}
+
+\item{trashed}{Logical. Whether to search files that are not in the trash
+(the default), only files that are in the trash (\code{trashed = TRUE}), or to
+search regardless of trashed status (\code{trashed = NA}).}
 
 \item{type}{Character. If provided, only files of this type will be returned.
 Can be anything that \code{\link[=drive_mime_type]{drive_mime_type()}} knows how to handle. This is
@@ -32,8 +36,7 @@ the Team Drives context. If specified, must be one of \code{"user"},
 \link[=team_drives]{Team Drives}.}
 
 \item{...}{Other parameters to pass along in the request. The most likely
-candidate is \code{q}. See below and the API's
-\href{https://developers.google.com/drive/v3/web/search-parameters}{Search for Files guide}.}
+candidate is \code{q}. See below and the API's \href{https://developers.google.com/drive/v3/web/search-parameters}{Search for Filesguide}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -74,11 +77,11 @@ vector-valued \code{q} are combined via 'and'.
 \section{Trash}{
 
 
-By default, \code{drive_find()} does not include files in the trash: it adds \code{q = "trashed = false"} to the query. However, it will not do so if the user
-specifies a \code{q} search clause for trash inclusion or exclusion. To see only
-files in the trash, use \code{drive_find(q = "trashed = true")}. To see files
-regardless of trash status, use
-\code{drive_find(q = "trashed = true or trashed = false")}.
+By default, \code{drive_find()} sets \code{trashed = FALSE} and does not include
+files in the trash. Literally, it adds \code{q = "trashed = false"} to the
+query. To search \emph{only} the trash, set \code{trashed = TRUE}. To see files
+regardless of trash status, set \code{trashed = NA}, which adds
+\code{q = "(trashed = true or trashed = false)"} to the query.
 }
 
 \section{Team Drives}{
@@ -94,9 +97,6 @@ to search one or more Team Drives or a domain. See
 ## list "My Drive" w/o regard for folder hierarchy
 drive_find()
 
-## search for files located directly in your root folder
-drive_find(q = "'root' in parents")
-
 ## filter for folders, the easy way and the hard way
 drive_find(type = "folder")
 drive_find(q = "mimeType = 'application/vnd.google-apps.folder'")
@@ -107,6 +107,11 @@ drive_find(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 
 ## files whose names match a regex
 drive_find(pattern = "jt")
+
+## search for files located directly in your root folder
+drive_find(q = "'root' in parents")
+## FYI: this is equivalent to
+drive_ls("~/")
 
 ## control page size or cap the number of files returned
 drive_find(pageSize = 50)
@@ -122,8 +127,11 @@ drive_find(q = "name contains 'TEST'",
 ## vector q
 drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
 
-## override the default to get files regardless of trash status
-drive_find(q = "trashed = true or trashed = false")
+## default `trashed = FALSE` excludes files in the trash
+## `trashed = TRUE` consults ONLY file in the trash
+drive_find(trashed = TRUE)
+## `trashed = NA` disregards trash status completely
+drive_find(trashed = NA)
 }
 
 }

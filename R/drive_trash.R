@@ -6,17 +6,19 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ## Create a file to trash.
-#' file <- drive_upload(system.file("DESCRIPTION"), "DESC")
-#' ## Put a single file in the trash.
-#' drive_trash("DESC")
-#' drive_untrash("DESC")
+#' ## Create a file and put it in the trash.
+#' file <- drive_upload(system.file("DESCRIPTION"), "DESC-trash-ex")
+#' drive_trash("DESC-trash-ex")
 #'
-#' ## Put multiple files in trash.
-#' file_a <- drive_upload(system.file("DESCRIPTION"), "file_a")
-#' file_b <- drive_upload(system.file("DESCRIPTION"), "file_b")
-#' drive_trash(c("file_a", "file_b"))
-#' drive_untrash(c("file_a", "file_b"))
+#' ## Confirm it's in the trash
+#' drive_find(trashed = TRUE)
+#'
+#' ## Remove it from the trash and confirm
+#' drive_untrash("DESC-trash-ex")
+#' drive_find(trashed = TRUE)
+#'
+#' ## Clean up
+#' drive_rm("DESC-trash-ex")
 #' }
 drive_trash <- function(file, verbose = TRUE) {
   invisible(drive_toggle_trash(file, trash = TRUE, verbose = verbose))
@@ -26,7 +28,7 @@ drive_trash <- function(file, verbose = TRUE) {
 #' @export
 drive_untrash <- function(file, verbose = TRUE) {
   if (is_path(file)) {
-    trash <- drive_view_trash()
+    trash <- drive_find(trashed = TRUE)
     file <- trash[trash$name %in% file, ]
   }
   invisible(drive_toggle_trash(file, trash = FALSE, verbose = verbose))
@@ -55,20 +57,14 @@ drive_toggle_trash <- function(file, trash, verbose = TRUE) {
 toggle_trash_one <- function(id, trash = TRUE) {
   request <- generate_request(
     endpoint = "drive.files.update",
-    params = list(fileId = id,
-                  trashed = trash,
-                  fields = "*")
+    params = list(
+      fileId = id,
+      trashed = trash,
+      fields = "*")
   )
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)
   as_dribble(list(proc_res))
-}
-
-#' Get files in Drive Trash
-#' @template dribble-return
-#' @export
-drive_view_trash <- function() {
-  drive_find(q = "trashed = true")
 }
 
 drive_reveal_trashed <- function(file) {
@@ -86,7 +82,7 @@ drive_reveal_trashed <- function(file) {
 #' @template verbose
 #' @export
 drive_empty_trash <- function(verbose = TRUE) {
-  files <- drive_view_trash()
+  files <- drive_find(trashed = TRUE)
   if (no_file(files)) {
     if (verbose) message("Your trash was already empty.")
     return(invisible(TRUE))

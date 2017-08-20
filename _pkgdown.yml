@@ -23,7 +23,6 @@ reference:
       - drive_get
       - drive_reveal
       - drive_browse
-      - drive_view_trash
   - title: "File creation and deletion"
     desc: >
       Create or delete Drive files and folders

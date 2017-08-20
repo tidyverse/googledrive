@@ -16,27 +16,29 @@ if (SETUP) {
 if (CLEAN) {
   drive_trash(c(
     nm_("trash-fodder"),
-    me_("trashee")
+    me_("trashee-1"),
+    me_("trashee-2")
   ))
 }
 
 # ---- tests ----
-test_that("drive_trash() moves file to trash and drive_untrash() undoes", {
+test_that("drive_trash() moves files to trash and drive_untrash() undoes", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(me_("trashee")))
+  on.exit(drive_rm(drive_find(me_("trashee-[12]"))))
 
-  trashee <- drive_cp(nm_("trash-fodder"), name = me_("trashee"))
+  trashee1 <- drive_cp(nm_("trash-fodder"), name = me_("trashee-1"))
+  trashee2 <- drive_cp(nm_("trash-fodder"), name = me_("trashee-2"))
 
-  out <- drive_trash(me_("trashee"))
+  out <- drive_trash(c(me_("trashee-1"), me_("trashee-2")))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, me_("trashee"))
-  expect_true(out[["drive_resource"]][[1]][["trashed"]])
+  expect_identical(sort(out$name), sort(c(me_("trashee-1"), me_("trashee-2"))))
+  expect_true(all(drive_reveal(out, "trashed")[["trashed"]]))
 
-  out <- drive_untrash(me_("trashee"))
+  out <- drive_untrash(c(me_("trashee-1"), me_("trashee-2")))
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, me_("trashee"))
-  expect_false(out[["drive_resource"]][[1]][["trashed"]])
+  expect_identical(sort(out$name), sort(c(me_("trashee-1"), me_("trashee-2"))))
+  expect_false(any(drive_reveal(out, "trashed")[["trashed"]]))
 })
 
 ## WARNING: this will empty your drive trash. If you do

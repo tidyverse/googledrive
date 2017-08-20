@@ -26,16 +26,18 @@ Move files to or from trash
 }
 \examples{
 \dontrun{
-## Create a file to trash.
-file <- drive_upload(system.file("DESCRIPTION"), "DESC")
-## Put a single file in the trash.
-drive_trash("DESC")
-drive_untrash("DESC")
+## Create a file and put it in the trash.
+file <- drive_upload(system.file("DESCRIPTION"), "DESC-trash-ex")
+drive_trash("DESC-trash-ex")
 
-## Put multiple files in trash.
-file_a <- drive_upload(system.file("DESCRIPTION"), "file_a")
-file_b <- drive_upload(system.file("DESCRIPTION"), "file_b")
-drive_trash(c("file_a", "file_b"))
-drive_untrash(c("file_a", "file_b"))
+## Confirm it's in the trash
+drive_find(trashed = TRUE)
+
+## Remove it from the trash and confirm
+drive_untrash("DESC-trash-ex")
+drive_find(trashed = TRUE)
+
+## Clean up
+drive_rm("DESC-trash-ex")
 }
 }

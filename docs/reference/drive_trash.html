@@ -106,17 +106,19 @@ ids or URLs marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <cod
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## Create a file to trash.</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='st'>"DESC"</span>)
-<span class='co'>## Put a single file in the trash.</span>
-<span class='fu'>drive_trash</span>(<span class='st'>"DESC"</span>)
-<span class='fu'>drive_untrash</span>(<span class='st'>"DESC"</span>)
+<span class='co'>## Create a file and put it in the trash.</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='st'>"DESC-trash-ex"</span>)
+<span class='fu'>drive_trash</span>(<span class='st'>"DESC-trash-ex"</span>)
 
-<span class='co'>## Put multiple files in trash.</span>
-<span class='no'>file_a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='st'>"file_a"</span>)
-<span class='no'>file_b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='st'>"file_b"</span>)
-<span class='fu'>drive_trash</span>(<span class='fu'>c</span>(<span class='st'>"file_a"</span>, <span class='st'>"file_b"</span>))
-<span class='fu'>drive_untrash</span>(<span class='fu'>c</span>(<span class='st'>"file_a"</span>, <span class='st'>"file_b"</span>))
+<span class='co'>## Confirm it's in the trash</span>
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='co'>## Remove it from the trash and confirm</span>
+<span class='fu'>drive_untrash</span>(<span class='st'>"DESC-trash-ex"</span>)
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='co'>## Clean up</span>
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='st'>"DESC-trash-ex"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
