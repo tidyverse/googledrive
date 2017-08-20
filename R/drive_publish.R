@@ -82,13 +82,11 @@ drive_change_publish <- function(file,
       success
     ))
   }
-  invisible(drive_reveal(file, "publish"))
+  invisible(drive_reveal(file, "published"))
 }
 
 change_publish_one <- function(id, params) {
-
   params[["fileId"]] <- id
-
   request <- generate_request(
     endpoint = "drive.revisions.update",
     params = params
