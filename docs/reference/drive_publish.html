@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Publish Google Drive file. — drive_publish • googledrive</title>
+<title>Publish native Google files — drive_publish • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -71,14 +71,19 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Publish Google Drive file.</h1>
+    <h1>Publish native Google files</h1>
     </div>
 
     
-    <p>Publish Google Drive file.</p>
+    <p>Publish (or un-publish) native Google files to the web. Native Google files
+include Google Docs, Google Sheets, and Google Slides. The returned
+<code><a href='dribble.html'>dribble</a></code> will have extra columns, <code>published</code> and <code>revisions_resource</code>.
+Read more in <code><a href='drive_reveal.html'>drive_reveal()</a></code>.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_publish</span>(<span class='no'>file</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_publish</span>(<span class='no'>file</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>drive_unpublish</span>(<span class='no'>file</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -91,9 +96,10 @@ ids or URLs marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <cod
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Name-value pairs to add to the API request body, for example
-<code>publishAuto = FALSE</code> will ensure that each subsequent revision will not be
-automatically published (default here is <code>publishAuto = TRUE</code>).</p></td>
+      <td><p>Name-value pairs to add to the API request body (see API docs
+linked below for details). For <code>drive_publish()</code>, we include
+<code>publishAuto = TRUE</code> and <code>publishedOutsideDomain = TRUE</code>, if user does not
+specify other values.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -107,6 +113,12 @@ automatically published (default here is <code>publishAuto = TRUE</code>).</p></
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
   item.</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Wraps the <code>revisions.update</code> endpoint:</p><ul>
+<li><p><a href='https://developers.google.com/drive/v3/reference/revisions/update'>https://developers.google.com/drive/v3/reference/revisions/update</a></p></li>
+</ul>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
@@ -115,7 +127,10 @@ automatically published (default here is <code>publishAuto = TRUE</code>).</p></
   <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
 
 <span class='co'>## Publish file</span>
-<span class='fu'>drive_publish</span>(<span class='no'>file</span>)
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_publish</span>(<span class='no'>file</span>)
+
+<span class='co'>## Unpublish file</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_unpublish</span>(<span class='no'>file</span>)
 
 <span class='co'>## Clean up</span>
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>file</span>)
@@ -127,6 +142,8 @@ automatically published (default here is <code>publishAuto = TRUE</code>).</p></
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -75,18 +75,13 @@
     </div>
 
     
-    <p>If token is not already available, call <code><a href='drive_auth.html'>drive_auth()</a></code> to either load
-from cache or initiate OAuth2.0 flow. Return the token -- not "bare" but,
-rather, prepared for inclusion in downstream requests. Use
-<code>access_token()</code> to reveal the actual access token, suitable for use
-with <code>curl</code>.</p>
+    <p>If token is not already available, call <code><a href='drive_auth.html'>drive_auth()</a></code> to either load from
+cache or initiate OAuth2.0 flow. Return the token -- not "bare" but, rather,
+prepared for inclusion in downstream requests. Use <code>access_token()</code> to reveal
+the actual access token, suitable for use with curl.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_token</span>(<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'>include_token_if</span>(<span class='no'>cond</span>)
-
-<span class='fu'>omit_token_if</span>(<span class='no'>cond</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_token</span>(<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -100,8 +95,7 @@ with <code>curl</code>.</p>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <code>request</code> object (an S3 class provided by
-<a href='http://www.rdocumentation.org/packages/httr/topics/httr'>httr</a>)</p>
+    <p>a <code>request</code> object (an S3 class provided by <a href='http://www.rdocumentation.org/packages/httr/topics/httr-package'>httr</a>)</p>
     
 
   </div>

@@ -123,20 +123,20 @@ Much better!
 
 #### Publish files
 
-Versions of Google Documents, Sheets, and Presentations can be published online. By default, `drive_publish()` will publish your most recent version. You can check your publication status by running `drive_check_publish()`.
+Versions of Google Documents, Sheets, and Presentations can be published online. By default, `drive_publish()` will publish your most recent version. You can check your publication status by running `drive_reveal(..., "published"")`.
 
 ```{r}
-drive_is_published(mirrors)
+drive_reveal(mirrors, "published")
 ```
 
 
 ```{r}
 mirrors <- drive_publish(mirrors)
-mirrors$publish
+mirrors$published
 ```
 
 ```{r}
-drive_is_published(mirrors)
+drive_reveal(mirrors, "published")
 ```
 
 #### Share files

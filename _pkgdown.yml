@@ -45,7 +45,7 @@ reference:
       - drive_publish
       - drive_unpublish
       - drive_share
-      - drive_is_published
+      - drive_reveal
       - drive_link
   - title: "Team Drives"
     desc: >

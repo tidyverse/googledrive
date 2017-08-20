@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve file links — drive_link • googledrive</title>
+<title>View or set auth config — drive_auth_config • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -71,40 +71,57 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve file links</h1>
+    <h1>View or set auth config</h1>
     </div>
 
     
-    <p>Returns the <code>"webViewLink"</code> for one or more files, which is the "link for
-opening the file in a relevant Google editor or viewer in a browser".</p>
+    <p>If you want to use your own app, setup a new project in
+<a href='https://console.developers.google.com'>Google Developers Console</a>.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_link</span>(<span class='no'>file</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_auth_config</span>(<span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>app</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>Something that identifies the file of interest on your Google
-Drive. Can be a character vector of names/paths, a character vector of file
-ids or URLs marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <code><a href='dribble.html'>dribble</a></code>.</p></td>
+      <th>active</th>
+      <td><p>Logical. <code>TRUE</code> means a token will be sent. <code>FALSE</code> means it
+will not.</p></td>
+    </tr>
+    <tr>
+      <th>app</th>
+      <td><p>OAuth app. Defaults to tidyverse app that ships with googledrive.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>API key. Defaults to key that ships with googledrive.
+Necessary in order to make unauthorized "token-free" requests for public
+resources.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Logical, indicating whether to print informative messages
+(default <code>TRUE</code>).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Character vector of file hyperlinks.</p>
+    <p><code>NULL</code>, invisibly</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other auth functions: <code><a href='drive_auth.html'>drive_auth</a></code>,
+  <code><a href='drive_deauth.html'>drive_deauth</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## get a few files into a dribble</span>
-<span class='no'>three_files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>3</span>)
-
-<span class='co'>## get their browser links</span>
-<span class='fu'>drive_link</span>(<span class='no'>three_files</span>)
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='fu'>drive_auth_config</span>()</div><div class='output co'>#&gt; <span class='message'>googledrive auth state: active</span>
+#&gt; <span class='message'>oauth app: tidyverse</span>
+#&gt; <span class='message'>API key: set</span>
+#&gt; <span class='message'>token: loaded</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -112,6 +129,8 @@ ids or URLs marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <cod
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

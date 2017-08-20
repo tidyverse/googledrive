@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Update Google Drive file share permissions. — drive_share • googledrive</title>
+<title>Share files — drive_share • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -71,14 +71,18 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Update Google Drive file share permissions.</h1>
+    <h1>Share files</h1>
     </div>
 
     
-    <p>Update Google Drive file share permissions.</p>
+    <p>Grant individuals or other groups access to files, including permission to
+read, comment, or edit. The returned <code><a href='dribble.html'>dribble</a></code> will have extra columns,
+<code>shared</code> and <code>permissions_resource</code>. Read more in <code><a href='drive_reveal.html'>drive_reveal()</a></code>.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_share</span>(<span class='no'>file</span>, <span class='kw'>role</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_share</span>(<span class='no'>file</span>, <span class='kw'>role</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"reader"</span>, <span class='st'>"commenter"</span>, <span class='st'>"writer"</span>, <span class='st'>"owner"</span>,
+  <span class='st'>"organizer"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"user"</span>, <span class='st'>"group"</span>, <span class='st'>"domain"</span>, <span class='st'>"anyone"</span>), <span class='no'>...</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -91,8 +95,8 @@ ids or URLs marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <cod
     </tr>
     <tr>
       <th>role</th>
-      <td><p>The role granted by this permission. Valid values are:</p><ul>
-<li><p>organizer</p></li>
+      <td><p>Character. The role to grant. Must be one of:</p><ul>
+<li><p>organizer (applies only to Team Drives)</p></li>
 <li><p>owner</p></li>
 <li><p>writer</p></li>
 <li><p>commenter</p></li>
@@ -101,7 +105,7 @@ ids or URLs marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <cod
     </tr>
     <tr>
       <th>type</th>
-      <td><p>The type of the grantee. Valid values are:</p><ul>
+      <td><p>Character. Describes the grantee. Must be one of:</p><ul>
 <li><p>user</p></li>
 <li><p>group</p></li>
 <li><p>domain</p></li>
@@ -110,7 +114,10 @@ ids or URLs marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <cod
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Name-value pairs to add to the API request body.</p></td>
+      <td><p>Name-value pairs to add to the API request. This is where you
+provide additional information, such as the <code>emailAddress</code> (when grantee
+<code>type</code> is <code>"group"</code> or <code>"user"</code>) or the <code>domain</code> (when grantee type is
+<code>"domain"</code>). Read the API docs linked below for more details.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -124,17 +131,41 @@ ids or URLs marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <cod
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
   item.</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Wraps the <code>permissions.update</code> endpoint:</p><ul>
+<li><p><a href='https://developers.google.com/drive/v3/reference/permissions/create'>https://developers.google.com/drive/v3/reference/permissions/create</a></p></li>
+</ul>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'>## Upload a file to share</span>
 <span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(
    <span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>),
+   <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"DESC-share-ex"</span>,
    <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"document"</span>
-   )
+)
 
-<span class='co'>## Share file</span>
-<span class='no'>file</span> <span class='kw'>%&gt;%</span>
+<span class='co'>## Let a specific person comment</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>drive_share</span>(
+    <span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"commenter"</span>,
+    <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"user"</span>,
+    <span class='kw'>emailAddress</span> <span class='kw'>=</span> <span class='st'>"susan@example.com"</span>
+)
+
+<span class='co'>## Let a different specific person edit and customize the email notification</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>drive_share</span>(
+    <span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"writer"</span>,
+    <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"user"</span>,
+    <span class='kw'>emailAddress</span> <span class='kw'>=</span> <span class='st'>"carol@example.com"</span>,
+    <span class='kw'>emailMessage</span> <span class='kw'>=</span> <span class='st'>"Would appreciate your feedback on this!"</span>
+)
+
+<span class='co'>## Let anyone read the file</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>drive_share</span>(<span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"reader"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"anyone"</span>)
 
 <span class='co'>## Clean up</span>
@@ -147,6 +178,8 @@ ids or URLs marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <cod
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
