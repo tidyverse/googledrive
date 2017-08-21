@@ -86,6 +86,7 @@ pathify_one_path <- function(op, nodes, root_id) {
 get_nodes <- function(path,
                       team_drive = NULL,
                       corpus = NULL) {
+
   path_parts <- purrr::map(path, partition_path, maybe_name = TRUE)
   ## workaround for purrr <= 0.2.2.2
   name <- purrr::map(path_parts, "name")
@@ -95,24 +96,18 @@ get_nodes <- function(path,
   names <- names[!is.na(names)]
   names <- glue("name = {sq(names)}")
   folders <- "mimeType = 'application/vnd.google-apps.folder'"
-  q_clauses <- collapse(c(folders, names), sep = " or ")
+  q_clauses <- or(c(folders, names))
 
-  nodes <- dribble()
-  if (length(q_clauses)) {
-    nodes <- rbind(
-      nodes,
-      drive_find(
-        team_drive = team_drive,
-        corpus = corpus,
-        fields = "*",
-        q = q_clauses,
-        verbose = FALSE
-      )
-    )
-  }
+  nodes <- drive_find(
+    team_drive = team_drive,
+    corpus = corpus,
+    q = q_clauses,
+    verbose = FALSE
+  )
+
   if (any(is_rootpath(path))) {
     nodes <- rbind(nodes, root_folder())
   }
 
-  nodes %>% promote("parents")
+  promote(nodes, "parents")
 }
