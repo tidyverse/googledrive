@@ -111,10 +111,5 @@ drive_reveal_mime_type <- function(file) {
   if (no_file(file)) {
     return(put_column(dribble(), mime_type = character(), .after = "name"))
   }
-  ## manually clear any pre-existing `mine_type` variable
-  ## promote() won't overwrite in situ because `mimeType`` vs `mime_type` :(
-  file[["mime_type"]] <- NULL
-  file <- promote(file, "mimeType")
-  names(file)[names(file) == "mimeType"] <- "mime_type"
-  file
+  promote(file, "mime_type")
 }
