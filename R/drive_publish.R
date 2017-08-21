@@ -50,18 +50,18 @@ drive_change_publish <- function(file,
   file <- as_dribble(file)
   file <- confirm_some_files(file)
 
-  file <- promote(file, "mimeType")
   type_ok <- is_native(file)
   if (!all(type_ok)) {
-    bad_mime_types <- glue_data(file[!type_ok, ], "  * {name}: {mimeType}")
+    file <- file[head(which(!type_ok), 10), ]
+    file <- promote(file, "mimeType")
+    bad_mime_types <- glue_data(file, "  * {name}: {mimeType}")
     stop_collapse(c(
       "Only native Google files can be published.",
       "Files that do not qualify (or, at least, the first 10):",
-      utils::head(bad_mime_types, 10),
+      bad_mime_types,
       "Check out `drive_share()` to change sharing permissions."
     ))
   }
-  file$mimeType <- NULL
 
   params <- toCamel(list(...))
   params[["published"]] <- publish
