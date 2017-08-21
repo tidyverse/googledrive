@@ -1,4 +1,4 @@
-## path utilities that are "mechanical"
+## path utilities that are "mechanical", i.e. they DO NOT call the Drive API,
 
 is_path <- function(x) is.character(x) && !inherits(x, "drive_id")
 
@@ -91,14 +91,4 @@ apply_extension <- function(path, ext) {
     path <- paste(path, ext, sep = ".")
   }
   path
-}
-
-confirm_clear_path <- function(path, name) {
-  if (is.null(name) && !has_slash(path) && drive_path_exists(append_slash(path))) {
-    stop_glue(
-      "Unclear if `path` specifies parent folder or full path\n",
-      "to the new file, including its name. ",
-      "See ?as_dribble() for details."
-    )
-  }
 }

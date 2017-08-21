@@ -100,6 +100,16 @@ dribble_with_path_for_root <- function() {
 root_folder <- function() drive_get(id = "root")
 root_id <- function() root_folder()$id
 
+confirm_clear_path <- function(path, name) {
+  if (is.null(name) && !has_slash(path) && drive_path_exists(append_slash(path))) {
+    stop_glue(
+      "Unclear if `path` specifies parent folder or full path\n",
+      "to the new file, including its name. ",
+      "See ?as_dribble() for details."
+    )
+  }
+}
+
 drive_path_exists <- function(path, verbose = TRUE) {
   stopifnot(is_path(path))
   if (length(path) == 0) return(logical(0))
