@@ -25,7 +25,7 @@
 #' [Permissions resources](https://developers.google.com/drive/v3/reference/permissions#resource).
 #'
 #' @section Publishing:
-#' When `what = "publishing"` the [`dribble`] gains a logical variable
+#' When `what = "published"` the [`dribble`] gains a logical variable
 #' `published` that indicates whether a file is published and a new list-column
 #' `revision_resource` containing lists of
 #' [Revisions resources](https://developers.google.com/drive/v3/reference/revisions#resource).

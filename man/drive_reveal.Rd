@@ -75,7 +75,7 @@ that indicates whether a file is shared and a new list-column
 
 \section{Publishing}{
 
-When \code{what = "publishing"} the \code{\link{dribble}} gains a logical variable
+When \code{what = "published"} the \code{\link{dribble}} gains a logical variable
 \code{published} that indicates whether a file is published and a new list-column
 \code{revision_resource} containing lists of
 \href{https://developers.google.com/drive/v3/reference/revisions#resource}{Revisions resources}.

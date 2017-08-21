@@ -52,8 +52,8 @@
 #' @template team_drive-singular
 #' @template corpus
 #' @param ... Other parameters to pass along in the request. The most likely
-#'   candidate is `q`. See below and the API's [Search for Files
-#'   guide](https://developers.google.com/drive/v3/web/search-parameters).
+#'   candidate is `q`. See below and the API's
+#'   [Search for Files guide](https://developers.google.com/drive/v3/web/search-parameters).
 #' @template verbose
 #'
 #' @template dribble-return

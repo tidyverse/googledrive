@@ -36,7 +36,8 @@ the Team Drives context. If specified, must be one of \code{"user"},
 \link[=team_drives]{Team Drives}.}
 
 \item{...}{Other parameters to pass along in the request. The most likely
-candidate is \code{q}. See below and the API's \href{https://developers.google.com/drive/v3/web/search-parameters}{Search for Filesguide}.}
+candidate is \code{q}. See below and the API's
+\href{https://developers.google.com/drive/v3/web/search-parameters}{Search for Files guide}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
