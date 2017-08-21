@@ -119,16 +119,14 @@ drive_share_one <- function(id, params, verbose) {
 drive_reveal_permissions <- function(file) {
   confirm_dribble(file)
   permissions_resource <- purrr::map(file$id, list_permissions_one)
-  file[["shared"]] <- NULL
-  file[["permissions_resource"]] <- NULL
   ## can't use promote() here (yet) because Team Drive files don't have
   ## `shared` and their NULLs would force `shared` to be a list-column
-  file <- tibble::add_column(
+  file <- put_column(
     file,
     shared = purrr::map_lgl(file$drive_resource, "shared", .default = NA),
-    .after = 1
+    .after = "name"
   )
-  tibble::add_column(
+  put_column(
     file,
     permissions_resource = permissions_resource
   )

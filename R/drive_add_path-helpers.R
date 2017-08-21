@@ -90,11 +90,11 @@ stringify_path <- function(id_path, key, value, root_id) {
 }
 
 dribble_with_path <- function() {
-  tibble::add_column(dribble(), path = character(), .after = "name")
+  put_column(dribble(), path = character(), .after = "name")
 }
 
 dribble_with_path_for_root <- function() {
-  tibble::add_column(root_folder(), path = "~/", .after = "name")
+  put_column(root_folder(), path = "~/", .after = "name")
 }
 
 root_folder <- function() drive_get(id = "root")

@@ -99,15 +99,12 @@ change_publish_one <- function(id, params) {
 drive_reveal_published <- function(file) {
   confirm_dribble(file)
   revision_resource <- purrr::map(file$id, get_publish_one)
-  ## Remove the columns if they already exist
-  file[["published"]] <- NULL
-  file[["revision_resource"]] <- NULL
-  file <- tibble::add_column(
+  file <- put_column(
     file,
     published = purrr::map_lgl(revision_resource, "published", .default = FALSE),
     .after = 1
   )
-  tibble::add_column(
+  put_column(
     file,
     revision_resource = revision_resource
   )

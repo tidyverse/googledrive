@@ -70,7 +70,7 @@ toggle_trash_one <- function(id, trash = TRUE) {
 drive_reveal_trashed <- function(file) {
   confirm_dribble(file)
   if (no_file(file)) {
-    return(tibble::add_column(dribble(), trashed = logical(), .after = "name"))
+    return(put_column(dribble(), trashed = logical(), .after = "name"))
   }
   promote(file, "trashed")
 }

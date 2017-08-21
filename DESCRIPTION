@@ -18,6 +18,7 @@ Imports: curl (>= 2.8.1),
   httr,
   jsonlite,
   purrr,
+  rlang,
   tibble,
   utils,
   uuid
