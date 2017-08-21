@@ -162,9 +162,6 @@ drive_find <- function(pattern = NULL,
   res_tbl
 }
 
-and <- function(x) collapse(x, sep = " and ")
-or <- function(x) collapse(x, sep = " or ")
-
 ## finds all the q clauses and collapses into one character vector of clauses
 ## these are destined to be and'ed to form q in the query
 marshal_q_clauses <- function(params) {

@@ -8,6 +8,9 @@ trim_ws <- function(x) {
   sub("\\s*$", "", sub("^\\s*", "", x))
 }
 
+and <- function(x) collapse(x, sep = " and ")
+or <- function(x) collapse(x, sep = " or ")
+
 ## put a column into a tibble in the REST sense: "create or update"
 ## tibble::add_column() except
 ##   1. can only add 1 column
