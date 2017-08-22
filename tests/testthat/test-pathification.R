@@ -1,8 +1,7 @@
 context("Pathification")
 
 # ---- tests ----
-test_that("get_paths() correctly reports paths, no name duplication", {
-  skip("rework this")
+test_that("pathify_*() reports correct paths, no name duplication", {
   #   ROOT
   #  /    \
   # a      b    d
@@ -10,69 +9,51 @@ test_that("get_paths() correctly reports paths, no name duplication", {
   #    c        e
   df <- tibble::tribble(
     ~ name,   ~ parents,
-    "c", c("a", "b"),
-    "a",      "ROOT",
-    "b",      "ROOT",
-    "e",         "d",
-    "d",        NULL
+       "c", c("a", "b"),
+       "a",      "ROOT",
+       "b",      "ROOT",
+       "e",         "d",
+       "d",        NULL
   )
   df$id <- df$name
   df$drive_resource <- list(list(kind = "drive#file"))
 
-  ## rooted path exists
-  out <- get_paths(path = "a/c", .rships = df)
-  expect_identical(out$id, "c")
-  expect_identical(out$path, "a/c")
-  out <- get_paths(path = "~/a/c", .rships = df)
-  expect_identical(out$id, "c")
-  expect_identical(out$path, "~/a/c")
-
-  ## unrooted path exists
-  out <- get_paths(path = "d/e", .rships = df)
-  expect_identical(out$id, "e")
-  expect_identical(out$path, "d/e")
-  ## rooted version does not exist
-  out <- get_paths(path = "~/d/e", .rships = df)
-  expect_equivalent(
-    out[c("name", "id", "drive_resource")],
-    dribble()
+  out <- pathify_prune_unnest(df, root_id = "ROOT")
+  expect_identical(
+    out[c("name", "path")],
+    tibble::tribble(
+      ~ name, ~ path,
+         "c", "~/a/c",
+         "c", "~/b/c",
+         "a",   "~/a",
+         "b",   "~/b",
+         "e",   "d/e",
+         "d",     "d"
+    )
   )
 
-  ## path does not exist, names do not exist
-  out <- get_paths(path = "x/y/z", .rships = df)
-  expect_equivalent(
-    out[c("name", "id", "drive_resource")],
-    dribble()
-  )
+  unrooted <- pathify_one_path("a/c", nodes = df, root_id = "ROOT")
+  rooted <- pathify_one_path("~/a/c", nodes = df, root_id = "ROOT")
+  expect_identical(unrooted, rooted)
+  expect_identical(unrooted$path, "~/a/c")
 
-  ## path only partially exists, partial_ok = FALSE
-  out <- get_paths(path = "a/f", .rships = df, partial_ok = FALSE)
-  expect_equivalent(
-    out[c("name", "id", "drive_resource")],
-    dribble()
-  )
+  unrooted <- pathify_one_path("d/e", nodes = df, root_id = "ROOT")
+  expect_identical(unrooted$path, "d/e")
 
-  ## path partially exists, non-matching name does not exist, partial_ok = TRUE
-  out <- get_paths(path = "a/f", .rships = df, partial_ok = TRUE)
-  expect_identical(out$id, "a")
-  expect_identical(out$path, "a")
+  rooted <- pathify_one_path("~/d/e", nodes = df, root_id = "ROOT")
+  expect_equal(nrow(rooted), 0)
 
-  ## path partially exists, but all names exist, partial_ok = FALSE
-  out <- get_paths(path = "a/e", .rships = df, partial_ok = FALSE)
-  expect_equivalent(
-    out[c("name", "id", "drive_resource")],
-    dribble()
-  )
+  nope <- pathify_one_path("x/y/z", nodes = df, root_id = "ROOT")
+  expect_equal(nrow(nope), 0)
 
-  ## path partially exists, but all names exist, partial_ok = TRUE
-  out <- get_paths(path = "a/e", .rships = df, partial_ok = TRUE)
-  expect_identical(out$id, "a")
-  expect_identical(out$path, "a")
+  nope <- pathify_one_path("a/f", nodes = df, root_id = "ROOT")
+  expect_equal(nrow(nope), 0)
 
+  nope <- pathify_one_path("a/e", nodes = df, root_id = "ROOT")
+  expect_equal(nrow(nope), 0)
 })
 
-test_that("get_paths() works, with name duplication & multiple parents", {
-  skip("rework this")
+test_that("pathify_*() reports correct paths, w/ name dup & multiple parents", {
   #     name(id)
   #      --(ROOT)  __
   #     /        \   \
@@ -83,67 +64,52 @@ test_that("get_paths() works, with name duplication & multiple parents", {
   # c(8)                   c(9)
   df <- tibble::tribble(
     ~ name, ~ id,   ~ parents,
-    "a",  "3", c("1", "4"),
-    "a",  "5",         "4",
-    "b",  "2",         "1",
-    "a",  "1",      "ROOT",
-    "a",  "4",      "ROOT",
-    "b",  "6",      "ROOT",
-    "a",  "7",         "6",
-    "c",  "8",         "2",
-    "c",  "9",         "7"
+       "a",  "3", c("1", "4"),
+       "a",  "5",         "4",
+       "b",  "2",         "1",
+       "a",  "1",      "ROOT",
+       "a",  "4",      "ROOT",
+       "b",  "6",      "ROOT",
+       "a",  "7",         "6",
+       "c",  "8",         "2",
+       "c",  "9",         "7"
   )
   df$drive_resource <- list(list(kind = "drive#file"))
 
-  ## single path exists
-  out <- get_paths(path = "a/b", .rships = df)
+  ## single path
+  out <- pathify_one_path("a/b", nodes = df, root_id = "ROOT")
   expect_identical(out$name, "b")
-  expect_identical(out$path, "a/b")
+  expect_identical(out$path, "~/a/b")
+  expect_identical(out$id, "2")
 
   ## multiple paths exist, depth 1
+  out <- pathify_one_path("a", nodes = df, root_id = "ROOT")
   expect_equivalent(
-    get_paths(path = "a", .rships = df[df$name == "a", ]),
+    out[c("name", "path", "id")],
     tibble::tribble(
-      ~ name, ~ id,          ~ drive_resource, ~ path,
-      "a",  "3", list(kind = "drive#file"),    "a",
-      "a",  "5", list(kind = "drive#file"),    "a",
-      "a",  "1", list(kind = "drive#file"),    "a",
-      "a",  "4", list(kind = "drive#file"),    "a",
-      "a",  "7", list(kind = "drive#file"),    "a"
+      ~ name, ~ path, ~ id,
+      "a",  "~/a/a", "3",
+      "a",  "~/a/a", "5",
+      "a",    "~/a", "1",
+      "a",    "~/a", "4",
+      "a",  "~/b/a", "7"
     )
   )
 
   ## multiple paths exist, depth > 1
+  out <- pathify_one_path("a/a", nodes = df, root_id = "ROOT")
   expect_equivalent(
-    get_paths(path = "a/a", .rships = df),
+    out[c("name", "path", "id")],
     tibble::tribble(
-      ~ name, ~ id,          ~ drive_resource, ~ path,
-      "a",  "3", list(kind = "drive#file"),  "a/a",
-      "a",  "5", list(kind = "drive#file"),  "a/a"
-    )
-  )
-
-  ## multiple partial paths exist at depth > 1
-  out <- get_paths(path = "a/f", .rships = df, partial_ok = FALSE)
-  expect_equivalent(
-    out[c("name", "id", "drive_resource")],
-    dribble()
-  )
-  expect_equivalent(
-    get_paths(path = "a/f", .rships = df, partial_ok = TRUE),
-    tibble::tribble(
-      ~ name, ~ id,          ~ drive_resource, ~ path,
-      "a",  "3", list(kind = "drive#file"),    "a",
-      "a",  "5", list(kind = "drive#file"),    "a",
-      "a",  "1", list(kind = "drive#file"),    "a",
-      "a",  "4", list(kind = "drive#file"),    "a",
-      "a",  "7", list(kind = "drive#file"),    "a"
+      ~ name, ~ path, ~ id,
+         "a",  "~/a/a", "3",
+         "a",  "~/a/a", "5"
     )
   )
 
   ## different paths with same names in different order are resolved
-  abc <- get_paths(path = "a/b/c", .rships = df, partial_ok = TRUE)
-  bac <- get_paths(path = "b/a/c", .rships = df, partial_ok = TRUE)
-  expect_false(identical(abc, bac))
+  out <- pathify_one_path("a/b/c", nodes = df, root_id = "ROOT")
+  expect_identical(out$id, "8")
+  out <- pathify_one_path("b/a/c", nodes = df, root_id = "ROOT")
+  expect_identical(out$id, "9")
 })
-
