@@ -52,7 +52,7 @@ drive_change_publish <- function(file,
 
   type_ok <- is_native(file)
   if (!all(type_ok)) {
-    file <- file[head(which(!type_ok), 10), ]
+    file <- file[utils::head(which(!type_ok), 10), ]
     file <- promote(file, "mimeType")
     bad_mime_types <- glue_data(file, "  * {name}: {mimeType}")
     stop_collapse(c(
