@@ -52,9 +52,11 @@
 #' drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 #'
 #' ## access the Team Drive named "foo"
+#' ## team_drive params must be specified if getting by path
 #' foo <- team_drive_get("foo")
 #' drive_get(c("this.jpg", "that-file"), team_drive = foo)
-#' drive_get(as_id("123456789"), team_drive = foo)
+#' ## team_drive params are not necessary if getting by id
+#' drive_get(as_id("123456789"))
 #'
 #' ## search all Team Drives and other files user has accessed
 #' drive_get(c("this.jpg", "that-file"), corpus = "all")
@@ -95,4 +97,34 @@ get_one_id <- function(id) {
   )
   response <- make_request(request)
   process_response(response)
+}
+
+drive_path_exists <- function(path, verbose = TRUE) {
+  stopifnot(is_path(path))
+  if (length(path) == 0) return(logical(0))
+  stopifnot(length(path) == 1)
+  some_files(drive_get(path = path))
+}
+
+confirm_clear_path <- function(path, name) {
+  if (is.null(name) &&
+      !has_slash(path) &&
+      drive_path_exists(append_slash(path))) {
+    stop_glue(
+      "Unclear if `path` specifies parent folder or full path\n",
+      "to the new file, including its name. ",
+      "See ?as_dribble() for details."
+    )
+  }
+}
+
+root_folder <- function() drive_get(id = "root")
+root_id <- function() root_folder()$id
+
+dribble_with_path <- function() {
+  put_column(dribble(), path = character(), .after = "name")
+}
+
+dribble_with_path_for_root <- function() {
+  put_column(root_folder(), path = "~/", .after = "name")
 }

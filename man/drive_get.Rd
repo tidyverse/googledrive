@@ -87,9 +87,11 @@ drive_get(as_id("abcdefgeh123456789"))
 drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 
 ## access the Team Drive named "foo"
+## team_drive params must be specified if getting by path
 foo <- team_drive_get("foo")
 drive_get(c("this.jpg", "that-file"), team_drive = foo)
-drive_get(as_id("123456789"), team_drive = foo)
+## team_drive params are not necessary if getting by id
+drive_get(as_id("123456789"))
 
 ## search all Team Drives and other files user has accessed
 drive_get(c("this.jpg", "that-file"), corpus = "all")
