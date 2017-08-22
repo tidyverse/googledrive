@@ -178,9 +178,11 @@ path, also calls <code>files.list</code>:</p><ul>
 <span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"abcdefgh123456789"</span>, <span class='st'>"jklmnopq123456789"</span>))
 
 <span class='co'>## access the Team Drive named "foo"</span>
+<span class='co'>## team_drive params must be specified if getting by path</span>
 <span class='no'>foo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='team_drive_get.html'>team_drive_get</a></span>(<span class='st'>"foo"</span>)
 <span class='fu'>drive_get</span>(<span class='fu'>c</span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='no'>foo</span>)
-<span class='fu'>drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"123456789"</span>), <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='no'>foo</span>)
+<span class='co'>## team_drive params are not necessary if getting by id</span>
+<span class='fu'>drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"123456789"</span>))
 
 <span class='co'>## search all Team Drives and other files user has accessed</span>
 <span class='fu'>drive_get</span>(<span class='fu'>c</span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='st'>"all"</span>)
