@@ -296,5 +296,5 @@ promote <- function(d, elem) {
     ## ensure elem is added, even if there are zero rows
     new[[elem_orig]] <- rep_len(list(NULL), nrow(d))
   }
-  put_column(d, rlang::UQS(new), .after = 1)
+  put_column(d, !!! new, .after = 1)
 }

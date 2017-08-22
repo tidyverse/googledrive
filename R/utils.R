@@ -26,11 +26,7 @@ put_column <- function(.data, ..., .before = NULL, .after = NULL) {
     .data[[nm]] <- new_var[[nm]]
     return(.data)
   }
-  tibble::add_column(
-    .data,
-    rlang::UQS(new_var),
-    .before = .before,
-    .after = .after
+  tibble::add_column(.data, !!! new_var, .before = .before, .after = .after
   )
 }
 
