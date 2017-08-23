@@ -42,6 +42,7 @@
 #'
 #' ## Clean up
 #' unlink(c("BioC_mirrors.csv", "BioC_mirrors.csv.xlsx", "my_csv_file.csv"))
+#' drive_rm(file)
 #' }
 drive_download <- function(file,
                            path = NULL,

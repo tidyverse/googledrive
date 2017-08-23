@@ -7,50 +7,46 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+The most natural way to identify a file is by its **name**. The Drive API, however, fundamentally identifies a file by its unique id. googledrive makes it easy to specify your file of interest by name at first, but then immediately capture that in a way that includes the file's id. This facilitates downstream file operations.
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+googledrive holds information on Drive files in what we call a **dribble**, a Drive tibble. A [tibble](http://tibble.tidyverse.org/reference/tibble.html) is the variant of the data frame that is used throughout the [tidyverse](http://www.tidyverse.org). A googledrive dribble will have one row per file and is guaranteed to have these variables:
 
-## Vignette Info
+  * `name`: The file's name.
+  * `id`: The file's unique id.
+  * `drive_resource`: A list column containing Drive API metadata that is internally useful and possibly interesting to some users. The typical user will leave this variable unexamined. Just let it be.
+  
+Some functions add additional variables, but the three above are always present. `drive_reveal()`, for example, can add file paths, MIME types, trash status, and information about permissions and publishing. Use your usual techniques for data frame manipulation in order to isolate specific rows -- files, in this case -- that you want to operate on. For example, you can manipulate the dribble with dplyr verbs such as `filter()`, `mutate()`, `arrange()`, and `slice()`.
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+## How to get one or more files in a dribble
 
-## Styles
+How do you get files into a dribble in the first place? Two main functions for this:
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+  * `drive_find()`: Similar to <drive.google.com>. Lists all your files or lets you narrow things down based on name or file properties.
+  * `drive_get()`: Get files by name -- file path, actually -- or by id, including by URL.
+  
+## `drive_find()`
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+Read the help for complete documentation but here are some of the many ways to call `drive_find()`:
 
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r eval = FALSE}
+drive_find()
+drive_find(n_max = 40)
+drive_find(pattern = "chicken")
+drive_find(type = "pdf")
+drive_find(type = "folder")
+drive_find(type = "spreadsheet")
+drive_find(trashed = TRUE)
+drive_find(q = "fullText contains 'horsebean'")
+drive_find(q = "modifiedTime > '2017-07-21T12:00:00'", order_by = "recency")
+drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+## `drive_get()`
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+*to be written*
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+## Other functions to get or manage a dribble
 
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+  * `drive_reveal()`
+  * `drive_ls()`
+  * `drive_browse()`
