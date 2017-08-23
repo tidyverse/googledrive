@@ -7,6 +7,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
 The most natural way to identify a file is by its **name**. The Drive API, however, fundamentally identifies a file by its unique id. googledrive makes it easy to specify your file of interest by name at first, but then immediately capture that in a way that includes the file's id. This facilitates downstream file operations.
 
 googledrive holds information on Drive files in what we call a **dribble**, a Drive tibble. A [tibble](http://tibble.tidyverse.org/reference/tibble.html) is the variant of the data frame that is used throughout the [tidyverse](http://www.tidyverse.org). A googledrive dribble will have one row per file and is guaranteed to have these variables:
@@ -41,12 +48,48 @@ drive_find(q = "modifiedTime > '2017-07-21T12:00:00'", order_by = "recency")
 drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
 ```
 
+`drive_find()` is for exhaustive file listing or filtering on file properties.
+
 ## `drive_get()`
 
-*to be written*
+Read the help for complete documentation but here are how calls to `drive_get()` can look:
 
-## Other functions to get or manage a dribble
+```{r eval = FALSE}
+drive_get("i_am_a_file_name")
+drive_get("i/am/a/deeply/buried/file.txt")
+drive_get("i/am/a/folder/")
+drive_get(c("i_am_a_file_name", "path/to/file"))
+drive_get(as_id("abcdefghijklm"))
+drive_get(as_id(c("abcdefghijklm", "nopqrstuvwxyz")))
+drive_get(id = "abcdefghijklm")
+drive_get(id = c("abcdefghijklm", "nopqrstuvwxyz"))
+drive_get(as_id("https://docs.google.com/document/d/abcdefghijklm/edit"))
+```
 
-  * `drive_reveal()`
-  * `drive_ls()`
-  * `drive_browse()`
+`drive_get()` is for targetted file fetching based on name, path, id, or URL.
+
+## Other handy functions
+
+`drive_reveal()` adds bonus information to the dribble, either by excavating it from the `drive_resource` variable or by calling the Drive API. Use it on a dribble containing files of interest.
+
+```{r eval = FALSE}
+drive_reveal(files, "path")
+drive_reveal(files, "trashed")
+drive_reveal(files, "mime_type")
+drive_reveal(files, "permissions")
+drive_reveal(files, "published")
+```
+
+`drive_ls()` lists files below a specified folder. It's a thin wrapper around `drive_find()`, so all those capabilities are available.
+
+```{r eval = FALSE}
+drive_ls("i/am/a/folder/", type = "spreadsheet")
+```
+
+`drive_browse()` will open a file in your browser.
+
+```{r eval = FALSE}
+drive_browse(i_am_a_dribble)
+drive_browse("i_am_a_file_name")
+drive_browse(as_id("abcdefghijklm"))
+```
