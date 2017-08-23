@@ -1,46 +1,48 @@
-#' Download a file from Drive.
+#' Download a Drive file
 #'
-#' This function downloads files from Google Drive. Native Google files, such as
-#' Google Docs, Google Sheets, Google Slides, must be exported to a conventional
-#' local file type. This can be specified explicitly via `type` or, otherwise,
-#' implicitly via the file extension of `path`, if provided. If all else
-#' fails, a valid default is used. Native Google files can be downloaded to
-#' types specified in the
+#' @description This function downloads a file from Google Drive. Native Google
+#' file types, such as Google Docs, Google Sheets, and Google Slides, must be
+#' exported to a conventional local file type. This can be specified:
+#'   * explicitly via `type`
+#'   * implicitly via the file extension of `path`
+#'   * not at all, i.e. rely on default built into googledrive
+#' @description To see what export file types are even possible, see the
 #' [Drive API documentation](https://developers.google.com/drive/v3/web/manage-downloads#downloading_google_documents).
+#' Returned dribble contains local path to downloaded file in `local_path`.
+#'
 #' @template file-singular
-#' @param path Character. Path for output file. If absent, the default file
-#'   name is the file's name on Google Drive and the default location is working
+#' @param path Character. Path for output file. If absent, the default file name
+#'   is the file's name on Google Drive and the default location is working
 #'   directory, possibly with an added file extension.
 #' @param type Character. Only consulted if `file` is a native Google file.
 #'   Specifies the desired type of the downloaded file. Will be processed via
 #'   [drive_mime_type()], so either a file extension like `"pdf"` or a full MIME
 #'   type like `"application/pdf"` is acceptable.
-#' @param overwrite A logical scalar. If `path` already exists, do you want
-#'   to overwrite it?
+#' @param overwrite A logical scalar. If `path` already exists, do you want to
+#'   overwrite it?
 #' @template verbose
-
+#' @template dribble-return
+#' @export
 #' @examples
 #' \dontrun{
-#' ## Save "chickwts.csv" to the working directory as "chickwts.csv".
-#' drive_download(file = "chickwts.csv")
+#' ## Upload a csv file into a Google Sheet
+#' file <- drive_upload(R.home('doc/BioC_mirrors.csv'), type = "spreadsheet")
 #'
-#' ## Export a Google Sheet named "chickwts" to the working directory as
-#' ## "chickwts.csv".
-#' drive_download(file = "chickwts", path = "chickwts.csv")
+#' ## Download Sheet as csv, explicit type
+#' (downloaded_file <- drive_download(file, type = "csv"))
 #'
-#' ## This will also export a Google Sheet named "chickwts" to the working
-#' ## directory as "chickwts.csv".
-#' drive_download(file = "chickwts", type = "csv")
+#' ## See local path to new file
+#' downloaded_file$local_path
 #'
-#' ## Export a Google Document named "foobar" to the working directory as
-#' ## "foobar.docx".
-#' drive_download(file = "foobar", path = "foobar.docx")
+#' ## Download as csv, type implicit in file extension
+#' drive_download(file, path = "my_csv_file.csv")
 #'
-#' ## This will also export a Google Document named "foobar" to the working
-#' ## directory as "foobar.docx".
-#' drive_download(file = "foobar", type = "docx")
+#' ## Download with default name and type (xlsx)
+#' drive_download(file)
+#'
+#' ## Clean up
+#' unlink(c("BioC_mirrors.csv", "BioC_mirrors.csv.xlsx", "my_csv_file.csv"))
 #' }
-#' @export
 drive_download <- function(file,
                            path = NULL,
                            type = NULL,
@@ -49,7 +51,6 @@ drive_download <- function(file,
   if (!is.null(path) && file.exists(path) && !overwrite) {
     stop_glue("\nPath exists and overwrite is FALSE:\n  * {path}")
   }
-
   file <- as_dribble(file)
   file <- confirm_single_file(file)
 
@@ -94,14 +95,15 @@ drive_download <- function(file,
 
   if (success) {
     if (verbose) {
-      message_glue("\nFile downloaded:\n  * {file$name}\n",
-            "Saved locally as:\n  * {path}"
+      message_glue(
+        "\nFile downloaded:\n  * {file$name}\n",
+        "Saved locally as:\n  * {path}"
       )
     }
   } else {
     stop_glue("The file doesn't seem to have downloaded.")
   }
-  invisible(file)
+  invisible(put_column(file, local_path = path, .after = "name"))
 }
 
 ## get the default export MIME type for a native Google MIME type

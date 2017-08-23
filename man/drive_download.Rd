@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_download.R
 \name{drive_download}
 \alias{drive_download}
-\title{Download a file from Drive.}
+\title{Download a Drive file}
 \usage{
 drive_download(file, path = NULL, type = NULL, overwrite = FALSE,
   verbose = TRUE)
@@ -12,8 +12,8 @@ drive_download(file, path = NULL, type = NULL, overwrite = FALSE,
 Drive. Can be a character vector of names/paths, a character vector of file
 ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 
-\item{path}{Character. Path for output file. If absent, the default file
-name is the file's name on Google Drive and the default location is working
+\item{path}{Character. Path for output file. If absent, the default file name
+is the file's name on Google Drive and the default location is working
 directory, possibly with an added file extension.}
 
 \item{type}{Character. Only consulted if \code{file} is a native Google file.
@@ -21,40 +21,48 @@ Specifies the desired type of the downloaded file. Will be processed via
 \code{\link[=drive_mime_type]{drive_mime_type()}}, so either a file extension like \code{"pdf"} or a full MIME
 type like \code{"application/pdf"} is acceptable.}
 
-\item{overwrite}{A logical scalar. If \code{path} already exists, do you want
-to overwrite it?}
+\item{overwrite}{A logical scalar. If \code{path} already exists, do you want to
+overwrite it?}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
+\value{
+An object of class \code{\link{dribble}}, a tibble with one row per
+  item.
+}
 \description{
-This function downloads files from Google Drive. Native Google files, such as
-Google Docs, Google Sheets, Google Slides, must be exported to a conventional
-local file type. This can be specified explicitly via \code{type} or, otherwise,
-implicitly via the file extension of \code{path}, if provided. If all else
-fails, a valid default is used. Native Google files can be downloaded to
-types specified in the
+This function downloads a file from Google Drive. Native Google
+file types, such as Google Docs, Google Sheets, and Google Slides, must be
+exported to a conventional local file type. This can be specified:
+\itemize{
+\item explicitly via \code{type}
+\item implicitly via the file extension of \code{path}
+\item not at all, i.e. rely on default built into googledrive
+}
+
+To see what export file types are even possible, see the
 \href{https://developers.google.com/drive/v3/web/manage-downloads#downloading_google_documents}{Drive API documentation}.
+Returned dribble contains local path to downloaded file in \code{local_path}.
 }
 \examples{
 \dontrun{
-## Save "chickwts.csv" to the working directory as "chickwts.csv".
-drive_download(file = "chickwts.csv")
+## Upload a csv file into a Google Sheet
+file <- drive_upload(R.home('doc/BioC_mirrors.csv'), type = "spreadsheet")
 
-## Export a Google Sheet named "chickwts" to the working directory as
-## "chickwts.csv".
-drive_download(file = "chickwts", path = "chickwts.csv")
+## Download Sheet as csv, explicit type
+(downloaded_file <- drive_download(file, type = "csv"))
 
-## This will also export a Google Sheet named "chickwts" to the working
-## directory as "chickwts.csv".
-drive_download(file = "chickwts", type = "csv")
+## See local path to new file
+downloaded_file$local_path
 
-## Export a Google Document named "foobar" to the working directory as
-## "foobar.docx".
-drive_download(file = "foobar", path = "foobar.docx")
+## Download as csv, type implicit in file extension
+drive_download(file, path = "my_csv_file.csv")
 
-## This will also export a Google Document named "foobar" to the working
-## directory as "foobar.docx".
-drive_download(file = "foobar", type = "docx")
+## Download with default name and type (xlsx)
+drive_download(file)
+
+## Clean up
+unlink(c("BioC_mirrors.csv", "BioC_mirrors.csv.xlsx", "my_csv_file.csv"))
 }
 }

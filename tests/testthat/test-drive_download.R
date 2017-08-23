@@ -31,16 +31,18 @@ test_that("drive_download() won't overwrite existing file", {
   )
 })
 
-test_that("drive_download() downloads a file", {
+test_that("drive_download() downloads a file and adds local_path column", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(unlink("description.txt"))
+  local_path <- paste0(nm_("DESC"), ".txt")
+  on.exit(unlink(local_path))
 
   expect_message(
-    drive_download(file = nm_("DESC"), path = "description.txt"),
+    out <- drive_download(nm_("DESC"), path = local_path, overwrite = TRUE),
     "File downloaded"
   )
-  expect_true(file.exists("description.txt"))
+  expect_true(file.exists(local_path))
+  expect_identical(out$local_path, local_path)
 })
 
 test_that("drive_download() errors if file does not exist on Drive", {
