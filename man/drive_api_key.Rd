@@ -2,16 +2,25 @@
 % Please edit documentation in R/drive_auth.R
 \name{drive_api_key}
 \alias{drive_api_key}
-\title{Retrieve built-in API key}
+\title{Retrieve API key}
 \usage{
 drive_api_key()
 }
 \value{
-A Google API key built into googledrive.
+A Google API key.
 }
 \description{
-Retrieve built-in API key
+Retrieves the pre-configured API key. Learn more in Google's document
+\href{https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279}{Credentials, access, security, andidentity}.
+By default, this API key is initialized to one that ships with googledrive.
+But the user can store their own key via \code{\link[=drive_auth_config]{drive_auth_config()}}, i.e.
+overwrite the default.
 }
 \examples{
 drive_api_key()
+
+\dontrun{
+drive_auth_config(api_key = "123")
+drive_api_key()
+}
 }

@@ -84,14 +84,14 @@ returned by \code{\link[=drive_endpoints]{drive_endpoints()}}.
 req <- generate_request(
   "drive.files.get",
   list(fileId = "abc"),
-  token = NULL
+  token = httr::config(token = "token!")
 )
 req
 ## re-create the previous request, but the hard way, i.e. "by hand"
 req <- build_request(
   path = "drive/v3/files/{fileId}",
   method = "GET",
-  list(fileId = "abc", key = drive_api_key()),
+  list(fileId = "abc", key = "an-api-key"),
   token = NULL
 )
 req

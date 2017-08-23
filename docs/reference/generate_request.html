@@ -175,7 +175,7 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
     <pre class="examples"><div class='input'><span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'>generate_request</span>(
   <span class='st'>"drive.files.get"</span>,
   <span class='fu'>list</span>(<span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>),
-  <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='st'>"token!"</span>)
 )
 <span class='no'>req</span></div><div class='output co'>#&gt; $method
 #&gt; [1] "GET"
@@ -184,9 +184,6 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
 #&gt; drive/v3/files/abc
 #&gt; 
 #&gt; $query
-#&gt; $query$key
-#&gt; [1] "AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
-#&gt; 
 #&gt; $query$supportsTeamDrives
 #&gt; [1] TRUE
 #&gt; 
@@ -195,15 +192,16 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
 #&gt; list()
 #&gt; 
 #&gt; $token
-#&gt; NULL
+#&gt; &lt;request&gt;
+#&gt; Auth token: character
 #&gt; 
 #&gt; $url
-#&gt; [1] "https://www.googleapis.com/drive/v3/files/abc?key=AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg&amp;supportsTeamDrives=TRUE"
+#&gt; [1] "https://www.googleapis.com/drive/v3/files/abc?supportsTeamDrives=TRUE"
 #&gt; </div><div class='input'><span class='co'>## re-create the previous request, but the hard way, i.e. "by hand"</span>
 <span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'>build_request</span>(
   <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"drive/v3/files/{fileId}"</span>,
   <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"GET"</span>,
-  <span class='fu'>list</span>(<span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='fu'><a href='drive_api_key.html'>drive_api_key</a></span>()),
+  <span class='fu'>list</span>(<span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='st'>"an-api-key"</span>),
   <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )
 <span class='no'>req</span></div><div class='output co'>#&gt; $method
@@ -214,7 +212,7 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
 #&gt; 
 #&gt; $query
 #&gt; $query$key
-#&gt; [1] "AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
+#&gt; [1] "an-api-key"
 #&gt; 
 #&gt; 
 #&gt; $body
@@ -224,7 +222,7 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
 #&gt; NULL
 #&gt; 
 #&gt; $url
-#&gt; [1] "https://www.googleapis.com/drive/v3/files/abc?key=AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
+#&gt; [1] "https://www.googleapis.com/drive/v3/files/abc?key=an-api-key"
 #&gt; </div><div class='input'>
 ## call an endpoint not used by googledrive
 ## List a file's comments

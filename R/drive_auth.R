@@ -264,13 +264,24 @@ set_api_key <- function(value) {
   .state[["api_key"]] <- value
 }
 
-#' Retrieve built-in API key
+#' Retrieve API key
 #'
-#' @return A Google API key built into googledrive.
+#' Retrieves the pre-configured API key. Learn more in Google's document
+#' [Credentials, access, security, and
+#' identity](https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279).
+#' By default, this API key is initialized to one that ships with googledrive.
+#' But the user can store their own key via [drive_auth_config()], i.e.
+#' overwrite the default.
+#'
+#' @return A Google API key.
 #' @export
-#'
 #' @examples
 #' drive_api_key()
+#'
+#' \dontrun{
+#' drive_auth_config(api_key = "123")
+#' drive_api_key()
+#' }
 drive_api_key <- function() {
   .state[["api_key"]]
 }

@@ -51,7 +51,7 @@
 #' req <- generate_request(
 #'   "drive.files.get",
 #'   list(fileId = "abc"),
-#'   token = NULL
+#'   token = httr::config(token = "token!")
 #' )
 #' req
 generate_request <- function(endpoint = character(),
@@ -102,7 +102,7 @@ generate_request <- function(endpoint = character(),
 #' req <- build_request(
 #'   path = "drive/v3/files/{fileId}",
 #'   method = "GET",
-#'   list(fileId = "abc", key = drive_api_key()),
+#'   list(fileId = "abc", key = "an-api-key"),
 #'   token = NULL
 #' )
 #' req
