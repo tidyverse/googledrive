@@ -12,6 +12,17 @@ navbar:
   left:
   - text: Reference
     href: reference/index.html
+  - text: Articles
+    menu:
+    - text: All Articles
+      href: articles/index.html
+    - text: File Identification
+      href: articles/articles/file-identification.html
+
+articles:
+  - title: "Articles"
+    contents:
+    - file-identification
 
 reference:
   - title: "Reach out and touch your files"

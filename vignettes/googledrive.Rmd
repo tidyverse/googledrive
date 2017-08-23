@@ -1,0 +1,17 @@
+---
+title: "googledrive"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{googledrive}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Please see the googledrive website:
+
+  * <http://googledrive.tidyverse.org/index.html>
+  
+for full documentation. In addition to function-specific help, there are several articles:
+
+  * [Article index](http://googledrive.tidyverse.org/articles/index.html)
+  * [File identification](http://googledrive.tidyverse.org/articles/file-identification.html)
