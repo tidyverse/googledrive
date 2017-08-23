@@ -48,7 +48,10 @@ Returned dribble contains local path to downloaded file in \code{local_path}.
 \examples{
 \dontrun{
 ## Upload a csv file into a Google Sheet
-file <- drive_upload(R.home('doc/BioC_mirrors.csv'), type = "spreadsheet")
+file <- drive_upload(
+  file.path(R.home("doc"), "BioC_mirrors.csv"),
+  type = "spreadsheet"
+  )
 
 ## Download Sheet as csv, explicit type
 (downloaded_file <- drive_download(file, type = "csv"))

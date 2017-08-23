@@ -103,7 +103,10 @@ In general, googledrive functions that operate on files allow you to specify the
 We can upload any file type. 
 
 ```{r}
-(mirrors <- drive_upload(R.home('doc/BioC_mirrors.csv'), "README-mirrors.csv"))
+(mirrors <- drive_upload(
+  file.path(R.home("doc"), "BioC_mirrors.csv"),
+  "README-mirrors.csv"
+))
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -113,7 +116,7 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 mirrors <- drive_rm(mirrors)
 
 mirrors <- drive_upload(
-  R.home('doc/BioC_mirrors.csv'),
+  file.path(R.home("doc"), "BioC_mirrors.csv"),
   "README-mirrors.csv",
   type = "spreadsheet"
 )

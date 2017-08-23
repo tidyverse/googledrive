@@ -31,11 +31,11 @@
 #' @examples
 #' \dontrun{
 #' ## upload a csv file
-#' mirrors_csv <- drive_upload(R.home('doc/BioC_mirrors.csv'))
+#' mirrors_csv <- drive_upload(file.path(R.home("doc"), "BioC_mirrors.csv"))
 #'
 #' ## or convert it to a Google Sheet
 #' mirrors_sheet <- drive_upload(
-#'   R.home('doc/BioC_mirrors.csv'),
+#'   file.path(R.home("doc"), "BioC_mirrors.csv"),
 #'   name = "BioC_mirrors",
 #'   type = "spreadsheet"
 #' )
@@ -48,7 +48,7 @@
 #'
 #' ## Upload a file and, at the same time, star it
 #' logo <- drive_upload(
-#'   R.home('doc/html/logo.jpg'),
+#'   file.path(R.home("doc"), "html", "logo.jpg"),
 #'   starred = "true"
 #' )
 #'

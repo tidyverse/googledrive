@@ -30,7 +30,7 @@ test_that("drive_share() adds permissions", {
   on.exit(drive_rm(me_("mirrors-to-share")))
 
   file <- drive_upload(
-    R.home('doc/BioC_mirrors.csv'),
+    file.path(R.home("doc"), "BioC_mirrors.csv"),
     name = me_("mirrors-to-share")
   )
   expect_false(file$drive_resource[[1]]$shared)

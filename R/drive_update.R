@@ -20,11 +20,11 @@
 #' @examples
 #' \dontrun{
 #' ## Create a new file, so we can update it
-#' x <- drive_upload(R.home("doc/NEWS"))
+#' x <- drive_upload(file.path(R.home("doc"), "NEWS"))
 #'
 #' ## Update the file with new media
 #' x <- x %>%
-#'   drive_update(R.home("doc/NEWS.1"))
+#'   drive_update(file.path(R.home("doc"), "NEWS.1"))
 #'
 #' ## Update the file with new metadata.
 #' ## Notice here `name` is not an argument of `drive_update()`, we are passing
@@ -41,7 +41,7 @@
 #'
 #' ## Update the file with new media AND new metadata
 #' x <- x %>%
-#'   drive_update(R.home("doc/NEWS.2"), name = "NEWS-2")
+#'   drive_update(file.path(R.home("doc"), "NEWS.2"), name = "NEWS-2")
 #'
 #' ## Clean up
 #' drive_rm(x, folder)
