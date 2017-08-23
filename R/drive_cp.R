@@ -45,7 +45,7 @@
 #' drive_rm(folder)
 #'
 #' ## upload a csv file to copy
-#' csv_file <- drive_upload(R.home('doc/BioC_mirrors.csv'))
+#' csv_file <- drive_upload(file.path(R.home("doc"), "BioC_mirrors.csv"))
 #'
 #' ## copy AND AT THE SAME TIME convert it to a Google Sheet
 #' mirrors_sheet <- drive_cp(

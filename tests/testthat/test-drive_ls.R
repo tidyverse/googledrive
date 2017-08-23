@@ -19,7 +19,7 @@ if (SETUP) {
     path = file.path(nm_("list-me"), nm_("DESCRIPTION"))
   )
   drive_upload(
-    R.home('doc/html/about.html'),
+    file.path(R.home("doc"), "html", "about.html"),
     path = file.path(nm_("list-me"), nm_("about-html"))
   )
 }

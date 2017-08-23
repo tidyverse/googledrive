@@ -103,7 +103,10 @@ In general, googledrive functions that operate on files allow you to specify the
 We can upload any file type. 
 
 ```{r}
-(mirrors <- drive_upload(R.home('doc/BioC_mirrors.csv'), "README-mirrors.csv"))
+(mirrors <- drive_upload(
+  file.path(R.home("doc"), "BioC_mirrors.csv"),
+  "README-mirrors.csv"
+))
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
@@ -113,7 +116,7 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 mirrors <- drive_rm(mirrors)
 
 mirrors <- drive_upload(
-  R.home('doc/BioC_mirrors.csv'),
+  file.path(R.home("doc"), "BioC_mirrors.csv"),
   "README-mirrors.csv",
   type = "spreadsheet"
 )
@@ -141,7 +144,7 @@ drive_reveal(mirrors, "published")
 
 #### Share files
 
-Notice the access here says "Shared with specific people". To update the access, we need to change the sharing permissions. Let's say I want anyone with the link to be able to view my dataset.
+To update the access, we need to change the sharing permissions. Let's say I want anyone with the link to be able to view my dataset.
 
 ```{r}
 mirrors <- mirrors %>%
@@ -161,7 +164,7 @@ mirrors %>%
 
 ##### Google files
 
-We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. Specify this explicitly via `type` or implicitly via the file extension in `out_path`. For example, if I would like to download the "538-star-wars-survey" Google Sheet as a `.csv` I could run the following.
+We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. Specify this explicitly via `type` or implicitly via the file extension in `path`. For example, if I would like to download the "538-star-wars-survey" Google Sheet as a `.csv` I could run the following.
 
 ```{r}
 drive_download("538-star-wars-survey", type = "csv")
