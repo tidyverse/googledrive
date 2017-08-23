@@ -21,7 +21,7 @@ if (SETUP) {
   drive_upload(system.file("DESCRIPTION"), name = nm_("thing02"))
   drive_upload(system.file("DESCRIPTION"), name = nm_("thing03"))
   folder_in_root <- drive_mkdir(nm_("thing01"))
-  folder_in_folder <- drive_mkdir(folder_in_root, name = nm_("thing01"))
+  folder_in_folder <- drive_mkdir(nm_("thing01"), parent = folder_in_root)
   file_in_folder_in_folder <- drive_cp(
     file_in_root,
     path = folder_in_folder,

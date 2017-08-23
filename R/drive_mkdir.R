@@ -1,11 +1,10 @@
-#' Create a folder on Drive.
+#' Create a folder
 #'
-#' @template path
-#' @templateVar name folder
-#' @templateVar default If not given or unknown, will default to the "My Drive" root folder.
-#' @template name
-#' @templateVar name folder
-#' @templateVar default {}
+#' @param folder Name for the new folder or, optionally, a path that specifies
+#'   an existing parent folder, as well as the new name.
+#' @param parent Target destination for the new folder, i.e. a folder or a Team
+#'   Drive. Can be given as an actual path (character), a file id or URL marked
+#'   with [as_id()], or a [`dribble`]. Defaults to your "My Drive" root folder.
 #' @template verbose
 #'
 #' @template dribble-return
@@ -16,24 +15,27 @@
 #' drive_mkdir("abc/def")
 #'
 #' ## This will also create a folder named "def" in folder "abc".
-#' drive_mkdir(path = "abc", name = "def")
+#' drive_mkdir("def", parent = "abc")
 #'
 #' ## Another way to create a folder named "def" in folder "abc",
 #' ## this time with parent folder stored in a dribble.
 #' abc <- as_dribble("abc")
-#' drive_mkdir(path = abc, name = "def")
-#'
-#' ## Yet another way to do this,
-#' ## this time with parent folder provide via id.
-#' drive_mkdir(path = as_id(abc$id), name = "def")
+#' drive_mkdir("def", parent = abc)
 #'
 #' ## clean up
 #' drive_ls(path = "abc", pattern = "^def$", type = "folder") %>% drive_rm()
 #' }
 #' @export
-drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
-  if (!is.null(name)) {
-    stopifnot(is_string(name))
+drive_mkdir <- function(folder, parent = NULL, verbose = TRUE) {
+  stopifnot(is_string(folder))
+
+  ## wire up to the conventional 'path' and 'name' pattern used elsewhere
+  if (is.null(parent)) {
+    path <- folder
+    name <- NULL
+  } else {
+    path <- parent
+    name <- folder
   }
 
   if (is_path(path)) {
@@ -45,9 +47,6 @@ drive_mkdir <- function(path = NULL, name = NULL, verbose = TRUE) {
     name <- name %||% path_parts$name
   }
 
-  if (is.null(name)) {
-    stop_glue("New folder's name must be specified either via 'path' or 'name'.")
-  }
   params <- list(
     name = name,
     mimeType = "application/vnd.google-apps.folder",

@@ -48,7 +48,7 @@ del <- drive_rm(
   verbose = FALSE
 )
 drive_mkdir("abc")
-drive_mkdir(path = "abc/def")
+drive_mkdir("abc/def")
 ```
 
 ### Package conventions

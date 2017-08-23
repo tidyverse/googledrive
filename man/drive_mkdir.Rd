@@ -2,21 +2,17 @@
 % Please edit documentation in R/drive_mkdir.R
 \name{drive_mkdir}
 \alias{drive_mkdir}
-\title{Create a folder on Drive.}
+\title{Create a folder}
 \usage{
-drive_mkdir(path = NULL, name = NULL, verbose = TRUE)
+drive_mkdir(folder, parent = NULL, verbose = TRUE)
 }
 \arguments{
-\item{path}{Specifies target destination for the new folder on Google
-Drive. Can be an actual path (character), a file id marked with
-\code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
-actual path, it is best to explicitly indicate if it's a folder by
-including a trailing slash, since it cannot always be worked out from the
-context of the call. {}}
+\item{folder}{Name for the new folder or, optionally, a path that specifies
+an existing parent folder, as well as the new name.}
 
-\item{name}{Character, new folder name if not specified as part of
-\code{path}. This will force \code{path} to be treated as a folder, even if
-it is character and lacks a trailing slash. {}}
+\item{parent}{Target destination for the new folder, i.e. a folder or a Team
+Drive. Can be given as an actual path (character), a file id or URL marked
+with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root folder.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -26,7 +22,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Create a folder on Drive.
+Create a folder
 }
 \examples{
 \dontrun{
@@ -34,16 +30,12 @@ Create a folder on Drive.
 drive_mkdir("abc/def")
 
 ## This will also create a folder named "def" in folder "abc".
-drive_mkdir(path = "abc", name = "def")
+drive_mkdir("def", parent = "abc")
 
 ## Another way to create a folder named "def" in folder "abc",
 ## this time with parent folder stored in a dribble.
 abc <- as_dribble("abc")
-drive_mkdir(path = abc, name = "def")
-
-## Yet another way to do this,
-## this time with parent folder provide via id.
-drive_mkdir(path = as_id(abc$id), name = "def")
+drive_mkdir("def", parent = abc)
 
 ## clean up
 drive_ls(path = "abc", pattern = "^def$", type = "folder") \%>\% drive_rm()

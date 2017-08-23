@@ -19,15 +19,14 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("drive_mkdir() errors for bad input (before hitting Drive API)", {
-  expect_error(drive_mkdir(), "name must be specified")
-  expect_error(drive_mkdir(letters), "is_string\\(path\\) is not TRUE")
-  expect_error(drive_mkdir(name = letters), "is_string\\(name\\) is not TRUE")
+  expect_error(drive_mkdir(), "argument \"folder\" is missing")
+  expect_error(drive_mkdir(letters), "is_string\\(folder\\) is not TRUE")
 })
 
 test_that("drive_mkdir() errors if parent path does not exist", {
   skip_if_no_token()
   skip_if_offline()
-  expect_error(drive_mkdir("qweruiop", "a"))
+  expect_error(drive_mkdir("a", parent = "qweruiop"))
 })
 
 test_that("drive_mkdir() errors if parent exists but is not a folder", {
@@ -38,7 +37,7 @@ test_that("drive_mkdir() errors if parent exists but is not a folder", {
     n_max = 1
   )
   expect_error(
-    drive_mkdir(x, "a"),
+    drive_mkdir("a", parent = x),
     "Requested parent 'path' is invalid"
   )
 })
@@ -51,6 +50,7 @@ test_that("drive_mkdir() creates a folder in root folder", {
   out <- drive_mkdir(me_("I-live-in-root"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("I-live-in-root"))
+  expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
 })
 
 test_that("drive_mkdir() accepts parent folder given as dribble", {
@@ -59,7 +59,7 @@ test_that("drive_mkdir() accepts parent folder given as dribble", {
   on.exit(drive_rm(me_("a")))
 
   PARENT <- drive_get(nm_("OMNI-PARENT"))
-  out <- drive_mkdir(PARENT, me_("a"))
+  out <- drive_mkdir(me_("a"), PARENT)
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("a"))
   expect_identical(
@@ -74,7 +74,7 @@ test_that("drive_mkdir() accepts parent folder given as file id", {
   on.exit(drive_rm(me_("b")))
 
   PARENT <- drive_get(nm_("OMNI-PARENT"))
-  out <- drive_mkdir(as_id(PARENT$id), me_("b"))
+  out <- drive_mkdir(me_("b"), as_id(PARENT$id))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("b"))
 })
@@ -89,7 +89,7 @@ test_that("drive_mkdir() accepts name as part of path", {
   expect_identical(out$name, me_("c"))
 })
 
-test_that("drive_mkdir() accepts name as part of path with trailing slash", {
+test_that("drive_mkdir() accepts folder = parent/name/, ie w/ trailing slash", {
   skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(me_("d")))
@@ -99,18 +99,18 @@ test_that("drive_mkdir() accepts name as part of path with trailing slash", {
   expect_identical(out$name, me_("d"))
 })
 
-test_that("drive_mkdir() accepts path and name", {
+test_that("drive_mkdir() parent separately, as a path", {
   skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(c(me_("e"), me_("f"))))
 
-  ## no trailing slash on path
-  out <- drive_mkdir(nm_("OMNI-PARENT"), me_("e"))
+  ## no trailing slash on parent
+  out <- drive_mkdir(me_("e"), parent = nm_("OMNI-PARENT"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("e"))
 
-  ## yes trailing slash on path
-  out <- drive_mkdir(file.path(nm_("OMNI-PARENT"), ""), me_("f"))
+  ## yes trailing slash on parent
+  out <- drive_mkdir(me_("f"), file.path(nm_("OMNI-PARENT"), ""))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("f"))
 })
