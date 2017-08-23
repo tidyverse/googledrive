@@ -82,8 +82,8 @@ tasks, such as uploading or downloading Drive files. The functions here are
 intended for internal use and for programming around the Drive API.</p>
     
 
-    <pre class="usage"><span class='fu'>generate_request</span>(<span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='fu'>character</span>(), <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(),
-  <span class='kw'>key</span> <span class='kw'>=</span> <span class='fu'><a href='drive_api_key.html'>drive_api_key</a></span>(), <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='drive_token.html'>drive_token</a></span>())
+    <pre class="usage"><span class='fu'>generate_request</span>(<span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='fu'>character</span>(), <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(), <span class='kw'>key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='drive_token.html'>drive_token</a></span>())
 
 <span class='fu'>build_request</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='no'>method</span>, <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(), <span class='kw'>body</span> <span class='kw'>=</span> <span class='fu'>list</span>(),
   <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -94,7 +94,7 @@ intended for internal use and for programming around the Drive API.</p>
     <tr>
       <th>endpoint</th>
       <td><p>Character. Nickname for one of the selected Drive v3 API
-endpoints built into googledrive. Inspect via <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</p></td>
+endpoints built into googledrive. Learn more in <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</p></td>
     </tr>
     <tr>
       <th>params</th>
@@ -103,13 +103,20 @@ the query, or, for <code>generate_request()</code> only, the body.</p></td>
     </tr>
     <tr>
       <th>key</th>
-      <td><p>API key, if none is already present in <code>params</code>. Set to <code>NULL</code> to
-suppress the inclusion of an API key.</p></td>
+      <td><p>API key. Will be needed for requests that don't contain a token.
+The need for an API key in the absence of a token is explained in Google's
+document
+<a href='https://support.google.com/googleapi/answer/6158857?hl=en&amp;ref_topic=7013279'>Credentials, access, security, and identity</a>.
+In order of precedence, these sources are consulted: the formal <code>key</code>
+argument, a <code>key</code> parameter in <code>params</code>, a pre-configured API key fetched
+via <code><a href='drive_api_key.html'>drive_api_key()</a></code>. googledrive ships with a built-in key or users can
+override with their own via <code><a href='drive_auth_config.html'>drive_auth_config()</a></code>.</p></td>
     </tr>
     <tr>
       <th>token</th>
-      <td><p>Drive token, obtained from <code><a href='drive_auth.html'>drive_auth()</a></code>. Set to <code>NULL</code> to
-suppress the inclusion of a token.</p></td>
+      <td><p>Drive token. Set to <code>NULL</code> to suppress the inclusion of a token.
+Note that, if auth has been de-activated via <code><a href='drive_auth_config.html'>drive_auth_config()</a></code>,
+<code><a href='drive_token.html'>drive_token()</a></code> will actually return <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>path</th>
@@ -132,22 +139,25 @@ using named parameters found in the <code>params</code> argument.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>list()</code> Components are <code>method</code>, <code>path</code>, <code>query</code>, <code>body</code>,
-<code>token</code>, and <code>url</code>, suitable as input for <code><a href='make_request.html'>make_request()</a></code>. The
-<code>path</code> is post-substitution and the <code>query</code> is a named list of all the
-non-body <code>params</code> that were not used during this substitution. <code>url</code> is the
-full URL after prepending the base URL for the Drive v3 API and appending
-the query.</p>
+<code>token</code>, and <code>url</code>, suitable as input for <code><a href='make_request.html'>make_request()</a></code>. The <code>path</code> is
+post-substitution and the <code>query</code> is a named list of all the non-body
+<code>params</code> that were not used during this substitution. <code>url</code> is the full URL
+after prepending the base URL for the Drive v3 API and appending the query.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>There are two functions:</p><ul>
-<li><p><code>generate_request()</code> takes a nickname for an endpoint and uses the API spec
-to look up the <code>path</code> and <code>method</code>. The <code>params</code> are checked for validity and
-completeness with respect to the endpoint. Body parameters are separated from
-those destined for path substitution or the query. If <code>params</code> does not
-already specify an API key, the argument <code>key</code> is used. <code>generate_request()</code>
-then passes things along to <code>gs_build_request()</code>. Use <code><a href='drive_endpoints.html'>drive_endpoints()</a></code> to
-see which endpoints can be accessed this way.</p></li>
+<li><p><code>generate_request()</code> lets you provide the bare minimum of input. It takes a
+nickname for an endpoint and:</p><ul>
+<li><p>Uses the API spec to look up the <code>path</code> and <code>method</code>.</p></li>
+<li><p>Checks <code>params</code> for validity and completeness with respect to the
+endpoint. Separates body parameters from those destined for path
+substitution or the query.</p></li>
+<li><p>Adds an API key to the query if <code>token = NULL</code>. Or, at least, we try.</p></li>
+<li><p>Adds <code>supportsTeamDrives = TRUE</code> to the query if the endpoint requires.</p></li>
+</ul></li>
+</ul><p><code>generate_request()</code> then passes things along to <code>build_request()</code>. Use
+<code><a href='drive_endpoints.html'>drive_endpoints()</a></code> to see which endpoints can be accessed this way.</p><ul>
 <li><p><code>build_request()</code> builds a request from explicit parts. It is quite
 dumb, only doing URL endpoint substitution and URL formation. It's up to the
 caller to make sure the <code>path</code>, <code>method</code>, <code>params</code>, <code>body</code>, and <code>token</code> are

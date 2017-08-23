@@ -5,24 +5,31 @@
 \alias{build_request}
 \title{Build a request for the Google Drive v3 API}
 \usage{
-generate_request(endpoint = character(), params = list(),
-  key = drive_api_key(), token = drive_token())
+generate_request(endpoint = character(), params = list(), key = NULL,
+  token = drive_token())
 
 build_request(path = "", method, params = list(), body = list(),
   token = NULL)
 }
 \arguments{
 \item{endpoint}{Character. Nickname for one of the selected Drive v3 API
-endpoints built into googledrive. Inspect via \code{\link[=drive_endpoints]{drive_endpoints()}}.}
+endpoints built into googledrive. Learn more in \code{\link[=drive_endpoints]{drive_endpoints()}}.}
 
 \item{params}{Named list. Parameters destined for endpoint URL substitution,
 the query, or, for \code{generate_request()} only, the body.}
 
-\item{key}{API key, if none is already present in \code{params}. Set to \code{NULL} to
-suppress the inclusion of an API key.}
+\item{key}{API key. Will be needed for requests that don't contain a token.
+The need for an API key in the absence of a token is explained in Google's
+document
+\href{https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279}{Credentials, access, security, and identity}.
+In order of precedence, these sources are consulted: the formal \code{key}
+argument, a \code{key} parameter in \code{params}, a pre-configured API key fetched
+via \code{\link[=drive_api_key]{drive_api_key()}}. googledrive ships with a built-in key or users can
+override with their own via \code{\link[=drive_auth_config]{drive_auth_config()}}.}
 
-\item{token}{Drive token, obtained from \code{\link[=drive_auth]{drive_auth()}}. Set to \code{NULL} to
-suppress the inclusion of a token.}
+\item{token}{Drive token. Set to \code{NULL} to suppress the inclusion of a token.
+Note that, if auth has been de-activated via \code{\link[=drive_auth_config]{drive_auth_config()}},
+\code{drive_token()} will actually return \code{NULL}.}
 
 \item{path}{Character, e.g.,
 \code{"drive/v3/files/{fileId}"}. It can include
@@ -36,11 +43,10 @@ using named parameters found in the \code{params} argument.}
 }
 \value{
 \code{list()}\cr Components are \code{method}, \code{path}, \code{query}, \code{body},
-\code{token}, and \code{url}, suitable as input for \code{\link[=make_request]{make_request()}}. The
-\code{path} is post-substitution and the \code{query} is a named list of all the
-non-body \code{params} that were not used during this substitution. \code{url} is the
-full URL after prepending the base URL for the Drive v3 API and appending
-the query.
+\code{token}, and \code{url}, suitable as input for \code{\link[=make_request]{make_request()}}. The \code{path} is
+post-substitution and the \code{query} is a named list of all the non-body
+\code{params} that were not used during this substitution. \code{url} is the full URL
+after prepending the base URL for the Drive v3 API and appending the query.
 }
 \description{
 Build a request, using some knowledge of the
@@ -52,13 +58,21 @@ intended for internal use and for programming around the Drive API.
 \details{
 There are two functions:
 \itemize{
-\item \code{generate_request()} takes a nickname for an endpoint and uses the API spec
-to look up the \code{path} and \code{method}. The \code{params} are checked for validity and
-completeness with respect to the endpoint. Body parameters are separated from
-those destined for path substitution or the query. If \code{params} does not
-already specify an API key, the argument \code{key} is used. \code{generate_request()}
-then passes things along to \code{gs_build_request()}. Use \code{\link[=drive_endpoints]{drive_endpoints()}} to
-see which endpoints can be accessed this way.
+\item \code{generate_request()} lets you provide the bare minimum of input. It takes a
+nickname for an endpoint and:
+\itemize{
+\item Uses the API spec to look up the \code{path} and \code{method}.
+\item Checks \code{params} for validity and completeness with respect to the
+endpoint. Separates body parameters from those destined for path
+substitution or the query.
+\item Adds an API key to the query if \code{token = NULL}. Or, at least, we try.
+\item Adds \code{supportsTeamDrives = TRUE} to the query if the endpoint requires.
+}
+}
+
+\code{generate_request()} then passes things along to \code{build_request()}. Use
+\code{\link[=drive_endpoints]{drive_endpoints()}} to see which endpoints can be accessed this way.
+\itemize{
 \item \code{build_request()} builds a request from explicit parts. It is quite
 dumb, only doing URL endpoint substitution and URL formation. It's up to the
 caller to make sure the \code{path}, \code{method}, \code{params}, \code{body}, and \code{token} are

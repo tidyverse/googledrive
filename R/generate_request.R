@@ -7,13 +7,17 @@
 #' intended for internal use and for programming around the Drive API.
 #'
 #' There are two functions:
-#' * `generate_request()` takes a nickname for an endpoint and uses the API spec
-#' to look up the `path` and `method`. The `params` are checked for validity and
-#' completeness with respect to the endpoint. Body parameters are separated from
-#' those destined for path substitution or the query. If `params` does not
-#' already specify an API key, the argument `key` is used. `generate_request()`
-#' then passes things along to `gs_build_request()`. Use [drive_endpoints()] to
-#' see which endpoints can be accessed this way.
+#' * `generate_request()` lets you provide the bare minimum of input. It takes a
+#'   nickname for an endpoint and:
+#'   - Uses the API spec to look up the `path` and `method`.
+#'   - Checks `params` for validity and completeness with respect to the
+#'     endpoint. Separates body parameters from those destined for path
+#'     substitution or the query.
+#'   - Adds an API key to the query if `token = NULL`. Or, at least, we try.
+#'   - Adds `supportsTeamDrives = TRUE` to the query if the endpoint requires.
+#'
+#'   `generate_request()` then passes things along to `build_request()`. Use
+#'   [drive_endpoints()] to see which endpoints can be accessed this way.
 #' * `build_request()` builds a request from explicit parts. It is quite
 #' dumb, only doing URL endpoint substitution and URL formation. It's up to the
 #' caller to make sure the `path`, `method`, `params`, `body`, and `token` are
@@ -21,20 +25,26 @@
 #' returned by [drive_endpoints()].
 #'
 #' @param endpoint Character. Nickname for one of the selected Drive v3 API
-#'   endpoints built into googledrive. Inspect via [drive_endpoints()].
+#'   endpoints built into googledrive. Learn more in [drive_endpoints()].
 #' @param params Named list. Parameters destined for endpoint URL substitution,
 #'   the query, or, for `generate_request()` only, the body.
-#' @param key API key, if none is already present in `params`. Set to `NULL` to
-#'   suppress the inclusion of an API key.
-#' @param token Drive token, obtained from [drive_auth()]. Set to `NULL` to
-#'   suppress the inclusion of a token.
+#' @param key API key. Will be needed for requests that don't contain a token.
+#'   The need for an API key in the absence of a token is explained in Google's
+#'   document
+#'   [Credentials, access, security, and identity](https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279).
+#'   In order of precedence, these sources are consulted: the formal `key`
+#'   argument, a `key` parameter in `params`, a pre-configured API key fetched
+#'   via [drive_api_key()]. googledrive ships with a built-in key or users can
+#'   override with their own via [drive_auth_config()].
+#' @param token Drive token. Set to `NULL` to suppress the inclusion of a token.
+#'   Note that, if auth has been de-activated via [drive_auth_config()],
+#'   `drive_token()` will actually return `NULL`.
 #'
 #' @return `list()`\cr Components are `method`, `path`, `query`, `body`,
-#'   `token`, and `url`, suitable as input for [make_request()]. The
-#'   `path` is post-substitution and the `query` is a named list of all the
-#'   non-body `params` that were not used during this substitution. `url` is the
-#'   full URL after prepending the base URL for the Drive v3 API and appending
-#'   the query.
+#'   `token`, and `url`, suitable as input for [make_request()]. The `path` is
+#'   post-substitution and the `query` is a named list of all the non-body
+#'   `params` that were not used during this substitution. `url` is the full URL
+#'   after prepending the base URL for the Drive v3 API and appending the query.
 #' @export
 #' @family low-level API functions
 #' @examples
@@ -46,7 +56,7 @@
 #' req
 generate_request <- function(endpoint = character(),
                              params = list(),
-                             key = drive_api_key(),
+                             key = NULL,
                              token = drive_token()) {
   ept <- .endpoints[[endpoint]]
   if (is.null(ept)) {
@@ -55,11 +65,16 @@ generate_request <- function(endpoint = character(),
 
   params <- match_params(params, ept$parameters)
   params <- partition_params(params, extract_body_names(ept$parameters))
-  ## preserve explicit `key = NULL` in params
-  if (!"key" %in% names(params$unmatched)) {
-    params[["unmatched"]][["key"]] <- key
+
+  if (is.null(token)) {
+    key <- key %||% params[["unmatched"]][["key"]] %||% drive_api_key()
+    if (is.null(key)) {
+      warning_glue("Request contains neither a token nor an API key.")
+    } else {
+      params[["unmatched"]][["key"]] <- key
+    }
   }
-  ## support Team Drives
+
   if (!is.null(ept[["parameters"]][["supportsTeamDrives"]])) {
     params[["unmatched"]][["supportsTeamDrives"]] <- TRUE
   }
