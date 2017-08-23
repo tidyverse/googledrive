@@ -31,7 +31,7 @@ How do you get files into a dribble in the first place? Two main functions for t
   * `drive_find()`: Similar to <drive.google.com>. Lists all your files or lets you narrow things down based on name or file properties.
   * `drive_get()`: Get files by name -- file path, actually -- or by id, including by URL.
   
-## `drive_find()`
+## drive_find()
 
 Read the help for complete documentation but here are some of the many ways to call `drive_find()`:
 
@@ -50,7 +50,7 @@ drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
 
 `drive_find()` is for exhaustive file listing or filtering on file properties.
 
-## `drive_get()`
+## drive_get()
 
 Read the help for complete documentation but here are how calls to `drive_get()` can look:
 
