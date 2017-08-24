@@ -25,7 +25,8 @@
 #' ## that contain the letters 'def'
 #' drive_ls(path = "abc", pattern = "def", type = "spreadsheet")
 #' }
-drive_ls <- function(path = NULL, ...) {
+drive_ls <- function(path = NULL, ..., recursive = TRUE) {
+  stopifnot(is.logical(recursive), length(recursive) == 1)
   if (is.null(path)) {
     return(drive_find(...))
   }
@@ -35,18 +36,34 @@ drive_ls <- function(path = NULL, ...) {
   }
   path <- as_dribble(path)
   path <- confirm_single_file(path)
+  message_glue("\n\nname = {path$name}")
 
-  params <- list(...)
-  params <- append(params, c(q = paste(sq(path$id), "in parents")))
-
+  dots <- list(...)
   if (is_team_drivy(path)) {
     if (is_team_drive(path)) {
-      params[["team_drive"]] <- as_id(path$id)
+      dots[["team_drive"]] <- as_id(path$id)
     } else {
-      params[["team_drive"]] <- as_id(
-        path$drive_resource[[1]][["teamDriveId"]]
-      )
+      dots[["team_drive"]] <- as_id(path$drive_resource[[1]][["teamDriveId"]])
     }
   }
-  do.call(drive_find, params)
+
+  params <- c(dots, c(q = glue("{sq(path$id)} in parents")))
+  out <- do.call(drive_find, params)
+  message_glue("number of files = {nrow(out)}")
+
+  if (!recursive) return(out)
+
+  folders <- out[is_folder(out), ]
+
+  message_glue("number of folders = {nrow(folders)}")
+
+  if (!some_files(folders)) return(out)
+
+  dots[["recursive"]] <- TRUE
+  foo <- purrr::map(folders$id, function(x) {dots[["path"]] <- as_id(x); dots})
+
+  recurse_out <- lapply(foo, function(x) do.call(drive_ls, x))
+  message_glue("{path$name}: length(recurse_out) = {length(recurse_out)}")
+
+  c(list(out), recurse_out)
 }
