@@ -4,7 +4,7 @@
 \alias{drive_ls}
 \title{List contents of a folder or Team Drive}
 \usage{
-drive_ls(path = NULL, ...)
+drive_ls(path = NULL, ..., recursive = FALSE)
 }
 \arguments{
 \item{path}{Specifies a single folder on Google Drive whose contents you want
@@ -13,27 +13,33 @@ to list. Can be an actual path (character), a file id or URL marked with
 Drive, it must be passed as a \code{\link{dribble}}.}
 
 \item{...}{Any parameters that are valid for \code{\link[=drive_find]{drive_find()}}.}
+
+\item{recursive}{Logical, indicating if you want only direct children of
+\code{path} (\code{recursive = FALSE}, the default) or all children, including
+indirect (\code{recursive = TRUE}).}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-List the contents of a folder or Team Drive, nonrecursively. This is a thin
-wrapper around \code{\link[=drive_find]{drive_find()}}, that simply limits the search to direct
-children of a specific folder or to top-level items of a Team Drive.
+List the contents of a folder or Team Drive, recursively or not. This is a
+thin wrapper around \code{\link[=drive_find]{drive_find()}}, that simply adds one constraint: the
+search is limited to direct or indirect children of \code{path}.
 }
 \examples{
 \dontrun{
 ## get contents of the folder 'abc' (non-recursive)
 drive_ls("abc")
 
-## get contents of folder 'abc' that contain the
-## letters 'def'
+## get contents of folder 'abc' whose names contain the letters 'def'
 drive_ls(path = "abc", pattern = "def")
 
 ## get all Google spreadsheets in folder 'abc'
-## that contain the letters 'def'
+## whose names contain the letters 'def'
 drive_ls(path = "abc", pattern = "def", type = "spreadsheet")
+
+## get all the files below 'abc', recursively, that are starred
+drive_ls(path = "abc", q = "starred = true", recursive = TRUE)
 }
 }

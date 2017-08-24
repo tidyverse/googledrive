@@ -22,10 +22,36 @@ if (SETUP) {
     file.path(R.home("doc"), "html", "about.html"),
     path = file.path(nm_("list-me"), nm_("about-html"))
   )
+
+  ## for testing `recursive = TRUE`
+  top <- drive_mkdir(nm_("topdir"))
+  drive_upload(
+    system.file("DESCRIPTION"),
+    path = top,
+    name = nm_("apple"),
+    type = "document",
+    starred = TRUE
+  )
+  folder1_level1 <- drive_mkdir(nm_("folder1-level1"), parent = top)
+  drive_mkdir(nm_("folder2-level1"), parent = top)
+  x <- drive_upload(
+    system.file("DESCRIPTION"),
+    path = folder1_level1,
+    name = nm_("banana"),
+    type = "document"
+  )
+  folder1_level2 <- drive_mkdir(nm_("folder1-level2"), parent = folder1_level1)
+  x <- drive_upload(
+    system.file("DESCRIPTION"),
+    path = folder1_level2,
+    name = nm_("cranberry"),
+    type = "document",
+    starred = TRUE
+  )
 }
 
 # ---- tests ----
-test_that("drive_ls() errors if file does not exist", {
+test_that("drive_ls() errors if `path` does not exist", {
   skip_if_no_token()
   skip_if_offline()
 
@@ -76,4 +102,25 @@ test_that("drive_ls() passes ... through to drive_find()", {
     out$name,
     c(nm_("DESCRIPTION"), nm_("about-html"))
   )
+})
+
+test_that("`recursive` does its job", {
+  out <- drive_ls(nm_("topdir"), recursive = FALSE)
+  expect_true(
+    all(
+      c(nm_("apple"), nm_("folder1-level1"), nm_("folder2-level1"))
+      %in% out$name
+    )
+  )
+
+  out <- drive_ls(nm_("topdir"), recursive = TRUE)
+  expect_true(
+    all(
+      c(nm_("apple"), nm_("folder1-level1"), nm_("folder2-level1"),
+        nm_("banana"), nm_("folder1-level2"), nm_("cranberry")) %in% out$name
+    )
+  )
+
+  out <- drive_ls(nm_("topdir"), q = "starred = true", recursive = TRUE)
+  expect_true(all(c(nm_("apple"), nm_("cranberry")) %in% out$name))
 })
