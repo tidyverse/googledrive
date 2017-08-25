@@ -1,0 +1,66 @@
+---
+title: "Dealing with permissions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Dealing with permissions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, eval = FALSE}
+library(purrr)
+```
+
+```{r, eval = FALSE}
+file <- drive_upload(system.file("DESCRIPTION"))
+```
+
+```{r, eval = FALSE}
+file <- drive_reveal(file, "permissions")
+```
+
+Let's give someone permission to edit this file using the `emailAddress` and `emailMessage` parameters.
+```{r, eval = FALSE}
+file <- file %>%
+  drive_share(
+    role = "writer",
+    type = "user",
+    emailAddress = "serena@example.com",
+    emailMessage = "Would appreciate your feedback on this!"
+  )
+```
+
+We also want anyone to be able to read the file.
+
+```{r, eval = FALSE}
+file <- file %>%
+  drive_share(role = "reader", type = "anyone")
+```
+
+Now that we've made a few updates to our permissions, the `permissions_resource` list-col in our `dribble` has been populated accordingly. We can pull important pieces out of this.
+
+```{r, eval = FALSE}
+permissions <- tibble::tibble(
+  id = map_chr(file$permissions_resource[[1]]$permissions, "id", .null = NA_character_),
+  name = map_chr(file$permissions_resource[[1]]$permissions, "displayName", .null = NA_character_),
+  type = map_chr(file$permissions_resource[[1]]$permissions, "type", .null = NA_character_),
+  role = map_chr(file$permissions_resource[[1]]$permissions, "role", .null = NA_character_),
+  email = map_chr(file$permissions_resource[[1]]$permissions, "emailAddress", .null = NA_character_),
+  deleted = map_lgl(file$permissions_resource[[1]]$permissions, "deleted", .null = NA)
+)
+```
+
+## Clean up
+
+```{r, eval = FALSE}
+drive_rm(file)
+```
+
+
