@@ -66,7 +66,7 @@ TL;DR with more detail below:
 
 ``` r
 ## store an OAuth token
-token <- drive_auth(new_user = TRUE, cache = FALSE)
+token <- drive_auth(reset = TRUE, cache = FALSE)
 saveRDS(token, rprojroot::find_testthat_root_file("testing-token.rds"))
 
 ## gather all the test setup and clean code from individual test files
@@ -91,7 +91,7 @@ rmarkdown::render(rprojroot::find_testthat_root_file("clean.R"))
 1.  Obtain a new, non-caching token via browser flow.
 
     ``` r
-    token <- drive_auth(new_user = TRUE, cache = FALSE)
+    token <- drive_auth(reset = TRUE, cache = FALSE)
     ```
 
 2.  Double-check that the user associated with the token is what you want.
