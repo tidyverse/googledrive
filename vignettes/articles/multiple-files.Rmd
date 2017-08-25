@@ -40,19 +40,21 @@ In general, our principle is if there are multiple parameters that would likely 
 
 In this example, we have multiple files we'd like to upload into a folder on Drive. We then would like to rename them with a prefix of the date they were uploaded.
 
-### Upload all files in a folder called "to-upload"
+### Upload all files into a folder called "to-upload"
 
-```{r}
+```{r, eval = FALSE}
 library(purrr)
 ```
 
-```{r}
-local_files <- dir("~/desktop/to-upload", full.names = TRUE)
+Let's grab a set of files to upload.
+
+```{r, eval = FALSE}
+local_files <- list.files(file.path(R.home("doc"), "html"), full.names = TRUE)
 ```
 
 Create a folder on your Drive called "to-upload" and upload all files into this folder by iterating over the `local_files` using `map()`.
 
-```{r}
+```{r, eval = FALSE}
 folder <- drive_mkdir("to-upload")
 files <- map(local_files, drive_upload, path = folder)
 ```
@@ -63,8 +65,8 @@ files <- map(local_files, drive_upload, path = folder)
 
 If we want to rename all of the files in this folder with a date prefix, we can do so, again by iterating over the data. Notice here we are using `map2_df()`. The `2` is because we are using two arguments, the `files` we are iterating over as well as the `new_names`. Rather than just using `map2()`, which will output a list, we are using `map2_df()` to bind the individual **dribbles** together into a single `tibble` for easier viewing and processing. This makes sense since this is our last action we are performing that requires iterating.
 
-```{r}
-new_names <- glue::glue_data(files, "{Sys.Date()}_{name}")
+```{r, eval = FALSE}
+new_names <- glue::glue("{Sys.Date()}_{basename(local_files)}")
 files <- map2_df(files, new_names, drive_rename)
 ```
 
@@ -72,6 +74,6 @@ files <- map2_df(files, new_names, drive_rename)
 
 Our delete function, `drive_rm()` is vectorized, and therefore does not need a `map()` in order to work. Additionally, since we uploaded all of the files into a single folder, we can just delete the folder and the files will also be deleted.
 
-```{r}
+```{r, eval = FALSE}
 drive_rm(folder)
 ```
