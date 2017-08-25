@@ -105,6 +105,9 @@ test_that("drive_ls() passes ... through to drive_find()", {
 })
 
 test_that("`recursive` does its job", {
+  skip_if_no_token()
+  skip_if_offline()
+
   out <- drive_ls(nm_("topdir"), recursive = FALSE)
   expect_true(
     all(
