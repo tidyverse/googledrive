@@ -122,9 +122,9 @@ root_folder <- function() drive_get(id = "root")
 root_id <- function() root_folder()$id
 
 dribble_with_path <- function() {
-  put_column(dribble(), path = character(), .after = "name")
+  put_column(dribble(), nm = "path", val = character(), .after = "name")
 }
 
 dribble_with_path_for_root <- function() {
-  put_column(root_folder(), path = "~/", .after = "name")
+  put_column(root_folder(), nm = "path", val = "~/", .after = "name")
 }

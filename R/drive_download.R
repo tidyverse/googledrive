@@ -107,7 +107,7 @@ drive_download <- function(file,
   } else {
     stop_glue("The file doesn't seem to have downloaded.")
   }
-  invisible(put_column(file, local_path = path, .after = "name"))
+  invisible(put_column(file, nm = "local_path", val = path, .after = "name"))
 }
 
 ## get the default export MIME type for a native Google MIME type

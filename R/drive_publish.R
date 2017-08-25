@@ -103,12 +103,14 @@ drive_reveal_published <- function(file) {
   revision_resource <- purrr::map(file$id, get_publish_one)
   file <- put_column(
     file,
-    published = purrr::map_lgl(revision_resource, "published", .default = FALSE),
+    nm = "published",
+    val = purrr::map_lgl(revision_resource, "published", .default = FALSE),
     .after = 1
   )
   put_column(
     file,
-    revision_resource = revision_resource
+    nm = "revision_resource",
+    val = revision_resource
   )
 }
 

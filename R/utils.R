@@ -15,19 +15,14 @@ or <- function(x) collapse(x, sep = " or ")
 ## tibble::add_column() except
 ##   1. can only add 1 column
 ##   2. if column by this name already exists, overwrite it in place
-put_column <- function(.data, ..., .before = NULL, .after = NULL) {
-  new_var <- rlang::dots_list(...)
-  if (length(new_var) == 0) return(.data)
-  if (length(new_var) != 1) {
-    stop_glue("Can only put exactly one column.")
-  }
-  nm <- names(new_var)
+##   3. provide `nm` and `val` separately
+put_column <- function(.data, nm, val, .before = NULL, .after = NULL) {
   if (nm %in% names(.data)) {
-    .data[[nm]] <- new_var[[nm]]
-    return(.data)
+    .data[[nm]] <- val
+    .data
+  } else {
+    tibble::add_column(.data, !! nm := val, .before = .before, .after = .after)
   }
-  tibble::add_column(.data, !!! new_var, .before = .before, .after = .after
-  )
 }
 
 stop_glue <- function(..., .sep = "", .envir = parent.frame(),

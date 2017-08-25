@@ -282,9 +282,8 @@ promote <- function(d, elem) {
   elem_orig <- elem
   elem <- toCamel(elem)
   present <- any(purrr::map_lgl(d$drive_resource, ~ elem %in% names(.x)))
-  new <- list()
   if (present) {
-    new[[elem_orig]] <- purrr::simplify(purrr::map(d$drive_resource, elem))
+    val <- purrr::simplify(purrr::map(d$drive_resource, elem))
     ## TO DO: find a way to emulate .default behavior from type-specific
     ## mappers ... might need to create my own simplify()
     ## https://github.com/tidyverse/purrr/issues/336
@@ -294,7 +293,7 @@ promote <- function(d, elem) {
     ## TO DO: do we really want promote() to be this forgiving?
     ## adds a placeholder column for elem if not present in drive_resource
     ## ensure elem is added, even if there are zero rows
-    new[[elem_orig]] <- rep_len(list(NULL), nrow(d))
+    val <- rep_len(list(NULL), nrow(d))
   }
-  put_column(d, !!! new, .after = 1)
+  put_column(d, nm = elem_orig, val = val, .after = 1)
 }

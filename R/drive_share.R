@@ -123,12 +123,14 @@ drive_reveal_permissions <- function(file) {
   ## `shared` and their NULLs would force `shared` to be a list-column
   file <- put_column(
     file,
-    shared = purrr::map_lgl(file$drive_resource, "shared", .default = NA),
+    nm = "shared",
+    val = purrr::map_lgl(file$drive_resource, "shared", .default = NA),
     .after = "name"
   )
   put_column(
     file,
-    permissions_resource = permissions_resource
+    nm = "permissions_resource",
+    val = permissions_resource
   )
 }
 
