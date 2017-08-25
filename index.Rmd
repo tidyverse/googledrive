@@ -20,42 +20,46 @@ googledrive::drive_auth(token_path)
 
 [![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master) 
 
-WARNING: this is still under construction. If you have feedback, please comment on [a relevant existing issue](https://github.com/tidyverse/googledrive/issues) or open a new one.
-
 ## Overview
 
-`googledrive` interfaces with Google Drive from R, allowing users to seamlessly manage files on Google Drive from the comfort of their console. 
+googledrive allows you to interact with files on Google Drive from R.
 
 ## Installation
 
+googledrive will soon be submitted to CRAN, but for now, install it from GitHub:
+
 ```{r, eval = FALSE}
-# Obtain the the development version from GitHub:
 # install.packages("devtools")
 devtools::install_github("tidyverse/googledrive")
 ```
 
 ## Usage
 
-### Load `googledrive`
+### Load googledrive
 
 ```{r}
 library("googledrive")
 ```
 
 ```{r data-setup, include = FALSE}
-del <- drive_rm(
-  c("README-mirrors.csv", "~/abc", "boring-text.txt"),
-  verbose = FALSE
-)
-drive_mkdir("abc")
-drive_mkdir("abc/def")
+CLEAN <- SETUP <- FALSE
+if (isTRUE(CLEAN)) {
+  del <- drive_rm(
+    c("README-mirrors.csv", "~/abc", "boring-text.txt"),
+    verbose = FALSE
+  )
+}
+if (isTRUE(SETUP)) {
+  drive_mkdir("abc")
+  drive_mkdir("abc/def")
+}
 ```
 
 ### Package conventions
 
 * Most functions begin with the prefix `drive_`.
 * Goal is to allow Drive access that feels similar to Unix file system utilities, e.g. `find`, `ls`, `mv`, `cp`, `mkdir`, and `rm`.
-* The metadata for one or more Drive files is held in a `dribble`, a "Drive tibble". This is a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive.
+* The metadata for one or more Drive files is held in a `dribble`, a "Drive tibble". This is a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive. It is a compromise between what people want to see (file name), what the API wants (file id), and the metadata needed for general file operations.
 * googledrive is "pipe-friendly" and, in fact, re-exports `%>%`, but does not require its use.
 
 ### Quick demo
@@ -81,19 +85,20 @@ Alternatively, you can refine the search using the `q` query parameter. Accepted
 (fls <- drive_find(q = "fullText contains 'horsebean'"))
 ```
 
-You often want to store the result of a googledrive call, as we do with `fls` above, so you can act on those files in the future.
+You often want to store the result of a googledrive call, as we do with `fls` above. `fls` is a dribble with info on several files and can be used as the input for downstream calls.
 
 #### Identify files
 
-In addition to `drive_find()`, you can also identify files by name (path, really) or by Drive file id using `drive_get()`.
+In addition to `drive_find()`, you can also identify files by name (path, really) or by Drive file id using `drive_get()`. `as_id()` can be used to coerce various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and dribbles.
 
 ```{r}
 ## identify file by path
 (x <- drive_get("~/abc/def"))
 
-## let's grab that file id and retrieve it that way
+## let's retrieve it by id (also a great way to force-refresh metadata)
 x$id
 drive_get(as_id(x$id))
+drive_get(as_id(x))
 ```
 
 In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a `dribble`. If it's ambiguous, use `as_id()` to flag a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.
@@ -112,9 +117,9 @@ We can upload any file type.
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
 
 ```{r}
-## example of using a dribble as input
-mirrors <- drive_rm(mirrors)
+drive_rm(mirrors)
 
+## example of using a dribble as input
 mirrors <- drive_upload(
   file.path(R.home("doc"), "BioC_mirrors.csv"),
   "README-mirrors.csv",
@@ -126,20 +131,16 @@ Much better!
 
 #### Publish files
 
-Versions of Google Documents, Sheets, and Presentations can be published online. By default, `drive_publish()` will publish your most recent version. You can check your publication status by running `drive_reveal(..., "published"")`.
+Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running `drive_reveal(..., "published")`, which adds a logical column `published` and parks more detailed metadata in a `revision_resource` variable.
 
 ```{r}
 drive_reveal(mirrors, "published")
 ```
 
+By default, `drive_publish()` will publish your most recent version.
 
 ```{r}
-mirrors <- drive_publish(mirrors)
-mirrors$published
-```
-
-```{r}
-drive_reveal(mirrors, "published")
+(mirrors <- drive_publish(mirrors))
 ```
 
 #### Share files
@@ -194,24 +195,23 @@ Downloading files that are *not* Google type files is even simpler, i.e. it does
 
 ```{r}
 ## upload something we can download
-boring <- drive_upload(system.file("DESCRIPTION"), name = "boring-text.txt")
+text_file <- drive_upload(system.file("DESCRIPTION"), name = "text-file.txt")
 
 ## download it and prove we got it
-drive_download("boring-text.txt")
-readLines("boring-text.txt") %>% head()
+drive_download("text-file.txt")
+readLines("text-file.txt") %>% head()
 ```
 
 #### Clean up
 
 ```{r}
-mirrors %>%
-  drive_rm()
-boring %>%
-  drive_rm()
+drive_rm(mirrors, text_file)
 ```
 
 ```{r, echo = FALSE}
-rm <- file.remove("538-star-wars-survey.csv")
-rm <- file.remove("538-star-wars-survey.xlsx")
-rm <- file.remove("boring-text.txt")
+unlink(c(
+  "538-star-wars-survey.csv",
+  "538-star-wars-survey.xlsx",
+  "text-file.txt"
+))
 ```
