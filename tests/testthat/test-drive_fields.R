@@ -1,11 +1,8 @@
 context("Fields")
 
 # ---- tests ----
-test_that("drive_fields() returns vector of default Files fields", {
-  expect_identical(
-    drive_fields(),
-    .drive$files_fields$name[.drive$files_fields$default]
-  )
+test_that("drive_fields() returns nothing, if no input", {
+  expect_identical(drive_fields(), character())
 })
 
 test_that("drive_fields(expose()) returns full tibble of Files fields", {

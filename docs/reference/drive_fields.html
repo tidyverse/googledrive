@@ -94,11 +94,12 @@
 requesting only the metadata that you actually need. This function is
 primarily for internal use and is currently focused on the
 <a href='https://developers.google.com/drive/v3/reference/files'>Files resource</a>.
-Assuming that <code>resource = "files"</code> (the default), <code>drive_fields()</code> returns
-a character vector of googledrive's default fields. If input is provided
-via <code>fields</code>, it's checked for validity against the known fields. To see a
-tibble containing all possible fields and a variable indicating which are
-googledrive defaults, call <code>drive_fields(expose())</code>.
+Note that high-level googledrive functions assume that the <code>name</code>, <code>id</code>, and
+<code>kind</code> fields are included, at a bare minimum. Assuming that
+<code>resource = "files"</code> (the default), input provided via <code>fields</code> is checked
+for validity against the known field names and the validated fields are
+returned. To see a tibble containing all possible fields and a short
+description of each, call <code>drive_fields(expose())</code>.
 
     <code>prep_fields()</code> prepares fields for inclusion as query
 parameters.</p>
@@ -113,8 +114,8 @@ parameters.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fields</th>
-      <td><p>Character vector of field names. Optional. If provided, and
-<code>resource = "files"</code>, they are checked for validity.</p></td>
+      <td><p>Character vector of field names. If <code>resource = "files"</code>, they
+are checked for validity. Otherwise, they are passed through.</p></td>
     </tr>
     <tr>
       <th>resource</th>
@@ -125,52 +126,36 @@ only the Files resource is anticipated.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>drive_fields()</code>: Character vector of field names. <code>prep_fields()</code>: a
-string.</p>
+    <p><code>drive_fields()</code>: Character vector of field names.
+<code>prep_fields()</code>: a string.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='https://developers.google.com/drive/v3/web/performance#partial'>Working with partialresources</a>,
-in the Drive API documentation</p>
+    <p><a href='https://developers.google.com/drive/v3/web/performance#partial'>Working with partial resources</a>,
+in the Drive API documentation.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## to get default fields for the Files resource</span>
-<span class='fu'>drive_fields</span>()</div><div class='output co'>#&gt;  [1] "appProperties"         "capabilities"          "contentHints"         
-#&gt;  [4] "createdTime"           "description"           "explicitlyTrashed"    
-#&gt;  [7] "fileExtension"         "folderColorRgb"        "fullFileExtension"    
-#&gt; [10] "headRevisionId"        "iconLink"              "id"                   
-#&gt; [13] "imageMediaMetadata"    "kind"                  "lastModifyingUser"    
-#&gt; [16] "md5Checksum"           "mimeType"              "modifiedByMeTime"     
-#&gt; [19] "modifiedTime"          "name"                  "originalFilename"     
-#&gt; [22] "ownedByMe"             "owners"                "parents"              
-#&gt; [25] "permissions"           "properties"            "quotaBytesUsed"       
-#&gt; [28] "shared"                "sharedWithMeTime"      "sharingUser"          
-#&gt; [31] "size"                  "spaces"                "starred"              
-#&gt; [34] "thumbnailLink"         "trashed"               "version"              
-#&gt; [37] "videoMediaMetadata"    "viewedByMe"            "viewedByMeTime"       
-#&gt; [40] "viewersCanCopyContent" "webContentLink"        "webViewLink"          
-#&gt; [43] "writersCanShare"      </div><div class='input'>
-<span class='co'>## get a tibble of all fields for the Files resource + indicator of defaults</span>
-<span class='fu'>drive_fields</span>(<span class='fu'><a href='expose.html'>expose</a></span>())</div><div class='output co'>#&gt; # A tibble: 51 x 3
-#&gt;                       name default
-#&gt;                      &lt;chr&gt;   &lt;lgl&gt;
-#&gt;  1           appProperties    TRUE
-#&gt;  2            capabilities    TRUE
-#&gt;  3            contentHints    TRUE
-#&gt;  4             createdTime    TRUE
-#&gt;  5             description    TRUE
-#&gt;  6       explicitlyTrashed    TRUE
-#&gt;  7           fileExtension    TRUE
-#&gt;  8          folderColorRgb    TRUE
-#&gt;  9       fullFileExtension    TRUE
-#&gt; 10 hasAugmentedPermissions   FALSE
+    <pre class="examples"><div class='input'><span class='co'>## get a tibble of all fields for the Files resource + indicator of defaults</span>
+<span class='fu'>drive_fields</span>(<span class='fu'><a href='expose.html'>expose</a></span>())</div><div class='output co'>#&gt; # A tibble: 51 x 2
+#&gt;                       name
+#&gt;                      &lt;chr&gt;
+#&gt;  1           appProperties
+#&gt;  2            capabilities
+#&gt;  3            contentHints
+#&gt;  4             createdTime
+#&gt;  5             description
+#&gt;  6       explicitlyTrashed
+#&gt;  7           fileExtension
+#&gt;  8          folderColorRgb
+#&gt;  9       fullFileExtension
+#&gt; 10 hasAugmentedPermissions
 #&gt; # ... with 41 more rows, and 1 more variables: desc &lt;chr&gt;</div><div class='input'>
 <span class='co'>## invalid fields are removed and throw warning</span>
 <span class='fu'>drive_fields</span>(<span class='fu'>c</span>(<span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"ownedByMe"</span>, <span class='st'>"pancakes!"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring fields that are non-standard for the Files resource:</span>
-#&gt; <span class='warning'>pancakes!</span></div><div class='output co'>#&gt; [1] "name"      "parents"   "ownedByMe"</div><div class='input'>
+#&gt; <span class='warning'>  * pancakes!</span></div><div class='output co'>#&gt; [1] "name"      "parents"   "ownedByMe"</div><div class='input'>
 <span class='co'>## prepare fields for query</span>
-<span class='fu'>prep_fields</span>(<span class='fu'>c</span>(<span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"ownedByMe"</span>))</div><div class='output co'>#&gt; [1] "files/name,files/parents,files/ownedByMe"</div></pre>
+<span class='fu'>prep_fields</span>(<span class='fu'>c</span>(<span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"kind"</span>))</div><div class='output co'>#&gt; [1] "files/name,files/parents,files/kind"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

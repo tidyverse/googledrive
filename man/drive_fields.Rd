@@ -10,34 +10,32 @@ drive_fields(fields = NULL, resource = "files")
 prep_fields(fields, resource = "files")
 }
 \arguments{
-\item{fields}{Character vector of field names. Optional. If provided, and
-\code{resource = "files"}, they are checked for validity.}
+\item{fields}{Character vector of field names. If \code{resource = "files"}, they
+are checked for validity. Otherwise, they are passed through.}
 
 \item{resource}{Character, naming the API resource of interest. Currently,
 only the Files resource is anticipated.}
 }
 \value{
-\code{drive_fields()}: Character vector of field names. \code{prep_fields()}: a
-string.
+\code{drive_fields()}: Character vector of field names.
+\code{prep_fields()}: a string.
 }
 \description{
 You may be able to improve the performance of your API calls by
 requesting only the metadata that you actually need. This function is
 primarily for internal use and is currently focused on the
 \href{https://developers.google.com/drive/v3/reference/files}{Files resource}.
-Assuming that \code{resource = "files"} (the default), \code{drive_fields()} returns
-a character vector of googledrive's default fields. If input is provided
-via \code{fields}, it's checked for validity against the known fields. To see a
-tibble containing all possible fields and a variable indicating which are
-googledrive defaults, call \code{drive_fields(expose())}.
+Note that high-level googledrive functions assume that the \code{name}, \code{id}, and
+\code{kind} fields are included, at a bare minimum. Assuming that
+\code{resource = "files"} (the default), input provided via \code{fields} is checked
+for validity against the known field names and the validated fields are
+returned. To see a tibble containing all possible fields and a short
+description of each, call \code{drive_fields(expose())}.
 
 \code{prep_fields()} prepares fields for inclusion as query
 parameters.
 }
 \examples{
-## to get default fields for the Files resource
-drive_fields()
-
 ## get a tibble of all fields for the Files resource + indicator of defaults
 drive_fields(expose())
 
@@ -45,9 +43,9 @@ drive_fields(expose())
 drive_fields(c("name", "parents", "ownedByMe", "pancakes!"))
 
 ## prepare fields for query
-prep_fields(c("name", "parents", "ownedByMe"))
+prep_fields(c("name", "parents", "kind"))
 }
 \seealso{
-\href{https://developers.google.com/drive/v3/web/performance#partial}{Working with partialresources},
-in the Drive API documentation
+\href{https://developers.google.com/drive/v3/web/performance#partial}{Working with partial resources},
+in the Drive API documentation.
 }
