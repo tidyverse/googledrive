@@ -27,6 +27,7 @@ skip_if_no_token <- (function() {
       } else {
         token <- tryCatch(
           drive_auth(rprojroot::find_testthat_root_file("testing-token.rds")),
+          warning = function(x) FALSE,
           error = function(e) FALSE
         )
         no_token <<- isFALSE(token)
