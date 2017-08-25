@@ -1,0 +1,77 @@
+---
+title: "Dealing with multiple files"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Dealing with multiple files}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Some of our functions are built to naturally handle multiple files, while others require single files.
+
+Functions that expect a single file:
+
+* `drive_browse()`  
+* `drive_cp()`  
+* `drive_download()`  
+* `drive_mv()`  
+* `drive_rename()`  
+* `drive_update()`
+* `drive_upload()`
+
+Functions that allow multiple files: 
+
+* `drive_publish()`  
+* `drive_reveal()`  
+* `drive_rm()`  
+* `drive_share()`  
+* `drive_trash()`  
+
+In general, our principle is if there are multiple parameters that would likely be different across multiple files, our function expects a single input. It is, however, possible to iterate over multiple files for our functions that are not vectorized. We will illustrate a workflow for that here.
+
+## Example
+
+In this example, we have multiple files we'd like to upload into a folder on Drive. We then would like to rename them with a prefix of the date they were uploaded.
+
+### Upload all files in a folder called "to-upload"
+
+```{r}
+library(purrr)
+```
+
+```{r}
+local_files <- dir("~/desktop/to-upload", full.names = TRUE)
+```
+
+Create a folder on your Drive called "to-upload" and upload all files into this folder by iterating over the `local_files` using `map()`.
+
+```{r}
+folder <- drive_mkdir("to-upload")
+files <- map(local_files, drive_upload, path = folder)
+```
+
+`files` is now a list where each element contains a **dribble** for each file that was uploaded.
+
+### Rename all files
+
+If we want to rename all of the files in this folder with a date prefix, we can do so, again by iterating over the data. Notice here we are using `map2_df()`. The `2` is because we are using two arguments, the `files` we are iterating over as well as the `new_names`. Rather than just using `map2()`, which will output a list, we are using `map2_df()` to bind the individual **dribbles** together into a single `tibble` for easier viewing and processing. This makes sense since this is our last action we are performing that requires iterating.
+
+```{r}
+new_names <- glue::glue_data(files, "{Sys.Date()}_{name}")
+files <- map2_df(files, new_names, drive_rename)
+```
+
+### Clean up
+
+Our delete function, `drive_rm()` is vectorized, and therefore does not need a `map()` in order to work. Additionally, since we uploaded all of the files into a single folder, we can just delete the folder and the files will also be deleted.
+
+```{r}
+drive_rm(folder)
+```
