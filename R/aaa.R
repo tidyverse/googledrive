@@ -8,6 +8,8 @@
 #' @usage lhs \%>\% rhs
 NULL
 
+if (getRversion() >= "2.15.1")  utils::globalVariables(c(":="))
+
 # environment to hold data about the Drive API
 .drive <- new.env(parent = emptyenv())
 .drive$base_url <- "https://www.googleapis.com"
