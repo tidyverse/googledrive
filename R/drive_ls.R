@@ -45,13 +45,15 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   params <- list(...)
   if (is_team_drivy(path)) {
     if (is_team_drive(path)) {
-      params[["team_drive"]] <- as_id(path$id)
+      params[["team_drive"]] <- as_id(path)
     } else {
-      params[["team_drive"]] <- as_id(path$drive_resource[[1]][["teamDriveId"]])
+      params[["team_drive"]] <- as_id(
+        path[["drive_resource"]][[1]][["teamDriveId"]]
+      )
     }
   }
 
-  parent <- path$id
+  parent <- path[["id"]]
   if (isTRUE(recursive)) {
     parent <- c(parent, folders_below(parent))
   }
@@ -62,19 +64,22 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   do.call(drive_find, params)
 }
 
+folders_below <- function(id) {
+  folder_kids <- folder_kids_of(id)
+  if (length(folder_kids) == 0) {
+    character()
+  } else {
+    c(
+      folder_kids,
+      unlist(lapply(folder_kids, folders_below), recursive = FALSE)
+    )
+  }
+}
+
 folder_kids_of <- function(id) {
   drive_find(
     type = "folder",
     q = glue("{sq(id)} in parents"),
     fields = prep_fields(c("kind", "name", "id"))
   )[["id"]]
-}
-
-folders_below <- function(id) {
-  kids <- folder_kids_of(id)
-  if (length(kids) == 0) {
-    character()
-  } else {
-    c(kids, unlist(lapply(kids, folder_kids_of), recursive = FALSE))
-  }
 }
