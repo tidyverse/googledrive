@@ -48,12 +48,14 @@
 #' @export
 #' @family low-level API functions
 #' @examples
+#' \dontrun{
 #' req <- generate_request(
 #'   "drive.files.get",
 #'   list(fileId = "abc"),
-#'   token = httr::config(token = "token!")
+#'   token = drive_token()
 #' )
 #' req
+#' }
 generate_request <- function(endpoint = character(),
                              params = list(),
                              key = NULL,
@@ -118,7 +120,7 @@ generate_request <- function(endpoint = character(),
 #'     fileId = "your-file-id-goes-here",
 #'     fields = "*"
 #'   ),
-#'   token = googledrive:::drive_token()
+#'   token = drive_token()
 #' )
 #' process_response(make_request(req))
 #' }

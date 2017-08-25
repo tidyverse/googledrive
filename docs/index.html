@@ -184,17 +184,17 @@ x<span class="op">$</span>id
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Library/Frameworks/R.framework/Resources/doc/BioC_mirrors.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTendSUUFWZkpqeVk</span>
+<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTa3paZXdOZjE3TUE</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/csv</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                 name                           id drive_resource</span>
 <span class="co">#&gt; *              &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-mirrors.csv 0B0Gh-SuuA2nTendSUUFWZkpqeVk    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 README-mirrors.csv 0B0Gh-SuuA2nTa3paZXdOZjE3TUE    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(mirrors)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTendSUUFWZkpqeVk</span>
+<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTa3paZXdOZjE3TUE</span>
 
 ## example of using a dribble as input
 mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
@@ -205,7 +205,7 @@ mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Library/Frameworks/R.framework/Resources/doc/BioC_mirrors.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 1u_Oa5W3IOYv6KrsCQ0t9DDnvDy2KY_8Jopzt8xn5vAA</span>
+<span class="co">#&gt;   * README-mirrors.csv: 1DPCjNho6isG5kUb09qzjSytvE3q_pzC8f-PS-Z94MBQ</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span></code></pre></div>
 <p>Much better!</p>
@@ -224,7 +224,7 @@ mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_
 <p>By default, <code><a href="reference/drive_publish.html">drive_publish()</a></code> will publish your most recent version.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_publish.html">drive_publish</a></span>(mirrors))
 <span class="co">#&gt; Files now published:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 1u_Oa5W3IOYv6KrsCQ0t9DDnvDy2KY_8Jopzt8xn5vAA</span>
+<span class="co">#&gt;   * README-mirrors.csv: 1DPCjNho6isG5kUb09qzjSytvE3q_pzC8f-PS-Z94MBQ</span>
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;                 name published</span>
 <span class="co">#&gt;                &lt;chr&gt;     &lt;lgl&gt;</span>
@@ -242,12 +242,12 @@ mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_
 <span class="co">#&gt;   * role = reader</span>
 <span class="co">#&gt;   * type = anyone</span>
 <span class="co">#&gt; For files:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 1u_Oa5W3IOYv6KrsCQ0t9DDnvDy2KY_8Jopzt8xn5vAA</span></code></pre></div>
+<span class="co">#&gt;   * README-mirrors.csv: 1DPCjNho6isG5kUb09qzjSytvE3q_pzC8f-PS-Z94MBQ</span></code></pre></div>
 <p>We always assign the return value of googledrive functions back into an R object. This object is of type <code>dribble</code>, which holds metadata on one or more Drive files. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.</p>
 <p>We can then extract the file’s hyperlink.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mirrors <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_link.html">drive_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1u_Oa5W3IOYv6KrsCQ0t9DDnvDy2KY_8Jopzt8xn5vAA/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1DPCjNho6isG5kUb09qzjSytvE3q_pzC8f-PS-Z94MBQ/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="download-files" class="section level4">
 <h4 class="hasAnchor">
@@ -288,7 +288,7 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Library/Frameworks/R.framework/Resources/library/base/DESCRIPTION</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTZFVIbWFDc19ybnc</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTSGg0cHBvWTJZWk0</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/plain</span>
 
@@ -312,8 +312,8 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 <a href="#clean-up" class="anchor"></a>Clean up</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(mirrors, text_file)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 1u_Oa5W3IOYv6KrsCQ0t9DDnvDy2KY_8Jopzt8xn5vAA</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTZFVIbWFDc19ybnc</span></code></pre></div>
+<span class="co">#&gt;   * README-mirrors.csv: 1DPCjNho6isG5kUb09qzjSytvE3q_pzC8f-PS-Z94MBQ</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTSGg0cHBvWTJZWk0</span></code></pre></div>
 </div>
 </div>
 </div>

@@ -16,6 +16,7 @@ List.
 Process a response from the Google Drive v3 API
 }
 \seealso{
-Other low-level API functions: \code{\link{generate_request}},
+Other low-level API functions: \code{\link{drive_token}},
+  \code{\link{generate_request}},
   \code{\link{make_request}}
 }

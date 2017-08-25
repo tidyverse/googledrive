@@ -192,16 +192,28 @@ drive_auth_config <- function(active = TRUE,
 
 #' Produce Google token
 #'
-#' If token is not already available, call [drive_auth()] to either load from
-#' cache or initiate OAuth2.0 flow. Return the token -- not "bare" but, rather,
-#' prepared for inclusion in downstream requests. Use `access_token()` to reveal
-#' the actual access token, suitable for use with curl.
+#' For internal use or for those programming around the Drive API. Produces a
+#' token prepared for use with [generate_request()] and [build_request()]. Most
+#' users do not need to handle tokens "by hand" or, even if they need some
+#' control, [drive_auth()] is what they need. If there is no current token,
+#' [drive_auth()] is called to either load from cache or initiate OAuth2.0 flow.
+#' If auth has been deactivated via [drive_auth_config()], `drive_token()`
+#' returns `NULL`.
 #'
 #' @template verbose
 #'
 #' @return a `request` object (an S3 class provided by [httr][httr::httr])
-#'
-#' @keywords internal
+#' @export
+#' @family low-level API functions
+#' @examples
+#' \dontrun{
+#' req <- generate_request(
+#'   "drive.files.get",
+#'   list(fileId = "abc"),
+#'   token = drive_token()
+#' )
+#' req
+#' }
 drive_token <- function(verbose = FALSE) {
   if (!auth_active()) {
     return(NULL)
@@ -212,7 +224,7 @@ drive_token <- function(verbose = FALSE) {
   httr::config(token = access_cred())
 }
 
-## useful when debugging
+## Reveals the actual access token, suitable for use with curl.
 access_token <- function() {
   if (!token_available(verbose = TRUE)) return(NULL)
   .state$cred$credentials$access_token

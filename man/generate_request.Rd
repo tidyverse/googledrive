@@ -81,12 +81,14 @@ returned by \code{\link[=drive_endpoints]{drive_endpoints()}}.
 }
 }
 \examples{
+\dontrun{
 req <- generate_request(
   "drive.files.get",
   list(fileId = "abc"),
-  token = httr::config(token = "token!")
+  token = drive_token()
 )
 req
+}
 ## re-create the previous request, but the hard way, i.e. "by hand"
 req <- build_request(
   path = "drive/v3/files/{fileId}",
@@ -107,12 +109,13 @@ req <- build_request(
     fileId = "your-file-id-goes-here",
     fields = "*"
   ),
-  token = googledrive:::drive_token()
+  token = drive_token()
 )
 process_response(make_request(req))
 }
 }
 \seealso{
-Other low-level API functions: \code{\link{make_request}},
+Other low-level API functions: \code{\link{drive_token}},
+  \code{\link{make_request}},
   \code{\link{process_response}}
 }

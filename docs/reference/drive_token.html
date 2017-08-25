@@ -90,10 +90,13 @@
     </div>
 
     
-    <p>If token is not already available, call <code><a href='drive_auth.html'>drive_auth()</a></code> to either load from
-cache or initiate OAuth2.0 flow. Return the token -- not "bare" but, rather,
-prepared for inclusion in downstream requests. Use <code>access_token()</code> to reveal
-the actual access token, suitable for use with curl.</p>
+    <p>For internal use or for those programming around the Drive API. Produces a
+token prepared for use with <code><a href='generate_request.html'>generate_request()</a></code> and <code><a href='generate_request.html'>build_request()</a></code>. Most
+users do not need to handle tokens "by hand" or, even if they need some
+control, <code><a href='drive_auth.html'>drive_auth()</a></code> is what they need. If there is no current token,
+<code><a href='drive_auth.html'>drive_auth()</a></code> is called to either load from cache or initiate OAuth2.0 flow.
+If auth has been deactivated via <code><a href='drive_auth_config.html'>drive_auth_config()</a></code>, <code>drive_token()</code>
+returns <code>NULL</code>.</p>
     
 
     <pre class="usage"><span class='fu'>drive_token</span>(<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
@@ -112,7 +115,22 @@ the actual access token, suitable for use with curl.</p>
 
     <p>a <code>request</code> object (an S3 class provided by <a href='http://www.rdocumentation.org/packages/httr/topics/httr-package'>httr</a>)</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <p>Other low-level API functions: <code><a href='generate_request.html'>generate_request</a></code>,
+  <code><a href='make_request.html'>make_request</a></code>,
+  <code><a href='process_response.html'>process_response</a></code></p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate_request.html'>generate_request</a></span>(
+  <span class='st'>"drive.files.get"</span>,
+  <span class='fu'>list</span>(<span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>),
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>drive_token</span>()
+)
+<span class='no'>req</span>
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -120,7 +138,11 @@ the actual access token, suitable for use with curl.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

@@ -182,37 +182,20 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other low-level API functions: <code><a href='make_request.html'>make_request</a></code>,
+    <p>Other low-level API functions: <code><a href='drive_token.html'>drive_token</a></code>,
+  <code><a href='make_request.html'>make_request</a></code>,
   <code><a href='process_response.html'>process_response</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'>generate_request</span>(
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'>generate_request</span>(
   <span class='st'>"drive.files.get"</span>,
   <span class='fu'>list</span>(<span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>),
-  <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='st'>"token!"</span>)
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='drive_token.html'>drive_token</a></span>()
 )
-<span class='no'>req</span></div><div class='output co'>#&gt; $method
-#&gt; [1] "GET"
-#&gt; 
-#&gt; $path
-#&gt; drive/v3/files/abc
-#&gt; 
-#&gt; $query
-#&gt; $query$supportsTeamDrives
-#&gt; [1] TRUE
-#&gt; 
-#&gt; 
-#&gt; $body
-#&gt; list()
-#&gt; 
-#&gt; $token
-#&gt; &lt;request&gt;
-#&gt; Auth token: character
-#&gt; 
-#&gt; $url
-#&gt; [1] "https://www.googleapis.com/drive/v3/files/abc?supportsTeamDrives=TRUE"
-#&gt; </div><div class='input'><span class='co'>## re-create the previous request, but the hard way, i.e. "by hand"</span>
+<span class='no'>req</span>
+<span class='co'># }</span><div class='input'><span class='co'>## re-create the previous request, but the hard way, i.e. "by hand"</span>
 <span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'>build_request</span>(
   <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"drive/v3/files/{fileId}"</span>,
   <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"GET"</span>,
@@ -250,7 +233,7 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
     <span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"your-file-id-goes-here"</span>,
     <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"*"</span>
   ),
-  <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>:::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/googledrive/topics/drive_token'>drive_token</a></span>()
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='drive_token.html'>drive_token</a></span>()
 )
 <span class='fu'><a href='process_response.html'>process_response</a></span>(<span class='fu'><a href='make_request.html'>make_request</a></span>(<span class='no'>req</span>))
 <span class='co'># }</span></pre>
