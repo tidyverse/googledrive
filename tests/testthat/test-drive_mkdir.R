@@ -19,8 +19,8 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("drive_mkdir() errors for bad input (before hitting Drive API)", {
-  expect_error(drive_mkdir(), "argument \"folder\" is missing")
-  expect_error(drive_mkdir(letters), "is_string\\(folder\\) is not TRUE")
+  expect_error(drive_mkdir(), "argument \"name\" is missing")
+  expect_error(drive_mkdir(letters), "is_string\\(name\\) is not TRUE")
 })
 
 test_that("drive_mkdir() errors if parent path does not exist", {
@@ -38,7 +38,7 @@ test_that("drive_mkdir() errors if parent exists but is not a folder", {
   )
   expect_error(
     drive_mkdir("a", parent = x),
-    "Requested parent 'path' is invalid"
+    "Requested parent `path` is invalid"
   )
 })
 
@@ -113,4 +113,28 @@ test_that("drive_mkdir() parent separately, as a path", {
   out <- drive_mkdir(me_("f"), file.path(nm_("OMNI-PARENT"), ""))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("f"))
+})
+
+test_that("drive_mkdir() catches invalid parameters", {
+  expect_error(
+    drive_mkdir("hi", bunny = "foofoo"),
+    "These parameters are not recognized for this endpoint"
+  )
+})
+
+test_that("drive_mkdir() can affect metadata", {
+  skip_if_no_token()
+  skip_if_offline()
+  on.exit(drive_rm(me_("g")))
+
+  out <- drive_mkdir(
+    me_("g"),
+    description = "folders are amazing",
+    folderColorRgb = "#ffad46"
+  )
+  dres <- out$drive_resource[[1]]
+  expect_identical(
+    dres[c("description", "folderColorRgb")],
+    list(description = "folders are amazing", folderColorRgb = "#ffad46")
+  )
 })

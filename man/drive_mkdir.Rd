@@ -4,15 +4,20 @@
 \alias{drive_mkdir}
 \title{Create a folder}
 \usage{
-drive_mkdir(folder, parent = NULL, verbose = TRUE)
+drive_mkdir(name, parent = NULL, ..., verbose = TRUE)
 }
 \arguments{
-\item{folder}{Name for the new folder or, optionally, a path that specifies
+\item{name}{Name for the new folder or, optionally, a path that specifies
 an existing parent folder, as well as the new name.}
 
 \item{parent}{Target destination for the new folder, i.e. a folder or a Team
 Drive. Can be given as an actual path (character), a file id or URL marked
 with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root folder.}
+
+\item{...}{Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via \code{...}. See the "Request body" section of the Drive API
+docs for the associated endpoint.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -22,22 +27,36 @@ An object of class \code{\link{dribble}}, a tibble with one row per
   item.
 }
 \description{
-Create a folder
+Creates a new Drive folder. To update the metadata of an existing Drive file,
+including a folder, use \code{\link[=drive_update]{drive_update()}}.
 }
 \examples{
 \dontrun{
-## Create folder named "def" in existing folder "abc".
-drive_mkdir("abc/def")
+## Create folder named 'ghi', then another below named it 'jkl' and star it
+ghi <- drive_mkdir("ghi")
+jkl <- drive_mkdir("ghi/jkl", starred = TRUE)
 
-## This will also create a folder named "def" in folder "abc".
-drive_mkdir("def", parent = "abc")
+## is 'jkl' really starred? YES
+purrr::pluck(jkl, "drive_resource", 1, "starred")
 
-## Another way to create a folder named "def" in folder "abc",
-## this time with parent folder stored in a dribble.
-abc <- as_dribble("abc")
-drive_mkdir("def", parent = abc)
+## Another way to create folder 'mno' in folder 'ghi'
+drive_mkdir("mno", parent = "ghi")
+
+## Yet another way to create a folder named 'pqr' in folder 'ghi',
+## this time with parent folder stored in a dribble,
+## and setting the new folder's description
+pqr <- drive_mkdir("pqr", parent = ghi, description = "I am a folder")
+
+## Did we really set the description? YES
+purrr::pluck(pqr, "drive_resource", 1, "description")
 
 ## clean up
-drive_ls(path = "abc", pattern = "^def$", type = "folder") \%>\% drive_rm()
+drive_rm(ghi)
+}
+}
+\seealso{
+Wraps the \code{files.create} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/files/create}
 }
 }

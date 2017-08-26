@@ -3,6 +3,7 @@ isFALSE <- function(x) identical(x, FALSE)
 last <- function(x) x[length(x)]
 
 sq <- function(x) glue::single_quote(x)
+bt <- function(x) glue::backtick(x)
 
 trim_ws <- function(x) {
   sub("\\s*$", "", sub("^\\s*", "", x))

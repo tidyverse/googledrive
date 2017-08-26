@@ -124,17 +124,17 @@ as_parent <- function(d) {
   d <- as_dribble(d)
   ## wording chosen to work for folder and Team Drive
   if (no_file(d)) {
-    stop_glue("Parent specified via {sq(in_var)} does not exist.")
+    stop_glue("Parent specified via {bt(in_var)} does not exist.")
   }
   if (!single_file(d)) {
     stop_glue(
-      "Parent specified via {sq(in_var)} doesn't uniquely ",
+      "Parent specified via {bt(in_var)} doesn't uniquely ",
       "identify exactly one folder or Team Drive."
     )
   }
   if (!is_parental(d)) {
     stop_glue(
-      "Requested parent {sq(in_var)} is invalid: neither a folder ",
+      "Requested parent {bt(in_var)} is invalid: neither a folder ",
       "nor a Team Drive.")
   }
   d

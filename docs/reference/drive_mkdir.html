@@ -90,16 +90,17 @@
     </div>
 
     
-    <p>Create a folder</p>
+    <p>Creates a new Drive folder. To update the metadata of an existing Drive file,
+including a folder, use <code><a href='drive_update.html'>drive_update()</a></code>.</p>
     
 
-    <pre class="usage"><span class='fu'>drive_mkdir</span>(<span class='no'>folder</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_mkdir</span>(<span class='no'>name</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>folder</th>
+      <th>name</th>
       <td><p>Name for the new folder or, optionally, a path that specifies
 an existing parent folder, as well as the new name.</p></td>
     </tr>
@@ -108,6 +109,13 @@ an existing parent folder, as well as the new name.</p></td>
       <td><p>Target destination for the new folder, i.e. a folder or a Team
 Drive. Can be given as an actual path (character), a file id or URL marked
 with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. Defaults to your "My Drive" root folder.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via <code>...</code>. See the "Request body" section of the Drive API
+docs for the associated endpoint.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -121,22 +129,35 @@ with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
   item.</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Wraps the <code>files.create</code> endpoint:</p><ul>
+<li><p><a href='https://developers.google.com/drive/v3/reference/files/create'>https://developers.google.com/drive/v3/reference/files/create</a></p></li>
+</ul>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## Create folder named "def" in existing folder "abc".</span>
-<span class='fu'>drive_mkdir</span>(<span class='st'>"abc/def"</span>)
+<span class='co'>## Create folder named 'ghi', then another below named it 'jkl' and star it</span>
+<span class='no'>ghi</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"ghi"</span>)
+<span class='no'>jkl</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"ghi/jkl"</span>, <span class='kw'>starred</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='co'>## This will also create a folder named "def" in folder "abc".</span>
-<span class='fu'>drive_mkdir</span>(<span class='st'>"def"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='st'>"abc"</span>)
+<span class='co'>## is 'jkl' really starred? YES</span>
+<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/purrr/topics/pluck'>pluck</a></span>(<span class='no'>jkl</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"starred"</span>)
 
-<span class='co'>## Another way to create a folder named "def" in folder "abc",</span>
-<span class='co'>## this time with parent folder stored in a dribble.</span>
-<span class='no'>abc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_dribble.html'>as_dribble</a></span>(<span class='st'>"abc"</span>)
-<span class='fu'>drive_mkdir</span>(<span class='st'>"def"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='no'>abc</span>)
+<span class='co'>## Another way to create folder 'mno' in folder 'ghi'</span>
+<span class='fu'>drive_mkdir</span>(<span class='st'>"mno"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='st'>"ghi"</span>)
+
+<span class='co'>## Yet another way to create a folder named 'pqr' in folder 'ghi',</span>
+<span class='co'>## this time with parent folder stored in a dribble,</span>
+<span class='co'>## and setting the new folder's description</span>
+<span class='no'>pqr</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"pqr"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='st'>"I am a folder"</span>)
+
+<span class='co'>## Did we really set the description? YES</span>
+<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/purrr/topics/pluck'>pluck</a></span>(<span class='no'>pqr</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"description"</span>)
 
 <span class='co'>## clean up</span>
-<span class='fu'><a href='drive_ls.html'>drive_ls</a></span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"abc"</span>, <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"^def$"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"folder"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>()
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>ghi</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -145,6 +166,8 @@ with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
