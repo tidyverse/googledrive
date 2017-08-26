@@ -14,4 +14,4 @@ Please see the googledrive website:
 for full documentation. In addition to function-specific help, there are several articles:
 
   * [Article index](http://googledrive.tidyverse.org/articles/index.html)
-  * [File identification](http://googledrive.tidyverse.org/articles/file-identification.html)
+  * [File identification](http://googledrive.tidyverse.org/articles/articles/file-identification.html)
