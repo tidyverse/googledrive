@@ -31,7 +31,7 @@ drive_reveal_path <- function(file) {
   x <- purrr::map(file$id, ~ pathify_one_id(.x, nodes, ROOT_ID))
 
   ## TO DO: if (verbose), message if a dribble doesn't have exactly 1 row?
-  do.call(rbind, x)
+  rlang::invoke(rbind, x)
 }
 
 pathify_one_id <- function(id, nodes, root_id) {
@@ -59,7 +59,7 @@ dribble_from_path <- function(path = NULL,
   x <- purrr::map(path, ~ pathify_one_path(.x, nodes, ROOT_ID))
 
   ## TO DO: if (verbose), message if a dribble doesn't have exactly 1 row?
-  do.call(rbind, x)
+  rlang::invoke(rbind, x)
 }
 
 pathify_one_path <- function(op, nodes, root_id) {
@@ -203,5 +203,5 @@ stringify_path <- function(id_path, key, value, root_id) {
   value <- c("~", value)
   nms <- value[match(id_path, key)]
   nms <- nms[!is.na(nms)]
-  do.call(file.path, as.list(rev(nms)))
+  rlang::invoke(file.path, as.list(rev(nms)))
 }

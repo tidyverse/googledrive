@@ -39,7 +39,7 @@ drive_rm <- function(..., verbose = TRUE) {
 
   ## explicitly select on var name to exclude 'path', if present
   file <- purrr::map(dots, ~ as_dribble(.x)[c("name", "id", "drive_resource")])
-  file <- do.call(rbind, file)
+  file <- rlang::invoke(rbind, file)
 
   if (no_file(file) && verbose) message("No such file(s) to delete.")
 
