@@ -1,27 +1,27 @@
 Package: googledrive
-Title: Manage Google Drive from R
 Version: 0.0.0.9000
+Title: An Interface to Google Drive
 Authors@R: c(
-  person("Lucy", "D'Agostino McGowan", email = "ld.mcgowan@vanderbilt.edu", role = c("aut")),
-  person("Jennifer", "Bryan", email = "jenny@rstudio.com", role = c("aut", "cre")),
-  person("RStudio", role = c("cph", "fnd"))          
-  )
+    person("Lucy", "D'Agostino McGowan", email = "ld.mcgowan@vanderbilt.edu", role = c("aut")),
+    person("Jennifer", "Bryan", email = "jenny@rstudio.com", role = c("aut", "cre")),
+    person("RStudio", role = c("cph", "fnd"))          
+    )
 Description: Manage Google Drive from R.
 Depends:
-  R (>= 3.1.0)
+    R (>= 3.1.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 Imports: curl (>= 2.8.1),
-  glue (>= 1.1.0),
-  httr,
-  jsonlite,
-  purrr,
-  rlang,
-  tibble,
-  utils,
-  uuid
+    glue (>= 1.1.0),
+    httr,
+    jsonlite,
+    purrr,
+    rlang,
+    tibble,
+    utils,
+    uuid
 Suggests: covr,
   dplyr,
   knitr,
