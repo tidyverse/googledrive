@@ -141,17 +141,17 @@ it is character and lacks a trailing slash. Defaults to current name.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'>## create a file to move</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='st'>"DESC-mv"</span>)
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>), <span class='st'>"chicken-mv.txt"</span>)
 
 <span class='co'>## rename it, but leave in current folder (root folder, in this case)</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mv</span>(<span class='no'>file</span>, <span class='st'>"DESC-mv-renamed"</span>)
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mv</span>(<span class='no'>file</span>, <span class='st'>"chicken-mv-renamed.txt"</span>)
 
 <span class='co'>## create a folder to move the file into</span>
 <span class='no'>folder</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"mv-folder"</span>)
 
 <span class='co'>## move the file and rename it again,</span>
 <span class='co'>## specify destination as a dribble</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mv</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>folder</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"DESC-mv-re-renamed"</span>)
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mv</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>folder</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-mv-re-renamed.txt"</span>)
 
 <span class='co'>## verify renamed file is now in the folder</span>
 <span class='fu'><a href='drive_ls.html'>drive_ls</a></span>(<span class='no'>folder</span>)

@@ -27,17 +27,17 @@ Move files to or from trash
 \examples{
 \dontrun{
 ## Create a file and put it in the trash.
-file <- drive_upload(system.file("DESCRIPTION"), "DESC-trash-ex")
-drive_trash("DESC-trash-ex")
+file <- drive_upload(drive_example("chicken.txt"), "chicken-trash.txt")
+drive_trash("chicken-trash.txt")
 
 ## Confirm it's in the trash
 drive_find(trashed = TRUE)
 
 ## Remove it from the trash and confirm
-drive_untrash("DESC-trash-ex")
+drive_untrash("chicken-trash.txt")
 drive_find(trashed = TRUE)
 
 ## Clean up
-drive_rm("DESC-trash-ex")
+drive_rm("chicken-trash.txt")
 }
 }

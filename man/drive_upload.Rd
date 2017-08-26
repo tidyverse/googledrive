@@ -47,29 +47,35 @@ of an existing Drive file, use \code{\link[=drive_update]{drive_update()}}.
 \examples{
 \dontrun{
 ## upload a csv file
-mirrors_csv <- drive_upload(file.path(R.home("doc"), "BioC_mirrors.csv"))
+chicken_csv <- drive_upload(
+  drive_example("chicken.csv"),
+  "chicken-upload.csv"
+)
 
 ## or convert it to a Google Sheet
-mirrors_sheet <- drive_upload(
-  file.path(R.home("doc"), "BioC_mirrors.csv"),
-  name = "BioC_mirrors",
+chicken_sheet <- drive_upload(
+  drive_example("chicken.csv"),
+  name = "chicken-sheet-upload.csv",
   type = "spreadsheet"
 )
 
 ## check out the new Sheet!
-drive_browse(mirrors_sheet)
+drive_browse(chicken_sheet)
 
 ## clean-up
-drive_find("BioC_mirrors") \%>\% drive_rm()
+drive_find("chicken.*upload") \%>\% drive_rm()
 
 ## Upload a file and, at the same time, star it
-logo <- drive_upload(
-  file.path(R.home("doc"), "html", "logo.jpg"),
+chicken <- drive_upload(
+  drive_example("chicken.jpg"),
   starred = "true"
 )
 
+## Is is really starred? YES
+purrr::pluck(chicken, "drive_resource", 1, "starred")
+
 ## Clean up
-drive_rm(logo)
+drive_rm(chicken)
 }
 }
 \seealso{

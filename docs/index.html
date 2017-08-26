@@ -115,16 +115,16 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="co">#&gt; # A tibble: 50 x 3</span>
 <span class="co">#&gt;                            name</span>
 <span class="co">#&gt;  *                        &lt;chr&gt;</span>
-<span class="co">#&gt;  1           README-mirrors.csv</span>
-<span class="co">#&gt;  2           README-mirrors.csv</span>
-<span class="co">#&gt;  3                          def</span>
-<span class="co">#&gt;  4                          abc</span>
-<span class="co">#&gt;  5               folder1-level4</span>
-<span class="co">#&gt;  6               folder1-level3</span>
-<span class="co">#&gt;  7      cranberry-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
-<span class="co">#&gt;  8 folder1-level2-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
-<span class="co">#&gt;  9         banana-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
-<span class="co">#&gt; 10 folder2-level1-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
+<span class="co">#&gt;  1               chicken-rm.txt</span>
+<span class="co">#&gt;  2                  chicken.jpg</span>
+<span class="co">#&gt;  3           README-mirrors.csv</span>
+<span class="co">#&gt;  4           README-mirrors.csv</span>
+<span class="co">#&gt;  5                          def</span>
+<span class="co">#&gt;  6                          abc</span>
+<span class="co">#&gt;  7               folder1-level4</span>
+<span class="co">#&gt;  8               folder1-level3</span>
+<span class="co">#&gt;  9      cranberry-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
+<span class="co">#&gt; 10 folder1-level2-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
 <span class="co">#&gt; # ... with 40 more rows, and 2 more variables: id &lt;chr&gt;,</span>
 <span class="co">#&gt; #   drive_resource &lt;list&gt;</span></code></pre></div>
 <p>You can narrow the query by specifying a <code>pattern</code> you’d like to match names against. Or by specifying a file type: the <code>type</code> argument understands MIME types, file extensions, and a few human-friendly keywords.</p>
@@ -177,35 +177,35 @@ x<span class="op">$</span>id
 <h4 class="hasAnchor">
 <a href="#upload-files" class="anchor"></a>Upload files</h4>
 <p>We can upload any file type.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
-  <span class="kw">file.path</span>(<span class="kw">R.home</span>(<span class="st">"doc"</span>), <span class="st">"BioC_mirrors.csv"</span>),
-  <span class="st">"README-mirrors.csv"</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(chicken &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
+  <span class="kw"><a href="reference/drive_example.html">drive_example</a></span>(<span class="st">"chicken.csv"</span>),
+  <span class="st">"README-chicken.csv"</span>
 ))
 <span class="co">#&gt; Local file:</span>
-<span class="co">#&gt;   * /Library/Frameworks/R.framework/Resources/doc/BioC_mirrors.csv</span>
+<span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTbkVEZ3BXX1pxM00</span>
+<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTNGdLZDB3NWtMOTA</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/csv</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                 name                           id drive_resource</span>
 <span class="co">#&gt; *              &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-mirrors.csv 0B0Gh-SuuA2nTbkVEZ3BXX1pxM00    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 README-chicken.csv 0B0Gh-SuuA2nTNGdLZDB3NWtMOTA    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(mirrors)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 0B0Gh-SuuA2nTbkVEZ3BXX1pxM00</span>
+<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTNGdLZDB3NWtMOTA</span>
 
 ## example of using a dribble as input
-mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
-  <span class="kw">file.path</span>(<span class="kw">R.home</span>(<span class="st">"doc"</span>), <span class="st">"BioC_mirrors.csv"</span>),
-  <span class="st">"README-mirrors.csv"</span>,
+chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
+  <span class="kw"><a href="reference/drive_example.html">drive_example</a></span>(<span class="st">"chicken.csv"</span>),
+  <span class="st">"README-chicken.csv"</span>,
   <span class="dt">type =</span> <span class="st">"spreadsheet"</span>
 )
 <span class="co">#&gt; Local file:</span>
-<span class="co">#&gt;   * /Library/Frameworks/R.framework/Resources/doc/BioC_mirrors.csv</span>
+<span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 1z5x_R6cmz3d5xCRVuhhxwWnkZQfkJ7JnqOo7YhnhBa0</span>
+<span class="co">#&gt;   * README-chicken.csv: 1IZBtBbF9qPiW8euZBfytiuCPRZTdP3IOMkRWVEoCDsc</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span></code></pre></div>
 <p>Much better!</p>
@@ -214,21 +214,21 @@ mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_
 <h4 class="hasAnchor">
 <a href="#publish-files" class="anchor"></a>Publish files</h4>
 <p>Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running <code><a href="reference/drive_reveal.html">drive_reveal(..., "published")</a></code>, which adds a logical column <code>published</code> and parks more detailed metadata in a <code>revision_resource</code> variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_reveal.html">drive_reveal</a></span>(mirrors, <span class="st">"published"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_reveal.html">drive_reveal</a></span>(chicken_sheet, <span class="st">"published"</span>)
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;                 name published</span>
 <span class="co">#&gt;                &lt;chr&gt;     &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 README-mirrors.csv     FALSE</span>
+<span class="co">#&gt; 1 README-chicken.csv     FALSE</span>
 <span class="co">#&gt; # ... with 3 more variables: id &lt;chr&gt;, drive_resource &lt;list&gt;,</span>
 <span class="co">#&gt; #   revision_resource &lt;list&gt;</span></code></pre></div>
 <p>By default, <code><a href="reference/drive_publish.html">drive_publish()</a></code> will publish your most recent version.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_publish.html">drive_publish</a></span>(mirrors))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_publish.html">drive_publish</a></span>(chicken_sheet))
 <span class="co">#&gt; Files now published:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 1z5x_R6cmz3d5xCRVuhhxwWnkZQfkJ7JnqOo7YhnhBa0</span>
+<span class="co">#&gt;   * README-chicken.csv: 1IZBtBbF9qPiW8euZBfytiuCPRZTdP3IOMkRWVEoCDsc</span>
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;                 name published</span>
 <span class="co">#&gt;                &lt;chr&gt;     &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 README-mirrors.csv      TRUE</span>
+<span class="co">#&gt; 1 README-chicken.csv      TRUE</span>
 <span class="co">#&gt; # ... with 3 more variables: id &lt;chr&gt;, drive_resource &lt;list&gt;,</span>
 <span class="co">#&gt; #   revision_resource &lt;list&gt;</span></code></pre></div>
 </div>
@@ -236,18 +236,18 @@ mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_
 <h4 class="hasAnchor">
 <a href="#share-files" class="anchor"></a>Share files</h4>
 <p>To update the access, we need to change the sharing permissions. Let’s say I want anyone with the link to be able to view my dataset.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mirrors &lt;-<span class="st"> </span>mirrors <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chicken_sheet &lt;-<span class="st"> </span>chicken_sheet <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_share.html">drive_share</a></span>(<span class="dt">role =</span> <span class="st">"reader"</span>, <span class="dt">type =</span> <span class="st">"anyone"</span>)
 <span class="co">#&gt; Permissions updated</span>
 <span class="co">#&gt;   * role = reader</span>
 <span class="co">#&gt;   * type = anyone</span>
 <span class="co">#&gt; For files:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 1z5x_R6cmz3d5xCRVuhhxwWnkZQfkJ7JnqOo7YhnhBa0</span></code></pre></div>
+<span class="co">#&gt;   * README-chicken.csv: 1IZBtBbF9qPiW8euZBfytiuCPRZTdP3IOMkRWVEoCDsc</span></code></pre></div>
 <p>We always assign the return value of googledrive functions back into an R object. This object is of type <code>dribble</code>, which holds metadata on one or more Drive files. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.</p>
 <p>We can then extract the file’s hyperlink.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mirrors <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chicken_sheet <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_link.html">drive_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1z5x_R6cmz3d5xCRVuhhxwWnkZQfkJ7JnqOo7YhnhBa0/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1IZBtBbF9qPiW8euZBfytiuCPRZTdP3IOMkRWVEoCDsc/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="download-files" class="section level4">
 <h4 class="hasAnchor">
@@ -284,11 +284,11 @@ mirrors &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_
 <a href="#all-other-files" class="anchor"></a>All other files</h5>
 <p>Downloading files that are <em>not</em> Google type files is even simpler, i.e. it does not require any conversion or type info.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## upload something we can download
-text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(<span class="kw">system.file</span>(<span class="st">"DESCRIPTION"</span>), <span class="dt">name =</span> <span class="st">"text-file.txt"</span>)
+text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(<span class="kw"><a href="reference/drive_example.html">drive_example</a></span>(<span class="st">"chicken.txt"</span>), <span class="dt">name =</span> <span class="st">"text-file.txt"</span>)
 <span class="co">#&gt; Local file:</span>
-<span class="co">#&gt;   * /Library/Frameworks/R.framework/Resources/library/base/DESCRIPTION</span>
+<span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.txt</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTRjZ3SmhPeFRrbWs</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTRzAwZjFpeUFEbG8</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/plain</span>
 
@@ -299,21 +299,21 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 <span class="co">#&gt; Saved locally as:</span>
 <span class="co">#&gt;   * text-file.txt</span>
 <span class="kw">readLines</span>(<span class="st">"text-file.txt"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()
-<span class="co">#&gt; [1] "Package: base"                                 </span>
-<span class="co">#&gt; [2] "Version: 3.3.2"                                </span>
-<span class="co">#&gt; [3] "Priority: base"                                </span>
-<span class="co">#&gt; [4] "Title: The R Base Package"                     </span>
-<span class="co">#&gt; [5] "Author: R Core Team and contributors worldwide"</span>
-<span class="co">#&gt; [6] "Maintainer: R Core Team &lt;R-core@r-project.org&gt;"</span></code></pre></div>
+<span class="co">#&gt; [1] "A chicken whose name was Chantecler"      </span>
+<span class="co">#&gt; [2] "Clucked in iambic pentameter"             </span>
+<span class="co">#&gt; [3] "It sat on a shelf, reading Song of Myself"</span>
+<span class="co">#&gt; [4] "And laid eggs with a perfect diameter."   </span>
+<span class="co">#&gt; [5] ""                                         </span>
+<span class="co">#&gt; [6] "—Richard Maxson"</span></code></pre></div>
 </div>
 </div>
 <div id="clean-up" class="section level4">
 <h4 class="hasAnchor">
 <a href="#clean-up" class="anchor"></a>Clean up</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(mirrors, text_file)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken_sheet, text_file)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-mirrors.csv: 1z5x_R6cmz3d5xCRVuhhxwWnkZQfkJ7JnqOo7YhnhBa0</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTRjZ3SmhPeFRrbWs</span></code></pre></div>
+<span class="co">#&gt;   * README-chicken.csv: 1IZBtBbF9qPiW8euZBfytiuCPRZTdP3IOMkRWVEoCDsc</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTRzAwZjFpeUFEbG8</span></code></pre></div>
 </div>
 </div>
 </div>

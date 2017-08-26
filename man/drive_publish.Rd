@@ -36,15 +36,17 @@ Read more in \code{\link[=drive_reveal]{drive_reveal()}}.
 \dontrun{
 ## Upload file to publish
 file <- drive_upload(
-  file.path(R.home("doc"), "BioC_mirrors.csv"),
+  drive_example("chicken.csv"),
   type = "spreadsheet"
   )
 
 ## Publish file
 file <- drive_publish(file)
+file$published
 
 ## Unpublish file
 file <- drive_unpublish(file)
+file$published
 
 ## Clean up
 drive_rm(file)

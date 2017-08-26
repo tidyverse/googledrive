@@ -148,46 +148,46 @@ docs for the associated endpoint.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'>## Create a file to copy</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='st'>"DESC-ex"</span>)
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>), <span class='st'>"chicken-cp.txt"</span>)
 
 <span class='co'>## Make a "Copy of" copy in same folder as the original</span>
-<span class='fu'>drive_cp</span>(<span class='st'>"DESC-ex"</span>)
+<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>)
 
 <span class='co'>## Make an explicitly named copy in same folder as the original</span>
-<span class='fu'>drive_cp</span>(<span class='st'>"DESC-ex"</span>, <span class='st'>"DESC-ex-two"</span>)
+<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, <span class='st'>"chicken-cp-two.txt"</span>)
 
 <span class='co'>## Make an explicitly named copy in a different folder</span>
 <span class='no'>folder</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"new-folder"</span>)
-<span class='fu'>drive_cp</span>(<span class='st'>"DESC-ex"</span>, <span class='no'>folder</span>, <span class='st'>"DESC-ex-three"</span>)
+<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>folder</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-cp-three.txt"</span>)
 
 <span class='co'>## Make an explicitly named copy and star it.</span>
 <span class='co'>## The starring is an example of providing metadata via `...`.</span>
 <span class='co'>## `starred` is not an actual argument to `drive_cp()`,</span>
 <span class='co'>## it just gets passed through to the API.</span>
-<span class='fu'>drive_cp</span>(<span class='st'>"DESC-ex"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"DESC-ex-starred"</span>, <span class='kw'>starred</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-cp-starred.txt"</span>, <span class='kw'>starred</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>## Behold all of our copies!</span>
-<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"DESC-ex"</span>)
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"chicken-cp"</span>)
 
 <span class='co'>## Delete all of our copies and the new folder!</span>
-<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"DESC-ex"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>()
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"chicken-cp"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>()
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>folder</span>)
 
 <span class='co'>## upload a csv file to copy</span>
-<span class='no'>csv_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>file.path</span>(<span class='fu'>R.home</span>(<span class='st'>"doc"</span>), <span class='st'>"BioC_mirrors.csv"</span>))
+<span class='no'>csv_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.csv"</span>))
 
 <span class='co'>## copy AND AT THE SAME TIME convert it to a Google Sheet</span>
-<span class='no'>mirrors_sheet</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_cp</span>(
+<span class='no'>chicken_sheet</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_cp</span>(
   <span class='no'>csv_file</span>,
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"BioC_mirrors"</span>,
-  <span class='kw'>mimeType</span> <span class='kw'>=</span> <span class='fu'><a href='drive_mime_type.html'>drive_mime_type</a></span>(<span class='st'>"spreadsheet"</span>)
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-cp"</span>,
+  <span class='kw'>mime_type</span> <span class='kw'>=</span> <span class='fu'><a href='drive_mime_type.html'>drive_mime_type</a></span>(<span class='st'>"spreadsheet"</span>)
 )
 
 <span class='co'>## go see the new Sheet in the browser</span>
-<span class='co'>## drive_browse(mirrors_sheet)</span>
+<span class='co'>## drive_browse(chicken_sheet)</span>
 
 <span class='co'>## clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>csv_file</span>, <span class='no'>mirrors_sheet</span>)
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>csv_file</span>, <span class='no'>chicken_sheet</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -19,46 +19,46 @@
 #' @examples
 #' \dontrun{
 #' ## Create a file to copy
-#' file <- drive_upload(system.file("DESCRIPTION"), "DESC-ex")
+#' file <- drive_upload(drive_example("chicken.txt"), "chicken-cp.txt")
 #'
 #' ## Make a "Copy of" copy in same folder as the original
-#' drive_cp("DESC-ex")
+#' drive_cp("chicken-cp.txt")
 #'
 #' ## Make an explicitly named copy in same folder as the original
-#' drive_cp("DESC-ex", "DESC-ex-two")
+#' drive_cp("chicken-cp.txt", "chicken-cp-two.txt")
 #'
 #' ## Make an explicitly named copy in a different folder
 #' folder <- drive_mkdir("new-folder")
-#' drive_cp("DESC-ex", folder, "DESC-ex-three")
+#' drive_cp("chicken-cp.txt", path = folder, name = "chicken-cp-three.txt")
 #'
 #' ## Make an explicitly named copy and star it.
 #' ## The starring is an example of providing metadata via `...`.
 #' ## `starred` is not an actual argument to `drive_cp()`,
 #' ## it just gets passed through to the API.
-#' drive_cp("DESC-ex", name = "DESC-ex-starred", starred = TRUE)
+#' drive_cp("chicken-cp.txt", name = "chicken-cp-starred.txt", starred = TRUE)
 #'
 #' ## Behold all of our copies!
-#' drive_find("DESC-ex")
+#' drive_find("chicken-cp")
 #'
 #' ## Delete all of our copies and the new folder!
-#' drive_find("DESC-ex") %>% drive_rm()
+#' drive_find("chicken-cp") %>% drive_rm()
 #' drive_rm(folder)
 #'
 #' ## upload a csv file to copy
-#' csv_file <- drive_upload(file.path(R.home("doc"), "BioC_mirrors.csv"))
+#' csv_file <- drive_upload(drive_example("chicken.csv"))
 #'
 #' ## copy AND AT THE SAME TIME convert it to a Google Sheet
-#' mirrors_sheet <- drive_cp(
+#' chicken_sheet <- drive_cp(
 #'   csv_file,
-#'   name = "BioC_mirrors",
-#'   mimeType = drive_mime_type("spreadsheet")
+#'   name = "chicken-cp",
+#'   mime_type = drive_mime_type("spreadsheet")
 #' )
 #'
 #' ## go see the new Sheet in the browser
-#' ## drive_browse(mirrors_sheet)
+#' ## drive_browse(chicken_sheet)
 #'
 #' ## clean up
-#' drive_rm(csv_file, mirrors_sheet)
+#' drive_rm(csv_file, chicken_sheet)
 #' }
 #' @export
 drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {

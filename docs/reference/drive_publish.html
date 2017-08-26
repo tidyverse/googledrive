@@ -139,15 +139,17 @@ specify other values.</p></td>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'>## Upload file to publish</span>
 <span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(
-  <span class='fu'>file.path</span>(<span class='fu'>R.home</span>(<span class='st'>"doc"</span>), <span class='st'>"BioC_mirrors.csv"</span>),
+  <span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.csv"</span>),
   <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>
   )
 
 <span class='co'>## Publish file</span>
 <span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_publish</span>(<span class='no'>file</span>)
+<span class='no'>file</span>$<span class='no'>published</span>
 
 <span class='co'>## Unpublish file</span>
 <span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_unpublish</span>(<span class='no'>file</span>)
+<span class='no'>file</span>$<span class='no'>published</span>
 
 <span class='co'>## Clean up</span>
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>file</span>)

@@ -27,7 +27,7 @@
 #' \dontrun{
 #' ## Upload a csv file into a Google Sheet
 #' file <- drive_upload(
-#'   file.path(R.home("doc"), "BioC_mirrors.csv"),
+#'   drive_example("chicken.csv"),
 #'   type = "spreadsheet"
 #'   )
 #'
@@ -44,7 +44,7 @@
 #' drive_download(file)
 #'
 #' ## Clean up
-#' unlink(c("BioC_mirrors.csv", "BioC_mirrors.csv.xlsx", "my_csv_file.csv"))
+#' unlink(c("chicken.csv", "chicken.csv.xlsx", "my_csv_file.csv"))
 #' drive_rm(file)
 #' }
 drive_download <- function(file,

@@ -127,18 +127,18 @@ row-bound prior to deletion.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'>## Create something to remove</span>
-<span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"abc-DESC"</span>)
+<span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-rm.txt"</span>)
 
 <span class='co'>## Remove it by name</span>
-<span class='fu'>drive_rm</span>(<span class='st'>"abc-DESC"</span>)
+<span class='fu'>drive_rm</span>(<span class='st'>"chicken-rm.txt"</span>)
 
 <span class='co'>## Create several things to remove</span>
-<span class='no'>x1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"abc-DESC"</span>)
-<span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"def-DESC"</span>)
-<span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'>system.file</span>(<span class='st'>"DESCRIPTION"</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"ghi-DESC"</span>)
+<span class='no'>x1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-abc.txt"</span>)
+<span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-def.txt"</span>)
+<span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-ghi.txt"</span>)
 
 <span class='co'>## Remove them all at once, specified in different ways</span>
-<span class='fu'>drive_rm</span>(<span class='no'>x1</span>, <span class='st'>"def-DESC"</span>, <span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='no'>x2</span>))
+<span class='fu'>drive_rm</span>(<span class='no'>x1</span>, <span class='st'>"chicken-def.txt"</span>, <span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='no'>x2</span>))
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

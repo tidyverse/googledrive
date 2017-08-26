@@ -20,28 +20,28 @@
 #' @examples
 #' \dontrun{
 #' ## Create a new file, so we can update it
-#' x <- drive_upload(file.path(R.home("doc"), "NEWS"))
+#' x <- drive_upload(drive_example("chicken.csv"))
 #'
 #' ## Update the file with new media
 #' x <- x %>%
-#'   drive_update(file.path(R.home("doc"), "NEWS.1"))
+#'   drive_update(drive_example("chicken.txt"))
 #'
 #' ## Update the file with new metadata.
 #' ## Notice here `name` is not an argument of `drive_update()`, we are passing
 #' ## this to the API via the `...``
 #' x <- x %>%
-#'   drive_update(name = "NEWS-1")
+#'   drive_update(name = "CHICKENS!")
 #'
 #' ## We can add a parent folder by passing `addParents` via `...`.
 #' folder <- drive_mkdir("second-parent-folder")
 #' x <- x %>%
-#'   drive_update(addParents = folder$id)
+#'   drive_update(addParents = as_id(folder))
 #' ## Verify the file now has multiple parents
-#' x$drive_resource[[1]]$parents
+#' purrr::pluck(x, "drive_resource", 1, "parents")
 #'
 #' ## Update the file with new media AND new metadata
 #' x <- x %>%
-#'   drive_update(file.path(R.home("doc"), "NEWS.2"), name = "NEWS-2")
+#'   drive_update(drive_example("chicken.txt"), name = "chicken-poem-again.txt")
 #'
 #' ## Clean up
 #' drive_rm(x, folder)

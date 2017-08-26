@@ -51,8 +51,8 @@ read, comment, or edit. The returned \code{\link{dribble}} will have extra colum
 \dontrun{
 ## Upload a file to share
 file <- drive_upload(
-   system.file("DESCRIPTION"),
-   name = "DESC-share-ex",
+   drive_example("chicken.txt"),
+   name = "chicken-share.txt",
    type = "document"
 )
 

@@ -18,18 +18,18 @@
 #' @examples
 #' \dontrun{
 #' ## Create something to remove
-#' drive_upload(system.file("DESCRIPTION"), name = "abc-DESC")
+#' drive_upload(drive_example("chicken.txt"), name = "chicken-rm.txt")
 #'
 #' ## Remove it by name
-#' drive_rm("abc-DESC")
+#' drive_rm("chicken-rm.txt")
 #'
 #' ## Create several things to remove
-#' x1 <- drive_upload(system.file("DESCRIPTION"), name = "abc-DESC")
-#' drive_upload(system.file("DESCRIPTION"), name = "def-DESC")
-#' x2 <- drive_upload(system.file("DESCRIPTION"), name = "ghi-DESC")
+#' x1 <- drive_upload(drive_example("chicken.txt"), name = "chicken-abc.txt")
+#' drive_upload(drive_example("chicken.txt"), name = "chicken-def.txt")
+#' x2 <- drive_upload(drive_example("chicken.txt"), name = "chicken-ghi.txt")
 #'
 #' ## Remove them all at once, specified in different ways
-#' drive_rm(x1, "def-DESC", as_id(x2))
+#' drive_rm(x1, "chicken-def.txt", as_id(x2))
 #' }
 drive_rm <- function(..., verbose = TRUE) {
   dots <- list(...)

@@ -22,17 +22,17 @@
 #' @examples
 #' \dontrun{
 #' ## create a file to move
-#' file <- drive_upload(system.file("DESCRIPTION"), "DESC-mv")
+#' file <- drive_upload(drive_example("chicken.txt"), "chicken-mv.txt")
 #'
 #' ## rename it, but leave in current folder (root folder, in this case)
-#' file <- drive_mv(file, "DESC-mv-renamed")
+#' file <- drive_mv(file, "chicken-mv-renamed.txt")
 #'
 #' ## create a folder to move the file into
 #' folder <- drive_mkdir("mv-folder")
 #'
 #' ## move the file and rename it again,
 #' ## specify destination as a dribble
-#' file <- drive_mv(file, path = folder, name = "DESC-mv-re-renamed")
+#' file <- drive_mv(file, path = folder, name = "chicken-mv-re-renamed.txt")
 #'
 #' ## verify renamed file is now in the folder
 #' drive_ls(folder)

@@ -108,21 +108,21 @@ In general, googledrive functions that operate on files allow you to specify the
 We can upload any file type. 
 
 ```{r}
-(mirrors <- drive_upload(
-  file.path(R.home("doc"), "BioC_mirrors.csv"),
-  "README-mirrors.csv"
+(chicken <- drive_upload(
+  drive_example("chicken.csv"),
+  "README-chicken.csv"
 ))
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
 
 ```{r}
-drive_rm(mirrors)
+drive_rm(chicken)
 
 ## example of using a dribble as input
-mirrors <- drive_upload(
-  file.path(R.home("doc"), "BioC_mirrors.csv"),
-  "README-mirrors.csv",
+chicken_sheet <- drive_upload(
+  drive_example("chicken.csv"),
+  "README-chicken.csv",
   type = "spreadsheet"
 )
 ```
@@ -134,13 +134,13 @@ Much better!
 Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running `drive_reveal(..., "published")`, which adds a logical column `published` and parks more detailed metadata in a `revision_resource` variable.
 
 ```{r}
-drive_reveal(mirrors, "published")
+drive_reveal(chicken_sheet, "published")
 ```
 
 By default, `drive_publish()` will publish your most recent version.
 
 ```{r}
-(mirrors <- drive_publish(mirrors))
+(chicken_sheet <- drive_publish(chicken_sheet))
 ```
 
 #### Share files
@@ -148,7 +148,7 @@ By default, `drive_publish()` will publish your most recent version.
 To update the access, we need to change the sharing permissions. Let's say I want anyone with the link to be able to view my dataset.
 
 ```{r}
-mirrors <- mirrors %>%
+chicken_sheet <- chicken_sheet %>%
   drive_share(role = "reader", type = "anyone")
 ```
 
@@ -157,7 +157,7 @@ We always assign the return value of googledrive functions back into an R object
 We can then extract the file's hyperlink.
 
 ```{r}
-mirrors %>%
+chicken_sheet %>%
   drive_link()
 ```
 
@@ -195,7 +195,7 @@ Downloading files that are *not* Google type files is even simpler, i.e. it does
 
 ```{r}
 ## upload something we can download
-text_file <- drive_upload(system.file("DESCRIPTION"), name = "text-file.txt")
+text_file <- drive_upload(drive_example("chicken.txt"), name = "text-file.txt")
 
 ## download it and prove we got it
 drive_download("text-file.txt")
@@ -205,7 +205,7 @@ readLines("text-file.txt") %>% head()
 #### Clean up
 
 ```{r}
-drive_rm(mirrors, text_file)
+drive_rm(chicken_sheet, text_file)
 ```
 
 ```{r, echo = FALSE}
