@@ -8,7 +8,7 @@ googledrive
 Overview
 --------
 
-`googledrive` interfaces with Google Drive from R, allowing users to seamlessly manage files on Google Drive from the comfort of their console.
+googledrive allows you to interact with files on Google Drive from R.
 
 Installation
 ------------
@@ -24,28 +24,26 @@ Usage
 
 Please see the package website: <https://tidyverse.github.io/googledrive/>
 
-Here's a teaser that uses googledrive to view the files you see on <https://drive.google.com>:
+Here's a teaser that uses googledrive to view some of the files you see on <https://drive.google.com>:
 
 ``` r
 library("googledrive")
-drive_find()
-#> Items so far:
-#> 121
-#> 
-#> # A tibble: 121 x 3
-#>                                    name
-#>  *                                <chr>
-#>  1                                  def
-#>  2                                  abc
-#>  3                          DESCRIPTION
-#>  4                     BioC_mirrors.csv
-#>  5                                 NEWS
-#>  6                               NEWS.0
-#>  7                               NEWS.1
-#>  8 upload-into-me-too-TEST-drive-upload
-#>  9                          DESCRIPTION
-#> 10                              folder1
-#> # ... with 111 more rows, and 2 more variables: id <chr>,
+drive_find(n_max = 25)
+#> Auto-refreshing stale OAuth token.
+#> # A tibble: 25 x 3
+#>                            name
+#>  *                        <chr>
+#>  1               chicken-rm.txt
+#>  2                  chicken.jpg
+#>  3           README-mirrors.csv
+#>  4           README-mirrors.csv
+#>  5                          def
+#>  6                          abc
+#>  7               folder1-level4
+#>  8               folder1-level3
+#>  9      cranberry-TEST-drive-ls
+#> 10 folder1-level2-TEST-drive-ls
+#> # ... with 15 more rows, and 2 more variables: id <chr>,
 #> #   drive_resource <list>
 ```
 

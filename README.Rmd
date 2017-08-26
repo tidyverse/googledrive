@@ -7,8 +7,7 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
+  comment = "#>"
 )
 ## use a token from our development account
 ## special care with path because wd is docs/ during pkgdown::build_site()
@@ -21,11 +20,9 @@ googledrive::drive_auth(token_path)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/googledrive)](https://cran.r-project.org/package=googledrive)
 [![Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)[![codecov](https://codecov.io/gh/tidyverse/googledrive/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/googledrive?branch=master) 
 
-WARNING: this is under very active development
-
 ## Overview
 
-`googledrive` interfaces with Google Drive from R, allowing users to seamlessly manage files on Google Drive from the comfort of their console. 
+googledrive allows you to interact with files on Google Drive from R.
 
 ## Installation
 
@@ -40,11 +37,11 @@ devtools::install_github("tidyverse/googledrive")
 Please see the package website:
 <https://tidyverse.github.io/googledrive/>
 
-Here's a teaser that uses googledrive to view the files you see on <https://drive.google.com>:
+Here's a teaser that uses googledrive to view some of the files you see on <https://drive.google.com>:
 
 ```{r}
 library("googledrive")
-drive_find()
+drive_find(n_max = 25)
 ```
 
 ## Contributing
