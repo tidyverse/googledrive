@@ -12,7 +12,7 @@ skip_if_offline <- (function() {
         error = function(e) TRUE
       )
     }
-    if (offline) skip("Offline")
+    if (offline) testthat::skip("Offline")
   }
 })()
 
@@ -36,7 +36,7 @@ skip_if_no_token <- (function() {
         }
       }
     }
-    if (no_token) skip("No Drive token")
+    if (no_token) testthat::skip("No Drive token")
   }
 })()
 
