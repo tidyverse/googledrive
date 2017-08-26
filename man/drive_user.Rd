@@ -2,24 +2,30 @@
 % Please edit documentation in R/drive_user.R
 \name{drive_user}
 \alias{drive_user}
-\title{Information on the user and user's Drive.}
+\title{Get info on current user}
 \usage{
-drive_user(fields = "user", ..., verbose = TRUE)
+drive_user(verbose = TRUE)
 }
 \arguments{
-\item{fields}{The fields the user would like output - by default only \code{user},
-which will display as detailed above.}
-
-\item{...}{Name-value pairs to query the API.}
-
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
 \value{
-A list of class \code{drive_user} with user's data.
+A list of class \code{drive_user}.
 }
 \description{
-Reveals information about the user associated with the current token.
+Reveals information about the user associated with the current token. This is
+a thin wrapper around \code{\link[=drive_about]{drive_about()}} that just extracts the most useful
+information (the information on current user) and prints it nicely.
+}
+\examples{
+\dontrun{
+drive_user()
+
+## more info is returned than is printed
+user <- drive_user()
+user[["permissionId"]]
+}
 }
 \seealso{
 Wraps the \code{about.get} endpoint:

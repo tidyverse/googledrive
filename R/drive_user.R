@@ -1,52 +1,43 @@
-#' Information on the user and user's Drive.
+#' Get info on current user
 #'
-#' Reveals information about the user associated with the current token.
+#' Reveals information about the user associated with the current token. This is
+#' a thin wrapper around [drive_about()] that just extracts the most useful
+#' information (the information on current user) and prints it nicely.
 #'
 #' @seealso Wraps the `about.get` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/about/get>
 #'
-#' @param fields The fields the user would like output - by default only `user`,
-#'   which will display as detailed above.
-#' @param ... Name-value pairs to query the API.
 #' @template verbose
 #'
-#' @return A list of class `drive_user` with user's data.
+#' @return A list of class `drive_user`.
 #' @export
+#' @examples
+#' \dontrun{
+#' drive_user()
 #'
-drive_user <- function(fields = "user", ..., verbose = TRUE) {
-
-  if (!token_available(verbose = verbose) || !is_legit_token(.state$cred)) {
+#' ## more info is returned than is printed
+#' user <- drive_user()
+#' user[["permissionId"]]
+#' }
+drive_user <- function(verbose = TRUE) {
+  if (!token_available(verbose = verbose)) {
     if (verbose) {
-      message("To retrieve user info, please call drive_auth() explicitly.")
+      message("Not logged in as any specific Google user.")
     }
-    return(invisible(NULL))
+    return(invisible())
   }
-
-  user_info <- guser(fields = fields, ...)
-
-  user_info
-
+  about <- drive_about()
+  structure(about[["user"]], class = c("drive_user", "list"))
 }
 
-#' Google Drive User Information
-#'
-#' @param fields fields to query, default is `user`.
-#' @param ... name-value pairs to query the API
-#'
-#' @return list of class `guser` with user's information
-#' @keywords internal
-
-guser <- function(fields = "user", ...) {
-
-  if (!token_available(verbose = FALSE)) {
-    return(NULL)
-  }
-
-  request <-  generate_request(endpoint = "drive.about.get",
-                   params = list(fields = fields))
-  response <- make_request(request)
-  proc_res <- process_response(response)
-  proc_res$date <- httr::parse_http_date(request$headers$date)
-  structure(proc_res, class = c("drive_user", "list"))
-
+print.drive_user <- function(user) {
+  cat(
+    c(
+      "Logged in as:",
+      glue("  * displayName: {user[['displayName']]}"),
+      glue("  * emailAddress: {user[['emailAddress']]}")
+    ),
+    sep = "\n"
+  )
+  invisible(user)
 }

@@ -81,9 +81,10 @@ reference:
     desc: >
       Take explicit control of the Google auth status or examine current state
     contents:
+      - drive_user
+      - drive_about
       - drive_auth
       - drive_deauth
-      - drive_user
       - drive_auth_config
   - title: "Drive API spec"
     desc: >
