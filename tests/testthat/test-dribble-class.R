@@ -250,3 +250,15 @@ test_that("promote() replaces existing element in situ", {
   expect_identical(x3$foo, "d")
   expect_identical(x3$bar, "e")
 })
+
+test_that("promote() does snake_case to camelCase conversion", {
+  x <- tibble::tibble(
+    name = "name",
+    id = "id",
+    drive_resource = list(
+      list(thisThat = "hi")
+    )
+  )
+  out <- promote(x, "this_that")
+  expect_identical(out[2], tibble::tibble(this_that = "hi"))
+})

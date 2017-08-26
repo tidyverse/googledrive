@@ -280,7 +280,7 @@ is_team_drivy <- function(d) {
 ## but use `this_var` as the variable name
 promote <- function(d, elem) {
   elem_orig <- elem
-  elem <- toCamel(elem)
+  elem <- camelCase(elem)
   present <- any(purrr::map_lgl(d$drive_resource, ~ elem %in% names(.x)))
   if (present) {
     val <- purrr::simplify(purrr::map(d$drive_resource, elem))
