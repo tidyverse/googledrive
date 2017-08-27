@@ -7,11 +7,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Please see the googledrive website:
+Please see the googledrive website for full documentation:
 
   * <http://googledrive.tidyverse.org/index.html>
   
-for full documentation. In addition to function-specific help, there are several articles:
+In addition to function-specific help, there are several articles which are indexed here:
 
   * [Article index](http://googledrive.tidyverse.org/articles/index.html)
-  * [File identification](http://googledrive.tidyverse.org/articles/articles/file-identification.html)
