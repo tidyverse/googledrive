@@ -51,6 +51,9 @@
     <li>
       <a href="articles/articles/multiple-files.html">Dealing with multiple files</a>
     </li>
+    <li>
+      <a href="articles/articles/permissions.html">File permissions</a>
+    </li>
   </ul>
 </li>
         <li>
@@ -185,17 +188,17 @@ x<span class="op">$</span>id
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTTmxXWEtoWnA4cUk</span>
+<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTSDRScVhUbWlEaTA</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/csv</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                 name                           id drive_resource</span>
 <span class="co">#&gt; *              &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-chicken.csv 0B0Gh-SuuA2nTTmxXWEtoWnA4cUk    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 README-chicken.csv 0B0Gh-SuuA2nTSDRScVhUbWlEaTA    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive guessed the MIME type. We can overrule this by using the <code>type</code> parameter to upload as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTTmxXWEtoWnA4cUk</span>
+<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTSDRScVhUbWlEaTA</span>
 
 ## example of using a dribble as input
 chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
@@ -206,7 +209,7 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1MNTVxcaEsLH4WW94m7VXRSSIu28wz7h_3scByP0-SGg</span>
+<span class="co">#&gt;   * README-chicken.csv: 1zDxruu6Wz98SpZU2MjI5kGSDidb-NWwnvpcJIFFpHpY</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span></code></pre></div>
 <p>Much better!</p>
@@ -220,7 +223,7 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;                 name shared                                           id</span>
 <span class="co">#&gt;                &lt;chr&gt;  &lt;lgl&gt;                                        &lt;chr&gt;</span>
-<span class="co">#&gt; 1 README-chicken.csv  FALSE 1MNTVxcaEsLH4WW94m7VXRSSIu28wz7h_3scByP0-SGg</span>
+<span class="co">#&gt; 1 README-chicken.csv  FALSE 1zDxruu6Wz98SpZU2MjI5kGSDidb-NWwnvpcJIFFpHpY</span>
 <span class="co">#&gt; # ... with 2 more variables: drive_resource &lt;list&gt;,</span>
 <span class="co">#&gt; #   permissions_resource &lt;list&gt;</span></code></pre></div>
 <p>Here’s how to grant anyone with the link permission to be able to view this dataset.</p>
@@ -230,11 +233,11 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <span class="co">#&gt;   * role = reader</span>
 <span class="co">#&gt;   * type = anyone</span>
 <span class="co">#&gt; For files:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1MNTVxcaEsLH4WW94m7VXRSSIu28wz7h_3scByP0-SGg</span>
+<span class="co">#&gt;   * README-chicken.csv: 1zDxruu6Wz98SpZU2MjI5kGSDidb-NWwnvpcJIFFpHpY</span>
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;                 name shared                                           id</span>
 <span class="co">#&gt;                &lt;chr&gt;  &lt;lgl&gt;                                        &lt;chr&gt;</span>
-<span class="co">#&gt; 1 README-chicken.csv   TRUE 1MNTVxcaEsLH4WW94m7VXRSSIu28wz7h_3scByP0-SGg</span>
+<span class="co">#&gt; 1 README-chicken.csv   TRUE 1zDxruu6Wz98SpZU2MjI5kGSDidb-NWwnvpcJIFFpHpY</span>
 <span class="co">#&gt; # ... with 2 more variables: drive_resource &lt;list&gt;,</span>
 <span class="co">#&gt; #   permissions_resource &lt;list&gt;</span></code></pre></div>
 </div>
@@ -253,7 +256,7 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <p>By default, <code><a href="reference/drive_publish.html">drive_publish()</a></code> will publish your most recent version.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_publish.html">drive_publish</a></span>(chicken_sheet))
 <span class="co">#&gt; Files now published:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1MNTVxcaEsLH4WW94m7VXRSSIu28wz7h_3scByP0-SGg</span>
+<span class="co">#&gt;   * README-chicken.csv: 1zDxruu6Wz98SpZU2MjI5kGSDidb-NWwnvpcJIFFpHpY</span>
 <span class="co">#&gt; # A tibble: 1 x 7</span>
 <span class="co">#&gt;                 name published shared</span>
 <span class="co">#&gt;                &lt;chr&gt;     &lt;lgl&gt;  &lt;lgl&gt;</span>
@@ -300,7 +303,7 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.txt</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTd21OYXVHQlFpcUk</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTbmdKUGUybGlJa28</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/plain</span>
 
@@ -324,8 +327,8 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 <a href="#clean-up" class="anchor"></a>Clean up</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken_sheet, text_file)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1MNTVxcaEsLH4WW94m7VXRSSIu28wz7h_3scByP0-SGg</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTd21OYXVHQlFpcUk</span></code></pre></div>
+<span class="co">#&gt;   * README-chicken.csv: 1zDxruu6Wz98SpZU2MjI5kGSDidb-NWwnvpcJIFFpHpY</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTbmdKUGUybGlJa28</span></code></pre></div>
 </div>
 </div>
 </div>

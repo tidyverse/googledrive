@@ -1,5 +1,5 @@
 ---
-title: "Dealing with permissions"
+title: "File permissions"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Dealing with permissions}
@@ -12,21 +12,27 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+## use a token from our development account
+token_path <- rprojroot::find_package_root_file("tidyverse-noncaching-token.rds")
+googledrive::drive_auth(token_path)
 ```
 
-```{r, eval = FALSE}
-library(purrr)
+You can use googledrive to manage permissions on your Drive files, i.e. grant different people or groups of people various levels of access (read, comment, edit, etc.).
+
+Let's upload a file and view its permissions.
+
+```{r}
+library(googledrive)
+file <- drive_example("chicken.txt") %>%
+  drive_upload(name = "chicken-perm-article.txt") %>% 
+  drive_reveal("permissions")
+file
 ```
 
-```{r, eval = FALSE}
-file <- drive_upload(system.file("DESCRIPTION"))
-```
+The `shared` column shows that this file is not yet shared with anyone and, for those so inclined, detailed information on permissions can be found in the `permissions_resource` list-column.
 
-```{r, eval = FALSE}
-file <- drive_reveal(file, "permissions")
-```
+Let's give a specific person permission to edit this file and a customized message, using the `emailAddress` and `emailMessage` parameters.
 
-Let's give someone permission to edit this file using the `emailAddress` and `emailMessage` parameters.
 ```{r, eval = FALSE}
 file <- file %>%
   drive_share(
@@ -35,31 +41,45 @@ file <- file %>%
     emailAddress = "serena@example.com",
     emailMessage = "Would appreciate your feedback on this!"
   )
+file
 ```
 
-We also want anyone to be able to read the file.
+```{r, echo = FALSE}
+file <- file %>%
+  drive_share(
+    role = "writer",
+    type = "user",
+    emailAddress = "jenny@stat.ubc.ca",
+    emailMessage = "Would appreciate your feedback on this!"
+  )
+file
+```
 
-```{r, eval = FALSE}
+We see that the file is now shared. We also want anyone to be able to read the file.
+
+```{r}
 file <- file %>%
   drive_share(role = "reader", type = "anyone")
 ```
 
-Now that we've made a few updates to our permissions, the `permissions_resource` list-col in our `dribble` has been populated accordingly. We can pull important pieces out of this.
+Now that we've made a few updates to our permissions, the `permissions_resource` list-column has become more interesting. Here's how to pull important information out of this and put into a tibble with one row per permission. (*Permission handling will become more formalized in future versions of googledrive. See [the issue](https://github.com/tidyverse/googledrive/issues/180)*). We use other packages in the tidyverse now for this data wrangling.
 
-```{r, eval = FALSE}
-permissions <- tibble::tibble(
-  id = map_chr(file$permissions_resource[[1]]$permissions, "id", .null = NA_character_),
-  name = map_chr(file$permissions_resource[[1]]$permissions, "displayName", .null = NA_character_),
-  type = map_chr(file$permissions_resource[[1]]$permissions, "type", .null = NA_character_),
-  role = map_chr(file$permissions_resource[[1]]$permissions, "role", .null = NA_character_),
-  email = map_chr(file$permissions_resource[[1]]$permissions, "emailAddress", .null = NA_character_),
-  deleted = map_lgl(file$permissions_resource[[1]]$permissions, "deleted", .null = NA)
+```{r}
+library(tidyverse)
+perm <- pluck(file, "permissions_resource", 1, "permissions")
+permissions <- tibble(
+  id = map_chr(perm, "id", .null = NA_character_),
+  name = map_chr(perm, "displayName", .null = NA_character_),
+  type = map_chr(perm, "type", .null = NA_character_),
+  role = map_chr(perm, "role", .null = NA_character_),
+  email = map_chr(perm, "emailAddress", .null = NA_character_)
 )
+as.data.frame(permissions)
 ```
 
 ## Clean up
 
-```{r, eval = FALSE}
+```{r}
 drive_rm(file)
 ```
 

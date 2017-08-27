@@ -51,6 +51,9 @@
     <li>
       <a href="../../articles/articles/multiple-files.html">Dealing with multiple files</a>
     </li>
+    <li>
+      <a href="../../articles/articles/permissions.html">File permissions</a>
+    </li>
   </ul>
 </li>
         <li>
@@ -159,10 +162,10 @@ files &lt;-<span class="st"> </span><span class="kw">map</span>(local_files, dri
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;          name                           id drive_resource</span>
 <span class="co">#&gt; *       &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 chicken.txt 0B0Gh-SuuA2nTMHFub1ltcTdIYWs    &lt;list [36]&gt;</span>
-<span class="co">#&gt; 2 chicken.pdf 0B0Gh-SuuA2nTclBOenA2ZmJuSTg    &lt;list [36]&gt;</span>
-<span class="co">#&gt; 3 chicken.jpg 0B0Gh-SuuA2nTUjBLY1JMVk4zbDA    &lt;list [38]&gt;</span>
-<span class="co">#&gt; 4 chicken.csv 0B0Gh-SuuA2nTLV9uZkQzTXp2Rlk    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 chicken.txt 0B0Gh-SuuA2nTR1g4UmFvRXg2aE0    &lt;list [36]&gt;</span>
+<span class="co">#&gt; 2 chicken.pdf 0B0Gh-SuuA2nTV0ZUQ1ByT2lJTVU    &lt;list [36]&gt;</span>
+<span class="co">#&gt; 3 chicken.jpg 0B0Gh-SuuA2nTZzF0N2VuNlViVzg    &lt;list [38]&gt;</span>
+<span class="co">#&gt; 4 chicken.csv 0B0Gh-SuuA2nTalRLdmlNRlJfVGM    &lt;list [36]&gt;</span></code></pre></div>
 </div>
 <div id="rename" class="section level3">
 <h3 class="hasAnchor">
@@ -186,19 +189,19 @@ files_dribble &lt;-<span class="st"> </span><span class="kw">map2_df</span>(file
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;                     name                           id drive_resource</span>
 <span class="co">#&gt; *                  &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 2017-08-27_chicken.txt 0B0Gh-SuuA2nTMHFub1ltcTdIYWs    &lt;list [37]&gt;</span>
-<span class="co">#&gt; 2 2017-08-27_chicken.pdf 0B0Gh-SuuA2nTclBOenA2ZmJuSTg    &lt;list [37]&gt;</span>
-<span class="co">#&gt; 3 2017-08-27_chicken.jpg 0B0Gh-SuuA2nTUjBLY1JMVk4zbDA    &lt;list [38]&gt;</span>
-<span class="co">#&gt; 4 2017-08-27_chicken.csv 0B0Gh-SuuA2nTLV9uZkQzTXp2Rlk    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 2017-08-27_chicken.txt 0B0Gh-SuuA2nTR1g4UmFvRXg2aE0    &lt;list [37]&gt;</span>
+<span class="co">#&gt; 2 2017-08-27_chicken.pdf 0B0Gh-SuuA2nTV0ZUQ1ByT2lJTVU    &lt;list [37]&gt;</span>
+<span class="co">#&gt; 3 2017-08-27_chicken.jpg 0B0Gh-SuuA2nTZzF0N2VuNlViVzg    &lt;list [38]&gt;</span>
+<span class="co">#&gt; 4 2017-08-27_chicken.csv 0B0Gh-SuuA2nTalRLdmlNRlJfVGM    &lt;list [36]&gt;</span></code></pre></div>
 <p>Note that you can always row bind individual dribbles into one big dribble yourself. We demo that with <code><a href="http://dplyr.tidyverse.org/reference/bind.html">dplyr::bind_rows()</a></code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bind_rows</span>(files)
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;          name                           id drive_resource</span>
 <span class="co">#&gt;         &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 chicken.csv 0B0Gh-SuuA2nTLV9uZkQzTXp2Rlk    &lt;list [36]&gt;</span>
-<span class="co">#&gt; 2 chicken.jpg 0B0Gh-SuuA2nTUjBLY1JMVk4zbDA    &lt;list [38]&gt;</span>
-<span class="co">#&gt; 3 chicken.pdf 0B0Gh-SuuA2nTclBOenA2ZmJuSTg    &lt;list [36]&gt;</span>
-<span class="co">#&gt; 4 chicken.txt 0B0Gh-SuuA2nTMHFub1ltcTdIYWs    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 chicken.csv 0B0Gh-SuuA2nTalRLdmlNRlJfVGM    &lt;list [36]&gt;</span>
+<span class="co">#&gt; 2 chicken.jpg 0B0Gh-SuuA2nTZzF0N2VuNlViVzg    &lt;list [38]&gt;</span>
+<span class="co">#&gt; 3 chicken.pdf 0B0Gh-SuuA2nTV0ZUQ1ByT2lJTVU    &lt;list [36]&gt;</span>
+<span class="co">#&gt; 4 chicken.txt 0B0Gh-SuuA2nTR1g4UmFvRXg2aE0    &lt;list [36]&gt;</span></code></pre></div>
 </div>
 <div id="clean-up" class="section level3">
 <h3 class="hasAnchor">
@@ -210,7 +213,7 @@ files_dribble &lt;-<span class="st"> </span><span class="kw">map2_df</span>(file
 <p>Finally – and this is the code we will actually execute – the easiest way to delete these files is to delete their enclosing folder.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_rm.html">drive_rm</a></span>(folder)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * upload-into-me-article-demo: 0B0Gh-SuuA2nTTl9HVTlhaW92dHM</span></code></pre></div>
+<span class="co">#&gt;   * upload-into-me-article-demo: 0B0Gh-SuuA2nTQ3lUSm42OVBsdUE</span></code></pre></div>
 </div>
 </div>
 </div>
