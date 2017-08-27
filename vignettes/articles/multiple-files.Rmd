@@ -12,15 +12,20 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+## use a token from our development account
+token_path <- rprojroot::find_package_root_file("tidyverse-noncaching-token.rds")
+googledrive::drive_auth(token_path)
 ```
 
-Some of our functions are built to naturally handle multiple files, while others require single files.
+Some googledrive functions are built to naturally handle multiple files, while others operate on a single file.
 
 Functions that expect a single file:
 
 * `drive_browse()`  
 * `drive_cp()`  
-* `drive_download()`  
+* `drive_download()` 
+* `drive_ls()`
+* `drive_mkdir()`
 * `drive_mv()`  
 * `drive_rename()`  
 * `drive_update()`
@@ -34,46 +39,84 @@ Functions that allow multiple files:
 * `drive_share()`  
 * `drive_trash()`  
 
-In general, our principle is if there are multiple parameters that would likely be different across multiple files, our function expects a single input. It is, however, possible to iterate over multiple files for our functions that are not vectorized. We will illustrate a workflow for that here.
+In general, the principle is: if there are multiple parameters that are likely to vary across multiple files, the function is designed to take a single input. In order to use these function with multiple inputs, use them together with your favorite approach for iteration in R. Below is a worked example, focusing on tools in the tidyverse, namely the `map()` functions in purrr.
 
-## Example
+## Upload multiple files, then rename them
 
-In this example, we have multiple files we'd like to upload into a folder on Drive. We then would like to rename them with a prefix of the date they were uploaded.
+Scenario: we have multiple local files we want to upload into a folder on Drive. Then we regret their original names and want to rename them.
 
-### Upload all files into a folder called "to-upload"
+Load packages.
 
-```{r, eval = FALSE}
-library(purrr)
+```{r}
+library(googledrive)
+library(glue)
+library(tidyverse)
 ```
 
-Let's grab a set of files to upload.
+### Upload
 
-```{r, eval = FALSE}
-local_files <- list.files(file.path(R.home("doc"), "html"), full.names = TRUE)
+Use the example files that ship with googledrive. This looks a bit odd, but the first call returns their names and the second returns full paths on the local system.
+
+```{r}
+local_files <- drive_example() %>% 
+  drive_example()
 ```
 
-Create a folder on your Drive called "to-upload" and upload all files into this folder by iterating over the `local_files` using `map()`.
+Create a folder on your Drive and upload all files into this folder by iterating over the `local_files` using `purrr::map()`.
 
-```{r, eval = FALSE}
-folder <- drive_mkdir("to-upload")
-files <- map(local_files, drive_upload, path = folder)
+```{r}
+folder <- drive_mkdir("upload-into-me-article-demo")
+files <- map(local_files, drive_upload, path = folder, verbose = FALSE)
 ```
 
-`files` is now a list where each element contains a **dribble** for each file that was uploaded.
+`files` is now a list of **dribbles**, one per uploaded file. Let's confirm that we uploaded the file into the new folder.
 
-### Rename all files
+```{r}
+str(files, max.level = 1)
+drive_ls(folder)
+```
 
-If we want to rename all of the files in this folder with a date prefix, we can do so, again by iterating over the data. Notice here we are using `map2_df()`. The `2` is because we are using two arguments, the `files` we are iterating over as well as the `new_names`. Rather than just using `map2()`, which will output a list, we are using `map2_df()` to bind the individual **dribbles** together into a single `tibble` for easier viewing and processing. This makes sense since this is our last action we are performing that requires iterating.
+### Rename
 
-```{r, eval = FALSE}
-new_names <- glue::glue("{Sys.Date()}_{basename(local_files)}")
-files <- map2_df(files, new_names, drive_rename)
+Imagine that we now wish these file names had a date prefix. First, form the new names. We use `glue::glue()` for string interpolation but you could also use `paste()`. Second, we map over two inputs: the list of dribbles from above and the vector of new names.
+
+```{r}
+new_names <- glue("{Sys.Date()}_{basename(local_files)}")
+files_dribble <- map2_df(files, new_names, drive_rename)
+## alternative: do this to get a list of dribbles for more downstream mapping
+# files_list <- map2(files, new_names, drive_rename)
+```
+
+We use `purrr::map2_df()` to work through the list of dribbles (= Drive files) and the vector of new names and row bind the returned dribbles into a single dribble holding all files. In commented out code, we show an alternative using `purrr::map2()` that would return another list of dribbles. This would set you up better for downstream operations that required more `map()`ing.
+
+Let's check on the contents of this folder again:
+
+```{r}
+drive_ls(folder)
+```
+
+Note that you can always row bind individual dribbles into one big dribble yourself. We demo that with `dplyr::bind_rows()`:
+
+```{r}
+bind_rows(files)
 ```
 
 ### Clean up
 
-Our delete function, `drive_rm()` is vectorized, and therefore does not need a `map()` in order to work. Additionally, since we uploaded all of the files into a single folder, we can just delete the folder and the files will also be deleted.
+Our trashing function, `drive_trash()` is vectorized and can therefore operate on a multi-file dribble. We could trash these files like so:
 
-```{r, eval = FALSE}
+```{r eval = FALSE}
+drive_trash(files_dribble)
+```
+
+If you're absolutely sure of yourself and happy to do something irreversible, you could truly delete these files with `drive_rm()`, which is also vectorized:
+
+```{r eval = FALSE}
+drive_rm(files_dribble)
+```
+
+Finally -- and this is the code we will actually execute -- the easiest way to delete these files is to delete their enclosing folder.
+
+```{r}
 drive_rm(folder)
 ```

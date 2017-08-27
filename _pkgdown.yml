@@ -18,11 +18,14 @@ navbar:
       href: articles/index.html
     - text: File Identification
       href: articles/articles/file-identification.html
+    - text: Dealing with multiple files
+      href: articles/articles/multiple-files.html
 
 articles:
   - title: "Articles"
     contents:
     - file-identification
+    - multiple-files
 
 reference:
   - title: "Reach out and touch your files"
