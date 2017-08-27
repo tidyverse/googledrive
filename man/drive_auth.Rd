@@ -10,7 +10,7 @@ drive_auth(oauth_token = NULL, service_token = NULL, reset = FALSE,
 }
 \arguments{
 \item{oauth_token}{Optional; path to an \code{.rds} file with a previously stored
-oauth token.}
+OAuth token.}
 
 \item{service_token}{Optional; a JSON string, URL, or path, giving or
 pointing to the service token file.}
@@ -55,7 +55,7 @@ this function allows the user to
 }
 
 For even deeper control over auth, use \code{\link[=drive_auth_config]{drive_auth_config()}} to use your own
-oauth app or API key. \code{\link[=drive_auth_config]{drive_auth_config()}} also allows you to
+OAuth app or API key. \code{\link[=drive_auth_config]{drive_auth_config()}} also allows you to
 deactivate auth, sending only an API key in requests, which works if you
 only need to access public data.
 }

@@ -31,7 +31,7 @@ gives control of:
 \itemize{
 \item The googledrive auth state. The default is active, meaning all requests
 are sent with a token and, if one is not already loaded, OAuth flow is
-initiated. It is possible, however, to place unauthorizeded requests to
+initiated. It is possible, however, to place unauthorized requests to
 the Drive API, as long as you are accessing public resources. Set \code{active}
 to \code{FALSE} to enter this state and never send a token.
 \item The OAuth app. If you want to use your own app, setup a new project in

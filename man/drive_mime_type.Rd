@@ -16,7 +16,7 @@ Drive API.}
 Character. MIME type.
 }
 \description{
-This is a helper to determinine which MIME type should be used
+This is a helper to determine which MIME type should be used
 for a file. Three types of input are acceptable:
 \itemize{
 \item Native Google Drive file types. Important examples:

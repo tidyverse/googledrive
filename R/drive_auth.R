@@ -29,7 +29,7 @@
 #'   `.httr-oauth`
 #'
 #' For even deeper control over auth, use [drive_auth_config()] to use your own
-#' oauth app or API key. [drive_auth_config()] also allows you to
+#' OAuth app or API key. [drive_auth_config()] also allows you to
 #' deactivate auth, sending only an API key in requests, which works if you
 #' only need to access public data.
 #'
@@ -37,7 +37,7 @@
 #' [Using OAuth 2.0 for Installed Applications](https://developers.google.com/identity/protocols/OAuth2InstalledApp)
 #'
 #' @param oauth_token Optional; path to an `.rds` file with a previously stored
-#'   oauth token.
+#'   OAuth token.
 #' @param service_token Optional; a JSON string, URL, or path, giving or
 #'   pointing to the service token file.
 #' @param reset Logical, defaults to `FALSE`. Set to `TRUE` if you want to
@@ -148,7 +148,7 @@ drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
 #' gives control of:
 #'   * The googledrive auth state. The default is active, meaning all requests
 #'   are sent with a token and, if one is not already loaded, OAuth flow is
-#'   initiated. It is possible, however, to place unauthorizeded requests to
+#'   initiated. It is possible, however, to place unauthorized requests to
 #'   the Drive API, as long as you are accessing public resources. Set `active`
 #'   to `FALSE` to enter this state and never send a token.
 #'   * The OAuth app. If you want to use your own app, setup a new project in
@@ -309,8 +309,7 @@ set_api_key <- function(value) {
 #' Retrieve API key
 #'
 #' Retrieves the pre-configured API key. Learn more in Google's document
-#' [Credentials, access, security, and
-#' identity](https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279).
+#' [Credentials, access, security, and identity](https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279).
 #' By default, this API key is initialized to one that ships with googledrive.
 #' But the user can store their own key via [drive_auth_config()], i.e.
 #' overwrite the default.
