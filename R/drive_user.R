@@ -30,6 +30,7 @@ drive_user <- function(verbose = TRUE) {
   structure(about[["user"]], class = c("drive_user", "list"))
 }
 
+#' @export
 print.drive_user <- function(user) {
   cat(
     c(
