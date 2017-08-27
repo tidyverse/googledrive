@@ -143,8 +143,24 @@ drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
 
 #' View or set auth config
 #'
-#' If you want to use your own app, setup a new project in
-#' [Google Developers Console](https://console.developers.google.com).
+#' @description This function gives advanced users more control over auth.
+#' Whereas [drive_auth()] gives control over tokens, `drive_auth_config()`
+#' gives control of:
+#'   * The googledrive auth state. The default is active, meaning all requests
+#'   are sent with a token and, if one is not already loaded, OAuth flow is
+#'   initiated. It is possible, however, to place unauthorizeded requests to
+#'   the Drive API, as long as you are accessing public resources. Set `active`
+#'   to `FALSE` to enter this state and never send a token.
+#'   * The OAuth app. If you want to use your own app, setup a new project in
+#'   [Google Developers Console](https://console.developers.google.com). Follow
+#'   the instructions in
+#'   [OAuth 2.0 for Mobile & Desktop Apps](https://developers.google.com/identity/protocols/OAuth2InstalledApp)
+#'   to obtain you own client ID and secret. Provide these to
+#'   [pkg::func(httr::oauth_app)].
+#'   * The API key. If googledrive auth is deactivated (see above), all requests
+#'   will be sent with an API key. If you want to provide your own, setup a
+#'   project as described above and follow the instructions in
+#'   [Setting up API keys](https://support.google.com/googleapi/answer/6158862).
 #'
 #' @param active Logical. `TRUE` means a token will be sent. `FALSE` means it
 #'   will not.
@@ -155,7 +171,7 @@ drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
 #' @template verbose
 #'
 #' @family auth functions
-#' @return `NULL`, invisibly
+#' @return A list of class `auth_config`, with the current auth configuration.
 #' @export
 #' @examples
 #' drive_auth_config()
@@ -175,19 +191,32 @@ drive_auth_config <- function(active = TRUE,
   set_oauth_app(app %||% .state[["tidyverse_app"]])
   set_api_key(api_key %||% .state[["tidyverse_api_key"]])
 
-  if (verbose) {
-    message_glue(
-      "googledrive auth state: ",
-      "{if (auth_active()) 'active' else 'inactive'}\n",
-      "oauth app: ",
-      "{oauth_app()[['appname']]}\n",
-      "API key: ",
-      "{if (is.null(drive_api_key())) 'unset' else 'set'}\n",
-      "token: ",
-      "{if (is.null(access_cred())) 'not loaded' else 'loaded'}"
-    )
-  }
-  invisible()
+  structure(
+    list(
+      active = auth_active(),
+      oauth_app_name = oauth_app()[['appname']],
+      api_key = drive_api_key(),
+      token = access_cred()
+    ),
+    class = c("auth_config", "list")
+  )
+}
+
+#' @export
+print.auth_config <- function(x, ...) {
+  cat(
+      glue("googledrive auth state: ",
+           "{if (x[['active']]) 'active' else 'inactive'}\n",
+           "oauth app: ",
+           "{x[['oauth_app_name']]}\n",
+           "API key: ",
+           "{if (is.null(x[['api_key']])) 'unset' else 'set'}\n",
+           "token: ",
+           "{if (is.null(x[['token']])) 'not loaded' else 'loaded'}"
+    ),
+    sep = ""
+  )
+  invisible(x)
 }
 
 #' Produce Google token

@@ -11,9 +11,10 @@ drive_auth_config(active = TRUE, app = NULL, api_key = NULL,
 \item{active}{Logical. \code{TRUE} means a token will be sent. \code{FALSE} means it
 will not.}
 
-\item{app}{OAuth app. Defaults to tidyverse app that ships with googledrive.}
+\item{app}{OAuth app. Defaults to a tidyverse app that ships with
+googledrive.}
 
-\item{api_key}{API key. Defaults to key that ships with googledrive.
+\item{api_key}{API key. Defaults to a key that ships with googledrive.
 Necessary in order to make unauthorized "token-free" requests for public
 resources.}
 
@@ -21,11 +22,29 @@ resources.}
 (default \code{TRUE}).}
 }
 \value{
-\code{NULL}, invisibly
+A list of class \code{auth_config}, with the current auth configuration.
 }
 \description{
-If you want to use your own app, setup a new project in
-\href{https://console.developers.google.com}{Google Developers Console}.
+This function gives advanced users more control over auth.
+Whereas \code{\link[=drive_auth]{drive_auth()}} gives control over tokens, \code{drive_auth_config()}
+gives control of:
+\itemize{
+\item The googledrive auth state. The default is active, meaning all requests
+are sent with a token and, if one is not already loaded, OAuth flow is
+initiated. It is possible, however, to place unauthorizeded requests to
+the Drive API, as long as you are accessing public resources. Set \code{active}
+to \code{FALSE} to enter this state and never send a token.
+\item The OAuth app. If you want to use your own app, setup a new project in
+\href{https://console.developers.google.com}{Google Developers Console}. Follow
+the instructions in
+\href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{OAuth 2.0 for Mobile & Desktop Apps}
+to obtain your own client ID and secret. Provide these to
+\code{\link[httr:oauth_app]{httr::oauth_app()}}.
+\item The API key. If googledrive auth is deactivated (see above), all requests
+will be sent with an API key. If you want to provide your own, setup a
+project as described above and follow the instructions in
+\href{https://support.google.com/googleapi/answer/6158862}{Setting up API keys}.
+}
 }
 \examples{
 drive_auth_config()
