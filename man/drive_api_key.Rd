@@ -11,7 +11,7 @@ A Google API key.
 }
 \description{
 Retrieves the pre-configured API key. Learn more in Google's document
-\href{https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279}{Credentials, access, security, andidentity}.
+\href{https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279}{Credentials, access, security, and identity}.
 By default, this API key is initialized to one that ships with googledrive.
 But the user can store their own key via \code{\link[=drive_auth_config]{drive_auth_config()}}, i.e.
 overwrite the default.

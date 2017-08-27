@@ -1,6 +1,6 @@
 #' Lookup MIME type
 #'
-#' @description This is a helper to determinine which MIME type should be used
+#' @description This is a helper to determine which MIME type should be used
 #' for a file. Three types of input are acceptable:
 #'   * Native Google Drive file types. Important examples:
 #'     - "document" for Google Docs

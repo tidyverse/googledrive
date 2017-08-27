@@ -13,8 +13,15 @@ googledrive allows you to interact with files on Google Drive from R.
 Installation
 ------------
 
+Install the CRAN version:
+
 ``` r
-# Obtain the the development version from GitHub:
+install.packages("googledrive")
+```
+
+Or install the development version from GitHub:
+
+``` r
 # install.packages("devtools")
 devtools::install_github("tidyverse/googledrive")
 ```

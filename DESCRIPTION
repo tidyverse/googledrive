@@ -1,12 +1,12 @@
 Package: googledrive
-Version: 0.0.0.9000
+Version: 0.1.1
 Title: An Interface to Google Drive
 Authors@R: c(
     person("Lucy", "D'Agostino McGowan", email = "ld.mcgowan@vanderbilt.edu", role = c("aut")),
     person("Jennifer", "Bryan", email = "jenny@rstudio.com", role = c("aut", "cre")),
     person("RStudio", role = c("cph", "fnd"))          
     )
-Description: Manage Google Drive from R.
+Description: Manage Google Drive files from R. 
 Depends:
     R (>= 3.1.0)
 License: MIT + file LICENSE
@@ -17,7 +17,7 @@ Imports: curl (>= 2.8.1),
     glue (>= 1.1.0),
     httr,
     jsonlite,
-    purrr,
+    purrr (>= 0.2.3),
     rlang,
     tibble,
     utils,
