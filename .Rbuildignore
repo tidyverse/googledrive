@@ -24,5 +24,4 @@
 ^tests/testthat/testing-token\.rds\.enc$
 ^tests/testthat/av_testing-token\.rds\.enc$
 ^secure-file$
-^tests/testthat/testing-token\.rds$
 ^cran-comments\.md$
