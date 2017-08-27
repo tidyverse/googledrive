@@ -31,14 +31,14 @@ drive_user <- function(verbose = TRUE) {
 }
 
 #' @export
-print.drive_user <- function(user) {
+print.drive_user <- function(x, ...) {
   cat(
     c(
       "Logged in as:",
-      glue("  * displayName: {user[['displayName']]}"),
-      glue("  * emailAddress: {user[['emailAddress']]}")
+      glue("  * displayName: {x[['displayName']]}"),
+      glue("  * emailAddress: {x[['emailAddress']]}")
     ),
     sep = "\n"
   )
-  invisible(user)
+  invisible(x)
 }
