@@ -6,7 +6,7 @@ Authors@R: c(
     person("Jennifer", "Bryan", email = "jenny@rstudio.com", role = c("aut", "cre")),
     person("RStudio", role = c("cph", "fnd"))          
     )
-Description: Manage Google Drive from R.
+Description: Manage Google Drive files from R. 
 Depends:
     R (>= 3.1.0)
 License: MIT + file LICENSE
