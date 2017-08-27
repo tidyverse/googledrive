@@ -6,13 +6,9 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 1 note
 
 * This is a new release.
-
-* Author field differs ...
-  - I happen to be building this tar.gz on R < 3.4 and have listed RStudio as
-    'fnd' in DESCRIPTION.
 
 ## Reverse dependencies
 
