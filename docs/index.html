@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manage Google Drive from R • googledrive</title>
+<title>An Interface to Google Drive • googledrive</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- tidyverse --><link href="pkgdown.css" rel="stylesheet">
@@ -113,20 +113,19 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">n_max =</span> <span class="dv">50</span>)
 <span class="co">#&gt; Auto-refreshing stale OAuth token.</span>
 <span class="co">#&gt; # A tibble: 50 x 3</span>
-<span class="co">#&gt;                            name</span>
-<span class="co">#&gt;  *                        &lt;chr&gt;</span>
-<span class="co">#&gt;  1               chicken-rm.txt</span>
-<span class="co">#&gt;  2                  chicken.jpg</span>
-<span class="co">#&gt;  3           README-mirrors.csv</span>
-<span class="co">#&gt;  4           README-mirrors.csv</span>
-<span class="co">#&gt;  5                          def</span>
-<span class="co">#&gt;  6                          abc</span>
-<span class="co">#&gt;  7               folder1-level4</span>
-<span class="co">#&gt;  8               folder1-level3</span>
-<span class="co">#&gt;  9      cranberry-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
-<span class="co">#&gt; 10 folder1-level2-</span><span class="al">TEST</span><span class="co">-drive-ls</span>
-<span class="co">#&gt; # ... with 40 more rows, and 2 more variables: id &lt;chr&gt;,</span>
-<span class="co">#&gt; #   drive_resource &lt;list&gt;</span></code></pre></div>
+<span class="co">#&gt;                       name                                           id</span>
+<span class="co">#&gt;  *                   &lt;chr&gt;                                        &lt;chr&gt;</span>
+<span class="co">#&gt;  1         chicken-xyz.csv                 0B0Gh-SuuA2nTVUZGclZiSzZ0bkE</span>
+<span class="co">#&gt;  2          chicken-rm.txt                 0B0Gh-SuuA2nTT3dBbXd1ZWtvSkE</span>
+<span class="co">#&gt;  3             chicken.jpg                 0B0Gh-SuuA2nTbEhtYnIzcFNfX3M</span>
+<span class="co">#&gt;  4      README-mirrors.csv 1LJlt-1emr662GV8WdEzddzsfqrt-VgQeZWoBrXh1Dic</span>
+<span class="co">#&gt;  5      README-mirrors.csv 1PLXfempSnjpXbKVEXwMG5vBEnd-FwmC26fw5lZ55FXg</span>
+<span class="co">#&gt;  6                     def                 0B0Gh-SuuA2nTRG5YWFVGaV8zbU0</span>
+<span class="co">#&gt;  7                     abc                 0B0Gh-SuuA2nTT2NqTGdLVWFkcjA</span>
+<span class="co">#&gt;  8          folder1-level4                 0B0Gh-SuuA2nTaTR6elE0TjZUUHM</span>
+<span class="co">#&gt;  9          folder1-level3                 0B0Gh-SuuA2nTWktWeTB0ajVoQjQ</span>
+<span class="co">#&gt; 10 cranberry-</span><span class="al">TEST</span><span class="co">-drive-ls 1PM--xCb5axy5Uu9f6fDNjPAN2psRbQ2_UOeU1v2zK0E</span>
+<span class="co">#&gt; # ... with 40 more rows, and 1 more variables: drive_resource &lt;list&gt;</span></code></pre></div>
 <p>You can narrow the query by specifying a <code>pattern</code> you’d like to match names against. Or by specifying a file type: the <code>type</code> argument understands MIME types, file extensions, and a few human-friendly keywords.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">pattern =</span> <span class="st">"chicken"</span>)
 <span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"spreadsheet"</span>)     ## Google Sheets!
@@ -184,17 +183,17 @@ x<span class="op">$</span>id
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTNGdLZDB3NWtMOTA</span>
+<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTbEJaR1RTZmszODQ</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/csv</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                 name                           id drive_resource</span>
 <span class="co">#&gt; *              &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-chicken.csv 0B0Gh-SuuA2nTNGdLZDB3NWtMOTA    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 README-chicken.csv 0B0Gh-SuuA2nTbEJaR1RTZmszODQ    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTNGdLZDB3NWtMOTA</span>
+<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTbEJaR1RTZmszODQ</span>
 
 ## example of using a dribble as input
 chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
@@ -205,7 +204,7 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1IZBtBbF9qPiW8euZBfytiuCPRZTdP3IOMkRWVEoCDsc</span>
+<span class="co">#&gt;   * README-chicken.csv: 1g2H6SMrwMTMnwy0Lx6D2kvwGnkrvOTEJHNMTn_XshHs</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span></code></pre></div>
 <p>Much better!</p>
@@ -224,7 +223,7 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <p>By default, <code><a href="reference/drive_publish.html">drive_publish()</a></code> will publish your most recent version.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_publish.html">drive_publish</a></span>(chicken_sheet))
 <span class="co">#&gt; Files now published:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1IZBtBbF9qPiW8euZBfytiuCPRZTdP3IOMkRWVEoCDsc</span>
+<span class="co">#&gt;   * README-chicken.csv: 1g2H6SMrwMTMnwy0Lx6D2kvwGnkrvOTEJHNMTn_XshHs</span>
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;                 name published</span>
 <span class="co">#&gt;                &lt;chr&gt;     &lt;lgl&gt;</span>
@@ -242,12 +241,12 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <span class="co">#&gt;   * role = reader</span>
 <span class="co">#&gt;   * type = anyone</span>
 <span class="co">#&gt; For files:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1IZBtBbF9qPiW8euZBfytiuCPRZTdP3IOMkRWVEoCDsc</span></code></pre></div>
+<span class="co">#&gt;   * README-chicken.csv: 1g2H6SMrwMTMnwy0Lx6D2kvwGnkrvOTEJHNMTn_XshHs</span></code></pre></div>
 <p>We always assign the return value of googledrive functions back into an R object. This object is of type <code>dribble</code>, which holds metadata on one or more Drive files. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.</p>
 <p>We can then extract the file’s hyperlink.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chicken_sheet <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_link.html">drive_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1IZBtBbF9qPiW8euZBfytiuCPRZTdP3IOMkRWVEoCDsc/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1g2H6SMrwMTMnwy0Lx6D2kvwGnkrvOTEJHNMTn_XshHs/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="download-files" class="section level4">
 <h4 class="hasAnchor">
@@ -288,7 +287,7 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.txt</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTRzAwZjFpeUFEbG8</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTeWZ1Nm9UV2pyVTQ</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/plain</span>
 
@@ -312,8 +311,8 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 <a href="#clean-up" class="anchor"></a>Clean up</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken_sheet, text_file)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1IZBtBbF9qPiW8euZBfytiuCPRZTdP3IOMkRWVEoCDsc</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTRzAwZjFpeUFEbG8</span></code></pre></div>
+<span class="co">#&gt;   * README-chicken.csv: 1g2H6SMrwMTMnwy0Lx6D2kvwGnkrvOTEJHNMTn_XshHs</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTeWZ1Nm9UV2pyVTQ</span></code></pre></div>
 </div>
 </div>
 </div>
