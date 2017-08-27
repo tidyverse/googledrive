@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_share.R
 \name{drive_share}
 \alias{drive_share}
-\title{Share files}
+\title{Share Drive files}
 \usage{
 drive_share(file, role = c("reader", "commenter", "writer", "owner",
   "organizer"), type = c("user", "group", "domain", "anyone"), ...,

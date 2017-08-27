@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_mv.R
 \name{drive_mv}
 \alias{drive_mv}
-\title{Move a Drive file.}
+\title{Move a Drive file}
 \usage{
 drive_mv(file, path = NULL, name = NULL, verbose = TRUE)
 }

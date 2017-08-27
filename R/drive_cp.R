@@ -1,4 +1,4 @@
-#' Copy a Drive file.
+#' Copy a Drive file
 #'
 #' Copies an existing Drive file into a new file id.
 #'

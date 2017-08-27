@@ -90,8 +90,25 @@
     </div>
 
     
-    <p>If you want to use your own app, setup a new project in
-<a href='https://console.developers.google.com'>Google Developers Console</a>.</p>
+    <p>This function gives advanced users more control over auth.
+Whereas <code><a href='drive_auth.html'>drive_auth()</a></code> gives control over tokens, <code>drive_auth_config()</code>
+gives control of:</p><ul>
+<li><p>The googledrive auth state. The default is active, meaning all requests
+are sent with a token and, if one is not already loaded, OAuth flow is
+initiated. It is possible, however, to place unauthorizeded requests to
+the Drive API, as long as you are accessing public resources. Set <code>active</code>
+to <code>FALSE</code> to enter this state and never send a token.</p></li>
+<li><p>The OAuth app. If you want to use your own app, setup a new project in
+<a href='https://console.developers.google.com'>Google Developers Console</a>. Follow
+the instructions in
+<a href='https://developers.google.com/identity/protocols/OAuth2InstalledApp'>OAuth 2.0 for Mobile &amp; Desktop Apps</a>
+to obtain your own client ID and secret. Provide these to
+<code><a href='http://www.rdocumentation.org/packages/httr/topics/oauth_app'>httr::oauth_app()</a></code>.</p></li>
+<li><p>The API key. If googledrive auth is deactivated (see above), all requests
+will be sent with an API key. If you want to provide your own, setup a
+project as described above and follow the instructions in
+<a href='https://support.google.com/googleapi/answer/6158862'>Setting up API keys</a>.</p></li>
+</ul>
     
 
     <pre class="usage"><span class='fu'>drive_auth_config</span>(<span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>app</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -107,11 +124,12 @@ will not.</p></td>
     </tr>
     <tr>
       <th>app</th>
-      <td><p>OAuth app. Defaults to tidyverse app that ships with googledrive.</p></td>
+      <td><p>OAuth app. Defaults to a tidyverse app that ships with
+googledrive.</p></td>
     </tr>
     <tr>
       <th>api_key</th>
-      <td><p>API key. Defaults to key that ships with googledrive.
+      <td><p>API key. Defaults to a key that ships with googledrive.
 Necessary in order to make unauthorized "token-free" requests for public
 resources.</p></td>
     </tr>
@@ -124,7 +142,7 @@ resources.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>NULL</code>, invisibly</p>
+    <p>A list of class <code>auth_config</code>, with the current auth configuration.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -133,10 +151,10 @@ resources.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>drive_auth_config</span>()</div><div class='output co'>#&gt; <span class='message'>googledrive auth state: active</span>
-#&gt; <span class='message'>oauth app: tidyverse</span>
-#&gt; <span class='message'>API key: set</span>
-#&gt; <span class='message'>token: loaded</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>drive_auth_config</span>()</div><div class='output co'>#&gt; googledrive auth state: active
+#&gt; oauth app: tidyverse
+#&gt; API key: set
+#&gt; token: loaded</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

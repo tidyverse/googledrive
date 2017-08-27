@@ -1,4 +1,4 @@
-#' Identify files on Google Drive
+#' Coerce to Drive files
 #'
 #' @description Converts various representations of Google Drive files into a
 #'   [`dribble`], the object used by googledrive to hold Drive file metadata.

@@ -1,4 +1,4 @@
-#' Identify Team Drives
+#' Coerce to Team Drive
 #'
 #' @description Converts various representations of Team Drive into a
 #'   [`dribble`], the object used by googledrive to hold Drive file metadata.

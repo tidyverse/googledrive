@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_mime_type.R
 \name{drive_extension}
 \alias{drive_extension}
-\title{Lookup extension from MIME type.}
+\title{Lookup extension from MIME type}
 \usage{
 drive_extension(type = NULL)
 }

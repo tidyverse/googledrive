@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{expose}
 \alias{expose}
-\title{An expose object.}
+\title{An expose object}
 \usage{
 expose()
 }

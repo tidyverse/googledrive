@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_mkdir.R
 \name{drive_mkdir}
 \alias{drive_mkdir}
-\title{Create a folder}
+\title{Create a Drive folder}
 \usage{
 drive_mkdir(name, parent = NULL, ..., verbose = TRUE)
 }

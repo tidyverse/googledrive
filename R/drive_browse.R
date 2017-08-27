@@ -1,4 +1,4 @@
-#' Retrieve file links
+#' Retrieve Drive file links
 #'
 #' Returns the `"webViewLink"` for one or more files, which is the "link for
 #' opening the file in a relevant Google editor or viewer in a browser".
@@ -32,7 +32,7 @@ drive_link <- function(file) {
   links
 }
 
-#' Visit file in browser
+#' Visit Drive file in browser
 #'
 #' Visits a file on Google Drive in your default browser.
 #'

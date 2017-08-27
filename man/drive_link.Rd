@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_browse.R
 \name{drive_link}
 \alias{drive_link}
-\title{Retrieve file links}
+\title{Retrieve Drive file links}
 \usage{
 drive_link(file)
 }

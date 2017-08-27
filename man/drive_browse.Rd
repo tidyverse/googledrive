@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_browse.R
 \name{drive_browse}
 \alias{drive_browse}
-\title{Visit file in browser}
+\title{Visit Drive file in browser}
 \usage{
 drive_browse(file = .Last.value)
 }

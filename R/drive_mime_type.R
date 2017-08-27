@@ -1,4 +1,4 @@
-#' Lookup MIME type.
+#' Lookup MIME type
 #'
 #' @description This is a helper to determinine which MIME type should be used
 #' for a file. Three types of input are acceptable:
@@ -66,7 +66,7 @@ drive_mime_type <- function(type = NULL) {
   mime_type
 }
 
-#' Lookup extension from MIME type.
+#' Lookup extension from MIME type
 #'
 #' @description This is a helper to determinine which extension should be used
 #' for a file. Two types of input are acceptable:

@@ -2,7 +2,7 @@
 % Please edit documentation in R/as_teamdrive.R
 \name{as_team_drive}
 \alias{as_team_drive}
-\title{Identify Team Drives}
+\title{Coerce to Team Drive}
 \usage{
 as_team_drive(x, ...)
 }

@@ -94,7 +94,7 @@ Sys_getenv <- function(x) {
 ## vectorized isTRUE()
 is_true <- function(x) vapply(x, isTRUE, logical(1))
 
-#' An expose object.
+#' An expose object
 #'
 #' `expose()` returns a sentinel object, similar in spirit to `NULL`, that tells
 #' the calling function to return its internal data structure. googledrive

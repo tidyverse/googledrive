@@ -2,7 +2,7 @@
 % Please edit documentation in R/as_dribble.R
 \name{as_dribble}
 \alias{as_dribble}
-\title{Identify files on Google Drive}
+\title{Coerce to Drive files}
 \usage{
 as_dribble(x, ...)
 }

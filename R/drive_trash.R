@@ -1,4 +1,4 @@
-#' Move files to or from trash
+#' Move Drive files to or from trash
 #' @template file-plural
 #' @template verbose
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_cp.R
 \name{drive_cp}
 \alias{drive_cp}
-\title{Copy a Drive file.}
+\title{Copy a Drive file}
 \usage{
 drive_cp(file, path = NULL, name = NULL, ..., verbose = TRUE)
 }

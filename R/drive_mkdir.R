@@ -1,4 +1,4 @@
-#' Create a folder
+#' Create a Drive folder
 #'
 #' Creates a new Drive folder. To update the metadata of an existing Drive file,
 #' including a folder, use [drive_update()].

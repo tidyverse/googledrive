@@ -1,4 +1,4 @@
-#' Share files
+#' Share Drive files
 #'
 #' Grant individuals or other groups access to files, including permission to
 #' read, comment, or edit. The returned [`dribble`] will have extra columns,

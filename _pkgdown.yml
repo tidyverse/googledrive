@@ -77,7 +77,7 @@ reference:
       - as_dribble
       - as_id
       - dribble-checks
-  - title: "Authentication"
+  - title: "Authorization"
     desc: >
       Take explicit control of the Google auth status or examine current state
     contents:

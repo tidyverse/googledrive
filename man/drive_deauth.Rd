@@ -2,7 +2,7 @@
 % Please edit documentation in R/drive_auth.R
 \name{drive_deauth}
 \alias{drive_deauth}
-\title{Suspend authorization.}
+\title{Suspend authorization}
 \usage{
 drive_deauth(clear_cache = TRUE, verbose = TRUE)
 }

@@ -103,7 +103,7 @@ drive_auth <- function(oauth_token = NULL,
   invisible(set_access_cred(drive_token))
 }
 
-#' Suspend authorization.
+#' Suspend authorization
 #'
 #' Suspend googledrive's authorization to place requests to the Drive API on
 #' behalf of the authenticated user.
@@ -155,8 +155,8 @@ drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
 #'   [Google Developers Console](https://console.developers.google.com). Follow
 #'   the instructions in
 #'   [OAuth 2.0 for Mobile & Desktop Apps](https://developers.google.com/identity/protocols/OAuth2InstalledApp)
-#'   to obtain you own client ID and secret. Provide these to
-#'   [pkg::func(httr::oauth_app)].
+#'   to obtain your own client ID and secret. Provide these to
+#'   [httr::oauth_app()].
 #'   * The API key. If googledrive auth is deactivated (see above), all requests
 #'   will be sent with an API key. If you want to provide your own, setup a
 #'   project as described above and follow the instructions in
@@ -164,8 +164,9 @@ drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
 #'
 #' @param active Logical. `TRUE` means a token will be sent. `FALSE` means it
 #'   will not.
-#' @param app OAuth app. Defaults to tidyverse app that ships with googledrive.
-#' @param api_key API key. Defaults to key that ships with googledrive.
+#' @param app OAuth app. Defaults to a tidyverse app that ships with
+#'   googledrive.
+#' @param api_key API key. Defaults to a key that ships with googledrive.
 #'   Necessary in order to make unauthorized "token-free" requests for public
 #'   resources.
 #' @template verbose

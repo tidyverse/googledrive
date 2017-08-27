@@ -183,17 +183,17 @@ x<span class="op">$</span>id
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTbEJaR1RTZmszODQ</span>
+<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTU1hZZkc5VWxDZGc</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/csv</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                 name                           id drive_resource</span>
 <span class="co">#&gt; *              &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-chicken.csv 0B0Gh-SuuA2nTbEJaR1RTZmszODQ    &lt;list [36]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 README-chicken.csv 0B0Gh-SuuA2nTU1hZZkc5VWxDZGc    &lt;list [36]&gt;</span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTbEJaR1RTZmszODQ</span>
+<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTU1hZZkc5VWxDZGc</span>
 
 ## example of using a dribble as input
 chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
@@ -204,7 +204,7 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1g2H6SMrwMTMnwy0Lx6D2kvwGnkrvOTEJHNMTn_XshHs</span>
+<span class="co">#&gt;   * README-chicken.csv: 1Dg7-I4dP5LvxhvTZQ1zY0ViSvaELlqz9nrDta9XpJ3Y</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span></code></pre></div>
 <p>Much better!</p>
@@ -223,7 +223,7 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <p>By default, <code><a href="reference/drive_publish.html">drive_publish()</a></code> will publish your most recent version.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_publish.html">drive_publish</a></span>(chicken_sheet))
 <span class="co">#&gt; Files now published:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1g2H6SMrwMTMnwy0Lx6D2kvwGnkrvOTEJHNMTn_XshHs</span>
+<span class="co">#&gt;   * README-chicken.csv: 1Dg7-I4dP5LvxhvTZQ1zY0ViSvaELlqz9nrDta9XpJ3Y</span>
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;                 name published</span>
 <span class="co">#&gt;                &lt;chr&gt;     &lt;lgl&gt;</span>
@@ -241,12 +241,12 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <span class="co">#&gt;   * role = reader</span>
 <span class="co">#&gt;   * type = anyone</span>
 <span class="co">#&gt; For files:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1g2H6SMrwMTMnwy0Lx6D2kvwGnkrvOTEJHNMTn_XshHs</span></code></pre></div>
+<span class="co">#&gt;   * README-chicken.csv: 1Dg7-I4dP5LvxhvTZQ1zY0ViSvaELlqz9nrDta9XpJ3Y</span></code></pre></div>
 <p>We always assign the return value of googledrive functions back into an R object. This object is of type <code>dribble</code>, which holds metadata on one or more Drive files. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.</p>
 <p>We can then extract the file’s hyperlink.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chicken_sheet <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/drive_link.html">drive_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1g2H6SMrwMTMnwy0Lx6D2kvwGnkrvOTEJHNMTn_XshHs/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1Dg7-I4dP5LvxhvTZQ1zY0ViSvaELlqz9nrDta9XpJ3Y/edit?usp=drivesdk"</span></code></pre></div>
 </div>
 <div id="download-files" class="section level4">
 <h4 class="hasAnchor">
@@ -287,7 +287,7 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.txt</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTeWZ1Nm9UV2pyVTQ</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTb2gzODZWMHFlSUk</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/plain</span>
 
@@ -311,8 +311,8 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 <a href="#clean-up" class="anchor"></a>Clean up</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken_sheet, text_file)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1g2H6SMrwMTMnwy0Lx6D2kvwGnkrvOTEJHNMTn_XshHs</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTeWZ1Nm9UV2pyVTQ</span></code></pre></div>
+<span class="co">#&gt;   * README-chicken.csv: 1Dg7-I4dP5LvxhvTZQ1zY0ViSvaELlqz9nrDta9XpJ3Y</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTb2gzODZWMHFlSUk</span></code></pre></div>
 </div>
 </div>
 </div>
