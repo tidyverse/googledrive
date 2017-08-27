@@ -100,9 +100,9 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <h3 class="hasAnchor">
 <a href="#package-conventions" class="anchor"></a>Package conventions</h3>
 <ul>
-<li>Most functions begin with the prefix <code>drive_</code>.</li>
-<li>Goal is to allow Drive access that feels similar to Unix file system utilities, e.g. <code>find</code>, <code>ls</code>, <code>mv</code>, <code>cp</code>, <code>mkdir</code>, and <code>rm</code>.</li>
-<li>The metadata for one or more Drive files is held in a <code>dribble</code>, a “Drive tibble”. This is a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive. It is a compromise between what people want to see (file name), what the API wants (file id), and the metadata needed for general file operations.</li>
+<li>Most functions begin with the prefix <code>drive_</code>. Auto-completion is your friend.</li>
+<li>Goal is to allow Drive access that feels similar to Unix file system utilities, e.g., <code>find</code>, <code>ls</code>, <code>mv</code>, <code>cp</code>, <code>mkdir</code>, and <code>rm</code>.</li>
+<li>The metadata for one or more Drive files is held in a <code>dribble</code>, a “Drive tibble”. This is a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive. It is designed to give people what they want (file name), track what the API wants (file id), and to hold the metadata needed for general file operations.</li>
 <li>googledrive is “pipe-friendly” and, in fact, re-exports <code>%&gt;%</code>, but does not require its use.</li>
 </ul>
 </div>
@@ -132,7 +132,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"csv"</span>)             ## MIME type = "text/csv"
 <span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"application/pdf"</span>) ## MIME type = "application/pdf"</code></pre></div>
 <p>Alternatively, you can refine the search using the <code>q</code> query parameter. Accepted search clauses can be found in the <a href="https://developers.google.com/drive/v3/web/search-parameters">Google Drive API documentation</a>. For example, to get all files with <code>'horsebean'</code> somewhere in their full text (such as files based on the <code>chickwts</code> dataset!), do this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(fls &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'horsebean'"</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(files &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'horsebean'"</span>))
 <span class="co">#&gt; # A tibble: 8 x 3</span>
 <span class="co">#&gt;                               name</span>
 <span class="co">#&gt; *                            &lt;chr&gt;</span>
@@ -145,19 +145,18 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="co">#&gt; 7  chickwts_txt-</span><span class="al">TEST</span><span class="co">-drive-publish</span>
 <span class="co">#&gt; 8          hadley-googledrive-tour</span>
 <span class="co">#&gt; # ... with 2 more variables: id &lt;chr&gt;, drive_resource &lt;list&gt;</span></code></pre></div>
-<p>You often want to store the result of a googledrive call, as we do with <code>fls</code> above. <code>fls</code> is a dribble with info on several files and can be used as the input for downstream calls.</p>
+<p>You generally want to store the result of a googledrive call, as we do with <code>files</code> above. <code>files</code> is a dribble with info on several files and can be used as the input for downstream calls. It can also be manipulated like a regular data frame at any point.</p>
 <div id="identify-files" class="section level4">
 <h4 class="hasAnchor">
 <a href="#identify-files" class="anchor"></a>Identify files</h4>
-<p>In addition to <code><a href="reference/drive_find.html">drive_find()</a></code>, you can also identify files by name (path, really) or by Drive file id using <code><a href="reference/drive_get.html">drive_get()</a></code>. <code><a href="reference/as_id.html">as_id()</a></code> can be used to coerce various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and dribbles.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## identify file by path
-(x &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(<span class="st">"~/abc/def"</span>))
+<p><code><a href="reference/drive_find.html">drive_find()</a></code> searches by file properties, but you can also identify files by name (path, really) or by Drive file id using <code><a href="reference/drive_get.html">drive_get()</a></code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(<span class="st">"~/abc/def"</span>))
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;    name       path                           id drive_resource</span>
 <span class="co">#&gt; * &lt;chr&gt;      &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1   def ~/abc/def/ 0B0Gh-SuuA2nTRG5YWFVGaV8zbU0    &lt;list [30]&gt;</span>
-
-## let's retrieve it by id (also a great way to force-refresh metadata)
+<span class="co">#&gt; 1   def ~/abc/def/ 0B0Gh-SuuA2nTRG5YWFVGaV8zbU0    &lt;list [30]&gt;</span></code></pre></div>
+<p><code><a href="reference/as_id.html">as_id()</a></code> can be used to coerce various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and dribbles.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## let's retrieve same file by id (also a great way to force-refresh metadata)
 x<span class="op">$</span>id
 <span class="co">#&gt; [1] "0B0Gh-SuuA2nTRG5YWFVGaV8zbU0"</span>
 <span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="reference/as_id.html">as_id</a></span>(x<span class="op">$</span>id))
@@ -183,17 +182,17 @@ x<span class="op">$</span>id
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTU1hZZkc5VWxDZGc</span>
+<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTdEtweWJvaTB4Yzg</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/csv</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;                 name                           id drive_resource</span>
 <span class="co">#&gt; *              &lt;chr&gt;                        &lt;chr&gt;         &lt;list&gt;</span>
-<span class="co">#&gt; 1 README-chicken.csv 0B0Gh-SuuA2nTU1hZZkc5VWxDZGc    &lt;list [36]&gt;</span></code></pre></div>
-<p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive assumed it was to be uploaded as such (<code><a href="reference/drive_upload.html">?drive_upload</a></code> for a full list of assumptions). We can overrule this by using the <code>type</code> parameter to have it load as a Google Spreadsheet. Let’s delete this file first.</p>
+<span class="co">#&gt; 1 README-chicken.csv 0B0Gh-SuuA2nTdEtweWJvaTB4Yzg    &lt;list [36]&gt;</span></code></pre></div>
+<p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive guessed the MIME type. We can overrule this by using the <code>type</code> parameter to upload as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTU1hZZkc5VWxDZGc</span>
+<span class="co">#&gt;   * README-chicken.csv: 0B0Gh-SuuA2nTdEtweWJvaTB4Yzg</span>
 
 ## example of using a dribble as input
 chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(
@@ -204,49 +203,60 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1Dg7-I4dP5LvxhvTZQ1zY0ViSvaELlqz9nrDta9XpJ3Y</span>
+<span class="co">#&gt;   * README-chicken.csv: 1IlgEdwAC47WyRmQbQTovGPPfQDnIbmyekNuSQNexfxo</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span></code></pre></div>
 <p>Much better!</p>
+</div>
+<div id="share-files" class="section level4">
+<h4 class="hasAnchor">
+<a href="#share-files" class="anchor"></a>Share files</h4>
+<p>To allow other people access your file, you need to change the sharing permissions. You can check the sharing status by running <code><a href="reference/drive_reveal.html">drive_reveal(..., "permissions")</a></code>, which adds a logical column <code>shared</code> and parks more detailed metadata in a <code>permissions_resource</code> variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chicken_sheet <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/drive_reveal.html">drive_reveal</a></span>(<span class="st">"permissions"</span>)
+<span class="co">#&gt; # A tibble: 1 x 5</span>
+<span class="co">#&gt;                 name shared                                           id</span>
+<span class="co">#&gt;                &lt;chr&gt;  &lt;lgl&gt;                                        &lt;chr&gt;</span>
+<span class="co">#&gt; 1 README-chicken.csv  FALSE 1IlgEdwAC47WyRmQbQTovGPPfQDnIbmyekNuSQNexfxo</span>
+<span class="co">#&gt; # ... with 2 more variables: drive_resource &lt;list&gt;,</span>
+<span class="co">#&gt; #   permissions_resource &lt;list&gt;</span></code></pre></div>
+<p>Here’s how to grant anyone with the link permission to be able to view this dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(chicken_sheet &lt;-<span class="st"> </span>chicken_sheet <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw"><a href="reference/drive_share.html">drive_share</a></span>(<span class="dt">role =</span> <span class="st">"reader"</span>, <span class="dt">type =</span> <span class="st">"anyone"</span>))
+<span class="co">#&gt; Permissions updated</span>
+<span class="co">#&gt;   * role = reader</span>
+<span class="co">#&gt;   * type = anyone</span>
+<span class="co">#&gt; For files:</span>
+<span class="co">#&gt;   * README-chicken.csv: 1IlgEdwAC47WyRmQbQTovGPPfQDnIbmyekNuSQNexfxo</span>
+<span class="co">#&gt; # A tibble: 1 x 5</span>
+<span class="co">#&gt;                 name shared                                           id</span>
+<span class="co">#&gt;                &lt;chr&gt;  &lt;lgl&gt;                                        &lt;chr&gt;</span>
+<span class="co">#&gt; 1 README-chicken.csv   TRUE 1IlgEdwAC47WyRmQbQTovGPPfQDnIbmyekNuSQNexfxo</span>
+<span class="co">#&gt; # ... with 2 more variables: drive_resource &lt;list&gt;,</span>
+<span class="co">#&gt; #   permissions_resource &lt;list&gt;</span></code></pre></div>
 </div>
 <div id="publish-files" class="section level4">
 <h4 class="hasAnchor">
 <a href="#publish-files" class="anchor"></a>Publish files</h4>
 <p>Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running <code><a href="reference/drive_reveal.html">drive_reveal(..., "published")</a></code>, which adds a logical column <code>published</code> and parks more detailed metadata in a <code>revision_resource</code> variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_reveal.html">drive_reveal</a></span>(chicken_sheet, <span class="st">"published"</span>)
-<span class="co">#&gt; # A tibble: 1 x 5</span>
-<span class="co">#&gt;                 name published</span>
-<span class="co">#&gt;                &lt;chr&gt;     &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 README-chicken.csv     FALSE</span>
-<span class="co">#&gt; # ... with 3 more variables: id &lt;chr&gt;, drive_resource &lt;list&gt;,</span>
-<span class="co">#&gt; #   revision_resource &lt;list&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chicken_sheet <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/drive_reveal.html">drive_reveal</a></span>(<span class="st">"published"</span>)
+<span class="co">#&gt; # A tibble: 1 x 7</span>
+<span class="co">#&gt;                 name published shared</span>
+<span class="co">#&gt;                &lt;chr&gt;     &lt;lgl&gt;  &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 README-chicken.csv     FALSE   TRUE</span>
+<span class="co">#&gt; # ... with 4 more variables: id &lt;chr&gt;, drive_resource &lt;list&gt;,</span>
+<span class="co">#&gt; #   permissions_resource &lt;list&gt;, revision_resource &lt;list&gt;</span></code></pre></div>
 <p>By default, <code><a href="reference/drive_publish.html">drive_publish()</a></code> will publish your most recent version.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_publish.html">drive_publish</a></span>(chicken_sheet))
 <span class="co">#&gt; Files now published:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1Dg7-I4dP5LvxhvTZQ1zY0ViSvaELlqz9nrDta9XpJ3Y</span>
-<span class="co">#&gt; # A tibble: 1 x 5</span>
-<span class="co">#&gt;                 name published</span>
-<span class="co">#&gt;                &lt;chr&gt;     &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 README-chicken.csv      TRUE</span>
-<span class="co">#&gt; # ... with 3 more variables: id &lt;chr&gt;, drive_resource &lt;list&gt;,</span>
-<span class="co">#&gt; #   revision_resource &lt;list&gt;</span></code></pre></div>
-</div>
-<div id="share-files" class="section level4">
-<h4 class="hasAnchor">
-<a href="#share-files" class="anchor"></a>Share files</h4>
-<p>To update the access, we need to change the sharing permissions. Let’s say I want anyone with the link to be able to view my dataset.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chicken_sheet &lt;-<span class="st"> </span>chicken_sheet <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="reference/drive_share.html">drive_share</a></span>(<span class="dt">role =</span> <span class="st">"reader"</span>, <span class="dt">type =</span> <span class="st">"anyone"</span>)
-<span class="co">#&gt; Permissions updated</span>
-<span class="co">#&gt;   * role = reader</span>
-<span class="co">#&gt;   * type = anyone</span>
-<span class="co">#&gt; For files:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1Dg7-I4dP5LvxhvTZQ1zY0ViSvaELlqz9nrDta9XpJ3Y</span></code></pre></div>
-<p>We always assign the return value of googledrive functions back into an R object. This object is of type <code>dribble</code>, which holds metadata on one or more Drive files. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.</p>
-<p>We can then extract the file’s hyperlink.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chicken_sheet <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="reference/drive_link.html">drive_link</a></span>()
-<span class="co">#&gt; [1] "https://docs.google.com/spreadsheets/d/1Dg7-I4dP5LvxhvTZQ1zY0ViSvaELlqz9nrDta9XpJ3Y/edit?usp=drivesdk"</span></code></pre></div>
+<span class="co">#&gt;   * README-chicken.csv: 1IlgEdwAC47WyRmQbQTovGPPfQDnIbmyekNuSQNexfxo</span>
+<span class="co">#&gt; # A tibble: 1 x 7</span>
+<span class="co">#&gt;                 name published shared</span>
+<span class="co">#&gt;                &lt;chr&gt;     &lt;lgl&gt;  &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 README-chicken.csv      TRUE   TRUE</span>
+<span class="co">#&gt; # ... with 4 more variables: id &lt;chr&gt;, drive_resource &lt;list&gt;,</span>
+<span class="co">#&gt; #   permissions_resource &lt;list&gt;, revision_resource &lt;list&gt;</span></code></pre></div>
 </div>
 <div id="download-files" class="section level4">
 <h4 class="hasAnchor">
@@ -254,7 +264,7 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <div id="google-files" class="section level5">
 <h5 class="hasAnchor">
 <a href="#google-files" class="anchor"></a>Google files</h5>
-<p>We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. Specify this explicitly via <code>type</code> or implicitly via the file extension in <code>path</code>. For example, if I would like to download the “538-star-wars-survey” Google Sheet as a <code>.csv</code> I could run the following.</p>
+<p>We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. There are reasonable defaults or you can specify this explicitly via <code>type</code> or implicitly via the file extension in <code>path</code>. For example, if I would like to download the “538-star-wars-survey” Google Sheet as a <code>.csv</code> I could run the following.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_download.html">drive_download</a></span>(<span class="st">"538-star-wars-survey"</span>, <span class="dt">type =</span> <span class="st">"csv"</span>)
 <span class="co">#&gt; File downloaded:</span>
 <span class="co">#&gt;   * 538-star-wars-survey</span>
@@ -270,7 +280,7 @@ chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 <span class="co">#&gt;   * 538-star-wars-survey</span>
 <span class="co">#&gt; Saved locally as:</span>
 <span class="co">#&gt;   * 538-star-wars-survey.csv</span></code></pre></div>
-<p>Notice in the example above, I specified <code>overwrite = TRUE</code>, in order to overwrite the file previously saved.</p>
+<p>Notice in the example above, I specified <code>overwrite = TRUE</code>, in order to overwrite the local file previously saved.</p>
 <p>Finally, you could just allow export to the default type. In the case of Google Sheets, this is an Excel workbook:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_download.html">drive_download</a></span>(<span class="st">"538-star-wars-survey"</span>)
 <span class="co">#&gt; File downloaded:</span>
@@ -287,7 +297,7 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.txt</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTb2gzODZWMHFlSUk</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTUHI4bGxQb1JHVGc</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/plain</span>
 
@@ -311,8 +321,8 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 <a href="#clean-up" class="anchor"></a>Clean up</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken_sheet, text_file)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * README-chicken.csv: 1Dg7-I4dP5LvxhvTZQ1zY0ViSvaELlqz9nrDta9XpJ3Y</span>
-<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTb2gzODZWMHFlSUk</span></code></pre></div>
+<span class="co">#&gt;   * README-chicken.csv: 1IlgEdwAC47WyRmQbQTovGPPfQDnIbmyekNuSQNexfxo</span>
+<span class="co">#&gt;   * text-file.txt: 0B0Gh-SuuA2nTUHI4bGxQb1JHVGc</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -342,6 +352,7 @@ text_file &lt;-<span class="st"> </span><span class="kw"><a href="reference/driv
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=googledrive"><img src="http://www.r-pkg.org/badges/version/googledrive" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://travis-ci.org/tidyverse/googledrive"><img src="https://travis-ci.org/tidyverse/googledrive.svg?branch=master" alt="Build Status"></a></li>
 <li><a href="https://ci.appveyor.com/project/tidyverse/googledrive"><img src="https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
 <li><a href="https://codecov.io/github/tidyverse/googledrive?branch=master"><img src="https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg" alt="Coverage Status"></a></li>

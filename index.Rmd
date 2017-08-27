@@ -57,9 +57,9 @@ if (isTRUE(SETUP)) {
 
 ### Package conventions
 
-* Most functions begin with the prefix `drive_`.
-* Goal is to allow Drive access that feels similar to Unix file system utilities, e.g. `find`, `ls`, `mv`, `cp`, `mkdir`, and `rm`.
-* The metadata for one or more Drive files is held in a `dribble`, a "Drive tibble". This is a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive. It is a compromise between what people want to see (file name), what the API wants (file id), and the metadata needed for general file operations.
+* Most functions begin with the prefix `drive_`. Auto-completion is your friend.
+* Goal is to allow Drive access that feels similar to Unix file system utilities, e.g., `find`, `ls`, `mv`, `cp`, `mkdir`, and `rm`.
+* The metadata for one or more Drive files is held in a `dribble`, a "Drive tibble". This is a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive. It is designed to give people what they want (file name), track what the API wants (file id), and to hold the metadata needed for general file operations.
 * googledrive is "pipe-friendly" and, in fact, re-exports `%>%`, but does not require its use.
 
 ### Quick demo
@@ -82,20 +82,23 @@ drive_find(type = "application/pdf") ## MIME type = "application/pdf"
 Alternatively, you can refine the search using the `q` query parameter. Accepted search clauses can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, to get all files with `'horsebean'` somewhere in their full text (such as files based on the `chickwts` dataset!), do this:
 
 ```{r}
-(fls <- drive_find(q = "fullText contains 'horsebean'"))
+(files <- drive_find(q = "fullText contains 'horsebean'"))
 ```
 
-You often want to store the result of a googledrive call, as we do with `fls` above. `fls` is a dribble with info on several files and can be used as the input for downstream calls.
+You generally want to store the result of a googledrive call, as we do with `files` above. `files` is a dribble with info on several files and can be used as the input for downstream calls. It can also be manipulated like a regular data frame at any point.
 
 #### Identify files
 
-In addition to `drive_find()`, you can also identify files by name (path, really) or by Drive file id using `drive_get()`. `as_id()` can be used to coerce various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and dribbles.
+`drive_find()` searches by file properties, but you can also identify files by name (path, really) or by Drive file id using `drive_get()`.
 
 ```{r}
-## identify file by path
 (x <- drive_get("~/abc/def"))
+```
 
-## let's retrieve it by id (also a great way to force-refresh metadata)
+`as_id()` can be used to coerce various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and dribbles.
+ 
+```{r}
+## let's retrieve same file by id (also a great way to force-refresh metadata)
 x$id
 drive_get(as_id(x$id))
 drive_get(as_id(x))
@@ -114,7 +117,7 @@ We can upload any file type.
 ))
 ```
 
-Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive assumed it was to be uploaded as such (`?drive_upload` for a full list of assumptions). We can overrule this by using the `type` parameter to have it load as a Google Spreadsheet. Let's delete this file first.
+Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, and we didn't specify the type, googledrive guessed the MIME type. We can overrule this by using the `type` parameter to upload as a Google Spreadsheet. Let's delete this file first.
 
 ```{r}
 drive_rm(chicken)
@@ -129,12 +132,29 @@ chicken_sheet <- drive_upload(
 
 Much better!
 
+#### Share files
+
+To allow other people access your file, you need to change the sharing permissions. You can check the sharing status by running `drive_reveal(..., "permissions")`, which adds a logical column `shared` and parks more detailed metadata in a `permissions_resource` variable.
+
+```{r}
+chicken_sheet %>% 
+  drive_reveal("permissions")
+```
+
+Here's how to grant anyone with the link permission to be able to view this dataset.
+
+```{r}
+(chicken_sheet <- chicken_sheet %>%
+   drive_share(role = "reader", type = "anyone"))
+```
+
 #### Publish files
 
 Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running `drive_reveal(..., "published")`, which adds a logical column `published` and parks more detailed metadata in a `revision_resource` variable.
 
 ```{r}
-drive_reveal(chicken_sheet, "published")
+chicken_sheet %>% 
+  drive_reveal("published")
 ```
 
 By default, `drive_publish()` will publish your most recent version.
@@ -143,29 +163,11 @@ By default, `drive_publish()` will publish your most recent version.
 (chicken_sheet <- drive_publish(chicken_sheet))
 ```
 
-#### Share files
-
-To update the access, we need to change the sharing permissions. Let's say I want anyone with the link to be able to view my dataset.
-
-```{r}
-chicken_sheet <- chicken_sheet %>%
-  drive_share(role = "reader", type = "anyone")
-```
-
-We always assign the return value of googledrive functions back into an R object. This object is of type `dribble`, which holds metadata on one or more Drive files. By constantly re-assigning the value, we keep it current, facilitating all downstream operations.
-
-We can then extract the file's hyperlink.
-
-```{r}
-chicken_sheet %>%
-  drive_link()
-```
-
 #### Download files
 
 ##### Google files
 
-We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. Specify this explicitly via `type` or implicitly via the file extension in `path`. For example, if I would like to download the "538-star-wars-survey" Google Sheet as a `.csv` I could run the following.
+We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. There are reasonable defaults or you can specify this explicitly via `type` or implicitly via the file extension in `path`. For example, if I would like to download the "538-star-wars-survey" Google Sheet as a `.csv` I could run the following.
 
 ```{r}
 drive_download("538-star-wars-survey", type = "csv")
@@ -181,7 +183,7 @@ drive_download(
 )
 ```
 
-Notice in the example above, I specified `overwrite = TRUE`, in order to overwrite the file previously saved.
+Notice in the example above, I specified `overwrite = TRUE`, in order to overwrite the local file previously saved.
 
 Finally, you could just allow export to the default type. In the case of Google Sheets, this is an Excel workbook:
 
