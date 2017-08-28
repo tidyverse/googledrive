@@ -26,11 +26,10 @@ googledrive allows you to interact with files on Google Drive from R.
 
 ## Installation
 
-googledrive will soon be submitted to CRAN, but for now, install it from GitHub:
+Install from CRAN:
 
 ```{r, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("tidyverse/googledrive")
+install.packages("googledrive")
 ```
 
 ## Usage
