@@ -1,6 +1,5 @@
-# googledrive 0.0.0.9000
+# googledrive 0.1.1.9000
 
-* Added a `NEWS.md` file to track changes to the package.
+# googledrive 0.1.1
 
-
-
+* initial CRAN release
