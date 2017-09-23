@@ -151,7 +151,7 @@ docs for the associated endpoint.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
-  item.</p>
+item.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -195,6 +195,13 @@ docs for the associated endpoint.</p></td>
 
 <span class='co'>## Clean up</span>
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>chicken</span>)
+
+<span class='co'>## Upload to a Team Drive:</span>
+<span class='co'>##   * your Google account must have Team Drive privileges, obviously</span>
+<span class='co'>##   * the Team Drive (or Team Drive-hosted folder) MUST be captured as a</span>
+<span class='co'>##     dribble first and provided via `path`</span>
+<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='team_drive_get.html'>team_drive_get</a></span>(<span class='st'>"Marketing"</span>)
+<span class='fu'>drive_upload</span>(<span class='st'>"fascinating.csv"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>td</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

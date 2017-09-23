@@ -76,6 +76,13 @@ purrr::pluck(chicken, "drive_resource", 1, "starred")
 
 ## Clean up
 drive_rm(chicken)
+
+## Upload to a Team Drive:
+##   * your Google account must have Team Drive privileges, obviously
+##   * the Team Drive (or Team Drive-hosted folder) MUST be captured as a
+##     dribble first and provided via `path`
+td <- team_drive_get("Marketing")
+drive_upload("fascinating.csv", path = td)
 }
 }
 \seealso{
