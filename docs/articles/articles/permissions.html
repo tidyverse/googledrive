@@ -91,14 +91,14 @@ file &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/dri
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/jenny/resources/R/library/googledrive/extdata/chicken.txt</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * chicken-perm-article.txt: 0B0Gh-SuuA2nTaWhkdEpBVFl3TEE</span>
+<span class="co">#&gt;   * chicken-perm-article.txt: 0B0Gh-SuuA2nTVEQwTS0yYWt1RG8</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/plain</span>
 file
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;                       name shared                           id</span>
 <span class="co">#&gt;                      &lt;chr&gt;  &lt;lgl&gt;                        &lt;chr&gt;</span>
-<span class="co">#&gt; 1 chicken-perm-article.txt  FALSE 0B0Gh-SuuA2nTaWhkdEpBVFl3TEE</span>
+<span class="co">#&gt; 1 chicken-perm-article.txt  FALSE 0B0Gh-SuuA2nTVEQwTS0yYWt1RG8</span>
 <span class="co">#&gt; # ... with 2 more variables: drive_resource &lt;list&gt;,</span>
 <span class="co">#&gt; #   permissions_resource &lt;list&gt;</span></code></pre></div>
 <p>The <code>shared</code> column shows that this file is not yet shared with anyone and, for those so inclined, detailed information on permissions can be found in the <code>permissions_resource</code> list-column.</p>
@@ -115,11 +115,11 @@ file</code></pre></div>
 #&gt;   * role = writer
 #&gt;   * type = user
 #&gt; For files:
-#&gt;   * chicken-perm-article.txt: 0B0Gh-SuuA2nTaWhkdEpBVFl3TEE
+#&gt;   * chicken-perm-article.txt: 0B0Gh-SuuA2nTVEQwTS0yYWt1RG8
 #&gt; # A tibble: 1 x 5
 #&gt;                       name shared                           id
 #&gt;                      &lt;chr&gt;  &lt;lgl&gt;                        &lt;chr&gt;
-#&gt; 1 chicken-perm-article.txt   TRUE 0B0Gh-SuuA2nTaWhkdEpBVFl3TEE
+#&gt; 1 chicken-perm-article.txt   TRUE 0B0Gh-SuuA2nTVEQwTS0yYWt1RG8
 #&gt; # ... with 2 more variables: drive_resource &lt;list&gt;,
 #&gt; #   permissions_resource &lt;list&gt;</code></pre>
 <p>We see that the file is now shared. We also want anyone to be able to read the file.</p>
@@ -129,18 +129,18 @@ file</code></pre></div>
 <span class="co">#&gt;   * role = reader</span>
 <span class="co">#&gt;   * type = anyone</span>
 <span class="co">#&gt; For files:</span>
-<span class="co">#&gt;   * chicken-perm-article.txt: 0B0Gh-SuuA2nTaWhkdEpBVFl3TEE</span></code></pre></div>
+<span class="co">#&gt;   * chicken-perm-article.txt: 0B0Gh-SuuA2nTVEQwTS0yYWt1RG8</span></code></pre></div>
 <p>Now that we’ve made a few updates to our permissions, the <code>permissions_resource</code> list-column has become more interesting. Here’s how to pull important information out of this and put into a tibble with one row per permission. (<em>Permission handling will become more formalized in future versions of googledrive. See <a href="https://github.com/tidyverse/googledrive/issues/180">the issue</a></em>). We use other packages in the tidyverse now for this data wrangling.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="co">#&gt; + ggplot2 2.2.1        Date: 2017-08-27</span>
-<span class="co">#&gt; + tibble  1.3.4           R: 3.3.2</span>
-<span class="co">#&gt; + tidyr   0.6.3          OS: OS X El Capitan 10.11.6</span>
-<span class="co">#&gt; + readr   1.1.1         GUI: X11</span>
-<span class="co">#&gt; + purrr   0.2.3      Locale: en_CA.UTF-8</span>
-<span class="co">#&gt; + dplyr   0.7.2          TZ: America/Vancouver</span>
-<span class="co">#&gt; + stringr 1.2.0      </span>
+<span class="co">#&gt; + ggplot2 2.2.1             Date: 2017-09-23</span>
+<span class="co">#&gt; + tibble  1.3.4                R: 3.4.1</span>
+<span class="co">#&gt; + tidyr   0.7.1               OS: macOS Sierra 10.12.6</span>
+<span class="co">#&gt; + readr   1.1.1              GUI: X11</span>
+<span class="co">#&gt; + purrr   0.2.3.9000      Locale: en_CA.UTF-8</span>
+<span class="co">#&gt; + dplyr   0.7.3               TZ: America/Vancouver</span>
+<span class="co">#&gt; + stringr 1.2.0           </span>
 <span class="co">#&gt; + forcats 0.2.0</span>
-<span class="co">#&gt; Conflicts -----------------------------------------------------------------</span>
+<span class="co">#&gt; ── Conflicts ────────────────────────────────────────────────────</span>
 <span class="co">#&gt; * filter(),  from dplyr, masks stats::filter()</span>
 <span class="co">#&gt; * lag(),     from dplyr, masks stats::lag()</span>
 perm &lt;-<span class="st"> </span><span class="kw">pluck</span>(file, <span class="st">"permissions_resource"</span>, <span class="dv">1</span>, <span class="st">"permissions"</span>)
@@ -165,7 +165,7 @@ permissions &lt;-<span class="st"> </span><span class="kw">tibble</span>(
 <a href="#clean-up" class="anchor"></a>Clean up</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../reference/drive_rm.html">drive_rm</a></span>(file)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * chicken-perm-article.txt: 0B0Gh-SuuA2nTaWhkdEpBVFl3TEE</span></code></pre></div>
+<span class="co">#&gt;   * chicken-perm-article.txt: 0B0Gh-SuuA2nTVEQwTS0yYWt1RG8</span></code></pre></div>
 </div>
 </div>
   </div>
