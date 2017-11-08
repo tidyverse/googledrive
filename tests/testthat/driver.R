@@ -2,8 +2,8 @@
 ##   * test setup = create the files/folders our tests expect to find on Drive
 ##   * test cleanup = delete the above files/folder from Drive
 ## execute this to get two R scripts:
-##   * setup.R
-##   * clean.R
+##   * all-test-setup.R
+##   * all-test-clean.R
 
 library(purrr)
 library(glue)
@@ -58,10 +58,10 @@ whoami[c('displayName', 'emailAddress')]
 writeLines(
   c(glue_data(list(action = "clean", ACTION = "CLEAN"), header),
     unlist(clean_code)),
-  find_testthat_root_file("clean.R")
+  find_testthat_root_file("all-test-clean.R")
 )
 writeLines(
   c(glue_data(list(action = "setup", ACTION = "SETUP"), header),
     unlist(setup_code)),
-  find_testthat_root_file("setup.R")
+  find_testthat_root_file("all-test-setup.R")
 )

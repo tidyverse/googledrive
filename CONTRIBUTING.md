@@ -60,30 +60,31 @@ It's nice if a pull request includes the result of running `devtools::document()
 
 We use [testthat](https://cran.r-project.org/package=testthat).
 
-We have many tests that require authorization and that rely on the existence of specific files and folders. Therefore, to fully test googledrive, you'll have to store an OAuth token in a specific place and you'll have to do some setup. We've tried to make it fairly easy to do this setup and to clean up those files when you're done.
+We have many tests that require authorization and that rely on the existence of specific files and folders. Therefore, to fully test googledrive, you'll have to store a token in a specific place and you'll have to do some setup. We've tried to make it fairly easy to do this setup and to clean up those files when you're done.
 
 TL;DR with more detail below:
 
 ``` r
 ## store an OAuth token
+## TO DO: update this when dust settles re: gargle and service token!
 token <- drive_auth(reset = TRUE, cache = FALSE)
 saveRDS(token, rprojroot::find_testthat_root_file("testing-token.rds"))
 
 ## gather all the test setup and clean code from individual test files
 source(rprojroot::find_testthat_root_file("driver.R"))
 ## leaves behind:
-##   * setup.R
-##   * clean.R
+##   * all-test-setup.R
+##   * all-test-clean.R
 
 ## "activate" by editing, e.g., SETUP <- TRUE vs SETUP <- FALSE
 
 ## source or, I prefer, render the setup script
-rmarkdown::render(rprojroot::find_testthat_root_file("setup.R"))
+rmarkdown::render(rprojroot::find_testthat_root_file("all-test-setup.R"))
 
 ## do all development work that requires tests HERE
 
 ## source or, I prefer, render the clean script
-rmarkdown::render(rprojroot::find_testthat_root_file("clean.R"))
+rmarkdown::render(rprojroot::find_testthat_root_file("all-test-clean.R"))
 ```
 
 #### OAuth token for testing
@@ -111,12 +112,12 @@ rmarkdown::render(rprojroot::find_testthat_root_file("clean.R"))
 For speed reasons, the googledrive tests expect to find certain pre-existing files and folders, i.e. we don't do full setup and tear down on each run. You do setup at the beginning of your googledrive development and leave these files in place while you work. When you're done, e.g., when your PR is complete, you can clean up these files. Each test run also creates and destroys files, both locally and on Drive, but that is different and not what we're talking about here.
 
 1.  Source `tests/testthat/driver.R` to extract and aggregate the current setup and clean code across all test files.
-    -   This will create two R scripts: `tests/testthat/setup.R` and `tests/testthat/clean.R`. Inspect them.
+    -   This will create two R scripts: `tests/testthat/all-test-setup.R` and `tests/testthat/all-test-clean.R`. Inspect them.
 2.  When you are truly ready to perform setup or clean, edit the code to set the `SETUP` or `CLEAN` variable to `TRUE` instead of `FALSE`. This friction is intentional, so you don't accidentally create or delete lots of Drive files without meaning to.
-3.  Render `setup.R` with the Knit button in RStudio or like so:
+3.  Render `all-test-setup.R` with the Knit button in RStudio or like so:
 
 ``` r
-rmarkdown::render("setup.R")
+rmarkdown::render("all-test-setup.R")
 ```
 
 You could also just source it, but it's nice to have a report that records what actually happened.
@@ -128,7 +129,7 @@ You can leave the setup in place for as long as you're working on googledrive, i
 When your googledrive development is over, render the clean script:
 
 ``` r
-rmarkdown::render("clean.R")
+rmarkdown::render("all-test-clean.R")
 ```
 
 Again, read the report to look over what happened, in case anything was trashed that should not have been (btw, let us know about that so we can fix!). Once you're satisfied that your own files were not touched, you can `drive_empty_trash()` to truly delete the test files.
