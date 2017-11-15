@@ -25,10 +25,12 @@ skip_if_no_token <- (function() {
         no_token <<- TRUE
         message("Not attempting to load token")
       } else {
-        token <- tryCatch(
-          drive_auth(rprojroot::find_testthat_root_file("testing-token.rds")),
-          warning = function(x) FALSE,
-          error = function(e) FALSE
+        token <- tryCatch({
+          token_path <- file.path("~/.R/gargle/googledrive-testing.json")
+          drive_auth(service_token = token_path)
+        },
+        warning = function(x) FALSE,
+        error = function(e) FALSE
         )
         no_token <<- isFALSE(token)
         if (no_token) {

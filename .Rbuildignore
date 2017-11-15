@@ -21,7 +21,7 @@
 ^index\.Rmd$
 ^CONDUCT\.md$
 ^CONTRIBUTING\.[R]?md$
-^tests/testthat/testing-token\.rds\.enc$
-^tests/testthat/av_testing-token\.rds\.enc$
 ^secure-file$
 ^cran-comments\.md$
+^tests/testthat/test-tokens/googledrive-testing\.json\.enc$
+^tests/testthat/test-tokens/av_googledrive-testing\.json\.enc$

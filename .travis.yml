@@ -3,8 +3,9 @@ cache: packages
 dist: trusty
 
 before_install:
+- mkdir -p ~/.R/gargle
 - openssl aes-256-cbc -K $encrypted_9859da42e62f_key -iv $encrypted_9859da42e62f_iv
-  -in tests/testthat/testing-token.rds.enc -out tests/testthat/testing-token.rds -d
+  -in tests/testthat/test-tokens/googledrive-testing.json.enc -out ~/.R/gargle/googledrive-testing.json -d
 
 env:
   global:
