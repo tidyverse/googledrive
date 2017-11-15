@@ -8,8 +8,8 @@ drive_browse(file = .Last.value)
 }
 \arguments{
 \item{file}{Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with
-\code{\link{as_id}()}, or a \code{\link{dribble}}.}
+Drive. Can be a name or path, a file id or URL marked with \code{\link[=as_id]{as_id()}}, or a
+\code{\link{dribble}}.}
 }
 \value{
 Character vector of file hyperlinks, from \code{\link[=drive_link]{drive_link()}}, invisibly.

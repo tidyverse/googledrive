@@ -37,3 +37,4 @@ Other low-level API functions: \code{\link{generate_request}},
   \code{\link{make_request}},
   \code{\link{process_response}}
 }
+\concept{low-level API functions}

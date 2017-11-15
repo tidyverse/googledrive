@@ -19,8 +19,7 @@ Drive, it must be passed as a \code{\link{dribble}}.}
 indirect (\code{recursive = TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 List the contents of a folder or Team Drive, recursively or not. This is a

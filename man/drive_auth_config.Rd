@@ -53,3 +53,4 @@ drive_auth_config()
 Other auth functions: \code{\link{drive_auth}},
   \code{\link{drive_deauth}}
 }
+\concept{auth functions}

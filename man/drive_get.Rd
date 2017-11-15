@@ -19,22 +19,18 @@ with \code{\link[=as_id]{as_id()}}). If both \code{path} and \code{id} are non-\
 ignored.}
 
 \item{team_drive}{Anything that identifies one specific Team Drive: its name,
-its id or URL marked with \code{\link{as_id}()}, or a
-\code{\link{dribble}}. Is pre-processed with
-\code{\link{as_team_drive}()}.  Read more about
-\link[=team_drives]{Team Drives}.}
+its id or URL marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Is pre-processed
+with \code{\link[=as_team_drive]{as_team_drive()}}.  Read more about \link[=team_drives]{Team Drives}.}
 
 \item{corpus}{Character, specifying the search collection. Only relevant in
-the Team Drives context. If specified, must be one of \code{"user"},
-\code{"all"}, or \code{"domain"}. Read more about
-\link[=team_drives]{Team Drives}.}
+the Team Drives context. If specified, must be one of \code{"user"}, \code{"all"}, or
+\code{"domain"}. Read more about \link[=team_drives]{Team Drives}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Retrieve metadata for files specified via path or via file id.
@@ -45,21 +41,20 @@ that lacks it, use \code{\link[=drive_reveal]{drive_reveal()}}, e.g., \code{driv
 you want to list the contents of a folder, use \code{\link[=drive_ls]{drive_ls()}}. For general
 searching, use \code{\link[=drive_find]{drive_find()}}.
 
-Note:
-  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-  are only available to users of certain enhanced Google services, such as G
-  Suite Enterprise, G Suite Business, or G Suite for Education.
+Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+are only available to users of certain enhanced Google services, such as G
+Suite Enterprise, G Suite Business, or G Suite for Education.
 }
 \section{Special considerations for paths}{
 
 Note that Google Drive does NOT behave like your local file system:
-  \itemize{
-  \item File and folder names need not be unique, even at a given level of
-  the hierarchy. A single name or file path can be associated with multiple
-  files (or zero or exactly one).
-  \item A file can have more than one direct parent. This implies that a
-  single file can be represented by multiple paths.
-  }
+\itemize{
+\item File and folder names need not be unique, even at a given level of
+the hierarchy. A single name or file path can be associated with multiple
+files (or zero or exactly one).
+\item A file can have more than one direct parent. This implies that a
+single file can be represented by multiple paths.
+}
 
 Bottom line: Do not assume there is a one-to-one relationship between file
 name or path and a Drive file or folder. This implies the length of the input

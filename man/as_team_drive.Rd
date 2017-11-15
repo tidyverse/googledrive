@@ -25,10 +25,9 @@ Team Drives can be specified via
 objects. Mostly for internal use.
 }
 
-Note:
-  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-  are only available to users of certain enhanced Google services, such as G
-  Suite Enterprise, G Suite Business, or G Suite for Education.
+Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+are only available to users of certain enhanced Google services, such as G
+Suite Enterprise, G Suite Business, or G Suite for Education.
 
 This is a generic function.
 }

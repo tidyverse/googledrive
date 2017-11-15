@@ -86,3 +86,4 @@ More detail is available from
 Other auth functions: \code{\link{drive_auth_config}},
   \code{\link{drive_deauth}}
 }
+\concept{auth functions}

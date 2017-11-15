@@ -8,26 +8,24 @@ drive_mv(file, path = NULL, name = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with
-\code{\link{as_id}()}, or a \code{\link{dribble}}.}
+Drive. Can be a name or path, a file id or URL marked with \code{\link[=as_id]{as_id()}}, or a
+\code{\link{dribble}}.}
 
 \item{path}{Specifies target destination for the new file on Google
-Drive. Can be an actual path (character), a file id marked with
-\code{\link{as_id}()}, or a \code{\link{dribble}}. If specified as an
-actual path, it is best to explicitly indicate if it's a folder by
-including a trailing slash, since it cannot always be worked out from the
-context of the call. Defaults to current name.}
+Drive. Can be an actual path (character), a file id marked with \code{\link[=as_id]{as_id()}},
+or a \code{\link{dribble}}. If specified as an actual path, it is best to explicitly
+indicate if it's a folder by including a trailing slash, since it cannot
+always be worked out from the context of the call. Defaults to current name.}
 
 \item{name}{Character, new file name if not specified as part of
-\code{path}. This will force \code{path} to be treated as a folder, even if
-it is character and lacks a trailing slash. Defaults to current name.}
+\code{path}. This will force \code{path} to be treated as a folder, even if it is
+character and lacks a trailing slash. Defaults to current name.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Move a Drive file to a different folder, give it a different name, or both.

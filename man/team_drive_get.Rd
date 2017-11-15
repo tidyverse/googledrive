@@ -18,8 +18,7 @@ ignored.}
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Retrieve metadata for Team Drives specified via name or id. Note
@@ -29,10 +28,9 @@ that Google Drive does NOT behave like your local file system:
 names need not be unique.
 }
 
-Note:
-  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-  are only available to users of certain enhanced Google services, such as G
-  Suite Enterprise, G Suite Business, or G Suite for Education.
+Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+are only available to users of certain enhanced Google services, such as G
+Suite Enterprise, G Suite Business, or G Suite for Education.
 }
 \examples{
 \dontrun{

@@ -8,8 +8,8 @@ drive_update(file, media = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with
-\code{\link{as_id}()}, or a \code{\link{dribble}}.}
+Drive. Can be a name or path, a file id or URL marked with \code{\link[=as_id]{as_id()}}, or a
+\code{\link{dribble}}.}
 
 \item{media}{Character, path to the local file to upload.}
 
@@ -22,8 +22,7 @@ docs for the associated endpoint.}
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Update an existing Drive file id with new content ("media" in Drive

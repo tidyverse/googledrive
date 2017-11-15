@@ -11,7 +11,7 @@ drive_share(file, role = c("reader", "commenter", "writer", "owner",
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
-ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+ids or URLs marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}.}
 
 \item{role}{Character. The role to grant. Must be one of:
 \itemize{
@@ -39,8 +39,7 @@ provide additional information, such as the \code{emailAddress} (when grantee
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Grant individuals or other groups access to files, including permission to

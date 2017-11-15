@@ -23,8 +23,7 @@ docs for the associated endpoint.}
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Creates a new Drive folder. To update the metadata of an existing Drive file,

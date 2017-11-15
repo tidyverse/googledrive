@@ -8,8 +8,8 @@ drive_rename(file, name = NULL, verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with
-\code{\link{as_id}()}, or a \code{\link{dribble}}.}
+Drive. Can be a name or path, a file id or URL marked with \code{\link[=as_id]{as_id()}}, or a
+\code{\link{dribble}}.}
 
 \item{name}{Character. Name you would like the file to have.}
 
@@ -17,8 +17,7 @@ Drive. Can be a name or path, a file id or URL marked with
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 This is a wrapper for \code{\link[=drive_mv]{drive_mv()}} that only renames a file.

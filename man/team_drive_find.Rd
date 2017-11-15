@@ -21,17 +21,15 @@ filtered locally, via the \code{pattern} argument.}
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 This is the closest googledrive function to what you get from
 visiting \url{https://drive.google.com} and clicking "Team Drives".
 
-Note:
-  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-  are only available to users of certain enhanced Google services, such as G
-  Suite Enterprise, G Suite Business, or G Suite for Education.
+Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+are only available to users of certain enhanced Google services, such as G
+Suite Enterprise, G Suite Business, or G Suite for Education.
 }
 \examples{
 \dontrun{

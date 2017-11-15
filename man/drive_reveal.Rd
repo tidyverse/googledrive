@@ -10,7 +10,7 @@ drive_reveal(file, what = c("path", "trashed", "mime_type", "permissions",
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
-ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
+ids or URLs marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}.}
 
 \item{what}{Character, describing the type of info you want to add:
 \itemize{
@@ -22,8 +22,7 @@ ids or URLs marked with \code{\link{as_id}()}, or a \code{\link{dribble}}.}
 }}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 \code{drive_reveal()} adds extra information about your Drive files that is not
@@ -40,13 +39,13 @@ associated with a specific file.
 \section{Special considerations for paths}{
 
 Note that Google Drive does NOT behave like your local file system:
-  \itemize{
-  \item File and folder names need not be unique, even at a given level of
-  the hierarchy. A single name or file path can be associated with multiple
-  files (or zero or exactly one).
-  \item A file can have more than one direct parent. This implies that a
-  single file can be represented by multiple paths.
-  }
+\itemize{
+\item File and folder names need not be unique, even at a given level of
+the hierarchy. A single name or file path can be associated with multiple
+files (or zero or exactly one).
+\item A file can have more than one direct parent. This implies that a
+single file can be represented by multiple paths.
+}
 
 Bottom line: Do not assume there is a one-to-one relationship between file
 name or path and a Drive file or folder. This implies the length of the input

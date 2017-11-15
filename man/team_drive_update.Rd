@@ -8,10 +8,8 @@ team_drive_update(team_drive, ..., verbose = TRUE)
 }
 \arguments{
 \item{team_drive}{Anything that identifies one specific Team Drive: its name,
-its id or URL marked with \code{\link{as_id}()}, or a
-\code{\link{dribble}}. Is pre-processed with
-\code{\link{as_team_drive}()}.  Read more about
-\link[=team_drives]{Team Drives}.}
+its id or URL marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Is pre-processed
+with \code{\link[=as_team_drive]{as_team_drive()}}.  Read more about \link[=team_drives]{Team Drives}.}
 
 \item{...}{Named parameters to pass along to the Drive API. See the "Request
 body" section of the Drive API docs for the associated endpoint.}
@@ -20,17 +18,15 @@ body" section of the Drive API docs for the associated endpoint.}
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Update the metadata of an existing Team Drive, e.g. its background image or
 theme.
 
-Note:
-  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-  are only available to users of certain enhanced Google services, such as G
-  Suite Enterprise, G Suite Business, or G Suite for Education.
+Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+are only available to users of certain enhanced Google services, such as G
+Suite Enterprise, G Suite Business, or G Suite for Education.
 }
 \examples{
 \dontrun{

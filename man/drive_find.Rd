@@ -25,15 +25,12 @@ applies to the results requested from the API, which may be further
 filtered locally, via the \code{pattern} argument.}
 
 \item{team_drive}{Anything that identifies one specific Team Drive: its name,
-its id or URL marked with \code{\link{as_id}()}, or a
-\code{\link{dribble}}. Is pre-processed with
-\code{\link{as_team_drive}()}.  Read more about
-\link[=team_drives]{Team Drives}.}
+its id or URL marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Is pre-processed
+with \code{\link[=as_team_drive]{as_team_drive()}}.  Read more about \link[=team_drives]{Team Drives}.}
 
 \item{corpus}{Character, specifying the search collection. Only relevant in
-the Team Drives context. If specified, must be one of \code{"user"},
-\code{"all"}, or \code{"domain"}. Read more about
-\link[=team_drives]{Team Drives}.}
+the Team Drives context. If specified, must be one of \code{"user"}, \code{"all"}, or
+\code{"domain"}. Read more about \link[=team_drives]{Team Drives}.}
 
 \item{...}{Other parameters to pass along in the request. The most likely
 candidate is \code{q}. See below and the API's
@@ -43,8 +40,7 @@ candidate is \code{q}. See below and the API's
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 This is the closest googledrive function to what you can do at
@@ -54,10 +50,9 @@ or even work with \link[=team_drives]{Team Drive files}, if you have access. Thi
 is a very powerful function. Together with the more specific \code{\link[=drive_get]{drive_get()}},
 this is the main way to identify files to target for downstream work.
 
-Note:
-  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-  are only available to users of certain enhanced Google services, such as G
-  Suite Enterprise, G Suite Business, or G Suite for Education.
+Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+are only available to users of certain enhanced Google services, such as G
+Suite Enterprise, G Suite Business, or G Suite for Education.
 }
 \section{File type}{
 

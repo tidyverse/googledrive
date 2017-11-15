@@ -9,8 +9,7 @@ team_drive_rm(team_drive = NULL, verbose = TRUE)
 \arguments{
 \item{team_drive}{Anything that identifies the Team Drive(s) of interest. Can
 be a character vector of names, a character vector of file ids or URLs
-marked with \code{\link{as_id}()}, or a \code{\link{dribble}} consisting
-only of Team Drives.}
+marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}} consisting only of Team Drives.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -19,12 +18,9 @@ only of Team Drives.}
 Logical vector, indicating whether the delete succeeded.
 }
 \description{
-Delete Team Drives
-
-Note:
-  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-  are only available to users of certain enhanced Google services, such as G
-  Suite Enterprise, G Suite Business, or G Suite for Education.
+Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+are only available to users of certain enhanced Google services, such as G
+Suite Enterprise, G Suite Business, or G Suite for Education.
 }
 \examples{
 \dontrun{

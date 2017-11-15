@@ -9,8 +9,8 @@ drive_download(file, path = NULL, type = NULL, overwrite = FALSE,
 }
 \arguments{
 \item{file}{Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with
-\code{\link{as_id}()}, or a \code{\link{dribble}}.}
+Drive. Can be a name or path, a file id or URL marked with \code{\link[=as_id]{as_id()}}, or a
+\code{\link{dribble}}.}
 
 \item{path}{Character. Path for output file. If absent, the default file name
 is the file's name on Google Drive and the default location is working
@@ -28,8 +28,7 @@ overwrite it?}
 (default \code{TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per
-  item.
+An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 This function downloads a file from Google Drive. Native Google

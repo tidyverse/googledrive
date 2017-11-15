@@ -23,10 +23,9 @@ The general flexibility to refer to files by name, path, or id does not
 apply to Team Drive files. While it's always a good idea to get things into
 a \code{\link{dribble}} early, for Team Drives it's absolutely required.
 
-Note:
-  \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-  are only available to users of certain enhanced Google services, such as G
-  Suite Enterprise, G Suite Business, or G Suite for Education.
+Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
+are only available to users of certain enhanced Google services, such as G
+Suite Enterprise, G Suite Business, or G Suite for Education.
 }
 \section{Specific Team Drive}{
 
