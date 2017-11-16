@@ -16,29 +16,35 @@ skip_if_offline <- (function() {
   }
 })()
 
-skip_if_no_token <- (function() {
-  no_token <- NA
-  function() {
-    if (is.na(no_token)) {
-      env_var <- as.logical(Sys.getenv("GOOGLEDRIVE_LOAD_TOKEN", NA_character_))
-      if (isFALSE(env_var)) {
-        no_token <<- TRUE
-        message("Not attempting to load token")
-      } else {
-        token <- tryCatch({
-          token_path <- file.path("~/.R/gargle/googledrive-testing.json")
-          drive_auth(service_token = token_path)
-        },
-        warning = function(x) FALSE,
-        error = function(e) FALSE
-        )
-        no_token <<- isFALSE(token)
-        if (no_token) {
-          message("Unable to load token")
-        }
-      }
+has_token <- function() {
+  env_var <- as.logical(Sys.getenv("GOOGLEDRIVE_LOAD_TOKEN", NA_character_))
+  if (isFALSE(env_var)) {
+    message("Not attempting to load token")
+    return(FALSE)
+  }
+
+  token <- tryCatch(
+    {
+      token_path <- file.path("~/.R/gargle/googledrive-testing.json")
+      drive_auth(service_token = token_path)
+      TRUE
     }
-    if (no_token) testthat::skip("No Drive token")
+    ,
+    warning = function(x) FALSE,
+    error = function(e) FALSE
+  )
+  if (!token) {
+    message("Unable to load token")
+  }
+
+  token
+}
+
+skip_if_no_token <- (function() {
+  has_token <- NULL
+  function() {
+    has_token <<- has_token %||% has_token()
+    testthat::skip_if_not(has_token, "No Drive token")
   }
 })()
 
