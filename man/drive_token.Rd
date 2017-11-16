@@ -4,11 +4,7 @@
 \alias{drive_token}
 \title{Produce Google token}
 \usage{
-drive_token(verbose = FALSE)
-}
-\arguments{
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
+drive_token()
 }
 \value{
 a \code{request} object (an S3 class provided by \link[httr:httr]{httr})

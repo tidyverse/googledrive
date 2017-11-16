@@ -1,52 +1,37 @@
-## we will outsource a great deal of this to gargle, but not in time for
-## the first CRAN release of googledrive
-## https://github.com/r-lib/gargle
-
-## current auth code is a mashup adapted from googlesheets, bigrquery, gmailr
-## https://github.com/jennybc/googlesheets/blob/master/R/gs_auth.R
-## https://github.com/rstats-db/bigrquery/blob/master/R/auth.r
-## https://github.com/jimhester/gmailr/blob/master/R/gmailr.R
-
-
-
 #' Authorize googledrive
 #'
 #' Authorize googledrive to view and manage your Drive files. By default, you
-#' are directed to a web browser, asked to sign in to your Google account,
-#' and to grant googledrive (the tidyverse, actually) permission to operate on
-#' your behalf with Google Drive. By default, these user credentials are cached
-#' in a file named `.httr-oauth` in the current working directory, from where
-#' they can be automatically refreshed, as necessary.
+#' are directed to a web browser, asked to sign in to your Google account, and
+#' to grant googledrive (the tidyverse, actually) permission to operate on your
+#' behalf with Google Drive. By default, these user credentials are cached in a
+#' file below your home directory, `~/.R/gargle/gargle-oauth`, from where they
+#' can be automatically refreshed, as necessary. Storage at the user-level means
+#' the same token can be used across multiple projects and they are less likely
+#' to be synced to the cloud by accident.
 #'
 #' Most users, most of the time, do not need to call `drive_auth()` explicitly
 #' -- it is triggered by the first action that requires authorization. Even when
 #' called, the default arguments will often suffice. However, when necessary,
-#' this function allows the user to
-#'   * force the adoption of a new token, via `reset = TRUE`
-#'   * retrieve current token, e.g., for storage to an `.rds` file
-#'   * put a pre-existing OAuth or service account token into force
-#'   * prevent the caching of new, interactively-obtained credentials in
-#'   `.httr-oauth`
+#' this function allows the user to explicitly
+#'   * Declare which Google identity to use, via an email address. If there are
+#'   multiple cached tokens, this can clarify which one to use. It can also
+#'   force googledrive to switch from one identity to another. If there's no
+#'   cached token for the email, this triggers a return to the browser to choose
+#'   the identity and give consent.
+#'   * Load a service account token.
+#'   * Specify non-default behavior re: token caching and out-of-bound
+#'   authentication.
 #'
 #' For even deeper control over auth, use [drive_auth_config()] to use your own
-#' OAuth app or API key. [drive_auth_config()] also allows you to
-#' deactivate auth, sending only an API key in requests, which works if you
-#' only need to access public data.
+#' OAuth app or API key.
 #'
 #' @seealso More detail is available from
 #' [Using OAuth 2.0 for Installed Applications](https://developers.google.com/identity/protocols/OAuth2InstalledApp)
 #'
-#' @param oauth_token Optional; path to an `.rds` file with a previously stored
-#'   OAuth token.
-#' @param service_token Optional; a JSON string, URL, or path, giving or
-#'   pointing to the service token file.
-#' @param reset Logical, defaults to `FALSE`. Set to `TRUE` if you want to
-#'   forget any token previously used in this session and start afresh. Disables
-#'   the `.httr-oauth` file in current working directory by renaming to
-#'   `.httr-oauth-SUSPENDED`.
+#' @param email Optional; email address associated with the desired Google user.
+#' @param path Optional; path to the downloaded JSON file for a service token.
 #' @inheritParams httr::oauth2.0_token
 #'
-#' @template verbose
 #' @family auth functions
 #' @export
 #'
@@ -56,60 +41,46 @@
 #' ## otherwise, go to browser for authentication and authorization
 #' drive_auth()
 #'
-#' ## force a new oauth token to be obtained
-#' drive_auth(reset = TRUE)
+#' ## see user associated with current token
+#' drive_user()
 #'
-#' ## store token in an object and then to file
-#' ttt <- drive_auth()
-#' saveRDS(ttt, "ttt.rds")
-#'
-#' ## load a pre-existing token
-#' drive_auth("ttt.rds") # from .rds file
+#' ## force use of a token associated with a specific email
+#' drive_auth(email = "jenny@example.com")
+#' drive_user()
 #'
 #' ## use a service account token
-#' drive_auth(service_token = "foofy-83ee9e7c9c48.json")
+#' drive_auth(path = "foofy-83ee9e7c9c48.json")
 #' }
-drive_auth <- function(oauth_token = NULL,
-                       service_token = NULL,
-                       reset = FALSE,
+drive_auth <- function(email = NULL,
+                       path = NULL,
+                       ## TODO: update for gargle!
                        cache = getOption("httr_oauth_cache"),
-                       use_oob = getOption("httr_oob_default"),
-                       verbose = TRUE) {
-  if (reset) {
-    drive_deauth(clear_cache = TRUE, verbose = verbose)
-  }
-
-  if (is.null(oauth_token)) {
-    if (is.null(service_token)) {
-      set_oauth2.0_cred(app = oauth_app(), cache = cache, use_oob = use_oob)
-    } else {
-      stopifnot(is_string(service_token))
-      set_service_token(service_token)
-    }
-    return(invisible(access_cred()))
-  }
-
-  stopifnot(is_string(oauth_token))
-  drive_token <- tryCatch(
-    readRDS(oauth_token),
-    error = function(e) {
-      stop_glue("\nCannot read token from alleged .rds file:\n  * {token}")
-    }
+                       use_oob = getOption("httr_oob_default")) {
+  cred <- gargle::token_fetch(
+    scopes = "https://www.googleapis.com/auth/drive",
+    app = drive_oauth_app(),
+    email = email,
+    path = path,
+    cache = cache,
+    use_oob = use_oob
   )
-  if (!is_legit_token(drive_token, verbose = TRUE)) {
-    stop_glue("\nFile does not contain a proper oauth token:\n  * {token}")
-  }
-  invisible(set_access_cred(drive_token))
+  stopifnot(is_legit_token(cred, verbose = TRUE))
+  set_access_cred(cred)
+  set_auth_active(TRUE)
+
+  return(invisible())
 }
 
 #' Suspend authorization
 #'
-#' Suspend googledrive's authorization to place requests to the Drive API on
-#' behalf of the authenticated user.
+#' Put googledrive into a de-authorized state. Instead of sending a token,
+#' googledrive will send an API key. This can be used to access public files for
+#' which no Google sign-in is required. This is handy for using googledrive in a
+#' non-interactive setting to make requests that do not require a token. It will
+#' prevent the attempt to obtain a token interactively in the browser. A
+#' built-in API key is used by default or the user can configure their own via
+#' [drive_auth_config()].
 #'
-#' @param clear_cache logical indicating whether to disable the
-#'   `.httr-oauth` file in working directory, if such exists, by renaming
-#'   to `.httr-oauth-SUSPENDED`
 #' @template verbose
 #'
 #' @export
@@ -117,25 +88,14 @@ drive_auth <- function(oauth_token = NULL,
 #' @examples
 #' \dontrun{
 #' drive_deauth()
+#' drive_user()
+#' public_file <-
+#'   drive_get(as_id("1Hj-k7NpPSyeOR3R7j4KuWnru6kZaqqOAE8_db5gowIM"))
+#' drive_download(public_file)
 #' }
-drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
-  if (clear_cache && file.exists(".httr-oauth")) {
-    if (verbose) {
-      message("Disabling .httr-oauth by renaming to .httr-oauth-SUSPENDED")
-    }
-    file.rename(".httr-oauth", ".httr-oauth-SUSPENDED")
-  }
-
-  if (token_available(verbose = FALSE)) {
-    if (verbose) {
-      message("Removing google token stashed internally in 'googledrive'.")
-    }
-    reset_access_cred()
-  } else {
-    message("No token currently in force.")
-  }
-
-  invisible(NULL)
+drive_deauth <- function(verbose = TRUE) {
+  set_auth_active(FALSE)
+  set_access_cred(NULL)
 }
 
 #' View or set auth config
@@ -143,58 +103,72 @@ drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
 #' @description This function gives advanced users more control over auth.
 #' Whereas [drive_auth()] gives control over tokens, `drive_auth_config()`
 #' gives control of:
-#'   * The googledrive auth state. The default is active, meaning all requests
-#'   are sent with a token and, if one is not already loaded, OAuth flow is
-#'   initiated. It is possible, however, to place unauthorized requests to
-#'   the Drive API, as long as you are accessing public resources. Set `active`
-#'   to `FALSE` to enter this state and never send a token.
 #'   * The OAuth app. If you want to use your own app, setup a new project in
 #'   [Google Developers Console](https://console.developers.google.com). Follow
 #'   the instructions in
 #'   [OAuth 2.0 for Mobile & Desktop Apps](https://developers.google.com/identity/protocols/OAuth2InstalledApp)
-#'   to obtain your own client ID and secret. Provide these to
-#'   [httr::oauth_app()].
-#'   * The API key. If googledrive auth is deactivated (see above), all requests
-#'   will be sent with an API key. If you want to provide your own, setup a
-#'   project as described above and follow the instructions in
-#'   [Setting up API keys](https://support.google.com/googleapi/answer/6158862).
+#'   to obtain your own client ID and secret. Either make an app from your
+#'   client ID and secret via [httr::oauth_app()] or provide a path
+#'   to the JSON file containing same, which you can download from
+#'   [Google Developers Console](https://console.developers.google.com).
+#'   * The API key. If googledrive auth is deactivated via [drive_deauth()], all
+#'   requests will be sent with an API key in lieu of a token. If you want to
+#'   provide your own API key, setup a project as described above and follow the
+#'   instructions in [Setting up API
+#'   keys](https://support.google.com/googleapi/answer/6158862).
 #'
-#' @param active Logical. `TRUE` means a token will be sent. `FALSE` means it
-#'   will not.
 #' @param app OAuth app. Defaults to a tidyverse app that ships with
 #'   googledrive.
-#' @param api_key API key. Defaults to a key that ships with googledrive.
-#'   Necessary in order to make unauthorized "token-free" requests for public
-#'   resources.
-#' @template verbose
+#' @param api_key API key. Defaults to a tidyverse key that ships with
+#'   googledrive. Necessary in order to make unauthorized "token-free" requests
+#'   for public resources.
+#' @inheritParams gargle::oauth_app_from_json
 #'
 #' @family auth functions
 #' @return A list of class `auth_config`, with the current auth configuration.
 #' @export
 #' @examples
+#' ## this will print current config
 #' drive_auth_config()
-drive_auth_config <- function(active = TRUE,
-                              app = NULL,
-                              api_key = NULL,
-                              verbose = TRUE) {
-  stopifnot(is.logical(active))
-  if (!is.null(app)) {
-    stopifnot(inherits(app, "oauth_app"))
-  }
-  if (!is.null(api_key)) {
-    stopifnot(is.character(api_key), length(api_key) == 1)
+#'
+#' if (require(httr)) {
+#'   ## bring your own app via client id (aka key) and secret
+#'   google_app <- httr::oauth_app(
+#'     "my-awesome-google-api-wrapping-package",
+#'     key = "123456789.apps.googleusercontent.com",
+#'     secret = "abcdefghijklmnopqrstuvwxyz"
+#'   )
+#'   drive_auth_config(app = google_app)
+#' }
+#'
+#' \dontrun{
+#' ## bring your own app via JSON downloaded from Google Developers Console
+#' drive_auth_config(
+#'   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
+#' )
+#' }
+drive_auth_config <- function(app = NULL,
+                              path = NULL,
+                              api_key = NULL) {
+  stopifnot(is.null(app) || inherits(app, "oauth_app"))
+  stopifnot(is.null(path) || is_string(path))
+  stopifnot(is.null(api_key) || is_string(api_key))
+
+  if (!is.null(app) && !is.null(path)) {
+    stop_glue("Don't provide both 'app' and 'path'. Pick one.")
   }
 
-  set_auth_active(isTRUE(active))
-  set_oauth_app(app %||% .state[["tidyverse_app"]])
-  set_api_key(api_key %||% .state[["tidyverse_api_key"]])
+  if (is.null(app) && !is.null(path)) {
+    app <- gargle::oauth_app_from_json(path)
+  }
+  set_oauth_app(app %||% drive_oauth_app())
+  set_api_key(api_key %||%  drive_api_key())
 
   structure(
     list(
       active = auth_active(),
-      oauth_app_name = oauth_app()[["appname"]],
-      api_key = drive_api_key(),
-      token = access_cred()
+      oauth_app_name = drive_oauth_app()[["appname"]],
+      api_key = drive_api_key()
     ),
     class = c("auth_config", "list")
   )
@@ -202,18 +176,17 @@ drive_auth_config <- function(active = TRUE,
 
 #' @export
 print.auth_config <- function(x, ...) {
-  cat(
-    glue(
-      "googledrive auth state: ",
-      "{if (x[['active']]) 'active' else 'inactive'}\n",
-      "oauth app: ",
-      "{x[['oauth_app_name']]}\n",
-      "API key: ",
-      "{if (is.null(x[['api_key']])) 'unset' else 'set'}\n",
-      "token: ",
-      "{if (is.null(x[['token']])) 'not loaded' else 'loaded'}"
-    ),
-    sep = ""
+  cat(glue(
+    "googledrive auth state: ",
+    "{if (x[['active']]) 'active' else 'inactive'}\n",
+    "oauth app: ",
+    "{x[['oauth_app_name']]}\n",
+    "API key: ",
+    "{if (is.null(x[['api_key']])) 'unset' else 'set'}\n",
+    "token: ",
+    "{if (is.null(access_cred())) 'not loaded' else 'loaded'}"
+  ),
+  sep = ""
   )
   invisible(x)
 }
@@ -228,8 +201,6 @@ print.auth_config <- function(x, ...) {
 #' If auth has been deactivated via [drive_auth_config()], `drive_token()`
 #' returns `NULL`.
 #'
-#' @template verbose
-#'
 #' @return a `request` object (an S3 class provided by [httr][httr::httr])
 #' @export
 #' @family low-level API functions
@@ -242,19 +213,19 @@ print.auth_config <- function(x, ...) {
 #' )
 #' req
 #' }
-drive_token <- function(verbose = FALSE) {
+drive_token <- function() {
   if (!auth_active()) {
     return(NULL)
   }
-  if (!token_available(verbose = verbose)) {
-    drive_auth(verbose = verbose)
+  if (is.null(access_cred())) {
+    drive_auth()
   }
   httr::config(token = access_cred())
 }
 
 ## Reveals the actual access token, suitable for use with curl.
 access_token <- function() {
-  if (!token_available(verbose = TRUE)) return(NULL)
+  if (is.null(access_cred())) return(NULL)
   .state$cred$credentials$access_token
 }
 
@@ -270,98 +241,49 @@ set_access_cred <- function(value) {
   .state$cred <- value
 }
 
-reset_access_cred <- function() {
-  set_access_cred(NULL)
-}
-
 access_cred <- function() {
   .state$cred
 }
 
-set_oauth2.0_cred <- function(app = NULL, cache = NULL, use_oob = NULL) {
-  cred <- httr::oauth2.0_token(
-    endpoint = httr::oauth_endpoints("google"),
-    app = app %||% oauth_app(),
-    scope = "https://www.googleapis.com/auth/drive",
-    cache = cache,
-    use_oob = use_oob
-  )
-  stopifnot(is_legit_token(cred, verbose = TRUE))
-  set_access_cred(cred)
+#' Retrieve OAuth app or API key
+#'
+#' Retrieves the configured OAuth app and API key. Learn more in Google's
+#' document [Credentials, access, security, and
+#' identity](https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279).
+#' By default, the app and API key are initialized to settings that ship with
+#' googledrive. But the user can store their own app or key via
+#' [drive_auth_config()], i.e. overwrite the defaults.
+#' @name auth-config
+#' @return An [httr::oauth_app()] or Google API key.
+#' @family auth functions
+#' @examples
+#' drive_api_key()
+#' drive_oauth_app()
+#'
+#' \dontrun{
+#' drive_auth_config(api_key = "123")
+#' drive_api_key()
+#' }
+NULL
+
+#' @rdname auth-config
+#' @export
+drive_api_key <- function() {
+  .state[["api_key"]]
 }
 
-set_service_token <- function(service_token) {
-  service_token <- jsonlite::fromJSON(service_token)
-  cred <- httr::oauth_service_token(
-    endpoint = httr::oauth_endpoints("google"),
-    service_token,
-    scope = "https://www.googleapis.com/auth/drive"
-  )
-  set_access_cred(cred)
+#' @rdname auth-config
+#' @export
+drive_oauth_app <- function() {
+  .state[["oauth_app"]]
 }
 
 set_api_key <- function(value) {
   .state[["api_key"]] <- value
 }
 
-#' Retrieve API key
-#'
-#' Retrieves the pre-configured API key. Learn more in Google's document
-#' [Credentials, access, security, and identity](https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279).
-#' By default, this API key is initialized to one that ships with googledrive.
-#' But the user can store their own key via [drive_auth_config()], i.e.
-#' overwrite the default.
-#'
-#' @return A Google API key.
-#' @export
-#' @examples
-#' drive_api_key()
-#'
-#' \dontrun{
-#' drive_auth_config(api_key = "123")
-#' drive_api_key()
-#' }
-drive_api_key <- function() {
-  .state[["api_key"]]
-}
-
 set_oauth_app <- function(value) {
   .state[["oauth_app"]] <- value
-}
-
-oauth_app <- function() {
-  .state[["oauth_app"]]
-}
-
-#' Check token availability
-#'
-#' Check if a token is available in googledrive internal `.state` environment.
-#'
-#' @return logical
-#'
-#' @keywords internal
-token_available <- function(verbose = TRUE) {
-  if (is.null(access_cred())) {
-    if (verbose) {
-      if (file.exists(".httr-oauth")) {
-        message(
-          "A .httr-oauth file exists in current working ",
-          "directory.\nWhen/if needed, the credentials cached in ",
-          ".httr-oauth will be used for this session.\nOr run drive_auth() ",
-          "for explicit authentication and authorization."
-        )
-      } else {
-        message(
-          "No .httr-oauth file exists in current working directory.\n",
-          "When/if needed, 'googledrive' will initiate authentication ",
-          "and authorization.\nOr run drive_auth() to trigger this ",
-          "explicitly."
-        )
-      }
-    }
-    return(FALSE)
-  }
-  TRUE
 }
 
 #' Check that token appears to be legitimate

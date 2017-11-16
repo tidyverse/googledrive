@@ -4,21 +4,14 @@
 \alias{drive_auth}
 \title{Authorize googledrive}
 \usage{
-drive_auth(oauth_token = NULL, service_token = NULL, reset = FALSE,
+drive_auth(email = NULL, path = NULL,
   cache = getOption("httr_oauth_cache"),
-  use_oob = getOption("httr_oob_default"), verbose = TRUE)
+  use_oob = getOption("httr_oob_default"))
 }
 \arguments{
-\item{oauth_token}{Optional; path to an \code{.rds} file with a previously stored
-OAuth token.}
+\item{email}{Optional; email address associated with the desired Google user.}
 
-\item{service_token}{Optional; a JSON string, URL, or path, giving or
-pointing to the service token file.}
-
-\item{reset}{Logical, defaults to \code{FALSE}. Set to \code{TRUE} if you want to
-forget any token previously used in this session and start afresh. Disables
-the \code{.httr-oauth} file in current working directory by renaming to
-\code{.httr-oauth-SUSPENDED}.}
+\item{path}{Optional; path to the downloaded JSON file for a service token.}
 
 \item{cache}{A logical value or a string. \code{TRUE} means to cache
 using the default cache file \code{.httr-oauth}, \code{FALSE} means
@@ -29,9 +22,6 @@ A string mean use the specified path as the cache file.}
 Otherwise, provide a URL to the user and prompt for a validation
 code. Defaults to the of the \code{"httr_oob_default"} default,
 or \code{TRUE} if \code{httpuv} is not installed.}
-
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
 }
 \description{
 Authorize googledrive to view and manage your Drive files. By default, you
@@ -45,19 +35,20 @@ they can be automatically refreshed, as necessary.
 Most users, most of the time, do not need to call \code{drive_auth()} explicitly
 -- it is triggered by the first action that requires authorization. Even when
 called, the default arguments will often suffice. However, when necessary,
-this function allows the user to
+this function allows the user to explicitly
 \itemize{
-\item force the adoption of a new token, via \code{reset = TRUE}
-\item retrieve current token, e.g., for storage to an \code{.rds} file
-\item put a pre-existing OAuth or service account token into force
-\item prevent the caching of new, interactively-obtained credentials in
-\code{.httr-oauth}
+\item Declare which Google identity to use, via an email address. If there are
+multiple cached tokens, this can clarify which one to use. It can also
+force googledrive to switch from one identity to another. If there's no
+cached token for the email, this triggers a return to the browser to choose
+the identity and give consent.
+\item Load a service account token.
+\item Specify non-default behavior re: token caching and out-of-bound
+authentication.
 }
 
 For even deeper control over auth, use \code{\link[=drive_auth_config]{drive_auth_config()}} to use your own
-OAuth app or API key. \code{\link[=drive_auth_config]{drive_auth_config()}} also allows you to
-deactivate auth, sending only an API key in requests, which works if you
-only need to access public data.
+OAuth app or API key.
 }
 \examples{
 \dontrun{
@@ -65,25 +56,23 @@ only need to access public data.
 ## otherwise, go to browser for authentication and authorization
 drive_auth()
 
-## force a new oauth token to be obtained
-drive_auth(reset = TRUE)
+## see user associated with current token
+drive_user()
 
-## store token in an object and then to file
-ttt <- drive_auth()
-saveRDS(ttt, "ttt.rds")
-
-## load a pre-existing token
-drive_auth("ttt.rds") # from .rds file
+## force use of a token associated with a specific email
+drive_auth(email = "jenny@example.com")
+drive_user()
 
 ## use a service account token
-drive_auth(service_token = "foofy-83ee9e7c9c48.json")
+drive_auth(path = "foofy-83ee9e7c9c48.json")
 }
 }
 \seealso{
 More detail is available from
 \href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{Using OAuth 2.0 for Installed Applications}
 
-Other auth functions: \code{\link{drive_auth_config}},
+Other auth functions: \code{\link{auth-config}},
+  \code{\link{drive_auth_config}},
   \code{\link{drive_deauth}}
 }
 \concept{auth functions}

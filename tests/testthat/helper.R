@@ -25,7 +25,7 @@ has_token <- function() {
 
   token <- tryCatch({
     token_path <- file.path("~/.R/gargle/googledrive-testing.json")
-    drive_auth(service_token = token_path)
+    drive_auth(path = token_path)
     TRUE
   }
   ,

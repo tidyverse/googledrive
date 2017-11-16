@@ -4,22 +4,17 @@
 \alias{drive_auth_config}
 \title{View or set auth config}
 \usage{
-drive_auth_config(active = TRUE, app = NULL, api_key = NULL,
-  verbose = TRUE)
+drive_auth_config(app = NULL, path = NULL, api_key = NULL)
 }
 \arguments{
-\item{active}{Logical. \code{TRUE} means a token will be sent. \code{FALSE} means it
-will not.}
-
 \item{app}{OAuth app. Defaults to a tidyverse app that ships with
 googledrive.}
 
-\item{api_key}{API key. Defaults to a key that ships with googledrive.
-Necessary in order to make unauthorized "token-free" requests for public
-resources.}
+\item{path}{Path to the JSON file.}
 
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
+\item{api_key}{API key. Defaults to a tidyverse key that ships with
+googledrive. Necessary in order to make unauthorized "token-free" requests
+for public resources.}
 }
 \value{
 A list of class \code{auth_config}, with the current auth configuration.
@@ -29,28 +24,43 @@ This function gives advanced users more control over auth.
 Whereas \code{\link[=drive_auth]{drive_auth()}} gives control over tokens, \code{drive_auth_config()}
 gives control of:
 \itemize{
-\item The googledrive auth state. The default is active, meaning all requests
-are sent with a token and, if one is not already loaded, OAuth flow is
-initiated. It is possible, however, to place unauthorized requests to
-the Drive API, as long as you are accessing public resources. Set \code{active}
-to \code{FALSE} to enter this state and never send a token.
 \item The OAuth app. If you want to use your own app, setup a new project in
 \href{https://console.developers.google.com}{Google Developers Console}. Follow
 the instructions in
 \href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{OAuth 2.0 for Mobile & Desktop Apps}
-to obtain your own client ID and secret. Provide these to
-\code{\link[httr:oauth_app]{httr::oauth_app()}}.
-\item The API key. If googledrive auth is deactivated (see above), all requests
-will be sent with an API key. If you want to provide your own, setup a
-project as described above and follow the instructions in
-\href{https://support.google.com/googleapi/answer/6158862}{Setting up API keys}.
+to obtain your own client ID and secret. Either make an app from your
+client ID and secret via \code{\link[httr:oauth_app]{httr::oauth_app()}} or provide a path
+to the JSON file containing same, which you can download from
+\href{https://console.developers.google.com}{Google Developers Console}.
+\item The API key. If googledrive auth is deactivated via \code{\link[=drive_deauth]{drive_deauth()}}, all
+requests will be sent with an API key in lieu of a token. If you want to
+provide your own API key, setup a project as described above and follow the
+instructions in \href{https://support.google.com/googleapi/answer/6158862}{Setting up API keys}.
 }
 }
 \examples{
+## this will print current config
 drive_auth_config()
+
+if (require(httr)) {
+  ## bring your own app via client id (aka key) and secret
+  google_app <- httr::oauth_app(
+    "my-awesome-google-api-wrapping-package",
+    key = "123456789.apps.googleusercontent.com",
+    secret = "abcdefghijklmnopqrstuvwxyz"
+  )
+  drive_auth_config(app = google_app)
+}
+
+\dontrun{
+## bring your own app via JSON downloaded from Google Developers Console
+drive_auth_config(
+  path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
+)
+}
 }
 \seealso{
-Other auth functions: \code{\link{drive_auth}},
-  \code{\link{drive_deauth}}
+Other auth functions: \code{\link{auth-config}},
+  \code{\link{drive_auth}}, \code{\link{drive_deauth}}
 }
 \concept{auth functions}

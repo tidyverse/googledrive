@@ -8,7 +8,7 @@ Authors@R: c(
       role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6983-2759")),
     person("RStudio", role = c("cph", "fnd"))          
     )
-Description: Manage Google Drive files from R. 
+Description: Manage Google Drive files from R.
 License: MIT + file LICENSE
 URL: https://googledrive.tidyverse.org,
     https://github.com/tidyverse/googledrive
@@ -17,6 +17,7 @@ Depends:
     R (>= 3.1.0)
 Imports: 
     curl (>= 2.8.1),
+    gargle,
     glue (>= 1.2.0),
     httr,
     jsonlite,
@@ -35,6 +36,8 @@ Suggests:
     testthat
 VignetteBuilder: 
     knitr
+Remotes:
+    r-lib/gargle
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
