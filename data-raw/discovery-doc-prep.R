@@ -2,6 +2,7 @@ library(rprojroot)
 library(jsonlite)
 library(httr)
 library(tidyverse)
+devtools::load_all(find_package_root_file())
 
 ## load the API spec, including download if necessary
 dd_cache <- find_package_root_file("data-raw") %>%
@@ -85,7 +86,7 @@ edf <- endpoints %>%
   simplify_all(.type = character(1)) %>%
   as_tibble() %>%
   arrange(id)
-View(edf)
+##View(edf)
 
 ## clean up individual variables
 
@@ -108,7 +109,7 @@ edf$response <- edf$response %>%
   map_chr("$ref", .null = NA_character_)
 edf$request <- edf$request %>%
   map_chr("$ref", .null = NA_character_)
-View(edf)
+##View(edf)
 
 ## loooong side journey to clean up parameters; give them
 ##   * common sub-elements, even if sparsely unpopulated
@@ -164,7 +165,7 @@ edf <- edf %>%
   select(-parameters) %>%
   left_join(params) %>%
   select(id, httpMethod, path, parameters, everything())
-View(edf)
+##View(edf)
 
 ## WE ARE DONE (THANK YOU JENNY!!)
 ## saving in various forms
