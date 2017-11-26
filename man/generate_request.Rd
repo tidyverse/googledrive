@@ -2,25 +2,20 @@
 % Please edit documentation in R/generate_request.R
 \name{generate_request}
 \alias{generate_request}
-\alias{build_request}
-\title{Build a request for the Google Drive v3 API}
+\title{Build a request for the Google Drive API}
 \usage{
 generate_request(endpoint = character(), params = list(), key = NULL,
   token = drive_token())
-
-build_request(path = "", method, params = list(), body = list(),
-  token = NULL)
 }
 \arguments{
 \item{endpoint}{Character. Nickname for one of the selected Drive v3 API
 endpoints built into googledrive. Learn more in \code{\link[=drive_endpoints]{drive_endpoints()}}.}
 
 \item{params}{Named list. Parameters destined for endpoint URL substitution,
-the query, or, for \code{generate_request()} only, the body.}
+the query, or the body.}
 
-\item{key}{API key. Will be needed for requests that don't contain a token.
-The need for an API key in the absence of a token is explained in Google's
-document
+\item{key}{API key. Needed for requests that don't contain a token. The need
+for an API key in the absence of a token is explained in Google's document
 \href{https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279}{Credentials, access, security, and identity}.
 In order of precedence, these sources are consulted: the formal \code{key}
 argument, a \code{key} parameter in \code{params}, a pre-configured API key fetched
@@ -30,54 +25,27 @@ override with their own via \code{\link[=drive_auth_config]{drive_auth_config()}
 \item{token}{Drive token. Set to \code{NULL} to suppress the inclusion of a token.
 Note that, if auth has been de-activated via \code{\link[=drive_auth_config]{drive_auth_config()}},
 \code{drive_token()} will actually return \code{NULL}.}
-
-\item{path}{Character, e.g.,
-\code{"drive/v3/files/{fileId}"}. It can include
-variables inside curly brackets, as the example does, which are substituted
-using named parameters found in the \code{params} argument.}
-
-\item{method}{Character, should match an HTTP verb, e.g., \code{GET}, \code{POST},
-\code{PATCH} or \code{PUT}}
-
-\item{body}{List, values to pass to the API request body.}
 }
 \value{
 \code{list()}\cr Components are \code{method}, \code{path}, \code{query}, \code{body},
-\code{token}, and \code{url}, suitable as input for \code{\link[=make_request]{make_request()}}. The \code{path} is
-post-substitution and the \code{query} is a named list of all the non-body
-\code{params} that were not used during this substitution. \code{url} is the full URL
-after prepending the base URL for the Drive v3 API and appending the query.
+\code{token}, and \code{url}, suitable as input for \code{\link[=make_request]{make_request()}}.
 }
 \description{
-Build a request, using some knowledge of the
-\href{https://developers.google.com/drive/v3/web/about-sdk}{Drive v3 API}. Most
+Build a request, using knowledge of the \href{https://developers.google.com/drive/v3/web/about-sdk}{Drive v3 API} from its
+\href{https://www.googleapis.com/discovery/v1/apis/drive/v3/rest}{Discovery Document}. Most
 users should, instead, use higher-level wrappers that facilitate common
 tasks, such as uploading or downloading Drive files. The functions here are
 intended for internal use and for programming around the Drive API.
-}
-\details{
-There are two functions:
-\itemize{
-\item \code{generate_request()} lets you provide the bare minimum of input. It takes a
-nickname for an endpoint and:
-\itemize{
-\item Uses the API spec to look up the \code{path} and \code{method}.
-\item Checks \code{params} for validity and completeness with respect to the
-endpoint. Separates body parameters from those destined for path
-substitution or the query.
-\item Adds an API key to the query if \code{token = NULL}. Or, at least, we try.
-\item Adds \code{supportsTeamDrives = TRUE} to the query if the endpoint requires.
-}
-}
 
-\code{generate_request()} then passes things along to \code{build_request()}. Use
-\code{\link[=drive_endpoints]{drive_endpoints()}} to see which endpoints can be accessed this way.
+\code{generate_request()} lets you provide the bare minimum of input.
+It takes a nickname for an endpoint and:
 \itemize{
-\item \code{build_request()} builds a request from explicit parts. It is quite
-dumb, only doing URL endpoint substitution and URL formation. It's up to the
-caller to make sure the \code{path}, \code{method}, \code{params}, \code{body}, and \code{token} are
-valid. Use this to call a Drive API endpoint that doesn't appear in the list
-returned by \code{\link[=drive_endpoints]{drive_endpoints()}}.
+\item Uses the API spec to look up the \code{path}, \code{method}, and base URL.
+\item Checks \code{params} for validity and completeness with respect to the
+endpoint. Separates parameters into those destined for the body, the query,
+and URL endpoint substitution (which is also enacted).
+\item Adds an API key to the query if and only if \code{token = NULL}.
+\item Adds \code{supportsTeamDrives = TRUE} to the query if the endpoint requires.
 }
 }
 \examples{
@@ -89,32 +57,10 @@ req <- generate_request(
 )
 req
 }
-## re-create the previous request, but the hard way, i.e. "by hand"
-req <- build_request(
-  path = "drive/v3/files/{fileId}",
-  method = "GET",
-  list(fileId = "abc", key = "an-api-key"),
-  token = NULL
-)
-req
-
-## call an endpoint not used by googledrive
-## List a file's comments
-## https://developers.google.com/drive/v3/reference/comments/list
-\dontrun{
-req <- build_request(
-  path = "drive/v3/files/{fileId}/comments",
-  method = "GET",
-  params = list(
-    fileId = "your-file-id-goes-here",
-    fields = "*"
-  ),
-  token = drive_token()
-)
-process_response(make_request(req))
-}
 }
 \seealso{
+\code{\link[gargle:develop_request]{gargle::develop_request()}}, \code{\link[gargle:build_request]{gargle::build_request()}}
+
 Other low-level API functions: \code{\link{drive_token}},
   \code{\link{make_request}},
   \code{\link{process_response}}

@@ -8,6 +8,7 @@ test_that("generate_request() basically works", {
     names(req),
     c("method", "path", "query", "body", "token", "url")
   )
+  expect_true(req$query$supportsTeamDrives)
 })
 
 test_that("generate_request() errors for unrecognized parameters", {
@@ -37,10 +38,11 @@ test_that("generate_request() and build_request() can deliver same result", {
   expect_identical(gen, build)
 })
 
-test_that("generate_request() sends no API key if token is non-NULL", {
+test_that("generate_request() suppresses API key if token is non-NULL", {
   req <- generate_request(
     "drive.files.get",
-    list(fileId = "abc"),
+    params = list(fileId = "abc", key = "key in params"),
+    key = "explicit key",
     token = httr::config(token = "token!")
   )
   expect_false(grepl("key", req$url))
@@ -49,16 +51,16 @@ test_that("generate_request() sends no API key if token is non-NULL", {
 test_that("generate_request() adds built-in API key when token = NULL", {
   req <- generate_request(
     "drive.files.get",
-    list(fileId = "abc"),
+    params = list(fileId = "abc"),
     token = NULL
   )
   expect_match(req$url, drive_api_key())
 })
 
-test_that("generate_request() prefers explicit API key to built-in", {
+test_that("generate_request(): explicit API key > key in params > built-in", {
   req <- generate_request(
     "drive.files.get",
-    list(fileId = "abc"),
+    params = list(fileId = "abc"),
     key = "xyz",
     token = NULL
   )
@@ -66,18 +68,16 @@ test_that("generate_request() prefers explicit API key to built-in", {
 
   req <- generate_request(
     "drive.files.get",
-    list(fileId = "abc", key = "xyz"),
+    params = list(fileId = "abc", key = "def"),
+    key = "xyz",
     token = NULL
   )
   expect_match(req$url, "key=xyz")
-})
 
-test_that("key argument overrides key in params of generate_request()", {
   req <- generate_request(
     "drive.files.get",
-    list(fileId = "abc", key = "xyz"),
-    key = "uvw",
+    params = list(fileId = "abc", key = "xyz"),
     token = NULL
   )
-  expect_match(req$url, "uvw")
+  expect_match(req$url, "xyz")
 })

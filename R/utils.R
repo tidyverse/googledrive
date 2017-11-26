@@ -80,7 +80,6 @@ warning_glue_data <- function(..., .sep = "", .envir = parent.frame(),
 
 warning_collapse <- function(x) warning(glue_collapse(x, sep = "\n"))
 
-
 ## removes last abs(n) elements
 crop <- function(x, n = 6L) if (n == 0) x else utils::head(x, -1 * abs(n))
 
@@ -121,4 +120,29 @@ glue_collapse <- function(x, sep = "", width = Inf, last = "") {
   } else {
     utils::getFromNamespace("collapse", "glue")(x = x, sep = sep, width = width, last = last)
   }
+}
+
+## partition a parameter list into two parts, using names to identify
+## components destined for the second part
+## example input:
+# partition_params(
+#   list(a = "a", b = "b", c = "c", d = "d"),
+#   c("b", "c")
+# )
+## example output:
+# list(
+#   unmatched = list(a = "a", d = "d"),
+#   matched = list(b = "b", c = "c")
+# )
+partition_params <- function(input, nms_to_match) {
+  out <- list(
+    unmatched = input,
+    matched = list()
+  )
+  if (length(nms_to_match) && length(input)) {
+    m <- names(out$unmatched) %in% nms_to_match
+    out$matched <- out$unmatched[m]
+    out$unmatched <- out$unmatched[!m]
+  }
+  out
 }
