@@ -208,6 +208,7 @@ elist %>%
   select(id, method = httpMethod, path, parameters) %>%
   pmap(list) %>%
   set_names(edf$id)
+attr(.endpoints, "base_url") <- dd_content$baseUrl
 ## View(.endpoints)
 
 devtools::use_data(.endpoints, internal = TRUE, overwrite = TRUE)

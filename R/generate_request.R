@@ -141,7 +141,7 @@ build_request <- function(path = "",
   )
 
   out$url <- httr::modify_url(
-    url = .drive$base_url,
+    url = attr(.endpoints, "base_url"),
     path = out$path,
     ## prevent a trailing `?` or `?=` when the query is trivial, e.g. list() or
     ## contains a single element which is NULL

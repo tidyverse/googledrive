@@ -12,7 +12,6 @@ if (getRversion() >= "2.15.1")  utils::globalVariables(c(":="))
 
 # environment to hold data about the Drive API
 .drive <- new.env(parent = emptyenv())
-.drive$base_url <- "https://www.googleapis.com"
 
 .drive$translate_mime_types <-
   system.file("extdata", "translate_mime_types.csv", package = "googledrive") %>%
