@@ -22,7 +22,7 @@ put_column <- function(.data, nm, val, .before = NULL, .after = NULL) {
     .data[[nm]] <- val
     .data
   } else {
-    tibble::add_column(.data, !! nm := val, .before = .before, .after = .after)
+    tibble::add_column(.data, !!nm := val, .before = .before, .after = .after)
   }
 }
 
