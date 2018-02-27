@@ -95,17 +95,15 @@
     <h1>Publish native Google files</h1>
     </div>
 
-    
     <p>Publish (or un-publish) native Google files to the web. Native Google files
 include Google Docs, Google Sheets, and Google Slides. The returned
 <code><a href='dribble.html'>dribble</a></code> will have extra columns, <code>published</code> and <code>revisions_resource</code>.
 Read more in <code><a href='drive_reveal.html'>drive_reveal()</a></code>.</p>
-    
 
     <pre class="usage"><span class='fu'>drive_publish</span>(<span class='no'>file</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>drive_unpublish</span>(<span class='no'>file</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -113,7 +111,7 @@ Read more in <code><a href='drive_reveal.html'>drive_reveal()</a></code>.</p>
       <th>file</th>
       <td><p>Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
-ids or URLs marked with <code><a href='as_id.html'>as_id</a>()</code>, or a <code><a href='dribble.html'>dribble</a></code>.</p></td>
+ids or URLs marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -128,18 +126,15 @@ specify other values.</p></td>
 (default <code>TRUE</code>).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
-  item.</p>
-    
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Wraps the <code>revisions.update</code> endpoint:</p><ul>
 <li><p><a href='https://developers.google.com/drive/v3/reference/revisions/update'>https://developers.google.com/drive/v3/reference/revisions/update</a></p></li>
 </ul>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
@@ -165,11 +160,8 @@ specify other values.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -183,7 +175,7 @@ specify other values.</p></td>
 
 <div class="author">
   <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script>

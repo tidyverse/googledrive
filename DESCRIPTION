@@ -2,8 +2,10 @@ Package: googledrive
 Title: An Interface to Google Drive
 Version: 0.1.1.9000
 Authors@R: c(
-    person("Lucy", "D'Agostino McGowan", email = "ld.mcgowan@vanderbilt.edu", role = c("aut")),
-    person("Jennifer", "Bryan", email = "jenny@rstudio.com", role = c("aut", "cre")),
+    person("Lucy", "D'Agostino McGowan", email = "ld.mcgowan@vanderbilt.edu",
+      role = c("aut")),
+    person("Jennifer", "Bryan", email = "jenny@rstudio.com",
+      role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6983-2759")),
     person("RStudio", role = c("cph", "fnd"))          
     )
 Description: Manage Google Drive files from R. 

@@ -95,7 +95,6 @@
     <h1>Request partial resources</h1>
     </div>
 
-    
     <p>You may be able to improve the performance of your API calls by
 requesting only the metadata that you actually need. This function is
 primarily for internal use and is currently focused on the
@@ -106,15 +105,13 @@ Note that high-level googledrive functions assume that the <code>name</code>, <c
 for validity against the known field names and the validated fields are
 returned. To see a tibble containing all possible fields and a short
 description of each, call <code>drive_fields(expose())</code>.
-
     <code>prep_fields()</code> prepares fields for inclusion as query
 parameters.</p>
-    
 
     <pre class="usage"><span class='fu'>drive_fields</span>(<span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource</span> <span class='kw'>=</span> <span class='st'>"files"</span>)
 
 <span class='fu'>prep_fields</span>(<span class='no'>fields</span>, <span class='kw'>resource</span> <span class='kw'>=</span> <span class='st'>"files"</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -129,34 +126,32 @@ are checked for validity. Otherwise, they are passed through.</p></td>
 only the Files resource is anticipated.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>drive_fields()</code>: Character vector of field names.
 <code>prep_fields()</code>: a string.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><a href='https://developers.google.com/drive/v3/web/performance#partial'>Working with partial resources</a>,
 in the Drive API documentation.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## get a tibble of all fields for the Files resource + indicator of defaults</span>
 <span class='fu'>drive_fields</span>(<span class='fu'><a href='expose.html'>expose</a></span>())</div><div class='output co'>#&gt; # A tibble: 51 x 2
-#&gt;                       name
-#&gt;                      &lt;chr&gt;
-#&gt;  1           appProperties
-#&gt;  2            capabilities
-#&gt;  3            contentHints
-#&gt;  4             createdTime
-#&gt;  5             description
-#&gt;  6       explicitlyTrashed
-#&gt;  7           fileExtension
-#&gt;  8          folderColorRgb
-#&gt;  9       fullFileExtension
-#&gt; 10 hasAugmentedPermissions
-#&gt; # ... with 41 more rows, and 1 more variables: desc &lt;chr&gt;</div><div class='input'>
+#&gt;    name                    desc                                                
+#&gt;    &lt;chr&gt;                   &lt;chr&gt;                                               
+#&gt;  1 appProperties           "A collection of arbitrary key-value pairs which ar…
+#&gt;  2 capabilities            Capabilities the current user has on this file. Eac…
+#&gt;  3 contentHints            Additional information about the content of the fil…
+#&gt;  4 createdTime             The time at which the file was created (RFC 3339 da…
+#&gt;  5 description             A short description of the file.                    
+#&gt;  6 explicitlyTrashed       Whether the file has been explicitly trashed, as op…
+#&gt;  7 fileExtension           The final component of fullFileExtension. This is o…
+#&gt;  8 folderColorRgb          "The color for a folder as an RGB hex string. The s…
+#&gt;  9 fullFileExtension       "The full file extension extracted from the name fi…
+#&gt; 10 hasAugmentedPermissions Whether any users are granted file access directly …
+#&gt; # ... with 41 more rows</div><div class='input'>
 <span class='co'>## invalid fields are removed and throw warning</span>
 <span class='fu'>drive_fields</span>(<span class='fu'>c</span>(<span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"ownedByMe"</span>, <span class='st'>"pancakes!"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring fields that are non-standard for the Files resource:</span>
 #&gt; <span class='warning'>  * pancakes!</span></div><div class='output co'>#&gt; [1] "name"      "parents"   "ownedByMe"</div><div class='input'>
@@ -167,11 +162,8 @@ in the Drive API documentation.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -185,7 +177,7 @@ in the Drive API documentation.</p>
 
 <div class="author">
   <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script>

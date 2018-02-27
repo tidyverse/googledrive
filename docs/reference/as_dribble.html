@@ -95,7 +95,6 @@
     <h1>Coerce to Drive files</h1>
     </div>
 
-    
     <p>Converts various representations of Google Drive files into a
 <code><a href='dribble.html'>dribble</a></code>, the object used by googledrive to hold Drive file metadata.
 Files can be specified via</p><ul>
@@ -107,7 +106,6 @@ downstream functions.</p></li>
 <li><p>List representing <a href='https://developers.google.com/drive/v3/reference/files#resource'>Files resource</a>
 objects. Mostly for internal use.</p></li>
 </ul>
-
     <p>This is a generic function.</p>
 <p>For maximum clarity, get your files into a <code><a href='dribble.html'>dribble</a></code> (or capture file id)
 as early as possible. When specifying via path, it's best to include the
@@ -119,10 +117,9 @@ say <code>foo/</code>, not <code>foo</code>.</p>
 and a folder <code>a/b/c/</code> already exists, it's unclear what you want. A file
 named <code>c</code> in <code>a/b/</code> or a file with default name in <code>a/b/c/</code>? You get an
 error and must make your intent clear.</p>
-    
 
     <pre class="usage"><span class='fu'>as_dribble</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -137,7 +134,7 @@ frame.</p></td>
       <td><p>Other arguments passed down to methods. (Not used.)</p></td>
     </tr>
     </table>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
@@ -153,7 +150,6 @@ frame.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -167,7 +163,7 @@ frame.</p></td>
 
 <div class="author">
   <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script>

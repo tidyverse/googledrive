@@ -95,19 +95,17 @@
     <h1>Authorize googledrive</h1>
     </div>
 
-    
     <p>Authorize googledrive to view and manage your Drive files. By default, you
 are directed to a web browser, asked to sign in to your Google account,
 and to grant googledrive (the tidyverse, actually) permission to operate on
 your behalf with Google Drive. By default, these user credentials are cached
 in a file named <code>.httr-oauth</code> in the current working directory, from where
 they can be automatically refreshed, as necessary.</p>
-    
 
     <pre class="usage"><span class='fu'>drive_auth</span>(<span class='kw'>oauth_token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>service_token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reset</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"httr_oauth_cache"</span>),
   <span class='kw'>use_oob</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"httr_oob_default"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -148,7 +146,7 @@ or <code>TRUE</code> if <code>httpuv</code> is not installed.</p></td>
 (default <code>TRUE</code>).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Most users, most of the time, do not need to call <code>drive_auth()</code> explicitly
@@ -165,14 +163,12 @@ this function allows the user to</p><ul>
 OAuth app or API key. <code><a href='drive_auth_config.html'>drive_auth_config()</a></code> also allows you to
 deactivate auth, sending only an API key in requests, which works if you
 only need to access public data.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>More detail is available from
 <a href='https://developers.google.com/identity/protocols/OAuth2InstalledApp'>Using OAuth 2.0 for Installed Applications</a></p>
 <p>Other auth functions: <code><a href='drive_auth_config.html'>drive_auth_config</a></code>,
   <code><a href='drive_deauth.html'>drive_deauth</a></code></p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
@@ -198,11 +194,8 @@ only need to access public data.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -216,7 +209,7 @@ only need to access public data.</p>
 
 <div class="author">
   <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script>

@@ -95,35 +95,32 @@
     <h1>Copy a Drive file</h1>
     </div>
 
-    
     <p>Copies an existing Drive file into a new file id.</p>
-    
 
     <pre class="usage"><span class='fu'>drive_cp</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file</th>
       <td><p>Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with
-<code><a href='as_id.html'>as_id</a>()</code>, or a <code><a href='dribble.html'>dribble</a></code>.</p></td>
+Drive. Can be a name or path, a file id or URL marked with <code><a href='as_id.html'>as_id()</a></code>, or a
+<code><a href='dribble.html'>dribble</a></code>.</p></td>
     </tr>
     <tr>
       <th>path</th>
       <td><p>Specifies target destination for the new file on Google
-Drive. Can be an actual path (character), a file id marked with
-<code><a href='as_id.html'>as_id</a>()</code>, or a <code><a href='dribble.html'>dribble</a></code>. If specified as an
-actual path, it is best to explicitly indicate if it's a folder by
-including a trailing slash, since it cannot always be worked out from the
-context of the call. Defaults to "Copy of <code>FILE-NAME</code>".</p></td>
+Drive. Can be an actual path (character), a file id marked with <code><a href='as_id.html'>as_id()</a></code>,
+or a <code><a href='dribble.html'>dribble</a></code>. If specified as an actual path, it is best to explicitly
+indicate if it's a folder by including a trailing slash, since it cannot
+always be worked out from the context of the call. Defaults to "Copy of <code>FILE-NAME</code>".</p></td>
     </tr>
     <tr>
       <th>name</th>
       <td><p>Character, new file name if not specified as part of
-<code>path</code>. This will force <code>path</code> to be treated as a folder, even if
-it is character and lacks a trailing slash. Defaults to "Copy of <code>FILE-NAME</code>".</p></td>
+<code>path</code>. This will force <code>path</code> to be treated as a folder, even if it is
+character and lacks a trailing slash. Defaults to "Copy of <code>FILE-NAME</code>".</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -138,18 +135,15 @@ docs for the associated endpoint.</p></td>
 (default <code>TRUE</code>).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per
-  item.</p>
-    
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Wraps the <code>files.copy</code> endpoint:</p><ul>
 <li><p><a href='https://developers.google.com/drive/v3/reference/files/copy'>https://developers.google.com/drive/v3/reference/files/copy</a></p></li>
 </ul>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
@@ -200,11 +194,8 @@ docs for the associated endpoint.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -218,7 +209,7 @@ docs for the associated endpoint.</p></td>
 
 <div class="author">
   <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script>

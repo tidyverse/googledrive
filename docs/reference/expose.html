@@ -95,7 +95,6 @@
     <h1>An expose object</h1>
     </div>
 
-    
     <p><code>expose()</code> returns a sentinel object, similar in spirit to <code>NULL</code>, that tells
 the calling function to return its internal data structure. googledrive
 stores alot of information about the Drive API, MIME types, etc., internally
@@ -105,45 +104,43 @@ provide nice defaults, check input validity, or lookup something cryptic,
 like MIME type, based on something friendlier, like a file extension. Pass
 <code>expose()</code> to such a function if you want to inspect its internal object, in
 its full glory. This is inspired by the <code>waiver()</code> object in ggplot2.</p>
-    
 
     <pre class="usage"><span class='fu'>expose</span>()</pre>
-        
+
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='drive_mime_type.html'>drive_mime_type</a></span>(<span class='fu'>expose</span>())</div><div class='output co'>#&gt; # A tibble: 77 x 4
-#&gt;                                                                  mime_type
-#&gt;                                                                      &lt;chr&gt;
-#&gt;  1                       application/x-vnd.oasis.opendocument.presentation
-#&gt;  2                                               text/tab-separated-values
-#&gt;  3                                                              image/jpeg
-#&gt;  4                                                              image/jpeg
-#&gt;  5                                                              image/jpeg
-#&gt;  6                                                               image/bmp
-#&gt;  7                                                               image/gif
-#&gt;  8                          application/vnd.ms-excel.sheet.macroenabled.12
-#&gt;  9 application/vnd.openxmlformats-officedocument.wordprocessingml.template
-#&gt; 10              application/vnd.ms-powerpoint.presentation.macroenabled.12
-#&gt; # ... with 67 more rows, and 3 more variables: ext &lt;chr&gt;, human_type &lt;chr&gt;,
-#&gt; #   default &lt;lgl&gt;</div><div class='input'><span class='fu'><a href='drive_fields.html'>drive_fields</a></span>(<span class='fu'>expose</span>())</div><div class='output co'>#&gt; # A tibble: 51 x 2
-#&gt;                       name
-#&gt;                      &lt;chr&gt;
-#&gt;  1           appProperties
-#&gt;  2            capabilities
-#&gt;  3            contentHints
-#&gt;  4             createdTime
-#&gt;  5             description
-#&gt;  6       explicitlyTrashed
-#&gt;  7           fileExtension
-#&gt;  8          folderColorRgb
-#&gt;  9       fullFileExtension
-#&gt; 10 hasAugmentedPermissions
-#&gt; # ... with 41 more rows, and 1 more variables: desc &lt;chr&gt;</div></pre>
+#&gt;    mime_type                                           ext   human_type default
+#&gt;    &lt;chr&gt;                                               &lt;chr&gt; &lt;chr&gt;      &lt;lgl&gt;  
+#&gt;  1 application/x-vnd.oasis.opendocument.presentation   &lt;NA&gt;  &lt;NA&gt;       NA     
+#&gt;  2 text/tab-separated-values                           tsv   tsv        TRUE   
+#&gt;  3 image/jpeg                                          jpeg  jpeg       TRUE   
+#&gt;  4 image/jpeg                                          jpg   jpg        FALSE  
+#&gt;  5 image/jpeg                                          jpe   jpe        FALSE  
+#&gt;  6 image/bmp                                           &lt;NA&gt;  &lt;NA&gt;       NA     
+#&gt;  7 image/gif                                           gif   gif        TRUE   
+#&gt;  8 application/vnd.ms-excel.sheet.macroenabled.12      &lt;NA&gt;  &lt;NA&gt;       NA     
+#&gt;  9 application/vnd.openxmlformats-officedocument.word… dotx  dotx       TRUE   
+#&gt; 10 application/vnd.ms-powerpoint.presentation.macroen… &lt;NA&gt;  &lt;NA&gt;       NA     
+#&gt; # ... with 67 more rows</div><div class='input'><span class='fu'><a href='drive_fields.html'>drive_fields</a></span>(<span class='fu'>expose</span>())</div><div class='output co'>#&gt; # A tibble: 51 x 2
+#&gt;    name                    desc                                                
+#&gt;    &lt;chr&gt;                   &lt;chr&gt;                                               
+#&gt;  1 appProperties           "A collection of arbitrary key-value pairs which ar…
+#&gt;  2 capabilities            Capabilities the current user has on this file. Eac…
+#&gt;  3 contentHints            Additional information about the content of the fil…
+#&gt;  4 createdTime             The time at which the file was created (RFC 3339 da…
+#&gt;  5 description             A short description of the file.                    
+#&gt;  6 explicitlyTrashed       Whether the file has been explicitly trashed, as op…
+#&gt;  7 fileExtension           The final component of fullFileExtension. This is o…
+#&gt;  8 folderColorRgb          "The color for a folder as an RGB hex string. The s…
+#&gt;  9 fullFileExtension       "The full file extension extracted from the name fi…
+#&gt; 10 hasAugmentedPermissions Whether any users are granted file access directly …
+#&gt; # ... with 41 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-            
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -157,7 +154,7 @@ its full glory. This is inspired by the <code>waiver()</code> object in ggplot2.
 
 <div class="author">
   <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script>

@@ -95,7 +95,6 @@
     <h1>List Drive endpoints</h1>
     </div>
 
-    
     <p>Returns a list of selected Drive API v3 endpoints, as stored inside the
 googledrive package. The names of this list (or the <code>id</code> sub-elements) are
 the nicknames that can be used to specify an endpoint in
@@ -103,10 +102,9 @@ the nicknames that can be used to specify an endpoint in
 associated HTTP verb, the <code>path</code>, and details about the parameters. This list
 is derived programmatically from the
 <a href='https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'>Drive API v3 Discovery Document</a>.</p>
-    
 
     <pre class="usage"><span class='fu'>drive_endpoints</span>(<span class='kw'>i</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -116,12 +114,11 @@ is derived programmatically from the
 Optional. By default, the entire list is returned.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list containing some or all of the subset of the Drive API v3
 endpoints that are used internally by googledrive.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>str</span>(<span class='fu'>drive_endpoints</span>(), <span class='kw'>max.level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; List of 27
@@ -134,17 +131,17 @@ endpoints that are used internally by googledrive.</p>
 #&gt;   ..$ id        : chr "drive.files.copy"
 #&gt;   ..$ method    : chr "POST"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/copy"
-#&gt;   ..$ parameters:List of 63
+#&gt;   ..$ parameters:List of 64
 #&gt;  $ drive.files.create      :List of 4
 #&gt;   ..$ id        : chr "drive.files.create"
 #&gt;   ..$ method    : chr "POST"
 #&gt;   ..$ path      : chr "drive/v3/files"
-#&gt;   ..$ parameters:List of 63
+#&gt;   ..$ parameters:List of 64
 #&gt;  $ drive.files.create.media:List of 4
 #&gt;   ..$ id        : chr "drive.files.create.media"
 #&gt;   ..$ method    : chr "POST"
 #&gt;   ..$ path      : chr "/upload/drive/v3/files"
-#&gt;   ..$ parameters:List of 64
+#&gt;   ..$ parameters:List of 65
 #&gt;  $ drive.files.delete      :List of 4
 #&gt;   ..$ id        : chr "drive.files.delete"
 #&gt;   ..$ method    : chr "DELETE"
@@ -179,12 +176,12 @@ endpoints that are used internally by googledrive.</p>
 #&gt;   ..$ id        : chr "drive.files.update"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}"
-#&gt;   ..$ parameters:List of 65
+#&gt;   ..$ parameters:List of 66
 #&gt;  $ drive.files.update.media:List of 4
 #&gt;   ..$ id        : chr "drive.files.update.media"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "/upload/drive/v3/files/{fileId}"
-#&gt;   ..$ parameters:List of 66
+#&gt;   ..$ parameters:List of 67
 #&gt;  $ drive.files.watch       :List of 4
 #&gt;   ..$ id        : chr "drive.files.watch"
 #&gt;   ..$ method    : chr "POST"
@@ -194,27 +191,27 @@ endpoints that are used internally by googledrive.</p>
 #&gt;   ..$ id        : chr "drive.permissions.create"
 #&gt;   ..$ method    : chr "POST"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions"
-#&gt;   ..$ parameters:List of 24
+#&gt;   ..$ parameters:List of 25
 #&gt;  $ drive.permissions.delete:List of 4
 #&gt;   ..$ id        : chr "drive.permissions.delete"
 #&gt;   ..$ method    : chr "DELETE"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters:List of 10
+#&gt;   ..$ parameters:List of 11
 #&gt;  $ drive.permissions.get   :List of 4
 #&gt;   ..$ id        : chr "drive.permissions.get"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters:List of 10
+#&gt;   ..$ parameters:List of 11
 #&gt;  $ drive.permissions.list  :List of 4
 #&gt;   ..$ id        : chr "drive.permissions.list"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions"
-#&gt;   ..$ parameters:List of 11
+#&gt;   ..$ parameters:List of 12
 #&gt;  $ drive.permissions.update:List of 4
 #&gt;   ..$ id        : chr "drive.permissions.update"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters:List of 24
+#&gt;   ..$ parameters:List of 25
 #&gt;  $ drive.revisions.delete  :List of 4
 #&gt;   ..$ id        : chr "drive.revisions.delete"
 #&gt;   ..$ method    : chr "DELETE"
@@ -239,7 +236,7 @@ endpoints that are used internally by googledrive.</p>
 #&gt;   ..$ id        : chr "drive.teamdrives.create"
 #&gt;   ..$ method    : chr "POST"
 #&gt;   ..$ path      : chr "drive/v3/teamdrives"
-#&gt;   ..$ parameters:List of 16
+#&gt;   ..$ parameters:List of 17
 #&gt;  $ drive.teamdrives.delete :List of 4
 #&gt;   ..$ id        : chr "drive.teamdrives.delete"
 #&gt;   ..$ method    : chr "DELETE"
@@ -249,17 +246,17 @@ endpoints that are used internally by googledrive.</p>
 #&gt;   ..$ id        : chr "drive.teamdrives.get"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/teamdrives/{teamDriveId}"
-#&gt;   ..$ parameters:List of 8
+#&gt;   ..$ parameters:List of 9
 #&gt;  $ drive.teamdrives.list   :List of 4
 #&gt;   ..$ id        : chr "drive.teamdrives.list"
 #&gt;   ..$ method    : chr "GET"
 #&gt;   ..$ path      : chr "drive/v3/teamdrives"
-#&gt;   ..$ parameters:List of 9
+#&gt;   ..$ parameters:List of 11
 #&gt;  $ drive.teamdrives.update :List of 4
 #&gt;   ..$ id        : chr "drive.teamdrives.update"
 #&gt;   ..$ method    : chr "PATCH"
 #&gt;   ..$ path      : chr "drive/v3/teamdrives/{teamDriveId}"
-#&gt;   ..$ parameters:List of 16</div><div class='input'><span class='fu'>drive_endpoints</span>(<span class='st'>"drive.files.delete"</span>)</div><div class='output co'>#&gt; $drive.files.delete
+#&gt;   ..$ parameters:List of 17</div><div class='input'><span class='fu'>drive_endpoints</span>(<span class='st'>"drive.files.delete"</span>)</div><div class='output co'>#&gt; $drive.files.delete
 #&gt; $drive.files.delete$id
 #&gt; [1] "drive.files.delete"
 #&gt; 
@@ -1248,6 +1245,29 @@ endpoints that are used internally by googledrive.</p>
 #&gt; [1] "The IDs of the parent folders which contain the file.\nIf not specified as part of a create request, the file will be placed directly in the My Drive folder. Update requests must use the addParents and removeParents parameters to modify the values."
 #&gt; 
 #&gt; 
+#&gt; $drive.files.create.media$parameters$permissionIds
+#&gt; $drive.files.create.media$parameters$permissionIds$location
+#&gt; [1] "body"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissionIds$required
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissionIds$type
+#&gt; [1] "array"
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissionIds$repeated
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissionIds$format
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissionIds$enum
+#&gt; [1] NA
+#&gt; 
+#&gt; $drive.files.create.media$parameters$permissionIds$description
+#&gt; [1] "List of permission IDs for users with access to this file."
+#&gt; 
+#&gt; 
 #&gt; $drive.files.create.media$parameters$permissions
 #&gt; $drive.files.create.media$parameters$permissions$location
 #&gt; [1] "body"
@@ -1968,9 +1988,7 @@ endpoints that are used internally by googledrive.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -1984,7 +2002,7 @@ endpoints that are used internally by googledrive.</p>
 
 <div class="author">
   <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script>

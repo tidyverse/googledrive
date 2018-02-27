@@ -95,7 +95,6 @@
     <h1>Make a request for the Google Drive v3 API</h1>
     </div>
 
-    
     <p>Low-level functions to execute one or more Drive API requests and, perhaps,
 process the response(s). Most users should, instead, use higher-level
 wrappers that facilitate common tasks, such as uploading or downloading Drive
@@ -115,7 +114,6 @@ next page must be extracted from the content of the current page.
 Therefore this function does both and returns a list of processed
 responses, one per page.</p></li>
 </ul>
-    
 
     <pre class="usage"><span class='fu'>make_request</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
@@ -123,7 +121,7 @@ responses, one per page.</p></li>
 
 <span class='fu'>do_paginated_request</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>res</span>) <span class='fl'>1</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -156,7 +154,7 @@ files or comments.</p></td>
 (default <code>TRUE</code>).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>make_request()</code>: Object of class <code>response</code> from httr.
@@ -166,13 +164,11 @@ request.
 
 <code>do_paginated_request()</code>: List of lists, representing the returned
 content, one component per page.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other low-level API functions: <code><a href='drive_token.html'>drive_token</a></code>,
   <code><a href='generate_request.html'>generate_request</a></code>,
   <code><a href='process_response.html'>process_response</a></code></p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
@@ -203,11 +199,8 @@ content, one component per page.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -221,7 +214,7 @@ content, one component per page.</p>
 
 <div class="author">
   <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script>

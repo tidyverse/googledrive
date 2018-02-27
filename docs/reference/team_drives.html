@@ -95,7 +95,6 @@
     <h1>Access Team Drives</h1>
     </div>
 
-    
     <p>How to capture a Team Drive or files/folders that live on a
 Team Drive for downstream use:</p><ul>
 <li><p><code><a href='drive_find.html'>drive_find()</a></code> and <code><a href='drive_get.html'>drive_get()</a></code> return a <code><a href='dribble.html'>dribble</a></code> with metadata on
@@ -106,20 +105,18 @@ metadata on Team Drives themselves. You will need this in order to use a Team
 Drive in certain file operations. For example, you can specify a Team Drive
 as the parent folder via the <code>path</code> argument for upload, move, copy, etc.</p></li>
 </ul>
-
     <p>Regard the functions above as the official "port of entry" for
 Team Drives and Team Drive files and folders. Use them to capture your
 target(s) in a <code><a href='dribble.html'>dribble</a></code> to pass along to other googledrive functions.
 The general flexibility to refer to files by name, path, or id does not
 apply to Team Drive files. While it's always a good idea to get things into
 a <code><a href='dribble.html'>dribble</a></code> early, for Team Drives it's absolutely required.</p>
-<p>Note:
-  <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
-  are only available to users of certain enhanced Google services, such as G
-  Suite Enterprise, G Suite Business, or G Suite for Education.</p>
-    
+<p>Note: <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
+are only available to users of certain enhanced Google services, such as G
+Suite Enterprise, G Suite Business, or G Suite for Education.</p>
 
-        
+
+
     <h2 class="hasAnchor" id="specific-team-drive"><a class="anchor" href="#specific-team-drive"></a>Specific Team Drive</h2>
 
     
@@ -129,7 +126,6 @@ drive_find(..., team_drive = as_id("i_am_a_team_drive_id"))
 drive_find(..., team_drive = i_am_a_team_drive_dribble)
 </pre>
     <p>The value of <code>team_drive</code> is pre-processed with <code><a href='as_team_drive.html'>as_team_drive()</a></code>.</p>
-    
     <h2 class="hasAnchor" id="other-collections"><a class="anchor" href="#other-collections"></a>Other collections</h2>
 
     
@@ -147,7 +143,6 @@ googledrive convenience short cut for <code>"user,allTeamDrives"</code>.</p></li
 <li><p><code>"domain"</code>: Queries files that are shared to the domain, including both
 Team Drive and non-Team Drive files.</p></li>
 </ul>
-    
     <h2 class="hasAnchor" id="api-docs"><a class="anchor" href="#api-docs"></a>API docs</h2>
 
     
@@ -169,19 +164,15 @@ parameters are detected</p></li>
 case) know about Team Drives? Obviously, this should be <code>TRUE</code> and
 googledrive sends it for all applicable endpoints, all the time.</p></li>
 </ul>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
       <li><a href="#specific-team-drive">Specific Team Drive</a></li>
-
       <li><a href="#other-collections">Other collections</a></li>
-
       <li><a href="#api-docs">API docs</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
@@ -193,7 +184,7 @@ googledrive sends it for all applicable endpoints, all the time.</p></li>
 
 <div class="author">
   <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script>

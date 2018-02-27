@@ -95,20 +95,18 @@
     <h1>Build a request for the Google Drive v3 API</h1>
     </div>
 
-    
     <p>Build a request, using some knowledge of the
 <a href='https://developers.google.com/drive/v3/web/about-sdk'>Drive v3 API</a>. Most
 users should, instead, use higher-level wrappers that facilitate common
 tasks, such as uploading or downloading Drive files. The functions here are
 intended for internal use and for programming around the Drive API.</p>
-    
 
     <pre class="usage"><span class='fu'>generate_request</span>(<span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='fu'>character</span>(), <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(), <span class='kw'>key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='drive_token.html'>drive_token</a></span>())
 
 <span class='fu'>build_request</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='no'>method</span>, <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'>list</span>(), <span class='kw'>body</span> <span class='kw'>=</span> <span class='fu'>list</span>(),
   <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -156,7 +154,7 @@ using named parameters found in the <code>params</code> argument.</p></td>
       <td><p>List, values to pass to the API request body.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>list()</code> Components are <code>method</code>, <code>path</code>, <code>query</code>, <code>body</code>,
@@ -164,7 +162,6 @@ using named parameters found in the <code>params</code> argument.</p></td>
 post-substitution and the <code>query</code> is a named list of all the non-body
 <code>params</code> that were not used during this substitution. <code>url</code> is the full URL
 after prepending the base URL for the Drive v3 API and appending the query.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>There are two functions:</p><ul>
@@ -185,13 +182,11 @@ caller to make sure the <code>path</code>, <code>method</code>, <code>params</co
 valid. Use this to call a Drive API endpoint that doesn't appear in the list
 returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</p></li>
 </ul>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other low-level API functions: <code><a href='drive_token.html'>drive_token</a></code>,
   <code><a href='make_request.html'>make_request</a></code>,
   <code><a href='process_response.html'>process_response</a></code></p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
@@ -248,13 +243,9 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -268,7 +259,7 @@ returned by <code><a href='drive_endpoints.html'>drive_endpoints()</a></code>.</
 
 <div class="author">
   <p>Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script>
