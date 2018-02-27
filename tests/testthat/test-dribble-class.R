@@ -81,7 +81,7 @@ test_that("`[` drops dribble class when not valid", {
   )
   expect_s3_class(d, "dribble")
   expect_false(inherits(d[1], "dribble"))
-  expect_false(inherits(d[ , 1], "dribble"))
+  expect_false(inherits(d[, 1], "dribble"))
 })
 
 test_that("dribble nrow checkers work", {

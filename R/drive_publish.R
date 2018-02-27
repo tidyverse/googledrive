@@ -50,7 +50,6 @@ drive_change_publish <- function(file,
                                  publish = TRUE,
                                  ...,
                                  verbose = TRUE) {
-
   file <- as_dribble(file)
   file <- confirm_some_files(file)
 

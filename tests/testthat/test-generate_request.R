@@ -13,8 +13,10 @@ test_that("generate_request() basically works", {
 test_that("generate_request() errors for unrecognized parameters", {
   params <- list(chicken = "muffin", bunny = "pippin")
   expect_error(
-    generate_request(endpoint = "drive.files.list",
-                     params = params, token = NULL),
+    generate_request(
+      endpoint = "drive.files.list",
+      params = params, token = NULL
+    ),
     "These parameters are not recognized for this endpoint:\nchicken\nbunny"
   )
 })

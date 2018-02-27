@@ -8,7 +8,7 @@
 #' @usage lhs \%>\% rhs
 NULL
 
-if (getRversion() >= "2.15.1")  utils::globalVariables(c(":="))
+if (getRversion() >= "2.15.1") utils::globalVariables(c(":="))
 
 # environment to hold data about the Drive API
 .drive <- new.env(parent = emptyenv())
@@ -43,7 +43,6 @@ if (getRversion() >= "2.15.1")  utils::globalVariables(c(":="))
   )
 
 .onLoad <- function(libname, pkgname) {
-
   set_auth_active(TRUE)
   set_api_key(.state[["tidyverse_api_key"]])
   set_oauth_app(.state[["tidyverse_app"]])
@@ -58,7 +57,6 @@ if (getRversion() >= "2.15.1")  utils::globalVariables(c(":="))
   }
 
   invisible()
-
 }
 
 ## This function is never called

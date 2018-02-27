@@ -24,8 +24,8 @@ if (length(dd_cache) == 0) {
   json_fname <- rev(dd_cache)[1]
 }
 dd_content <- fromJSON(json_fname)
-##View(dd_content)
-##listviewer::jsonedit(dd_content)
+## View(dd_content)
+## listviewer::jsonedit(dd_content)
 
 ## extract the method collections and bring to same level of hierarchy
 endpoints <- c("about", "files", "permissions", "revisions", "teamdrives") %>%
@@ -42,7 +42,7 @@ add_schema_params <- function(endpoint, nm) {
   message_glue("{nm} gains {req} schema params\n")
   endpoint$parameters <- c(
     endpoint$parameters,
-    dd_content[[c("schemas",  req, "properties")]]
+    dd_content[[c("schemas", req, "properties")]]
   )
   endpoint
 }
@@ -86,7 +86,7 @@ edf <- endpoints %>%
   simplify_all(.type = character(1)) %>%
   as_tibble() %>%
   arrange(id)
-##View(edf)
+## View(edf)
 
 ## clean up individual variables
 
@@ -109,13 +109,14 @@ edf$response <- edf$response %>%
   map_chr("$ref", .null = NA_character_)
 edf$request <- edf$request %>%
   map_chr("$ref", .null = NA_character_)
-##View(edf)
+## View(edf)
 
 ## loooong side journey to clean up parameters; give them
 ##   * common sub-elements, even if sparsely unpopulated
 ##   * common order
 params <- edf %>%
-  select(id, parameters) %>% {
+  select(id, parameters) %>%
+  {
     ## unnest() won't work with a list ... doing it manually
     tibble(
       id = rep(.$id, lengths(.$parameters)),
@@ -124,7 +125,7 @@ params <- edf %>%
     )
   } %>%
   select(id, pname, parameters)
-#params$parameters %>% map(names) %>% reduce(union)
+# params$parameters %>% map(names) %>% reduce(union)
 
 ## keeping repeated and enum so it can generalize to sheets in the future.
 nms <-
@@ -143,7 +144,7 @@ params <- params %>%
     required = required %>% map(1, .null = NA) %>% flatten_lgl(),
     type = type %>% map(1, .null = NA) %>% flatten_chr(),
     repeated = repeated %>% map(1, .null = NA) %>% flatten_lgl(),
-    format = format %>%  map(1, .null = NA) %>% flatten_chr(),
+    format = format %>% map(1, .null = NA) %>% flatten_chr(),
     enum = enum %>% map(1, .null = NA) %>% flatten_chr(),
     description = description %>% map(1, .null = NA) %>% flatten_chr()
   )
@@ -165,7 +166,7 @@ edf <- edf %>%
   select(-parameters) %>%
   left_join(params) %>%
   select(id, httpMethod, path, parameters, everything())
-##View(edf)
+## View(edf)
 
 ## WE ARE DONE (THANK YOU JENNY!!)
 ## saving in various forms
@@ -183,7 +184,7 @@ saveRDS(edf, file = out_fname)
 elist <- edf %>%
   pmap(list) %>%
   set_names(edf$id)
-##View(elist)
+## View(elist)
 
 out_fname <- str_replace(
   json_fname,

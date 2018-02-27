@@ -1,6 +1,6 @@
-#mime-types tables
-#https://developers.google.com/drive/v3/web/mime-types
-#https://developers.google.com/drive/v3/web/manage-downloads
+# mime-types tables
+# https://developers.google.com/drive/v3/web/mime-types
+# https://developers.google.com/drive/v3/web/manage-downloads
 library("tidyverse")
 library("httr")
 library("rvest")
@@ -11,14 +11,14 @@ library("googledrive")
 fmts <- generate_request(
   endpoint = "drive.about.get",
   params = list(fields = "importFormats,exportFormats")
-  ) %>%
+) %>%
   do_request()
 
 imports <- tibble::enframe(
   fmts$importFormats,
   name = "mime_type_local",
   value = "mime_type_google"
-  ) %>%
+) %>%
   mutate(
     mime_type_google = purrr::simplify_all(mime_type_google),
     action = "import"
@@ -29,7 +29,7 @@ exports <- tibble::enframe(
   fmts$exportFormats,
   name = "mime_type_google",
   value = "mime_type_local"
-  ) %>%
+) %>%
   mutate(
     mime_type_local = purrr::simplify_all(mime_type_local),
     action = "export"
@@ -40,9 +40,11 @@ translate_mime_types <- bind_rows(imports, exports)
 
 defaults <- read_csv(
   find_package_root_file("data-raw", "export-mime-type-defaults.csv")
-  ) %>%
-  mutate(action = "export",
-         default = TRUE)
+) %>%
+  mutate(
+    action = "export",
+    default = TRUE
+  )
 
 translate_mime_types <- translate_mime_types %>%
   left_join(defaults) %>%
@@ -85,8 +87,9 @@ mime_tbl <- translate_mime_types %>%
 mime_tbl <- mime_ext %>%
   right_join(mime_tbl, by = "mime_type") %>%
   mutate(human_type = ifelse(grepl("application/vnd.google-apps.", mime_type),
-                             gsub("application/vnd.google-apps.", "", mime_type),
-                             ext))
+    gsub("application/vnd.google-apps.", "", mime_type),
+    ext
+  ))
 
 default_ext <- read_csv(
   find_package_root_file("data-raw", "extension-mime-type-defaults.csv")

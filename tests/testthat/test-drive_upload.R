@@ -53,7 +53,6 @@ test_that("drive_upload() accepts body metadata via ...", {
   expect_s3_class(uploadee, "dribble")
   expect_identical(nrow(uploadee), 1L)
   expect_true(uploadee$drive_resource[[1]]$starred)
-
 })
 
 test_that("drive_upload() errors if given both 'path' and 'parents'", {
@@ -63,13 +62,15 @@ test_that("drive_upload() errors if given both 'path' and 'parents'", {
   destination <- drive_get(nm_("upload-into-me"))
   destination2 <- drive_get(nm_("upload-into-me-too"))
 
-  expect_error({
-    uploadee <- drive_upload(
-    system.file("DESCRIPTION"),
-    path = destination,
-    name = me_("DESCRIPTION"),
-    parents = destination2$id
-    )},
+  expect_error(
+    {
+      uploadee <- drive_upload(
+        system.file("DESCRIPTION"),
+        path = destination,
+        name = me_("DESCRIPTION"),
+        parents = destination2$id
+      )
+    },
     "You have specified parent folders via both 'path' and 'parents'"
   )
 })
@@ -96,4 +97,3 @@ test_that("drive_upload() errors if given both 'path' and 'parents'", {
 #                    list(destination2$id, destination$id))
 #
 # })
-

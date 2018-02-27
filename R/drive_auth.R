@@ -75,7 +75,6 @@ drive_auth <- function(oauth_token = NULL,
                        cache = getOption("httr_oauth_cache"),
                        use_oob = getOption("httr_oob_default"),
                        verbose = TRUE) {
-
   if (reset) {
     drive_deauth(clear_cache = TRUE, verbose = verbose)
   }
@@ -120,7 +119,6 @@ drive_auth <- function(oauth_token = NULL,
 #' drive_deauth()
 #' }
 drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
-
   if (clear_cache && file.exists(".httr-oauth")) {
     if (verbose) {
       message("Disabling .httr-oauth by renaming to .httr-oauth-SUSPENDED")
@@ -138,7 +136,6 @@ drive_deauth <- function(clear_cache = TRUE, verbose = TRUE) {
   }
 
   invisible(NULL)
-
 }
 
 #' View or set auth config
@@ -195,7 +192,7 @@ drive_auth_config <- function(active = TRUE,
   structure(
     list(
       active = auth_active(),
-      oauth_app_name = oauth_app()[['appname']],
+      oauth_app_name = oauth_app()[["appname"]],
       api_key = drive_api_key(),
       token = access_cred()
     ),
@@ -206,14 +203,15 @@ drive_auth_config <- function(active = TRUE,
 #' @export
 print.auth_config <- function(x, ...) {
   cat(
-      glue("googledrive auth state: ",
-           "{if (x[['active']]) 'active' else 'inactive'}\n",
-           "oauth app: ",
-           "{x[['oauth_app_name']]}\n",
-           "API key: ",
-           "{if (is.null(x[['api_key']])) 'unset' else 'set'}\n",
-           "token: ",
-           "{if (is.null(x[['token']])) 'not loaded' else 'loaded'}"
+    glue(
+      "googledrive auth state: ",
+      "{if (x[['active']]) 'active' else 'inactive'}\n",
+      "oauth app: ",
+      "{x[['oauth_app_name']]}\n",
+      "API key: ",
+      "{if (is.null(x[['api_key']])) 'unset' else 'set'}\n",
+      "token: ",
+      "{if (is.null(x[['token']])) 'not loaded' else 'loaded'}"
     ),
     sep = ""
   )
@@ -346,15 +344,19 @@ token_available <- function(verbose = TRUE) {
   if (is.null(access_cred())) {
     if (verbose) {
       if (file.exists(".httr-oauth")) {
-        message("A .httr-oauth file exists in current working ",
-                "directory.\nWhen/if needed, the credentials cached in ",
-                ".httr-oauth will be used for this session.\nOr run drive_auth() ",
-                "for explicit authentication and authorization.")
+        message(
+          "A .httr-oauth file exists in current working ",
+          "directory.\nWhen/if needed, the credentials cached in ",
+          ".httr-oauth will be used for this session.\nOr run drive_auth() ",
+          "for explicit authentication and authorization."
+        )
       } else {
-        message("No .httr-oauth file exists in current working directory.\n",
-                "When/if needed, 'googledrive' will initiate authentication ",
-                "and authorization.\nOr run drive_auth() to trigger this ",
-                "explicitly.")
+        message(
+          "No .httr-oauth file exists in current working directory.\n",
+          "When/if needed, 'googledrive' will initiate authentication ",
+          "and authorization.\nOr run drive_auth() to trigger this ",
+          "explicitly."
+        )
       }
     }
     return(FALSE)
@@ -366,7 +368,6 @@ token_available <- function(verbose = TRUE) {
 #'
 #' @keywords internal
 is_legit_token <- function(x, verbose = FALSE) {
-
   if (!inherits(x, "Token2.0")) {
     if (verbose) message("Not a Token2.0 object.")
     return(FALSE)
@@ -388,5 +389,4 @@ is_legit_token <- function(x, verbose = FALSE) {
   }
 
   TRUE
-
 }

@@ -61,8 +61,10 @@
 #' drive_get(id = "root") %>% drive_reveal("path")
 #' }
 drive_reveal <- function(file,
-                         what = c("path", "trashed", "mime_type",
-                                  "permissions", "published")) {
+                         what = c(
+                           "path", "trashed", "mime_type",
+                           "permissions", "published"
+                         )) {
   file <- as_dribble(file)
   what <- match.arg(what)
   reveal <- switch(
@@ -75,4 +77,3 @@ drive_reveal <- function(file,
   )
   reveal(file)
 }
-

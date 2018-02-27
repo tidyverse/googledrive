@@ -108,7 +108,6 @@ drive_find <- function(pattern = NULL,
                        corpus = NULL,
                        ...,
                        verbose = TRUE) {
-
   if (!is.null(pattern) && !(is_string(pattern))) {
     stop_glue("`pattern` must be a character string.")
   }

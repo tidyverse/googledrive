@@ -60,7 +60,8 @@ toggle_trash_one <- function(id, trash = TRUE) {
     params = list(
       fileId = id,
       trashed = trash,
-      fields = "*")
+      fields = "*"
+    )
   )
   response <- make_request(request, encode = "json")
   proc_res <- process_response(response)

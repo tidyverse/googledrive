@@ -56,12 +56,16 @@ whoami[c('displayName', 'emailAddress')]
 "
 
 writeLines(
-  c(glue_data(list(action = "clean", ACTION = "CLEAN"), header),
-    unlist(clean_code)),
+  c(
+    glue_data(list(action = "clean", ACTION = "CLEAN"), header),
+    unlist(clean_code)
+  ),
   find_testthat_root_file("all-test-clean.R")
 )
 writeLines(
-  c(glue_data(list(action = "setup", ACTION = "SETUP"), header),
-    unlist(setup_code)),
+  c(
+    glue_data(list(action = "setup", ACTION = "SETUP"), header),
+    unlist(setup_code)
+  ),
   find_testthat_root_file("all-test-setup.R")
 )

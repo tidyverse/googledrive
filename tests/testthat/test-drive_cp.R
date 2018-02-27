@@ -38,8 +38,10 @@ test_that("drive_cp() can copy file in place", {
   expect_identical(file_cp$name, me_("i-am-a-file"))
 
   ## should have the same parent
-  expect_identical(file$drive_resource[[1]]$parents,
-                   file_cp$drive_resource[[1]]$parents)
+  expect_identical(
+    file$drive_resource[[1]]$parents,
+    file_cp$drive_resource[[1]]$parents
+  )
 })
 
 test_that("drive_cp() can copy a file into a different folder", {

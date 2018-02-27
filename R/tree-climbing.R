@@ -14,8 +14,10 @@ pth <- function(id, kids, elders, stop_value) {
   i <- which(kids == this)
 
   if (length(i) > 1) {
-    stop_glue("\nThis id appears more than once in the role of 'kid':\n",
-          "  * {sq(kids[i[1]])}")
+    stop_glue(
+      "\nThis id appears more than once in the role of 'kid':\n",
+      "  * {sq(kids[i[1]])}"
+    )
   }
 
   if (length(i) < 1) {

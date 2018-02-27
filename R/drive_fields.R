@@ -57,8 +57,10 @@ drive_fields <- function(fields = NULL,
   if (!setequal(fields, out)) {
     bad_fields <- setdiff(fields, out)
     warning_collapse(
-      c("Ignoring fields that are non-standard for the Files resource:",
-        glue("  * {bad_fields}"))
+      c(
+        "Ignoring fields that are non-standard for the Files resource:",
+        glue("  * {bad_fields}")
+      )
     )
   }
   out

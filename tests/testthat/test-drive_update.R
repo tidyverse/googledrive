@@ -28,7 +28,7 @@ test_that("drive_update() errors if local media does not exist", {
   )
 })
 
-test_that("drive_update() informatively errors if the path does not exist",{
+test_that("drive_update() informatively errors if the path does not exist", {
   skip_if_no_token()
   skip_if_offline()
   expect_error(
@@ -37,7 +37,7 @@ test_that("drive_update() informatively errors if the path does not exist",{
   )
 })
 
-test_that("drive_update() informatively errors if the path is not unique",{
+test_that("drive_update() informatively errors if the path is not unique", {
   skip_if_no_token()
   skip_if_offline()
   expect_error(
@@ -67,7 +67,7 @@ test_that("drive_update() can update metadata only", {
   expect_true(out$starred)
 })
 
-test_that("drive_update() uses multipart request to update media + metadata",{
+test_that("drive_update() uses multipart request to update media + metadata", {
   skip_if_no_token()
   skip_if_offline()
   on.exit(drive_rm(c(me_("update-me"), me_("update-me-new"))))

@@ -31,7 +31,6 @@
 #' drive_mime_type(expose())
 #' @export
 drive_mime_type <- function(type = NULL) {
-
   if (is.null(type)) {
     return(invisible())
   }
@@ -86,7 +85,6 @@ drive_mime_type <- function(type = NULL) {
 #' drive_extension(c("text/plain", "pdf", "image/gif"))
 #' @export
 drive_extension <- function(type = NULL) {
-
   if (is.null(type)) {
     return(invisible())
   }
@@ -99,7 +97,7 @@ drive_extension <- function(type = NULL) {
 
 one_ext <- function(type) {
   m <- which(.drive$mime_tbl$mime_type %in% type &
-               is_true(.drive$mime_tbl$default))
+    is_true(.drive$mime_tbl$default))
   if (length(m) == 0L) {
     m <- NA_integer_
   }

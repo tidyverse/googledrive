@@ -129,7 +129,6 @@ build_request <- function(path = "",
                           params = list(),
                           body = list(),
                           token = NULL) {
-
   params <- partition_params(params, extract_path_names(path))
 
   out <- list(

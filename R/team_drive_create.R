@@ -32,7 +32,7 @@ team_drive_create <- function(name, verbose = TRUE) {
   out <- as_dribble(list(process_response(response)))
 
   if (verbose) {
-      message_glue("\nTeam Drive created:\n  * {out$name}: {out$id}")
+    message_glue("\nTeam Drive created:\n  * {out$name}: {out$id}")
   }
   invisible(out)
 }

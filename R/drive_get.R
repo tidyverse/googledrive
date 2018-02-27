@@ -108,8 +108,8 @@ drive_path_exists <- function(path, verbose = TRUE) {
 
 confirm_clear_path <- function(path, name) {
   if (is.null(name) &&
-      !has_slash(path) &&
-      drive_path_exists(append_slash(path))) {
+    !has_slash(path) &&
+    drive_path_exists(append_slash(path))) {
     stop_glue(
       "Unclear if `path` specifies parent folder or full path\n",
       "to the new file, including its name. ",

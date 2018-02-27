@@ -61,8 +61,10 @@
 #' drive_rm(file)
 #' }
 drive_share <- function(file,
-                        role = c("reader", "commenter", "writer",
-                                 "owner", "organizer"),
+                        role = c(
+                          "reader", "commenter", "writer",
+                          "owner", "organizer"
+                        ),
                         type = c("user", "group", "domain", "anyone"),
                         ...,
                         verbose = TRUE) {

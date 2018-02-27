@@ -39,16 +39,20 @@ validate_dribble <- function(x) {
   if (!has_dribble_cols(x)) {
     missing_cols <- setdiff(dribble_cols, colnames(x))
     stop_collapse(
-      c("Invalid dribble. These required column names are missing:",
-        missing_cols)
+      c(
+        "Invalid dribble. These required column names are missing:",
+        missing_cols
+      )
     )
   }
 
   if (!has_dribble_coltypes(x)) {
     mistyped_cols <- dribble_cols[!dribble_coltypes_ok(x)]
     stop_collapse(
-      c("Invalid dribble. These columns have the wrong type:",
-        mistyped_cols)
+      c(
+        "Invalid dribble. These columns have the wrong type:",
+        mistyped_cols
+      )
     )
   }
 
@@ -78,9 +82,9 @@ dribble <- function(x = NULL) {
 
 maybe_dribble <- function(x) {
   if (is.data.frame(x) &&
-      has_dribble_cols(x) &&
-      has_dribble_coltypes(x) &&
-      has_drive_resource(x)) {
+    has_dribble_cols(x) &&
+    has_dribble_coltypes(x) &&
+    has_drive_resource(x)) {
     new_dribble(x)
   } else {
     as_tibble(x)
@@ -103,9 +107,11 @@ has_dribble_cols <- function(x) {
 }
 
 dribble_coltypes_ok <- function(x) {
-  c(name = is.character(x$name),
+  c(
+    name = is.character(x$name),
     id = is.character(x$id),
-    drive_resource = inherits(x$drive_resource, "list"))
+    drive_resource = inherits(x$drive_resource, "list")
+  )
 }
 
 has_dribble_coltypes <- function(x) {
@@ -135,7 +141,8 @@ as_parent <- function(d) {
   if (!is_parental(d)) {
     stop_glue(
       "Requested parent {bt(in_var)} is invalid: neither a folder ",
-      "nor a Team Drive.")
+      "nor a Team Drive."
+    )
   }
   d
 }

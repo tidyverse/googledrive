@@ -74,7 +74,6 @@ drive_upload <- function(media,
                          type = NULL,
                          ...,
                          verbose = TRUE) {
-
   if (!file.exists(media)) {
     stop_glue("\nFile does not exist:\n  * {media}")
   }
@@ -134,9 +133,10 @@ drive_upload <- function(media,
   out <- as_dribble(list(process_response(response)))
 
   if (verbose) {
-    message_glue("\nLocal file:\n  * {media}\n",
-          "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
-          "with MIME type:\n  * {out$drive_resource[[1]]$mimeType}"
+    message_glue(
+      "\nLocal file:\n  * {media}\n",
+      "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
+      "with MIME type:\n  * {out$drive_resource[[1]]$mimeType}"
     )
   }
   invisible(out)

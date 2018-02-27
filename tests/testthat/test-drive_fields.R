@@ -19,7 +19,6 @@ test_that("drive_fields(expose()) returns full tibble of Files fields", {
 })
 
 test_that("drive_fields() admits it only knows about Files fields", {
-
   expect_message(
     out <- drive_fields(NULL, resource = "foo"),
     "ALERT! Only fields for the `files` resource are built-in."

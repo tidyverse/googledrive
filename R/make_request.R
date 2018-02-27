@@ -29,16 +29,20 @@
 #' @export
 #' @family low-level API functions
 make_request <- function(x, ...) {
-  method <- list("GET" = httr::GET,
-                 "POST" = httr::POST,
-                 "PATCH" = httr::PATCH,
-                 "PUT" = httr::PUT,
-                 "DELETE" = httr::DELETE)[[x$method]]
-  method(url = x$url,
-         x$token,
-         drive_ua(),
-         query = x$query,
-         body = x$body, ...)
+  method <- list(
+    "GET" = httr::GET,
+    "POST" = httr::POST,
+    "PATCH" = httr::PATCH,
+    "PUT" = httr::PUT,
+    "DELETE" = httr::DELETE
+  )[[x$method]]
+  method(
+    url = x$url,
+    x$token,
+    drive_ua(),
+    query = x$query,
+    body = x$body, ...
+  )
 }
 
 #' @rdname make_request
@@ -126,7 +130,7 @@ drive_ua <- function() {
   httr::user_agent(paste0(
     "googledrive/", utils::packageVersion("googledrive"), " ",
     ## TO DO: uncomment this once we use gargle
-    #"gargle/", utils::packageVersion("gargle"), " ",
+    # "gargle/", utils::packageVersion("gargle"), " ",
     "httr/", utils::packageVersion("httr")
   ))
 }

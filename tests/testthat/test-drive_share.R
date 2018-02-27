@@ -41,4 +41,3 @@ test_that("drive_share() adds permissions", {
   expect_identical(purrr::map_chr(perms, "role"), c("owner", "commenter"))
   expect_identical(purrr::map_chr(perms, "type"), c("user", "anyone"))
 })
-

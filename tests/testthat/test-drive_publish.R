@@ -14,14 +14,20 @@ if (CLEAN) {
 
 # ---- setup ----
 if (SETUP) {
-  drive_upload(file.path(R.home("doc"), "html", "about.html"),
-               name = nm_("foo_doc"),
-               type = "document")
-  drive_upload(file.path(R.home("doc"), "BioC_mirrors.csv"),
-               name = nm_("foo_sheet"),
-               type = "spreadsheet")
-  drive_upload(file.path(R.home("doc"), "html", "RLogo.pdf"),
-               name = nm_("foo_pdf"))
+  drive_upload(
+    file.path(R.home("doc"), "html", "about.html"),
+    name = nm_("foo_doc"),
+    type = "document"
+  )
+  drive_upload(
+    file.path(R.home("doc"), "BioC_mirrors.csv"),
+    name = nm_("foo_sheet"),
+    type = "spreadsheet"
+  )
+  drive_upload(
+    file.path(R.home("doc"), "html", "RLogo.pdf"),
+    name = nm_("foo_pdf")
+  )
 }
 
 # ---- tests ----

@@ -97,7 +97,7 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
     params[["name"]] <- name
   }
 
-  request <-  generate_request(
+  request <- generate_request(
     endpoint = "drive.files.copy",
     params = params
   )

@@ -89,12 +89,11 @@ pathify_one_path <- function(op, nodes, root_id) {
 get_nodes <- function(path,
                       team_drive = NULL,
                       corpus = NULL) {
-
   path_parts <- purrr::map(path, partition_path, maybe_name = TRUE)
   ## workaround for purrr <= 0.2.2.2
   name <- purrr::map(path_parts, "name")
   name <- purrr::flatten_chr(purrr::map_if(name, is.null, ~ NA_character_))
-  #name <- purrr::map_chr(path_parts, "name", .default = NA)
+  # name <- purrr::map_chr(path_parts, "name", .default = NA)
   names <- unique(name)
   names <- names[!is.na(names)]
   names <- glue("name = {sq(names)}")
