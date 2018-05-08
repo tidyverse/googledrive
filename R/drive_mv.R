@@ -106,7 +106,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     new_path <- paste0(append_slash(path$name), out$name)
     message_glue(
       "\nFile {action}:\n  * {file$name} -> {new_path}",
-      action = collapse(names(actions)[actions], last = " and ")
+      action = glue_collapse(names(actions)[actions], last = " and ")
     )
   }
   invisible(out)

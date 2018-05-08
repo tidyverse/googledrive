@@ -9,8 +9,8 @@ trim_ws <- function(x) {
   sub("\\s*$", "", sub("^\\s*", "", x))
 }
 
-and <- function(x) collapse(x, sep = " and ")
-or <- function(x) collapse(x, sep = " or ")
+and <- function(x) glue_collapse(x, sep = " and ")
+or <- function(x) glue_collapse(x, sep = " or ")
 
 ## put a column into a tibble in the REST sense: "create or update"
 ## tibble::add_column() except
@@ -42,7 +42,7 @@ stop_glue_data <- function(..., .sep = "", .envir = parent.frame(),
   )
 }
 
-stop_collapse <- function(x) stop(collapse(x, sep = "\n"), call. = FALSE)
+stop_collapse <- function(x) stop(glue_collapse(x, sep = "\n"), call. = FALSE)
 
 message_glue <- function(..., .sep = "", .envir = parent.frame(),
                          .domain = NULL, .appendLF = TRUE) {
@@ -60,7 +60,7 @@ message_glue_data <- function(..., .sep = "", .envir = parent.frame(),
   )
 }
 
-message_collapse <- function(x) message(collapse(x, sep = "\n"))
+message_collapse <- function(x) message(glue_collapse(x, sep = "\n"))
 
 warning_glue <- function(..., .sep = "", .envir = parent.frame(),
                          call. = FALSE, .domain = NULL) {
@@ -78,7 +78,7 @@ warning_glue_data <- function(..., .sep = "", .envir = parent.frame(),
   )
 }
 
-warning_collapse <- function(x) warning(collapse(x, sep = "\n"))
+warning_collapse <- function(x) warning(glue_collapse(x, sep = "\n"))
 
 
 ## removes last abs(n) elements

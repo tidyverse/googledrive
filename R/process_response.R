@@ -27,7 +27,7 @@ process_response <- function(res) {
   errors <- out$errors[[1]]
   msg <- glue("HTTP error [{out$code}] {out$message}")
   details <- glue_data(errors, "  * {names(errors)}: {errors}")
-  err_msg <- collapse(c(msg, details), sep = "\n")
+  err_msg <- glue_collapse(c(msg, details), sep = "\n")
   cl <- c(
     "googledrive_error", paste0("http_error_", out$code),
     "error", "condition"

@@ -53,7 +53,7 @@ tryCatch(skip_if_no_token(), skip = function(x) NULL)
 
 nm_fun <- function(context, user = Sys.info()["user"]) {
   y <- purrr::compact(list(context, user))
-  function(x) as.character(glue::collapse(c(x, y), sep = "-"))
+  function(x) as.character(glue::glue_collapse(c(x, y), sep = "-"))
 }
 
 message("Test file naming scheme:\n  * ", nm_fun("TEST-context")("foo"))

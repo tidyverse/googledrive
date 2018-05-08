@@ -31,7 +31,7 @@ as_team_drive <- function(x, ...) UseMethod("as_team_drive")
 #' @export
 as_team_drive.default <- function(x, ...) {
   stop_glue_data(
-    list(x = collapse(class(x), sep = "/")),
+    list(x = glue_collapse(class(x), sep = "/")),
     "Don't know how to coerce object of class {x} into a Team Drive dribble."
   )
 }

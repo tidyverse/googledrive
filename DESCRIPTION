@@ -16,7 +16,7 @@ Depends:
     R (>= 3.1.0)
 Imports: 
     curl (>= 2.8.1),
-    glue (>= 1.1.0),
+    glue (> 1.2.0),
     httr,
     jsonlite,
     purrr (>= 0.2.3),
@@ -37,3 +37,5 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1.9000
+Remotes:  
+    tidyverse/glue
