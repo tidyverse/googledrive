@@ -178,7 +178,13 @@ marshal_q_clauses <- function(params) {
 
 handle_team_drives <- function(team_drive, corpus) {
   if (!is.null(team_drive)) {
-    team_drive <- as_id(as_team_drive(team_drive))
+    coerce_to_teamdrive <- as_team_drive(team_drive) # results in a dribble
+
+    if (nrow(coerce_to_teamdrive) < 1) {
+      stop("Drive with this designation not found. Check that you are passing parameters to team_drive argument correctly.")
+    }
+
+    team_drive <- as_id(coerce_to_teamdrive)
   }
   if (identical(corpus, "all")) {
     corpus <- "user,allTeamDrives"
