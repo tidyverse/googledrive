@@ -68,24 +68,26 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     name <- name %||% path_parts$name %||% file$name
   }
 
-  meta <- list(fields = "*")
+  meta <- list()
 
-  if (!is.null(name)) {
+  if (!is.null(name) && name != file$name) {
     meta[["name"]] <- name
   }
 
   ## if moving the file, modify the parent
+  parents_before <- file$drive_resource[[1]][["parents"]]
+  n_parents_before <- length(parents_before)
   if (!is.null(path)) {
     path <- as_parent(path)
-    current_parents <- file$drive_resource[[1]][["parents"]]
-    if (!path$id %in% current_parents) {
+    if (!path$id %in% parents_before) {
       meta[["addParents"]] <- path$id
-      if (length(current_parents) == 1) {
-        meta[["removeParents"]] <- current_parents
-      } else {
+      if (n_parents_before == 1) {
+        meta[["removeParents"]] <- parents_before
+      } else if (n_parents_before > 1) {
         warning(
           "File started with multiple parents!\n",
-          "New parent folder has been added, but no existing parent has been removed.\n",
+          "New parent folder has been added, but no existing parent has ",
+          "been removed.\n",
           "Not clear which parent(s) should be removed."
         )
       }
@@ -96,17 +98,22 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     if (verbose) message("Nothing to be done.")
     return(invisible(file))
   }
+  meta[["fields"]] <- "*"
   out <- drive_update_metadata(file, meta)
 
   if (verbose) {
+    parent_added <- !is.null(meta[["addParents"]])
     actions <- c(
       renamed = !identical(out$name, file$name),
-      moved = !is.null(meta[["removeParents"]])
+      moved = parent_added && n_parents_before < 2,
+      `added to folder` = parent_added && n_parents_before > 1
     )
     new_path <- paste0(append_slash(path$name), out$name)
     message_glue(
       "\nFile {action}:\n  * {file$name} -> {new_path}",
-      action = glue_collapse(names(actions)[actions], last = " and ")
+      action = glue_collapse(
+        names(actions)[actions], sep = ",", last = " and "
+      )
     )
   }
   invisible(out)

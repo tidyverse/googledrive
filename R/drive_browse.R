@@ -52,5 +52,5 @@ drive_browse <- function(file = .Last.value) {
     message_glue("Browsing the first file of {nrow(file)}.")
   }
   utils::browseURL(links[1])
-  return(invisible(links))
+  invisible(links)
 }
