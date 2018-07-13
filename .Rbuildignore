@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^internal$
 ^\.httr-oauth$
+.httr-oauth$
 ^\.travis\.yml$
 ^README\.Rmd$
 ^sandbox$
