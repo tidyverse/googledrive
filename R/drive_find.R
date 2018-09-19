@@ -181,7 +181,8 @@ handle_team_drives <- function(team_drive, corpus) {
     team_drive <- as_team_drive(team_drive)
     if (no_file(team_drive)) {
       stop(
-        "Can't find the requested `team_drive`.", call. = FALSE
+        "Can't find the requested `team_drive`.",
+        call. = FALSE
       )
     }
     team_drive <- as_id(team_drive)

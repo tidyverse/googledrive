@@ -28,7 +28,7 @@ drive_reveal_path <- function(file) {
   nodes <- nodes[!duplicated(nodes$id), ]
 
   ROOT_ID <- root_id()
-  x <- purrr::map(file$id, ~ pathify_one_id(.x, nodes, ROOT_ID))
+  x <- purrr::map(file$id, ~pathify_one_id(.x, nodes, ROOT_ID))
 
   ## TO DO: if (verbose), message if a dribble doesn't have exactly 1 row?
   rlang::invoke(rbind, x)
@@ -56,7 +56,7 @@ dribble_from_path <- function(path = NULL,
   if (nrow(nodes) == 0) return(dribble_with_path())
 
   ROOT_ID <- root_id()
-  x <- purrr::map(path, ~ pathify_one_path(.x, nodes, ROOT_ID))
+  x <- purrr::map(path, ~pathify_one_path(.x, nodes, ROOT_ID))
 
   ## TO DO: if (verbose), message if a dribble doesn't have exactly 1 row?
   rlang::invoke(rbind, x)
@@ -92,7 +92,7 @@ get_nodes <- function(path,
   path_parts <- purrr::map(path, partition_path, maybe_name = TRUE)
   ## workaround for purrr <= 0.2.2.2
   name <- purrr::map(path_parts, "name")
-  name <- purrr::flatten_chr(purrr::map_if(name, is.null, ~ NA_character_))
+  name <- purrr::flatten_chr(purrr::map_if(name, is.null, ~NA_character_))
   # name <- purrr::map_chr(path_parts, "name", .default = NA)
   names <- unique(name)
   names <- names[!is.na(names)]
@@ -164,7 +164,7 @@ add_id_path <- function(nodes, root_id, leaf = NULL) {
   nodes$id_path <- list(character())
   nodes$id_path[leaf] <- purrr::map(
     nodes$id[leaf],
-    ~ pth(.x, kids = nodes$id, elders = nodes$parents, stop_value = root_id)
+    ~pth(.x, kids = nodes$id, elders = nodes$parents, stop_value = root_id)
   )
   nodes
 }
@@ -182,7 +182,7 @@ add_id_path <- function(nodes, root_id, leaf = NULL) {
 add_path <- function(nodes, root_id) {
   nodes$path <- purrr::map(
     nodes$id_path,
-    ~ purrr::map(
+    ~purrr::map(
       .x,
       stringify_path,
       key = nodes$id,

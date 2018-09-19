@@ -69,7 +69,7 @@ as_dribble.list <- function(x, ...) {
   if (length(x) == 0) return(dribble())
 
   required_nms <- c("name", "id", "kind")
-  stopifnot(purrr::map_lgl(x, ~ all(required_nms %in% names(.x))))
+  stopifnot(purrr::map_lgl(x, ~all(required_nms %in% names(.x))))
 
   as_dribble(
     tibble::tibble(

@@ -207,5 +207,5 @@ extract_path_names <- function(path) {
 }
 
 extract_body_names <- function(params) {
-  names(params)[purrr::map_lgl(params, ~ .x[["location"]] == "body")]
+  names(params)[purrr::map_lgl(params, ~.x[["location"]] == "body")]
 }

@@ -23,15 +23,14 @@ has_token <- function() {
     return(FALSE)
   }
 
-  token <- tryCatch(
-    {
-      token_path <- file.path("~/.R/gargle/googledrive-testing.json")
-      drive_auth(service_token = token_path)
-      TRUE
-    }
-    ,
-    warning = function(x) FALSE,
-    error = function(e) FALSE
+  token <- tryCatch({
+    token_path <- file.path("~/.R/gargle/googledrive-testing.json")
+    drive_auth(service_token = token_path)
+    TRUE
+  }
+  ,
+  warning = function(x) FALSE,
+  error = function(e) FALSE
   )
   if (!token) {
     message("Unable to load token")
