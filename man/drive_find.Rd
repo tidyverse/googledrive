@@ -4,8 +4,9 @@
 \alias{drive_find}
 \title{Find files on Google Drive}
 \usage{
-drive_find(pattern = NULL, trashed = FALSE, type = NULL, n_max = Inf,
-  team_drive = NULL, corpus = NULL, ..., verbose = TRUE)
+drive_find(pattern = NULL, trashed = FALSE, type = NULL,
+  n_max = Inf, team_drive = NULL, corpus = NULL, ...,
+  verbose = TRUE)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the items whose names match this
