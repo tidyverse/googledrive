@@ -6,12 +6,43 @@
 \alias{googledrive-package}
 \title{googledrive: An Interface to Google Drive}
 \description{
-TO DO: mine index.Rmd and articles for some material
+googledrive allows you to interact with files on Google Drive
+from R.
+
+\code{googledrive::drive_find(n_max = 50)} lists up to 50 of the files you see
+in \href{https://drive.google.com}{My Drive}. You can expect to be sent to your
+browser here, to authenticate yourself and authorize the googledrive
+package to deal on your behalf with Google Drive.
+
+Most functions begin with the prefix \code{drive_}.
+
+The goal is to allow Drive access that feels similar to Unix file system
+utilities, e.g., \code{find}, \code{ls}, \code{mv}, \code{cp}, \code{mkdir}, and \code{rm}.
+
+The metadata for one or more Drive files is held in a \code{dribble}, a "Drive
+tibble". This is a data frame with one row per file. A dribble is returned
+(and accepted) by almost every function in googledrive. It is designed to
+give people what they want (file name), track what the API wants (file id),
+and to hold the metadata needed for general file operations.
+
+googledrive is "pipe-friendly" and, in fact, re-exports \code{\%>\%}, but does not
+require its use.
+
+Please see the googledrive website for full documentation:
+\itemize{
+\item \url{https://googledrive.tidyverse.org/index.html}
+}
+
+In addition to function-specific help, there are several articles which are
+indexed here:
+\itemize{
+\item \href{https://googledrive.tidyverse.org/articles/index.html}{Article index}
+}
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://googledrive.tidyverse.org}
+  \item \url{https://googledrive.tidyverse.org}
   \item \url{https://github.com/tidyverse/googledrive}
   \item Report bugs at \url{https://github.com/tidyverse/googledrive/issues}
 }
