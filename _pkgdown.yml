@@ -5,6 +5,10 @@ template:
 home:
   strip_header: true
 
+authors:
+  Jennifer Bryan:
+    href: https://jennybryan.org
+
 navbar:
   left:
   - text: Reference
@@ -19,6 +23,8 @@ navbar:
       href: articles/articles/multiple-files.html
     - text: File permissions
       href: articles/articles/permissions.html
+  - text: News
+    href: news/index.html
 
 articles:
   - title: "Articles"
