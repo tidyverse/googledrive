@@ -19,6 +19,10 @@ matrix:
     r_build_args: --no-build-vignettes
     r_check_args: --ignore-vignettes --no-examples
   - os: linux
+    r: 3.3
+    r_build_args: --no-build-vignettes
+    r_check_args: --ignore-vignettes --no-examples
+  - os: linux
     r: oldrel
     r_build_args: --no-build-vignettes
     r_check_args: --ignore-vignettes --no-examples
