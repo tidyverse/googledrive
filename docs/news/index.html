@@ -31,6 +31,9 @@
 
 <meta property="og:title" content="Changelog" />
 
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -69,7 +72,7 @@
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
         </div>
       </div>
     </div>
@@ -99,6 +102,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
         <li>
   <a href="https://github.com/tidyverse/googledrive">
     <span class="fa fa-github fa-lg"></span>
@@ -121,6 +127,14 @@
       <small>Source: <a href='https://github.com/tidyverse/googledrive/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="googledrive-0-1-2" class="section level1">
+<h1 class="page-header">
+<a href="#googledrive-0-1-2" class="anchor"></a>googledrive 0.1.2<small> 2018-10-06 </small>
+</h1>
+<ul>
+<li>Internal usage of <code><a href="http://www.rdocumentation.org/packages/glue/topics/glue-deprecated">glue::collapse()</a></code> modified to call <code><a href="http://www.rdocumentation.org/packages/glue/topics/glue_collapse">glue::glue_collapse()</a></code> if glue v1.3.0 or later is installed and <code><a href="http://www.rdocumentation.org/packages/glue/topics/glue-deprecated">glue::collapse()</a></code> otherwise. Eliminates a deprecation warning emanating from glue. (<a href='https://github.com/tidyverse/googledrive/issues/222'>#222</a> <a href='http://github.com/jimhester'>@jimhester</a>)</li>
+</ul>
+</div>
     <div id="googledrive-0-1-1" class="section level1">
 <h1 class="page-header">
 <a href="#googledrive-0-1-1" class="anchor"></a>googledrive 0.1.1<small> 2017-08-28 </small>
@@ -135,6 +149,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#googledrive-0-1-2">0.1.2</a></li>
         <li><a href="#googledrive-0-1-1">0.1.1</a></li>
       </ul>
     </div>
@@ -149,7 +164,7 @@
 
 <div class="author">
   <p>
-    Developed by Lucy D'Agostino McGowan, Jennifer Bryan, <a href='https://www.rstudio.com'><img src='https://tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
+    Developed by Lucy D'Agostino McGowan, <a href='https://jennybryan.org'>Jennifer Bryan</a>, <a href='https://www.rstudio.com'><img src='https://tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
