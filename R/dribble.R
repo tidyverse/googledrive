@@ -119,7 +119,7 @@ has_dribble_coltypes <- function(x) {
 }
 
 has_drive_resource <- function(x) {
-  kind <- purrr::map_chr(x$drive_resource, "kind", .null = NA_character_)
+  kind <- purrr::map_chr(x$drive_resource, "kind", .default = NA_character_)
   all(!is.na(kind) & kind %in% c("drive#file", "drive#teamDrive"))
 }
 

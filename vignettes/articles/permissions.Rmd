@@ -68,11 +68,11 @@ Now that we've made a few updates to our permissions, the `permissions_resource`
 library(tidyverse)
 perm <- pluck(file, "permissions_resource", 1, "permissions")
 permissions <- tibble(
-  id = map_chr(perm, "id", .null = NA_character_),
-  name = map_chr(perm, "displayName", .null = NA_character_),
-  type = map_chr(perm, "type", .null = NA_character_),
-  role = map_chr(perm, "role", .null = NA_character_),
-  email = map_chr(perm, "emailAddress", .null = NA_character_)
+  id = map_chr(perm, "id", .default = NA_character_),
+  name = map_chr(perm, "displayName", .default = NA_character_),
+  type = map_chr(perm, "type", .default = NA_character_),
+  role = map_chr(perm, "role", .default = NA_character_),
+  email = map_chr(perm, "emailAddress", .default = NA_character_)
 )
 as.data.frame(permissions)
 ```
@@ -82,5 +82,3 @@ as.data.frame(permissions)
 ```{r}
 drive_rm(file)
 ```
-
-
