@@ -29,7 +29,7 @@ test_that("request_generate() and request_build() can deliver same result", {
     list(fileId = "abc"),
     token = httr::config(token = "token!")
   )
-  build <- request_build(
+  build <- gargle::request_build(
     path = "drive/v3/files/{fileId}",
     method = "GET",
     params = list(fileId = "abc", supportsTeamDrives = TRUE),
