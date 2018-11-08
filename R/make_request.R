@@ -28,8 +28,8 @@
 #' @return `request_make()`: Object of class `response` from [httr].
 #' @export
 #' @family low-level API functions
-request_make <- function(x, ..., user_agent = drive_ua()) {
-  gargle::request_make(x, ..., user_agent = user_agent)
+request_make <- function(x, ...) {
+  gargle::request_make(x, ..., user_agent = drive_ua())
 }
 
 #' @rdname request_make
@@ -117,8 +117,8 @@ do_paginated_request <- function(x,
 drive_ua <- function() {
   httr::user_agent(paste0(
     "googledrive/", utils::packageVersion("googledrive"), " ",
-    ## TO DO: uncomment this once we use gargle
-    # "gargle/", utils::packageVersion("gargle"), " ",
+    "(GPN:RStudio; )", " ",
+    "gargle/", utils::packageVersion("gargle"), " ",
     "httr/", utils::packageVersion("httr")
   ))
 }
