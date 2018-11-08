@@ -28,21 +28,8 @@
 #' @return `request_make()`: Object of class `response` from [httr].
 #' @export
 #' @family low-level API functions
-request_make <- function(x, ...) {
-  method <- list(
-    "GET" = httr::GET,
-    "POST" = httr::POST,
-    "PATCH" = httr::PATCH,
-    "PUT" = httr::PUT,
-    "DELETE" = httr::DELETE
-  )[[x$method]]
-  method(
-    url = x$url,
-    x$token,
-    drive_ua(),
-    query = x$query,
-    body = x$body, ...
-  )
+request_make <- function(x, ..., user_agent = drive_ua()) {
+  gargle::request_make(x, ..., user_agent = user_agent)
 }
 
 #' @rdname request_make
@@ -113,6 +100,7 @@ do_paginated_request <- function(x,
     page <- request_make(x, ...)
     responses[[i]] <- process_response(page)
     x$query$pageToken <- responses[[i]]$nextPageToken
+    x$url <- httr::modify_url(x$url, query = x$query)
     total <- total + n(responses[[i]])
     if (verbose && i == 2) message_glue("Items so far: ")
     if (verbose && i > 1) message_glue("{total} ", .appendLF = FALSE)

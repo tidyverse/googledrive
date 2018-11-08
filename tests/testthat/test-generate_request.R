@@ -4,11 +4,11 @@ context("Generate requests")
 test_that("request_generate() basically works", {
   req <- request_generate(endpoint = "drive.files.list", token = NULL)
   expect_type(req, "list")
-  expect_identical(
+  expect_setequal(
     names(req),
-    c("method", "path", "query", "body", "token", "url")
+    c("method", "url", "body", "token")
   )
-  expect_true(req$query$supportsTeamDrives)
+  expect_match(req$url, "supportsTeamDrives=TRUE")
 })
 
 test_that("request_generate() errors for unrecognized parameters", {
