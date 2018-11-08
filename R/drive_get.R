@@ -88,14 +88,14 @@ get_one_id <- function(id) {
   if (!isTRUE(nzchar(id, keepNA = TRUE))) {
     stop_glue("File ids must not be NA and cannot be the empty string.")
   }
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.files.get",
     params = list(
       fileId = id,
       fields = "*"
     )
   )
-  response <- make_request(request)
+  response <- request_make(request)
   process_response(response)
 }
 

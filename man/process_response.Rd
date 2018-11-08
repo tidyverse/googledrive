@@ -17,7 +17,7 @@ Process a response from the Google Drive v3 API
 }
 \seealso{
 Other low-level API functions: \code{\link{drive_token}},
-  \code{\link{generate_request}},
-  \code{\link{make_request}}
+  \code{\link{request_generate}},
+  \code{\link{request_make}}
 }
 \concept{low-level API functions}

@@ -8,7 +8,7 @@
 #'   tasks, such as uploading or downloading Drive files. The functions here are
 #'   intended for internal use and for programming around the Drive API.
 #'
-#' @description `generate_request()` lets you provide the bare minimum of input.
+#' @description `request_generate()` lets you provide the bare minimum of input.
 #'   It takes a nickname for an endpoint and:
 #'   * Uses the API spec to look up the `path`, `method`, and base URL.
 #'   * Checks `params` for validity and completeness with respect to the
@@ -34,20 +34,20 @@
 #'   `drive_token()` will actually return `NULL`.
 #'
 #' @return `list()`\cr Components are `method`, `path`, `query`, `body`,
-#'   `token`, and `url`, suitable as input for [make_request()].
+#'   `token`, and `url`, suitable as input for [request_make()].
 #' @export
 #' @family low-level API functions
-#' @seealso [gargle::develop_request()], [gargle::build_request()]
+#' @seealso [gargle::request_develop()], [gargle::request_build()]
 #' @examples
 #' \dontrun{
-#' req <- generate_request(
+#' req <- request_generate(
 #'   "drive.files.get",
 #'   list(fileId = "abc"),
 #'   token = drive_token()
 #' )
 #' req
 #' }
-generate_request <- function(endpoint = character(),
+request_generate <- function(endpoint = character(),
                              params = list(),
                              key = NULL,
                              token = drive_token()) {
@@ -62,8 +62,8 @@ generate_request <- function(endpoint = character(),
     params$supportsTeamDrives <- TRUE
   }
 
-  req <- gargle::develop_request(endpoint = ept, params = params)
-  gargle::build_request(
+  req <- gargle::request_develop(endpoint = ept, params = params)
+  gargle::request_build(
     path = req$path,
     method = req$method,
     params = req$params,

@@ -85,7 +85,7 @@ drive_update <- function(file,
 
 ## currently this can never be called, because we always send fields
 drive_update_media <- function(file, media) {
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.files.update.media",
     params = list(
       fileId = file$id,
@@ -96,30 +96,30 @@ drive_update_media <- function(file, media) {
 
   ## media uploads have unique body situations, so customizing here.
   request$body <- httr::upload_file(path = media)
-  response <- make_request(request, encode = "json")
+  response <- request_make(request, encode = "json")
   as_dribble(list(process_response(response)))
 }
 
 drive_update_metadata <- function(file, meta) {
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.files.update",
     params = c(
       fileId = file$id,
       meta
     )
   )
-  response <- make_request(request, encode = "json")
+  response <- request_make(request, encode = "json")
   as_dribble(list(process_response(response)))
 }
 
 drive_update_multipart <- function(file, media, meta) {
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.files.update.media",
     params = c(
       fileId = file$id,
       uploadType = "multipart",
       ## We provide the metadata here even though it's overwritten below,
-      ## so that generate_request() still validates it.
+      ## so that request_generate() still validates it.
       meta
     )
   )
@@ -134,6 +134,6 @@ drive_update_multipart <- function(file, media, meta) {
     ),
     media = httr::upload_file(path = media)
   )
-  response <- make_request(request)
+  response <- request_make(request)
   as_dribble(list(process_response(response)))
 }

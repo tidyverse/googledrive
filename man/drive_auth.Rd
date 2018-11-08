@@ -25,11 +25,13 @@ or \code{TRUE} if \code{httpuv} is not installed.}
 }
 \description{
 Authorize googledrive to view and manage your Drive files. By default, you
-are directed to a web browser, asked to sign in to your Google account,
-and to grant googledrive (the tidyverse, actually) permission to operate on
-your behalf with Google Drive. By default, these user credentials are cached
-in a file named \code{.httr-oauth} in the current working directory, from where
-they can be automatically refreshed, as necessary.
+are directed to a web browser, asked to sign in to your Google account, and
+to grant googledrive (the tidyverse, actually) permission to operate on your
+behalf with Google Drive. By default, these user credentials are cached in a
+file below your home directory, \code{~/.R/gargle/gargle-oauth}, from where they
+can be automatically refreshed, as necessary. Storage at the user-level means
+the same token can be used across multiple projects and they are less likely
+to be synced to the cloud by accident.
 }
 \details{
 Most users, most of the time, do not need to call \code{drive_auth()} explicitly

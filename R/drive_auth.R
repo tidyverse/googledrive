@@ -194,7 +194,7 @@ print.auth_config <- function(x, ...) {
 #' Produce Google token
 #'
 #' For internal use or for those programming around the Drive API. Produces a
-#' token prepared for use with [generate_request()] and [build_request()]. Most
+#' token prepared for use with [request_generate()] and [request_build()]. Most
 #' users do not need to handle tokens "by hand" or, even if they need some
 #' control, [drive_auth()] is what they need. If there is no current token,
 #' [drive_auth()] is called to either load from cache or initiate OAuth2.0 flow.
@@ -206,7 +206,7 @@ print.auth_config <- function(x, ...) {
 #' @family low-level API functions
 #' @examples
 #' \dontrun{
-#' req <- generate_request(
+#' req <- request_generate(
 #'   "drive.files.get",
 #'   list(fileId = "abc"),
 #'   token = drive_token()

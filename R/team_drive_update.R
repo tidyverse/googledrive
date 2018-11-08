@@ -48,14 +48,14 @@ team_drive_update <- function(team_drive, ..., verbose = TRUE) {
   }
 
   meta$fields <- meta$fields %||% "*"
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.teamdrives.update",
     params = c(
       teamDriveId = as_id(team_drive),
       meta
     )
   )
-  response <- make_request(request, encode = "json")
+  response <- request_make(request, encode = "json")
   out <- as_dribble(list(process_response(response)))
 
   if (verbose) {

@@ -59,10 +59,10 @@ drive_rm <- function(..., verbose = TRUE) {
 }
 
 delete_one <- function(id) {
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.files.delete",
     params = list(fileId = id)
   )
-  response <- make_request(request)
+  response <- request_make(request)
   process_response(response)
 }

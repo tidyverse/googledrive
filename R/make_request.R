@@ -5,11 +5,11 @@
 #' wrappers that facilitate common tasks, such as uploading or downloading Drive
 #' files. The functions here are intended for internal use and for programming
 #' around the Drive API. Three functions are documented here:
-#'   * `make_request()` does the bare minimum: just calls an HTTP method, only
+#'   * `request_make()` does the bare minimum: just calls an HTTP method, only
 #'     adding the googledrive user agent. Typically the input is created with
-#'     [`generate_request()`] or [`build_request()`] and the output is
+#'     [`request_generate()`] or [`request_build()`] and the output is
 #'     processed with [`process_response()`].
-#'   * `do_request()` is simply `process_response(make_request(x, ...))`. It
+#'   * `do_request()` is simply `process_response(request_make(x, ...))`. It
 #'     exists only because we had to make `do_paginated_request()` and it felt
 #'     weird to not make the equivalent for a single request.
 #'   * `do_paginated_request()` executes the input request **with page
@@ -20,15 +20,15 @@
 #'     responses, one per page.
 #'
 #' @param x List, holding the components for an HTTP request, presumably created
-#'   with [`generate_request()`] or [build_request()]. Should contain the
+#'   with [`request_generate()`] or [request_build()]. Should contain the
 #'    `method`, `path`, `query`, `body`, `token`, and `url`.
 #' @param ... Optional arguments passed through to the HTTP method.
 #' @template verbose
 #'
-#' @return `make_request()`: Object of class `response` from [httr].
+#' @return `request_make()`: Object of class `response` from [httr].
 #' @export
 #' @family low-level API functions
-make_request <- function(x, ...) {
+request_make <- function(x, ...) {
   method <- list(
     "GET" = httr::GET,
     "POST" = httr::POST,
@@ -45,15 +45,15 @@ make_request <- function(x, ...) {
   )
 }
 
-#' @rdname make_request
+#' @rdname request_make
 #' @export
 #' @return `do_request()`: List representing the content returned by a single
 #'   request.
 do_request <- function(x, ...) {
-  process_response(make_request(x, ...))
+  process_response(request_make(x, ...))
 }
 
-#' @rdname make_request
+#' @rdname request_make
 #' @param n_max Maximum number of items to return. Defaults to `Inf`, i.e. there
 #'   is no limit and we keep making requests until we get all items.
 #' @param n Function that computes the number of items in one response or page.
@@ -68,7 +68,7 @@ do_request <- function(x, ...) {
 #' \dontrun{
 #' ## build a request for an endpoint that is:
 #' ##   * paginated
-#' ##   * NOT privileged in googledrive, i.e. not covered by generate_request()
+#' ##   * NOT privileged in googledrive, i.e. not covered by request_generate()
 #' ## "comments" are a great example
 #' ## https://developers.google.com/drive/v3/reference/comments
 #' ##
@@ -94,7 +94,7 @@ do_paginated_request <- function(x,
                                  n = function(res) 1,
                                  verbose = TRUE) {
   ## when traversing pages, you can't cleanly separate the task into
-  ## make_request() and process_response(), because you need to process
+  ## request_make() and process_response(), because you need to process
   ## response / page i to get the pageToken for request / page i + 1
   ## so this function does both
   stopifnot(identical(x$method, "GET"))
@@ -110,7 +110,7 @@ do_paginated_request <- function(x,
   i <- 1
   total <- 0
   repeat {
-    page <- make_request(x, ...)
+    page <- request_make(x, ...)
     responses[[i]] <- process_response(page)
     x$query$pageToken <- responses[[i]]$nextPageToken
     total <- total + n(responses[[i]])

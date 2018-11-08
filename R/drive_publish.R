@@ -91,11 +91,11 @@ drive_change_publish <- function(file,
 
 change_publish_one <- function(id, params) {
   params[["fileId"]] <- id
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.revisions.update",
     params = params
   )
-  response <- make_request(request, encode = "json")
+  response <- request_make(request, encode = "json")
   process_response(response)
 }
 
@@ -116,7 +116,7 @@ drive_reveal_published <- function(file) {
 }
 
 get_publish_one <- function(id) {
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.revisions.get",
     params = list(
       fileId = id,
@@ -124,7 +124,7 @@ get_publish_one <- function(id) {
       fields = "*"
     )
   )
-  response <- make_request(request)
+  response <- request_make(request)
   ## folders generate a 403
   if (httr::status_code(response) == 403) {
     return(NULL)

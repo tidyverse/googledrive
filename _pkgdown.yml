@@ -108,9 +108,9 @@ reference:
     desc: >
       Low-level functions used internally and made available for programming
     contents:
-      - generate_request
-      - build_request
-      - make_request
+      - request_generate
+      - request_build
+      - request_make
       - do_request
       - do_paginated_request
       - process_response

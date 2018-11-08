@@ -74,7 +74,7 @@ drive_download <- function(file,
     verify_export_mime_type(mime_type, export_type)
     path <- apply_extension(path, drive_extension(export_type))
 
-    request <- generate_request(
+    request <- request_generate(
       endpoint = "drive.files.export",
       params = list(
         fileId = file$id,
@@ -82,7 +82,7 @@ drive_download <- function(file,
       )
     )
   } else {
-    request <- generate_request(
+    request <- request_generate(
       endpoint = "drive.files.get",
       params = list(
         fileId = file$id,
@@ -91,7 +91,7 @@ drive_download <- function(file,
     )
   }
 
-  response <- make_request(
+  response <- request_make(
     request,
     httr::write_disk(path, overwrite = overwrite)
   )
