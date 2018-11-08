@@ -11,12 +11,11 @@ a \code{request} object (an S3 class provided by \link[httr:httr]{httr})
 }
 \description{
 For internal use or for those programming around the Drive API. Produces a
-token prepared for use with \code{\link[=request_generate]{request_generate()}} and \code{\link[=request_build]{request_build()}}. Most
-users do not need to handle tokens "by hand" or, even if they need some
-control, \code{\link[=drive_auth]{drive_auth()}} is what they need. If there is no current token,
-\code{\link[=drive_auth]{drive_auth()}} is called to either load from cache or initiate OAuth2.0 flow.
-If auth has been deactivated via \code{\link[=drive_auth_config]{drive_auth_config()}}, \code{drive_token()}
-returns \code{NULL}.
+token prepared for use with \code{\link[=request_generate]{request_generate()}}. Most users do not need to
+handle tokens "by hand" or, even if they need some control, \code{\link[=drive_auth]{drive_auth()}} is
+what they need. If there is no current token, \code{\link[=drive_auth]{drive_auth()}} is called to
+either load from cache or initiate OAuth2.0 flow. If auth has been
+deactivated via \code{\link[=drive_auth_config]{drive_auth_config()}}, \code{drive_token()} returns \code{NULL}.
 }
 \examples{
 \dontrun{

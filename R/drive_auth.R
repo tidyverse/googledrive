@@ -194,12 +194,11 @@ print.auth_config <- function(x, ...) {
 #' Produce Google token
 #'
 #' For internal use or for those programming around the Drive API. Produces a
-#' token prepared for use with [request_generate()] and [request_build()]. Most
-#' users do not need to handle tokens "by hand" or, even if they need some
-#' control, [drive_auth()] is what they need. If there is no current token,
-#' [drive_auth()] is called to either load from cache or initiate OAuth2.0 flow.
-#' If auth has been deactivated via [drive_auth_config()], `drive_token()`
-#' returns `NULL`.
+#' token prepared for use with [request_generate()]. Most users do not need to
+#' handle tokens "by hand" or, even if they need some control, [drive_auth()] is
+#' what they need. If there is no current token, [drive_auth()] is called to
+#' either load from cache or initiate OAuth2.0 flow. If auth has been
+#' deactivated via [drive_auth_config()], `drive_token()` returns `NULL`.
 #'
 #' @return a `request` object (an S3 class provided by [httr][httr::httr])
 #' @export

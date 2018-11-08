@@ -15,8 +15,8 @@ do_paginated_request(x, ..., n_max = Inf, n = function(res) 1,
 }
 \arguments{
 \item{x}{List, holding the components for an HTTP request, presumably created
-with \code{\link[=request_generate]{request_generate()}} or \code{\link[=request_build]{request_build()}}. Should contain the
-\code{method}, \code{path}, \code{query}, \code{body}, \code{token}, and \code{url}.}
+with \code{\link[=request_generate]{request_generate()}} Should contain the \code{method}, \code{url}, \code{body},
+and \code{token}.}
 
 \item{...}{Optional arguments passed through to the HTTP method.}
 
@@ -50,8 +50,8 @@ around the Drive API. Three functions are documented here:
 \itemize{
 \item \code{request_make()} does the bare minimum: just calls an HTTP method, only
 adding the googledrive user agent. Typically the input is created with
-\code{\link[=request_generate]{request_generate()}} or \code{\link[=request_build]{request_build()}} and the output is
-processed with \code{\link[=process_response]{process_response()}}.
+\code{\link[=request_generate]{request_generate()}} and the output is processed with
+\code{\link[=process_response]{process_response()}}.
 \item \code{do_request()} is simply \code{process_response(request_make(x, ...))}. It
 exists only because we had to make \code{do_paginated_request()} and it felt
 weird to not make the equivalent for a single request.

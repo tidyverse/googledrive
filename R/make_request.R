@@ -7,8 +7,8 @@
 #' around the Drive API. Three functions are documented here:
 #'   * `request_make()` does the bare minimum: just calls an HTTP method, only
 #'     adding the googledrive user agent. Typically the input is created with
-#'     [`request_generate()`] or [`request_build()`] and the output is
-#'     processed with [`process_response()`].
+#'     [`request_generate()`] and the output is processed with
+#'     [`process_response()`].
 #'   * `do_request()` is simply `process_response(request_make(x, ...))`. It
 #'     exists only because we had to make `do_paginated_request()` and it felt
 #'     weird to not make the equivalent for a single request.
@@ -20,8 +20,8 @@
 #'     responses, one per page.
 #'
 #' @param x List, holding the components for an HTTP request, presumably created
-#'   with [`request_generate()`] or [request_build()]. Should contain the
-#'    `method`, `path`, `query`, `body`, `token`, and `url`.
+#'   with [`request_generate()`] Should contain the `method`, `url`, `body`,
+#'   and `token`.
 #' @param ... Optional arguments passed through to the HTTP method.
 #' @template verbose
 #'
