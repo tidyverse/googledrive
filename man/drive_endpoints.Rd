@@ -18,7 +18,7 @@ endpoints that are used internally by googledrive.
 Returns a list of selected Drive API v3 endpoints, as stored inside the
 googledrive package. The names of this list (or the \code{id} sub-elements) are
 the nicknames that can be used to specify an endpoint in
-\code{\link[=generate_request]{generate_request()}}. For each endpoint, we store its nickname or \code{id}, the
+\code{\link[=request_generate]{request_generate()}}. For each endpoint, we store its nickname or \code{id}, the
 associated HTTP verb, the \code{path}, and details about the parameters. This list
 is derived programmatically from the
 \href{https://www.googleapis.com/discovery/v1/apis/drive/v3/rest}{Drive API v3 Discovery Document}.

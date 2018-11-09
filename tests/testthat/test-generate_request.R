@@ -1,19 +1,20 @@
 context("Generate requests")
 
 # ---- tests ----
-test_that("generate_request() basically works", {
-  req <- generate_request(endpoint = "drive.files.list", token = NULL)
+test_that("request_generate() basically works", {
+  req <- request_generate(endpoint = "drive.files.list", token = NULL)
   expect_type(req, "list")
-  expect_identical(
+  expect_setequal(
     names(req),
-    c("method", "path", "query", "body", "token", "url")
+    c("method", "url", "body", "token")
   )
+  expect_match(req$url, "supportsTeamDrives=TRUE")
 })
 
-test_that("generate_request() errors for unrecognized parameters", {
+test_that("request_generate() errors for unrecognized parameters", {
   params <- list(chicken = "muffin", bunny = "pippin")
   expect_error(
-    generate_request(
+    request_generate(
       endpoint = "drive.files.list",
       params = params, token = NULL
     ),
@@ -21,14 +22,14 @@ test_that("generate_request() errors for unrecognized parameters", {
   )
 })
 
-test_that("generate_request() and build_request() can deliver same result", {
+test_that("request_generate() and request_build() can deliver same result", {
   ## include a dummy token to prevent earnest efforts to find an API key
-  gen <- generate_request(
+  gen <- request_generate(
     "drive.files.get",
     list(fileId = "abc"),
     token = httr::config(token = "token!")
   )
-  build <- build_request(
+  build <- gargle::request_build(
     path = "drive/v3/files/{fileId}",
     method = "GET",
     params = list(fileId = "abc", supportsTeamDrives = TRUE),
@@ -37,47 +38,46 @@ test_that("generate_request() and build_request() can deliver same result", {
   expect_identical(gen, build)
 })
 
-test_that("generate_request() sends no API key if token is non-NULL", {
-  req <- generate_request(
+test_that("request_generate() suppresses API key if token is non-NULL", {
+  req <- request_generate(
     "drive.files.get",
-    list(fileId = "abc"),
+    params = list(fileId = "abc", key = "key in params"),
+    key = "explicit key",
     token = httr::config(token = "token!")
   )
   expect_false(grepl("key", req$url))
 })
 
-test_that("generate_request() adds built-in API key when token = NULL", {
-  req <- generate_request(
+test_that("request_generate() adds built-in API key when token = NULL", {
+  req <- request_generate(
     "drive.files.get",
-    list(fileId = "abc"),
+    params = list(fileId = "abc"),
     token = NULL
   )
   expect_match(req$url, drive_api_key())
 })
 
-test_that("generate_request() prefers explicit API key to built-in", {
-  req <- generate_request(
+test_that("request_generate(): explicit API key > key in params > built-in", {
+  req <- request_generate(
     "drive.files.get",
-    list(fileId = "abc"),
+    params = list(fileId = "abc"),
     key = "xyz",
     token = NULL
   )
   expect_match(req$url, "key=xyz")
 
-  req <- generate_request(
+  req <- request_generate(
     "drive.files.get",
-    list(fileId = "abc", key = "xyz"),
+    params = list(fileId = "abc", key = "def"),
+    key = "xyz",
     token = NULL
   )
   expect_match(req$url, "key=xyz")
-})
 
-test_that("key argument overrides key in params of generate_request()", {
-  req <- generate_request(
+  req <- request_generate(
     "drive.files.get",
-    list(fileId = "abc", key = "xyz"),
-    key = "uvw",
+    params = list(fileId = "abc", key = "xyz"),
     token = NULL
   )
-  expect_match(req$url, "uvw")
+  expect_match(req$url, "xyz")
 })

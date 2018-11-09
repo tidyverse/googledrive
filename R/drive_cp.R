@@ -97,11 +97,11 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
     params[["name"]] <- name
   }
 
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.files.copy",
     params = params
   )
-  res <- make_request(request, encode = "json")
+  res <- request_make(request, encode = "json")
   proc_res <- process_response(res)
 
   out <- as_dribble(list(proc_res))

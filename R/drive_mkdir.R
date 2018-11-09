@@ -72,11 +72,11 @@ drive_mkdir <- function(name,
     params[["parents"]] <- list(path[["id"]])
   }
 
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.files.create",
     params = params
   )
-  response <- make_request(request, encode = "json")
+  response <- request_make(request, encode = "json")
   proc_res <- process_response(response)
 
   out <- as_dribble(list(proc_res))

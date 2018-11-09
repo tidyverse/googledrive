@@ -30,19 +30,12 @@ if (getRversion() >= "2.15.1") utils::globalVariables(c(":="))
 
 # environment to store credentials
 .state <- new.env(parent = emptyenv())
-## we will outsource a great deal of this to gargle, but not in time for
-## the first CRAN release of googledrive
-## https://github.com/r-lib/gargle
-## these are the tidyverse-wide values, copied from gargle
-.state[["tidyverse_api_key"]] <- "AIzaSyCJ-oYJlNhbPDJySWsbR_B7QqzNz5EthTg"
-.state[["tidyverse_app"]] <-
-  httr::oauth_app(
-    appname = "tidyverse",
-    key = "603366585132-nku3fbd298ma3925l12o2hq0cc1v8u11.apps.googleusercontent.com",
-    secret = "as_N12yfWLRL9RMz5nVpgCZt"
-  )
 
 .onLoad <- function(libname, pkgname) {
+
+  .state[["tidyverse_app"]] <- gargle::tidyverse_app()
+  .state[["tidyverse_api_key"]] <- gargle::tidyverse_api_key()
+
   set_auth_active(TRUE)
   set_api_key(.state[["tidyverse_api_key"]])
   set_oauth_app(.state[["tidyverse_app"]])

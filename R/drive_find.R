@@ -139,7 +139,7 @@ drive_find <- function(pattern = NULL,
 
   params <- append(params, handle_team_drives(team_drive, corpus))
 
-  request <- generate_request(endpoint = "drive.files.list", params = params)
+  request <- request_generate(endpoint = "drive.files.list", params = params)
   proc_res_list <- do_paginated_request(
     request,
     n_max = n_max,

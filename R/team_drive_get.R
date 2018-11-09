@@ -45,14 +45,14 @@ get_one_team_drive_id <- function(id) {
   if (!isTRUE(nzchar(id, keepNA = TRUE))) {
     stop_glue("Team Drive ids must not be NA and cannot be the empty string.")
   }
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.teamdrives.get",
     params = list(
       teamDriveId = id,
       fields = "*"
     )
   )
-  response <- make_request(request)
+  response <- request_make(request)
   process_response(response)
 }
 

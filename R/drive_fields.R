@@ -74,12 +74,12 @@ prep_fields <- function(fields, resource = "files") {
 }
 ## usage:
 ## resource = NULL because we prepend "files/" when n > 1 items can come back
-# request <- generate_request(
+# request <- request_generate(
 #   endpoint = "drive.files.get",
 #   params = list(
 #     fileId = two_files_search$id[1],
 #     fields = prep_fields(c("name", "owners"), resource = NULL)
 #   )
 # )
-# response <- make_request(request)
+# response <- request_make(request)
 # process_response(response)

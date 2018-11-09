@@ -21,10 +21,10 @@
 #'   purrr::map_chr("id")
 #' }
 drive_about <- function() {
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.about.get",
     params = list(fields = "*")
   )
-  response <- make_request(request)
+  response <- request_make(request)
   process_response(response)
 }

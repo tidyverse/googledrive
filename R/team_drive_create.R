@@ -20,7 +20,7 @@
 #' }
 team_drive_create <- function(name, verbose = TRUE) {
   stopifnot(is_string(name), isTRUE(nzchar(name)))
-  request <- generate_request(
+  request <- request_generate(
     "drive.teamdrives.create",
     params = list(
       requestId = uuid::UUIDgenerate(),
@@ -28,7 +28,7 @@ team_drive_create <- function(name, verbose = TRUE) {
       fields = "*"
     )
   )
-  response <- make_request(request, encode = "json")
+  response <- request_make(request, encode = "json")
   out <- as_dribble(list(process_response(response)))
 
   if (verbose) {

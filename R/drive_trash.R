@@ -55,7 +55,7 @@ drive_toggle_trash <- function(file, trash, verbose = TRUE) {
 }
 
 toggle_trash_one <- function(id, trash = TRUE) {
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.files.update",
     params = list(
       fileId = id,
@@ -63,7 +63,7 @@ toggle_trash_one <- function(id, trash = TRUE) {
       fields = "*"
     )
   )
-  response <- make_request(request, encode = "json")
+  response <- request_make(request, encode = "json")
   proc_res <- process_response(response)
   as_dribble(list(proc_res))
 }

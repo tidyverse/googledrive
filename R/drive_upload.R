@@ -112,7 +112,7 @@ drive_upload <- function(media,
   params[["name"]] <- name %||% basename(media)
   params[["mimeType"]] <- drive_mime_type(type)
 
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.files.create.media",
     params = params
   )
@@ -129,7 +129,7 @@ drive_upload <- function(media,
     media = httr::upload_file(path = media)
   )
 
-  response <- make_request(request)
+  response <- request_make(request)
   out <- as_dribble(list(process_response(response)))
 
   if (verbose) {

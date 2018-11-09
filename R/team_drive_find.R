@@ -32,7 +32,7 @@ team_drive_find <- function(pattern = NULL,
   params <- toCamel(list(...))
   params$fields <- params$fields %||% "*"
 
-  request <- generate_request("drive.teamdrives.list", params = params)
+  request <- request_generate("drive.teamdrives.list", params = params)
   proc_res_list <- do_paginated_request(
     request,
     n_max = n_max,

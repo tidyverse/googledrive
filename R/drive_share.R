@@ -110,11 +110,11 @@ drive_share <- function(file,
 
 drive_share_one <- function(id, params, verbose) {
   params[["fileId"]] <- id
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.permissions.create",
     params = params
   )
-  response <- make_request(request, encode = "json")
+  response <- request_make(request, encode = "json")
   process_response(response)
 }
 
@@ -137,7 +137,7 @@ drive_reveal_permissions <- function(file) {
 }
 
 list_permissions_one <- function(id) {
-  request <- generate_request(
+  request <- request_generate(
     endpoint = "drive.permissions.list",
     params = list(
       fileId = id,
@@ -146,7 +146,7 @@ list_permissions_one <- function(id) {
   )
   ## TO DO: we aren't dealing with the fact that this endpoint is paginated
   ## for Team Drives
-  response <- make_request(request, encode = "json")
+  response <- request_make(request, encode = "json")
   ## if capabilities/canReadRevisions (present in File resource) is not true,
   ## user will get a 403 "insufficientFilePermissions" here
   if (httr::status_code(response) == 403) {
