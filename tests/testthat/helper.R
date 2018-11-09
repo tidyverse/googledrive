@@ -1,20 +1,15 @@
 CLEAN <- SETUP <- FALSE
 isFALSE <- function(x) identical(x, FALSE)
 
-## inspired by developments over in gh
-## https://github.com/r-lib/gh/blob/master/tests/testthat/helper-offline.R
-skip_if_offline <- (function() {
-  offline <- NA
-  function() {
-    if (is.na(offline)) {
-      offline <<- tryCatch(
-        is.na(pingr::ping_port("google.com", count = 1, timeout = 1)),
-        error = function(e) TRUE
-      )
-    }
-    if (offline) testthat::skip("Offline")
+## inlining a function in dev version of testthat
+## https://github.com/r-lib/testthat/commit/be8e6b6ae87642c157c5ed6510076ba37e1bc0ed
+skip_if_offline <- function(host = "r-project.org") {
+  skip_if_not_installed("curl")
+  has_internet <- !is.null(curl::nslookup(host, error = FALSE))
+  if (!has_internet) {
+    skip("offline")
   }
-})()
+}
 
 has_token <- function() {
   env_var <- as.logical(Sys.getenv("GOOGLEDRIVE_LOAD_TOKEN", NA_character_))
@@ -48,7 +43,7 @@ skip_if_no_token <- (function() {
 })()
 
 ## call it once here, so message re: token is not muffled by test_that()
-tryCatch(skip_if_no_token(), skip = function(x) NULL)
+#tryCatch(skip_if_no_token(), skip = function(x) NULL)
 
 nm_fun <- function(context, user = Sys.info()["user"]) {
   y <- purrr::compact(list(context, user))

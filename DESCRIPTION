@@ -30,7 +30,6 @@ Suggests:
     covr,
     dplyr,
     knitr,
-    pingr,
     rmarkdown,
     rprojroot,
     testthat
