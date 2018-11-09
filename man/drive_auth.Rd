@@ -5,8 +5,8 @@
 \title{Authorize googledrive}
 \usage{
 drive_auth(email = NULL, path = NULL,
-  cache = getOption("httr_oauth_cache"),
-  use_oob = getOption("httr_oob_default"))
+  cache = getOption("gargle.oauth_cache"),
+  use_oob = getOption("gargle.oob_default"))
 }
 \arguments{
 \item{email}{Optional; email address associated with the desired Google user.}
