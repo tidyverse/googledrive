@@ -60,6 +60,7 @@ drive_auth <- function(email = NULL,
     app = drive_oauth_app(),
     email = email,
     path = path,
+    package = "googledrive",
     cache = cache,
     use_oob = use_oob
   )
