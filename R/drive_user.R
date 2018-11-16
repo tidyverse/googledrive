@@ -35,7 +35,7 @@ print.drive_user <- function(x, ...) {
   cat(
     c(
       "Logged in as:",
-      glue("  * displayName: {x[['displayName']]}"),
+      glue("  *  displayName: {x[['displayName']]}"),
       glue("  * emailAddress: {x[['emailAddress']]}")
     ),
     sep = "\n"
