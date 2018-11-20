@@ -5,7 +5,7 @@
 #' is this info not always present?
 #'   1. You don't always care about it.
 #'   2. It may require calling different endpoints in the Drive API. Example:
-#'   getting a file's permissions.
+#'   determining if a file has been "published on the web".
 #'   3. It might require additional API calls. Example: figuring out the path(s)
 #'   associated with a specific file.
 #'
@@ -13,7 +13,7 @@
 #'
 #' @section Trashed:
 #' When `what = "trashed"`, the [`dribble`] gains a logical variable that
-#' indicates whether a file is in the trash..
+#' indicates whether a file is in the trash.
 #'
 #' @section MIME type: When `what = "mime_type"`, the [`dribble`] gains a
 #'   variable of MIME types.
@@ -69,11 +69,11 @@ drive_reveal <- function(file,
   what <- match.arg(what)
   reveal <- switch(
     what,
-    "path" = drive_reveal_path,
-    "trashed" = drive_reveal_trashed,
-    "mime_type" = drive_reveal_mime_type,
+    "path"        = drive_reveal_path,
+    "trashed"     = drive_reveal_trashed,
+    "mime_type"   = drive_reveal_mime_type,
     "permissions" = drive_reveal_permissions,
-    "published" = drive_reveal_published
+    "published"   = drive_reveal_published
   )
   reveal(file)
 }

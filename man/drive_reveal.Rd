@@ -31,7 +31,7 @@ is this info not always present?
 \enumerate{
 \item You don't always care about it.
 \item It may require calling different endpoints in the Drive API. Example:
-getting a file's permissions.
+determining if a file has been "published on the web".
 \item It might require additional API calls. Example: figuring out the path(s)
 associated with a specific file.
 }
@@ -56,7 +56,7 @@ necessarily equal the number rows in the output.
 \section{Trashed}{
 
 When \code{what = "trashed"}, the \code{\link{dribble}} gains a logical variable that
-indicates whether a file is in the trash..
+indicates whether a file is in the trash.
 }
 
 \section{MIME type}{
