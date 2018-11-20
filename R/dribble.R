@@ -95,8 +95,7 @@ maybe_dribble <- function(x) {
 #' @importFrom tibble as_tibble
 as_tibble.dribble <- function(x) {
   as_tibble(
-    structure(x, class = class(tibble::tibble())),
-    validate = TRUE
+    structure(x, class = class(tibble::tibble()))
   )
 }
 
