@@ -5,6 +5,7 @@
 \title{Authorize googledrive}
 \usage{
 drive_auth(email = NULL, path = NULL,
+  scopes = "https://www.googleapis.com/auth/drive",
   cache = getOption("gargle.oauth_cache"),
   use_oob = getOption("gargle.oob_default"))
 }
@@ -12,6 +13,8 @@ drive_auth(email = NULL, path = NULL,
 \item{email}{Optional; email address associated with the desired Google user.}
 
 \item{path}{Optional; path to the downloaded JSON file for a service token.}
+
+\item{scopes}{Optional; scope(s) to use. See your choices at \href{https://developers.google.com/identity/protocols/googlescopes#drivev3}{OAuth 2.0 Scopes for Google APIs}.}
 
 \item{cache}{A logical value or a string. \code{TRUE} means to cache
 using the default cache file \code{.httr-oauth}, \code{FALSE} means
@@ -64,6 +67,11 @@ drive_user()
 ## force use of a token associated with a specific email
 drive_auth(email = "jenny@example.com")
 drive_user()
+
+## use a 'read only' scope, so it's impossible to edit or delete files
+drive_auth(
+  scopes = "https://www.googleapis.com/auth/drive.readonly"
+)
 
 ## use a service account token
 drive_auth(path = "foofy-83ee9e7c9c48.json")
