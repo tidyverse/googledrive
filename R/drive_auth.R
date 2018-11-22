@@ -109,7 +109,6 @@ drive_auth <- function(email = NULL,
 #' drive_download(public_file)
 #' }
 drive_deauth <- function() {
-  .auth$set_cred(NULL)
   .auth$set_auth_active(FALSE)
   return(invisible())
 }
@@ -210,7 +209,7 @@ drive_auth_config <- function(app = NULL,
 #' req
 #' }
 drive_token <- function() {
-  if (!.auth$auth_active) {
+  if (isFALSE(.auth$auth_active)) {
     return(NULL)
   }
   if (is.null(.auth$cred)) {
