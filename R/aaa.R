@@ -29,6 +29,7 @@ if (getRversion() >= "2.15.1") utils::globalVariables(c(":="))
   tibble::as_tibble()
 
 .auth <- gargle::AuthState$new(
+  package     = "googledrive",
   app         = gargle::tidyverse_app(),
   api_key     = gargle::tidyverse_api_key(),
   auth_active = TRUE,
