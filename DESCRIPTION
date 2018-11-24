@@ -36,7 +36,7 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    r-lib/gargle@authstate
+    r-lib/gargle
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
