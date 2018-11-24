@@ -14,46 +14,47 @@ drive_auth(email = NULL, path = NULL,
 
 \item{path}{Optional; path to the downloaded JSON file for a service token.}
 
-\item{scopes}{Optional; scope(s) to use. See your choices at \href{https://developers.google.com/identity/protocols/googlescopes#drivev3}{OAuth 2.0 Scopes for Google APIs}.}
+\item{scopes}{Optional; scope(s) to use. See your choices at
+\href{https://developers.google.com/identity/protocols/googlescopes#drivev3}{OAuth 2.0 Scopes for Google APIs}.}
 
-\item{cache}{A logical value or a string. \code{TRUE} means to cache
-using the default cache file \code{.httr-oauth}, \code{FALSE} means
-don't cache, and \code{NA} means to guess using some sensible heuristics.
-A string mean use the specified path as the cache file.}
+\item{cache}{A logical value or a string. \code{TRUE} means to cache using the
+default user-level cache file, \code{~/.R/gargle/gargle-oauth}, \code{FALSE} means
+don't cache, and \code{NA} means to guess using some sensible heuristics. A
+string means use the specified path as the cache file.}
 
-\item{use_oob}{if FALSE, use a local webserver for the OAuth dance.
-Otherwise, provide a URL to the user and prompt for a validation
-code. Defaults to the of the \code{"httr_oob_default"} default,
-or \code{TRUE} if \code{httpuv} is not installed.}
+\item{use_oob}{If \code{FALSE}, use a local webserver for the OAuth dance.
+Otherwise, provide a URL to the user and prompt for a validation code.
+Defaults to the option "gargle.oob_default" or \code{TRUE} if httpuv is not
+installed.}
 }
 \description{
-Authorize googledrive to view and manage your Drive files. By default, you
-are directed to a web browser, asked to sign in to your Google account, and
-to grant googledrive (the tidyverse, actually) permission to operate on your
-behalf with Google Drive. By default, these user credentials are cached in a
-file below your home directory, \code{~/.R/gargle/gargle-oauth}, from where they
-can be automatically refreshed, as necessary. Storage at the user-level means
-the same token can be used across multiple projects and they are less likely
-to be synced to the cloud by accident.
+Authorize googledrive to view and manage your Drive files. By default,
+you are directed to a web browser, asked to sign in to your Google
+account, and to grant googledrive permission to operate on your behalf
+with Google Drive. By default, these user credentials are cached in a
+file below your home directory, \code{~/.R/gargle/gargle-oauth}, from where
+they can be automatically refreshed, as necessary. Storage at the user
+level means the same token can be used across multiple projects and
+tokens are less likely to be synced to the cloud by accident.
 }
 \details{
-Most users, most of the time, do not need to call \code{drive_auth()} explicitly
--- it is triggered by the first action that requires authorization. Even when
-called, the default arguments will often suffice. However, when necessary,
-this function allows the user to explicitly
+Most users, most of the time, do not need to call \code{drive_auth()}
+explicitly -- it is triggered by the first action that requires
+authorization. Even when called, the default arguments often suffice.
+However, when necessary, this function allows the user to explicitly:
 \itemize{
-\item Declare which Google identity to use, via an email address. If there are
-multiple cached tokens, this can clarify which one to use. It can also
-force googledrive to switch from one identity to another. If there's no
-cached token for the email, this triggers a return to the browser to choose
-the identity and give consent.
-\item Load a service account token.
+\item Declare which Google identity to use, via an email address. If there
+are multiple cached tokens, this can clarify which one to use. It can
+also force googledrive to switch from one identity to another. If
+there's no cached token for the email, this triggers a return to the
+browser to choose the identity and give consent.
+\item Load a service account token (as opposed to OAuth).
 \item Specify non-default behavior re: token caching and out-of-bound
 authentication.
 }
 
-For even deeper control over auth, use \code{\link[=drive_auth_config]{drive_auth_config()}} to use your own
-OAuth app or API key.
+For even deeper control over auth, use \code{\link[=drive_auth_config]{drive_auth_config()}} to use
+your own OAuth app or API key.
 }
 \examples{
 \dontrun{
@@ -78,11 +79,7 @@ drive_auth(path = "foofy-83ee9e7c9c48.json")
 }
 }
 \seealso{
-More detail is available from
-\href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{Using OAuth 2.0 for Installed Applications}
-
-Other auth functions: \code{\link{auth-config}},
-  \code{\link{drive_auth_config}},
+Other auth functions: \code{\link{drive_auth_config}},
   \code{\link{drive_deauth}}
 }
 \concept{auth functions}
