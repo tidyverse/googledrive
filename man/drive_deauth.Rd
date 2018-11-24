@@ -4,11 +4,7 @@
 \alias{drive_deauth}
 \title{Suspend authorization}
 \usage{
-drive_deauth(verbose = TRUE)
-}
-\arguments{
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
+drive_deauth()
 }
 \description{
 Put googledrive into a de-authorized state. Instead of sending a token,

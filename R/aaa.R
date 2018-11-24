@@ -28,17 +28,15 @@ if (getRversion() >= "2.15.1") utils::globalVariables(c(":="))
   read.csv(stringsAsFactors = FALSE) %>%
   tibble::as_tibble()
 
-# environment to store credentials
-.state <- new.env(parent = emptyenv())
+.auth <- gargle::AuthState$new(
+  package     = "googledrive",
+  app         = gargle::tidyverse_app(),
+  api_key     = gargle::tidyverse_api_key(),
+  auth_active = TRUE,
+  cred        = NULL
+)
 
 .onLoad <- function(libname, pkgname) {
-
-  .state[["tidyverse_app"]] <- gargle::tidyverse_app()
-  .state[["tidyverse_api_key"]] <- gargle::tidyverse_api_key()
-
-  set_auth_active(TRUE)
-  set_api_key(.state[["tidyverse_api_key"]])
-  set_oauth_app(.state[["tidyverse_app"]])
 
   if (requireNamespace("dplyr", quietly = TRUE)) {
     register_s3_method("dplyr", "arrange", "dribble")

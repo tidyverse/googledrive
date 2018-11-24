@@ -66,16 +66,24 @@ drive_auth <- function(email = NULL,
                        use_oob = getOption("gargle.oob_default")) {
   cred <- gargle::token_fetch(
     scopes = scopes,
-    app = drive_oauth_app(),
+    app = .auth$app,
     email = email,
     path = path,
     package = "googledrive",
     cache = cache,
     use_oob = use_oob
   )
-  stopifnot(is_legit_token(cred, verbose = TRUE))
-  set_access_cred(cred)
-  set_auth_active(TRUE)
+  if (!gargle::is_legit_token(cred, verbose = TRUE)) {
+    stop(
+      "Can't get Google credentials.\n",
+      "Are you running googledrive in a non-interactive session? Consider:\n",
+      "  * drive_deauth() to prevent the attempt to get credentials.\n",
+      "  * Call drive_auth() directly with all necessary specifics.\n",
+      call. = FALSE
+    )
+  }
+  .auth$set_cred(cred)
+  .auth$set_auth_active(TRUE)
 
   return(invisible())
 }
@@ -90,8 +98,6 @@ drive_auth <- function(email = NULL,
 #' built-in API key is used by default or the user can configure their own via
 #' [drive_auth_config()].
 #'
-#' @template verbose
-#'
 #' @export
 #' @family auth functions
 #' @examples
@@ -102,9 +108,9 @@ drive_auth <- function(email = NULL,
 #'   drive_get(as_id("1Hj-k7NpPSyeOR3R7j4KuWnru6kZaqqOAE8_db5gowIM"))
 #' drive_download(public_file)
 #' }
-drive_deauth <- function(verbose = TRUE) {
-  set_auth_active(FALSE)
-  set_access_cred(NULL)
+drive_deauth <- function() {
+  .auth$set_auth_active(FALSE)
+  return(invisible())
 }
 
 #' View or set auth config
@@ -170,34 +176,15 @@ drive_auth_config <- function(app = NULL,
   if (is.null(app) && !is.null(path)) {
     app <- gargle::oauth_app_from_json(path)
   }
-  set_oauth_app(app %||% drive_oauth_app())
-  set_api_key(api_key %||%  drive_api_key())
+  if (!is.null(app)) {
+    .auth$set_app(app)
+  }
 
-  structure(
-    list(
-      active = auth_active(),
-      oauth_app_name = drive_oauth_app()[["appname"]],
-      api_key = drive_api_key()
-    ),
-    class = c("auth_config", "list")
-  )
-}
+  if (!is.null(api_key)) {
+    .auth$set_api_key(api_key)
+  }
 
-#' @export
-print.auth_config <- function(x, ...) {
-  cat(glue(
-    "googledrive auth state: ",
-    "{if (x[['active']]) 'active' else 'inactive'}\n",
-    "oauth app: ",
-    "{x[['oauth_app_name']]}\n",
-    "API key: ",
-    "{if (is.null(x[['api_key']])) 'unset' else 'set'}\n",
-    "token: ",
-    "{if (is.null(access_cred())) 'not loaded' else 'loaded'}"
-  ),
-  sep = ""
-  )
-  invisible(x)
+  .auth
 }
 
 #' Produce Google token
@@ -222,35 +209,13 @@ print.auth_config <- function(x, ...) {
 #' req
 #' }
 drive_token <- function() {
-  if (!auth_active()) {
+  if (isFALSE(.auth$auth_active)) {
     return(NULL)
   }
-  if (is.null(access_cred())) {
+  if (is.null(.auth$cred)) {
     drive_auth()
   }
-  httr::config(token = access_cred())
-}
-
-## Reveals the actual access token, suitable for use with curl.
-access_token <- function() {
-  if (is.null(access_cred())) return(NULL)
-  .state$cred$credentials$access_token
-}
-
-set_auth_active <- function(value) {
-  .state$active <- value
-}
-
-auth_active <- function() {
-  .state$active
-}
-
-set_access_cred <- function(value) {
-  .state$cred <- value
-}
-
-access_cred <- function() {
-  .state$cred
+  httr::config(token = .auth$cred)
 }
 
 #' Retrieve OAuth app or API key
@@ -276,47 +241,8 @@ NULL
 
 #' @rdname auth-config
 #' @export
-drive_api_key <- function() {
-  .state[["api_key"]]
-}
+drive_api_key <- function() .auth$api_key
 
 #' @rdname auth-config
 #' @export
-drive_oauth_app <- function() {
-  .state[["oauth_app"]]
-}
-
-set_api_key <- function(value) {
-  .state[["api_key"]] <- value
-}
-
-set_oauth_app <- function(value) {
-  .state[["oauth_app"]] <- value
-}
-
-#' Check that token appears to be legitimate
-#'
-#' @keywords internal
-is_legit_token <- function(x, verbose = FALSE) {
-  if (!inherits(x, "Token2.0")) {
-    if (verbose) message("Not a Token2.0 object.")
-    return(FALSE)
-  }
-
-  if ("invalid_client" %in% unlist(x$credentials)) {
-    # shouldn't happen if id and secret are good
-    if (verbose) {
-      message("Authorization error. Please check client_id and client_secret.")
-    }
-    return(FALSE)
-  }
-
-  if ("invalid_request" %in% unlist(x$credentials)) {
-    # in past, this could happen if user clicks "Cancel" or "Deny" instead of
-    # "Accept" when OAuth2 flow kicks to browser ... but httr now catches this
-    if (verbose) message("Authorization error. No access token obtained.")
-    return(FALSE)
-  }
-
-  TRUE
-}
+drive_oauth_app <- function() .auth$app
