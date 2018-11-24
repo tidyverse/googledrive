@@ -8,12 +8,12 @@ drive_deauth()
 }
 \description{
 Put googledrive into a de-authorized state. Instead of sending a token,
-googledrive will send an API key. This can be used to access public files for
-which no Google sign-in is required. This is handy for using googledrive in a
-non-interactive setting to make requests that do not require a token. It will
-prevent the attempt to obtain a token interactively in the browser. A
-built-in API key is used by default or the user can configure their own via
-\code{\link[=drive_auth_config]{drive_auth_config()}}.
+googledrive will send its API key. This can be used to access public
+files for which no Google sign-in is required. This is handy for using
+googledrive in a non-interactive setting to make requests that do not
+require a token. It will prevent the attempt to obtain a token
+interactively in the browser. A built-in API key is used by default or
+the user can configure their own via \code{\link[=drive_auth_config]{drive_auth_config()}}.
 }
 \examples{
 \dontrun{
@@ -25,7 +25,7 @@ drive_download(public_file)
 }
 }
 \seealso{
-Other auth functions: \code{\link{auth-config}},
-  \code{\link{drive_auth_config}}, \code{\link{drive_auth}}
+Other auth functions: \code{\link{drive_auth_config}},
+  \code{\link{drive_auth}}
 }
 \concept{auth functions}
