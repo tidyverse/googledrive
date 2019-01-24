@@ -23,7 +23,7 @@ the \code{.httr-oauth} file in current working directory by renaming to
 \item{cache}{A logical value or a string. \code{TRUE} means to cache
 using the default cache file \code{.httr-oauth}, \code{FALSE} means
 don't cache, and \code{NA} means to guess using some sensible heuristics.
-A string mean use the specified path as the cache file.}
+A string means use the specified path as the cache file.}
 
 \item{use_oob}{if FALSE, use a local webserver for the OAuth dance.
 Otherwise, provide a URL to the user and prompt for a validation
