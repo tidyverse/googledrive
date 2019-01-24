@@ -155,7 +155,7 @@ build_request <- function(path = "",
 ##   * error for unknown params
 match_params <- function(provided, spec) {
   ## .endpoints %>% map("parameters") %>% flatten() %>% map_lgl("required")
-  required <- spec %>% purrr::keep("required") %>% names()
+  required <- spec %>% purrr::keep(~ rlang::is_true(.x$required)) %>% names()
   missing <- setdiff(required, names(provided))
   if (length(missing)) {
     stop_collapse(
