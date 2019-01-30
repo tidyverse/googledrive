@@ -71,7 +71,7 @@ drive_auth <- function(email = NULL,
   .auth$set_cred(cred)
   .auth$set_auth_active(TRUE)
 
-  return(invisible())
+  invisible()
 }
 
 #' Suspend authorization
@@ -90,7 +90,7 @@ drive_auth <- function(email = NULL,
 #' }
 drive_deauth <- function() {
   .auth$set_auth_active(FALSE)
-  return(invisible())
+  invisible()
 }
 
 #' Produce configured token
