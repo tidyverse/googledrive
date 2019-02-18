@@ -27,7 +27,7 @@
 #'   indexed here:
 #'   * [Article index](https://googledrive.tidyverse.org/articles/index.html)
 #'
-#' @importFrom rlang %||%
+#' @importFrom rlang %||% :=
 #' @importFrom glue glue glue_data
 #' @keywords internal
 "_PACKAGE"
