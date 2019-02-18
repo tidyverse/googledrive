@@ -16,14 +16,6 @@
   read.csv(stringsAsFactors = FALSE) %>%
   tibble::as_tibble()
 
-.auth <- gargle::AuthState$new(
-  package     = "googledrive",
-  app         = gargle::tidyverse_app(),
-  api_key     = gargle::tidyverse_api_key(),
-  auth_active = TRUE,
-  cred        = NULL
-)
-
 .onLoad <- function(libname, pkgname) {
 
   if (requireNamespace("dplyr", quietly = TRUE)) {

@@ -1,6 +1,14 @@
 ## This file is the interface between googledrive and the
 ## auth functionality in gargle.
 
+.auth <- gargle::AuthState$new(
+  package     = "googledrive",
+  app         = gargle::tidyverse_app(),
+  api_key     = gargle::tidyverse_api_key(),
+  auth_active = TRUE,
+  cred        = NULL
+)
+
 ## The roxygen comments for these functions are mostly generated from data
 ## in this list and template text maintained in gargle.
 gargle_lookup_table <- list(
