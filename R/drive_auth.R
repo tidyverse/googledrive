@@ -45,6 +45,10 @@ gargle_lookup_table <- list(
 #' drive_auth(email = "jenny@example.com")
 #' drive_user()
 #'
+#' ## force a menu where you can choose from existing tokens or
+#' ## choose to get a new one
+#' drive_auth(email = NA)
+#'
 #' ## use a 'read only' scope, so it's impossible to edit or delete files
 #' drive_auth(
 #'   scopes = "https://www.googleapis.com/auth/drive.readonly"
@@ -71,8 +75,8 @@ drive_auth <- function(email = NULL,
     stop(
       "Can't get Google credentials.\n",
       "Are you running googledrive in a non-interactive session? Consider:\n",
-      "  * drive_deauth() to prevent the attempt to get credentials.\n",
-      "  * Call drive_auth() directly with all necessary specifics.\n",
+      "  * `drive_deauth()` to prevent the attempt to get credentials.\n",
+      "  * Call `drive_auth()` directly with all necessary specifics.\n",
       call. = FALSE
     )
   }
