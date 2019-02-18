@@ -1,13 +1,3 @@
-#' Pipe operator
-#'
-#' @name %>%
-#' @rdname pipe
-#' @keywords internal
-#' @export
-#' @importFrom purrr %>%
-#' @usage lhs \%>\% rhs
-NULL
-
 if (getRversion() >= "2.15.1") utils::globalVariables(c(":="))
 
 # environment to hold data about the Drive API
