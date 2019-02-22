@@ -8,8 +8,8 @@ x <- download_discovery_document("drive:v3")
 dd <- read_discovery_document(x)
 
 methods <- get_raw_methods(dd)
-methods <- groom_methods(methods, dd)
 
+methods <- methods %>% map(groom_properties,  dd)
 methods <- methods %>% map(add_schema_params, dd)
 methods <- methods %>% map(add_global_params, dd)
 
