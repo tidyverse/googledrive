@@ -48,7 +48,7 @@ are multiple cached tokens, this can clarify which one to use. It can
 also force googledrive to switch from one identity to another. If
 there's no cached token for the email, this triggers a return to the
 browser to choose the identity and give consent.
-\item Load a service account token (as opposed to OAuth).
+\item Use a service account token.
 \item Specify non-default behavior re: token caching and out-of-bound
 authentication.
 }
@@ -68,6 +68,10 @@ drive_user()
 ## force use of a token associated with a specific email
 drive_auth(email = "jenny@example.com")
 drive_user()
+
+## force a menu where you can choose from existing tokens or
+## choose to get a new one
+drive_auth(email = NA)
 
 ## use a 'read only' scope, so it's impossible to edit or delete files
 drive_auth(
