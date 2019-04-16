@@ -19,7 +19,7 @@ Imports:
     curl (>= 2.8.1),
     gargle (>= 0.0.0.9004),
     glue (>= 1.2.0),
-    httr,h
+    httr,
     jsonlite,
     magrittr,
     purrr (>= 0.2.3),
