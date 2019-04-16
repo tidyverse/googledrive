@@ -72,7 +72,7 @@
         <a class="navbar-brand" href="index.html">googledrive</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3.9000</span>
         </div>
       </div>
     </div>
@@ -107,7 +107,7 @@
 </li>
         <li>
   <a href="https://github.com/tidyverse/googledrive">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -159,7 +159,7 @@
 <li>BAD PR title: “Something about #345”. This will not actually close issue #345 upon merging. <a href="https://help.github.com/articles/closing-issues-using-keywords/">Use the magic words</a>.</li>
 </ul>
 </li>
-<li>Add a bullet to <code>NEWS.md</code> with a concise description of the change, if it’s something a user would want to know when updating the package. <a href="https://github.com/tidyverse/dplyr/blob/master/NEWS.html">dplyr’s <code>NEWS.md</code></a> is a good source of examples. Note the sentence format, the inclusion of GitHub username, and links to relevant issue(s)/PR(s). We will handle any organization into sub-sections just prior to a release. What merits a bullet?
+<li>Add a bullet to <code>NEWS.md</code> with a concise description of the change, if it’s something a user would want to know when updating the package. <a href="https://github.com/tidyverse/dplyr/blob/master/NEWS.md">dplyr’s <code>NEWS.md</code></a> is a good source of examples. Note the sentence format, the inclusion of GitHub username, and links to relevant issue(s)/PR(s). We will handle any organization into sub-sections just prior to a release. What merits a bullet?
 <ul>
 <li>Fixing a typo in the docs does not, but it is still awesome and deeply appreciated.</li>
 <li>Fixing a bug or adding a new feature is bullet-worthy.</li>
@@ -179,7 +179,7 @@
 <li>Return a tidy tibble, probably a <a href="https://tidyverse.github.io/googledrive/reference/dribble.html"><code>dribble</code></a>, whenever it makes sense.</li>
 </ul>
 <p>There is a high-level interface for the typical user. These functions help you accomplish the most common tasks, hopefully in a natural way. Examples: <code><a href="reference/drive_find.html">drive_find()</a></code>, <code><a href="reference/drive_upload.html">drive_upload()</a></code>, <code><a href="reference/drive_download.html">drive_download()</a></code>. A few hand-picked functions support passing extra parameters through to the API request via <code>...</code>, but we don’t do this across the board.</p>
-<p>There is also a low-level interface that is used internally. These are functions like <code><a href="reference/generate_request.html">generate_request()</a></code> and <code><a href="reference/process_response.html">process_response()</a></code>. These functions are exported for use by programming-oriented users who are willing to read <a href="https://developers.google.com/drive/v3/web/about-sdk">Drive API docs</a> and want to do things we haven’t made available in the high-level interface.</p>
+<p>There is also a low-level interface that is used internally. These are functions like <code>generate_request()</code> and <code><a href="reference/process_response.html">process_response()</a></code>. These functions are exported for use by programming-oriented users who are willing to read <a href="https://developers.google.com/drive/v3/web/about-sdk">Drive API docs</a> and want to do things we haven’t made available in the high-level interface.</p>
 </div>
 <div id="package-mechanics" class="section level2">
 <h2 class="hasAnchor">
@@ -191,7 +191,7 @@
 <p>Use templates or inheritance to repeat documentation whenever it is helpful, but without actually repeating its source.</p>
 <p>Use internal and external links liberally, i.e. to other docs in googledrive or to Drive API resources.</p>
 <p>We encourage working examples that include any necessary setup and teardown. In most cases, you’ll have to put them inside a <code>\dontrun{}</code>.</p>
-<p>It’s nice if a pull request includes the result of running <code><a href="http://www.rdocumentation.org/packages/devtools/topics/document">devtools::document()</a></code>, to update <code>NAMESPACE</code> and the <code>.Rd</code> files, but that’s optional. A good reason to NOT <code>document()</code> is if you have a different version of roxygen2 installed and that sprays minor formatting changes across <code>.Rd</code> files that have nothing to do with the PR.</p>
+<p>It’s nice if a pull request includes the result of running <code><a href="https://www.rdocumentation.org/packages/devtools/topics/document">devtools::document()</a></code>, to update <code>NAMESPACE</code> and the <code>.Rd</code> files, but that’s optional. A good reason to NOT <code>document()</code> is if you have a different version of roxygen2 installed and that sprays minor formatting changes across <code>.Rd</code> files that have nothing to do with the PR.</p>
 </div>
 <div id="testing" class="section level3">
 <h3 class="hasAnchor">
@@ -199,26 +199,26 @@
 <p>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>.</p>
 <p>We have many tests that require authorization and that rely on the existence of specific files and folders. Therefore, to fully test googledrive, you’ll have to store a token in a specific place and you’ll have to do some setup. We’ve tried to make it fairly easy to do this setup and to clean up those files when you’re done.</p>
 <p>TL;DR with more detail below:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">## store an OAuth token</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">## TO DO: update this when dust settles re: gargle and service token!</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">## store an OAuth token</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">## TO DO: update this when dust settles re: gargle and service token!</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">token &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_auth.html">drive_auth</a></span>(<span class="dt">reset =</span> <span class="ot">TRUE</span>, <span class="dt">cache =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">saveRDS</span>(token, rprojroot<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rprojroot/topics/find_root_file">find_testthat_root_file</a></span>(<span class="st">"testing-token.rds"</span>))</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">saveRDS</a></span>(token, rprojroot<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rprojroot/topics/find_root_file">find_testthat_root_file</a></span>(<span class="st">"testing-token.rds"</span>))</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">## gather all the test setup and clean code from individual test files</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw">source</span>(rprojroot<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rprojroot/topics/find_root_file">find_testthat_root_file</a></span>(<span class="st">"driver.R"</span>))</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">## leaves behind:</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">##   * all-test-setup.R</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">##   * all-test-clean.R</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">## gather all the test setup and clean code from individual test files</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/source">source</a></span>(rprojroot<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rprojroot/topics/find_root_file">find_testthat_root_file</a></span>(<span class="st">"driver.R"</span>))</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">## leaves behind:</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">##   * all-test-setup.R</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">##   * all-test-clean.R</span></a>
 <a class="sourceLine" id="cb1-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">## "activate" by editing, e.g., SETUP &lt;- TRUE vs SETUP &lt;- FALSE</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">## "activate" by editing, e.g., SETUP &lt;- TRUE vs SETUP &lt;- FALSE</span></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">## source or, I prefer, render the setup script</a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">rmarkdown<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rmarkdown/topics/render">render</a></span>(rprojroot<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rprojroot/topics/find_root_file">find_testthat_root_file</a></span>(<span class="st">"all-test-setup.R"</span>))</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">## source or, I prefer, render the setup script</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">rmarkdown<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rmarkdown/topics/render">render</a></span>(rprojroot<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rprojroot/topics/find_root_file">find_testthat_root_file</a></span>(<span class="st">"all-test-setup.R"</span>))</a>
 <a class="sourceLine" id="cb1-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">## do all development work that requires tests HERE</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">## do all development work that requires tests HERE</span></a>
 <a class="sourceLine" id="cb1-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19">## source or, I prefer, render the clean script</a>
-<a class="sourceLine" id="cb1-20" data-line-number="20">rmarkdown<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rmarkdown/topics/render">render</a></span>(rprojroot<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rprojroot/topics/find_root_file">find_testthat_root_file</a></span>(<span class="st">"all-test-clean.R"</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">## source or, I prefer, render the clean script</span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">rmarkdown<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rmarkdown/topics/render">render</a></span>(rprojroot<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rprojroot/topics/find_root_file">find_testthat_root_file</a></span>(<span class="st">"all-test-clean.R"</span>))</a></code></pre></div>
 <div id="oauth-token-for-testing" class="section level4">
 <h4 class="hasAnchor">
 <a href="#oauth-token-for-testing" class="anchor"></a>OAuth token for testing</h4>
@@ -233,7 +233,7 @@
 </li>
 <li>
 <p>Write this token to file, to the location expected by googledrive’s tests.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">saveRDS</span>(token, rprojroot<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rprojroot/topics/find_root_file">find_testthat_root_file</a></span>(<span class="st">"testing-token.rds"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">saveRDS</a></span>(token, rprojroot<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rprojroot/topics/find_root_file">find_testthat_root_file</a></span>(<span class="st">"testing-token.rds"</span>))</a></code></pre></div>
 </li>
 </ol>
 </div>
@@ -250,12 +250,12 @@
 <li>When you are truly ready to perform setup or clean, edit the code to set the <code>SETUP</code> or <code>CLEAN</code> variable to <code>TRUE</code> instead of <code>FALSE</code>. This friction is intentional, so you don’t accidentally create or delete lots of Drive files without meaning to.</li>
 <li>Render <code>all-test-setup.R</code> with the Knit button in RStudio or like so:</li>
 </ol>
-<!-- end list --><div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">rmarkdown<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rmarkdown/topics/render">render</a></span>(<span class="st">"all-test-setup.R"</span>)</a></code></pre></div>
+<!-- end list --><div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">rmarkdown<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rmarkdown/topics/render">render</a></span>(<span class="st">"all-test-setup.R"</span>)</a></code></pre></div>
 <p>You could also just source it, but it’s nice to have a report that records what actually happened.</p>
-<p>You should now be able to run the tests via <em>Build &gt; Test Package</em> or <em>Build &gt; Check Package</em> in RStudio or via <code><a href="http://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code>.</p>
+<p>You should now be able to run the tests via <em>Build &gt; Test Package</em> or <em>Build &gt; Check Package</em> in RStudio or via <code><a href="https://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code>.</p>
 <p>You can leave the setup in place for as long as you’re working on googledrive, i.e. you don’t need to do this for every test run. In fact, that is the whole point!</p>
 <p>When your googledrive development is over, render the clean script:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">rmarkdown<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rmarkdown/topics/render">render</a></span>(<span class="st">"all-test-clean.R"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">rmarkdown<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rmarkdown/topics/render">render</a></span>(<span class="st">"all-test-clean.R"</span>)</a></code></pre></div>
 <p>Again, read the report to look over what happened, in case anything was trashed that should not have been (btw, let us know about that so we can fix!). Once you’re satisfied that your own files were not touched, you can <code><a href="reference/drive_empty_trash.html">drive_empty_trash()</a></code> to truly delete the test files.</p>
 </div>
 <div id="adding-tests" class="section level4">
@@ -302,7 +302,7 @@
 
 <div class="author">
   <p>
-    Developed by Lucy D'Agostino McGowan, <a href='https://jennybryan.org'>Jennifer Bryan</a>, <a href='https://www.rstudio.com'><img src='https://tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
+    Developed by Lucy D'Agostino McGowan, <a href='https://jennybryan.org'>Jennifer Bryan</a>, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
