@@ -24,7 +24,7 @@ string means use the specified path as the cache file.}
 
 \item{use_oob}{If \code{FALSE}, use a local webserver for the OAuth dance.
 Otherwise, provide a URL to the user and prompt for a validation code.
-Defaults to the option "gargle.oob_default" or \code{TRUE} if httpuv is not
+Defaults to the option \code{gargle.oob_default} or \code{TRUE} if httpuv is not
 installed.}
 }
 \description{
