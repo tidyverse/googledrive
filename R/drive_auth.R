@@ -131,6 +131,10 @@ drive_token <- function() {
   httr::config(token = .auth$cred)
 }
 
+have_token <- function() {
+  inherits(.auth$cred, "Token2.0")
+}
+
 #' View or edit auth config
 #'
 #' @eval gargle:::PREFIX_auth_config_description(gargle_lookup_table)
