@@ -125,7 +125,7 @@ drive_token <- function() {
   if (isFALSE(.auth$auth_active)) {
     return(NULL)
   }
-  if (is.null(.auth$cred)) {
+  if (!have_token()) {
     drive_auth()
   }
   httr::config(token = .auth$cred)
