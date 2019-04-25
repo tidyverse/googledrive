@@ -11,10 +11,6 @@
 ^README-.*\.png$
 ^\.httr-oauth-SUSPENDED$
 ^scratch.R$
-^tidyverse-noncaching-token\.rds$
-^jenny-f-bryan-noncaching-token\.rds$
-^jenny-at-bryanbc-noncaching-token\.rds$
-^jenny-at-rstudio-noncaching-token\.rds$
 ^man-roxygen$
 ^docs$
 ^_pkgdown\.yml$
@@ -23,6 +19,4 @@
 ^CONTRIBUTING\.[R]?md$
 ^secure-file$
 ^cran-comments\.md$
-^tests/testthat/test-tokens/googledrive-testing\.json\.enc$
-^tests/testthat/test-tokens/av_googledrive-testing\.json\.enc$
 ^\.github$

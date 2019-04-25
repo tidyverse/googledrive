@@ -17,7 +17,7 @@ Depends:
     R (>= 3.2)
 Imports: 
     curl (>= 2.8.1),
-    gargle (>= 0.0.0.9004),
+    gargle (>= 0.0.0.9005),
     glue (>= 1.2.0),
     httr,
     jsonlite,
@@ -34,7 +34,8 @@ Suggests:
     rmarkdown,
     roxygen2,
     rprojroot,
-    testthat
+    sodium,
+    testthat (>= 2.1.1)
 VignetteBuilder: 
     knitr
 Remotes:

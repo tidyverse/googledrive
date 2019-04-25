@@ -8,14 +8,6 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  - ps: New-Item ~/.R/gargle -ItemType Directory
-  - ps: |
-      if (-not $env:APPVEYOR_PULL_REQUEST_NUMBER)
-      {
-        nuget install secure-file -ExcludeVersion
-        C:\projects\googledrive\secure-file\tools\secure-file.exe -decrypt C:\projects\googledrive\tests\testthat\test-tokens\av_googledrive-testing.json.enc -secret $env:my_secret -out  C:\Users\appveyor\.R\gargle\googledrive-testing.json
-      }
-  - ps: Test-Path ~/.R/gargle/googledrive-testing.json -PathType Leaf
   - ps: Bootstrap
 
 # Adapt as necessary starting from here
@@ -24,8 +16,6 @@ environment:
   global:
     USE_RTOOLS: true
     WARNINGS_ARE_ERRORS: 1
-  my_secret:
-    secure: nVYnVjtzpqZ2V87uoBzyDQ==
 
 build_script:
   - travis-tool.sh install_deps
