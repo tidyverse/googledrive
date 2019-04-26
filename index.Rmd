@@ -50,7 +50,17 @@ install.packages("googledrive")
 library("googledrive")
 ```
 
-```{r drive-setup, include = FALSE}
+```{r drive-setup, eval = FALSE, include = FALSE}
+# This chunk contains code to setup all the files necessary for this document
+# to make sense, starting from a blank slate. Likewise, it contains code to
+# delete those same files.
+#
+# It is meant to be run occasionally, interactively, by a human maintainer.
+# So far, I can't think of anywhere better to put this.
+#
+# The visible, executable chunks may also create files, in which case the
+# necessary clean up code shall also be visible and executable.
+
 CLEAN <- SETUP <- FALSE
 
 examples <- drive_example()
@@ -87,12 +97,15 @@ if (isTRUE(CLEAN)) {
 
 * Most functions begin with the prefix `drive_`. Auto-completion is your friend.
 * Goal is to allow Drive access that feels similar to Unix file system utilities, e.g., `find`, `ls`, `mv`, `cp`, `mkdir`, and `rm`.
-* The metadata for one or more Drive files is held in a `dribble`, a "Drive tibble". This is a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive. It is designed to give people what they want (file name), track what the API wants (file id), and to hold the metadata needed for general file operations.
+* The metadata for one or more Drive files is held in a `dribble`, a "Drive tibble". This is a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive. Design goals:
+  - Give humans what they want: the file name
+  - Track what the API wants: the fild ID
+  - Hold on to all the other metadata sent back by the API
 * googledrive is "pipe-friendly" and, in fact, re-exports `%>%`, but does not require its use.
 
 ### Quick demo
 
-Here's how to list up to the first `n_max` files you see in [My Drive](https://drive.google.com). You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.
+Here's how to list up to `n_max` of the files you see in [My Drive](https://drive.google.com). You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.
 
 ```{r}
 drive_find(n_max = 30)
@@ -113,7 +126,7 @@ Alternatively, you can refine the search using the `q` query parameter. Accepted
 (files <- drive_find(q = "fullText contains 'project'"))
 ```
 
-You generally want to store the result of a googledrive call, as we do with `files` above. `files` is a dribble with info on several files and can be used as the input for downstream calls. It can also be manipulated like a regular data frame at any point.
+You generally want to store the result of a googledrive call, as we do with `files` above. `files` is a dribble with info on several files and can be used as the input for downstream calls. It can also be manipulated as a regular data frame at any point.
 
 #### Identify files
 
@@ -132,7 +145,7 @@ drive_get(as_id(x$id))
 drive_get(as_id(x))
 ```
 
-In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a `dribble`. If it's ambiguous, use `as_id()` to flag a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.
+In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a `dribble`. If it's ambiguous, use `as_id()` to mark a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.
 
 #### Upload files
 
@@ -162,14 +175,14 @@ Much better!
 
 #### Share files
 
-To allow other people access your file, you need to change the sharing permissions. You can check the sharing status by running `drive_reveal(..., "permissions")`, which adds a logical column `shared` and parks more detailed metadata in a `permissions_resource` variable.
+To allow other people to access your file, you need to change the sharing permissions. You can check the sharing status by running `drive_reveal(..., "permissions")`, which adds a logical column `shared` and parks more detailed metadata in a `permissions_resource` variable.
 
 ```{r}
 chicken_sheet %>% 
   drive_reveal("permissions")
 ```
 
-Here's how to grant anyone with the link permission to be able to view this dataset.
+Here's how to grant anyone with the link permission to view this dataset.
 
 ```{r}
 (chicken_sheet <- chicken_sheet %>%
@@ -211,7 +224,7 @@ drive_download(
 )
 ```
 
-Notice in the example above, I specified `overwrite = TRUE`, in order to overwrite the local file previously saved.
+Notice in the example above, I specified `overwrite = TRUE`, in order to overwrite the local csv file previously saved.
 
 Finally, you could just allow export to the default type. In the case of Google Sheets, this is an Excel workbook:
 
@@ -237,4 +250,3 @@ file.remove(c(
   "README-chicken-sheet.csv", "README-chicken-sheet.xlsx", "chicken.txt"
 ))
 ```
-
