@@ -8,13 +8,23 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
+can_decrypt <- gargle:::secret_can_decrypt("googledrive")
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  error = TRUE,
+  purl = can_decrypt,
+  eval = can_decrypt
 )
-## use a token from our development account
-token_path <- rprojroot::find_package_root_file("tidyverse-noncaching-token.rds")
-googledrive::drive_auth(token_path)
+if (can_decrypt) {
+  json <- gargle:::secret_read("googledrive", "googledrive-docs.json")
+  googledrive::drive_auth(path = rawToChar(json))
+}
+options(tidyverse.quiet = TRUE)
+```
+
+```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
 ```
 
 Some googledrive functions are built to naturally handle multiple files, while others operate on a single file.
@@ -60,45 +70,65 @@ Use the example files that ship with googledrive. This looks a bit odd, but the 
 ```{r}
 local_files <- drive_example() %>% 
   drive_example()
+basename(local_files)
 ```
 
 Create a folder on your Drive and upload all files into this folder by iterating over the `local_files` using `purrr::map()`.
 
 ```{r}
 folder <- drive_mkdir("upload-into-me-article-demo")
-files <- map(local_files, drive_upload, path = folder, verbose = FALSE)
+files <- map(local_files, ~ drive_upload(.x, path = folder, verbose = FALSE))
 ```
 
-`files` is now a list of **dribbles**, one per uploaded file. Let's confirm that we uploaded the file into the new folder.
+First, let's confirm that we uploaded the files into the new folder.
+
+```{r}
+drive_ls(folder)
+```
+
+Now let's reflect on the `files` object returned by this operation. `files` is a list of **dribbles**, one per uploaded file.
 
 ```{r}
 str(files, max.level = 1)
-drive_ls(folder)
 ```
+
+This would be a favorable data structure if you've got more `map()`ing to do, as you'll see below.
+
+But what if not? You can always row bind individual dribbles into one big dribble yourself with, e.g., `dplyr::bind_rows()`.
+
+```{r}
+bind_rows(files)
+```
+
+Below we show another way to finesse this by using a variant of `purrr::map()` that does this for us, namely `map_df()`.
 
 ### Rename
 
 Imagine that we now wish these file names had a date prefix. First, form the new names. We use `glue::glue()` for string interpolation but you could also use `paste()`. Second, we map over two inputs: the list of dribbles from above and the vector of new names.
 
 ```{r}
-new_names <- glue("{Sys.Date()}_{basename(local_files)}")
+(new_names <- glue("{Sys.Date()}_{basename(local_files)}"))
 files_dribble <- map2_df(files, new_names, drive_rename)
-## alternative: do this to get a list of dribbles for more downstream mapping
-# files_list <- map2(files, new_names, drive_rename)
 ```
 
-We use `purrr::map2_df()` to work through the list of dribbles (= Drive files) and the vector of new names and row bind the returned dribbles into a single dribble holding all files. In commented out code, we show an alternative using `purrr::map2()` that would return another list of dribbles. This would set you up better for downstream operations that required more `map()`ing.
+We use `purrr::map2_df()` to work through `files`, the list of dribbles (= Drive files), and `new_names`, the vector of new names, and row bind the returned dribbles into a single dribble holding all files.
 
-Let's check on the contents of this folder again:
+Let's check on the contents of this folder again to confirm the new names:
 
 ```{r}
 drive_ls(folder)
 ```
 
-Note that you can always row bind individual dribbles into one big dribble yourself. We demo that with `dplyr::bind_rows()`:
+Let's confirm that, by using `map2_df()` instead of `map2()`, we got a single dribble back, instead of a list of one-row dribbles:
 
 ```{r}
-bind_rows(files)
+files_dribble
+```
+
+What if you wanted to get a list back, because your downstream operations include yet more `map()`ing? Then you would use `map2()`.
+
+```{r eval = FALSE}
+files_list <- map2(files, new_names, drive_rename)
 ```
 
 ### Clean up
