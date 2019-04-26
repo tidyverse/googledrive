@@ -41,7 +41,7 @@
         <a class="navbar-brand" href="../../index.html">googledrive</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3.9000</span>
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@
 </li>
         <li>
   <a href="https://github.com/tidyverse/googledrive">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -103,7 +103,7 @@
     
     
 <p>The most natural way to identify a file is by its <strong>name</strong>. The Drive API, however, fundamentally identifies a file by its unique id. googledrive makes it easy to specify your file of interest by name at first, but then immediately capture that in a way that includes the file’s id. This facilitates downstream file operations.</p>
-<p>googledrive holds information on Drive files in what we call a <strong>dribble</strong>, a Drive tibble. A <a href="http://tibble.tidyverse.org/reference/tibble.html">tibble</a> is the variant of the data frame that is used throughout the <a href="http://www.tidyverse.org">tidyverse</a>. A googledrive dribble will have one row per file and is guaranteed to have these variables:</p>
+<p>googledrive holds information on Drive files in what we call a <strong>dribble</strong>, a Drive tibble. A <a href="https://tibble.tidyverse.org/reference/tbl_df-class.html">tibble</a> is the variant of the data frame that is used throughout the <a href="https://www.tidyverse.org">tidyverse</a>. A googledrive dribble will have one row per file and is guaranteed to have these variables:</p>
 <ul>
 <li>
 <code>name</code>: The file’s name.</li>
@@ -112,14 +112,14 @@
 <li>
 <code>drive_resource</code>: A list column containing Drive API metadata that is internally useful and possibly interesting to some users. The typical user will leave this variable unexamined. Just let it be.</li>
 </ul>
-<p>Some functions add additional variables, but the three above are always present. <code><a href="../../reference/drive_reveal.html">drive_reveal()</a></code>, for example, can add file paths, MIME types, trash status, and information about permissions and publishing. Use your usual techniques for data frame manipulation in order to isolate specific rows – files, in this case – that you want to operate on. For example, you can manipulate the dribble with dplyr verbs such as <code>filter()</code>, <code>mutate()</code>, <code>arrange()</code>, and <code>slice()</code>.</p>
+<p>Some functions add additional variables, but the three above are always present. <code><a href="../../reference/drive_reveal.html">drive_reveal()</a></code>, for example, can add file paths, MIME types, trash status, and information about permissions and publishing. Use your usual techniques for data frame manipulation in order to isolate specific rows – files, in this case – that you want to operate on. For example, you can manipulate the dribble with dplyr verbs such as <code><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter()</a></code>, <code>mutate()</code>, <code>arrange()</code>, and <code>slice()</code>.</p>
 <div id="how-to-get-one-or-more-files-in-a-dribble" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-to-get-one-or-more-files-in-a-dribble" class="anchor"></a>How to get one or more files in a dribble</h2>
 <p>How do you get files into a dribble in the first place? Two main functions for this:</p>
 <ul>
 <li>
-<code><a href="../../reference/drive_find.html">drive_find()</a></code>: Similar to &lt;drive.google.com&gt;. Lists all your files or lets you narrow things down based on name or file properties.</li>
+<code><a href="../../reference/drive_find.html">drive_find()</a></code>: Similar to <a href="https://drive.google.com" class="uri">https://drive.google.com</a>. Lists all your files or lets you narrow things down based on name or file properties.</li>
 <li>
 <code><a href="../../reference/drive_get.html">drive_get()</a></code>: Get files by name – file path, actually – or by id, including by URL.</li>
 </ul>
@@ -135,9 +135,9 @@
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"folder"</span>)</a>
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"spreadsheet"</span>)</a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">trashed =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'horsebean'"</span>)</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"modifiedTime &gt; '2017-07-21T12:00:00'"</span>, <span class="dt">order_by =</span> <span class="st">"recency"</span>)</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="kw">c</span>(<span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'project'"</span>)</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"modifiedTime &gt; '2019-04-21T12:00:00'"</span>, <span class="dt">order_by =</span> <span class="st">"recency"</span>)</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span>))</a></code></pre></div>
 <p><code><a href="../../reference/drive_find.html">drive_find()</a></code> is for exhaustive file listing or filtering on file properties.</p>
 </div>
 <div id="drive_get" class="section level2">
@@ -147,11 +147,11 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="st">"i_am_a_file_name"</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="st">"i/am/a/deeply/buried/file.txt"</span>)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="st">"i/am/a/folder/"</span>)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw">c</span>(<span class="st">"i_am_a_file_name"</span>, <span class="st">"path/to/file"</span>))</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"i_am_a_file_name"</span>, <span class="st">"path/to/file"</span>))</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="../../reference/as_id.html">as_id</a></span>(<span class="st">"abcdefghijklm"</span>))</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="../../reference/as_id.html">as_id</a></span>(<span class="kw">c</span>(<span class="st">"abcdefghijklm"</span>, <span class="st">"nopqrstuvwxyz"</span>)))</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="../../reference/as_id.html">as_id</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"abcdefghijklm"</span>, <span class="st">"nopqrstuvwxyz"</span>)))</a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="dt">id =</span> <span class="st">"abcdefghijklm"</span>)</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="dt">id =</span> <span class="kw">c</span>(<span class="st">"abcdefghijklm"</span>, <span class="st">"nopqrstuvwxyz"</span>))</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="dt">id =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"abcdefghijklm"</span>, <span class="st">"nopqrstuvwxyz"</span>))</a>
 <a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="../../reference/as_id.html">as_id</a></span>(<span class="st">"https://docs.google.com/document/d/abcdefghijklm/edit"</span>))</a></code></pre></div>
 <p><code><a href="../../reference/drive_get.html">drive_get()</a></code> is for targetted file fetching based on name, path, id, or URL.</p>
 </div>
@@ -195,7 +195,7 @@
 
 <div class="author">
   <p>
-    Developed by Lucy D'Agostino McGowan, <a href="https://jennybryan.org">Jennifer Bryan</a>, <a href="https://www.rstudio.com"><img src="https://tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>.
+    Developed by Lucy D'Agostino McGowan, <a href="https://jennybryan.org">Jennifer Bryan</a>, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

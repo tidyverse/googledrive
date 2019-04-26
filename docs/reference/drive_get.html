@@ -82,7 +82,7 @@ Suite Enterprise, G Suite Business, or G Suite for Education." />
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3.9000</span>
         </div>
       </div>
     </div>
@@ -117,7 +117,7 @@ Suite Enterprise, G Suite Business, or G Suite for Education." />
 </li>
         <li>
   <a href="https://github.com/tidyverse/googledrive">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -228,25 +228,25 @@ path, also calls <code>files.list</code>:</p><ul>
 <span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"root"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_reveal.html'>drive_reveal</a></span>(<span class='st'>"path"</span>)
 
 <span class='co'>## multiple names</span>
-<span class='fu'>drive_get</span>(<span class='fu'>c</span>(<span class='st'>"abc"</span>, <span class='st'>"def"</span>))
+<span class='fu'>drive_get</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"abc"</span>, <span class='st'>"def"</span>))
 
 <span class='co'>## multiple names, one of which must be a folder</span>
-<span class='fu'>drive_get</span>(<span class='fu'>c</span>(<span class='st'>"abc"</span>, <span class='st'>"def/"</span>))
+<span class='fu'>drive_get</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"abc"</span>, <span class='st'>"def/"</span>))
 
 <span class='co'>## query by file id(s)</span>
 <span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"abcdefgeh123456789"</span>)
 <span class='fu'>drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"abcdefgeh123456789"</span>))
-<span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"abcdefgh123456789"</span>, <span class='st'>"jklmnopq123456789"</span>))
+<span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"abcdefgh123456789"</span>, <span class='st'>"jklmnopq123456789"</span>))
 
 <span class='co'>## access the Team Drive named "foo"</span>
 <span class='co'>## team_drive params must be specified if getting by path</span>
 <span class='no'>foo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='team_drive_get.html'>team_drive_get</a></span>(<span class='st'>"foo"</span>)
-<span class='fu'>drive_get</span>(<span class='fu'>c</span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='no'>foo</span>)
+<span class='fu'>drive_get</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='no'>foo</span>)
 <span class='co'>## team_drive params are not necessary if getting by id</span>
 <span class='fu'>drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"123456789"</span>))
 
 <span class='co'>## search all Team Drives and other files user has accessed</span>
-<span class='fu'>drive_get</span>(<span class='fu'>c</span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='st'>"all"</span>)
+<span class='fu'>drive_get</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='st'>"all"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -273,7 +273,7 @@ path, also calls <code>files.list</code>:</p><ul>
 
 <div class="author">
   <p>
-    Developed by Lucy D'Agostino McGowan, <a href='https://jennybryan.org'>Jennifer Bryan</a>, <a href='https://www.rstudio.com'><img src='https://tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
+    Developed by Lucy D'Agostino McGowan, <a href='https://jennybryan.org'>Jennifer Bryan</a>, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

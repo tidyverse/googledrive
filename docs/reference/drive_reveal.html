@@ -36,7 +36,7 @@ automatically present in the default dribble produced by googledrive. Why
 is this info not always present?
 You don't always care about it.
 It may require calling different endpoints in the Drive API. Example:
-getting a file's permissions.
+determining if a file has been &quot;published on the web&quot;.
 It might require additional API calls. Example: figuring out the path(s)
 associated with a specific file.
 " />
@@ -82,7 +82,7 @@ associated with a specific file.
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3.9000</span>
         </div>
       </div>
     </div>
@@ -117,7 +117,7 @@ associated with a specific file.
 </li>
         <li>
   <a href="https://github.com/tidyverse/googledrive">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -145,14 +145,14 @@ automatically present in the default <code><a href='dribble.html'>dribble</a></c
 is this info not always present?</p><ol>
 <li><p>You don't always care about it.</p></li>
 <li><p>It may require calling different endpoints in the Drive API. Example:
-getting a file's permissions.</p></li>
+determining if a file has been "published on the web".</p></li>
 <li><p>It might require additional API calls. Example: figuring out the path(s)
 associated with a specific file.</p></li>
 </ol>
     
     </div>
 
-    <pre class="usage"><span class='fu'>drive_reveal</span>(<span class='no'>file</span>, <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"path"</span>, <span class='st'>"trashed"</span>, <span class='st'>"mime_type"</span>,
+    <pre class="usage"><span class='fu'>drive_reveal</span>(<span class='no'>file</span>, <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"path"</span>, <span class='st'>"trashed"</span>, <span class='st'>"mime_type"</span>,
   <span class='st'>"permissions"</span>, <span class='st'>"published"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -199,7 +199,7 @@ necessarily equal the number rows in the output.</p>
 
     
     <p>When <code>what = "trashed"</code>, the <code><a href='dribble.html'>dribble</a></code> gains a logical variable that
-indicates whether a file is in the trash..</p>
+indicates whether a file is in the trash.</p>
     
     <h2 class="hasAnchor" id="mime-type"><a class="anchor" href="#mime-type"></a>MIME type</h2>
 
@@ -274,7 +274,7 @@ that indicates whether a file is shared and a new list-column
 
 <div class="author">
   <p>
-    Developed by Lucy D'Agostino McGowan, <a href='https://jennybryan.org'>Jennifer Bryan</a>, <a href='https://www.rstudio.com'><img src='https://tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
+    Developed by Lucy D'Agostino McGowan, <a href='https://jennybryan.org'>Jennifer Bryan</a>, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

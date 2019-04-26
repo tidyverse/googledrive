@@ -84,7 +84,7 @@ MIME types accepted by Google Drive (these are simply passed through).
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3.9000</span>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@ MIME types accepted by Google Drive (these are simply passed through).
 </li>
         <li>
   <a href="https://github.com/tidyverse/googledrive">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -181,24 +181,24 @@ Drive API.</p></td>
 <span class='co'>## get the mime type for jpegs</span>
 <span class='fu'>drive_mime_type</span>(<span class='st'>"jpeg"</span>)</div><div class='output co'>#&gt; [1] "image/jpeg"</div><div class='input'>
 <span class='co'>## it's vectorized</span>
-<span class='fu'>drive_mime_type</span>(<span class='fu'>c</span>(<span class='st'>"presentation"</span>, <span class='st'>"pdf"</span>, <span class='st'>"image/gif"</span>))</div><div class='output co'>#&gt; [1] "application/vnd.google-apps.presentation"
+<span class='fu'>drive_mime_type</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"presentation"</span>, <span class='st'>"pdf"</span>, <span class='st'>"image/gif"</span>))</div><div class='output co'>#&gt; [1] "application/vnd.google-apps.presentation"
 #&gt; [2] "application/pdf"                         
 #&gt; [3] "image/gif"                               </div><div class='input'>
 <span class='co'>## see the internal tibble of MIME types known to the Drive API</span>
-<span class='fu'>drive_mime_type</span>(<span class='fu'><a href='expose.html'>expose</a></span>())</div><div class='output co'>#&gt; [90m# A tibble: 77 x 4[39m
-#&gt;    mime_type                                           ext   human_type default
-#&gt;    [3m[90m&lt;chr&gt;[39m[23m                                               [3m[90m&lt;chr&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m      [3m[90m&lt;lgl&gt;[39m[23m  
-#&gt; [90m 1[39m application/x-vnd.oasis.opendocument.presentation   [31mNA[39m    [31mNA[39m         [31mNA[39m     
-#&gt; [90m 2[39m text/tab-separated-values                           tsv   tsv        TRUE   
-#&gt; [90m 3[39m image/jpeg                                          jpeg  jpeg       TRUE   
-#&gt; [90m 4[39m image/jpeg                                          jpg   jpg        FALSE  
-#&gt; [90m 5[39m image/jpeg                                          jpe   jpe        FALSE  
-#&gt; [90m 6[39m image/bmp                                           [31mNA[39m    [31mNA[39m         [31mNA[39m     
-#&gt; [90m 7[39m image/gif                                           gif   gif        TRUE   
-#&gt; [90m 8[39m application/vnd.ms-excel.sheet.macroenabled.12      [31mNA[39m    [31mNA[39m         [31mNA[39m     
-#&gt; [90m 9[39m application/vnd.openxmlformats-officedocument.word… dotx  dotx       TRUE   
-#&gt; [90m10[39m application/vnd.ms-powerpoint.presentation.macroen… [31mNA[39m    [31mNA[39m         [31mNA[39m     
-#&gt; [90m# … with 67 more rows[39m</div></pre>
+<span class='fu'>drive_mime_type</span>(<span class='fu'><a href='expose.html'>expose</a></span>())</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 77 x 4</span><span>
+#&gt;    mime_type                                            ext   human_type default
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                                </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> application/x-vnd.oasis.opendocument.presentation    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> text/tab-separated-values                            tsv   tsv        TRUE   
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> image/jpeg                                           jpeg  jpeg       TRUE   
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> image/jpeg                                           jpg   jpg        FALSE  
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> image/jpeg                                           jpe   jpe        FALSE  
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> image/bmp                                            </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> image/gif                                            gif   gif        TRUE   
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> application/vnd.ms-excel.sheet.macroenabled.12       </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> application/vnd.openxmlformats-officedocument.wordp… dotx  dotx       TRUE   
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> application/vnd.ms-powerpoint.presentation.macroena… </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     
+#&gt; </span><span style='color: #949494;'># … with 67 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -220,7 +220,7 @@ Drive API.</p></td>
 
 <div class="author">
   <p>
-    Developed by Lucy D'Agostino McGowan, <a href='https://jennybryan.org'>Jennifer Bryan</a>, <a href='https://www.rstudio.com'><img src='https://tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
+    Developed by Lucy D'Agostino McGowan, <a href='https://jennybryan.org'>Jennifer Bryan</a>, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

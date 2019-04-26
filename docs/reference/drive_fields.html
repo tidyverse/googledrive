@@ -85,7 +85,7 @@ parameters." />
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3.9000</span>
         </div>
       </div>
     </div>
@@ -120,7 +120,7 @@ parameters." />
 </li>
         <li>
   <a href="https://github.com/tidyverse/googledrive">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -190,25 +190,25 @@ in the Drive API documentation.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## get a tibble of all fields for the Files resource + indicator of defaults</span>
-<span class='fu'>drive_fields</span>(<span class='fu'><a href='expose.html'>expose</a></span>())</div><div class='output co'>#&gt; [90m# A tibble: 51 x 2[39m
-#&gt;    name               desc                                                     
-#&gt;    [3m[90m&lt;chr&gt;[39m[23m              [3m[90m&lt;chr&gt;[39m[23m                                                    
-#&gt; [90m 1[39m appProperties      [90m"[39mA collection of arbitrary key-value pairs which are pri…
-#&gt; [90m 2[39m capabilities       Capabilities the current user has on this file. Each cap…
-#&gt; [90m 3[39m contentHints       Additional information about the content of the file. Th…
-#&gt; [90m 4[39m createdTime        The time at which the file was created (RFC 3339 date-ti…
-#&gt; [90m 5[39m description        A short description of the file.                         
-#&gt; [90m 6[39m explicitlyTrashed  Whether the file has been explicitly trashed, as opposed…
-#&gt; [90m 7[39m fileExtension      The final component of fullFileExtension. This is only a…
-#&gt; [90m 8[39m folderColorRgb     [90m"[39mThe color for a folder as an RGB hex string. The suppor…
-#&gt; [90m 9[39m fullFileExtension  [90m"[39mThe full file extension extracted from the name field. …
-#&gt; [90m10[39m hasAugmentedPermi… Whether any users are granted file access directly on th…
-#&gt; [90m# … with 41 more rows[39m</div><div class='input'>
+<span class='fu'>drive_fields</span>(<span class='fu'><a href='expose.html'>expose</a></span>())</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 51 x 2</span><span>
+#&gt;    name                desc                                                     
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                                    
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> appProperties       </span><span style='color: #949494;'>"</span><span>A collection of arbitrary key-value pairs which are pri…
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> capabilities        Capabilities the current user has on this file. Each cap…
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> contentHints        Additional information about the content of the file. Th…
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> createdTime         The time at which the file was created (RFC 3339 date-ti…
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> description         A short description of the file.                         
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> explicitlyTrashed   Whether the file has been explicitly trashed, as opposed…
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> fileExtension       The final component of fullFileExtension. This is only a…
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> folderColorRgb      </span><span style='color: #949494;'>"</span><span>The color for a folder as an RGB hex string. The suppor…
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> fullFileExtension   </span><span style='color: #949494;'>"</span><span>The full file extension extracted from the name field. …
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> hasAugmentedPermis… Whether any users are granted file access directly on th…
+#&gt; </span><span style='color: #949494;'># … with 41 more rows</span><span></div><div class='input'>
 <span class='co'>## invalid fields are removed and throw warning</span>
-<span class='fu'>drive_fields</span>(<span class='fu'>c</span>(<span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"ownedByMe"</span>, <span class='st'>"pancakes!"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring fields that are non-standard for the Files resource:</span>
+<span class='fu'>drive_fields</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"ownedByMe"</span>, <span class='st'>"pancakes!"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring fields that are non-standard for the Files resource:</span>
 #&gt; <span class='warning'>  * pancakes!</span></div><div class='output co'>#&gt; [1] "name"      "parents"   "ownedByMe"</div><div class='input'>
 <span class='co'>## prepare fields for query</span>
-<span class='fu'>prep_fields</span>(<span class='fu'>c</span>(<span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"kind"</span>))</div><div class='output co'>#&gt; [1] "files/name,files/parents,files/kind"</div></pre>
+<span class='fu'>prep_fields</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"kind"</span>))</div><div class='output co'>#&gt; [1] "files/name,files/parents,files/kind"</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -232,7 +232,7 @@ in the Drive API documentation.</p></div>
 
 <div class="author">
   <p>
-    Developed by Lucy D'Agostino McGowan, <a href='https://jennybryan.org'>Jennifer Bryan</a>, <a href='https://www.rstudio.com'><img src='https://tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
+    Developed by Lucy D'Agostino McGowan, <a href='https://jennybryan.org'>Jennifer Bryan</a>, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
