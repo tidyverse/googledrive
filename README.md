@@ -34,26 +34,27 @@ Please see the package website:
 <https://tidyverse.github.io/googledrive/>
 
 Here’s a teaser that uses googledrive to view some of the files you see
-on <https://drive.google.com>:
+on <https://drive.google.com> (up to `n_max = 25`, in this case):
 
 ``` r
 library("googledrive")
 drive_find(n_max = 25)
-#> Auto-refreshing stale OAuth token.
-#> # A tibble: 25 x 3
-#>    name                 id                                  drive_resource
-#>  * <chr>                <chr>                               <list>        
-#>  1 chicken-xyz.csv      0B0Gh-SuuA2nTVUZGclZiSzZ0bkE        <list [38]>   
-#>  2 chicken-rm.txt       0B0Gh-SuuA2nTT3dBbXd1ZWtvSkE        <list [39]>   
-#>  3 chicken.jpg          0B0Gh-SuuA2nTbEhtYnIzcFNfX3M        <list [41]>   
-#>  4 README-mirrors.csv   1LJlt-1emr662GV8WdEzddzsfqrt-VgQeZ… <list [34]>   
-#>  5 README-mirrors.csv   1PLXfempSnjpXbKVEXwMG5vBEnd-FwmC26… <list [34]>   
-#>  6 def                  0B0Gh-SuuA2nTRG5YWFVGaV8zbU0        <list [32]>   
-#>  7 abc                  0B0Gh-SuuA2nTT2NqTGdLVWFkcjA        <list [32]>   
-#>  8 folder1-level4       0B0Gh-SuuA2nTaTR6elE0TjZUUHM        <list [33]>   
-#>  9 folder1-level3       0B0Gh-SuuA2nTWktWeTB0ajVoQjQ        <list [33]>   
-#> 10 cranberry-TEST-driv… 1PM--xCb5axy5Uu9f6fDNjPAN2psRbQ2_U… <list [33]>   
-#> # … with 15 more rows
+#> # A tibble: 13 x 3
+#>    name                id                                drive_resource
+#>  * <chr>               <chr>                             <list>        
+#>  1 googledrive-NEWS.md 15pfwRfXvpxekxhdERmSUnoxQY5K701y7 <list [38]>   
+#>  2 def                 1hr4EFw3r5vAMm5Jgw2SsFluBpN-oAC-x <list [32]>   
+#>  3 abc                 11lidFPceZAcNTHasQARiwAhE0NgmSfJN <list [32]>   
+#>  4 THANKS              1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_du3 <list [39]>   
+#>  5 BioC_mirrors.csv    1vV0fPdNOyo3Ti9ofA38MuTQm27pXvYq5 <list [38]>   
+#>  6 logo.jpg            1OFeNdd63NfoavqvDf5-xa3LORiamfKXS <list [40]>   
+#>  7 Rlogo.svg           11sxsw-ux-UjQjzVdxd1wjNz37hJeBrBu <list [40]>   
+#>  8 Rlogo.pdf           1cn7oVxQRgD0l_hCI4nrSSWrKeVFysUp7 <list [39]>   
+#>  9 DESCRIPTION         1MjV4stVPhlMNz1AcrIizcL7yTcVaRuBo <list [39]>   
+#> 10 chicken.txt         1xmwFZ_UN-CSs3Ic2aPUw22DbxZxoenVT <list [39]>   
+#> 11 chicken.pdf         1eK9ozP1TZjXfAgaAGmP9GrUTovGUaO9S <list [39]>   
+#> 12 chicken.jpg         1JnGjIdruQXErd20xR_ecAzN3yP_fTcfF <list [40]>   
+#> 13 chicken.csv         1eHoOi9Ch3zk3_QBRKCJajFEIO4aeGINr <list [38]>
 ```
 
 ## Contributing

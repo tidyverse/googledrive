@@ -4,15 +4,24 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+
+```{r setup, include = FALSE}
+can_decrypt <- gargle:::secret_can_decrypt("googledrive")
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  error = TRUE,
+  purl = can_decrypt,
+  eval = can_decrypt
 )
-## use a token from our development account
-## special care with path because wd is docs/ during pkgdown::build_site()
-token_path <- rprojroot::find_package_root_file("tidyverse-noncaching-token.rds")
-googledrive::drive_auth(token_path)
+if (can_decrypt) {
+  json <- gargle:::secret_read("googledrive", "googledrive-docs.json")
+  googledrive::drive_auth(path = rawToChar(json))
+}
+```
+
+```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
 ```
 
 # googledrive <img src="man/figures/logo.png" align="right" height=140/>
@@ -44,7 +53,7 @@ devtools::install_github("tidyverse/googledrive")
 Please see the package website:
 <https://tidyverse.github.io/googledrive/>
 
-Here's a teaser that uses googledrive to view some of the files you see on <https://drive.google.com>:
+Here's a teaser that uses googledrive to view some of the files you see on <https://drive.google.com> (up to `n_max = 25`, in this case):
 
 ```{r}
 library("googledrive")
