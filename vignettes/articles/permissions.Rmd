@@ -35,13 +35,15 @@ Let's upload a file and view its permissions.
 
 ```{r}
 library(googledrive)
+
 file <- drive_example("chicken.txt") %>%
   drive_upload(name = "chicken-perm-article.txt") %>% 
   drive_reveal("permissions")
+
 file
 ```
 
-The `shared` column shows that this file is not yet shared with anyone and, for those so inclined, detailed information on permissions can be found in the `permissions_resource` list-column. The `drive_resource`, which is always present in a dribble, typically also contains information on permissions.
+`shared = FALSE` indicates that this file is not yet shared with anyone and, for those so inclined, detailed information on permissions can be found in the `permissions_resource` list-column. Note that the `drive_resource`, which is always present in a dribble, typically also contains information on permissions. So if you just want to *know* about permissions, as opposed to modifying them, you can probably consult `drive_resource`.
 
 Let's give a specific person permission to edit this file and a customized message, using the `emailAddress` and `emailMessage` parameters.
 
@@ -53,34 +55,25 @@ file <- file %>%
     emailAddress = "serena@example.com",
     emailMessage = "Would appreciate your feedback on this!"
   )
-file
 ```
 
-```{r, echo = FALSE}
-file <- file %>%
-  drive_share(
-    role = "writer",
-    type = "user",
-    emailAddress = "jenny@rstudio.com",
-    emailMessage = "Would appreciate your feedback on this!"
-  )
-file
-```
-
-We see that the file is now shared. More details about "who has what role" on this file can be excavated from the `permissions_resource`.
-
-Let's say we also want anyone to be able to read the file.
+Let's say we also want "anyone with a link" to be able to read the file.
 
 ```{r}
 file <- file %>%
   drive_share(role = "reader", type = "anyone")
+file
 ```
+
+We see that the file is now `shared = TRUE`.
 
 Now that we've made a few updates to our permissions, the `permissions_resource` list-column has become more interesting. Here's how to pull important information out of this and put into a tibble with one row per permission. (*Permission handling will become more formalized in future versions of googledrive. See [the issue](https://github.com/tidyverse/googledrive/issues/180)*). We use other packages in the tidyverse now for this data wrangling.
 
 ```{r eval = FALSE}
 library(tidyverse)
+
 perm <- pluck(file, "permissions_resource", 1, "permissions")
+
 permissions <- tibble(
   id =    map_chr(perm, "id",           .default = NA_character_),
   name =  map_chr(perm, "displayName",  .default = NA_character_),
