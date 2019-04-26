@@ -12,6 +12,7 @@ can_decrypt <- gargle:::secret_can_decrypt("googledrive")
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  cache = TRUE,
   error = TRUE,
   purl = can_decrypt,
   eval = can_decrypt

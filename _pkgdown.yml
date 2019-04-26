@@ -25,13 +25,6 @@ navbar:
   - text: News
     href: news/index.html
 
-articles:
-  - title: "Articles"
-    contents:
-    - file-identification
-    - multiple-files
-    - permissions
-
 reference:
   - title: "Reach out and touch your files"
     desc: >
