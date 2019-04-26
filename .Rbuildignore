@@ -20,3 +20,4 @@
 ^secure-file$
 ^cran-comments\.md$
 ^\.github$
+^pkgdown$

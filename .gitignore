@@ -8,3 +8,4 @@ scratch.R
 .Rapp.history
 *token.rds
 inst/doc
+docs/

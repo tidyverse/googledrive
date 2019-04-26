@@ -17,6 +17,11 @@ matrix:
       - find . -name testthat.Rout | xargs cat
       after_failure:
       - find . -name testthat.Rout | xargs cat
+      before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
+      deploy:
+        provider: script
+        script: Rscript -e 'pkgdown::deploy_site_github()'
+        skip_cleanup: true
     - r: devel
       env: GOOGLEDRIVE_PASSWORD=''
       r_build_args: --no-build-vignettes
