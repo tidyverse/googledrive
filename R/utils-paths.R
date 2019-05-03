@@ -25,8 +25,8 @@ has_slash <- function(path) {
 
 ## "a/b/" and "a/b" both return "a/b/"
 append_slash <- function(path) {
-  if (length(path) < 1 || path == "") return(path)
-  ifelse(has_slash(path), path, paste0(path, "/"))
+  if (length(path) < 1) return(path)
+  ifelse(has_slash(path) | path == "", path, paste0(path, "/"))
 }
 
 ## "a/b/" and "a/b" both return "a/b"

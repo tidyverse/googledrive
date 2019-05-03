@@ -41,6 +41,7 @@ test_that("append_slash() appends a slash or declines to do so", {
   expect_identical(append_slash("a/"), "a/")
   expect_identical(append_slash("/"), "/")
   expect_identical(append_slash(""), "")
+  expect_identical(append_slash(c("a", "")), c("a/", ""))
   expect_identical(append_slash(character(0)), character(0))
 })
 
