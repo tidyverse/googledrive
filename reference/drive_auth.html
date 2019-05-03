@@ -175,17 +175,14 @@ tokens are less likely to be synced to the cloud by accident.</p>
     </tr>
     <tr>
       <th>cache</th>
-      <td><p>A logical value or a string. <code>TRUE</code> means to cache using the
-default user-level cache file, <code>~/.R/gargle/gargle-oauth</code>, <code>FALSE</code> means
-don't cache, and <code>NA</code> means to guess using some sensible heuristics. A
-string means use the specified path as the cache file.</p></td>
+      <td><p>Specifies the OAuth token cache. Defaults to the option named
+"gargle_oauth_cache", retrieved via <code>gargle_oauth_cache()</code>.</p></td>
     </tr>
     <tr>
       <th>use_oob</th>
-      <td><p>If <code>FALSE</code>, use a local webserver for the OAuth dance.
-Otherwise, provide a URL to the user and prompt for a validation code.
-Defaults to the option <code>gargle.oob_default</code> or <code>TRUE</code> if httpuv is not
-installed.</p></td>
+      <td><p>Whether to prefer "out of band" authentication. Defaults to
+the option named "gargle_oob_default", retrieved via
+<code>gargle_oob_default()</code>.</p></td>
     </tr>
     </table>
     
