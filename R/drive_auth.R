@@ -17,6 +17,7 @@ gargle_lookup_table <- list(
   PRODUCT     = "Google Drive",
   API         = "Drive API",
   PREFIX      = "drive",
+  AUTH_CONFIG_SOURCE = "tidyverse",
   SCOPES_LINK = "https://developers.google.com/identity/protocols/googlescopes#drivev3"
 )
 
