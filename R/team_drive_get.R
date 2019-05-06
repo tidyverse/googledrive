@@ -53,7 +53,7 @@ get_one_team_drive_id <- function(id) {
     )
   )
   response <- request_make(request)
-  process_response(response)
+  gargle::response_process(response)
 }
 
 team_drive_from_name <- function(name = NULL) {

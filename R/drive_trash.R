@@ -64,7 +64,7 @@ toggle_trash_one <- function(id, trash = TRUE) {
     )
   )
   response <- request_make(request, encode = "json")
-  proc_res <- process_response(response)
+  proc_res <- gargle::response_process(response)
   as_dribble(list(proc_res))
 }
 

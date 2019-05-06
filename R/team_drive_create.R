@@ -29,7 +29,7 @@ team_drive_create <- function(name, verbose = TRUE) {
     )
   )
   response <- request_make(request, encode = "json")
-  out <- as_dribble(list(process_response(response)))
+  out <- as_dribble(list(gargle::response_process(response)))
 
   if (verbose) {
     message_glue("\nTeam Drive created:\n  * {out$name}: {out$id}")

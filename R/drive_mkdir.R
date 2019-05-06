@@ -77,7 +77,7 @@ drive_mkdir <- function(name,
     params = params
   )
   response <- request_make(request, encode = "json")
-  proc_res <- process_response(response)
+  proc_res <- gargle::response_process(response)
 
   out <- as_dribble(list(proc_res))
 

@@ -7,11 +7,12 @@
 #' around the Drive API. Three functions are documented here:
 #'   * `request_make()` does the bare minimum: just calls an HTTP method, only
 #'     adding the googledrive user agent. Typically the input is created with
-#'     [`request_generate()`] and the output is processed with
-#'     [`process_response()`].
-#'   * `do_request()` is simply `process_response(request_make(x, ...))`. It
-#'     exists only because we had to make `do_paginated_request()` and it felt
-#'     weird to not make the equivalent for a single request.
+#'     [request_generate()] and the output is processed with
+#'     [gargle::response_process()].
+#'   * `do_request()` is simply
+#'     `gargle::response_process(request_make(x, ...))`. It exists only because
+#'     we had to make `do_paginated_request()` and it felt weird to not make the
+#'     equivalent for a single request.
 #'   * `do_paginated_request()` executes the input request **with page
 #'     traversal**. It is impossible to separate paginated requests into a "make
 #'     request" step and a "process request" step, because the token for the
@@ -20,7 +21,7 @@
 #'     responses, one per page.
 #'
 #' @param x List, holding the components for an HTTP request, presumably created
-#'   with [`request_generate()`] Should contain the `method`, `url`, `body`,
+#'   with [request_generate()] Should contain the `method`, `url`, `body`,
 #'   and `token`.
 #' @param ... Optional arguments passed through to the HTTP method.
 #' @template verbose
@@ -37,7 +38,7 @@ request_make <- function(x, ...) {
 #' @return `do_request()`: List representing the content returned by a single
 #'   request.
 do_request <- function(x, ...) {
-  process_response(request_make(x, ...))
+  gargle::response_process(request_make(x, ...))
 }
 
 #' @rdname request_make
@@ -81,7 +82,7 @@ do_paginated_request <- function(x,
                                  n = function(res) 1,
                                  verbose = TRUE) {
   ## when traversing pages, you can't cleanly separate the task into
-  ## request_make() and process_response(), because you need to process
+  ## request_make() and gargle::response_process(), because you need to process
   ## response / page i to get the pageToken for request / page i + 1
   ## so this function does both
   stopifnot(identical(x$method, "GET"))
@@ -98,7 +99,7 @@ do_paginated_request <- function(x,
   total <- 0
   repeat {
     page <- request_make(x, ...)
-    responses[[i]] <- process_response(page)
+    responses[[i]] <- gargle::response_process(page)
     x$query$pageToken <- responses[[i]]$nextPageToken
     x$url <- httr::modify_url(x$url, query = x$query)
     total <- total + n(responses[[i]])
