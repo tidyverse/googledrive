@@ -18,7 +18,8 @@ test_that("request_generate() errors for unrecognized parameters", {
       endpoint = "drive.files.list",
       params = params, token = NULL
     ),
-    "These parameters are not recognized for this endpoint:\nchicken\nbunny"
+    regexp = "These parameters are unknown",
+    class = "gargle_error_bad_params"
   )
 })
 

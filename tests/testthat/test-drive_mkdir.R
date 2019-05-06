@@ -118,7 +118,8 @@ test_that("drive_mkdir() parent separately, as a path", {
 test_that("drive_mkdir() catches invalid parameters", {
   expect_error(
     drive_mkdir("hi", bunny = "foofoo"),
-    "These parameters are not recognized for this endpoint"
+    regexp = "These parameters are unknown",
+    class = "gargle_error_bad_params"
   )
 })
 
