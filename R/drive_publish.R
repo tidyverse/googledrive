@@ -96,7 +96,7 @@ change_publish_one <- function(id, params) {
     params = params
   )
   response <- request_make(request, encode = "json")
-  process_response(response)
+  gargle::response_process(response)
 }
 
 drive_reveal_published <- function(file) {
@@ -129,5 +129,5 @@ get_publish_one <- function(id) {
   if (httr::status_code(response) == 403) {
     return(NULL)
   }
-  process_response(response)
+  gargle::response_process(response)
 }

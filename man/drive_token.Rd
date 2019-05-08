@@ -29,8 +29,7 @@ req
 }
 }
 \seealso{
-Other low-level API functions: \code{\link{process_response}},
-  \code{\link{request_generate}},
+Other low-level API functions: \code{\link{request_generate}},
   \code{\link{request_make}}
 }
 \concept{low-level API functions}

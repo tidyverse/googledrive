@@ -102,7 +102,7 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
     params = params
   )
   res <- request_make(request, encode = "json")
-  proc_res <- process_response(res)
+  proc_res <- gargle::response_process(res)
 
   out <- as_dribble(list(proc_res))
 

@@ -130,7 +130,7 @@ drive_upload <- function(media,
   )
 
   response <- request_make(request)
-  out <- as_dribble(list(process_response(response)))
+  out <- as_dribble(list(gargle::response_process(response)))
 
   if (verbose) {
     message_glue(

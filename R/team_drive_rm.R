@@ -55,5 +55,5 @@ delete_one_team_drive <- function(id) {
     params = list(teamDriveId = id)
   )
   response <- request_make(request)
-  process_response(response)
+  gargle::response_process(response)
 }

@@ -96,7 +96,7 @@ get_one_id <- function(id) {
     )
   )
   response <- request_make(request)
-  process_response(response)
+  gargle::response_process(response)
 }
 
 drive_path_exists <- function(path, verbose = TRUE) {

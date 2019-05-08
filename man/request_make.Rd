@@ -51,10 +51,11 @@ around the Drive API. Three functions are documented here:
 \item \code{request_make()} does the bare minimum: just calls an HTTP method, only
 adding the googledrive user agent. Typically the input is created with
 \code{\link[=request_generate]{request_generate()}} and the output is processed with
-\code{\link[=process_response]{process_response()}}.
-\item \code{do_request()} is simply \code{process_response(request_make(x, ...))}. It
-exists only because we had to make \code{do_paginated_request()} and it felt
-weird to not make the equivalent for a single request.
+\code{\link[gargle:response_process]{gargle::response_process()}}.
+\item \code{do_request()} is simply
+\code{gargle::response_process(request_make(x, ...))}. It exists only because
+we had to make \code{do_paginated_request()} and it felt weird to not make the
+equivalent for a single request.
 \item \code{do_paginated_request()} executes the input request \strong{with page
 traversal}. It is impossible to separate paginated requests into a "make
 request" step and a "process request" step, because the token for the
@@ -90,7 +91,6 @@ do_paginated_request(req, n_max = 1)
 }
 \seealso{
 Other low-level API functions: \code{\link{drive_token}},
-  \code{\link{process_response}},
   \code{\link{request_generate}}
 }
 \concept{low-level API functions}

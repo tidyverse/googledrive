@@ -17,7 +17,7 @@ Depends:
     R (>= 3.2)
 Imports: 
     curl (>= 2.8.1),
-    gargle (>= 0.0.0.9006),
+    gargle (>= 0.0.0.9007),
     glue (>= 1.2.0),
     httr,
     jsonlite,
@@ -39,7 +39,7 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    r-lib/gargle
+    r-lib/gargle@response-processing
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

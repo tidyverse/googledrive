@@ -115,7 +115,7 @@ drive_share_one <- function(id, params, verbose) {
     params = params
   )
   response <- request_make(request, encode = "json")
-  process_response(response)
+  gargle::response_process(response)
 }
 
 drive_reveal_permissions <- function(file) {
@@ -152,5 +152,5 @@ list_permissions_one <- function(id) {
   if (httr::status_code(response) == 403) {
     return(NULL)
   }
-  process_response(response)
+  gargle::response_process(response)
 }

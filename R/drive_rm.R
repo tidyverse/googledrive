@@ -64,5 +64,5 @@ delete_one <- function(id) {
     params = list(fileId = id)
   )
   response <- request_make(request)
-  process_response(response)
+  gargle::response_process(response)
 }
