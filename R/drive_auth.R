@@ -65,7 +65,7 @@ drive_auth <- function(email = NULL,
                        use_oob = getOption("gargle.oob_default")) {
   cred <- gargle::token_fetch(
     scopes = scopes,
-    app = .auth$app,
+    app = drive_oauth_app(),
     email = email,
     path = path,
     package = "googledrive",
