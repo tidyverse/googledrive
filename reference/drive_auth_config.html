@@ -217,8 +217,13 @@ current API key. <code>drive_oauth_app()</code>: the current
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## this will print current config</span>
-<span class='fu'>drive_auth_config</span>()
-
+<span class='fu'>drive_auth_config</span>()</div><div class='output co'>#&gt; &lt;AuthState (via gargle)&gt;
+#&gt;          &lt;package&gt; googledrive
+#&gt;              &lt;app&gt; tidyverse
+#&gt;          &lt;api_key&gt; AIzaSyC...
+#&gt;      &lt;auth_active&gt; TRUE
+#&gt;      &lt;credentials&gt; NULL
+#&gt; ---</div><div class='input'>
 <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>require</a></span>(<span class='no'>httr</span>)) {
   <span class='co'>## bring your own app via client id (aka key) and secret</span>
   <span class='no'>google_app</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/oauth_app'>oauth_app</a></span>(
@@ -227,7 +232,13 @@ current API key. <code>drive_oauth_app()</code>: the current
     <span class='kw'>secret</span> <span class='kw'>=</span> <span class='st'>"abcdefghijklmnopqrstuvwxyz"</span>
   )
   <span class='fu'>drive_auth_config</span>(<span class='kw'>app</span> <span class='kw'>=</span> <span class='no'>google_app</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: httr</span></div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: httr</span></div><div class='output co'>#&gt; &lt;AuthState (via gargle)&gt;
+#&gt;          &lt;package&gt; googledrive
+#&gt;              &lt;app&gt; my-awesome-google-api-wrapping-package
+#&gt;          &lt;api_key&gt; AIzaSyC...
+#&gt;      &lt;auth_active&gt; TRUE
+#&gt;      &lt;credentials&gt; NULL
+#&gt; ---</div><div class='input'>
 </div><span class='co'># NOT RUN {</span>
 <span class='co'>## bring your own app via JSON downloaded from Google Developers Console</span>
 <span class='fu'>drive_auth_config</span>(

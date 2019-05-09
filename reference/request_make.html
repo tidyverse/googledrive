@@ -41,10 +41,11 @@ around the Drive API. Three functions are documented here:
 request_make() does the bare minimum: just calls an HTTP method, only
 adding the googledrive user agent. Typically the input is created with
 request_generate() and the output is processed with
-process_response().
-do_request() is simply process_response(request_make(x, ...)). It
-exists only because we had to make do_paginated_request() and it felt
-weird to not make the equivalent for a single request.
+gargle::response_process().
+do_request() is simply
+gargle::response_process(request_make(x, ...)). It exists only because
+we had to make do_paginated_request() and it felt weird to not make the
+equivalent for a single request.
 do_paginated_request() executes the input request with page
 traversal. It is impossible to separate paginated requests into a &quot;make
 request&quot; step and a &quot;process request&quot; step, because the token for the
@@ -160,10 +161,11 @@ around the Drive API. Three functions are documented here:</p><ul>
 <li><p><code>request_make()</code> does the bare minimum: just calls an HTTP method, only
 adding the googledrive user agent. Typically the input is created with
 <code><a href='request_generate.html'>request_generate()</a></code> and the output is processed with
-<code><a href='process_response.html'>process_response()</a></code>.</p></li>
-<li><p><code>do_request()</code> is simply <code><a href='process_response.html'>process_response(request_make(x, ...))</a></code>. It
-exists only because we had to make <code>do_paginated_request()</code> and it felt
-weird to not make the equivalent for a single request.</p></li>
+<code><a href='https://gargle.r-lib.org/reference/response_process.html'>gargle::response_process()</a></code>.</p></li>
+<li><p><code>do_request()</code> is simply
+<code><a href='https://gargle.r-lib.org/reference/response_process.html'>gargle::response_process(request_make(x, ...))</a></code>. It exists only because
+we had to make <code>do_paginated_request()</code> and it felt weird to not make the
+equivalent for a single request.</p></li>
 <li><p><code>do_paginated_request()</code> executes the input request <strong>with page
 traversal</strong>. It is impossible to separate paginated requests into a "make
 request" step and a "process request" step, because the token for the
@@ -225,7 +227,6 @@ content, one component per page.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other low-level API functions: <code><a href='drive_token.html'>drive_token</a></code>,
-  <code><a href='process_response.html'>process_response</a></code>,
   <code><a href='request_generate.html'>request_generate</a></code></p></div>
     
 
