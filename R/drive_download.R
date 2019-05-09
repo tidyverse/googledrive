@@ -29,7 +29,7 @@
 #' file <- drive_upload(
 #'   drive_example("chicken.csv"),
 #'   type = "spreadsheet"
-#'   )
+#' )
 #'
 #' ## Download Sheet as csv, explicit type
 #' (downloaded_file <- drive_download(file, type = "csv"))

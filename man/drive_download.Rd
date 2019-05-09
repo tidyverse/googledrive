@@ -50,7 +50,7 @@ Returned dribble contains local path to downloaded file in \code{local_path}.
 file <- drive_upload(
   drive_example("chicken.csv"),
   type = "spreadsheet"
-  )
+)
 
 ## Download Sheet as csv, explicit type
 (downloaded_file <- drive_download(file, type = "csv"))
