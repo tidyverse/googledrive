@@ -112,7 +112,7 @@
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt; Local file:</span></a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt;   * /home/travis/R/Library/googledrive/extdata/chicken.txt</span></a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; uploaded into Drive file:</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;   * chicken-perm-article.txt: 1JO9W4m0Y_2Nvc0ek5oqEzLggVcx6OpdA</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;   * chicken-perm-article.txt: 1RUPGgIudNXMWeyKE7_DgyZHpoM8P2ei8</span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; with MIME type:</span></a>
 <a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt;   * text/plain</span></a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"></a>
@@ -120,7 +120,7 @@
 <a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt;   name           shared id                 drive_resource permissions_reso…</span></a>
 <a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; * &lt;chr&gt;          &lt;lgl&gt;  &lt;chr&gt;              &lt;list&gt;         &lt;list&gt;           </span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; 1 chicken-perm-… FALSE  1JO9W4m0Y_2Nvc0ek… &lt;list [38]&gt;    &lt;list [2]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; 1 chicken-perm-… FALSE  1RUPGgIudNXMWeyKE… &lt;list [38]&gt;    &lt;list [2]&gt;</span></a></code></pre></div>
 <p><code>shared = FALSE</code> indicates that this file is not yet shared with anyone and, for those so inclined, detailed information on permissions can be found in the <code>permissions_resource</code> list-column. Note that the <code>drive_resource</code>, which is always present in a dribble, typically also contains information on permissions. So if you just want to <em>know</em> about permissions, as opposed to modifying them, you can probably consult <code>drive_resource</code>.</p>
 <p>Let’s give a specific person permission to edit this file and a customized message, using the <code>emailAddress</code> and <code>emailMessage</code> parameters.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">file &lt;-<span class="st"> </span>file <span class="op">%&gt;%</span></a>
@@ -137,12 +137,12 @@
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;   * role = reader</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;   * type = anyone</span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; For files:</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;   * chicken-perm-article.txt: 1JO9W4m0Y_2Nvc0ek5oqEzLggVcx6OpdA</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;   * chicken-perm-article.txt: 1RUPGgIudNXMWeyKE7_DgyZHpoM8P2ei8</span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8">file</a>
 <a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;   name           shared id                 drive_resource permissions_reso…</span></a>
 <a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; * &lt;chr&gt;          &lt;lgl&gt;  &lt;chr&gt;              &lt;list&gt;         &lt;list&gt;           </span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; 1 chicken-perm-… TRUE   1JO9W4m0Y_2Nvc0ek… &lt;list [39]&gt;    &lt;list [2]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; 1 chicken-perm-… TRUE   1RUPGgIudNXMWeyKE… &lt;list [39]&gt;    &lt;list [2]&gt;</span></a></code></pre></div>
 <p>We see that the file is now <code>shared = TRUE</code>.</p>
 <p>Now that we’ve made a few updates to our permissions, the <code>permissions_resource</code> list-column has become more interesting. Here’s how to pull important information out of this and put into a tibble with one row per permission. (<em>Permission handling will become more formalized in future versions of googledrive. See <a href="https://github.com/tidyverse/googledrive/issues/180">the issue</a></em>). We use other packages in the tidyverse now for this data wrangling.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)</a>
@@ -169,7 +169,7 @@
 <a href="#clean-up" class="anchor"></a>Clean up</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../../reference/drive_rm.html">drive_rm</a></span>(file)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; Files deleted:</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;   * chicken-perm-article.txt: 1JO9W4m0Y_2Nvc0ek5oqEzLggVcx6OpdA</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;   * chicken-perm-article.txt: 1RUPGgIudNXMWeyKE7_DgyZHpoM8P2ei8</span></a></code></pre></div>
 </div>
   </div>
 
