@@ -10,12 +10,30 @@ drive_auth(email = NULL, path = NULL,
   use_oob = gargle::gargle_oob_default(), token = NULL)
 }
 \arguments{
-\item{email}{Optional; email address associated with the desired Google user.}
+\item{email}{Optional. Allows user to target a specific Google identity. If
+specified, this is used for token lookup, i.e. to determine if a suitable
+token is already available in the cache. If no such token is found, \code{email}
+is used to pre-select the targetted Google identity in the OAuth chooser.
+Note, however, that the email associated with a token when it's cached is
+always determined from the token itself, never from this argument. Use \code{NA}
+or \code{FALSE} to match nothing and force the OAuth dance in the browser. Use
+\code{TRUE} to allow email auto-discovery, if exactly one matching token is
+found in the cache. Defaults to the option named "gargle_oauth_email",
+retrieved by \code{\link[gargle:gargle_oauth_email]{gargle::gargle_oauth_email()}}.}
 
-\item{path}{Optional; path to the downloaded JSON file for a service token.}
+\item{path}{JSON identifying the service account, in one of the forms
+supported for the \code{txt} argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a
+file path or JSON string).}
 
-\item{scopes}{Optional; scope(s) to use. See your choices at
-\href{https://developers.google.com/identity/protocols/googlescopes#drivev3}{OAuth 2.0 Scopes for Google APIs}.}
+\item{scopes}{A character vector of scopes to request. Pick from those listed
+at \url{https://developers.google.com/identity/protocols/googlescopes}.
+
+For certain token flows, the
+\code{"https://www.googleapis.com/auth/userinfo.email"} scope is unconditionally
+included. This grants permission to retrieve the email address associated
+with a token; gargle uses this to index cached OAuth tokens. This grants no
+permission to view or send email. It is considered a low value scope and
+does not appear on the consent screen.}
 
 \item{cache}{Specifies the OAuth token cache. Defaults to the option named
 "gargle_oauth_cache", retrieved via \code{\link[gargle:gargle_oauth_cache]{gargle::gargle_oauth_cache()}}.}
@@ -27,10 +45,12 @@ the option named "gargle_oob_default", retrieved via
 \item{token}{A token with class \link[httr:Token-class]{Token2.0}.}
 }
 \description{
-Authorize googledrive to view and manage your Drive files. By default,
-you are directed to a web browser, asked to sign in to your Google
-account, and to grant googledrive permission to operate on your behalf
-with Google Drive. By default, these user credentials are cached in a
+Authorize googledrive to view and manage your Drive files. This function is a
+wrapper around \code{\link[gargle:token_fetch]{gargle::token_fetch()}}.
+
+By default, you are directed to a web browser, asked to sign in to your
+Google account, and to grant googledrive permission to operate on your
+behalf with Google Drive. By default, these user credentials are cached in a
 folder below your home directory, \code{~/.R/gargle/gargle-oauth}, from where
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
@@ -53,8 +73,9 @@ browser to choose the identity and give consent.
 authentication.
 }
 
-For even deeper control over auth, use \code{\link[=drive_auth_config]{drive_auth_config()}} to use
-your own OAuth app or API key.
+For details on the many ways to find a token, see
+\code{\link[gargle:token_fetch]{gargle::token_fetch()}}. For deeper control over auth, use
+\code{\link[=drive_auth_config]{drive_auth_config()}} to bring your own OAuth app or API key.
 }
 \examples{
 \dontrun{

@@ -16,19 +16,14 @@ gargle_lookup_table <- list(
   PRODUCT     = "Google Drive",
   API         = "Drive API",
   PREFIX      = "drive",
-  AUTH_CONFIG_SOURCE = "tidyverse",
-  SCOPES_LINK = "https://developers.google.com/identity/protocols/googlescopes#drivev3"
+  AUTH_CONFIG_SOURCE = "tidyverse"
 )
 
 #' Authorize googledrive
 #'
 #' @eval gargle:::PREFIX_auth_description(gargle_lookup_table)
 #' @eval gargle:::PREFIX_auth_details(gargle_lookup_table)
-#' @eval gargle:::PREFIX_auth_params_email()
-#' @eval gargle:::PREFIX_auth_params_path()
-#' @eval gargle:::PREFIX_auth_params_scopes(gargle_lookup_table)
-#' @eval gargle:::PREFIX_auth_params_cache_use_oob()
-#' @eval gargle:::PREFIX_auth_params_token()
+#' @eval gargle:::PREFIX_auth_params()
 #'
 #' @family auth functions
 #' @export
