@@ -102,6 +102,7 @@ drive_auth <- function(email = NULL,
 #' }
 drive_deauth <- function() {
   .auth$set_auth_active(FALSE)
+  .auth$set_cred(NULL)
   invisible()
 }
 
