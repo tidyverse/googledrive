@@ -1,8 +1,9 @@
 #' Coerce to Drive files
 #'
-#' @description Converts various representations of Google Drive files into a
-#'   [`dribble`], the object used by googledrive to hold Drive file metadata.
-#'   Files can be specified via
+#' @description
+#' Converts various representations of Google Drive files into a [`dribble`],
+#' the object used by googledrive to hold Drive file metadata. Files can be
+#' specified via:
 #'   * File path. File name is an important special case.
 #'   * File id. Mark with [as_id()] to distinguish from file path.
 #'   * Data frame or [`dribble`]. Once you've successfully used googledrive to
@@ -11,7 +12,7 @@
 #'   * List representing [Files resource](https://developers.google.com/drive/v3/reference/files#resource)
 #'     objects. Mostly for internal use.
 #'
-#' @description This is a generic function.
+#' This is a generic function.
 #'
 #' For maximum clarity, get your files into a [`dribble`] (or capture file id)
 #' as early as possible. When specifying via path, it's best to include the
@@ -32,11 +33,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ## specify the path
+#' # specify the path (substitute names or paths on your Drive!)
 #' as_dribble("abc")
 #' as_dribble("abc/def")
 #'
-#' ## specify the file id (substitute one of your own!)
+#' # specify the file id (substitute a read file id of your own!)
 #' as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
 #' }
 as_dribble <- function(x, ...) UseMethod("as_dribble")

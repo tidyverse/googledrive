@@ -14,9 +14,9 @@ frame.}
 \item{...}{Other arguments passed down to methods. (Not used.)}
 }
 \description{
-Converts various representations of Google Drive files into a
-\code{\link{dribble}}, the object used by googledrive to hold Drive file metadata.
-Files can be specified via
+Converts various representations of Google Drive files into a \code{\link{dribble}},
+the object used by googledrive to hold Drive file metadata. Files can be
+specified via:
 \itemize{
 \item File path. File name is an important special case.
 \item File id. Mark with \code{\link[=as_id]{as_id()}} to distinguish from file path.
@@ -43,11 +43,11 @@ error and must make your intent clear.
 }
 \examples{
 \dontrun{
-## specify the path
+# specify the path (substitute names or paths on your Drive!)
 as_dribble("abc")
 as_dribble("abc/def")
 
-## specify the file id (substitute one of your own!)
+# specify the file id (substitute a read file id of your own!)
 as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
 }
 }
