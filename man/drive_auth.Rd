@@ -18,11 +18,11 @@ drive_auth(email = NULL, path = NULL,
 \href{https://developers.google.com/identity/protocols/googlescopes#drivev3}{OAuth 2.0 Scopes for Google APIs}.}
 
 \item{cache}{Specifies the OAuth token cache. Defaults to the option named
-"gargle_oauth_cache", retrieved via \code{\link[=gargle_oauth_cache]{gargle_oauth_cache()}}.}
+"gargle_oauth_cache", retrieved via \code{\link[gargle:gargle_oauth_cache]{gargle::gargle_oauth_cache()}}.}
 
 \item{use_oob}{Whether to prefer "out of band" authentication. Defaults to
 the option named "gargle_oob_default", retrieved via
-\code{\link[=gargle_oob_default]{gargle_oob_default()}}.}
+\code{\link[gargle:gargle_oob_default]{gargle::gargle_oob_default()}}.}
 }
 \description{
 Authorize googledrive to view and manage your Drive files. By default,
@@ -46,6 +46,7 @@ also force googledrive to switch from one identity to another. If
 there's no cached token for the email, this triggers a return to the
 browser to choose the identity and give consent.
 \item Use a service account token.
+\item Bring their own \link[httr:Token-class]{Token2.0}.
 \item Specify non-default behavior re: token caching and out-of-bound
 authentication.
 }
