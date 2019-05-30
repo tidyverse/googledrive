@@ -4,7 +4,7 @@ if (gargle:::secret_can_decrypt("googledrive")) {
 }
 
 skip_if_no_token <- function() {
-  testthat::skip_if_not(have_token(), "No Drive token")
+  testthat::skip_if_not(drive_has_token(), "No Drive token")
 }
 
 nm_fun <- function(context, user = Sys.info()["user"]) {

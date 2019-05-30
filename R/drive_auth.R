@@ -126,13 +126,24 @@ drive_token <- function() {
   if (isFALSE(.auth$auth_active)) {
     return(NULL)
   }
-  if (!have_token()) {
+  if (!drive_has_token()) {
     drive_auth()
   }
   httr::config(token = .auth$cred)
 }
 
-have_token <- function() {
+#' Is there a token on hand?
+#'
+#' Reports whether googledrive has stored a token, ready for use in downstream
+#' requests. Exists mostly for protecting examples that won't work in the
+#' absence of a token.
+#'
+#' @return Logical.
+#' @export
+#'
+#' @examples
+#' drive_has_token()
+drive_has_token <- function() {
   inherits(.auth$cred, "Token2.0")
 }
 
