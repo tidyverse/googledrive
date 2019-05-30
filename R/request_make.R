@@ -70,7 +70,7 @@ do_request <- function(x, ...) {
 #'     fields = "*",
 #'     pageSize = 2
 #'   ),
-#'   token = googledrive:::drive_token()
+#'   token = googledrive::drive_token()
 #' )
 #' ## make the paginated request, but cap it at 1 page
 #' ## should get back exactly two comments
