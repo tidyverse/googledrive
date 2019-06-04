@@ -7,7 +7,7 @@
 drive_auth(email = NULL, path = NULL,
   scopes = "https://www.googleapis.com/auth/drive",
   cache = gargle::gargle_oauth_cache(),
-  use_oob = gargle::gargle_oob_default())
+  use_oob = gargle::gargle_oob_default(), token = NULL)
 }
 \arguments{
 \item{email}{Optional; email address associated with the desired Google user.}
@@ -23,6 +23,8 @@ drive_auth(email = NULL, path = NULL,
 \item{use_oob}{Whether to prefer "out of band" authentication. Defaults to
 the option named "gargle_oob_default", retrieved via
 \code{\link[gargle:gargle_oob_default]{gargle::gargle_oob_default()}}.}
+
+\item{token}{A token with class \link[httr:Token-class]{Token2.0}.}
 }
 \description{
 Authorize googledrive to view and manage your Drive files. By default,

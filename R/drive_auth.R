@@ -28,6 +28,7 @@ gargle_lookup_table <- list(
 #' @eval gargle:::PREFIX_auth_params_path()
 #' @eval gargle:::PREFIX_auth_params_scopes(gargle_lookup_table)
 #' @eval gargle:::PREFIX_auth_params_cache_use_oob()
+#' @eval gargle:::PREFIX_auth_params_token()
 #'
 #' @family auth functions
 #' @export
@@ -61,7 +62,8 @@ drive_auth <- function(email = NULL,
                        path = NULL,
                        scopes = "https://www.googleapis.com/auth/drive",
                        cache = gargle::gargle_oauth_cache(),
-                       use_oob = gargle::gargle_oob_default()) {
+                       use_oob = gargle::gargle_oob_default(),
+                       token = NULL) {
   cred <- gargle::token_fetch(
     scopes = scopes,
     app = drive_oauth_app(),
@@ -69,7 +71,8 @@ drive_auth <- function(email = NULL,
     path = path,
     package = "googledrive",
     cache = cache,
-    use_oob = use_oob
+    use_oob = use_oob,
+    token = token
   )
   if (!inherits(cred, "Token2.0")) {
     stop(
