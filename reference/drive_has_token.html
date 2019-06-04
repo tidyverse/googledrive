@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Coerce to Drive files — as_dribble • googledrive</title>
+<title>Is there a token on hand? — drive_has_token • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -31,31 +31,11 @@
 
 
 
-<meta property="og:title" content="Coerce to Drive files — as_dribble" />
+<meta property="og:title" content="Is there a token on hand? — drive_has_token" />
 
-<meta property="og:description" content="Converts various representations of Google Drive files into a dribble,
-the object used by googledrive to hold Drive file metadata. Files can be
-specified via:
-File path. File name is an important special case.
-File id. Mark with as_id() to distinguish from file path.
-Data frame or dribble. Once you've successfully used googledrive to
-identify the files of interest, you'll have a dribble. Pass it into
-downstream functions.
-List representing Files resource
-objects. Mostly for internal use.
-" />
-
-<meta property="og:description" content="This is a generic function.
-For maximum clarity, get your files into a dribble (or capture file id)
-as early as possible. When specifying via path, it's best to include the
-trailing slash when you're targetting a folder. If you want the folder foo,
-say foo/, not foo.
-Some functions, such as drive_cp(), drive_mkdir(), drive_mv(), and
-drive_upload(), can accept the new file or folder name as the last part of
-path, when name is not given. But if you say a/b/c (no trailing slash)
-and a folder a/b/c/ already exists, it's unclear what you want. A file
-named c in a/b/ or a file with default name in a/b/c/? You get an
-error and must make your intent clear." />
+<meta property="og:description" content="Reports whether googledrive has stored a token, ready for use in downstream
+requests. Exists mostly for protecting examples that won't work in the
+absence of a token." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -149,72 +129,35 @@ error and must make your intent clear." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Coerce to Drive files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/as_dribble.R'><code>R/as_dribble.R</code></a></small>
-    <div class="hidden name"><code>as_dribble.Rd</code></div>
+    <h1>Is there a token on hand?</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/drive_auth.R'><code>R/drive_auth.R</code></a></small>
+    <div class="hidden name"><code>drive_has_token.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Converts various representations of Google Drive files into a <code><a href='dribble.html'>dribble</a></code>,
-the object used by googledrive to hold Drive file metadata. Files can be
-specified via:</p><ul>
-<li><p>File path. File name is an important special case.</p></li>
-<li><p>File id. Mark with <code><a href='as_id.html'>as_id()</a></code> to distinguish from file path.</p></li>
-<li><p>Data frame or <code><a href='dribble.html'>dribble</a></code>. Once you've successfully used googledrive to
-identify the files of interest, you'll have a <code><a href='dribble.html'>dribble</a></code>. Pass it into
-downstream functions.</p></li>
-<li><p>List representing <a href='https://developers.google.com/drive/v3/reference/files#resource'>Files resource</a>
-objects. Mostly for internal use.</p></li>
-</ul>
-
-    <p>This is a generic function.</p>
-<p>For maximum clarity, get your files into a <code><a href='dribble.html'>dribble</a></code> (or capture file id)
-as early as possible. When specifying via path, it's best to include the
-trailing slash when you're targetting a folder. If you want the folder <code>foo</code>,
-say <code>foo/</code>, not <code>foo</code>.</p>
-<p>Some functions, such as <code><a href='drive_cp.html'>drive_cp()</a></code>, <code><a href='drive_mkdir.html'>drive_mkdir()</a></code>, <code><a href='drive_mv.html'>drive_mv()</a></code>, and
-<code><a href='drive_upload.html'>drive_upload()</a></code>, can accept the new file or folder name as the last part of
-<code>path</code>, when <code>name</code> is not given. But if you say <code>a/b/c</code> (no trailing slash)
-and a folder <code>a/b/c/</code> already exists, it's unclear what you want. A file
-named <code>c</code> in <code>a/b/</code> or a file with default name in <code>a/b/c/</code>? You get an
-error and must make your intent clear.</p>
+    <p>Reports whether googledrive has stored a token, ready for use in downstream
+requests. Exists mostly for protecting examples that won't work in the
+absence of a token.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>as_dribble</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>A vector of Drive file paths, a vector of file ids marked
-with <code><a href='as_id.html'>as_id()</a></code>, a list of Files Resource objects, or a suitable data
-frame.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Other arguments passed down to methods. (Not used.)</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='fu'>drive_has_token</span>()</pre>
+        
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Logical.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># specify the path (substitute names or paths on your Drive!)</span>
-<span class='fu'>as_dribble</span>(<span class='st'>"abc"</span>)
-<span class='fu'>as_dribble</span>(<span class='st'>"abc/def"</span>)
-
-<span class='co'># specify the file id (substitute a read file id of your own!)</span>
-<span class='fu'>as_dribble</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"</span>))
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='fu'>drive_has_token</span>()</div><div class='output co'>#&gt; [1] FALSE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#value">Value</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

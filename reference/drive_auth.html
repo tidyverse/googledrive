@@ -176,13 +176,13 @@ tokens are less likely to be synced to the cloud by accident.</p>
     <tr>
       <th>cache</th>
       <td><p>Specifies the OAuth token cache. Defaults to the option named
-"gargle_oauth_cache", retrieved via <code>gargle_oauth_cache()</code>.</p></td>
+"gargle_oauth_cache", retrieved via <code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_oauth_cache()</a></code>.</p></td>
     </tr>
     <tr>
       <th>use_oob</th>
       <td><p>Whether to prefer "out of band" authentication. Defaults to
 the option named "gargle_oob_default", retrieved via
-<code>gargle_oob_default()</code>.</p></td>
+<code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_oob_default()</a></code>.</p></td>
     </tr>
     </table>
     
@@ -198,6 +198,7 @@ also force googledrive to switch from one identity to another. If
 there's no cached token for the email, this triggers a return to the
 browser to choose the identity and give consent.</p></li>
 <li><p>Use a service account token.</p></li>
+<li><p>Bring their own <a href='https://www.rdocumentation.org/packages/httr/topics/Token-class'>Token2.0</a>.</p></li>
 <li><p>Specify non-default behavior re: token caching and out-of-bound
 authentication.</p></li>
 </ul>
