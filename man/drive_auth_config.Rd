@@ -13,11 +13,11 @@ drive_api_key()
 drive_oauth_app()
 }
 \arguments{
-\item{app}{OAuth app. Defaults to a {AUTH_CONFIG_SOURCE} app.}
+\item{app}{OAuth app. Defaults to a tidyverse app.}
 
 \item{path}{Path to the JSON file.}
 
-\item{api_key}{API key. Defaults to a {AUTH_CONFIG_SOURCE} key. Necessary in
+\item{api_key}{API key. Defaults to a tidyverse key. Necessary in
 order to make unauthorized "token-free" requests for public resources.}
 }
 \value{

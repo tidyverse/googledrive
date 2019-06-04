@@ -150,8 +150,8 @@ drive_has_token <- function() {
 #' View or edit auth config
 #'
 #' @eval gargle:::PREFIX_auth_config_description(gargle_lookup_table)
-#' @eval gargle:::PREFIX_auth_config_params_except_key()
-#' @eval gargle:::PREFIX_auth_config_params_key()
+#' @eval gargle:::PREFIX_auth_config_params_except_key(gargle_lookup_table)
+#' @eval gargle:::PREFIX_auth_config_params_key(gargle_lookup_table)
 #' @eval gargle:::PREFIX_auth_config_return_with_key(gargle_lookup_table)
 #'
 #' @family auth functions
