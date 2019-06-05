@@ -61,7 +61,8 @@ if (require(httr)) {
     key = "123456789.apps.googleusercontent.com",
     secret = "abcdefghijklmnopqrstuvwxyz"
   )
-  drive_auth_config(app = google_app)
+  google_key <- "the-key-I-got-for-a-google-API"
+  drive_auth_config(app = google_app, api_key = google_key)
 }
 
 \dontrun{

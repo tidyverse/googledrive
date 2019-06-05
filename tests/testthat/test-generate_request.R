@@ -49,13 +49,13 @@ test_that("request_generate() suppresses API key if token is non-NULL", {
   expect_false(grepl("key", req$url))
 })
 
-test_that("request_generate() adds built-in API key when token = NULL", {
+test_that("request_generate() adds gargle's tidyverse API key if no token", {
   req <- request_generate(
     "drive.files.get",
     params = list(fileId = "abc"),
     token = NULL
   )
-  expect_match(req$url, drive_api_key())
+  expect_match(req$url, gargle::tidyverse_api_key())
 })
 
 test_that("request_generate(): explicit API key > key in params > built-in", {

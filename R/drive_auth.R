@@ -3,8 +3,6 @@
 
 .auth <- gargle::init_AuthState(
   package     = "googledrive",
-  app         = gargle::tidyverse_app(),
-  api_key     = gargle::tidyverse_api_key(),
   auth_active = TRUE
 )
 
@@ -61,7 +59,7 @@ drive_auth <- function(email = NULL,
                        token = NULL) {
   cred <- gargle::token_fetch(
     scopes = scopes,
-    app = drive_oauth_app(),
+    app = drive_oauth_app() %||% gargle::tidyverse_app(),
     email = email,
     path = path,
     package = "googledrive",
@@ -165,7 +163,8 @@ drive_has_token <- function() {
 #'     key = "123456789.apps.googleusercontent.com",
 #'     secret = "abcdefghijklmnopqrstuvwxyz"
 #'   )
-#'   drive_auth_config(app = google_app)
+#'   google_key <- "the-key-I-got-for-a-google-API"
+#'   drive_auth_config(app = google_app, api_key = google_key)
 #' }
 #'
 #' \dontrun{

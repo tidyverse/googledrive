@@ -57,7 +57,7 @@ request_generate <- function(endpoint = character(),
   }
 
   ## modifications specific to googledrive package
-  params$key <- key %||% params$key %||% drive_api_key()
+  params$key <- key %||% params$key %||% drive_api_key() %||% gargle::tidyverse_api_key()
   if (!is.null(ept$parameters$supportsTeamDrives)) {
     params$supportsTeamDrives <- TRUE
   }
