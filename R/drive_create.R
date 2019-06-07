@@ -23,7 +23,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ## Create a blank Google Doc named 'Word Star' in
+#' ## Create a blank Google Doc named 'WordStar' in
 #' ## your 'My Drive' root folder and star it
 #' wordstar <- drive_create("WordStar", type = "document", starred = TRUE)
 #'
