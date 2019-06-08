@@ -39,22 +39,23 @@ on <https://drive.google.com> (up to `n_max = 25`, in this case):
 ``` r
 library("googledrive")
 drive_find(n_max = 25)
-#> # A tibble: 13 x 3
-#>    name                id                                drive_resource
-#>  * <chr>               <chr>                             <list>        
-#>  1 googledrive-NEWS.md 15pfwRfXvpxekxhdERmSUnoxQY5K701y7 <list [38]>   
-#>  2 def                 1hr4EFw3r5vAMm5Jgw2SsFluBpN-oAC-x <list [32]>   
-#>  3 abc                 11lidFPceZAcNTHasQARiwAhE0NgmSfJN <list [32]>   
-#>  4 THANKS              1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_du3 <list [39]>   
-#>  5 BioC_mirrors.csv    1vV0fPdNOyo3Ti9ofA38MuTQm27pXvYq5 <list [38]>   
-#>  6 logo.jpg            1OFeNdd63NfoavqvDf5-xa3LORiamfKXS <list [40]>   
-#>  7 Rlogo.svg           11sxsw-ux-UjQjzVdxd1wjNz37hJeBrBu <list [40]>   
-#>  8 Rlogo.pdf           1cn7oVxQRgD0l_hCI4nrSSWrKeVFysUp7 <list [39]>   
-#>  9 DESCRIPTION         1MjV4stVPhlMNz1AcrIizcL7yTcVaRuBo <list [39]>   
-#> 10 chicken.txt         1xmwFZ_UN-CSs3Ic2aPUw22DbxZxoenVT <list [39]>   
-#> 11 chicken.pdf         1eK9ozP1TZjXfAgaAGmP9GrUTovGUaO9S <list [39]>   
-#> 12 chicken.jpg         1JnGjIdruQXErd20xR_ecAzN3yP_fTcfF <list [40]>   
-#> 13 chicken.csv         1eHoOi9Ch3zk3_QBRKCJajFEIO4aeGINr <list [38]>
+#> # A tibble: 14 x 3
+#>    name                    id                              drive_resource  
+#>  * <chr>                   <chr>                           <list>          
+#>  1 chicken-perm-article.t… 1oWpfPYR-77c-DdvoW30682F9Gde8Z… <named list [39…
+#>  2 googledrive-NEWS.md     15pfwRfXvpxekxhdERmSUnoxQY5K70… <named list [38…
+#>  3 def                     1hr4EFw3r5vAMm5Jgw2SsFluBpN-oA… <named list [32…
+#>  4 abc                     11lidFPceZAcNTHasQARiwAhE0NgmS… <named list [32…
+#>  5 THANKS                  1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_… <named list [39…
+#>  6 BioC_mirrors.csv        1vV0fPdNOyo3Ti9ofA38MuTQm27pXv… <named list [38…
+#>  7 logo.jpg                1OFeNdd63NfoavqvDf5-xa3LORiamf… <named list [40…
+#>  8 Rlogo.svg               11sxsw-ux-UjQjzVdxd1wjNz37hJeB… <named list [40…
+#>  9 Rlogo.pdf               1cn7oVxQRgD0l_hCI4nrSSWrKeVFys… <named list [39…
+#> 10 DESCRIPTION             1MjV4stVPhlMNz1AcrIizcL7yTcVaR… <named list [39…
+#> 11 chicken.txt             1xmwFZ_UN-CSs3Ic2aPUw22DbxZxoe… <named list [39…
+#> 12 chicken.pdf             1eK9ozP1TZjXfAgaAGmP9GrUTovGUa… <named list [39…
+#> 13 chicken.jpg             1JnGjIdruQXErd20xR_ecAzN3yP_fT… <named list [40…
+#> 14 chicken.csv             1eHoOi9Ch3zk3_QBRKCJajFEIO4aeG… <named list [38…
 ```
 
 ## Contributing
@@ -65,3 +66,7 @@ read [these guidelines](.github/CONTRIBUTING.md).
 Please note that the googledrive project is released with a [Contributor
 Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this
 project, you agree to abide by its terms.
+
+## Privacy
+
+[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
