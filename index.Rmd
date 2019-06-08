@@ -250,3 +250,7 @@ file.remove(c(
   "README-chicken-sheet.csv", "README-chicken-sheet.xlsx", "chicken.txt"
 ))
 ```
+
+## Privacy
+
+[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
