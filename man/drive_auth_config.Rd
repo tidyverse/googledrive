@@ -28,24 +28,16 @@ current API key. \code{drive_oauth_app()}: the current
 }
 \description{
 These functions give the user more control over auth than what is
-possible with \code{\link[=drive_auth]{drive_auth()}}. Learn more in Google's documentation:
-\href{https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279}{Credentials, access, security, and identity}
-and \href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{Using OAuth 2.0 for Installed Applications}.
-\code{drive_auth_config()} gives control of:
+possible with \code{\link[=drive_auth]{drive_auth()}}. \code{drive_auth_config()} gives control
+of:
 \itemize{
-\item The OAuth app. If you want to use your own app, setup a new project
-in \href{https://console.developers.google.com}{Google Developers Console}.
-Follow the instructions in \href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{OAuth 2.0 for Mobile & Desktop Apps}
-to obtain your own client ID and secret. Either make an app from
-your client ID and secret via \code{\link[httr:oauth_app]{httr::oauth_app()}} or provide a path
-to the JSON file containing same, which you can download from
-\href{https://console.developers.google.com}{Google Developers Console}.
-\item The API key. If googledrive is deauthorized via
-\code{\link[=drive_deauth]{drive_deauth()}}, all requests will be sent with an API key in
-lieu of a token. If you want to provide your own API key, setup a
-project as described above and follow the instructions in
-\href{https://support.google.com/googleapi/answer/6158862}{Setting up API keys}.
+\item The OAuth app, which is used when obtaining a user token.
+\item The API key. If googledrive is deauthorized via \code{\link[=drive_deauth]{drive_deauth()}},
+all requests will be sent with an API key in lieu of a token.
 }
+
+See the vignette \href{https://gargle.r-lib.org/articles/get-api-credentials.html}{How to get your own API credentials}
+for more.
 
 \code{drive_api_key()} and \code{drive_oauth_app()} retrieve the
 currently configured API key and OAuth app, respectively.
