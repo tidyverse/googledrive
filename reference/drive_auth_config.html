@@ -34,25 +34,16 @@
 <meta property="og:title" content="View or edit auth config — drive_auth_config" />
 
 <meta property="og:description" content="These functions give the user more control over auth than what is
-possible with drive_auth(). Learn more in Google's documentation:
-Credentials, access, security, and identity
-and Using OAuth 2.0 for Installed Applications.
-drive_auth_config() gives control of:
-The OAuth app. If you want to use your own app, setup a new project
-in Google Developers Console.
-Follow the instructions in OAuth 2.0 for Mobile &amp;amp; Desktop Apps
-to obtain your own client ID and secret. Either make an app from
-your client ID and secret via httr::oauth_app() or provide a path
-to the JSON file containing same, which you can download from
-Google Developers Console.
-The API key. If googledrive is deauthorized via
-drive_deauth(), all requests will be sent with an API key in
-lieu of a token. If you want to provide your own API key, setup a
-project as described above and follow the instructions in
-Setting up API keys.
+possible with drive_auth(). drive_auth_config() gives control
+of:
+The OAuth app, which is used when obtaining a user token.
+The API key. If googledrive is deauthorized via drive_deauth(),
+all requests will be sent with an API key in lieu of a token.
 " />
 
-<meta property="og:description" content="drive_api_key() and drive_oauth_app() retrieve the
+<meta property="og:description" content="See the vignette How to get your own API credentials
+for more.
+drive_api_key() and drive_oauth_app() retrieve the
 currently configured API key and OAuth app, respectively." />
 
 <meta property="og:image" content="/logo.png" />
@@ -155,25 +146,16 @@ currently configured API key and OAuth app, respectively." />
     <div class="ref-description">
     
     <p>These functions give the user more control over auth than what is
-possible with <code><a href='drive_auth.html'>drive_auth()</a></code>. Learn more in Google's documentation:
-<a href='https://support.google.com/googleapi/answer/6158857?hl=en&amp;ref_topic=7013279'>Credentials, access, security, and identity</a>
-and <a href='https://developers.google.com/identity/protocols/OAuth2InstalledApp'>Using OAuth 2.0 for Installed Applications</a>.
-<code>drive_auth_config()</code> gives control of:</p><ul>
-<li><p>The OAuth app. If you want to use your own app, setup a new project
-in <a href='https://console.developers.google.com'>Google Developers Console</a>.
-Follow the instructions in <a href='https://developers.google.com/identity/protocols/OAuth2InstalledApp'>OAuth 2.0 for Mobile &amp; Desktop Apps</a>
-to obtain your own client ID and secret. Either make an app from
-your client ID and secret via <code><a href='https://www.rdocumentation.org/packages/httr/topics/oauth_app'>httr::oauth_app()</a></code> or provide a path
-to the JSON file containing same, which you can download from
-<a href='https://console.developers.google.com'>Google Developers Console</a>.</p></li>
-<li><p>The API key. If googledrive is deauthorized via
-<code><a href='drive_deauth.html'>drive_deauth()</a></code>, all requests will be sent with an API key in
-lieu of a token. If you want to provide your own API key, setup a
-project as described above and follow the instructions in
-<a href='https://support.google.com/googleapi/answer/6158862'>Setting up API keys</a>.</p></li>
+possible with <code><a href='drive_auth.html'>drive_auth()</a></code>. <code>drive_auth_config()</code> gives control
+of:</p><ul>
+<li><p>The OAuth app, which is used when obtaining a user token.</p></li>
+<li><p>The API key. If googledrive is deauthorized via <code><a href='drive_deauth.html'>drive_deauth()</a></code>,
+all requests will be sent with an API key in lieu of a token.</p></li>
 </ul>
 
-    <p><code>drive_api_key()</code> and <code>drive_oauth_app()</code> retrieve the
+    <p>See the vignette <a href='https://gargle.r-lib.org/articles/get-api-credentials.html'>How to get your own API credentials</a>
+for more.</p>
+<p><code>drive_api_key()</code> and <code>drive_oauth_app()</code> retrieve the
 currently configured API key and OAuth app, respectively.</p>
     
     </div>
