@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Produce configured token — drive_token • googledrive</title>
+<title>Deprecated googledrive functions — googledrive-deprecated • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -31,15 +31,9 @@
 
 
 
-<meta property="og:title" content="Produce configured token — drive_token" />
+<meta property="og:title" content="Deprecated googledrive functions — googledrive-deprecated" />
 
-<meta property="og:description" content="For internal use or for those programming around the Drive API.
-Returns a token pre-processed with httr::config(). Most users
-do not need to handle tokens &quot;by hand&quot; or, even if they need some
-control, drive_auth() is what they need. If there is no current
-token, drive_auth() is called to either load from cache or
-initiate OAuth2.0 flow. If auth has been deactivated via
-drive_auth_config(), drive_token() returns NULL." />
+<meta property="og:description" content="Deprecated googledrive functions" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -133,55 +127,45 @@ drive_auth_config(), drive_token() returns NULL." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Produce configured token</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/drive_auth.R'><code>R/drive_auth.R</code></a></small>
-    <div class="hidden name"><code>drive_token.Rd</code></div>
+    <h1>Deprecated googledrive functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
+    <div class="hidden name"><code>googledrive-deprecated.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>For internal use or for those programming around the Drive API.
-Returns a token pre-processed with <code><a href='https://www.rdocumentation.org/packages/httr/topics/config'>httr::config()</a></code>. Most users
-do not need to handle tokens "by hand" or, even if they need some
-control, <code><a href='drive_auth.html'>drive_auth()</a></code> is what they need. If there is no current
-token, <code><a href='drive_auth.html'>drive_auth()</a></code> is called to either load from cache or
-initiate OAuth2.0 flow. If auth has been deactivated via
-<code><a href='googledrive-deprecated.html'>drive_auth_config()</a></code>, <code>drive_token()</code> returns <code>NULL</code>.</p>
+    <p>Deprecated googledrive functions</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>drive_token</span>()</pre>
-        
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code>request</code> object (an S3 class provided by <a href='https://www.rdocumentation.org/packages/httr/topics/httr-package'>httr</a>).</p>
+    <pre class="usage"><span class='fu'>drive_auth_config</span>(<span class='no'>app</span>, <span class='no'>path</span>, <span class='no'>api_key</span>)</pre>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other low-level API functions: <code><a href='request_generate.html'>request_generate</a></code>,
-  <code><a href='request_make.html'>request_make</a></code></p></div>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>app</th>
+      <td><p>OAuth app, in the sense of <code><a href='https://www.rdocumentation.org/packages/httr/topics/oauth_app'>httr::oauth_app()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>JSON downloaded from Google Developers Console, containing a
+client id (aka key) and secret, in one of the forms supported for the <code>txt</code>
+argument of <code><a href='https://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>jsonlite::fromJSON()</a></code> (typically, a file path or JSON string).</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>API key.</p></td>
+    </tr>
+    </table>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='request_generate.html'>request_generate</a></span>(
-  <span class='st'>"drive.files.get"</span>,
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>),
-  <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>drive_token</span>()
-)
-<span class='no'>req</span>
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
 
   </div>
 </div>
