@@ -143,65 +143,103 @@ drive_has_token <- function() {
   inherits(.auth$cred, "Token2.0")
 }
 
-#' View or edit auth config
+# TODO(jennybc): update roxygen header below when/if gargle supports
+# THING_auth_configure, instead of or in addition to THING_auth_config.
+
+#' Edit and view auth configuration
 #'
-#' @eval gargle:::PREFIX_auth_config_description(gargle_lookup_table)
-#' @eval gargle:::PREFIX_auth_config_params_except_key(gargle_lookup_table)
-#' @eval gargle:::PREFIX_auth_config_params_key(gargle_lookup_table)
-#' @eval gargle:::PREFIX_auth_config_return_with_key(gargle_lookup_table)
+#' @description
+#' These functions give more control over and visibility into the auth
+#' configuration than [drive_auth()] does. `drive_auth_configure()` lets the
+#' user specify their own:
+#' * OAuth app, which is used when obtaining a user token.
+#' * API key. If googledrive is deauthorized via [drive_deauth()], all requests
+#'    are sent with an API key in lieu of a token.
+#'
+#' See the vignette [How to get your own API
+#' credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) for
+#' more. If the user does not configure these settings, internal defaults are
+#' used.
+#'
+#' @param app OAuth app, in the sense of [httr::oauth_app()].
+# @param path JSON obtained from [Google Developers
+#   Console](https://console.developers.google.com), containing a client id
+#   (aka key) and secret, in one of the forms supported for the `txt` argument
+#   of [jsonlite::fromJSON()] (typically, a file path or JSON string).
+#' @inheritParams gargle::oauth_app_from_json
+#' @param api_key API key.
+#'
+#' @return
+#' * `drive_auth_configure()`: An object of R6 class [gargle::AuthState],
+#'   invisibly.
+#' * `drive_oauth_app()`: the current user-configured [httr::oauth_app()].
+#' * `drive_api_key()`: the current user-configured API key.
 #'
 #' @family auth functions
 #' @export
 #' @examples
-#' ## this will print current config
-#' drive_auth_config()
+#' # see and store the current user-configured OAuth app (probaby `NULL`)
+#' (original_app <- drive_oauth_app())
+#'
+#' # see and store the current user-configured API key (probaby `NULL`)
+#' (original_api_key <- drive_api_key())
 #'
 #' if (require(httr)) {
-#'   ## bring your own app via client id (aka key) and secret
+#'   # bring your own app via client id (aka key) and secret
 #'   google_app <- httr::oauth_app(
 #'     "my-awesome-google-api-wrapping-package",
 #'     key = "123456789.apps.googleusercontent.com",
 #'     secret = "abcdefghijklmnopqrstuvwxyz"
 #'   )
 #'   google_key <- "the-key-I-got-for-a-google-API"
-#'   drive_auth_config(app = google_app, api_key = google_key)
+#'   drive_auth_configure(app = google_app, api_key = google_key)
+#'
+#'   # confirm the changes
+#'   drive_oauth_app()
+#'   drive_api_key()
 #' }
 #'
 #' \dontrun{
 #' ## bring your own app via JSON downloaded from Google Developers Console
-#' drive_auth_config(
+#' drive_auth_configure(
 #'   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
 #' )
 #' }
-drive_auth_config <- function(app = NULL,
-                              path = NULL,
-                              api_key = NULL) {
-  stopifnot(is.null(app) || inherits(app, "oauth_app"))
-  stopifnot(is.null(path) || is_string(path))
-  stopifnot(is.null(api_key) || is_string(api_key))
-
-  if (!is.null(app) && !is.null(path)) {
-    stop_glue("Don't provide both 'app' and 'path'. Pick one.")
+#'
+#' # restore original auth config
+#' drive_auth_configure(app = original_app, api_key = original_api_key)
+drive_auth_configure <- function(app, path, api_key) {
+  if (!missing(app) && !missing(path)) {
+    stop("Must supply exactly one of `app` and `path`", call. = FALSE)
   }
+  stopifnot(missing(api_key) || is.null(api_key) || is_string(api_key))
 
-  if (is.null(app) && !is.null(path)) {
+  if (!missing(path)) {
+    stopifnot(is_string(path))
     app <- gargle::oauth_app_from_json(path)
   }
-  if (!is.null(app)) {
-    .auth$set_app(app)
+  stopifnot(missing(app) || is.null(app) || inherits(app, "oauth_app"))
+
+  if (!missing(app) || !missing(path)) {
+    .auth$app <- app
   }
 
-  if (!is.null(api_key)) {
-    .auth$set_api_key(api_key)
+  if (!missing(api_key)) {
+    .auth$api_key <- api_key
   }
 
-  .auth
+  invisible(.auth)
+
+  # switch to these once this is resolved and released
+  # https://github.com/r-lib/gargle/issues/82#issuecomment-502343745
+  #.auth$set_app(app)
+  #.auth$set_api_key(api_key)
 }
 
 #' @export
-#' @rdname drive_auth_config
+#' @rdname drive_auth_configure
 drive_api_key <- function() .auth$api_key
 
 #' @export
-#' @rdname drive_auth_config
+#' @rdname drive_auth_configure
 drive_oauth_app <- function() .auth$app
