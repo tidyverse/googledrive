@@ -162,10 +162,6 @@ drive_has_token <- function() {
 #' used.
 #'
 #' @param app OAuth app, in the sense of [httr::oauth_app()].
-# @param path JSON obtained from [Google Developers
-#   Console](https://console.developers.google.com), containing a client id
-#   (aka key) and secret, in one of the forms supported for the `txt` argument
-#   of [jsonlite::fromJSON()] (typically, a file path or JSON string).
 #' @inheritParams gargle::oauth_app_from_json
 #' @param api_key API key.
 #'
