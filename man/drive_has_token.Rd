@@ -11,9 +11,14 @@ Logical.
 }
 \description{
 Reports whether googledrive has stored a token, ready for use in downstream
-requests. Exists mostly for protecting examples that won't work in the
-absence of a token.
+requests.
 }
 \examples{
 drive_has_token()
 }
+\seealso{
+Other low-level API functions: \code{\link{drive_token}},
+  \code{\link{request_generate}},
+  \code{\link{request_make}}
+}
+\concept{low-level API functions}

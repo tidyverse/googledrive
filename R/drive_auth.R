@@ -13,8 +13,7 @@ gargle_lookup_table <- list(
   YOUR_STUFF  = "your Drive files",
   PRODUCT     = "Google Drive",
   API         = "Drive API",
-  PREFIX      = "drive",
-  AUTH_CONFIG_SOURCE = "tidyverse"
+  PREFIX      = "drive"
 )
 
 #' Authorize googledrive
@@ -130,11 +129,11 @@ drive_token <- function() {
 
 #' Is there a token on hand?
 #'
-#' Reports whether googledrive has stored a token, ready for use in downstream
-#' requests. Exists mostly for protecting examples that won't work in the
-#' absence of a token.
+#' @eval gargle:::PREFIX_has_token_description(gargle_lookup_table)
 #'
 #' @return Logical.
+#'
+#' @family low-level API functions
 #' @export
 #'
 #' @examples

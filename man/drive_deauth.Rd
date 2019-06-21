@@ -12,8 +12,10 @@ googledrive will send an API key. This can be used to access public
 resources for which no Google sign-in is required. This is handy for using
 googledrive in a non-interactive setting to make requests that do not
 require a token. It will prevent the attempt to obtain a token
-interactively in the browser. A built-in API key is used by default or
-the user can configure their own via \code{\link[=drive_auth_config]{drive_auth_config()}}.
+interactively in the browser. The user can configure their own API key
+via \code{\link[=drive_auth_configure]{drive_auth_configure()}} and retrieve that key via
+\code{\link[=drive_api_key]{drive_api_key()}}.
+In the absence of a user-configured key, an built-in default key is used.
 }
 \examples{
 \dontrun{

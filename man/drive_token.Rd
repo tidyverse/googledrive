@@ -15,8 +15,9 @@ Returns a token pre-processed with \code{\link[httr:config]{httr::config()}}. Mo
 do not need to handle tokens "by hand" or, even if they need some
 control, \code{\link[=drive_auth]{drive_auth()}} is what they need. If there is no current
 token, \code{\link[=drive_auth]{drive_auth()}} is called to either load from cache or
-initiate OAuth2.0 flow. If auth has been deactivated via
-\code{\link[=drive_auth_config]{drive_auth_config()}}, \code{drive_token()} returns \code{NULL}.
+initiate OAuth2.0 flow.
+If auth has been deactivated via \code{\link[=drive_deauth]{drive_deauth()}}, \code{drive_token()}
+returns \code{NULL}.
 }
 \examples{
 \dontrun{
@@ -29,7 +30,8 @@ req
 }
 }
 \seealso{
-Other low-level API functions: \code{\link{request_generate}},
+Other low-level API functions: \code{\link{drive_has_token}},
+  \code{\link{request_generate}},
   \code{\link{request_make}}
 }
 \concept{low-level API functions}

@@ -75,7 +75,7 @@ authentication.
 
 For details on the many ways to find a token, see
 \code{\link[gargle:token_fetch]{gargle::token_fetch()}}. For deeper control over auth, use
-\code{\link[=drive_auth_config]{drive_auth_config()}} to bring your own OAuth app or API key.
+\code{\link[=drive_auth_configure]{drive_auth_configure()}} to bring your own OAuth app or API key.
 }
 \examples{
 \dontrun{
