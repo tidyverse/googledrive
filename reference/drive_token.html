@@ -38,8 +38,9 @@ Returns a token pre-processed with httr::config(). Most users
 do not need to handle tokens &quot;by hand&quot; or, even if they need some
 control, drive_auth() is what they need. If there is no current
 token, drive_auth() is called to either load from cache or
-initiate OAuth2.0 flow. If auth has been deactivated via
-drive_auth_config(), drive_token() returns NULL." />
+initiate OAuth2.0 flow.
+If auth has been deactivated via drive_deauth(), drive_token()
+returns NULL." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -145,8 +146,9 @@ Returns a token pre-processed with <code><a href='https://www.rdocumentation.org
 do not need to handle tokens "by hand" or, even if they need some
 control, <code><a href='drive_auth.html'>drive_auth()</a></code> is what they need. If there is no current
 token, <code><a href='drive_auth.html'>drive_auth()</a></code> is called to either load from cache or
-initiate OAuth2.0 flow. If auth has been deactivated via
-<code><a href='googledrive-deprecated.html'>drive_auth_config()</a></code>, <code>drive_token()</code> returns <code>NULL</code>.</p>
+initiate OAuth2.0 flow.
+If auth has been deactivated via <code><a href='drive_deauth.html'>drive_deauth()</a></code>, <code>drive_token()</code>
+returns <code>NULL</code>.</p>
     
     </div>
 
@@ -158,7 +160,8 @@ initiate OAuth2.0 flow. If auth has been deactivated via
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other low-level API functions: <code><a href='request_generate.html'>request_generate</a></code>,
+    <div class='dont-index'><p>Other low-level API functions: <code><a href='drive_has_token.html'>drive_has_token</a></code>,
+  <code><a href='request_generate.html'>request_generate</a></code>,
   <code><a href='request_make.html'>request_make</a></code></p></div>
     
 

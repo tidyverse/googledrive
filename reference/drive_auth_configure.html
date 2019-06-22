@@ -34,16 +34,19 @@
 <meta property="og:title" content="Edit and view auth configuration — drive_auth_configure" />
 
 <meta property="og:description" content="These functions give more control over and visibility into the auth
-configuration than drive_auth() does. drive_auth_configure() lets the
-user specify their own:
+configuration than drive_auth() does. drive_auth_configure()
+lets the user specify their own:
 OAuth app, which is used when obtaining a user token.
-API key. If googledrive is deauthorized via drive_deauth(), all requests
-are sent with an API key in lieu of a token.
+API key. If googledrive is de-authorized via drive_deauth(), all
+requests are sent with an API key in lieu of a token.
+See the vignette
+How to get your own API credentials
+for more.
+If the user does not configure these settings, internal defaults
+are used.
+drive_oauth_app() and drive_api_key() retrieve the
+currently configured OAuth app and API key, respectively.
 " />
-
-<meta property="og:description" content="See the vignette How to get your own API credentials for
-more. If the user does not configure these settings, internal defaults are
-used." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -145,16 +148,19 @@ used." />
     <div class="ref-description">
     
     <p>These functions give more control over and visibility into the auth
-configuration than <code><a href='drive_auth.html'>drive_auth()</a></code> does. <code>drive_auth_configure()</code> lets the
-user specify their own:</p><ul>
+configuration than <code><a href='drive_auth.html'>drive_auth()</a></code> does. <code>drive_auth_configure()</code>
+lets the user specify their own:</p><ul>
 <li><p>OAuth app, which is used when obtaining a user token.</p></li>
-<li><p>API key. If googledrive is deauthorized via <code><a href='drive_deauth.html'>drive_deauth()</a></code>, all requests
-are sent with an API key in lieu of a token.</p></li>
+<li><p>API key. If googledrive is de-authorized via <code><a href='drive_deauth.html'>drive_deauth()</a></code>, all
+requests are sent with an API key in lieu of a token.
+See the vignette
+<a href='https://gargle.r-lib.org/articles/get-api-credentials.html'>How to get your own API credentials</a>
+for more.
+If the user does not configure these settings, internal defaults
+are used.
+<code>drive_oauth_app()</code> and <code>drive_api_key()</code> retrieve the
+currently configured OAuth app and API key, respectively.</p></li>
 </ul>
-
-    <p>See the vignette <a href='https://gargle.r-lib.org/articles/get-api-credentials.html'>How to get your own API credentials</a> for
-more. If the user does not configure these settings, internal defaults are
-used.</p>
     
     </div>
 
@@ -173,7 +179,7 @@ used.</p>
     </tr>
     <tr>
       <th>path</th>
-      <td><p>JSON downloaded from Google Developers Console, containing a
+      <td><p>JSON downloaded from Google Cloud Platform Console, containing a
 client id (aka key) and secret, in one of the forms supported for the <code>txt</code>
 argument of <code><a href='https://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>jsonlite::fromJSON()</a></code> (typically, a file path or JSON string).</p></td>
     </tr>
@@ -187,9 +193,10 @@ argument of <code><a href='https://www.rdocumentation.org/packages/jsonlite/topi
 
     
 <ul>
-<li><p><code>drive_auth_configure()</code>: An object of R6 class <a href='https://gargle.r-lib.org/reference/AuthState-class.html'>gargle::AuthState</a>,
-invisibly.</p></li>
-<li><p><code>drive_oauth_app()</code>: the current user-configured <code><a href='https://www.rdocumentation.org/packages/httr/topics/oauth_app'>httr::oauth_app()</a></code>.</p></li>
+<li><p><code>drive_auth_configure()</code>: An object of R6 class
+<a href='https://gargle.r-lib.org/reference/AuthState-class.html'>gargle::AuthState</a>, invisibly.</p></li>
+<li><p><code>drive_oauth_app()</code>: the current user-configured
+<code><a href='https://www.rdocumentation.org/packages/httr/topics/oauth_app'>httr::oauth_app()</a></code>.</p></li>
 <li><p><code>drive_api_key()</code>: the current user-configured API key.</p></li>
 </ul>
 
