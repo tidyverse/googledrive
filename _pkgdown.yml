@@ -22,6 +22,8 @@ navbar:
       href: articles/articles/multiple-files.html
     - text: File permissions
       href: articles/articles/permissions.html
+    - text: Bring your own OAuth app or API key
+      href: articles/articles/bring-your-own-app.html
   - text: News
     href: news/index.html
 
