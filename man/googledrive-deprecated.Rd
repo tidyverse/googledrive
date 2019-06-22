@@ -10,7 +10,7 @@ drive_auth_config(app, path, api_key)
 \arguments{
 \item{app}{OAuth app, in the sense of \code{\link[httr:oauth_app]{httr::oauth_app()}}.}
 
-\item{path}{JSON downloaded from Google Developers Console, containing a
+\item{path}{JSON downloaded from Google Cloud Platform Console, containing a
 client id (aka key) and secret, in one of the forms supported for the \code{txt}
 argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a file path or JSON string).}
 

@@ -130,8 +130,7 @@ drive_token <- function() {
 #' Is there a token on hand?
 #'
 #' @eval gargle:::PREFIX_has_token_description(gargle_lookup_table)
-#'
-#' @return Logical.
+#' @eval gargle:::PREFIX_has_token_return()
 #'
 #' @family low-level API functions
 #' @export
@@ -142,33 +141,11 @@ drive_has_token <- function() {
   inherits(.auth$cred, "Token2.0")
 }
 
-# TODO(jennybc): update roxygen header below when/if gargle supports
-# THING_auth_configure, instead of or in addition to THING_auth_config.
-
 #' Edit and view auth configuration
 #'
-#' @description
-#' These functions give more control over and visibility into the auth
-#' configuration than [drive_auth()] does. `drive_auth_configure()` lets the
-#' user specify their own:
-#' * OAuth app, which is used when obtaining a user token.
-#' * API key. If googledrive is deauthorized via [drive_deauth()], all requests
-#'    are sent with an API key in lieu of a token.
-#'
-#' See the vignette [How to get your own API
-#' credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) for
-#' more. If the user does not configure these settings, internal defaults are
-#' used.
-#'
-#' @param app OAuth app, in the sense of [httr::oauth_app()].
-#' @inheritParams gargle::oauth_app_from_json
-#' @param api_key API key.
-#'
-#' @return
-#' * `drive_auth_configure()`: An object of R6 class [gargle::AuthState],
-#'   invisibly.
-#' * `drive_oauth_app()`: the current user-configured [httr::oauth_app()].
-#' * `drive_api_key()`: the current user-configured API key.
+#' @eval gargle:::PREFIX_auth_configure_description(gargle_lookup_table)
+#' @eval gargle:::PREFIX_auth_configure_params()
+#' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table)
 #'
 #' @family auth functions
 #' @export
