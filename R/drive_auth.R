@@ -193,19 +193,14 @@ drive_auth_configure <- function(app, path, api_key) {
   stopifnot(missing(app) || is.null(app) || inherits(app, "oauth_app"))
 
   if (!missing(app) || !missing(path)) {
-    .auth$app <- app
+    .auth$set_app(app)
   }
 
   if (!missing(api_key)) {
-    .auth$api_key <- api_key
+    .auth$set_api_key(api_key)
   }
 
   invisible(.auth)
-
-  # switch to these once this is resolved and released
-  # https://github.com/r-lib/gargle/issues/82#issuecomment-502343745
-  #.auth$set_app(app)
-  #.auth$set_api_key(api_key)
 }
 
 #' @export
