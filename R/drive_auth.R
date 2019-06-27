@@ -50,7 +50,7 @@ gargle_lookup_table <- list(
 #' ## use a service account token
 #' drive_auth(path = "foofy-83ee9e7c9c48.json")
 #' }
-drive_auth <- function(email = NULL,
+drive_auth <- function(email = gargle::gargle_oauth_email(),
                        path = NULL,
                        scopes = "https://www.googleapis.com/auth/drive",
                        cache = gargle::gargle_oauth_cache(),

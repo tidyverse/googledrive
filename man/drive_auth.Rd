@@ -4,7 +4,7 @@
 \alias{drive_auth}
 \title{Authorize googledrive}
 \usage{
-drive_auth(email = NULL, path = NULL,
+drive_auth(email = gargle::gargle_oauth_email(), path = NULL,
   scopes = "https://www.googleapis.com/auth/drive",
   cache = gargle::gargle_oauth_cache(),
   use_oob = gargle::gargle_oob_default(), token = NULL)
