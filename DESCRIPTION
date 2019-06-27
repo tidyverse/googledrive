@@ -17,7 +17,7 @@ Depends:
     R (>= 3.2)
 Imports: 
     curl (>= 2.8.1),
-    gargle (>= 0.2.0.9001),
+    gargle (>= 0.2.0.9004),
     glue (>= 1.2.0),
     httr,
     jsonlite,

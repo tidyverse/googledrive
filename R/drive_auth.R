@@ -83,7 +83,7 @@ drive_auth <- function(email = NULL,
 
 #' Suspend authorization
 #'
-#' @eval gargle:::PREFIX_deauth_description(gargle_lookup_table)
+#' @eval gargle:::PREFIX_deauth_description_with_api_key(gargle_lookup_table)
 #'
 #' @family auth functions
 #' @export
