@@ -157,7 +157,7 @@ tokens are less likely to be synced to the cloud by accident.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>drive_auth</span>(<span class='kw'>email</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>drive_auth</span>(<span class='kw'>email</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oauth_email</a></span>(), <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>scopes</span> <span class='kw'>=</span> <span class='st'>"https://www.googleapis.com/auth/drive"</span>,
   <span class='kw'>cache</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oauth_cache</a></span>(),
   <span class='kw'>use_oob</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oob_default</a></span>(), <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -208,7 +208,10 @@ the option named "gargle_oob_default", retrieved via
     </tr>
     <tr>
       <th>token</th>
-      <td><p>A token with class <a href='https://www.rdocumentation.org/packages/httr/topics/Token-class'>Token2.0</a>.</p></td>
+      <td><p>A token with class <a href='https://www.rdocumentation.org/packages/httr/topics/Token-class'>Token2.0</a> or an object of
+httr's class <code>request</code>, i.e. a token that has been prepared with
+<code><a href='https://www.rdocumentation.org/packages/httr/topics/config'>httr::config()</a></code> and has a <a href='https://www.rdocumentation.org/packages/httr/topics/Token-class'>Token2.0</a> in the
+<code>auth_token</code> component.</p></td>
     </tr>
     </table>
     
