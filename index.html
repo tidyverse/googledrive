@@ -143,22 +143,22 @@
 <p>Here’s how to list up to <code>n_max</code> of the files you see in <a href="https://drive.google.com">My Drive</a>. You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">n_max =</span> <span class="dv">30</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; # A tibble: 14 x 3</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;    name                     id                               drive_resource</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;  * &lt;chr&gt;                    &lt;chr&gt;                            &lt;list&gt;        </span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;  1 chicken-perm-article.txt 1oWpfPYR-77c-DdvoW30682F9Gde8Zp… &lt;list [39]&gt;   </span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  2 googledrive-NEWS.md      15pfwRfXvpxekxhdERmSUnoxQY5K701… &lt;list [38]&gt;   </span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;  3 def                      1hr4EFw3r5vAMm5Jgw2SsFluBpN-oAC… &lt;list [32]&gt;   </span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;  4 abc                      11lidFPceZAcNTHasQARiwAhE0NgmSf… &lt;list [32]&gt;   </span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;  5 THANKS                   1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_d… &lt;list [39]&gt;   </span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  6 BioC_mirrors.csv         1vV0fPdNOyo3Ti9ofA38MuTQm27pXvY… &lt;list [38]&gt;   </span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  7 logo.jpg                 1OFeNdd63NfoavqvDf5-xa3LORiamfK… &lt;list [40]&gt;   </span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;  8 Rlogo.svg                11sxsw-ux-UjQjzVdxd1wjNz37hJeBr… &lt;list [40]&gt;   </span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  9 Rlogo.pdf                1cn7oVxQRgD0l_hCI4nrSSWrKeVFysU… &lt;list [39]&gt;   </span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; 10 DESCRIPTION              1MjV4stVPhlMNz1AcrIizcL7yTcVaRu… &lt;list [39]&gt;   </span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 11 chicken.txt              1xmwFZ_UN-CSs3Ic2aPUw22DbxZxoen… &lt;list [39]&gt;   </span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; 12 chicken.pdf              1eK9ozP1TZjXfAgaAGmP9GrUTovGUaO… &lt;list [39]&gt;   </span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; 13 chicken.jpg              1JnGjIdruQXErd20xR_ecAzN3yP_fTc… &lt;list [40]&gt;   </span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; 14 chicken.csv              1eHoOi9Ch3zk3_QBRKCJajFEIO4aeGI… &lt;list [38]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;    name                    id                              drive_resource  </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;  * &lt;chr&gt;                   &lt;chr&gt;                           &lt;list&gt;          </span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;  1 chicken-perm-article.t… 1oWpfPYR-77c-DdvoW30682F9Gde8Z… &lt;named list [39…</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  2 googledrive-NEWS.md     15pfwRfXvpxekxhdERmSUnoxQY5K70… &lt;named list [38…</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;  3 def                     1hr4EFw3r5vAMm5Jgw2SsFluBpN-oA… &lt;named list [32…</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;  4 abc                     11lidFPceZAcNTHasQARiwAhE0NgmS… &lt;named list [32…</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;  5 THANKS                  1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_… &lt;named list [39…</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  6 BioC_mirrors.csv        1vV0fPdNOyo3Ti9ofA38MuTQm27pXv… &lt;named list [38…</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  7 logo.jpg                1OFeNdd63NfoavqvDf5-xa3LORiamf… &lt;named list [40…</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;  8 Rlogo.svg               11sxsw-ux-UjQjzVdxd1wjNz37hJeB… &lt;named list [40…</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  9 Rlogo.pdf               1cn7oVxQRgD0l_hCI4nrSSWrKeVFys… &lt;named list [39…</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; 10 DESCRIPTION             1MjV4stVPhlMNz1AcrIizcL7yTcVaR… &lt;named list [39…</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 11 chicken.txt             1xmwFZ_UN-CSs3Ic2aPUw22DbxZxoe… &lt;named list [39…</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; 12 chicken.pdf             1eK9ozP1TZjXfAgaAGmP9GrUTovGUa… &lt;named list [39…</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; 13 chicken.jpg             1JnGjIdruQXErd20xR_ecAzN3yP_fT… &lt;named list [40…</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; 14 chicken.csv             1eHoOi9Ch3zk3_QBRKCJajFEIO4aeG… &lt;named list [38…</span></a></code></pre></div>
 <p>You can narrow the query by specifying a <code>pattern</code> you’d like to match names against. Or by specifying a file type: the <code>type</code> argument understands MIME types, file extensions, and a few human-friendly keywords.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">pattern =</span> <span class="st">"chicken"</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"spreadsheet"</span>)     ## Google Sheets!</a>
@@ -167,10 +167,10 @@
 <p>Alternatively, you can refine the search using the <code>q</code> query parameter. Accepted search clauses can be found in the <a href="https://developers.google.com/drive/v3/web/search-parameters">Google Drive API documentation</a>. For example, to get all files with <code>'project'</code> somewhere in their full text, do this:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">(files &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'project'"</span>))</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;   name        id                                drive_resource</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;       &lt;chr&gt;                             &lt;list&gt;        </span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 1 THANKS      1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_du3 &lt;list [39]&gt;   </span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 2 DESCRIPTION 1MjV4stVPhlMNz1AcrIizcL7yTcVaRuBo &lt;list [39]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;   name        id                                drive_resource   </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;       &lt;chr&gt;                             &lt;list&gt;           </span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 1 THANKS      1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_du3 &lt;named list [39]&gt;</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 2 DESCRIPTION 1MjV4stVPhlMNz1AcrIizcL7yTcVaRuBo &lt;named list [39]&gt;</span></a></code></pre></div>
 <p>You generally want to store the result of a googledrive call, as we do with <code>files</code> above. <code>files</code> is a dribble with info on several files and can be used as the input for downstream calls. It can also be manipulated as a regular data frame at any point.</p>
 <div id="identify-files" class="section level4">
 <h4 class="hasAnchor">
@@ -178,23 +178,23 @@
 <p><code><a href="reference/drive_find.html">drive_find()</a></code> searches by file properties, but you can also identify files by name (path, really) or by Drive file id using <code><a href="reference/drive_get.html">drive_get()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">(x &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(<span class="st">"~/abc/def/googledrive-NEWS.md"</span>))</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;   name           path                 id                     drive_resource</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;                &lt;chr&gt;                  &lt;list&gt;        </span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 1 googledrive-N… ~/abc/def/googledri… 15pfwRfXvpxekxhdERmSU… &lt;list [38]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;   name           path                 id                    drive_resource </span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;                &lt;chr&gt;                 &lt;list&gt;         </span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 1 googledrive-N… ~/abc/def/googledri… 15pfwRfXvpxekxhdERmS… &lt;named list [3…</span></a></code></pre></div>
 <p><code><a href="reference/as_id.html">as_id()</a></code> can be used to coerce various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and dribbles.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">## let's retrieve same file by id (also a great way to force-refresh metadata)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">x<span class="op">$</span>id</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; [1] "15pfwRfXvpxekxhdERmSUnoxQY5K701y7"</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="reference/as_id.html">as_id</a></span>(x<span class="op">$</span>id))</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   name                id                                drive_resource</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; * &lt;chr&gt;               &lt;chr&gt;                             &lt;list&gt;        </span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 1 googledrive-NEWS.md 15pfwRfXvpxekxhdERmSUnoxQY5K701y7 &lt;list [38]&gt;</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   name                id                                drive_resource   </span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; * &lt;chr&gt;               &lt;chr&gt;                             &lt;list&gt;           </span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 1 googledrive-NEWS.md 15pfwRfXvpxekxhdERmSUnoxQY5K701y7 &lt;named list [38]&gt;</span></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="kw"><a href="reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="reference/as_id.html">as_id</a></span>(x))</a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;   name                id                                drive_resource</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; * &lt;chr&gt;               &lt;chr&gt;                             &lt;list&gt;        </span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; 1 googledrive-NEWS.md 15pfwRfXvpxekxhdERmSUnoxQY5K701y7 &lt;list [38]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;   name                id                                drive_resource   </span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; * &lt;chr&gt;               &lt;chr&gt;                             &lt;list&gt;           </span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; 1 googledrive-NEWS.md 15pfwRfXvpxekxhdERmSUnoxQY5K701y7 &lt;named list [38]&gt;</span></a></code></pre></div>
 <p>In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a <code>dribble</code>. If it’s ambiguous, use <code><a href="reference/as_id.html">as_id()</a></code> to mark a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.</p>
 </div>
 <div id="upload-files" class="section level4">
@@ -208,17 +208,17 @@
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Local file:</span></a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;   * /home/travis/R/Library/googledrive/extdata/chicken.csv</span></a>
 <a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; uploaded into Drive file:</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;   * README-chicken.csv: 1rz3sao0daBaCgNeoYVBVuOPzL1DbJmfS</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;   * README-chicken.csv: 1c8laFVpEhQaITgTZ2qRuSnWNCd4VEMjh</span></a>
 <a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; with MIME type:</span></a>
 <a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;   * text/csv</span></a>
 <a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;   name               id                                drive_resource</span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                             &lt;list&gt;        </span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; 1 README-chicken.csv 1rz3sao0daBaCgNeoYVBVuOPzL1DbJmfS &lt;list [38]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;   name               id                                drive_resource   </span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                             &lt;list&gt;           </span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; 1 README-chicken.csv 1c8laFVpEhQaITgTZ2qRuSnWNCd4VEMjh &lt;named list [38]&gt;</span></a></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive guessed the MIME type. We can overrule this by using the <code>type</code> parameter to upload as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Files deleted:</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;   * README-chicken.csv: 1rz3sao0daBaCgNeoYVBVuOPzL1DbJmfS</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;   * README-chicken.csv: 1c8laFVpEhQaITgTZ2qRuSnWNCd4VEMjh</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb9-5" data-line-number="5">## example of using a dribble as input</a>
 <a class="sourceLine" id="cb9-6" data-line-number="6">chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_upload.html">drive_upload</a></span>(</a>
@@ -229,7 +229,7 @@
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; Local file:</span></a>
 <a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;   * /home/travis/R/Library/googledrive/extdata/chicken.csv</span></a>
 <a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; uploaded into Drive file:</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt;   * README-chicken-sheet: 1JNpNZvGAlS8bYMGmdelp-KipZpnx5gzHQ8fWRT_okz4</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt;   * README-chicken-sheet: 1f0lqEsjqTCMYsz69p5DwSqjXsqLFY_v3u0IJHhFWi5g</span></a>
 <a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; with MIME type:</span></a>
 <a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span></a></code></pre></div>
 <p>Much better!</p>
@@ -241,9 +241,9 @@
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">chicken_sheet <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/drive_reveal.html">drive_reveal</a></span>(<span class="st">"permissions"</span>)</a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt;   name        shared id                    drive_resource permissions_reso…</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; * &lt;chr&gt;       &lt;lgl&gt;  &lt;chr&gt;                 &lt;list&gt;         &lt;list&gt;           </span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; 1 README-chi… FALSE  1JNpNZvGAlS8bYMGmdel… &lt;list [34]&gt;    &lt;list [2]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt;   name        shared id                   drive_resource  permissions_reso…</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; * &lt;chr&gt;       &lt;lgl&gt;  &lt;chr&gt;                &lt;list&gt;          &lt;list&gt;           </span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; 1 README-chi… FALSE  1f0lqEsjqTCMYsz69p5… &lt;named list [3… &lt;named list [2]&gt;</span></a></code></pre></div>
 <p>Here’s how to grant anyone with the link permission to view this dataset.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">(chicken_sheet &lt;-<span class="st"> </span>chicken_sheet <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">   </span><span class="kw"><a href="reference/drive_share.html">drive_share</a></span>(<span class="dt">role =</span> <span class="st">"reader"</span>, <span class="dt">type =</span> <span class="st">"anyone"</span>))</a>
@@ -251,11 +251,11 @@
 <a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt;   * role = reader</span></a>
 <a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt;   * type = anyone</span></a>
 <a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; For files:</span></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt;   * README-chicken-sheet: 1JNpNZvGAlS8bYMGmdelp-KipZpnx5gzHQ8fWRT_okz4</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt;   * README-chicken-sheet: 1f0lqEsjqTCMYsz69p5DwSqjXsqLFY_v3u0IJHhFWi5g</span></a>
 <a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
-<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt;   name        shared id                    drive_resource permissions_reso…</span></a>
-<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; * &lt;chr&gt;       &lt;lgl&gt;  &lt;chr&gt;                 &lt;list&gt;         &lt;list&gt;           </span></a>
-<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; 1 README-chi… TRUE   1JNpNZvGAlS8bYMGmdel… &lt;list [34]&gt;    &lt;list [2]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt;   name        shared id                   drive_resource  permissions_reso…</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; * &lt;chr&gt;       &lt;lgl&gt;  &lt;chr&gt;                &lt;list&gt;          &lt;list&gt;           </span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; 1 README-chi… TRUE   1f0lqEsjqTCMYsz69p5… &lt;named list [3… &lt;named list [2]&gt;</span></a></code></pre></div>
 </div>
 <div id="publish-files" class="section level4">
 <h4 class="hasAnchor">
@@ -266,16 +266,16 @@
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; # A tibble: 1 x 7</span></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt;   name  published shared id    drive_resource permissions_res…</span></a>
 <a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; * &lt;chr&gt; &lt;lgl&gt;     &lt;lgl&gt;  &lt;chr&gt; &lt;list&gt;         &lt;list&gt;          </span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; 1 READ… FALSE     TRUE   1JNp… &lt;list [34]&gt;    &lt;list [2]&gt;      </span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; 1 READ… FALSE     TRUE   1f0l… &lt;named list [… &lt;named list [2]&gt;</span></a>
 <a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; # … with 1 more variable: revision_resource &lt;list&gt;</span></a></code></pre></div>
 <p>By default, <code><a href="reference/drive_publish.html">drive_publish()</a></code> will publish your most recent version.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">(chicken_sheet &lt;-<span class="st"> </span><span class="kw"><a href="reference/drive_publish.html">drive_publish</a></span>(chicken_sheet))</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; Files now published:</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;   * README-chicken-sheet: 1JNpNZvGAlS8bYMGmdelp-KipZpnx5gzHQ8fWRT_okz4</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;   * README-chicken-sheet: 1f0lqEsjqTCMYsz69p5DwSqjXsqLFY_v3u0IJHhFWi5g</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; # A tibble: 1 x 7</span></a>
 <a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;   name  published shared id    drive_resource permissions_res…</span></a>
 <a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; * &lt;chr&gt; &lt;lgl&gt;     &lt;lgl&gt;  &lt;chr&gt; &lt;list&gt;         &lt;list&gt;          </span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; 1 READ… TRUE      TRUE   1JNp… &lt;list [34]&gt;    &lt;list [2]&gt;      </span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; 1 READ… TRUE      TRUE   1f0l… &lt;named list [… &lt;named list [2]&gt;</span></a>
 <a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; # … with 1 more variable: revision_resource &lt;list&gt;</span></a></code></pre></div>
 </div>
 <div id="download-files" class="section level4">
@@ -332,7 +332,7 @@
 <a href="#clean-up" class="anchor"></a>Clean up</h4>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="reference/drive_rm.html">drive_rm</a></span>(chicken_sheet)</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co">#&gt; Files deleted:</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt;   * README-chicken-sheet: 1JNpNZvGAlS8bYMGmdelp-KipZpnx5gzHQ8fWRT_okz4</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt;   * README-chicken-sheet: 1f0lqEsjqTCMYsz69p5DwSqjXsqLFY_v3u0IJHhFWi5g</span></a>
 <a class="sourceLine" id="cb18-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files">file.remove</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
 <a class="sourceLine" id="cb18-5" data-line-number="5">  <span class="st">"README-chicken-sheet.csv"</span>, <span class="st">"README-chicken-sheet.xlsx"</span>, <span class="st">"chicken.txt"</span></a>
 <a class="sourceLine" id="cb18-6" data-line-number="6">))</a>
