@@ -61,11 +61,13 @@ drive_find(n_max = 25)
 ## Contributing
 
 If you’d like to contribute to the development of googledrive, please
-read [these guidelines](.github/CONTRIBUTING.md).
+read [these
+guidelines](https://googledrive.tidyverse.org/CONTRIBUTING.md).
 
-Please note that the googledrive project is released with a [Contributor
-Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this
-project, you agree to abide by its terms.
+Please note that the googledrive project is released with a
+\[Contributor Code of
+Conduct\]<https://googledrive.tidyverse.org/CODE_OF_CONDUCT.html>). By
+contributing to this project, you agree to abide by its terms.
 
 ## Privacy
 
