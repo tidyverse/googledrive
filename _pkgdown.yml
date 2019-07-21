@@ -1,3 +1,5 @@
+url: https://googledrive.tidyverse.org
+
 template:
   package: tidytemplate
 
@@ -9,23 +11,11 @@ authors:
     href: https://jennybryan.org
 
 navbar:
-  left:
-  - text: Reference
-    href: reference/index.html
-  - text: Articles
-    menu:
-    - text: All Articles
-      href: articles/index.html
-    - text: File Identification
-      href: articles/articles/file-identification.html
-    - text: Dealing with multiple files
-      href: articles/articles/multiple-files.html
-    - text: File permissions
-      href: articles/articles/permissions.html
-    - text: Bring your own OAuth app or API key
-      href: articles/articles/bring-your-own-app.html
-  - text: News
-    href: news/index.html
+  components:
+    home: ~
+    intro:
+      text: Reprex do's and don'ts
+      href: articles/reprex-dos-and-donts.html
 
 reference:
   - title: "Reach out and touch your files"
