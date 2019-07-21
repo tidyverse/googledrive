@@ -33,6 +33,10 @@ matrix:
       env: GOOGLEDRIVE_PASSWORD=''
       r_build_args: --no-build-vignettes
       r_check_args: --ignore-vignettes --no-examples
+    - r: 3.4
+      env: GOOGLEDRIVE_PASSWORD=''
+      r_build_args: --no-build-vignettes
+      r_check_args: --ignore-vignettes --no-examples
     - r: 3.3
       env: GOOGLEDRIVE_PASSWORD=''
       r_build_args: --no-build-vignettes
