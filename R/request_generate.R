@@ -25,10 +25,10 @@
 #'   for an API key in the absence of a token is explained in Google's document
 #'   [Credentials, access, security, and
 #'   identity](https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279).
-#'   In order of precedence, these sources are consulted: the formal `key`
-#'   argument, a `key` parameter in `params`, a pre-configured API key fetched
-#'   via [drive_api_key()]. googledrive ships with a built-in key or users can
-#'   override with their own via [drive_auth_configure()].
+#'    In order of precedence, these sources are consulted: the formal `key`
+#'   argument, a `key` parameter in `params`, a user-configured API key fetched
+#'   via [drive_api_key()], a built-in key shipped with googledrive. See
+#'   [drive_auth_configure()] for details on a user-configured key.
 #' @param token Drive token. Set to `NULL` to suppress the inclusion of a token.
 #'   Note that, if auth has been de-activated via [drive_deauth()],
 #'   `drive_token()` will actually return `NULL`.
