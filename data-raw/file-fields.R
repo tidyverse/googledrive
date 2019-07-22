@@ -1,10 +1,10 @@
-library(rprojroot)
+library(here)
 library(jsonlite)
 library(tidyverse)
+library(fs)
 
-dd_cache <- find_package_root_file("data-raw") %>%
-  list.files(pattern = "discovery-document.json$", full.names = TRUE)
-json_fname <- rev(dd_cache)[1]
+json_fname <- dir_ls(here("data-raw"), regexp = "drive-v3")
+stopifnot(length(json_fname) == 1)
 dd_content <- fromJSON(json_fname)
 
 ff <- pluck(dd_content, "schemas", "File", "properties")
@@ -13,4 +13,4 @@ df <- tibble(
   desc = map_chr(ff, "description")
 )
 
-write_csv(df, find_package_root_file("inst", "extdata", "files_fields.csv"))
+write_csv(df, here("inst", "extdata", "files_fields.csv"))
