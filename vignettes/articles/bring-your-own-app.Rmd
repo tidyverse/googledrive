@@ -16,42 +16,19 @@ knitr::opts_chunk$set(
 )
 ```
 
-## OAuth app
+## Role of the OAuth app and API key
 
 googledrive helps you obtain a token to work with the Google Drive API from R primarily through the `drive_auth()` function. Under the hood, that process relies on an OAuth client and secret, a.k.a. an "OAuth app".
 
-If there is a problem with googledrive's internal OAuth app or if you would prefer to use your own, you can configure this. Here we describe how.
+googledrive can also make unauthorized calls to the Google Drive API, for example accessing a file available to "Anyone with a link", by sending an API key, instead of a user token.
 
-## Get an OAuth app
+If there is a problem with googledrive's internal OAuth app or API key or if you would prefer to use your own, you can configure this. Below we describe how.
 
-Follow the instructions in the gargle article [How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) to get an OAuth client ID and secret.
+There is a section for the OAuth app, then for the API key, both of which describe googledrive v1.0.0 and higher. There's a section at the end with similar info for earlier versions of googledrive, but we strongly advise upgrading.
 
-Now register it with googledrive.
+## Get an OAuth app and tell googledrive about it
 
-### googledrive v0.1.3 and earlier
-
-Method 1: Create an OAuth app directly, providing the client ID as `key` and client secret as `secret`.
-
-```{r eval = FALSE}
-google_app <- httr::oauth_app(
-  appname = "my-awesome-google-project",
-  key = "123456789.apps.googleusercontent.com",
-  secret = "abcdefghijklmnopqrstuvwxyz"
-)
-drive_auth_config(app = google_app)
-```
-
-Method 2: Create an OAuth app by providing the path to the JSON file downloaded from the [Google Cloud Platform Console](https://console.cloud.google.com).
-
-```{r eval = FALSE}
-drive_auth_config(
-  path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
-)
-```
-
-### Development version of googledrive
-
-*Difference from earlier versions: `drive_auth_config()` is being soft-deprecated, in favor of `drive_auth_configure()`.*
+Follow the instructions in the gargle article [How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) to get an OAuth client ID and secret. Now register it with googledrive.
 
 Method 1: Create an OAuth app directly, providing the client ID as `key` and client secret as `secret`.
 
@@ -72,9 +49,7 @@ drive_auth_configure(
 )
 ```
 
-### Confirm success and carry on
-
-You can see the currently configured OAuth app like so:
+Confirm success and carry on! You can see the currently configured OAuth app like so:
 
 ```{r eval = FALSE}
 drive_oauth_app()
@@ -84,35 +59,15 @@ You should see your own app there now.
 
 For the rest of this R session, when you get a new token with `drive_auth()`, your OAuth app is used.
 
-## API key
+## Get an API key and tell googledrive about it
 
-googledrive can make unauthorized calls to the Google Drive API, for example accessing a file available to "Anyone with a link", by sending an API key, instead of a user token.
-
-If there is a problem with googledrive's internal API key or if you would prefer to provide your own, you can configure this. Here we describe how.
-
-## Get an API key
-
-Follow the instructions in the gargle article [How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) to get an API key. You probably want to use the same GCP project to create both your OAuth app (above) and your API key.
-
-Now register it with googledrive.
-
-### googledrive v0.1.3 and earlier
-
-```{r eval = FALSE}
-drive_auth_config(api_key = "YOUR_API_KEY_GOES_HERE")
-```
-
-### Development version of googledrive
-
-*Difference from earlier versions: `drive_auth_config()` is being soft-deprecated, in favor of `drive_auth_configure()`.*
+Follow the instructions in the gargle article [How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) to get an API key. You probably want to use the same GCP project to create both your OAuth app (above) and your API key. Now register it with googledrive.
 
 ```{r eval = FALSE}
 drive_auth_configure(api_key = "YOUR_API_KEY_GOES_HERE")
 ```
 
-### Confirm success and carry on
-
-You can see the currently configured API key like so:
+Confirm success and carry on! You can see the currently configured API key like so:
 
 ```{r eval = FALSE}
 drive_api_key()
@@ -121,3 +76,32 @@ drive_api_key()
 You should see your own API key now.
 
 For the rest of this R session, if you go into a de-authorized state via `drive_deauth()`, your API key will be sent with the request.
+
+## Instructions for googledrive v0.1.3 and earlier
+
+What's changed? The old `drive_auth_config()` has been soft-deprecated, in favor of `drive_auth_configure()`.
+
+OAuth app, Method 1: Create an OAuth app directly, providing the client ID as `key` and client secret as `secret`.
+
+```{r eval = FALSE}
+google_app <- httr::oauth_app(
+  appname = "my-awesome-google-project",
+  key = "123456789.apps.googleusercontent.com",
+  secret = "abcdefghijklmnopqrstuvwxyz"
+)
+drive_auth_config(app = google_app)
+```
+
+OAuth app, Method 2: Create an OAuth app by providing the path to the JSON file downloaded from the [Google Cloud Platform Console](https://console.cloud.google.com).
+
+```{r eval = FALSE}
+drive_auth_config(
+  path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
+)
+```
+
+API key:
+
+```{r eval = FALSE}
+drive_auth_config(api_key = "YOUR_API_KEY_GOES_HERE")
+```
