@@ -78,7 +78,7 @@ reference:
       - drive_about
       - drive_auth
       - drive_deauth
-      - drive_auth_config
+      - drive_auth_configure
   - title: "Drive API spec"
     desc: >
       Summon info about or check input against the Drive API spec

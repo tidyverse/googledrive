@@ -28,9 +28,9 @@
 #'   In order of precedence, these sources are consulted: the formal `key`
 #'   argument, a `key` parameter in `params`, a pre-configured API key fetched
 #'   via [drive_api_key()]. googledrive ships with a built-in key or users can
-#'   override with their own via [drive_auth_config()].
+#'   override with their own via [drive_auth_configure()].
 #' @param token Drive token. Set to `NULL` to suppress the inclusion of a token.
-#'   Note that, if auth has been de-activated via [drive_auth_config()],
+#'   Note that, if auth has been de-activated via [drive_deauth()],
 #'   `drive_token()` will actually return `NULL`.
 #'
 #' @return `list()`\cr Components are `method`, `path`, `query`, `body`,
