@@ -189,14 +189,14 @@ the query, or the body.</p></td>
 for an API key in the absence of a token is explained in Google's document
 <a href='https://support.google.com/googleapi/answer/6158857?hl=en&amp;ref_topic=7013279'>Credentials, access, security, and identity</a>.
 In order of precedence, these sources are consulted: the formal <code>key</code>
-argument, a <code>key</code> parameter in <code>params</code>, a pre-configured API key fetched
-via <code><a href='drive_auth_configure.html'>drive_api_key()</a></code>. googledrive ships with a built-in key or users can
-override with their own via <code><a href='googledrive-deprecated.html'>drive_auth_config()</a></code>.</p></td>
+argument, a <code>key</code> parameter in <code>params</code>, a user-configured API key fetched
+via <code><a href='drive_auth_configure.html'>drive_api_key()</a></code>, a built-in key shipped with googledrive. See
+<code><a href='drive_auth_configure.html'>drive_auth_configure()</a></code> for details on a user-configured key.</p></td>
     </tr>
     <tr>
       <th>token</th>
       <td><p>Drive token. Set to <code>NULL</code> to suppress the inclusion of a token.
-Note that, if auth has been de-activated via <code><a href='googledrive-deprecated.html'>drive_auth_config()</a></code>,
+Note that, if auth has been de-activated via <code><a href='drive_deauth.html'>drive_deauth()</a></code>,
 <code><a href='drive_token.html'>drive_token()</a></code> will actually return <code>NULL</code>.</p></td>
     </tr>
     </table>
