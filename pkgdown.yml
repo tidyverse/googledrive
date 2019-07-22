@@ -7,4 +7,7 @@ articles:
   multiple-files: articles/multiple-files.html
   permissions: articles/permissions.html
   googledrive: googledrive.html
+urls:
+  reference: https://googledrive.tidyverse.org/reference
+  article: https://googledrive.tidyverse.org/articles
 
