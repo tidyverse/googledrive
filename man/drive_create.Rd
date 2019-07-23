@@ -10,8 +10,8 @@ drive_create(name, parent = NULL, type = NULL, ..., verbose = TRUE)
 \item{name}{Name for the new file or, optionally, a path that specifies
 an existing parent folder, as well as the new file name.}
 
-\item{parent}{Target destination for the new file, i.e. a folder or a Team
-Drive. Can be given as an actual path (character), a file id, or URL marked
+\item{parent}{Target destination for the new item, i.e. a folder or a Team
+Drive. Can be given as an actual path (character), a file id or URL marked
 with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root folder.}
 
 \item{type}{Character. Create a blank Google Doc, Sheet or Slides by
@@ -31,13 +31,17 @@ docs for the associated endpoint.}
 An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
-Creates a new blank Drive file. To create a new Drive \emph{folder},
-use \code{\link[=drive_mkdir]{drive_mkdir()}}. To upload an existing local file into
-Drive, use \code{\link[=drive_upload]{drive_upload()}}.
+Creates a new blank Drive file. Note there are better options for these
+special cases:
+\itemize{
+\item Creating a folder? Use \code{\link[=drive_mkdir]{drive_mkdir()}}.
+\item Want to upload existing local content into a new Drive file? Use
+\code{\link[=drive_upload]{drive_upload()}}.
+}
 }
 \examples{
 \dontrun{
-## Create a blank Google Doc named 'Word Star' in
+## Create a blank Google Doc named 'WordStar' in
 ## your 'My Drive' root folder and star it
 wordstar <- drive_create("WordStar", type = "document", starred = TRUE)
 

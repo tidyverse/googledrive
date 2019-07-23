@@ -10,7 +10,7 @@ drive_mkdir(name, parent = NULL, ..., verbose = TRUE)
 \item{name}{Name for the new folder or, optionally, a path that specifies
 an existing parent folder, as well as the new name.}
 
-\item{parent}{Target destination for the new folder, i.e. a folder or a Team
+\item{parent}{Target destination for the new item, i.e. a folder or a Team
 Drive. Can be given as an actual path (character), a file id or URL marked
 with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root folder.}
 

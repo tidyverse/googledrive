@@ -8,11 +8,7 @@
 #'
 #' @param name Name for the new folder or, optionally, a path that specifies
 #'   an existing parent folder, as well as the new name.
-#' @param parent Target destination for the new folder, i.e. a folder or a Team
-#'   Drive. Can be given as an actual path (character), a file id or URL marked
-#'   with [as_id()], or a [`dribble`]. Defaults to your "My Drive" root folder.
-#' @template dots-metadata
-#' @template verbose
+#' @inheritParams drive_create
 #'
 #' @template dribble-return
 #' @export
@@ -43,51 +39,11 @@ drive_mkdir <- function(name,
                         parent = NULL,
                         ...,
                         verbose = TRUE) {
-  stopifnot(is_string(name))
-
-  ## wire up to the conventional 'path' and 'name' pattern used elsewhere
-  if (is.null(parent)) {
-    path <- name
-    name <- NULL
-  } else {
-    path <- parent
-  }
-
-  if (is_path(path)) {
-    if (is.null(name)) {
-      path <- strip_slash(path)
-    }
-    path_parts <- partition_path(path, maybe_name = is.null(name))
-    path <- path_parts$parent
-    name <- name %||% path_parts$name
-  }
-
-  params <- toCamel(list(...))
-  params[["name"]] <- name
-  params[["fields"]] <- params[["fields"]] %||% "*"
-  params[["mimeType"]] <- "application/vnd.google-apps.folder"
-
-  if (!is.null(path)) {
-    path <- as_parent(path)
-    params[["parents"]] <- list(path[["id"]])
-  }
-
-  request <- request_generate(
-    endpoint = "drive.files.create",
-    params = params
+  drive_create(
+    name = name,
+    parent = parent,
+    type = "application/vnd.google-apps.folder",
+    ...,
+    verbose = verbose
   )
-  response <- request_make(request, encode = "json")
-  proc_res <- gargle::response_process(response)
-
-  out <- as_dribble(list(proc_res))
-
-  success <- out$name == name
-  if (verbose) {
-    new_path <- paste0(append_slash(path$name), out$name)
-    message_glue(
-      "\nFolder {if (success) '' else 'NOT '}created:\n",
-      "  * {new_path}"
-    )
-  }
-  invisible(out)
 }

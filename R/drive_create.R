@@ -1,16 +1,18 @@
 #' Create a new blank Drive file
 #'
-#' Creates a new blank Drive file. To create a new Drive *folder*,
-#' use [drive_mkdir()]. To upload an existing local file into
-#' Drive, use [drive_upload()].
+#' Creates a new blank Drive file. Note there are better options for these
+#' special cases:
+#'   * Creating a folder? Use [drive_mkdir()].
+#'   * Want to upload existing local content into a new Drive file? Use
+#'     [drive_upload()].
 #'
 #' @seealso Wraps the `files.create` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/create>
 #'
 #' @param name Name for the new file or, optionally, a path that specifies
 #'   an existing parent folder, as well as the new file name.
-#' @param parent Target destination for the new file, i.e. a folder or a Team
-#'   Drive. Can be given as an actual path (character), a file id, or URL marked
+#' @param parent Target destination for the new item, i.e. a folder or a Team
+#'   Drive. Can be given as an actual path (character), a file id or URL marked
 #'   with [as_id()], or a [`dribble`]. Defaults to your "My Drive" root folder.
 #' @param type Character. Create a blank Google Doc, Sheet or Slides by
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,
