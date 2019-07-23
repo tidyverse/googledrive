@@ -61,7 +61,7 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   parent <- glue("({or(parent)})")
   params[["q"]] <- append(params[["q"]], parent)
 
-  rlang::invoke(drive_find, params)
+  rlang::exec(drive_find, !!!params)
 }
 
 folders_below <- function(id) {
