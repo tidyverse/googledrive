@@ -33,6 +33,7 @@ reference:
     contents:
       - drive_upload
       - drive_download
+      - drive_create
       - drive_mkdir
       - drive_cp
       - drive_mv
