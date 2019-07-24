@@ -33,13 +33,19 @@
 
 <meta property="og:title" content="List Drive endpoints — drive_endpoints" />
 
-<meta property="og:description" content="Returns a list of selected Drive API v3 endpoints, as stored inside the
-googledrive package. The names of this list (or the id sub-elements) are
-the nicknames that can be used to specify an endpoint in
-request_generate(). For each endpoint, we store its nickname or id, the
-associated HTTP verb, the path, and details about the parameters. This list
-is derived programmatically from the
-Drive API v3 Discovery Document." />
+<meta property="og:description" content="The googledrive package stores a named list of Drive API v3 endpoints (or
+&quot;methods&quot;, using Google's vocabulary) internally and these functions expose
+this data.
+drive_endpoint() returns one endpoint, i.e. it uses [[.
+drive_endpoints() returns a list of endpoints, i.e. it uses [.
+" />
+
+<meta property="og:description" content="The names of this list (or the id sub-elements) are the nicknames that can
+be used to specify an endpoint in request_generate(). For each endpoint, we
+store its nickname or id, the associated HTTP verb, the path, and details
+about the parameters. This list is derived programmatically from the Drive API v3 Discovery Document using
+the approach described in the Discovery Documents section
+of the gargle vignette Request helper functions." />
 
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -143,36 +149,45 @@ Drive API v3 Discovery Document." />
 
     <div class="ref-description">
     
-    <p>Returns a list of selected Drive API v3 endpoints, as stored inside the
-googledrive package. The names of this list (or the <code>id</code> sub-elements) are
-the nicknames that can be used to specify an endpoint in
-<code><a href='request_generate.html'>request_generate()</a></code>. For each endpoint, we store its nickname or <code>id</code>, the
-associated HTTP verb, the <code>path</code>, and details about the parameters. This list
-is derived programmatically from the
-<a href='https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'>Drive API v3 Discovery Document</a>.</p>
+    <p>The googledrive package stores a named list of Drive API v3 endpoints (or
+"methods", using Google's vocabulary) internally and these functions expose
+this data.</p><ul>
+<li><p><code>drive_endpoint()</code> returns one endpoint, i.e. it uses <code>[[</code>.</p></li>
+<li><p><code>drive_endpoints()</code> returns a list of endpoints, i.e. it uses <code>[</code>.</p></li>
+</ul>
+
+    <p>The names of this list (or the <code>id</code> sub-elements) are the nicknames that can
+be used to specify an endpoint in <code><a href='request_generate.html'>request_generate()</a></code>. For each endpoint, we
+store its nickname or <code>id</code>, the associated HTTP verb, the <code>path</code>, and details
+about the parameters. This list is derived programmatically from the <a href='https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'>Drive API v3 Discovery Document</a> using
+the approach described in the <a href='https://gargle.r-lib.org/articles/request-helper-functions.html#discovery-documents'>Discovery Documents section</a>
+of the gargle vignette <a href='https://gargle.r-lib.org/articles/request-helper-functions.html'>Request helper functions</a>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>drive_endpoints</span>(<span class='kw'>i</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_endpoints</span>(<span class='kw'>i</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>drive_endpoint</span>(<span class='no'>i</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>i</th>
-      <td><p>The name(s) or integer index(ices) of the endpoints to return.
-Optional. By default, the entire list is returned.</p></td>
+      <td><p>The name(s) or integer index(ices) of the endpoints to return. <code>i</code>
+is optional for <code>drive_endpoints()</code> and, if not given, the entire list is
+returned.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list containing some or all of the subset of the Drive API v3
-endpoints that are used internally by googledrive.</p>
+    <p>One or more of the Drive API v3 endpoints that are used internally by
+googledrive.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='fu'>drive_endpoints</span>(), <span class='kw'>max.level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; List of 48
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fu'>drive_endpoints</span>(), <span class='fl'>3</span>), <span class='kw'>max.level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; List of 3
 #&gt;  $ drive.about.get                :List of 7
 #&gt;   ..$ id         : chr "drive.about.get"
 #&gt;   ..$ httpMethod : chr "GET"
@@ -198,998 +213,568 @@ endpoints that are used internally by googledrive.</p>
 #&gt;   ..$ description         : chr "Lists the changes for a user or shared drive."
 #&gt;   ..$ response            : chr "ChangeList"
 #&gt;   ..$ parameterOrder      : chr "pageToken"
-#&gt;   ..$ supportsSubscription: logi TRUE
-#&gt;  $ drive.changes.watch            :List of 10
-#&gt;   ..$ id                  : chr "drive.changes.watch"
-#&gt;   ..$ httpMethod          : chr "POST"
-#&gt;   ..$ path                : 'fs_path' chr "drive/v3/changes/watch"
-#&gt;   ..$ parameters          :List of 29
-#&gt;   ..$ scopes              : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description         : chr "Subscribes to changes for a user."
-#&gt;   ..$ request             : chr "Channel"
-#&gt;   ..$ response            : chr "Channel"
-#&gt;   ..$ parameterOrder      : chr "pageToken"
-#&gt;   ..$ supportsSubscription: logi TRUE
-#&gt;  $ drive.channels.stop            :List of 7
-#&gt;   ..$ id         : chr "drive.channels.stop"
-#&gt;   ..$ httpMethod : chr "POST"
-#&gt;   ..$ path       : 'fs_path' chr "drive/v3/channels/stop"
-#&gt;   ..$ scopes     : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description: chr "Stop watching resources through this channel"
-#&gt;   ..$ request    : chr "Channel"
-#&gt;   ..$ parameters :List of 17
-#&gt;  $ drive.comments.create          :List of 9
-#&gt;   ..$ id            : chr "drive.comments.create"
-#&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments"
-#&gt;   ..$ parameters    :List of 20
-#&gt;   ..$ scopes        : chr "drive, drive.file"
-#&gt;   ..$ description   : chr "Creates a new comment on a file."
-#&gt;   ..$ request       : chr "Comment"
-#&gt;   ..$ response      : chr "Comment"
-#&gt;   ..$ parameterOrder: chr "fileId"
-#&gt;  $ drive.comments.delete          :List of 7
-#&gt;   ..$ id            : chr "drive.comments.delete"
-#&gt;   ..$ httpMethod    : chr "DELETE"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}"
-#&gt;   ..$ parameters    :List of 9
-#&gt;   ..$ scopes        : chr "drive, drive.file"
-#&gt;   ..$ description   : chr "Deletes a comment."
-#&gt;   ..$ parameterOrder: chr [1:2] "fileId" "commentId"
-#&gt;  $ drive.comments.get             :List of 8
-#&gt;   ..$ id            : chr "drive.comments.get"
-#&gt;   ..$ httpMethod    : chr "GET"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}"
-#&gt;   ..$ parameters    :List of 10
-#&gt;   ..$ scopes        : chr "drive, drive.file, drive.readonly"
-#&gt;   ..$ description   : chr "Gets a comment by ID."
-#&gt;   ..$ response      : chr "Comment"
-#&gt;   ..$ parameterOrder: chr [1:2] "fileId" "commentId"
-#&gt;  $ drive.comments.list            :List of 8
-#&gt;   ..$ id            : chr "drive.comments.list"
-#&gt;   ..$ httpMethod    : chr "GET"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments"
-#&gt;   ..$ parameters    :List of 12
-#&gt;   ..$ scopes        : chr "drive, drive.file, drive.readonly"
-#&gt;   ..$ description   : chr "Lists a file's comments."
-#&gt;   ..$ response      : chr "CommentList"
-#&gt;   ..$ parameterOrder: chr "fileId"
-#&gt;  $ drive.comments.update          :List of 9
-#&gt;   ..$ id            : chr "drive.comments.update"
-#&gt;   ..$ httpMethod    : chr "PATCH"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}"
-#&gt;   ..$ parameters    :List of 21
-#&gt;   ..$ scopes        : chr "drive, drive.file"
-#&gt;   ..$ description   : chr "Updates a comment with patch semantics."
-#&gt;   ..$ request       : chr "Comment"
-#&gt;   ..$ response      : chr "Comment"
-#&gt;   ..$ parameterOrder: chr [1:2] "fileId" "commentId"
-#&gt;  $ drive.drives.create            :List of 9
-#&gt;   ..$ id            : chr "drive.drives.create"
-#&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/drives"
-#&gt;   ..$ parameters    :List of 19
-#&gt;   ..$ scopes        : chr "drive"
-#&gt;   ..$ description   : chr "Creates a new shared drive."
-#&gt;   ..$ request       : chr "Drive"
-#&gt;   ..$ response      : chr "Drive"
-#&gt;   ..$ parameterOrder: chr "requestId"
-#&gt;  $ drive.drives.delete            :List of 7
-#&gt;   ..$ id            : chr "drive.drives.delete"
-#&gt;   ..$ httpMethod    : chr "DELETE"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/drives/{driveId}"
-#&gt;   ..$ parameters    :List of 8
-#&gt;   ..$ scopes        : chr "drive"
-#&gt;   ..$ description   : chr "Permanently deletes a shared drive for which the user is an organizer. The shared drive cannot contain any untrashed items."
-#&gt;   ..$ parameterOrder: chr "driveId"
-#&gt;  $ drive.drives.get               :List of 8
-#&gt;   ..$ id            : chr "drive.drives.get"
-#&gt;   ..$ httpMethod    : chr "GET"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/drives/{driveId}"
-#&gt;   ..$ parameters    :List of 9
-#&gt;   ..$ scopes        : chr "drive, drive.readonly"
-#&gt;   ..$ description   : chr "Gets a shared drive's metadata by ID."
-#&gt;   ..$ response      : chr "Drive"
-#&gt;   ..$ parameterOrder: chr "driveId"
-#&gt;  $ drive.drives.hide              :List of 8
-#&gt;   ..$ id            : chr "drive.drives.hide"
-#&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/drives/{driveId}/hide"
-#&gt;   ..$ parameters    :List of 8
-#&gt;   ..$ scopes        : chr "drive"
-#&gt;   ..$ description   : chr "Hides a shared drive from the default view."
-#&gt;   ..$ response      : chr "Drive"
-#&gt;   ..$ parameterOrder: chr "driveId"
-#&gt;  $ drive.drives.list              :List of 7
-#&gt;   ..$ id         : chr "drive.drives.list"
-#&gt;   ..$ httpMethod : chr "GET"
-#&gt;   ..$ path       : 'fs_path' chr "drive/v3/drives"
-#&gt;   ..$ parameters :List of 11
-#&gt;   ..$ scopes     : chr "drive, drive.readonly"
-#&gt;   ..$ description: chr "Lists the user's shared drives."
-#&gt;   ..$ response   : chr "DriveList"
-#&gt;  $ drive.drives.unhide            :List of 8
-#&gt;   ..$ id            : chr "drive.drives.unhide"
-#&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/drives/{driveId}/unhide"
-#&gt;   ..$ parameters    :List of 8
-#&gt;   ..$ scopes        : chr "drive"
-#&gt;   ..$ description   : chr "Restores a shared drive to the default view."
-#&gt;   ..$ response      : chr "Drive"
-#&gt;   ..$ parameterOrder: chr "driveId"
-#&gt;  $ drive.drives.update            :List of 9
-#&gt;   ..$ id            : chr "drive.drives.update"
-#&gt;   ..$ httpMethod    : chr "PATCH"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/drives/{driveId}"
-#&gt;   ..$ parameters    :List of 20
-#&gt;   ..$ scopes        : chr "drive"
-#&gt;   ..$ description   : chr "Updates the metadate for a shared drive."
-#&gt;   ..$ request       : chr "Drive"
-#&gt;   ..$ response      : chr "Drive"
-#&gt;   ..$ parameterOrder: chr "driveId"
-#&gt;  $ drive.files.copy               :List of 9
-#&gt;   ..$ id            : chr "drive.files.copy"
-#&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/copy"
-#&gt;   ..$ parameters    :List of 68
-#&gt;   ..$ scopes        : chr "drive, drive.appdata, drive.file, drive.photos.readonly"
-#&gt;   ..$ description   : chr "Creates a copy of a file and applies any requested updates with patch semantics."
-#&gt;   ..$ request       : chr "File"
-#&gt;   ..$ response      : chr "File"
-#&gt;   ..$ parameterOrder: chr "fileId"
-#&gt;  $ drive.files.create             :List of 11
-#&gt;   ..$ id                  : chr "drive.files.create"
-#&gt;   ..$ httpMethod          : chr "POST"
-#&gt;   ..$ path                : 'fs_path' chr "drive/v3/files"
-#&gt;   ..$ parameters          :List of 68
-#&gt;   ..$ scopes              : chr "drive, drive.appdata, drive.file"
-#&gt;   ..$ description         : chr "Creates a new file."
-#&gt;   ..$ request             : chr "File"
-#&gt;   ..$ response            : chr "File"
-#&gt;   ..$ mediaUpload         :List of 3
-#&gt;   ..$ supportsMediaUpload : logi TRUE
-#&gt;   ..$ supportsSubscription: logi TRUE
-#&gt;  $ drive.files.delete             :List of 7
-#&gt;   ..$ id            : chr "drive.files.delete"
-#&gt;   ..$ httpMethod    : chr "DELETE"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}"
-#&gt;   ..$ parameters    :List of 10
-#&gt;   ..$ scopes        : chr "drive, drive.appdata, drive.file"
-#&gt;   ..$ description   : chr "Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared dr"| __truncated__
-#&gt;   ..$ parameterOrder: chr "fileId"
-#&gt;  $ drive.files.emptyTrash         :List of 6
-#&gt;   ..$ id         : chr "drive.files.emptyTrash"
-#&gt;   ..$ httpMethod : chr "DELETE"
-#&gt;   ..$ path       : 'fs_path' chr "drive/v3/files/trash"
-#&gt;   ..$ scopes     : chr "drive"
-#&gt;   ..$ description: chr "Permanently deletes all of the user's trashed files."
-#&gt;   ..$ parameters :List of 7
-#&gt;  $ drive.files.export             :List of 8
-#&gt;   ..$ id                   : chr "drive.files.export"
-#&gt;   ..$ httpMethod           : chr "GET"
-#&gt;   ..$ path                 : 'fs_path' chr "drive/v3/files/{fileId}/export"
-#&gt;   ..$ parameters           :List of 9
-#&gt;   ..$ scopes               : chr "drive, drive.file, drive.readonly"
-#&gt;   ..$ description          : chr "Exports a Google Doc to the requested MIME type and returns the exported content. Please note that the exported"| __truncated__
-#&gt;   ..$ supportsMediaDownload: logi TRUE
-#&gt;   ..$ parameterOrder       : chr [1:2] "fileId" "mimeType"
-#&gt;  $ drive.files.generateIds        :List of 7
-#&gt;   ..$ id         : chr "drive.files.generateIds"
-#&gt;   ..$ httpMethod : chr "GET"
-#&gt;   ..$ path       : 'fs_path' chr "drive/v3/files/generateIds"
-#&gt;   ..$ parameters :List of 9
-#&gt;   ..$ scopes     : chr "drive, drive.appdata, drive.file"
-#&gt;   ..$ description: chr "Generates a set of file IDs which can be provided in create or copy requests."
-#&gt;   ..$ response   : chr "GeneratedIds"
-#&gt;  $ drive.files.get                :List of 11
-#&gt;   ..$ id                     : chr "drive.files.get"
-#&gt;   ..$ httpMethod             : chr "GET"
-#&gt;   ..$ path                   : 'fs_path' chr "drive/v3/files/{fileId}"
-#&gt;   ..$ parameters             :List of 11
-#&gt;   ..$ scopes                 : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description            : chr "Gets a file's metadata or content by ID."
-#&gt;   ..$ response               : chr "File"
-#&gt;   ..$ supportsMediaDownload  : logi TRUE
-#&gt;   ..$ useMediaDownloadService: logi TRUE
-#&gt;   ..$ parameterOrder         : chr "fileId"
-#&gt;   ..$ supportsSubscription   : logi TRUE
-#&gt;  $ drive.files.list               :List of 7
-#&gt;   ..$ id         : chr "drive.files.list"
-#&gt;   ..$ httpMethod : chr "GET"
-#&gt;   ..$ path       : 'fs_path' chr "drive/v3/files"
-#&gt;   ..$ parameters :List of 20
-#&gt;   ..$ scopes     : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description: chr "Lists or searches files."
-#&gt;   ..$ response   : chr "FileList"
-#&gt;  $ drive.files.update             :List of 11
-#&gt;   ..$ id                 : chr "drive.files.update"
-#&gt;   ..$ httpMethod         : chr "PATCH"
-#&gt;   ..$ path               : 'fs_path' chr "drive/v3/files/{fileId}"
-#&gt;   ..$ parameters         :List of 70
-#&gt;   ..$ scopes             : chr "drive, drive.appdata, drive.file, drive.metadata, drive.scripts"
-#&gt;   ..$ description        : chr "Updates a file's metadata and/or content with patch semantics."
-#&gt;   ..$ request            : chr "File"
-#&gt;   ..$ response           : chr "File"
-#&gt;   ..$ mediaUpload        :List of 3
-#&gt;   ..$ supportsMediaUpload: logi TRUE
-#&gt;   ..$ parameterOrder     : chr "fileId"
-#&gt;  $ drive.files.watch              :List of 12
-#&gt;   ..$ id                     : chr "drive.files.watch"
-#&gt;   ..$ httpMethod             : chr "POST"
-#&gt;   ..$ path                   : 'fs_path' chr "drive/v3/files/{fileId}/watch"
-#&gt;   ..$ parameters             :List of 21
-#&gt;   ..$ scopes                 : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description            : chr "Subscribes to changes to a file"
-#&gt;   ..$ request                : chr "Channel"
-#&gt;   ..$ response               : chr "Channel"
-#&gt;   ..$ supportsMediaDownload  : logi TRUE
-#&gt;   ..$ useMediaDownloadService: logi TRUE
-#&gt;   ..$ parameterOrder         : chr "fileId"
-#&gt;   ..$ supportsSubscription   : logi TRUE
-#&gt;  $ drive.permissions.create       :List of 9
-#&gt;   ..$ id            : chr "drive.permissions.create"
-#&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/permissions"
-#&gt;   ..$ parameters    :List of 27
-#&gt;   ..$ scopes        : chr "drive, drive.file"
-#&gt;   ..$ description   : chr "Creates a permission for a file or shared drive."
-#&gt;   ..$ request       : chr "Permission"
-#&gt;   ..$ response      : chr "Permission"
-#&gt;   ..$ parameterOrder: chr "fileId"
-#&gt;  $ drive.permissions.delete       :List of 7
-#&gt;   ..$ id            : chr "drive.permissions.delete"
-#&gt;   ..$ httpMethod    : chr "DELETE"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters    :List of 12
-#&gt;   ..$ scopes        : chr "drive, drive.file"
-#&gt;   ..$ description   : chr "Deletes a permission."
-#&gt;   ..$ parameterOrder: chr [1:2] "fileId" "permissionId"
-#&gt;  $ drive.permissions.get          :List of 8
-#&gt;   ..$ id            : chr "drive.permissions.get"
-#&gt;   ..$ httpMethod    : chr "GET"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters    :List of 12
-#&gt;   ..$ scopes        : chr "drive, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description   : chr "Gets a permission by ID."
-#&gt;   ..$ response      : chr "Permission"
-#&gt;   ..$ parameterOrder: chr [1:2] "fileId" "permissionId"
-#&gt;  $ drive.permissions.list         :List of 8
-#&gt;   ..$ id            : chr "drive.permissions.list"
-#&gt;   ..$ httpMethod    : chr "GET"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/permissions"
-#&gt;   ..$ parameters    :List of 13
-#&gt;   ..$ scopes        : chr "drive, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description   : chr "Lists a file's or shared drive's permissions."
-#&gt;   ..$ response      : chr "PermissionList"
-#&gt;   ..$ parameterOrder: chr "fileId"
-#&gt;  $ drive.permissions.update       :List of 9
-#&gt;   ..$ id            : chr "drive.permissions.update"
-#&gt;   ..$ httpMethod    : chr "PATCH"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/permissions/{permissionId}"
-#&gt;   ..$ parameters    :List of 27
-#&gt;   ..$ scopes        : chr "drive, drive.file"
-#&gt;   ..$ description   : chr "Updates a permission with patch semantics."
-#&gt;   ..$ request       : chr "Permission"
-#&gt;   ..$ response      : chr "Permission"
-#&gt;   ..$ parameterOrder: chr [1:2] "fileId" "permissionId"
-#&gt;  $ drive.replies.create           :List of 9
-#&gt;   ..$ id            : chr "drive.replies.create"
-#&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}/replies"
-#&gt;   ..$ parameters    :List of 18
-#&gt;   ..$ scopes        : chr "drive, drive.file"
-#&gt;   ..$ description   : chr "Creates a new reply to a comment."
-#&gt;   ..$ request       : chr "Reply"
-#&gt;   ..$ response      : chr "Reply"
-#&gt;   ..$ parameterOrder: chr [1:2] "fileId" "commentId"
-#&gt;  $ drive.replies.delete           :List of 7
-#&gt;   ..$ id            : chr "drive.replies.delete"
-#&gt;   ..$ httpMethod    : chr "DELETE"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}/replies/{replyId}"
-#&gt;   ..$ parameters    :List of 10
-#&gt;   ..$ scopes        : chr "drive, drive.file"
-#&gt;   ..$ description   : chr "Deletes a reply."
-#&gt;   ..$ parameterOrder: chr [1:3] "fileId" "commentId" "replyId"
-#&gt;  $ drive.replies.get              :List of 8
-#&gt;   ..$ id            : chr "drive.replies.get"
-#&gt;   ..$ httpMethod    : chr "GET"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}/replies/{replyId}"
-#&gt;   ..$ parameters    :List of 11
-#&gt;   ..$ scopes        : chr "drive, drive.file, drive.readonly"
-#&gt;   ..$ description   : chr "Gets a reply by ID."
-#&gt;   ..$ response      : chr "Reply"
-#&gt;   ..$ parameterOrder: chr [1:3] "fileId" "commentId" "replyId"
-#&gt;  $ drive.replies.list             :List of 8
-#&gt;   ..$ id            : chr "drive.replies.list"
-#&gt;   ..$ httpMethod    : chr "GET"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}/replies"
-#&gt;   ..$ parameters    :List of 12
-#&gt;   ..$ scopes        : chr "drive, drive.file, drive.readonly"
-#&gt;   ..$ description   : chr "Lists a comment's replies."
-#&gt;   ..$ response      : chr "ReplyList"
-#&gt;   ..$ parameterOrder: chr [1:2] "fileId" "commentId"
-#&gt;  $ drive.replies.update           :List of 9
-#&gt;   ..$ id            : chr "drive.replies.update"
-#&gt;   ..$ httpMethod    : chr "PATCH"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}/replies/{replyId}"
-#&gt;   ..$ parameters    :List of 19
-#&gt;   ..$ scopes        : chr "drive, drive.file"
-#&gt;   ..$ description   : chr "Updates a reply with patch semantics."
-#&gt;   ..$ request       : chr "Reply"
-#&gt;   ..$ response      : chr "Reply"
-#&gt;   ..$ parameterOrder: chr [1:3] "fileId" "commentId" "replyId"
-#&gt;  $ drive.revisions.delete         :List of 7
-#&gt;   ..$ id            : chr "drive.revisions.delete"
-#&gt;   ..$ httpMethod    : chr "DELETE"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/revisions/{revisionId}"
-#&gt;   ..$ parameters    :List of 9
-#&gt;   ..$ scopes        : chr "drive, drive.appdata, drive.file"
-#&gt;   ..$ description   : chr "Permanently deletes a file version. You can only delete revisions for files with binary content in Google Drive"| __truncated__
-#&gt;   ..$ parameterOrder: chr [1:2] "fileId" "revisionId"
-#&gt;  $ drive.revisions.get            :List of 10
-#&gt;   ..$ id                     : chr "drive.revisions.get"
-#&gt;   ..$ httpMethod             : chr "GET"
-#&gt;   ..$ path                   : 'fs_path' chr "drive/v3/files/{fileId}/revisions/{revisionId}"
-#&gt;   ..$ parameters             :List of 10
-#&gt;   ..$ scopes                 : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description            : chr "Gets a revision's metadata or content by ID."
-#&gt;   ..$ response               : chr "Revision"
-#&gt;   ..$ supportsMediaDownload  : logi TRUE
-#&gt;   ..$ useMediaDownloadService: logi TRUE
-#&gt;   ..$ parameterOrder         : chr [1:2] "fileId" "revisionId"
-#&gt;  $ drive.revisions.list           :List of 8
-#&gt;   ..$ id            : chr "drive.revisions.list"
-#&gt;   ..$ httpMethod    : chr "GET"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/revisions"
-#&gt;   ..$ parameters    :List of 10
-#&gt;   ..$ scopes        : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description   : chr "Lists a file's revisions."
-#&gt;   ..$ response      : chr "RevisionList"
-#&gt;   ..$ parameterOrder: chr "fileId"
-#&gt;  $ drive.revisions.update         :List of 9
-#&gt;   ..$ id            : chr "drive.revisions.update"
-#&gt;   ..$ httpMethod    : chr "PATCH"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/revisions/{revisionId}"
-#&gt;   ..$ parameters    :List of 22
-#&gt;   ..$ scopes        : chr "drive, drive.appdata, drive.file"
-#&gt;   ..$ description   : chr "Updates a revision with patch semantics."
-#&gt;   ..$ request       : chr "Revision"
-#&gt;   ..$ response      : chr "Revision"
-#&gt;   ..$ parameterOrder: chr [1:2] "fileId" "revisionId"
-#&gt;  $ drive.teamdrives.create        :List of 9
-#&gt;   ..$ id            : chr "drive.teamdrives.create"
-#&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/teamdrives"
-#&gt;   ..$ parameters    :List of 18
-#&gt;   ..$ scopes        : chr "drive"
-#&gt;   ..$ description   : chr "Deprecated use drives.create instead."
-#&gt;   ..$ request       : chr "TeamDrive"
-#&gt;   ..$ response      : chr "TeamDrive"
-#&gt;   ..$ parameterOrder: chr "requestId"
-#&gt;  $ drive.teamdrives.delete        :List of 7
-#&gt;   ..$ id            : chr "drive.teamdrives.delete"
-#&gt;   ..$ httpMethod    : chr "DELETE"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/teamdrives/{teamDriveId}"
-#&gt;   ..$ parameters    :List of 8
-#&gt;   ..$ scopes        : chr "drive"
-#&gt;   ..$ description   : chr "Deprecated use drives.delete instead."
-#&gt;   ..$ parameterOrder: chr "teamDriveId"
-#&gt;  $ drive.teamdrives.get           :List of 8
-#&gt;   ..$ id            : chr "drive.teamdrives.get"
-#&gt;   ..$ httpMethod    : chr "GET"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/teamdrives/{teamDriveId}"
-#&gt;   ..$ parameters    :List of 9
-#&gt;   ..$ scopes        : chr "drive, drive.readonly"
-#&gt;   ..$ description   : chr "Deprecated use drives.get instead."
-#&gt;   ..$ response      : chr "TeamDrive"
-#&gt;   ..$ parameterOrder: chr "teamDriveId"
-#&gt;  $ drive.teamdrives.list          :List of 7
-#&gt;   ..$ id         : chr "drive.teamdrives.list"
-#&gt;   ..$ httpMethod : chr "GET"
-#&gt;   ..$ path       : 'fs_path' chr "drive/v3/teamdrives"
-#&gt;   ..$ parameters :List of 11
-#&gt;   ..$ scopes     : chr "drive, drive.readonly"
-#&gt;   ..$ description: chr "Deprecated use drives.list instead."
-#&gt;   ..$ response   : chr "TeamDriveList"
-#&gt;  $ drive.teamdrives.update        :List of 9
-#&gt;   ..$ id            : chr "drive.teamdrives.update"
-#&gt;   ..$ httpMethod    : chr "PATCH"
-#&gt;   ..$ path          : 'fs_path' chr "drive/v3/teamdrives/{teamDriveId}"
-#&gt;   ..$ parameters    :List of 19
-#&gt;   ..$ scopes        : chr "drive"
-#&gt;   ..$ description   : chr "Deprecated use drives.update instead"
-#&gt;   ..$ request       : chr "TeamDrive"
-#&gt;   ..$ response      : chr "TeamDrive"
-#&gt;   ..$ parameterOrder: chr "teamDriveId"
-#&gt;  $ drive.files.update.media       :List of 11
-#&gt;   ..$ id                 : chr "drive.files.update.media"
-#&gt;   ..$ httpMethod         : chr "PATCH"
-#&gt;   ..$ path               : chr "/upload/drive/v3/files/{fileId}"
-#&gt;   ..$ parameters         :List of 71
-#&gt;   ..$ scopes             : chr "drive, drive.appdata, drive.file, drive.metadata, drive.scripts"
-#&gt;   ..$ description        : chr "Updates a file's metadata and/or content with patch semantics."
-#&gt;   ..$ request            : chr "File"
-#&gt;   ..$ response           : chr "File"
-#&gt;   ..$ mediaUpload        :List of 3
-#&gt;   ..$ supportsMediaUpload: logi TRUE
-#&gt;   ..$ parameterOrder     : chr "fileId"
-#&gt;  $ drive.files.create.media       :List of 11
-#&gt;   ..$ id                  : chr "drive.files.create.media"
-#&gt;   ..$ httpMethod          : chr "POST"
-#&gt;   ..$ path                : chr "/upload/drive/v3/files"
-#&gt;   ..$ parameters          :List of 69
-#&gt;   ..$ scopes              : chr "drive, drive.appdata, drive.file"
-#&gt;   ..$ description         : chr "Creates a new file."
-#&gt;   ..$ request             : chr "File"
-#&gt;   ..$ response            : chr "File"
-#&gt;   ..$ mediaUpload         :List of 3
-#&gt;   ..$ supportsMediaUpload : logi TRUE
-#&gt;   ..$ supportsSubscription: logi TRUE</div><div class='input'><span class='fu'>drive_endpoints</span>(<span class='st'>"drive.files.delete"</span>)</div><div class='output co'>#&gt; $drive.files.delete
-#&gt; $drive.files.delete$id
+#&gt;   ..$ supportsSubscription: logi TRUE</div><div class='input'><span class='fu'>drive_endpoint</span>(<span class='st'>"drive.files.delete"</span>)</div><div class='output co'>#&gt; $id
 #&gt; [1] "drive.files.delete"
 #&gt; 
-#&gt; $drive.files.delete$httpMethod
+#&gt; $httpMethod
 #&gt; [1] "DELETE"
 #&gt; 
-#&gt; $drive.files.delete$path
+#&gt; $path
 #&gt; drive/v3/files/{fileId}
 #&gt; 
-#&gt; $drive.files.delete$parameters
-#&gt; $drive.files.delete$parameters$fileId
-#&gt; $drive.files.delete$parameters$fileId$type
+#&gt; $parameters
+#&gt; $parameters$fileId
+#&gt; $parameters$fileId$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$fileId$description
+#&gt; $parameters$fileId$description
 #&gt; [1] "The ID of the file."
 #&gt; 
-#&gt; $drive.files.delete$parameters$fileId$required
+#&gt; $parameters$fileId$required
 #&gt; [1] TRUE
 #&gt; 
-#&gt; $drive.files.delete$parameters$fileId$location
+#&gt; $parameters$fileId$location
 #&gt; [1] "path"
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsAllDrives
-#&gt; $drive.files.delete$parameters$supportsAllDrives$type
+#&gt; $parameters$supportsAllDrives
+#&gt; $parameters$supportsAllDrives$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsAllDrives$description
+#&gt; $parameters$supportsAllDrives$description
 #&gt; [1] "Deprecated - Whether the requesting application supports both My Drives and shared drives. This parameter will only be effective until June 1, 2020. Afterwards all applications are assumed to support shared drives."
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsAllDrives$default
+#&gt; $parameters$supportsAllDrives$default
 #&gt; [1] "false"
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsAllDrives$location
+#&gt; $parameters$supportsAllDrives$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsTeamDrives
-#&gt; $drive.files.delete$parameters$supportsTeamDrives$type
+#&gt; $parameters$supportsTeamDrives
+#&gt; $parameters$supportsTeamDrives$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsTeamDrives$description
+#&gt; $parameters$supportsTeamDrives$description
 #&gt; [1] "Deprecated use supportsAllDrives instead."
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsTeamDrives$default
+#&gt; $parameters$supportsTeamDrives$default
 #&gt; [1] "false"
 #&gt; 
-#&gt; $drive.files.delete$parameters$supportsTeamDrives$location
+#&gt; $parameters$supportsTeamDrives$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt
-#&gt; $drive.files.delete$parameters$alt$type
+#&gt; $parameters$alt
+#&gt; $parameters$alt$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt$description
+#&gt; $parameters$alt$description
 #&gt; [1] "Data format for the response."
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt$default
+#&gt; $parameters$alt$default
 #&gt; [1] "json"
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt$enum
+#&gt; $parameters$alt$enum
 #&gt; [1] "json"
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt$enumDescriptions
+#&gt; $parameters$alt$enumDescriptions
 #&gt; [1] "Responses with Content-Type of application/json"
 #&gt; 
-#&gt; $drive.files.delete$parameters$alt$location
+#&gt; $parameters$alt$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$fields
-#&gt; $drive.files.delete$parameters$fields$type
+#&gt; $parameters$fields
+#&gt; $parameters$fields$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$fields$description
+#&gt; $parameters$fields$description
 #&gt; [1] "Selector specifying which fields to include in a partial response."
 #&gt; 
-#&gt; $drive.files.delete$parameters$fields$location
+#&gt; $parameters$fields$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$key
-#&gt; $drive.files.delete$parameters$key$type
+#&gt; $parameters$key
+#&gt; $parameters$key$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$key$description
+#&gt; $parameters$key$description
 #&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
 #&gt; 
-#&gt; $drive.files.delete$parameters$key$location
+#&gt; $parameters$key$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$oauth_token
-#&gt; $drive.files.delete$parameters$oauth_token$type
+#&gt; $parameters$oauth_token
+#&gt; $parameters$oauth_token$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$oauth_token$description
+#&gt; $parameters$oauth_token$description
 #&gt; [1] "OAuth 2.0 token for the current user."
 #&gt; 
-#&gt; $drive.files.delete$parameters$oauth_token$location
+#&gt; $parameters$oauth_token$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$prettyPrint
-#&gt; $drive.files.delete$parameters$prettyPrint$type
+#&gt; $parameters$prettyPrint
+#&gt; $parameters$prettyPrint$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.files.delete$parameters$prettyPrint$description
+#&gt; $parameters$prettyPrint$description
 #&gt; [1] "Returns response with indentations and line breaks."
 #&gt; 
-#&gt; $drive.files.delete$parameters$prettyPrint$default
+#&gt; $parameters$prettyPrint$default
 #&gt; [1] "true"
 #&gt; 
-#&gt; $drive.files.delete$parameters$prettyPrint$location
+#&gt; $parameters$prettyPrint$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$quotaUser
-#&gt; $drive.files.delete$parameters$quotaUser$type
+#&gt; $parameters$quotaUser
+#&gt; $parameters$quotaUser$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$quotaUser$description
+#&gt; $parameters$quotaUser$description
 #&gt; [1] "An opaque string that represents a user for quota purposes. Must not exceed 40 characters."
 #&gt; 
-#&gt; $drive.files.delete$parameters$quotaUser$location
+#&gt; $parameters$quotaUser$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$parameters$userIp
-#&gt; $drive.files.delete$parameters$userIp$type
+#&gt; $parameters$userIp
+#&gt; $parameters$userIp$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.files.delete$parameters$userIp$description
+#&gt; $parameters$userIp$description
 #&gt; [1] "Deprecated. Please use quotaUser instead."
 #&gt; 
-#&gt; $drive.files.delete$parameters$userIp$location
+#&gt; $parameters$userIp$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; $drive.files.delete$scopes
+#&gt; $scopes
 #&gt; [1] "drive, drive.appdata, drive.file"
 #&gt; 
-#&gt; $drive.files.delete$description
+#&gt; $description
 #&gt; [1] "Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted."
 #&gt; 
-#&gt; $drive.files.delete$parameterOrder
+#&gt; $parameterOrder
 #&gt; [1] "fileId"
-#&gt; 
-#&gt; </div><div class='input'><span class='fu'>drive_endpoints</span>(<span class='fl'>4</span>)</div><div class='output co'>#&gt; $drive.changes.watch
-#&gt; $drive.changes.watch$id
+#&gt; </div><div class='input'><span class='fu'>drive_endpoint</span>(<span class='fl'>4</span>)</div><div class='output co'>#&gt; $id
 #&gt; [1] "drive.changes.watch"
 #&gt; 
-#&gt; $drive.changes.watch$httpMethod
+#&gt; $httpMethod
 #&gt; [1] "POST"
 #&gt; 
-#&gt; $drive.changes.watch$path
+#&gt; $path
 #&gt; drive/v3/changes/watch
 #&gt; 
-#&gt; $drive.changes.watch$parameters
-#&gt; $drive.changes.watch$parameters$driveId
-#&gt; $drive.changes.watch$parameters$driveId$type
+#&gt; $parameters
+#&gt; $parameters$driveId
+#&gt; $parameters$driveId$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$driveId$description
+#&gt; $parameters$driveId$description
 #&gt; [1] "The shared drive from which changes will be returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$driveId$location
+#&gt; $parameters$driveId$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeCorpusRemovals
-#&gt; $drive.changes.watch$parameters$includeCorpusRemovals$type
+#&gt; $parameters$includeCorpusRemovals
+#&gt; $parameters$includeCorpusRemovals$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeCorpusRemovals$description
+#&gt; $parameters$includeCorpusRemovals$description
 #&gt; [1] "Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeCorpusRemovals$default
+#&gt; $parameters$includeCorpusRemovals$default
 #&gt; [1] "false"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeCorpusRemovals$location
+#&gt; $parameters$includeCorpusRemovals$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeItemsFromAllDrives
-#&gt; $drive.changes.watch$parameters$includeItemsFromAllDrives$type
+#&gt; $parameters$includeItemsFromAllDrives
+#&gt; $parameters$includeItemsFromAllDrives$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeItemsFromAllDrives$description
+#&gt; $parameters$includeItemsFromAllDrives$description
 #&gt; [1] "Deprecated - Whether both My Drive and shared drive items should be included in results. This parameter will only be effective until June 1, 2020. Afterwards shared drive items will be included in the results."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeItemsFromAllDrives$default
+#&gt; $parameters$includeItemsFromAllDrives$default
 #&gt; [1] "false"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeItemsFromAllDrives$location
+#&gt; $parameters$includeItemsFromAllDrives$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeRemoved
-#&gt; $drive.changes.watch$parameters$includeRemoved$type
+#&gt; $parameters$includeRemoved
+#&gt; $parameters$includeRemoved$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeRemoved$description
+#&gt; $parameters$includeRemoved$description
 #&gt; [1] "Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeRemoved$default
+#&gt; $parameters$includeRemoved$default
 #&gt; [1] "true"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeRemoved$location
+#&gt; $parameters$includeRemoved$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeTeamDriveItems
-#&gt; $drive.changes.watch$parameters$includeTeamDriveItems$type
+#&gt; $parameters$includeTeamDriveItems
+#&gt; $parameters$includeTeamDriveItems$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeTeamDriveItems$description
+#&gt; $parameters$includeTeamDriveItems$description
 #&gt; [1] "Deprecated use includeItemsFromAllDrives instead."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeTeamDriveItems$default
+#&gt; $parameters$includeTeamDriveItems$default
 #&gt; [1] "false"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$includeTeamDriveItems$location
+#&gt; $parameters$includeTeamDriveItems$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$pageSize
-#&gt; $drive.changes.watch$parameters$pageSize$type
+#&gt; $parameters$pageSize
+#&gt; $parameters$pageSize$type
 #&gt; [1] "integer"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$pageSize$description
+#&gt; $parameters$pageSize$description
 #&gt; [1] "The maximum number of changes to return per page."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$pageSize$default
+#&gt; $parameters$pageSize$default
 #&gt; [1] "100"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$pageSize$format
+#&gt; $parameters$pageSize$format
 #&gt; [1] "int32"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$pageSize$minimum
+#&gt; $parameters$pageSize$minimum
 #&gt; [1] "1"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$pageSize$maximum
+#&gt; $parameters$pageSize$maximum
 #&gt; [1] "1000"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$pageSize$location
+#&gt; $parameters$pageSize$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$pageToken
-#&gt; $drive.changes.watch$parameters$pageToken$type
+#&gt; $parameters$pageToken
+#&gt; $parameters$pageToken$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$pageToken$description
+#&gt; $parameters$pageToken$description
 #&gt; [1] "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$pageToken$required
+#&gt; $parameters$pageToken$required
 #&gt; [1] TRUE
 #&gt; 
-#&gt; $drive.changes.watch$parameters$pageToken$location
+#&gt; $parameters$pageToken$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$restrictToMyDrive
-#&gt; $drive.changes.watch$parameters$restrictToMyDrive$type
+#&gt; $parameters$restrictToMyDrive
+#&gt; $parameters$restrictToMyDrive$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$restrictToMyDrive$description
+#&gt; $parameters$restrictToMyDrive$description
 #&gt; [1] "Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$restrictToMyDrive$default
+#&gt; $parameters$restrictToMyDrive$default
 #&gt; [1] "false"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$restrictToMyDrive$location
+#&gt; $parameters$restrictToMyDrive$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$spaces
-#&gt; $drive.changes.watch$parameters$spaces$type
+#&gt; $parameters$spaces
+#&gt; $parameters$spaces$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$spaces$description
+#&gt; $parameters$spaces$description
 #&gt; [1] "A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$spaces$default
+#&gt; $parameters$spaces$default
 #&gt; [1] "drive"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$spaces$location
+#&gt; $parameters$spaces$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$supportsAllDrives
-#&gt; $drive.changes.watch$parameters$supportsAllDrives$type
+#&gt; $parameters$supportsAllDrives
+#&gt; $parameters$supportsAllDrives$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$supportsAllDrives$description
+#&gt; $parameters$supportsAllDrives$description
 #&gt; [1] "Deprecated - Whether the requesting application supports both My Drives and shared drives. This parameter will only be effective until June 1, 2020. Afterwards all applications are assumed to support shared drives."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$supportsAllDrives$default
+#&gt; $parameters$supportsAllDrives$default
 #&gt; [1] "false"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$supportsAllDrives$location
+#&gt; $parameters$supportsAllDrives$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$supportsTeamDrives
-#&gt; $drive.changes.watch$parameters$supportsTeamDrives$type
+#&gt; $parameters$supportsTeamDrives
+#&gt; $parameters$supportsTeamDrives$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$supportsTeamDrives$description
+#&gt; $parameters$supportsTeamDrives$description
 #&gt; [1] "Deprecated use supportsAllDrives instead."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$supportsTeamDrives$default
+#&gt; $parameters$supportsTeamDrives$default
 #&gt; [1] "false"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$supportsTeamDrives$location
+#&gt; $parameters$supportsTeamDrives$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$teamDriveId
-#&gt; $drive.changes.watch$parameters$teamDriveId$type
+#&gt; $parameters$teamDriveId
+#&gt; $parameters$teamDriveId$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$teamDriveId$description
+#&gt; $parameters$teamDriveId$description
 #&gt; [1] "Deprecated use driveId instead."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$teamDriveId$location
+#&gt; $parameters$teamDriveId$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$address
-#&gt; $drive.changes.watch$parameters$address$type
+#&gt; $parameters$address
+#&gt; $parameters$address$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$address$description
+#&gt; $parameters$address$description
 #&gt; [1] "The address where notifications are delivered for this channel."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$address$location
+#&gt; $parameters$address$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$expiration
-#&gt; $drive.changes.watch$parameters$expiration$type
+#&gt; $parameters$expiration
+#&gt; $parameters$expiration$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$expiration$description
+#&gt; $parameters$expiration$description
 #&gt; [1] "Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$expiration$format
+#&gt; $parameters$expiration$format
 #&gt; [1] "int64"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$expiration$location
+#&gt; $parameters$expiration$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$id
-#&gt; $drive.changes.watch$parameters$id$type
+#&gt; $parameters$id
+#&gt; $parameters$id$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$id$description
+#&gt; $parameters$id$description
 #&gt; [1] "A UUID or similar unique string that identifies this channel."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$id$location
+#&gt; $parameters$id$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$kind
-#&gt; $drive.changes.watch$parameters$kind$type
+#&gt; $parameters$kind
+#&gt; $parameters$kind$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$kind$description
+#&gt; $parameters$kind$description
 #&gt; [1] "Identifies this as a notification channel used to watch for changes to a resource, which is \"api#channel\"."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$kind$default
+#&gt; $parameters$kind$default
 #&gt; [1] "api#channel"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$kind$location
+#&gt; $parameters$kind$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$params
-#&gt; $drive.changes.watch$parameters$params$type
+#&gt; $parameters$params
+#&gt; $parameters$params$type
 #&gt; [1] "object"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$params$description
+#&gt; $parameters$params$description
 #&gt; [1] "Additional parameters controlling delivery channel behavior. Optional."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$params$additionalProperties
-#&gt; $drive.changes.watch$parameters$params$additionalProperties$type
+#&gt; $parameters$params$additionalProperties
+#&gt; $parameters$params$additionalProperties$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$params$additionalProperties$description
+#&gt; $parameters$params$additionalProperties$description
 #&gt; [1] "Declares a new parameter by name."
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$params$location
+#&gt; $parameters$params$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$payload
-#&gt; $drive.changes.watch$parameters$payload$type
+#&gt; $parameters$payload
+#&gt; $parameters$payload$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$payload$description
+#&gt; $parameters$payload$description
 #&gt; [1] "A Boolean value to indicate whether payload is wanted. Optional."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$payload$location
+#&gt; $parameters$payload$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$resourceId
-#&gt; $drive.changes.watch$parameters$resourceId$type
+#&gt; $parameters$resourceId
+#&gt; $parameters$resourceId$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$resourceId$description
+#&gt; $parameters$resourceId$description
 #&gt; [1] "An opaque ID that identifies the resource being watched on this channel. Stable across different API versions."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$resourceId$location
+#&gt; $parameters$resourceId$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$resourceUri
-#&gt; $drive.changes.watch$parameters$resourceUri$type
+#&gt; $parameters$resourceUri
+#&gt; $parameters$resourceUri$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$resourceUri$description
+#&gt; $parameters$resourceUri$description
 #&gt; [1] "A version-specific identifier for the watched resource."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$resourceUri$location
+#&gt; $parameters$resourceUri$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$token
-#&gt; $drive.changes.watch$parameters$token$type
+#&gt; $parameters$token
+#&gt; $parameters$token$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$token$description
+#&gt; $parameters$token$description
 #&gt; [1] "An arbitrary string delivered to the target address with each notification delivered over this channel. Optional."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$token$location
+#&gt; $parameters$token$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$type
-#&gt; $drive.changes.watch$parameters$type$type
+#&gt; $parameters$type
+#&gt; $parameters$type$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$type$description
+#&gt; $parameters$type$description
 #&gt; [1] "The type of delivery mechanism used for this channel."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$type$location
+#&gt; $parameters$type$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$alt
-#&gt; $drive.changes.watch$parameters$alt$type
+#&gt; $parameters$alt
+#&gt; $parameters$alt$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$alt$description
+#&gt; $parameters$alt$description
 #&gt; [1] "Data format for the response."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$alt$default
+#&gt; $parameters$alt$default
 #&gt; [1] "json"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$alt$enum
+#&gt; $parameters$alt$enum
 #&gt; [1] "json"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$alt$enumDescriptions
+#&gt; $parameters$alt$enumDescriptions
 #&gt; [1] "Responses with Content-Type of application/json"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$alt$location
+#&gt; $parameters$alt$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$fields
-#&gt; $drive.changes.watch$parameters$fields$type
+#&gt; $parameters$fields
+#&gt; $parameters$fields$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$fields$description
+#&gt; $parameters$fields$description
 #&gt; [1] "Selector specifying which fields to include in a partial response."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$fields$location
+#&gt; $parameters$fields$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$key
-#&gt; $drive.changes.watch$parameters$key$type
+#&gt; $parameters$key
+#&gt; $parameters$key$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$key$description
+#&gt; $parameters$key$description
 #&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$key$location
+#&gt; $parameters$key$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$oauth_token
-#&gt; $drive.changes.watch$parameters$oauth_token$type
+#&gt; $parameters$oauth_token
+#&gt; $parameters$oauth_token$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$oauth_token$description
+#&gt; $parameters$oauth_token$description
 #&gt; [1] "OAuth 2.0 token for the current user."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$oauth_token$location
+#&gt; $parameters$oauth_token$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$prettyPrint
-#&gt; $drive.changes.watch$parameters$prettyPrint$type
+#&gt; $parameters$prettyPrint
+#&gt; $parameters$prettyPrint$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$prettyPrint$description
+#&gt; $parameters$prettyPrint$description
 #&gt; [1] "Returns response with indentations and line breaks."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$prettyPrint$default
+#&gt; $parameters$prettyPrint$default
 #&gt; [1] "true"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$prettyPrint$location
+#&gt; $parameters$prettyPrint$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$quotaUser
-#&gt; $drive.changes.watch$parameters$quotaUser$type
+#&gt; $parameters$quotaUser
+#&gt; $parameters$quotaUser$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$quotaUser$description
+#&gt; $parameters$quotaUser$description
 #&gt; [1] "An opaque string that represents a user for quota purposes. Must not exceed 40 characters."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$quotaUser$location
+#&gt; $parameters$quotaUser$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$parameters$userIp
-#&gt; $drive.changes.watch$parameters$userIp$type
+#&gt; $parameters$userIp
+#&gt; $parameters$userIp$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $drive.changes.watch$parameters$userIp$description
+#&gt; $parameters$userIp$description
 #&gt; [1] "Deprecated. Please use quotaUser instead."
 #&gt; 
-#&gt; $drive.changes.watch$parameters$userIp$location
+#&gt; $parameters$userIp$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; $drive.changes.watch$scopes
+#&gt; $scopes
 #&gt; [1] "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
 #&gt; 
-#&gt; $drive.changes.watch$description
+#&gt; $description
 #&gt; [1] "Subscribes to changes for a user."
 #&gt; 
-#&gt; $drive.changes.watch$request
+#&gt; $request
 #&gt; [1] "Channel"
 #&gt; 
-#&gt; $drive.changes.watch$response
+#&gt; $response
 #&gt; [1] "Channel"
 #&gt; 
-#&gt; $drive.changes.watch$parameterOrder
+#&gt; $parameterOrder
 #&gt; [1] "pageToken"
 #&gt; 
-#&gt; $drive.changes.watch$supportsSubscription
+#&gt; $supportsSubscription
 #&gt; [1] TRUE
-#&gt; 
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
