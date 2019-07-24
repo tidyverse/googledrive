@@ -7,7 +7,7 @@
 
 library(purrr)
 library(glue)
-library(rprojroot)
+library(testthat)
 
 ## grabs code from two chunks: 'nm_fun' and chunk ('clean' or 'setup')
 do_one <- function(r_file, chunk) {
@@ -24,7 +24,7 @@ do_one <- function(r_file, chunk) {
 }
 
 test_files <- list.files(
-  path = find_testthat_root_file(),
+  path = test_path(),
   pattern = "test-.+\\.R",
   full.names = TRUE
 )
@@ -46,7 +46,7 @@ header <- "
 #' This script aggregates the test-related {action} code from all test files.
 
 library(googledrive)
-source(rprojroot::find_testthat_root_file('helper.R'))
+source(testthat::test_path('helper.R'))
 whoami <- drive_user()$user
 whoami[c('displayName', 'emailAddress')]
 
@@ -60,12 +60,12 @@ writeLines(
     glue_data(list(action = "clean", ACTION = "CLEAN"), header),
     unlist(clean_code)
   ),
-  find_testthat_root_file("all-test-clean.R")
+  test_path("all-test-clean.R")
 )
 writeLines(
   c(
     glue_data(list(action = "setup", ACTION = "SETUP"), header),
     unlist(setup_code)
   ),
-  find_testthat_root_file("all-test-setup.R")
+  test_path("all-test-setup.R")
 )

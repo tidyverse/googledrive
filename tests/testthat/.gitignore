@@ -1,5 +1,5 @@
 .httr-oauth
 testing-token.rds
 .Rapp.history
-clean.*
-setup.*
+all-test-clean.*
+all-test-setup.*
