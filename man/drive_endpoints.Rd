@@ -2,29 +2,40 @@
 % Please edit documentation in R/drive_endpoints.R
 \name{drive_endpoints}
 \alias{drive_endpoints}
+\alias{drive_endpoint}
 \title{List Drive endpoints}
 \usage{
 drive_endpoints(i = NULL)
+
+drive_endpoint(i)
 }
 \arguments{
-\item{i}{The name(s) or integer index(ices) of the endpoints to return.
-Optional. By default, the entire list is returned.}
+\item{i}{The name(s) or integer index(ices) of the endpoints to return. \code{i}
+is optional for \code{drive_endpoints()} and, if not given, the entire list is
+returned.}
 }
 \value{
-A list containing some or all of the subset of the Drive API v3
-endpoints that are used internally by googledrive.
+One or more of the Drive API v3 endpoints that are used internally by
+googledrive.
 }
 \description{
-Returns a list of selected Drive API v3 endpoints, as stored inside the
-googledrive package. The names of this list (or the \code{id} sub-elements) are
-the nicknames that can be used to specify an endpoint in
-\code{\link[=request_generate]{request_generate()}}. For each endpoint, we store its nickname or \code{id}, the
-associated HTTP verb, the \code{path}, and details about the parameters. This list
-is derived programmatically from the
-\href{https://www.googleapis.com/discovery/v1/apis/drive/v3/rest}{Drive API v3 Discovery Document}.
+The googledrive package stores a named list of Drive API v3 endpoints (or
+"methods", using Google's vocabulary) internally and these functions expose
+this data.
+\itemize{
+\item \code{drive_endpoint()} returns one endpoint, i.e. it uses \code{[[}.
+\item \code{drive_endpoints()} returns a list of endpoints, i.e. it uses \code{[}.
+}
+
+The names of this list (or the \code{id} sub-elements) are the nicknames that can
+be used to specify an endpoint in \code{\link[=request_generate]{request_generate()}}. For each endpoint, we
+store its nickname or \code{id}, the associated HTTP verb, the \code{path}, and details
+about the parameters. This list is derived programmatically from the \href{https://www.googleapis.com/discovery/v1/apis/drive/v3/rest}{Drive API v3 Discovery Document} using
+the approach described in the \href{https://gargle.r-lib.org/articles/request-helper-functions.html#discovery-documents}{Discovery Documents section}
+of the gargle vignette \href{https://gargle.r-lib.org/articles/request-helper-functions.html}{Request helper functions}.
 }
 \examples{
-str(drive_endpoints(), max.level = 2)
-drive_endpoints("drive.files.delete")
-drive_endpoints(4)
+str(head(drive_endpoints(), 3), max.level = 2)
+drive_endpoint("drive.files.delete")
+drive_endpoint(4)
 }

@@ -51,7 +51,7 @@ request_generate <- function(endpoint = character(),
                              params = list(),
                              key = NULL,
                              token = drive_token()) {
-  ept <- .endpoints[[endpoint]]
+  ept <- drive_endpoint(endpoint)
   if (is.null(ept)) {
     stop_glue("\nEndpoint not recognized:\n  * {endpoint}")
   }

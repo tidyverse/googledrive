@@ -84,7 +84,7 @@ reference:
     desc: >
       Summon info about or check input against the Drive API spec
     contents:
-      - drive_endpoints
+      - starts_with("drive_endpoint")
       - drive_extension
       - drive_fields
       - drive_mime_type
