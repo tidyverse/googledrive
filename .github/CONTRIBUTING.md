@@ -17,7 +17,9 @@ Contributing to googledrive
     It’s a good idea to do that before you touch anything, so you have
     a baseline.
   - Match the existing code style. Our intent is to follow
-    <http://style.tidyverse.org>.
+    <https://style.tidyverse.org>. Please use the [styler
+    package](https://styler.r-lib.org) to re-style any code that you
+    touch.
   - Tests: please *try* to run our tests or at least those that exercise
     your PR. Add tests, if relevant. If things go sideways, just say so.
     We are painfully aware that it’s not easy to test API-wrapping,
@@ -28,8 +30,10 @@ Contributing to googledrive
     [roxygen2](https://cran.r-project.org/package=roxygen2), so you must
     edit the roxygen comments above the function; never edit `NAMESPACE`
     or `.Rd` files by hand. More below.
-  - Website: Do not update the pkgdown-created website, i.e. the files
-    generated below `docs/`. We’ll take care of that.
+  - Website: The pkgdown-created website is built and deployed
+    automatically via Travis-CI. Some changes require an edit to the
+    `reference` section of `_pkgdown.yml`, i.e. to make sure that a
+    function appears there.
   - If the PR is related to an issue, link to it in the description,
     with [the `#15`
     syntax](https://help.github.com/articles/autolinked-references-and-urls/)
@@ -70,7 +74,7 @@ Contributing to googledrive
     really exist.
   - Accommodate initial file specification via path or name, but
     constantly push downstream work to be based on file id.
-  - Return a tidy tibble, probably a
+  - Return a tidy tibble, almost always a
     [`dribble`](https://tidyverse.github.io/googledrive/reference/dribble.html),
     whenever it makes sense.
 
@@ -80,10 +84,9 @@ Examples: `drive_find()`, `drive_upload()`, `drive_download()`. A few
 hand-picked functions support passing extra parameters through to the
 API request via `...`, but we don’t do this across the board.
 
-There is also a low-level interface that is used internally. These are
-functions like `generate_request()` and `process_response()`. These
-functions are exported for use by programming-oriented users who are
-willing to read [Drive API
+There is also a low-level interface that is used internally. An example
+is the function `request_generate()`. These functions are exported for
+use by programming-oriented users who are willing to read [Drive API
 docs](https://developers.google.com/drive/v3/web/about-sdk) and want to
 do things we haven’t made available in the high-level interface.
 
@@ -117,58 +120,31 @@ changes across `.Rd` files that have nothing to do with the PR.
 
 We use [testthat](https://cran.r-project.org/package=testthat).
 
-We have many tests that require authorization and that rely on the
-existence of specific files and folders. Therefore, to fully test
-googledrive, you’ll have to store a token in a specific place and you’ll
-have to do some setup. We’ve tried to make it fairly easy to do this
-setup and to clean up those files when you’re done.
+We have many tests that (1) require authorization and that (2) rely on
+the existence of specific files and folders. Therefore, to fully test
+googledrive, you have to do some setup.
 
-TL;DR with more detail below:
+For small changes, it’s fine to test your specific change locally and
+make a PR. Keep reading for an explanation of how to run full tests for
+googledrive.
 
-``` r
-## store an OAuth token
-## TO DO: update this when dust settles re: gargle and service token!
-token <- drive_auth(reset = TRUE, cache = FALSE)
-saveRDS(token, rprojroot::find_testthat_root_file("testing-token.rds"))
+#### Auth
 
-## gather all the test setup and clean code from individual test files
-source(rprojroot::find_testthat_root_file("driver.R"))
-## leaves behind:
-##   * all-test-setup.R
-##   * all-test-clean.R
+A token is put into force at the beginning of a test run by the first
+few lines of
+[tests/testthat/helper.R](https://github.com/tidyverse/googledrive/blob/master/tests/testthat/helper.R).
 
-## "activate" by editing, e.g., SETUP <- TRUE vs SETUP <- FALSE
-
-## source or, I prefer, render the setup script
-rmarkdown::render(rprojroot::find_testthat_root_file("all-test-setup.R"))
-
-## do all development work that requires tests HERE
-
-## source or, I prefer, render the clean script
-rmarkdown::render(rprojroot::find_testthat_root_file("all-test-clean.R"))
-```
-
-#### OAuth token for testing
-
-1.  Obtain a new, non-caching token via browser flow.
-    
-    ``` r
-    token <- drive_auth(reset = TRUE, cache = FALSE)
-    ```
-
-2.  Double-check that the user associated with the token is what you
-    want.
-    
-    ``` r
-    drive_user()
-    ```
-
-3.  Write this token to file, to the location expected by googledrive’s
-    tests.
-    
-    ``` r
-    saveRDS(token, rprojroot::find_testthat_root_file("testing-token.rds"))
-    ```
+  - This reflects the approach documented in the gargle vignette
+    [Managing tokens
+    securely](https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html).
+    We use embedded, encrypted service account token.
+  - If you want to use a token you already have, edit those lines to use
+    any of the techniques described in the gargle vignette
+    [Non-interactive
+    auth](https://gargle.r-lib.org/articles/non-interactive-auth.html).
+    Don’t commit and submit this change as part of a pull request; just
+    use it as a pragmatic way to run tests with a token you have on
+    hand.
 
 #### R scripts for setup and clean
 
@@ -181,21 +157,32 @@ test run also creates and destroys files, both locally and on Drive, but
 that is different and not what we’re talking about here.
 
 1.  Source `tests/testthat/driver.R` to extract and aggregate the
-    current setup and clean code across all test files.
-      - This will create two R scripts:
-        `tests/testthat/all-test-setup.R` and
-        `tests/testthat/all-test-clean.R`. Inspect them.
+    current setup and clean code across all test
+    files.
+    
+    ``` r
+    ## gather all the test setup and clean code from individual test files
+    source(testthat::test_path("driver.R"))
+    ## leaves behind:
+    ##   * all-test-setup.R
+    ##   * all-test-clean.R
+    ```
+    
+      - This creates two R scripts: `tests/testthat/all-test-setup.R`
+        and `tests/testthat/all-test-clean.R`. Inspect them.
+
 2.  When you are truly ready to perform setup or clean, edit the code to
     set the `SETUP` or `CLEAN` variable to `TRUE` instead of `FALSE`.
     This friction is intentional, so you don’t accidentally create or
     delete lots of Drive files without meaning to.
+
 3.  Render `all-test-setup.R` with the Knit button in RStudio or like
     so:
 
 <!-- end list -->
 
 ``` r
-rmarkdown::render("all-test-setup.R")
+rmarkdown::render(testthat::test_path("all-test-setup.R"))
 ```
 
 You could also just source it, but it’s nice to have a report that
@@ -211,7 +198,7 @@ that is the whole point\!
 When your googledrive development is over, render the clean script:
 
 ``` r
-rmarkdown::render("all-test-clean.R")
+rmarkdown::render(testthat::test_path("all-test-clean.R"))
 ```
 
 Again, read the report to look over what happened, in case anything was
@@ -261,8 +248,8 @@ CI](https://travis-ci.org/tidyverse/googledrive). We use
 [codecov](https://codecov.io/github/tidyverse/googledrive?branch=master)
 to track the test coverage. In general, the package is subjected to `R
 CMD check`, unit tests, and test coverage analysis after every push to
-GitHub. There are encrypted OAuth tokens on both AppVeyor and Travis CI,
-so tests against the Drive API can be run.
+GitHub. There are encrypted service account tokens on both AppVeyor and
+Travis CI, so tests against the Drive API can be run.
 
 Things are a bit different for pull requests from outside contributors,
 however. These PRs do not have access to the encrypted tokens, therefore

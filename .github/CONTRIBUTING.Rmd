@@ -11,7 +11,7 @@ output:
   * Uphold the design principles and package mechanics outlined below.
   * When in doubt, discuss in an issue before doing lots of work.
   * Make sure the package still passes `R CMD check` locally for you. It's a good idea to do that before you touch anything, so you have a baseline.
-  * Match the existing code style. Our intent is to follow <http://style.tidyverse.org>.
+  * Match the existing code style. Our intent is to follow <https://style.tidyverse.org>. Please use the [styler package](https://styler.r-lib.org) to re-style any code that you touch.
   * Tests: please *try* to run our tests or at least those that exercise your PR. Add tests, if relevant. If things go sideways, just say so. We are painfully aware that it's not easy to test API-wrapping, auth-requiring packages like googledrive and are open to constructive feedback. More below.
   * Documentation: Update the documentation source, if your PR changes any behavior. We use [roxygen2](https://cran.r-project.org/package=roxygen2), so you must edit the roxygen comments above the function; never edit `NAMESPACE` or `.Rd` files by hand. More below.
   * Website: The pkgdown-created website is built and deployed automatically via Travis-CI. Some changes require an edit to the `reference` section of `_pkgdown.yml`, i.e. to make sure that a function appears there.
@@ -30,11 +30,11 @@ output:
   * Be pipe-friendly.
   * If it's not well-documented (e.g. working example!), it doesn't really exist.
   * Accommodate initial file specification via path or name, but constantly push downstream work to be based on file id.
-  * Return a tidy tibble, probably a [`dribble`](https://tidyverse.github.io/googledrive/reference/dribble.html), whenever it makes sense.
+  * Return a tidy tibble, almost always a [`dribble`](https://tidyverse.github.io/googledrive/reference/dribble.html), whenever it makes sense.
 
 There is a high-level interface for the typical user. These functions help you accomplish the most common tasks, hopefully in a natural way. Examples: `drive_find()`, `drive_upload()`, `drive_download()`. A few hand-picked functions support passing extra parameters through to the API request via `...`, but we don't do this across the board.
 
-There is also a low-level interface that is used internally. These are functions like `generate_request()` and `process_response()`. These functions are exported for use by programming-oriented users who are willing to read [Drive API docs](https://developers.google.com/drive/v3/web/about-sdk) and want to do things we haven't made available in the high-level interface.
+There is also a low-level interface that is used internally. An example is the function `request_generate()`. These functions are exported for use by programming-oriented users who are willing to read [Drive API docs](https://developers.google.com/drive/v3/web/about-sdk) and want to do things we haven't made available in the high-level interface.
 
 ## Package mechanics
 
@@ -55,15 +55,16 @@ It's nice if a pull request includes the result of running `devtools::document()
 
 We use [testthat](https://cran.r-project.org/package=testthat).
 
-We have many tests that require authorization and that rely on the existence of specific files and folders. Therefore, to fully test googledrive, you have to do some setup.
+We have many tests that (1) require authorization and that (2) rely on the existence of specific files and folders. Therefore, to fully test googledrive, you have to do some setup.
 
-For small changes, it's fine to test your specific change locally and make a PR. Keep reading for an explanation of how we actually test.
+For small changes, it's fine to test your specific change locally and make a PR. Keep reading for an explanation of how to run full tests for googledrive.
 
 #### Auth
 
-Get a service account token: see the [Service account token](https://gargle.r-lib.org/articles/get-api-credentials.html#service-account-token) section of the gargle vignette [How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html).
+A token is put into force at the beginning of a test run by the first few lines of [tests/testthat/helper.R](https://github.com/tidyverse/googledrive/blob/master/tests/testthat/helper.R).
 
-Either set up your service token up the way we do, which is explained in the gargle vignette [Managing tokens securely](https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html). Or adapt the first few lines of [tests/testthat/helper.R](https://github.com/tidyverse/googledrive/blob/master/tests/testthat/helper.R) to simply read your (unencrypted) service account token from a local file.
+  * This reflects the approach documented in the gargle vignette [Managing tokens securely](https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html). We use embedded, encrypted service account token.
+  * If you want to use a token you already have, edit those lines to use any of the techniques described in the gargle vignette [Non-interactive auth](https://gargle.r-lib.org/articles/non-interactive-auth.html). Don't commit and submit this change as part of a pull request; just use it as a pragmatic way to run tests with a token you have on hand.
 
 #### R scripts for setup and clean
 
@@ -77,7 +78,7 @@ For speed reasons, the googledrive tests expect to find certain pre-existing fil
     ##   * all-test-setup.R
     ##   * all-test-clean.R
     ```
-    - This will create two R scripts: `tests/testthat/all-test-setup.R` and `tests/testthat/all-test-clean.R`. Inspect them.
+    - This creates two R scripts: `tests/testthat/all-test-setup.R` and `tests/testthat/all-test-clean.R`. Inspect them.
 1. When you are truly ready to perform setup or clean, edit the code to set the `SETUP` or `CLEAN` variable to `TRUE` instead of `FALSE`. This friction is intentional, so you don't accidentally create or delete lots of Drive files without meaning to.
 1. Render `all-test-setup.R` with the Knit button in RStudio or like so:
 ```{r eval = FALSE}
