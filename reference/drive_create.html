@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Drive folder — drive_mkdir • googledrive</title>
+<title>Create a new blank Drive file — drive_create • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -31,10 +31,14 @@
 
 
 
-<meta property="og:title" content="Create a Drive folder — drive_mkdir" />
+<meta property="og:title" content="Create a new blank Drive file — drive_create" />
 
-<meta property="og:description" content="Creates a new Drive folder. To update the metadata of an existing Drive file,
-including a folder, use drive_update()." />
+<meta property="og:description" content="Creates a new blank Drive file. Note there are better options for these
+special cases:
+Creating a folder? Use drive_mkdir().
+Want to upload existing local content into a new Drive file? Use
+drive_upload().
+" />
 
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -131,33 +135,44 @@ including a folder, use drive_update()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a Drive folder</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/drive_mkdir.R'><code>R/drive_mkdir.R</code></a></small>
-    <div class="hidden name"><code>drive_mkdir.Rd</code></div>
+    <h1>Create a new blank Drive file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/drive_create.R'><code>R/drive_create.R</code></a></small>
+    <div class="hidden name"><code>drive_create.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Creates a new Drive folder. To update the metadata of an existing Drive file,
-including a folder, use <code><a href='drive_update.html'>drive_update()</a></code>.</p>
+    <p>Creates a new blank Drive file. Note there are better options for these
+special cases:</p><ul>
+<li><p>Creating a folder? Use <code><a href='drive_mkdir.html'>drive_mkdir()</a></code>.</p></li>
+<li><p>Want to upload existing local content into a new Drive file? Use
+<code><a href='drive_upload.html'>drive_upload()</a></code>.</p></li>
+</ul>
     
     </div>
 
-    <pre class="usage"><span class='fu'>drive_mkdir</span>(<span class='no'>name</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_create</span>(<span class='no'>name</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>Name for the new folder or, optionally, a path that specifies
-an existing parent folder, as well as the new name.</p></td>
+      <td><p>Name for the new file or, optionally, a path that specifies
+an existing parent folder, as well as the new file name.</p></td>
     </tr>
     <tr>
       <th>parent</th>
       <td><p>Target destination for the new item, i.e. a folder or a Team
 Drive. Can be given as an actual path (character), a file id or URL marked
 with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. Defaults to your "My Drive" root folder.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>Character. Create a blank Google Doc, Sheet or Slides by
+setting <code>type</code> to <code>document</code>, <code>spreadsheet</code>, or <code>presentation</code>,
+respectively. All non-<code>NULL</code> values for <code>type</code> are pre-processed with
+<code><a href='drive_mime_type.html'>drive_mime_type()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -186,26 +201,41 @@ docs for the associated endpoint.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## Create folder named 'ghi', then another below named it 'jkl' and star it</span>
-<span class='no'>ghi</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"ghi"</span>)
-<span class='no'>jkl</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"ghi/jkl"</span>, <span class='kw'>starred</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='co'>## Create a blank Google Doc named 'WordStar' in</span>
+<span class='co'>## your 'My Drive' root folder and star it</span>
+<span class='no'>wordstar</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_create</span>(<span class='st'>"WordStar"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"document"</span>, <span class='kw'>starred</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='co'>## is 'jkl' really starred? YES</span>
-<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>jkl</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"starred"</span>)
+<span class='co'>## is 'WordStar' really starred? YES</span>
+<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>wordstar</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"starred"</span>)
 
-<span class='co'>## Another way to create folder 'mno' in folder 'ghi'</span>
-<span class='fu'>drive_mkdir</span>(<span class='st'>"mno"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='st'>"ghi"</span>)
-
-<span class='co'>## Yet another way to create a folder named 'pqr' in folder 'ghi',</span>
-<span class='co'>## this time with parent folder stored in a dribble,</span>
-<span class='co'>## and setting the new folder's description</span>
-<span class='no'>pqr</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"pqr"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='st'>"I am a folder"</span>)
+<span class='co'>## Create a blank Google Slides presentation in</span>
+<span class='co'>## the root folder, and set its description</span>
+<span class='no'>execuvision</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_create</span>(
+  <span class='st'>"ExecuVision"</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"presentation"</span>,
+  <span class='kw'>description</span> <span class='kw'>=</span> <span class='st'>"deeply nested bullet lists FTW"</span>
+)
 
 <span class='co'>## Did we really set the description? YES</span>
-<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>pqr</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"description"</span>)
+<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>execuvision</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"description"</span>)
+
+<span class='co'>## check out the new presentation</span>
+<span class='fu'><a href='drive_browse.html'>drive_browse</a></span>(<span class='no'>execuvision</span>)
+
+<span class='co'>## Create folder 'b4xl' in the root folder,</span>
+<span class='co'>## then create an empty new Google Sheet in it</span>
+<span class='no'>b4xl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"b4xl"</span>)
+<span class='fu'>drive_create</span>(<span class='st'>"VisiCalc"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='no'>b4xl</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
+
+<span class='co'>## Another way to create a Google Sheet in the folder 'spreadsheets'</span>
+<span class='fu'>drive_create</span>(<span class='st'>"b4xl/SuperCalc"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
+
+<span class='co'>## Another way to create a new file in a folder,</span>
+<span class='co'>## this time specifying `parent` as a character</span>
+<span class='fu'>drive_create</span>(<span class='st'>"Lotus 1-2-3"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='st'>"b4xl"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
 
 <span class='co'>## clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>ghi</span>)
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>wordstar</span>, <span class='no'>b4xl</span>, <span class='no'>execuvision</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
