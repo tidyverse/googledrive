@@ -42,48 +42,53 @@ test_that("drive_create() errors if parent exists but is not a folder", {
   )
 })
 
-test_that("drive_create() creates a document in root folder", {
+test_that("drive_create() create specific things in root folder", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(me_("create-me-in-root")))
 
-  out <- drive_create(me_("create-me-in-root"), type = "document")
+  on.exit(drive_rm(me_("docs-in-root")), add = TRUE)
+  out <- drive_create(me_("docs-in-root"), type = "document")
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, me_("create-me-in-root"))
+  expect_identical(out$name, me_("docs-in-root"))
   expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
   expect_identical(
     drive_reveal_mime_type(out)$mime_type,
     drive_mime_type("document")
   )
-})
 
-test_that("drive_create() creates a spreadsheet in root folder", {
-  skip_if_no_token()
-  skip_if_offline()
-  on.exit(drive_rm(me_("create-me-in-root")))
-
-  out <- drive_create(me_("create-me-in-root"), type = "spreadsheet")
+  on.exit(drive_rm(me_("sheets-in-root")), add = TRUE)
+  out <- drive_create(me_("sheets-in-root"), type = "spreadsheet")
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, me_("create-me-in-root"))
+  expect_identical(out$name, me_("sheets-in-root"))
   expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
   expect_identical(
     drive_reveal_mime_type(out)$mime_type,
     drive_mime_type("spreadsheet")
   )
-})
 
-test_that("drive_create() creates a slides presentation in root folder", {
-  skip_if_no_token()
-  skip_if_offline()
-  on.exit(drive_rm(me_("create-me-in-root")))
-
-  out <- drive_create(me_("create-me-in-root"), type = "presentation")
+  on.exit(drive_rm(me_("slides-in-root")), add = TRUE)
+  out <- drive_create(me_("slides-in-root"), type = "presentation")
   expect_s3_class(out, "dribble")
-  expect_identical(out$name, me_("create-me-in-root"))
+  expect_identical(out$name, me_("slides-in-root"))
   expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
   expect_identical(
     drive_reveal_mime_type(out)$mime_type,
     drive_mime_type("presentation")
+  )
+})
+
+test_that("drive_mkdir() creates a folder in root folder", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  on.exit(drive_rm(me_("folder-in-root")))
+  out <- drive_mkdir(me_("folder-in-root"))
+  expect_s3_class(out, "dribble")
+  expect_identical(out$name, me_("folder-in-root"))
+  expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
+  expect_identical(
+    drive_reveal_mime_type(out)$mime_type,
+    drive_mime_type("folder")
   )
 })
 
@@ -134,7 +139,7 @@ test_that("drive_create() parent separately, as a path", {
   expect_identical(out$name, me_("e"))
 
   ## yes trailing slash on parent
-  out <- drive_create(me_("f"), file.path(nm_("create-in-me"), ""))
+  out <- drive_create(me_("f"), parent = file.path(nm_("create-in-me"), ""))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("f"))
 })
