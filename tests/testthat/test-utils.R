@@ -38,3 +38,11 @@ test_that("put_column() works with an expression", {
     tibble::tibble(v1 = 1, v2 = 2, v3 = "stuff")
   )
 })
+
+test_that("and() protects its inputs with parentheses", {
+  x <- c("organizerCount > 5", "memberCount > 20")
+  expect_identical(
+    as.character(and(c("createdTime > '2019-01-01T12:00:00'", or(x)))),
+    "(createdTime > '2019-01-01T12:00:00') and (organizerCount > 5 or memberCount > 20)"
+  )
+})

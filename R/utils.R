@@ -9,7 +9,9 @@ trim_ws <- function(x) {
   sub("\\s*$", "", sub("^\\s*", "", x))
 }
 
-and <- function(x) glue_collapse(x, sep = " and ")
+# https://developers.google.com/drive/api/v3/search-shareddrives#query_multiple_terms_with_parentheses
+parenthesize <- function(x) glue("({x})")
+and <- function(x) glue_collapse(parenthesize(x), sep = " and ")
 or <- function(x) glue_collapse(x, sep = " or ")
 
 ## put a column into a tibble in the REST sense: "create or update"
