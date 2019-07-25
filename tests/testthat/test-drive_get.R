@@ -67,7 +67,7 @@ test_that("drive_get() gives n-row output for n ids as input", {
   skip_if_no_token()
   skip_if_offline()
 
-  two_files_find <- drive_find(pattern = nm_("DESC-0[12]"))
+  two_files_find <- drive_find(pattern = nm_("thing0[12]"))
   two_files_get <- drive_get(id = two_files_find$id)
   expect_identical(
     two_files_find[c("name", "id")],
@@ -194,4 +194,15 @@ test_that("we understand behavior with multiple parents", {
     )
   )
   expect_identical(res$id[1], res$id[2])
+})
+
+test_that("drive_get() works with a URL", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  file <- drive_find(nm_("thing02"))
+
+  out <- drive_get(purrr::pluck(file, "drive_resource", 1, "webViewLink"))
+  expect_identical(file$id, out$id)
+
 })

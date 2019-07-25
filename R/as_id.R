@@ -49,15 +49,21 @@ as_id.data.frame <- function(x, ...) as_id(validate_dribble(new_dribble(x)))
 #' @export
 as_id.character <- function(x, ...) {
   if (length(x) == 0L) return(x)
-  structure(purrr::map_chr(x, one_id), class = "drive_id")
+  structure(purrr::map_chr(x, get_one_id), class = "drive_id")
 }
 
-one_id <- function(x) {
+## we anticipate file-id-containing URLs in these forms:
+##       /d/FILE_ID   Drive file
+## /folders/FILE_ID   Drive folder
+##       id=FILE_ID   uploaded blob
+id_regexp <- "(/d/|/folders/|id=)[^/]+"
+
+is_drive_url <- function(x) grepl("^http", x) & grepl(id_regexp, x)
+
+get_one_id <- function(x) {
   if (!grepl("^http|/", x)) return(x)
 
-  ## We expect the links to have /d/ before the file id, have /folders/
-  ## before a folder id, or have id= before an uploaded blob
-  id_loc <- regexpr("/d/([^/])+|/folders/([^/])+|id=([^/])+", x)
+  id_loc <- regexpr(id_regexp, x)
   if (id_loc == -1) {
     NA_character_
   } else {

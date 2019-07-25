@@ -10,9 +10,9 @@ drive_get(path = NULL, id = NULL, team_drive = NULL, corpus = NULL,
 \arguments{
 \item{path}{Character vector of path(s) to get. Use a trailing slash to
 indicate explicitly that a path is a folder, which can disambiguate if
-there is a file of the same name (yes this is possible on Drive!). A
-character vector marked with \code{\link[=as_id]{as_id()}} is treated as if it was provided via
-the \code{id} argument.}
+there is a file of the same name (yes this is possible on Drive!). If
+\code{path} appears to contain Drive URLs or is explicitly marked with
+\code{\link[=as_id]{as_id()}}, it is treated as if it was provided via the \code{id} argument.}
 
 \item{id}{Character vector of Drive file ids or URLs (it is first processed
 with \code{\link[=as_id]{as_id()}}). If both \code{path} and \code{id} are non-\code{NULL}, \code{id} is silently
@@ -80,6 +80,12 @@ drive_get(c("abc", "def/"))
 drive_get(id = "abcdefgeh123456789")
 drive_get(as_id("abcdefgeh123456789"))
 drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
+
+## apply to a browser URL for, e.g., a Google Sheet
+my_url <- "https://docs.google.com/spreadsheets/d/FILE_ID/edit#gid=SHEET_ID")
+drive_get(my_url)
+drive_get(as_id(my_url))
+drive_get(id = my_url)
 
 ## access the Team Drive named "foo"
 ## team_drive params must be specified if getting by path
