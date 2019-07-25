@@ -167,9 +167,9 @@ Suite Enterprise, G Suite Business, or G Suite for Education.</p>
       <th>path</th>
       <td><p>Character vector of path(s) to get. Use a trailing slash to
 indicate explicitly that a path is a folder, which can disambiguate if
-there is a file of the same name (yes this is possible on Drive!). A
-character vector marked with <code><a href='as_id.html'>as_id()</a></code> is treated as if it was provided via
-the <code>id</code> argument.</p></td>
+there is a file of the same name (yes this is possible on Drive!). If
+<code>path</code> appears to contain Drive URLs or is explicitly marked with
+<code><a href='as_id.html'>as_id()</a></code>, it is treated as if it was provided via the <code>id</code> argument.</p></td>
     </tr>
     <tr>
       <th>id</th>
@@ -225,34 +225,41 @@ path, also calls <code>files.list</code>:</p><ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## get info about your "My Drive" root folder</span>
-<span class='fu'>drive_get</span>(<span class='st'>"~/"</span>)
-<span class='co'>## the API reserves the file id "root" for your root folder</span>
-<span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"root"</span>)
-<span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"root"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_reveal.html'>drive_reveal</a></span>(<span class='st'>"path"</span>)
+    <pre class="examples"># NOT RUN {
+## get info about your "My Drive" root folder
+drive_get("~/")
+## the API reserves the file id "root" for your root folder
+drive_get(id = "root")
+drive_get(id = "root") %>% drive_reveal("path")
 
-<span class='co'>## multiple names</span>
-<span class='fu'>drive_get</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"abc"</span>, <span class='st'>"def"</span>))
+## multiple names
+drive_get(c("abc", "def"))
 
-<span class='co'>## multiple names, one of which must be a folder</span>
-<span class='fu'>drive_get</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"abc"</span>, <span class='st'>"def/"</span>))
+## multiple names, one of which must be a folder
+drive_get(c("abc", "def/"))
 
-<span class='co'>## query by file id(s)</span>
-<span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"abcdefgeh123456789"</span>)
-<span class='fu'>drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"abcdefgeh123456789"</span>))
-<span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"abcdefgh123456789"</span>, <span class='st'>"jklmnopq123456789"</span>))
+## query by file id(s)
+drive_get(id = "abcdefgeh123456789")
+drive_get(as_id("abcdefgeh123456789"))
+drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 
-<span class='co'>## access the Team Drive named "foo"</span>
-<span class='co'>## team_drive params must be specified if getting by path</span>
-<span class='no'>foo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='team_drive_get.html'>team_drive_get</a></span>(<span class='st'>"foo"</span>)
-<span class='fu'>drive_get</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='no'>foo</span>)
-<span class='co'>## team_drive params are not necessary if getting by id</span>
-<span class='fu'>drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"123456789"</span>))
+## apply to a browser URL for, e.g., a Google Sheet
+my_url <- "https://docs.google.com/spreadsheets/d/FILE_ID/edit#gid=SHEET_ID")
+drive_get(my_url)
+drive_get(as_id(my_url))
+drive_get(id = my_url)
 
-<span class='co'>## search all Team Drives and other files user has accessed</span>
-<span class='fu'>drive_get</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='st'>"all"</span>)
-<span class='co'># }</span></pre>
+## access the Team Drive named "foo"
+## team_drive params must be specified if getting by path
+foo <- team_drive_get("foo")
+drive_get(c("this.jpg", "that-file"), team_drive = foo)
+## team_drive params are not necessary if getting by id
+drive_get(as_id("123456789"))
+
+## search all Team Drives and other files user has accessed
+drive_get(c("this.jpg", "that-file"), corpus = "all")
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
