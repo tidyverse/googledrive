@@ -35,7 +35,7 @@ the Team Drives context. If specified, must be one of \code{"user"}, \code{"all"
 
 \item{...}{Other parameters to pass along in the request. The most likely
 candidate is \code{q}. See below and the API's
-\href{https://developers.google.com/drive/v3/web/search-parameters}{Search for Files guide}.}
+\href{https://developers.google.com/drive/api/v3/search-files}{Search for files and folders guide}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -140,6 +140,6 @@ Wraps the \code{files.list} endpoint:
 
 Helpful resource for forming your own queries:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/web/search-parameters}
+\item \url{https://developers.google.com/drive/api/v3/search-files}
 }
 }

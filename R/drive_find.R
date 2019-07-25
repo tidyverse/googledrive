@@ -39,7 +39,7 @@
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
 #'
 #' Helpful resource for forming your own queries:
-#'   * <https://developers.google.com/drive/v3/web/search-parameters>
+#'   * <https://developers.google.com/drive/api/v3/search-files>
 #'
 #' @template pattern
 #' @param trashed Logical. Whether to search files that are not in the trash
@@ -53,7 +53,7 @@
 #' @template corpus
 #' @param ... Other parameters to pass along in the request. The most likely
 #'   candidate is `q`. See below and the API's
-#'   [Search for Files guide](https://developers.google.com/drive/v3/web/search-parameters).
+#'   [Search for files and folders guide](https://developers.google.com/drive/api/v3/search-files).
 #' @template verbose
 #'
 #' @template dribble-return
