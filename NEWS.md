@@ -78,6 +78,8 @@ There are other small changes to the low-level developer-facing API:
 
 `drive_create()` is a new function that creates a new empty file, with an optional file type specification (#258, @ianmcook). `drive_mkdir()` becomes a thin wrapper around `drive_create()`, with the file type hard-wired to "folder".
 
+`drive_empty_trash()` now exploits the correct endpoint (as opposed to deleting individual files) and is therefore much faster (#203).
+
 ## Dependency changes
 
 R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2).
