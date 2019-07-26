@@ -81,7 +81,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../articles/reprex-dos-and-donts.html">Reprex do's and don'ts</a>
+  <a href="../articles/googledrive.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -231,6 +231,7 @@
 <a href="#other-changes" class="anchor"></a>Other changes</h2>
 <p><code><a href="../reference/drive_create.html">drive_create()</a></code> is a new function that creates a new empty file, with an optional file type specification (<a href='https://github.com/tidyverse/googledrive/issues/258'>#258</a>, <a href='https://github.com/ianmcook'>@ianmcook</a>). <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code> becomes a thin wrapper around <code><a href="../reference/drive_create.html">drive_create()</a></code>, with the file type hard-wired to “folder”.</p>
 <p><code><a href="../reference/drive_empty_trash.html">drive_empty_trash()</a></code> now exploits the correct endpoint (as opposed to deleting individual files) and is therefore much faster (<a href='https://github.com/tidyverse/googledrive/issues/203'>#203</a>).</p>
+<p>The internal table of known MIME types includes <code>"application/vnd.google.colab"</code>, which is associated with the file extension <code>.ipynb</code> and the human-oriented nickname <code>"colab"</code> (<a href='https://github.com/tidyverse/googledrive/issues/207'>#207</a>).</p>
 </div>
 <div id="dependency-changes" class="section level2">
 <h2 class="hasAnchor">
