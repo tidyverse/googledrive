@@ -13,9 +13,6 @@ authors:
 navbar:
   components:
     home: ~
-    intro:
-      text: Reprex do's and don'ts
-      href: articles/reprex-dos-and-donts.html
 
 reference:
   - title: "Reach out and touch your files"
