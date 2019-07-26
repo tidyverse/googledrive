@@ -76,3 +76,4 @@ application/vnd.google-apps.spreadsheet,NA,spreadsheet,NA
 application/vnd.google-apps.unknown,NA,unknown,NA
 application/vnd.google-apps.video,NA,video,NA
 application/vnd.google-apps.drive-sdk,NA,drive-sdk,NA
+application/vnd.google.colab,ipynb,colab,TRUE

@@ -80,6 +80,8 @@ There are other small changes to the low-level developer-facing API:
 
 `drive_empty_trash()` now exploits the correct endpoint (as opposed to deleting individual files) and is therefore much faster (#203).
 
+The internal table of known MIME types includes `"application/vnd.google.colab"`, which is associated with the file extension `.ipynb` and the human-oriented nickname `"colab"` (#207).
+
 ## Dependency changes
 
 R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2).

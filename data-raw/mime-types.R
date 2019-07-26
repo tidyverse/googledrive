@@ -13,7 +13,7 @@ conflicted::conflict_prefer("pluck", "purrr")
 fmts <- request_generate(
   endpoint = "drive.about.get",
   params = list(fields = "importFormats,exportFormats")
-) %>%
+  ) %>%
   do_request()
 
 imports <- fmts %>%
@@ -102,6 +102,15 @@ mime_tbl <- mime_tbl %>%
       is.na(default) ~ FALSE,
       TRUE           ~ TRUE
     )
+  )
+
+mime_tbl <- mime_tbl %>%
+  add_row(
+    # TODO(jennybc): consider also "application/vnd.google.colaboratory"
+    mime_type = "application/vnd.google.colab",
+    ext = "ipynb",
+    human_type = "colab",
+    default = TRUE
   )
 
 write_csv(mime_tbl, path = here("inst", "extdata", "mime_tbl.csv"))
