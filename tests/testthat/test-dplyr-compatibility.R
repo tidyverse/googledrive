@@ -5,7 +5,7 @@ if (FALSE) {
   ## how the test file was created
   saveRDS(
     drive_find(n_max = 10),
-    rprojroot::find_testthat_root_file("test-files/just_a_dribble.rds")
+    test_file("just_a_dribble.rds")
   )
 }
 
@@ -13,9 +13,7 @@ if (FALSE) {
 test_that("dribble class can be retained by dplyr verbs", {
   skip_if_not_installed("dplyr")
 
-  x <- readRDS(
-    rprojroot::find_testthat_root_file("test-files/just_a_dribble.rds")
-  )
+  x <- readRDS(test_file("just_a_dribble.rds"))
 
   expect_s3_class(dplyr::arrange(x, name), "dribble")
   expect_s3_class(dplyr::filter(x, grepl("-TEST-", name)), "dribble")
@@ -30,9 +28,7 @@ test_that("dribble class can be retained by dplyr verbs", {
 test_that("dribble class can be dropped by dplyr verbs", {
   skip_if_not_installed("dplyr")
 
-  x <- readRDS(
-    rprojroot::find_testthat_root_file("test-files/just_a_dribble.rds")
-  )
+  x <- readRDS(test_file("just_a_dribble.rds"))
 
   expect_false(inherits(dplyr::mutate(x, name = 1L), "dribble"))
   expect_false(inherits(dplyr::rename(x, HEY = name), "dribble"))

@@ -16,3 +16,7 @@ nm_fun <- function(context, user = Sys.info()["user"]) {
 expect_error_free <- function(...) {
   expect_error(..., regexp = NA)
 }
+
+# usage:
+# test_file("something.rds")
+test_file <- function(name) testthat::test_path("test-files", name)

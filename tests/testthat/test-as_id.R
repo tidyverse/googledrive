@@ -6,7 +6,7 @@ if (FALSE) {
   ## see also test-dplyr-compatbility.R
   saveRDS(
     drive_find(n_max = 10),
-    rprojroot::find_testthat_root_file("test-files/just_a_dribble.rds")
+    test_file("just_a_dribble.rds")
   )
 }
 
@@ -59,9 +59,7 @@ test_that("as_id() extracts ids from Drive URLs but not other URLs", {
 })
 
 test_that("as_id() works with dribble and dribble-ish data frames", {
-  x <- readRDS(
-    rprojroot::find_testthat_root_file("test-files/just_a_dribble.rds")
-  )
+  x <- readRDS(test_file("just_a_dribble.rds"))
 
   expect_s3_class(as_id(x), "drive_id")
   expect_identical(unclass(as_id(x)), x$id)

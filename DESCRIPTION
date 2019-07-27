@@ -33,7 +33,6 @@ Suggests:
     knitr,
     rmarkdown,
     roxygen2,
-    rprojroot,
     sodium,
     testthat (>= 2.1.1)
 VignetteBuilder: 

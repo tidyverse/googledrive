@@ -90,6 +90,8 @@ R 3.1 is no longer explicitly supported or tested. Our general practice is to su
 
 gargle and magrittr are newly Imported.
 
+rprojroot has been removed from Suggests.
+
 # googledrive 0.1.3
 
 Minor patch release for compatibility with the imminent release of purrr 0.3.0.
