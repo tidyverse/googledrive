@@ -24,7 +24,9 @@ Where to learn more:
 
 OAuth2 tokens are now cached at the user level, by default, instead of in `.httr-oauth` in the current project. We recommend that you delete any vestigial `.httr-oauth` files lying around your googledrive projects and re-authorize googledrive, i.e. get a new token, stored in the new way.
 
-The OAuth2 token key-value store now incorporates the associated Google user when indexing, which makes it easier to switch between Google identities.
+googledrive uses a new OAuth "app", owned by a verified Google Cloud Project entitled "Tidyverse API Packages", which is the project name you will see on the OAuth consent screen. See our new [Privacy Policy](https://www.tidyverse.org/google_privacy_policy/) for details.
+
+The local OAuth2 token key-value store now incorporates the associated Google user when indexing, which makes it easier to switch between Google identities.
 
 The arguments and usage of `drive_auth()` have changed.
 
@@ -62,16 +64,16 @@ Auth configuration has also changed:
 
   * `drive_auth_configure()` is a variant of the now-deprecated `drive_auth_config()` whose explicit and only job is to *set* aspects of the configuration, i.e. the OAuth app or API key.
     - Use `drive_oauth_app()` and `drive_api_key()` to *retrieve* a user-configured app or API key, if such exist.
-      - These functions no longer return built-in auth assets, although built-in assets still exist and are used in the absence of user configuration.
+    - These functions no longer return built-in auth assets, although built-in assets still exist and are used in the absence of user configuration.
   * `drive_deauth()` is how you go into a de-authorized state, i.e. send an API key in lieu of a token.
   
-`drive_has_token()` is a new helper that simply reports whether a token is in place, without triggering the auth flow, as `drive_token()` would do.
+`drive_has_token()` is a new helper that simply reports whether a token is in place, without triggering the auth flow.
 
 There are other small changes to the low-level developer-facing API:
 
   - `generate_request()` has been renamed to `request_generate()`.
   - `make_request()` had been renamed to `request_make()` and is a very thin wrapper around `gargle::request_make()` that only adds googledrive's user agent.
-  - `build_request()` has been removed. If you can't do what you need with `request_generate()`, use `gargle::request_develop()` or `gargle::request_build()`.
+  - `build_request()` has been removed. If you can't do what you need with `request_generate()`, use `gargle::request_develop()` or `gargle::request_build()` directly.
   - `process_response()` has been removed. Instead, use `gargle::response_process(response)`, as we do inside googledrive.
 
 ## Other changes
