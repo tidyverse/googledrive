@@ -156,9 +156,10 @@
 <li>
 <em>details for more advanced users</em>
 <ul>
-<li><a href="https://gargle.r-lib.org/articles/how-gargle-gets-tokens.html">How gargle gets tokens</a></li>
-<li><a href="https://gargle.r-lib.org/articles/non-interactive-auth.html">Non-interactive auth</a></li>
+<li><a href="https://googledrive.tidyverse.org/articles/articles/bring-your-own-app.html">Bring your own OAuth app or API key</a></li>
 <li><a href="https://gargle.r-lib.org/articles/get-api-credentials.html">How to get your own API credentials</a></li>
+<li><a href="https://gargle.r-lib.org/articles/non-interactive-auth.html">Non-interactive auth</a></li>
+<li><a href="https://gargle.r-lib.org/articles/how-gargle-gets-tokens.html">How gargle gets tokens</a></li>
 </ul>
 </li>
 </ul>
@@ -203,7 +204,7 @@
 <li>
 <code><a href="../reference/drive_auth_configure.html">drive_auth_configure()</a></code> is a variant of the now-deprecated <code><a href="../reference/googledrive-deprecated.html">drive_auth_config()</a></code> whose explicit and only job is to <em>set</em> aspects of the configuration, i.e. the OAuth app or API key.
 <ul>
-<li>Use <code><a href="../reference/drive_auth_configure.html">drive_oauth_app()</a></code> and <code><a href="../reference/drive_auth_configure.html">drive_api_key()</a></code> to <em>retrieve</em> a user-configured app or API key, if such exist.</li>
+<li>Use <code><a href="../reference/drive_auth_configure.html">drive_oauth_app()</a></code> (new) and <code><a href="../reference/drive_auth_configure.html">drive_api_key()</a></code> to <em>retrieve</em> a user-configured app or API key, if such exist.</li>
 <li>These functions no longer return built-in auth assets, although built-in assets still exist and are used in the absence of user configuration.</li>
 </ul>
 </li>
@@ -230,6 +231,7 @@
 <p><code><a href="../reference/drive_create.html">drive_create()</a></code> is a new function that creates a new empty file, with an optional file type specification (<a href='https://github.com/tidyverse/googledrive/issues/258'>#258</a>, <a href='https://github.com/ianmcook'>@ianmcook</a>). <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code> becomes a thin wrapper around <code><a href="../reference/drive_create.html">drive_create()</a></code>, with the file type hard-wired to “folder”.</p>
 <p><code><a href="../reference/drive_empty_trash.html">drive_empty_trash()</a></code> now exploits the correct endpoint (as opposed to deleting individual files) and is therefore much faster (<a href='https://github.com/tidyverse/googledrive/issues/203'>#203</a>).</p>
 <p>The internal table of known MIME types includes <code>"application/vnd.google.colab"</code>, which is associated with the file extension <code>.ipynb</code> and the human-oriented nickname <code>"colab"</code> (<a href='https://github.com/tidyverse/googledrive/issues/207'>#207</a>).</p>
+<p><code><a href="../reference/drive_endpoints.html">drive_endpoints()</a></code> gains a singular friend, <code><a href="../reference/drive_endpoints.html">drive_endpoint()</a></code> which returns exactly one endpoint. These helpers index into the internal list of Drive API endpoints with <code>[</code> and <code>[[</code>, respectively.</p>
 </div>
 <div id="dependency-changes" class="section level2">
 <h2 class="hasAnchor">
