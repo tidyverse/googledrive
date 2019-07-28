@@ -30,8 +30,7 @@ devtools::install_github("tidyverse/googledrive")
 
 ## Usage
 
-Please see the package website:
-<https://tidyverse.github.io/googledrive/>
+Please see the package website: <https://googledrive.tidyverse.org>
 
 Here’s a teaser that uses googledrive to view some of the files you see
 on <https://drive.google.com> (up to `n_max = 25`, in this case):
