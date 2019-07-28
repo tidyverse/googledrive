@@ -37,7 +37,7 @@
 #' as_dribble("abc")
 #' as_dribble("abc/def")
 #'
-#' # specify the file id (substitute a read file id of your own!)
+#' # specify the file id (substitute a real file id of your own!)
 #' as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
 #' }
 as_dribble <- function(x, ...) UseMethod("as_dribble")
