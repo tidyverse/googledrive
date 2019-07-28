@@ -16,9 +16,10 @@ Where to learn more:
   
   * Help for [`drive_auth()`](https://googledrive.tidyverse.org/reference/drive_auth.html) *all that most users need*
   * *details for more advanced users*
-    - [How gargle gets tokens](https://gargle.r-lib.org/articles/how-gargle-gets-tokens.html)
-    - [Non-interactive auth](https://gargle.r-lib.org/articles/non-interactive-auth.html)
+    - [Bring your own OAuth app or API key](https://googledrive.tidyverse.org/articles/articles/bring-your-own-app.html)
     - [How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) 
+    - [Non-interactive auth](https://gargle.r-lib.org/articles/non-interactive-auth.html)
+    - [How gargle gets tokens](https://gargle.r-lib.org/articles/how-gargle-gets-tokens.html)
 
 ### Changes that a user will notice
 
@@ -63,7 +64,7 @@ For full details see the resources listed in *Where to learn more* above. The ch
 Auth configuration has also changed:
 
   * `drive_auth_configure()` is a variant of the now-deprecated `drive_auth_config()` whose explicit and only job is to *set* aspects of the configuration, i.e. the OAuth app or API key.
-    - Use `drive_oauth_app()` and `drive_api_key()` to *retrieve* a user-configured app or API key, if such exist.
+    - Use `drive_oauth_app()` (new) and `drive_api_key()` to *retrieve* a user-configured app or API key, if such exist.
     - These functions no longer return built-in auth assets, although built-in assets still exist and are used in the absence of user configuration.
   * `drive_deauth()` is how you go into a de-authorized state, i.e. send an API key in lieu of a token.
   
@@ -83,6 +84,8 @@ There are other small changes to the low-level developer-facing API:
 `drive_empty_trash()` now exploits the correct endpoint (as opposed to deleting individual files) and is therefore much faster (#203).
 
 The internal table of known MIME types includes `"application/vnd.google.colab"`, which is associated with the file extension `.ipynb` and the human-oriented nickname `"colab"` (#207).
+
+`drive_endpoints()` gains a singular friend, `drive_endpoint()` which returns exactly one endpoint. These helpers index into the internal list of Drive API endpoints with `[` and `[[`, respectively.
 
 ## Dependency changes
 
