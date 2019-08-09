@@ -57,6 +57,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     return(invisible(file))
   }
 
+  # vet (path, name)
   if (!is.null(name)) {
     stopifnot(is_string(name))
   }
@@ -68,21 +69,17 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     name <- name %||% path_parts$name %||% file$name
   }
 
-  meta <- list()
+  params <- list()
 
-  if (!is.null(name) && name != file$name) {
-    meta[["name"]] <- name
-  }
-
-  ## if moving the file, modify the parent
-  parents_before <- file$drive_resource[[1]][["parents"]]
+  # load (path, name) into params
+  parents_before <- purrr::pluck(file, "drive_resource", 1, "parents")
   n_parents_before <- length(parents_before)
   if (!is.null(path)) {
     path <- as_parent(path)
     if (!path$id %in% parents_before) {
-      meta[["addParents"]] <- path$id
+      params[["addParents"]] <- path$id
       if (n_parents_before == 1) {
-        meta[["removeParents"]] <- parents_before
+        params[["removeParents"]] <- parents_before
       } else if (n_parents_before > 1) {
         warning(
           "File started with multiple parents!\n",
@@ -93,16 +90,20 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
       }
     }
   }
+  if (!is.null(name) && name != file$name) {
+    params[["name"]] <- name
+  }
 
-  if (length(meta) == 0) {
+  if (length(params) == 0) {
     if (verbose) message("Nothing to be done.")
     return(invisible(file))
   }
-  meta[["fields"]] <- "*"
-  out <- drive_update_metadata(file, meta)
+
+  params[["fields"]] <- "*"
+  out <- drive_update_metadata(file, params)
 
   if (verbose) {
-    parent_added <- !is.null(meta[["addParents"]])
+    parent_added <- !is.null(params[["addParents"]])
     actions <- c(
       renamed = !identical(out$name, file$name),
       moved = parent_added && n_parents_before < 2,

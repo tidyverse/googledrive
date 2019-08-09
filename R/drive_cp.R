@@ -68,6 +68,7 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
     stop_glue("The Drive API does not copy folders or Team Drives.")
   }
 
+  # vet (path, name)
   if (!is.null(name)) {
     stopifnot(is_string(name))
   }
@@ -79,23 +80,17 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
     name <- name %||% path_parts$name
   }
 
-  name <- name %||% glue("Copy of {file$name}")
+  params <- toCamel(list(...))
 
-  dots <- toCamel(list(...))
-  dots$fields <- dots$fields %||% "*"
-  params <- c(
-    fileId = file$id,
-    dots
-  )
-
+  # load (path, name) into params
   if (!is.null(path)) {
     path <- as_parent(path)
     params[["parents"]] <- list(path$id)
   }
+  params[["name"]] <- name %||% glue("Copy of {file$name}")
 
-  if (!is.null(name)) {
-    params[["name"]] <- name
-  }
+  params[["fields"]] <- params[["fields"]] %||% "*"
+  params[["fileId"]] <- file$id
 
   request <- request_generate(
     endpoint = "drive.files.copy",

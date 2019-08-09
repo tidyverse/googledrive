@@ -78,6 +78,7 @@ drive_upload <- function(media,
     stop_glue("\nFile does not exist:\n  * {media}")
   }
 
+  # vet (path, name)
   if (!is.null(name)) {
     stopifnot(is_string(name))
   }
@@ -89,28 +90,18 @@ drive_upload <- function(media,
     name <- name %||% path_parts$name
   }
 
-  dots <- toCamel(list(...))
-  dots$fields <- dots$fields %||% "*"
+  params <- toCamel(list(...))
 
-  params <- c(
-    uploadType = "multipart",
-    dots
-  )
-
+  # load (path, name) into params
   if (!is.null(path)) {
     path <- as_parent(path)
-    if (!is.null(params[["parents"]])) {
-      stop_collapse(c(
-        "You have specified parent folders via both 'path' and 'parents'.",
-        "Pick one.",
-        "If you want multiple parents, just use the 'parents' parameter."
-      ))
-    }
     params[["parents"]] <- path$id
   }
-
   params[["name"]] <- name %||% basename(media)
+
+  params[["fields"]] <- params[["fields"]] %||% "*"
   params[["mimeType"]] <- drive_mime_type(type)
+  params[["uploadType"]] <- "multipart"
 
   request <- request_generate(
     endpoint = "drive.files.create.media",

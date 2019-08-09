@@ -76,6 +76,7 @@ drive_create <- function(name,
     path <- parent
   }
 
+  # vet (path, name)
   if (is_path(path)) {
     if (is.null(name)) {
       path <- strip_slash(path)
@@ -86,14 +87,16 @@ drive_create <- function(name,
   }
 
   params <- toCamel(list(...))
-  params[["name"]] <- name
-  params[["fields"]] <- params[["fields"]] %||% "*"
-  params[["mimeType"]] <- drive_mime_type(type)
 
+  # load (path, name) into params
   if (!is.null(path)) {
     path <- as_parent(path)
     params[["parents"]] <- list(path[["id"]])
   }
+  params[["name"]] <- name
+
+  params[["fields"]] <- params[["fields"]] %||% "*"
+  params[["mimeType"]] <- drive_mime_type(type)
 
   request <- request_generate(
     endpoint = "drive.files.create",
