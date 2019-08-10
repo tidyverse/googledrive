@@ -57,17 +57,9 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     return(invisible(file))
   }
 
-  # vet (path, name)
-  if (!is.null(name)) {
-    stopifnot(is_string(name))
-  }
-
-  if (is_path(path)) {
-    confirm_clear_path(path, name)
-    path_parts <- partition_path(path, maybe_name = is.null(name))
-    path <- path_parts$parent
-    name <- name %||% path_parts$name %||% file$name
-  }
+  tmp <- rationalize_path_name(path, name)
+  path <- tmp$path
+  name <- tmp$name
 
   params <- list()
 

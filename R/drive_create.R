@@ -66,23 +66,16 @@ drive_create <- function(name,
                          type = NULL,
                          ...,
                          verbose = TRUE) {
+  # the role of path and name is naturally inverted here, relative to all other
+  # related functions
   stopifnot(is_string(name))
-
-  ## wire up to the conventional 'path' and 'name' pattern used elsewhere
   if (is.null(path)) {
     path <- name
     name <- NULL
   }
-
-  # vet (path, name)
-  if (is_path(path)) {
-    if (is.null(name)) {
-      path <- strip_slash(path)
-    }
-    path_parts <- partition_path(path, maybe_name = is.null(name))
-    path <- path_parts$parent
-    name <- name %||% path_parts$name
-  }
+  tmp <- rationalize_path_name(path, name)
+  path <- tmp$path
+  name <- tmp$name
 
   params <- toCamel(list(...))
 
