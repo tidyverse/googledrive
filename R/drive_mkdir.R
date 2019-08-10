@@ -40,6 +40,7 @@
 drive_mkdir <- function(name,
                         path = NULL,
                         ...,
+                        overwrite = NA,
                         parent = "DEPRECATED",
                         verbose = TRUE) {
   if (!missing(parent)) {
@@ -53,6 +54,7 @@ drive_mkdir <- function(name,
     path = path,
     type = "application/vnd.google-apps.folder",
     ...,
+    overwrite = overwrite,
     verbose = verbose
   )
 }

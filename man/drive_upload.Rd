@@ -5,7 +5,7 @@
 \title{Upload into a new Drive file}
 \usage{
 drive_upload(media, path = NULL, name = NULL, type = NULL, ...,
-  verbose = TRUE)
+  overwrite = NA, verbose = TRUE)
 }
 \arguments{
 \item{media}{Character, path to the local file to upload.}
@@ -31,6 +31,22 @@ respectively. All non-\code{NULL} values for \code{type} are pre-processed with
 the metadata of the target file by specifying properties of the Files
 resource via \code{...}. See the "Request body" section of the Drive API
 docs for the associated endpoint.}
+
+\item{overwrite}{Logical, indicating whether to check for a pre-existing file
+at the targetted "filepath". The quotes around "filepath" refer to the fact
+that Drive does not have a 1-to-1 relationship between filepaths and files,
+like a typical file system; read more about that in \code{\link[=drive_get]{drive_get()}}.
+\itemize{
+\item \code{NA} (default): Just do the operation, even if it results in multiple
+files with the same filepath.
+\item \code{TRUE}: Check for a pre-existing file at the filepath. If there is
+zero or one, move a pre-existing file to the trash, then carry on. Throw
+an error if two or more pre-existing files are found,
+\item \code{FALSE}: Error if there is any pre-existing file at the filepath.
+}
+
+Note that existence checks, based on filepath, are expensive operations, i.e.
+they require additional API calls.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

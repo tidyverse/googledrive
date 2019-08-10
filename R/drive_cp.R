@@ -13,6 +13,7 @@
 #' @templateVar name file
 #' @templateVar default Defaults to "Copy of `FILE-NAME`".
 #' @template dots-metadata
+#' @template overwrite
 #' @template verbose
 #' @template dribble-return
 #'
@@ -61,7 +62,12 @@
 #' drive_rm(csv_file, chicken_sheet)
 #' }
 #' @export
-drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
+drive_cp <- function(file,
+                     path = NULL,
+                     name = NULL,
+                     ...,
+                     overwrite = NA,
+                     verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_parental(file)) {
@@ -80,6 +86,7 @@ drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
     params[["parents"]] <- list(path$id)
   }
   params[["name"]] <- name %||% glue("Copy of {file$name}")
+  check_for_overwrite(params[["parents"]], params[["name"]], overwrite)
 
   params[["fields"]] <- params[["fields"]] %||% "*"
   params[["fileId"]] <- file$id

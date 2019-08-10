@@ -24,6 +24,7 @@
 #'   respectively. All non-`NULL` values for `type` are pre-processed with
 #'   [drive_mime_type()].
 #' @template dots-metadata
+#' @template overwrite
 #' @template verbose
 #'
 #' @template dribble-return
@@ -73,6 +74,7 @@ drive_upload <- function(media,
                          name = NULL,
                          type = NULL,
                          ...,
+                         overwrite = NA,
                          verbose = TRUE) {
   if (!file.exists(media)) {
     stop_glue("\nFile does not exist:\n  * {media}")
@@ -90,6 +92,8 @@ drive_upload <- function(media,
     params[["parents"]] <- path$id
   }
   params[["name"]] <- name %||% basename(media)
+
+  check_for_overwrite(params[["parents"]], params[["name"]], overwrite)
 
   params[["fields"]] <- params[["fields"]] %||% "*"
   params[["mimeType"]] <- drive_mime_type(type)

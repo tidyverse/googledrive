@@ -36,6 +36,47 @@ drive_path_exists <- function(path, verbose = TRUE) {
   some_files(drive_get(path = path))
 }
 
+check_for_overwrite <- function(parent = NULL, name, overwrite) {
+  stopifnot(is_toggle(overwrite))
+  if (is.na(overwrite)) {
+    return(invisible())
+  }
+
+  parent_id <- if (is.null(parent)) root_id() else parent$id
+  q <- c(
+    glue("'{parent_id}' in parents"),
+    glue("name = '{name}'"),
+    "trashed = FALSE"
+  )
+  hits <- drive_find(q = q)
+
+  if (no_file(hits)) {
+    return(invisible())
+  }
+
+  if (overwrite && single_file(hits)) {
+    return(drive_trash(hits))
+  }
+
+  hits <- drive_reveal(hits, "path")
+  msg <- glue("  * {hits$path}: {hits$id}")
+
+  if (overwrite) {
+    msg <- c(
+      "Multiple items already exist at the target filepath.",
+      "Although `overwrite = TRUE`, it's not clear which item to overwrite.",
+      "Use `overwrite = NA` to suppress this check. Aborting.",
+      msg
+    )
+  } else {
+    msg <- c(
+      "One or more items already exist at the target filepath and `overwrite = FALSE`:",
+      msg
+    )
+  }
+  stop_glue(glue_collapse(msg, sep = "\n"))
+}
+
 # path utilities that are "mechanical", i.e. they NEVER call the Drive API ----
 
 is_path <- function(x) is.character(x) && !inherits(x, "drive_id")

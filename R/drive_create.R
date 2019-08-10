@@ -19,6 +19,7 @@
 #'   respectively. All non-`NULL` values for `type` are pre-processed with
 #'   [drive_mime_type()].
 #' @template dots-metadata
+#' @template overwrite
 #' @template verbose
 #'
 #' @template dribble-return
@@ -65,6 +66,7 @@ drive_create <- function(name,
                          path = NULL,
                          type = NULL,
                          ...,
+                         overwrite = NA,
                          verbose = TRUE) {
   # the order and role of `path` and `name` is naturally inverted here,
   # relative to all other related functions, hence we pre-process
@@ -85,6 +87,7 @@ drive_create <- function(name,
     params[["parents"]] <- list(path[["id"]])
   }
   params[["name"]] <- name
+  check_for_overwrite(params[["parents"]], params[["name"]], overwrite)
 
   params[["fields"]] <- params[["fields"]] %||% "*"
   params[["mimeType"]] <- drive_mime_type(type)
