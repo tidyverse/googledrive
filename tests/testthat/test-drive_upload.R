@@ -15,7 +15,6 @@ if (CLEAN) {
 # ---- setup ----
 if (SETUP) {
   drive_mkdir(nm_("upload-into-me"))
-  drive_mkdir(nm_("upload-into-me-too"))
 }
 
 # ---- tests ----

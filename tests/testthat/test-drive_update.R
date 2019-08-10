@@ -9,7 +9,8 @@ if (CLEAN) {
   drive_trash(c(
     nm_("update-fodder"),
     nm_("not-unique"),
-    nm_("does-not-exist")
+    nm_("does-not-exist"),
+    nm_("upload-into-me")
   ))
 }
 
@@ -18,6 +19,7 @@ if (SETUP) {
   drive_upload(system.file("DESCRIPTION"), nm_("update-fodder"))
   drive_upload(system.file("DESCRIPTION"), nm_("not-unique"))
   drive_upload(system.file("DESCRIPTION"), nm_("not-unique"))
+  drive_mkdir(nm_("upload-into-me"))
 }
 
 # ---- tests ----
@@ -83,4 +85,26 @@ test_that("drive_update() uses multipart request to update media + metadata", {
   now_out <- readLines(tmp)
   expect_identical(now, now_out)
   expect_identical(out$name, me_("update-me-new"))
+})
+
+test_that("drive_update() can add a parent", {
+  skip_if_no_token()
+  skip_if_offline()
+  on.exit(drive_rm(me_("DESCRIPTION")))
+
+  uploadee <- drive_upload(
+    system.file("DESCRIPTION"),
+    name = me_("DESCRIPTION"),
+    starred = TRUE
+  )
+  orig_parents <- unlist(purrr::pluck(uploadee, "drive_resource", 1, "parents"))
+
+  folder <- drive_get(nm_("upload-into-me"))
+  updatee <- drive_update(uploadee, addParents = as_id(folder))
+  new_parents <- unlist(purrr::pluck(updatee, "drive_resource", 1, "parents"))
+
+  expect_identical(
+    setdiff(new_parents, orig_parents),
+    folder$id
+  )
 })
