@@ -76,16 +76,37 @@ There are other small changes to the low-level developer-facing API:
   - `make_request()` had been renamed to `request_make()` and is a very thin wrapper around `gargle::request_make()` that only adds googledrive's user agent.
   - `build_request()` has been removed. If you can't do what you need with `request_generate()`, use `gargle::request_develop()` or `gargle::request_build()` directly.
   - `process_response()` has been removed. Instead, use `gargle::response_process(response)`, as we do inside googledrive.
+  
+## `overwrite = NA / TRUE / FALSE`
+
+All functions that create a new item or rename/move an existing item have gained an `overwrite` argument:
+
+  * `drive_create()` *this whole function is new*
+  * `drive_cp()`
+  * `drive_mkdir()`
+  * `drive_mv()`
+  * `drive_rename()`
+  * `drive_upload()`
+  
+The default of `overwrite = NA` corresponds to the current behaviour, which is to not consider other pre-existing files at all.
+
+It is fairly easy for a user to create multiple Drive files with the same name or filepath, especially when working via the API versus in the browser. This is perfectly valid on Drive, which identifies file by ID, but can be confusing and undesirable for humans.
+
+`overwrite = TRUE` requests to move a pre-existing file at the target filepath to the trash, prior to creating the new item. If 2 or more files are found, an error is thrown, because it's not clear which one(s) to trash.
+
+`overwrite = FALSE` means the new item will only be created if there is no pre-existing file at that filepath.
+
+Existence checks based on filepath (or name) are quite expensive. This is why the default is `overwrite = NA`, in addition to backwards compatibility.
 
 ## Other changes
 
 `drive_create()` is a new function that creates a new empty file, with an optional file type specification (#258, @ianmcook). `drive_mkdir()` becomes a thin wrapper around `drive_create()`, with the file type hard-wired to "folder".
 
-In `drive_mkdir()`, the optional parent directory should now be passed as `path` instead of `parent`. This is more consistent with everything else in googledrive, which became very obvious when adding `drive_create()` and the general `overwrite` functionality.
+In `drive_mkdir()`, the optional parent directory is now known as `path` instead of `parent`. This is more consistent with everything else in googledrive, which became very obvious when adding `drive_create()` and the general `overwrite` functionality.
 
 `drive_empty_trash()` now exploits the correct endpoint (as opposed to deleting individual files) and is therefore much faster (#203).
 
-The internal table of known MIME types includes `"application/vnd.google.colab"`, which is associated with the file extension `.ipynb` and the human-oriented nickname `"colab"` (#207).
+Colaboratory notebooks now have some MIME type support, in terms of the `type` argument in various functions (<https://colab.research.google.com/>). The internal table of known MIME types includes `"application/vnd.google.colab"`, which is associated with the file extension `.ipynb` and the human-oriented nickname `"colab"` (#207).
 
 `drive_endpoints()` gains a singular friend, `drive_endpoint()` which returns exactly one endpoint. These helpers index into the internal list of Drive API endpoints with `[` and `[[`, respectively.
 
