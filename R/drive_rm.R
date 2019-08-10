@@ -37,9 +37,12 @@ drive_rm <- function(..., verbose = TRUE) {
     dots <- list(NULL)
   }
 
-  ## explicitly select on var name to exclude 'path', if present
+  # explicitly select on var name to exclude 'path', if present
   file <- purrr::map(dots, ~as_dribble(.x)[c("name", "id", "drive_resource")])
   file <- rlang::exec(rbind, !!!file)
+  # filter to the unique file ids (multiple parents mean drive_get() and
+  # therefore as_dribble() can return >1 row representing a single file)
+  file <- file[!duplicated(file$id), ]
 
   if (no_file(file) && verbose) message("No such file(s) to delete.")
 
