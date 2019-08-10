@@ -1,4 +1,42 @@
-## path utilities that are "mechanical", i.e. they DO NOT call the Drive API,
+# path utilities that CAN call the Drive API ----
+root_folder <- function() drive_get(id = "root")
+root_id <- function() root_folder()$id
+
+rationalize_path_name <- function(path = NULL, name = NULL) {
+  if (!is.null(name)) {
+    stopifnot(is_string(name))
+  }
+
+  if (is_path(path)) {
+    confirm_clear_path(path, name)
+    path_parts <- partition_path(path, maybe_name = is.null(name))
+    path <- path_parts$parent
+    name <- name %||% path_parts$name
+  }
+
+  list(path = path, name = name)
+}
+
+confirm_clear_path <- function(path, name) {
+  if (is.null(name) &&
+      !has_slash(path) &&
+      drive_path_exists(append_slash(path))) {
+    stop_glue(
+      "Unclear if `path` specifies parent folder or full path\n",
+      "to the new file, including its name. ",
+      "See ?as_dribble() for details."
+    )
+  }
+}
+
+drive_path_exists <- function(path, verbose = TRUE) {
+  stopifnot(is_path(path))
+  if (length(path) == 0) return(logical(0))
+  stopifnot(length(path) == 1)
+  some_files(drive_get(path = path))
+}
+
+# path utilities that are "mechanical", i.e. they NEVER call the Drive API ----
 
 is_path <- function(x) is.character(x) && !inherits(x, "drive_id")
 

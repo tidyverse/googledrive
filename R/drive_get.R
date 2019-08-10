@@ -109,28 +109,6 @@ get_one_file <- function(id) {
   gargle::response_process(response)
 }
 
-drive_path_exists <- function(path, verbose = TRUE) {
-  stopifnot(is_path(path))
-  if (length(path) == 0) return(logical(0))
-  stopifnot(length(path) == 1)
-  some_files(drive_get(path = path))
-}
-
-confirm_clear_path <- function(path, name) {
-  if (is.null(name) &&
-    !has_slash(path) &&
-    drive_path_exists(append_slash(path))) {
-    stop_glue(
-      "Unclear if `path` specifies parent folder or full path\n",
-      "to the new file, including its name. ",
-      "See ?as_dribble() for details."
-    )
-  }
-}
-
-root_folder <- function() drive_get(id = "root")
-root_id <- function() root_folder()$id
-
 dribble_with_path <- function() {
   put_column(dribble(), nm = "path", val = character(), .after = "name")
 }
