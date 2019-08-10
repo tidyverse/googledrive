@@ -66,8 +66,8 @@ drive_create <- function(name,
                          type = NULL,
                          ...,
                          verbose = TRUE) {
-  # the role of path and name is naturally inverted here, relative to all other
-  # related functions
+  # the order and role of `path` and `name` is naturally inverted here,
+  # relative to all other related functions, hence we pre-process
   stopifnot(is_string(name))
   if (is.null(path)) {
     path <- name

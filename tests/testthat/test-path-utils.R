@@ -109,3 +109,61 @@ test_that("is_path() works", {
   expect_false(is_path(as_id(letters)))
   expect_false(is_path(dribble()))
 })
+
+test_that("rationalize_path_name() errors for bad `name`, before hitting API", {
+  expect_error(
+    rationalize_path_name(name = letters),
+    "is_string\\(name\\) is not TRUE"
+  )
+})
+
+test_that("rationalize_path_name() can pass `path` and `name` through, w/o hitting API", {
+  # specifically, this happens when `is_path(path)` is FALSE
+  expect_identical(
+    rationalize_path_name(path = NULL, name = "NAME"),
+    list(path = NULL, name = "NAME")
+  )
+  expect_identical(
+    rationalize_path_name(path = as_id("FILE_ID"), name = NULL),
+    list(path = as_id("FILE_ID"), name = NULL)
+  )
+  expect_identical(
+    rationalize_path_name(path = as_id("FILE_ID"), name = "NAME"),
+    list(path = as_id("FILE_ID"), name = "NAME")
+  )
+  expect_identical(
+    rationalize_path_name(path = dribble(), name = NULL),
+    list(path = dribble(), name = NULL)
+  )
+  expect_identical(
+    rationalize_path_name(path = dribble(), name = "NAME"),
+    list(path = dribble(), name = "NAME")
+  )
+})
+
+test_that("rationalize_path_name() won't hit API if we can infer `path` is a folder", {
+  expect_identical(
+    rationalize_path_name(path = "PARENT_FOLDER", name = "NAME"),
+    list(path = "PARENT_FOLDER/", name = "NAME")
+  )
+  expect_identical(
+    rationalize_path_name(path = "PARENT_FOLDER/", name = NULL),
+    list(path = "PARENT_FOLDER/", name = NULL)
+  )
+})
+
+test_that("rationalize_path_name() populates `path` and `name` and correctly", {
+  with_mock(
+    `googledrive:::confirm_clear_path` = function(path, name) NULL, {
+      expect_identical(
+        rationalize_path_name(path = "FILE_NAME", name = NULL),
+        list(path = NULL, name = "FILE_NAME")
+      )
+      expect_identical(
+        rationalize_path_name(path = "PARENT_FOLDER/FILE_NAME", name = NULL),
+        list(path = "PARENT_FOLDER/", name = "FILE_NAME")
+      )
+    }
+  )
+})
+
