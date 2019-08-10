@@ -81,6 +81,8 @@ There are other small changes to the low-level developer-facing API:
 
 `drive_create()` is a new function that creates a new empty file, with an optional file type specification (#258, @ianmcook). `drive_mkdir()` becomes a thin wrapper around `drive_create()`, with the file type hard-wired to "folder".
 
+In `drive_mkdir()`, the optional parent directory should now be passed as `path` instead of `parent`. This is more consistent with everything else in googledrive, which became very obvious when adding `drive_create()` and the general `overwrite` functionality.
+
 `drive_empty_trash()` now exploits the correct endpoint (as opposed to deleting individual files) and is therefore much faster (#203).
 
 The internal table of known MIME types includes `"application/vnd.google.colab"`, which is associated with the file extension `.ipynb` and the human-oriented nickname `"colab"` (#207).
@@ -93,7 +95,7 @@ R 3.1 is no longer explicitly supported or tested. Our general practice is to su
 
 gargle and magrittr are newly Imported.
 
-rprojroot has been removed from Suggests.
+rprojroot has been removed from Suggests, because we can now use a version of testthat recent enough to offer `testthat::test_path()`.
 
 # googledrive 0.1.3
 

@@ -4,13 +4,13 @@
 \alias{drive_create}
 \title{Create a new blank Drive file}
 \usage{
-drive_create(name, parent = NULL, type = NULL, ..., verbose = TRUE)
+drive_create(name, path = NULL, type = NULL, ..., verbose = TRUE)
 }
 \arguments{
 \item{name}{Name for the new file or, optionally, a path that specifies
 an existing parent folder, as well as the new file name.}
 
-\item{parent}{Target destination for the new item, i.e. a folder or a Team
+\item{path}{Target destination for the new item, i.e. a folder or a Team
 Drive. Can be given as an actual path (character), a file id or URL marked
 with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root folder.}
 
@@ -65,14 +65,14 @@ drive_browse(execuvision)
 ## Create folder 'b4xl' in the root folder,
 ## then create an empty new Google Sheet in it
 b4xl <- drive_mkdir("b4xl")
-drive_create("VisiCalc", parent = b4xl, type = "spreadsheet")
+drive_create("VisiCalc", path = b4xl, type = "spreadsheet")
 
 ## Another way to create a Google Sheet in the folder 'spreadsheets'
 drive_create("b4xl/SuperCalc", type = "spreadsheet")
 
 ## Another way to create a new file in a folder,
-## this time specifying `parent` as a character
-drive_create("Lotus 1-2-3", parent = "b4xl", type = "spreadsheet")
+## this time specifying parent `path` as a character
+drive_create("Lotus 1-2-3", path = "b4xl", type = "spreadsheet")
 
 ## clean up
 drive_rm(wordstar, b4xl, execuvision)

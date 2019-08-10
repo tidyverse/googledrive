@@ -4,13 +4,14 @@
 \alias{drive_mkdir}
 \title{Create a Drive folder}
 \usage{
-drive_mkdir(name, parent = NULL, ..., verbose = TRUE)
+drive_mkdir(name, path = NULL, ..., parent = "DEPRECATED",
+  verbose = TRUE)
 }
 \arguments{
 \item{name}{Name for the new folder or, optionally, a path that specifies
 an existing parent folder, as well as the new name.}
 
-\item{parent}{Target destination for the new item, i.e. a folder or a Team
+\item{path}{Target destination for the new item, i.e. a folder or a Team
 Drive. Can be given as an actual path (character), a file id or URL marked
 with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root folder.}
 
@@ -18,6 +19,9 @@ with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your
 the metadata of the target file by specifying properties of the Files
 resource via \code{...}. See the "Request body" section of the Drive API
 docs for the associated endpoint.}
+
+\item{parent}{DEPRECATED. Use the \code{path} argument for this now, which is more
+consistent with other functions in googledrive.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -39,12 +43,12 @@ jkl <- drive_mkdir("ghi/jkl", starred = TRUE)
 purrr::pluck(jkl, "drive_resource", 1, "starred")
 
 ## Another way to create folder 'mno' in folder 'ghi'
-drive_mkdir("mno", parent = "ghi")
+drive_mkdir("mno", path = "ghi")
 
 ## Yet another way to create a folder named 'pqr' in folder 'ghi',
 ## this time with parent folder stored in a dribble,
 ## and setting the new folder's description
-pqr <- drive_mkdir("pqr", parent = ghi, description = "I am a folder")
+pqr <- drive_mkdir("pqr", path = ghi, description = "I am a folder")
 
 ## Did we really set the description? YES
 purrr::pluck(pqr, "drive_resource", 1, "description")

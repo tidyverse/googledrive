@@ -11,7 +11,7 @@
 #'
 #' @param name Name for the new file or, optionally, a path that specifies
 #'   an existing parent folder, as well as the new file name.
-#' @param parent Target destination for the new item, i.e. a folder or a Team
+#' @param path Target destination for the new item, i.e. a folder or a Team
 #'   Drive. Can be given as an actual path (character), a file id or URL marked
 #'   with [as_id()], or a [`dribble`]. Defaults to your "My Drive" root folder.
 #' @param type Character. Create a blank Google Doc, Sheet or Slides by
@@ -49,31 +49,29 @@
 #' ## Create folder 'b4xl' in the root folder,
 #' ## then create an empty new Google Sheet in it
 #' b4xl <- drive_mkdir("b4xl")
-#' drive_create("VisiCalc", parent = b4xl, type = "spreadsheet")
+#' drive_create("VisiCalc", path = b4xl, type = "spreadsheet")
 #'
 #' ## Another way to create a Google Sheet in the folder 'spreadsheets'
 #' drive_create("b4xl/SuperCalc", type = "spreadsheet")
 #'
 #' ## Another way to create a new file in a folder,
-#' ## this time specifying `parent` as a character
-#' drive_create("Lotus 1-2-3", parent = "b4xl", type = "spreadsheet")
+#' ## this time specifying parent `path` as a character
+#' drive_create("Lotus 1-2-3", path = "b4xl", type = "spreadsheet")
 #'
 #' ## clean up
 #' drive_rm(wordstar, b4xl, execuvision)
 #' }
 drive_create <- function(name,
-                         parent = NULL,
+                         path = NULL,
                          type = NULL,
                          ...,
                          verbose = TRUE) {
   stopifnot(is_string(name))
 
   ## wire up to the conventional 'path' and 'name' pattern used elsewhere
-  if (is.null(parent)) {
+  if (is.null(path)) {
     path <- name
     name <- NULL
-  } else {
-    path <- parent
   }
 
   # vet (path, name)
