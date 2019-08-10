@@ -145,6 +145,9 @@ test_that("drive_create() parent separately, as a path", {
 })
 
 test_that("drive_create() catches invalid parameters", {
+  skip_if_no_token()
+  skip_if_offline()
+
   expect_error(
     drive_create("hi", bunny = "foofoo"),
     regexp = "These parameters are unknown",
