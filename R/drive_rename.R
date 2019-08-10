@@ -5,6 +5,7 @@
 #'
 #' @template file-singular
 #' @param name Character. Name you would like the file to have.
+#' @template overwrite
 #' @template verbose
 #'
 #' @template dribble-return
@@ -22,6 +23,6 @@
 #' drive_rm(folder)
 #' }
 #' @export
-drive_rename <- function(file, name = NULL, verbose = TRUE) {
-  drive_mv(file = file, name = name, verbose = verbose)
+drive_rename <- function(file, name = NULL, overwrite = NA, verbose = TRUE) {
+  drive_mv(file = file, name = name, overwrite = overwrite, verbose = verbose)
 }
