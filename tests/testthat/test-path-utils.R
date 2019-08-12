@@ -1,5 +1,21 @@
 context("Path utilities")
 
+# ---- nm_fun ----
+me_ <- nm_fun("TEST-path-utils")
+nm_ <- nm_fun("TEST-path-utils", NULL)
+
+# ---- clean ----
+if (CLEAN) {
+  drive_trash(c(
+    nm_("create-in-me")
+  ))
+}
+
+# ---- setup ----
+if (SETUP) {
+  drive_mkdir(nm_("create-in-me"))
+}
+
 # ---- tests ----
 test_that("rootize_path() standardizes root", {
   expect_identical(rootize_path("~"), "~/")
@@ -167,3 +183,42 @@ test_that("rationalize_path_name() populates `path` and `name` and correctly", {
   )
 })
 
+test_that("check_for_overwrite() does its job", {
+  skip_if_no_token()
+  skip_if_offline()
+  on.exit(drive_rm(me_("name-collision")))
+
+  PARENT <- drive_get(nm_("create-in-me"))
+
+  first <- drive_create(me_("name-collision"), path = PARENT)
+
+  expect_error(
+    check_for_overwrite(
+      parent = PARENT,
+      me_("name-collision"),
+      overwrite = FALSE
+    ),
+    "already exist"
+  )
+
+  expect_error_free(
+    second <- drive_create(me_("name-collision"), overwrite = TRUE)
+  )
+  expect_identical(first$name, second$name)
+  expect_false(first$id == second$id)
+
+  expect_error_free(
+    drive_create(me_("name-collision"), path = PARENT, overwrite = NA)
+  )
+  df <- drive_get(file.path(nm_("create-in-me"), me_("name-collision")))
+  expect_identical(nrow(df), 2L)
+
+  expect_error(
+    check_for_overwrite(
+      parent = PARENT,
+      me_("name-collision"),
+      overwrite = TRUE
+    ),
+    "Multiple items"
+  )
+})
