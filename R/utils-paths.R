@@ -36,14 +36,14 @@ drive_path_exists <- function(path, verbose = TRUE) {
   some_files(drive_get(path = path))
 }
 
-# `parent` is NULL or a 1-row dribble
+# `parent` is NULL or the file ID of a folder
 check_for_overwrite <- function(parent = NULL, name, overwrite) {
   stopifnot(is_toggle(overwrite))
   if (is.na(overwrite)) {
     return(invisible())
   }
 
-  parent_id <- if (is.null(parent)) root_id() else parent$id
+  parent_id <- parent %||% root_id()
   q <- c(
     glue("'{parent_id}' in parents"),
     glue("name = '{name}'"),

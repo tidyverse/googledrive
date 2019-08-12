@@ -186,39 +186,56 @@ test_that("rationalize_path_name() populates `path` and `name` and correctly", {
 test_that("check_for_overwrite() does its job", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(me_("name-collision")))
+  on.exit({
+    drive_rm(file.path(nm_("create-in-me"), me_("name-collision")))
+    drive_empty_trash()
+  })
 
-  PARENT <- drive_get(nm_("create-in-me"))
+  PARENT_ID <- drive_get(nm_("create-in-me"))$id
 
-  first <- drive_create(me_("name-collision"), path = PARENT)
+  first <- drive_create(me_("name-collision"), path = as_id(PARENT_ID))
 
   expect_error(
     check_for_overwrite(
-      parent = PARENT,
-      me_("name-collision"),
+      parent = PARENT_ID,
+      name = me_("name-collision"),
       overwrite = FALSE
     ),
     "already exist"
   )
 
   expect_error_free(
-    second <- drive_create(me_("name-collision"), overwrite = TRUE)
+    second <- drive_create(me_("name-collision"), path = as_id(PARENT_ID), overwrite = TRUE)
   )
   expect_identical(first$name, second$name)
+  expect_identical(
+    purrr::pluck(first, "drive_resource", 1, "parents"),
+    purrr::pluck(second, "drive_resource", 1, "parents")
+  )
   expect_false(first$id == second$id)
 
   expect_error_free(
-    drive_create(me_("name-collision"), path = PARENT, overwrite = NA)
+    drive_create(me_("name-collision"), path = as_id(PARENT_ID), overwrite = NA)
   )
-  df <- drive_get(file.path(nm_("create-in-me"), me_("name-collision")))
+  df <- drive_ls(nm_("create-in-me"))
   expect_identical(nrow(df), 2L)
 
   expect_error(
     check_for_overwrite(
-      parent = PARENT,
+      parent = PARENT_ID,
       me_("name-collision"),
       overwrite = TRUE
     ),
     "Multiple items"
+  )
+})
+
+test_that("check_for_overwrite() copes with `parent = NULL`", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  expect_error(
+    check_for_overwrite(parent = NULL, nm_("create-in-me"), overwrite = FALSE),
+    "already exist"
   )
 })
