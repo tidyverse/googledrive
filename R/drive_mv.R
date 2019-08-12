@@ -15,6 +15,7 @@
 #' @template name
 #' @templateVar name file
 #' @templateVar default Defaults to current name.
+#' @template overwrite
 #' @template verbose
 #'
 #' @template dribble-return
@@ -48,7 +49,11 @@
 #' ## Clean up
 #' drive_rm(file, folder)
 #' }
-drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
+drive_mv <- function(file,
+                     path = NULL,
+                     name = NULL,
+                     overwrite = NA,
+                     verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
 
@@ -63,7 +68,7 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
 
   params <- list()
 
-  # load (path, name) into params
+  # load (path, name) into params ... maybe
   parents_before <- purrr::pluck(file, "drive_resource", 1, "parents")
   n_parents_before <- length(parents_before)
   if (!is.null(path)) {
@@ -90,6 +95,12 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     if (verbose) message("Nothing to be done.")
     return(invisible(file))
   }
+
+  check_for_overwrite(
+    parent = params[["addParents"]] %||% parents_before[[1]],
+    name   = params[["name"]]       %||% file$name,
+    overwrite = overwrite
+  )
 
   params[["fields"]] <- "*"
   out <- drive_update_metadata(file, params)

@@ -4,7 +4,8 @@
 \alias{drive_mv}
 \title{Move a Drive file}
 \usage{
-drive_mv(file, path = NULL, name = NULL, verbose = TRUE)
+drive_mv(file, path = NULL, name = NULL, overwrite = NA,
+  verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file of interest on your Google
@@ -20,6 +21,22 @@ always be worked out from the context of the call. Defaults to current name.}
 \item{name}{Character, new file name if not specified as part of
 \code{path}. This will force \code{path} to be treated as a folder, even if it is
 character and lacks a trailing slash. Defaults to current name.}
+
+\item{overwrite}{Logical, indicating whether to check for a pre-existing file
+at the targetted "filepath". The quotes around "filepath" refer to the fact
+that Drive does not have a 1-to-1 relationship between filepaths and files,
+like a typical file system; read more about that in \code{\link[=drive_get]{drive_get()}}.
+\itemize{
+\item \code{NA} (default): Just do the operation, even if it results in multiple
+files with the same filepath.
+\item \code{TRUE}: Check for a pre-existing file at the filepath. If there is
+zero or one, move a pre-existing file to the trash, then carry on. Throw
+an error if two or more pre-existing files are found,
+\item \code{FALSE}: Error if there is any pre-existing file at the filepath.
+}
+
+Note that existence checks, based on filepath, are expensive operations, i.e.
+they require additional API calls.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

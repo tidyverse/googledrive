@@ -36,6 +36,7 @@ drive_path_exists <- function(path, verbose = TRUE) {
   some_files(drive_get(path = path))
 }
 
+# `parent` is NULL or a 1-row dribble
 check_for_overwrite <- function(parent = NULL, name, overwrite) {
   stopifnot(is_toggle(overwrite))
   if (is.na(overwrite)) {
