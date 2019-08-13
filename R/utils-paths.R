@@ -38,27 +38,19 @@ drive_path_exists <- function(path, verbose = TRUE) {
 
 # `parent` is NULL or the file ID of a folder
 check_for_overwrite <- function(parent = NULL, name, overwrite) {
-  stopifnot(is_toggle(overwrite))
-  if (is.na(overwrite)) {
+  hits <- overwrite_hits(parent = parent, name = name, overwrite = overwrite)
+
+  # Happy Path 1 of 2: no name collision
+  if (is.null(hits) || no_file(hits)) {
     return(invisible())
   }
 
-  parent_id <- parent %||% root_id()
-  q <- c(
-    glue("'{parent_id}' in parents"),
-    glue("name = '{name}'"),
-    "trashed = FALSE"
-  )
-  hits <- drive_find(q = q)
-
-  if (no_file(hits)) {
-    return(invisible())
-  }
-
+  # Happy Path 2 of 2: single name collision, which we are authorized to trash
   if (overwrite && single_file(hits)) {
     return(drive_trash(hits))
   }
 
+  # Unhappy Paths: multiple collisions and/or not allowed to trash anything
   hits <- drive_reveal(hits, "path")
   msg <- glue("  * {hits$path}: {hits$id}")
 
@@ -76,6 +68,21 @@ check_for_overwrite <- function(parent = NULL, name, overwrite) {
     )
   }
   stop_glue(glue_collapse(msg, sep = "\n"))
+}
+
+overwrite_hits <- function(parent = NULL, name, overwrite) {
+  stopifnot(is_toggle(overwrite))
+  if (is.na(overwrite)) {
+    return(invisible())
+  }
+
+  parent_id <- parent %||% root_id()
+  q <- c(
+    glue("'{parent_id}' in parents"),
+    glue("name = '{name}'"),
+    "trashed = FALSE"
+  )
+  drive_find(q = q)
 }
 
 # path utilities that are "mechanical", i.e. they NEVER call the Drive API ----
