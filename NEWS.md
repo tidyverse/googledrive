@@ -88,9 +88,9 @@ All functions that create a new item or rename/move an existing item have gained
   * `drive_rename()`
   * `drive_upload()`
   
-The default of `overwrite = NA` corresponds to the current behaviour, which is to not consider other pre-existing files at all.
+The default of `overwrite = NA` corresponds to the current behaviour, which is to "Just. Do. It.", i.e. to not consider pre-existing files at all.
 
-It is fairly easy for a user to create multiple Drive files with the same name or filepath, especially when working via the API versus in the browser. This is perfectly valid on Drive, which identifies file by ID, but can be confusing and undesirable for humans.
+What's the point of `overwrite`? It is fairly easy for a user to create multiple Drive files with the same name or filepath, especially when working via the API versus in the browser. This is perfectly valid on Drive, which identifies file by ID, but can be confusing and undesirable for humans.
 
 `overwrite = TRUE` requests to move a pre-existing file at the target filepath to the trash, prior to creating the new item. If 2 or more files are found, an error is thrown, because it's not clear which one(s) to trash.
 
