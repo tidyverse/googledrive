@@ -2,7 +2,7 @@ has_internet <- !is.null(curl::nslookup(host = "r-project.org", error = FALSE))
 if (has_internet && gargle:::secret_can_decrypt("googledrive")) {
   json <- gargle:::secret_read("googledrive", "googledrive-testing.json")
   drive_auth(path = rawToChar(json))
-  drive_empty_trash()
+  #drive_empty_trash()
 }
 
 skip_if_no_token <- function() {
