@@ -38,6 +38,13 @@
 #' ## it just gets passed through to the API.
 #' drive_cp("chicken-cp.txt", name = "chicken-cp-starred.txt", starred = TRUE)
 #'
+#' ## `overwrite = FALSE` errors if file already exists at target filepath
+#' ## THIS WILL ERROR!
+#' drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = FALSE)
+#'
+#' ## `overwrite = TRUE` moves an existing file to trash, then proceeds
+#' drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = TRUE)
+#'
 #' ## Behold all of our copies!
 #' drive_find("chicken-cp")
 #'

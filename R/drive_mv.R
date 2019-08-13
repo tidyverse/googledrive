@@ -46,6 +46,14 @@
 #' ## to ensure we get a move vs. renaming it to "mv-folder"
 #' file <- drive_mv(file, "mv-folder/")
 #'
+#' ## `overwrite = FALSE` errors if something already exists at target filepath
+#' ## THIS WILL ERROR!
+#' drive_create("name-squatter", path = "~/")
+#' drive_mv(file, path = "~/", name = "name-squatter", overwrite = FALSE)
+#'
+#' ## `overwrite = TRUE` moves the existing item to trash, then proceeds
+#' drive_mv(file, path = "~/", name = "name-squatter", overwrite = TRUE)
+#'
 #' ## Clean up
 #' drive_rm(file, folder)
 #' }

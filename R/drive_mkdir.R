@@ -34,6 +34,14 @@
 #' ## Did we really set the description? YES
 #' purrr::pluck(pqr, "drive_resource", 1, "description")
 #'
+#' ## `overwrite = FALSE` errors if something already exists at target filepath
+#' ## THIS WILL ERROR!
+#' drive_create("name-squatter", path = ghi)
+#' drive_mkdir("name-squatter", path = ghi, overwrite = FALSE)
+#'
+#' ## `overwrite = TRUE` moves the existing item to trash, then proceeds
+#' drive_mkdir("name-squatter", path = ghi, overwrite = TRUE)
+#'
 #' ## clean up
 #' drive_rm(ghi)
 #' }

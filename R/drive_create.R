@@ -52,12 +52,19 @@
 #' b4xl <- drive_mkdir("b4xl")
 #' drive_create("VisiCalc", path = b4xl, type = "spreadsheet")
 #'
-#' ## Another way to create a Google Sheet in the folder 'spreadsheets'
+#' ## Another way to create a Google Sheet in the folder 'b4xl'
 #' drive_create("b4xl/SuperCalc", type = "spreadsheet")
 #'
 #' ## Another way to create a new file in a folder,
 #' ## this time specifying parent `path` as a character
 #' drive_create("Lotus 1-2-3", path = "b4xl", type = "spreadsheet")
+#'
+#' ## `overwrite = FALSE` errors if file already exists at target filepath
+#' ## THIS WILL ERROR!
+#' drive_create("VisiCalc", path = b4xl, overwrite = FALSE)
+#'
+#' ## `overwrite = TRUE` moves an existing file to trash, then proceeds
+#' drive_create("VisiCalc", path = b4xl, overwrite = TRUE)
 #'
 #' ## clean up
 #' drive_rm(wordstar, b4xl, execuvision)

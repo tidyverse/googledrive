@@ -22,14 +22,16 @@ docs for the associated endpoint.}
 
 \item{overwrite}{Logical, indicating whether to check for a pre-existing file
 at the targetted "filepath". The quotes around "filepath" refer to the fact
-that Drive does not have a 1-to-1 relationship between filepaths and files,
+that Drive does not impose a 1-to-1 relationship between filepaths and files,
 like a typical file system; read more about that in \code{\link[=drive_get]{drive_get()}}.
 \itemize{
 \item \code{NA} (default): Just do the operation, even if it results in multiple
 files with the same filepath.
 \item \code{TRUE}: Check for a pre-existing file at the filepath. If there is
-zero or one, move a pre-existing file to the trash, then carry on. Throw
-an error if two or more pre-existing files are found,
+zero or one, move a pre-existing file to the trash, then carry on. Note
+that the new file does not inherit any properties from the old one, such
+as sharing or publishing settings. It will have a new file ID. An error is
+thrown if two or more pre-existing files are found.
 \item \code{FALSE}: Error if there is any pre-existing file at the filepath.
 }
 
@@ -68,6 +70,14 @@ pqr <- drive_mkdir("pqr", path = ghi, description = "I am a folder")
 
 ## Did we really set the description? YES
 purrr::pluck(pqr, "drive_resource", 1, "description")
+
+## `overwrite = FALSE` errors if something already exists at target filepath
+## THIS WILL ERROR!
+drive_create("name-squatter", path = ghi)
+drive_mkdir("name-squatter", path = ghi, overwrite = FALSE)
+
+## `overwrite = TRUE` moves the existing item to trash, then proceeds
+drive_mkdir("name-squatter", path = ghi, overwrite = TRUE)
 
 ## clean up
 drive_rm(ghi)

@@ -27,14 +27,16 @@ docs for the associated endpoint.}
 
 \item{overwrite}{Logical, indicating whether to check for a pre-existing file
 at the targetted "filepath". The quotes around "filepath" refer to the fact
-that Drive does not have a 1-to-1 relationship between filepaths and files,
+that Drive does not impose a 1-to-1 relationship between filepaths and files,
 like a typical file system; read more about that in \code{\link[=drive_get]{drive_get()}}.
 \itemize{
 \item \code{NA} (default): Just do the operation, even if it results in multiple
 files with the same filepath.
 \item \code{TRUE}: Check for a pre-existing file at the filepath. If there is
-zero or one, move a pre-existing file to the trash, then carry on. Throw
-an error if two or more pre-existing files are found,
+zero or one, move a pre-existing file to the trash, then carry on. Note
+that the new file does not inherit any properties from the old one, such
+as sharing or publishing settings. It will have a new file ID. An error is
+thrown if two or more pre-existing files are found.
 \item \code{FALSE}: Error if there is any pre-existing file at the filepath.
 }
 
@@ -84,12 +86,19 @@ drive_browse(execuvision)
 b4xl <- drive_mkdir("b4xl")
 drive_create("VisiCalc", path = b4xl, type = "spreadsheet")
 
-## Another way to create a Google Sheet in the folder 'spreadsheets'
+## Another way to create a Google Sheet in the folder 'b4xl'
 drive_create("b4xl/SuperCalc", type = "spreadsheet")
 
 ## Another way to create a new file in a folder,
 ## this time specifying parent `path` as a character
 drive_create("Lotus 1-2-3", path = "b4xl", type = "spreadsheet")
+
+## `overwrite = FALSE` errors if file already exists at target filepath
+## THIS WILL ERROR!
+drive_create("VisiCalc", path = b4xl, overwrite = FALSE)
+
+## `overwrite = TRUE` moves an existing file to trash, then proceeds
+drive_create("VisiCalc", path = b4xl, overwrite = TRUE)
 
 ## clean up
 drive_rm(wordstar, b4xl, execuvision)

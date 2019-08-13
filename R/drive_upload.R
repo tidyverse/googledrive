@@ -62,6 +62,25 @@
 #' ## Clean up
 #' drive_rm(chicken)
 #'
+#' ## `overwrite = FALSE` errors if something already exists at target filepath
+#' ## THIS WILL ERROR!
+#' drive_create("name-squatter")
+#' drive_upload(
+#'   drive_example("chicken.jpg"),
+#'   name = "name-squatter",
+#'   overwrite = FALSE
+#' )
+#'
+#' ## `overwrite = TRUE` moves the existing item to trash, then proceeds
+#' chicken <- drive_upload(
+#'   drive_example("chicken.jpg"),
+#'   name = "name-squatter",
+#'   overwrite = TRUE
+#' )
+#'
+#' ## Clean up
+#' drive_rm(chicken)
+#'
 #' ## Upload to a Team Drive:
 #' ##   * your Google account must have Team Drive privileges, obviously
 #' ##   * the Team Drive (or Team Drive-hosted folder) MUST be captured as a
