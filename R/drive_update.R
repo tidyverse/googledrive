@@ -1,7 +1,8 @@
 #' Update an existing Drive file
 #'
 #' Update an existing Drive file id with new content ("media" in Drive
-#' API-speak), new metadata, or both.
+#' API-speak), new metadata, or both.  To create a new file or update existing,
+#' depending on whether the Drive file already exists, see [drive_put()].
 #'
 #' @seealso Wraps the `files.update` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/update>

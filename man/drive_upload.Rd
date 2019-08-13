@@ -58,7 +58,8 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Uploads a local file into a new Drive file. To update the content or metadata
-of an existing Drive file, use \code{\link[=drive_update]{drive_update()}}.
+of an existing Drive file, use \code{\link[=drive_update]{drive_update()}}. To upload or update,
+depending on whether the Drive file already exists, see \code{\link[=drive_put]{drive_put()}}.
 }
 \examples{
 \dontrun{

@@ -1,7 +1,8 @@
 #' Upload into a new Drive file
 #'
 #' Uploads a local file into a new Drive file. To update the content or metadata
-#' of an existing Drive file, use [drive_update()].
+#' of an existing Drive file, use [drive_update()]. To upload or update,
+#' depending on whether the Drive file already exists, see [drive_put()].
 #'
 #' @seealso Wraps the `files.create` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/create>

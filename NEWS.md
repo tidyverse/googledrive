@@ -4,6 +4,8 @@ The release of version 1.0.0 marks two events:
 
   * The overall design of googledrive has survived ~2 years on CRAN, with very little need for change. The API and feature set is fairly stable.
   * There are changes in the auth interface that are not backwards compatible.
+  
+There is also new functionality that makes it less likely you'll create multiple files with the same name, without actually meaning to.
 
 ## Auth from gargle
 
@@ -77,9 +79,22 @@ There are other small changes to the low-level developer-facing API:
   - `build_request()` has been removed. If you can't do what you need with `request_generate()`, use `gargle::request_develop()` or `gargle::request_build()` directly.
   - `process_response()` has been removed. Instead, use `gargle::response_process(response)`, as we do inside googledrive.
   
-## `overwrite = NA / TRUE / FALSE`
+## `overwrite = NA / TRUE / FALSE` and `drive_put()`
 
-All functions that create a new item or rename/move an existing item have gained an `overwrite` argument:
+Google Drive doesn't impose a 1-to-1 relationship between files and filepaths, the way your local file system does. Therefore, when working via the Drive API (instead of the browser), it's fairly easy to create multiple Drive files with the same name or filepath, without actually meaning to. This is perfectly valid on Drive, which identifies file by ID, but can be confusing and undesirable for humans.
+
+googledrive v1.0.0 offers some new ways to fight this:
+
+  * All functions that create a new item or rename/move an existing item have
+    gained an `overwrite` argument.
+  * `drive_put()` is a new convenience wrapper that figures out whether to call
+    `drive_upload()` or `drive_update()`.
+    
+Changes inspired by #230.
+
+### `overwrite = NA / TRUE / FALSE`
+
+These functions gain an `overwrite` argument:
 
   * `drive_create()` *this whole function is new*
   * `drive_cp()`
@@ -90,13 +105,31 @@ All functions that create a new item or rename/move an existing item have gained
   
 The default of `overwrite = NA` corresponds to the current behaviour, which is to "Just. Do. It.", i.e. to not consider pre-existing files at all.
 
-What's the point of `overwrite`? It is fairly easy for a user to create multiple Drive files with the same name or filepath, especially when working via the API versus in the browser. This is perfectly valid on Drive, which identifies file by ID, but can be confusing and undesirable for humans.
-
 `overwrite = TRUE` requests to move a pre-existing file at the target filepath to the trash, prior to creating the new item. If 2 or more files are found, an error is thrown, because it's not clear which one(s) to trash.
 
 `overwrite = FALSE` means the new item will only be created if there is no pre-existing file at that filepath.
 
-Existence checks based on filepath (or name) are quite expensive. This is why the default is `overwrite = NA`, in addition to backwards compatibility.
+Existence checks based on filepath (or name) can be expensive. This is why the default is `overwrite = NA`, in addition to backwards compatibility.
+
+### `drive_put()`
+
+Sometimes you have a file you will repeatedly send to Drive, i.e. the first time you run an analysis, you create the file and, when you re-run it, you update the file. Previously this was hard to express with googledrive.
+
+`drive_put()` is useful here and refers to the HTTP verb `PUT`: create the thing if it doesn't exist or, if it does, replace its contents. A good explanation of `PUT` and `PATCH` is [RESTful API Design — PUT vs PATCH](https://medium.com/backticks-tildes/restful-api-design-put-vs-patch-4a061aa3ed0b)).
+
+In pseudo-code, here's the basic idea of `drive_put()`:
+
+``` r
+target_filepath <- <determined from arguments `path`, `name`, and `media`>
+hits <- <get all Drive files at target_filepath>
+if (no hits) {
+ drive_upload(media, path, name, type, ..., verbose)
+} else if (exactly 1 hit) {
+ drive_update(hit, media, ..., verbose)
+} else {
+ ERROR
+}
+```
 
 ## Other changes
 
