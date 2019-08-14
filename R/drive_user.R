@@ -20,7 +20,7 @@
 #' user[["permissionId"]]
 #' }
 drive_user <- function(verbose = TRUE) {
-  if (isFALSE(.auth$auth_active)) {
+  if (!drive_has_token()) {
     if (verbose) {
       message("Not logged in as any specific Google user.")
     }
