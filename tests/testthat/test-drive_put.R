@@ -17,6 +17,9 @@ if (SETUP) {
 # ---- tests ----
 
 test_that("drive_put() works", {
+  skip_if_no_token()
+  skip_if_offline()
+
   local_file <- tempfile(me_("foo"), fileext = ".txt")
   download_target <- tempfile(me_("download"), fileext = ".txt")
   on.exit({
