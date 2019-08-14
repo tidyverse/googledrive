@@ -178,7 +178,7 @@ currently configured OAuth app and API key, respectively.</p></li>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>app</th>
-      <td><p>OAuth app, in the sense of <code><a href='https://www.rdocumentation.org/packages/httr/topics/oauth_app'>httr::oauth_app()</a></code>.</p></td>
+      <td><p>OAuth app, in the sense of <code><a href='https://httr.r-lib.org/reference/oauth_app.html'>httr::oauth_app()</a></code>.</p></td>
     </tr>
     <tr>
       <th>path</th>
@@ -199,7 +199,7 @@ argument of <code><a href='https://www.rdocumentation.org/packages/jsonlite/topi
 <li><p><code>drive_auth_configure()</code>: An object of R6 class
 <a href='https://gargle.r-lib.org/reference/AuthState-class.html'>gargle::AuthState</a>, invisibly.</p></li>
 <li><p><code>drive_oauth_app()</code>: the current user-configured
-<code><a href='https://www.rdocumentation.org/packages/httr/topics/oauth_app'>httr::oauth_app()</a></code>.</p></li>
+<code><a href='https://httr.r-lib.org/reference/oauth_app.html'>httr::oauth_app()</a></code>.</p></li>
 <li><p><code>drive_api_key()</code>: the current user-configured API key.</p></li>
 </ul>
 
@@ -217,7 +217,7 @@ argument of <code><a href='https://www.rdocumentation.org/packages/jsonlite/topi
 (<span class='no'>original_api_key</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_api_key</span>())</div><div class='output co'>#&gt; NULL</div><div class='input'>
 <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>require</a></span>(<span class='no'>httr</span>)) {
   <span class='co'># bring your own app via client id (aka key) and secret</span>
-  <span class='no'>google_app</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/oauth_app'>oauth_app</a></span>(
+  <span class='no'>google_app</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://httr.r-lib.org/reference/oauth_app.html'>oauth_app</a></span>(
     <span class='st'>"my-awesome-google-api-wrapping-package"</span>,
     <span class='kw'>key</span> <span class='kw'>=</span> <span class='st'>"123456789.apps.googleusercontent.com"</span>,
     <span class='kw'>secret</span> <span class='kw'>=</span> <span class='st'>"abcdefghijklmnopqrstuvwxyz"</span>

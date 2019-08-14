@@ -143,7 +143,7 @@ If you would like to rename AND move the file, see <code><a href='drive_mv.html'
     
     </div>
 
-    <pre class="usage"><span class='fu'>drive_rename</span>(<span class='no'>file</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_rename</span>(<span class='no'>file</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,6 +159,25 @@ Drive. Can be a name or path, a file id or URL marked with <code><a href='as_id.
       <td><p>Character. Name you would like the file to have.</p></td>
     </tr>
     <tr>
+      <th>overwrite</th>
+      <td><p>Logical, indicating whether to check for a pre-existing file
+at the targetted "filepath". The quotes around "filepath" refer to the fact
+that Drive does not impose a 1-to-1 relationship between filepaths and files,
+like a typical file system; read more about that in <code><a href='drive_get.html'>drive_get()</a></code>.</p><ul>
+<li><p><code>NA</code> (default): Just do the operation, even if it results in multiple
+files with the same filepath.</p></li>
+<li><p><code>TRUE</code>: Check for a pre-existing file at the filepath. If there is
+zero or one, move a pre-existing file to the trash, then carry on. Note
+that the new file does not inherit any properties from the old one, such
+as sharing or publishing settings. It will have a new file ID. An error is
+thrown if two or more pre-existing files are found.</p></li>
+<li><p><code>FALSE</code>: Error if there is any pre-existing file at the filepath.</p></li>
+</ul>
+
+<p>Note that existence checks, based on filepath, are expensive operations, i.e.
+they require additional API calls.</p></td>
+    </tr>
+    <tr>
       <th>verbose</th>
       <td><p>Logical, indicating whether to print informative messages
 (default <code>TRUE</code>).</p></td>
@@ -172,15 +191,22 @@ Drive. Can be a name or path, a file id or URL marked with <code><a href='as_id.
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## Create a folder to rename</span>
-<span class='no'>folder</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"folder-to-rename"</span>)
+<span class='co'>## Create a file to rename</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_create.html'>drive_create</a></span>(<span class='st'>"file-to-rename"</span>)
 
-<span class='co'>## Rename folder</span>
-<span class='no'>folder</span> <span class='kw'>&lt;-</span> <span class='no'>folder</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>drive_rename</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"renamed-folder"</span>)
+<span class='co'>## Rename it</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_rename</span>(<span class='no'>file</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"renamed-file"</span>)
+
+<span class='co'>## `overwrite = FALSE` errors if something already exists at target filepath</span>
+<span class='co'>## THIS WILL ERROR!</span>
+<span class='fu'><a href='drive_create.html'>drive_create</a></span>(<span class='st'>"name-squatter"</span>)
+<span class='fu'>drive_rename</span>(<span class='no'>file</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"name-squatter"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'>## `overwrite = TRUE` moves the existing item to trash, then proceeds</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_rename</span>(<span class='no'>file</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"name-squatter"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>## Clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>folder</span>)
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>file</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

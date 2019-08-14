@@ -141,6 +141,7 @@
 <li>The overall design of googledrive has survived ~2 years on CRAN, with very little need for change. The API and feature set is fairly stable.</li>
 <li>There are changes in the auth interface that are not backwards compatible.</li>
 </ul>
+<p>There is also new functionality that makes it less likely you’ll create multiple files with the same name, without actually meaning to.</p>
 <div id="auth-from-gargle" class="section level2">
 <h2 class="hasAnchor">
 <a href="#auth-from-gargle" class="anchor"></a>Auth from gargle</h2>
@@ -225,12 +226,63 @@
 </ul>
 </div>
 </div>
+<div id="overwrite-na-true-false-and-drive_put" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overwrite-na-true-false-and-drive_put" class="anchor"></a><code>overwrite = NA / TRUE / FALSE</code> and <code><a href="../reference/drive_put.html">drive_put()</a></code>
+</h2>
+<p>Google Drive doesn’t impose a 1-to-1 relationship between files and filepaths, the way your local file system does. Therefore, when working via the Drive API (instead of the browser), it’s fairly easy to create multiple Drive files with the same name or filepath, without actually meaning to. This is perfectly valid on Drive, which identifies file by ID, but can be confusing and undesirable for humans.</p>
+<p>googledrive v1.0.0 offers some new ways to fight this:</p>
+<ul>
+<li>All functions that create a new item or rename/move an existing item have gained an <code>overwrite</code> argument.</li>
+<li>
+<code><a href="../reference/drive_put.html">drive_put()</a></code> is a new convenience wrapper that figures out whether to call <code><a href="../reference/drive_upload.html">drive_upload()</a></code> or <code><a href="../reference/drive_update.html">drive_update()</a></code>.</li>
+</ul>
+<p>Changes inspired by <a href='https://github.com/tidyverse/googledrive/issues/230'>#230</a>.</p>
+<div id="overwrite-na-true-false" class="section level3">
+<h3 class="hasAnchor">
+<a href="#overwrite-na-true-false" class="anchor"></a><code>overwrite = NA / TRUE / FALSE</code>
+</h3>
+<p>These functions gain an <code>overwrite</code> argument:</p>
+<ul>
+<li>
+<code><a href="../reference/drive_create.html">drive_create()</a></code> <em>this whole function is new</em>
+</li>
+<li><code><a href="../reference/drive_cp.html">drive_cp()</a></code></li>
+<li><code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code></li>
+<li><code><a href="../reference/drive_mv.html">drive_mv()</a></code></li>
+<li><code><a href="../reference/drive_rename.html">drive_rename()</a></code></li>
+<li><code><a href="../reference/drive_upload.html">drive_upload()</a></code></li>
+</ul>
+<p>The default of <code>overwrite = NA</code> corresponds to the current behaviour, which is to “Just. Do. It.”, i.e. to not consider pre-existing files at all.</p>
+<p><code>overwrite = TRUE</code> requests to move a pre-existing file at the target filepath to the trash, prior to creating the new item. If 2 or more files are found, an error is thrown, because it’s not clear which one(s) to trash.</p>
+<p><code>overwrite = FALSE</code> means the new item will only be created if there is no pre-existing file at that filepath.</p>
+<p>Existence checks based on filepath (or name) can be expensive. This is why the default is <code>overwrite = NA</code>, in addition to backwards compatibility.</p>
+</div>
+<div id="drive_put" class="section level3">
+<h3 class="hasAnchor">
+<a href="#drive_put" class="anchor"></a><code><a href="../reference/drive_put.html">drive_put()</a></code>
+</h3>
+<p>Sometimes you have a file you will repeatedly send to Drive, i.e. the first time you run an analysis, you create the file and, when you re-run it, you update the file. Previously this was hard to express with googledrive.</p>
+<p><code><a href="../reference/drive_put.html">drive_put()</a></code> is useful here and refers to the HTTP verb <code>PUT</code>: create the thing if it doesn’t exist or, if it does, replace its contents. A good explanation of <code>PUT</code> and <code>PATCH</code> is <a href="https://medium.com/backticks-tildes/restful-api-design-put-vs-patch-4a061aa3ed0b">RESTful API Design — PUT vs PATCH</a>).</p>
+<p>In pseudo-code, here’s the basic idea of <code><a href="../reference/drive_put.html">drive_put()</a></code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">target_filepath &lt;-<span class="st"> </span><span class="er">&lt;</span>determined from arguments <span class="st">`</span><span class="dt">path</span><span class="st">`</span>, <span class="st">`</span><span class="dt">name</span><span class="st">`</span>, and <span class="st">`</span><span class="dt">media</span><span class="st">`</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">hits &lt;-<span class="st"> </span><span class="er">&lt;</span>get all Drive files at target_filepath<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="cf">if</span> (no hits) {</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"> <span class="kw"><a href="../reference/drive_upload.html">drive_upload</a></span>(media, path, name, type, ..., verbose)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">} <span class="cf">else</span> <span class="cf">if</span> (exactly <span class="dv">1</span> hit) {</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"> <span class="kw"><a href="../reference/drive_update.html">drive_update</a></span>(hit, media, ..., verbose)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"> ERROR</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">}</a></code></pre></div>
+</div>
+</div>
 <div id="other-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h2>
 <p><code><a href="../reference/drive_create.html">drive_create()</a></code> is a new function that creates a new empty file, with an optional file type specification (<a href='https://github.com/tidyverse/googledrive/issues/258'>#258</a>, <a href='https://github.com/ianmcook'>@ianmcook</a>). <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code> becomes a thin wrapper around <code><a href="../reference/drive_create.html">drive_create()</a></code>, with the file type hard-wired to “folder”.</p>
+<p>In <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code>, the optional parent directory is now known as <code>path</code> instead of <code>parent</code>. This is more consistent with everything else in googledrive, which became very obvious when adding <code><a href="../reference/drive_create.html">drive_create()</a></code> and the general <code>overwrite</code> functionality.</p>
 <p><code><a href="../reference/drive_empty_trash.html">drive_empty_trash()</a></code> now exploits the correct endpoint (as opposed to deleting individual files) and is therefore much faster (<a href='https://github.com/tidyverse/googledrive/issues/203'>#203</a>).</p>
-<p>The internal table of known MIME types includes <code>"application/vnd.google.colab"</code>, which is associated with the file extension <code>.ipynb</code> and the human-oriented nickname <code>"colab"</code> (<a href='https://github.com/tidyverse/googledrive/issues/207'>#207</a>).</p>
+<p>Colaboratory notebooks now have some MIME type support, in terms of the <code>type</code> argument in various functions (<a href="https://colab.research.google.com/" class="uri">https://colab.research.google.com/</a>). The internal table of known MIME types includes <code>"application/vnd.google.colab"</code>, which is associated with the file extension <code>.ipynb</code> and the human-oriented nickname <code>"colab"</code> (<a href='https://github.com/tidyverse/googledrive/issues/207'>#207</a>).</p>
 <p><code><a href="../reference/drive_endpoints.html">drive_endpoints()</a></code> gains a singular friend, <code><a href="../reference/drive_endpoints.html">drive_endpoint()</a></code> which returns exactly one endpoint. These helpers index into the internal list of Drive API endpoints with <code>[</code> and <code>[[</code>, respectively.</p>
 </div>
 <div id="dependency-changes" class="section level2">
@@ -238,7 +290,7 @@
 <a href="#dependency-changes" class="anchor"></a>Dependency changes</h2>
 <p>R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2).</p>
 <p>gargle and magrittr are newly Imported.</p>
-<p>rprojroot has been removed from Suggests.</p>
+<p>rprojroot has been removed from Suggests, because we can now use a version of testthat recent enough to offer <code><a href="https://www.rdocumentation.org/packages/testthat/topics/test_path">testthat::test_path()</a></code>.</p>
 </div>
 </div>
     <div id="googledrive-0-1-3" class="section level1">

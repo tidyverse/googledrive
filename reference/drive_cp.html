@@ -141,7 +141,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>drive_cp</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_cp</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,6 +173,25 @@ character and lacks a trailing slash. Defaults to "Copy of <code>FILE-NAME</code
 the metadata of the target file by specifying properties of the Files
 resource via <code>...</code>. See the "Request body" section of the Drive API
 docs for the associated endpoint.</p></td>
+    </tr>
+    <tr>
+      <th>overwrite</th>
+      <td><p>Logical, indicating whether to check for a pre-existing file
+at the targetted "filepath". The quotes around "filepath" refer to the fact
+that Drive does not impose a 1-to-1 relationship between filepaths and files,
+like a typical file system; read more about that in <code><a href='drive_get.html'>drive_get()</a></code>.</p><ul>
+<li><p><code>NA</code> (default): Just do the operation, even if it results in multiple
+files with the same filepath.</p></li>
+<li><p><code>TRUE</code>: Check for a pre-existing file at the filepath. If there is
+zero or one, move a pre-existing file to the trash, then carry on. Note
+that the new file does not inherit any properties from the old one, such
+as sharing or publishing settings. It will have a new file ID. An error is
+thrown if two or more pre-existing files are found.</p></li>
+<li><p><code>FALSE</code>: Error if there is any pre-existing file at the filepath.</p></li>
+</ul>
+
+<p>Note that existence checks, based on filepath, are expensive operations, i.e.
+they require additional API calls.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -211,6 +231,13 @@ docs for the associated endpoint.</p></td>
 <span class='co'>## `starred` is not an actual argument to `drive_cp()`,</span>
 <span class='co'>## it just gets passed through to the API.</span>
 <span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-cp-starred.txt"</span>, <span class='kw'>starred</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='co'>## `overwrite = FALSE` errors if file already exists at target filepath</span>
+<span class='co'>## THIS WILL ERROR!</span>
+<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-cp.txt"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'>## `overwrite = TRUE` moves an existing file to trash, then proceeds</span>
+<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-cp.txt"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>## Behold all of our copies!</span>
 <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"chicken-cp"</span>)

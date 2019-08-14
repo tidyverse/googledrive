@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Move a Drive file — drive_mv • googledrive</title>
+<title>PUT new media into a Drive file — drive_put • googledrive</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -31,15 +31,21 @@
 
 
 
-<meta property="og:title" content="Move a Drive file — drive_mv" />
+<meta property="og:title" content="PUT new media into a Drive file — drive_put" />
 
-<meta property="og:description" content="Move a Drive file to a different folder, give it a different name, or both.
-Note that folders on Google Drive are not like folders on your local
-filesystem. They are more like a label, which implies that a Drive file can
-have multiple folders as direct parent! However, most people still use and
-think of them like &quot;regular&quot; folders. When we say &quot;move a Drive file&quot;, it
-actually means: &quot;add a new folder to this file's parents and remove the old
-one&quot;." />
+<meta property="og:description" content="PUTs new media into a Drive file, in the HTTP sense: if the file already
+exists, we replace its content and we create a new file, otherwise. This is a
+convenience wrapper around drive_upload() and drive_update(). In
+pseudo-code:target_filepath &amp;lt;- &amp;lt;determined from `path`, `name`, and `media`&amp;gt;
+hits &amp;lt;- &amp;lt;get all Drive files at target_filepath&amp;gt;
+if (no hits) {
+  drive_upload(media, path, name, type, ..., verbose)
+} else if (exactly 1 hit) {
+  drive_update(hit, media, ..., verbose)
+} else {
+  ERROR
+}
+" />
 
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -136,34 +142,38 @@ one&quot;." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Move a Drive file</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/drive_mv.R'><code>R/drive_mv.R</code></a></small>
-    <div class="hidden name"><code>drive_mv.Rd</code></div>
+    <h1>PUT new media into a Drive file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/drive_put.R'><code>R/drive_put.R</code></a></small>
+    <div class="hidden name"><code>drive_put.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Move a Drive file to a different folder, give it a different name, or both.
-Note that folders on Google Drive are not like folders on your local
-filesystem. They are more like a label, which implies that a Drive file can
-have multiple folders as direct parent! However, most people still use and
-think of them like "regular" folders. When we say "move a Drive file", it
-actually means: "add a new folder to this file's parents and remove the old
-one".</p>
+    <p>PUTs new media into a Drive file, in the HTTP sense: if the file already
+exists, we replace its content and we create a new file, otherwise. This is a
+convenience wrapper around <code><a href='drive_upload.html'>drive_upload()</a></code> and <code><a href='drive_update.html'>drive_update()</a></code>. In
+pseudo-code:</p><pre>target_filepath &lt;- &lt;determined from `path`, `name`, and `media`&gt;
+hits &lt;- &lt;get all Drive files at target_filepath&gt;
+if (no hits) {
+  drive_upload(media, path, name, type, ..., verbose)
+} else if (exactly 1 hit) {
+  drive_update(hit, media, ..., verbose)
+} else {
+  ERROR
+}
+</pre>
     
     </div>
 
-    <pre class="usage"><span class='fu'>drive_mv</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+    <pre class="usage"><span class='fu'>drive_put</span>(<span class='no'>media</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with <code><a href='as_id.html'>as_id()</a></code>, or a
-<code><a href='dribble.html'>dribble</a></code>.</p></td>
+      <th>media</th>
+      <td><p>Character, path to the local file to upload.</p></td>
     </tr>
     <tr>
       <th>path</th>
@@ -171,32 +181,29 @@ Drive. Can be a name or path, a file id or URL marked with <code><a href='as_id.
 Drive. Can be an actual path (character), a file id marked with <code><a href='as_id.html'>as_id()</a></code>,
 or a <code><a href='dribble.html'>dribble</a></code>. If specified as an actual path, it is best to explicitly
 indicate if it's a folder by including a trailing slash, since it cannot
-always be worked out from the context of the call. Defaults to current name.</p></td>
+always be worked out from the context of the call. Will default to its local name.</p></td>
     </tr>
     <tr>
       <th>name</th>
       <td><p>Character, new file name if not specified as part of
 <code>path</code>. This will force <code>path</code> to be treated as a folder, even if it is
-character and lacks a trailing slash. Defaults to current name.</p></td>
+character and lacks a trailing slash. Will default to its local name.</p></td>
     </tr>
     <tr>
-      <th>overwrite</th>
-      <td><p>Logical, indicating whether to check for a pre-existing file
-at the targetted "filepath". The quotes around "filepath" refer to the fact
-that Drive does not impose a 1-to-1 relationship between filepaths and files,
-like a typical file system; read more about that in <code><a href='drive_get.html'>drive_get()</a></code>.</p><ul>
-<li><p><code>NA</code> (default): Just do the operation, even if it results in multiple
-files with the same filepath.</p></li>
-<li><p><code>TRUE</code>: Check for a pre-existing file at the filepath. If there is
-zero or one, move a pre-existing file to the trash, then carry on. Note
-that the new file does not inherit any properties from the old one, such
-as sharing or publishing settings. It will have a new file ID. An error is
-thrown if two or more pre-existing files are found.</p></li>
-<li><p><code>FALSE</code>: Error if there is any pre-existing file at the filepath.</p></li>
-</ul>
-
-<p>Note that existence checks, based on filepath, are expensive operations, i.e.
-they require additional API calls.</p></td>
+      <th>...</th>
+      <td><p>Named parameters to pass along to the Drive API. You can affect
+the metadata of the target file by specifying properties of the Files
+resource via <code>...</code>. See the "Request body" section of the Drive API
+docs for the associated endpoint.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>Character. If <code>type = NULL</code>, a MIME type is automatically
+determined from the file extension, if possible. If the source file is of a
+suitable type, you can request conversion to Google Doc, Sheet or Slides by
+setting <code>type</code> to <code>document</code>, <code>spreadsheet</code>, or <code>presentation</code>,
+respectively. All non-<code>NULL</code> values for <code>type</code> are pre-processed with
+<code><a href='drive_mime_type.html'>drive_mime_type()</a></code>.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -212,40 +219,28 @@ they require additional API calls.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## create a file to move</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>), <span class='st'>"chicken-mv.txt"</span>)
+<span class='co'># create a local file to work with</span>
+<span class='no'>local_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempfile</a></span>(<span class='st'>"drive_put_"</span>, <span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".txt"</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/writeLines'>writeLines</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"beginning"</span>, <span class='st'>"middle"</span>), <span class='no'>local_file</span>)
 
-<span class='co'>## rename it, but leave in current folder (root folder, in this case)</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mv</span>(<span class='no'>file</span>, <span class='st'>"chicken-mv-renamed.txt"</span>)
+<span class='co'># PUT to a novel filepath --&gt; drive_put() delegates to drive_upload()</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_put</span>(<span class='no'>local_file</span>)
 
-<span class='co'>## create a folder to move the file into</span>
-<span class='no'>folder</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"mv-folder"</span>)
+<span class='co'># update the local file</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='st'>"end"</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>local_file</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\n"</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='co'>## move the file and rename it again,</span>
-<span class='co'>## specify destination as a dribble</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mv</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>folder</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-mv-re-renamed.txt"</span>)
+<span class='co'># PUT again --&gt; drive_put() delegates to drive_update()</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_put</span>(<span class='no'>local_file</span>)
 
-<span class='co'>## verify renamed file is now in the folder</span>
-<span class='fu'><a href='drive_ls.html'>drive_ls</a></span>(<span class='no'>folder</span>)
+<span class='co'># create a second file at this filepath</span>
+<span class='no'>file2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_create.html'>drive_create</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/basename'>basename</a></span>(<span class='no'>local_file</span>))
 
-<span class='co'>## move the file back to root folder</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mv</span>(<span class='no'>file</span>, <span class='st'>"~/"</span>)
+<span class='co'># PUT again --&gt; ERROR</span>
+<span class='fu'>drive_put</span>(<span class='no'>local_file</span>)
 
-<span class='co'>## move it again</span>
-<span class='co'>## specify destination as path with trailing slash</span>
-<span class='co'>## to ensure we get a move vs. renaming it to "mv-folder"</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mv</span>(<span class='no'>file</span>, <span class='st'>"mv-folder/"</span>)
-
-<span class='co'>## `overwrite = FALSE` errors if something already exists at target filepath</span>
-<span class='co'>## THIS WILL ERROR!</span>
-<span class='fu'><a href='drive_create.html'>drive_create</a></span>(<span class='st'>"name-squatter"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"~/"</span>)
-<span class='fu'>drive_mv</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"~/"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"name-squatter"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='co'>## `overwrite = TRUE` moves the existing item to trash, then proceeds</span>
-<span class='fu'>drive_mv</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"~/"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"name-squatter"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='co'>## Clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>file</span>, <span class='no'>folder</span>)
+<span class='co'># clean-up</span>
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"drive_put_.+[.]txt"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>()
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='no'>local_file</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -297,6 +297,9 @@ to search one or more Team Drives or a domain. See
 <span class='fu'>drive_find</span>(<span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='co'>## `trashed = NA` disregards trash status completely</span>
 <span class='fu'>drive_find</span>(<span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
+
+<span class='co'>## see top 10 files in terms of "recency"</span>
+<span class='fu'>drive_find</span>(<span class='kw'>orderBy</span> <span class='kw'>=</span> <span class='st'>"recency desc"</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>10</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>

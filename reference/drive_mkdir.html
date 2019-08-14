@@ -143,7 +143,8 @@ including a folder, use <code><a href='drive_update.html'>drive_update()</a></co
     
     </div>
 
-    <pre class="usage"><span class='fu'>drive_mkdir</span>(<span class='no'>name</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_mkdir</span>(<span class='no'>name</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>parent</span> <span class='kw'>=</span> <span class='st'>"DEPRECATED"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,7 +155,7 @@ including a folder, use <code><a href='drive_update.html'>drive_update()</a></co
 an existing parent folder, as well as the new name.</p></td>
     </tr>
     <tr>
-      <th>parent</th>
+      <th>path</th>
       <td><p>Target destination for the new item, i.e. a folder or a Team
 Drive. Can be given as an actual path (character), a file id or URL marked
 with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. Defaults to your "My Drive" root folder.</p></td>
@@ -165,6 +166,30 @@ with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.
 the metadata of the target file by specifying properties of the Files
 resource via <code>...</code>. See the "Request body" section of the Drive API
 docs for the associated endpoint.</p></td>
+    </tr>
+    <tr>
+      <th>overwrite</th>
+      <td><p>Logical, indicating whether to check for a pre-existing file
+at the targetted "filepath". The quotes around "filepath" refer to the fact
+that Drive does not impose a 1-to-1 relationship between filepaths and files,
+like a typical file system; read more about that in <code><a href='drive_get.html'>drive_get()</a></code>.</p><ul>
+<li><p><code>NA</code> (default): Just do the operation, even if it results in multiple
+files with the same filepath.</p></li>
+<li><p><code>TRUE</code>: Check for a pre-existing file at the filepath. If there is
+zero or one, move a pre-existing file to the trash, then carry on. Note
+that the new file does not inherit any properties from the old one, such
+as sharing or publishing settings. It will have a new file ID. An error is
+thrown if two or more pre-existing files are found.</p></li>
+<li><p><code>FALSE</code>: Error if there is any pre-existing file at the filepath.</p></li>
+</ul>
+
+<p>Note that existence checks, based on filepath, are expensive operations, i.e.
+they require additional API calls.</p></td>
+    </tr>
+    <tr>
+      <th>parent</th>
+      <td><p>DEPRECATED. Use the <code>path</code> argument for this now, which is more
+consistent with other functions in googledrive.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -194,15 +219,23 @@ docs for the associated endpoint.</p></td>
 <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>jkl</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"starred"</span>)
 
 <span class='co'>## Another way to create folder 'mno' in folder 'ghi'</span>
-<span class='fu'>drive_mkdir</span>(<span class='st'>"mno"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='st'>"ghi"</span>)
+<span class='fu'>drive_mkdir</span>(<span class='st'>"mno"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"ghi"</span>)
 
 <span class='co'>## Yet another way to create a folder named 'pqr' in folder 'ghi',</span>
 <span class='co'>## this time with parent folder stored in a dribble,</span>
 <span class='co'>## and setting the new folder's description</span>
-<span class='no'>pqr</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"pqr"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='st'>"I am a folder"</span>)
+<span class='no'>pqr</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"pqr"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='st'>"I am a folder"</span>)
 
 <span class='co'>## Did we really set the description? YES</span>
 <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>pqr</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"description"</span>)
+
+<span class='co'>## `overwrite = FALSE` errors if something already exists at target filepath</span>
+<span class='co'>## THIS WILL ERROR!</span>
+<span class='fu'><a href='drive_create.html'>drive_create</a></span>(<span class='st'>"name-squatter"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>)
+<span class='fu'>drive_mkdir</span>(<span class='st'>"name-squatter"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'>## `overwrite = TRUE` moves the existing item to trash, then proceeds</span>
+<span class='fu'>drive_mkdir</span>(<span class='st'>"name-squatter"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>## clean up</span>
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>ghi</span>)
