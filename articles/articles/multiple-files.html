@@ -162,7 +162,7 @@
 <p>Create a folder on your Drive and upload all files into this folder by iterating over the <code>local_files</code> using <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">folder &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/drive_mkdir.html">drive_mkdir</a></span>(<span class="st">"upload-into-me-article-demo"</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; Created Drive file:</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;   * upload-into-me-article-demo: 1Ktesg9L_5RTJR-AonkwPv3m5QexXgy-S</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;   * upload-into-me-article-demo: 1k8DdGsRyfyjeMYbUgvwyhBOy4SRirjmN</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; with MIME type:</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;   * application/vnd.google-apps.folder</span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6">files &lt;-<span class="st"> </span><span class="kw">map</span>(local_files, <span class="op">~</span><span class="st"> </span><span class="kw"><a href="../../reference/drive_upload.html">drive_upload</a></span>(.x, <span class="dt">path =</span> folder, <span class="dt">verbose =</span> <span class="ot">FALSE</span>))</a></code></pre></div>
@@ -171,10 +171,10 @@
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt;   name        id                                drive_resource   </span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;       &lt;chr&gt;                             &lt;list&gt;           </span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; 1 chicken.txt 1FrqS1HNQYolUytIypbN8g3J6kMv82Sxo &lt;named list [38]&gt;</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 2 chicken.pdf 1ur-TYLMMhz2KRKlJ71FP0ug_JMwtI44e &lt;named list [38]&gt;</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 3 chicken.jpg 1nAlu4w37RG6682QD-g8sbQ3LmAikXLsN &lt;named list [40]&gt;</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 4 chicken.csv 1deOah3lvghKya9hQiHATUgokC3wqoxVG &lt;named list [38]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; 1 chicken.txt 16zzcJObynI7O2PzKjiht_6r158fW7F8e &lt;named list [38]&gt;</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 2 chicken.pdf 1LuX0KdOXJaJdaCHMHnnCc8zLva-orwk_ &lt;named list [38]&gt;</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 3 chicken.jpg 14H9duZlG1ifCyDhWe2uB84Ojl0f_NIsn &lt;named list [40]&gt;</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 4 chicken.csv 1p_vxZwdW-bXykcWT6Toi-zaTyD45XbT8 &lt;named list [38]&gt;</span></a></code></pre></div>
 <p>Now let’s reflect on the <code>files</code> object returned by this operation. <code>files</code> is a list of <strong>dribbles</strong>, one per uploaded file.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(files, <span class="dt">max.level =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; List of 4</span></a>
@@ -188,10 +188,10 @@
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;   name        id                                drive_resource   </span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                             &lt;list&gt;           </span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 1 chicken.csv 1deOah3lvghKya9hQiHATUgokC3wqoxVG &lt;named list [38]&gt;</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 2 chicken.jpg 1nAlu4w37RG6682QD-g8sbQ3LmAikXLsN &lt;named list [40]&gt;</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 3 chicken.pdf 1ur-TYLMMhz2KRKlJ71FP0ug_JMwtI44e &lt;named list [38]&gt;</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 4 chicken.txt 1FrqS1HNQYolUytIypbN8g3J6kMv82Sxo &lt;named list [38]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 1 chicken.csv 1p_vxZwdW-bXykcWT6Toi-zaTyD45XbT8 &lt;named list [38]&gt;</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 2 chicken.jpg 14H9duZlG1ifCyDhWe2uB84Ojl0f_NIsn &lt;named list [40]&gt;</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 3 chicken.pdf 1LuX0KdOXJaJdaCHMHnnCc8zLva-orwk_ &lt;named list [38]&gt;</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 4 chicken.txt 16zzcJObynI7O2PzKjiht_6r158fW7F8e &lt;named list [38]&gt;</span></a></code></pre></div>
 <p>Below we show another way to finesse this by using a variant of <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> that does this for us, namely <code>map_df()</code>.</p>
 </div>
 <div id="rename" class="section level3">
@@ -218,19 +218,19 @@
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;   name                   id                                drive_resource  </span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;                  &lt;chr&gt;                             &lt;list&gt;          </span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 1 2019-08-14_chicken.txt 1FrqS1HNQYolUytIypbN8g3J6kMv82Sxo &lt;named list [39…</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 2 2019-08-14_chicken.pdf 1ur-TYLMMhz2KRKlJ71FP0ug_JMwtI44e &lt;named list [39…</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 3 2019-08-14_chicken.jpg 1nAlu4w37RG6682QD-g8sbQ3LmAikXLsN &lt;named list [40…</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; 4 2019-08-14_chicken.csv 1deOah3lvghKya9hQiHATUgokC3wqoxVG &lt;named list [38…</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 1 2019-08-14_chicken.txt 16zzcJObynI7O2PzKjiht_6r158fW7F8e &lt;named list [39…</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 2 2019-08-14_chicken.pdf 1LuX0KdOXJaJdaCHMHnnCc8zLva-orwk_ &lt;named list [39…</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 3 2019-08-14_chicken.jpg 14H9duZlG1ifCyDhWe2uB84Ojl0f_NIsn &lt;named list [40…</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; 4 2019-08-14_chicken.csv 1p_vxZwdW-bXykcWT6Toi-zaTyD45XbT8 &lt;named list [38…</span></a></code></pre></div>
 <p>Let’s confirm that, by using <code>map2_df()</code> instead of <code>map2()</code>, we got a single dribble back, instead of a list of one-row dribbles:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">files_dribble</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;   name                   id                                drive_resource  </span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;                  &lt;chr&gt;                             &lt;list&gt;          </span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 1 2019-08-14_chicken.csv 1deOah3lvghKya9hQiHATUgokC3wqoxVG &lt;named list [38…</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; 2 2019-08-14_chicken.jpg 1nAlu4w37RG6682QD-g8sbQ3LmAikXLsN &lt;named list [40…</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; 3 2019-08-14_chicken.pdf 1ur-TYLMMhz2KRKlJ71FP0ug_JMwtI44e &lt;named list [39…</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; 4 2019-08-14_chicken.txt 1FrqS1HNQYolUytIypbN8g3J6kMv82Sxo &lt;named list [39…</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 1 2019-08-14_chicken.csv 1p_vxZwdW-bXykcWT6Toi-zaTyD45XbT8 &lt;named list [38…</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; 2 2019-08-14_chicken.jpg 14H9duZlG1ifCyDhWe2uB84Ojl0f_NIsn &lt;named list [40…</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; 3 2019-08-14_chicken.pdf 1LuX0KdOXJaJdaCHMHnnCc8zLva-orwk_ &lt;named list [39…</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; 4 2019-08-14_chicken.txt 16zzcJObynI7O2PzKjiht_6r158fW7F8e &lt;named list [39…</span></a></code></pre></div>
 <p>What if you wanted to get a list back, because your downstream operations include yet more <code>map()</code>ing? Then you would use <code>map2()</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">files_list &lt;-<span class="st"> </span><span class="kw">map2</span>(files, new_names, drive_rename)</a></code></pre></div>
 </div>
@@ -244,7 +244,7 @@
 <p>Finally – and this is the code we will actually execute – the easiest way to delete these files is to delete their enclosing folder.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../../reference/drive_rm.html">drive_rm</a></span>(folder)</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; Files deleted:</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;   * upload-into-me-article-demo: 1Ktesg9L_5RTJR-AonkwPv3m5QexXgy-S</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;   * upload-into-me-article-demo: 1k8DdGsRyfyjeMYbUgvwyhBOy4SRirjmN</span></a></code></pre></div>
 </div>
 </div>
   </div>
