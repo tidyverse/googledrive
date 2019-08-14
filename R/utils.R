@@ -1,5 +1,7 @@
 isFALSE <- function(x) identical(x, FALSE)
 
+is_toggle <- function(x) length(x) == 1L && is.logical(x)
+
 last <- function(x) x[length(x)]
 
 sq <- function(x) glue::single_quote(x)

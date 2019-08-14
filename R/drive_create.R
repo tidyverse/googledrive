@@ -11,7 +11,7 @@
 #'
 #' @param name Name for the new file or, optionally, a path that specifies
 #'   an existing parent folder, as well as the new file name.
-#' @param parent Target destination for the new item, i.e. a folder or a Team
+#' @param path Target destination for the new item, i.e. a folder or a Team
 #'   Drive. Can be given as an actual path (character), a file id or URL marked
 #'   with [as_id()], or a [`dribble`]. Defaults to your "My Drive" root folder.
 #' @param type Character. Create a blank Google Doc, Sheet or Slides by
@@ -19,6 +19,7 @@
 #'   respectively. All non-`NULL` values for `type` are pre-processed with
 #'   [drive_mime_type()].
 #' @template dots-metadata
+#' @template overwrite
 #' @template verbose
 #'
 #' @template dribble-return
@@ -49,51 +50,54 @@
 #' ## Create folder 'b4xl' in the root folder,
 #' ## then create an empty new Google Sheet in it
 #' b4xl <- drive_mkdir("b4xl")
-#' drive_create("VisiCalc", parent = b4xl, type = "spreadsheet")
+#' drive_create("VisiCalc", path = b4xl, type = "spreadsheet")
 #'
-#' ## Another way to create a Google Sheet in the folder 'spreadsheets'
+#' ## Another way to create a Google Sheet in the folder 'b4xl'
 #' drive_create("b4xl/SuperCalc", type = "spreadsheet")
 #'
 #' ## Another way to create a new file in a folder,
-#' ## this time specifying `parent` as a character
-#' drive_create("Lotus 1-2-3", parent = "b4xl", type = "spreadsheet")
+#' ## this time specifying parent `path` as a character
+#' drive_create("Lotus 1-2-3", path = "b4xl", type = "spreadsheet")
+#'
+#' ## `overwrite = FALSE` errors if file already exists at target filepath
+#' ## THIS WILL ERROR!
+#' drive_create("VisiCalc", path = b4xl, overwrite = FALSE)
+#'
+#' ## `overwrite = TRUE` moves an existing file to trash, then proceeds
+#' drive_create("VisiCalc", path = b4xl, overwrite = TRUE)
 #'
 #' ## clean up
 #' drive_rm(wordstar, b4xl, execuvision)
 #' }
 drive_create <- function(name,
-                         parent = NULL,
+                         path = NULL,
                          type = NULL,
                          ...,
+                         overwrite = NA,
                          verbose = TRUE) {
+  # the order and role of `path` and `name` is naturally inverted here,
+  # relative to all other related functions, hence we pre-process
   stopifnot(is_string(name))
-
-  ## wire up to the conventional 'path' and 'name' pattern used elsewhere
-  if (is.null(parent)) {
+  if (is.null(path)) {
     path <- name
     name <- NULL
-  } else {
-    path <- parent
   }
-
-  if (is_path(path)) {
-    if (is.null(name)) {
-      path <- strip_slash(path)
-    }
-    path_parts <- partition_path(path, maybe_name = is.null(name))
-    path <- path_parts$parent
-    name <- name %||% path_parts$name
-  }
+  tmp <- rationalize_path_name(path, name)
+  path <- tmp$path
+  name <- tmp$name
 
   params <- toCamel(list(...))
-  params[["name"]] <- name
-  params[["fields"]] <- params[["fields"]] %||% "*"
-  params[["mimeType"]] <- drive_mime_type(type)
 
+  # load (path, name) into params
   if (!is.null(path)) {
     path <- as_parent(path)
     params[["parents"]] <- list(path[["id"]])
   }
+  params[["name"]] <- name
+  check_for_overwrite(params[["parents"]], params[["name"]], overwrite)
+
+  params[["fields"]] <- params[["fields"]] %||% "*"
+  params[["mimeType"]] <- drive_mime_type(type)
 
   request <- request_generate(
     endpoint = "drive.files.create",

@@ -9,6 +9,8 @@
 #' @param name Name for the new folder or, optionally, a path that specifies
 #'   an existing parent folder, as well as the new name.
 #' @inheritParams drive_create
+#' @param parent DEPRECATED. Use the `path` argument for this now, which is more
+#'   consistent with other functions in googledrive.
 #'
 #' @template dribble-return
 #' @export
@@ -22,28 +24,45 @@
 #' purrr::pluck(jkl, "drive_resource", 1, "starred")
 #'
 #' ## Another way to create folder 'mno' in folder 'ghi'
-#' drive_mkdir("mno", parent = "ghi")
+#' drive_mkdir("mno", path = "ghi")
 #'
 #' ## Yet another way to create a folder named 'pqr' in folder 'ghi',
 #' ## this time with parent folder stored in a dribble,
 #' ## and setting the new folder's description
-#' pqr <- drive_mkdir("pqr", parent = ghi, description = "I am a folder")
+#' pqr <- drive_mkdir("pqr", path = ghi, description = "I am a folder")
 #'
 #' ## Did we really set the description? YES
 #' purrr::pluck(pqr, "drive_resource", 1, "description")
+#'
+#' ## `overwrite = FALSE` errors if something already exists at target filepath
+#' ## THIS WILL ERROR!
+#' drive_create("name-squatter", path = ghi)
+#' drive_mkdir("name-squatter", path = ghi, overwrite = FALSE)
+#'
+#' ## `overwrite = TRUE` moves the existing item to trash, then proceeds
+#' drive_mkdir("name-squatter", path = ghi, overwrite = TRUE)
 #'
 #' ## clean up
 #' drive_rm(ghi)
 #' }
 drive_mkdir <- function(name,
-                        parent = NULL,
+                        path = NULL,
                         ...,
+                        overwrite = NA,
+                        parent = "DEPRECATED",
                         verbose = TRUE) {
+  if (!missing(parent)) {
+    # TODO: use lifecycle technology here, but not in this PR
+    message("`parent` is deprecated, use `path` now")
+    path <- parent
+  }
+
   drive_create(
     name = name,
-    parent = parent,
+    path = path,
     type = "application/vnd.google-apps.folder",
     ...,
+    overwrite = overwrite,
     verbose = verbose
   )
 }

@@ -21,8 +21,8 @@ Specifies the desired type of the downloaded file. Will be processed via
 \code{\link[=drive_mime_type]{drive_mime_type()}}, so either a file extension like \code{"pdf"} or a full MIME
 type like \code{"application/pdf"} is acceptable.}
 
-\item{overwrite}{A logical scalar. If \code{path} already exists, do you want to
-overwrite it?}
+\item{overwrite}{A logical scalar. If local \code{path} already exists, do you
+want to overwrite it?}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}

@@ -5,23 +5,31 @@
 #'
 #' @template file-singular
 #' @param name Character. Name you would like the file to have.
+#' @template overwrite
 #' @template verbose
 #'
 #' @template dribble-return
 #'
 #' @examples
 #' \dontrun{
-#' ## Create a folder to rename
-#' folder <- drive_mkdir("folder-to-rename")
+#' ## Create a file to rename
+#' file <- drive_create("file-to-rename")
 #'
-#' ## Rename folder
-#' folder <- folder %>%
-#'   drive_rename(name = "renamed-folder")
+#' ## Rename it
+#' file <- drive_rename(file, name = "renamed-file")
+#'
+#' ## `overwrite = FALSE` errors if something already exists at target filepath
+#' ## THIS WILL ERROR!
+#' drive_create("name-squatter")
+#' drive_rename(file, name = "name-squatter", overwrite = FALSE)
+#'
+#' ## `overwrite = TRUE` moves the existing item to trash, then proceeds
+#' file <- drive_rename(file, name = "name-squatter", overwrite = TRUE)
 #'
 #' ## Clean up
-#' drive_rm(folder)
+#' drive_rm(file)
 #' }
 #' @export
-drive_rename <- function(file, name = NULL, verbose = TRUE) {
-  drive_mv(file = file, name = name, verbose = verbose)
+drive_rename <- function(file, name = NULL, overwrite = NA, verbose = TRUE) {
+  drive_mv(file = file, name = name, overwrite = overwrite, verbose = verbose)
 }

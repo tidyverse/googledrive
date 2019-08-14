@@ -1,5 +1,21 @@
 context("Path utilities")
 
+# ---- nm_fun ----
+me_ <- nm_fun("TEST-path-utils")
+nm_ <- nm_fun("TEST-path-utils", NULL)
+
+# ---- clean ----
+if (CLEAN) {
+  drive_trash(c(
+    nm_("create-in-me")
+  ))
+}
+
+# ---- setup ----
+if (SETUP) {
+  drive_mkdir(nm_("create-in-me"))
+}
+
 # ---- tests ----
 test_that("rootize_path() standardizes root", {
   expect_identical(rootize_path("~"), "~/")
@@ -108,4 +124,118 @@ test_that("is_path() works", {
   expect_false(is_path(as_id("a")))
   expect_false(is_path(as_id(letters)))
   expect_false(is_path(dribble()))
+})
+
+test_that("rationalize_path_name() errors for bad `name`, before hitting API", {
+  expect_error(
+    rationalize_path_name(name = letters),
+    "is_string\\(name\\) is not TRUE"
+  )
+})
+
+test_that("rationalize_path_name() can pass `path` and `name` through, w/o hitting API", {
+  # specifically, this happens when `is_path(path)` is FALSE
+  expect_identical(
+    rationalize_path_name(path = NULL, name = "NAME"),
+    list(path = NULL, name = "NAME")
+  )
+  expect_identical(
+    rationalize_path_name(path = as_id("FILE_ID"), name = NULL),
+    list(path = as_id("FILE_ID"), name = NULL)
+  )
+  expect_identical(
+    rationalize_path_name(path = as_id("FILE_ID"), name = "NAME"),
+    list(path = as_id("FILE_ID"), name = "NAME")
+  )
+  expect_identical(
+    rationalize_path_name(path = dribble(), name = NULL),
+    list(path = dribble(), name = NULL)
+  )
+  expect_identical(
+    rationalize_path_name(path = dribble(), name = "NAME"),
+    list(path = dribble(), name = "NAME")
+  )
+})
+
+test_that("rationalize_path_name() won't hit API if we can infer `path` is a folder", {
+  expect_identical(
+    rationalize_path_name(path = "PARENT_FOLDER", name = "NAME"),
+    list(path = "PARENT_FOLDER/", name = "NAME")
+  )
+  expect_identical(
+    rationalize_path_name(path = "PARENT_FOLDER/", name = NULL),
+    list(path = "PARENT_FOLDER/", name = NULL)
+  )
+})
+
+test_that("rationalize_path_name() populates `path` and `name` and correctly", {
+  with_mock(
+    `googledrive:::confirm_clear_path` = function(path, name) NULL, {
+      expect_identical(
+        rationalize_path_name(path = "FILE_NAME", name = NULL),
+        list(path = NULL, name = "FILE_NAME")
+      )
+      expect_identical(
+        rationalize_path_name(path = "PARENT_FOLDER/FILE_NAME", name = NULL),
+        list(path = "PARENT_FOLDER/", name = "FILE_NAME")
+      )
+    }
+  )
+})
+
+test_that("check_for_overwrite() does its job", {
+  skip_if_no_token()
+  skip_if_offline()
+  on.exit({
+    drive_rm(file.path(nm_("create-in-me"), me_("name-collision")))
+    drive_empty_trash()
+  })
+
+  PARENT_ID <- drive_get(nm_("create-in-me"))$id
+
+  first <- drive_create(me_("name-collision"), path = as_id(PARENT_ID))
+
+  expect_error(
+    check_for_overwrite(
+      parent = PARENT_ID,
+      name = me_("name-collision"),
+      overwrite = FALSE
+    ),
+    "already exist"
+  )
+
+  expect_error_free(
+    second <- drive_create(me_("name-collision"), path = as_id(PARENT_ID), overwrite = TRUE)
+  )
+  expect_identical(first$name, second$name)
+  expect_identical(
+    purrr::pluck(first, "drive_resource", 1, "parents"),
+    purrr::pluck(second, "drive_resource", 1, "parents")
+  )
+  expect_false(first$id == second$id)
+
+  expect_error_free(
+    drive_create(me_("name-collision"), path = as_id(PARENT_ID), overwrite = NA)
+  )
+  df <- drive_ls(nm_("create-in-me"))
+  expect_identical(nrow(df), 2L)
+
+  expect_error(
+    check_for_overwrite(
+      parent = PARENT_ID,
+      me_("name-collision"),
+      overwrite = TRUE
+    ),
+    "Multiple items"
+  )
+})
+
+test_that("check_for_overwrite() copes with `parent = NULL`", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  expect_error(
+    check_for_overwrite(parent = NULL, nm_("create-in-me"), overwrite = FALSE),
+    "already exist"
+  )
 })

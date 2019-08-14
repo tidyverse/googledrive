@@ -4,13 +4,14 @@
 \alias{drive_mkdir}
 \title{Create a Drive folder}
 \usage{
-drive_mkdir(name, parent = NULL, ..., verbose = TRUE)
+drive_mkdir(name, path = NULL, ..., overwrite = NA,
+  parent = "DEPRECATED", verbose = TRUE)
 }
 \arguments{
 \item{name}{Name for the new folder or, optionally, a path that specifies
 an existing parent folder, as well as the new name.}
 
-\item{parent}{Target destination for the new item, i.e. a folder or a Team
+\item{path}{Target destination for the new item, i.e. a folder or a Team
 Drive. Can be given as an actual path (character), a file id or URL marked
 with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root folder.}
 
@@ -18,6 +19,27 @@ with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your
 the metadata of the target file by specifying properties of the Files
 resource via \code{...}. See the "Request body" section of the Drive API
 docs for the associated endpoint.}
+
+\item{overwrite}{Logical, indicating whether to check for a pre-existing file
+at the targetted "filepath". The quotes around "filepath" refer to the fact
+that Drive does not impose a 1-to-1 relationship between filepaths and files,
+like a typical file system; read more about that in \code{\link[=drive_get]{drive_get()}}.
+\itemize{
+\item \code{NA} (default): Just do the operation, even if it results in multiple
+files with the same filepath.
+\item \code{TRUE}: Check for a pre-existing file at the filepath. If there is
+zero or one, move a pre-existing file to the trash, then carry on. Note
+that the new file does not inherit any properties from the old one, such
+as sharing or publishing settings. It will have a new file ID. An error is
+thrown if two or more pre-existing files are found.
+\item \code{FALSE}: Error if there is any pre-existing file at the filepath.
+}
+
+Note that existence checks, based on filepath, are expensive operations, i.e.
+they require additional API calls.}
+
+\item{parent}{DEPRECATED. Use the \code{path} argument for this now, which is more
+consistent with other functions in googledrive.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -39,15 +61,23 @@ jkl <- drive_mkdir("ghi/jkl", starred = TRUE)
 purrr::pluck(jkl, "drive_resource", 1, "starred")
 
 ## Another way to create folder 'mno' in folder 'ghi'
-drive_mkdir("mno", parent = "ghi")
+drive_mkdir("mno", path = "ghi")
 
 ## Yet another way to create a folder named 'pqr' in folder 'ghi',
 ## this time with parent folder stored in a dribble,
 ## and setting the new folder's description
-pqr <- drive_mkdir("pqr", parent = ghi, description = "I am a folder")
+pqr <- drive_mkdir("pqr", path = ghi, description = "I am a folder")
 
 ## Did we really set the description? YES
 purrr::pluck(pqr, "drive_resource", 1, "description")
+
+## `overwrite = FALSE` errors if something already exists at target filepath
+## THIS WILL ERROR!
+drive_create("name-squatter", path = ghi)
+drive_mkdir("name-squatter", path = ghi, overwrite = FALSE)
+
+## `overwrite = TRUE` moves the existing item to trash, then proceeds
+drive_mkdir("name-squatter", path = ghi, overwrite = TRUE)
 
 ## clean up
 drive_rm(ghi)

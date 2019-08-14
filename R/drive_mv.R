@@ -15,6 +15,7 @@
 #' @template name
 #' @templateVar name file
 #' @templateVar default Defaults to current name.
+#' @template overwrite
 #' @template verbose
 #'
 #' @template dribble-return
@@ -45,10 +46,22 @@
 #' ## to ensure we get a move vs. renaming it to "mv-folder"
 #' file <- drive_mv(file, "mv-folder/")
 #'
+#' ## `overwrite = FALSE` errors if something already exists at target filepath
+#' ## THIS WILL ERROR!
+#' drive_create("name-squatter", path = "~/")
+#' drive_mv(file, path = "~/", name = "name-squatter", overwrite = FALSE)
+#'
+#' ## `overwrite = TRUE` moves the existing item to trash, then proceeds
+#' drive_mv(file, path = "~/", name = "name-squatter", overwrite = TRUE)
+#'
 #' ## Clean up
 #' drive_rm(file, folder)
 #' }
-drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
+drive_mv <- function(file,
+                     path = NULL,
+                     name = NULL,
+                     overwrite = NA,
+                     verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
 
@@ -57,32 +70,21 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
     return(invisible(file))
   }
 
-  if (!is.null(name)) {
-    stopifnot(is_string(name))
-  }
+  tmp <- rationalize_path_name(path, name)
+  path <- tmp$path
+  name <- tmp$name
 
-  if (is_path(path)) {
-    confirm_clear_path(path, name)
-    path_parts <- partition_path(path, maybe_name = is.null(name))
-    path <- path_parts$parent
-    name <- name %||% path_parts$name %||% file$name
-  }
+  params <- list()
 
-  meta <- list()
-
-  if (!is.null(name) && name != file$name) {
-    meta[["name"]] <- name
-  }
-
-  ## if moving the file, modify the parent
-  parents_before <- file$drive_resource[[1]][["parents"]]
+  # load (path, name) into params ... maybe
+  parents_before <- purrr::pluck(file, "drive_resource", 1, "parents")
   n_parents_before <- length(parents_before)
   if (!is.null(path)) {
     path <- as_parent(path)
     if (!path$id %in% parents_before) {
-      meta[["addParents"]] <- path$id
+      params[["addParents"]] <- path$id
       if (n_parents_before == 1) {
-        meta[["removeParents"]] <- parents_before
+        params[["removeParents"]] <- parents_before
       } else if (n_parents_before > 1) {
         warning(
           "File started with multiple parents!\n",
@@ -93,16 +95,26 @@ drive_mv <- function(file, path = NULL, name = NULL, verbose = TRUE) {
       }
     }
   }
+  if (!is.null(name) && name != file$name) {
+    params[["name"]] <- name
+  }
 
-  if (length(meta) == 0) {
+  if (length(params) == 0) {
     if (verbose) message("Nothing to be done.")
     return(invisible(file))
   }
-  meta[["fields"]] <- "*"
-  out <- drive_update_metadata(file, meta)
+
+  check_for_overwrite(
+    parent = params[["addParents"]] %||% parents_before[[1]],
+    name   = params[["name"]]       %||% file$name,
+    overwrite = overwrite
+  )
+
+  params[["fields"]] <- "*"
+  out <- drive_update_metadata(file, params)
 
   if (verbose) {
-    parent_added <- !is.null(meta[["addParents"]])
+    parent_added <- !is.null(params[["addParents"]])
     actions <- c(
       renamed = !identical(out$name, file$name),
       moved = parent_added && n_parents_before < 2,

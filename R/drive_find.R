@@ -97,6 +97,9 @@
 #' drive_find(trashed = TRUE)
 #' ## `trashed = NA` disregards trash status completely
 #' drive_find(trashed = NA)
+#'
+#' ## see top 10 files in terms of "recency"
+#' drive_find(orderBy = "recency desc", n_max = 10)
 #' }
 #'
 #' @export

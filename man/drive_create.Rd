@@ -4,13 +4,14 @@
 \alias{drive_create}
 \title{Create a new blank Drive file}
 \usage{
-drive_create(name, parent = NULL, type = NULL, ..., verbose = TRUE)
+drive_create(name, path = NULL, type = NULL, ..., overwrite = NA,
+  verbose = TRUE)
 }
 \arguments{
 \item{name}{Name for the new file or, optionally, a path that specifies
 an existing parent folder, as well as the new file name.}
 
-\item{parent}{Target destination for the new item, i.e. a folder or a Team
+\item{path}{Target destination for the new item, i.e. a folder or a Team
 Drive. Can be given as an actual path (character), a file id or URL marked
 with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root folder.}
 
@@ -23,6 +24,24 @@ respectively. All non-\code{NULL} values for \code{type} are pre-processed with
 the metadata of the target file by specifying properties of the Files
 resource via \code{...}. See the "Request body" section of the Drive API
 docs for the associated endpoint.}
+
+\item{overwrite}{Logical, indicating whether to check for a pre-existing file
+at the targetted "filepath". The quotes around "filepath" refer to the fact
+that Drive does not impose a 1-to-1 relationship between filepaths and files,
+like a typical file system; read more about that in \code{\link[=drive_get]{drive_get()}}.
+\itemize{
+\item \code{NA} (default): Just do the operation, even if it results in multiple
+files with the same filepath.
+\item \code{TRUE}: Check for a pre-existing file at the filepath. If there is
+zero or one, move a pre-existing file to the trash, then carry on. Note
+that the new file does not inherit any properties from the old one, such
+as sharing or publishing settings. It will have a new file ID. An error is
+thrown if two or more pre-existing files are found.
+\item \code{FALSE}: Error if there is any pre-existing file at the filepath.
+}
+
+Note that existence checks, based on filepath, are expensive operations, i.e.
+they require additional API calls.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
@@ -65,14 +84,21 @@ drive_browse(execuvision)
 ## Create folder 'b4xl' in the root folder,
 ## then create an empty new Google Sheet in it
 b4xl <- drive_mkdir("b4xl")
-drive_create("VisiCalc", parent = b4xl, type = "spreadsheet")
+drive_create("VisiCalc", path = b4xl, type = "spreadsheet")
 
-## Another way to create a Google Sheet in the folder 'spreadsheets'
+## Another way to create a Google Sheet in the folder 'b4xl'
 drive_create("b4xl/SuperCalc", type = "spreadsheet")
 
 ## Another way to create a new file in a folder,
-## this time specifying `parent` as a character
-drive_create("Lotus 1-2-3", parent = "b4xl", type = "spreadsheet")
+## this time specifying parent `path` as a character
+drive_create("Lotus 1-2-3", path = "b4xl", type = "spreadsheet")
+
+## `overwrite = FALSE` errors if file already exists at target filepath
+## THIS WILL ERROR!
+drive_create("VisiCalc", path = b4xl, overwrite = FALSE)
+
+## `overwrite = TRUE` moves an existing file to trash, then proceeds
+drive_create("VisiCalc", path = b4xl, overwrite = TRUE)
 
 ## clean up
 drive_rm(wordstar, b4xl, execuvision)

@@ -18,8 +18,8 @@
 #'   Specifies the desired type of the downloaded file. Will be processed via
 #'   [drive_mime_type()], so either a file extension like `"pdf"` or a full MIME
 #'   type like `"application/pdf"` is acceptable.
-#' @param overwrite A logical scalar. If `path` already exists, do you want to
-#'   overwrite it?
+#' @param overwrite A logical scalar. If local `path` already exists, do you
+#'   want to overwrite it?
 #' @template verbose
 #' @template dribble-return
 #' @export

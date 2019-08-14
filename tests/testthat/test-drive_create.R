@@ -26,7 +26,7 @@ test_that("drive_create() errors for bad input (before hitting Drive API)", {
 test_that("drive_create() errors if parent path does not exist", {
   skip_if_no_token()
   skip_if_offline()
-  expect_error(drive_create("a", parent = "qweruiop"))
+  expect_error(drive_create("a", path = "qweruiop"))
 })
 
 test_that("drive_create() errors if parent exists but is not a folder", {
@@ -37,7 +37,7 @@ test_that("drive_create() errors if parent exists but is not a folder", {
     n_max = 1
   )
   expect_error(
-    drive_create("a", parent = x),
+    drive_create("a", path = x),
     "Requested parent `path` is invalid"
   )
 })
@@ -134,17 +134,20 @@ test_that("drive_create() parent separately, as a path", {
   on.exit(drive_rm(c(me_("e"), me_("f"))))
 
   ## no trailing slash on parent
-  out <- drive_create(me_("e"), parent = nm_("create-in-me"))
+  out <- drive_create(me_("e"), path = nm_("create-in-me"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("e"))
 
   ## yes trailing slash on parent
-  out <- drive_create(me_("f"), parent = file.path(nm_("create-in-me"), ""))
+  out <- drive_create(me_("f"), path = file.path(nm_("create-in-me"), ""))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("f"))
 })
 
 test_that("drive_create() catches invalid parameters", {
+  skip_if_no_token()
+  skip_if_offline()
+
   expect_error(
     drive_create("hi", bunny = "foofoo"),
     regexp = "These parameters are unknown",

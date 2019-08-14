@@ -1,7 +1,8 @@
 #' Upload into a new Drive file
 #'
 #' Uploads a local file into a new Drive file. To update the content or metadata
-#' of an existing Drive file, use [drive_update()].
+#' of an existing Drive file, use [drive_update()]. To upload or update,
+#' depending on whether the Drive file already exists, see [drive_put()].
 #'
 #' @seealso Wraps the `files.create` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/create>
@@ -24,6 +25,7 @@
 #'   respectively. All non-`NULL` values for `type` are pre-processed with
 #'   [drive_mime_type()].
 #' @template dots-metadata
+#' @template overwrite
 #' @template verbose
 #'
 #' @template dribble-return
@@ -61,6 +63,25 @@
 #' ## Clean up
 #' drive_rm(chicken)
 #'
+#' ## `overwrite = FALSE` errors if something already exists at target filepath
+#' ## THIS WILL ERROR!
+#' drive_create("name-squatter")
+#' drive_upload(
+#'   drive_example("chicken.jpg"),
+#'   name = "name-squatter",
+#'   overwrite = FALSE
+#' )
+#'
+#' ## `overwrite = TRUE` moves the existing item to trash, then proceeds
+#' chicken <- drive_upload(
+#'   drive_example("chicken.jpg"),
+#'   name = "name-squatter",
+#'   overwrite = TRUE
+#' )
+#'
+#' ## Clean up
+#' drive_rm(chicken)
+#'
 #' ## Upload to a Team Drive:
 #' ##   * your Google account must have Team Drive privileges, obviously
 #' ##   * the Team Drive (or Team Drive-hosted folder) MUST be captured as a
@@ -73,44 +94,30 @@ drive_upload <- function(media,
                          name = NULL,
                          type = NULL,
                          ...,
+                         overwrite = NA,
                          verbose = TRUE) {
   if (!file.exists(media)) {
     stop_glue("\nFile does not exist:\n  * {media}")
   }
 
-  if (!is.null(name)) {
-    stopifnot(is_string(name))
-  }
+  tmp <- rationalize_path_name(path, name)
+  path <- tmp$path
+  name <- tmp$name
 
-  if (is_path(path)) {
-    confirm_clear_path(path, name)
-    path_parts <- partition_path(path, maybe_name = is.null(name))
-    path <- path_parts$parent
-    name <- name %||% path_parts$name
-  }
+  params <- toCamel(list(...))
 
-  dots <- toCamel(list(...))
-  dots$fields <- dots$fields %||% "*"
-
-  params <- c(
-    uploadType = "multipart",
-    dots
-  )
-
+  # load (path, name) into params
   if (!is.null(path)) {
     path <- as_parent(path)
-    if (!is.null(params[["parents"]])) {
-      stop_collapse(c(
-        "You have specified parent folders via both 'path' and 'parents'.",
-        "Pick one.",
-        "If you want multiple parents, just use the 'parents' parameter."
-      ))
-    }
     params[["parents"]] <- path$id
   }
-
   params[["name"]] <- name %||% basename(media)
+
+  check_for_overwrite(params[["parents"]], params[["name"]], overwrite)
+
+  params[["fields"]] <- params[["fields"]] %||% "*"
   params[["mimeType"]] <- drive_mime_type(type)
+  params[["uploadType"]] <- "multipart"
 
   request <- request_generate(
     endpoint = "drive.files.create.media",

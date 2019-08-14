@@ -13,6 +13,7 @@
 #' @templateVar name file
 #' @templateVar default Defaults to "Copy of `FILE-NAME`".
 #' @template dots-metadata
+#' @template overwrite
 #' @template verbose
 #' @template dribble-return
 #'
@@ -36,6 +37,13 @@
 #' ## `starred` is not an actual argument to `drive_cp()`,
 #' ## it just gets passed through to the API.
 #' drive_cp("chicken-cp.txt", name = "chicken-cp-starred.txt", starred = TRUE)
+#'
+#' ## `overwrite = FALSE` errors if file already exists at target filepath
+#' ## THIS WILL ERROR!
+#' drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = FALSE)
+#'
+#' ## `overwrite = TRUE` moves an existing file to trash, then proceeds
+#' drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = TRUE)
 #'
 #' ## Behold all of our copies!
 #' drive_find("chicken-cp")
@@ -61,41 +69,34 @@
 #' drive_rm(csv_file, chicken_sheet)
 #' }
 #' @export
-drive_cp <- function(file, path = NULL, name = NULL, ..., verbose = TRUE) {
+drive_cp <- function(file,
+                     path = NULL,
+                     name = NULL,
+                     ...,
+                     overwrite = NA,
+                     verbose = TRUE) {
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_parental(file)) {
     stop_glue("The Drive API does not copy folders or Team Drives.")
   }
 
-  if (!is.null(name)) {
-    stopifnot(is_string(name))
-  }
+  tmp <- rationalize_path_name(path, name)
+  path <- tmp$path
+  name <- tmp$name
 
-  if (is_path(path)) {
-    confirm_clear_path(path, name)
-    path_parts <- partition_path(path, maybe_name = is.null(name))
-    path <- path_parts$parent
-    name <- name %||% path_parts$name
-  }
+  params <- toCamel(list(...))
 
-  name <- name %||% glue("Copy of {file$name}")
-
-  dots <- toCamel(list(...))
-  dots$fields <- dots$fields %||% "*"
-  params <- c(
-    fileId = file$id,
-    dots
-  )
-
+  # load (path, name) into params
   if (!is.null(path)) {
     path <- as_parent(path)
     params[["parents"]] <- list(path$id)
   }
+  params[["name"]] <- name %||% glue("Copy of {file$name}")
+  check_for_overwrite(params[["parents"]], params[["name"]], overwrite)
 
-  if (!is.null(name)) {
-    params[["name"]] <- name
-  }
+  params[["fields"]] <- params[["fields"]] %||% "*"
+  params[["fileId"]] <- file$id
 
   request <- request_generate(
     endpoint = "drive.files.copy",

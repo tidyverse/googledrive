@@ -5,7 +5,7 @@
 \title{Upload into a new Drive file}
 \usage{
 drive_upload(media, path = NULL, name = NULL, type = NULL, ...,
-  verbose = TRUE)
+  overwrite = NA, verbose = TRUE)
 }
 \arguments{
 \item{media}{Character, path to the local file to upload.}
@@ -32,6 +32,24 @@ the metadata of the target file by specifying properties of the Files
 resource via \code{...}. See the "Request body" section of the Drive API
 docs for the associated endpoint.}
 
+\item{overwrite}{Logical, indicating whether to check for a pre-existing file
+at the targetted "filepath". The quotes around "filepath" refer to the fact
+that Drive does not impose a 1-to-1 relationship between filepaths and files,
+like a typical file system; read more about that in \code{\link[=drive_get]{drive_get()}}.
+\itemize{
+\item \code{NA} (default): Just do the operation, even if it results in multiple
+files with the same filepath.
+\item \code{TRUE}: Check for a pre-existing file at the filepath. If there is
+zero or one, move a pre-existing file to the trash, then carry on. Note
+that the new file does not inherit any properties from the old one, such
+as sharing or publishing settings. It will have a new file ID. An error is
+thrown if two or more pre-existing files are found.
+\item \code{FALSE}: Error if there is any pre-existing file at the filepath.
+}
+
+Note that existence checks, based on filepath, are expensive operations, i.e.
+they require additional API calls.}
+
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 }
@@ -40,7 +58,8 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Uploads a local file into a new Drive file. To update the content or metadata
-of an existing Drive file, use \code{\link[=drive_update]{drive_update()}}.
+of an existing Drive file, use \code{\link[=drive_update]{drive_update()}}. To upload or update,
+depending on whether the Drive file already exists, see \code{\link[=drive_put]{drive_put()}}.
 }
 \examples{
 \dontrun{
@@ -71,6 +90,25 @@ chicken <- drive_upload(
 
 ## Is is really starred? YES
 purrr::pluck(chicken, "drive_resource", 1, "starred")
+
+## Clean up
+drive_rm(chicken)
+
+## `overwrite = FALSE` errors if something already exists at target filepath
+## THIS WILL ERROR!
+drive_create("name-squatter")
+drive_upload(
+  drive_example("chicken.jpg"),
+  name = "name-squatter",
+  overwrite = FALSE
+)
+
+## `overwrite = TRUE` moves the existing item to trash, then proceeds
+chicken <- drive_upload(
+  drive_example("chicken.jpg"),
+  name = "name-squatter",
+  overwrite = TRUE
+)
 
 ## Clean up
 drive_rm(chicken)

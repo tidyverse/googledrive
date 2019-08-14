@@ -26,7 +26,8 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Update an existing Drive file id with new content ("media" in Drive
-API-speak), new metadata, or both.
+API-speak), new metadata, or both.  To create a new file or update existing,
+depending on whether the Drive file already exists, see \code{\link[=drive_put]{drive_put()}}.
 }
 \examples{
 \dontrun{
