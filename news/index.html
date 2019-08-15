@@ -279,6 +279,7 @@
 <div id="other-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h2>
+<p><code><a href="../reference/drive_find.html">drive_find()</a></code> now sorts by “recency”, by default.</p>
 <p><code><a href="../reference/drive_create.html">drive_create()</a></code> is a new function that creates a new empty file, with an optional file type specification (<a href='https://github.com/tidyverse/googledrive/issues/258'>#258</a>, <a href='https://github.com/ianmcook'>@ianmcook</a>). <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code> becomes a thin wrapper around <code><a href="../reference/drive_create.html">drive_create()</a></code>, with the file type hard-wired to “folder”.</p>
 <p>In <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code>, the optional parent directory is now known as <code>path</code> instead of <code>parent</code>. This is more consistent with everything else in googledrive, which became very obvious when adding <code><a href="../reference/drive_create.html">drive_create()</a></code> and the general <code>overwrite</code> functionality.</p>
 <p><code><a href="../reference/drive_empty_trash.html">drive_empty_trash()</a></code> now exploits the correct endpoint (as opposed to deleting individual files) and is therefore much faster (<a href='https://github.com/tidyverse/googledrive/issues/203'>#203</a>).</p>
