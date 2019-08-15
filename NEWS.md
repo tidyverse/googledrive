@@ -9,7 +9,7 @@ There is also new functionality that makes it less likely you'll create multiple
 
 ## Auth from gargle
 
-googledrive's auth functionality now comes from the [gargle package](https://gargle.r-lib.org), which provides R infrastructure to work with Google APIs, in general. The same transition is underway in several other packages, such as [bigrquery](https://bigrquery.r-dbi.org). This will make user interfaces more consistent and makes two new token flows available in googledrive:
+googledrive's auth functionality now comes from the [gargle package](https://gargle.r-lib.org), which provides R infrastructure to work with Google APIs, in general. The same transition is happening in several other packages, such as [bigrquery](https://bigrquery.r-dbi.org) and [gmailr](https://gmailr.r-lib.org). This makes user interfaces more consistent and makes two new token flows available in googledrive:
 
   * Application Default Credentials
   * Service account tokens from the metadata server available to VMs running on GCE
@@ -22,6 +22,7 @@ Where to learn more:
     - [How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) 
     - [Non-interactive auth](https://gargle.r-lib.org/articles/non-interactive-auth.html)
     - [How gargle gets tokens](https://gargle.r-lib.org/articles/how-gargle-gets-tokens.html)
+    - [Managing tokens securely](https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html)
 
 ### Changes that a user will notice
 
@@ -37,9 +38,9 @@ The arguments and usage of `drive_auth()` have changed.
   
     ``` r  
     drive_auth(
-      oauth_token = NULL,
-      service_token = NULL,
-      reset = FALSE,
+      oauth_token = NULL,                       # use `token` now
+      service_token = NULL,                     # use `path` now
+      reset = FALSE,                            
       cache = getOption("httr_oauth_cache"),
       use_oob = getOption("httr_oob_default"),
       verbose = TRUE
@@ -50,18 +51,18 @@ The arguments and usage of `drive_auth()` have changed.
   
     ``` r
     drive_auth(
-      email = gargle::gargle_oauth_email(),
-      path = NULL,
-      scopes = "https://www.googleapis.com/auth/drive",
+      email = gargle::gargle_oauth_email(),             # NEW!
+      path = NULL,                                      # was `service_token`
+      scopes = "https://www.googleapis.com/auth/drive", # NEW!
       cache = gargle::gargle_oauth_cache(),
       use_oob = gargle::gargle_oob_default(),
-      token = NULL
+      token = NULL                                      # was `oauth_token`
     )
     ```
 
 For full details see the resources listed in *Where to learn more* above. The change that probably affects the most code is the way to provide a service account token:
-  - Previously: `drive_auth(service_token = "/path/to/your/service-account.json")` (v0.1.3 and earlier)
-  - Now: `drive_auth(path = "/path/to/your/service-account.json")` (>= v1.0.0)
+  - Previously: `drive_auth(service_token = "/path/to/your/service-account-token.json")` (v0.1.3 and earlier)
+  - Now: `drive_auth(path = "/path/to/your/service-account-token.json")` (>= v1.0.0)
 
 Auth configuration has also changed:
 
@@ -81,7 +82,7 @@ There are other small changes to the low-level developer-facing API:
   
 ## `overwrite = NA / TRUE / FALSE` and `drive_put()`
 
-Google Drive doesn't impose a 1-to-1 relationship between files and filepaths, the way your local file system does. Therefore, when working via the Drive API (instead of the browser), it's fairly easy to create multiple Drive files with the same name or filepath, without actually meaning to. This is perfectly valid on Drive, which identifies file by ID, but can be confusing and undesirable for humans.
+Google Drive doesn't impose a 1-to-1 relationship between files and filepaths, the way your local file system does. Therefore, when working via the Drive API (instead of in the browser), it's fairly easy to create multiple Drive files with the same name or filepath, without actually meaning to. This is perfectly valid on Drive, which identifies file by ID, but can be confusing and undesirable for humans.
 
 googledrive v1.0.0 offers some new ways to fight this:
 
@@ -115,7 +116,7 @@ Existence checks based on filepath (or name) can be expensive. This is why the d
 
 Sometimes you have a file you will repeatedly send to Drive, i.e. the first time you run an analysis, you create the file and, when you re-run it, you update the file. Previously this was hard to express with googledrive.
 
-`drive_put()` is useful here and refers to the HTTP verb `PUT`: create the thing if it doesn't exist or, if it does, replace its contents. A good explanation of `PUT` and `PATCH` is [RESTful API Design — PUT vs PATCH](https://medium.com/backticks-tildes/restful-api-design-put-vs-patch-4a061aa3ed0b)).
+`drive_put()` is useful here and refers to the HTTP verb `PUT`: create the thing if it doesn't exist or, if it does, replace its contents. A good explanation of `PUT` is [RESTful API Design — PUT vs PATCH](https://medium.com/backticks-tildes/restful-api-design-put-vs-patch-4a061aa3ed0b)).
 
 In pseudo-code, here's the basic idea of `drive_put()`:
 
