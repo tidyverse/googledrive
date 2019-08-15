@@ -169,10 +169,11 @@ character and lacks a trailing slash. Defaults to "Copy of <code>FILE-NAME</code
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Named parameters to pass along to the Drive API. You can affect
-the metadata of the target file by specifying properties of the Files
-resource via <code>...</code>. See the "Request body" section of the Drive API
-docs for the associated endpoint.</p></td>
+      <td><p>Named parameters to pass along to the Drive API. Has the tidy dots
+semantics that come from using <code><a href='https://rlang.r-lib.org/reference/tidy-dots.html'>rlang::list2()</a></code>. You can affect the
+metadata of the target file by specifying properties of the Files resource
+via <code>...</code>. Read the "Request body" section of the Drive API docs for the
+associated endpoint to learn about relevant parameters.</p></td>
     </tr>
     <tr>
       <th>overwrite</th>
