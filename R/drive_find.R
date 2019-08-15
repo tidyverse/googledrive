@@ -29,6 +29,16 @@
 #'   regardless of trash status, set `trashed = NA`, which adds
 #'   `q = "(trashed = true or trashed = false)"` to the query.
 
+#' @section Sort order:
+#'
+#'   By default, `drive_find()` sends `orderBy = "recency desc"`, so the top
+#'   files in your result have high "recency" (whatever that means). To suppress
+#'   sending `orderBy` at all, do `drive_find(orderBy = NULL)`. The `orderBy`
+#'   parameter accepts sort keys in addition to `recency`, which are documented
+#'   in the [`files.list` endpoint](https://developers.google.com/drive/v3/reference/files/list).
+#'   googledrive translates a snake_case specification of `order_by` into the
+#'   lowerCamel form, `orderBy`.
+
 #' @section Team Drives:
 #'
 #' If you have access to Team Drives, you'll know. Use `team_drive` or `corpus`
@@ -43,8 +53,9 @@
 #'
 #' @template pattern
 #' @param trashed Logical. Whether to search files that are not in the trash
-#'   (the default), only files that are in the trash (`trashed = TRUE`), or to
-#'   search regardless of trashed status (`trashed = NA`).
+#'   (`trashed = FALSE`, the default), only files that are in the trash
+#'   (`trashed = TRUE`), or to search regardless of trashed status (`trashed =
+#'   NA`).
 #' @param type Character. If provided, only files of this type will be returned.
 #'   Can be anything that [drive_mime_type()] knows how to handle. This is
 #'   processed by googledrive and sent as a query parameter.
@@ -59,47 +70,51 @@
 #' @template dribble-return
 #' @examples
 #' \dontrun{
-#' ## list "My Drive" w/o regard for folder hierarchy
+#' # list "My Drive" w/o regard for folder hierarchy
 #' drive_find()
 #'
-#' ## filter for folders, the easy way and the hard way
+#' # filter for folders, the easy way and the hard way
 #' drive_find(type = "folder")
 #' drive_find(q = "mimeType = 'application/vnd.google-apps.folder'")
 #'
-#' ## filter for Google Sheets, the easy way and the hard way
+#' # filter for Google Sheets, the easy way and the hard way
 #' drive_find(type = "spreadsheet")
 #' drive_find(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 #'
-#' ## files whose names match a regex
+#' # files whose names match a regex
 #' drive_find(pattern = "jt")
 #'
-#' ## search for files located directly in your root folder
+#' # search for files located directly in your root folder
 #' drive_find(q = "'root' in parents")
-#' ## FYI: this is equivalent to
+#' # FYI: this is equivalent to
 #' drive_ls("~/")
 #'
-#' ## control page size or cap the number of files returned
+#' # control page size or cap the number of files returned
 #' drive_find(pageSize = 50)
-#' ## all params passed through `...` can be camelCase or snake_case
+#' # all params passed through `...` can be camelCase or snake_case
 #' drive_find(page_size = 50)
 #' drive_find(n_max = 58)
 #' drive_find(page_size = 5, n_max = 15)
 #'
-#' ## various ways to specify q search clauses
-#' ## multiple q's
+#' # various ways to specify q search clauses
+#' # multiple q's
 #' drive_find(q = "name contains 'TEST'",
 #'            q = "modifiedTime > '2017-07-21T12:00:00'")
-#' ## vector q
+#' # vector q
 #' drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
 #'
-#' ## default `trashed = FALSE` excludes files in the trash
-#' ## `trashed = TRUE` consults ONLY file in the trash
+#' # default `trashed = FALSE` excludes files in the trash
+#' # `trashed = TRUE` consults ONLY file in the trash
 #' drive_find(trashed = TRUE)
-#' ## `trashed = NA` disregards trash status completely
+#' # `trashed = NA` disregards trash status completely
 #' drive_find(trashed = NA)
 #'
-#' ## see top 10 files in terms of "recency"
-#' drive_find(orderBy = "recency desc", n_max = 10)
+#' # suppress the default sorting on recency
+#' drive_find(order_by = NULL, n_max = 5)
+#'
+#' # sort on various keys
+#' drive_find(order_by = "quotaBytesUsed", n_max = 5)
+#' drive_find(order_by = "modifiedByMeTime", n_max = 5)
 #' }
 #'
 #' @export
@@ -114,12 +129,15 @@ drive_find <- function(pattern = NULL,
   if (!is.null(pattern) && !(is_string(pattern))) {
     stop_glue("`pattern` must be a character string.")
   }
-  stopifnot(is.logical(trashed), length(trashed) == 1)
+  stopifnot(is_toggle(trashed))
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
   if (n_max < 1) return(dribble())
 
   params <- toCamel(list(...))
   params[["fields"]] <- params[["fields"]] %||% "*"
+  if (!rlang::has_name(params, "orderBy")) {
+    params[["orderBy"]] <- "recency desc"
+  }
   params <- marshal_q_clauses(params)
 
   trash_clause <- switch(

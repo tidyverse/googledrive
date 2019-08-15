@@ -133,6 +133,8 @@ if (no hits) {
 
 ## Other changes
 
+`drive_find()` now sorts by "recency", by default.
+
 `drive_create()` is a new function that creates a new empty file, with an optional file type specification (#258, @ianmcook). `drive_mkdir()` becomes a thin wrapper around `drive_create()`, with the file type hard-wired to "folder".
 
 In `drive_mkdir()`, the optional parent directory is now known as `path` instead of `parent`. This is more consistent with everything else in googledrive, which became very obvious when adding `drive_create()` and the general `overwrite` functionality.

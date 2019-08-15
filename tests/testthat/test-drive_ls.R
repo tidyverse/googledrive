@@ -89,7 +89,7 @@ test_that("drive_ls() passes ... through to drive_find()", {
   ## does user-specified q get appended to vs clobbered?
   ## if so, only about-html is listed here
   about <- drive_get(nm_("about-html"))
-  out <- drive_ls(d, q = "fullText contains 'portable'")
+  out <- drive_ls(d, q = "fullText contains 'portable'", orderBy = NULL)
   expect_identical(
     about[c("name", "id")],
     out[c("name", "id")]
