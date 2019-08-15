@@ -20,10 +20,11 @@ always be worked out from the context of the call. Will default to its local nam
 \code{path}. This will force \code{path} to be treated as a folder, even if it is
 character and lacks a trailing slash. Will default to its local name.}
 
-\item{...}{Named parameters to pass along to the Drive API. You can affect
-the metadata of the target file by specifying properties of the Files
-resource via \code{...}. See the "Request body" section of the Drive API
-docs for the associated endpoint.}
+\item{...}{Named parameters to pass along to the Drive API. Has the tidy dots
+semantics that come from using \code{\link[rlang:list2]{rlang::list2()}}. You can affect the
+metadata of the target file by specifying properties of the Files resource
+via \code{...}. Read the "Request body" section of the Drive API docs for the
+associated endpoint to learn about relevant parameters.}
 
 \item{type}{Character. If \code{type = NULL}, a MIME type is automatically
 determined from the file extension, if possible. If the source file is of a

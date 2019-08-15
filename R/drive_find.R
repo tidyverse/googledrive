@@ -133,7 +133,7 @@ drive_find <- function(pattern = NULL,
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
   if (n_max < 1) return(dribble())
 
-  params <- toCamel(list(...))
+  params <- toCamel(rlang::list2(...))
   params[["fields"]] <- params[["fields"]] %||% "*"
   if (!rlang::has_name(params, "orderBy")) {
     params[["orderBy"]] <- "recency desc"

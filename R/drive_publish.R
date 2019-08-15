@@ -66,7 +66,7 @@ drive_change_publish <- function(file,
     ))
   }
 
-  params <- toCamel(list(...))
+  params <- toCamel(rlang::list2(...))
   params[["published"]] <- publish
   params[["publishAuto"]] <- params[["publishAuto"]] %||% TRUE
   params[["publishedOutsideDomain"]] <-

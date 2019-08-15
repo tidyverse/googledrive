@@ -42,7 +42,7 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   path <- as_dribble(path)
   path <- confirm_single_file(path)
 
-  params <- list(...)
+  params <- rlang::list2(...)
   if (is_team_drivy(path)) {
     if (is_team_drive(path)) {
       params[["team_drive"]] <- as_id(path)

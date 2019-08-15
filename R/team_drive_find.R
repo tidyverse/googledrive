@@ -29,7 +29,7 @@ team_drive_find <- function(pattern = NULL,
   if (n_max < 1) return(dribble())
 
   ## what could possibly come via `...` here? pageSize (or fields)
-  params <- toCamel(list(...))
+  params <- toCamel(rlang::list2(...))
   params$fields <- params$fields %||% "*"
 
   request <- request_generate("drive.teamdrives.list", params = params)

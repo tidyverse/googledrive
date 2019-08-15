@@ -73,7 +73,7 @@ drive_share <- function(file,
   file <- as_dribble(file)
   file <- confirm_some_files(file)
 
-  params <- toCamel(list(...))
+  params <- toCamel(rlang::list2(...))
   params[["role"]] <- role
   params[["type"]] <- type
   params[["fields"]] <- "*"

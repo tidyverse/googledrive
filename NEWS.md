@@ -133,6 +133,8 @@ if (no hits) {
 
 ## Other changes
 
+All functions that support `...` as a way to pass more parameters to the Drive API now have "tidy dots semantics": `!!!` is supported for splicing and `!!` can be used on the LHS of `:=`. Full docs are in [`rlang::list2()`](https://rlang.r-lib.org/reference/tidy-dots.html).
+
 `drive_find()` now sorts by "recency", by default.
 
 `drive_create()` is a new function that creates a new empty file, with an optional file type specification (#258, @ianmcook). `drive_mkdir()` becomes a thin wrapper around `drive_create()`, with the file type hard-wired to "folder".

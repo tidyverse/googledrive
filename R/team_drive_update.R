@@ -41,7 +41,7 @@ team_drive_update <- function(team_drive, ..., verbose = TRUE) {
     stop_collapse(c("Can't update multiple Team Drives at once:", team_drive))
   }
 
-  meta <- toCamel(list(...))
+  meta <- toCamel(rlang::list2(...))
   if (length(meta) == 0) {
     if (verbose) message("No updates specified.")
     return(invisible(team_drive))

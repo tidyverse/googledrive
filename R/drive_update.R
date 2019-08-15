@@ -58,7 +58,7 @@ drive_update <- function(file,
   file <- as_dribble(file)
   file <- confirm_single_file(file)
 
-  meta <- toCamel(list(...))
+  meta <- toCamel(rlang::list2(...))
 
   if (is.null(media) && length(meta) == 0) {
     if (verbose) message("No updates specified.")

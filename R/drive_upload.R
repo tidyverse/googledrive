@@ -104,7 +104,7 @@ drive_upload <- function(media,
   path <- tmp$path
   name <- tmp$name
 
-  params <- toCamel(list(...))
+  params <- toCamel(rlang::list2(...))
 
   # load (path, name) into params
   if (!is.null(path)) {
