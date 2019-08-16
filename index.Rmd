@@ -84,6 +84,12 @@ if (isTRUE(SETUP)) {
     path = abc_def,
     name = "googledrive-NEWS.md"
   )
+  
+  THANKS <- drive_get("THANKS")
+  Rlogo_pdf <- drive_get("Rlogo.pdf")
+  x <- list(THANKS, Rlogo_pdf)
+  purrr::map(x, ~ drive_update(.x, starred = TRUE))
+  purrr::map(x, ~ drive_share(.x, role = "reader", type = "anyone"))
 }
 
 if (isTRUE(CLEAN)) {
@@ -120,10 +126,10 @@ drive_find(type = "csv")             ## MIME type = "text/csv"
 drive_find(type = "application/pdf") ## MIME type = "application/pdf"
 ```
 
-Alternatively, you can refine the search using the `q` query parameter. Accepted search clauses can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, to get all files with `'project'` somewhere in their full text, do this:
+Alternatively, you can refine the search using the `q` query parameter. Accepted search clauses can be found in the [Google Drive API documentation](https://developers.google.com/drive/v3/web/search-parameters). For example, to see all files that you've starred and that are readable by "anyone with a link", do this:
 
 ```{r}
-(files <- drive_find(q = "fullText contains 'project'"))
+(files <- drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'")))
 ```
 
 You generally want to store the result of a googledrive call, as we do with `files` above. `files` is a dribble with info on several files and can be used as the input for downstream calls. It can also be manipulated as a regular data frame at any point.
