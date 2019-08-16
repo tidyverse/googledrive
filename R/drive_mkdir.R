@@ -52,8 +52,7 @@ drive_mkdir <- function(name,
                         parent = "DEPRECATED",
                         verbose = TRUE) {
   if (!missing(parent)) {
-    # TODO: use lifecycle technology here, but not in this PR
-    message("`parent` is deprecated, use `path` now")
+    warning_glue("`parent` is deprecated as of v1.0.0, use `path` now")
     path <- parent
   }
 
