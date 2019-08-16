@@ -29,6 +29,7 @@ reference:
       Create or delete Drive files and folders
     contents:
       - drive_upload
+      - drive_put
       - drive_download
       - drive_create
       - drive_mkdir
