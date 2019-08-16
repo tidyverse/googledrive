@@ -61,7 +61,7 @@ drive_find(n_max = 25)
 
 If you’d like to contribute to the development of googledrive, please
 read [these
-guidelines](https://googledrive.tidyverse.org/CONTRIBUTING.md).
+guidelines](https://googledrive.tidyverse.org/CONTRIBUTING.html).
 
 Please note that the googledrive project is released with a [Contributor
 Code of
