@@ -18,3 +18,4 @@
 ^\.github$
 ^pkgdown$
 ^vignettes/articles$
+^revdep$
