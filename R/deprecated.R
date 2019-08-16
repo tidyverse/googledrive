@@ -7,7 +7,7 @@ NULL
 #' @rdname googledrive-deprecated
 #' @inheritParams drive_auth_configure
 #' @export
-drive_auth_config <- function(app, path, api_key) {
+drive_auth_config <- function(active, app, path, api_key) {
   .Deprecated(msg = glue("
     `drive_auth_config()` has been deprecated.
      Use `drive_auth_configure()` to configure your own OAuth app or API key.

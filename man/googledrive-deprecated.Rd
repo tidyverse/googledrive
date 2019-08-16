@@ -5,7 +5,7 @@
 \alias{drive_auth_config}
 \title{Deprecated googledrive functions}
 \usage{
-drive_auth_config(app, path, api_key)
+drive_auth_config(active, app, path, api_key)
 }
 \arguments{
 \item{app}{OAuth app, in the sense of \code{\link[httr:oauth_app]{httr::oauth_app()}}.}
