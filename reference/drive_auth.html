@@ -41,7 +41,12 @@ behalf with Google Drive. By default, these user credentials are cached in a
 folder below your home directory, ~/.R/gargle/gargle-oauth, from where
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
-tokens are less likely to be synced to the cloud by accident." />
+tokens are less likely to be synced to the cloud by accident.
+If you are interacting with R from a web-based platform, like RStudio
+Server or Cloud, you need to use a variant of this flow, known as
+out-of-band auth (&quot;oob&quot;). If this does not happen automatically, you
+can request it yourself with use_oob = TRUE or, more persistently, by
+setting an option via options(gargle_oob_default = TRUE)." />
 
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -154,6 +159,11 @@ folder below your home directory, <code>~/.R/gargle/gargle-oauth</code>, from wh
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
 tokens are less likely to be synced to the cloud by accident.</p>
+<p>If you are interacting with R from a web-based platform, like RStudio
+Server or Cloud, you need to use a variant of this flow, known as
+out-of-band auth ("oob"). If this does not happen automatically, you
+can request it yourself with <code>use_oob = TRUE</code> or, more persistently, by
+setting an option via <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options(gargle_oob_default = TRUE)</a></code>.</p>
     
     </div>
 
@@ -233,7 +243,8 @@ authentication.</p></li>
 </ul>
     <p>For details on the many ways to find a token, see
 <code><a href='https://gargle.r-lib.org/reference/token_fetch.html'>gargle::token_fetch()</a></code>. For deeper control over auth, use
-<code><a href='drive_auth_configure.html'>drive_auth_configure()</a></code> to bring your own OAuth app or API key.</p>
+<code><a href='drive_auth_configure.html'>drive_auth_configure()</a></code> to bring your own OAuth app or API key.
+Read more about gargle options, see <a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_options</a>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
