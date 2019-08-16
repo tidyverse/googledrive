@@ -1,16 +1,21 @@
 ## Test environments
-* local OS X install, R 3.5.1
+
+* local OS X install, R 3.6
+* Windows 10 Enterprise (local VM), R 3.6
 * ubuntu 14.04 trusty (on travis-ci), R 3.2 - devel
-* Windows Server 2012 R2 (on appveyor), R 3.5.1
+* Windows Server 2012 R2 (on appveyor), R 3.6.1
 * win-builder (devel and release)
+* Windows Server 2008 R2 SP1 (on R-hub), R-devel
+* Ubuntu Linux 16.04 LTS + GCD (on R-hub), R-release
+* Fedora Linux + clang + gfortran (on R-hub), R-devel
 
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
 
-This is a patch release to address a deprecation warning coming from glue::collapse(), which has been deprecated in favor of glue::glue_collapse().
+## revdepcheck results
 
-## Reverse dependencies
+We checked 3 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
-There are 2 reverse dependencies: reproducible, SpaDES.core.
-I do not get a clean R CMD check for these 2 packages locally, but the problems I see appear to have nothing to do with googledrive.
+ * We saw 0 new problems
+ * We failed to check 0 packages
