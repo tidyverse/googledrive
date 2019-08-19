@@ -21,7 +21,7 @@ Where to learn more:
     - [Bring your own OAuth app or API key](https://googledrive.tidyverse.org/articles/articles/bring-your-own-app.html)
     - [How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) 
     - [Non-interactive auth](https://gargle.r-lib.org/articles/non-interactive-auth.html)
-    - [Auth when using R in the browser](Auth when using R in the browser)
+    - [Auth when using R in the browser](https://gargle.r-lib.org/articles/auth-from-web.html)
     - [How gargle gets tokens](https://gargle.r-lib.org/articles/how-gargle-gets-tokens.html)
     - [Managing tokens securely](https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html)
 
