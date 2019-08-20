@@ -134,7 +134,7 @@
 
     <div id="googledrive-1-0-0" class="section level1">
 <h1 class="page-header">
-<a href="#googledrive-1-0-0" class="anchor"></a>googledrive 1.0.0<small> Unreleased </small>
+<a href="#googledrive-1-0-0" class="anchor"></a>googledrive 1.0.0<small> 2019-08-19 </small>
 </h1>
 <p>The release of version 1.0.0 marks two events:</p>
 <ul>
@@ -160,7 +160,7 @@
 <li><a href="https://googledrive.tidyverse.org/articles/articles/bring-your-own-app.html">Bring your own OAuth app or API key</a></li>
 <li><a href="https://gargle.r-lib.org/articles/get-api-credentials.html">How to get your own API credentials</a></li>
 <li><a href="https://gargle.r-lib.org/articles/non-interactive-auth.html">Non-interactive auth</a></li>
-<li><a href="Auth%20when%20using%20R%20in%20the%20browser">Auth when using R in the browser</a></li>
+<li><a href="https://gargle.r-lib.org/articles/auth-from-web.html">Auth when using R in the browser</a></li>
 <li><a href="https://gargle.r-lib.org/articles/how-gargle-gets-tokens.html">How gargle gets tokens</a></li>
 <li><a href="https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html">Managing tokens securely</a></li>
 </ul>
@@ -265,7 +265,7 @@
 <a href="#drive_put" class="anchor"></a><code><a href="../reference/drive_put.html">drive_put()</a></code>
 </h3>
 <p>Sometimes you have a file you will repeatedly send to Drive, i.e. the first time you run an analysis, you create the file and, when you re-run it, you update the file. Previously this was hard to express with googledrive.</p>
-<p><code><a href="../reference/drive_put.html">drive_put()</a></code> is useful here and refers to the HTTP verb <code>PUT</code>: create the thing if it doesn’t exist or, if it does, replace its contents. A good explanation of <code>PUT</code> is <a href="https://medium.com/backticks-tildes/restful-api-design-put-vs-patch-4a061aa3ed0b">RESTful API Design — PUT vs PATCH</a>).</p>
+<p><code><a href="../reference/drive_put.html">drive_put()</a></code> is useful here and refers to the HTTP verb <code>PUT</code>: create the thing if it doesn’t exist or, if it does, replace its contents. A good explanation of <code>PUT</code> is <a href="https://medium.com/backticks-tildes/restful-api-design-put-vs-patch-4a061aa3ed0b">RESTful API Design — PUT vs PATCH</a>.</p>
 <p>In pseudo-code, here’s the basic idea of <code><a href="../reference/drive_put.html">drive_put()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">target_filepath &lt;-<span class="st"> </span><span class="er">&lt;</span>determined from arguments <span class="st">`</span><span class="dt">path</span><span class="st">`</span>, <span class="st">`</span><span class="dt">name</span><span class="st">`</span>, and <span class="st">`</span><span class="dt">media</span><span class="st">`</span><span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">hits &lt;-<span class="st"> </span><span class="er">&lt;</span>get all Drive files at target_filepath<span class="op">&gt;</span></a>
