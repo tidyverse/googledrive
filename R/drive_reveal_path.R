@@ -54,7 +54,8 @@ dribble_from_path <- function(path = NULL,
   ## nodes = files with names implied by our paths + all folders
   nodes <- get_nodes(path, team_drive, corpus)
   if (nrow(nodes) == 0) return(dribble_with_path())
-
+  ## remove any duplicated nodes
+  nodes <- nodes[!duplicated(nodes$id), ]
   ROOT_ID <- root_id()
   x <- purrr::map(path, ~pathify_one_path(.x, nodes, ROOT_ID))
 
