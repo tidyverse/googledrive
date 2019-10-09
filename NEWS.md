@@ -1,5 +1,7 @@
 # googledrive (development version)
 
+`as_tibble()` method for `dribble` objects now passes `...` through, which could apply, for example, to tibble's `.name_repair` argument.
+
 # googledrive 1.0.0
 
 The release of version 1.0.0 marks two events:
