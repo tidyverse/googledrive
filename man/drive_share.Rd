@@ -4,9 +4,13 @@
 \alias{drive_share}
 \title{Share Drive files}
 \usage{
-drive_share(file, role = c("reader", "commenter", "writer", "owner",
-  "organizer"), type = c("user", "group", "domain", "anyone"), ...,
-  verbose = TRUE)
+drive_share(
+  file,
+  role = c("reader", "commenter", "writer", "owner", "organizer"),
+  type = c("user", "group", "domain", "anyone"),
+  ...,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google

@@ -10,8 +10,7 @@ request_make(x, ...)
 
 do_request(x, ...)
 
-do_paginated_request(x, ..., n_max = Inf, n = function(res) 1,
-  verbose = TRUE)
+do_paginated_request(x, ..., n_max = Inf, n = function(res) 1, verbose = TRUE)
 }
 \arguments{
 \item{x}{List, holding the components for an HTTP request, presumably created
@@ -90,7 +89,8 @@ do_paginated_request(req, n_max = 1)
 }
 }
 \seealso{
-Other low-level API functions: \code{\link{drive_has_token}},
-  \code{\link{drive_token}}, \code{\link{request_generate}}
+Other low-level API functions: \code{\link{drive_has_token}()},
+  \code{\link{drive_token}()},
+  \code{\link{request_generate}()}
 }
 \concept{low-level API functions}

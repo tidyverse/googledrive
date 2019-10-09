@@ -4,9 +4,16 @@
 \alias{drive_find}
 \title{Find files on Google Drive}
 \usage{
-drive_find(pattern = NULL, trashed = FALSE, type = NULL,
-  n_max = Inf, team_drive = NULL, corpus = NULL, ...,
-  verbose = TRUE)
+drive_find(
+  pattern = NULL,
+  trashed = FALSE,
+  type = NULL,
+  n_max = Inf,
+  team_drive = NULL,
+  corpus = NULL,
+  ...,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the items whose names match this
@@ -88,7 +95,7 @@ By default, \code{drive_find()} sends \code{orderBy = "recency desc"}, so the to
 files in your result have high "recency" (whatever that means). To suppress
 sending \code{orderBy} at all, do \code{drive_find(orderBy = NULL)}. The \code{orderBy}
 parameter accepts sort keys in addition to \code{recency}, which are documented
-in the \href{https://developers.google.com/drive/v3/reference/files/list}{files.list endpoint}.
+in the \href{https://developers.google.com/drive/v3/reference/files/list}{\code{files.list} endpoint}.
 googledrive translates a snake_case specification of \code{order_by} into the
 lowerCamel form, \code{orderBy}.
 }

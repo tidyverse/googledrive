@@ -4,8 +4,7 @@
 \alias{drive_put}
 \title{PUT new media into a Drive file}
 \usage{
-drive_put(media, path = NULL, name = NULL, ..., type = NULL,
-  verbose = TRUE)
+drive_put(media, path = NULL, name = NULL, ..., type = NULL, verbose = TRUE)
 }
 \arguments{
 \item{media}{Character, path to the local file to upload.}
@@ -45,13 +44,13 @@ exists, we replace its content and we create a new file, otherwise. This is a
 convenience wrapper around \code{\link[=drive_upload]{drive_upload()}} and \code{\link[=drive_update]{drive_update()}}. In
 pseudo-code:\preformatted{target_filepath <- <determined from `path`, `name`, and `media`>
 hits <- <get all Drive files at target_filepath>
-if (no hits) {
+if (no hits) \{
   drive_upload(media, path, name, type, ..., verbose)
-} else if (exactly 1 hit) {
+\} else if (exactly 1 hit) \{
   drive_update(hit, media, ..., verbose)
-} else {
+\} else \{
   ERROR
-}
+\}
 }
 }
 \examples{

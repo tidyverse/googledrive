@@ -4,8 +4,12 @@
 \alias{request_generate}
 \title{Build a request for the Google Drive API}
 \usage{
-request_generate(endpoint = character(), params = list(), key = NULL,
-  token = drive_token())
+request_generate(
+  endpoint = character(),
+  params = list(),
+  key = NULL,
+  token = drive_token()
+)
 }
 \arguments{
 \item{endpoint}{Character. Nickname for one of the selected Drive v3 API
@@ -61,7 +65,7 @@ req
 \seealso{
 \code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_build]{gargle::request_build()}}
 
-Other low-level API functions: \code{\link{drive_has_token}},
-  \code{\link{drive_token}}, \code{\link{request_make}}
+Other low-level API functions: \code{\link{drive_has_token}()},
+  \code{\link{drive_token}()}, \code{\link{request_make}()}
 }
 \concept{low-level API functions}

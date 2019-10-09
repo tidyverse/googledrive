@@ -4,8 +4,15 @@
 \alias{drive_upload}
 \title{Upload into a new Drive file}
 \usage{
-drive_upload(media, path = NULL, name = NULL, type = NULL, ...,
-  overwrite = NA, verbose = TRUE)
+drive_upload(
+  media,
+  path = NULL,
+  name = NULL,
+  type = NULL,
+  ...,
+  overwrite = NA,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{media}{Character, path to the local file to upload.}

@@ -25,7 +25,7 @@ tibble". This is a data frame with one row per file. A dribble is returned
 give people what they want (file name), track what the API wants (file id),
 and to hold the metadata needed for general file operations.
 
-googledrive is "pipe-friendly" and, in fact, re-exports \code{\%>\%}, but does not
+googledrive is "pipe-friendly" and, in fact, re-exports \verb{\%>\%}, but does not
 require its use.
 
 Please see the googledrive website for full documentation:
@@ -49,7 +49,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Jennifer Bryan \email{jenny@rstudio.com} (0000-0002-6983-2759)
+\strong{Maintainer}: Jennifer Bryan \email{jenny@rstudio.com} (\href{https://orcid.org/0000-0002-6983-2759}{ORCID})
 
 Authors:
 \itemize{

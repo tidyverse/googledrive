@@ -23,8 +23,8 @@ The googledrive package stores a named list of Drive API v3 endpoints (or
 "methods", using Google's vocabulary) internally and these functions expose
 this data.
 \itemize{
-\item \code{drive_endpoint()} returns one endpoint, i.e. it uses \code{[[}.
-\item \code{drive_endpoints()} returns a list of endpoints, i.e. it uses \code{[}.
+\item \code{drive_endpoint()} returns one endpoint, i.e. it uses \verb{[[}.
+\item \code{drive_endpoints()} returns a list of endpoints, i.e. it uses \verb{[}.
 }
 
 The names of this list (or the \code{id} sub-elements) are the nicknames that can

@@ -32,13 +32,13 @@ This is a generic function.
 For maximum clarity, get your files into a \code{\link{dribble}} (or capture file id)
 as early as possible. When specifying via path, it's best to include the
 trailing slash when you're targetting a folder. If you want the folder \code{foo},
-say \code{foo/}, not \code{foo}.
+say \verb{foo/}, not \code{foo}.
 
 Some functions, such as \code{\link[=drive_cp]{drive_cp()}}, \code{\link[=drive_mkdir]{drive_mkdir()}}, \code{\link[=drive_mv]{drive_mv()}}, and
 \code{\link[=drive_upload]{drive_upload()}}, can accept the new file or folder name as the last part of
 \code{path}, when \code{name} is not given. But if you say \code{a/b/c} (no trailing slash)
-and a folder \code{a/b/c/} already exists, it's unclear what you want. A file
-named \code{c} in \code{a/b/} or a file with default name in \code{a/b/c/}? You get an
+and a folder \verb{a/b/c/} already exists, it's unclear what you want. A file
+named \code{c} in \verb{a/b/} or a file with default name in \verb{a/b/c/}? You get an
 error and must make your intent clear.
 }
 \examples{

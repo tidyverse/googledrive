@@ -4,8 +4,7 @@
 \alias{drive_mv}
 \title{Move a Drive file}
 \usage{
-drive_mv(file, path = NULL, name = NULL, overwrite = NA,
-  verbose = TRUE)
+drive_mv(file, path = NULL, name = NULL, overwrite = NA, verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file of interest on your Google

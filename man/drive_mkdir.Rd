@@ -4,8 +4,14 @@
 \alias{drive_mkdir}
 \title{Create a Drive folder}
 \usage{
-drive_mkdir(name, path = NULL, ..., overwrite = NA,
-  parent = "DEPRECATED", verbose = TRUE)
+drive_mkdir(
+  name,
+  path = NULL,
+  ...,
+  overwrite = NA,
+  parent = "DEPRECATED",
+  verbose = TRUE
+)
 }
 \arguments{
 \item{name}{Name for the new folder or, optionally, a path that specifies

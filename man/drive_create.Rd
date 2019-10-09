@@ -4,8 +4,14 @@
 \alias{drive_create}
 \title{Create a new blank Drive file}
 \usage{
-drive_create(name, path = NULL, type = NULL, ..., overwrite = NA,
-  verbose = TRUE)
+drive_create(
+  name,
+  path = NULL,
+  type = NULL,
+  ...,
+  overwrite = NA,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{name}{Name for the new file or, optionally, a path that specifies

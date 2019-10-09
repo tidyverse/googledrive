@@ -4,8 +4,13 @@
 \alias{drive_download}
 \title{Download a Drive file}
 \usage{
-drive_download(file, path = NULL, type = NULL, overwrite = FALSE,
-  verbose = TRUE)
+drive_download(
+  file,
+  path = NULL,
+  type = NULL,
+  overwrite = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{file}{Something that identifies the file of interest on your Google

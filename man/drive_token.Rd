@@ -30,8 +30,8 @@ req
 }
 }
 \seealso{
-Other low-level API functions: \code{\link{drive_has_token}},
-  \code{\link{request_generate}},
-  \code{\link{request_make}}
+Other low-level API functions: \code{\link{drive_has_token}()},
+  \code{\link{request_generate}()},
+  \code{\link{request_make}()}
 }
 \concept{low-level API functions}

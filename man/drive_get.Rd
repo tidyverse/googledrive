@@ -4,8 +4,13 @@
 \alias{drive_get}
 \title{Get Drive files by path or id}
 \usage{
-drive_get(path = NULL, id = NULL, team_drive = NULL, corpus = NULL,
-  verbose = TRUE)
+drive_get(
+  path = NULL,
+  id = NULL,
+  team_drive = NULL,
+  corpus = NULL,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{path}{Character vector of path(s) to get. Use a trailing slash to

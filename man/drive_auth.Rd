@@ -4,10 +4,14 @@
 \alias{drive_auth}
 \title{Authorize googledrive}
 \usage{
-drive_auth(email = gargle::gargle_oauth_email(), path = NULL,
+drive_auth(
+  email = gargle::gargle_oauth_email(),
+  path = NULL,
   scopes = "https://www.googleapis.com/auth/drive",
   cache = gargle::gargle_oauth_cache(),
-  use_oob = gargle::gargle_oob_default(), token = NULL)
+  use_oob = gargle::gargle_oob_default(),
+  token = NULL
+)
 }
 \arguments{
 \item{email}{Optional. Allows user to target a specific Google identity. If
@@ -54,7 +58,7 @@ wrapper around \code{\link[gargle:token_fetch]{gargle::token_fetch()}}.
 By default, you are directed to a web browser, asked to sign in to your
 Google account, and to grant googledrive permission to operate on your
 behalf with Google Drive. By default, these user credentials are cached in a
-folder below your home directory, \code{~/.R/gargle/gargle-oauth}, from where
+folder below your home directory, \verb{~/.R/gargle/gargle-oauth}, from where
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
 tokens are less likely to be synced to the cloud by accident.
@@ -114,7 +118,7 @@ drive_auth(path = "foofy-83ee9e7c9c48.json")
 }
 }
 \seealso{
-Other auth functions: \code{\link{drive_auth_configure}},
-  \code{\link{drive_deauth}}
+Other auth functions: \code{\link{drive_auth_configure}()},
+  \code{\link{drive_deauth}()}
 }
 \concept{auth functions}
