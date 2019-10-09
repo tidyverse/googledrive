@@ -8,21 +8,31 @@
 
 <title>Add column(s) with new information — drive_reveal • googledrive</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,7 +42,6 @@
 
 
 <meta property="og:title" content="Add column(s) with new information — drive_reveal" />
-
 <meta property="og:description" content="drive_reveal() adds extra information about your Drive files that is not
 automatically present in the default dribble produced by googledrive. Why
 is this info not always present?
@@ -41,30 +50,25 @@ It may require calling different endpoints in the Drive API. Example:
 determining if a file has been &quot;published on the web&quot;.
 It might require additional API calls. Example: figuring out the path(s)
 associated with a specific file.
-" />
 
+" />
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
 
+
 <!-- mathjax -->
-<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<!-- google analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
-<script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
 
- gtag('config', 'UA-115082821-1');
-</script>
+
   </head>
 
   <body>
@@ -84,7 +88,7 @@ associated with a specific file.
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
         </div>
       </div>
     </div>
@@ -122,7 +126,7 @@ associated with a specific file.
 </li>
         <li>
   <a href="https://github.com/tidyverse/googledrive">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -133,6 +137,7 @@ associated with a specific file.
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -144,7 +149,6 @@ associated with a specific file.
     </div>
 
     <div class="ref-description">
-    
     <p><code>drive_reveal()</code> adds extra information about your Drive files that is not
 automatically present in the default <code><a href='dribble.html'>dribble</a></code> produced by googledrive. Why
 is this info not always present?</p><ol>
@@ -154,12 +158,14 @@ determining if a file has been "published on the web".</p></li>
 <li><p>It might require additional API calls. Example: figuring out the path(s)
 associated with a specific file.</p></li>
 </ol>
-    
+
     </div>
 
-    <pre class="usage"><span class='fu'>drive_reveal</span>(<span class='no'>file</span>, <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"path"</span>, <span class='st'>"trashed"</span>, <span class='st'>"mime_type"</span>,
-  <span class='st'>"permissions"</span>, <span class='st'>"published"</span>))</pre>
-    
+    <pre class="usage"><span class='fu'>drive_reveal</span>(
+  <span class='no'>file</span>,
+  <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"path"</span>, <span class='st'>"trashed"</span>, <span class='st'>"mime_type"</span>, <span class='st'>"permissions"</span>, <span class='st'>"published"</span>)
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -180,56 +186,55 @@ ids or URLs marked with <code><a href='as_id.html'>as_id()</a></code>, or a <cod
 </ul></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
-    
     <h2 class="hasAnchor" id="special-considerations-for-paths"><a class="anchor" href="#special-considerations-for-paths"></a>Special considerations for paths</h2>
 
     
-    <p>Note that Google Drive does NOT behave like your local file system:</p><ul>
+
+<p>Note that Google Drive does NOT behave like your local file system:</p><ul>
 <li><p>File and folder names need not be unique, even at a given level of
 the hierarchy. A single name or file path can be associated with multiple
 files (or zero or exactly one).</p></li>
 <li><p>A file can have more than one direct parent. This implies that a
 single file can be represented by multiple paths.</p></li>
 </ul>
-    <p>Bottom line: Do not assume there is a one-to-one relationship between file
+
+<p>Bottom line: Do not assume there is a one-to-one relationship between file
 name or path and a Drive file or folder. This implies the length of the input
 (i.e. the number of input paths or the number of rows in a dribble) will not
 necessarily equal the number rows in the output.</p>
-    
     <h2 class="hasAnchor" id="trashed"><a class="anchor" href="#trashed"></a>Trashed</h2>
 
     
-    <p>When <code>what = "trashed"</code>, the <code><a href='dribble.html'>dribble</a></code> gains a logical variable that
+
+<p>When <code>what = "trashed"</code>, the <code><a href='dribble.html'>dribble</a></code> gains a logical variable that
 indicates whether a file is in the trash.</p>
-    
     <h2 class="hasAnchor" id="mime-type"><a class="anchor" href="#mime-type"></a>MIME type</h2>
 
     <p>When <code>what = "mime_type"</code>, the <code><a href='dribble.html'>dribble</a></code> gains a
 variable of MIME types.</p>
-    
     <h2 class="hasAnchor" id="permissions"><a class="anchor" href="#permissions"></a>Permissions</h2>
 
     
-    <p>When <code>what = "permissions"</code> the <code><a href='dribble.html'>dribble</a></code> gains a logical variable <code>shared</code>
+
+<p>When <code>what = "permissions"</code> the <code><a href='dribble.html'>dribble</a></code> gains a logical variable <code>shared</code>
 that indicates whether a file is shared and a new list-column
 <code>permissions_resource</code> containing lists of
 <a href='https://developers.google.com/drive/v3/reference/permissions#resource'>Permissions resources</a>.</p>
-    
     <h2 class="hasAnchor" id="publishing"><a class="anchor" href="#publishing"></a>Publishing</h2>
 
     
-    <p>When <code>what = "published"</code> the <code><a href='dribble.html'>dribble</a></code> gains a logical variable
+
+<p>When <code>what = "published"</code> the <code><a href='dribble.html'>dribble</a></code> gains a logical variable
 <code>published</code> that indicates whether a file is published and a new list-column
 <code>revision_resource</code> containing lists of
 <a href='https://developers.google.com/drive/v3/reference/revisions#resource'>Revisions resources</a>.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## Get a nice, random selection of files</span>
 <span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
 
@@ -247,30 +252,24 @@ that indicates whether a file is shared and a new list-column
 
 <span class='co'>## 'root' is a special file id that always represents your root folder</span>
 <span class='fu'><a href='drive_get.html'>drive_get</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"root"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>drive_reveal</span>(<span class='st'>"path"</span>)
-<span class='co'># }</span></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#special-considerations-for-paths">Special considerations for paths</a></li>
-
       <li><a href="#trashed">Trashed</a></li>
-
       <li><a href="#mime-type">MIME type</a></li>
-
       <li><a href="#permissions">Permissions</a></li>
-
       <li><a href="#publishing">Publishing</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="tidyverse">
@@ -283,11 +282,14 @@ that indicates whether a file is shared and a new list-column
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

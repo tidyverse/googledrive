@@ -8,21 +8,31 @@
 
 <title>Lookup MIME type — drive_mime_type • googledrive</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,7 +42,6 @@
 
 
 <meta property="og:title" content="Lookup MIME type — drive_mime_type" />
-
 <meta property="og:description" content="This is a helper to determine which MIME type should be used
 for a file. Three types of input are acceptable:
 Native Google Drive file types. Important examples:
@@ -43,30 +52,25 @@ Native Google Drive file types. Important examples:
 
 File extensions, such as &quot;pdf&quot;, &quot;csv&quot;, etc.
 MIME types accepted by Google Drive (these are simply passed through).
-" />
 
+" />
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
 
+
 <!-- mathjax -->
-<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<!-- google analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
-<script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
 
- gtag('config', 'UA-115082821-1');
-</script>
+
   </head>
 
   <body>
@@ -86,7 +90,7 @@ MIME types accepted by Google Drive (these are simply passed through).
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
         </div>
       </div>
     </div>
@@ -124,7 +128,7 @@ MIME types accepted by Google Drive (these are simply passed through).
 </li>
         <li>
   <a href="https://github.com/tidyverse/googledrive">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -135,6 +139,7 @@ MIME types accepted by Google Drive (these are simply passed through).
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -146,7 +151,6 @@ MIME types accepted by Google Drive (these are simply passed through).
     </div>
 
     <div class="ref-description">
-    
     <p>This is a helper to determine which MIME type should be used
 for a file. Three types of input are acceptable:</p><ul>
 <li><p>Native Google Drive file types. Important examples:</p><ul>
@@ -158,11 +162,11 @@ for a file. Three types of input are acceptable:</p><ul>
 <li><p>File extensions, such as "pdf", "csv", etc.</p></li>
 <li><p>MIME types accepted by Google Drive (these are simply passed through).</p></li>
 </ul>
-    
+
     </div>
 
     <pre class="usage"><span class='fu'>drive_mime_type</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -174,11 +178,10 @@ validation and lookup, i.e. all MIME types known to be relevant to the
 Drive API.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Character. MIME type.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## get the mime type for Google Spreadsheets</span>
@@ -186,7 +189,7 @@ Drive API.</p></td>
 <span class='co'>## get the mime type for jpegs</span>
 <span class='fu'>drive_mime_type</span>(<span class='st'>"jpeg"</span>)</div><div class='output co'>#&gt; [1] "image/jpeg"</div><div class='input'>
 <span class='co'>## it's vectorized</span>
-<span class='fu'>drive_mime_type</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"presentation"</span>, <span class='st'>"pdf"</span>, <span class='st'>"image/gif"</span>))</div><div class='output co'>#&gt; [1] "application/vnd.google-apps.presentation"
+<span class='fu'>drive_mime_type</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"presentation"</span>, <span class='st'>"pdf"</span>, <span class='st'>"image/gif"</span>))</div><div class='output co'>#&gt; [1] "application/vnd.google-apps.presentation"
 #&gt; [2] "application/pdf"                         
 #&gt; [3] "image/gif"                               </div><div class='input'>
 <span class='co'>## see the internal tibble of MIME types known to the Drive API</span>
@@ -209,14 +212,13 @@ Drive API.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="tidyverse">
@@ -229,11 +231,14 @@ Drive API.</p></td>
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
