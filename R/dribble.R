@@ -93,9 +93,10 @@ maybe_dribble <- function(x) {
 
 #' @export
 #' @importFrom tibble as_tibble
-as_tibble.dribble <- function(x) {
+as_tibble.dribble <- function(x, ...) {
   as_tibble(
-    structure(x, class = class(tibble::tibble()))
+    structure(x, class = class(tibble::tibble())),
+    ...
   )
 }
 
