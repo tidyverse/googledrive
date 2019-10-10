@@ -52,7 +52,7 @@
 #' drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 #'
 #' ## apply to a browser URL for, e.g., a Google Sheet
-#' my_url <- "https://docs.google.com/spreadsheets/d/FILE_ID/edit#gid=SHEET_ID")
+#' my_url <- "https://docs.google.com/spreadsheets/d/FILE_ID/edit#gid=SHEET_ID"
 #' drive_get(my_url)
 #' drive_get(as_id(my_url))
 #' drive_get(id = my_url)
