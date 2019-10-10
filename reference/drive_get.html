@@ -232,7 +232,40 @@ path, also calls <code>files.list</code>:</p><ul>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'>## get info about your "My Drive" root folder</span>
+<span class='fu'>drive_get</span>(<span class='st'>"~/"</span>)
+<span class='co'>## the API reserves the file id "root" for your root folder</span>
+<span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"root"</span>)
+<span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"root"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_reveal.html'>drive_reveal</a></span>(<span class='st'>"path"</span>)
+
+<span class='co'>## multiple names</span>
+<span class='fu'>drive_get</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"abc"</span>, <span class='st'>"def"</span>))
+
+<span class='co'>## multiple names, one of which must be a folder</span>
+<span class='fu'>drive_get</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"abc"</span>, <span class='st'>"def/"</span>))
+
+<span class='co'>## query by file id(s)</span>
+<span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"abcdefgeh123456789"</span>)
+<span class='fu'>drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"abcdefgeh123456789"</span>))
+<span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"abcdefgh123456789"</span>, <span class='st'>"jklmnopq123456789"</span>))
+
+<span class='co'>## apply to a browser URL for, e.g., a Google Sheet</span>
+<span class='no'>my_url</span> <span class='kw'>&lt;-</span> <span class='st'>"https://docs.google.com/spreadsheets/d/FILE_ID/edit#gid=SHEET_ID"</span>
+<span class='fu'>drive_get</span>(<span class='no'>my_url</span>)
+<span class='fu'>drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='no'>my_url</span>))
+<span class='fu'>drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>my_url</span>)
+
+<span class='co'>## access the Team Drive named "foo"</span>
+<span class='co'>## team_drive params must be specified if getting by path</span>
+<span class='no'>foo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='team_drive_get.html'>team_drive_get</a></span>(<span class='st'>"foo"</span>)
+<span class='fu'>drive_get</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='no'>foo</span>)
+<span class='co'>## team_drive params are not necessary if getting by id</span>
+<span class='fu'>drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"123456789"</span>))
+
+<span class='co'>## search all Team Drives and other files user has accessed</span>
+<span class='fu'>drive_get</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span>), <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='st'>"all"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
