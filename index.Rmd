@@ -103,7 +103,7 @@ if (isTRUE(CLEAN)) {
 * Goal is to allow Drive access that feels similar to Unix file system utilities, e.g., `find`, `ls`, `mv`, `cp`, `mkdir`, and `rm`.
 * The metadata for one or more Drive files is held in a `dribble`, a "Drive tibble". This is a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive. Design goals:
   - Give humans what they want: the file name
-  - Track what the API wants: the fild ID
+  - Track what the API wants: the file ID
   - Hold on to all the other metadata sent back by the API
 * googledrive is "pipe-friendly" and, in fact, re-exports `%>%`, but does not require its use.
 
@@ -186,7 +186,7 @@ chicken_sheet %>%
   drive_reveal("permissions")
 ```
 
-Here's how to grant anyone with the link permission to view this dataset.
+Here's how to grant anyone with the link permission to view this data set.
 
 ```{r}
 (chicken_sheet <- chicken_sheet %>%

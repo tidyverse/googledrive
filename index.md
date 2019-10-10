@@ -40,7 +40,7 @@ library("googledrive")
     dribble is returned (and accepted) by almost every function in
     googledrive. Design goals:
       - Give humans what they want: the file name
-      - Track what the API wants: the fild ID
+      - Track what the API wants: the file ID
       - Hold on to all the other metadata sent back by the API
   - googledrive is “pipe-friendly” and, in fact, re-exports `%>%`, but
     does not require its use.
@@ -158,13 +158,13 @@ We can upload any file type.
 #> Local file:
 #>   * /Users/jenny/Library/R/3.6/library/googledrive/extdata/chicken.csv
 #> uploaded into Drive file:
-#>   * README-chicken.csv: 1YwZc6afJTzODgcB0Jq0OwM-xD8pw_j5j
+#>   * README-chicken.csv: 1mjn-J_HbyfQisV3Kpl__C5IBLFiGW-1X
 #> with MIME type:
 #>   * text/csv
 #> # A tibble: 1 x 3
 #>   name               id                                drive_resource   
 #> * <chr>              <chr>                             <list>           
-#> 1 README-chicken.csv 1YwZc6afJTzODgcB0Jq0OwM-xD8pw_j5j <named list [38]>
+#> 1 README-chicken.csv 1mjn-J_HbyfQisV3Kpl__C5IBLFiGW-1X <named list [38]>
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv`
@@ -175,7 +175,7 @@ Google Spreadsheet. Let’s delete this file first.
 ``` r
 drive_rm(chicken)
 #> Files deleted:
-#>   * README-chicken.csv: 1YwZc6afJTzODgcB0Jq0OwM-xD8pw_j5j
+#>   * README-chicken.csv: 1mjn-J_HbyfQisV3Kpl__C5IBLFiGW-1X
 
 ## example of using a dribble as input
 chicken_sheet <- drive_upload(
@@ -186,7 +186,7 @@ chicken_sheet <- drive_upload(
 #> Local file:
 #>   * /Users/jenny/Library/R/3.6/library/googledrive/extdata/chicken.csv
 #> uploaded into Drive file:
-#>   * README-chicken-sheet: 1gGNxEY6ZMd1XK7fsKsGCisUWkNCeGBPq8aKXIMAOPGQ
+#>   * README-chicken-sheet: 1j2VsF1NcYlc6W9OwenhhMijl7u7HOxpdDXY9UJrg_SM
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 ```
@@ -206,11 +206,11 @@ chicken_sheet %>%
 #> # A tibble: 1 x 5
 #>   name        shared id                   drive_resource  permissions_reso…
 #> * <chr>       <lgl>  <chr>                <list>          <list>           
-#> 1 README-chi… FALSE  1gGNxEY6ZMd1XK7fsKs… <named list [3… <named list [2]>
+#> 1 README-chi… FALSE  1j2VsF1NcYlc6W9Owen… <named list [3… <named list [2]>
 ```
 
-Here’s how to grant anyone with the link permission to view this
-dataset.
+Here’s how to grant anyone with the link permission to view this data
+set.
 
 ``` r
 (chicken_sheet <- chicken_sheet %>%
@@ -219,11 +219,11 @@ dataset.
 #>   * role = reader
 #>   * type = anyone
 #> For files:
-#>   * README-chicken-sheet: 1gGNxEY6ZMd1XK7fsKsGCisUWkNCeGBPq8aKXIMAOPGQ
+#>   * README-chicken-sheet: 1j2VsF1NcYlc6W9OwenhhMijl7u7HOxpdDXY9UJrg_SM
 #> # A tibble: 1 x 5
 #>   name        shared id                   drive_resource  permissions_reso…
 #> * <chr>       <lgl>  <chr>                <list>          <list>           
-#> 1 README-chi… TRUE   1gGNxEY6ZMd1XK7fsKs… <named list [3… <named list [2]>
+#> 1 README-chi… TRUE   1j2VsF1NcYlc6W9Owen… <named list [3… <named list [2]>
 ```
 
 #### Publish files
@@ -240,7 +240,7 @@ chicken_sheet %>%
 #> # A tibble: 1 x 7
 #>   name  published shared id    drive_resource permissions_res…
 #> * <chr> <lgl>     <lgl>  <chr> <list>         <list>          
-#> 1 READ… FALSE     TRUE   1gGN… <named list [… <named list [2]>
+#> 1 READ… FALSE     TRUE   1j2V… <named list [… <named list [2]>
 #> # … with 1 more variable: revision_resource <list>
 ```
 
@@ -249,11 +249,11 @@ By default, `drive_publish()` will publish your most recent version.
 ``` r
 (chicken_sheet <- drive_publish(chicken_sheet))
 #> Files now published:
-#>   * README-chicken-sheet: 1gGNxEY6ZMd1XK7fsKsGCisUWkNCeGBPq8aKXIMAOPGQ
+#>   * README-chicken-sheet: 1j2VsF1NcYlc6W9OwenhhMijl7u7HOxpdDXY9UJrg_SM
 #> # A tibble: 1 x 7
 #>   name  published shared id    drive_resource permissions_res…
 #> * <chr> <lgl>     <lgl>  <chr> <list>         <list>          
-#> 1 READ… TRUE      TRUE   1gGN… <named list [… <named list [2]>
+#> 1 READ… TRUE      TRUE   1j2V… <named list [… <named list [2]>
 #> # … with 1 more variable: revision_resource <list>
 ```
 
@@ -330,7 +330,7 @@ readLines("chicken.txt") %>% head()
 ``` r
 drive_rm(chicken_sheet)
 #> Files deleted:
-#>   * README-chicken-sheet: 1gGNxEY6ZMd1XK7fsKsGCisUWkNCeGBPq8aKXIMAOPGQ
+#>   * README-chicken-sheet: 1j2VsF1NcYlc6W9OwenhhMijl7u7HOxpdDXY9UJrg_SM
 file.remove(c(
   "README-chicken-sheet.csv", "README-chicken-sheet.xlsx", "chicken.txt"
 ))
