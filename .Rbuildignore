@@ -20,3 +20,4 @@
 ^vignettes/articles$
 ^revdep$
 ^index\.md$
+^LICENSE\.md$
