@@ -1,5 +1,7 @@
 # googledrive (development version)
 
+`drive_share_anyone()` is a new convenience wrapper that makes a file readable by "anyone with a link".
+
 `as_tibble()` method for `dribble` objects now passes `...` through, which could apply, for example, to tibble's `.name_repair` argument.
 
 # googledrive 1.0.0

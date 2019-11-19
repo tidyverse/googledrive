@@ -1,8 +1,12 @@
 #' Share Drive files
 #'
+#' @description
 #' Grant individuals or other groups access to files, including permission to
 #' read, comment, or edit. The returned [`dribble`] will have extra columns,
 #' `shared` and `permissions_resource`. Read more in [drive_reveal()].
+#'
+#' `drive_share_anyone()` is a convenience wrapper for a common special case:
+#' "make this `file` readable by 'anyone with a link'".
 #'
 #' @seealso Wraps the `permissions.update` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/permissions/create>
@@ -56,6 +60,8 @@
 #' ## Let anyone read the file
 #' file <- file %>%
 #'   drive_share(role = "reader", type = "anyone")
+#' ## Single-purpose wrapper function for this
+#' drive_share_anyone(file)
 #'
 #' ## Clean up
 #' drive_rm(file)
@@ -106,6 +112,15 @@ drive_share <- function(file,
   ## refresh drive_resource, get full permissions_resource
   out <- drive_get(as_id(file))
   invisible(drive_reveal(out, "permissions"))
+}
+
+#' @rdname drive_share
+#' @export
+drive_share_anyone <- function(file, verbose = TRUE) {
+  drive_share(
+    file = file,
+    role = "reader", type = "anyone",
+    verbose = verbose)
 }
 
 drive_share_one <- function(id, params, verbose) {
