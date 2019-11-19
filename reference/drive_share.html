@@ -44,7 +44,9 @@
 <meta property="og:title" content="Share Drive files — drive_share" />
 <meta property="og:description" content="Grant individuals or other groups access to files, including permission to
 read, comment, or edit. The returned dribble will have extra columns,
-shared and permissions_resource. Read more in drive_reveal()." />
+shared and permissions_resource. Read more in drive_reveal().
+drive_share_anyone() is a convenience wrapper for a common special case:
+&quot;make this file readable by 'anyone with a link'&quot;." />
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -153,6 +155,8 @@ shared and permissions_resource. Read more in drive_reveal()." />
     <p>Grant individuals or other groups access to files, including permission to
 read, comment, or edit. The returned <code><a href='dribble.html'>dribble</a></code> will have extra columns,
 <code>shared</code> and <code>permissions_resource</code>. Read more in <code><a href='drive_reveal.html'>drive_reveal()</a></code>.</p>
+<p><code>drive_share_anyone()</code> is a convenience wrapper for a common special case:
+"make this <code>file</code> readable by 'anyone with a link'".</p>
     </div>
 
     <pre class="usage"><span class='fu'>drive_share</span>(
@@ -161,7 +165,9 @@ read, comment, or edit. The returned <code><a href='dribble.html'>dribble</a></c
   <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"user"</span>, <span class='st'>"group"</span>, <span class='st'>"domain"</span>, <span class='st'>"anyone"</span>),
   <span class='no'>...</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+)
+
+<span class='fu'>drive_share_anyone</span>(<span class='no'>file</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -225,7 +231,7 @@ provide additional information, such as the <code>emailAddress</code> (when gran
 )
 
 <span class='co'>## Let a specific person comment</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span> <span class='kw'>%&gt;%</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span>
   <span class='fu'>drive_share</span>(
     <span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"commenter"</span>,
     <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"user"</span>,
@@ -233,7 +239,7 @@ provide additional information, such as the <code>emailAddress</code> (when gran
 )
 
 <span class='co'>## Let a different specific person edit and customize the email notification</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span> <span class='kw'>%&gt;%</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span>
   <span class='fu'>drive_share</span>(
     <span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"writer"</span>,
     <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"user"</span>,
@@ -242,8 +248,10 @@ provide additional information, such as the <code>emailAddress</code> (when gran
 )
 
 <span class='co'>## Let anyone read the file</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span> <span class='kw'>%&gt;%</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span>
   <span class='fu'>drive_share</span>(<span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"reader"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"anyone"</span>)
+<span class='co'>## Single-purpose wrapper function for this</span>
+<span class='fu'>drive_share_anyone</span>(<span class='no'>file</span>)
 
 <span class='co'>## Clean up</span>
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>file</span>)
