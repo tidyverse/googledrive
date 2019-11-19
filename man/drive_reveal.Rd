@@ -100,6 +100,6 @@ drive_reveal(files, "permissions")
 drive_reveal(files, "published")
 
 ## 'root' is a special file id that always represents your root folder
-drive_get(id = "root") \%>\% drive_reveal("path")
+drive_get(id = "root") %>% drive_reveal("path")
 }
 }

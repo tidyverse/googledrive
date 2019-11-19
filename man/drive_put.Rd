@@ -63,7 +63,7 @@ writeLines(c("beginning", "middle"), local_file)
 file <- drive_put(local_file)
 
 # update the local file
-cat("end", file = local_file, sep = "\\n", append = TRUE)
+cat("end", file = local_file, sep = "\n", append = TRUE)
 
 # PUT again --> drive_put() delegates to drive_update()
 file <- drive_put(local_file)
@@ -75,7 +75,7 @@ file2 <- drive_create(basename(local_file))
 drive_put(local_file)
 
 # clean-up
-drive_find("drive_put_.+[.]txt") \%>\% drive_rm()
+drive_find("drive_put_.+[.]txt") %>% drive_rm()
 unlink(local_file)
 }
 }

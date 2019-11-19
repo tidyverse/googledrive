@@ -89,8 +89,9 @@ do_paginated_request(req, n_max = 1)
 }
 }
 \seealso{
-Other low-level API functions: \code{\link{drive_has_token}()},
-  \code{\link{drive_token}()},
-  \code{\link{request_generate}()}
+Other low-level API functions: 
+\code{\link{drive_has_token}()},
+\code{\link{drive_token}()},
+\code{\link{request_generate}()}
 }
 \concept{low-level API functions}

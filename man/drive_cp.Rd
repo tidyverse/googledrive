@@ -86,7 +86,7 @@ drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = TRUE)
 drive_find("chicken-cp")
 
 ## Delete all of our copies and the new folder!
-drive_find("chicken-cp") \%>\% drive_rm()
+drive_find("chicken-cp") %>% drive_rm()
 drive_rm(folder)
 
 ## upload a csv file to copy

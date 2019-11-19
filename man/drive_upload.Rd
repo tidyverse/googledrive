@@ -88,7 +88,7 @@ chicken_sheet <- drive_upload(
 drive_browse(chicken_sheet)
 
 ## clean-up
-drive_find("chicken.*upload") \%>\% drive_rm()
+drive_find("chicken.*upload") %>% drive_rm()
 
 ## Upload a file and, at the same time, star it
 chicken <- drive_upload(

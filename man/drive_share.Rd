@@ -2,6 +2,7 @@
 % Please edit documentation in R/drive_share.R
 \name{drive_share}
 \alias{drive_share}
+\alias{drive_share_anyone}
 \title{Share Drive files}
 \usage{
 drive_share(
@@ -11,6 +12,8 @@ drive_share(
   ...,
   verbose = TRUE
 )
+
+drive_share_anyone(file, verbose = TRUE)
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
@@ -49,6 +52,9 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 Grant individuals or other groups access to files, including permission to
 read, comment, or edit. The returned \code{\link{dribble}} will have extra columns,
 \code{shared} and \code{permissions_resource}. Read more in \code{\link[=drive_reveal]{drive_reveal()}}.
+
+\code{drive_share_anyone()} is a convenience wrapper for a common special case:
+"make this \code{file} readable by 'anyone with a link'".
 }
 \examples{
 \dontrun{
@@ -60,7 +66,7 @@ file <- drive_upload(
 )
 
 ## Let a specific person comment
-file <- file \%>\%
+file <- file %>%
   drive_share(
     role = "commenter",
     type = "user",
@@ -68,7 +74,7 @@ file <- file \%>\%
 )
 
 ## Let a different specific person edit and customize the email notification
-file <- file \%>\%
+file <- file %>%
   drive_share(
     role = "writer",
     type = "user",
@@ -77,8 +83,10 @@ file <- file \%>\%
 )
 
 ## Let anyone read the file
-file <- file \%>\%
+file <- file %>%
   drive_share(role = "reader", type = "anyone")
+## Single-purpose wrapper function for this
+drive_share_anyone(file)
 
 ## Clean up
 drive_rm(file)
