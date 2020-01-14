@@ -231,7 +231,7 @@ provide additional information, such as the <code>emailAddress</code> (when gran
 )
 
 <span class='co'>## Let a specific person comment</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>drive_share</span>(
     <span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"commenter"</span>,
     <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"user"</span>,
@@ -239,7 +239,7 @@ provide additional information, such as the <code>emailAddress</code> (when gran
 )
 
 <span class='co'>## Let a different specific person edit and customize the email notification</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>drive_share</span>(
     <span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"writer"</span>,
     <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"user"</span>,
@@ -248,7 +248,7 @@ provide additional information, such as the <code>emailAddress</code> (when gran
 )
 
 <span class='co'>## Let anyone read the file</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span>
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='no'>file</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>drive_share</span>(<span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"reader"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"anyone"</span>)
 <span class='co'>## Single-purpose wrapper function for this</span>
 <span class='fu'>drive_share_anyone</span>(<span class='no'>file</span>)

@@ -179,7 +179,7 @@ character and lacks a trailing slash. Defaults to "Copy of <code>FILE-NAME</code
     <tr>
       <th>...</th>
       <td><p>Named parameters to pass along to the Drive API. Has the tidy dots
-semantics that come from using <code><a href='https://rlang.r-lib.org/reference/tidy-dots.html'>rlang::list2()</a></code>. You can affect the
+semantics that come from using <code><a href='https://rlang.r-lib.org/reference/list2.html'>rlang::list2()</a></code>. You can affect the
 metadata of the target file by specifying properties of the Files resource
 via <code>...</code>. Read the "Request body" section of the Drive API docs for the
 associated endpoint to learn about relevant parameters.</p></td>
@@ -252,7 +252,7 @@ they require additional API calls.</p></td>
 <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"chicken-cp"</span>)
 
 <span class='co'>## Delete all of our copies and the new folder!</span>
-<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"chicken-cp"</span>)
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"chicken-cp"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>()
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>folder</span>)
 
 <span class='co'>## upload a csv file to copy</span>
