@@ -149,6 +149,7 @@
 <h1 class="page-header">
 <a href="#googledrive-development-version" class="anchor"></a>googledrive (development version)<small> Unreleased </small>
 </h1>
+<p><code><a href="../reference/drive_find.html">drive_find()</a></code> explicitly checks for and eliminates duplicate records for a file ID, guarding against an overlap in paginated results returned by the API. It would seem that this should never happen, but there is some suggestion that it does. (<a href='https://github.com/tidyverse/googledrive/issues/272'>#272</a>, <a href='https://github.com/tidyverse/googledrive/issues/277'>#277</a>, <a href='https://github.com/tidyverse/googledrive/issues/279'>#279</a>, <a href='https://github.com/tidyverse/googledrive/issues/281'>#281</a>)</p>
 <p><code><a href="../reference/drive_share.html">drive_share_anyone()</a></code> is a new convenience wrapper that makes a file readable by “anyone with a link”.</p>
 <p><code>as_tibble()</code> method for <code>dribble</code> objects now passes <code>...</code> through, which could apply, for example, to tibble’s <code>.name_repair</code> argument.</p>
 </div>
