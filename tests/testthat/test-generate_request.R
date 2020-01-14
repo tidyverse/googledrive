@@ -27,7 +27,7 @@ test_that("request_generate() and request_build() can deliver same result", {
   ## include a dummy token to prevent earnest efforts to find an API key
   gen <- request_generate(
     "drive.files.get",
-    list(fileId = "abc"),
+    params = list(fileId = "abc"),
     token = httr::config(token = "token!")
   )
   build <- gargle::request_build(
@@ -36,7 +36,8 @@ test_that("request_generate() and request_build() can deliver same result", {
     params = list(fileId = "abc", supportsTeamDrives = TRUE),
     token = httr::config(token = "token!")
   )
-  expect_identical(gen, build)
+  # don't fail for this difference: body is empty list vs empty named list
+  expect_identical(purrr::compact(gen), purrr::compact(build))
 })
 
 test_that("request_generate() suppresses API key if token is non-NULL", {
