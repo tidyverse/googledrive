@@ -1,5 +1,7 @@
 # googledrive (development version)
 
+`drive_find()` explicitly checks for and eliminates duplicate records for a file ID, guarding against an overlap in paginated results returned by the API. It would seem that this should never happen, but there is some suggestion that it does. (#272, #277, #279, #281)
+
 `drive_share_anyone()` is a new convenience wrapper that makes a file readable by "anyone with a link".
 
 `as_tibble()` method for `dribble` objects now passes `...` through, which could apply, for example, to tibble's `.name_repair` argument.

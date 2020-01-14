@@ -173,6 +173,11 @@ drive_find <- function(pattern = NULL,
     purrr::flatten() %>%
     as_dribble()
 
+  # there is some evidence of overlap in the results returned in different
+  # pages; this is attempt to eliminate a 2nd (or 3rd ...) record for an ID
+  # #272 #273 #277 #279 #281
+  res_tbl <- res_tbl[!duplicated(res_tbl$id), ]
+
   if (!is.null(pattern)) {
     res_tbl <- res_tbl[grep(pattern, res_tbl$name), ]
   }
