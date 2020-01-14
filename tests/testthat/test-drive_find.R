@@ -79,13 +79,10 @@ test_that("drive_find() tolerates specification of pageSize", {
   skip_if_offline()
 
   expect_silent({
-    default <- drive_find(n_max = 10, verbose = FALSE)
-    page_size <- drive_find(n_max = 10, pageSize = 5, verbose = FALSE)
+    out <- drive_find(n_max = 10, pageSize = 5, verbose = FALSE)
   })
-  ## weird little things deep in the files resource can vary but
-  ## I really don't care, e.g. thumbnailLink seems very volatile
-  expect_setequal(default$name, page_size$name)
-  expect_setequal(default$id, page_size$id)
+  expect_length(out$name, 10)
+  expect_less_than(anyDuplicated(out$id), 1)
 })
 
 test_that("drive_find() honors n_max", {
