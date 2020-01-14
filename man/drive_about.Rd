@@ -21,7 +21,7 @@ drive_about()
 
 ## explore the names of available Team Drive themes
 about <- drive_about()
-about[["teamDriveThemes"]] %>%
+about[["teamDriveThemes"]] \%>\%
   purrr::map_chr("id")
 }
 }

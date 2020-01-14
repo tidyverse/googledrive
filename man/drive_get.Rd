@@ -73,7 +73,7 @@ necessarily equal the number rows in the output.
 drive_get("~/")
 ## the API reserves the file id "root" for your root folder
 drive_get(id = "root")
-drive_get(id = "root") %>% drive_reveal("path")
+drive_get(id = "root") \%>\% drive_reveal("path")
 
 ## multiple names
 drive_get(c("abc", "def"))

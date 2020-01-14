@@ -66,7 +66,7 @@ file <- drive_upload(
 )
 
 ## Let a specific person comment
-file <- file %>%
+file <- file \%>\%
   drive_share(
     role = "commenter",
     type = "user",
@@ -74,7 +74,7 @@ file <- file %>%
 )
 
 ## Let a different specific person edit and customize the email notification
-file <- file %>%
+file <- file \%>\%
   drive_share(
     role = "writer",
     type = "user",
@@ -83,7 +83,7 @@ file <- file %>%
 )
 
 ## Let anyone read the file
-file <- file %>%
+file <- file \%>\%
   drive_share(role = "reader", type = "anyone")
 ## Single-purpose wrapper function for this
 drive_share_anyone(file)
