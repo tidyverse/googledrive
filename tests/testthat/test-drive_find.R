@@ -84,7 +84,8 @@ test_that("drive_find() tolerates specification of pageSize", {
   })
   ## weird little things deep in the files resource can vary but
   ## I really don't care, e.g. thumbnailLink seems very volatile
-  expect_identical(default[c("name", "id")], page_size[c("name", "id")])
+  expect_setequal(default$name, page_size$name)
+  expect_setequal(default$id, page_size$id)
 })
 
 test_that("drive_find() honors n_max", {
