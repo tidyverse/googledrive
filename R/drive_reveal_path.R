@@ -73,7 +73,7 @@ pathify_one_path <- function(op, nodes, root_id) {
   if (!any(leaf)) return(dribble_with_path())
   out <- pathify_prune_unnest(nodes, root_id = root_id, leaf = leaf)
 
-  target <- paste0(strip_slash(op), "/?$")
+  target <- paste0(escape_regex(strip_slash(op)), "/?$")
   if (is_rooted(op)) {
     target <- paste0("^", target)
   }
