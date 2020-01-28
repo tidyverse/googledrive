@@ -16,6 +16,11 @@ parenthesize <- function(x) glue("({x})")
 and <- function(x) glue_collapse(parenthesize(x), sep = " and ")
 or <- function(x) glue_collapse(x, sep = " or ")
 
+escape_regex <- function(x) {
+  chars <- c("*", ".", "?", "^", "+", "$", "|", "(", ")", "[", "]", "{", "}", "\\")
+  gsub(paste0("([\\", paste0(collapse = "\\", chars), "])"), "\\\\\\1", x, perl = TRUE)
+}
+
 ## put a column into a tibble in the REST sense: "create or update"
 ## tibble::add_column() except
 ##   1. can only add 1 column

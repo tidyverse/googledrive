@@ -82,7 +82,7 @@ test_that("drive_find() tolerates specification of pageSize", {
     out <- drive_find(n_max = 10, pageSize = 5, verbose = FALSE)
   })
   expect_length(out$name, 10)
-  expect_less_than(anyDuplicated(out$id), 1)
+  expect_lt(anyDuplicated(out$id), 1)
 })
 
 test_that("drive_find() honors n_max", {
