@@ -14,7 +14,7 @@
 #'
 #' @seealso Wraps the `files.get` endpoint and, if you specify files by name or
 #'   path, also calls `files.list`:
-#'   * <https://developers.google.com/drive/v3/reference/files/update>
+#'   * <https://developers.google.com/drive/v3/reference/files/get>
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
 #'
 #' @param path Character vector of path(s) to get. Use a trailing slash to
@@ -39,6 +39,11 @@
 #' ## the API reserves the file id "root" for your root folder
 #' drive_get(id = "root")
 #' drive_get(id = "root") %>% drive_reveal("path")
+#'
+#' ## The examples below are indicative of correct syntax.
+#' ## But note these will generally result in an error or a
+#' ## 0-row dribble, unless you replace the inputs with paths
+#' ## or file ids that exist in your Drive.
 #'
 #' ## multiple names
 #' drive_get(c("abc", "def"))
