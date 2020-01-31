@@ -1,5 +1,7 @@
 # googledrive (development version)
 
+Better handling of filenames that include characters that have special meaning in a regular expression (#292).
+
 `drive_find()` explicitly checks for and eliminates duplicate records for a file ID, guarding against repetition in the paginated results returned by the API. It would seem that this should never happen, but there is some indication that it does. (#272, #277, #279, #281)
 
 `drive_share_anyone()` is a new convenience wrapper that makes a file readable by "anyone with a link".
