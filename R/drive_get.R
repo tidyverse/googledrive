@@ -34,15 +34,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## Note many of these will error or return 0-row tibbles unless
-#' ## you replace the inputs with paths or ids which exist on your
-#' ## Drive.
-#'
 #' ## get info about your "My Drive" root folder
 #' drive_get("~/")
 #' ## the API reserves the file id "root" for your root folder
 #' drive_get(id = "root")
 #' drive_get(id = "root") %>% drive_reveal("path")
+#'
+#' ## The examples below are indicative of correct syntax.
+#' ## But note these will generally result in an error or a
+#' ## 0-row dribble, unless you replace the inputs with paths
+#' ## or file ids that exist in your Drive.
 #'
 #' ## multiple names
 #' drive_get(c("abc", "def"))
