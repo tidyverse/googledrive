@@ -14,7 +14,7 @@
 #'
 #' @seealso Wraps the `files.get` endpoint and, if you specify files by name or
 #'   path, also calls `files.list`:
-#'   * <https://developers.google.com/drive/v3/reference/files/update>
+#'   * <https://developers.google.com/drive/v3/reference/files/get>
 #'   * <https://developers.google.com/drive/v3/reference/files/list>
 #'
 #' @param path Character vector of path(s) to get. Use a trailing slash to
@@ -34,6 +34,10 @@
 #'
 #' @examples
 #' \dontrun{
+#' ## Note many of these will error or return 0-row tibbles unless
+#' ## you replace the inputs with paths or ids which exist on your
+#' ## Drive.
+#'
 #' ## get info about your "My Drive" root folder
 #' drive_get("~/")
 #' ## the API reserves the file id "root" for your root folder
