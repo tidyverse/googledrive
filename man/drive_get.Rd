@@ -69,6 +69,10 @@ necessarily equal the number rows in the output.
 
 \examples{
 \dontrun{
+## Note many of these will error or return 0-row tibbles unless
+## you replace the inputs with paths or ids which exist on your
+## Drive.
+
 ## get info about your "My Drive" root folder
 drive_get("~/")
 ## the API reserves the file id "root" for your root folder
@@ -107,7 +111,7 @@ drive_get(c("this.jpg", "that-file"), corpus = "all")
 Wraps the \code{files.get} endpoint and, if you specify files by name or
 path, also calls \code{files.list}:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/files/update}
+\item \url{https://developers.google.com/drive/v3/reference/files/get}
 \item \url{https://developers.google.com/drive/v3/reference/files/list}
 }
 }
