@@ -248,13 +248,17 @@ necessarily equal the number rows in the output.</p>
 
     <div class='dont-index'><p>Wraps the <code>files.get</code> endpoint and, if you specify files by name or
 path, also calls <code>files.list</code>:</p><ul>
-<li><p><a href='https://developers.google.com/drive/v3/reference/files/update'>https://developers.google.com/drive/v3/reference/files/update</a></p></li>
+<li><p><a href='https://developers.google.com/drive/v3/reference/files/get'>https://developers.google.com/drive/v3/reference/files/get</a></p></li>
 <li><p><a href='https://developers.google.com/drive/v3/reference/files/list'>https://developers.google.com/drive/v3/reference/files/list</a></p></li>
 </ul>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'>## Note many of these will error or return 0-row tibbles unless</span>
+<span class='co'>## you replace the inputs with paths or ids which exist on your</span>
+<span class='co'>## Drive.</span>
+
 <span class='co'>## get info about your "My Drive" root folder</span>
 <span class='fu'>drive_get</span>(<span class='st'>"~/"</span>)
 <span class='co'>## the API reserves the file id "root" for your root folder</span>
