@@ -1,12 +1,23 @@
 on:
   push:
     branches: master
+  schedule:
+    # * is a special character in YAML so we have to quote this string
+    # 12 (UTC) - 7 or 8 (offset for Pacific) = 4am or 5am = I'm asleep
+    # also try to avoid overlap with same job for googlesheets4 because quota
+    # https://crontab.guru is your friend
+    - cron:  '30 12 * * *'
 
 name: pkgdown
 
 jobs:
   pkgdown:
     runs-on: macOS-latest
+    if: "github.event_name == 'schedule' || contains(github.event.head_commit.message, '[pkgdown]')"
+
+    env:
+      GOOGLEDRIVE_PASSWORD: ${{ secrets.GOOGLEDRIVE_PASSWORD }}
+
     steps:
       - uses: actions/checkout@v2
 
@@ -31,6 +42,8 @@ jobs:
         run: |
           install.packages("remotes")
           remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("tidyverse")
+          remotes::install_github("tidyverse/tidytemplate")
           remotes::install_dev("pkgdown")
         shell: Rscript {0}
 
