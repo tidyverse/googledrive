@@ -1,13 +1,9 @@
 ## Test environments
-
-* local OS X install, R 3.6
-* Windows 10 Enterprise (local VM), R 3.6
-* ubuntu 14.04 trusty (on travis-ci), R 3.2 - devel
-* Windows Server 2012 R2 (on appveyor), R 3.6.1
-* win-builder (devel and release)
-* Windows Server 2008 R2 SP1 (on R-hub), R-devel
-* Ubuntu Linux 16.04 LTS + GCD (on R-hub), R-release
-* Fedora Linux + clang + gfortran (on R-hub), R-devel
+* local macOS system
+* ubuntu 16.04 (travis-ci), R devel, release, oldrel, 3.4, 3.3, 3.2
+* windows server 2008 R2 (r-hub) R devel
+* windows server 2012 R2 (appveyor) R release
+* win-builder R devel
 
 ## R CMD check results
 
