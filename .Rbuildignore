@@ -22,3 +22,4 @@
 ^index\.md$
 ^LICENSE\.md$
 ^CRAN-RELEASE$
+^\.covrignore$
