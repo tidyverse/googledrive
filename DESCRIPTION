@@ -1,13 +1,18 @@
 Package: googledrive
 Title: An Interface to Google Drive
 Version: 1.0.1.9000
-Authors@R: c(
-    person("Lucy", "D'Agostino McGowan", email = "ld.mcgowan@vanderbilt.edu",
-      role = c("aut")),
-    person("Jennifer", "Bryan", email = "jenny@rstudio.com",
-      role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6983-2759")),
-    person("RStudio", role = c("cph", "fnd"))          
-    )
+Authors@R: 
+    c(person(given = "Lucy",
+             family = "D'Agostino McGowan",
+             role = "aut",
+             email = "ld.mcgowan@vanderbilt.edu"),
+      person(given = "Jennifer",
+             family = "Bryan",
+             role = c("aut", "cre"),
+             email = "jenny@rstudio.com",
+             comment = c(ORCID = "0000-0002-6983-2759")),
+      person(given = "RStudio",
+             role = c("cph", "fnd")))
 Description: Manage Google Drive files from R.
 License: MIT + file LICENSE
 URL: https://googledrive.tidyverse.org,
