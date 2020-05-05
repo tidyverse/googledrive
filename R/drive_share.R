@@ -8,7 +8,7 @@
 #' `drive_share_anyone()` is a convenience wrapper for a common special case:
 #' "make this `file` readable by 'anyone with a link'".
 #'
-#' @seealso Wraps the `permissions.update` endpoint:
+#' @seealso Wraps the `permissions.create` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/permissions/create>
 #'
 #' @template file-plural

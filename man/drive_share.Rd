@@ -93,7 +93,7 @@ drive_rm(file)
 }
 }
 \seealso{
-Wraps the \code{permissions.update} endpoint:
+Wraps the \code{permissions.create} endpoint:
 \itemize{
 \item \url{https://developers.google.com/drive/v3/reference/permissions/create}
 }
