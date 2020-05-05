@@ -21,3 +21,4 @@
 ^revdep$
 ^index\.md$
 ^LICENSE\.md$
+^CRAN-RELEASE$
