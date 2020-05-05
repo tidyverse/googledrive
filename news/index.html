@@ -90,7 +90,7 @@
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
         </div>
       </div>
     </div>
@@ -163,10 +163,11 @@
       <small>Source: <a href='https://github.com/tidyverse/googledrive/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="googledrive-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#googledrive-development-version" class="anchor"></a>googledrive (development version)<small> Unreleased </small>
+    <div id="googledrive-1-0-1" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.1">
+<a href="#googledrive-1-0-1" class="anchor"></a>googledrive 1.0.1<small> Unreleased </small>
 </h1>
+<p>Patch release to modify a test for compatibility with an upcoming release of gargle.</p>
 <p><code><a href="../reference/drive_share.html">drive_share()</a></code> gains awareness of the <code>"fileOrganizer"</code> role (<a href='https://github.com/tidyverse/googledrive/issues/302'>#302</a>).</p>
 <p>Better handling of filenames that include characters that have special meaning in a regular expression (<a href='https://github.com/tidyverse/googledrive/issues/292'>#292</a>).</p>
 <p><code><a href="../reference/drive_find.html">drive_find()</a></code> explicitly checks for and eliminates duplicate records for a file ID, guarding against repetition in the paginated results returned by the API. It would seem that this should never happen, but there is some indication that it does. (<a href='https://github.com/tidyverse/googledrive/issues/272'>#272</a>, <a href='https://github.com/tidyverse/googledrive/issues/277'>#277</a>, <a href='https://github.com/tidyverse/googledrive/issues/279'>#279</a>, <a href='https://github.com/tidyverse/googledrive/issues/281'>#281</a>)</p>
