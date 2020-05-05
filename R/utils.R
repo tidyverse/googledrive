@@ -106,7 +106,7 @@ is_true <- function(x) vapply(x, isTRUE, logical(1))
 #'
 #' `expose()` returns a sentinel object, similar in spirit to `NULL`, that tells
 #' the calling function to return its internal data structure. googledrive
-#' stores alot of information about the Drive API, MIME types, etc., internally
+#' stores a lot of information about the Drive API, MIME types, etc., internally
 #' and then exploits it in helper functions, like [`drive_mime_type()`],
 #' [`drive_fields()`], [`drive_endpoints()`], etc. We use these objects to
 #' provide nice defaults, check input validity, or lookup something cryptic,

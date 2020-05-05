@@ -1,4 +1,3 @@
-alot
 API's
 AppVeyor
 auth
@@ -6,7 +5,7 @@ Auth
 AuthState
 behaviour
 bigrquery
-codecov
+Codecov
 colab
 Colaboratory
 commenter
