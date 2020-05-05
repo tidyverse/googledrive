@@ -135,6 +135,6 @@ drive_update_multipart <- function(file, media, meta) {
     ),
     media = httr::upload_file(path = media)
   )
-  response <- request_make(request)
+  response <- request_make(request, encode = "multipart")
   as_dribble(list(gargle::response_process(response)))
 }

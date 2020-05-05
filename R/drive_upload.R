@@ -136,7 +136,7 @@ drive_upload <- function(media,
     media = httr::upload_file(path = media)
   )
 
-  response <- request_make(request)
+  response <- request_make(request, encode = "multipart")
   out <- as_dribble(list(gargle::response_process(response)))
 
   if (verbose) {
