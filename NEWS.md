@@ -1,5 +1,7 @@
 # googledrive (development version)
 
+Patch release to modify a test for compatibility with an upcoming release of gargle.
+
 `drive_share()` gains awareness of the `"fileOrganizer"` role (#302).
 
 Better handling of filenames that include characters that have special meaning in a regular expression (#292).
