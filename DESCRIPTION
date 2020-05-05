@@ -34,10 +34,12 @@ Suggests:
     rmarkdown,
     roxygen2,
     sodium,
+    spelling,
     testthat (>= 2.1.1)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
