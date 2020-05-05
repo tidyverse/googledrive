@@ -7,7 +7,7 @@
 \usage{
 drive_share(
   file,
-  role = c("reader", "commenter", "writer", "owner", "organizer"),
+  role = c("reader", "commenter", "writer", "fileOrganizer", "owner", "organizer"),
   type = c("user", "group", "domain", "anyone"),
   ...,
   verbose = TRUE
@@ -24,6 +24,7 @@ ids or URLs marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}
 \itemize{
 \item organizer (applies only to Team Drives)
 \item owner
+\item fileOrganizer
 \item writer
 \item commenter
 \item reader
@@ -96,5 +97,10 @@ drive_rm(file)
 Wraps the \code{permissions.create} endpoint:
 \itemize{
 \item \url{https://developers.google.com/drive/v3/reference/permissions/create}
+}
+
+Drive roles and permissions are described here:
+\itemize{
+\item \url{https://developers.google.com/drive/api/v3/ref-roles}
 }
 }

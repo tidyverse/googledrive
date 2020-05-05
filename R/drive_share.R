@@ -8,13 +8,18 @@
 #' `drive_share_anyone()` is a convenience wrapper for a common special case:
 #' "make this `file` readable by 'anyone with a link'".
 #'
-#' @seealso Wraps the `permissions.create` endpoint:
+#' @seealso
+#' Wraps the `permissions.create` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/permissions/create>
+#'
+#' Drive roles and permissions are described here:
+#'   * <https://developers.google.com/drive/api/v3/ref-roles>
 #'
 #' @template file-plural
 #' @param role Character. The role to grant. Must be one of:
 #'   * organizer (applies only to Team Drives)
 #'   * owner
+#'   * fileOrganizer
 #'   * writer
 #'   * commenter
 #'   * reader
@@ -69,7 +74,7 @@
 drive_share <- function(file,
                         role = c(
                           "reader", "commenter", "writer",
-                          "owner", "organizer"
+                          "fileOrganizer", "owner", "organizer"
                         ),
                         type = c("user", "group", "domain", "anyone"),
                         ...,
