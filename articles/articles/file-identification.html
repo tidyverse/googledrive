@@ -12,13 +12,14 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../../tidyverse.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../../bootstrap-toc.css">
+<script src="../../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><link href="../../tidyverse-2.css" rel="stylesheet">
 <meta property="og:title" content="File Identification">
-<meta property="og:description" content="">
+<meta property="og:description" content="googledrive">
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -32,7 +33,7 @@
   gtag('config', 'UA-115082821-1');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,7 +47,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../../index.html">googledrive</a>
-        <div class="info">
+        <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
           <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
         </div>
@@ -99,7 +100,7 @@
   </ul>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/googledrive">
+  <a href="https://github.com/tidyverse/googledrive/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -117,7 +118,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>File Identification</h1>
+      <h1 data-toc-skip>File Identification</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/tidyverse/googledrive/blob/master/vignettes/articles/file-identification.Rmd"><code>vignettes/articles/file-identification.Rmd</code></a></small>
@@ -153,64 +154,56 @@
 <h2 class="hasAnchor">
 <a href="#drive_find" class="anchor"></a>drive_find()</h2>
 <p>Read the help for complete documentation but here are some of the many ways to call <code><a href="../../reference/drive_find.html">drive_find()</a></code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>()</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">n_max =</span> <span class="dv">40</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">pattern =</span> <span class="st">"chicken"</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"pdf"</span>)</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"folder"</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"spreadsheet"</span>)</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">trashed =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"fullText contains 'project'"</span>)</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="st">"modifiedTime &gt; '2019-04-21T12:00:00'"</span>, <span class="dt">order_by =</span> <span class="st">"recency"</span>)</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="dt">q =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span>()
+<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="kw">n_max</span> <span class="kw">=</span> <span class="fl">40</span>)
+<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"chicken"</span>)
+<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"pdf"</span>)
+<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"folder"</span>)
+<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>)
+<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="kw">trashed</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="kw">q</span> <span class="kw">=</span> <span class="st">"fullText contains 'project'"</span>)
+<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="kw">q</span> <span class="kw">=</span> <span class="st">"modifiedTime &gt; '2019-04-21T12:00:00'"</span>, <span class="kw">order_by</span> <span class="kw">=</span> <span class="st">"recency"</span>)
+<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span>(<span class="kw">q</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span>))</pre></body></html></div>
 <p><code><a href="../../reference/drive_find.html">drive_find()</a></code> is for exhaustive file listing or filtering on file properties.</p>
 </div>
 <div id="drive_get" class="section level2">
 <h2 class="hasAnchor">
 <a href="#drive_get" class="anchor"></a>drive_get()</h2>
 <p>Read the help for complete documentation but here are how calls to <code><a href="../../reference/drive_get.html">drive_get()</a></code> can look:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="st">"i_am_a_file_name"</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="st">"i/am/a/deeply/buried/file.txt"</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="st">"i/am/a/folder/"</span>)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"i_am_a_file_name"</span>, <span class="st">"path/to/file"</span>))</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="../../reference/as_id.html">as_id</a></span>(<span class="st">"abcdefghijklm"</span>))</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="../../reference/as_id.html">as_id</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"abcdefghijklm"</span>, <span class="st">"nopqrstuvwxyz"</span>)))</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="dt">id =</span> <span class="st">"abcdefghijklm"</span>)</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="dt">id =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"abcdefghijklm"</span>, <span class="st">"nopqrstuvwxyz"</span>))</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw"><a href="../../reference/as_id.html">as_id</a></span>(<span class="st">"https://docs.google.com/document/d/abcdefghijklm/edit"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="st">"i_am_a_file_name"</span>)
+<span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="st">"i/am/a/deeply/buried/file.txt"</span>)
+<span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="st">"i/am/a/folder/"</span>)
+<span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"i_am_a_file_name"</span>, <span class="st">"path/to/file"</span>))
+<span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="fu"><a href="../../reference/as_id.html">as_id</a></span>(<span class="st">"abcdefghijklm"</span>))
+<span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="fu"><a href="../../reference/as_id.html">as_id</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"abcdefghijklm"</span>, <span class="st">"nopqrstuvwxyz"</span>)))
+<span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="st">"abcdefghijklm"</span>)
+<span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"abcdefghijklm"</span>, <span class="st">"nopqrstuvwxyz"</span>))
+<span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span>(<span class="fu"><a href="../../reference/as_id.html">as_id</a></span>(<span class="st">"https://docs.google.com/document/d/abcdefghijklm/edit"</span>))</pre></body></html></div>
 <p><code><a href="../../reference/drive_get.html">drive_get()</a></code> is for targetted file fetching based on name, path, id, or URL.</p>
 </div>
 <div id="other-handy-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-handy-functions" class="anchor"></a>Other handy functions</h2>
 <p><code><a href="../../reference/drive_reveal.html">drive_reveal()</a></code> adds bonus information to the dribble, either by excavating it from the <code>drive_resource</code> variable or by calling the Drive API. Use it on a dribble containing files of interest.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../../reference/drive_reveal.html">drive_reveal</a></span>(files, <span class="st">"path"</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="../../reference/drive_reveal.html">drive_reveal</a></span>(files, <span class="st">"trashed"</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="../../reference/drive_reveal.html">drive_reveal</a></span>(files, <span class="st">"mime_type"</span>)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="../../reference/drive_reveal.html">drive_reveal</a></span>(files, <span class="st">"permissions"</span>)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="../../reference/drive_reveal.html">drive_reveal</a></span>(files, <span class="st">"published"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span>(<span class="no">files</span>, <span class="st">"path"</span>)
+<span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span>(<span class="no">files</span>, <span class="st">"trashed"</span>)
+<span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span>(<span class="no">files</span>, <span class="st">"mime_type"</span>)
+<span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span>(<span class="no">files</span>, <span class="st">"permissions"</span>)
+<span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span>(<span class="no">files</span>, <span class="st">"published"</span>)</pre></body></html></div>
 <p><code><a href="../../reference/drive_ls.html">drive_ls()</a></code> lists files below a specified folder. It’s a thin wrapper around <code><a href="../../reference/drive_find.html">drive_find()</a></code>, so all those capabilities are available.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../../reference/drive_ls.html">drive_ls</a></span>(<span class="st">"i/am/a/folder/"</span>, <span class="dt">type =</span> <span class="st">"spreadsheet"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../../reference/drive_ls.html">drive_ls</a></span>(<span class="st">"i/am/a/folder/"</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>)</pre></body></html></div>
 <p><code><a href="../../reference/drive_browse.html">drive_browse()</a></code> will open a file in your browser.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../../reference/drive_browse.html">drive_browse</a></span>(i_am_a_dribble)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="../../reference/drive_browse.html">drive_browse</a></span>(<span class="st">"i_am_a_file_name"</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="../../reference/drive_browse.html">drive_browse</a></span>(<span class="kw"><a href="../../reference/as_id.html">as_id</a></span>(<span class="st">"abcdefghijklm"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../../reference/drive_browse.html">drive_browse</a></span>(<span class="no">i_am_a_dribble</span>)
+<span class="fu"><a href="../../reference/drive_browse.html">drive_browse</a></span>(<span class="st">"i_am_a_file_name"</span>)
+<span class="fu"><a href="../../reference/drive_browse.html">drive_browse</a></span>(<span class="fu"><a href="../../reference/as_id.html">as_id</a></span>(<span class="st">"abcdefghijklm"</span>))</pre></body></html></div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#how-to-get-one-or-more-files-in-a-dribble">How to get one or more files in a dribble</a></li>
-      <li><a href="#drive_find">drive_find()</a></li>
-      <li><a href="#drive_get">drive_get()</a></li>
-      <li><a href="#other-handy-functions">Other handy functions</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
