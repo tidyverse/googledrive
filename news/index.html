@@ -90,7 +90,7 @@
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9000</span>
         </div>
       </div>
     </div>
@@ -163,9 +163,14 @@
       <small>Source: <a href='https://github.com/tidyverse/googledrive/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="googledrive-1-0-1" class="section level1">
+    <div id="googledrive-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#googledrive-development-version" class="anchor"></a>googledrive (development version)<small> Unreleased </small>
+</h1>
+</div>
+    <div id="googledrive-101" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.1">
-<a href="#googledrive-1-0-1" class="anchor"></a>googledrive 1.0.1<small> Unreleased </small>
+<a href="#googledrive-101" class="anchor"></a>googledrive 1.0.1<small> Unreleased </small>
 </h1>
 <p>Patch release to modify a test for compatibility with an upcoming release of gargle.</p>
 <p><code><a href="../reference/drive_share.html">drive_share()</a></code> gains awareness of the <code>"fileOrganizer"</code> role (<a href='https://github.com/tidyverse/googledrive/issues/302'>#302</a>).</p>
@@ -174,9 +179,9 @@
 <p><code><a href="../reference/drive_share.html">drive_share_anyone()</a></code> is a new convenience wrapper that makes a file readable by “anyone with a link”.</p>
 <p><code>as_tibble()</code> method for <code>dribble</code> objects now passes <code>...</code> through, which could apply, for example, to tibble’s <code>.name_repair</code> argument.</p>
 </div>
-    <div id="googledrive-1-0-0" class="section level1">
+    <div id="googledrive-100" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.0">
-<a href="#googledrive-1-0-0" class="anchor"></a>googledrive 1.0.0<small> 2019-08-19 </small>
+<a href="#googledrive-100" class="anchor"></a>googledrive 1.0.0<small> 2019-08-19 </small>
 </h1>
 <p>The release of version 1.0.0 marks two events:</p>
 <ul>
@@ -270,9 +275,9 @@
 </ul>
 </div>
 </div>
-<div id="overwrite-na-true-false-and-drive_put" class="section level2">
+<div id="overwrite--na--true--false-and-drive_put" class="section level2">
 <h2 class="hasAnchor">
-<a href="#overwrite-na-true-false-and-drive_put" class="anchor"></a><code>overwrite = NA / TRUE / FALSE</code> and <code>drive_put()</code>
+<a href="#overwrite--na--true--false-and-drive_put" class="anchor"></a><code>overwrite = NA / TRUE / FALSE</code> and <code>drive_put()</code>
 </h2>
 <p>Google Drive doesn’t impose a 1-to-1 relationship between files and filepaths, the way your local file system does. Therefore, when working via the Drive API (instead of in the browser), it’s fairly easy to create multiple Drive files with the same name or filepath, without actually meaning to. This is perfectly valid on Drive, which identifies file by ID, but can be confusing and undesirable for humans.</p>
 <p>googledrive v1.0.0 offers some new ways to fight this:</p>
@@ -282,9 +287,9 @@
 <code><a href="../reference/drive_put.html">drive_put()</a></code> is a new convenience wrapper that figures out whether to call <code><a href="../reference/drive_upload.html">drive_upload()</a></code> or <code><a href="../reference/drive_update.html">drive_update()</a></code>.</li>
 </ul>
 <p>Changes inspired by <a href='https://github.com/tidyverse/googledrive/issues/230'>#230</a>.</p>
-<div id="overwrite-na-true-false" class="section level3">
+<div id="overwrite--na--true--false" class="section level3">
 <h3 class="hasAnchor">
-<a href="#overwrite-na-true-false" class="anchor"></a><code>overwrite = NA / TRUE / FALSE</code>
+<a href="#overwrite--na--true--false" class="anchor"></a><code>overwrite = NA / TRUE / FALSE</code>
 </h3>
 <p>These functions gain an <code>overwrite</code> argument:</p>
 <ul>
@@ -339,23 +344,23 @@ if (no hits) {
 <p>rprojroot has been removed from Suggests, because we can now use a version of testthat recent enough to offer <code><a href="https://testthat.r-lib.org/reference/test_path.html">testthat::test_path()</a></code>.</p>
 </div>
 </div>
-    <div id="googledrive-0-1-3" class="section level1">
+    <div id="googledrive-013" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.3">
-<a href="#googledrive-0-1-3" class="anchor"></a>googledrive 0.1.3<small> 2019-01-24 </small>
+<a href="#googledrive-013" class="anchor"></a>googledrive 0.1.3<small> 2019-01-24 </small>
 </h1>
 <p>Minor patch release for compatibility with the imminent release of purrr 0.3.0.</p>
 </div>
-    <div id="googledrive-0-1-2" class="section level1">
+    <div id="googledrive-012" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.2">
-<a href="#googledrive-0-1-2" class="anchor"></a>googledrive 0.1.2<small> 2018-10-06 </small>
+<a href="#googledrive-012" class="anchor"></a>googledrive 0.1.2<small> 2018-10-06 </small>
 </h1>
 <ul>
 <li>Internal usage of <code><a href="https://glue.tidyverse.org/reference/glue-deprecated.html">glue::collapse()</a></code> modified to call <code><a href="https://glue.tidyverse.org/reference/glue_collapse.html">glue::glue_collapse()</a></code> if glue v1.3.0 or later is installed and <code><a href="https://glue.tidyverse.org/reference/glue-deprecated.html">glue::collapse()</a></code> otherwise. Eliminates a deprecation warning emanating from glue. (<a href='https://github.com/tidyverse/googledrive/issues/222'>#222</a> <a href='https://github.com/jimhester'>@jimhester</a>)</li>
 </ul>
 </div>
-    <div id="googledrive-0-1-1" class="section level1">
+    <div id="googledrive-011" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.1">
-<a href="#googledrive-0-1-1" class="anchor"></a>googledrive 0.1.1<small> 2017-08-28 </small>
+<a href="#googledrive-011" class="anchor"></a>googledrive 0.1.1<small> 2017-08-28 </small>
 </h1>
 <ul>
 <li>initial CRAN release</li>

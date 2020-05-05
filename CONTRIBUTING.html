@@ -90,7 +90,7 @@
         <a class="navbar-brand" href="index.html">googledrive</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9000</span>
         </div>
       </div>
     </div>
@@ -281,11 +281,11 @@
 <li>All test files should have a name that documents why they exist and who made them. Use the <code># ---- nm_fun ----</code> chunk to define naming functions used in that test file (see existing files for examples). Always use one of these functions to generate file names. Use <code>nm_()</code> for test files that persist. Use <code>me_()</code> for ephemeral test files that are created and destroyed in one test run.</li>
 </ul>
 <p>Example and structure of a self-documenting name for a persistent test file:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">move<span class="op">-</span>files<span class="op">-</span>into<span class="op">-</span>me<span class="op">-</span>TEST<span class="op">-</span>drive<span class="op">-</span>mv</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="op">&lt;</span>informative<span class="op">-</span>slug<span class="op">&gt;-</span>TEST<span class="op">-</span><span class="er">&lt;</span>test<span class="op">-</span>context<span class="op">&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>move<span class="op">-</span>files<span class="op">-</span>into<span class="op">-</span>me<span class="op">-</span>TEST<span class="op">-</span>drive<span class="op">-</span>mv</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="op">&lt;</span>informative<span class="op">-</span>slug<span class="op">&gt;-</span>TEST<span class="op">-</span><span class="er">&lt;</span>test<span class="op">-</span>context<span class="op">&gt;</span></span></code></pre></div>
 <p>Example and structure of a self-documenting name for an ephemeral test file:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">DESCRIPTION<span class="op">-</span>TEST<span class="op">-</span>drive<span class="op">-</span>upload<span class="op">-</span>travis</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="op">&lt;</span>informative<span class="op">-</span>slug<span class="op">&gt;-</span>TEST<span class="op">-</span><span class="er">&lt;</span>test<span class="op">-</span>context<span class="op">&gt;-</span><span class="er">&lt;</span>user<span class="op">&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>DESCRIPTION<span class="op">-</span>TEST<span class="op">-</span>drive<span class="op">-</span>upload<span class="op">-</span>travis</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="op">&lt;</span>informative<span class="op">-</span>slug<span class="op">&gt;-</span>TEST<span class="op">-</span><span class="er">&lt;</span>test<span class="op">-</span>context<span class="op">&gt;-</span><span class="er">&lt;</span>user<span class="op">&gt;</span></span></code></pre></div>
 <p>Note that the current user is appended! This is so that concurrent test runs do not attempt to edit the same files.</p>
 </div>
 </div>
