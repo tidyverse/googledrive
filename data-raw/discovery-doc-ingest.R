@@ -35,6 +35,6 @@ methods <- mediafy("drive.files.create", methods)
 
 .endpoints <- methods
 attr(.endpoints, "base_url") <- dd$rootUrl
-## View(.endpoints)
+# View(.endpoints)
 
 usethis::use_data(.endpoints, internal = TRUE, overwrite = TRUE)
