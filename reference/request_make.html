@@ -51,9 +51,9 @@ process the response(s). Most users should, instead, use higher-level
 wrappers that facilitate common tasks, such as uploading or downloading Drive
 files. The functions here are intended for internal use and for programming
 around the Drive API. Three functions are documented here:
-request_make() does the bare minimum: just calls an HTTP method, only
-adding the googledrive user agent. Typically the input is created with
-request_generate() and the output is processed with
+request_make() does the bare minimum: calls gargle::request_make(),
+only adding the googledrive user agent. Typically the input is created
+with request_generate() and the output is processed with
 gargle::response_process().
 do_request() is simply
 gargle::response_process(request_make(x, ...)). It exists only because
@@ -191,9 +191,9 @@ process the response(s). Most users should, instead, use higher-level
 wrappers that facilitate common tasks, such as uploading or downloading Drive
 files. The functions here are intended for internal use and for programming
 around the Drive API. Three functions are documented here:</p><ul>
-<li><p><code>request_make()</code> does the bare minimum: just calls an HTTP method, only
-adding the googledrive user agent. Typically the input is created with
-<code><a href='request_generate.html'>request_generate()</a></code> and the output is processed with
+<li><p><code>request_make()</code> does the bare minimum: calls <code><a href='https://gargle.r-lib.org/reference/request_make.html'>gargle::request_make()</a></code>,
+only adding the googledrive user agent. Typically the input is created
+with <code><a href='request_generate.html'>request_generate()</a></code> and the output is processed with
 <code><a href='https://gargle.r-lib.org/reference/response_process.html'>gargle::response_process()</a></code>.</p></li>
 <li><p><code>do_request()</code> is simply
 <code><a href='https://gargle.r-lib.org/reference/response_process.html'>gargle::response_process(request_make(x, ...))</a></code>. It exists only because
