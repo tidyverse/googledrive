@@ -30,6 +30,7 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
@@ -42,7 +43,8 @@ jobs:
 
       - name: Query dependencies
         run: |
-          install.packages('remotes')
+          # getting dev remotes for better behaviour re: installation order
+          install.packages("https://github.com/r-lib/remotes/archive/master.tar.gz", repos = NULL)
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
         shell: Rscript {0}
 
@@ -65,6 +67,8 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # temporary hack until there's a macOS binary for ps
+          install.packages("ps", type = "source")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
