@@ -49,8 +49,8 @@
 <meta property="og:description" content="PUTs new media into a Drive file, in the HTTP sense: if the file already
 exists, we replace its content and we create a new file, otherwise. This is a
 convenience wrapper around drive_upload() and drive_update(). In
-pseudo-code:target_filepath &amp;amp;lt;- &amp;amp;lt;determined from `path`, `name`, and `media`&amp;amp;gt;
-hits &amp;amp;lt;- &amp;amp;lt;get all Drive files at target_filepath&amp;amp;gt;
+pseudo-code:target_filepath &amp;lt;- &amp;lt;determined from `path`, `name`, and `media`&amp;gt;
+hits &amp;lt;- &amp;lt;get all Drive files at target_filepath&amp;gt;
 if (no hits) {
   drive_upload(media, path, name, type, ..., verbose)
 } else if (exactly 1 hit) {
@@ -182,8 +182,8 @@ if (no hits) {
     <p>PUTs new media into a Drive file, in the HTTP sense: if the file already
 exists, we replace its content and we create a new file, otherwise. This is a
 convenience wrapper around <code><a href='drive_upload.html'>drive_upload()</a></code> and <code><a href='drive_update.html'>drive_update()</a></code>. In
-pseudo-code:</p><pre>target_filepath &amp;lt;- &amp;lt;determined from `path`, `name`, and `media`&amp;gt;
-hits &amp;lt;- &amp;lt;get all Drive files at target_filepath&amp;gt;
+pseudo-code:</p><pre>target_filepath &lt;- &lt;determined from `path`, `name`, and `media`&gt;
+hits &lt;- &lt;get all Drive files at target_filepath&gt;
 if (no hits) {
   drive_upload(media, path, name, type, ..., verbose)
 } else if (exactly 1 hit) {
