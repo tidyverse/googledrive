@@ -96,7 +96,7 @@ do things we haven’t made available in the high-level interface.
 
 We use [roxygen2](https://cran.r-project.org/package=roxygen2),
 specifically with the [Markdown
-syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html),
+syntax](https://roxygen2.r-lib.org/articles/rd-formatting.html),
 to create `NAMESPACE` and all `.Rd` files. All edits to documentation
 should be done in roxygen comments above the associated function or
 object.
