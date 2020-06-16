@@ -184,11 +184,11 @@ This is a generic function." />
 
     <div class="ref-description">
     <p>Converts various representations of Team Drive into a
-<code><a href='dribble.html'>dribble</a></code>, the object used by googledrive to hold Drive file metadata.
+<code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, the object used by googledrive to hold Drive file metadata.
 Team Drives can be specified via</p><ul>
 <li><p>Name.</p></li>
-<li><p>Team Drive id. Mark with <code><a href='as_id.html'>as_id()</a></code> to distinguish from name.</p></li>
-<li><p>Data frame or <code><a href='dribble.html'>dribble</a></code> consisting solely of Team Drives.</p></li>
+<li><p>Team Drive id. Mark with <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id()</a></code> to distinguish from name.</p></li>
+<li><p>Data frame or <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> consisting solely of Team Drives.</p></li>
 <li><p>List representing <a href='https://developers.google.com/drive/v3/reference/teamdrives#resource-representations'>Team Drive resource</a>
 objects. Mostly for internal use.</p></li>
 </ul>
@@ -199,7 +199,7 @@ Suite Enterprise, G Suite Business, or G Suite for Education.</p>
 <p>This is a generic function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_team_drive</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://googledrive.tidyverse.org/reference/as_team_drive.html'>as_team_drive</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,7 +207,7 @@ Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     <tr>
       <th>x</th>
       <td><p>A vector of Team Drive names, a vector of Team Drive ids marked
-with <code><a href='as_id.html'>as_id()</a></code>, a list of Team Drive Resource objects, or a suitable data
+with <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id()</a></code>, a list of Team Drive Resource objects, or a suitable data
 frame.</p></td>
     </tr>
     <tr>
@@ -218,12 +218,12 @@ frame.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## specify the name</span>
-<span class='fu'>as_team_drive</span>(<span class='st'>"abc"</span>)
+<span class='fu'><a href='https://googledrive.tidyverse.org/reference/as_team_drive.html'>as_team_drive</a></span>(<span class='st'>"abc"</span>)
 
 <span class='co'>## specify the id (substitute one of your own!)</span>
-<span class='fu'>as_team_drive</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"0AOPK1X2jaNckUk9PVA"</span>))
+<span class='fu'><a href='https://googledrive.tidyverse.org/reference/as_team_drive.html'>as_team_drive</a></span>(<span class='fu'><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id</a></span>(<span class='st'>"0AOPK1X2jaNckUk9PVA"</span>))
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

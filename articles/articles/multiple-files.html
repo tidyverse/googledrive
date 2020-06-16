@@ -172,103 +172,129 @@
 <a href="#upload-multiple-files-then-rename-them" class="anchor"></a>Upload multiple files, then rename them</h2>
 <p>Scenario: we have multiple local files we want to upload into a folder on Drive. Then we regret their original names and want to rename them.</p>
 <p>Load packages.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googledrive</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">glue</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://googledrive.tidyverse.org">googledrive</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/tidyverse/glue">glue</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
+</pre></div>
 <div id="upload" class="section level3">
 <h3 class="hasAnchor">
 <a href="#upload" class="anchor"></a>Upload</h3>
 <p>Use the example files that ship with googledrive. This looks a bit odd, but the first call returns their names and the second returns full paths on the local system.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">local_files</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/drive_example.html">drive_example</a></span>() <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">local_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_example.html">drive_example</a></span>() <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../../reference/drive_example.html">drive_example</a></span>()
-<span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span>(<span class="no">local_files</span>)
-<span class="co">#&gt; [1] "chicken.csv" "chicken.jpg" "chicken.pdf" "chicken.txt"</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span>(<span class="kw">local_files</span>)
+<span class="co">#&gt; [1] "chicken.csv" "chicken.jpg" "chicken.pdf" "chicken.txt"</span>
+</pre></div>
 <p>Create a folder on your Drive and upload all files into this folder by iterating over the <code>local_files</code> using <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code>.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">folder</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/drive_mkdir.html">drive_mkdir</a></span>(<span class="st">"upload-into-me-article-demo"</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_mkdir.html">drive_mkdir</a></span>(<span class="st">"upload-into-me-article-demo"</span>)
 <span class="co">#&gt; Created Drive file:</span>
-<span class="co">#&gt;   * upload-into-me-article-demo: 1TDxD5u1hSCg3mH-eeG7746AKxHFk-kke</span>
+<span class="co">#&gt;   * upload-into-me-article-demo: 1uAZtWCI4PqiUdfipAf2yZuLcXgBhNMX6</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * application/vnd.google-apps.folder</span>
-<span class="no">files</span> <span class="kw">&lt;-</span> <span class="fu">map</span>(<span class="no">local_files</span>, ~ <span class="fu"><a href="../../reference/drive_upload.html">drive_upload</a></span>(<span class="no">.x</span>, <span class="kw">path</span> <span class="kw">=</span> <span class="no">folder</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>))</pre></body></html></div>
+<span class="kw">files</span> <span class="op">&lt;-</span> <span class="fu">map</span>(<span class="kw">local_files</span>, <span class="op">~</span> <span class="fu"><a href="../../reference/drive_upload.html">drive_upload</a></span>(<span class="kw">.x</span>, path = <span class="kw">folder</span>, verbose = <span class="fl">FALSE</span>))
+</pre></div>
 <p>First, let’s confirm that we uploaded the files into the new folder.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../../reference/drive_ls.html">drive_ls</a></span>(<span class="no">folder</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="../../reference/drive_ls.html">drive_ls</a></span>(<span class="kw">folder</span>)
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   name        id                                drive_resource   </span>
 <span class="co">#&gt; * &lt;chr&gt;       &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 chicken.txt 1-Ro_wrh8JPQYhRpvBTzHan4sb-tzJtaV &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 2 chicken.pdf 1T8vAv7JkehJf2rA_4pFYWMUjJZIqE_fv &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 3 chicken.jpg 1QJSreK3hT2mMUP0YC8MOqJ8iHKkocY2h &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 4 chicken.csv 1oxq89MdbZB3KZfPQFXeYQa3ja3vDKTsY &lt;named list [38]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 chicken.txt 116vDQ7w5ruzOzlTj7wqPBSpX2u9BcQtt &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 2 chicken.pdf 13kXeCsnWY100g34iK_2GbjRAeJgPU8nL &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 3 chicken.jpg 1WlcMDcWuEE2NQZSZNwfbv94u0sUb3MwK &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 4 chicken.csv 1iJ3qHVBaN5NPGg4w5EcbS7mOafIUB6QO &lt;named list [38]&gt;</span>
+</pre></div>
 <p>Now let’s reflect on the <code>files</code> object returned by this operation. <code>files</code> is a list of <strong>dribbles</strong>, one per uploaded file.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">files</span>, <span class="kw">max.level</span> <span class="kw">=</span> <span class="fl">1</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw">files</span>, max.level = <span class="fl">1</span>)
 <span class="co">#&gt; List of 4</span>
 <span class="co">#&gt;  $ : tibble [1 × 3] (S3: dribble/tbl_df/tbl/data.frame)</span>
 <span class="co">#&gt;  $ : tibble [1 × 3] (S3: dribble/tbl_df/tbl/data.frame)</span>
 <span class="co">#&gt;  $ : tibble [1 × 3] (S3: dribble/tbl_df/tbl/data.frame)</span>
-<span class="co">#&gt;  $ : tibble [1 × 3] (S3: dribble/tbl_df/tbl/data.frame)</span></pre></body></html></div>
+<span class="co">#&gt;  $ : tibble [1 × 3] (S3: dribble/tbl_df/tbl/data.frame)</span>
+</pre></div>
 <p>This would be a favorable data structure if you’ve got more <code>map()</code>ing to do, as you’ll see below.</p>
 <p>But what if not? You can always row bind individual dribbles into one big dribble yourself with, e.g., <code><a href="https://dplyr.tidyverse.org/reference/bind.html">dplyr::bind_rows()</a></code>.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu">bind_rows</span>(<span class="no">files</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu">bind_rows</span>(<span class="kw">files</span>)
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   name        id                                drive_resource   </span>
 <span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 chicken.csv 1oxq89MdbZB3KZfPQFXeYQa3ja3vDKTsY &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 2 chicken.jpg 1QJSreK3hT2mMUP0YC8MOqJ8iHKkocY2h &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 3 chicken.pdf 1T8vAv7JkehJf2rA_4pFYWMUjJZIqE_fv &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 4 chicken.txt 1-Ro_wrh8JPQYhRpvBTzHan4sb-tzJtaV &lt;named list [38]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 chicken.csv 1iJ3qHVBaN5NPGg4w5EcbS7mOafIUB6QO &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 2 chicken.jpg 1WlcMDcWuEE2NQZSZNwfbv94u0sUb3MwK &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 3 chicken.pdf 13kXeCsnWY100g34iK_2GbjRAeJgPU8nL &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 4 chicken.txt 116vDQ7w5ruzOzlTj7wqPBSpX2u9BcQtt &lt;named list [38]&gt;</span>
+</pre></div>
 <p>Below we show another way to finesse this by using a variant of <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> that does this for us, namely <code>map_df()</code>.</p>
 </div>
 <div id="rename" class="section level3">
 <h3 class="hasAnchor">
 <a href="#rename" class="anchor"></a>Rename</h3>
 <p>Imagine that we now wish these file names had a date prefix. First, form the new names. We use <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code> for string interpolation but you could also use <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code>. Second, we map over two inputs: the list of dribbles from above and the vector of new names.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r">(<span class="no">new_names</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">"{Sys.Date()}_{basename(local_files)}"</span>))
-<span class="co">#&gt; 2020-06-15_chicken.csv</span>
-<span class="co">#&gt; 2020-06-15_chicken.jpg</span>
-<span class="co">#&gt; 2020-06-15_chicken.pdf</span>
-<span class="co">#&gt; 2020-06-15_chicken.txt</span>
-<span class="no">files_dribble</span> <span class="kw">&lt;-</span> <span class="fu">map2_df</span>(<span class="no">files</span>, <span class="no">new_names</span>, <span class="no">drive_rename</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit">
+(<span class="kw">new_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">"{Sys.Date()}_{basename(local_files)}"</span>))
+<span class="co">#&gt; 2020-06-16_chicken.csv</span>
+<span class="co">#&gt; 2020-06-16_chicken.jpg</span>
+<span class="co">#&gt; 2020-06-16_chicken.pdf</span>
+<span class="co">#&gt; 2020-06-16_chicken.txt</span>
+<span class="kw">files_dribble</span> <span class="op">&lt;-</span> <span class="fu">map2_df</span>(<span class="kw">files</span>, <span class="kw">new_names</span>, <span class="kw">drive_rename</span>)
 <span class="co">#&gt; File renamed:</span>
-<span class="co">#&gt;   * chicken.csv -&gt; 2020-06-15_chicken.csv</span>
+<span class="co">#&gt;   * chicken.csv -&gt; 2020-06-16_chicken.csv</span>
 <span class="co">#&gt; File renamed:</span>
-<span class="co">#&gt;   * chicken.jpg -&gt; 2020-06-15_chicken.jpg</span>
+<span class="co">#&gt;   * chicken.jpg -&gt; 2020-06-16_chicken.jpg</span>
 <span class="co">#&gt; File renamed:</span>
-<span class="co">#&gt;   * chicken.pdf -&gt; 2020-06-15_chicken.pdf</span>
+<span class="co">#&gt;   * chicken.pdf -&gt; 2020-06-16_chicken.pdf</span>
 <span class="co">#&gt; File renamed:</span>
-<span class="co">#&gt;   * chicken.txt -&gt; 2020-06-15_chicken.txt</span></pre></body></html></div>
+<span class="co">#&gt;   * chicken.txt -&gt; 2020-06-16_chicken.txt</span>
+</pre></div>
 <p>We use <code><a href="https://purrr.tidyverse.org/reference/map2.html">purrr::map2_df()</a></code> to work through <code>files</code>, the list of dribbles (= Drive files), and <code>new_names</code>, the vector of new names, and row bind the returned dribbles into a single dribble holding all files.</p>
 <p>Let’s check on the contents of this folder again to confirm the new names:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../../reference/drive_ls.html">drive_ls</a></span>(<span class="no">folder</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu"><a href="../../reference/drive_ls.html">drive_ls</a></span>(<span class="kw">folder</span>)
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   name                   id                                drive_resource   </span>
 <span class="co">#&gt; * &lt;chr&gt;                  &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 2020-06-15_chicken.txt 1-Ro_wrh8JPQYhRpvBTzHan4sb-tzJtaV &lt;named list [39]&gt;</span>
-<span class="co">#&gt; 2 2020-06-15_chicken.pdf 1T8vAv7JkehJf2rA_4pFYWMUjJZIqE_fv &lt;named list [39]&gt;</span>
-<span class="co">#&gt; 3 2020-06-15_chicken.jpg 1QJSreK3hT2mMUP0YC8MOqJ8iHKkocY2h &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 4 2020-06-15_chicken.csv 1oxq89MdbZB3KZfPQFXeYQa3ja3vDKTsY &lt;named list [38]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 2020-06-16_chicken.txt 116vDQ7w5ruzOzlTj7wqPBSpX2u9BcQtt &lt;named list [39]&gt;</span>
+<span class="co">#&gt; 2 2020-06-16_chicken.pdf 13kXeCsnWY100g34iK_2GbjRAeJgPU8nL &lt;named list [39]&gt;</span>
+<span class="co">#&gt; 3 2020-06-16_chicken.jpg 1WlcMDcWuEE2NQZSZNwfbv94u0sUb3MwK &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 4 2020-06-16_chicken.csv 1iJ3qHVBaN5NPGg4w5EcbS7mOafIUB6QO &lt;named list [38]&gt;</span>
+</pre></div>
 <p>Let’s confirm that, by using <code>map2_df()</code> instead of <code>map2()</code>, we got a single dribble back, instead of a list of one-row dribbles:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">files_dribble</span>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="kw">files_dribble</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   name                   id                                drive_resource   </span>
 <span class="co">#&gt;   &lt;chr&gt;                  &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 2020-06-15_chicken.csv 1oxq89MdbZB3KZfPQFXeYQa3ja3vDKTsY &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 2 2020-06-15_chicken.jpg 1QJSreK3hT2mMUP0YC8MOqJ8iHKkocY2h &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 3 2020-06-15_chicken.pdf 1T8vAv7JkehJf2rA_4pFYWMUjJZIqE_fv &lt;named list [39]&gt;</span>
-<span class="co">#&gt; 4 2020-06-15_chicken.txt 1-Ro_wrh8JPQYhRpvBTzHan4sb-tzJtaV &lt;named list [39]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 2020-06-16_chicken.csv 1iJ3qHVBaN5NPGg4w5EcbS7mOafIUB6QO &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 2 2020-06-16_chicken.jpg 1WlcMDcWuEE2NQZSZNwfbv94u0sUb3MwK &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 3 2020-06-16_chicken.pdf 13kXeCsnWY100g34iK_2GbjRAeJgPU8nL &lt;named list [39]&gt;</span>
+<span class="co">#&gt; 4 2020-06-16_chicken.txt 116vDQ7w5ruzOzlTj7wqPBSpX2u9BcQtt &lt;named list [39]&gt;</span>
+</pre></div>
 <p>What if you wanted to get a list back, because your downstream operations include yet more <code>map()</code>ing? Then you would use <code>map2()</code>.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">files_list</span> <span class="kw">&lt;-</span> <span class="fu">map2</span>(<span class="no">files</span>, <span class="no">new_names</span>, <span class="no">drive_rename</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="kw">files_list</span> <span class="op">&lt;-</span> <span class="fu">map2</span>(<span class="kw">files</span>, <span class="kw">new_names</span>, <span class="kw">drive_rename</span>)
+</pre></div>
 </div>
 <div id="clean-up" class="section level3">
 <h3 class="hasAnchor">
 <a href="#clean-up" class="anchor"></a>Clean up</h3>
 <p>Our trashing function, <code><a href="../../reference/drive_trash.html">drive_trash()</a></code> is vectorized and can therefore operate on a multi-file dribble. We could trash these files like so:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../../reference/drive_trash.html">drive_trash</a></span>(<span class="no">files_dribble</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="fu"><a href="../../reference/drive_trash.html">drive_trash</a></span>(<span class="kw">files_dribble</span>)
+</pre></div>
 <p>If you’re absolutely sure of yourself and happy to do something irreversible, you could truly delete these files with <code><a href="../../reference/drive_rm.html">drive_rm()</a></code>, which is also vectorized:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="../../reference/drive_rm.html">drive_rm</a></span>(<span class="no">files_dribble</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="fu"><a href="../../reference/drive_rm.html">drive_rm</a></span>(<span class="kw">files_dribble</span>)
+</pre></div>
 <p>Finally – and this is the code we will actually execute – the easiest way to delete these files is to delete their enclosing folder.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../../reference/drive_rm.html">drive_rm</a></span>(<span class="no">folder</span>)
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="fu"><a href="../../reference/drive_rm.html">drive_rm</a></span>(<span class="kw">folder</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * upload-into-me-article-demo: 1TDxD5u1hSCg3mH-eeG7746AKxHFk-kke</span></pre></body></html></div>
+<span class="co">#&gt;   * upload-into-me-article-demo: 1uAZtWCI4PqiUdfipAf2yZuLcXgBhNMX6</span>
+</pre></div>
 </div>
 </div>
   </div>

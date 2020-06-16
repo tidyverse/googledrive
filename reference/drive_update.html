@@ -174,10 +174,10 @@ depending on whether the Drive file already exists, see drive_put()." />
     <div class="ref-description">
     <p>Update an existing Drive file id with new content ("media" in Drive
 API-speak), new metadata, or both.  To create a new file or update existing,
-depending on whether the Drive file already exists, see <code><a href='drive_put.html'>drive_put()</a></code>.</p>
+depending on whether the Drive file already exists, see <code><a href='https://googledrive.tidyverse.org/reference/drive_put.html'>drive_put()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>drive_update</span>(<span class='no'>file</span>, <span class='kw'>media</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_update.html'>drive_update</a></span>(<span class='kw'>file</span>, media = <span class='kw'>NULL</span>, <span class='kw'>...</span>, verbose = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,8 +185,8 @@ depending on whether the Drive file already exists, see <code><a href='drive_put
     <tr>
       <th>file</th>
       <td><p>Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with <code><a href='as_id.html'>as_id()</a></code>, or a
-<code><a href='dribble.html'>dribble</a></code>.</p></td>
+Drive. Can be a name or path, a file id or URL marked with <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id()</a></code>, or a
+<code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>.</p></td>
     </tr>
     <tr>
       <th>media</th>
@@ -209,7 +209,7 @@ associated endpoint to learn about relevant parameters.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
+    <p>An object of class <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Wraps the <code>files.update</code> endpoint:</p><ul>
@@ -222,33 +222,33 @@ associated endpoint to learn about relevant parameters.</p></td>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## Create a new file, so we can update it</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.csv"</span>))
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.csv"</span>))
 
 <span class='co'>## Update the file with new media</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>drive_update</span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>))
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='kw'>x</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_update.html'>drive_update</a></span>(<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>))
 
 <span class='co'>## Update the file with new metadata.</span>
 <span class='co'>## Notice here `name` is not an argument of `drive_update()`, we are passing</span>
 <span class='co'>## this to the API via the `...``</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>drive_update</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"CHICKENS!"</span>)
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='kw'>x</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_update.html'>drive_update</a></span>(name = <span class='st'>"CHICKENS!"</span>)
 
 <span class='co'>## We can add a parent folder by passing `addParents` via `...`.</span>
-<span class='no'>folder</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"second-parent-folder"</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>drive_update</span>(<span class='kw'>addParents</span> <span class='kw'>=</span> <span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='no'>folder</span>))
+<span class='kw'>folder</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"second-parent-folder"</span>)
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='kw'>x</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_update.html'>drive_update</a></span>(addParents = <span class='fu'><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id</a></span>(<span class='kw'>folder</span>))
 <span class='co'>## Verify the file now has multiple parents</span>
-<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>x</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"parents"</span>)
+<span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='kw'>x</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"parents"</span>)
 
 <span class='co'>## Update the file with new media AND new metadata</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>drive_update</span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>), <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-poem-again.txt"</span>)
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='kw'>x</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_update.html'>drive_update</a></span>(<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>), name = <span class='st'>"chicken-poem-again.txt"</span>)
 
 <span class='co'>## Clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>x</span>, <span class='no'>folder</span>)
+<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='kw'>x</span>, <span class='kw'>folder</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
