@@ -191,7 +191,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="kw">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_mkdir.html">drive_mkdir</a></span>(<span class="st">"upload-into-me-article-demo"</span>)
 <span class="co">#&gt; Created Drive file:</span>
-<span class="co">#&gt;   * upload-into-me-article-demo: 1Z4qoWYe3oLRpayzW4JWL9yy5JTLITvdC</span>
+<span class="co">#&gt;   * upload-into-me-article-demo: 1a98e-f8ccowMACS_FbwLpEX5uweBZyCz</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * application/vnd.google-apps.folder</span>
 <span class="kw">files</span> <span class="op">&lt;-</span> <span class="fu">map</span>(<span class="kw">local_files</span>, <span class="op">~</span> <span class="fu"><a href="../../reference/drive_upload.html">drive_upload</a></span>(<span class="kw">.x</span>, path = <span class="kw">folder</span>, verbose = <span class="fl">FALSE</span>))
@@ -199,20 +199,13 @@
 <p>First, let’s confirm that we uploaded the files into the new folder.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="fu"><a href="../../reference/drive_ls.html">drive_ls</a></span>(<span class="kw">folder</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   name        id                                drive_resource   </span>
 <span class="co">#&gt; * &lt;chr&gt;       &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 chicken.txt 1o-T2fn3QH90SSxrCj1SVZnDkQtVCUm24 &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 2 chicken.pdf 1UD4KonrOeqgINqrN5UlSVxCBUbQpJYB_ &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 3 chicken.jpg 1QaKh7yxzZSTb4QB6V-ZIntIajPSBEtGH &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 4 chicken.csv 1EzbpPBpKgwipUDv0xzICvM2kEq2UC_xm &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 1 chicken.txt 1FVB0luxfgp29nwf3fbEIXMcSjeDWfqed &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 2 chicken.pdf 1hZUhe9KGvkx0sDJsv6Qy29vsYOXazREK &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 3 chicken.jpg 1gXVt-0Fa_8T9phSPb56NOnRLmL-PScxt &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 4 chicken.csv 133G8Mhh6zvHS74Ewb6jjFANiYtFJFBUx &lt;named list [38]&gt;</span>
 </pre></div>
 <p>Now let’s reflect on the <code>files</code> object returned by this operation. <code>files</code> is a list of <strong>dribbles</strong>, one per uploaded file.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
@@ -227,20 +220,13 @@
 <p>But what if not? You can always row bind individual dribbles into one big dribble yourself with, e.g., <code><a href="https://dplyr.tidyverse.org/reference/bind.html">dplyr::bind_rows()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu">bind_rows</span>(<span class="kw">files</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   name        id                                drive_resource   </span>
 <span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 chicken.csv 1EzbpPBpKgwipUDv0xzICvM2kEq2UC_xm &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 2 chicken.jpg 1QaKh7yxzZSTb4QB6V-ZIntIajPSBEtGH &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 3 chicken.pdf 1UD4KonrOeqgINqrN5UlSVxCBUbQpJYB_ &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 4 chicken.txt 1o-T2fn3QH90SSxrCj1SVZnDkQtVCUm24 &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 1 chicken.csv 133G8Mhh6zvHS74Ewb6jjFANiYtFJFBUx &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 2 chicken.jpg 1gXVt-0Fa_8T9phSPb56NOnRLmL-PScxt &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 3 chicken.pdf 1hZUhe9KGvkx0sDJsv6Qy29vsYOXazREK &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 4 chicken.txt 1FVB0luxfgp29nwf3fbEIXMcSjeDWfqed &lt;named list [38]&gt;</span>
 </pre></div>
 <p>Below we show another way to finesse this by using a variant of <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> that does this for us, namely <code>map_df()</code>.</p>
 </div>
@@ -250,56 +236,42 @@
 <p>Imagine that we now wish these file names had a date prefix. First, form the new names. We use <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code> for string interpolation but you could also use <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code>. Second, we map over two inputs: the list of dribbles from above and the vector of new names.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 (<span class="kw">new_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span>(<span class="st">"{Sys.Date()}_{basename(local_files)}"</span>))
-<span class="co">#&gt; 2020-07-10_chicken.csv</span>
-<span class="co">#&gt; 2020-07-10_chicken.jpg</span>
-<span class="co">#&gt; 2020-07-10_chicken.pdf</span>
-<span class="co">#&gt; 2020-07-10_chicken.txt</span>
+<span class="co">#&gt; 2020-07-11_chicken.csv</span>
+<span class="co">#&gt; 2020-07-11_chicken.jpg</span>
+<span class="co">#&gt; 2020-07-11_chicken.pdf</span>
+<span class="co">#&gt; 2020-07-11_chicken.txt</span>
 <span class="kw">files_dribble</span> <span class="op">&lt;-</span> <span class="fu">map2_df</span>(<span class="kw">files</span>, <span class="kw">new_names</span>, <span class="kw">drive_rename</span>)
 <span class="co">#&gt; File renamed:</span>
-<span class="co">#&gt;   * chicken.csv -&gt; 2020-07-10_chicken.csv</span>
+<span class="co">#&gt;   * chicken.csv -&gt; 2020-07-11_chicken.csv</span>
 <span class="co">#&gt; File renamed:</span>
-<span class="co">#&gt;   * chicken.jpg -&gt; 2020-07-10_chicken.jpg</span>
+<span class="co">#&gt;   * chicken.jpg -&gt; 2020-07-11_chicken.jpg</span>
 <span class="co">#&gt; File renamed:</span>
-<span class="co">#&gt;   * chicken.pdf -&gt; 2020-07-10_chicken.pdf</span>
+<span class="co">#&gt;   * chicken.pdf -&gt; 2020-07-11_chicken.pdf</span>
 <span class="co">#&gt; File renamed:</span>
-<span class="co">#&gt;   * chicken.txt -&gt; 2020-07-10_chicken.txt</span>
+<span class="co">#&gt;   * chicken.txt -&gt; 2020-07-11_chicken.txt</span>
 </pre></div>
 <p>We use <code><a href="https://purrr.tidyverse.org/reference/map2.html">purrr::map2_df()</a></code> to work through <code>files</code>, the list of dribbles (= Drive files), and <code>new_names</code>, the vector of new names, and row bind the returned dribbles into a single dribble holding all files.</p>
 <p>Let’s check on the contents of this folder again to confirm the new names:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu"><a href="../../reference/drive_ls.html">drive_ls</a></span>(<span class="kw">folder</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   name                   id                                drive_resource   </span>
 <span class="co">#&gt; * &lt;chr&gt;                  &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 2020-07-10_chicken.txt 1o-T2fn3QH90SSxrCj1SVZnDkQtVCUm24 &lt;named list [39]&gt;</span>
-<span class="co">#&gt; 2 2020-07-10_chicken.pdf 1UD4KonrOeqgINqrN5UlSVxCBUbQpJYB_ &lt;named list [39]&gt;</span>
-<span class="co">#&gt; 3 2020-07-10_chicken.jpg 1QaKh7yxzZSTb4QB6V-ZIntIajPSBEtGH &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 4 2020-07-10_chicken.csv 1EzbpPBpKgwipUDv0xzICvM2kEq2UC_xm &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 1 2020-07-11_chicken.txt 1FVB0luxfgp29nwf3fbEIXMcSjeDWfqed &lt;named list [39]&gt;</span>
+<span class="co">#&gt; 2 2020-07-11_chicken.pdf 1hZUhe9KGvkx0sDJsv6Qy29vsYOXazREK &lt;named list [39]&gt;</span>
+<span class="co">#&gt; 3 2020-07-11_chicken.jpg 1gXVt-0Fa_8T9phSPb56NOnRLmL-PScxt &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 4 2020-07-11_chicken.csv 133G8Mhh6zvHS74Ewb6jjFANiYtFJFBUx &lt;named list [38]&gt;</span>
 </pre></div>
 <p>Let’s confirm that, by using <code>map2_df()</code> instead of <code>map2()</code>, we got a single dribble back, instead of a list of one-row dribbles:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="kw">files_dribble</span>
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   name                   id                                drive_resource   </span>
 <span class="co">#&gt;   &lt;chr&gt;                  &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 2020-07-10_chicken.csv 1EzbpPBpKgwipUDv0xzICvM2kEq2UC_xm &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 2 2020-07-10_chicken.jpg 1QaKh7yxzZSTb4QB6V-ZIntIajPSBEtGH &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 3 2020-07-10_chicken.pdf 1UD4KonrOeqgINqrN5UlSVxCBUbQpJYB_ &lt;named list [39]&gt;</span>
-<span class="co">#&gt; 4 2020-07-10_chicken.txt 1o-T2fn3QH90SSxrCj1SVZnDkQtVCUm24 &lt;named list [39]&gt;</span>
+<span class="co">#&gt; 1 2020-07-11_chicken.csv 133G8Mhh6zvHS74Ewb6jjFANiYtFJFBUx &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 2 2020-07-11_chicken.jpg 1gXVt-0Fa_8T9phSPb56NOnRLmL-PScxt &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 3 2020-07-11_chicken.pdf 1hZUhe9KGvkx0sDJsv6Qy29vsYOXazREK &lt;named list [39]&gt;</span>
+<span class="co">#&gt; 4 2020-07-11_chicken.txt 1FVB0luxfgp29nwf3fbEIXMcSjeDWfqed &lt;named list [39]&gt;</span>
 </pre></div>
 <p>What if you wanted to get a list back, because your downstream operations include yet more <code>map()</code>ing? Then you would use <code>map2()</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
@@ -321,7 +293,7 @@
 <div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="fu"><a href="../../reference/drive_rm.html">drive_rm</a></span>(<span class="kw">folder</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * upload-into-me-article-demo: 1Z4qoWYe3oLRpayzW4JWL9yy5JTLITvdC</span>
+<span class="co">#&gt;   * upload-into-me-article-demo: 1a98e-f8ccowMACS_FbwLpEX5uweBZyCz</span>
 </pre></div>
 </div>
 </div>
