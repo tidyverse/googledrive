@@ -191,10 +191,10 @@ Suite Enterprise, G Suite Business, or G Suite for Education." />
     <div class="ref-description">
     <p>How to capture a Team Drive or files/folders that live on a
 Team Drive for downstream use:</p><ul>
-<li><p><code><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find()</a></code> and <code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>drive_get()</a></code> return a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> with metadata on
+<li><p><code><a href='drive_find.html'>drive_find()</a></code> and <code><a href='drive_get.html'>drive_get()</a></code> return a <code><a href='dribble.html'>dribble</a></code> with metadata on
 files, including folders. Both can be directed to search on Team Drives,
 using the optional arguments <code>team_drive</code> or <code>corpus</code> (documented below).</p></li>
-<li><p><code><a href='https://googledrive.tidyverse.org/reference/team_drive_find.html'>team_drive_find()</a></code> and <code><a href='https://googledrive.tidyverse.org/reference/team_drive_get.html'>team_drive_get()</a></code> return a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> with
+<li><p><code><a href='team_drive_find.html'>team_drive_find()</a></code> and <code><a href='team_drive_get.html'>team_drive_get()</a></code> return a <code><a href='dribble.html'>dribble</a></code> with
 metadata on Team Drives themselves. You will need this in order to use a Team
 Drive in certain file operations. For example, you can specify a Team Drive
 as the parent folder via the <code>path</code> argument for upload, move, copy, etc.</p></li>
@@ -202,10 +202,10 @@ as the parent folder via the <code>path</code> argument for upload, move, copy, 
 
 <p>Regard the functions above as the official "port of entry" for
 Team Drives and Team Drive files and folders. Use them to capture your
-target(s) in a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> to pass along to other googledrive functions.
+target(s) in a <code><a href='dribble.html'>dribble</a></code> to pass along to other googledrive functions.
 The general flexibility to refer to files by name, path, or id does not
 apply to Team Drive files. While it's always a good idea to get things into
-a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> early, for Team Drives it's absolutely required.</p>
+a <code><a href='dribble.html'>dribble</a></code> early, for Team Drives it's absolutely required.</p>
 <p>Note: <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
 are only available to users of certain enhanced Google services, such as G
 Suite Enterprise, G Suite Business, or G Suite for Education.</p>
@@ -218,19 +218,19 @@ Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     
 
 <p>To search one specific Team Drive, pass its name, marked id, or
-<code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> to <code>team_drive</code> somewhere in the call, like so:</p><pre><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, team_drive = <span class='st'>"i_am_a_team_drive_name"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, team_drive = <span class='fu'><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id</a></span>(<span class='st'>"i_am_a_team_drive_id"</span>))
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, team_drive = <span class='kw'>i_am_a_team_drive_dribble</span>)</pre>
+<code><a href='dribble.html'>dribble</a></code> to <code>team_drive</code> somewhere in the call, like so:</p><pre><span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='no'>...</span>, <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='st'>"i_am_a_team_drive_name"</span>)
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='no'>...</span>, <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"i_am_a_team_drive_id"</span>))
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='no'>...</span>, <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='no'>i_am_a_team_drive_dribble</span>)</pre>
 
-<p>The value of <code>team_drive</code> is pre-processed with <code><a href='https://googledrive.tidyverse.org/reference/as_team_drive.html'>as_team_drive()</a></code>.</p>
+<p>The value of <code>team_drive</code> is pre-processed with <code><a href='as_team_drive.html'>as_team_drive()</a></code>.</p>
     <h2 class="hasAnchor" id="other-collections"><a class="anchor" href="#other-collections"></a>Other collections</h2>
 
     
 
 <p>To search other collections, pass the <code>corpus</code> parameter somewhere in the
-call, like so:</p><pre><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, corpus = <span class='st'>"user"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, corpus = <span class='st'>"all"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, corpus = <span class='st'>"domain"</span>)</pre>
+call, like so:</p><pre><span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='no'>...</span>, <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='st'>"user"</span>)
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='no'>...</span>, <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='st'>"all"</span>)
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='no'>...</span>, <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='st'>"domain"</span>)</pre>
 
 <p>Possible values of <code>corpus</code> and what they mean:</p><ul>
 <li><p><code>"user"</code>: Queries files that the user has accessed, including both Team and

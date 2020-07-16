@@ -177,7 +177,7 @@ are only available to users of certain enhanced Google services, such as G
 Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://googledrive.tidyverse.org/reference/team_drive_rm.html'>team_drive_rm</a></span>(team_drive = <span class='kw'>NULL</span>, verbose = <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>team_drive_rm</span>(<span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,7 +186,7 @@ Suite Enterprise, G Suite Business, or G Suite for Education.</p>
       <th>team_drive</th>
       <td><p>Anything that identifies the Team Drive(s) of interest. Can
 be a character vector of names, a character vector of file ids or URLs
-marked with <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> consisting only of Team Drives.</p></td>
+marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code> consisting only of Team Drives.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -206,21 +206,21 @@ marked with <code><a href='https://googledrive.tidyverse.org/reference/as_id.htm
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## Create Team Drives to remove in various ways</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/team_drive_create.html'>team_drive_create</a></span>(<span class='st'>"testdrive-01"</span>)
-<span class='kw'>td02</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/team_drive_create.html'>team_drive_create</a></span>(<span class='st'>"testdrive-02"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/team_drive_create.html'>team_drive_create</a></span>(<span class='st'>"testdrive-03"</span>)
-<span class='kw'>td04</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/team_drive_create.html'>team_drive_create</a></span>(<span class='st'>"testdrive-04"</span>)
+<span class='fu'><a href='team_drive_create.html'>team_drive_create</a></span>(<span class='st'>"testdrive-01"</span>)
+<span class='no'>td02</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='team_drive_create.html'>team_drive_create</a></span>(<span class='st'>"testdrive-02"</span>)
+<span class='fu'><a href='team_drive_create.html'>team_drive_create</a></span>(<span class='st'>"testdrive-03"</span>)
+<span class='no'>td04</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='team_drive_create.html'>team_drive_create</a></span>(<span class='st'>"testdrive-04"</span>)
 
 <span class='co'>## remove by name</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/team_drive_rm.html'>team_drive_rm</a></span>(<span class='st'>"testdrive-01"</span>)
+<span class='fu'>team_drive_rm</span>(<span class='st'>"testdrive-01"</span>)
 <span class='co'>## remove by id</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/team_drive_rm.html'>team_drive_rm</a></span>(<span class='fu'><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id</a></span>(<span class='kw'>td02</span>))
+<span class='fu'>team_drive_rm</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='no'>td02</span>))
 <span class='co'>## remove by URL (or, rather, id found in URL)</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/team_drive_rm.html'>team_drive_rm</a></span>(<span class='fu'><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id</a></span>(<span class='st'>"https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"</span>))
+<span class='fu'>team_drive_rm</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"</span>))
 <span class='co'>## remove by dribble</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/team_drive_rm.html'>team_drive_rm</a></span>(<span class='kw'>td04</span>)
+<span class='fu'>team_drive_rm</span>(<span class='no'>td04</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

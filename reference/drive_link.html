@@ -175,7 +175,7 @@ opening the file in a relevant Google editor or viewer in a browser&quot;." />
 opening the file in a relevant Google editor or viewer in a browser".</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_link.html'>drive_link</a></span>(<span class='kw'>file</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_link</span>(<span class='no'>file</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -183,8 +183,8 @@ opening the file in a relevant Google editor or viewer in a browser".</p>
     <tr>
       <th>file</th>
       <td><p>Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id()</a></code>, or a
-<code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>.</p></td>
+Drive. Can be a name or path, a file id or URL marked with <code><a href='as_id.html'>as_id()</a></code>, or a
+<code><a href='dribble.html'>dribble</a></code>.</p></td>
     </tr>
     </table>
 
@@ -193,12 +193,12 @@ Drive. Can be a name or path, a file id or URL marked with <code><a href='https:
     <p>Character vector of file hyperlinks.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## get a few files into a dribble</span>
-<span class='kw'>three_files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(n_max = <span class='fl'>3</span>)
+<span class='no'>three_files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>3</span>)
 
 <span class='co'>## get their browser links</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_link.html'>drive_link</a></span>(<span class='kw'>three_files</span>)
+<span class='fu'>drive_link</span>(<span class='no'>three_files</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

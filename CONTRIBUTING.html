@@ -218,8 +218,8 @@
 <li>Accommodate initial file specification via path or name, but constantly push downstream work to be based on file id.</li>
 <li>Return a tidy tibble, almost always a <a href="https://tidyverse.github.io/googledrive/reference/dribble.html"><code>dribble</code></a>, whenever it makes sense.</li>
 </ul>
-<p>There is a high-level interface for the typical user. These functions help you accomplish the most common tasks, hopefully in a natural way. Examples: <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code>, <code><a href="https://googledrive.tidyverse.org/reference/drive_upload.html">drive_upload()</a></code>, <code><a href="https://googledrive.tidyverse.org/reference/drive_download.html">drive_download()</a></code>. A few hand-picked functions support passing extra parameters through to the API request via <code>...</code>, but we don’t do this across the board.</p>
-<p>There is also a low-level interface that is used internally. An example is the function <code><a href="https://googledrive.tidyverse.org/reference/request_generate.html">request_generate()</a></code>. These functions are exported for use by programming-oriented users who are willing to read <a href="https://developers.google.com/drive/v3/web/about-sdk">Drive API docs</a> and want to do things we haven’t made available in the high-level interface.</p>
+<p>There is a high-level interface for the typical user. These functions help you accomplish the most common tasks, hopefully in a natural way. Examples: <code><a href="reference/drive_find.html">drive_find()</a></code>, <code><a href="reference/drive_upload.html">drive_upload()</a></code>, <code><a href="reference/drive_download.html">drive_download()</a></code>. A few hand-picked functions support passing extra parameters through to the API request via <code>...</code>, but we don’t do this across the board.</p>
+<p>There is also a low-level interface that is used internally. An example is the function <code><a href="reference/request_generate.html">request_generate()</a></code>. These functions are exported for use by programming-oriented users who are willing to read <a href="https://developers.google.com/drive/v3/web/about-sdk">Drive API docs</a> and want to do things we haven’t made available in the high-level interface.</p>
 </div>
 <div id="package-mechanics" class="section level2">
 <h2 class="hasAnchor">
@@ -255,13 +255,11 @@
 <ol>
 <li>
 <p>Source <code>tests/testthat/driver.R</code> to extract and aggregate the current setup and clean code across all test files.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co">## gather all the test setup and clean code from individual test files</span>
-<span class="fu"><a href="https://rdrr.io/r/base/source.html">source</a></span>(<span class="kw">testthat</span>::<span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span>(<span class="st">"driver.R"</span>))
+<div class="sourceCode" id="cb1"><html><pre class="r"><span class="co">## gather all the test setup and clean code from individual test files</span>
+<span class="fu"><a href="https://rdrr.io/r/base/source.html">source</a></span>(<span class="kw pkg">testthat</span><span class="kw ns">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span>(<span class="st">"driver.R"</span>))
 <span class="co">## leaves behind:</span>
 <span class="co">##   * all-test-setup.R</span>
-<span class="co">##   * all-test-clean.R</span>
-</pre></div>
+<span class="co">##   * all-test-clean.R</span></pre></html></div>
 <ul>
 <li>This creates two R scripts: <code>tests/testthat/all-test-setup.R</code> and <code>tests/testthat/all-test-clean.R</code>. Inspect them.</li>
 </ul>
@@ -269,17 +267,13 @@
 <li><p>When you are truly ready to perform setup or clean, edit the code to set the <code>SETUP</code> or <code>CLEAN</code> variable to <code>TRUE</code> instead of <code>FALSE</code>. This friction is intentional, so you don’t accidentally create or delete lots of Drive files without meaning to.</p></li>
 <li><p>Render <code>all-test-setup.R</code> with the Knit button in RStudio or like so:</p></li>
 </ol>
-<!-- end list --><div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">rmarkdown</span>::<span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span>(<span class="kw">testthat</span>::<span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span>(<span class="st">"all-test-setup.R"</span>))
-</pre></div>
+<!-- end list --><div class="sourceCode" id="cb2"><html><pre class="r"><span class="kw pkg">rmarkdown</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span>(<span class="kw pkg">testthat</span><span class="kw ns">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span>(<span class="st">"all-test-setup.R"</span>))</pre></html></div>
 <p>You could also just source it, but it’s nice to have a report that records what actually happened.</p>
 <p>You should now be able to run the tests via <em>Build &gt; Test Package</em> or <em>Build &gt; Check Package</em> in RStudio or via <code>devtools::test()</code>.</p>
 <p>You can leave the setup in place for as long as you’re working on googledrive, i.e. you don’t need to do this for every test run. In fact, that is the whole point!</p>
 <p>When your googledrive development is over, render the clean script:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">rmarkdown</span>::<span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span>(<span class="kw">testthat</span>::<span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span>(<span class="st">"all-test-clean.R"</span>))
-</pre></div>
-<p>Again, read the report to look over what happened, in case anything was trashed that should not have been (btw, let us know about that so we can fix!). Once you’re satisfied that your own files were not touched, you can <code><a href="https://googledrive.tidyverse.org/reference/drive_empty_trash.html">drive_empty_trash()</a></code> to truly delete the test files.</p>
+<div class="sourceCode" id="cb3"><html><pre class="r"><span class="kw pkg">rmarkdown</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span>(<span class="kw pkg">testthat</span><span class="kw ns">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span>(<span class="st">"all-test-clean.R"</span>))</pre></html></div>
+<p>Again, read the report to look over what happened, in case anything was trashed that should not have been (btw, let us know about that so we can fix!). Once you’re satisfied that your own files were not touched, you can <code><a href="reference/drive_empty_trash.html">drive_empty_trash()</a></code> to truly delete the test files.</p>
 </div>
 <div id="adding-tests" class="section level4">
 <h4 class="hasAnchor">

@@ -177,7 +177,7 @@ File ownership and access: Is it mine? Published? Shared?
     </div>
 
     <div class="ref-description">
-    <p>Sometimes you need to check things about a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>` or about the files it
+    <p>Sometimes you need to check things about a <code><a href='dribble.html'>dribble</a></code>` or about the files it
 represents, such as:</p><ul>
 <li><p>Is it even a dribble?</p></li>
 <li><p>Size: Does the dribble hold exactly one file? At least one file? No file?</p></li>
@@ -187,54 +187,54 @@ represents, such as:</p><ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>is_dribble</a></span>(<span class='kw'>d</span>)
+    <pre class="usage"><span class='fu'>is_dribble</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>no_file</a></span>(<span class='kw'>d</span>)
+<span class='fu'>no_file</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>single_file</a></span>(<span class='kw'>d</span>)
+<span class='fu'>single_file</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>some_files</a></span>(<span class='kw'>d</span>)
+<span class='fu'>some_files</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>confirm_dribble</a></span>(<span class='kw'>d</span>)
+<span class='fu'>confirm_dribble</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>confirm_single_file</a></span>(<span class='kw'>d</span>)
+<span class='fu'>confirm_single_file</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>confirm_some_files</a></span>(<span class='kw'>d</span>)
+<span class='fu'>confirm_some_files</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>is_folder</a></span>(<span class='kw'>d</span>)
+<span class='fu'>is_folder</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>is_native</a></span>(<span class='kw'>d</span>)
+<span class='fu'>is_native</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>is_parental</a></span>(<span class='kw'>d</span>)
+<span class='fu'>is_parental</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>is_mine</a></span>(<span class='kw'>d</span>)
+<span class='fu'>is_mine</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>is_team_drive</a></span>(<span class='kw'>d</span>)
+<span class='fu'>is_team_drive</span>(<span class='no'>d</span>)
 
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>is_team_drivy</a></span>(<span class='kw'>d</span>)</pre>
+<span class='fu'>is_team_drivy</span>(<span class='no'>d</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>d</th>
-      <td><p>A <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>.</p></td>
+      <td><p>A <code><a href='dribble.html'>dribble</a></code>.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## most of us have multiple files or folders on Google Drive</span>
-<span class='kw'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>()
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>is_dribble</a></span>(<span class='kw'>d</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>no_file</a></span>(<span class='kw'>d</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>single_file</a></span>(<span class='kw'>d</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>some_files</a></span>(<span class='kw'>d</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>confirm_single_file</a></span>(<span class='kw'>d</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>confirm_some_files</a></span>(<span class='kw'>d</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>is_folder</a></span>(<span class='kw'>d</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/dribble-checks.html'>is_mine</a></span>(<span class='kw'>d</span>)
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>()
+<span class='fu'>is_dribble</span>(<span class='no'>d</span>)
+<span class='fu'>no_file</span>(<span class='no'>d</span>)
+<span class='fu'>single_file</span>(<span class='no'>d</span>)
+<span class='fu'>some_files</span>(<span class='no'>d</span>)
+<span class='fu'>confirm_single_file</span>(<span class='no'>d</span>)
+<span class='fu'>confirm_some_files</span>(<span class='no'>d</span>)
+<span class='fu'>is_folder</span>(<span class='no'>d</span>)
+<span class='fu'>is_mine</span>(<span class='no'>d</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

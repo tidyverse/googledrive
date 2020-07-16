@@ -171,11 +171,11 @@ If you would like to rename AND move the file, see drive_mv()." />
     </div>
 
     <div class="ref-description">
-    <p>This is a wrapper for <code><a href='https://googledrive.tidyverse.org/reference/drive_mv.html'>drive_mv()</a></code> that only renames a file.
-If you would like to rename AND move the file, see <code><a href='https://googledrive.tidyverse.org/reference/drive_mv.html'>drive_mv()</a></code>.</p>
+    <p>This is a wrapper for <code><a href='drive_mv.html'>drive_mv()</a></code> that only renames a file.
+If you would like to rename AND move the file, see <code><a href='drive_mv.html'>drive_mv()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rename.html'>drive_rename</a></span>(<span class='kw'>file</span>, name = <span class='kw'>NULL</span>, overwrite = <span class='fl'>NA</span>, verbose = <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_rename</span>(<span class='no'>file</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -183,8 +183,8 @@ If you would like to rename AND move the file, see <code><a href='https://google
     <tr>
       <th>file</th>
       <td><p>Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id()</a></code>, or a
-<code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>.</p></td>
+Drive. Can be a name or path, a file id or URL marked with <code><a href='as_id.html'>as_id()</a></code>, or a
+<code><a href='dribble.html'>dribble</a></code>.</p></td>
     </tr>
     <tr>
       <th>name</th>
@@ -195,7 +195,7 @@ Drive. Can be a name or path, a file id or URL marked with <code><a href='https:
       <td><p>Logical, indicating whether to check for a pre-existing file
 at the targetted "filepath". The quotes around "filepath" refer to the fact
 that Drive does not impose a 1-to-1 relationship between filepaths and files,
-like a typical file system; read more about that in <code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>drive_get()</a></code>.</p><ul>
+like a typical file system; read more about that in <code><a href='drive_get.html'>drive_get()</a></code>.</p><ul>
 <li><p><code>NA</code> (default): Just do the operation, even if it results in multiple
 files with the same filepath.</p></li>
 <li><p><code>TRUE</code>: Check for a pre-existing file at the filepath. If there is
@@ -218,26 +218,26 @@ they require additional API calls.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## Create a file to rename</span>
-<span class='kw'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_create.html'>drive_create</a></span>(<span class='st'>"file-to-rename"</span>)
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_create.html'>drive_create</a></span>(<span class='st'>"file-to-rename"</span>)
 
 <span class='co'>## Rename it</span>
-<span class='kw'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rename.html'>drive_rename</a></span>(<span class='kw'>file</span>, name = <span class='st'>"renamed-file"</span>)
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_rename</span>(<span class='no'>file</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"renamed-file"</span>)
 
 <span class='co'>## `overwrite = FALSE` errors if something already exists at target filepath</span>
 <span class='co'>## THIS WILL ERROR!</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_create.html'>drive_create</a></span>(<span class='st'>"name-squatter"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rename.html'>drive_rename</a></span>(<span class='kw'>file</span>, name = <span class='st'>"name-squatter"</span>, overwrite = <span class='fl'>FALSE</span>)
+<span class='fu'><a href='drive_create.html'>drive_create</a></span>(<span class='st'>"name-squatter"</span>)
+<span class='fu'>drive_rename</span>(<span class='no'>file</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"name-squatter"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'>## `overwrite = TRUE` moves the existing item to trash, then proceeds</span>
-<span class='kw'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rename.html'>drive_rename</a></span>(<span class='kw'>file</span>, name = <span class='st'>"name-squatter"</span>, overwrite = <span class='fl'>TRUE</span>)
+<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_rename</span>(<span class='no'>file</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"name-squatter"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>## Clean up</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='kw'>file</span>)
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>file</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

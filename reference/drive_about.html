@@ -173,11 +173,11 @@ useful information (the information on current user) and prints it nicely." />
 
     <div class="ref-description">
     <p>Gets information about the user, the user's Drive, and system capabilities.
-This function mostly exists to power <code><a href='https://googledrive.tidyverse.org/reference/drive_user.html'>drive_user()</a></code>, which extracts the most
+This function mostly exists to power <code><a href='drive_user.html'>drive_user()</a></code>, which extracts the most
 useful information (the information on current user) and prints it nicely.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_about.html'>drive_about</a></span>()</pre>
+    <pre class="usage"><span class='fu'>drive_about</span>()</pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -192,13 +192,13 @@ useful information (the information on current user) and prints it nicely.</p>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_about.html'>drive_about</a></span>()
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>drive_about</span>()
 
 <span class='co'>## explore the names of available Team Drive themes</span>
-<span class='kw'>about</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_about.html'>drive_about</a></span>()
-<span class='kw'>about</span>[[<span class='st'>"teamDriveThemes"</span>]] <span class='op'>%&gt;%</span>
-  <span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map_chr</a></span>(<span class='st'>"id"</span>)
+<span class='no'>about</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_about</span>()
+<span class='no'>about</span><span class='kw'>[[</span><span class='st'>"teamDriveThemes"</span>]] <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map_chr</a></span>(<span class='st'>"id"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

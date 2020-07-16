@@ -173,18 +173,18 @@ depending on whether the Drive file already exists, see drive_put()." />
 
     <div class="ref-description">
     <p>Uploads a local file into a new Drive file. To update the content or metadata
-of an existing Drive file, use <code><a href='https://googledrive.tidyverse.org/reference/drive_update.html'>drive_update()</a></code>. To upload or update,
-depending on whether the Drive file already exists, see <code><a href='https://googledrive.tidyverse.org/reference/drive_put.html'>drive_put()</a></code>.</p>
+of an existing Drive file, use <code><a href='drive_update.html'>drive_update()</a></code>. To upload or update,
+depending on whether the Drive file already exists, see <code><a href='drive_put.html'>drive_put()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_upload.html'>drive_upload</a></span>(
-  <span class='kw'>media</span>,
-  path = <span class='kw'>NULL</span>,
-  name = <span class='kw'>NULL</span>,
-  type = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>,
-  overwrite = <span class='fl'>NA</span>,
-  verbose = <span class='fl'>TRUE</span>
+    <pre class="usage"><span class='fu'>drive_upload</span>(
+  <span class='no'>media</span>,
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -197,8 +197,8 @@ depending on whether the Drive file already exists, see <code><a href='https://g
     <tr>
       <th>path</th>
       <td><p>Specifies target destination for the new file on Google
-Drive. Can be an actual path (character), a file id marked with <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id()</a></code>,
-or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>. If specified as an actual path, it is best to explicitly
+Drive. Can be an actual path (character), a file id marked with <code><a href='as_id.html'>as_id()</a></code>,
+or a <code><a href='dribble.html'>dribble</a></code>. If specified as an actual path, it is best to explicitly
 indicate if it's a folder by including a trailing slash, since it cannot
 always be worked out from the context of the call. Will default to its local name.</p></td>
     </tr>
@@ -215,7 +215,7 @@ determined from the file extension, if possible. If the source file is of a
 suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting <code>type</code> to <code>document</code>, <code>spreadsheet</code>, or <code>presentation</code>,
 respectively. All non-<code>NULL</code> values for <code>type</code> are pre-processed with
-<code><a href='https://googledrive.tidyverse.org/reference/drive_mime_type.html'>drive_mime_type()</a></code>.</p></td>
+<code><a href='drive_mime_type.html'>drive_mime_type()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -230,7 +230,7 @@ associated endpoint to learn about relevant parameters.</p></td>
       <td><p>Logical, indicating whether to check for a pre-existing file
 at the targetted "filepath". The quotes around "filepath" refer to the fact
 that Drive does not impose a 1-to-1 relationship between filepaths and files,
-like a typical file system; read more about that in <code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>drive_get()</a></code>.</p><ul>
+like a typical file system; read more about that in <code><a href='drive_get.html'>drive_get()</a></code>.</p><ul>
 <li><p><code>NA</code> (default): Just do the operation, even if it results in multiple
 files with the same filepath.</p></li>
 <li><p><code>TRUE</code>: Check for a pre-existing file at the filepath. If there is
@@ -253,7 +253,7 @@ they require additional API calls.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Wraps the <code>files.create</code> endpoint:</p><ul>
@@ -266,63 +266,63 @@ they require additional API calls.</p></td>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## upload a csv file</span>
-<span class='kw'>chicken_csv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_upload.html'>drive_upload</a></span>(
-  <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.csv"</span>),
+<span class='no'>chicken_csv</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_upload</span>(
+  <span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.csv"</span>),
   <span class='st'>"chicken-upload.csv"</span>
 )
 
 <span class='co'>## or convert it to a Google Sheet</span>
-<span class='kw'>chicken_sheet</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_upload.html'>drive_upload</a></span>(
-  <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.csv"</span>),
-  name = <span class='st'>"chicken-sheet-upload.csv"</span>,
-  type = <span class='st'>"spreadsheet"</span>
+<span class='no'>chicken_sheet</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_upload</span>(
+  <span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.csv"</span>),
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-sheet-upload.csv"</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>
 )
 
 <span class='co'>## check out the new Sheet!</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_browse.html'>drive_browse</a></span>(<span class='kw'>chicken_sheet</span>)
+<span class='fu'><a href='drive_browse.html'>drive_browse</a></span>(<span class='no'>chicken_sheet</span>)
 
 <span class='co'>## clean-up</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"chicken.*upload"</span>) <span class='op'>%&gt;%</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>()
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"chicken.*upload"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>()
 
 <span class='co'>## Upload a file and, at the same time, star it</span>
-<span class='kw'>chicken</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_upload.html'>drive_upload</a></span>(
-  <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.jpg"</span>),
-  starred = <span class='st'>"true"</span>
+<span class='no'>chicken</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_upload</span>(
+  <span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.jpg"</span>),
+  <span class='kw'>starred</span> <span class='kw'>=</span> <span class='st'>"true"</span>
 )
 
 <span class='co'>## Is is really starred? YES</span>
-<span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='kw'>chicken</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"starred"</span>)
+<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>chicken</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"starred"</span>)
 
 <span class='co'>## Clean up</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='kw'>chicken</span>)
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>chicken</span>)
 
 <span class='co'>## `overwrite = FALSE` errors if something already exists at target filepath</span>
 <span class='co'>## THIS WILL ERROR!</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_create.html'>drive_create</a></span>(<span class='st'>"name-squatter"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_upload.html'>drive_upload</a></span>(
-  <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.jpg"</span>),
-  name = <span class='st'>"name-squatter"</span>,
-  overwrite = <span class='fl'>FALSE</span>
+<span class='fu'><a href='drive_create.html'>drive_create</a></span>(<span class='st'>"name-squatter"</span>)
+<span class='fu'>drive_upload</span>(
+  <span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.jpg"</span>),
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"name-squatter"</span>,
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
 
 <span class='co'>## `overwrite = TRUE` moves the existing item to trash, then proceeds</span>
-<span class='kw'>chicken</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_upload.html'>drive_upload</a></span>(
-  <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.jpg"</span>),
-  name = <span class='st'>"name-squatter"</span>,
-  overwrite = <span class='fl'>TRUE</span>
+<span class='no'>chicken</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_upload</span>(
+  <span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.jpg"</span>),
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"name-squatter"</span>,
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )
 
 <span class='co'>## Clean up</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='kw'>chicken</span>)
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>chicken</span>)
 
 <span class='co'>## Upload to a Team Drive:</span>
 <span class='co'>##   * your Google account must have Team Drive privileges, obviously</span>
 <span class='co'>##   * the Team Drive (or Team Drive-hosted folder) MUST be captured as a</span>
 <span class='co'>##     dribble first and provided via `path`</span>
-<span class='kw'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/team_drive_get.html'>team_drive_get</a></span>(<span class='st'>"Marketing"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_upload.html'>drive_upload</a></span>(<span class='st'>"fascinating.csv"</span>, path = <span class='kw'>td</span>)
+<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='team_drive_get.html'>team_drive_get</a></span>(<span class='st'>"Marketing"</span>)
+<span class='fu'>drive_upload</span>(<span class='st'>"fascinating.csv"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>td</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

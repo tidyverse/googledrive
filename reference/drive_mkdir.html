@@ -172,16 +172,16 @@ including a folder, use drive_update()." />
 
     <div class="ref-description">
     <p>Creates a new Drive folder. To update the metadata of an existing Drive file,
-including a folder, use <code><a href='https://googledrive.tidyverse.org/reference/drive_update.html'>drive_update()</a></code>.</p>
+including a folder, use <code><a href='drive_update.html'>drive_update()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_mkdir.html'>drive_mkdir</a></span>(
-  <span class='kw'>name</span>,
-  path = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>,
-  overwrite = <span class='fl'>NA</span>,
-  parent = <span class='st'>"DEPRECATED"</span>,
-  verbose = <span class='fl'>TRUE</span>
+    <pre class="usage"><span class='fu'>drive_mkdir</span>(
+  <span class='no'>name</span>,
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>parent</span> <span class='kw'>=</span> <span class='st'>"DEPRECATED"</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -196,7 +196,7 @@ an existing parent folder, as well as the new name.</p></td>
       <th>path</th>
       <td><p>Target destination for the new item, i.e. a folder or a Team
 Drive. Can be given as an actual path (character), a file id or URL marked
-with <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>. Defaults to your "My Drive" root folder.</p></td>
+with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. Defaults to your "My Drive" root folder.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -211,7 +211,7 @@ associated endpoint to learn about relevant parameters.</p></td>
       <td><p>Logical, indicating whether to check for a pre-existing file
 at the targetted "filepath". The quotes around "filepath" refer to the fact
 that Drive does not impose a 1-to-1 relationship between filepaths and files,
-like a typical file system; read more about that in <code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>drive_get()</a></code>.</p><ul>
+like a typical file system; read more about that in <code><a href='drive_get.html'>drive_get()</a></code>.</p><ul>
 <li><p><code>NA</code> (default): Just do the operation, even if it results in multiple
 files with the same filepath.</p></li>
 <li><p><code>TRUE</code>: Check for a pre-existing file at the filepath. If there is
@@ -239,7 +239,7 @@ consistent with other functions in googledrive.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Wraps the <code>files.create</code> endpoint:</p><ul>
@@ -248,35 +248,35 @@ consistent with other functions in googledrive.</p></td>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## Create folder named 'ghi', then another below named it 'jkl' and star it</span>
-<span class='kw'>ghi</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"ghi"</span>)
-<span class='kw'>jkl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"ghi/jkl"</span>, starred = <span class='fl'>TRUE</span>)
+<span class='no'>ghi</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"ghi"</span>)
+<span class='no'>jkl</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"ghi/jkl"</span>, <span class='kw'>starred</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>## is 'jkl' really starred? YES</span>
-<span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='kw'>jkl</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"starred"</span>)
+<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>jkl</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"starred"</span>)
 
 <span class='co'>## Another way to create folder 'mno' in folder 'ghi'</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"mno"</span>, path = <span class='st'>"ghi"</span>)
+<span class='fu'>drive_mkdir</span>(<span class='st'>"mno"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"ghi"</span>)
 
 <span class='co'>## Yet another way to create a folder named 'pqr' in folder 'ghi',</span>
 <span class='co'>## this time with parent folder stored in a dribble,</span>
 <span class='co'>## and setting the new folder's description</span>
-<span class='kw'>pqr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"pqr"</span>, path = <span class='kw'>ghi</span>, description = <span class='st'>"I am a folder"</span>)
+<span class='no'>pqr</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"pqr"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='st'>"I am a folder"</span>)
 
 <span class='co'>## Did we really set the description? YES</span>
-<span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='kw'>pqr</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"description"</span>)
+<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>pqr</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"description"</span>)
 
 <span class='co'>## `overwrite = FALSE` errors if something already exists at target filepath</span>
 <span class='co'>## THIS WILL ERROR!</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_create.html'>drive_create</a></span>(<span class='st'>"name-squatter"</span>, path = <span class='kw'>ghi</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"name-squatter"</span>, path = <span class='kw'>ghi</span>, overwrite = <span class='fl'>FALSE</span>)
+<span class='fu'><a href='drive_create.html'>drive_create</a></span>(<span class='st'>"name-squatter"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>)
+<span class='fu'>drive_mkdir</span>(<span class='st'>"name-squatter"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'>## `overwrite = TRUE` moves the existing item to trash, then proceeds</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"name-squatter"</span>, path = <span class='kw'>ghi</span>, overwrite = <span class='fl'>TRUE</span>)
+<span class='fu'>drive_mkdir</span>(<span class='st'>"name-squatter"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>## clean up</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='kw'>ghi</span>)
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>ghi</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

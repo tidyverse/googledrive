@@ -181,23 +181,23 @@ Suite Enterprise, G Suite Business, or G Suite for Education." />
     <p>This is the closest googledrive function to what you can do at
 <a href='https://drive.google.com'>https://drive.google.com</a>: by default, you just get a listing of your files.
 You can also search in various ways, e.g., filter by file type or ownership
-or even work with <a href='https://googledrive.tidyverse.org/reference/team_drives.html'>Team Drive files</a>, if you have access. This
-is a very powerful function. Together with the more specific <code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>drive_get()</a></code>,
+or even work with <a href='team_drives.html'>Team Drive files</a>, if you have access. This
+is a very powerful function. Together with the more specific <code><a href='drive_get.html'>drive_get()</a></code>,
 this is the main way to identify files to target for downstream work.</p>
 <p>Note: <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
 are only available to users of certain enhanced Google services, such as G
 Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(
-  pattern = <span class='kw'>NULL</span>,
-  trashed = <span class='fl'>FALSE</span>,
-  type = <span class='kw'>NULL</span>,
-  n_max = <span class='fl'>Inf</span>,
-  team_drive = <span class='kw'>NULL</span>,
-  corpus = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>,
-  verbose = <span class='fl'>TRUE</span>
+    <pre class="usage"><span class='fu'>drive_find</span>(
+  <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
+  <span class='kw'>team_drive</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>corpus</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -218,7 +218,7 @@ returned by the API.</p></td>
     <tr>
       <th>type</th>
       <td><p>Character. If provided, only files of this type will be returned.
-Can be anything that <code><a href='https://googledrive.tidyverse.org/reference/drive_mime_type.html'>drive_mime_type()</a></code> knows how to handle. This is
+Can be anything that <code><a href='drive_mime_type.html'>drive_mime_type()</a></code> knows how to handle. This is
 processed by googledrive and sent as a query parameter.</p></td>
     </tr>
     <tr>
@@ -230,14 +230,14 @@ filtered locally, via the <code>pattern</code> argument.</p></td>
     <tr>
       <th>team_drive</th>
       <td><p>Anything that identifies one specific Team Drive: its name,
-its id or URL marked with <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>. Is pre-processed
-with <code><a href='https://googledrive.tidyverse.org/reference/as_team_drive.html'>as_team_drive()</a></code>.  Read more about <a href='https://googledrive.tidyverse.org/reference/team_drives.html'>Team Drives</a>.</p></td>
+its id or URL marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. Is pre-processed
+with <code><a href='as_team_drive.html'>as_team_drive()</a></code>.  Read more about <a href='team_drives.html'>Team Drives</a>.</p></td>
     </tr>
     <tr>
       <th>corpus</th>
       <td><p>Character, specifying the search collection. Only relevant in
 the Team Drives context. If specified, must be one of <code>"user"</code>, <code>"all"</code>, or
-<code>"domain"</code>. Read more about <a href='https://googledrive.tidyverse.org/reference/team_drives.html'>Team Drives</a>.</p></td>
+<code>"domain"</code>. Read more about <a href='team_drives.html'>Team Drives</a>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -254,13 +254,13 @@ candidate is <code>q</code>. See below and the API's
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
     <h2 class="hasAnchor" id="file-type"><a class="anchor" href="#file-type"></a>File type</h2>
 
     
 
 
-<p>The <code>type</code> argument is pre-processed with <code><a href='https://googledrive.tidyverse.org/reference/drive_mime_type.html'>drive_mime_type()</a></code>, so you can
+<p>The <code>type</code> argument is pre-processed with <code><a href='drive_mime_type.html'>drive_mime_type()</a></code>, so you can
 use a few shortcuts and file extensions, in addition to full-blown MIME
 types. googledrive forms a search clause to pass to <code>q</code>.</p>
     <h2 class="hasAnchor" id="search-parameters"><a class="anchor" href="#search-parameters"></a>Search parameters</h2>
@@ -276,7 +276,7 @@ vector-valued <code>q</code> are combined via 'and'.</p>
     
 
 
-<p>By default, <code><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find()</a></code> sets <code>trashed = FALSE</code> and does not include
+<p>By default, <code>drive_find()</code> sets <code>trashed = FALSE</code> and does not include
 files in the trash. Literally, it adds <code>q = "trashed = false"</code> to the
 query. To search <em>only</em> the trash, set <code>trashed = TRUE</code>. To see files
 regardless of trash status, set <code>trashed = NA</code>, which adds
@@ -286,9 +286,9 @@ regardless of trash status, set <code>trashed = NA</code>, which adds
     
 
 
-<p>By default, <code><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find()</a></code> sends <code>orderBy = "recency desc"</code>, so the top
+<p>By default, <code>drive_find()</code> sends <code>orderBy = "recency desc"</code>, so the top
 files in your result have high "recency" (whatever that means). To suppress
-sending <code>orderBy</code> at all, do <code><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find(orderBy = NULL)</a></code>. The <code>orderBy</code>
+sending <code>orderBy</code> at all, do <code>drive_find(orderBy = NULL)</code>. The <code>orderBy</code>
 parameter accepts sort keys in addition to <code>recency</code>, which are documented
 in the <a href='https://developers.google.com/drive/v3/reference/files/list'><code>files.list</code> endpoint</a>.
 googledrive translates a snake_case specification of <code>order_by</code> into the
@@ -300,7 +300,7 @@ lowerCamel form, <code>orderBy</code>.</p>
 
 <p>If you have access to Team Drives, you'll know. Use <code>team_drive</code> or <code>corpus</code>
 to search one or more Team Drives or a domain. See
-<a href='https://googledrive.tidyverse.org/reference/team_drives.html'>Access Team Drives</a> for more.</p>
+<a href='team_drives.html'>Access Team Drives</a> for more.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Wraps the <code>files.list</code> endpoint:</p><ul>
@@ -313,54 +313,53 @@ to search one or more Team Drives or a domain. See
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># list "My Drive" w/o regard for folder hierarchy</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>()
+<span class='fu'>drive_find</span>()
 
 <span class='co'># filter for folders, the easy way and the hard way</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(type = <span class='st'>"folder"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(q = <span class='st'>"mimeType = 'application/vnd.google-apps.folder'"</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"folder"</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType = 'application/vnd.google-apps.folder'"</span>)
 
 <span class='co'># filter for Google Sheets, the easy way and the hard way</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(type = <span class='st'>"spreadsheet"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(q = <span class='st'>"mimeType='application/vnd.google-apps.spreadsheet'"</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"mimeType='application/vnd.google-apps.spreadsheet'"</span>)
 
 <span class='co'># files whose names match a regex</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(pattern = <span class='st'>"jt"</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"jt"</span>)
 
 <span class='co'># search for files located directly in your root folder</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(q = <span class='st'>"'root' in parents"</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"'root' in parents"</span>)
 <span class='co'># FYI: this is equivalent to</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_ls.html'>drive_ls</a></span>(<span class='st'>"~/"</span>)
+<span class='fu'><a href='drive_ls.html'>drive_ls</a></span>(<span class='st'>"~/"</span>)
 
 <span class='co'># control page size or cap the number of files returned</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(pageSize = <span class='fl'>50</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>pageSize</span> <span class='kw'>=</span> <span class='fl'>50</span>)
 <span class='co'># all params passed through `...` can be camelCase or snake_case</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(page_size = <span class='fl'>50</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(n_max = <span class='fl'>58</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(page_size = <span class='fl'>5</span>, n_max = <span class='fl'>15</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>50</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>58</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>page_size</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>15</span>)
 
 <span class='co'># various ways to specify q search clauses</span>
 <span class='co'># multiple q's</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(q = <span class='st'>"name contains 'TEST'"</span>,
-           q = <span class='st'>"modifiedTime &gt; '2017-07-21T12:00:00'"</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"name contains 'TEST'"</span>,
+           <span class='kw'>q</span> <span class='kw'>=</span> <span class='st'>"modifiedTime &gt; '2017-07-21T12:00:00'"</span>)
 <span class='co'># vector q</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(q = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"starred = true"</span>, <span class='st'>"visibility = 'anyoneWithLink'"</span>))
+<span class='fu'>drive_find</span>(<span class='kw'>q</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"starred = true"</span>, <span class='st'>"visibility = 'anyoneWithLink'"</span>))
 
 <span class='co'># default `trashed = FALSE` excludes files in the trash</span>
 <span class='co'># `trashed = TRUE` consults ONLY file in the trash</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(trashed = <span class='fl'>TRUE</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='co'># `trashed = NA` disregards trash status completely</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(trashed = <span class='fl'>NA</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
 
 <span class='co'># suppress the default sorting on recency</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(order_by = <span class='kw'>NULL</span>, n_max = <span class='fl'>5</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>5</span>)
 
 <span class='co'># sort on various keys</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(order_by = <span class='st'>"quotaBytesUsed"</span>, n_max = <span class='fl'>5</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(order_by = <span class='st'>"modifiedByMeTime"</span>, n_max = <span class='fl'>5</span>)
-}
-</div></pre>
+<span class='fu'>drive_find</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='st'>"quotaBytesUsed"</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+<span class='fu'>drive_find</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='st'>"modifiedByMeTime"</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

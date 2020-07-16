@@ -179,8 +179,8 @@ associated with a specific file.
     </div>
 
     <div class="ref-description">
-    <p><code><a href='https://googledrive.tidyverse.org/reference/drive_reveal.html'>drive_reveal()</a></code> adds extra information about your Drive files that is not
-automatically present in the default <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> produced by googledrive. Why
+    <p><code>drive_reveal()</code> adds extra information about your Drive files that is not
+automatically present in the default <code><a href='dribble.html'>dribble</a></code> produced by googledrive. Why
 is this info not always present?</p><ol>
 <li><p>You don't always care about it.</p></li>
 <li><p>It may require calling different endpoints in the Drive API. Example:
@@ -191,9 +191,9 @@ associated with a specific file.</p></li>
 
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_reveal.html'>drive_reveal</a></span>(
-  <span class='kw'>file</span>,
-  what = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"path"</span>, <span class='st'>"trashed"</span>, <span class='st'>"mime_type"</span>, <span class='st'>"permissions"</span>, <span class='st'>"published"</span>)
+    <pre class="usage"><span class='fu'>drive_reveal</span>(
+  <span class='no'>file</span>,
+  <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"path"</span>, <span class='st'>"trashed"</span>, <span class='st'>"mime_type"</span>, <span class='st'>"permissions"</span>, <span class='st'>"published"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -203,7 +203,7 @@ associated with a specific file.</p></li>
       <th>file</th>
       <td><p>Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
-ids or URLs marked with <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>.</p></td>
+ids or URLs marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>.</p></td>
     </tr>
     <tr>
       <th>what</th>
@@ -219,7 +219,7 @@ ids or URLs marked with <code><a href='https://googledrive.tidyverse.org/referen
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
     <h2 class="hasAnchor" id="special-considerations-for-paths"><a class="anchor" href="#special-considerations-for-paths"></a>Special considerations for paths</h2>
 
     
@@ -240,17 +240,17 @@ necessarily equal the number rows in the output.</p>
 
     
 
-<p>When <code>what = "trashed"</code>, the <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> gains a logical variable that
+<p>When <code>what = "trashed"</code>, the <code><a href='dribble.html'>dribble</a></code> gains a logical variable that
 indicates whether a file is in the trash.</p>
     <h2 class="hasAnchor" id="mime-type"><a class="anchor" href="#mime-type"></a>MIME type</h2>
 
-    <p>When <code>what = "mime_type"</code>, the <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> gains a
+    <p>When <code>what = "mime_type"</code>, the <code><a href='dribble.html'>dribble</a></code> gains a
 variable of MIME types.</p>
     <h2 class="hasAnchor" id="permissions"><a class="anchor" href="#permissions"></a>Permissions</h2>
 
     
 
-<p>When <code>what = "permissions"</code> the <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> gains a logical variable <code>shared</code>
+<p>When <code>what = "permissions"</code> the <code><a href='dribble.html'>dribble</a></code> gains a logical variable <code>shared</code>
 that indicates whether a file is shared and a new list-column
 <code>permissions_resource</code> containing lists of
 <a href='https://developers.google.com/drive/v3/reference/permissions#resource'>Permissions resources</a>.</p>
@@ -258,15 +258,15 @@ that indicates whether a file is shared and a new list-column
 
     
 
-<p>When <code>what = "published"</code> the <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code> gains a logical variable
+<p>When <code>what = "published"</code> the <code><a href='dribble.html'>dribble</a></code> gains a logical variable
 <code>published</code> that indicates whether a file is published and a new list-column
 <code>revision_resource</code> containing lists of
 <a href='https://developers.google.com/drive/v3/reference/revisions#resource'>Revisions resources</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## Get a nice, random selection of files</span>
-<span class='kw'>files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(n_max = <span class='fl'>10</span>, trashed = <span class='fl'>NA</span>)
+<span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
 
 <span class='co'>## Reveal</span>
 <span class='co'>##   * paths (warning: can be slow for many files!)</span>
@@ -274,14 +274,14 @@ that indicates whether a file is shared and a new list-column
 <span class='co'>##   * MIME type</span>
 <span class='co'>##   * permissions, i.e. sharing status</span>
 <span class='co'>##   * if `published` or not</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_reveal.html'>drive_reveal</a></span>(<span class='kw'>files</span>, <span class='st'>"path"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_reveal.html'>drive_reveal</a></span>(<span class='kw'>files</span>, <span class='st'>"trashed"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_reveal.html'>drive_reveal</a></span>(<span class='kw'>files</span>, <span class='st'>"mime_type"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_reveal.html'>drive_reveal</a></span>(<span class='kw'>files</span>, <span class='st'>"permissions"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_reveal.html'>drive_reveal</a></span>(<span class='kw'>files</span>, <span class='st'>"published"</span>)
+<span class='fu'>drive_reveal</span>(<span class='no'>files</span>, <span class='st'>"path"</span>)
+<span class='fu'>drive_reveal</span>(<span class='no'>files</span>, <span class='st'>"trashed"</span>)
+<span class='fu'>drive_reveal</span>(<span class='no'>files</span>, <span class='st'>"mime_type"</span>)
+<span class='fu'>drive_reveal</span>(<span class='no'>files</span>, <span class='st'>"permissions"</span>)
+<span class='fu'>drive_reveal</span>(<span class='no'>files</span>, <span class='st'>"published"</span>)
 
 <span class='co'>## 'root' is a special file id that always represents your root folder</span>
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>drive_get</a></span>(id = <span class='st'>"root"</span>) <span class='op'>%&gt;%</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_reveal.html'>drive_reveal</a></span>(<span class='st'>"path"</span>)
+<span class='fu'><a href='drive_get.html'>drive_get</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"root"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>drive_reveal</span>(<span class='st'>"path"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
