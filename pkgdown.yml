@@ -7,7 +7,7 @@ articles:
   multiple-files: articles/multiple-files.html
   permissions: articles/permissions.html
   googledrive: googledrive.html
-last_built: 2020-07-30T12:36Z
+last_built: 2020-07-31T12:39Z
 urls:
   reference: https://googledrive.tidyverse.org/reference
   article: https://googledrive.tidyverse.org/articles
