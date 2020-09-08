@@ -192,8 +192,8 @@ associated with a specific file.</p></li>
     </div>
 
     <pre class="usage"><span class='fu'>drive_reveal</span>(
-  <span class='no'>file</span>,
-  <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"path"</span>, <span class='st'>"trashed"</span>, <span class='st'>"mime_type"</span>, <span class='st'>"permissions"</span>, <span class='st'>"published"</span>)
+  <span class='kw'>file</span>,
+  what = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"path"</span>, <span class='st'>"trashed"</span>, <span class='st'>"mime_type"</span>, <span class='st'>"permissions"</span>, <span class='st'>"published"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -264,9 +264,9 @@ that indicates whether a file is shared and a new list-column
 <a href='https://developers.google.com/drive/v3/reference/revisions#resource'>Revisions resources</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## Get a nice, random selection of files</span>
-<span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>trashed</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
+<span class='kw'>files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>(n_max = <span class='fl'>10</span>, trashed = <span class='fl'>NA</span>)
 
 <span class='co'>## Reveal</span>
 <span class='co'>##   * paths (warning: can be slow for many files!)</span>
@@ -274,15 +274,16 @@ that indicates whether a file is shared and a new list-column
 <span class='co'>##   * MIME type</span>
 <span class='co'>##   * permissions, i.e. sharing status</span>
 <span class='co'>##   * if `published` or not</span>
-<span class='fu'>drive_reveal</span>(<span class='no'>files</span>, <span class='st'>"path"</span>)
-<span class='fu'>drive_reveal</span>(<span class='no'>files</span>, <span class='st'>"trashed"</span>)
-<span class='fu'>drive_reveal</span>(<span class='no'>files</span>, <span class='st'>"mime_type"</span>)
-<span class='fu'>drive_reveal</span>(<span class='no'>files</span>, <span class='st'>"permissions"</span>)
-<span class='fu'>drive_reveal</span>(<span class='no'>files</span>, <span class='st'>"published"</span>)
+<span class='fu'>drive_reveal</span>(<span class='kw'>files</span>, <span class='st'>"path"</span>)
+<span class='fu'>drive_reveal</span>(<span class='kw'>files</span>, <span class='st'>"trashed"</span>)
+<span class='fu'>drive_reveal</span>(<span class='kw'>files</span>, <span class='st'>"mime_type"</span>)
+<span class='fu'>drive_reveal</span>(<span class='kw'>files</span>, <span class='st'>"permissions"</span>)
+<span class='fu'>drive_reveal</span>(<span class='kw'>files</span>, <span class='st'>"published"</span>)
 
 <span class='co'>## 'root' is a special file id that always represents your root folder</span>
-<span class='fu'><a href='drive_get.html'>drive_get</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"root"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>drive_reveal</span>(<span class='st'>"path"</span>)
-}</div></pre>
+<span class='fu'><a href='drive_get.html'>drive_get</a></span>(id = <span class='st'>"root"</span>) <span class='op'>%&gt;%</span> <span class='fu'>drive_reveal</span>(<span class='st'>"path"</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

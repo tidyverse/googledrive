@@ -202,10 +202,10 @@ and URL endpoint substitution (which is also enacted).</p></li>
     </div>
 
     <pre class="usage"><span class='fu'>request_generate</span>(
-  <span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(),
-  <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='drive_token.html'>drive_token</a></span>()
+  endpoint = <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(),
+  params = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  key = <span class='kw'>NULL</span>,
+  token = <span class='fu'><a href='drive_token.html'>drive_token</a></span>()
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -252,14 +252,15 @@ Note that, if auth has been de-activated via <code><a href='drive_deauth.html'>d
 <code><a href='request_make.html'>request_make</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'>request_generate</span>(
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>req</span> <span class='op'>&lt;-</span> <span class='fu'>request_generate</span>(
   <span class='st'>"drive.files.get"</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>),
-  <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='drive_token.html'>drive_token</a></span>()
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(fileId = <span class='st'>"abc"</span>),
+  token = <span class='fu'><a href='drive_token.html'>drive_token</a></span>()
 )
-<span class='no'>req</span>
-}</div></pre>
+<span class='kw'>req</span>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -203,7 +203,7 @@
 </ul>
 <p>Where to learn more:</p>
 <ul>
-<li>Help for <a href="https://googledrive.tidyverse.org/reference/drive_auth.html"><code><a href="../reference/drive_auth.html">drive_auth()</a></code></a> <em>all that most users need</em>
+<li>Help for <a href="https://googledrive.tidyverse.org/reference/drive_auth.html"><code>drive_auth()</code></a> <em>all that most users need</em>
 </li>
 <li>
 <em>details for more advanced users</em>
@@ -227,25 +227,29 @@
 <ul>
 <li>
 <p>Previous signature (v0.1.3 and earlier)</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="../reference/drive_auth.html">drive_auth</a></span>(
-  <span class="kw">oauth_token</span> <span class="kw">=</span> <span class="kw">NULL</span>,                       <span class="co"># use `token` now</span>
-  <span class="kw">service_token</span> <span class="kw">=</span> <span class="kw">NULL</span>,                     <span class="co"># use `path` now</span>
-  <span class="kw">reset</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-  <span class="kw">cache</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span>(<span class="st">"httr_oauth_cache"</span>),
-  <span class="kw">use_oob</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span>(<span class="st">"httr_oob_default"</span>),
-  <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="../reference/drive_auth.html">drive_auth</a></span>(
+  oauth_token = <span class="kw">NULL</span>,                       <span class="co"># use `token` now</span>
+  service_token = <span class="kw">NULL</span>,                     <span class="co"># use `path` now</span>
+  reset = <span class="fl">FALSE</span>,                            
+  cache = <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span>(<span class="st">"httr_oauth_cache"</span>),
+  use_oob = <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span>(<span class="st">"httr_oob_default"</span>),
+  verbose = <span class="fl">TRUE</span>
+)
+</pre></div>
 </li>
 <li>
 <p>Current signature (&gt;= v1.0.0)</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="../reference/drive_auth.html">drive_auth</a></span>(
-  <span class="kw">email</span> <span class="kw">=</span> <span class="kw pkg">gargle</span><span class="kw ns">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oauth_email</a></span>(),             <span class="co"># NEW!</span>
-  <span class="kw">path</span> <span class="kw">=</span> <span class="kw">NULL</span>,                                      <span class="co"># was `service_token`</span>
-  <span class="kw">scopes</span> <span class="kw">=</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>, <span class="co"># NEW!</span>
-  <span class="kw">cache</span> <span class="kw">=</span> <span class="kw pkg">gargle</span><span class="kw ns">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oauth_cache</a></span>(),
-  <span class="kw">use_oob</span> <span class="kw">=</span> <span class="kw pkg">gargle</span><span class="kw ns">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oob_default</a></span>(),
-  <span class="kw">token</span> <span class="kw">=</span> <span class="kw">NULL</span>                                      <span class="co"># was `oauth_token`</span>
-)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="../reference/drive_auth.html">drive_auth</a></span>(
+  email = <span class="kw">gargle</span>::<span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oauth_email</a></span>(),             <span class="co"># NEW!</span>
+  path = <span class="kw">NULL</span>,                                      <span class="co"># was `service_token`</span>
+  scopes = <span class="st">"https://www.googleapis.com/auth/drive"</span>, <span class="co"># NEW!</span>
+  cache = <span class="kw">gargle</span>::<span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oauth_cache</a></span>(),
+  use_oob = <span class="kw">gargle</span>::<span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oob_default</a></span>(),
+  token = <span class="kw">NULL</span>                                      <span class="co"># was `oauth_token`</span>
+)
+</pre></div>
 </li>
 </ul>
 <p>For full details see the resources listed in <em>Where to learn more</em> above. The change that probably affects the most code is the way to provide a service account token:</p>
@@ -318,21 +322,21 @@
 <p>Sometimes you have a file you will repeatedly send to Drive, i.e. the first time you run an analysis, you create the file and, when you re-run it, you update the file. Previously this was hard to express with googledrive.</p>
 <p><code><a href="../reference/drive_put.html">drive_put()</a></code> is useful here and refers to the HTTP verb <code>PUT</code>: create the thing if it doesn’t exist or, if it does, replace its contents. A good explanation of <code>PUT</code> is <a href="https://medium.com/backticks-tildes/restful-api-design-put-vs-patch-4a061aa3ed0b">RESTful API Design — PUT vs PATCH</a>.</p>
 <p>In pseudo-code, here’s the basic idea of <code><a href="../reference/drive_put.html">drive_put()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="r">target_filepath &lt;- &lt;determined from arguments `path`, `name`, and `media`&gt;
-hits &lt;- &lt;get all Drive files at target_filepath&gt;
-if (no hits) {
- drive_upload(media, path, name, type, ..., verbose)
-} else if (exactly 1 hit) {
- drive_update(hit, media, ..., verbose)
-} else {
- ERROR
-}</pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>target_filepath &lt;-<span class="st"> </span><span class="er">&lt;</span>determined from arguments <span class="st">`</span><span class="dt">path</span><span class="st">`</span>, <span class="st">`</span><span class="dt">name</span><span class="st">`</span>, and <span class="st">`</span><span class="dt">media</span><span class="st">`</span><span class="op">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>hits &lt;-<span class="st"> </span><span class="er">&lt;</span>get all Drive files at target_filepath<span class="op">&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="cf">if</span> (no hits) {</span>
+<span id="cb3-4"><a href="#cb3-4"></a> <span class="kw">drive_upload</span>(media, path, name, type, ..., verbose)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>} <span class="cf">else</span> <span class="cf">if</span> (exactly <span class="dv">1</span> hit) {</span>
+<span id="cb3-6"><a href="#cb3-6"></a> <span class="kw">drive_update</span>(hit, media, ..., verbose)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>} <span class="cf">else</span> {</span>
+<span id="cb3-8"><a href="#cb3-8"></a> ERROR</span>
+<span id="cb3-9"><a href="#cb3-9"></a>}</span></code></pre></div>
 </div>
 </div>
 <div id="other-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h2>
-<p>All functions that support <code>...</code> as a way to pass more parameters to the Drive API now have “tidy dots semantics”: <code>!!!</code> is supported for splicing and <code>!!</code> can be used on the LHS of <code>:=</code>. Full docs are in <a href="https://rlang.r-lib.org/reference/tidy-dots.html"><code><a href="https://rlang.r-lib.org/reference/list2.html">rlang::list2()</a></code></a>.</p>
+<p>All functions that support <code>...</code> as a way to pass more parameters to the Drive API now have “tidy dots semantics”: <code>!!!</code> is supported for splicing and <code>!!</code> can be used on the LHS of <code>:=</code>. Full docs are in <a href="https://rlang.r-lib.org/reference/tidy-dots.html"><code>rlang::list2()</code></a>.</p>
 <p><code><a href="../reference/drive_find.html">drive_find()</a></code> now sorts by “recency”, by default.</p>
 <p><code><a href="../reference/drive_create.html">drive_create()</a></code> is a new function that creates a new empty file, with an optional file type specification (<a href='https://github.com/tidyverse/googledrive/issues/258'>#258</a>, <a href='https://github.com/ianmcook'>@ianmcook</a>). <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code> becomes a thin wrapper around <code><a href="../reference/drive_create.html">drive_create()</a></code>, with the file type hard-wired to “folder”.</p>
 <p>In <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code>, the optional parent directory is now known as <code>path</code> instead of <code>parent</code>. This is more consistent with everything else in googledrive, which became very obvious when adding <code><a href="../reference/drive_create.html">drive_create()</a></code> and the general <code>overwrite</code> functionality.</p>

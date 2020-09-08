@@ -201,14 +201,15 @@ returns <code>NULL</code>.</p>
 <code><a href='request_make.html'>request_make</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='request_generate.html'>request_generate</a></span>(
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>req</span> <span class='op'>&lt;-</span> <span class='fu'><a href='request_generate.html'>request_generate</a></span>(
   <span class='st'>"drive.files.get"</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>fileId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>),
-  <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>drive_token</span>()
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(fileId = <span class='st'>"abc"</span>),
+  token = <span class='fu'>drive_token</span>()
 )
-<span class='no'>req</span>
-}</div></pre>
+<span class='kw'>req</span>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

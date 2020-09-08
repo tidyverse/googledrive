@@ -173,7 +173,7 @@
     <p>Copies an existing Drive file into a new file id.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>drive_cp</span>(<span class='no'>file</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_cp</span>(<span class='kw'>file</span>, path = <span class='kw'>NULL</span>, name = <span class='kw'>NULL</span>, <span class='kw'>...</span>, overwrite = <span class='fl'>NA</span>, verbose = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -243,9 +243,9 @@ they require additional API calls.</p></td>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## Create a file to copy</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>), <span class='st'>"chicken-cp.txt"</span>)
+<span class='kw'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>), <span class='st'>"chicken-cp.txt"</span>)
 
 <span class='co'>## Make a "Copy of" copy in same folder as the original</span>
 <span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>)
@@ -254,45 +254,46 @@ they require additional API calls.</p></td>
 <span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, <span class='st'>"chicken-cp-two.txt"</span>)
 
 <span class='co'>## Make an explicitly named copy in a different folder</span>
-<span class='no'>folder</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"new-folder"</span>)
-<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>folder</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-cp-three.txt"</span>)
+<span class='kw'>folder</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span>(<span class='st'>"new-folder"</span>)
+<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, path = <span class='kw'>folder</span>, name = <span class='st'>"chicken-cp-three.txt"</span>)
 
 <span class='co'>## Make an explicitly named copy and star it.</span>
 <span class='co'>## The starring is an example of providing metadata via `...`.</span>
 <span class='co'>## `starred` is not an actual argument to `drive_cp()`,</span>
 <span class='co'>## it just gets passed through to the API.</span>
-<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-cp-starred.txt"</span>, <span class='kw'>starred</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, name = <span class='st'>"chicken-cp-starred.txt"</span>, starred = <span class='fl'>TRUE</span>)
 
 <span class='co'>## `overwrite = FALSE` errors if file already exists at target filepath</span>
 <span class='co'>## THIS WILL ERROR!</span>
-<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-cp.txt"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, name = <span class='st'>"chicken-cp.txt"</span>, overwrite = <span class='fl'>FALSE</span>)
 
 <span class='co'>## `overwrite = TRUE` moves an existing file to trash, then proceeds</span>
-<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-cp.txt"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>drive_cp</span>(<span class='st'>"chicken-cp.txt"</span>, name = <span class='st'>"chicken-cp.txt"</span>, overwrite = <span class='fl'>TRUE</span>)
 
 <span class='co'>## Behold all of our copies!</span>
 <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"chicken-cp"</span>)
 
 <span class='co'>## Delete all of our copies and the new folder!</span>
-<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"chicken-cp"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>()
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>folder</span>)
+<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='st'>"chicken-cp"</span>) <span class='op'>%&gt;%</span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span>()
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='kw'>folder</span>)
 
 <span class='co'>## upload a csv file to copy</span>
-<span class='no'>csv_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.csv"</span>))
+<span class='kw'>csv_file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(<span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.csv"</span>))
 
 <span class='co'>## copy AND AT THE SAME TIME convert it to a Google Sheet</span>
-<span class='no'>chicken_sheet</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_cp</span>(
-  <span class='no'>csv_file</span>,
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"chicken-cp"</span>,
-  <span class='kw'>mime_type</span> <span class='kw'>=</span> <span class='fu'><a href='drive_mime_type.html'>drive_mime_type</a></span>(<span class='st'>"spreadsheet"</span>)
+<span class='kw'>chicken_sheet</span> <span class='op'>&lt;-</span> <span class='fu'>drive_cp</span>(
+  <span class='kw'>csv_file</span>,
+  name = <span class='st'>"chicken-cp"</span>,
+  mime_type = <span class='fu'><a href='drive_mime_type.html'>drive_mime_type</a></span>(<span class='st'>"spreadsheet"</span>)
 )
 
 <span class='co'>## go see the new Sheet in the browser</span>
 <span class='co'>## drive_browse(chicken_sheet)</span>
 
 <span class='co'>## clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>csv_file</span>, <span class='no'>chicken_sheet</span>)
-}</div></pre>
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='kw'>csv_file</span>, <span class='kw'>chicken_sheet</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

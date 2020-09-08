@@ -177,7 +177,7 @@ distinguish them from file names or paths.</p>
 <p>This is a generic function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_id</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>as_id</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,21 +198,24 @@ or a suitable data frame.</p></td>
     <p>A character vector bearing the S3 class <code>drive_id</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>as_id</span>(<span class='st'>"123abc"</span>)</div><div class='output co'>#&gt; [1] "123abc"
+    <pre class="examples"><div class='input'><span class='fu'>as_id</span>(<span class='st'>"123abc"</span>)
+</div><div class='output co'>#&gt; [1] "123abc"
 #&gt; attr(,"class")
-#&gt; [1] "drive_id"</div><div class='input'><span class='fu'>as_id</span>(<span class='st'>"https://docs.google.com/spreadsheets/d/qawsedrf16273849/edit#gid=12345"</span>)</div><div class='output co'>#&gt; [1] "qawsedrf16273849"
+#&gt; [1] "drive_id"</div><div class='input'><span class='fu'>as_id</span>(<span class='st'>"https://docs.google.com/spreadsheets/d/qawsedrf16273849/edit#gid=12345"</span>)
+</div><div class='output co'>#&gt; [1] "qawsedrf16273849"
 #&gt; attr(,"class")
 #&gt; [1] "drive_id"</div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>3</span>)
-<span class='fu'>as_id</span>(<span class='no'>x</span>)
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span>(n_max = <span class='fl'>3</span>)
+<span class='fu'>as_id</span>(<span class='kw'>x</span>)
 
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='drive_get.html'>drive_get</a></span>(<span class='st'>"foofy"</span>)
-<span class='fu'>as_id</span>(<span class='no'>x</span>)
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_get.html'>drive_get</a></span>(<span class='st'>"foofy"</span>)
+<span class='fu'>as_id</span>(<span class='kw'>x</span>)
 
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='team_drive_find.html'>team_drive_find</a></span>(<span class='st'>"work-stuff"</span>)
-<span class='fu'>as_id</span>(<span class='no'>x</span>)
-}</div></pre>
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='team_drive_find.html'>team_drive_find</a></span>(<span class='st'>"work-stuff"</span>)
+<span class='fu'>as_id</span>(<span class='kw'>x</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

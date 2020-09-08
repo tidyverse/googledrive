@@ -131,72 +131,84 @@
     
 <p>You can use googledrive to manage permissions on your Drive files, i.e. grant different people or groups of people various levels of access (read, comment, edit, etc.).</p>
 <p>Let’s upload a file and view its permissions.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googledrive</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://googledrive.tidyverse.org">googledrive</a></span>)
 
-<span class="no">file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/drive_example.html">drive_example</a></span>(<span class="st">"chicken.txt"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/drive_upload.html">drive_upload</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="st">"chicken-perm-article.txt"</span>) <span class="kw">%&gt;%</span>
+<span class="kw">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_example.html">drive_example</a></span>(<span class="st">"chicken.txt"</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/drive_upload.html">drive_upload</a></span>(name = <span class="st">"chicken-perm-article.txt"</span>) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span>(<span class="st">"permissions"</span>)
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/runner/work/_temp/Library/googledrive/extdata/chicken.txt</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * chicken-perm-article.txt: 1fuErS8Q65rU2HHxCTa-6C5RY3MEzIJ-0</span>
+<span class="co">#&gt;   * chicken-perm-article.txt: 1LUw2jqrqublRgUYUwcNkBZ3Ti2Yf6NRp</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/plain</span>
 
-<span class="no">file</span>
+<span class="kw">file</span>
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;   name            shared id                   drive_resource  permissions_resou…</span>
 <span class="co">#&gt; * &lt;chr&gt;           &lt;lgl&gt;  &lt;chr&gt;                &lt;list&gt;          &lt;list&gt;            </span>
-<span class="co">#&gt; 1 chicken-perm-a… FALSE  1fuErS8Q65rU2HHxCTa… &lt;named list [3… &lt;named list [2]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 chicken-perm-a… FALSE  1LUw2jqrqublRgUYUwc… &lt;named list [3… &lt;named list [2]&gt;</span>
+</pre></div>
 <p><code>shared = FALSE</code> indicates that this file is not yet shared with anyone and, for those so inclined, detailed information on permissions can be found in the <code>permissions_resource</code> list-column. Note that the <code>drive_resource</code>, which is always present in a dribble, typically also contains information on permissions. So if you just want to <em>know</em> about permissions, as opposed to modifying them, you can probably consult <code>drive_resource</code>.</p>
 <p>Let’s give a specific person permission to edit this file and a customized message, using the <code>emailAddress</code> and <code>emailMessage</code> parameters.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">file</span> <span class="kw">&lt;-</span> <span class="no">file</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">file</span> <span class="op">&lt;-</span> <span class="kw">file</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../../reference/drive_share.html">drive_share</a></span>(
-    <span class="kw">role</span> <span class="kw">=</span> <span class="st">"writer"</span>,
-    <span class="kw">type</span> <span class="kw">=</span> <span class="st">"user"</span>,
-    <span class="kw">emailAddress</span> <span class="kw">=</span> <span class="st">"serena@example.com"</span>,
-    <span class="kw">emailMessage</span> <span class="kw">=</span> <span class="st">"Would appreciate your feedback on this!"</span>
-  )</pre></body></html></div>
+    role = <span class="st">"writer"</span>,
+    type = <span class="st">"user"</span>,
+    emailAddress = <span class="st">"serena@example.com"</span>,
+    emailMessage = <span class="st">"Would appreciate your feedback on this!"</span>
+  )
+</pre></div>
 <p>Let’s say we also want “anyone with a link” to be able to read the file.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">file</span> <span class="kw">&lt;-</span> <span class="no">file</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../../reference/drive_share.html">drive_share</a></span>(<span class="kw">role</span> <span class="kw">=</span> <span class="st">"reader"</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"anyone"</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">file</span> <span class="op">&lt;-</span> <span class="kw">file</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../../reference/drive_share.html">drive_share</a></span>(role = <span class="st">"reader"</span>, type = <span class="st">"anyone"</span>)
 <span class="co">#&gt; Permissions updated</span>
 <span class="co">#&gt;   * role = reader</span>
 <span class="co">#&gt;   * type = anyone</span>
 <span class="co">#&gt; For files:</span>
-<span class="co">#&gt;   * chicken-perm-article.txt: 1fuErS8Q65rU2HHxCTa-6C5RY3MEzIJ-0</span>
-<span class="no">file</span>
+<span class="co">#&gt;   * chicken-perm-article.txt: 1LUw2jqrqublRgUYUwcNkBZ3Ti2Yf6NRp</span>
+<span class="kw">file</span>
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;   name            shared id                   drive_resource  permissions_resou…</span>
 <span class="co">#&gt; * &lt;chr&gt;           &lt;lgl&gt;  &lt;chr&gt;                &lt;list&gt;          &lt;list&gt;            </span>
-<span class="co">#&gt; 1 chicken-perm-a… TRUE   1fuErS8Q65rU2HHxCTa… &lt;named list [3… &lt;named list [2]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 chicken-perm-a… TRUE   1LUw2jqrqublRgUYUwc… &lt;named list [3… &lt;named list [2]&gt;</span>
+</pre></div>
 <p>We see that the file is now <code>shared = TRUE</code>.</p>
 <p>Now that we’ve made a few updates to our permissions, the <code>permissions_resource</code> list-column has become more interesting. Here’s how to pull important information out of this and put into a tibble with one row per permission. (<em>Permission handling will become more formalized in future versions of googledrive. See <a href="https://github.com/tidyverse/googledrive/issues/180">the issue</a></em>). We use other packages in the tidyverse now for this data wrangling.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
 
-<span class="no">perm</span> <span class="kw">&lt;-</span> <span class="fu">pluck</span>(<span class="no">file</span>, <span class="st">"permissions_resource"</span>, <span class="fl">1</span>, <span class="st">"permissions"</span>)
+<span class="kw">perm</span> <span class="op">&lt;-</span> <span class="fu">pluck</span>(<span class="kw">file</span>, <span class="st">"permissions_resource"</span>, <span class="fl">1</span>, <span class="st">"permissions"</span>)
 
-<span class="no">permissions</span> <span class="kw">&lt;-</span> <span class="fu">tibble</span>(
-  <span class="kw">id</span> <span class="kw">=</span>    <span class="fu">map_chr</span>(<span class="no">perm</span>, <span class="st">"id"</span>,           <span class="kw">.default</span> <span class="kw">=</span> <span class="fl">NA_character_</span>),
-  <span class="kw">name</span> <span class="kw">=</span>  <span class="fu">map_chr</span>(<span class="no">perm</span>, <span class="st">"displayName"</span>,  <span class="kw">.default</span> <span class="kw">=</span> <span class="fl">NA_character_</span>),
-  <span class="kw">type</span> <span class="kw">=</span>  <span class="fu">map_chr</span>(<span class="no">perm</span>, <span class="st">"type"</span>,         <span class="kw">.default</span> <span class="kw">=</span> <span class="fl">NA_character_</span>),
-  <span class="kw">role</span> <span class="kw">=</span>  <span class="fu">map_chr</span>(<span class="no">perm</span>, <span class="st">"role"</span>,         <span class="kw">.default</span> <span class="kw">=</span> <span class="fl">NA_character_</span>),
-  <span class="kw">email</span> <span class="kw">=</span> <span class="fu">map_chr</span>(<span class="no">perm</span>, <span class="st">"emailAddress"</span>, <span class="kw">.default</span> <span class="kw">=</span> <span class="fl">NA_character_</span>)
+<span class="kw">permissions</span> <span class="op">&lt;-</span> <span class="fu">tibble</span>(
+  id =    <span class="fu">map_chr</span>(<span class="kw">perm</span>, <span class="st">"id"</span>,           .default = <span class="fl">NA_character_</span>),
+  name =  <span class="fu">map_chr</span>(<span class="kw">perm</span>, <span class="st">"displayName"</span>,  .default = <span class="fl">NA_character_</span>),
+  type =  <span class="fu">map_chr</span>(<span class="kw">perm</span>, <span class="st">"type"</span>,         .default = <span class="fl">NA_character_</span>),
+  role =  <span class="fu">map_chr</span>(<span class="kw">perm</span>, <span class="st">"role"</span>,         .default = <span class="fl">NA_character_</span>),
+  email = <span class="fu">map_chr</span>(<span class="kw">perm</span>, <span class="st">"emailAddress"</span>, .default = <span class="fl">NA_character_</span>)
 )
-<span class="no">permissions</span></pre></body></html></div>
+<span class="kw">permissions</span>
+</pre></div>
 <p>We’ve suppressed execution of the above chunk but here’s some static, indicative output:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r">#&gt; # A tibble: 3 x 5
-#&gt;   id           name            type   role  email                      
-#&gt;   &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                      
-#&gt; 1 12345678901… Serena Somebody user   writ… serena@example.com          
-#&gt; 2 anyoneWithL… NA              anyone read… NA                         
-#&gt; 3 98765432109… Orville Owner   user   owner orville@example.com</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="co">#&gt; # A tibble: 3 x 5</span>
+<span class="co">#&gt;   id           name            type   role  email                      </span>
+<span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                      </span>
+<span class="co">#&gt; 1 12345678901… Serena Somebody user   writ… serena@example.com          </span>
+<span class="co">#&gt; 2 anyoneWithL… NA              anyone read… NA                         </span>
+<span class="co">#&gt; 3 98765432109… Orville Owner   user   owner orville@example.com</span>
+</pre></div>
 <div id="clean-up" class="section level2">
 <h2 class="hasAnchor">
 <a href="#clean-up" class="anchor"></a>Clean up</h2>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../../reference/drive_rm.html">drive_rm</a></span>(<span class="no">file</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="../../reference/drive_rm.html">drive_rm</a></span>(<span class="kw">file</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * chicken-perm-article.txt: 1fuErS8Q65rU2HHxCTa-6C5RY3MEzIJ-0</span></pre></body></html></div>
+<span class="co">#&gt;   * chicken-perm-article.txt: 1LUw2jqrqublRgUYUwcNkBZ3Ti2Yf6NRp</span>
+</pre></div>
 </div>
   </div>
 

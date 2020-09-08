@@ -189,7 +189,7 @@ are only available to users of certain enhanced Google services, such as G
 Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>team_drive_get</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>team_drive_get</span>(name = <span class='kw'>NULL</span>, id = <span class='kw'>NULL</span>, verbose = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -217,14 +217,15 @@ ignored.</p></td>
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>team_drive_get</span>(<span class='st'>"my-awesome-team-drive"</span>)
 <span class='fu'>team_drive_get</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"apple"</span>, <span class='st'>"orange"</span>, <span class='st'>"banana"</span>))
 <span class='fu'>team_drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"KCmiHLXUk9PVA-0AJNG"</span>))
 <span class='fu'>team_drive_get</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"https://drive.google.com/drive/u/0/folders/KCmiHLXUk9PVA-0AJNG"</span>))
-<span class='fu'>team_drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"KCmiHLXUk9PVA-0AJNG"</span>)
-<span class='fu'>team_drive_get</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"https://drive.google.com/drive/u/0/folders/KCmiHLXUk9PVA-0AJNG"</span>)
-}</div></pre>
+<span class='fu'>team_drive_get</span>(id = <span class='st'>"KCmiHLXUk9PVA-0AJNG"</span>)
+<span class='fu'>team_drive_get</span>(id = <span class='st'>"https://drive.google.com/drive/u/0/folders/KCmiHLXUk9PVA-0AJNG"</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

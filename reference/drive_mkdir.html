@@ -176,12 +176,12 @@ including a folder, use <code><a href='drive_update.html'>drive_update()</a></co
     </div>
 
     <pre class="usage"><span class='fu'>drive_mkdir</span>(
-  <span class='no'>name</span>,
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>parent</span> <span class='kw'>=</span> <span class='st'>"DEPRECATED"</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>name</span>,
+  path = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>,
+  overwrite = <span class='fl'>NA</span>,
+  parent = <span class='st'>"DEPRECATED"</span>,
+  verbose = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -248,36 +248,37 @@ consistent with other functions in googledrive.</p></td>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## Create folder named 'ghi', then another below named it 'jkl' and star it</span>
-<span class='no'>ghi</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"ghi"</span>)
-<span class='no'>jkl</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"ghi/jkl"</span>, <span class='kw'>starred</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='kw'>ghi</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"ghi"</span>)
+<span class='kw'>jkl</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"ghi/jkl"</span>, starred = <span class='fl'>TRUE</span>)
 
 <span class='co'>## is 'jkl' really starred? YES</span>
-<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>jkl</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"starred"</span>)
+<span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='kw'>jkl</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"starred"</span>)
 
 <span class='co'>## Another way to create folder 'mno' in folder 'ghi'</span>
-<span class='fu'>drive_mkdir</span>(<span class='st'>"mno"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"ghi"</span>)
+<span class='fu'>drive_mkdir</span>(<span class='st'>"mno"</span>, path = <span class='st'>"ghi"</span>)
 
 <span class='co'>## Yet another way to create a folder named 'pqr' in folder 'ghi',</span>
 <span class='co'>## this time with parent folder stored in a dribble,</span>
 <span class='co'>## and setting the new folder's description</span>
-<span class='no'>pqr</span> <span class='kw'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"pqr"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='st'>"I am a folder"</span>)
+<span class='kw'>pqr</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mkdir</span>(<span class='st'>"pqr"</span>, path = <span class='kw'>ghi</span>, description = <span class='st'>"I am a folder"</span>)
 
 <span class='co'>## Did we really set the description? YES</span>
-<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='no'>pqr</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"description"</span>)
+<span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='kw'>pqr</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"description"</span>)
 
 <span class='co'>## `overwrite = FALSE` errors if something already exists at target filepath</span>
 <span class='co'>## THIS WILL ERROR!</span>
-<span class='fu'><a href='drive_create.html'>drive_create</a></span>(<span class='st'>"name-squatter"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>)
-<span class='fu'>drive_mkdir</span>(<span class='st'>"name-squatter"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='drive_create.html'>drive_create</a></span>(<span class='st'>"name-squatter"</span>, path = <span class='kw'>ghi</span>)
+<span class='fu'>drive_mkdir</span>(<span class='st'>"name-squatter"</span>, path = <span class='kw'>ghi</span>, overwrite = <span class='fl'>FALSE</span>)
 
 <span class='co'>## `overwrite = TRUE` moves the existing item to trash, then proceeds</span>
-<span class='fu'>drive_mkdir</span>(<span class='st'>"name-squatter"</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>ghi</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>drive_mkdir</span>(<span class='st'>"name-squatter"</span>, path = <span class='kw'>ghi</span>, overwrite = <span class='fl'>TRUE</span>)
 
 <span class='co'>## clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='no'>ghi</span>)
-}</div></pre>
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='kw'>ghi</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
