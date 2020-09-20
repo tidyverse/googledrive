@@ -140,7 +140,7 @@
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt;   * /Users/runner/work/_temp/Library/googledrive/extdata/chicken.txt</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * chicken-perm-article.txt: 1KAmXkvAwoXizMovsJziT3SYQIG0VaRm2</span>
+<span class="co">#&gt;   * chicken-perm-article.txt: 1ZkoFw2c0YQMYhbe-EUk2w8AKd3SImrGS</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * text/plain</span>
 
@@ -148,7 +148,7 @@
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;   name            shared id                   drive_resource  permissions_resou…</span>
 <span class="co">#&gt; * &lt;chr&gt;           &lt;lgl&gt;  &lt;chr&gt;                &lt;list&gt;          &lt;list&gt;            </span>
-<span class="co">#&gt; 1 chicken-perm-a… FALSE  1KAmXkvAwoXizMovsJz… &lt;named list [3… &lt;named list [2]&gt;</span>
+<span class="co">#&gt; 1 chicken-perm-a… FALSE  1ZkoFw2c0YQMYhbe-EU… &lt;named list [3… &lt;named list [2]&gt;</span>
 </pre></div>
 <p><code>shared = FALSE</code> indicates that this file is not yet shared with anyone and, for those so inclined, detailed information on permissions can be found in the <code>permissions_resource</code> list-column. Note that the <code>drive_resource</code>, which is always present in a dribble, typically also contains information on permissions. So if you just want to <em>know</em> about permissions, as opposed to modifying them, you can probably consult <code>drive_resource</code>.</p>
 <p>Let’s give a specific person permission to edit this file and a customized message, using the <code>emailAddress</code> and <code>emailMessage</code> parameters.</p>
@@ -169,12 +169,12 @@
 <span class="co">#&gt;   * role = reader</span>
 <span class="co">#&gt;   * type = anyone</span>
 <span class="co">#&gt; For files:</span>
-<span class="co">#&gt;   * chicken-perm-article.txt: 1KAmXkvAwoXizMovsJziT3SYQIG0VaRm2</span>
+<span class="co">#&gt;   * chicken-perm-article.txt: 1ZkoFw2c0YQMYhbe-EUk2w8AKd3SImrGS</span>
 <span class="kw">file</span>
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;   name            shared id                   drive_resource  permissions_resou…</span>
 <span class="co">#&gt; * &lt;chr&gt;           &lt;lgl&gt;  &lt;chr&gt;                &lt;list&gt;          &lt;list&gt;            </span>
-<span class="co">#&gt; 1 chicken-perm-a… TRUE   1KAmXkvAwoXizMovsJz… &lt;named list [3… &lt;named list [2]&gt;</span>
+<span class="co">#&gt; 1 chicken-perm-a… TRUE   1ZkoFw2c0YQMYhbe-EU… &lt;named list [3… &lt;named list [2]&gt;</span>
 </pre></div>
 <p>We see that the file is now <code>shared = TRUE</code>.</p>
 <p>Now that we’ve made a few updates to our permissions, the <code>permissions_resource</code> list-column has become more interesting. Here’s how to pull important information out of this and put into a tibble with one row per permission. (<em>Permission handling will become more formalized in future versions of googledrive. See <a href="https://github.com/tidyverse/googledrive/issues/180">the issue</a></em>). We use other packages in the tidyverse now for this data wrangling.</p>
@@ -207,7 +207,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu"><a href="../../reference/drive_rm.html">drive_rm</a></span>(<span class="kw">file</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * chicken-perm-article.txt: 1KAmXkvAwoXizMovsJziT3SYQIG0VaRm2</span>
+<span class="co">#&gt;   * chicken-perm-article.txt: 1ZkoFw2c0YQMYhbe-EUk2w8AKd3SImrGS</span>
 </pre></div>
 </div>
   </div>
