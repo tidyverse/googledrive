@@ -218,9 +218,9 @@ Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     
 
 <p>To search one specific Team Drive, pass its name, marked id, or
-<code><a href='dribble.html'>dribble</a></code> to <code>team_drive</code> somewhere in the call, like so:</p><pre><span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, team_drive = <span class='st'>"i_am_a_team_drive_name"</span>)
-<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, team_drive = <span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"i_am_a_team_drive_id"</span>))
-<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, team_drive = <span class='kw'>i_am_a_team_drive_dribble</span>)
+<code><a href='dribble.html'>dribble</a></code> to <code>team_drive</code> somewhere in the call, like so:</p><pre><span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span><span class='va'>...</span>, team_drive <span class='op'>=</span> <span class='st'>"i_am_a_team_drive_name"</span><span class='op'>)</span>
+<span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span><span class='va'>...</span>, team_drive <span class='op'>=</span> <span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"i_am_a_team_drive_id"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span><span class='va'>...</span>, team_drive <span class='op'>=</span> <span class='va'>i_am_a_team_drive_dribble</span><span class='op'>)</span>
 </pre>
 
 <p>The value of <code>team_drive</code> is pre-processed with <code><a href='as_team_drive.html'>as_team_drive()</a></code>.</p>
@@ -229,9 +229,9 @@ Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     
 
 <p>To search other collections, pass the <code>corpus</code> parameter somewhere in the
-call, like so:</p><pre><span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, corpus = <span class='st'>"user"</span>)
-<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, corpus = <span class='st'>"all"</span>)
-<span class='fu'><a href='drive_find.html'>drive_find</a></span>(<span class='kw'>...</span>, corpus = <span class='st'>"domain"</span>)
+call, like so:</p><pre><span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span><span class='va'>...</span>, corpus <span class='op'>=</span> <span class='st'>"user"</span><span class='op'>)</span>
+<span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span><span class='va'>...</span>, corpus <span class='op'>=</span> <span class='st'>"all"</span><span class='op'>)</span>
+<span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span><span class='va'>...</span>, corpus <span class='op'>=</span> <span class='st'>"domain"</span><span class='op'>)</span>
 </pre>
 
 <p>Possible values of <code>corpus</code> and what they mean:</p><ul>

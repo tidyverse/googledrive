@@ -177,7 +177,7 @@ a thin wrapper around <code><a href='drive_about.html'>drive_about()</a></code> 
 information (the information on current user) and prints it nicely.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>drive_user</span>(verbose = <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_user</span><span class='op'>(</span>verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,13 +200,13 @@ information (the information on current user) and prints it nicely.</p>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>drive_user</span>()
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>drive_user</span><span class='op'>(</span><span class='op'>)</span>
 
 <span class='co'>## more info is returned than is printed</span>
-<span class='kw'>user</span> <span class='op'>&lt;-</span> <span class='fu'>drive_user</span>()
-<span class='kw'>user</span>[[<span class='st'>"permissionId"</span>]]
-}
+<span class='va'>user</span> <span class='op'>&lt;-</span> <span class='fu'>drive_user</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>user</span><span class='op'>[[</span><span class='st'>"permissionId"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

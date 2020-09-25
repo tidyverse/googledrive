@@ -217,7 +217,7 @@ named <code>c</code> in <code>a/b/</code> or a file with default name in <code>a
 error and must make your intent clear.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_dribble</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>as_dribble</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,14 +236,14 @@ frame.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># specify the path (substitute names or paths on your Drive!)</span>
-<span class='fu'>as_dribble</span>(<span class='st'>"abc"</span>)
-<span class='fu'>as_dribble</span>(<span class='st'>"abc/def"</span>)
+<span class='fu'>as_dribble</span><span class='op'>(</span><span class='st'>"abc"</span><span class='op'>)</span>
+<span class='fu'>as_dribble</span><span class='op'>(</span><span class='st'>"abc/def"</span><span class='op'>)</span>
 
 <span class='co'># specify the file id (substitute a real file id of your own!)</span>
-<span class='fu'>as_dribble</span>(<span class='fu'><a href='as_id.html'>as_id</a></span>(<span class='st'>"0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"</span>))
-}
+<span class='fu'>as_dribble</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

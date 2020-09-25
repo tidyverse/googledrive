@@ -177,7 +177,7 @@ thin wrapper around <code><a href='drive_find.html'>drive_find()</a></code>, tha
 search is limited to direct or indirect children of <code>path</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>drive_ls</span>(path = <span class='kw'>NULL</span>, <span class='kw'>...</span>, recursive = <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_ls</span><span class='op'>(</span>path <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span>, recursive <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,20 +206,20 @@ indirect (<code>recursive = TRUE</code>).</p></td>
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## get contents of the folder 'abc' (non-recursive)</span>
-<span class='fu'>drive_ls</span>(<span class='st'>"abc"</span>)
+<span class='fu'>drive_ls</span><span class='op'>(</span><span class='st'>"abc"</span><span class='op'>)</span>
 
 <span class='co'>## get contents of folder 'abc' whose names contain the letters 'def'</span>
-<span class='fu'>drive_ls</span>(path = <span class='st'>"abc"</span>, pattern = <span class='st'>"def"</span>)
+<span class='fu'>drive_ls</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"abc"</span>, pattern <span class='op'>=</span> <span class='st'>"def"</span><span class='op'>)</span>
 
 <span class='co'>## get all Google spreadsheets in folder 'abc'</span>
 <span class='co'>## whose names contain the letters 'def'</span>
-<span class='fu'>drive_ls</span>(path = <span class='st'>"abc"</span>, pattern = <span class='st'>"def"</span>, type = <span class='st'>"spreadsheet"</span>)
+<span class='fu'>drive_ls</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"abc"</span>, pattern <span class='op'>=</span> <span class='st'>"def"</span>, type <span class='op'>=</span> <span class='st'>"spreadsheet"</span><span class='op'>)</span>
 
 <span class='co'>## get all the files below 'abc', recursively, that are starred</span>
-<span class='fu'>drive_ls</span>(path = <span class='st'>"abc"</span>, q = <span class='st'>"starred = true"</span>, recursive = <span class='fl'>TRUE</span>)
-}
+<span class='fu'>drive_ls</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"abc"</span>, q <span class='op'>=</span> <span class='st'>"starred = true"</span>, recursive <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

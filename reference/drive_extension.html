@@ -183,7 +183,7 @@ for a file. Two types of input are acceptable:</p><ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>drive_extension</span>(type = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>drive_extension</span><span class='op'>(</span>type <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,10 +201,10 @@ for a file. Two types of input are acceptable:</p><ul>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'>## get the extension for mime type image/jpeg</span>
-<span class='fu'>drive_extension</span>(<span class='st'>"image/jpeg"</span>)
+<span class='fu'>drive_extension</span><span class='op'>(</span><span class='st'>"image/jpeg"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "jpeg"</div><div class='input'>
 <span class='co'>## it's vectorized</span>
-<span class='fu'>drive_extension</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"text/plain"</span>, <span class='st'>"pdf"</span>, <span class='st'>"image/gif"</span>))
+<span class='fu'>drive_extension</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"text/plain"</span>, <span class='st'>"pdf"</span>, <span class='st'>"image/gif"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "txt" "pdf" "gif"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

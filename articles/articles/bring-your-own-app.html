@@ -143,23 +143,20 @@
 <p>Follow the instructions in the gargle article <a href="https://gargle.r-lib.org/articles/get-api-credentials.html">How to get your own API credentials</a> to get an OAuth client ID and secret. Now register it with googledrive.</p>
 <p>Method 1: Create an OAuth app directly, providing the client ID as <code>key</code> and client secret as <code>secret</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw">google_app</span> <span class="op">&lt;-</span> <span class="kw">httr</span>::<span class="fu"><a href="https://httr.r-lib.org/reference/oauth_app.html">oauth_app</a></span>(
-  appname = <span class="st">"my-awesome-google-project"</span>,
-  key = <span class="st">"123456789.apps.googleusercontent.com"</span>,
-  secret = <span class="st">"abcdefghijklmnopqrstuvwxyz"</span>
-)
-<span class="fu"><a href="../../reference/drive_auth_configure.html">drive_auth_configure</a></span>(app = <span class="kw">google_app</span>)
-</pre></div>
+<span class="va">google_app</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/oauth_app.html">oauth_app</a></span><span class="op">(</span>
+  appname <span class="op">=</span> <span class="st">"my-awesome-google-project"</span>,
+  key <span class="op">=</span> <span class="st">"123456789.apps.googleusercontent.com"</span>,
+  secret <span class="op">=</span> <span class="st">"abcdefghijklmnopqrstuvwxyz"</span>
+<span class="op">)</span>
+<span class="fu"><a href="../../reference/drive_auth_configure.html">drive_auth_configure</a></span><span class="op">(</span>app <span class="op">=</span> <span class="va">google_app</span><span class="op">)</span></pre></div>
 <p>Method 2: Create an OAuth app by providing the path to the JSON file downloaded from the <a href="https://console.cloud.google.com">Google Cloud Platform Console</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../../reference/drive_auth_configure.html">drive_auth_configure</a></span>(
-  path = <span class="st">"/path/to/the/JSON/you/downloaded/from/google/dev/console.json"</span>
-)
-</pre></div>
+<span class="fu"><a href="../../reference/drive_auth_configure.html">drive_auth_configure</a></span><span class="op">(</span>
+  path <span class="op">=</span> <span class="st">"/path/to/the/JSON/you/downloaded/from/google/dev/console.json"</span>
+<span class="op">)</span></pre></div>
 <p>Confirm success and carry on! You can see the currently configured OAuth app like so:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../../reference/drive_auth_configure.html">drive_oauth_app</a></span>()
-</pre></div>
+<span class="fu"><a href="../../reference/drive_auth_configure.html">drive_oauth_app</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p>You should see your own app there now.</p>
 <p>For the rest of this R session, when you get a new token with <code><a href="../../reference/drive_auth.html">drive_auth()</a></code>, your OAuth app is used.</p>
 </div>
@@ -168,12 +165,10 @@
 <a href="#get-an-api-key-and-tell-googledrive-about-it" class="anchor"></a>Get an API key and tell googledrive about it</h2>
 <p>Follow the instructions in the gargle article <a href="https://gargle.r-lib.org/articles/get-api-credentials.html">How to get your own API credentials</a> to get an API key. You probably want to use the same GCP project to create both your OAuth app (above) and your API key. Now register it with googledrive.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../../reference/drive_auth_configure.html">drive_auth_configure</a></span>(api_key = <span class="st">"YOUR_API_KEY_GOES_HERE"</span>)
-</pre></div>
+<span class="fu"><a href="../../reference/drive_auth_configure.html">drive_auth_configure</a></span><span class="op">(</span>api_key <span class="op">=</span> <span class="st">"YOUR_API_KEY_GOES_HERE"</span><span class="op">)</span></pre></div>
 <p>Confirm success and carry on! You can see the currently configured API key like so:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="../../reference/drive_auth_configure.html">drive_api_key</a></span>()
-</pre></div>
+<span class="fu"><a href="../../reference/drive_auth_configure.html">drive_api_key</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p>You should see your own API key now.</p>
 <p>For the rest of this R session, if you go into a de-authorized state via <code><a href="../../reference/drive_deauth.html">drive_deauth()</a></code>, your API key will be sent with the request.</p>
 </div>
@@ -183,23 +178,20 @@
 <p>What’s changed? The old <code><a href="../../reference/googledrive-deprecated.html">drive_auth_config()</a></code> has been soft-deprecated, in favor of <code><a href="../../reference/drive_auth_configure.html">drive_auth_configure()</a></code>.</p>
 <p>OAuth app, Method 1: Create an OAuth app directly, providing the client ID as <code>key</code> and client secret as <code>secret</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">google_app</span> <span class="op">&lt;-</span> <span class="kw">httr</span>::<span class="fu"><a href="https://httr.r-lib.org/reference/oauth_app.html">oauth_app</a></span>(
-  appname = <span class="st">"my-awesome-google-project"</span>,
-  key = <span class="st">"123456789.apps.googleusercontent.com"</span>,
-  secret = <span class="st">"abcdefghijklmnopqrstuvwxyz"</span>
-)
-<span class="fu"><a href="../../reference/googledrive-deprecated.html">drive_auth_config</a></span>(app = <span class="kw">google_app</span>)
-</pre></div>
+<span class="va">google_app</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/oauth_app.html">oauth_app</a></span><span class="op">(</span>
+  appname <span class="op">=</span> <span class="st">"my-awesome-google-project"</span>,
+  key <span class="op">=</span> <span class="st">"123456789.apps.googleusercontent.com"</span>,
+  secret <span class="op">=</span> <span class="st">"abcdefghijklmnopqrstuvwxyz"</span>
+<span class="op">)</span>
+<span class="fu"><a href="../../reference/googledrive-deprecated.html">drive_auth_config</a></span><span class="op">(</span>app <span class="op">=</span> <span class="va">google_app</span><span class="op">)</span></pre></div>
 <p>OAuth app, Method 2: Create an OAuth app by providing the path to the JSON file downloaded from the <a href="https://console.cloud.google.com">Google Cloud Platform Console</a>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="../../reference/googledrive-deprecated.html">drive_auth_config</a></span>(
-  path = <span class="st">"/path/to/the/JSON/you/downloaded/from/google/dev/console.json"</span>
-)
-</pre></div>
+<span class="fu"><a href="../../reference/googledrive-deprecated.html">drive_auth_config</a></span><span class="op">(</span>
+  path <span class="op">=</span> <span class="st">"/path/to/the/JSON/you/downloaded/from/google/dev/console.json"</span>
+<span class="op">)</span></pre></div>
 <p>API key:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="../../reference/googledrive-deprecated.html">drive_auth_config</a></span>(api_key = <span class="st">"YOUR_API_KEY_GOES_HERE"</span>)
-</pre></div>
+<span class="fu"><a href="../../reference/googledrive-deprecated.html">drive_auth_config</a></span><span class="op">(</span>api_key <span class="op">=</span> <span class="st">"YOUR_API_KEY_GOES_HERE"</span><span class="op">)</span></pre></div>
 </div>
   </div>
 

@@ -181,15 +181,15 @@ read, comment, or edit. The returned <code><a href='dribble.html'>dribble</a></c
 "make this <code>file</code> readable by 'anyone with a link'".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>drive_share</span>(
-  <span class='kw'>file</span>,
-  role = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"reader"</span>, <span class='st'>"commenter"</span>, <span class='st'>"writer"</span>, <span class='st'>"fileOrganizer"</span>, <span class='st'>"owner"</span>, <span class='st'>"organizer"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"user"</span>, <span class='st'>"group"</span>, <span class='st'>"domain"</span>, <span class='st'>"anyone"</span>),
-  <span class='kw'>...</span>,
-  verbose = <span class='fl'>TRUE</span>
-)
+    <pre class="usage"><span class='fu'>drive_share</span><span class='op'>(</span>
+  <span class='va'>file</span>,
+  role <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"reader"</span>, <span class='st'>"commenter"</span>, <span class='st'>"writer"</span>, <span class='st'>"fileOrganizer"</span>, <span class='st'>"owner"</span>, <span class='st'>"organizer"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"user"</span>, <span class='st'>"group"</span>, <span class='st'>"domain"</span>, <span class='st'>"anyone"</span><span class='op'>)</span>,
+  <span class='va'>...</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>drive_share_anyone</span>(<span class='kw'>file</span>, verbose = <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>drive_share_anyone</span><span class='op'>(</span><span class='va'>file</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -249,40 +249,40 @@ provide additional information, such as the <code>emailAddress</code> (when gran
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## Upload a file to share</span>
-<span class='kw'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span>(
-   <span class='fu'><a href='drive_example.html'>drive_example</a></span>(<span class='st'>"chicken.txt"</span>),
-   name = <span class='st'>"chicken-share.txt"</span>,
-   type = <span class='st'>"document"</span>
-)
+<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span><span class='op'>(</span>
+   <span class='fu'><a href='drive_example.html'>drive_example</a></span><span class='op'>(</span><span class='st'>"chicken.txt"</span><span class='op'>)</span>,
+   name <span class='op'>=</span> <span class='st'>"chicken-share.txt"</span>,
+   type <span class='op'>=</span> <span class='st'>"document"</span>
+<span class='op'>)</span>
 
 <span class='co'>## Let a specific person comment</span>
-<span class='kw'>file</span> <span class='op'>&lt;-</span> <span class='kw'>file</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>drive_share</span>(
-    role = <span class='st'>"commenter"</span>,
-    type = <span class='st'>"user"</span>,
-    emailAddress = <span class='st'>"susan@example.com"</span>
-)
+<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='va'>file</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>drive_share</span><span class='op'>(</span>
+    role <span class='op'>=</span> <span class='st'>"commenter"</span>,
+    type <span class='op'>=</span> <span class='st'>"user"</span>,
+    emailAddress <span class='op'>=</span> <span class='st'>"susan@example.com"</span>
+<span class='op'>)</span>
 
 <span class='co'>## Let a different specific person edit and customize the email notification</span>
-<span class='kw'>file</span> <span class='op'>&lt;-</span> <span class='kw'>file</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>drive_share</span>(
-    role = <span class='st'>"writer"</span>,
-    type = <span class='st'>"user"</span>,
-    emailAddress = <span class='st'>"carol@example.com"</span>,
-    emailMessage = <span class='st'>"Would appreciate your feedback on this!"</span>
-)
+<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='va'>file</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>drive_share</span><span class='op'>(</span>
+    role <span class='op'>=</span> <span class='st'>"writer"</span>,
+    type <span class='op'>=</span> <span class='st'>"user"</span>,
+    emailAddress <span class='op'>=</span> <span class='st'>"carol@example.com"</span>,
+    emailMessage <span class='op'>=</span> <span class='st'>"Would appreciate your feedback on this!"</span>
+<span class='op'>)</span>
 
 <span class='co'>## Let anyone read the file</span>
-<span class='kw'>file</span> <span class='op'>&lt;-</span> <span class='kw'>file</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>drive_share</span>(role = <span class='st'>"reader"</span>, type = <span class='st'>"anyone"</span>)
+<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='va'>file</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>drive_share</span><span class='op'>(</span>role <span class='op'>=</span> <span class='st'>"reader"</span>, type <span class='op'>=</span> <span class='st'>"anyone"</span><span class='op'>)</span>
 <span class='co'>## Single-purpose wrapper function for this</span>
-<span class='fu'>drive_share_anyone</span>(<span class='kw'>file</span>)
+<span class='fu'>drive_share_anyone</span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
 
 <span class='co'>## Clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span>(<span class='kw'>file</span>)
-}
+<span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

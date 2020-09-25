@@ -228,28 +228,26 @@
 <li>
 <p>Previous signature (v0.1.3 and earlier)</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="../reference/drive_auth.html">drive_auth</a></span>(
-  oauth_token = <span class="kw">NULL</span>,                       <span class="co"># use `token` now</span>
-  service_token = <span class="kw">NULL</span>,                     <span class="co"># use `path` now</span>
-  reset = <span class="fl">FALSE</span>,                            
-  cache = <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span>(<span class="st">"httr_oauth_cache"</span>),
-  use_oob = <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span>(<span class="st">"httr_oob_default"</span>),
-  verbose = <span class="fl">TRUE</span>
-)
-</pre></div>
+<span class="fu"><a href="../reference/drive_auth.html">drive_auth</a></span><span class="op">(</span>
+  oauth_token <span class="op">=</span> <span class="cn">NULL</span>,                       <span class="co"># use `token` now</span>
+  service_token <span class="op">=</span> <span class="cn">NULL</span>,                     <span class="co"># use `path` now</span>
+  reset <span class="op">=</span> <span class="cn">FALSE</span>,                            
+  cache <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"httr_oauth_cache"</span><span class="op">)</span>,
+  use_oob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"httr_oob_default"</span><span class="op">)</span>,
+  verbose <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></pre></div>
 </li>
 <li>
 <p>Current signature (&gt;= v1.0.0)</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../reference/drive_auth.html">drive_auth</a></span>(
-  email = <span class="kw">gargle</span>::<span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oauth_email</a></span>(),             <span class="co"># NEW!</span>
-  path = <span class="kw">NULL</span>,                                      <span class="co"># was `service_token`</span>
-  scopes = <span class="st">"https://www.googleapis.com/auth/drive"</span>, <span class="co"># NEW!</span>
-  cache = <span class="kw">gargle</span>::<span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oauth_cache</a></span>(),
-  use_oob = <span class="kw">gargle</span>::<span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oob_default</a></span>(),
-  token = <span class="kw">NULL</span>                                      <span class="co"># was `oauth_token`</span>
-)
-</pre></div>
+<span class="fu"><a href="../reference/drive_auth.html">drive_auth</a></span><span class="op">(</span>
+  email <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oauth_email</a></span><span class="op">(</span><span class="op">)</span>,             <span class="co"># NEW!</span>
+  path <span class="op">=</span> <span class="cn">NULL</span>,                                      <span class="co"># was `service_token`</span>
+  scopes <span class="op">=</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>, <span class="co"># NEW!</span>
+  cache <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oauth_cache</a></span><span class="op">(</span><span class="op">)</span>,
+  use_oob <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html">gargle_oob_default</a></span><span class="op">(</span><span class="op">)</span>,
+  token <span class="op">=</span> <span class="cn">NULL</span>                                      <span class="co"># was `oauth_token`</span>
+<span class="op">)</span></pre></div>
 </li>
 </ul>
 <p>For full details see the resources listed in <em>Where to learn more</em> above. The change that probably affects the most code is the way to provide a service account token:</p>

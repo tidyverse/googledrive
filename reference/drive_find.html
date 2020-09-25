@@ -189,16 +189,16 @@ are only available to users of certain enhanced Google services, such as G
 Suite Enterprise, G Suite Business, or G Suite for Education.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>drive_find</span>(
-  pattern = <span class='kw'>NULL</span>,
-  trashed = <span class='fl'>FALSE</span>,
-  type = <span class='kw'>NULL</span>,
-  n_max = <span class='fl'>Inf</span>,
-  team_drive = <span class='kw'>NULL</span>,
-  corpus = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>,
-  verbose = <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>drive_find</span><span class='op'>(</span>
+  pattern <span class='op'>=</span> <span class='cn'>NULL</span>,
+  trashed <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  n_max <span class='op'>=</span> <span class='cn'>Inf</span>,
+  team_drive <span class='op'>=</span> <span class='cn'>NULL</span>,
+  corpus <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -313,53 +313,53 @@ to search one or more Team Drives or a domain. See
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># list "My Drive" w/o regard for folder hierarchy</span>
-<span class='fu'>drive_find</span>()
+<span class='fu'>drive_find</span><span class='op'>(</span><span class='op'>)</span>
 
 <span class='co'># filter for folders, the easy way and the hard way</span>
-<span class='fu'>drive_find</span>(type = <span class='st'>"folder"</span>)
-<span class='fu'>drive_find</span>(q = <span class='st'>"mimeType = 'application/vnd.google-apps.folder'"</span>)
+<span class='fu'>drive_find</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"folder"</span><span class='op'>)</span>
+<span class='fu'>drive_find</span><span class='op'>(</span>q <span class='op'>=</span> <span class='st'>"mimeType = 'application/vnd.google-apps.folder'"</span><span class='op'>)</span>
 
 <span class='co'># filter for Google Sheets, the easy way and the hard way</span>
-<span class='fu'>drive_find</span>(type = <span class='st'>"spreadsheet"</span>)
-<span class='fu'>drive_find</span>(q = <span class='st'>"mimeType='application/vnd.google-apps.spreadsheet'"</span>)
+<span class='fu'>drive_find</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"spreadsheet"</span><span class='op'>)</span>
+<span class='fu'>drive_find</span><span class='op'>(</span>q <span class='op'>=</span> <span class='st'>"mimeType='application/vnd.google-apps.spreadsheet'"</span><span class='op'>)</span>
 
 <span class='co'># files whose names match a regex</span>
-<span class='fu'>drive_find</span>(pattern = <span class='st'>"jt"</span>)
+<span class='fu'>drive_find</span><span class='op'>(</span>pattern <span class='op'>=</span> <span class='st'>"jt"</span><span class='op'>)</span>
 
 <span class='co'># search for files located directly in your root folder</span>
-<span class='fu'>drive_find</span>(q = <span class='st'>"'root' in parents"</span>)
+<span class='fu'>drive_find</span><span class='op'>(</span>q <span class='op'>=</span> <span class='st'>"'root' in parents"</span><span class='op'>)</span>
 <span class='co'># FYI: this is equivalent to</span>
-<span class='fu'><a href='drive_ls.html'>drive_ls</a></span>(<span class='st'>"~/"</span>)
+<span class='fu'><a href='drive_ls.html'>drive_ls</a></span><span class='op'>(</span><span class='st'>"~/"</span><span class='op'>)</span>
 
 <span class='co'># control page size or cap the number of files returned</span>
-<span class='fu'>drive_find</span>(pageSize = <span class='fl'>50</span>)
+<span class='fu'>drive_find</span><span class='op'>(</span>pageSize <span class='op'>=</span> <span class='fl'>50</span><span class='op'>)</span>
 <span class='co'># all params passed through `...` can be camelCase or snake_case</span>
-<span class='fu'>drive_find</span>(page_size = <span class='fl'>50</span>)
-<span class='fu'>drive_find</span>(n_max = <span class='fl'>58</span>)
-<span class='fu'>drive_find</span>(page_size = <span class='fl'>5</span>, n_max = <span class='fl'>15</span>)
+<span class='fu'>drive_find</span><span class='op'>(</span>page_size <span class='op'>=</span> <span class='fl'>50</span><span class='op'>)</span>
+<span class='fu'>drive_find</span><span class='op'>(</span>n_max <span class='op'>=</span> <span class='fl'>58</span><span class='op'>)</span>
+<span class='fu'>drive_find</span><span class='op'>(</span>page_size <span class='op'>=</span> <span class='fl'>5</span>, n_max <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span>
 
 <span class='co'># various ways to specify q search clauses</span>
 <span class='co'># multiple q's</span>
-<span class='fu'>drive_find</span>(q = <span class='st'>"name contains 'TEST'"</span>,
-           q = <span class='st'>"modifiedTime &gt; '2017-07-21T12:00:00'"</span>)
+<span class='fu'>drive_find</span><span class='op'>(</span>q <span class='op'>=</span> <span class='st'>"name contains 'TEST'"</span>,
+           q <span class='op'>=</span> <span class='st'>"modifiedTime &gt; '2017-07-21T12:00:00'"</span><span class='op'>)</span>
 <span class='co'># vector q</span>
-<span class='fu'>drive_find</span>(q = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"starred = true"</span>, <span class='st'>"visibility = 'anyoneWithLink'"</span>))
+<span class='fu'>drive_find</span><span class='op'>(</span>q <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"starred = true"</span>, <span class='st'>"visibility = 'anyoneWithLink'"</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># default `trashed = FALSE` excludes files in the trash</span>
 <span class='co'># `trashed = TRUE` consults ONLY file in the trash</span>
-<span class='fu'>drive_find</span>(trashed = <span class='fl'>TRUE</span>)
+<span class='fu'>drive_find</span><span class='op'>(</span>trashed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='co'># `trashed = NA` disregards trash status completely</span>
-<span class='fu'>drive_find</span>(trashed = <span class='fl'>NA</span>)
+<span class='fu'>drive_find</span><span class='op'>(</span>trashed <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
 
 <span class='co'># suppress the default sorting on recency</span>
-<span class='fu'>drive_find</span>(order_by = <span class='kw'>NULL</span>, n_max = <span class='fl'>5</span>)
+<span class='fu'>drive_find</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='cn'>NULL</span>, n_max <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
 
 <span class='co'># sort on various keys</span>
-<span class='fu'>drive_find</span>(order_by = <span class='st'>"quotaBytesUsed"</span>, n_max = <span class='fl'>5</span>)
-<span class='fu'>drive_find</span>(order_by = <span class='st'>"modifiedByMeTime"</span>, n_max = <span class='fl'>5</span>)
-}
+<span class='fu'>drive_find</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='st'>"quotaBytesUsed"</span>, n_max <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'>drive_find</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='st'>"modifiedByMeTime"</span>, n_max <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>
