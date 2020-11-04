@@ -255,12 +255,12 @@
 <ol>
 <li>
 <p>Source <code>tests/testthat/driver.R</code> to extract and aggregate the current setup and clean code across all test files.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co">## gather all the test setup and clean code from individual test files</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## gather all the test setup and clean code from individual test files</span>
 <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span><span class="op">(</span><span class="st">"driver.R"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">## leaves behind:</span>
 <span class="co">##   * all-test-setup.R</span>
-<span class="co">##   * all-test-clean.R</span></pre></div>
+<span class="co">##   * all-test-clean.R</span></code></pre></div>
 <ul>
 <li>This creates two R scripts: <code>tests/testthat/all-test-setup.R</code> and <code>tests/testthat/all-test-clean.R</code>. Inspect them.</li>
 </ul>
@@ -268,14 +268,14 @@
 <li><p>When you are truly ready to perform setup or clean, edit the code to set the <code>SETUP</code> or <code>CLEAN</code> variable to <code>TRUE</code> instead of <code>FALSE</code>. This friction is intentional, so you don’t accidentally create or delete lots of Drive files without meaning to.</p></li>
 <li><p>Render <code>all-test-setup.R</code> with the Knit button in RStudio or like so:</p></li>
 </ol>
-<!-- end list --><div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span><span class="op">(</span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span><span class="op">(</span><span class="st">"all-test-setup.R"</span><span class="op">)</span><span class="op">)</span></pre></div>
+<!-- end list --><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span><span class="op">(</span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span><span class="op">(</span><span class="st">"all-test-setup.R"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>You could also just source it, but it’s nice to have a report that records what actually happened.</p>
 <p>You should now be able to run the tests via <em>Build &gt; Test Package</em> or <em>Build &gt; Check Package</em> in RStudio or via <code>devtools::test()</code>.</p>
 <p>You can leave the setup in place for as long as you’re working on googledrive, i.e. you don’t need to do this for every test run. In fact, that is the whole point!</p>
 <p>When your googledrive development is over, render the clean script:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span><span class="op">(</span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span><span class="op">(</span><span class="st">"all-test-clean.R"</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span><span class="op">(</span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span><span class="op">(</span><span class="st">"all-test-clean.R"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Again, read the report to look over what happened, in case anything was trashed that should not have been (btw, let us know about that so we can fix!). Once you’re satisfied that your own files were not touched, you can <code><a href="reference/drive_empty_trash.html">drive_empty_trash()</a></code> to truly delete the test files.</p>
 </div>
 <div id="adding-tests" class="section level4">

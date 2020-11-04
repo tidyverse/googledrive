@@ -156,8 +156,8 @@
 <h2 class="hasAnchor">
 <a href="#drive_find" class="anchor"></a>drive_find()</h2>
 <p>Read the help for complete documentation but here are some of the many ways to call <code><a href="../../reference/drive_find.html">drive_find()</a></code>:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"chicken"</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"pdf"</span><span class="op">)</span>
@@ -166,15 +166,15 @@
 <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>trashed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>q <span class="op">=</span> <span class="st">"fullText contains 'project'"</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>q <span class="op">=</span> <span class="st">"modifiedTime &gt; '2019-04-21T12:00:00'"</span>, order_by <span class="op">=</span> <span class="st">"recency"</span><span class="op">)</span>
-<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span><span class="op">)</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><code><a href="../../reference/drive_find.html">drive_find()</a></code> is for exhaustive file listing or filtering on file properties.</p>
 </div>
 <div id="drive_get" class="section level2">
 <h2 class="hasAnchor">
 <a href="#drive_get" class="anchor"></a>drive_get()</h2>
 <p>Read the help for complete documentation but here are how calls to <code><a href="../../reference/drive_get.html">drive_get()</a></code> can look:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"i_am_a_file_name"</span><span class="op">)</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"i_am_a_file_name"</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"i/am/a/deeply/buried/file.txt"</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"i/am/a/folder/"</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"i_am_a_file_name"</span>, <span class="st">"path/to/file"</span><span class="op">)</span><span class="op">)</span>
@@ -182,27 +182,27 @@
 <span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="fu"><a href="../../reference/as_id.html">as_id</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"abcdefghijklm"</span>, <span class="st">"nopqrstuvwxyz"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"abcdefghijklm"</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"abcdefghijklm"</span>, <span class="st">"nopqrstuvwxyz"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="fu"><a href="../../reference/as_id.html">as_id</a></span><span class="op">(</span><span class="st">"https://docs.google.com/document/d/abcdefghijklm/edit"</span><span class="op">)</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="fu"><a href="../../reference/as_id.html">as_id</a></span><span class="op">(</span><span class="st">"https://docs.google.com/document/d/abcdefghijklm/edit"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><code><a href="../../reference/drive_get.html">drive_get()</a></code> is for targetted file fetching based on name, path, id, or URL.</p>
 </div>
 <div id="other-handy-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-handy-functions" class="anchor"></a>Other handy functions</h2>
 <p><code><a href="../../reference/drive_reveal.html">drive_reveal()</a></code> adds bonus information to the dribble, either by excavating it from the <code>drive_resource</code> variable or by calling the Drive API. Use it on a dribble containing files of interest.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"path"</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"path"</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"trashed"</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"mime_type"</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"permissions"</span><span class="op">)</span>
-<span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"published"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"published"</span><span class="op">)</span></code></pre></div>
 <p><code><a href="../../reference/drive_ls.html">drive_ls()</a></code> lists files below a specified folder. It’s a thin wrapper around <code><a href="../../reference/drive_find.html">drive_find()</a></code>, so all those capabilities are available.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../../reference/drive_ls.html">drive_ls</a></span><span class="op">(</span><span class="st">"i/am/a/folder/"</span>, type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/drive_ls.html">drive_ls</a></span><span class="op">(</span><span class="st">"i/am/a/folder/"</span>, type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></code></pre></div>
 <p><code><a href="../../reference/drive_browse.html">drive_browse()</a></code> will open a file in your browser.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="../../reference/drive_browse.html">drive_browse</a></span><span class="op">(</span><span class="va">i_am_a_dribble</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/drive_browse.html">drive_browse</a></span><span class="op">(</span><span class="va">i_am_a_dribble</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/drive_browse.html">drive_browse</a></span><span class="op">(</span><span class="st">"i_am_a_file_name"</span><span class="op">)</span>
-<span class="fu"><a href="../../reference/drive_browse.html">drive_browse</a></span><span class="op">(</span><span class="fu"><a href="../../reference/as_id.html">as_id</a></span><span class="op">(</span><span class="st">"abcdefghijklm"</span><span class="op">)</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../../reference/drive_browse.html">drive_browse</a></span><span class="op">(</span><span class="fu"><a href="../../reference/as_id.html">as_id</a></span><span class="op">(</span><span class="st">"abcdefghijklm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
