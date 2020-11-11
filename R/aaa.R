@@ -18,6 +18,11 @@
 
 .onLoad <- function(libname, pkgname) {
 
+  .auth <<- gargle::init_AuthState(
+    package     = "googledrive",
+    auth_active = TRUE
+  )
+
   if (requireNamespace("dplyr", quietly = TRUE)) {
     register_s3_method("dplyr", "arrange", "dribble")
     register_s3_method("dplyr", "filter", "dribble")
