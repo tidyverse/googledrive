@@ -283,7 +283,7 @@ is_team_drivy <- function(d) {
 ## promote an element in drive_resource into a top-level variable
 ## if new, it will be the second column, presumably after `name`
 ## if variable by that name already exists, it is overwritten in place
-## if you reqest `this_var`, we look for `thisVar` in drive_resource
+## if you request `this_var`, we look for `thisVar` in drive_resource
 ## but use `this_var` as the variable name
 promote <- function(d, elem) {
   elem_orig <- elem
