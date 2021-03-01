@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/googledrive)](https://cran.r-project.org/package=googledrive)
-[![R build
-status](https://github.com/tidyverse/googledrive/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googledrive/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/googledrive)](https://CRAN.R-project.org/package=googledrive)
+[![R-CMD-check](https://github.com/tidyverse/googledrive/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googledrive/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/tidyverse/googledrive/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/googledrive?branch=master)
 <!-- badges: end -->
@@ -41,23 +41,25 @@ on <https://drive.google.com> (up to `n_max = 25`, in this case):
 ``` r
 library("googledrive")
 drive_find(n_max = 25)
-#> # A tibble: 14 x 3
-#>    name                     id                                drive_resource   
-#>  * <chr>                    <chr>                             <list>           
-#>  1 Rlogo.pdf                1cn7oVxQRgD0l_hCI4nrSSWrKeVFysUp7 <named list [39]>
-#>  2 THANKS                   1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_du3 <named list [39]>
-#>  3 chicken-perm-article.txt 1oWpfPYR-77c-DdvoW30682F9Gde8Zpn- <named list [39]>
-#>  4 googledrive-NEWS.md      15pfwRfXvpxekxhdERmSUnoxQY5K701y7 <named list [38]>
-#>  5 def                      1hr4EFw3r5vAMm5Jgw2SsFluBpN-oAC-x <named list [32]>
-#>  6 abc                      11lidFPceZAcNTHasQARiwAhE0NgmSfJN <named list [32]>
-#>  7 BioC_mirrors.csv         1vV0fPdNOyo3Ti9ofA38MuTQm27pXvYq5 <named list [38]>
-#>  8 logo.jpg                 1OFeNdd63NfoavqvDf5-xa3LORiamfKXS <named list [40]>
-#>  9 Rlogo.svg                11sxsw-ux-UjQjzVdxd1wjNz37hJeBrBu <named list [40]>
-#> 10 DESCRIPTION              1MjV4stVPhlMNz1AcrIizcL7yTcVaRuBo <named list [39]>
-#> 11 chicken.txt              1xmwFZ_UN-CSs3Ic2aPUw22DbxZxoenVT <named list [39]>
-#> 12 chicken.pdf              1eK9ozP1TZjXfAgaAGmP9GrUTovGUaO9S <named list [39]>
-#> 13 chicken.jpg              1JnGjIdruQXErd20xR_ecAzN3yP_fTcfF <named list [40]>
-#> 14 chicken.csv              1eHoOi9Ch3zk3_QBRKCJajFEIO4aeGINr <named list [38]>
+#> # A tibble: 16 x 3
+#>    name                        id                               drive_resource  
+#>  * <chr>                       <chr>                            <list>          
+#>  1 chicken.csv                 1o6dQB-ZygN9Bbl_y9xUEilQNYEZbIx… <named list [38…
+#>  2 upload-into-me-article-demo 1yP0o6H8l-4IUJj2LDGOoYp-vIfBb1g… <named list [32…
+#>  3 Rlogo.pdf                   1cn7oVxQRgD0l_hCI4nrSSWrKeVFysU… <named list [39…
+#>  4 THANKS                      1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_d… <named list [39…
+#>  5 chicken-perm-article.txt    1oWpfPYR-77c-DdvoW30682F9Gde8Zp… <named list [39…
+#>  6 googledrive-NEWS.md         15pfwRfXvpxekxhdERmSUnoxQY5K701… <named list [38…
+#>  7 def                         1hr4EFw3r5vAMm5Jgw2SsFluBpN-oAC… <named list [32…
+#>  8 abc                         11lidFPceZAcNTHasQARiwAhE0NgmSf… <named list [32…
+#>  9 BioC_mirrors.csv            1vV0fPdNOyo3Ti9ofA38MuTQm27pXvY… <named list [38…
+#> 10 logo.jpg                    1OFeNdd63NfoavqvDf5-xa3LORiamfK… <named list [40…
+#> 11 Rlogo.svg                   11sxsw-ux-UjQjzVdxd1wjNz37hJeBr… <named list [40…
+#> 12 DESCRIPTION                 1MjV4stVPhlMNz1AcrIizcL7yTcVaRu… <named list [39…
+#> 13 chicken.txt                 1xmwFZ_UN-CSs3Ic2aPUw22DbxZxoen… <named list [39…
+#> 14 chicken.pdf                 1eK9ozP1TZjXfAgaAGmP9GrUTovGUaO… <named list [39…
+#> 15 chicken.jpg                 1JnGjIdruQXErd20xR_ecAzN3yP_fTc… <named list [40…
+#> 16 chicken.csv                 1eHoOi9Ch3zk3_QBRKCJajFEIO4aeGI… <named list [38…
 ```
 
 ## Contributing
