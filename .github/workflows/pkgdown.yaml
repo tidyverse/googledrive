@@ -1,61 +1,68 @@
 on:
   push:
-    branches: master
+    branches:
+      - main
+      - master
   schedule:
     # * is a special character in YAML so we have to quote this string
-    # 12 (UTC) - 7 or 8 (offset for Pacific) = 4am or 5am = I'm asleep
-    # also try to avoid overlap with same job for googlesheets4 because quota
+    # 13:30 (UTC) - 7 or 8 (offset for Pacific) = 5:30 or 6:30 am
+    # try to avoid overlap other jobs in googledrive and googlesheets4 because quota
     # https://crontab.guru is your friend
-    - cron:  '30 12 * * *'
+    - cron:  '30 13 * * *'
 
 name: pkgdown
 
 jobs:
   pkgdown:
-    runs-on: macOS-latest
-    if: "github.event_name == 'schedule' || contains(github.event.head_commit.message, '[pkgdown]')"
+    runs-on: ubuntu-18.04
+    if: github.event_name == 'schedule' || contains(github.event.head_commit.message, '[pkgdown]')
 
     env:
+      RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
       GOOGLEDRIVE_PASSWORD: ${{ secrets.GOOGLEDRIVE_PASSWORD }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-r@v1
+        id: install-r
 
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: Query dependencies
+      - name: Install pak and query dependencies
         run: |
-          # getting dev remotes for better behaviour re: installation order
-          install.packages("https://github.com/r-lib/remotes/archive/master.tar.gz", repos = NULL)
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
+          saveRDS(pak::pkg_deps("local::.", dependencies = TRUE), ".github/r-depends.rds")
         shell: Rscript {0}
 
       - name: Cache R packages
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+          key: ubuntu-18.04-${{ steps.install-r.outputs.installed-r-version }}-1-${{ hashFiles('.github/r-depends.rds') }}
+          restore-keys: ubuntu-18.04-${{ steps.install-r.outputs.installed-r-version }}-1-
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          pak::local_system_requirements(execute = TRUE)
+          pak::pkg_system_requirements("pkgdown", execute = TRUE)
+        shell: Rscript {0}
 
       - name: Install dependencies
         run: |
-          # temporary hack until there's a macOS binary for ps
-          install.packages("ps", type = "source")
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("tidyverse")
-          remotes::install_github("tidyverse/tidytemplate")
-          install.packages("pkgdown")
+          pak::local_install_dev_deps(upgrade = TRUE)
+          pak::pkg_install("tidyverse")
+          pak::pkg_install("tidyverse/tidytemplate")
+          pak::pkg_install("pkgdown")
         shell: Rscript {0}
 
       - name: Install package
         run: R CMD INSTALL .
 
-      - name: Deploy package
+      - name: Build and deploy pkgdown site
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
