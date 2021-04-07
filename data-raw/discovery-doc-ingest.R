@@ -4,10 +4,26 @@ source(
   system.file("discovery-doc-ingest", "ingest-functions.R", package = "gargle")
 )
 
-x <- download_discovery_document("drive:v3")
+existing <- list_discovery_documents("drive")
+if (length(existing) > 1) {
+  rlang::warn("MULTIPLE DISCOVERY DOCUMENTS FOUND. FIX THIS!")
+}
+
+if (length(existing) < 1) {
+  rlang::inform("Downloading Discovery Document")
+  x <- download_discovery_document("drive:v3")
+} else {
+  msg <- glue::glue("
+    Using existing Discovery Document:
+      * {existing}
+    ")
+  rlang::inform(msg)
+  x <- here::here("data-raw", existing)
+}
+
 dd <- read_discovery_document(x)
 
-methods <- get_raw_methods(dd)
+methods      <- get_raw_methods(dd)
 
 methods <- methods %>% map(groom_properties,  dd)
 methods <- methods %>% map(add_schema_params, dd)
