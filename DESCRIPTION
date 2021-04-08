@@ -26,6 +26,7 @@ Imports:
     glue (>= 1.2.0),
     httr,
     jsonlite,
+    lifecycle,
     magrittr,
     purrr (>= 0.2.3),
     rlang (>= 0.3.1),
