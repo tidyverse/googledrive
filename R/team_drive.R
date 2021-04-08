@@ -43,3 +43,11 @@ team_drive_get <- function(name = NULL, id = NULL, verbose = TRUE) {
   # TODO: add something about verbosity once I deprecate that
   shared_drive_get(name = name, id = id, verbose = verbose)
 }
+
+#' @export
+#' @rdname deprecated-team-drive-functions
+team_drive_create <- function(name, verbose = TRUE) {
+  lifecycle::deprecate_warn("2.0.0", "team_drive_create()", "shared_drive_create()")
+  # TODO: add something about verbosity once I deprecate that
+  shared_drive_create(name = name, verbose = verbose)
+}

@@ -4,11 +4,14 @@
 \alias{deprecated-team-drive-functions}
 \alias{team_drive_find}
 \alias{team_drive_get}
+\alias{team_drive_create}
 \title{Deprecated Team Drive functions}
 \usage{
 team_drive_find(pattern = NULL, n_max = Inf, ..., verbose = TRUE)
 
 team_drive_get(name = NULL, id = NULL, verbose = TRUE)
+
+team_drive_create(name, verbose = TRUE)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the items whose names match this
