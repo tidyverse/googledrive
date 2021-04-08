@@ -240,7 +240,7 @@ googledrive.</p>
 #&gt;   ..$ id                  : chr "drive.changes.list"
 #&gt;   ..$ httpMethod          : chr "GET"
 #&gt;   ..$ path                : 'fs_path' chr "drive/v3/changes"
-#&gt;   ..$ parameters          :List of 19
+#&gt;   ..$ parameters          :List of 20
 #&gt;   ..$ scopes              : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
 #&gt;   ..$ description         : chr "Lists the changes for a user or shared drive."
 #&gt;   ..$ response            : chr "ChangeList"
@@ -256,6 +256,20 @@ googledrive.</p>
 #&gt; drive/v3/files/{fileId}
 #&gt; 
 #&gt; $parameters
+#&gt; $parameters$enforceSingleParent
+#&gt; $parameters$enforceSingleParent$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $parameters$enforceSingleParent$description
+#&gt; [1] "Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root."
+#&gt; 
+#&gt; $parameters$enforceSingleParent$default
+#&gt; [1] "false"
+#&gt; 
+#&gt; $parameters$enforceSingleParent$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; 
 #&gt; $parameters$fileId
 #&gt; $parameters$fileId$type
 #&gt; [1] "string"
@@ -275,7 +289,7 @@ googledrive.</p>
 #&gt; [1] "boolean"
 #&gt; 
 #&gt; $parameters$supportsAllDrives$description
-#&gt; [1] "Deprecated - Whether the requesting application supports both My Drives and shared drives. This parameter will only be effective until June 1, 2020. Afterwards all applications are assumed to support shared drives."
+#&gt; [1] "Whether the requesting application supports both My Drives and shared drives."
 #&gt; 
 #&gt; $parameters$supportsAllDrives$default
 #&gt; [1] "false"
@@ -437,12 +451,23 @@ googledrive.</p>
 #&gt; [1] "boolean"
 #&gt; 
 #&gt; $parameters$includeItemsFromAllDrives$description
-#&gt; [1] "Deprecated - Whether both My Drive and shared drive items should be included in results. This parameter will only be effective until June 1, 2020. Afterwards shared drive items are included in the results."
+#&gt; [1] "Whether both My Drive and shared drive items should be included in results."
 #&gt; 
 #&gt; $parameters$includeItemsFromAllDrives$default
 #&gt; [1] "false"
 #&gt; 
 #&gt; $parameters$includeItemsFromAllDrives$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; 
+#&gt; $parameters$includePermissionsForView
+#&gt; $parameters$includePermissionsForView$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $parameters$includePermissionsForView$description
+#&gt; [1] "Specifies which additional view's permissions to include in the response. Only 'published' is supported."
+#&gt; 
+#&gt; $parameters$includePermissionsForView$location
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
@@ -544,7 +569,7 @@ googledrive.</p>
 #&gt; [1] "boolean"
 #&gt; 
 #&gt; $parameters$supportsAllDrives$description
-#&gt; [1] "Deprecated - Whether the requesting application supports both My Drives and shared drives. This parameter will only be effective until June 1, 2020. Afterwards all applications are assumed to support shared drives."
+#&gt; [1] "Whether the requesting application supports both My Drives and shared drives."
 #&gt; 
 #&gt; $parameters$supportsAllDrives$default
 #&gt; [1] "false"
@@ -696,7 +721,7 @@ googledrive.</p>
 #&gt; [1] "string"
 #&gt; 
 #&gt; $parameters$type$description
-#&gt; [1] "The type of delivery mechanism used for this channel."
+#&gt; [1] "The type of delivery mechanism used for this channel. Valid values are \"web_hook\" (or \"webhook\"). Both values refer to a channel where Http requests are used to deliver messages."
 #&gt; 
 #&gt; $parameters$type$location
 #&gt; [1] "body"
