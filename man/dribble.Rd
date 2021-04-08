@@ -5,18 +5,18 @@
 \title{dribble object}
 \description{
 googledrive stores the metadata for one or more Drive files or
-Team Drives as a \code{dribble}. It is a "Drive
-\link[tibble:tibble-package]{tibble}" with one row per file or Team Drive and,
-at a minimum, these variables:
+shared drives as a \code{dribble}. It is a "Drive
+\link[tibble:tibble-package]{tibble}" with one row per file or shared drive
+and, at a minimum, these columns:
 \itemize{
-\item \code{name}: a character variable containing file or Team Drive names
-\item \code{id}: a character variable of file or Team Drive ids
+\item \code{name}: a character column containing file or shared drive names
+\item \code{id}: a character column of file or shared drive ids
 \item \code{drive_resource}: a list-column, each element of which is either a
-\href{https://developers.google.com/drive/v3/reference/files#resource-representations}{Files resource}
-or \href{https://developers.google.com/drive/v3/reference/teamdrives#resource-representations}{Team Drive resource}
+\href{https://developers.google.com/drive/api/v3/reference/files#resource-representations}{Files resource}
+or a \href{https://developers.google.com/drive/api/v3/reference/drives#resource-representations}{Drives resource}
 object. Note there is no guarantee that all documented fields are always
 present. We do check if the \code{kind} field is present and equal to one of
-\code{drive#file} or \code{drive#teamDrive}.
+\code{drive#file} or \code{drive#drive}.
 }
 
 The \code{dribble} format is handy because it exposes the file name,

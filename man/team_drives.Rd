@@ -23,9 +23,16 @@ The general flexibility to refer to files by name, path, or id does not
 apply to Team Drive files. While it's always a good idea to get things into
 a \code{\link{dribble}} early, for Team Drives it's absolutely required.
 
-Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-are only available to users of certain enhanced Google services, such as G
-Suite Enterprise, G Suite Business, or G Suite for Education.
+Team Drives have been rebranded as \emph{shared drives} and, as of googledrive
+v2.0.0, all \verb{team_drive_*()} functions have been deprecated, in favor of
+\verb{shared_drive_*()} successors.
+
+The changes in googledrive reflect that the Team Drives resource collection
+has been deprecated in the Drive API v3, in favor of the new (shared) Drives
+resource collection. Read more
+\itemize{
+\item \url{https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api}
+}
 }
 \section{Specific Team Drive}{
 

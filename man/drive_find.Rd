@@ -58,9 +58,16 @@ or even work with \link[=team_drives]{Team Drive files}, if you have access. Thi
 is a very powerful function. Together with the more specific \code{\link[=drive_get]{drive_get()}},
 this is the main way to identify files to target for downstream work.
 
-Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-are only available to users of certain enhanced Google services, such as G
-Suite Enterprise, G Suite Business, or G Suite for Education.
+Team Drives have been rebranded as \emph{shared drives} and, as of googledrive
+v2.0.0, all \verb{team_drive_*()} functions have been deprecated, in favor of
+\verb{shared_drive_*()} successors.
+
+The changes in googledrive reflect that the Team Drives resource collection
+has been deprecated in the Drive API v3, in favor of the new (shared) Drives
+resource collection. Read more
+\itemize{
+\item \url{https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api}
+}
 }
 \section{File type}{
 

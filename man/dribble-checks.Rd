@@ -13,6 +13,7 @@
 \alias{is_native}
 \alias{is_parental}
 \alias{is_mine}
+\alias{is_shared_drive}
 \alias{is_team_drive}
 \alias{is_team_drivy}
 \title{Check facts about a dribble}
@@ -38,6 +39,8 @@ is_native(d)
 is_parental(d)
 
 is_mine(d)
+
+is_shared_drive(d)
 
 is_team_drive(d)
 

@@ -1,17 +1,17 @@
 #' dribble object
 #'
 #' @description googledrive stores the metadata for one or more Drive files or
-#'   Team Drives as a `dribble`. It is a "Drive
-#'   [tibble][tibble::tibble-package]" with one row per file or Team Drive and,
-#'   at a minimum, these variables:
-#'   * `name`: a character variable containing file or Team Drive names
-#'   * `id`: a character variable of file or Team Drive ids
+#'   shared drives as a `dribble`. It is a "Drive
+#'   [tibble][tibble::tibble-package]" with one row per file or shared drive
+#'   and, at a minimum, these columns:
+#'   * `name`: a character column containing file or shared drive names
+#'   * `id`: a character column of file or shared drive ids
 #'   * `drive_resource`: a list-column, each element of which is either a
-#'   [Files resource](https://developers.google.com/drive/v3/reference/files#resource-representations)
-#'   or [Team Drive resource](https://developers.google.com/drive/v3/reference/teamdrives#resource-representations)
+#'   [Files resource](https://developers.google.com/drive/api/v3/reference/files#resource-representations)
+#'   or a [Drives resource](https://developers.google.com/drive/api/v3/reference/drives#resource-representations)
 #'   object. Note there is no guarantee that all documented fields are always
 #'   present. We do check if the `kind` field is present and equal to one of
-#'   `drive#file` or `drive#teamDrive`.
+#'   `drive#file` or `drive#drive`.
 #'
 #' @description The `dribble` format is handy because it exposes the file name,
 #'   which is good for humans, but keeps it bundled with the file's unique id
@@ -25,8 +25,8 @@
 #' @seealso [as_dribble()]
 NULL
 
-## implementing dribble as advised here:
-## https://github.com/hadley/adv-r/blob/master/S3.Rmd
+# implementing dribble as advised here:
+# https://github.com/hadley/adv-r/blob/master/S3.Rmd
 
 new_dribble <- function(x) {
   stopifnot(inherits(x, "data.frame"))
@@ -59,7 +59,7 @@ validate_dribble <- function(x) {
   if (!has_drive_resource(x)) {
     stop_glue(
       "Invalid dribble. Can't confirm `kind = \"drive#file\"` or ",
-      "`kind = \"drive#teamDrive\"` for all elements of the nominal ",
+      "`kind = \"drive#drive\"` for all elements of the nominal ",
       "`drive_resource` column"
     )
   }
@@ -120,28 +120,29 @@ has_dribble_coltypes <- function(x) {
 
 has_drive_resource <- function(x) {
   kind <- purrr::map_chr(x$drive_resource, "kind", .default = NA_character_)
-  all(!is.na(kind) & kind %in% c("drive#file", "drive#teamDrive"))
+  # TODO: remove `drive#teamDrive` here, when possible
+  all(!is.na(kind) & kind %in% c("drive#file", "drive#drive", "drive#teamDrive"))
 }
 
-## used across several functions that create a file or modify "parentage"
-## processes a putative parent folder or Team Drive
+# used across several functions that create a file or modify "parentage"
+# processes a putative parent folder or shared drive
 as_parent <- function(d) {
   in_var <- deparse(substitute(d))
   d <- as_dribble(d)
-  ## wording chosen to work for folder and Team Drive
+  # wording chosen to work for folder and shared drive
   if (no_file(d)) {
     stop_glue("Parent specified via {bt(in_var)} does not exist.")
   }
   if (!single_file(d)) {
     stop_glue(
       "Parent specified via {bt(in_var)} doesn't uniquely ",
-      "identify exactly one folder or Team Drive."
+      "identify exactly one folder or shared drive."
     )
   }
   if (!is_parental(d)) {
     stop_glue(
       "Requested parent {bt(in_var)} is invalid: neither a folder ",
-      "nor a Team Drive."
+      "nor a shared drive."
     )
   }
   d
@@ -254,15 +255,25 @@ is_parental <- function(d) {
   stopifnot(inherits(d, "dribble"))
   kind <- purrr::map_chr(d$drive_resource, "kind")
   mime_type <- purrr::map_chr(d$drive_resource, "mimeType", .default = NA)
-  kind == "drive#teamDrive" | mime_type == "application/vnd.google-apps.folder"
+  # TODO: remove `drive#teamDrive` here, when possible
+  kind == "drive#teamDrive" |
+    kind == "drive#drive" |
+    mime_type == "application/vnd.google-apps.folder"
 }
 
 #' @export
 #' @rdname dribble-checks
-## TO DO: handle team drives here
+## TO DO: do I need to do anything about shared drives here?
 is_mine <- function(d) {
   stopifnot(inherits(d, "dribble"))
   purrr::map_lgl(d$drive_resource, list("owners", 1, "me"))
+}
+
+#' @export
+#' @rdname dribble-checks
+is_shared_drive <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  purrr::map_chr(d$drive_resource, "kind") == "drive#drive"
 }
 
 #' @export
