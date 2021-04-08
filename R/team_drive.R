@@ -31,7 +31,8 @@ team_drive_find <- function(pattern = NULL,
   shared_drive_find(
     pattern = pattern,
     n_max = n_max,
-    ...
+    ...,
+    verbose = verbose
   )
 }
 
@@ -40,5 +41,5 @@ team_drive_find <- function(pattern = NULL,
 team_drive_get <- function(name = NULL, id = NULL, verbose = TRUE) {
   lifecycle::deprecate_warn("2.0.0", "team_drive_get()", "shared_drive_get()")
   # TODO: add something about verbosity once I deprecate that
-  shared_drive_get(name = name, id = id)
+  shared_drive_get(name = name, id = id, verbose = verbose)
 }
