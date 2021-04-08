@@ -5,6 +5,8 @@
 \alias{team_drive_find}
 \alias{team_drive_get}
 \alias{team_drive_create}
+\alias{team_drive_rm}
+\alias{as_team_drive}
 \title{Deprecated Team Drive functions}
 \usage{
 team_drive_find(pattern = NULL, n_max = Inf, ..., verbose = TRUE)
@@ -12,6 +14,10 @@ team_drive_find(pattern = NULL, n_max = Inf, ..., verbose = TRUE)
 team_drive_get(name = NULL, id = NULL, verbose = TRUE)
 
 team_drive_create(name, verbose = TRUE)
+
+team_drive_rm(team_drive = NULL, verbose = TRUE)
+
+as_team_drive(x, ...)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the items whose names match this
@@ -26,6 +32,10 @@ filtered locally, via the \code{pattern} argument.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
+
+\item{team_drive}{Anything that identifies the Team Drive(s) of interest. Can
+be a character vector of names, a character vector of file ids or URLs
+marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}} consisting only of Team Drives.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.

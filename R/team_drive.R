@@ -7,6 +7,7 @@
 #' @template pattern
 #' @template n_max
 #' @param ... Other parameters to pass along in the request, such as `pageSize`.
+#' @template team_drive-plural
 #' @template verbose
 #'
 #' @template dribble-return
@@ -50,4 +51,19 @@ team_drive_create <- function(name, verbose = TRUE) {
   lifecycle::deprecate_warn("2.0.0", "team_drive_create()", "shared_drive_create()")
   # TODO: add something about verbosity once I deprecate that
   shared_drive_create(name = name, verbose = verbose)
+}
+
+#' @export
+#' @rdname deprecated-team-drive-functions
+team_drive_rm <- function(team_drive = NULL, verbose = TRUE) {
+  lifecycle::deprecate_warn("2.0.0", "team_drive_rm()", "shared_drive_rm()")
+  # TODO: add something about verbosity once I deprecate that
+  shared_drive_rm(drive = team_drive, verbose = verbose)
+}
+
+#' @export
+#' @rdname deprecated-team-drive-functions
+as_team_drive <- function(x, ...) {
+  lifecycle::deprecate_warn("2.0.0", "as_team_drive()", "as_shared_drive()")
+  as_shared_drive(x, ...)
 }
