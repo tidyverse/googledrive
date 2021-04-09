@@ -6,6 +6,7 @@
 \alias{team_drive_get}
 \alias{team_drive_create}
 \alias{team_drive_rm}
+\alias{team_drive_update}
 \alias{as_team_drive}
 \title{Deprecated Team Drive functions}
 \usage{
@@ -16,6 +17,8 @@ team_drive_get(name = NULL, id = NULL, verbose = TRUE)
 team_drive_create(name, verbose = TRUE)
 
 team_drive_rm(team_drive = NULL, verbose = TRUE)
+
+team_drive_update(team_drive, ..., verbose = TRUE)
 
 as_team_drive(x, ...)
 }
