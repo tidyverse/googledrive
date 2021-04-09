@@ -49,7 +49,7 @@ It takes a nickname for an endpoint and:
 endpoint. Separates parameters into those destined for the body, the query,
 and URL endpoint substitution (which is also enacted).
 \item Adds an API key to the query if and only if \code{token = NULL}.
-\item Adds \code{supportsTeamDrives = TRUE} to the query if the endpoint requires.
+\item Adds \code{supportsAllDrives = TRUE} to the query if the endpoint requires.
 }
 }
 \examples{

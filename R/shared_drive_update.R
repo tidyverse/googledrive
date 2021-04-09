@@ -23,7 +23,7 @@
 #' themes <- drive_about()$driveThemes
 #' purrr::map_chr(themes, "id")
 #'
-#' ## cycle through various themes for this Team Drive
+#' # cycle through various themes for this shared drive
 #' sd <- shared_drive_update(sd, themeId = "bok_choy")
 #' sd <- shared_drive_update(sd, themeId = "cocktails")
 #'

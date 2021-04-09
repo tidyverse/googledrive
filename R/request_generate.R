@@ -15,7 +15,7 @@
 #'   endpoint. Separates parameters into those destined for the body, the query,
 #'   and URL endpoint substitution (which is also enacted).
 #'   * Adds an API key to the query if and only if `token = NULL`.
-#'   * Adds `supportsTeamDrives = TRUE` to the query if the endpoint requires.
+#'   * Adds `supportsAllDrives = TRUE` to the query if the endpoint requires.
 #'
 #' @param endpoint Character. Nickname for one of the selected Drive v3 API
 #'   endpoints built into googledrive. Learn more in [drive_endpoints()].

@@ -78,7 +78,7 @@ drive_cp <- function(file,
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_parental(file)) {
-    stop_glue("The Drive API does not copy folders or Team Drives.")
+    stop_glue("The Drive API does not copy folders or shared drives.")
   }
 
   tmp <- rationalize_path_name(path, name)

@@ -8,6 +8,7 @@
 \alias{team_drive_rm}
 \alias{team_drive_update}
 \alias{as_team_drive}
+\alias{is_team_drive}
 \title{Deprecated Team Drive functions}
 \usage{
 team_drive_find(pattern = NULL, n_max = Inf, ..., verbose = TRUE)
@@ -21,6 +22,8 @@ team_drive_rm(team_drive = NULL, verbose = TRUE)
 team_drive_update(team_drive, ..., verbose = TRUE)
 
 as_team_drive(x, ...)
+
+is_team_drive(d)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the items whose names match this
