@@ -276,21 +276,6 @@ is_shared_drive <- function(d) {
   purrr::map_chr(d$drive_resource, "kind") == "drive#drive"
 }
 
-#' @export
-#' @rdname dribble-checks
-is_team_drive <- function(d) {
-  stopifnot(inherits(d, "dribble"))
-  purrr::map_chr(d$drive_resource, "kind") == "drive#teamDrive"
-}
-
-#' @export
-#' @rdname dribble-checks
-is_team_drivy <- function(d) {
-  stopifnot(inherits(d, "dribble"))
-  is_team_drive(d) |
-    purrr::map_lgl(d$drive_resource, ~!is.null(.x[["teamDriveId"]]))
-}
-
 ## promote an element in drive_resource into a top-level variable
 ## if new, it will be the second column, presumably after `name`
 ## if variable by that name already exists, it is overwritten in place

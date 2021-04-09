@@ -43,6 +43,12 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   path <- confirm_single_file(path)
 
   params <- rlang::list2(...)
+  # TODO: adapt to shared drives
+  is_team_drivy <- function(d) {
+    stopifnot(inherits(d, "dribble"))
+    is_team_drive(d) |
+      purrr::map_lgl(d$drive_resource, ~!is.null(.x[["teamDriveId"]]))
+  }
   if (is_team_drivy(path)) {
     if (is_team_drive(path)) {
       params[["team_drive"]] <- as_id(path)
