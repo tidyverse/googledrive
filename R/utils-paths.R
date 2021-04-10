@@ -82,7 +82,7 @@ overwrite_hits <- function(parent = NULL, name, overwrite) {
     glue("name = '{name}'"),
     "trashed = FALSE"
   )
-  drive_find(q = q)
+  drive_find(q = q, corpus = "allDrives")
 }
 
 # path utilities that are "mechanical", i.e. they NEVER call the Drive API ----
