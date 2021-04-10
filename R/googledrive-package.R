@@ -29,6 +29,7 @@
 #'
 #' @importFrom rlang %||% :=
 #' @importFrom glue glue glue_data
+#' @importFrom lifecycle deprecated
 #' @keywords internal
 "_PACKAGE"
 
