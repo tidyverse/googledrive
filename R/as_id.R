@@ -30,7 +30,7 @@ as_id <- function(x, ...) UseMethod("as_id")
 as_id.default <- function(x, ...) {
   stop_glue_data(
     list(x = glue_collapse(class(x), sep = "/")),
-    "Don't know how to coerce object of class {x} into a drive_id"
+    "Don't know how to coerce object of class <{x}> into a drive_id"
   )
 }
 
