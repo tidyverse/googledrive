@@ -1,6 +1,6 @@
 Package: googledrive
 Title: An Interface to Google Drive
-Version: 1.0.1.9001
+Version: 1.9.0.9000
 Authors@R: 
     c(person(given = "Lucy",
              family = "D'Agostino McGowan",
