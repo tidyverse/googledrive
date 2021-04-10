@@ -4,21 +4,16 @@
 #' `r lifecycle::badge('deprecated')`
 #' @template team-drives-description
 #'
-#' @template pattern
-#' @template n_max
-#' @param ... Other parameters to pass along in the request, such as `pageSize`.
+#' @inheritParams shared_drive_find
+#' @inheritParams shared_drive_get
+#' @inheritParams as_shared_drive
+#' @inheritParams is_shared_drive
 #' @template team_drive-plural
-#' @template verbose
 #'
 #' @template dribble-return
 #'
 #' @keywords internal
 #' @name deprecated-team-drive-functions
-#'
-#' @examples
-#' \dontrun{
-#' team_drive_find()
-#' }
 NULL
 
 #' @export

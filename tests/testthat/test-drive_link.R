@@ -1,13 +1,11 @@
-context("Retrieve links")
-
 # ---- other ----
 if (FALSE) {
-  ## how the test file was created
-  ## using Team-Drive-capable token ...
-  files <- drive_find(corpora = "user,allTeamDrives")
-  tds <- team_drive_find()
-  x <- rbind(files, tds)
-  saveRDS(x, test_file("mix_of_files_and_teamdrives.rds"))
+  # how the test file was created
+  # using shared-drive-capable token ...
+  files <- drive_find(corpus = "allDrives", n_max = 10)
+  sds <- shared_drive_find()
+  x <- rbind(files, sds)
+  saveRDS(x, test_file("mix_of_files_and_teamdrives.rds"), version = 2)
 }
 
 # ---- tests ----

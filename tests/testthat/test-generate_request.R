@@ -8,7 +8,7 @@ test_that("request_generate() basically works", {
     names(req),
     c("method", "url", "body", "token")
   )
-  expect_match(req$url, "supportsTeamDrives=TRUE")
+  expect_match(req$url, "supportsAllDrives=TRUE")
 })
 
 test_that("request_generate() errors for unrecognized parameters", {
@@ -33,7 +33,7 @@ test_that("request_generate() and request_build() can deliver same result", {
   build <- gargle::request_build(
     path = "drive/v3/files/{fileId}",
     method = "GET",
-    params = list(fileId = "abc", supportsTeamDrives = TRUE),
+    params = list(fileId = "abc", supportsAllDrives = TRUE),
     token = httr::config(token = "token!")
   )
   # don't fail for this difference: body is empty list vs empty named list

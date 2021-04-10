@@ -4,12 +4,13 @@
 \alias{shared_drive_update}
 \title{Update a shared drive}
 \usage{
-shared_drive_update(drive, ..., verbose = TRUE)
+shared_drive_update(shared_drive, ..., verbose = TRUE)
 }
 \arguments{
-\item{drive}{Anything that identifies one specific shared drive: its name,
-its id or URL marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Is pre-processed
-with \code{\link[=as_shared_drive]{as_shared_drive()}}.  Read more about \link[=shared_drives]{shared drives}.}
+\item{shared_drive}{Anything that identifies one specific shared drive: its
+name, its id or URL marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. The value
+provided to \code{shared_drive} is pre-processed with \code{\link[=as_shared_drive]{as_shared_drive()}}. Read
+more about \link[=shared_drives]{shared drives}.}
 
 \item{...}{Properties to set in \code{name = value} form. See the "Request
 body" section of the Drive API docs for this endpoint.}
@@ -27,11 +28,7 @@ theme.
 A shared drive supports files owned by an organization rather than an
 individual user. Shared drives follow different sharing and ownership models
 from a specific user's "My Drive". Shared drives are the successors to the
-earlier concept of Team Drives. Learn more at:
-\itemize{
-\item \url{https://developers.google.com/drive/api/v3/about-shareddrives}
-\item \url{https://developers.google.com/drive/api/v3/shared-drives-diffs}
-}
+earlier concept of Team Drives. Learn more about \link[=shared_drives]{shared drives}.
 }
 \examples{
 \dontrun{

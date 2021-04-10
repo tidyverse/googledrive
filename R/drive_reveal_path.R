@@ -7,22 +7,22 @@ drive_reveal_path <- function(file) {
   file <- as_dribble(file)
   if (no_file(file)) return(dribble_with_path())
 
-  team_drive <- NULL
+  shared_drive <- NULL
   corpus <- NULL
-  tid <- purrr::map_chr(file$drive_resource, "teamDriveId", .default = NA)
-  tid <- unique(tid[!is.na(tid)])
-  if (length(tid) > 0) {
-    if (length(tid) == 1) {
-      team_drive <- as_id(tid)
+  sid <- purrr::map_chr(file$drive_resource, "driveId", .default = NA)
+  sid <- unique(sid[!is.na(sid)])
+  if (length(sid) > 0) {
+    if (length(sid) == 1) {
+      shared_drive <- as_id(sid)
     } else {
-      corpus <- "all"
+      corpus <- "allDrives"
     }
   }
 
   ## nodes = the specific files we have + all folders
   nodes <- rbind(
     file,
-    drive_find(type = "folder", team_drive = team_drive, corpus = corpus),
+    drive_find(type = "folder", shared_drive = shared_drive, corpus = corpus),
     make.row.names = FALSE
   ) %>% promote("parents")
   nodes <- nodes[!duplicated(nodes$id), ]
@@ -45,14 +45,14 @@ pathify_one_id <- function(id, nodes, root_id) {
 ## but for files specified via path vs. id
 ## does the actual work for drive_get(path = ...)
 dribble_from_path <- function(path = NULL,
-                              team_drive = NULL,
+                              shared_drive = NULL,
                               corpus = NULL) {
   if (length(path) == 0) return(dribble_with_path())
   stopifnot(is_path(path))
   path <- rootize_path(path)
 
   ## nodes = files with names implied by our paths + all folders
-  nodes <- get_nodes(path, team_drive, corpus)
+  nodes <- get_nodes(path, shared_drive, corpus)
   if (nrow(nodes) == 0) return(dribble_with_path())
 
   ROOT_ID <- root_id()
@@ -87,7 +87,7 @@ pathify_one_path <- function(op, nodes, root_id) {
 ## given a vector of paths,
 ## retrieves metadata for all files that could be needed to resolve paths
 get_nodes <- function(path,
-                      team_drive = NULL,
+                      shared_drive = NULL,
                       corpus = NULL) {
   path_parts <- purrr::map(path, partition_path, maybe_name = TRUE)
   ## workaround for purrr <= 0.2.2.2
@@ -101,7 +101,7 @@ get_nodes <- function(path,
   q_clauses <- or(c(folders, names))
 
   nodes <- drive_find(
-    team_drive = team_drive,
+    shared_drive = shared_drive,
     corpus = corpus,
     q = q_clauses,
     verbose = FALSE

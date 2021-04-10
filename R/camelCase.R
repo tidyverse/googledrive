@@ -10,7 +10,7 @@
 ##
 ## HOWEVER, the Drive API is camelCase
 ## both wrt parameter names and many of their string values
-## examples: `pageSize``, `mimeType``, `corpora = "teamDrive"``
+## examples: `pageSize`, `mimeType`, `corpora = "allDrives"`
 ## therefore, whenever we pass `...` through, we process with toCamel()
 ## this means user can say `page_size = 20` and we send `pageSize = 20`
 ##

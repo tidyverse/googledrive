@@ -22,9 +22,9 @@ ids or URLs marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}
 
 \item{role}{Character. The role to grant. Must be one of:
 \itemize{
-\item organizer (applies only to Team Drives)
-\item owner
-\item fileOrganizer
+\item owner (not allowed in shared drives)
+\item organizer (applies to shared drives)
+\item fileOrganizer (applies to shared drives)
 \item writer
 \item commenter
 \item reader
@@ -59,44 +59,44 @@ read, comment, or edit. The returned \code{\link{dribble}} will have extra colum
 }
 \examples{
 \dontrun{
-## Upload a file to share
+# Upload a file to share
 file <- drive_upload(
    drive_example("chicken.txt"),
    name = "chicken-share.txt",
    type = "document"
 )
 
-## Let a specific person comment
+# Let a specific person comment
 file <- file \%>\%
   drive_share(
     role = "commenter",
     type = "user",
     emailAddress = "susan@example.com"
-)
+  )
 
-## Let a different specific person edit and customize the email notification
+# Let a different specific person edit and customize the email notification
 file <- file \%>\%
   drive_share(
     role = "writer",
     type = "user",
     emailAddress = "carol@example.com",
     emailMessage = "Would appreciate your feedback on this!"
-)
+  )
 
-## Let anyone read the file
+# Let anyone read the file
 file <- file \%>\%
   drive_share(role = "reader", type = "anyone")
-## Single-purpose wrapper function for this
+# Single-purpose wrapper function for this
 drive_share_anyone(file)
 
-## Clean up
+# Clean up
 drive_rm(file)
 }
 }
 \seealso{
 Wraps the \code{permissions.create} endpoint:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/permissions/create}
+\item \url{https://developers.google.com/drive/api/v3/reference/permissions/create}
 }
 
 Drive roles and permissions are described here:

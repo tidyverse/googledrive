@@ -39,9 +39,21 @@ filtered locally, via the \code{pattern} argument.}
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
 
-\item{team_drive}{Anything that identifies the Team Drive(s) of interest. Can
-be a character vector of names, a character vector of file ids or URLs
-marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}} consisting only of Team Drives.}
+\item{name}{Character vector of names. A character vector marked with
+\code{\link[=as_id]{as_id()}} is treated as if it was provided via the \code{id} argument.}
+
+\item{id}{Character vector of shared drive ids or URLs (it is first processed
+with \code{\link[=as_id]{as_id()}}). If both \code{name} and \code{id} are non-\code{NULL}, \code{id} is silently
+ignored.}
+
+\item{team_drive}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Google Drive and the
+Drive API have replaced Team Drives with shared drives.}
+
+\item{x}{A vector of shared drive names, a vector of shared drive ids marked
+with \code{\link[=as_id]{as_id()}}, a list of Drives resource objects, or a suitable data
+frame.}
+
+\item{d}{A \code{\link{dribble}}.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.
@@ -58,11 +70,6 @@ has been deprecated in the Drive API v3, in favor of the new (shared) Drives
 resource collection. Read more
 \itemize{
 \item \url{https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api}
-}
-}
-\examples{
-\dontrun{
-team_drive_find()
 }
 }
 \keyword{internal}

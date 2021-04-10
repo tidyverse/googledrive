@@ -30,8 +30,8 @@
 #' ## clean up
 #' shared_drive_rm(sd)
 #' }
-shared_drive_update <- function(drive, ..., verbose = TRUE) {
-  shared_drive <- as_shared_drive(drive)
+shared_drive_update <- function(shared_drive, ..., verbose = TRUE) {
+  shared_drive <- as_shared_drive(shared_drive)
   if (no_file(shared_drive) && verbose) {
     message("No such shared drive found to update.")
     return(invisible(dribble()))

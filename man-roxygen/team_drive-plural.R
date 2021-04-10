@@ -1,3 +1,2 @@
-#' @param team_drive Anything that identifies the Team Drive(s) of interest. Can
-#'   be a character vector of names, a character vector of file ids or URLs
-#'   marked with [as_id()], or a [`dribble`] consisting only of Team Drives.
+#' @param team_drive `r lifecycle::badge("deprecated")` Google Drive and the
+#'   Drive API have replaced Team Drives with shared drives.
