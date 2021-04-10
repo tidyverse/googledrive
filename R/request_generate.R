@@ -15,7 +15,7 @@
 #'   endpoint. Separates parameters into those destined for the body, the query,
 #'   and URL endpoint substitution (which is also enacted).
 #'   * Adds an API key to the query if and only if `token = NULL`.
-#'   * Adds `supportsTeamDrives = TRUE` to the query if the endpoint requires.
+#'   * Adds `supportsAllDrives = TRUE` to the query if the endpoint requires.
 #'
 #' @param endpoint Character. Nickname for one of the selected Drive v3 API
 #'   endpoints built into googledrive. Learn more in [drive_endpoints()].
@@ -59,8 +59,8 @@ request_generate <- function(endpoint = character(),
   ## modifications specific to googledrive package
   params$key <- key %||% params$key %||%
     drive_api_key() %||% gargle::tidyverse_api_key()
-  if (!is.null(ept$parameters$supportsTeamDrives)) {
-    params$supportsTeamDrives <- TRUE
+  if (!is.null(ept$parameters$supportsAllDrives)) {
+    params$supportsAllDrives <- TRUE
   }
 
   req <- gargle::request_develop(endpoint = ept, params = params)

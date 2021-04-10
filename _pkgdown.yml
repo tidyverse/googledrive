@@ -59,17 +59,11 @@ reference:
       - drive_share
       - drive_reveal
       - drive_link
-  - title: "Team Drives"
+  - title: "Shared drives"
     desc: >
-      Manipulate and explore Team Drives
+      Manipulate and explore shared drives
     contents:
-      - team_drives
-      - team_drive_find
-      - team_drive_get
-      - team_drive_create
-      - team_drive_rm
-      - team_drive_update
-      - as_team_drive
+      - matches("shared_drive")
   - title: "Dribble object"
     desc: >
       Metadata about Drive files is stored in a "Drive tibble" a.k.a. a dribble

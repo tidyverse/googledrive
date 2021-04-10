@@ -140,11 +140,11 @@ test_that("as_dribble(NULL) returns empty dribble", {
 test_that("as_dribble() default method handles unsuitable input", {
   expect_error(
     as_dribble(1.3),
-    "Don't know how to coerce object of class numeric into a dribble"
+    "Don't know how to coerce object of class <numeric> into a dribble"
   )
   expect_error(
     as_dribble(TRUE),
-    "Don't know how to coerce object of class logical into a dribble"
+    "Don't know how to coerce object of class <logical> into a dribble"
   )
 })
 

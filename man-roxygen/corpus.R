@@ -1,4 +1,5 @@
-#' @param corpus Character, specifying the search collection. Only relevant in
-#'   the Team Drives context. If specified, must be one of `"user"`, `"all"`, or
-#'   `"domain"`. Read more about [Team Drives][team_drives].
-
+#' @param corpus Character, specifying which collections of items to search.
+#'   Relevant to those who work with shared drives and/or Google Workspace
+#'   domains. If specified, must be one of `"user"`, `"drive"` (requires that
+#'   `shared_drive` also be specified), `"allDrives"`, or `"domain"`. Read more
+#'   about [shared drives][shared_drives].

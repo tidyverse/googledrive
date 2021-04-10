@@ -22,12 +22,12 @@ drive_link <- function(file) {
     "webViewLink",
     .default = NA_character_
   )
-  ## no documented, programmatic way to get browser links for Team Drives
-  ## but this seems to work ... I won't document it either, though
-  td <- is_team_drive(file)
-  links[td] <- glue(
+  # no documented, programmatic way to get browser links for shared drives
+  # but this seems to work ... I won't document it either, though
+  sd <- is_shared_drive(file)
+  links[sd] <- glue(
     "https://drive.google.com/drive/folders/{id}",
-    id = as_id(file)[td]
+    id = as_id(file)[sd]
   )
   links
 }

@@ -5,8 +5,8 @@
 #'
 #' @description This is a generic function.
 #'
-#' @param x A character vector of file or Team Drive ids or URLs, a [`dribble`]
-#'   or a suitable data frame.
+#' @param x A character vector of file or shared drive ids or URLs, a
+#'   [`dribble`] or a suitable data frame.
 #' @param ... Other arguments passed down to methods. (Not used.)
 #' @return A character vector bearing the S3 class `drive_id`.
 #' @export
@@ -21,7 +21,7 @@
 #' x <- drive_get("foofy")
 #' as_id(x)
 #'
-#' x <- team_drive_find("work-stuff")
+#' x <- shared_drive_find("work-stuff")
 #' as_id(x)
 #' }
 as_id <- function(x, ...) UseMethod("as_id")
@@ -30,7 +30,7 @@ as_id <- function(x, ...) UseMethod("as_id")
 as_id.default <- function(x, ...) {
   stop_glue_data(
     list(x = glue_collapse(class(x), sep = "/")),
-    "Don't know how to coerce object of class {x} into a drive_id"
+    "Don't know how to coerce object of class <{x}> into a drive_id"
   )
 }
 

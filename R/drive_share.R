@@ -10,16 +10,16 @@
 #'
 #' @seealso
 #' Wraps the `permissions.create` endpoint:
-#'   * <https://developers.google.com/drive/v3/reference/permissions/create>
+#' * <https://developers.google.com/drive/api/v3/reference/permissions/create>
 #'
 #' Drive roles and permissions are described here:
-#'   * <https://developers.google.com/drive/api/v3/ref-roles>
+#' * <https://developers.google.com/drive/api/v3/ref-roles>
 #'
 #' @template file-plural
 #' @param role Character. The role to grant. Must be one of:
-#'   * organizer (applies only to Team Drives)
-#'   * owner
-#'   * fileOrganizer
+#'   * owner (not allowed in shared drives)
+#'   * organizer (applies to shared drives)
+#'   * fileOrganizer (applies to shared drives)
 #'   * writer
 #'   * commenter
 #'   * reader
@@ -38,37 +38,37 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ## Upload a file to share
+#' # Upload a file to share
 #' file <- drive_upload(
 #'    drive_example("chicken.txt"),
 #'    name = "chicken-share.txt",
 #'    type = "document"
 #' )
 #'
-#' ## Let a specific person comment
+#' # Let a specific person comment
 #' file <- file %>%
 #'   drive_share(
 #'     role = "commenter",
 #'     type = "user",
 #'     emailAddress = "susan@example.com"
-#' )
+#'   )
 #'
-#' ## Let a different specific person edit and customize the email notification
+#' # Let a different specific person edit and customize the email notification
 #' file <- file %>%
 #'   drive_share(
 #'     role = "writer",
 #'     type = "user",
 #'     emailAddress = "carol@example.com",
 #'     emailMessage = "Would appreciate your feedback on this!"
-#' )
+#'   )
 #'
-#' ## Let anyone read the file
+#' # Let anyone read the file
 #' file <- file %>%
 #'   drive_share(role = "reader", type = "anyone")
-#' ## Single-purpose wrapper function for this
+#' # Single-purpose wrapper function for this
 #' drive_share_anyone(file)
 #'
-#' ## Clean up
+#' # Clean up
 #' drive_rm(file)
 #' }
 drive_share <- function(file,
@@ -141,6 +141,7 @@ drive_share_one <- function(id, params, verbose) {
 drive_reveal_permissions <- function(file) {
   confirm_dribble(file)
   permissions_resource <- purrr::map(file$id, list_permissions_one)
+  # TODO: revisit this in light of Team Drives --> shared drives
   ## can't use promote() here (yet) because Team Drive files don't have
   ## `shared` and their NULLs would force `shared` to be a list-column
   file <- put_column(
@@ -164,11 +165,12 @@ list_permissions_one <- function(id) {
       fields = "*"
     )
   )
-  ## TO DO: we aren't dealing with the fact that this endpoint is paginated
-  ## for Team Drives
+  # TODO: is this still a problem for shared drives? probably
+  # TO DO: we aren't dealing with the fact that this endpoint is paginated
+  # for Team Drives
   response <- request_make(request, encode = "json")
-  ## if capabilities/canReadRevisions (present in File resource) is not true,
-  ## user will get a 403 "insufficientFilePermissions" here
+  # if capabilities/canReadRevisions (present in File resource) is not true,
+  # user will get a 403 "insufficientFilePermissions" here
   if (httr::status_code(response) == 403) {
     return(NULL)
   }

@@ -7,8 +7,8 @@
 as_id(x, ...)
 }
 \arguments{
-\item{x}{A character vector of file or Team Drive ids or URLs, a \code{\link{dribble}}
-or a suitable data frame.}
+\item{x}{A character vector of file or shared drive ids or URLs, a
+\code{\link{dribble}} or a suitable data frame.}
 
 \item{...}{Other arguments passed down to methods. (Not used.)}
 }
@@ -32,7 +32,7 @@ as_id(x)
 x <- drive_get("foofy")
 as_id(x)
 
-x <- team_drive_find("work-stuff")
+x <- shared_drive_find("work-stuff")
 as_id(x)
 }
 }

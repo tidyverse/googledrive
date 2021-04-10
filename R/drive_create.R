@@ -11,8 +11,8 @@
 #'
 #' @param name Name for the new file or, optionally, a path that specifies
 #'   an existing parent folder, as well as the new file name.
-#' @param path Target destination for the new item, i.e. a folder or a Team
-#'   Drive. Can be given as an actual path (character), a file id or URL marked
+#' @param path Target destination for the new item, i.e. a folder or a shared
+#'   drive. Can be given as an actual path (character), a file id or URL marked
 #'   with [as_id()], or a [`dribble`]. Defaults to your "My Drive" root folder.
 #' @param type Character. Create a blank Google Doc, Sheet or Slides by
 #'   setting `type` to `document`, `spreadsheet`, or `presentation`,

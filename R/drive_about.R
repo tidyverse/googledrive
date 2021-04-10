@@ -15,9 +15,9 @@
 #' \dontrun{
 #' drive_about()
 #'
-#' ## explore the names of available Team Drive themes
+#' # explore the names of available shared drive themes
 #' about <- drive_about()
-#' about[["teamDriveThemes"]] %>%
+#' about[["driveThemes"]] %>%
 #'   purrr::map_chr("id")
 #' }
 drive_about <- function() {

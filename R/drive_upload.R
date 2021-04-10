@@ -82,12 +82,13 @@
 #' ## Clean up
 #' drive_rm(chicken)
 #'
-#' ## Upload to a Team Drive:
-#' ##   * your Google account must have Team Drive privileges, obviously
-#' ##   * the Team Drive (or Team Drive-hosted folder) MUST be captured as a
-#' ##     dribble first and provided via `path`
-#' td <- team_drive_get("Marketing")
-#' drive_upload("fascinating.csv", path = td)
+#' # Upload to a shared drive:
+#' #   * Shared drives are only available if your account is associated with a
+#' #     Google Workspace
+#' #   * The shared drive (or shared-drive-hosted folder) MUST be captured as a
+#' #     dribble first and provided via `path`
+#' sd <- shared_drive_get("Marketing")
+#' drive_upload("fascinating.csv", path = sd)
 #' }
 drive_upload <- function(media,
                          path = NULL,

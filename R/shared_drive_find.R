@@ -1,11 +1,11 @@
-#' Find Team Drives
+#' Find shared drives
 #'
 #' @description This is the closest googledrive function to what you get from
-#'   visiting <https://drive.google.com> and clicking "Team Drives".
-#' @template team-drives-description
+#'   visiting <https://drive.google.com> and clicking "Shared drives".
+#' @template shared-drive-description
 
-#' @seealso Wraps the `teamdrives.list` endpoint::
-#'   * <https://developers.google.com/drive/v3/reference/teamdrives/list>
+#' @seealso Wraps the `drives.list` endpoint:
+#' * <https://developers.google.com/drive/api/v3/reference/drives/list>
 
 #' @template pattern
 #' @template n_max
@@ -16,12 +16,12 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' team_drive_find()
+#' shared_drive_find()
 #' }
-team_drive_find <- function(pattern = NULL,
-                            n_max = Inf,
-                            ...,
-                            verbose = TRUE) {
+shared_drive_find <- function(pattern = NULL,
+                              n_max = Inf,
+                              ...,
+                              verbose = TRUE) {
   if (!is.null(pattern) && !is_string(pattern)) {
     stop_glue("Please update `pattern` to be a character string.")
   }
@@ -32,16 +32,16 @@ team_drive_find <- function(pattern = NULL,
   params <- toCamel(rlang::list2(...))
   params$fields <- params$fields %||% "*"
 
-  request <- request_generate("drive.teamdrives.list", params = params)
+  request <- request_generate("drive.drives.list", params = params)
   proc_res_list <- do_paginated_request(
     request,
     n_max = n_max,
-    n = function(x) length(x$teamDrives),
+    n = function(x) length(x$drives),
     verbose = verbose
   )
 
   res_tbl <- proc_res_list %>%
-    purrr::map("teamDrives") %>%
+    purrr::map("drives") %>%
     purrr::flatten() %>%
     as_dribble()
 

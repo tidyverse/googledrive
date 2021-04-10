@@ -2,15 +2,15 @@
 % Please edit documentation in R/drive_ls.R
 \name{drive_ls}
 \alias{drive_ls}
-\title{List contents of a folder or Team Drive}
+\title{List contents of a folder or shared drive}
 \usage{
 drive_ls(path = NULL, ..., recursive = FALSE)
 }
 \arguments{
 \item{path}{Specifies a single folder on Google Drive whose contents you want
 to list. Can be an actual path (character), a file id or URL marked with
-\code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. If it is a Team Drive or is a folder on a Team
-Drive, it must be passed as a \code{\link{dribble}}.}
+\code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. If it is a shared drive or is a folder on a
+shared drive, it must be passed as a \code{\link{dribble}}.}
 
 \item{...}{Any parameters that are valid for \code{\link[=drive_find]{drive_find()}}.}
 
@@ -22,7 +22,7 @@ indirect (\code{recursive = TRUE}).}
 An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
-List the contents of a folder or Team Drive, recursively or not. This is a
+List the contents of a folder or shared drive, recursively or not. This is a
 thin wrapper around \code{\link[=drive_find]{drive_find()}}, that simply adds one constraint: the
 search is limited to direct or indirect children of \code{path}.
 }

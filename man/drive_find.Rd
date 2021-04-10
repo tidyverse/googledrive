@@ -9,10 +9,11 @@ drive_find(
   trashed = FALSE,
   type = NULL,
   n_max = Inf,
-  team_drive = NULL,
+  shared_drive = NULL,
   corpus = NULL,
   ...,
-  verbose = TRUE
+  verbose = TRUE,
+  team_drive = deprecated()
 )
 }
 \arguments{
@@ -32,13 +33,16 @@ processed by googledrive and sent as a query parameter.}
 applies to the results requested from the API, which may be further
 filtered locally, via the \code{pattern} argument.}
 
-\item{team_drive}{Anything that identifies one specific Team Drive: its name,
-its id or URL marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Is pre-processed
-with \code{\link[=as_team_drive]{as_team_drive()}}.  Read more about \link[=team_drives]{Team Drives}.}
+\item{shared_drive}{Anything that identifies one specific shared drive: its
+name, its id or URL marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. The value
+provided to \code{shared_drive} is pre-processed with \code{\link[=as_shared_drive]{as_shared_drive()}}. Read
+more about \link[=shared_drives]{shared drives}.}
 
-\item{corpus}{Character, specifying the search collection. Only relevant in
-the Team Drives context. If specified, must be one of \code{"user"}, \code{"all"}, or
-\code{"domain"}. Read more about \link[=team_drives]{Team Drives}.}
+\item{corpus}{Character, specifying which collections of items to search.
+Relevant to those who work with shared drives and/or Google Workspace
+domains. If specified, must be one of \code{"user"}, \code{"drive"} (requires that
+\code{shared_drive} also be specified), \code{"allDrives"}, or \code{"domain"}. Read more
+about \link[=shared_drives]{shared drives}.}
 
 \item{...}{Other parameters to pass along in the request. The most likely
 candidate is \code{q}. See below and the API's
@@ -46,6 +50,9 @@ candidate is \code{q}. See below and the API's
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
+
+\item{team_drive}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Google Drive and the
+Drive API have replaced Team Drives with shared drives.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.
@@ -54,13 +61,10 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 This is the closest googledrive function to what you can do at
 \url{https://drive.google.com}: by default, you just get a listing of your files.
 You can also search in various ways, e.g., filter by file type or ownership
-or even work with \link[=team_drives]{Team Drive files}, if you have access. This
-is a very powerful function. Together with the more specific \code{\link[=drive_get]{drive_get()}},
-this is the main way to identify files to target for downstream work.
-
-Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-are only available to users of certain enhanced Google services, such as G
-Suite Enterprise, G Suite Business, or G Suite for Education.
+or work with \link[=shared_drives]{shared drives}. This is a very powerful
+function. Together with the more specific \code{\link[=drive_get]{drive_get()}}, this is the main way
+to identify files to target for downstream work. If you know you want to
+search within a specific folder or shared drive, use \code{\link[=drive_ls]{drive_ls()}}.
 }
 \section{File type}{
 
@@ -95,17 +99,18 @@ By default, \code{drive_find()} sends \code{orderBy = "recency desc"}, so the to
 files in your result have high "recency" (whatever that means). To suppress
 sending \code{orderBy} at all, do \code{drive_find(orderBy = NULL)}. The \code{orderBy}
 parameter accepts sort keys in addition to \code{recency}, which are documented
-in the \href{https://developers.google.com/drive/v3/reference/files/list}{\code{files.list} endpoint}.
+in the \href{https://developers.google.com/drive/api/v3/reference/files/list}{\code{files.list} endpoint}.
 googledrive translates a snake_case specification of \code{order_by} into the
 lowerCamel form, \code{orderBy}.
 }
 
-\section{Team Drives}{
+\section{Shared drives and domains}{
 
 
-If you have access to Team Drives, you'll know. Use \code{team_drive} or \code{corpus}
-to search one or more Team Drives or a domain. See
-\link[=team_drives]{Access Team Drives} for more.
+If you work with shared drives and/or Google Workspace, you can apply your
+search query to collections of items beyond those associated with "My
+Drive". Use the \code{shared_drive} or \code{corpus} arguments to control this.
+Read more about \link[=shared_drives]{shared drives}.
 }
 
 \examples{
@@ -161,7 +166,7 @@ drive_find(order_by = "modifiedByMeTime", n_max = 5)
 \seealso{
 Wraps the \code{files.list} endpoint:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/files/list}
+\item \url{https://developers.google.com/drive/api/v3/reference/files/list}
 }
 
 Helpful resource for forming your own queries:

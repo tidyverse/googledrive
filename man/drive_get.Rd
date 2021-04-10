@@ -7,9 +7,10 @@
 drive_get(
   path = NULL,
   id = NULL,
-  team_drive = NULL,
+  shared_drive = NULL,
   corpus = NULL,
-  verbose = TRUE
+  verbose = TRUE,
+  team_drive = deprecated()
 )
 }
 \arguments{
@@ -23,16 +24,22 @@ there is a file of the same name (yes this is possible on Drive!). If
 with \code{\link[=as_id]{as_id()}}). If both \code{path} and \code{id} are non-\code{NULL}, \code{id} is silently
 ignored.}
 
-\item{team_drive}{Anything that identifies one specific Team Drive: its name,
-its id or URL marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Is pre-processed
-with \code{\link[=as_team_drive]{as_team_drive()}}.  Read more about \link[=team_drives]{Team Drives}.}
+\item{shared_drive}{Anything that identifies one specific shared drive: its
+name, its id or URL marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. The value
+provided to \code{shared_drive} is pre-processed with \code{\link[=as_shared_drive]{as_shared_drive()}}. Read
+more about \link[=shared_drives]{shared drives}.}
 
-\item{corpus}{Character, specifying the search collection. Only relevant in
-the Team Drives context. If specified, must be one of \code{"user"}, \code{"all"}, or
-\code{"domain"}. Read more about \link[=team_drives]{Team Drives}.}
+\item{corpus}{Character, specifying which collections of items to search.
+Relevant to those who work with shared drives and/or Google Workspace
+domains. If specified, must be one of \code{"user"}, \code{"drive"} (requires that
+\code{shared_drive} also be specified), \code{"allDrives"}, or \code{"domain"}. Read more
+about \link[=shared_drives]{shared drives}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{TRUE}).}
+
+\item{team_drive}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Google Drive and the
+Drive API have replaced Team Drives with shared drives.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.
@@ -41,14 +48,14 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 Retrieve metadata for files specified via path or via file id.
 
 If the files are specified via \code{path}, the returned \code{\link{dribble}}
-will include a \code{path} variable. To add path information to any \code{\link{dribble}}
+will include a \code{path} column To add path information to any \code{\link{dribble}}
 that lacks it, use \code{\link[=drive_reveal]{drive_reveal()}}, e.g., \code{drive_reveal(d, "path")}. If
 you want to list the contents of a folder, use \code{\link[=drive_ls]{drive_ls()}}. For general
 searching, use \code{\link[=drive_find]{drive_find()}}.
 
-Note: \href{https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/}{Team Drives}
-are only available to users of certain enhanced Google services, such as G
-Suite Enterprise, G Suite Business, or G Suite for Education.
+If you want to get a file via \code{path} and it's not necessarily on your My
+Drive, you may need to specify the \code{shared_drive} or \code{corpus} arguments to
+search other collections of items. Read more about \link[=shared_drives]{shared drives}.
 }
 \section{Special considerations for paths}{
 
@@ -69,50 +76,50 @@ necessarily equal the number rows in the output.
 
 \examples{
 \dontrun{
-## get info about your "My Drive" root folder
+# get info about your "My Drive" root folder
 drive_get("~/")
-## the API reserves the file id "root" for your root folder
+# the API reserves the file id "root" for your root folder
 drive_get(id = "root")
 drive_get(id = "root") \%>\% drive_reveal("path")
 
-## The examples below are indicative of correct syntax.
-## But note these will generally result in an error or a
-## 0-row dribble, unless you replace the inputs with paths
-## or file ids that exist in your Drive.
+# The examples below are indicative of correct syntax.
+# But note these will generally result in an error or a
+# 0-row dribble, unless you replace the inputs with paths
+# or file ids that exist in your Drive.
 
-## multiple names
+# multiple names
 drive_get(c("abc", "def"))
 
-## multiple names, one of which must be a folder
+# multiple names, one of which must be a folder
 drive_get(c("abc", "def/"))
 
-## query by file id(s)
+# query by file id(s)
 drive_get(id = "abcdefgeh123456789")
 drive_get(as_id("abcdefgeh123456789"))
 drive_get(id = c("abcdefgh123456789", "jklmnopq123456789"))
 
-## apply to a browser URL for, e.g., a Google Sheet
+# apply to a browser URL for, e.g., a Google Sheet
 my_url <- "https://docs.google.com/spreadsheets/d/FILE_ID/edit#gid=SHEET_ID"
 drive_get(my_url)
 drive_get(as_id(my_url))
 drive_get(id = my_url)
 
-## access the Team Drive named "foo"
-## team_drive params must be specified if getting by path
-foo <- team_drive_get("foo")
-drive_get(c("this.jpg", "that-file"), team_drive = foo)
-## team_drive params are not necessary if getting by id
+# access the shared drive named "foo"
+# shared_drive params must be specified if getting by path
+foo <- shared_drive_get("foo")
+drive_get(c("this.jpg", "that-file"), shared_drive = foo)
+# shared_drive params are not necessary if getting by id
 drive_get(as_id("123456789"))
 
-## search all Team Drives and other files user has accessed
-drive_get(c("this.jpg", "that-file"), corpus = "all")
+# search all shared drives and other files user has accessed
+drive_get(c("this.jpg", "that-file"), corpus = "allDrives")
 }
 }
 \seealso{
 Wraps the \code{files.get} endpoint and, if you specify files by name or
 path, also calls \code{files.list}:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/files/get}
-\item \url{https://developers.google.com/drive/v3/reference/files/list}
+\item \url{https://developers.google.com/drive/api/v3/reference/files/get}
+\item \url{https://developers.google.com/drive/api/v3/reference/files/list}
 }
 }

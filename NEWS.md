@@ -1,5 +1,24 @@
 # googledrive (development version)
 
+*We anticipate the next release of googledrive will have version v2.0.0.*
+
+## Team Drives are dead! Long live shared drives!
+
+Google Drive has rebranded Team Drives as **shared drives**.
+While anyone can have a **My Drive**, shared drives are only available for Google Workspace (previously known as G Suite).
+Shared drives and the files within are owned by a team/organization, as opposed to an individual.
+
+In googledrive, all `team_drive_*()` functions have been deprecated, in favor of
+their `shared_drive_*()` successors.
+Likewise, any `team_drive` argument has been deprecated, in favor of a new `shared_drive` argument.
+The terms used to describe which collections to search have also changed slightly, with `"allDrives"` replacing `"all"`.
+This applies to the `corpus` argument of `drive_find()` and `drive_get()`.
+
+Where to learn more:
+
+* [Team Drives is being renamed to shared drives](https://workspaceupdates.googleblog.com/2019/04/shared-drives.html) from Google Workspace blog
+* [Upcoming changes to the Google Drive API and Google Picker API](https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api) from the Google Cloud blog
+
 # googledrive 1.0.1
 
 Patch release to modify a test for compatibility with an upcoming release of gargle.
