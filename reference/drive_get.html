@@ -52,13 +52,13 @@
 <meta property="og:title" content="Get Drive files by path or id — drive_get" />
 <meta property="og:description" content="Retrieve metadata for files specified via path or via file id.
 If the files are specified via path, the returned dribble
-will include a path variable. To add path information to any dribble
+will include a path column To add path information to any dribble
 that lacks it, use drive_reveal(), e.g., drive_reveal(d, &quot;path&quot;). If
 you want to list the contents of a folder, use drive_ls(). For general
 searching, use drive_find().
-Note: Team Drives
-are only available to users of certain enhanced Google services, such as G
-Suite Enterprise, G Suite Business, or G Suite for Education." />
+If you want to get a file via path and it's not necessarily on your My
+Drive, you may need to specify the shared_drive or corpus arguments to
+search other collections of items. Read more about shared drives." />
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -103,7 +103,7 @@ Suite Enterprise, G Suite Business, or G Suite for Education." />
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9001</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.0.9000</span>
         </div>
       </div>
     </div>
@@ -180,21 +180,22 @@ Suite Enterprise, G Suite Business, or G Suite for Education." />
     <div class="ref-description">
     <p>Retrieve metadata for files specified via path or via file id.</p>
 <p>If the files are specified via <code>path</code>, the returned <code><a href='dribble.html'>dribble</a></code>
-will include a <code>path</code> variable. To add path information to any <code><a href='dribble.html'>dribble</a></code>
+will include a <code>path</code> column To add path information to any <code><a href='dribble.html'>dribble</a></code>
 that lacks it, use <code><a href='drive_reveal.html'>drive_reveal()</a></code>, e.g., <code><a href='drive_reveal.html'>drive_reveal(d, "path")</a></code>. If
 you want to list the contents of a folder, use <code><a href='drive_ls.html'>drive_ls()</a></code>. For general
 searching, use <code><a href='drive_find.html'>drive_find()</a></code>.</p>
-<p>Note: <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
-are only available to users of certain enhanced Google services, such as G
-Suite Enterprise, G Suite Business, or G Suite for Education.</p>
+<p>If you want to get a file via <code>path</code> and it's not necessarily on your My
+Drive, you may need to specify the <code>shared_drive</code> or <code>corpus</code> arguments to
+search other collections of items. Read more about <a href='shared_drives.html'>shared drives</a>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>drive_get</span><span class='op'>(</span>
   path <span class='op'>=</span> <span class='cn'>NULL</span>,
   id <span class='op'>=</span> <span class='cn'>NULL</span>,
-  team_drive <span class='op'>=</span> <span class='cn'>NULL</span>,
+  shared_drive <span class='op'>=</span> <span class='cn'>NULL</span>,
   corpus <span class='op'>=</span> <span class='cn'>NULL</span>,
-  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  team_drive <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -215,21 +216,29 @@ with <code><a href='as_id.html'>as_id()</a></code>). If both <code>path</code> a
 ignored.</p></td>
     </tr>
     <tr>
-      <th>team_drive</th>
-      <td><p>Anything that identifies one specific Team Drive: its name,
-its id or URL marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. Is pre-processed
-with <code><a href='as_team_drive.html'>as_team_drive()</a></code>.  Read more about <a href='team_drives.html'>Team Drives</a>.</p></td>
+      <th>shared_drive</th>
+      <td><p>Anything that identifies one specific shared drive: its
+name, its id or URL marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. The value
+provided to <code>shared_drive</code> is pre-processed with <code><a href='as_shared_drive.html'>as_shared_drive()</a></code>. Read
+more about <a href='shared_drives.html'>shared drives</a>.</p></td>
     </tr>
     <tr>
       <th>corpus</th>
-      <td><p>Character, specifying the search collection. Only relevant in
-the Team Drives context. If specified, must be one of <code>"user"</code>, <code>"all"</code>, or
-<code>"domain"</code>. Read more about <a href='team_drives.html'>Team Drives</a>.</p></td>
+      <td><p>Character, specifying which collections of items to search.
+Relevant to those who work with shared drives and/or Google Workspace
+domains. If specified, must be one of <code>"user"</code>, <code>"drive"</code> (requires that
+<code>shared_drive</code> also be specified), <code>"allDrives"</code>, or <code>"domain"</code>. Read more
+about <a href='shared_drives.html'>shared drives</a>.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
       <td><p>Logical, indicating whether to print informative messages
 (default <code>TRUE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>team_drive</th>
+      <td><p><a href='https://lifecycle.r-lib.org/articles/stages.html#deprecated'><img src='figures/lifecycle-deprecated.svg' alt='[Deprecated]' /></a> Google Drive and the
+Drive API have replaced Team Drives with shared drives.</p></td>
     </tr>
     </table>
 
@@ -256,50 +265,50 @@ necessarily equal the number rows in the output.</p>
 
     <div class='dont-index'><p>Wraps the <code>files.get</code> endpoint and, if you specify files by name or
 path, also calls <code>files.list</code>:</p><ul>
-<li><p><a href='https://developers.google.com/drive/v3/reference/files/get'>https://developers.google.com/drive/v3/reference/files/get</a></p></li>
-<li><p><a href='https://developers.google.com/drive/v3/reference/files/list'>https://developers.google.com/drive/v3/reference/files/list</a></p></li>
+<li><p><a href='https://developers.google.com/drive/api/v3/reference/files/get'>https://developers.google.com/drive/api/v3/reference/files/get</a></p></li>
+<li><p><a href='https://developers.google.com/drive/api/v3/reference/files/list'>https://developers.google.com/drive/api/v3/reference/files/list</a></p></li>
 </ul>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'>## get info about your "My Drive" root folder</span>
+<span class='co'># get info about your "My Drive" root folder</span>
 <span class='fu'>drive_get</span><span class='op'>(</span><span class='st'>"~/"</span><span class='op'>)</span>
-<span class='co'>## the API reserves the file id "root" for your root folder</span>
+<span class='co'># the API reserves the file id "root" for your root folder</span>
 <span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"root"</span><span class='op'>)</span>
 <span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"root"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='drive_reveal.html'>drive_reveal</a></span><span class='op'>(</span><span class='st'>"path"</span><span class='op'>)</span>
 
-<span class='co'>## The examples below are indicative of correct syntax.</span>
-<span class='co'>## But note these will generally result in an error or a</span>
-<span class='co'>## 0-row dribble, unless you replace the inputs with paths</span>
-<span class='co'>## or file ids that exist in your Drive.</span>
+<span class='co'># The examples below are indicative of correct syntax.</span>
+<span class='co'># But note these will generally result in an error or a</span>
+<span class='co'># 0-row dribble, unless you replace the inputs with paths</span>
+<span class='co'># or file ids that exist in your Drive.</span>
 
-<span class='co'>## multiple names</span>
+<span class='co'># multiple names</span>
 <span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"abc"</span>, <span class='st'>"def"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='co'>## multiple names, one of which must be a folder</span>
+<span class='co'># multiple names, one of which must be a folder</span>
 <span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"abc"</span>, <span class='st'>"def/"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='co'>## query by file id(s)</span>
+<span class='co'># query by file id(s)</span>
 <span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"abcdefgeh123456789"</span><span class='op'>)</span>
 <span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"abcdefgeh123456789"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"abcdefgh123456789"</span>, <span class='st'>"jklmnopq123456789"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='co'>## apply to a browser URL for, e.g., a Google Sheet</span>
+<span class='co'># apply to a browser URL for, e.g., a Google Sheet</span>
 <span class='va'>my_url</span> <span class='op'>&lt;-</span> <span class='st'>"https://docs.google.com/spreadsheets/d/FILE_ID/edit#gid=SHEET_ID"</span>
 <span class='fu'>drive_get</span><span class='op'>(</span><span class='va'>my_url</span><span class='op'>)</span>
 <span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='va'>my_url</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='va'>my_url</span><span class='op'>)</span>
 
-<span class='co'>## access the Team Drive named "foo"</span>
-<span class='co'>## team_drive params must be specified if getting by path</span>
-<span class='va'>foo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='team_drive_get.html'>team_drive_get</a></span><span class='op'>(</span><span class='st'>"foo"</span><span class='op'>)</span>
-<span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span><span class='op'>)</span>, team_drive <span class='op'>=</span> <span class='va'>foo</span><span class='op'>)</span>
-<span class='co'>## team_drive params are not necessary if getting by id</span>
+<span class='co'># access the shared drive named "foo"</span>
+<span class='co'># shared_drive params must be specified if getting by path</span>
+<span class='va'>foo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='shared_drive_get.html'>shared_drive_get</a></span><span class='op'>(</span><span class='st'>"foo"</span><span class='op'>)</span>
+<span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span><span class='op'>)</span>, shared_drive <span class='op'>=</span> <span class='va'>foo</span><span class='op'>)</span>
+<span class='co'># shared_drive params are not necessary if getting by id</span>
 <span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"123456789"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='co'>## search all Team Drives and other files user has accessed</span>
-<span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span><span class='op'>)</span>, corpus <span class='op'>=</span> <span class='st'>"all"</span><span class='op'>)</span>
+<span class='co'># search all shared drives and other files user has accessed</span>
+<span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span><span class='op'>)</span>, corpus <span class='op'>=</span> <span class='st'>"allDrives"</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>

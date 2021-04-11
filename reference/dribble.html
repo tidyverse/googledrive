@@ -51,17 +51,17 @@
 
 <meta property="og:title" content="dribble object — dribble" />
 <meta property="og:description" content="googledrive stores the metadata for one or more Drive files or
-Team Drives as a dribble. It is a &quot;Drive
-tibble&quot; with one row per file or Team Drive and,
-at a minimum, these variables:
-name: a character variable containing file or Team Drive names
-id: a character variable of file or Team Drive ids
+shared drives as a dribble. It is a &quot;Drive
+tibble&quot; with one row per file or shared drive
+and, at a minimum, these columns:
+name: a character column containing file or shared drive names
+id: a character column of file or shared drive ids
 drive_resource: a list-column, each element of which is either a
 Files resource
-or Team Drive resource
+or a Drives resource
 object. Note there is no guarantee that all documented fields are always
 present. We do check if the kind field is present and equal to one of
-drive#file or drive#teamDrive.
+drive#file or drive#drive.
 
 
 The dribble format is handy because it exposes the file name,
@@ -114,7 +114,7 @@ correct type." />
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9001</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.0.9000</span>
         </div>
       </div>
     </div>
@@ -190,17 +190,17 @@ correct type." />
 
     <div class="ref-description">
     <p>googledrive stores the metadata for one or more Drive files or
-Team Drives as a <code>dribble</code>. It is a "Drive
-<a href='https://tibble.tidyverse.org/reference/tibble-package.html'>tibble</a>" with one row per file or Team Drive and,
-at a minimum, these variables:</p><ul>
-<li><p><code>name</code>: a character variable containing file or Team Drive names</p></li>
-<li><p><code>id</code>: a character variable of file or Team Drive ids</p></li>
+shared drives as a <code>dribble</code>. It is a "Drive
+<a href='https://tibble.tidyverse.org/reference/tibble-package.html'>tibble</a>" with one row per file or shared drive
+and, at a minimum, these columns:</p><ul>
+<li><p><code>name</code>: a character column containing file or shared drive names</p></li>
+<li><p><code>id</code>: a character column of file or shared drive ids</p></li>
 <li><p><code>drive_resource</code>: a list-column, each element of which is either a
-<a href='https://developers.google.com/drive/v3/reference/files#resource-representations'>Files resource</a>
-or <a href='https://developers.google.com/drive/v3/reference/teamdrives#resource-representations'>Team Drive resource</a>
+<a href='https://developers.google.com/drive/api/v3/reference/files#resource-representations'>Files resource</a>
+or a <a href='https://developers.google.com/drive/api/v3/reference/drives#resource-representations'>Drives resource</a>
 object. Note there is no guarantee that all documented fields are always
 present. We do check if the <code>kind</code> field is present and equal to one of
-<code>drive#file</code> or <code>drive#teamDrive</code>.</p></li>
+<code>drive#file</code> or <code>drive#drive</code>.</p></li>
 </ul>
 
 <p>The <code>dribble</code> format is handy because it exposes the file name,

@@ -53,12 +53,10 @@
 <meta property="og:description" content="This is the closest googledrive function to what you can do at
 https://drive.google.com: by default, you just get a listing of your files.
 You can also search in various ways, e.g., filter by file type or ownership
-or even work with Team Drive files, if you have access. This
-is a very powerful function. Together with the more specific drive_get(),
-this is the main way to identify files to target for downstream work.
-Note: Team Drives
-are only available to users of certain enhanced Google services, such as G
-Suite Enterprise, G Suite Business, or G Suite for Education." />
+or work with shared drives. This is a very powerful
+function. Together with the more specific drive_get(), this is the main way
+to identify files to target for downstream work. If you know you want to
+search within a specific folder or shared drive, use drive_ls()." />
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -103,7 +101,7 @@ Suite Enterprise, G Suite Business, or G Suite for Education." />
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9001</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.0.9000</span>
         </div>
       </div>
     </div>
@@ -181,12 +179,10 @@ Suite Enterprise, G Suite Business, or G Suite for Education." />
     <p>This is the closest googledrive function to what you can do at
 <a href='https://drive.google.com'>https://drive.google.com</a>: by default, you just get a listing of your files.
 You can also search in various ways, e.g., filter by file type or ownership
-or even work with <a href='team_drives.html'>Team Drive files</a>, if you have access. This
-is a very powerful function. Together with the more specific <code><a href='drive_get.html'>drive_get()</a></code>,
-this is the main way to identify files to target for downstream work.</p>
-<p>Note: <a href='https://gsuite.google.com/learning-center/products/drive/get-started-team-drive/'>Team Drives</a>
-are only available to users of certain enhanced Google services, such as G
-Suite Enterprise, G Suite Business, or G Suite for Education.</p>
+or work with <a href='shared_drives.html'>shared drives</a>. This is a very powerful
+function. Together with the more specific <code><a href='drive_get.html'>drive_get()</a></code>, this is the main way
+to identify files to target for downstream work. If you know you want to
+search within a specific folder or shared drive, use <code><a href='drive_ls.html'>drive_ls()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>drive_find</span><span class='op'>(</span>
@@ -194,10 +190,11 @@ Suite Enterprise, G Suite Business, or G Suite for Education.</p>
   trashed <span class='op'>=</span> <span class='cn'>FALSE</span>,
   type <span class='op'>=</span> <span class='cn'>NULL</span>,
   n_max <span class='op'>=</span> <span class='cn'>Inf</span>,
-  team_drive <span class='op'>=</span> <span class='cn'>NULL</span>,
+  shared_drive <span class='op'>=</span> <span class='cn'>NULL</span>,
   corpus <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>,
-  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  team_drive <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -228,16 +225,19 @@ applies to the results requested from the API, which may be further
 filtered locally, via the <code>pattern</code> argument.</p></td>
     </tr>
     <tr>
-      <th>team_drive</th>
-      <td><p>Anything that identifies one specific Team Drive: its name,
-its id or URL marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. Is pre-processed
-with <code><a href='as_team_drive.html'>as_team_drive()</a></code>.  Read more about <a href='team_drives.html'>Team Drives</a>.</p></td>
+      <th>shared_drive</th>
+      <td><p>Anything that identifies one specific shared drive: its
+name, its id or URL marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. The value
+provided to <code>shared_drive</code> is pre-processed with <code><a href='as_shared_drive.html'>as_shared_drive()</a></code>. Read
+more about <a href='shared_drives.html'>shared drives</a>.</p></td>
     </tr>
     <tr>
       <th>corpus</th>
-      <td><p>Character, specifying the search collection. Only relevant in
-the Team Drives context. If specified, must be one of <code>"user"</code>, <code>"all"</code>, or
-<code>"domain"</code>. Read more about <a href='team_drives.html'>Team Drives</a>.</p></td>
+      <td><p>Character, specifying which collections of items to search.
+Relevant to those who work with shared drives and/or Google Workspace
+domains. If specified, must be one of <code>"user"</code>, <code>"drive"</code> (requires that
+<code>shared_drive</code> also be specified), <code>"allDrives"</code>, or <code>"domain"</code>. Read more
+about <a href='shared_drives.html'>shared drives</a>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -249,6 +249,11 @@ candidate is <code>q</code>. See below and the API's
       <th>verbose</th>
       <td><p>Logical, indicating whether to print informative messages
 (default <code>TRUE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>team_drive</th>
+      <td><p><a href='https://lifecycle.r-lib.org/articles/stages.html#deprecated'><img src='figures/lifecycle-deprecated.svg' alt='[Deprecated]' /></a> Google Drive and the
+Drive API have replaced Team Drives with shared drives.</p></td>
     </tr>
     </table>
 
@@ -290,21 +295,22 @@ regardless of trash status, set <code>trashed = NA</code>, which adds
 files in your result have high "recency" (whatever that means). To suppress
 sending <code>orderBy</code> at all, do <code>drive_find(orderBy = NULL)</code>. The <code>orderBy</code>
 parameter accepts sort keys in addition to <code>recency</code>, which are documented
-in the <a href='https://developers.google.com/drive/v3/reference/files/list'><code>files.list</code> endpoint</a>.
+in the <a href='https://developers.google.com/drive/api/v3/reference/files/list'><code>files.list</code> endpoint</a>.
 googledrive translates a snake_case specification of <code>order_by</code> into the
 lowerCamel form, <code>orderBy</code>.</p>
-    <h2 class="hasAnchor" id="team-drives"><a class="anchor" href="#team-drives"></a>Team Drives</h2>
+    <h2 class="hasAnchor" id="shared-drives-and-domains"><a class="anchor" href="#shared-drives-and-domains"></a>Shared drives and domains</h2>
 
     
 
 
-<p>If you have access to Team Drives, you'll know. Use <code>team_drive</code> or <code>corpus</code>
-to search one or more Team Drives or a domain. See
-<a href='team_drives.html'>Access Team Drives</a> for more.</p>
+<p>If you work with shared drives and/or Google Workspace, you can apply your
+search query to collections of items beyond those associated with "My
+Drive". Use the <code>shared_drive</code> or <code>corpus</code> arguments to control this.
+Read more about <a href='shared_drives.html'>shared drives</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Wraps the <code>files.list</code> endpoint:</p><ul>
-<li><p><a href='https://developers.google.com/drive/v3/reference/files/list'>https://developers.google.com/drive/v3/reference/files/list</a></p></li>
+<li><p><a href='https://developers.google.com/drive/api/v3/reference/files/list'>https://developers.google.com/drive/api/v3/reference/files/list</a></p></li>
 </ul>
 
 <p>Helpful resource for forming your own queries:</p><ul>

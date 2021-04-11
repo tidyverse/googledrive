@@ -94,7 +94,7 @@
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9001</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.0.9000</span>
         </div>
       </div>
     </div>
@@ -171,6 +171,20 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#googledrive-development-version" class="anchor"></a>googledrive (development version)<small> Unreleased </small>
 </h1>
+<p><em>We anticipate the next release of googledrive will have version v2.0.0.</em></p>
+<div id="team-drives-are-dead-long-live-shared-drives" class="section level2">
+<h2 class="hasAnchor">
+<a href="#team-drives-are-dead-long-live-shared-drives" class="anchor"></a>Team Drives are dead! Long live shared drives!</h2>
+<p>Google Drive has rebranded Team Drives as <strong>shared drives</strong>. While anyone can have a <strong>My Drive</strong>, shared drives are only available for Google Workspace (previously known as G Suite). Shared drives and the files within are owned by a team/organization, as opposed to an individual.</p>
+<p>In googledrive, all <code>team_drive_*()</code> functions have been deprecated, in favor of their <code>shared_drive_*()</code> successors. Likewise, any <code>team_drive</code> argument has been deprecated, in favor of a new <code>shared_drive</code> argument. The terms used to describe which collections to search have also changed slightly, with <code>"allDrives"</code> replacing <code>"all"</code>. This applies to the <code>corpus</code> argument of <code><a href="../reference/drive_find.html">drive_find()</a></code> and <code><a href="../reference/drive_get.html">drive_get()</a></code>.</p>
+<p>Where to learn more:</p>
+<ul>
+<li>
+<a href="https://workspaceupdates.googleblog.com/2019/04/shared-drives.html">Team Drives is being renamed to shared drives</a> from Google Workspace blog</li>
+<li>
+<a href="https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api">Upcoming changes to the Google Drive API and Google Picker API</a> from the Google Cloud blog</li>
+</ul>
+</div>
 </div>
     <div id="googledrive-101" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.1">

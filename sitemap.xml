@@ -10,7 +10,10 @@
     <loc>https://googledrive.tidyverse.org/reference/as_id.html</loc>
   </url>
   <url>
-    <loc>https://googledrive.tidyverse.org/reference/as_team_drive.html</loc>
+    <loc>https://googledrive.tidyverse.org/reference/as_shared_drive.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/reference/deprecated-team-drive-functions.html</loc>
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/reference/dribble-checks.html</loc>
@@ -133,22 +136,22 @@
     <loc>https://googledrive.tidyverse.org/reference/request_make.html</loc>
   </url>
   <url>
-    <loc>https://googledrive.tidyverse.org/reference/team_drive_create.html</loc>
+    <loc>https://googledrive.tidyverse.org/reference/shared_drive_create.html</loc>
   </url>
   <url>
-    <loc>https://googledrive.tidyverse.org/reference/team_drive_find.html</loc>
+    <loc>https://googledrive.tidyverse.org/reference/shared_drive_find.html</loc>
   </url>
   <url>
-    <loc>https://googledrive.tidyverse.org/reference/team_drive_get.html</loc>
+    <loc>https://googledrive.tidyverse.org/reference/shared_drive_get.html</loc>
   </url>
   <url>
-    <loc>https://googledrive.tidyverse.org/reference/team_drive_rm.html</loc>
+    <loc>https://googledrive.tidyverse.org/reference/shared_drive_rm.html</loc>
   </url>
   <url>
-    <loc>https://googledrive.tidyverse.org/reference/team_drive_update.html</loc>
+    <loc>https://googledrive.tidyverse.org/reference/shared_drive_update.html</loc>
   </url>
   <url>
-    <loc>https://googledrive.tidyverse.org/reference/team_drives.html</loc>
+    <loc>https://googledrive.tidyverse.org/reference/shared_drives.html</loc>
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/articles/articles/bring-your-own-app.html</loc>

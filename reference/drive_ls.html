@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List contents of a folder or Team Drive — drive_ls • googledrive</title>
+<title>List contents of a folder or shared drive — drive_ls • googledrive</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,8 +49,8 @@
 
 
 
-<meta property="og:title" content="List contents of a folder or Team Drive — drive_ls" />
-<meta property="og:description" content="List the contents of a folder or Team Drive, recursively or not. This is a
+<meta property="og:title" content="List contents of a folder or shared drive — drive_ls" />
+<meta property="og:description" content="List the contents of a folder or shared drive, recursively or not. This is a
 thin wrapper around drive_find(), that simply adds one constraint: the
 search is limited to direct or indirect children of path." />
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
@@ -97,7 +97,7 @@ search is limited to direct or indirect children of path." />
         <a class="navbar-brand" href="../index.html">googledrive</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9001</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.0.9000</span>
         </div>
       </div>
     </div>
@@ -166,13 +166,13 @@ search is limited to direct or indirect children of path." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List contents of a folder or Team Drive</h1>
+    <h1>List contents of a folder or shared drive</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/drive_ls.R'><code>R/drive_ls.R</code></a></small>
     <div class="hidden name"><code>drive_ls.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>List the contents of a folder or Team Drive, recursively or not. This is a
+    <p>List the contents of a folder or shared drive, recursively or not. This is a
 thin wrapper around <code><a href='drive_find.html'>drive_find()</a></code>, that simply adds one constraint: the
 search is limited to direct or indirect children of <code>path</code>.</p>
     </div>
@@ -186,8 +186,8 @@ search is limited to direct or indirect children of <code>path</code>.</p>
       <th>path</th>
       <td><p>Specifies a single folder on Google Drive whose contents you want
 to list. Can be an actual path (character), a file id or URL marked with
-<code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. If it is a Team Drive or is a folder on a Team
-Drive, it must be passed as a <code><a href='dribble.html'>dribble</a></code>.</p></td>
+<code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>. If it is a shared drive or is a folder on a
+shared drive, it must be passed as a <code><a href='dribble.html'>dribble</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>

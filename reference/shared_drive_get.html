@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Move Drive files to or from trash — drive_trash • googledrive</title>
+<title>Get shared drives by name or id — shared_drive_get • googledrive</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,8 +49,17 @@
 
 
 
-<meta property="og:title" content="Move Drive files to or from trash — drive_trash" />
-<meta property="og:description" content="Move Drive files to or from trash" />
+<meta property="og:title" content="Get shared drives by name or id — shared_drive_get" />
+<meta property="og:description" content="Retrieve metadata for shared drives specified by name or id. Note that Google
+Drive does NOT behave like your local file system:
+You can get zero, one, or more shared drives back for each name! Shared
+drive names need not be unique.
+
+
+A shared drive supports files owned by an organization rather than an
+individual user. Shared drives follow different sharing and ownership models
+from a specific user's &quot;My Drive&quot;. Shared drives are the successors to the
+earlier concept of Team Drives. Learn more about shared drives." />
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -164,27 +173,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Move Drive files to or from trash</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/drive_trash.R'><code>R/drive_trash.R</code></a></small>
-    <div class="hidden name"><code>drive_trash.Rd</code></div>
+    <h1>Get shared drives by name or id</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/shared_drive_get.R'><code>R/shared_drive_get.R</code></a></small>
+    <div class="hidden name"><code>shared_drive_get.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Move Drive files to or from trash</p>
+    <p>Retrieve metadata for shared drives specified by name or id. Note that Google
+Drive does NOT behave like your local file system:</p><ul>
+<li><p>You can get zero, one, or more shared drives back for each name! Shared
+drive names need not be unique.</p></li>
+</ul>
+
+<p>A shared drive supports files owned by an organization rather than an
+individual user. Shared drives follow different sharing and ownership models
+from a specific user's "My Drive". Shared drives are the successors to the
+earlier concept of Team Drives. Learn more about <a href='shared_drives.html'>shared drives</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>drive_trash</span><span class='op'>(</span><span class='va'>file</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='fu'>drive_untrash</span><span class='op'>(</span><span class='va'>file</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>shared_drive_get</span><span class='op'>(</span>name <span class='op'>=</span> <span class='cn'>NULL</span>, id <span class='op'>=</span> <span class='cn'>NULL</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>Something that identifies the file(s) of interest on your Google
-Drive. Can be a character vector of names/paths, a character vector of file
-ids or URLs marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>.</p></td>
+      <th>name</th>
+      <td><p>Character vector of names. A character vector marked with
+<code><a href='as_id.html'>as_id()</a></code> is treated as if it was provided via the <code>id</code> argument.</p></td>
+    </tr>
+    <tr>
+      <th>id</th>
+      <td><p>Character vector of shared drive ids or URLs (it is first processed
+with <code><a href='as_id.html'>as_id()</a></code>). If both <code>name</code> and <code>id</code> are non-<code>NULL</code>, <code>id</code> is silently
+ignored.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -199,19 +220,12 @@ ids or URLs marked with <code><a href='as_id.html'>as_id()</a></code>, or a <cod
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'>## Create a file and put it in the trash.</span>
-<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span><span class='op'>(</span><span class='fu'><a href='drive_example.html'>drive_example</a></span><span class='op'>(</span><span class='st'>"chicken.txt"</span><span class='op'>)</span>, <span class='st'>"chicken-trash.txt"</span><span class='op'>)</span>
-<span class='fu'>drive_trash</span><span class='op'>(</span><span class='st'>"chicken-trash.txt"</span><span class='op'>)</span>
-
-<span class='co'>## Confirm it's in the trash</span>
-<span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span>trashed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='co'>## Remove it from the trash and confirm</span>
-<span class='fu'>drive_untrash</span><span class='op'>(</span><span class='st'>"chicken-trash.txt"</span><span class='op'>)</span>
-<span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span>trashed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='co'>## Clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='st'>"chicken-trash.txt"</span><span class='op'>)</span>
+<span class='fu'>shared_drive_get</span><span class='op'>(</span><span class='st'>"my-awesome-shared-drive"</span><span class='op'>)</span>
+<span class='fu'>shared_drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"apple"</span>, <span class='st'>"orange"</span>, <span class='st'>"banana"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>shared_drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"KCmiHLXUk9PVA-0AJNG"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>shared_drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"https://drive.google.com/drive/u/0/folders/KCmiHLXUk9PVA-0AJNG"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>shared_drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"KCmiHLXUk9PVA-0AJNG"</span><span class='op'>)</span>
+<span class='fu'>shared_drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"https://drive.google.com/drive/u/0/folders/KCmiHLXUk9PVA-0AJNG"</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
