@@ -1,5 +1,3 @@
-context("Create files")
-
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-drive-create")
 nm_ <- nm_fun("TEST-drive-create", NULL)

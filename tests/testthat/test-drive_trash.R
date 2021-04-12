@@ -1,5 +1,3 @@
-context("Trash files")
-
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-drive-trash")
 nm_ <- nm_fun("TEST-drive-trash", NULL)

@@ -1,5 +1,3 @@
-context("Pathification")
-
 # ---- tests ----
 test_that("pathify_*() reports correct paths, no name duplication", {
   #   ROOT
@@ -84,7 +82,7 @@ test_that("pathify_*() reports correct paths, w/ name dup & multiple parents", {
 
   ## multiple paths exist, depth 1
   out <- pathify_one_path("a", nodes = df, root_id = "ROOT")
-  expect_equivalent(
+  expect_equal(
     out[c("name", "path", "id")],
     tibble::tribble(
       ~ name, ~ path, ~ id,
@@ -93,18 +91,20 @@ test_that("pathify_*() reports correct paths, w/ name dup & multiple parents", {
       "a",    "~/a", "1",
       "a",    "~/a", "4",
       "a",  "~/b/a", "7"
-    )
+    ),
+    ignore_attr = TRUE
   )
 
   ## multiple paths exist, depth > 1
   out <- pathify_one_path("a/a", nodes = df, root_id = "ROOT")
-  expect_equivalent(
+  expect_equal(
     out[c("name", "path", "id")],
     tibble::tribble(
       ~ name, ~ path, ~ id,
          "a",  "~/a/a", "3",
          "a",  "~/a/a", "5"
-    )
+    ),
+    ignore_attr = TRUE
   )
 
   ## different paths with same names in different order are resolved

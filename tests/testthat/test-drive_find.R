@@ -1,5 +1,3 @@
-context("Find files")
-
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-drive-find")
 nm_ <- nm_fun("TEST-drive-find", NULL)

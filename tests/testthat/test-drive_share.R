@@ -1,5 +1,3 @@
-context("Share files")
-
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-drive-share")
 nm_ <- nm_fun("TEST-drive-share", NULL)

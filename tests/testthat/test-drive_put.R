@@ -30,10 +30,8 @@ test_that("drive_put() works", {
 
   writeLines(c("beginning", "middle"), local_file)
 
-  expect_message(
-    original <- drive_put(local_file),
-    "drive_upload"
-  )
+  # TODO: make this a snapshot test, once I have verbosity control
+  original <- drive_put(local_file)
   expect_s3_class(original, "dribble")
 
   drive_download(original, path = download_target)
@@ -44,10 +42,8 @@ test_that("drive_put() works", {
 
   cat("end", file = local_file, sep = "\n", append = TRUE)
 
-  expect_message(
-    second <- drive_put(local_file),
-    "drive_update"
-  )
+  # TODO: make this a snapshot test, once I have verbosity control
+  second <- drive_put(local_file)
   expect_identical(original$id, second$id)
 
   drive_download(original, path = download_target, overwrite = TRUE)

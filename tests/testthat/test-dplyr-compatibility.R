@@ -1,5 +1,3 @@
-context("dplyr compatibility")
-
 # ---- other ----
 if (FALSE) {
   ## how the test file was created

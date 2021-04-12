@@ -1,5 +1,3 @@
-context("Drive user")
-
 test_that("drive_user() reports on the user", {
   skip_if_no_token()
   skip_if_offline()

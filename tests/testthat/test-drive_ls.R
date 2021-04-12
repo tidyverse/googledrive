@@ -1,5 +1,3 @@
-context("List folder contents")
-
 # ---- nm_fun ----
 nm_ <- nm_fun("TEST-drive-ls", NULL)
 

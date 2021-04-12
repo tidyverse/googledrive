@@ -1,5 +1,3 @@
-context("Update files")
-
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-drive-update")
 nm_ <- nm_fun("TEST-drive-update", NULL)

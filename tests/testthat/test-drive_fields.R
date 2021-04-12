@@ -1,5 +1,3 @@
-context("Fields")
-
 # ---- tests ----
 test_that("drive_fields() returns nothing, if no input", {
   expect_identical(drive_fields(), character())

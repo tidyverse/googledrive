@@ -1,5 +1,3 @@
-context("Utils")
-
 # ---- tests ----
 test_that("put_column() adds a column in the right place", {
   df <- tibble::tibble(v1 = 1, v2 = 2)

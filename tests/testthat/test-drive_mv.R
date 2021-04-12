@@ -1,5 +1,3 @@
-context("Move files")
-
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-drive-mv")
 nm_ <- nm_fun("TEST-drive-mv", NULL)
@@ -29,10 +27,8 @@ test_that("drive_mv() can rename file", {
     me_("DESC"),
     verbose = FALSE
   )
-  expect_message(
-    out <- drive_mv(renamee, name = me_("DESC-renamed")),
-    "File renamed"
-  )
+  # TODO: make this a snapshot test, once I have verbosity control
+  out <- drive_mv(renamee, name = me_("DESC-renamed"))
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)
 })
@@ -45,10 +41,8 @@ test_that("drive_mv() can move a file into a folder given as path", {
   movee <- drive_upload(system.file("DESCRIPTION"), me_("DESC"))
 
   ## path is detected as folder (must have trailing slash)
-  expect_message(
-    out <- drive_mv(movee, paste0(nm_("move-files-into-me"), "/")),
-    "File moved"
-  )
+  # TODO: make this a snapshot test, once I have verbosity control
+  out <- drive_mv(movee, paste0(nm_("move-files-into-me"), "/"))
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)
   destination <- drive_get(nm_("move-files-into-me"))
@@ -63,10 +57,8 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
   movee <- drive_upload(system.file("DESCRIPTION"), me_("DESC"))
 
   destination <- drive_get(nm_("move-files-into-me"))
-  expect_message(
-    out <- drive_mv(movee, destination),
-    "File moved"
-  )
+  # TODO: make this a snapshot test, once I have verbosity control
+  out <- drive_mv(movee, destination)
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)
   expect_identical(out$drive_resource[[1]]$parents[[1]], destination$id)
@@ -79,10 +71,8 @@ test_that("drive_mv() can rename and move, using `path` and `name`", {
 
   movee <- drive_upload(system.file("DESCRIPTION"), me_("DESC"))
 
-  expect_message(
-    out <- drive_mv(movee, nm_("move-files-into-me"), me_("DESC-renamed")),
-    "File renamed and moved"
-  )
+  # TODO: make this a snapshot test, once I have verbosity control
+  out <- drive_mv(movee, nm_("move-files-into-me"), me_("DESC-renamed"))
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)
 })
@@ -94,12 +84,10 @@ test_that("drive_mv() can rename and move, using `path` only", {
 
   movee <- drive_upload(system.file("DESCRIPTION"), me_("DESC"))
 
-  expect_message(
-    out <- drive_mv(
-      movee,
-      file.path(nm_("move-files-into-me"), me_("DESC-renamed"))
-    ),
-    "File renamed and moved"
+  # TODO: make this a snapshot test, once I have verbosity control
+  out <- drive_mv(
+    movee,
+    file.path(nm_("move-files-into-me"), me_("DESC-renamed"))
   )
   expect_s3_class(out, "dribble")
   expect_identical(nrow(out), 1L)

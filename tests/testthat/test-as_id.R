@@ -1,5 +1,3 @@
-context("Drive id class")
-
 # ---- other ----
 if (FALSE) {
   ## how the test file was created

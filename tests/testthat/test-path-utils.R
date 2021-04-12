@@ -1,5 +1,3 @@
-context("Path utilities")
-
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-path-utils")
 nm_ <- nm_fun("TEST-path-utils", NULL)
@@ -170,7 +168,7 @@ test_that("rationalize_path_name() won't hit API if we can infer `path` is a fol
 
 test_that("rationalize_path_name() populates `path` and `name` and correctly", {
   with_mock(
-    `googledrive:::confirm_clear_path` = function(path, name) NULL, {
+    confirm_clear_path = function(path, name) NULL, {
       expect_identical(
         rationalize_path_name(path = "FILE_NAME", name = NULL),
         list(path = NULL, name = "FILE_NAME")

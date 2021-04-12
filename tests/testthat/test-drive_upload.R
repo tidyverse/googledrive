@@ -1,5 +1,3 @@
-context("Upload files")
-
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-drive-upload")
 nm_ <- nm_fun("TEST-drive-upload", NULL)

@@ -1,5 +1,3 @@
-context("Publish files")
-
 # ---- nm_fun ----
 nm_ <- nm_fun("TEST-drive-publish", NULL)
 

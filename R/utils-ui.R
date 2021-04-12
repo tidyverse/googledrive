@@ -1,6 +1,10 @@
 sq <- function(x) glue::single_quote(x)
 bt <- function(x) glue::backtick(x)
 
+is_testing <- function() {
+  identical(Sys.getenv("TESTTHAT"), "true")
+}
+
 stop_glue <- function(..., .sep = "", .envir = parent.frame(),
                       call. = FALSE, .domain = NULL) {
   stop(
@@ -21,21 +25,35 @@ stop_collapse <- function(x) stop(glue_collapse(x, sep = "\n"), call. = FALSE)
 
 message_glue <- function(..., .sep = "", .envir = parent.frame(),
                          .domain = NULL, .appendLF = TRUE) {
-  message(
-    glue(..., .sep = .sep, .envir = .envir),
-    domain = .domain, appendLF = .appendLF
-  )
+  # TODO: temporary fix since I switched to testthat 3e before updating the
+  # UI functions
+  if (!is_testing()) {
+    message(
+      glue(..., .sep = .sep, .envir = .envir),
+      domain = .domain, appendLF = .appendLF
+    )
+  }
 }
 
 message_glue_data <- function(..., .sep = "", .envir = parent.frame(),
                               .domain = NULL) {
-  message(
-    glue_data(..., .sep = .sep, .envir = .envir),
-    domain = .domain
-  )
+  # TODO: temporary fix since I switched to testthat 3e before updating the
+  # UI functions
+  if (!is_testing()) {
+    message(
+      glue_data(..., .sep = .sep, .envir = .envir),
+      domain = .domain
+    )
+  }
 }
 
-message_collapse <- function(x) message(glue_collapse(x, sep = "\n"))
+message_collapse <- function(x) {
+  # TODO: temporary fix since I switched to testthat 3e before updating the
+  # UI functions
+  if (!is_testing()) {
+    message(glue_collapse(x, sep = "\n"))
+  }
+}
 
 warning_glue <- function(..., .sep = "", .envir = parent.frame(),
                          call. = FALSE, .domain = NULL) {

@@ -1,5 +1,3 @@
-context("Generate requests")
-
 # ---- tests ----
 test_that("request_generate() basically works", {
   req <- request_generate(endpoint = "drive.files.list", token = NULL)

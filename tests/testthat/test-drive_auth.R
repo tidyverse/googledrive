@@ -14,10 +14,10 @@ test_that("drive_auth_configure works", {
   )
 
   drive_auth_configure(app = gargle::gargle_app())
-  expect_is(drive_oauth_app(), "oauth_app")
+  expect_s3_class(drive_oauth_app(), "oauth_app")
 
   drive_auth_configure(path = test_path("test-files/client_secret_123.googleusercontent.com.json"))
-  expect_is(drive_oauth_app(), "oauth_app")
+  expect_s3_class(drive_oauth_app(), "oauth_app")
 
   drive_auth_configure(app = NULL)
   expect_null(drive_oauth_app())
