@@ -214,6 +214,11 @@ marshal_q_clauses <- function(params) {
   c(params[["unmatched"]], q = list(q_bits))
 }
 
+# https://developers.google.com/drive/api/v3/search-shareddrives#query_multiple_terms_with_parentheses
+parenthesize <- function(x) glue("({x})")
+and <- function(x) glue_collapse(parenthesize(x), sep = " and ")
+or <- function(x) glue_collapse(x, sep = " or ")
+
 handle_shared_drives <- function(shared_drive, corpus) {
   if (!is.null(shared_drive)) {
     shared_drive <- as_shared_drive(shared_drive)
