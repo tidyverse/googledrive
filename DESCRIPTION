@@ -23,7 +23,7 @@ Depends:
 Imports: 
     curl (>= 2.8.1),
     gargle (>= 1.1.0),
-    glue (>= 1.2.0),
+    glue (>= 1.4.2),
     httr,
     jsonlite,
     lifecycle,

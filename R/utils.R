@@ -47,14 +47,6 @@ expose <- function() structure(list(), class = "expose")
 
 is_expose <- function(x) inherits(x, "expose")
 
-glue_collapse <- function(x, sep = "", width = Inf, last = "") {
-  if (utils::packageVersion("glue") > "1.2.0") {
-    utils::getFromNamespace("glue_collapse", "glue")(x = x, sep = sep, width = width, last = last)
-  } else {
-    utils::getFromNamespace("collapse", "glue")(x = x, sep = sep, width = width, last = last)
-  }
-}
-
 ## partition a parameter list into two parts, using names to identify
 ## components destined for the second part
 ## example input:

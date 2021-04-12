@@ -28,7 +28,7 @@
 #'   * [Article index](https://googledrive.tidyverse.org/articles/index.html)
 #'
 #' @importFrom rlang %||% :=
-#' @importFrom glue glue glue_data
+#' @importFrom glue glue glue_data glue_collapse
 #' @importFrom lifecycle deprecated
 #' @keywords internal
 "_PACKAGE"
