@@ -145,9 +145,9 @@ drive_find <- function(pattern = NULL,
 
   if (n_max < 1) return(dribble())
 
-  params <- toCamel(rlang::list2(...))
+  params <- toCamel(list2(...))
   params[["fields"]] <- params[["fields"]] %||% "*"
-  if (!rlang::has_name(params, "orderBy")) {
+  if (!has_name(params, "orderBy")) {
     params[["orderBy"]] <- "recency desc"
   }
   params <- marshal_q_clauses(params)

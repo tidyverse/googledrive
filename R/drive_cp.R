@@ -85,7 +85,7 @@ drive_cp <- function(file,
   path <- tmp$path
   name <- tmp$name
 
-  params <- toCamel(rlang::list2(...))
+  params <- toCamel(list2(...))
 
   # load (path, name) into params
   if (!is.null(path)) {

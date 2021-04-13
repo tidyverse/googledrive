@@ -41,7 +41,7 @@ shared_drive_update <- function(shared_drive, ..., verbose = TRUE) {
     stop_collapse(c("Can't update multiple shared drives at once:", drives))
   }
 
-  meta <- toCamel(rlang::list2(...))
+  meta <- toCamel(list2(...))
   if (length(meta) == 0) {
     if (verbose) message("No updates specified.")
     return(invisible(shared_drive))

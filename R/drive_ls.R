@@ -42,7 +42,7 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   path <- as_dribble(path)
   path <- confirm_single_file(path)
 
-  params <- rlang::list2(...)
+  params <- list2(...)
   if (is_shared_drive(path)) {
     params[["shared_drive"]] <- as_id(path)
   }
@@ -55,7 +55,7 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   parent <- glue("({or(parent)})")
   params[["q"]] <- append(params[["q"]], parent)
 
-  rlang::exec(drive_find, !!!params)
+  exec(drive_find, !!!params)
 }
 
 folders_below <- function(id) {
