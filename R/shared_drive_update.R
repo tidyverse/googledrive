@@ -10,7 +10,6 @@
 #' @template shared_drive-singular
 #' @param ... Properties to set in `name = value` form. See the "Request
 #'   body" section of the Drive API docs for this endpoint.
-#' @template verbose
 #'
 #' @template dribble-return
 #' @export
@@ -30,9 +29,9 @@
 #' ## clean up
 #' shared_drive_rm(sd)
 #' }
-shared_drive_update <- function(shared_drive, ..., verbose = TRUE) {
+shared_drive_update <- function(shared_drive, ...) {
   shared_drive <- as_shared_drive(shared_drive)
-  if (no_file(shared_drive) && verbose) {
+  if (no_file(shared_drive)) {
     message("No such shared drive found to update.")
     return(invisible(dribble()))
   }
@@ -43,7 +42,7 @@ shared_drive_update <- function(shared_drive, ..., verbose = TRUE) {
 
   meta <- toCamel(list2(...))
   if (length(meta) == 0) {
-    if (verbose) message("No updates specified.")
+    message_glue("No updates specified.")
     return(invisible(shared_drive))
   }
 
@@ -58,9 +57,7 @@ shared_drive_update <- function(shared_drive, ..., verbose = TRUE) {
   response <- request_make(request, encode = "json")
   out <- as_dribble(list(gargle::response_process(response)))
 
-  if (verbose) {
-    message_glue("\nShared drive updated:\n  * {out$name}: {out$id}")
-  }
+  message_glue("\nShared drive updated:\n  * {out$name}: {out$id}")
 
   invisible(out)
 }

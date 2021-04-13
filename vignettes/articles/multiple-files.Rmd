@@ -78,7 +78,8 @@ Create a folder on your Drive and upload all files into this folder by iterating
 
 ```{r}
 folder <- drive_mkdir("upload-into-me-article-demo")
-files <- map(local_files, ~ drive_upload(.x, path = folder, verbose = FALSE))
+with_drive_quiet(
+  files <- map(local_files, ~ drive_upload(.x, path = folder, verbose = FALSE)) )
 ```
 
 First, let's confirm that we uploaded the files into the new folder.

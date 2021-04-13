@@ -96,7 +96,11 @@ drive_upload <- function(media,
                          type = NULL,
                          ...,
                          overwrite = NA,
-                         verbose = TRUE) {
+                         verbose = deprecated()) {
+  if (lifecycle::is_present(verbose)) {
+    warn_for_verbose(verbose)
+  }
+
   if (!file.exists(media)) {
     stop_glue("\nFile does not exist:\n  * {media}")
   }
@@ -140,12 +144,10 @@ drive_upload <- function(media,
   response <- request_make(request, encode = "multipart")
   out <- as_dribble(list(gargle::response_process(response)))
 
-  if (verbose) {
-    message_glue(
-      "\nLocal file:\n  * {media}\n",
-      "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
-      "with MIME type:\n  * {out$drive_resource[[1]]$mimeType}"
-    )
-  }
+  message_glue(
+    "\nLocal file:\n  * {media}\n",
+    "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
+    "with MIME type:\n  * {out$drive_resource[[1]]$mimeType}"
+  )
   invisible(out)
 }

@@ -10,7 +10,6 @@
 #' @template pattern
 #' @template n_max
 #' @param ... Other parameters to pass along in the request, such as `pageSize`.
-#' @template verbose
 #'
 #' @template dribble-return
 #' @export
@@ -20,8 +19,7 @@
 #' }
 shared_drive_find <- function(pattern = NULL,
                               n_max = Inf,
-                              ...,
-                              verbose = TRUE) {
+                              ...) {
   if (!is.null(pattern) && !is_string(pattern)) {
     stop_glue("Please update `pattern` to be a character string.")
   }
@@ -36,8 +34,7 @@ shared_drive_find <- function(pattern = NULL,
   proc_res_list <- do_paginated_request(
     request,
     n_max = n_max,
-    n = function(x) length(x$drives),
-    verbose = verbose
+    n = function(x) length(x$drives)
   )
 
   res_tbl <- proc_res_list %>%

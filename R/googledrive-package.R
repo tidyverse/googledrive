@@ -44,3 +44,23 @@
 #' @importFrom rlang %||%
 ## usethis namespace: end
 NULL
+
+#' googledrive configuration
+#'
+#' @description
+#' Some aspects of googledrive behaviour can be controlled via an option.
+#'
+#' @section Auth:
+#'
+#' Read about googledrive's main auth function, [drive_auth()]. It is powered
+#' by the gargle package, which consults several options:
+#' * Default Google user or, more precisely, `email`: see
+#'   [gargle::gargle_oauth_email()]
+#' * Whether or where to cache OAuth tokens: see
+#'   [gargle::gargle_oauth_cache()]
+#' * Whether to prefer "out-of-band" auth: see
+#'   [gargle::gargle_oob_default()]
+#' * Application Default Credentials: see [gargle::credentials_app_default()]
+#'
+#' @name googledrive-configuration
+NULL

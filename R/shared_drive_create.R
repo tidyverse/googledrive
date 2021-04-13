@@ -7,7 +7,6 @@
 #'
 #' @param name Character. Name of the new shared drive. Must be non-empty and not
 #'   entirely whitespace.
-#' @template verbose
 #'
 #' @template dribble-return
 #' @export
@@ -18,7 +17,7 @@
 #' ## clean up
 #' shared_drive_rm("my-awesome-shared-drive")
 #' }
-shared_drive_create <- function(name, verbose = TRUE) {
+shared_drive_create <- function(name) {
   stopifnot(is_string(name), isTRUE(nzchar(name)))
   request <- request_generate(
     "drive.drives.create",
@@ -31,8 +30,6 @@ shared_drive_create <- function(name, verbose = TRUE) {
   response <- request_make(request, encode = "json")
   out <- as_dribble(list(gargle::response_process(response)))
 
-  if (verbose) {
-    message_glue("\nShared drive created:\n  * {out$name}: {out$id}")
-  }
+  message_glue("\nShared drive created:\n  * {out$name}: {out$id}")
   invisible(out)
 }

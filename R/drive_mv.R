@@ -61,12 +61,16 @@ drive_mv <- function(file,
                      path = NULL,
                      name = NULL,
                      overwrite = NA,
-                     verbose = TRUE) {
+                     verbose = deprecated()) {
+  if (lifecycle::is_present(verbose)) {
+    warn_for_verbose(verbose)
+  }
+
   file <- as_dribble(file)
   file <- confirm_single_file(file)
 
   if (is.null(path) && is.null(name)) {
-    if (verbose) message("Nothing to be done.")
+    message_glue("Nothing to be done.")
     return(invisible(file))
   }
 
@@ -100,7 +104,7 @@ drive_mv <- function(file,
   }
 
   if (length(params) == 0) {
-    if (verbose) message("Nothing to be done.")
+    message_glue("Nothing to be done.")
     return(invisible(file))
   }
 
@@ -113,21 +117,20 @@ drive_mv <- function(file,
   params[["fields"]] <- "*"
   out <- drive_update_metadata(file, params)
 
-  if (verbose) {
-    parent_added <- !is.null(params[["addParents"]])
-    actions <- c(
-      renamed = !identical(out$name, file$name),
-      moved = parent_added && n_parents_before < 2,
-      `added to folder` = parent_added && n_parents_before > 1
+  parent_added <- !is.null(params[["addParents"]])
+  actions <- c(
+    renamed = !identical(out$name, file$name),
+    moved = parent_added && n_parents_before < 2,
+    `added to folder` = parent_added && n_parents_before > 1
+  )
+  new_path <- paste0(append_slash(path$name), out$name)
+  message_glue(
+    "\nFile {action}:\n  * {file$name} -> {new_path}",
+    action = glue_collapse(
+      names(actions)[actions],
+      sep = ",", last = " and "
     )
-    new_path <- paste0(append_slash(path$name), out$name)
-    message_glue(
-      "\nFile {action}:\n  * {file$name} -> {new_path}",
-      action = glue_collapse(
-        names(actions)[actions],
-        sep = ",", last = " and "
-      )
-    )
-  }
+  )
+
   invisible(out)
 }

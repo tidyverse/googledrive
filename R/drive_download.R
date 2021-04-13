@@ -51,7 +51,10 @@ drive_download <- function(file,
                            path = NULL,
                            type = NULL,
                            overwrite = FALSE,
-                           verbose = TRUE) {
+                           verbose = deprecated()) {
+  if (lifecycle::is_present(verbose)) {
+    warn_for_verbose(verbose)
+  }
   if (!is.null(path) && file.exists(path) && !overwrite) {
     stop_glue("\nPath exists and overwrite is FALSE:\n  * {path}")
   }
@@ -98,12 +101,10 @@ drive_download <- function(file,
   success <- httr::status_code(response) == 200 && file.exists(path)
 
   if (success) {
-    if (verbose) {
-      message_glue(
-        "\nFile downloaded:\n  * {file$name}\n",
-        "Saved locally as:\n  * {path}"
-      )
-    }
+    message_glue(
+      "\nFile downloaded:\n  * {file$name}\n",
+      "Saved locally as:\n  * {path}"
+    )
   } else {
     stop_glue("The file doesn't seem to have downloaded.")
   }
