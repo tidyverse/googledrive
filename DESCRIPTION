@@ -21,7 +21,6 @@ BugReports: https://github.com/tidyverse/googledrive/issues
 Depends: 
     R (>= 3.2)
 Imports: 
-    curl (>= 2.8.1),
     gargle (>= 1.1.0),
     glue (>= 1.4.2),
     httr,
