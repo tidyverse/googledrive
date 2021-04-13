@@ -19,7 +19,7 @@ Most functions begin with the prefix \code{drive_}.
 The goal is to allow Drive access that feels similar to Unix file system
 utilities, e.g., \code{find}, \code{ls}, \code{mv}, \code{cp}, \code{mkdir}, and \code{rm}.
 
-The metadata for one or more Drive files is held in a \code{dribble}, a "Drive
+The metadata for one or more Drive files is held in a \code{\link{dribble}}, a "Drive
 tibble". This is a data frame with one row per file. A dribble is returned
 (and accepted) by almost every function in googledrive. It is designed to
 give people what they want (file name), track what the API wants (file id),
