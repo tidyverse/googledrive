@@ -30,11 +30,20 @@ test_that("drive_put() works", {
 
   writeLines(c("beginning", "middle"), local_file)
 
-  # TODO: make this a snapshot test, once I have verbosity control
-  original <- drive_put(local_file)
+  local_drive_loud()
+  first_put <- capture.output(
+    original <- drive_put(local_file),
+    type = "message"
+  )
+  first_put[grep(basename(local_file), first_put)] <- "{RANDOM}"
+  expect_snapshot(
+    writeLines(first_put)
+  )
   expect_s3_class(original, "dribble")
 
-  drive_download(original, path = download_target)
+  with_drive_quiet(
+    drive_download(original, path = download_target)
+  )
   expect_identical(
     readLines(local_file),
     readLines(download_target)
@@ -42,17 +51,27 @@ test_that("drive_put() works", {
 
   cat("end", file = local_file, sep = "\n", append = TRUE)
 
-  # TODO: make this a snapshot test, once I have verbosity control
-  second <- drive_put(local_file)
+  second_put <- capture.output(
+    second <- drive_put(local_file),
+    type = "message"
+  )
+  second_put[grep(basename(local_file), second_put)] <- "{RANDOM}"
+  expect_snapshot(
+    writeLines(second_put)
+  )
   expect_identical(original$id, second$id)
 
-  drive_download(original, path = download_target, overwrite = TRUE)
+  with_drive_quiet(
+    drive_download(original, path = download_target, overwrite = TRUE)
+  )
   expect_identical(
     readLines(local_file),
     readLines(download_target)
   )
 
-  name_collider <- drive_create(basename(local_file))
+  with_drive_quiet(
+    name_collider <- drive_create(basename(local_file))
+  )
 
   expect_error(
     drive_put(local_file),

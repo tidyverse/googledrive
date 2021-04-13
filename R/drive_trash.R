@@ -20,37 +20,42 @@
 #' ## Clean up
 #' drive_rm("chicken-trash.txt")
 #' }
-drive_trash <- function(file, verbose = TRUE) {
-  invisible(drive_toggle_trash(file, trash = TRUE, verbose = verbose))
+drive_trash <- function(file, verbose = deprecated()) {
+  if (lifecycle::is_present(verbose)) {
+    warn_for_verbose(verbose)
+  }
+  invisible(drive_toggle_trash(file, trash = TRUE))
 }
 
 #' @rdname drive_trash
 #' @export
-drive_untrash <- function(file, verbose = TRUE) {
+drive_untrash <- function(file, verbose = deprecated()) {
+  if (lifecycle::is_present(verbose)) {
+    warn_for_verbose(verbose)
+  }
   if (is_path(file)) {
     trash <- drive_find(trashed = TRUE)
     file <- trash[trash$name %in% file, ]
   }
-  invisible(drive_toggle_trash(file, trash = FALSE, verbose = verbose))
+  invisible(drive_toggle_trash(file, trash = FALSE))
 }
 
-drive_toggle_trash <- function(file, trash, verbose = TRUE) {
+drive_toggle_trash <- function(file, trash) {
   VERB <- if (trash) "trash" else "untrash"
   VERBED <- paste0(VERB, "ed")
 
   file <- as_dribble(file)
   if (no_file(file)) {
-    if (verbose) message_glue("No such files found to {VERB}.")
+    message_glue("No such files found to {VERB}.")
     return(invisible(dribble()))
   }
 
   out <- purrr::map(file$id, toggle_trash_one, trash = trash)
   out <- do.call(rbind, out)
 
-  if (verbose) {
-    files <- glue_data(out, "  * {name}: {id}")
-    message_collapse(c(glue("Files {VERBED}:"), files))
-  }
+  files <- glue_data(out, "  * {name}: {id}")
+  message_collapse(c(glue("Files {VERBED}:"), files))
+
   invisible(out)
 }
 
@@ -84,23 +89,25 @@ drive_reveal_trashed <- function(file) {
 #'
 #' @template verbose
 #' @export
-drive_empty_trash <- function(verbose = TRUE) {
+drive_empty_trash <- function(verbose = deprecated()) {
+  if (lifecycle::is_present(verbose)) {
+    warn_for_verbose(verbose)
+  }
+
   files <- drive_find(trashed = TRUE)
   if (no_file(files)) {
-    if (verbose) message("Your trash was already empty.")
+    message_glue("Your trash was already empty.")
     return(invisible(TRUE))
   }
   request <- request_generate(endpoint = "drive.files.emptyTrash")
   response <- request_make(request)
   success <- gargle::response_process(response)
-  if (verbose) {
-    if (success) {
-      message_glue(
-        "{nrow(files)} file(s) deleted from your Google Drive trash."
-      )
-    } else {
-      message_glue("Empty trash appears to have failed.")
-    }
+  if (success) {
+    message_glue(
+      "{nrow(files)} file(s) deleted from your Google Drive trash."
+    )
+  } else {
+    message_glue("Empty trash appears to have failed.")
   }
   invisible(success)
 }

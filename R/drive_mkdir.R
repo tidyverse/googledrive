@@ -50,10 +50,14 @@ drive_mkdir <- function(name,
                         ...,
                         overwrite = NA,
                         parent = "DEPRECATED",
-                        verbose = TRUE) {
+                        verbose = deprecated()) {
+  # TODO: remove this in v2.0.0
   if (!missing(parent)) {
     warning_glue("`parent` is deprecated as of v1.0.0, use `path` now")
     path <- parent
+  }
+  if (lifecycle::is_present(verbose)) {
+    warn_for_verbose(verbose)
   }
 
   drive_create(
@@ -61,7 +65,6 @@ drive_mkdir <- function(name,
     path = path,
     type = "application/vnd.google-apps.folder",
     ...,
-    overwrite = overwrite,
-    verbose = verbose
+    overwrite = overwrite
   )
 }

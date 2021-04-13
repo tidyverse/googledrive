@@ -29,7 +29,7 @@ confirm_clear_path <- function(path, name) {
   }
 }
 
-drive_path_exists <- function(path, verbose = TRUE) {
+drive_path_exists <- function(path) {
   stopifnot(is_path(path))
   if (length(path) == 0) return(logical(0))
   stopifnot(length(path) == 1)

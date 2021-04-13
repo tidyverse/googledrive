@@ -10,7 +10,13 @@ request_make(x, ...)
 
 do_request(x, ...)
 
-do_paginated_request(x, ..., n_max = Inf, n = function(res) 1, verbose = TRUE)
+do_paginated_request(
+  x,
+  ...,
+  n_max = Inf,
+  n = function(res) 1,
+  verbose = deprecated()
+)
 }
 \arguments{
 \item{x}{List, holding the components for an HTTP request, presumably created
@@ -28,8 +34,12 @@ an item. If you know more about the structure of the response, you can
 pass another function to count and threshhold, for example, the number of
 files or comments.}
 
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
+\item{verbose}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This logical argument to
+individual googledrive functions is deprecated. To globally suppress
+googledrive messaging, use \code{options(googledrive_quiet = TRUE)} (the default
+behaviour is to emit informational messages). To suppress messaging in a
+more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_quiet()}} or
+\code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
 }
 \value{
 \code{request_make()}: Object of class \code{response} from \link{httr}.

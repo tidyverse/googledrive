@@ -11,15 +11,15 @@
 \alias{is_team_drive}
 \title{Deprecated Team Drive functions}
 \usage{
-team_drive_find(pattern = NULL, n_max = Inf, ..., verbose = TRUE)
+team_drive_find(pattern = NULL, n_max = Inf, ..., verbose = deprecated())
 
-team_drive_get(name = NULL, id = NULL, verbose = TRUE)
+team_drive_get(name = NULL, id = NULL, verbose = deprecated())
 
-team_drive_create(name, verbose = TRUE)
+team_drive_create(name, verbose = deprecated())
 
-team_drive_rm(team_drive = NULL, verbose = TRUE)
+team_drive_rm(team_drive = NULL, verbose = deprecated())
 
-team_drive_update(team_drive, ..., verbose = TRUE)
+team_drive_update(team_drive, ..., verbose = deprecated())
 
 as_team_drive(x, ...)
 
@@ -35,9 +35,6 @@ applies to the results requested from the API, which may be further
 filtered locally, via the \code{pattern} argument.}
 
 \item{...}{Other parameters to pass along in the request, such as \code{pageSize}.}
-
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
 
 \item{name}{Character vector of names. A character vector marked with
 \code{\link[=as_id]{as_id()}} is treated as if it was provided via the \code{id} argument.}

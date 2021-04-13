@@ -26,11 +26,14 @@ if (SETUP) {
 test_that("drive_cp() can copy file in place", {
   skip_if_no_token()
   skip_if_offline()
+
   on.exit(drive_rm(me_("i-am-a-file")))
+  local_drive_loud()
 
   file <- drive_get(nm_("i-am-a-file"))
-  # TODO: make this a snapshot test once I have verbosity control
-  file_cp <- drive_cp(file, name = me_("i-am-a-file"))
+  expect_snapshot(
+    file_cp <- drive_cp(file, name = me_("i-am-a-file"))
+  )
   expect_identical(file_cp$name, me_("i-am-a-file"))
 
   ## should have the same parent
@@ -43,12 +46,15 @@ test_that("drive_cp() can copy file in place", {
 test_that("drive_cp() can copy a file into a different folder", {
   skip_if_no_token()
   skip_if_offline()
+
   on.exit(drive_rm(me_("i-am-a-file")))
+  local_drive_loud()
 
   file <- drive_get(nm_("i-am-a-file"))
   folder <- drive_get(nm_("i-am-a-folder"))
-  # TODO: make this a snapshot test once I have verbosity control
-  file_cp <- drive_cp(file, path = folder, name = me_("i-am-a-file"))
+  expect_snapshot(
+    file_cp <- drive_cp(file, path = folder, name = me_("i-am-a-file"))
+  )
   expect_identical(file_cp$name, me_("i-am-a-file"))
 
   ## should have folder as parent
@@ -81,14 +87,17 @@ test_that("drive_cp() errors if asked to copy a folder", {
 test_that("drive_cp() takes name, assumes path is folder if both are specified", {
   skip_if_no_token()
   skip_if_offline()
+
   on.exit(drive_rm(me_("file-name")))
+  local_drive_loud()
 
   ## if given `path` and `name`, assumes `path` is a folder
-  # TODO: make this a snapshot test once I have verbosity control
-  file_cp <- drive_cp(
-    nm_("i-am-a-file"),
-    path = nm_("i-am-a-folder"),
-    name = me_("file-name")
+  expect_snapshot(
+    file_cp <- drive_cp(
+      nm_("i-am-a-file"),
+      path = nm_("i-am-a-folder"),
+      name = me_("file-name")
+    )
   )
   expect_identical(file_cp$name, me_("file-name"))
 

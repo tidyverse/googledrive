@@ -19,6 +19,15 @@ Where to learn more:
 * [Team Drives is being renamed to shared drives](https://workspaceupdates.googleblog.com/2019/04/shared-drives.html) from Google Workspace blog
 * [Upcoming changes to the Google Drive API and Google Picker API](https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api) from the Google Cloud blog
 
+## User interface
+
+`googledrive_quiet` is a new option to suppress informational messages from googledrive.
+Unless it's explicitly set to `FALSE`, the default is to message.
+
+The `verbose` argument of all `drive_*()` functions is deprecated (though `verbose = FALSE` is still honored, with a warning) and will be removed in a future release.
+
+`local_drive_quiet()` and `with_drive_quiet()` are [withr-style](https://withr.r-lib.org) convenience helpers for setting `googledrive_quiet = TRUE` for some limited scope.
+
 # googledrive 1.0.1
 
 Patch release to modify a test for compatibility with an upcoming release of gargle.

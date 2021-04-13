@@ -4,7 +4,7 @@
 \alias{drive_update}
 \title{Update an existing Drive file}
 \usage{
-drive_update(file, media = NULL, ..., verbose = TRUE)
+drive_update(file, media = NULL, ..., verbose = deprecated())
 }
 \arguments{
 \item{file}{Something that identifies the file of interest on your Google
@@ -19,8 +19,12 @@ metadata of the target file by specifying properties of the Files resource
 via \code{...}. Read the "Request body" section of the Drive API docs for the
 associated endpoint to learn about relevant parameters.}
 
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
+\item{verbose}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This logical argument to
+individual googledrive functions is deprecated. To globally suppress
+googledrive messaging, use \code{options(googledrive_quiet = TRUE)} (the default
+behaviour is to emit informational messages). To suppress messaging in a
+more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_quiet()}} or
+\code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.
@@ -32,10 +36,10 @@ depending on whether the Drive file already exists, see \code{\link[=drive_put]{
 }
 \examples{
 \dontrun{
-## Create a new file, so we can update it
+# Create a new file, so we can update it
 x <- drive_upload(drive_example("chicken.csv"))
 
-## Update the file with new media
+# Update the file with new media
 x <- x \%>\%
   drive_update(drive_example("chicken.txt"))
 

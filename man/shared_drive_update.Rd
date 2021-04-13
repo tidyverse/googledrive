@@ -4,7 +4,7 @@
 \alias{shared_drive_update}
 \title{Update a shared drive}
 \usage{
-shared_drive_update(shared_drive, ..., verbose = TRUE)
+shared_drive_update(shared_drive, ...)
 }
 \arguments{
 \item{shared_drive}{Anything that identifies one specific shared drive: its
@@ -14,9 +14,6 @@ more about \link[=shared_drives]{shared drives}.}
 
 \item{...}{Properties to set in \code{name = value} form. See the "Request
 body" section of the Drive API docs for this endpoint.}
-
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.

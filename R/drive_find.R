@@ -126,7 +126,7 @@ drive_find <- function(pattern = NULL,
                        shared_drive = NULL,
                        corpus = NULL,
                        ...,
-                       verbose = TRUE,
+                       verbose = deprecated(),
                        team_drive = deprecated()) {
   if (!is.null(pattern) && !(is_string(pattern))) {
     stop_glue("`pattern` must be a character string.")
@@ -134,6 +134,9 @@ drive_find <- function(pattern = NULL,
   stopifnot(is_toggle(trashed))
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
 
+  if (lifecycle::is_present(verbose)) {
+    warn_for_verbose(verbose)
+  }
   if (lifecycle::is_present(team_drive)) {
     lifecycle::deprecate_warn(
       "2.0.0",
@@ -176,8 +179,7 @@ drive_find <- function(pattern = NULL,
   proc_res_list <- do_paginated_request(
     request,
     n_max = n_max,
-    n = function(x) length(x$files),
-    verbose = verbose
+    n = function(x) length(x$files)
   )
 
   res_tbl <- proc_res_list %>%
