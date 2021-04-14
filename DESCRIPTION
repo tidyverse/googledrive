@@ -34,6 +34,7 @@ Imports:
     uuid
 Suggests: 
     covr,
+    curl,
     dplyr,
     knitr,
     mockr,
