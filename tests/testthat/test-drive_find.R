@@ -53,9 +53,9 @@ test_that("drive_find() filters for the regex in `pattern`", {
 })
 
 test_that("drive_find() errors for nonsense in `n_max`", {
-  expect_error(drive_find(n_max = "a"))
-  expect_error(drive_find(n_max = 1:3))
-  expect_error(drive_find(n_max = -2))
+  expect_snapshot(drive_find(n_max = "a"), error = TRUE)
+  expect_snapshot(drive_find(n_max = 1:3), error = TRUE)
+  expect_snapshot(drive_find(n_max = -2), error = TRUE)
 })
 
 test_that("drive_find() returns early if n_max < 1", {

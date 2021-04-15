@@ -73,6 +73,7 @@ test_that("drive_put() works", {
     name_collider <- drive_create(basename(local_file))
   )
 
+  # not easy to convert to snapshot, due to volatile file ids
   expect_error(
     drive_put(local_file),
     "Multiple items"

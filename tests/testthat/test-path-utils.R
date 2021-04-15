@@ -111,9 +111,9 @@ test_that("partition_path() splits into stuff before/after last slash", {
 })
 
 test_that("partition_path() fails for bad input", {
-  expect_error(partition_path(letters), "is_string\\(path\\) is not TRUE")
-  expect_error(partition_path(dribble()), "is_string\\(path\\) is not TRUE")
-  expect_error(partition_path(as_id("123"), '!inherits\\(x, "drive_id"\\) is not TRUE'))
+  expect_snapshot(partition_path(letters), error = TRUE)
+  expect_snapshot(partition_path(dribble()), error = TRUE)
+  expect_snapshot(partition_path(as_id("123")), error = TRUE)
 })
 
 test_that("is_path() works", {
@@ -125,10 +125,7 @@ test_that("is_path() works", {
 })
 
 test_that("rationalize_path_name() errors for bad `name`, before hitting API", {
-  expect_error(
-    rationalize_path_name(name = letters),
-    "is_string\\(name\\) is not TRUE"
-  )
+  expect_snapshot(rationalize_path_name(name = letters), error = TRUE)
 })
 
 test_that("rationalize_path_name() can pass `path` and `name` through, w/o hitting API", {

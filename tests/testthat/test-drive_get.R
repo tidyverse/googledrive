@@ -51,14 +51,8 @@ test_that("drive_get() 'no input' edge cases", {
   expect_identical(drive_get(NULL), dribble_with_path())
   expect_identical(drive_get(character(0)), dribble_with_path())
 
-  expect_error(
-    drive_get(id = NA_character_),
-    "File ids must not be NA and cannot be the empty string"
-  )
-  expect_error(
-    drive_get(id = ""),
-    "File ids must not be NA and cannot be the empty string"
-  )
+  expect_snapshot(drive_get(id = NA_character_), error = TRUE)
+  expect_snapshot(drive_get(id = ""), error = TRUE)
 })
 
 test_that("drive_get() gives n-row output for n ids as input", {

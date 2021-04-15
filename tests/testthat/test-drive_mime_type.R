@@ -41,12 +41,12 @@ test_that("drive_mime_type() returns MIME type for mixed input", {
 })
 
 test_that("drive_mime_type() errors for invalid input", {
-  expect_error(drive_mime_type(1), "'type' must be character")
-  expect_error(drive_mime_type(dribble()), "'type' must be character")
+  expect_snapshot(drive_mime_type(1), error = TRUE)
+  expect_snapshot(drive_mime_type(dribble()), error = TRUE)
 })
 
 test_that("drive_mime_type() errors for single unrecognized input", {
-  expect_error(drive_mime_type("nonsense"), "Unrecognized 'type'")
+  expect_snapshot(drive_mime_type("nonsense"), error = TRUE)
 })
 
 test_that("drive_extension() returns NULL if no input", {
@@ -74,10 +74,10 @@ test_that("drive_extension() returns file extension for mixed input", {
 })
 
 test_that("drive_extension() errors for invalid input", {
-  expect_error(drive_extension(1), "is\\.character\\(type\\) is not TRUE")
-  expect_error(drive_extension(dribble()), "is\\.character\\(type\\) is not TRUE")
+  expect_snapshot(drive_extension(1), error = TRUE)
+  expect_snapshot(drive_extension(dribble()), error = TRUE)
 })
 
 test_that("drive_extension() errors for single unrecognized input", {
-  expect_error(drive_extension("nonsense"), "Unrecognized 'type'")
+  expect_snapshot(drive_extension("nonsense"), error = TRUE)
 })

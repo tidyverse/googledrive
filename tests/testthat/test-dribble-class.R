@@ -5,34 +5,22 @@ test_that("dribble() creates empty dribble", {
 })
 
 test_that("new_dribble() requires data.frame and adds the dribble class", {
-  expect_error(
-    new_dribble(1:3),
-    'inherits\\(x, "data.frame"\\) is not TRUE'
-  )
+  expect_snapshot(new_dribble(1:3), error = TRUE)
   expect_s3_class(new_dribble(data.frame(x = 1:3)), "dribble")
 })
 
 test_that("validate_dribble() checks class, var names, var types", {
-  expect_error(
-    validate_dribble("a"),
-    'inherits\\(x, "dribble"\\) is not TRUE'
-  )
+  expect_snapshot(validate_dribble("a"), error = TRUE)
 
   ## wrong type
   d <- dribble()
   d$id <- numeric()
-  expect_error(
-    validate_dribble(d),
-    "Invalid dribble. These columns have the wrong type"
-  )
+  expect_snapshot(validate_dribble(d), error = TRUE)
 
   ## missing a required variable
   d <- dribble()
   d$name <- NULL
-  expect_error(
-    validate_dribble(d),
-    "Invalid dribble. These required column names are missing"
-  )
+  expect_snapshot(validate_dribble(d), error = TRUE)
 
   ## list-col elements do not have `kind = "drive#file"`
   d <- new_dribble(
@@ -42,10 +30,7 @@ test_that("validate_dribble() checks class, var names, var types", {
       drive_resource = list(kind = "whatever")
     )
   )
-  expect_error(
-    validate_dribble(d),
-    "Invalid dribble. Can't confirm `kind = \"drive#file\"`"
-  )
+  expect_snapshot(validate_dribble(d), error = TRUE)
 })
 
 test_that("as_tibble() drops the dribble class", {
@@ -86,14 +71,8 @@ test_that("dribble nrow checkers work", {
   expect_true(no_file(dribble()))
   expect_false(single_file(dribble()))
   expect_false(some_files(dribble()))
-  expect_error(
-    confirm_single_file(dribble()),
-    "does not identify at least one"
-  )
-  expect_error(
-    confirm_some_files(dribble()),
-    "does not identify at least one"
-  )
+  expect_snapshot(confirm_single_file(dribble()), error = TRUE)
+  expect_snapshot(confirm_some_files(dribble()), error = TRUE)
 
   d <- new_dribble(
     tibble::tibble(
@@ -112,10 +91,7 @@ test_that("dribble nrow checkers work", {
   expect_false(no_file(d))
   expect_false(single_file(d))
   expect_true(some_files(d))
-  expect_error(
-    confirm_single_file(d),
-    "identifies more than one"
-  )
+  expect_snapshot(confirm_single_file(d), error = TRUE)
   expect_identical(confirm_some_files(d), d)
 })
 
@@ -136,14 +112,8 @@ test_that("as_dribble(NULL) returns empty dribble", {
 })
 
 test_that("as_dribble() default method handles unsuitable input", {
-  expect_error(
-    as_dribble(1.3),
-    "Don't know how to coerce object of class <numeric> into a dribble"
-  )
-  expect_error(
-    as_dribble(TRUE),
-    "Don't know how to coerce object of class <logical> into a dribble"
-  )
+  expect_snapshot(as_dribble(1.3), error = TRUE)
+  expect_snapshot(as_dribble(TRUE), error = TRUE)
 })
 
 test_that("as_dribble.list() works for good input", {
@@ -161,14 +131,14 @@ test_that("as_dribble.list() catches bad input", {
   drib_lst <- list(
     name = "name"
   )
-  expect_error(as_dribble(list(drib_lst)))
+  expect_snapshot(as_dribble(list(drib_lst)), error = TRUE)
 
   drib_lst <- list(
     name = "name",
     id = "id",
     kind = "whatever"
   )
-  expect_error(as_dribble(list(drib_lst)))
+  expect_snapshot(as_dribble(list(drib_lst)), error = TRUE)
 })
 
 test_that("promote() works when elem present, absent, and input is trivial", {

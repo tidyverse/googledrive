@@ -17,9 +17,9 @@ test_that("as_id() copes with NULL, length-0 input, no input", {
 })
 
 test_that("as_id() errors for unanticipated input", {
-  expect_error(as_id(mean), "Don't know how to coerce")
-  expect_error(as_id(1.2), "Don't know how to coerce")
-  expect_error(as_id(1L), "Don't know how to coerce")
+  expect_snapshot(as_id(mean), error = TRUE)
+  expect_snapshot(as_id(1.2), error = TRUE)
+  expect_snapshot(as_id(1L), error = TRUE)
 })
 
 test_that("as_id() returns non-URL character strings as ids", {

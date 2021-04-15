@@ -17,7 +17,10 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("drive_upload() detects non-existent file", {
-  expect_error(drive_upload("no-such-file"), "File does not exist")
+  expect_snapshot(
+    drive_upload("no-such-file", "File does not exist"),
+    error = TRUE
+  )
 })
 
 test_that("drive_upload() places file in non-root folder, with new name", {

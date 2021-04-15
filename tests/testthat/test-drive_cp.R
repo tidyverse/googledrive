@@ -79,11 +79,11 @@ test_that("drive_cp() doesn't tolerate ambiguity in `path`", {
   skip_if_offline()
 
   file <- drive_get(nm_("i-am-a-file"))
-  ## `path` lacks trailing slash, so ambiguous if it's parent folder or
-  ## folder + name
-  expect_error(
-    file_cp <- drive_cp(file, nm_("i-am-a-folder")),
-    "Unclear if `path` specifies parent folder or full path"
+  # `path` lacks trailing slash, so ambiguous if it's parent folder or
+  # folder + name
+  expect_snapshot(
+    drive_cp(file, nm_("i-am-a-folder")),
+    error = TRUE
   )
 })
 
@@ -91,9 +91,9 @@ test_that("drive_cp() errors if asked to copy a folder", {
   skip_if_no_token()
   skip_if_offline()
 
-  expect_error(
+  expect_snapshot(
     drive_cp(nm_("i-am-a-folder")),
-    "The Drive API does not copy folders"
+    error = TRUE
   )
 })
 
@@ -105,7 +105,8 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
   defer_drive_rm(cp_name)
   local_drive_loud()
 
-  ## if given `path` and `name`, assumes `path` is a folder
+  # if given `path` and `name`, assumes `path` is a folder
+  # the message capture trick is necessary because cp_name includes {user}
   drive_cp_message <- capture.output(
     file_cp <- drive_cp(
       nm_("i-am-a-file"),
@@ -121,20 +122,22 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
 
   expect_identical(file_cp$name, me_("file-name"))
 
-  ## if `path` is not a folder, will error
-  expect_error(
+  # error if `path` is not a folder
+  expect_snapshot(
     file_cp <- drive_cp(
       nm_("i-am-a-file"),
-      nm_("file-name"),
-      nm_("file-name")
-    )
+      path = nm_("file-name"),
+      name = nm_("file-name")
+    ),
+    error = TRUE
   )
 
-  expect_error(
+  # error if `path` doesn't uniquely identify one folder/shared drive
+  expect_snapshot(
     file_cp <- drive_cp(
       nm_("i-am-a-file"),
-      paste0(nm_("not-unique-folder"), "/")
+      append_slash(nm_("not-unique-folder"))
     ),
-    "doesn't uniquely identify exactly one"
+    error = TRUE
   )
 })

@@ -22,27 +22,24 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("drive_update() errors if local media does not exist", {
-  expect_error(
-    drive_update(dribble(), "nope123"),
-    "Local file does not exist"
-  )
+  expect_snapshot(drive_update(dribble(), "nope123"), error = TRUE)
 })
 
 test_that("drive_update() informatively errors if the path does not exist", {
   skip_if_no_token()
   skip_if_offline()
-  expect_error(
+  expect_snapshot(
     drive_update(nm_("does-not-exist"), system.file("DESCRIPTION")),
-    "does not identify at least one"
+    error = TRUE
   )
 })
 
 test_that("drive_update() informatively errors if the path is not unique", {
   skip_if_no_token()
   skip_if_offline()
-  expect_error(
+  expect_snapshot(
     drive_update(nm_("not-unique"), system.file("DESCRIPTION")),
-    "more than one"
+    error = TRUE
   )
 })
 

@@ -18,8 +18,8 @@ if (SETUP) {
 # ---- tests ----
 
 test_that("drive_share() errors for invalid `role` or `type`", {
-  expect_error(drive_share(dribble(), role = "chef"), "should be one of")
-  expect_error(drive_share(dribble(), type = "pet"), "should be one of")
+  expect_snapshot(drive_share(dribble(), role = "chef"), error = TRUE)
+  expect_snapshot(drive_share(dribble(), type = "pet"), error = TRUE)
 })
 
 test_that("drive_share() adds permissions", {

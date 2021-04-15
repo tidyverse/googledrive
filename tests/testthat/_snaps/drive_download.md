@@ -1,7 +1,10 @@
 # drive_download() won't overwrite existing file
 
-    Path exists and overwrite is FALSE:
-      * precious-TEST-drive-download.txt
+    Code
+      withr::with_dir(tmpdir, drive_download(dribble(), path = precious_filepath))
+    Error <simpleError>
+      Path exists and overwrite is FALSE:
+        * precious-TEST-drive-download.txt
 
 # drive_download() downloads a file and adds local_path column
 
@@ -12,6 +15,13 @@
         * DESC-TEST-drive-download
       Saved locally as:
         * DESC-TEST-drive-download.txt
+
+# drive_download() errors if file does not exist on Drive
+
+    Code
+      drive_download(nm_("this-should-not-exist"))
+    Error <simpleError>
+      'file' does not identify at least one Drive file.
 
 # drive_download() converts with explicit `type`
 

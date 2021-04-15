@@ -11,13 +11,14 @@ test_that("request_generate() basically works", {
 
 test_that("request_generate() errors for unrecognized parameters", {
   params <- list(chicken = "muffin", bunny = "pippin")
-  expect_error(
-    request_generate(
-      endpoint = "drive.files.list",
-      params = params, token = NULL
-    ),
-    regexp = "These parameters are unknown",
-    class = "gargle_error_bad_params"
+  expect_snapshot(
+    (expect_error(
+      request_generate(
+        endpoint = "drive.files.list",
+        params = params, token = NULL
+      ),
+      class = "gargle_error_bad_params"
+    ))
   )
 })
 

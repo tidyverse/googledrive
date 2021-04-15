@@ -46,9 +46,9 @@ test_that("pth() errors for cycle", {
      "a",       "b",
      "b",       "a"
   )
-  expect_error(
+  expect_snapshot(
     pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT"),
-    "Cycles are not allowed"
+    error = TRUE
   )
 
   #   a
@@ -59,9 +59,9 @@ test_that("pth() errors for cycle", {
     ~ id, ~ parents,
      "a",       "a"
   )
-  expect_error(
+  expect_snapshot(
     pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT"),
-    "Cycles are not allowed"
+    error = TRUE
   )
 })
 
@@ -71,9 +71,9 @@ test_that("pth() errors for duplicated kid", {
     "a",     "ROOT",
     "a",     "ROOT"
   )
-  expect_error(
+  expect_snapshot(
     pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT"),
-    "This id appears more than once in the role of 'kid'"
+    error = TRUE
   )
 
   #   a
@@ -84,9 +84,9 @@ test_that("pth() errors for duplicated kid", {
     ~ id, ~ parents,
     "a",       "a"
   )
-  expect_error(
+  expect_snapshot(
     pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT"),
-    "Cycles are not allowed"
+    error = TRUE
   )
 })
 

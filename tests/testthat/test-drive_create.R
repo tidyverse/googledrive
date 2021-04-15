@@ -17,14 +17,14 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("drive_create() errors for bad input (before hitting Drive API)", {
-  expect_error(drive_create(), "argument \"name\" is missing")
-  expect_error(drive_create(letters), "is_string\\(name\\) is not TRUE")
+  expect_snapshot(drive_create(), error = TRUE)
+  expect_snapshot(drive_create(letters), error = TRUE)
 })
 
 test_that("drive_create() errors if parent path does not exist", {
   skip_if_no_token()
   skip_if_offline()
-  expect_error(drive_create("a", path = "qweruiop"))
+  expect_snapshot(drive_create("a", path = "qweruiop"), error = TRUE)
 })
 
 test_that("drive_create() errors if parent exists but is not a folder", {
@@ -34,10 +34,7 @@ test_that("drive_create() errors if parent exists but is not a folder", {
     q = "mimeType != 'application/vnd.google-apps.folder'",
     n_max = 1
   )
-  expect_error(
-    drive_create("a", path = x),
-    "Requested parent `path` is invalid"
-  )
+  expect_snapshot(drive_create("a", path = x), error = TRUE)
 })
 
 test_that("drive_create() create specific things in root folder", {
@@ -145,11 +142,11 @@ test_that("drive_create() parent separately, as a path", {
 test_that("drive_create() catches invalid parameters", {
   skip_if_no_token()
   skip_if_offline()
-
-  expect_error(
-    drive_create("hi", bunny = "foofoo"),
-    regexp = "These parameters are unknown",
-    class = "gargle_error_bad_params"
+  expect_snapshot(
+    (expect_error(
+      drive_create("hi", bunny = "foofoo"),
+      class = "gargle_error_bad_params"
+    ))
   )
 })
 

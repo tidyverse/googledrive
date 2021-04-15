@@ -53,10 +53,7 @@ test_that("drive_ls() errors if `path` does not exist", {
   skip_if_no_token()
   skip_if_offline()
 
-  expect_error(
-    drive_ls(nm_("this-should-not-exist")),
-    "does not identify at least one"
-  )
+  expect_snapshot(drive_ls(nm_("this-should-not-exist")), error = TRUE)
 })
 
 test_that("drive_ls() outputs contents of folder", {

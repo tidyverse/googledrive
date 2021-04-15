@@ -24,11 +24,12 @@ test_that("drive_download() won't overwrite existing file", {
   tmpdir <-  withr::local_tempdir()
   precious_filepath <- paste0(nm_("precious"), ".txt")
   writeLines("I exist and I am special", file.path(tmpdir, precious_filepath))
-  expect_snapshot_error(
+  expect_snapshot(
     withr::with_dir(
       tmpdir,
       drive_download(dribble(), path = precious_filepath)
-    )
+    ),
+    error = TRUE
   )
 })
 
@@ -53,10 +54,7 @@ test_that("drive_download() downloads a file and adds local_path column", {
 test_that("drive_download() errors if file does not exist on Drive", {
   skip_if_no_token()
   skip_if_offline()
-  expect_error(
-    drive_download(nm_("this-should-not-exist")),
-    "does not identify at least one"
-  )
+  expect_snapshot(drive_download(nm_("this-should-not-exist")), error = TRUE)
 })
 
 test_that("drive_download() converts with explicit `type`", {
