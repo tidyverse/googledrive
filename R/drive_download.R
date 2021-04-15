@@ -52,9 +52,7 @@ drive_download <- function(file,
                            type = NULL,
                            overwrite = FALSE,
                            verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
   if (!is.null(path) && file.exists(path) && !overwrite) {
     stop_glue("\nPath exists and overwrite is FALSE:\n  * {path}")
   }

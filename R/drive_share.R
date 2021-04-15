@@ -79,9 +79,7 @@ drive_share <- function(file,
                         type = c("user", "group", "domain", "anyone"),
                         ...,
                         verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
 
   role <- match.arg(role)
   type <- match.arg(type)
@@ -123,9 +121,7 @@ drive_share <- function(file,
 #' @rdname drive_share
 #' @export
 drive_share_anyone <- function(file, verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
   drive_share(file = file, role = "reader", type = "anyone")
 }
 

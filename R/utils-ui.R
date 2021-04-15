@@ -6,7 +6,10 @@ bt <- function(x) glue::backtick(x)
 # }
 
 warn_for_verbose <- function(verbose = TRUE, env = parent.frame()) {
-  if (isTRUE(verbose)) {
+  # this is about whether `verbose` was present in the **user's** call to the
+  # calling function
+  # don't worry about the `verbose = TRUE` default here
+  if (!lifecycle::is_present(verbose) || isTRUE(verbose)) {
     return(invisible())
   }
 

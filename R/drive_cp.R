@@ -75,9 +75,7 @@ drive_cp <- function(file,
                      ...,
                      overwrite = NA,
                      verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
 
   file <- as_dribble(file)
   file <- confirm_single_file(file)

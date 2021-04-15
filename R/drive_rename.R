@@ -34,8 +34,6 @@ drive_rename <- function(file,
                          name = NULL,
                          overwrite = NA,
                          verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
   drive_mv(file = file, name = name, overwrite = overwrite)
 }

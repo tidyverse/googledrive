@@ -87,9 +87,7 @@ drive_get <- function(path = NULL,
   stopifnot(is.null(path) || is.character(path))
   stopifnot(is.null(id) || is.character(id))
 
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
   if (lifecycle::is_present(team_drive)) {
     lifecycle::deprecate_warn(
       "2.0.0",

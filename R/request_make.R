@@ -81,9 +81,7 @@ do_paginated_request <- function(x,
                                  n_max = Inf,
                                  n = function(res) 1,
                                  verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
 
   ## when traversing pages, you can't cleanly separate the task into
   ## request_make() and gargle::response_process(), because you need to process

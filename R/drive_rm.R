@@ -32,9 +32,7 @@
 #' drive_rm(x1, "chicken-def.txt", as_id(x2))
 #' }
 drive_rm <- function(..., verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
   dots <- list(...)
   if (length(dots) == 0) {
     dots <- list(NULL)

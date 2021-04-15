@@ -51,10 +51,7 @@ drive_put <- function(media,
                       ...,
                       type = NULL,
                       verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
-
+  warn_for_verbose(verbose)
   if (!file.exists(media)) {
     stop_glue("\nFile does not exist:\n  * {media}")
   }

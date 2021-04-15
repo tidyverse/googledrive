@@ -21,18 +21,14 @@
 #' drive_rm("chicken-trash.txt")
 #' }
 drive_trash <- function(file, verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
   invisible(drive_toggle_trash(file, trash = TRUE))
 }
 
 #' @rdname drive_trash
 #' @export
 drive_untrash <- function(file, verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
   if (is_path(file)) {
     trash <- drive_find(trashed = TRUE)
     file <- trash[trash$name %in% file, ]
@@ -90,9 +86,7 @@ drive_reveal_trashed <- function(file) {
 #' @template verbose
 #' @export
 drive_empty_trash <- function(verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
 
   files <- drive_find(trashed = TRUE)
   if (no_file(files)) {

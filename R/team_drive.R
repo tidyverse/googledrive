@@ -22,50 +22,40 @@ team_drive_find <- function(pattern = NULL,
                             n_max = Inf,
                             ...,
                             verbose = deprecated()) {
+  warn_for_verbose(verbose)
   lifecycle::deprecate_warn("2.0.0", "team_drive_find()", "shared_drive_find()")
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
   shared_drive_find(pattern = pattern, n_max = n_max, ...)
 }
 
 #' @export
 #' @rdname deprecated-team-drive-functions
 team_drive_get <- function(name = NULL, id = NULL, verbose = deprecated()) {
+  warn_for_verbose(verbose)
   lifecycle::deprecate_warn("2.0.0", "team_drive_get()", "shared_drive_get()")
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
   shared_drive_get(name = name, id = id)
 }
 
 #' @export
 #' @rdname deprecated-team-drive-functions
 team_drive_create <- function(name, verbose = deprecated()) {
+  warn_for_verbose(verbose)
   lifecycle::deprecate_warn("2.0.0", "team_drive_create()", "shared_drive_create()")
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
   shared_drive_create(name = name)
 }
 
 #' @export
 #' @rdname deprecated-team-drive-functions
 team_drive_rm <- function(team_drive = NULL, verbose = deprecated()) {
+  warn_for_verbose(verbose)
   lifecycle::deprecate_warn("2.0.0", "team_drive_rm()", "shared_drive_rm()")
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
   shared_drive_rm(drive = team_drive)
 }
 
 #' @export
 #' @rdname deprecated-team-drive-functions
 team_drive_update <- function(team_drive, ..., verbose = deprecated()) {
+  warn_for_verbose(verbose)
   lifecycle::deprecate_warn("2.0.0", "team_drive_update()", "shared_drive_update()")
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
   shared_drive_update(drive = team_drive, ...)
 }
 

@@ -75,9 +75,7 @@ drive_create <- function(name,
                          ...,
                          overwrite = NA,
                          verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
 
   # the order and role of `path` and `name` is naturally inverted here,
   # relative to all other related functions, hence we pre-process

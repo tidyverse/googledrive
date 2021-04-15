@@ -37,18 +37,14 @@
 #' drive_rm(file)
 #' }
 drive_publish <- function(file, ..., verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
   drive_change_publish(file = file, publish = TRUE, ...)
 }
 
 #' @rdname drive_publish
 #' @export
 drive_unpublish <- function(file, ..., verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
+  warn_for_verbose(verbose)
   drive_change_publish(file = file, publish = FALSE, ...)
 }
 

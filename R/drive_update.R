@@ -51,10 +51,7 @@ drive_update <- function(file,
                          media = NULL,
                          ...,
                          verbose = deprecated()) {
-  if (lifecycle::is_present(verbose)) {
-    warn_for_verbose(verbose)
-  }
-
+  warn_for_verbose(verbose)
   if (!is.null(media) && !file.exists(media)) {
     stop_glue("\nLocal file does not exist:\n  * {media}")
   }
