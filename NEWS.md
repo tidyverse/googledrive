@@ -24,7 +24,8 @@ Where to learn more:
 `googledrive_quiet` is a new option to suppress informational messages from googledrive.
 Unless it's explicitly set to `FALSE`, the default is to message.
 
-The `verbose` argument of all `drive_*()` functions is deprecated (though `verbose = FALSE` is still honored, with a warning) and will be removed in a future release.
+The `verbose` argument of all `drive_*()` functions is deprecated and will be removed in a future release.
+In the current release, `verbose = FALSE` is still honored, but generates a warning.
 
 `local_drive_quiet()` and `with_drive_quiet()` are [withr-style](https://withr.r-lib.org) convenience helpers for setting `googledrive_quiet = TRUE` for some limited scope.
 
