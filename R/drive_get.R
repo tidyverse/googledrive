@@ -83,11 +83,11 @@ drive_get <- function(path = NULL,
                       corpus = NULL,
                       verbose = deprecated(),
                       team_drive = deprecated()) {
+  warn_for_verbose(verbose)
   if (length(path) + length(id) == 0) return(dribble_with_path())
   stopifnot(is.null(path) || is.character(path))
   stopifnot(is.null(id) || is.character(id))
 
-  warn_for_verbose(verbose)
   if (lifecycle::is_present(team_drive)) {
     lifecycle::deprecate_warn(
       "2.0.0",
