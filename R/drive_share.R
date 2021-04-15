@@ -131,7 +131,7 @@ drive_share_one <- function(id, params) {
     endpoint = "drive.permissions.create",
     params = params
   )
-  response <- request_make(request, encode = "json")
+  response <- request_make(request)
   gargle::response_process(response)
 }
 
@@ -165,7 +165,7 @@ list_permissions_one <- function(id) {
   # TODO: is this still a problem for shared drives? probably
   # TO DO: we aren't dealing with the fact that this endpoint is paginated
   # for Team Drives
-  response <- request_make(request, encode = "json")
+  response <- request_make(request)
   # if capabilities/canReadRevisions (present in File resource) is not true,
   # user will get a 403 "insufficientFilePermissions" here
   if (httr::status_code(response) == 403) {

@@ -94,7 +94,7 @@ change_publish_one <- function(id, params) {
     endpoint = "drive.revisions.update",
     params = params
   )
-  response <- request_make(request, encode = "json")
+  response <- request_make(request)
   gargle::response_process(response)
 }
 

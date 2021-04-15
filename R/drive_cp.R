@@ -104,7 +104,7 @@ drive_cp <- function(file,
     endpoint = "drive.files.copy",
     params = params
   )
-  res <- request_make(request, encode = "json")
+  res <- request_make(request)
   proc_res <- gargle::response_process(res)
 
   out <- as_dribble(list(proc_res))

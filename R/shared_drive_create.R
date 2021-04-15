@@ -27,7 +27,7 @@ shared_drive_create <- function(name) {
       fields = "*"
     )
   )
-  response <- request_make(request, encode = "json")
+  response <- request_make(request)
   out <- as_dribble(list(gargle::response_process(response)))
 
   message_glue("\nShared drive created:\n  * {out$name}: {out$id}")

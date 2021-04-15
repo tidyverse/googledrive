@@ -96,7 +96,7 @@ drive_update_media <- function(file, media) {
 
   ## media uploads have unique body situations, so customizing here.
   request$body <- httr::upload_file(path = media)
-  response <- request_make(request, encode = "json")
+  response <- request_make(request)
   as_dribble(list(gargle::response_process(response)))
 }
 
@@ -108,7 +108,7 @@ drive_update_metadata <- function(file, meta) {
       meta
     )
   )
-  response <- request_make(request, encode = "json")
+  response <- request_make(request)
   as_dribble(list(gargle::response_process(response)))
 }
 

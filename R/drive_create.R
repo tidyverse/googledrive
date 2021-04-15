@@ -105,7 +105,7 @@ drive_create <- function(name,
     endpoint = "drive.files.create",
     params = params
   )
-  response <- request_make(request, encode = "json")
+  response <- request_make(request)
   proc_res <- gargle::response_process(response)
 
   out <- as_dribble(list(proc_res))

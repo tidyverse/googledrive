@@ -54,7 +54,7 @@ shared_drive_update <- function(shared_drive, ...) {
       meta
     )
   )
-  response <- request_make(request, encode = "json")
+  response <- request_make(request)
   out <- as_dribble(list(gargle::response_process(response)))
 
   message_glue("\nShared drive updated:\n  * {out$name}: {out$id}")
