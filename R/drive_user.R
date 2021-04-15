@@ -19,11 +19,11 @@
 #' user <- drive_user()
 #' user[["permissionId"]]
 #' }
-drive_user <- function(verbose = TRUE) {
+drive_user <- function(verbose = deprecated()) {
+  warn_for_verbose(verbose)
+
   if (!drive_has_token()) {
-    if (verbose) {
-      message("Not logged in as any specific Google user.")
-    }
+    message_glue("Not logged in as any specific Google user.")
     return(invisible())
   }
   about <- drive_about()

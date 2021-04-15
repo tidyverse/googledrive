@@ -8,9 +8,9 @@
 #' target_filepath <- <determined from `path`, `name`, and `media`>
 #' hits <- <get all Drive files at target_filepath>
 #' if (no hits) {
-#'   drive_upload(media, path, name, type, ..., verbose)
+#'   drive_upload(media, path, name, type, ...)
 #' } else if (exactly 1 hit) {
-#'   drive_update(hit, media, ..., verbose)
+#'   drive_update(hit, media, ...)
 #' } else {
 #'   ERROR
 #' }
@@ -50,7 +50,8 @@ drive_put <- function(media,
                       name = NULL,
                       ...,
                       type = NULL,
-                      verbose = TRUE) {
+                      verbose = deprecated()) {
+  warn_for_verbose(verbose)
   if (!file.exists(media)) {
     stop_glue("\nFile does not exist:\n  * {media}")
   }
@@ -76,29 +77,23 @@ drive_put <- function(media,
 
   # Happy Path 1 of 2: no name collision
   if (is.null(hits) || no_file(hits)) {
-    if (verbose) {
-      message_glue("No pre-existing file at this filepath. Calling `drive_upload()`.")
-    }
+    message_glue("No pre-existing file at this filepath. Calling `drive_upload()`.")
     return(drive_upload(
       media = media,
       path = as_id(params[["parents"]]),
       name = params[["name"]],
       type = type,
-      ...,
-      verbose = verbose
+      ...
     ))
   }
 
   # Happy Path 2 of 2: single name collision
   if (single_file(hits)) {
-    if (verbose) {
-      message_glue("Pre-existing file found at this filepath. Calling `drive_update()`.")
-    }
+    message_glue("Pre-existing file found at this filepath. Calling `drive_update()`.")
     return(drive_update(
       hits,
       media = media,
-      ...,
-      verbose = verbose
+      ...
     ))
   }
 

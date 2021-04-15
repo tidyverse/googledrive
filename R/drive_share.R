@@ -78,7 +78,9 @@ drive_share <- function(file,
                         ),
                         type = c("user", "group", "domain", "anyone"),
                         ...,
-                        verbose = TRUE) {
+                        verbose = deprecated()) {
+  warn_for_verbose(verbose)
+
   role <- match.arg(role)
   type <- match.arg(type)
   file <- as_dribble(file)
@@ -92,26 +94,23 @@ drive_share <- function(file,
   permission_out <- purrr::map(
     file$id,
     drive_share_one,
-    params = params,
-    verbose = verbose
+    params = params
   )
 
-  if (verbose) {
-    ok <- purrr::map_chr(permission_out, "type") == type
-    if (any(ok)) {
-      successes <- glue_data(file[ok, ], "  * {name}: {id}")
-      message_collapse(c(
-        "Permissions updated",
-        glue("  * role = {role}"),
-        glue("  * type = {type}"),
-        "For files:",
-        successes
-      ))
-    }
-    if (any(!ok)) {
-      failures <- glue_data(file[ok, ], "  * {name}: {id}")
-      message_collapse(c("Permissions were NOT updated:", failures))
-    }
+  ok <- purrr::map_chr(permission_out, "type") == type
+  if (any(ok)) {
+    successes <- glue_data(file[ok, ], "  * {name}: {id}")
+    message_collapse(c(
+      "Permissions updated",
+      glue("  * role = {role}"),
+      glue("  * type = {type}"),
+      "For files:",
+      successes
+    ))
+  }
+  if (any(!ok)) {
+    failures <- glue_data(file[ok, ], "  * {name}: {id}")
+    message_collapse(c("Permissions were NOT updated:", failures))
   }
 
   ## refresh drive_resource, get full permissions_resource
@@ -121,14 +120,12 @@ drive_share <- function(file,
 
 #' @rdname drive_share
 #' @export
-drive_share_anyone <- function(file, verbose = TRUE) {
-  drive_share(
-    file = file,
-    role = "reader", type = "anyone",
-    verbose = verbose)
+drive_share_anyone <- function(file, verbose = deprecated()) {
+  warn_for_verbose(verbose)
+  drive_share(file = file, role = "reader", type = "anyone")
 }
 
-drive_share_one <- function(id, params, verbose) {
+drive_share_one <- function(id, params) {
   params[["fileId"]] <- id
   request <- request_generate(
     endpoint = "drive.permissions.create",

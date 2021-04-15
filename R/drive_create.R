@@ -74,7 +74,9 @@ drive_create <- function(name,
                          type = NULL,
                          ...,
                          overwrite = NA,
-                         verbose = TRUE) {
+                         verbose = deprecated()) {
+  warn_for_verbose(verbose)
+
   # the order and role of `path` and `name` is naturally inverted here,
   # relative to all other related functions, hence we pre-process
   stopifnot(is_string(name))
@@ -108,11 +110,9 @@ drive_create <- function(name,
 
   out <- as_dribble(list(proc_res))
 
-  if (verbose) {
-    message_glue(
-      "\nCreated Drive file:\n  * {out$name}: {out$id}\n",
-      "with MIME type:\n  * {out$drive_resource[[1]]$mimeType}"
-    )
-  }
+  message_glue(
+    "\nCreated Drive file:\n  * {out$name}: {out$id}\n",
+    "with MIME type:\n  * {out$drive_resource[[1]]$mimeType}"
+  )
   invisible(out)
 }

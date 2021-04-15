@@ -14,7 +14,6 @@
 #' @param id Character vector of shared drive ids or URLs (it is first processed
 #'   with [as_id()]). If both `name` and `id` are non-`NULL`, `id` is silently
 #'   ignored.
-#' @template verbose
 #'
 #' @template dribble-return
 #' @export
@@ -27,7 +26,7 @@
 #' shared_drive_get(id = "KCmiHLXUk9PVA-0AJNG")
 #' shared_drive_get(id = "https://drive.google.com/drive/u/0/folders/KCmiHLXUk9PVA-0AJNG")
 #' }
-shared_drive_get <- function(name = NULL, id = NULL, verbose = TRUE) {
+shared_drive_get <- function(name = NULL, id = NULL) {
   if (length(name) + length(id) == 0) return(dribble())
 
   if (!is.null(name) && inherits(name, "drive_id")) {
@@ -63,11 +62,11 @@ get_one_shared_drive_id <- function(id) {
 shared_drive_from_name <- function(name = NULL) {
   if (length(name) == 0) return(dribble())
 
-  shared_drives <- shared_drive_find(verbose = FALSE)
+  shared_drives <- shared_drive_find()
   if (no_file(shared_drives)) return(dribble())
 
   shared_drives <- shared_drives[shared_drives$name %in% name, ]
-  ## TO DO: if (verbose), message if a name matches 0 or multiple shared drives?
+  ## TO DO: message if a name matches 0 or multiple shared drives?
 
   shared_drives[order(match(shared_drives$name, name)), ]
 }

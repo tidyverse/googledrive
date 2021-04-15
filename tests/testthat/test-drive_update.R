@@ -50,9 +50,9 @@ test_that("no op if no media, no metadata", {
   skip_if_no_token()
   skip_if_offline()
 
-  expect_message(
+  local_drive_loud()
+  expect_snapshot(
     out <- drive_update(nm_("update-fodder")),
-    "No updates specified"
   )
   expect_s3_class(out, "dribble")
 })

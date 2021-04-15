@@ -126,8 +126,9 @@ drive_find <- function(pattern = NULL,
                        shared_drive = NULL,
                        corpus = NULL,
                        ...,
-                       verbose = TRUE,
+                       verbose = deprecated(),
                        team_drive = deprecated()) {
+  warn_for_verbose(verbose)
   if (!is.null(pattern) && !(is_string(pattern))) {
     stop_glue("`pattern` must be a character string.")
   }
@@ -176,8 +177,7 @@ drive_find <- function(pattern = NULL,
   proc_res_list <- do_paginated_request(
     request,
     n_max = n_max,
-    n = function(x) length(x$files),
-    verbose = verbose
+    n = function(x) length(x$files)
   )
 
   res_tbl <- proc_res_list %>%

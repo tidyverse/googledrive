@@ -74,7 +74,9 @@ drive_cp <- function(file,
                      name = NULL,
                      ...,
                      overwrite = NA,
-                     verbose = TRUE) {
+                     verbose = deprecated()) {
+  warn_for_verbose(verbose)
+
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_parental(file)) {
@@ -107,9 +109,7 @@ drive_cp <- function(file,
 
   out <- as_dribble(list(proc_res))
 
-  if (verbose) {
-    new_path <- paste0(append_slash(path$name), out$name)
-    message_glue("\nFile copied:\n  * {file$name} -> {new_path}")
-  }
+  new_path <- paste0(append_slash(path$name), out$name)
+  message_glue("\nFile copied:\n  * {file$name} -> {new_path}")
   invisible(out)
 }

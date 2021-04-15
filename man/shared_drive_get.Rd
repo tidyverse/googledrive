@@ -4,7 +4,7 @@
 \alias{shared_drive_get}
 \title{Get shared drives by name or id}
 \usage{
-shared_drive_get(name = NULL, id = NULL, verbose = TRUE)
+shared_drive_get(name = NULL, id = NULL)
 }
 \arguments{
 \item{name}{Character vector of names. A character vector marked with
@@ -13,9 +13,6 @@ shared_drive_get(name = NULL, id = NULL, verbose = TRUE)
 \item{id}{Character vector of shared drive ids or URLs (it is first processed
 with \code{\link[=as_id]{as_id()}}). If both \code{name} and \code{id} are non-\code{NULL}, \code{id} is silently
 ignored.}
-
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.

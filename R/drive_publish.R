@@ -36,20 +36,21 @@
 #' ## Clean up
 #' drive_rm(file)
 #' }
-drive_publish <- function(file, ..., verbose = TRUE) {
-  drive_change_publish(file = file, publish = TRUE, ..., verbose = verbose)
+drive_publish <- function(file, ..., verbose = deprecated()) {
+  warn_for_verbose(verbose)
+  drive_change_publish(file = file, publish = TRUE, ...)
 }
 
 #' @rdname drive_publish
 #' @export
-drive_unpublish <- function(file, ..., verbose = TRUE) {
-  drive_change_publish(file = file, publish = FALSE, ..., verbose = verbose)
+drive_unpublish <- function(file, ..., verbose = deprecated()) {
+  warn_for_verbose(verbose)
+  drive_change_publish(file = file, publish = FALSE, ...)
 }
 
 drive_change_publish <- function(file,
                                  publish = TRUE,
-                                 ...,
-                                 verbose = TRUE) {
+                                 ...) {
   file <- as_dribble(file)
   file <- confirm_some_files(file)
 
@@ -79,13 +80,11 @@ drive_change_publish <- function(file,
     change_publish_one,
     params = params
   )
-  if (verbose) {
-    success <- glue_data(file, "  * {name}: {id}")
-    message_collapse(c(
-      glue("Files now {if (publish) '' else 'NOT '}published:\n"),
-      success
-    ))
-  }
+  success <- glue_data(file, "  * {name}: {id}")
+  message_collapse(c(
+    glue("Files now {if (publish) '' else 'NOT '}published:\n"),
+    success
+  ))
   invisible(drive_reveal(file, "published"))
 }
 

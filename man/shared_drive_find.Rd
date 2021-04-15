@@ -4,7 +4,7 @@
 \alias{shared_drive_find}
 \title{Find shared drives}
 \usage{
-shared_drive_find(pattern = NULL, n_max = Inf, ..., verbose = TRUE)
+shared_drive_find(pattern = NULL, n_max = Inf, ...)
 }
 \arguments{
 \item{pattern}{Character. If provided, only the items whose names match this
@@ -16,9 +16,6 @@ applies to the results requested from the API, which may be further
 filtered locally, via the \code{pattern} argument.}
 
 \item{...}{Other parameters to pass along in the request, such as \code{pageSize}.}
-
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.

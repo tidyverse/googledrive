@@ -80,7 +80,9 @@ do_paginated_request <- function(x,
                                  ...,
                                  n_max = Inf,
                                  n = function(res) 1,
-                                 verbose = TRUE) {
+                                 verbose = deprecated()) {
+  warn_for_verbose(verbose)
+
   ## when traversing pages, you can't cleanly separate the task into
   ## request_make() and gargle::response_process(), because you need to process
   ## response / page i to get the pageToken for request / page i + 1
@@ -103,10 +105,10 @@ do_paginated_request <- function(x,
     x$query$pageToken <- responses[[i]]$nextPageToken
     x$url <- httr::modify_url(x$url, query = x$query)
     total <- total + n(responses[[i]])
-    if (verbose && i == 2) message_glue("Items so far: ")
-    if (verbose && i > 1) message_glue("{total} ", .appendLF = FALSE)
+    if (i == 2) message_glue("Items so far: ")
+    if (i > 1) message_glue("{total} ", .appendLF = FALSE)
     if (is.null(x$query$pageToken) || total >= n_max) {
-      if (verbose && i > 1) message("")
+      if (i > 1) message("")
       break
     }
     i <- i + 1

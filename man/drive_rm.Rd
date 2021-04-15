@@ -4,7 +4,7 @@
 \alias{drive_rm}
 \title{Delete files from Drive}
 \usage{
-drive_rm(..., verbose = TRUE)
+drive_rm(..., verbose = deprecated())
 }
 \arguments{
 \item{...}{One or more Drive files, specified in any valid way, i.e. as a
@@ -12,8 +12,12 @@ drive_rm(..., verbose = TRUE)
 any combination thereof. Elements are processed with \code{\link[=as_dribble]{as_dribble()}} and
 row-bound prior to deletion.}
 
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
+\item{verbose}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This logical argument to
+individual googledrive functions is deprecated. To globally suppress
+googledrive messaging, use \code{options(googledrive_quiet = TRUE)} (the default
+behaviour is to emit informational messages). To suppress messaging in a
+more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_quiet()}} or
+\code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
 }
 \value{
 Logical vector, indicating whether the delete succeeded.

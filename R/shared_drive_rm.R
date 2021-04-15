@@ -6,7 +6,6 @@
 #'   * <https://developers.google.com/drive/api/v3/reference/drives/delete>
 #'
 #' @template shared_drive-plural
-#' @template verbose
 #'
 #' @return Logical vector, indicating whether the delete succeeded.
 #' @export
@@ -27,24 +26,22 @@
 #' ## remove by dribble
 #' shared_drive_rm(sd04)
 #' }
-shared_drive_rm <- function(drive = NULL, verbose = TRUE) {
+shared_drive_rm <- function(drive = NULL) {
   shared_drive <- as_shared_drive(drive)
-  if (no_file(shared_drive) && verbose) {
-    message("No such shared drive(s) found to delete.")
+  if (no_file(shared_drive)) {
+    message_glue("No such shared drive(s) found to delete.")
     return(invisible(logical(0)))
   }
 
   out <- purrr::map_lgl(as_id(shared_drive), delete_one_shared_drive)
 
-  if (verbose) {
-    if (any(out)) {
-      successes <- glue_data(shared_drive[out, ], "  * {name}: {id}")
-      message_collapse(c("Shared drives deleted:", successes))
-    }
-    if (any(!out)) {
-      failures <- glue_data(shared_drive[!out, ], "  * {name}: {id}")
-      message_collapse(c("Shared drives NOT deleted:", failures))
-    }
+  if (any(out)) {
+    successes <- glue_data(shared_drive[out, ], "  * {name}: {id}")
+    message_collapse(c("Shared drives deleted:", successes))
+  }
+  if (any(!out)) {
+    failures <- glue_data(shared_drive[!out, ], "  * {name}: {id}")
+    message_collapse(c("Shared drives NOT deleted:", failures))
   }
   invisible(out)
 }

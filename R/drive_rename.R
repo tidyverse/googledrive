@@ -30,6 +30,10 @@
 #' drive_rm(file)
 #' }
 #' @export
-drive_rename <- function(file, name = NULL, overwrite = NA, verbose = TRUE) {
-  drive_mv(file = file, name = name, overwrite = overwrite, verbose = verbose)
+drive_rename <- function(file,
+                         name = NULL,
+                         overwrite = NA,
+                         verbose = deprecated()) {
+  warn_for_verbose(verbose)
+  drive_mv(file = file, name = name, overwrite = overwrite)
 }

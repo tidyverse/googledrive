@@ -30,7 +30,7 @@ drive_reveal_path <- function(file) {
   ROOT_ID <- root_id()
   x <- purrr::map(file$id, ~pathify_one_id(.x, nodes, ROOT_ID))
 
-  ## TO DO: if (verbose), message if a dribble doesn't have exactly 1 row?
+  ## TO DO: message if a dribble doesn't have exactly 1 row?
   exec(rbind, !!!x)
 }
 
@@ -58,7 +58,7 @@ dribble_from_path <- function(path = NULL,
   ROOT_ID <- root_id()
   x <- purrr::map(path, ~pathify_one_path(.x, nodes, ROOT_ID))
 
-  ## TO DO: if (verbose), message if a dribble doesn't have exactly 1 row?
+  ## TO DO: message if a dribble doesn't have exactly 1 row?
   exec(rbind, !!!x)
 }
 
@@ -100,11 +100,12 @@ get_nodes <- function(path,
   folders <- "mimeType = 'application/vnd.google-apps.folder'"
   q_clauses <- or(c(folders, names))
 
-  nodes <- drive_find(
-    shared_drive = shared_drive,
-    corpus = corpus,
-    q = q_clauses,
-    verbose = FALSE
+  with_drive_quiet(
+    nodes <- drive_find(
+      shared_drive = shared_drive,
+      corpus = corpus,
+      q = q_clauses
+    )
   )
 
   if (any(is_rootpath(path))) {

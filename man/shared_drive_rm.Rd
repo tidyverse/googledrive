@@ -4,15 +4,12 @@
 \alias{shared_drive_rm}
 \title{Delete shared drives}
 \usage{
-shared_drive_rm(drive = NULL, verbose = TRUE)
+shared_drive_rm(drive = NULL)
 }
 \arguments{
 \item{drive}{Anything that identifies the shared drive(s) of interest. Can
 be a character vector of names, a character vector of file ids or URLs
 marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}} consisting only of shared drives.}
-
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
 }
 \value{
 Logical vector, indicating whether the delete succeeded.

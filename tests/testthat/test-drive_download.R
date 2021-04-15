@@ -32,11 +32,14 @@ test_that("drive_download() won't overwrite existing file", {
 test_that("drive_download() downloads a file and adds local_path column", {
   skip_if_no_token()
   skip_if_offline()
+
   local_path <- paste0(nm_("DESC"), ".txt")
   on.exit(unlink(local_path))
+  local_drive_loud()
 
-  # TODO: make this a snapshot test, once I have verbosity control
-  out <- drive_download(nm_("DESC"), path = local_path, overwrite = TRUE)
+  expect_snapshot(
+    out <- drive_download(nm_("DESC"), path = local_path, overwrite = TRUE)
+  )
   expect_true(file.exists(local_path))
   expect_identical(out$local_path, local_path)
 })
@@ -56,9 +59,11 @@ test_that("drive_download() converts with explicit `type`", {
 
   nm <- paste0(nm_("DESC-doc"), ".docx")
   on.exit(unlink(nm))
+  local_drive_loud()
 
-  # TODO: make this a snapshot test, once I have verbosity control
-  drive_download(file = nm_("DESC-doc"), type = "docx")
+  expect_snapshot(
+    drive_download(file = nm_("DESC-doc"), type = "docx")
+  )
   expect_true(file.exists(nm))
 })
 
@@ -68,9 +73,11 @@ test_that("drive_download() converts with type implicit in `path`", {
 
   nm <- paste0(nm_("DESC-doc"), ".docx")
   on.exit(unlink(nm))
+  local_drive_loud()
 
-  # TODO: make this a snapshot test, once I have verbosity control
-  drive_download(file = nm_("DESC-doc"), path = nm)
+  expect_snapshot(
+    drive_download(file = nm_("DESC-doc"), path = nm)
+  )
   expect_true(file.exists(nm))
 })
 
@@ -80,8 +87,10 @@ test_that("drive_download() converts using default MIME type, if necessary", {
 
   nm <- paste0(nm_("DESC-doc"), ".docx")
   on.exit(unlink(nm))
+  local_drive_loud()
 
-  # TODO: make this a snapshot test, once I have verbosity control
-  drive_download(file = nm_("DESC-doc"))
+  expect_snapshot(
+    drive_download(file = nm_("DESC-doc"))
+  )
   expect_true(file.exists(nm))
 })

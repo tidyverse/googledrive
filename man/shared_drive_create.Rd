@@ -4,14 +4,11 @@
 \alias{shared_drive_create}
 \title{Create a new shared drive}
 \usage{
-shared_drive_create(name, verbose = TRUE)
+shared_drive_create(name)
 }
 \arguments{
 \item{name}{Character. Name of the new shared drive. Must be non-empty and not
 entirely whitespace.}
-
-\item{verbose}{Logical, indicating whether to print informative messages
-(default \code{TRUE}).}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.

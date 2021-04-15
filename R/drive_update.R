@@ -20,10 +20,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## Create a new file, so we can update it
+#' # Create a new file, so we can update it
 #' x <- drive_upload(drive_example("chicken.csv"))
 #'
-#' ## Update the file with new media
+#' # Update the file with new media
 #' x <- x %>%
 #'   drive_update(drive_example("chicken.txt"))
 #'
@@ -50,7 +50,8 @@
 drive_update <- function(file,
                          media = NULL,
                          ...,
-                         verbose = TRUE) {
+                         verbose = deprecated()) {
+  warn_for_verbose(verbose)
   if (!is.null(media) && !file.exists(media)) {
     stop_glue("\nLocal file does not exist:\n  * {media}")
   }
@@ -61,7 +62,7 @@ drive_update <- function(file,
   meta <- toCamel(list2(...))
 
   if (is.null(media) && length(meta) == 0) {
-    if (verbose) message("No updates specified.")
+    message_glue("No updates specified.")
     return(invisible(file))
   }
 
@@ -77,9 +78,7 @@ drive_update <- function(file,
     }
   }
 
-  if (verbose) {
-    message_glue("\nFile updated:\n  * {out$name}: {out$id}")
-  }
+  message_glue("\nFile updated:\n  * {out$name}: {out$id}")
 
   invisible(out)
 }

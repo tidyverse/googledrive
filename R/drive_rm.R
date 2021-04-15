@@ -31,7 +31,8 @@
 #' ## Remove them all at once, specified in different ways
 #' drive_rm(x1, "chicken-def.txt", as_id(x2))
 #' }
-drive_rm <- function(..., verbose = TRUE) {
+drive_rm <- function(..., verbose = deprecated()) {
+  warn_for_verbose(verbose)
   dots <- list(...)
   if (length(dots) == 0) {
     dots <- list(NULL)
@@ -44,19 +45,17 @@ drive_rm <- function(..., verbose = TRUE) {
   # therefore as_dribble() can return >1 row representing a single file)
   file <- file[!duplicated(file$id), ]
 
-  if (no_file(file) && verbose) message("No such file(s) to delete.")
+  if (no_file(file)) message_glue("No such file(s) to delete.")
 
   out <- purrr::map_lgl(file$id, delete_one)
 
-  if (verbose) {
-    if (any(out)) {
-      successes <- glue_data(file[out, ], "  * {name}: {id}")
-      message_collapse(c("Files deleted:", successes))
-    }
-    if (any(!out)) {
-      failures <- glue_data(file[!out, ], "  * {name}: {id}")
-      message_collapse(c("Files NOT deleted:", failures))
-    }
+  if (any(out)) {
+    successes <- glue_data(file[out, ], "  * {name}: {id}")
+    message_collapse(c("Files deleted:", successes))
+  }
+  if (any(!out)) {
+    failures <- glue_data(file[!out, ], "  * {name}: {id}")
+    message_collapse(c("Files NOT deleted:", failures))
   }
   invisible(out)
 }
