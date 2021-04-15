@@ -13,11 +13,15 @@ warn_for_verbose <- function(verbose = TRUE, env = parent.frame()) {
   called_from <- sys.parent(1)
   if (called_from == 0) {
     # called from global env, presumably in a test or during development
-    called_as <- "some_googledrive_function()"
+    caller <- "some_googledrive_function"
   } else {
-    called_as <- deparse(sys.call(called_from))
+    called_as <- sys.call(called_from)
+    if (is.call(called_as) && is.symbol(called_as[[1]])) {
+      caller <- as.character(called_as[[1]])
+    } else {
+      caller <- "some_googledrive_function"
+    }
   }
-  caller <- sub("[(].*[)]", "", called_as)
   lifecycle::deprecate_warn(
     when = "2.0.0",
     what = glue("{caller}(verbose)"),
