@@ -1,9 +1,9 @@
 test_that("drive_auth_configure works", {
   old_app <- drive_oauth_app()
   old_api_key <- drive_api_key()
-  on.exit({
+  withr::defer(
     drive_auth_configure(app = old_app, api_key = old_api_key)
-  })
+  )
 
   expect_error_free(drive_oauth_app())
   expect_error_free(drive_api_key())

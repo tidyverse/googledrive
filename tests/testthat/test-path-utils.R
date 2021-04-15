@@ -184,10 +184,9 @@ test_that("rationalize_path_name() populates `path` and `name` and correctly", {
 test_that("check_for_overwrite() does its job", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit({
-    drive_rm(file.path(nm_("create-in-me"), me_("name-collision")))
-    drive_empty_trash()
-  })
+
+  withr::defer(drive_empty_trash())
+  defer_drive_rm(file.path(nm_("create-in-me"), me_("name-collision")))
 
   PARENT_ID <- drive_get(nm_("create-in-me"))$id
 
@@ -203,7 +202,11 @@ test_that("check_for_overwrite() does its job", {
   )
 
   expect_error_free(
-    second <- drive_create(me_("name-collision"), path = as_id(PARENT_ID), overwrite = TRUE)
+    second <- drive_create(
+      me_("name-collision"),
+      path = as_id(PARENT_ID),
+      overwrite = TRUE
+    )
   )
   expect_identical(first$name, second$name)
   expect_identical(
@@ -213,7 +216,11 @@ test_that("check_for_overwrite() does its job", {
   expect_false(first$id == second$id)
 
   expect_error_free(
-    drive_create(me_("name-collision"), path = as_id(PARENT_ID), overwrite = NA)
+    drive_create(
+      me_("name-collision"),
+      path = as_id(PARENT_ID),
+      overwrite = NA
+    )
   )
   df <- drive_ls(nm_("create-in-me"))
   expect_identical(nrow(df), 2L)

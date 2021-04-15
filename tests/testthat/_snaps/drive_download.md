@@ -1,7 +1,12 @@
+# drive_download() won't overwrite existing file
+
+    Path exists and overwrite is FALSE:
+      * precious-TEST-drive-download.txt
+
 # drive_download() downloads a file and adds local_path column
 
     Code
-      out <- drive_download(nm_("DESC"), path = local_path, overwrite = TRUE)
+      withr::with_dir(tmpdir, out <- drive_download(nm_("DESC"), path = download_filepath))
     Message <simpleMessage>
       File downloaded:
         * DESC-TEST-drive-download
@@ -11,7 +16,7 @@
 # drive_download() converts with explicit `type`
 
     Code
-      drive_download(file = nm_("DESC-doc"), type = "docx")
+      withr::with_dir(tmpdir, drive_download(file = nm_("DESC-doc"), type = "docx"))
     Message <simpleMessage>
       File downloaded:
         * DESC-doc-TEST-drive-download
@@ -21,7 +26,7 @@
 # drive_download() converts with type implicit in `path`
 
     Code
-      drive_download(file = nm_("DESC-doc"), path = nm)
+      withr::with_dir(tmpdir, drive_download(file = nm_("DESC-doc"), path = download_filename))
     Message <simpleMessage>
       File downloaded:
         * DESC-doc-TEST-drive-download
@@ -31,7 +36,7 @@
 # drive_download() converts using default MIME type, if necessary
 
     Code
-      drive_download(file = nm_("DESC-doc"))
+      withr::with_dir(tmpdir, drive_download(file = nm_("DESC-doc")))
     Message <simpleMessage>
       File downloaded:
         * DESC-doc-TEST-drive-download

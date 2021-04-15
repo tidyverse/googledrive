@@ -25,3 +25,10 @@ expect_error_free <- function(...) {
 # usage:
 # test_file("something.rds")
 test_file <- function(name) testthat::test_path("test-files", name)
+
+defer_drive_rm <- function(..., env = parent.frame()) {
+  withr::defer(
+    with_drive_quiet(drive_rm(...)),
+    envir = env
+  )
+}

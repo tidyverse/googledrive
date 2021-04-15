@@ -44,7 +44,7 @@ test_that("drive_create() create specific things in root folder", {
   skip_if_no_token()
   skip_if_offline()
 
-  on.exit(drive_rm(me_("docs-in-root")), add = TRUE)
+  defer_drive_rm(me_("docs-in-root"))
   out <- drive_create(me_("docs-in-root"), type = "document")
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("docs-in-root"))
@@ -54,7 +54,7 @@ test_that("drive_create() create specific things in root folder", {
     drive_mime_type("document")
   )
 
-  on.exit(drive_rm(me_("sheets-in-root")), add = TRUE)
+  defer_drive_rm(me_("sheets-in-root"))
   out <- drive_create(me_("sheets-in-root"), type = "spreadsheet")
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("sheets-in-root"))
@@ -64,7 +64,7 @@ test_that("drive_create() create specific things in root folder", {
     drive_mime_type("spreadsheet")
   )
 
-  on.exit(drive_rm(me_("slides-in-root")), add = TRUE)
+  defer_drive_rm(me_("slides-in-root"))
   out <- drive_create(me_("slides-in-root"), type = "presentation")
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("slides-in-root"))
@@ -79,7 +79,7 @@ test_that("drive_mkdir() creates a folder in root folder", {
   skip_if_no_token()
   skip_if_offline()
 
-  on.exit(drive_rm(me_("folder-in-root")))
+  defer_drive_rm(me_("folder-in-root"))
   out <- drive_mkdir(me_("folder-in-root"))
   expect_s3_class(out, "dribble")
   expect_identical(out$name, me_("folder-in-root"))
@@ -93,7 +93,7 @@ test_that("drive_mkdir() creates a folder in root folder", {
 test_that("drive_create() accepts parent folder given as dribble", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(me_("a")))
+  defer_drive_rm(me_("a"))
 
   PARENT <- drive_get(nm_("create-in-me"))
   out <- drive_create(me_("a"), PARENT)
@@ -108,7 +108,7 @@ test_that("drive_create() accepts parent folder given as dribble", {
 test_that("drive_create() accepts parent folder given as file id", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(me_("b")))
+  defer_drive_rm(me_("b"))
 
   PARENT <- drive_get(nm_("create-in-me"))
   out <- drive_create(me_("b"), as_id(PARENT$id))
@@ -119,7 +119,7 @@ test_that("drive_create() accepts parent folder given as file id", {
 test_that("drive_create() accepts name as part of path", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(me_("c")))
+  defer_drive_rm(me_("c"))
 
   out <- drive_create(file.path(nm_("create-in-me"), me_("c")))
   expect_s3_class(out, "dribble")
@@ -129,7 +129,7 @@ test_that("drive_create() accepts name as part of path", {
 test_that("drive_create() parent separately, as a path", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(c(me_("e"), me_("f"))))
+  defer_drive_rm(c(me_("e"), me_("f")))
 
   ## no trailing slash on parent
   out <- drive_create(me_("e"), path = nm_("create-in-me"))
@@ -156,7 +156,7 @@ test_that("drive_create() catches invalid parameters", {
 test_that("drive_create() accepts metadata via ...", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(me_("create-me-in-root")))
+  defer_drive_rm(me_("create-me-in-root"))
 
   out <- drive_create(
     me_("create-me-in-root"),

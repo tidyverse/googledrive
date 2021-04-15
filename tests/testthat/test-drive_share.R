@@ -25,7 +25,7 @@ test_that("drive_share() errors for invalid `role` or `type`", {
 test_that("drive_share() adds permissions", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(me_("mirrors-to-share")))
+  defer_drive_rm(me_("mirrors-to-share"))
 
   file <- drive_upload(
     file.path(R.home("doc"), "BioC_mirrors.csv"),

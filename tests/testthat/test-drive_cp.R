@@ -28,7 +28,7 @@ test_that("drive_cp() can copy file in place", {
   skip_if_offline()
 
   cp_name <- me_("i-am-a-file")
-  on.exit(drive_rm(cp_name))
+  defer_drive_rm(cp_name)
   local_drive_loud()
 
   file <- drive_get(nm_("i-am-a-file"))
@@ -55,7 +55,7 @@ test_that("drive_cp() can copy a file into a different folder", {
   skip_if_offline()
 
   cp_name <- me_("i-am-a-file")
-  on.exit(drive_rm(cp_name))
+  defer_drive_rm(cp_name)
   local_drive_loud()
 
   file <- drive_get(nm_("i-am-a-file"))
@@ -102,7 +102,7 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
   skip_if_offline()
 
   cp_name <- me_("file-name")
-  on.exit(drive_rm(cp_name))
+  defer_drive_rm(cp_name)
   local_drive_loud()
 
   ## if given `path` and `name`, assumes `path` is a folder

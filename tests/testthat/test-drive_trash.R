@@ -23,7 +23,7 @@ if (CLEAN) {
 test_that("drive_trash() moves files to trash and drive_untrash() undoes", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(drive_find(me_("trashee-[12]"))))
+  defer_drive_rm(drive_find(me_("trashee-[12]")))
 
   trashee1 <- drive_cp(nm_("trash-fodder"), name = me_("trashee-1"))
   trashee2 <- drive_cp(nm_("trash-fodder"), name = me_("trashee-2"))

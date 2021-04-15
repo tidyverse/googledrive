@@ -22,11 +22,11 @@ test_that("drive_put() works", {
 
   local_file <- tempfile(me_("foo"), fileext = ".txt")
   download_target <- tempfile(me_("download"), fileext = ".txt")
-  on.exit({
+  withr::defer({
     unlink(local_file)
     unlink(download_target)
-    drive_rm(drive_find(me_("foo")))
   })
+  defer_drive_rm(drive_find(me_("foo")))
 
   writeLines(c("beginning", "middle"), local_file)
 

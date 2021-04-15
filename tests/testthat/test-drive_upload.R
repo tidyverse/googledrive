@@ -23,7 +23,7 @@ test_that("drive_upload() detects non-existent file", {
 test_that("drive_upload() places file in non-root folder, with new name", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(me_("DESCRIPTION")))
+  defer_drive_rm(me_("DESCRIPTION"))
 
   destination <- drive_get(nm_("upload-into-me"))
   uploadee <- drive_upload(
@@ -40,7 +40,7 @@ test_that("drive_upload() places file in non-root folder, with new name", {
 test_that("drive_upload() accepts body metadata via ...", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(me_("DESCRIPTION")))
+  defer_drive_rm(me_("DESCRIPTION"))
 
   uploadee <- drive_upload(
     system.file("DESCRIPTION"),

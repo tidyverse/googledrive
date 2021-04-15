@@ -23,11 +23,11 @@ test_that("drive_mv() can rename file", {
 
   name_1 <- me_("DESC")
   name_2 <- me_("DESC-renamed")
-  on.exit(drive_rm(name_2))
-  local_drive_loud()
+  defer_drive_rm(name_2)
 
   file <- drive_upload(system.file("DESCRIPTION"), name_1)
 
+  local_drive_loud()
   drive_mv_message <- capture.output(
     file <- drive_mv(file, name = name_2),
     type = "message"
@@ -47,12 +47,12 @@ test_that("drive_mv() can move a file into a folder given as path", {
   skip_if_offline()
 
   mv_name <- me_("DESC")
-  on.exit(drive_rm(mv_name))
-  local_drive_loud()
+  defer_drive_rm(mv_name)
 
   mv_file <- drive_upload(system.file("DESCRIPTION"), mv_name)
 
-  ## path is detected as folder (must have trailing slash)
+  local_drive_loud()
+  # path is detected as folder (must have trailing slash)
   drive_mv_message <- capture.output(
     mv_file <- drive_mv(mv_file, paste0(nm_("move-files-into-me"), "/")),
     type = "message"
@@ -73,12 +73,12 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
   skip_if_offline()
 
   mv_name <- me_("DESC")
-  on.exit(drive_rm(mv_name))
-  local_drive_loud()
+  defer_drive_rm(mv_name)
 
   mv_file <- drive_upload(system.file("DESCRIPTION"), mv_name)
   destination <- drive_get(nm_("move-files-into-me"))
 
+  local_drive_loud()
   drive_mv_message <- capture.output(
     mv_file <- drive_mv(mv_file, destination),
     type = "message"
@@ -99,11 +99,11 @@ test_that("drive_mv() can rename and move, using `path` and `name`", {
 
   name_1 <- me_("DESC")
   name_2 <- me_("DESC-renamed")
-  on.exit(drive_rm(name_2))
-  local_drive_loud()
+  defer_drive_rm(name_2)
 
   mv_file <- drive_upload(system.file("DESCRIPTION"), name_1)
 
+  local_drive_loud()
   drive_mv_message <- capture.output(
     mv_file <- drive_mv(mv_file, nm_("move-files-into-me"), name_2),
     type = "message"
@@ -124,11 +124,11 @@ test_that("drive_mv() can rename and move, using `path` only", {
 
   name_1 <- me_("DESC")
   name_2 <- me_("DESC-renamed")
-  on.exit(drive_rm(name_2))
-  local_drive_loud()
+  defer_drive_rm(name_2)
 
   mv_file <- drive_upload(system.file("DESCRIPTION"), name_1)
 
+  local_drive_loud()
   drive_mv_message <- capture.output(
     mv_file <- drive_mv(
       mv_file,

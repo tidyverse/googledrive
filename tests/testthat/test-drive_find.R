@@ -113,7 +113,7 @@ test_that("marshal_q_clauses() handles multiple q and vector q", {
 test_that("trashed argument works", {
   skip_if_no_token()
   skip_if_offline()
-  on.exit(drive_rm(drive_find(me_("trashed"), trashed = NA)))
+  defer_drive_rm(drive_find(me_("trashed"), trashed = NA))
 
   trashed <- drive_cp(nm_("copy-me"), name = me_("trashed"))
   drive_trash(trashed)
