@@ -14,8 +14,8 @@ if (CLEAN) {
 # ---- setup ----
 if (SETUP) {
   drive_mkdir(nm_("i-am-a-folder"))
-  drive_mkdir(nm_("not-unique-folder"))
-  drive_mkdir(nm_("not-unique-folder"))
+  drive_mkdir(name = nm_("not-unique-folder"), path = as_id(googledrive:::root_id()))
+  drive_mkdir(name = nm_("not-unique-folder"), path = as_id(googledrive:::root_id()))
   drive_upload(
     system.file("DESCRIPTION"),
     nm_("i-am-a-file")

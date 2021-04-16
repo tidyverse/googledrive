@@ -30,15 +30,15 @@ if (SETUP) {
     type = "document",
     starred = TRUE
   )
-  folder1_level1 <- drive_mkdir(nm_("folder1-level1"), parent = top)
-  drive_mkdir(nm_("folder2-level1"), parent = top)
+  folder1_level1 <- drive_mkdir(nm_("folder1-level1"), path = top)
+  drive_mkdir(nm_("folder2-level1"), path = top)
   x <- drive_upload(
     system.file("DESCRIPTION"),
     path = folder1_level1,
     name = nm_("banana"),
     type = "document"
   )
-  folder1_level2 <- drive_mkdir(nm_("folder1-level2"), parent = folder1_level1)
+  folder1_level2 <- drive_mkdir(nm_("folder1-level2"), path = folder1_level1)
   x <- drive_upload(
     system.file("DESCRIPTION"),
     path = folder1_level2,

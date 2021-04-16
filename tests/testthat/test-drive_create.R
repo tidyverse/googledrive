@@ -5,8 +5,7 @@ nm_ <- nm_fun("TEST-drive-create", NULL)
 # ---- clean ----
 if (CLEAN) {
   drive_trash(c(
-    nm_("create-in-me"),
-    nm_("create-me-in-root")
+    nm_("create-in-me")
   ))
 }
 

@@ -1,9 +1,9 @@
-## this script extracts code from all individual test files to do:
-##   * test setup = create the files/folders our tests expect to find on Drive
-##   * test cleanup = delete the above files/folder from Drive
-## execute this to get two R scripts:
-##   * all-test-setup.R
-##   * all-test-clean.R
+# this script extracts code from all individual test files to do:
+#   * test setup = create the files/folders our tests expect to find on Drive
+#   * test cleanup = delete the above files/folder from Drive
+# execute this to get two R scripts:
+#   * all-test-setup.R
+#   * all-test-clean.R
 
 library(purrr)
 library(glue)
@@ -46,9 +46,8 @@ header <- "
 #' This script aggregates the test-related {action} code from all test files.
 
 library(googledrive)
-source(testthat::test_path('helper.R'))
-whoami <- drive_user()$user
-whoami[c('displayName', 'emailAddress')]
+source(here::here('tests', 'testthat', 'helper.R'))
+drive_user()
 
 ## change this to TRUE when you are really ready to do this!
 {ACTION} <- FALSE
