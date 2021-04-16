@@ -49,14 +49,8 @@ drive_mkdir <- function(name,
                         path = NULL,
                         ...,
                         overwrite = NA,
-                        parent = "DEPRECATED",
                         verbose = deprecated()) {
   warn_for_verbose(verbose)
-  # TODO: remove this in v2.0.0
-  if (!missing(parent)) {
-    warning_glue("`parent` is deprecated as of v1.0.0, use `path` now")
-    path <- parent
-  }
 
   drive_create(
     name = name,
