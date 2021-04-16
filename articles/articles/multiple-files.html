@@ -175,7 +175,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/glue">glue</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 <div id="upload" class="section level3">
 <h3 class="hasAnchor">
 <a href="#upload" class="anchor"></a>Upload</h3>
@@ -190,7 +190,12 @@
 <code class="sourceCode R"><span class="va">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_mkdir.html">drive_mkdir</a></span><span class="op">(</span><span class="st">"upload-into-me-article-demo"</span><span class="op">)</span>
 <span class="co">#&gt; Error: Unclear if `path` specifies parent folder or full path</span>
 <span class="co">#&gt; to the new file, including its name. See ?as_dribble() for details.</span>
-<span class="va">files</span> <span class="op">&lt;-</span> <span class="fu">map</span><span class="op">(</span><span class="va">local_files</span>, <span class="op">~</span> <span class="fu"><a href="../../reference/drive_upload.html">drive_upload</a></span><span class="op">(</span><span class="va">.x</span>, path <span class="op">=</span> <span class="va">folder</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../../reference/googledrive-configuration.html">with_drive_quiet</a></span><span class="op">(</span>
+  <span class="va">files</span> <span class="op">&lt;-</span> <span class="fu">map</span><span class="op">(</span><span class="va">local_files</span>, <span class="op">~</span> <span class="fu"><a href="../../reference/drive_upload.html">drive_upload</a></span><span class="op">(</span><span class="va">.x</span>, path <span class="op">=</span> <span class="va">folder</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span>
+<span class="co">#&gt; Warning: The `verbose` argument of `drive_upload()` is deprecated as of googledrive 2.0.0.</span>
+<span class="co">#&gt; Set `options(googledrive_quiet = TRUE)` to suppress all googledrive messages.</span>
+<span class="co">#&gt; For finer control, use `local_drive_quiet()` or `with_drive_quiet()`.</span>
+<span class="co">#&gt; googledrive's `verbose` argument will be removed in the future.</span>
 <span class="co">#&gt; Error in is_path(path): object 'folder' not found</span></code></pre></div>
 <p>First, let’s confirm that we uploaded the files into the new folder.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -213,10 +218,10 @@
 <p>Imagine that we now wish these file names had a date prefix. First, form the new names. We use <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code> for string interpolation but you could also use <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code>. Second, we map over two inputs: the list of dribbles from above and the vector of new names.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="va">new_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"{Sys.Date()}_{basename(local_files)}"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; 2021-04-15_chicken.csv</span>
-<span class="co">#&gt; 2021-04-15_chicken.jpg</span>
-<span class="co">#&gt; 2021-04-15_chicken.pdf</span>
-<span class="co">#&gt; 2021-04-15_chicken.txt</span>
+<span class="co">#&gt; 2021-04-16_chicken.csv</span>
+<span class="co">#&gt; 2021-04-16_chicken.jpg</span>
+<span class="co">#&gt; 2021-04-16_chicken.pdf</span>
+<span class="co">#&gt; 2021-04-16_chicken.txt</span>
 <span class="va">files_dribble</span> <span class="op">&lt;-</span> <span class="fu">map2_df</span><span class="op">(</span><span class="va">files</span>, <span class="va">new_names</span>, <span class="va">drive_rename</span><span class="op">)</span>
 <span class="co">#&gt; Error in map2(.x, .y, .f, ...): object 'files' not found</span></code></pre></div>
 <p>We use <code><a href="https://purrr.tidyverse.org/reference/map2.html">purrr::map2_df()</a></code> to work through <code>files</code>, the list of dribbles (= Drive files), and <code>new_names</code>, the vector of new names, and row bind the returned dribbles into a single dribble holding all files.</p>

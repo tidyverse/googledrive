@@ -185,6 +185,13 @@
 <a href="https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api">Upcoming changes to the Google Drive API and Google Picker API</a> from the Google Cloud blog</li>
 </ul>
 </div>
+<div id="user-interface" class="section level2">
+<h2 class="hasAnchor">
+<a href="#user-interface" class="anchor"></a>User interface</h2>
+<p><code>googledrive_quiet</code> is a new option to suppress informational messages from googledrive. Unless it’s explicitly set to <code>FALSE</code>, the default is to message.</p>
+<p>The <code>verbose</code> argument of all <code>drive_*()</code> functions is deprecated and will be removed in a future release. In the current release, <code>verbose = FALSE</code> is still honored, but generates a warning.</p>
+<p><code><a href="../reference/googledrive-configuration.html">local_drive_quiet()</a></code> and <code><a href="../reference/googledrive-configuration.html">with_drive_quiet()</a></code> are <a href="https://withr.r-lib.org">withr-style</a> convenience helpers for setting <code>googledrive_quiet = TRUE</code> for some limited scope.</p>
+</div>
 </div>
     <div id="googledrive-101" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.1">

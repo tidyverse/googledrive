@@ -177,15 +177,19 @@ a thin wrapper around <code><a href='drive_about.html'>drive_about()</a></code> 
 information (the information on current user) and prints it nicely.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>drive_user</span><span class='op'>(</span>verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>drive_user</span><span class='op'>(</span>verbose <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>verbose</th>
-      <td><p>Logical, indicating whether to print informative messages
-(default <code>TRUE</code>).</p></td>
+      <td><p><a href='https://lifecycle.r-lib.org/articles/stages.html#deprecated'><img src='figures/lifecycle-deprecated.svg' alt='[Deprecated]' /></a> This logical argument to
+individual googledrive functions is deprecated. To globally suppress
+googledrive messaging, use <code><a href='https://rdrr.io/r/base/options.html'>options(googledrive_quiet = TRUE)</a></code> (the default
+behaviour is to emit informational messages). To suppress messaging in a
+more limited way, use the helpers <code><a href='googledrive-configuration.html'>local_drive_quiet()</a></code> or
+<code><a href='googledrive-configuration.html'>with_drive_quiet()</a></code>.</p></td>
     </tr>
     </table>
 
