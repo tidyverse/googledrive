@@ -9,8 +9,6 @@
 #' @param name Name for the new folder or, optionally, a path that specifies
 #'   an existing parent folder, as well as the new name.
 #' @inheritParams drive_create
-#' @param parent DEPRECATED. Use the `path` argument for this now, which is more
-#'   consistent with other functions in googledrive.
 #'
 #' @template dribble-return
 #' @export

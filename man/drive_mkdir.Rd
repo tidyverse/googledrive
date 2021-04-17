@@ -44,9 +44,6 @@ googledrive messaging, use \code{options(googledrive_quiet = TRUE)} (the default
 behaviour is to emit informational messages). To suppress messaging in a
 more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_quiet()}} or
 \code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
-
-\item{parent}{DEPRECATED. Use the \code{path} argument for this now, which is more
-consistent with other functions in googledrive.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.
