@@ -156,20 +156,6 @@ message_glue <- function(..., .sep = "", .envir = parent.frame(),
   )
 }
 
-message_glue_data <- function(..., .sep = "", .envir = parent.frame(),
-                              .domain = NULL) {
-  # TODO: temporary fix since I switched to testthat 3e before updating the
-  # UI functions
-  quiet <- drive_quiet() %|% is_testing()
-  if (quiet) {
-    return(invisible())
-  }
-  message(
-    glue_data(..., .sep = .sep, .envir = .envir),
-    domain = .domain
-  )
-}
-
 message_collapse <- function(x) {
   # TODO: temporary fix since I switched to testthat 3e before updating the
   # UI functions
@@ -178,22 +164,6 @@ message_collapse <- function(x) {
     return(invisible())
   }
   message(glue_collapse(x, sep = "\n"))
-}
-
-warning_glue <- function(..., .sep = "", .envir = parent.frame(),
-                         call. = FALSE, .domain = NULL) {
-  warning(
-    glue(..., .sep = .sep, .envir = .envir),
-    call. = call., domain = .domain
-  )
-}
-
-warning_glue_data <- function(..., .sep = "", .envir = parent.frame(),
-                              call. = FALSE, .domain = NULL) {
-  warning(
-    glue_data(..., .sep = .sep, .envir = .envir),
-    call. = call., domain = .domain
-  )
 }
 
 warning_collapse <- function(x) warning(glue_collapse(x, sep = "\n"))
