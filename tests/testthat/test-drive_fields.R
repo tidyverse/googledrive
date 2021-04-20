@@ -8,25 +8,16 @@ test_that("drive_fields(expose()) returns full tibble of Files fields", {
     drive_fields(expose()),
     .drive$files_fields
   )
-
-  expect_message(
-    out <- drive_fields(expose(), resource = "foo"),
-    "ALERT! Only fields for the `files` resource are built-in."
-  )
+  out <- drive_fields(expose(), resource = "foo")
   expect_identical(out, drive_fields(expose()))
 })
 
 test_that("drive_fields() admits it only knows about Files fields", {
-  expect_message(
-    out <- drive_fields(NULL, resource = "foo"),
-    "ALERT! Only fields for the `files` resource are built-in."
-  )
-  expect_identical(out, drive_fields())
+  local_drive_loud()
 
   x <- letters[1:6]
-  expect_message(
-    out <- drive_fields(x, resource = "foo"),
-    "ALERT! Only fields for the `files` resource are built-in."
+  expect_snapshot(
+    out <- drive_fields(x, resource = "foo")
   )
   expect_identical(out, x)
 })

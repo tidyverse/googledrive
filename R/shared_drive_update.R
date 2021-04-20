@@ -32,7 +32,9 @@
 shared_drive_update <- function(shared_drive, ...) {
   shared_drive <- as_shared_drive(shared_drive)
   if (no_file(shared_drive)) {
-    message("No such shared drive found to update.")
+    drive_memo(c(
+      "!" = "No such shared drive found to update."
+    ))
     return(invisible(dribble()))
   }
   if (!single_file(shared_drive)) {
@@ -42,7 +44,9 @@ shared_drive_update <- function(shared_drive, ...) {
 
   meta <- toCamel(list2(...))
   if (length(meta) == 0) {
-    message_glue("No updates specified.")
+    drive_memo(c(
+      "!" = "No updates specified."
+    ))
     return(invisible(shared_drive))
   }
 

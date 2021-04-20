@@ -124,6 +124,15 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
+drive_memo <- function(text, .envir = parent.frame()) {
+  quiet <- drive_quiet() %|% is_testing()
+  if (quiet) {
+    return(invisible())
+  }
+  cli::cli_memo(text = text, .envir = .envir)
+}
+
+# old UI functions ----
 stop_glue <- function(..., .sep = "", .envir = parent.frame(),
                       call. = FALSE, .domain = NULL) {
   stop(

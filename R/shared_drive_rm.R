@@ -29,7 +29,9 @@
 shared_drive_rm <- function(drive = NULL) {
   shared_drive <- as_shared_drive(drive)
   if (no_file(shared_drive)) {
-    message_glue("No such shared drive(s) found to delete.")
+    drive_memo(c(
+      "!" = "No such shared drive found to delete."
+    ))
     return(invisible(logical(0)))
   }
 

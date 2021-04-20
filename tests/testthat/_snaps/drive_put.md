@@ -3,7 +3,7 @@
     Code
       writeLines(first_put)
     Output
-      No pre-existing file at this filepath. Calling `drive_upload()`.
+      i No pre-existing file at this filepath. Calling `drive_upload()`.
       Local file:
       {RANDOM}
       uploaded into Drive file:
@@ -16,7 +16,7 @@
     Code
       writeLines(second_put)
     Output
-      Pre-existing file found at this filepath. Calling `drive_update()`.
+      i Pre-existing file at this filepath. Calling `drive_update()`.
       File updated:
       {RANDOM}
 

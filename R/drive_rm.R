@@ -45,7 +45,11 @@ drive_rm <- function(..., verbose = deprecated()) {
   # therefore as_dribble() can return >1 row representing a single file)
   file <- file[!duplicated(file$id), ]
 
-  if (no_file(file)) message_glue("No such file(s) to delete.")
+  if (no_file(file)) {
+    drive_memo(c(
+      "!" = "No such file to delete."
+    ))
+  }
 
   out <- purrr::map_lgl(file$id, delete_one)
 

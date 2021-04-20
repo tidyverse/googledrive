@@ -90,18 +90,22 @@ drive_empty_trash <- function(verbose = deprecated()) {
 
   files <- drive_find(trashed = TRUE)
   if (no_file(files)) {
-    message_glue("Your trash was already empty.")
+    drive_memo(c(
+      "i" = "No files found in trash; your trash was already empty."
+    ))
     return(invisible(TRUE))
   }
   request <- request_generate(endpoint = "drive.files.emptyTrash")
   response <- request_make(request)
   success <- gargle::response_process(response)
   if (success) {
-    message_glue(
-      "{nrow(files)} file(s) deleted from your Google Drive trash."
-    )
+    drive_memo(c(
+      "v" = "{nrow(files)} file{?s} deleted from your Google Drive trash."
+    ))
   } else {
-    message_glue("Empty trash appears to have failed.")
+    drive_memo(c(
+      "x" = "Empty trash appears to have failed."
+    ))
   }
   invisible(success)
 }

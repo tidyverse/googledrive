@@ -17,32 +17,30 @@ are checked for validity. Otherwise, they are passed through.}
 only the Files resource is anticipated.}
 }
 \value{
-\code{drive_fields()}: Character vector of field names.
-\code{prep_fields()}: a string.
+\code{drive_fields()}: Character vector of field names. \code{prep_fields()}: a
+string.
 }
 \description{
 You may be able to improve the performance of your API calls by
 requesting only the metadata that you actually need. This function is
-primarily for internal use and is currently focused on the
-\href{https://developers.google.com/drive/v3/reference/files}{Files resource}.
-Note that high-level googledrive functions assume that the \code{name}, \code{id}, and
-\code{kind} fields are included, at a bare minimum. Assuming that
-\code{resource = "files"} (the default), input provided via \code{fields} is checked
-for validity against the known field names and the validated fields are
-returned. To see a tibble containing all possible fields and a short
-description of each, call \code{drive_fields(expose())}.
+primarily for internal use and is currently focused on the \href{https://developers.google.com/drive/api/v3/reference/files}{Files resource}. Note
+that high-level googledrive functions assume that the \code{name}, \code{id}, and
+\code{kind} fields are included, at a bare minimum. Assuming that \code{resource = "files"} (the default), input provided via \code{fields} is checked for validity
+against the known field names and the validated fields are returned. To see
+a tibble containing all possible fields and a short description of each,
+call \code{drive_fields(expose())}.
 
 \code{prep_fields()} prepares fields for inclusion as query
 parameters.
 }
 \examples{
-## get a tibble of all fields for the Files resource + indicator of defaults
+# get a tibble of all fields for the Files resource + indicator of defaults
 drive_fields(expose())
 
-## invalid fields are removed and throw warning
+# invalid fields are removed and throw warning
 drive_fields(c("name", "parents", "ownedByMe", "pancakes!"))
 
-## prepare fields for query
+# prepare fields for query
 prep_fields(c("name", "parents", "kind"))
 }
 \seealso{

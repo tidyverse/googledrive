@@ -23,7 +23,9 @@ drive_user <- function(verbose = deprecated()) {
   warn_for_verbose(verbose)
 
   if (!drive_has_token()) {
-    message_glue("Not logged in as any specific Google user.")
+    drive_memo(c(
+      "i" = "Not logged in as any specific Google user."
+    ))
     return(invisible())
   }
   about <- drive_about()

@@ -1,0 +1,118 @@
+---
+title: "Messages and errors in googledrive"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE
+)
+```
+
+```{r setup}
+library(googledrive)
+```
+
+*In a hidden chunk here, I "export" the internal helpers covered below.*
+
+```{r include = FALSE}
+drive_memo <- googledrive:::drive_memo
+```
+
+## User-facing messages
+
+Everything should be emitted by helpers in `utils-ui.R`, such as `drive_memo()`.
+These helpers are all wrappers around cli functions, such as `cli::cli_memo()`.
+
+*These may not demo well via pkgdown, but the interactive experience is nice.*
+
+```{r}
+drive_memo(c(
+        "noindent",
+  " " = "indent",
+  "*" = "bullet",
+  "v" = "success",
+  "x" = "danger",
+  "!" = "warning",
+  "i" = "info"
+))
+```
+
+The helpers encourage consistent styling and make it possible to selectively silence messages coming from googledrive.
+The googledrive message helpers:
+
+-   Use the [cli package](https://cli.r-lib.org/index.html) to get interpolation, inline markup, and pluralization
+-   Eventually route through `rlang::inform()`, which is important because `inform()` prints to standard output in interactive sessions. This means that informational messages won't have the same "look" as errors and can generally be more stylish, at least in IDEs like RStudio.
+-   Are under the control of the `googledrive_quiet` option. If it's unset, the default is to show messages (unless we're testing, i.e. the environment variable `TESTTHAT` is `"true"`). Doing `options(googledrive_quiet = TRUE)` will suppress messages. There are withr-style convenience helpers: `local_drive_quiet()` and `with_drive_quiet()`.
+
+### Inline styling
+
+How we use the inline classes:
+
+-   `.field` for the value of an argument, e.g. a MIME type
+    *TODO: I think this should really be a class that falls back to quoted*
+-   `.arg`, `.fun`, `.path` for their usual purpose
+
+Most relevant cli docs:
+
+-   [CLI inline markup](https://cli.r-lib.org/reference/inline-markup.html)
+-   [Building a Semantic CLI](https://cli.r-lib.org/articles/semantic-cli.html)
+
+### Bullets
+
+I use the different bullet points in `drive_memo()` to convey a mood.
+
+Exclamation mark `"!"`: I'm not throwing an error or warning, but I want to get the user's attention, because it seems likely (but not certain) that they misunderstand something about googledrive or Google Drive or their Drive files. Examples:
+
+```{r}
+drive_memo(c(
+  "!" = "Ignoring {.arg type}. Only consulted for native Google file types.",
+  " " = "Target {.arg file} has MIME type: {.field mime_type}."
+))
+
+drive_memo(c(
+  "!" = "Currently only fields for the {.field files} resource can be \\
+    checked for validity.",
+  " " = "Nothing done."
+))
+
+drive_memo(c(
+  "!" = "No updates specified."
+))
+
+drive_memo(c(
+  "!" = "No such file to delete."
+))
+```
+
+Information "i": I'm just keeping you informed of how my work is going.
+
+```{r}
+drive_memo(c(
+  "i" = "No pre-existing file at this filepath. Calling \\
+         {.fun drive_upload}."
+))
+drive_memo(c(
+  "i" = "Pre-existing file at this filepath. Calling \\
+         {.fun drive_update}."
+))
+
+drive_memo(c(
+  "i" = "Not logged in as any specific Google user."
+))
+```
+
+In cases where we determine there is nothing we can or should do, sometimes I use `"!"` and sometimes I use `"i"`.
+It depends on whether it feels like the user could or should have known that no work would be possible or needed.
+
+
+### Tricky stuff
+
+If you want to see some tricky examples {this} or {that}, look here:
+
+*don't have any yet*
+
+## Errors
+
+*I haven't gotten here yet*
