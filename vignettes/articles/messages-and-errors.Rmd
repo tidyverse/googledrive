@@ -51,8 +51,15 @@ The googledrive message helpers:
 How we use the inline classes:
 
 -   `.field` for the value of an argument, e.g. a MIME type
-    *TODO: I think this should really be a class that falls back to quoted*
 -   `.arg`, `.fun`, `.path` for their usual purpose
+
+```{r}
+drive_memo(c(
+  "We need to talk about the {.arg foofy} argument to {.fun blarg}",
+  "You provided {.field a_very_weird_value} and I suspect you're confused \\
+   about something"
+))
+```
 
 Most relevant cli docs:
 
@@ -68,12 +75,12 @@ Exclamation mark `"!"`: I'm not throwing an error or warning, but I want to get 
 ```{r}
 drive_memo(c(
   "!" = "Ignoring {.arg type}. Only consulted for native Google file types.",
-  " " = "Target {.arg file} has MIME type: {.field mime_type}."
+  " " = "MIME type of {.arg file}: {.field mime_type}."
 ))
 
 drive_memo(c(
   "!" = "Currently only fields for the {.field files} resource can be \\
-    checked for validity.",
+         checked for validity.",
   " " = "Nothing done."
 ))
 

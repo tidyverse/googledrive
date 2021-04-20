@@ -3,6 +3,6 @@
     Code
       out <- drive_fields(x, resource = "foo")
     Message <cliMessage>
-      ! Currently only fields for the files resource can be checked for validity.
+      ! Currently only fields for the 'files' resource can be checked for validity.
         Nothing done.
 

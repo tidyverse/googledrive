@@ -129,7 +129,31 @@ drive_memo <- function(text, .envir = parent.frame()) {
   if (quiet) {
     return(invisible())
   }
+  cli::cli_div(theme = list(span.field = list(transform = quote_if_no_color)))
   cli::cli_memo(text = text, .envir = .envir)
+  cli::cli_end()
+}
+
+# TODO: if a better way appears in cli, use it
+# @gabor says: "if you want to have before and after for the no-color case
+# only, we can have a selector for that, such as:
+# span.field::no-color
+# (but, at the time I write this, cli does not support this yet)
+quote_if_no_color <- function(x, quote = "'") {
+  if (cli::num_ansi_colors() > 1) {
+    x
+  } else {
+    paste0(quote, x, quote)
+  }
+}
+
+# useful to me during development, so I can see how my messages look w/o color
+local_no_color <- function(.envir = parent.frame()) {
+  withr::local_envvar(c("NO_COLOR" = 1), .local_envir = .envir)
+}
+
+with_no_color <- function(code) {
+  withr::with_envvar(c("NO_COLOR" = 1), code)
 }
 
 # old UI functions ----

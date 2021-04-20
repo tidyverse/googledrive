@@ -68,7 +68,7 @@ drive_download <- function(file,
   if (!grepl("google", mime_type) && !is.null(type)) {
     drive_memo(c(
       "!" = "Ignoring {.arg type}. Only consulted for native Google file types.",
-      " " = "Target {.arg file} has MIME type: {.field mime_type}."
+      " " = "MIME type of {.arg file}: {.field mime_type}."
     ))
   }
 
