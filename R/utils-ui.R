@@ -129,22 +129,37 @@ drive_memo <- function(text, .envir = parent.frame()) {
   if (quiet) {
     return(invisible())
   }
-  cli::cli_div(theme = list(span.field = list(transform = quote_if_no_color)))
+  cli::cli_div(theme = list(
+    span.field = list(transform = single_quote_if_no_color),
+    # this is so cli_format.dribble controls its own coloring (vs. "blue")
+    span.val = list(color = "reset")
+  ))
   cli::cli_memo(text = text, .envir = .envir)
   cli::cli_end()
 }
 
-# TODO: if a better way appears in cli, use it
-# @gabor says: "if you want to have before and after for the no-color case
-# only, we can have a selector for that, such as:
-# span.field::no-color
-# (but, at the time I write this, cli does not support this yet)
 quote_if_no_color <- function(x, quote = "'") {
+  # TODO: if a better way appears in cli, use it
+  # @gabor says: "if you want to have before and after for the no-color case
+  # only, we can have a selector for that, such as:
+  # span.field::no-color
+  # (but, at the time I write this, cli does not support this yet)
   if (cli::num_ansi_colors() > 1) {
     x
   } else {
     paste0(quote, x, quote)
   }
+}
+
+single_quote_if_no_color <- function(x) quote_if_no_color(x, "'")
+double_quote_if_no_color <- function(x) quote_if_no_color(x, '"')
+
+#' @export
+#' @importFrom cli cli_format
+cli_format.dribble <- function(x, ...) {
+  stopifnot(single_file(x))
+  id_string <- glue("<id: {x$id}>")
+  glue("{cli::col_blue(x$name)} {cli::col_grey(id_string)}")
 }
 
 # useful to me during development, so I can see how my messages look w/o color
