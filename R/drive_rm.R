@@ -54,12 +54,20 @@ drive_rm <- function(..., verbose = deprecated()) {
   out <- purrr::map_lgl(file$id, delete_one)
 
   if (any(out)) {
-    successes <- glue_data(file[out, ], "  * {name}: {id}")
-    message_collapse(c("Files deleted:", successes))
+    successes <- file[out, ]
+    drive_memo(c(
+      "File{?s} deleted:{cli::qty(nrow(successes))}",
+      cli_format_dribble(successes)
+    ))
   }
+  # I'm not sure this ever comes up IRL?
+  # Is it even possible that removal fails but there's no error?
   if (any(!out)) {
-    failures <- glue_data(file[!out, ], "  * {name}: {id}")
-    message_collapse(c("Files NOT deleted:", failures))
+    failures <- file[!out, ]
+    drive_memo(c(
+      "File{?s} NOT deleted:{cli::qty(nrow(failures))}",
+      cli_format_dribble(failures)
+    ))
   }
   invisible(out)
 }

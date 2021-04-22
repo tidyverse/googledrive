@@ -6,18 +6,18 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ## Create a file and put it in the trash.
+#' # Create a file and put it in the trash.
 #' file <- drive_upload(drive_example("chicken.txt"), "chicken-trash.txt")
 #' drive_trash("chicken-trash.txt")
 #'
-#' ## Confirm it's in the trash
+#' # Confirm it's in the trash
 #' drive_find(trashed = TRUE)
 #'
-#' ## Remove it from the trash and confirm
+#' # Remove it from the trash and confirm
 #' drive_untrash("chicken-trash.txt")
 #' drive_find(trashed = TRUE)
 #'
-#' ## Clean up
+#' # Clean up
 #' drive_rm("chicken-trash.txt")
 #' }
 drive_trash <- function(file, verbose = deprecated()) {
@@ -42,15 +42,17 @@ drive_toggle_trash <- function(file, trash) {
 
   file <- as_dribble(file)
   if (no_file(file)) {
-    message_glue("No such files found to {VERB}.")
+    drive_memo(c("!" = "No such files found to {VERB}."))
     return(invisible(dribble()))
   }
 
   out <- purrr::map(file$id, toggle_trash_one, trash = trash)
   out <- do.call(rbind, out)
 
-  files <- glue_data(out, "  * {name}: {id}")
-  message_collapse(c(glue("Files {VERBED}:"), files))
+  drive_memo(c(
+    "{cli::qty(nrow(out))}File{?s} {VERBED}:",
+    cli_format_dribble(out)
+  ))
 
   invisible(out)
 }

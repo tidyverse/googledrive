@@ -80,7 +80,7 @@ drive_update <- function(file,
     }
   }
 
-  message_glue("\nFile updated:\n  * {out$name}: {out$id}")
+  drive_memo(c("File updated:", cli_format_dribble(out)))
 
   invisible(out)
 }

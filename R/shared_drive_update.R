@@ -61,7 +61,7 @@ shared_drive_update <- function(shared_drive, ...) {
   response <- request_make(request)
   out <- as_dribble(list(gargle::response_process(response)))
 
-  message_glue("\nShared drive updated:\n  * {out$name}: {out$id}")
+  drive_memo(c("Shared drive updated:", cli_format_dribble(out)))
 
   invisible(out)
 }

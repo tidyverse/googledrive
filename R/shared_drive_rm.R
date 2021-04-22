@@ -11,17 +11,17 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ## Create shared drives to remove in various ways
+#' # Create shared drives to remove in various ways
 #' shared_drive_create("testdrive-01")
 #' sd02 <- shared_drive_create("testdrive-02")
 #' shared_drive_create("testdrive-03")
 #' sd04 <- shared_drive_create("testdrive-04")
 #'
-#' ## remove by name
+#' # remove by name
 #' shared_drive_rm("testdrive-01")
-#' ## remove by id
+#' # remove by id
 #' shared_drive_rm(as_id(sd02))
-#' ## remove by URL (or, rather, id found in URL)
+#' # remove by URL (or, rather, id found in URL)
 #' shared_drive_rm(as_id("https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"))
 #' ## remove by dribble
 #' shared_drive_rm(sd04)
@@ -38,12 +38,20 @@ shared_drive_rm <- function(drive = NULL) {
   out <- purrr::map_lgl(as_id(shared_drive), delete_one_shared_drive)
 
   if (any(out)) {
-    successes <- glue_data(shared_drive[out, ], "  * {name}: {id}")
-    message_collapse(c("Shared drives deleted:", successes))
+    successes <- shared_drive[out, ]
+    drive_memo(c(
+      "Shared drive{?s} deleted:{cli::qty(nrow(successes))}",
+      cli_format_dribble(successes)
+    ))
   }
+  # I'm not sure this ever comes up IRL?
+  # Is it even possible that removal fails but there's no error?
   if (any(!out)) {
-    failures <- glue_data(shared_drive[!out, ], "  * {name}: {id}")
-    message_collapse(c("Shared drives NOT deleted:", failures))
+    failures <- shared_drive[!out, ]
+    drive_memo(c(
+      "Shared drive{?s} NOT deleted:{cli::qty(nrow(failures))}",
+      cli_format_dribble(failures)
+    ))
   }
   invisible(out)
 }

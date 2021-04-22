@@ -15,7 +15,8 @@ returned by the API.}
 applies to the results requested from the API, which may be further
 filtered locally, via the \code{pattern} argument.}
 
-\item{...}{Other parameters to pass along in the request, such as \code{pageSize}.}
+\item{...}{Other parameters to pass along in the request, such as \code{pageSize}
+or \code{useDomainAdminAccess}.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.

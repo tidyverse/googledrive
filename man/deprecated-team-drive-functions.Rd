@@ -34,7 +34,8 @@ returned by the API.}
 applies to the results requested from the API, which may be further
 filtered locally, via the \code{pattern} argument.}
 
-\item{...}{Other parameters to pass along in the request, such as \code{pageSize}.}
+\item{...}{Other parameters to pass along in the request, such as \code{pageSize}
+or \code{useDomainAdminAccess}.}
 
 \item{name}{Character vector of names. A character vector marked with
 \code{\link[=as_id]{as_id()}} is treated as if it was provided via the \code{id} argument.}
