@@ -32,7 +32,7 @@
 shared_drive_update <- function(shared_drive, ...) {
   shared_drive <- as_shared_drive(shared_drive)
   if (no_file(shared_drive)) {
-    drive_memo(c(
+    drive_bullets(c(
       "!" = "No such shared drive found to update."
     ))
     return(invisible(dribble()))
@@ -44,7 +44,7 @@ shared_drive_update <- function(shared_drive, ...) {
 
   meta <- toCamel(list2(...))
   if (length(meta) == 0) {
-    drive_memo(c(
+    drive_bullets(c(
       "!" = "No updates specified."
     ))
     return(invisible(shared_drive))
@@ -61,7 +61,7 @@ shared_drive_update <- function(shared_drive, ...) {
   response <- request_make(request)
   out <- as_dribble(list(gargle::response_process(response)))
 
-  drive_memo(c("Shared drive updated:", cli_format_dribble(out)))
+  drive_bullets(c("Shared drive updated:", cli_format_dribble(out)))
 
   invisible(out)
 }

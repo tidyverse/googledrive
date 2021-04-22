@@ -29,7 +29,7 @@
 shared_drive_rm <- function(drive = NULL) {
   shared_drive <- as_shared_drive(drive)
   if (no_file(shared_drive)) {
-    drive_memo(c(
+    drive_bullets(c(
       "!" = "No such shared drive found to delete."
     ))
     return(invisible(logical(0)))
@@ -39,7 +39,7 @@ shared_drive_rm <- function(drive = NULL) {
 
   if (any(out)) {
     successes <- shared_drive[out, ]
-    drive_memo(c(
+    drive_bullets(c(
       "Shared drive{?s} deleted:{cli::qty(nrow(successes))}",
       cli_format_dribble(successes)
     ))
@@ -48,7 +48,7 @@ shared_drive_rm <- function(drive = NULL) {
   # Is it even possible that removal fails but there's no error?
   if (any(!out)) {
     failures <- shared_drive[!out, ]
-    drive_memo(c(
+    drive_bullets(c(
       "Shared drive{?s} NOT deleted:{cli::qty(nrow(failures))}",
       cli_format_dribble(failures)
     ))

@@ -113,7 +113,7 @@ drive_create <- function(name,
 
   out <- as_dribble(list(proc_res))
 
-  drive_memo(c(
+  drive_bullets(c(
     "Created Drive file:",
     cli_format_dribble(out),
     "with MIME type:",

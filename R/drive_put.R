@@ -77,7 +77,7 @@ drive_put <- function(media,
 
   # Happy Path 1 of 2: no name collision
   if (is.null(hits) || no_file(hits)) {
-    drive_memo(c(
+    drive_bullets(c(
       "i" = "No pre-existing Drive file at this path. Calling \\
              {.fun drive_upload}."
     ))
@@ -93,7 +93,7 @@ drive_put <- function(media,
 
   # Happy Path 2 of 2: single name collision
   if (single_file(hits)) {
-    drive_memo(c(
+    drive_bullets(c(
       "i" = "A Drive file already exists at this path. Calling \\
              {.fun drive_update}."
     ))

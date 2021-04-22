@@ -46,7 +46,7 @@ drive_rm <- function(..., verbose = deprecated()) {
   file <- file[!duplicated(file$id), ]
 
   if (no_file(file)) {
-    drive_memo(c(
+    drive_bullets(c(
       "!" = "No such file to delete."
     ))
   }
@@ -55,7 +55,7 @@ drive_rm <- function(..., verbose = deprecated()) {
 
   if (any(out)) {
     successes <- file[out, ]
-    drive_memo(c(
+    drive_bullets(c(
       "File{?s} deleted:{cli::qty(nrow(successes))}",
       cli_format_dribble(successes)
     ))
@@ -64,7 +64,7 @@ drive_rm <- function(..., verbose = deprecated()) {
   # Is it even possible that removal fails but there's no error?
   if (any(!out)) {
     failures <- file[!out, ]
-    drive_memo(c(
+    drive_bullets(c(
       "File{?s} NOT deleted:{cli::qty(nrow(failures))}",
       cli_format_dribble(failures)
     ))

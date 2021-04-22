@@ -62,7 +62,7 @@ drive_update <- function(file,
   meta <- toCamel(list2(...))
 
   if (is.null(media) && length(meta) == 0) {
-    drive_memo(c(
+    drive_bullets(c(
       "!" = "No updates specified."
     ))
     return(invisible(file))
@@ -80,7 +80,7 @@ drive_update <- function(file,
     }
   }
 
-  drive_memo(c("File updated:", cli_format_dribble(out)))
+  drive_bullets(c("File updated:", cli_format_dribble(out)))
 
   invisible(out)
 }

@@ -81,7 +81,7 @@ drive_change_publish <- function(file,
     params = params
   )
   n <- nrow(file)
-  drive_memo(c(
+  drive_bullets(c(
     cli::pluralize(
       "{cli::qty(n)}File{?s} now {if (publish) '' else 'NOT '}published:"),
     cli_format_dribble(file)

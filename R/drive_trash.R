@@ -42,14 +42,14 @@ drive_toggle_trash <- function(file, trash) {
 
   file <- as_dribble(file)
   if (no_file(file)) {
-    drive_memo(c("!" = "No such files found to {VERB}."))
+    drive_bullets(c("!" = "No such files found to {VERB}."))
     return(invisible(dribble()))
   }
 
   out <- purrr::map(file$id, toggle_trash_one, trash = trash)
   out <- do.call(rbind, out)
 
-  drive_memo(c(
+  drive_bullets(c(
     "{cli::qty(nrow(out))}File{?s} {VERBED}:",
     cli_format_dribble(out)
   ))
@@ -92,7 +92,7 @@ drive_empty_trash <- function(verbose = deprecated()) {
 
   files <- drive_find(trashed = TRUE)
   if (no_file(files)) {
-    drive_memo(c(
+    drive_bullets(c(
       "i" = "No files found in trash; your trash was already empty."
     ))
     return(invisible(TRUE))
@@ -101,11 +101,11 @@ drive_empty_trash <- function(verbose = deprecated()) {
   response <- request_make(request)
   success <- gargle::response_process(response)
   if (success) {
-    drive_memo(c(
+    drive_bullets(c(
       "v" = "{nrow(files)} file{?s} deleted from your Google Drive trash."
     ))
   } else {
-    drive_memo(c(
+    drive_bullets(c(
       "x" = "Empty trash appears to have failed."
     ))
   }

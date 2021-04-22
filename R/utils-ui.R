@@ -133,7 +133,7 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
-drive_memo <- function(text, .envir = parent.frame()) {
+drive_bullets <- function(text, .envir = parent.frame()) {
   quiet <- drive_quiet() %|% is_testing()
   if (quiet) {
     return(invisible())
@@ -143,7 +143,7 @@ drive_memo <- function(text, .envir = parent.frame()) {
     # this is so cli_format.dribble controls its own coloring (vs. "blue")
     span.val = list(color = "reset")
   ))
-  cli::cli_memo(text = text, .envir = .envir)
+  cli::cli_bullets(text = text, .envir = .envir)
   cli::cli_end()
 }
 

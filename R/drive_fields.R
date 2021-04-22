@@ -39,7 +39,7 @@
 drive_fields <- function(fields = NULL,
                          resource = "files") {
   if (!identical(resource, "files")) {
-    drive_memo(c(
+    drive_bullets(c(
       "!" = "Currently only fields for the {.field files} resource can be \\
              checked for validity.",
       " " = "Nothing done."

@@ -68,7 +68,7 @@ drive_mv <- function(file,
   file <- confirm_single_file(file)
 
   if (is.null(path) && is.null(name)) {
-    drive_memo(c(
+    drive_bullets(c(
       "!" = "Nothing to be done."
     ))
     return(invisible(file))
@@ -104,7 +104,7 @@ drive_mv <- function(file,
   }
 
   if (length(params) == 0) {
-    drive_memo(c(
+    drive_bullets(c(
       "!" = "Nothing to be done."
     ))
     return(invisible(file))

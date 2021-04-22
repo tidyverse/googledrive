@@ -100,7 +100,7 @@ drive_share <- function(file,
   ok <- purrr::map_chr(permission_out, "type") == type
   if (any(ok)) {
     successes <- file[ok, ]
-    drive_memo(c(
+    drive_bullets(c(
       "Permissions updated:",
       "*" = "role = {role}",
       "*" = "type = {type}",
@@ -112,7 +112,7 @@ drive_share <- function(file,
   # Is it even possible that permission update fails but there's no error?
   if (any(!ok)) {
     failures <- file[!ok, ]
-    drive_memo(c(
+    drive_bullets(c(
       "Permissions were NOT updated for file{?s}:{cli::qty(nrow(failures))}",
       cli_format_dribble(failures)
     ))
