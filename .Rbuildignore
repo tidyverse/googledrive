@@ -23,3 +23,4 @@
 ^LICENSE\.md$
 ^CRAN-RELEASE$
 ^\.covrignore$
+^tests/testthat/all-test.+
