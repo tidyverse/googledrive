@@ -157,9 +157,28 @@ double_quote_if_no_color <- function(x) quote_if_no_color(x, '"')
 #' @export
 #' @importFrom cli cli_format
 cli_format.dribble <- function(x, ...) {
-  stopifnot(single_file(x))
+  confirm_single_file(x)
   id_string <- glue("<id: {x$id}>")
-  glue("{cli::col_blue(x$name)} {cli::col_grey(id_string)}")
+  glue("{x$name} {cli::col_grey(id_string)}")
+}
+
+cli_format_dribble <- function(x, bullet = "*") {
+  confirm_dribble(x)
+
+  n <- nrow(x)
+  n_show_nominal <- 5
+  if (n > n_show_nominal && n - n_show_nominal > 2) {
+    n_show <- n_show_nominal
+  } else {
+    n_show <- n
+  }
+
+  out <- purrr::map_chr(seq_len(n_show), ~ cli_format(x[.x, ]))
+  out <- set_names(out, rep_along(out, bullet))
+  if (n > n_show) {
+    out <- c(out, " " = glue("{cli::symbol$ellipsis} and {n - n_show} more"))
+  }
+  out
 }
 
 # useful to me during development, so I can see how my messages look w/o color

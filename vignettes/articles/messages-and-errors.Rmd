@@ -18,6 +18,7 @@ library(googledrive)
 
 ```{r include = FALSE}
 drive_memo <- googledrive:::drive_memo
+cli_format_dribble <- googledrive:::cli_format_dribble
 ```
 
 ## User-facing messages
@@ -32,6 +33,7 @@ drive_memo(c(
         "noindent",
   " " = "indent",
   "*" = "bullet",
+  ">" = "arrow",
   "v" = "success",
   "x" = "danger",
   "!" = "warning",
@@ -113,6 +115,24 @@ drive_memo(c(
 In cases where we determine there is nothing we can or should do, sometimes I use `"!"` and sometimes I use `"i"`.
 It depends on whether it feels like the user could or should have known that no work would be possible or needed.
 
+### Drive files as bullets
+
+Use `drive_memo()` in combination with `cli_format_dribble()`, which formats individual Drive files and makes them into `"*"` bullets.
+
+```{r}
+dat <- drive_find(n_max = 10)
+
+# if you know there's only 1 file
+x <- dat[1, ]
+drive_memo(c("File VERBED:", cli_format_dribble(x)))
+
+# if you don't know how many files
+x <- dat
+drive_memo(c(
+  cli::pluralize("File{?s} VERBED:{cli::qty(nrow(x))}"),
+  cli_format_dribble(dat)
+))
+```
 
 ### Tricky stuff
 
