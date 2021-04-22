@@ -13,7 +13,7 @@ test_that("drive_fields(expose()) returns full tibble of Files fields", {
 })
 
 test_that("drive_fields() admits it only knows about Files fields", {
-  local_drive_loud()
+  local_drive_loud_and_wide()
 
   x <- letters[1:6]
   expect_snapshot(

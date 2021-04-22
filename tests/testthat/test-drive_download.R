@@ -40,7 +40,7 @@ test_that("drive_download() downloads a file and adds local_path column", {
   tmpdir <-  withr::local_tempdir()
   download_filepath <- paste0(nm_("DESC"), fileext = ".txt")
 
-  local_drive_loud()
+  local_drive_loud_and_wide()
   expect_snapshot(
     withr::with_dir(
       tmpdir,
@@ -63,7 +63,7 @@ test_that("drive_download() converts with explicit `type`", {
 
   tmpdir <- withr::local_tempdir(nm_("DESC-doc"))
   download_filename <- paste0(nm_("DESC-doc"), ".docx")
-  local_drive_loud()
+  local_drive_loud_and_wide()
 
   expect_snapshot(
     withr::with_dir(
@@ -80,7 +80,7 @@ test_that("drive_download() converts with type implicit in `path`", {
 
   tmpdir <- withr::local_tempdir(nm_("DESC-doc"))
   download_filename <- paste0(nm_("DESC-doc"), ".docx")
-  local_drive_loud()
+  local_drive_loud_and_wide()
 
   expect_snapshot(
     withr::with_dir(
@@ -97,7 +97,7 @@ test_that("drive_download() converts using default MIME type, if necessary", {
 
   tmpdir <- withr::local_tempdir(nm_("DESC-doc"))
   download_filename <- paste0(nm_("DESC-doc"), ".docx")
-  local_drive_loud()
+  local_drive_loud_and_wide()
 
   expect_snapshot(
     withr::with_dir(

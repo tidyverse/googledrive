@@ -27,7 +27,7 @@ test_that("drive_mv() can rename file", {
 
   file <- drive_upload(system.file("DESCRIPTION"), name_1)
 
-  local_drive_loud()
+  local_drive_loud_and_wide()
   drive_mv_message <- capture.output(
     file <- drive_mv(file, name = name_2),
     type = "message"
@@ -51,7 +51,7 @@ test_that("drive_mv() can move a file into a folder given as path", {
 
   mv_file <- drive_upload(system.file("DESCRIPTION"), mv_name)
 
-  local_drive_loud()
+  local_drive_loud_and_wide()
   # path is detected as folder (must have trailing slash)
   drive_mv_message <- capture.output(
     mv_file <- drive_mv(mv_file, paste0(nm_("move-files-into-me"), "/")),
@@ -78,7 +78,7 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
   mv_file <- drive_upload(system.file("DESCRIPTION"), mv_name)
   destination <- drive_get(nm_("move-files-into-me"))
 
-  local_drive_loud()
+  local_drive_loud_and_wide()
   drive_mv_message <- capture.output(
     mv_file <- drive_mv(mv_file, destination),
     type = "message"
@@ -103,7 +103,7 @@ test_that("drive_mv() can rename and move, using `path` and `name`", {
 
   mv_file <- drive_upload(system.file("DESCRIPTION"), name_1)
 
-  local_drive_loud()
+  local_drive_loud_and_wide()
   drive_mv_message <- capture.output(
     mv_file <- drive_mv(mv_file, nm_("move-files-into-me"), name_2),
     type = "message"
@@ -128,7 +128,7 @@ test_that("drive_mv() can rename and move, using `path` only", {
 
   mv_file <- drive_upload(system.file("DESCRIPTION"), name_1)
 
-  local_drive_loud()
+  local_drive_loud_and_wide()
   drive_mv_message <- capture.output(
     mv_file <- drive_mv(
       mv_file,

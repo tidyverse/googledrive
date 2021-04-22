@@ -113,6 +113,15 @@ local_drive_loud <- function(env = parent.frame()) {
   withr::local_options(list(googledrive_quiet = FALSE), .local_envir = env)
 }
 
+# keeps wrapping from wreaking havoc on snapshot tests, esp. when I have to
+# find and replace volatile bits of text
+local_drive_loud_and_wide <- function(cli.width = 85, env = parent.frame()) {
+  withr::local_options(list(
+    googledrive_quiet = FALSE,
+    cli.width = cli.width
+  ), .local_envir = env)
+}
+
 #' @rdname googledrive-configuration
 #' @param code Code to execute quietly
 #' @export
@@ -158,7 +167,8 @@ double_quote_if_no_color <- function(x) quote_if_no_color(x, '"')
 #' @importFrom cli cli_format
 cli_format.dribble <- function(x, ...) {
   confirm_single_file(x)
-  id_string <- glue("<id: {x$id}>")
+  # \u00a0 is a nonbreaking space
+  id_string <- glue("<id:\u00a0{x$id}>")
   glue("{x$name} {cli::col_grey(id_string)}")
 }
 

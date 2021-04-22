@@ -30,7 +30,7 @@ test_that("drive_put() works", {
 
   writeLines(c("beginning", "middle"), local_file)
 
-  local_drive_loud()
+  local_drive_loud_and_wide()
   first_put <- capture.output(
     original <- drive_put(local_file),
     type = "message"
