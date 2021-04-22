@@ -37,6 +37,7 @@ test_that("drive_cp() can copy file in place", {
     type = "message"
   )
   drive_cp_message <- sub(cp_name, "{cp_name}", drive_cp_message, perl = TRUE)
+  drive_cp_message <- sub("<id: .+>", "<id: {RANDOM}>", drive_cp_message, perl = TRUE)
   expect_snapshot(
     writeLines(drive_cp_message)
   )
@@ -56,7 +57,7 @@ test_that("drive_cp() can copy a file into a different folder", {
 
   cp_name <- me_("i-am-a-file")
   defer_drive_rm(cp_name)
-  local_drive_loud_and_wide()
+  local_drive_loud_and_wide(100)
 
   file <- drive_get(nm_("i-am-a-file"))
   folder <- drive_get(nm_("i-am-a-folder"))
@@ -65,6 +66,7 @@ test_that("drive_cp() can copy a file into a different folder", {
     type = "message"
   )
   drive_cp_message <- sub(cp_name, "{cp_name}", drive_cp_message, perl = TRUE)
+  drive_cp_message <- sub("<id: .+>", "<id: {RANDOM}>", drive_cp_message, perl = TRUE)
   expect_snapshot(
     writeLines(drive_cp_message)
   )
@@ -103,7 +105,7 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
 
   cp_name <- me_("file-name")
   defer_drive_rm(cp_name)
-  local_drive_loud_and_wide()
+  local_drive_loud_and_wide(100)
 
   # if given `path` and `name`, assumes `path` is a folder
   # the message capture trick is necessary because cp_name includes {user}
@@ -116,6 +118,7 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
     type = "message"
   )
   drive_cp_message <- sub(cp_name, "{cp_name}", drive_cp_message, perl = TRUE)
+  drive_cp_message <- sub("<id: .+>", "<id: {RANDOM}>", drive_cp_message, perl = TRUE)
   expect_snapshot(
     writeLines(drive_cp_message)
   )

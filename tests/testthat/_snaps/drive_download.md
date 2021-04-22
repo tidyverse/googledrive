@@ -9,12 +9,12 @@
 # drive_download() downloads a file and adds local_path column
 
     Code
-      withr::with_dir(tmpdir, out <- drive_download(nm_("DESC"), path = download_filepath))
-    Message <simpleMessage>
+      writeLines(drive_download_message)
+    Output
       File downloaded:
-        * DESC-TEST-drive-download
+      {RANDOM}
       Saved locally as:
-        * DESC-TEST-drive-download.txt
+      {RANDOM}
 
 # drive_download() errors if file does not exist on Drive
 
@@ -26,30 +26,30 @@
 # drive_download() converts with explicit `type`
 
     Code
-      withr::with_dir(tmpdir, drive_download(file = nm_("DESC-doc"), type = "docx"))
-    Message <simpleMessage>
+      writeLines(drive_download_message)
+    Output
       File downloaded:
-        * DESC-doc-TEST-drive-download
+      {RANDOM}
       Saved locally as:
-        * DESC-doc-TEST-drive-download.docx
+      {RANDOM}
 
 # drive_download() converts with type implicit in `path`
 
     Code
-      withr::with_dir(tmpdir, drive_download(file = nm_("DESC-doc"), path = download_filename))
-    Message <simpleMessage>
+      writeLines(drive_download_message)
+    Output
       File downloaded:
-        * DESC-doc-TEST-drive-download
+      {RANDOM}
       Saved locally as:
-        * DESC-doc-TEST-drive-download.docx
+      {RANDOM}
 
 # drive_download() converts using default MIME type, if necessary
 
     Code
-      withr::with_dir(tmpdir, drive_download(file = nm_("DESC-doc")))
-    Message <simpleMessage>
+      writeLines(drive_download_message)
+    Output
       File downloaded:
-        * DESC-doc-TEST-drive-download
+      {RANDOM}
       Saved locally as:
-        * DESC-doc-TEST-drive-download.docx
+      {RANDOM}
 

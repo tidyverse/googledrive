@@ -37,17 +37,21 @@ test_that("drive_download() downloads a file and adds local_path column", {
   skip_if_no_token()
   skip_if_offline()
 
-  tmpdir <-  withr::local_tempdir()
-  download_filepath <- paste0(nm_("DESC"), fileext = ".txt")
+  download_filepath <- withr::local_file(
+    tempfile(nm_("DESC"), fileext = ".txt")
+  )
 
   local_drive_loud_and_wide()
-  expect_snapshot(
-    withr::with_dir(
-      tmpdir,
-      out <- drive_download(nm_("DESC"), path = download_filepath)
-    )
+  drive_download_message <- capture.output(
+    out <- drive_download(nm_("DESC"), path = download_filepath),
+    type = "message"
   )
-  expect_true(file.exists(file.path(tmpdir, download_filepath)))
+  drive_download_message[grep(nm_("DESC"), drive_download_message)] <- "{RANDOM}"
+  expect_snapshot(
+    writeLines(drive_download_message)
+  )
+
+  expect_true(file.exists(download_filepath))
   expect_identical(out$local_path, download_filepath)
 })
 
@@ -65,12 +69,18 @@ test_that("drive_download() converts with explicit `type`", {
   download_filename <- paste0(nm_("DESC-doc"), ".docx")
   local_drive_loud_and_wide()
 
-  expect_snapshot(
+  drive_download_message <- capture.output(
     withr::with_dir(
       tmpdir,
       drive_download(file = nm_("DESC-doc"), type = "docx")
-    )
+    ),
+    type = "message"
   )
+  drive_download_message[grep(nm_("DESC-doc"), drive_download_message)] <- "{RANDOM}"
+  expect_snapshot(
+    writeLines(drive_download_message)
+  )
+
   expect_true(file.exists(file.path(tmpdir, download_filename)))
 })
 
@@ -82,12 +92,18 @@ test_that("drive_download() converts with type implicit in `path`", {
   download_filename <- paste0(nm_("DESC-doc"), ".docx")
   local_drive_loud_and_wide()
 
-  expect_snapshot(
+  drive_download_message <- capture.output(
     withr::with_dir(
       tmpdir,
       drive_download(file = nm_("DESC-doc"), path = download_filename)
-    )
+    ),
+    type = "message"
   )
+  drive_download_message[grep(nm_("DESC-doc"), drive_download_message)] <- "{RANDOM}"
+  expect_snapshot(
+    writeLines(drive_download_message)
+  )
+
   expect_true(file.exists(file.path(tmpdir, download_filename)))
 })
 
@@ -99,11 +115,17 @@ test_that("drive_download() converts using default MIME type, if necessary", {
   download_filename <- paste0(nm_("DESC-doc"), ".docx")
   local_drive_loud_and_wide()
 
-  expect_snapshot(
+  drive_download_message <- capture.output(
     withr::with_dir(
       tmpdir,
       drive_download(file = nm_("DESC-doc"))
-    )
+    ),
+    type = "message"
   )
+  drive_download_message[grep(nm_("DESC-doc"), drive_download_message)] <- "{RANDOM}"
+  expect_snapshot(
+    writeLines(drive_download_message)
+  )
+
   expect_true(file.exists(file.path(tmpdir, download_filename)))
 })

@@ -134,12 +134,6 @@ drive_bullets(c(
 ))
 ```
 
-### Tricky stuff
-
-If you want to see some tricky examples {this} or {that}, look here:
-
-*don't have any yet*
-
 ## Errors
 
 *I haven't gotten here yet*

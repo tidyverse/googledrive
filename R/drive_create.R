@@ -116,8 +116,8 @@ drive_create <- function(name,
   drive_bullets(c(
     "Created Drive file:",
     cli_format_dribble(out),
-    "with MIME type:",
-    "*" = "{out$drive_resource[[1]]$mimeType}"
+    "With MIME type:",
+    "*" = "{.field {purrr::pluck(out, 'drive_resource', 1, 'mimeType')}}"
   ))
   invisible(out)
 }

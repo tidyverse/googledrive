@@ -60,12 +60,15 @@ drive_fields <- function(fields = NULL,
   out <- intersect(fields, .drive$files_fields$name)
   if (!setequal(fields, out)) {
     bad_fields <- setdiff(fields, out)
-    warning_collapse(
-      c(
-        "Ignoring fields that are non-standard for the Files resource:",
-        glue("  * {bad_fields}")
-      )
-    )
+    bad_fields <- glue("{.field <<bad_fields>>}", .open = "<<", .close = ">>")
+    bad_fields <- set_names(bad_fields, nm = rep_along(bad_fields, "*"))
+    # TODO: make this a warning or error, once rlang offers support for cli
+    # I care a bit more about styling than the condition, at this point
+    # but I still think this should be at least a warning
+    drive_bullets(c(
+      "Omitting fields that are not recognized as part of the Files resource:",
+      bad_fields
+    ))
   }
   out
 }

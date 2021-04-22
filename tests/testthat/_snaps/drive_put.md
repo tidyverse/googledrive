@@ -6,10 +6,10 @@
       i No pre-existing Drive file at this path. Calling `drive_upload()`.
       Local file:
       {RANDOM}
-      uploaded into Drive file:
+      Uploaded into Drive file:
       {RANDOM}
-      with MIME type:
-        * text/plain
+      With MIME type:
+      * 'text/plain'
 
 ---
 

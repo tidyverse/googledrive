@@ -19,53 +19,56 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## Create a file to copy
+#' # Create a file to copy
 #' file <- drive_upload(drive_example("chicken.txt"), "chicken-cp.txt")
 #'
-#' ## Make a "Copy of" copy in same folder as the original
+#' # Make a "Copy of" copy in same folder as the original
 #' drive_cp("chicken-cp.txt")
 #'
-#' ## Make an explicitly named copy in same folder as the original
+#' # Make an explicitly named copy in same folder as the original
 #' drive_cp("chicken-cp.txt", "chicken-cp-two.txt")
 #'
-#' ## Make an explicitly named copy in a different folder
+#' # Make an explicitly named copy in a different folder
 #' folder <- drive_mkdir("new-folder")
 #' drive_cp("chicken-cp.txt", path = folder, name = "chicken-cp-three.txt")
 #'
-#' ## Make an explicitly named copy and star it.
-#' ## The starring is an example of providing metadata via `...`.
-#' ## `starred` is not an actual argument to `drive_cp()`,
-#' ## it just gets passed through to the API.
-#' drive_cp("chicken-cp.txt", name = "chicken-cp-starred.txt", starred = TRUE)
+#' # Make an explicitly named copy and star it.
+#' # The starring is an example of providing metadata via `...`.
+#' # `starred` is not an actual argument to `drive_cp()`,
+#' # it just gets passed through to the API.
+#' x <- drive_cp("chicken-cp.txt", name = "chicken-cp-starred.txt", starred = TRUE)
+#' purrr::pluck(x, "drive_resource", 1, "starred")
 #'
-#' ## `overwrite = FALSE` errors if file already exists at target filepath
-#' ## THIS WILL ERROR!
+#' # `overwrite = FALSE` errors if file already exists at target filepath
+#' # THIS WILL ERROR!
 #' drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = FALSE)
 #'
-#' ## `overwrite = TRUE` moves an existing file to trash, then proceeds
+#' # `overwrite = TRUE` moves an existing file to trash, then proceeds
 #' drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = TRUE)
 #'
-#' ## Behold all of our copies!
+#' # Behold all of our copies!
 #' drive_find("chicken-cp")
 #'
-#' ## Delete all of our copies and the new folder!
+#' # Delete all of our copies and the new folder!
 #' drive_find("chicken-cp") %>% drive_rm()
 #' drive_rm(folder)
 #'
-#' ## upload a csv file to copy
+#' # upload a csv file to copy
 #' csv_file <- drive_upload(drive_example("chicken.csv"))
 #'
-#' ## copy AND AT THE SAME TIME convert it to a Google Sheet
+#' # copy AND AT THE SAME TIME convert it to a Google Sheet
 #' chicken_sheet <- drive_cp(
 #'   csv_file,
 #'   name = "chicken-cp",
 #'   mime_type = drive_mime_type("spreadsheet")
 #' )
+#' # is it really a Google Sheet?
+#' purrr::pluck(chicken_sheet, "drive_resource", 1, "mimeType")
 #'
-#' ## go see the new Sheet in the browser
-#' ## drive_browse(chicken_sheet)
+#' # go see the new Sheet in the browser
+#' # drive_browse(chicken_sheet)
 #'
-#' ## clean up
+#' # clean up
 #' drive_rm(csv_file, chicken_sheet)
 #' }
 #' @export
@@ -106,10 +109,20 @@ drive_cp <- function(file,
   )
   res <- request_make(request)
   proc_res <- gargle::response_process(res)
-
   out <- as_dribble(list(proc_res))
 
-  new_path <- paste0(append_slash(path$name), out$name)
-  message_glue("\nFile copied:\n  * {file$name} -> {new_path}")
+  # doing this in a hacky way because drive_reveal_path(), which is more
+  # correct, can be quite slow
+  # once I eliminate the "multiple parent" accommodations, that might change
+  tmp <- out
+  tmp$name <- paste0(append_slash(path$name), out$name)
+
+  drive_bullets(c(
+    "Original file:",
+    cli_format_dribble(file),
+    "Copied to file:",
+    cli_format_dribble(tmp)
+  ))
+
   invisible(out)
 }

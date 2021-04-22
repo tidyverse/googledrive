@@ -23,9 +23,9 @@ test_that("drive_fields() admits it only knows about Files fields", {
 })
 
 test_that("drive_fields() detects bad fields", {
-  expect_warning(
-    out <- drive_fields(c("name", "parents", "ownedByMe", "pancakes!")),
-    "Ignoring fields that are non-standard"
+  local_drive_loud_and_wide()
+  expect_snapshot(
+    out <- drive_fields(c("name", "parents", "ownedByMe", "pancakes!"))
   )
   expect_identical(out, c("name", "parents", "ownedByMe"))
 })
