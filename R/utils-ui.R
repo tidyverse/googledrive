@@ -141,7 +141,7 @@ drive_bullets <- function(text, .envir = parent.frame()) {
   cli::cli_div(theme = list(
     span.field = list(transform = single_quote_if_no_color),
     # this is so cli_format.dribble controls its own coloring (vs. "blue")
-    span.val = list(color = "reset")
+    span.val = list(color = NULL)
   ))
   cli::cli_bullets(text = text, .envir = .envir)
   cli::cli_end()
