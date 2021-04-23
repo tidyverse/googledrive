@@ -105,7 +105,7 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
 
   cp_name <- me_("file-name")
   defer_drive_rm(cp_name)
-  local_drive_loud_and_wide(100)
+  local_drive_loud_and_wide(110)
 
   # if given `path` and `name`, assumes `path` is a folder
   # the message capture trick is necessary because cp_name includes {user}
