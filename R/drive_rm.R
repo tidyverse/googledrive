@@ -45,17 +45,29 @@ drive_rm <- function(..., verbose = deprecated()) {
   # therefore as_dribble() can return >1 row representing a single file)
   file <- file[!duplicated(file$id), ]
 
-  if (no_file(file)) message_glue("No such file(s) to delete.")
+  if (no_file(file)) {
+    drive_bullets(c(
+      "!" = "No such file to delete."
+    ))
+  }
 
   out <- purrr::map_lgl(file$id, delete_one)
 
   if (any(out)) {
-    successes <- glue_data(file[out, ], "  * {name}: {id}")
-    message_collapse(c("Files deleted:", successes))
+    successes <- file[out, ]
+    drive_bullets(c(
+      "File{?s} deleted:{cli::qty(nrow(successes))}",
+      cli_format_dribble(successes)
+    ))
   }
+  # I'm not sure this ever comes up IRL?
+  # Is it even possible that removal fails but there's no error?
   if (any(!out)) {
-    failures <- glue_data(file[!out, ], "  * {name}: {id}")
-    message_collapse(c("Files NOT deleted:", failures))
+    failures <- file[!out, ]
+    drive_bullets(c(
+      "File{?s} NOT deleted:{cli::qty(nrow(failures))}",
+      cli_format_dribble(failures)
+    ))
   }
   invisible(out)
 }

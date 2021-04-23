@@ -37,13 +37,13 @@ Read more in \code{\link[=drive_reveal]{drive_reveal()}}.
 }
 \examples{
 \dontrun{
-## Upload file to publish
+# Upload file to publish
 file <- drive_upload(
   drive_example("chicken.csv"),
   type = "spreadsheet"
-  )
+)
 
-## Publish file
+# Publish file
 file <- drive_publish(file)
 file$published
 

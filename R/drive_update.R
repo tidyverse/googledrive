@@ -62,7 +62,9 @@ drive_update <- function(file,
   meta <- toCamel(list2(...))
 
   if (is.null(media) && length(meta) == 0) {
-    message_glue("No updates specified.")
+    drive_bullets(c(
+      "!" = "No updates specified."
+    ))
     return(invisible(file))
   }
 
@@ -78,7 +80,7 @@ drive_update <- function(file,
     }
   }
 
-  message_glue("\nFile updated:\n  * {out$name}: {out$id}")
+  drive_bullets(c("File updated:", cli_format_dribble(out)))
 
   invisible(out)
 }

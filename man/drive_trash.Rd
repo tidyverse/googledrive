@@ -29,18 +29,18 @@ Move Drive files to or from trash
 }
 \examples{
 \dontrun{
-## Create a file and put it in the trash.
+# Create a file and put it in the trash.
 file <- drive_upload(drive_example("chicken.txt"), "chicken-trash.txt")
 drive_trash("chicken-trash.txt")
 
-## Confirm it's in the trash
+# Confirm it's in the trash
 drive_find(trashed = TRUE)
 
-## Remove it from the trash and confirm
+# Remove it from the trash and confirm
 drive_untrash("chicken-trash.txt")
 drive_find(trashed = TRUE)
 
-## Clean up
+# Clean up
 drive_rm("chicken-trash.txt")
 }
 }

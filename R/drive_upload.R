@@ -32,39 +32,39 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ## upload a csv file
+#' # upload a csv file
 #' chicken_csv <- drive_upload(
 #'   drive_example("chicken.csv"),
 #'   "chicken-upload.csv"
 #' )
 #'
-#' ## or convert it to a Google Sheet
+#' # or convert it to a Google Sheet
 #' chicken_sheet <- drive_upload(
 #'   drive_example("chicken.csv"),
 #'   name = "chicken-sheet-upload.csv",
 #'   type = "spreadsheet"
 #' )
 #'
-#' ## check out the new Sheet!
+#' # check out the new Sheet!
 #' drive_browse(chicken_sheet)
 #'
-#' ## clean-up
+#' # clean-up
 #' drive_find("chicken.*upload") %>% drive_rm()
 #'
-#' ## Upload a file and, at the same time, star it
+#' # Upload a file and, at the same time, star it
 #' chicken <- drive_upload(
 #'   drive_example("chicken.jpg"),
 #'   starred = "true"
 #' )
 #'
-#' ## Is is really starred? YES
+#' # Is is really starred? YES
 #' purrr::pluck(chicken, "drive_resource", 1, "starred")
 #'
-#' ## Clean up
+#' # Clean up
 #' drive_rm(chicken)
 #'
-#' ## `overwrite = FALSE` errors if something already exists at target filepath
-#' ## THIS WILL ERROR!
+#' # `overwrite = FALSE` errors if something already exists at target filepath
+#' # THIS WILL ERROR!
 #' drive_create("name-squatter")
 #' drive_upload(
 #'   drive_example("chicken.jpg"),
@@ -72,14 +72,14 @@
 #'   overwrite = FALSE
 #' )
 #'
-#' ## `overwrite = TRUE` moves the existing item to trash, then proceeds
+#' # `overwrite = TRUE` moves the existing item to trash, then proceeds
 #' chicken <- drive_upload(
 #'   drive_example("chicken.jpg"),
 #'   name = "name-squatter",
 #'   overwrite = TRUE
 #' )
 #'
-#' ## Clean up
+#' # Clean up
 #' drive_rm(chicken)
 #'
 #' # Upload to a shared drive:
@@ -142,10 +142,13 @@ drive_upload <- function(media,
   response <- request_make(request, encode = "multipart")
   out <- as_dribble(list(gargle::response_process(response)))
 
-  message_glue(
-    "\nLocal file:\n  * {media}\n",
-    "uploaded into Drive file:\n  * {out$name}: {out$id}\n",
-    "with MIME type:\n  * {out$drive_resource[[1]]$mimeType}"
-  )
+  drive_bullets(c(
+    "Local file:",
+    "*" = "{.path {media}}",
+    "Uploaded into Drive file:",
+    cli_format_dribble(out),
+    "With MIME type:",
+    "*" = "{.field {purrr::pluck(out, 'drive_resource', 1, 'mimeType')}}"
+  ))
   invisible(out)
 }

@@ -1,0 +1,139 @@
+---
+title: "Messages and errors in googledrive"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE
+)
+```
+
+```{r setup}
+library(googledrive)
+```
+
+*In a hidden chunk here, I "export" the internal helpers covered below.*
+
+```{r include = FALSE}
+drive_bullets <- googledrive:::drive_bullets
+cli_format_dribble <- googledrive:::cli_format_dribble
+```
+
+## User-facing messages
+
+Everything should be emitted by helpers in `utils-ui.R`, such as `drive_bullets()`.
+These helpers are all wrappers around cli functions, such as `cli::cli_bullets()`.
+
+*These may not demo well via pkgdown, but the interactive experience is nice.*
+
+```{r}
+drive_bullets(c(
+        "noindent",
+  " " = "indent",
+  "*" = "bullet",
+  ">" = "arrow",
+  "v" = "success",
+  "x" = "danger",
+  "!" = "warning",
+  "i" = "info"
+))
+```
+
+The helpers encourage consistent styling and make it possible to selectively silence messages coming from googledrive.
+The googledrive message helpers:
+
+-   Use the [cli package](https://cli.r-lib.org/index.html) to get interpolation, inline markup, and pluralization
+-   Eventually route through `rlang::inform()`, which is important because `inform()` prints to standard output in interactive sessions. This means that informational messages won't have the same "look" as errors and can generally be more stylish, at least in IDEs like RStudio.
+-   Are under the control of the `googledrive_quiet` option. If it's unset, the default is to show messages (unless we're testing, i.e. the environment variable `TESTTHAT` is `"true"`). Doing `options(googledrive_quiet = TRUE)` will suppress messages. There are withr-style convenience helpers: `local_drive_quiet()` and `with_drive_quiet()`.
+
+### Inline styling
+
+How we use the inline classes:
+
+-   `.field` for the value of an argument, e.g. a MIME type
+-   `.arg`, `.fun`, `.path` for their usual purpose
+
+```{r}
+drive_bullets(c(
+  "We need to talk about the {.arg foofy} argument to {.fun blarg}",
+  "You provided {.field a_very_weird_value} and I suspect you're confused \\
+   about something"
+))
+```
+
+Most relevant cli docs:
+
+-   [CLI inline markup](https://cli.r-lib.org/reference/inline-markup.html)
+-   [Building a Semantic CLI](https://cli.r-lib.org/articles/semantic-cli.html)
+
+### Bullets
+
+I use the different bullet points in `drive_bullets()` to convey a mood.
+
+Exclamation mark `"!"`: I'm not throwing an error or warning, but I want to get the user's attention, because it seems likely (but not certain) that they misunderstand something about googledrive or Google Drive or their Drive files. Examples:
+
+```{r}
+drive_bullets(c(
+  "!" = "Ignoring {.arg type}. Only consulted for native Google file types.",
+  " " = "MIME type of {.arg file}: {.field mime_type}."
+))
+
+drive_bullets(c(
+  "!" = "Currently only fields for the {.field files} resource can be \\
+         checked for validity.",
+  " " = "Nothing done."
+))
+
+drive_bullets(c(
+  "!" = "No updates specified."
+))
+
+drive_bullets(c(
+  "!" = "No such file to delete."
+))
+```
+
+Information "i": I'm just keeping you informed of how my work is going.
+
+```{r}
+drive_bullets(c(
+  "i" = "No pre-existing file at this filepath. Calling \\
+         {.fun drive_upload}."
+))
+drive_bullets(c(
+  "i" = "Pre-existing file at this filepath. Calling \\
+         {.fun drive_update}."
+))
+
+drive_bullets(c(
+  "i" = "Not logged in as any specific Google user."
+))
+```
+
+In cases where we determine there is nothing we can or should do, sometimes I use `"!"` and sometimes I use `"i"`.
+It depends on whether it feels like the user could or should have known that no work would be possible or needed.
+
+### Drive files as bullets
+
+Use `drive_bullets()` in combination with `cli_format_dribble()`, which formats individual Drive files and makes them into `"*"` bullets.
+
+```{r}
+dat <- drive_find(n_max = 10)
+
+# if you know there's only 1 file
+x <- dat[1, ]
+drive_bullets(c("File VERBED:", cli_format_dribble(x)))
+
+# if you don't know how many files
+x <- dat
+drive_bullets(c(
+  cli::pluralize("File{?s} VERBED:{cli::qty(nrow(x))}"),
+  cli_format_dribble(dat)
+))
+```
+
+## Errors
+
+*I haven't gotten here yet*

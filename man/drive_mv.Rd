@@ -66,39 +66,39 @@ one".
 }
 \examples{
 \dontrun{
-## create a file to move
+# create a file to move
 file <- drive_upload(drive_example("chicken.txt"), "chicken-mv.txt")
 
-## rename it, but leave in current folder (root folder, in this case)
+# rename it, but leave in current folder (root folder, in this case)
 file <- drive_mv(file, "chicken-mv-renamed.txt")
 
-## create a folder to move the file into
+# create a folder to move the file into
 folder <- drive_mkdir("mv-folder")
 
-## move the file and rename it again,
-## specify destination as a dribble
+# move the file and rename it again,
+# specify destination as a dribble
 file <- drive_mv(file, path = folder, name = "chicken-mv-re-renamed.txt")
 
-## verify renamed file is now in the folder
+# verify renamed file is now in the folder
 drive_ls(folder)
 
-## move the file back to root folder
+# move the file back to root folder
 file <- drive_mv(file, "~/")
 
-## move it again
-## specify destination as path with trailing slash
-## to ensure we get a move vs. renaming it to "mv-folder"
+# move it again
+# specify destination as path with trailing slash
+# to ensure we get a move vs. renaming it to "mv-folder"
 file <- drive_mv(file, "mv-folder/")
 
-## `overwrite = FALSE` errors if something already exists at target filepath
-## THIS WILL ERROR!
+# `overwrite = FALSE` errors if something already exists at target filepath
+# THIS WILL ERROR!
 drive_create("name-squatter", path = "~/")
 drive_mv(file, path = "~/", name = "name-squatter", overwrite = FALSE)
 
-## `overwrite = TRUE` moves the existing item to trash, then proceeds
+# `overwrite = TRUE` moves the existing item to trash, then proceeds
 drive_mv(file, path = "~/", name = "name-squatter", overwrite = TRUE)
 
-## Clean up
+# Clean up
 drive_rm(file, folder)
 }
 }

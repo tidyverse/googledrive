@@ -77,7 +77,11 @@ drive_put <- function(media,
 
   # Happy Path 1 of 2: no name collision
   if (is.null(hits) || no_file(hits)) {
-    message_glue("No pre-existing file at this filepath. Calling `drive_upload()`.")
+    drive_bullets(c(
+      "i" = "No pre-existing Drive file at this path. Calling \\
+             {.fun drive_upload}."
+    ))
+
     return(drive_upload(
       media = media,
       path = as_id(params[["parents"]]),
@@ -89,7 +93,10 @@ drive_put <- function(media,
 
   # Happy Path 2 of 2: single name collision
   if (single_file(hits)) {
-    message_glue("Pre-existing file found at this filepath. Calling `drive_update()`.")
+    drive_bullets(c(
+      "i" = "A Drive file already exists at this path. Calling \\
+             {.fun drive_update}."
+    ))
     return(drive_update(
       hits,
       media = media,

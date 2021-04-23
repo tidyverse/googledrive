@@ -11,12 +11,12 @@
 # warn_for_verbose(FALSE) makes googledrive quiet, in scope
 
     Code
-      message_glue("chatty before")
-    Message <simpleMessage>
+      drive_bullets("chatty before")
+    Message <cliMessage>
       chatty before
     Code
       drive_something()
-      message_glue("chatty after")
-    Message <simpleMessage>
+      drive_bullets("chatty after")
+    Message <cliMessage>
       chatty after
 

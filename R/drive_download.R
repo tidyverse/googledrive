@@ -25,26 +25,26 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ## Upload a csv file into a Google Sheet
+#' # Upload a csv file into a Google Sheet
 #' file <- drive_upload(
 #'   drive_example("chicken.csv"),
 #'   type = "spreadsheet"
 #' )
 #'
-#' ## Download Sheet as csv, explicit type
-#' (downloaded_file <- drive_download(file, type = "csv"))
+#' # Download Sheet as csv, explicit type
+#' downloaded_file <- drive_download(file, type = "csv")
 #'
-#' ## See local path to new file
+#' # See local path to new file
 #' downloaded_file$local_path
 #'
-#' ## Download as csv, type implicit in file extension
+#' # Download as csv, type implicit in file extension
 #' drive_download(file, path = "my_csv_file.csv")
 #'
-#' ## Download with default name and type (xlsx)
+#' # Download with default name and type (xlsx)
 #' drive_download(file)
 #'
-#' ## Clean up
-#' unlink(c("chicken.csv", "chicken.csv.xlsx", "my_csv_file.csv"))
+#' # Clean up
+#' unlink(c("chicken.csv", "chicken.xlsx", "my_csv_file.csv"))
 #' drive_rm(file)
 #' }
 drive_download <- function(file,
@@ -66,7 +66,10 @@ drive_download <- function(file,
   mime_type <- file$drive_resource[[1]]$mimeType
 
   if (!grepl("google", mime_type) && !is.null(type)) {
-    message("Ignoring `type`. Only consulted for native Google file types.")
+    drive_bullets(c(
+      "!" = "Ignoring {.arg type}. Only consulted for native Google file types.",
+      " " = "MIME type of {.arg file}: {.field mime_type}."
+    ))
   }
 
   if (grepl("google", mime_type)) {
@@ -99,10 +102,12 @@ drive_download <- function(file,
   success <- httr::status_code(response) == 200 && file.exists(path)
 
   if (success) {
-    message_glue(
-      "\nFile downloaded:\n  * {file$name}\n",
-      "Saved locally as:\n  * {path}"
-    )
+    drive_bullets(c(
+      "File downloaded:",
+      cli_format_dribble(file),
+      "Saved locally as:",
+      "*" = "{.path {path}}"
+    ))
   } else {
     stop_glue("The file doesn't seem to have downloaded.")
   }

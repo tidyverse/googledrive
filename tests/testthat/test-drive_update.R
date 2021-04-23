@@ -47,7 +47,7 @@ test_that("no op if no media, no metadata", {
   skip_if_no_token()
   skip_if_offline()
 
-  local_drive_loud()
+  local_drive_loud_and_wide()
   expect_snapshot(
     out <- drive_update(nm_("update-fodder")),
   )

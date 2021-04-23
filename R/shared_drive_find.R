@@ -9,7 +9,8 @@
 
 #' @template pattern
 #' @template n_max
-#' @param ... Other parameters to pass along in the request, such as `pageSize`.
+#' @param ... Other parameters to pass along in the request, such as `pageSize`
+#'   or `useDomainAdminAccess`.
 #'
 #' @template dribble-return
 #' @export

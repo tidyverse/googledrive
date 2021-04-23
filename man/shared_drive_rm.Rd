@@ -22,17 +22,17 @@ earlier concept of Team Drives. Learn more about \link[=shared_drives]{shared dr
 }
 \examples{
 \dontrun{
-## Create shared drives to remove in various ways
+# Create shared drives to remove in various ways
 shared_drive_create("testdrive-01")
 sd02 <- shared_drive_create("testdrive-02")
 shared_drive_create("testdrive-03")
 sd04 <- shared_drive_create("testdrive-04")
 
-## remove by name
+# remove by name
 shared_drive_rm("testdrive-01")
-## remove by id
+# remove by id
 shared_drive_rm(as_id(sd02))
-## remove by URL (or, rather, id found in URL)
+# remove by URL (or, rather, id found in URL)
 shared_drive_rm(as_id("https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"))
 ## remove by dribble
 shared_drive_rm(sd04)

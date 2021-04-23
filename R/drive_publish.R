@@ -19,13 +19,13 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ## Upload file to publish
+#' # Upload file to publish
 #' file <- drive_upload(
 #'   drive_example("chicken.csv"),
 #'   type = "spreadsheet"
-#'   )
+#' )
 #'
-#' ## Publish file
+#' # Publish file
 #' file <- drive_publish(file)
 #' file$published
 #'
@@ -80,10 +80,11 @@ drive_change_publish <- function(file,
     change_publish_one,
     params = params
   )
-  success <- glue_data(file, "  * {name}: {id}")
-  message_collapse(c(
-    glue("Files now {if (publish) '' else 'NOT '}published:\n"),
-    success
+  n <- nrow(file)
+  drive_bullets(c(
+    cli::pluralize(
+      "{cli::qty(n)}File{?s} now {if (publish) '' else 'NOT '}published:"),
+    cli_format_dribble(file)
   ))
   invisible(drive_reveal(file, "published"))
 }

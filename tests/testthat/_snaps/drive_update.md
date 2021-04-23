@@ -24,6 +24,6 @@
 
     Code
       out <- drive_update(nm_("update-fodder"))
-    Message <simpleMessage>
-      No updates specified.
+    Message <cliMessage>
+      ! No updates specified.
 

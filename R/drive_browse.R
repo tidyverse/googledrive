@@ -49,7 +49,7 @@ drive_browse <- function(file = .Last.value) {
   links <- drive_link(file)
   if (!interactive() || no_file(file)) return(invisible(links))
   if (!single_file(file)) {
-    message_glue("Browsing the first file of {nrow(file)}.")
+    drive_bullets(c("v" = "Browsing the first file of {nrow(file)}."))
   }
   utils::browseURL(links[1])
   invisible(links)
