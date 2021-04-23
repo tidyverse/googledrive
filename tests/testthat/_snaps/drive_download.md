@@ -12,9 +12,9 @@
       writeLines(drive_download_message)
     Output
       File downloaded:
-      {RANDOM}
+      * {file_to_download} <id: {FILE_ID}>
       Saved locally as:
-      {RANDOM}
+      * '{download_filepath}'
 
 # drive_download() errors if file does not exist on Drive
 
@@ -29,9 +29,9 @@
       writeLines(drive_download_message)
     Output
       File downloaded:
-      {RANDOM}
+      * {file_to_download} <id: {FILE_ID}>
       Saved locally as:
-      {RANDOM}
+      * '{download_filename}'
 
 # drive_download() converts with type implicit in `path`
 
@@ -39,9 +39,9 @@
       writeLines(drive_download_message)
     Output
       File downloaded:
-      {RANDOM}
+      * {file_to_download} <id: {FILE_ID}>
       Saved locally as:
-      {RANDOM}
+      * '{download_filename}'
 
 # drive_download() converts using default MIME type, if necessary
 
@@ -49,7 +49,7 @@
       writeLines(drive_download_message)
     Output
       File downloaded:
-      {RANDOM}
+      * {file_to_download} <id: {FILE_ID}>
       Saved locally as:
-      {RANDOM}
+      * '{download_filename}'
 

@@ -5,9 +5,9 @@
     Output
       i No pre-existing Drive file at this path. Calling `drive_upload()`.
       Local file:
-      {RANDOM}
+      * '{local_file}'
       Uploaded into Drive file:
-      {RANDOM}
+      * {put_file} <id: {FILE_ID}>
       With MIME type:
       * 'text/plain'
 
@@ -18,5 +18,5 @@
     Output
       i A Drive file already exists at this path. Calling `drive_update()`.
       File updated:
-      {RANDOM}
+      * {put_file} <id: {FILE_ID}>
 

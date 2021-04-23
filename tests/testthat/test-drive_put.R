@@ -21,6 +21,7 @@ test_that("drive_put() works", {
   skip_if_offline()
 
   local_file <- tempfile(me_("foo"), fileext = ".txt")
+  put_file <- basename(local_file)
   download_target <- tempfile(me_("download"), fileext = ".txt")
   withr::defer({
     unlink(local_file)
@@ -35,7 +36,10 @@ test_that("drive_put() works", {
     original <- drive_put(local_file),
     type = "message"
   )
-  first_put[grep(basename(local_file), first_put)] <- "{RANDOM}"
+  first_put <- first_put %>%
+    scrub_filepath(local_file) %>%
+    scrub_filepath(put_file) %>%
+    scrub_file_id()
   expect_snapshot(
     writeLines(first_put)
   )
@@ -55,7 +59,9 @@ test_that("drive_put() works", {
     second <- drive_put(local_file),
     type = "message"
   )
-  second_put[grep(basename(local_file), second_put)] <- "{RANDOM}"
+  second_put <- second_put %>%
+    scrub_filepath(put_file) %>%
+    scrub_file_id()
   expect_snapshot(
     writeLines(second_put)
   )

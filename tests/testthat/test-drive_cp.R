@@ -36,8 +36,9 @@ test_that("drive_cp() can copy file in place", {
     cp_file <- drive_cp(file, name = cp_name),
     type = "message"
   )
-  drive_cp_message <- sub(cp_name, "{cp_name}", drive_cp_message, perl = TRUE)
-  drive_cp_message <- sub("<id: .+>", "<id: {RANDOM}>", drive_cp_message, perl = TRUE)
+  drive_cp_message <- drive_cp_message %>%
+    scrub_filepath(cp_name) %>%
+    scrub_file_id()
   expect_snapshot(
     writeLines(drive_cp_message)
   )
@@ -65,8 +66,9 @@ test_that("drive_cp() can copy a file into a different folder", {
     cp_file <- drive_cp(file, path = folder, name = cp_name),
     type = "message"
   )
-  drive_cp_message <- sub(cp_name, "{cp_name}", drive_cp_message, perl = TRUE)
-  drive_cp_message <- sub("<id: .+>", "<id: {RANDOM}>", drive_cp_message, perl = TRUE)
+  drive_cp_message <- drive_cp_message %>%
+    scrub_filepath(cp_name) %>%
+    scrub_file_id()
   expect_snapshot(
     writeLines(drive_cp_message)
   )
@@ -117,8 +119,9 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
     ),
     type = "message"
   )
-  drive_cp_message <- sub(cp_name, "{cp_name}", drive_cp_message, perl = TRUE)
-  drive_cp_message <- sub("<id: .+>", "<id: {RANDOM}>", drive_cp_message, perl = TRUE)
+  drive_cp_message <- drive_cp_message %>%
+    scrub_filepath(cp_name) %>%
+    scrub_file_id()
   expect_snapshot(
     writeLines(drive_cp_message)
   )

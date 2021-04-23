@@ -82,6 +82,8 @@ overwrite_hits <- function(parent = NULL, name, overwrite) {
     glue("name = '{name}'"),
     "trashed = FALSE"
   )
+  # suppress drive_find() status updates
+  local_drive_quiet()
   drive_find(q = q, corpus = "allDrives")
 }
 

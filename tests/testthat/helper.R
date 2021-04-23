@@ -32,3 +32,16 @@ defer_drive_rm <- function(..., env = parent.frame()) {
     envir = env
   )
 }
+
+# used to replace volatile filepaths and file ids in snapshot tests
+# may eventually be unnecessary, depending on how this works out:
+# https://github.com/r-lib/testthat/issues/1345
+# @param replace_me Should be a bare symbol
+scrub_filepath <- function(message, replace_me) {
+  x <- ensym(replace_me)
+  gsub(replace_me, paste0("{", as_string(x), "}"), message, perl = TRUE)
+}
+
+scrub_file_id <- function(message) {
+  gsub("<id: [a-zA-Z0-9_-]+>", "<id: {FILE_ID}>", message, perl = TRUE)
+}
