@@ -21,6 +21,8 @@ Where to learn more:
 
 ## User interface
 
+The user interface has gotten more stylish, thanks to the cli package (<https://cli.r-lib.org>).
+
 `googledrive_quiet` is a new option to suppress informational messages from googledrive.
 Unless it's explicitly set to `FALSE`, the default is to message.
 
