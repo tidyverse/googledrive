@@ -218,29 +218,3 @@ stop_glue_data <- function(..., .sep = "", .envir = parent.frame(),
 }
 
 stop_collapse <- function(x) stop(glue_collapse(x, sep = "\n"), call. = FALSE)
-
-message_glue <- function(..., .sep = "", .envir = parent.frame(),
-                         .domain = NULL, .appendLF = TRUE) {
-  # TODO: temporary fix since I switched to testthat 3e before updating the
-  # UI functions
-  quiet <- drive_quiet() %|% is_testing()
-  if (quiet) {
-    return(invisible())
-  }
-  message(
-    glue(..., .sep = .sep, .envir = .envir),
-    domain = .domain, appendLF = .appendLF
-  )
-}
-
-message_collapse <- function(x) {
-  # TODO: temporary fix since I switched to testthat 3e before updating the
-  # UI functions
-  quiet <- drive_quiet() %|% is_testing()
-  if (quiet) {
-    return(invisible())
-  }
-  message(glue_collapse(x, sep = "\n"))
-}
-
-warning_collapse <- function(x) warning(glue_collapse(x, sep = "\n"))
