@@ -99,22 +99,38 @@ do_paginated_request <- function(x,
   responses <- list()
   i <- 1
   total <- 0
+  # TODO: do I have anything to say here at the beginning?
+  # what's a non-jargon-y and general way to say:
+  # "we're hitting a paginated endpoint and we're working with pageSize n"
+  st <- show_status()
+  if (st) sb <- cli::cli_status(msg = character())
   repeat {
     page <- request_make(x, ...)
     responses[[i]] <- gargle::response_process(page)
     x$query$pageToken <- responses[[i]]$nextPageToken
     x$url <- httr::modify_url(x$url, query = x$query)
+    # TODO: presumably this might need some generalization when this moves
+    # to gargle (how we determine how much 'stuff' we've seen and how we
+    # talk about it in the status bar)
+    # TODO: need to do something re: non-interactive work, e.g. Rmd
     total <- total + n(responses[[i]])
-    if (i == 2) message_glue("Items so far: ")
-    if (i > 1) message_glue("{total} ", .appendLF = FALSE)
+    if (st) {
+      cli::cli_status_update(
+        id = sb,
+        "{cli::symbol$arrow_right} Files retrieved so far: {total}"
+      )
+    }
     if (is.null(x$query$pageToken) || total >= n_max) {
-      if (i > 1) message("")
       break
     }
     i <- i + 1
   }
 
   responses
+}
+
+show_status <- function() {
+  is_interactive() && is_false(getOption("googledrive_quiet", FALSE))
 }
 
 drive_ua <- function() {
