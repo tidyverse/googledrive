@@ -57,7 +57,7 @@ test_that("drive_cp() can copy a file into a different folder", {
 
   cp_name <- me_("i-am-a-file")
   defer_drive_rm(cp_name)
-  local_drive_loud_and_wide(100)
+  local_drive_loud_and_wide(110)
 
   file <- drive_get(nm_("i-am-a-file"))
   folder <- drive_get(nm_("i-am-a-folder"))
