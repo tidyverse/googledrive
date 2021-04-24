@@ -131,6 +131,9 @@ Returned dribble contains local path to downloaded file in local_path." />
       <a href="../articles/articles/file-identification.html">File Identification</a>
     </li>
     <li>
+      <a href="../articles/articles/messages-and-errors.html">Messages and errors in googledrive</a>
+    </li>
+    <li>
       <a href="../articles/articles/multiple-files.html">Dealing with multiple files</a>
     </li>
     <li>
@@ -245,26 +248,26 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'>## Upload a csv file into a Google Sheet</span>
+<span class='co'># Upload a csv file into a Google Sheet</span>
 <span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span><span class='op'>(</span>
   <span class='fu'><a href='drive_example.html'>drive_example</a></span><span class='op'>(</span><span class='st'>"chicken.csv"</span><span class='op'>)</span>,
   type <span class='op'>=</span> <span class='st'>"spreadsheet"</span>
 <span class='op'>)</span>
 
-<span class='co'>## Download Sheet as csv, explicit type</span>
-<span class='op'>(</span><span class='va'>downloaded_file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_download</span><span class='op'>(</span><span class='va'>file</span>, type <span class='op'>=</span> <span class='st'>"csv"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># Download Sheet as csv, explicit type</span>
+<span class='va'>downloaded_file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_download</span><span class='op'>(</span><span class='va'>file</span>, type <span class='op'>=</span> <span class='st'>"csv"</span><span class='op'>)</span>
 
-<span class='co'>## See local path to new file</span>
+<span class='co'># See local path to new file</span>
 <span class='va'>downloaded_file</span><span class='op'>$</span><span class='va'>local_path</span>
 
-<span class='co'>## Download as csv, type implicit in file extension</span>
+<span class='co'># Download as csv, type implicit in file extension</span>
 <span class='fu'>drive_download</span><span class='op'>(</span><span class='va'>file</span>, path <span class='op'>=</span> <span class='st'>"my_csv_file.csv"</span><span class='op'>)</span>
 
-<span class='co'>## Download with default name and type (xlsx)</span>
+<span class='co'># Download with default name and type (xlsx)</span>
 <span class='fu'>drive_download</span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
 
-<span class='co'>## Clean up</span>
-<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"chicken.csv"</span>, <span class='st'>"chicken.csv.xlsx"</span>, <span class='st'>"my_csv_file.csv"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># Clean up</span>
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"chicken.csv"</span>, <span class='st'>"chicken.xlsx"</span>, <span class='st'>"my_csv_file.csv"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>

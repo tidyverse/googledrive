@@ -120,6 +120,9 @@
       <a href="../articles/articles/file-identification.html">File Identification</a>
     </li>
     <li>
+      <a href="../articles/articles/messages-and-errors.html">Messages and errors in googledrive</a>
+    </li>
+    <li>
       <a href="../articles/articles/multiple-files.html">Dealing with multiple files</a>
     </li>
     <li>
@@ -188,6 +191,7 @@
 <div id="user-interface" class="section level2">
 <h2 class="hasAnchor">
 <a href="#user-interface" class="anchor"></a>User interface</h2>
+<p>The user interface has gotten more stylish, thanks to the cli package (<a href="https://cli.r-lib.org" class="uri">https://cli.r-lib.org</a>).</p>
 <p><code>googledrive_quiet</code> is a new option to suppress informational messages from googledrive. Unless it’s explicitly set to <code>FALSE</code>, the default is to message.</p>
 <p>The <code>verbose</code> argument of all <code>drive_*()</code> functions is deprecated and will be removed in a future release. In the current release, <code>verbose = FALSE</code> is still honored, but generates a warning.</p>
 <p><code><a href="../reference/googledrive-configuration.html">local_drive_quiet()</a></code> and <code><a href="../reference/googledrive-configuration.html">with_drive_quiet()</a></code> are <a href="https://withr.r-lib.org">withr-style</a> convenience helpers for setting <code>googledrive_quiet = TRUE</code> for some limited scope.</p>
@@ -341,7 +345,7 @@
 <a href="#drive_put" class="anchor"></a><code>drive_put()</code>
 </h3>
 <p>Sometimes you have a file you will repeatedly send to Drive, i.e. the first time you run an analysis, you create the file and, when you re-run it, you update the file. Previously this was hard to express with googledrive.</p>
-<p><code><a href="../reference/drive_put.html">drive_put()</a></code> is useful here and refers to the HTTP verb <code>PUT</code>: create the thing if it doesn’t exist or, if it does, replace its contents. A good explanation of <code>PUT</code> is <a href="https://medium.com/backticks-tildes/restful-api-design-put-vs-patch-4a061aa3ed0b">RESTful API Design — PUT vs PATCH</a>.</p>
+<p><code><a href="../reference/drive_put.html">drive_put()</a></code> is useful here and refers to the HTTP verb <code>PUT</code>: create the thing if it doesn’t exist or, if it does, replace its contents. A good explanation of <code>PUT</code> is <a href="https://medium.com/backticks-tildes/restful-api-design-put-vs-patch-4a061aa3ed0b">RESTful API Design – PUT vs PATCH</a>.</p>
 <p>In pseudo-code, here’s the basic idea of <code><a href="../reference/drive_put.html">drive_put()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>target_filepath &lt;-<span class="st"> </span><span class="er">&lt;</span>determined from arguments <span class="st">`</span><span class="dt">path</span><span class="st">`</span>, <span class="st">`</span><span class="dt">name</span><span class="st">`</span>, and <span class="st">`</span><span class="dt">media</span><span class="st">`</span><span class="op">&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>hits &lt;-<span class="st"> </span><span class="er">&lt;</span>get all Drive files at target_filepath<span class="op">&gt;</span></span>

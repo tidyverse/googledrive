@@ -52,14 +52,12 @@
 <meta property="og:title" content="Request partial resources — drive_fields" />
 <meta property="og:description" content="You may be able to improve the performance of your API calls by
 requesting only the metadata that you actually need. This function is
-primarily for internal use and is currently focused on the
-Files resource.
-Note that high-level googledrive functions assume that the name, id, and
-kind fields are included, at a bare minimum. Assuming that
-resource = &quot;files&quot; (the default), input provided via fields is checked
-for validity against the known field names and the validated fields are
-returned. To see a tibble containing all possible fields and a short
-description of each, call drive_fields(expose()).
+primarily for internal use and is currently focused on the Files resource. Note
+that high-level googledrive functions assume that the name, id, and
+kind fields are included, at a bare minimum. Assuming that resource = &quot;files&quot; (the default), input provided via fields is checked for validity
+against the known field names and the validated fields are returned. To see
+a tibble containing all possible fields and a short description of each,
+call drive_fields(expose()).
 prep_fields() prepares fields for inclusion as query
 parameters." />
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
@@ -132,6 +130,9 @@ parameters." />
       <a href="../articles/articles/file-identification.html">File Identification</a>
     </li>
     <li>
+      <a href="../articles/articles/messages-and-errors.html">Messages and errors in googledrive</a>
+    </li>
+    <li>
       <a href="../articles/articles/multiple-files.html">Dealing with multiple files</a>
     </li>
     <li>
@@ -183,14 +184,12 @@ parameters." />
     <div class="ref-description">
     <p>You may be able to improve the performance of your API calls by
 requesting only the metadata that you actually need. This function is
-primarily for internal use and is currently focused on the
-<a href='https://developers.google.com/drive/v3/reference/files'>Files resource</a>.
-Note that high-level googledrive functions assume that the <code>name</code>, <code>id</code>, and
-<code>kind</code> fields are included, at a bare minimum. Assuming that
-<code>resource = "files"</code> (the default), input provided via <code>fields</code> is checked
-for validity against the known field names and the validated fields are
-returned. To see a tibble containing all possible fields and a short
-description of each, call <code>drive_fields(expose())</code>.</p>
+primarily for internal use and is currently focused on the <a href='https://developers.google.com/drive/api/v3/reference/files'>Files resource</a>. Note
+that high-level googledrive functions assume that the <code>name</code>, <code>id</code>, and
+<code>kind</code> fields are included, at a bare minimum. Assuming that <code>resource = "files"</code> (the default), input provided via <code>fields</code> is checked for validity
+against the known field names and the validated fields are returned. To see
+a tibble containing all possible fields and a short description of each,
+call <code>drive_fields(expose())</code>.</p>
 <p><code>prep_fields()</code> prepares fields for inclusion as query
 parameters.</p>
     </div>
@@ -216,15 +215,15 @@ only the Files resource is anticipated.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>drive_fields()</code>: Character vector of field names.
-<code>prep_fields()</code>: a string.</p>
+    <p><code>drive_fields()</code>: Character vector of field names. <code>prep_fields()</code>: a
+string.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='https://developers.google.com/drive/v3/web/performance#partial'>Working with partial resources</a>,
 in the Drive API documentation.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## get a tibble of all fields for the Files resource + indicator of defaults</span>
+    <pre class="examples"><div class='input'><span class='co'># get a tibble of all fields for the Files resource + indicator of defaults</span>
 <span class='fu'>drive_fields</span><span class='op'>(</span><span class='fu'><a href='expose.html'>expose</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 55 x 2</span><span>
 #&gt;    name                  desc                                                   
@@ -240,11 +239,10 @@ in the Drive API documentation.</p></div>
 #&gt; </span><span style='color: #BCBCBC;'> 9</span><span> exportLinks           </span><span style='color: #949494;'>"</span><span>Links for exporting Google Docs to specific formats.</span><span style='color: #949494;'>"</span><span> 
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> fileExtension         </span><span style='color: #949494;'>"</span><span>The final component of fullFileExtension. This is onl…
 #&gt; </span><span style='color: #949494;'># … with 45 more rows</span><span></div><div class='input'>
-<span class='co'>## invalid fields are removed and throw warning</span>
+<span class='co'># invalid fields are removed and throw warning</span>
 <span class='fu'>drive_fields</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"ownedByMe"</span>, <span class='st'>"pancakes!"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring fields that are non-standard for the Files resource:</span>
-#&gt; <span class='warning'>  * pancakes!</span></div><div class='output co'>#&gt; [1] "name"      "parents"   "ownedByMe"</div><div class='input'>
-<span class='co'>## prepare fields for query</span>
+</div><div class='output co'>#&gt; <span class='message'>Omitting fields that are not recognized as part of the Files resource:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>pancakes!</span><span></span></div><div class='output co'>#&gt; [1] "name"      "parents"   "ownedByMe"</div><div class='input'>
+<span class='co'># prepare fields for query</span>
 <span class='fu'>prep_fields</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"name"</span>, <span class='st'>"parents"</span>, <span class='st'>"kind"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "files/name,files/parents,files/kind"</div></span></pre>
   </div>
