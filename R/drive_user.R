@@ -33,14 +33,18 @@ drive_user <- function(verbose = deprecated()) {
 }
 
 #' @export
-print.drive_user <- function(x, ...) {
-  cat(
-    c(
+format.drive_user <- function(x, ...) {
+  cli::cli_format_method(
+    drive_bullets(c(
       "Logged in as:",
-      glue("  *  displayName: {x[['displayName']]}"),
-      glue("  * emailAddress: {x[['emailAddress']]}")
-    ),
-    sep = "\n"
+      "*" = "displayName: {.field {x[['displayName']]}}",
+      "*" = "emailAddress: {.email {x[['emailAddress']]}}"
+    ))
   )
+}
+
+#' @export
+print.drive_user <- function(x, ...) {
+  cli::cat_line(format(x, ...))
   invisible(x)
 }
