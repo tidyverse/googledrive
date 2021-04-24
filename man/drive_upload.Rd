@@ -73,7 +73,7 @@ of an existing Drive file, use \code{\link[=drive_update]{drive_update()}}. To u
 depending on whether the Drive file already exists, see \code{\link[=drive_put]{drive_put()}}.
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # upload a csv file
 chicken_csv <- drive_upload(
   drive_example("chicken.csv"),
@@ -124,6 +124,7 @@ chicken <- drive_upload(
 # Clean up
 drive_rm(chicken)
 
+\dontrun{
 # Upload to a shared drive:
 #   * Shared drives are only available if your account is associated with a
 #     Google Workspace
@@ -132,6 +133,7 @@ drive_rm(chicken)
 sd <- shared_drive_get("Marketing")
 drive_upload("fascinating.csv", path = sd)
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{files.create} endpoint:

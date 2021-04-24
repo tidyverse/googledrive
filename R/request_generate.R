@@ -38,15 +38,13 @@
 #' @export
 #' @family low-level API functions
 #' @seealso [gargle::request_develop()], [gargle::request_build()]
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' req <- request_generate(
 #'   "drive.files.get",
 #'   list(fileId = "abc"),
 #'   token = drive_token()
 #' )
 #' req
-#' }
 request_generate <- function(endpoint = character(),
                              params = list(),
                              key = NULL,

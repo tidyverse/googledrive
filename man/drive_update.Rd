@@ -34,7 +34,7 @@ API-speak), new metadata, or both.  To create a new file or update existing,
 depending on whether the Drive file already exists, see \code{\link[=drive_put]{drive_put()}}.
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Create a new file, so we can update it
 x <- drive_upload(drive_example("chicken.csv"))
 
@@ -42,26 +42,19 @@ x <- drive_upload(drive_example("chicken.csv"))
 x <- x \%>\%
   drive_update(drive_example("chicken.txt"))
 
-## Update the file with new metadata.
-## Notice here `name` is not an argument of `drive_update()`, we are passing
-## this to the API via the `...``
+# Update the file with new metadata.
+# Notice here `name` is not an argument of `drive_update()`, we are passing
+# this to the API via the `...``
 x <- x \%>\%
   drive_update(name = "CHICKENS!")
 
-## We can add a parent folder by passing `addParents` via `...`.
-folder <- drive_mkdir("second-parent-folder")
-x <- x \%>\%
-  drive_update(addParents = as_id(folder))
-## Verify the file now has multiple parents
-purrr::pluck(x, "drive_resource", 1, "parents")
-
-## Update the file with new media AND new metadata
+# Update the file with new media AND new metadata
 x <- x \%>\%
   drive_update(drive_example("chicken.txt"), name = "chicken-poem-again.txt")
 
-## Clean up
-drive_rm(x, folder)
-}
+# Clean up
+drive_rm(x)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{files.update} endpoint:

@@ -18,8 +18,7 @@
 #' @template dribble-return
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' # Create a new file, so we can update it
 #' x <- drive_upload(drive_example("chicken.csv"))
 #'
@@ -27,26 +26,18 @@
 #' x <- x %>%
 #'   drive_update(drive_example("chicken.txt"))
 #'
-#' ## Update the file with new metadata.
-#' ## Notice here `name` is not an argument of `drive_update()`, we are passing
-#' ## this to the API via the `...``
+#' # Update the file with new metadata.
+#' # Notice here `name` is not an argument of `drive_update()`, we are passing
+#' # this to the API via the `...``
 #' x <- x %>%
 #'   drive_update(name = "CHICKENS!")
 #'
-#' ## We can add a parent folder by passing `addParents` via `...`.
-#' folder <- drive_mkdir("second-parent-folder")
-#' x <- x %>%
-#'   drive_update(addParents = as_id(folder))
-#' ## Verify the file now has multiple parents
-#' purrr::pluck(x, "drive_resource", 1, "parents")
-#'
-#' ## Update the file with new media AND new metadata
+#' # Update the file with new media AND new metadata
 #' x <- x %>%
 #'   drive_update(drive_example("chicken.txt"), name = "chicken-poem-again.txt")
 #'
-#' ## Clean up
-#' drive_rm(x, folder)
-#' }
+#' # Clean up
+#' drive_rm(x)
 drive_update <- function(file,
                          media = NULL,
                          ...,

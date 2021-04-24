@@ -17,8 +17,7 @@
 #'
 #' @template dribble-return
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' # Upload file to publish
 #' file <- drive_upload(
 #'   drive_example("chicken.csv"),
@@ -29,13 +28,12 @@
 #' file <- drive_publish(file)
 #' file$published
 #'
-#' ## Unpublish file
+#' # Unpublish file
 #' file <- drive_unpublish(file)
 #' file$published
 #'
-#' ## Clean up
+#' # Clean up
 #' drive_rm(file)
-#' }
 drive_publish <- function(file, ..., verbose = deprecated()) {
   warn_for_verbose(verbose)
   drive_change_publish(file = file, publish = TRUE, ...)

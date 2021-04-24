@@ -46,15 +46,15 @@ exported to a conventional local file type. This can be specified:
 \itemize{
 \item explicitly via \code{type}
 \item implicitly via the file extension of \code{path}
-\item not at all, i.e. rely on default built into googledrive
+\item not at all, i.e. rely on the built-in default
 }
 
-To see what export file types are even possible, see the
-\href{https://developers.google.com/drive/v3/web/manage-downloads#downloading_google_documents}{Drive API documentation}.
-Returned dribble contains local path to downloaded file in \code{local_path}.
+To see what export file types are even possible, see the \href{https://developers.google.com/drive/api/v3/ref-export-formats}{Drive API documentation}
+or the result of \code{drive_about()$exportFormats}. The returned dribble
+includes a \code{local_path} column.
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Upload a csv file into a Google Sheet
 file <- drive_upload(
   drive_example("chicken.csv"),
@@ -76,5 +76,9 @@ drive_download(file)
 # Clean up
 unlink(c("chicken.csv", "chicken.xlsx", "my_csv_file.csv"))
 drive_rm(file)
+\dontshow{\}) # examplesIf}
 }
+\seealso{
+\href{https://developers.google.com/drive/v3/web/manage-downloads#downloading_google_documents}{Download files},
+in the Drive API documentation.
 }

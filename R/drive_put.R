@@ -1,9 +1,14 @@
 #' PUT new media into a Drive file
 #'
-#' PUTs new media into a Drive file, in the HTTP sense: if the file already
-#' exists, we replace its content and we create a new file, otherwise. This is a
-#' convenience wrapper around [`drive_upload()`] and [`drive_update()`]. In
-#' pseudo-code:
+#' @description
+#' PUTs new media into a Drive file, in the HTTP sense:
+#' * If the file already exists, we replace its content.
+#' * If the file does not already exist, we create a new file.
+#'
+#' @description
+#' This is a convenience wrapper around [`drive_upload()`] and
+#' [`drive_update()`]. In pseudo-code:
+#'
 #' ```
 #' target_filepath <- <determined from `path`, `name`, and `media`>
 #' hits <- <get all Drive files at target_filepath>
@@ -20,8 +25,7 @@
 #'
 #' @template dribble-return
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' # create a local file to work with
 #' local_file <- tempfile("drive_put_", fileext = ".txt")
 #' writeLines(c("beginning", "middle"), local_file)
@@ -44,7 +48,6 @@
 #' # clean-up
 #' drive_find("drive_put_.+[.]txt") %>% drive_rm()
 #' unlink(local_file)
-#' }
 drive_put <- function(media,
                       path = NULL,
                       name = NULL,

@@ -15,22 +15,20 @@
 #' @return Logical vector, indicating whether the delete succeeded.
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' ## Create something to remove
+#' @examplesIf drive_has_token()
+#' # Create something to remove
 #' drive_upload(drive_example("chicken.txt"), name = "chicken-rm.txt")
 #'
-#' ## Remove it by name
+#' # Remove it by name
 #' drive_rm("chicken-rm.txt")
 #'
-#' ## Create several things to remove
+#' # Create several things to remove
 #' x1 <- drive_upload(drive_example("chicken.txt"), name = "chicken-abc.txt")
 #' drive_upload(drive_example("chicken.txt"), name = "chicken-def.txt")
 #' x2 <- drive_upload(drive_example("chicken.txt"), name = "chicken-ghi.txt")
 #'
-#' ## Remove them all at once, specified in different ways
+#' # Remove them all at once, specified in different ways
 #' drive_rm(x1, "chicken-def.txt", as_id(x2))
-#' }
 drive_rm <- function(..., verbose = deprecated()) {
   warn_for_verbose(verbose)
   dots <- list(...)

@@ -11,14 +11,12 @@
 #'
 #' @return A list of class `drive_user`.
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' drive_user()
 #'
-#' ## more info is returned than is printed
+#' # more info is returned than is printed
 #' user <- drive_user()
-#' user[["permissionId"]]
-#' }
+#' str(user)
 drive_user <- function(verbose = deprecated()) {
   warn_for_verbose(verbose)
 

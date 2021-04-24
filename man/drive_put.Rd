@@ -49,10 +49,14 @@ more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_qu
 An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
-PUTs new media into a Drive file, in the HTTP sense: if the file already
-exists, we replace its content and we create a new file, otherwise. This is a
-convenience wrapper around \code{\link[=drive_upload]{drive_upload()}} and \code{\link[=drive_update]{drive_update()}}. In
-pseudo-code:\preformatted{target_filepath <- <determined from `path`, `name`, and `media`>
+PUTs new media into a Drive file, in the HTTP sense:
+\itemize{
+\item If the file already exists, we replace its content.
+\item If the file does not already exist, we create a new file.
+}
+
+This is a convenience wrapper around \code{\link[=drive_upload]{drive_upload()}} and
+\code{\link[=drive_update]{drive_update()}}. In pseudo-code:\preformatted{target_filepath <- <determined from `path`, `name`, and `media`>
 hits <- <get all Drive files at target_filepath>
 if (no hits) \{
   drive_upload(media, path, name, type, ...)
@@ -64,7 +68,7 @@ if (no hits) \{
 }
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # create a local file to work with
 local_file <- tempfile("drive_put_", fileext = ".txt")
 writeLines(c("beginning", "middle"), local_file)
@@ -87,5 +91,5 @@ drive_put(local_file)
 # clean-up
 drive_find("drive_put_.+[.]txt") \%>\% drive_rm()
 unlink(local_file)
-}
+\dontshow{\}) # examplesIf}
 }

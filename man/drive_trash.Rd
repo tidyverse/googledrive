@@ -28,7 +28,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 Move Drive files to or from trash
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Create a file and put it in the trash.
 file <- drive_upload(drive_example("chicken.txt"), "chicken-trash.txt")
 drive_trash("chicken-trash.txt")
@@ -42,5 +42,5 @@ drive_find(trashed = TRUE)
 
 # Clean up
 drive_rm("chicken-trash.txt")
-}
+\dontshow{\}) # examplesIf}
 }

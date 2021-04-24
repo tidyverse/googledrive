@@ -131,7 +131,11 @@ drive_find(type = "spreadsheet")
 drive_find(q = "mimeType='application/vnd.google-apps.spreadsheet'")
 
 # files whose names match a regex
-drive_find(pattern = "jt")
+# the local, general, sometimes-slow-to-execute version
+drive_find(pattern = "ick")
+# the server-side, executes-faster version
+# NOTE: works only for a pattern at the beginning of file name
+drive_find(q = "name contains 'chick'")
 
 # search for files located directly in your root folder
 drive_find(q = "'root' in parents")
@@ -148,7 +152,7 @@ drive_find(page_size = 5, n_max = 15)
 # various ways to specify q search clauses
 # multiple q's
 drive_find(q = "name contains 'TEST'",
-           q = "modifiedTime > '2017-07-21T12:00:00'")
+           q = "modifiedTime > '2020-07-21T12:00:00'")
 # vector q
 drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
 
@@ -162,8 +166,9 @@ drive_find(trashed = NA)
 drive_find(order_by = NULL, n_max = 5)
 
 # sort on various keys
-drive_find(order_by = "quotaBytesUsed", n_max = 5)
 drive_find(order_by = "modifiedByMeTime", n_max = 5)
+# request descending order
+drive_find(order_by = "quotaBytesUsed desc", n_max = 5)
 }
 
 }

@@ -20,8 +20,7 @@
 #'
 #' @template dribble-return
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' # create a file to move
 #' file <- drive_upload(drive_example("chicken.txt"), "chicken-mv.txt")
 #'
@@ -56,7 +55,6 @@
 #'
 #' # Clean up
 #' drive_rm(file, folder)
-#' }
 drive_mv <- function(file,
                      path = NULL,
                      name = NULL,

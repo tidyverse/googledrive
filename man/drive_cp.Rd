@@ -65,7 +65,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 Copies an existing Drive file into a new file id.
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Create a file to copy
 file <- drive_upload(drive_example("chicken.txt"), "chicken-cp.txt")
 
@@ -88,7 +88,7 @@ purrr::pluck(x, "drive_resource", 1, "starred")
 
 # `overwrite = FALSE` errors if file already exists at target filepath
 # THIS WILL ERROR!
-drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = FALSE)
+# drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = FALSE)
 
 # `overwrite = TRUE` moves an existing file to trash, then proceeds
 drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = TRUE)
@@ -98,7 +98,7 @@ drive_find("chicken-cp")
 
 # Delete all of our copies and the new folder!
 drive_find("chicken-cp") \%>\% drive_rm()
-drive_rm(folder)
+drive_find("new-folder") \%>\% drive_rm(folder)
 
 # upload a csv file to copy
 csv_file <- drive_upload(drive_example("chicken.csv"))
@@ -116,8 +116,9 @@ purrr::pluck(chicken_sheet, "drive_resource", 1, "mimeType")
 # drive_browse(chicken_sheet)
 
 # clean up
-drive_rm(csv_file, chicken_sheet)
-}
+drive_find("chicken.csv") \%>\% drive_rm()
+drive_rm(chicken_sheet)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{files.copy} endpoint:

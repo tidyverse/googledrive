@@ -24,8 +24,7 @@
 #'
 #' @template dribble-return
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' # Create a blank Google Doc named 'WordStar' in
 #' # your 'My Drive' root folder and star it
 #' wordstar <- drive_create("WordStar", type = "document", starred = TRUE)
@@ -71,7 +70,6 @@
 #'
 #' # clean up
 #' drive_rm(wordstar, b4xl, execuvision)
-#' }
 drive_create <- function(name,
                          path = NULL,
                          type = NULL,

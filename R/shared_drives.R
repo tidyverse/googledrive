@@ -225,10 +225,10 @@ validate_corpora <- function(corpora) {
 #' @export
 #' @examples
 #' \dontrun{
-#' ## specify the name
+#' # specify the name
 #' as_shared_drive("abc")
 #'
-#' ## specify the id (substitute one of your own!)
+#' # specify the id (substitute one of your own!)
 #' as_shared_drive(as_id("0AOPK1X2jaNckUk9PVA"))
 #' }
 as_shared_drive <- function(x, ...) UseMethod("as_shared_drive")

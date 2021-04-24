@@ -18,7 +18,7 @@ Character vector of file hyperlinks, from \code{\link[=drive_link]{drive_link()}
 Visits a file on Google Drive in your default browser.
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token() && rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 drive_find(n_max = 1) \%>\% drive_browse()
-}
+\dontshow{\}) # examplesIf}
 }

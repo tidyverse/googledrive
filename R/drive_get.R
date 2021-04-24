@@ -5,7 +5,7 @@
 #' @template not-like-your-local-file-system
 #'
 #' @description If the files are specified via `path`, the returned [`dribble`]
-#'   will include a `path` column To add path information to any [`dribble`]
+#'   will include a `path` column. To add path information to any [`dribble`]
 #'   that lacks it, use [drive_reveal()], e.g., `drive_reveal(d, "path")`. If
 #'   you want to list the contents of a folder, use [drive_ls()]. For general
 #'   searching, use [drive_find()].
@@ -37,14 +37,14 @@
 #' @template dribble-return
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' # get info about your "My Drive" root folder
 #' drive_get("~/")
 #' # the API reserves the file id "root" for your root folder
 #' drive_get(id = "root")
 #' drive_get(id = "root") %>% drive_reveal("path")
 #'
+#' \dontrun{
 #' # The examples below are indicative of correct syntax.
 #' # But note these will generally result in an error or a
 #' # 0-row dribble, unless you replace the inputs with paths

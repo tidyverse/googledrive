@@ -62,7 +62,7 @@ read, comment, or edit. The returned \code{\link{dribble}} will have extra colum
 "make this \code{file} readable by 'anyone with a link'".
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Upload a file to share
 file <- drive_upload(
    drive_example("chicken.txt"),
@@ -76,7 +76,7 @@ file <- file \%>\%
     role = "commenter",
     type = "user",
     emailAddress = "susan@example.com"
-  )
+)
 
 # Let a different specific person edit and customize the email notification
 file <- file \%>\%
@@ -95,7 +95,7 @@ drive_share_anyone(file)
 
 # Clean up
 drive_rm(file)
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{permissions.create} endpoint:

@@ -34,10 +34,10 @@ This is a generic function.
 }
 \examples{
 \dontrun{
-## specify the name
+# specify the name
 as_shared_drive("abc")
 
-## specify the id (substitute one of your own!)
+# specify the id (substitute one of your own!)
 as_shared_drive(as_id("0AOPK1X2jaNckUk9PVA"))
 }
 }

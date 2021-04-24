@@ -17,17 +17,17 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ## get contents of the folder 'abc' (non-recursive)
+#' # get contents of the folder 'abc' (non-recursive)
 #' drive_ls("abc")
 #'
-#' ## get contents of folder 'abc' whose names contain the letters 'def'
+#' # get contents of folder 'abc' whose names contain the letters 'def'
 #' drive_ls(path = "abc", pattern = "def")
 #'
-#' ## get all Google spreadsheets in folder 'abc'
-#' ## whose names contain the letters 'def'
+#' # get all Google spreadsheets in folder 'abc'
+#' # whose names contain the letters 'def'
 #' drive_ls(path = "abc", pattern = "def", type = "spreadsheet")
 #'
-#' ## get all the files below 'abc', recursively, that are starred
+#' # get all the files below 'abc', recursively, that are starred
 #' drive_ls(path = "abc", q = "starred = true", recursive = TRUE)
 #' }
 drive_ls <- function(path = NULL, ..., recursive = FALSE) {

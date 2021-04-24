@@ -40,26 +40,24 @@
 #'
 #' @template dribble-return
 #' @export
-#' @examples
-#' \dontrun{
-#' ## Get a nice, random selection of files
+#' @examplesIf drive_has_token()
+#' # Get a nice, random selection of files
 #' files <- drive_find(n_max = 10, trashed = NA)
 #'
-#' ## Reveal
-#' ##   * paths (warning: can be slow for many files!)
-#' ##   * if `trashed` or not
-#' ##   * MIME type
-#' ##   * permissions, i.e. sharing status
-#' ##   * if `published` or not
+#' # Reveal
+#' #   * paths (warning: can be slow for many files!)
+#' #   * if `trashed` or not
+#' #   * MIME type
+#' #   * permissions, i.e. sharing status
+#' #   * if `published` or not
 #' drive_reveal(files, "path")
 #' drive_reveal(files, "trashed")
 #' drive_reveal(files, "mime_type")
 #' drive_reveal(files, "permissions")
 #' drive_reveal(files, "published")
 #'
-#' ## 'root' is a special file id that always represents your root folder
+#' # 'root' is a special file id that always represents your root folder
 #' drive_get(id = "root") %>% drive_reveal("path")
-#' }
 drive_reveal <- function(file,
                          what = c(
                            "path", "trashed", "mime_type",

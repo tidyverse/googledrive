@@ -12,37 +12,38 @@
 #'
 #' @template dribble-return
 #' @export
-#' @examples
-#' \dontrun{
-#' ## Create folder named 'ghi', then another below named it 'jkl' and star it
+#' @examplesIf drive_has_token()
+#' # Create folder named 'ghi', then another below named it 'jkl' and star it
 #' ghi <- drive_mkdir("ghi")
 #' jkl <- drive_mkdir("ghi/jkl", starred = TRUE)
 #'
-#' ## is 'jkl' really starred? YES
+#' # is 'jkl' really starred? YES
 #' purrr::pluck(jkl, "drive_resource", 1, "starred")
 #'
-#' ## Another way to create folder 'mno' in folder 'ghi'
+#' # Another way to create folder 'mno' in folder 'ghi'
 #' drive_mkdir("mno", path = "ghi")
 #'
-#' ## Yet another way to create a folder named 'pqr' in folder 'ghi',
-#' ## this time with parent folder stored in a dribble,
-#' ## and setting the new folder's description
+#' # Yet another way to create a folder named 'pqr' in folder 'ghi',
+#' # this time with parent folder stored in a dribble,
+#' # and setting the new folder's description
 #' pqr <- drive_mkdir("pqr", path = ghi, description = "I am a folder")
 #'
-#' ## Did we really set the description? YES
+#' # Did we really set the description? YES
 #' purrr::pluck(pqr, "drive_resource", 1, "description")
 #'
-#' ## `overwrite = FALSE` errors if something already exists at target filepath
-#' ## THIS WILL ERROR!
+#' # `overwrite = FALSE` errors if something already exists at target filepath
+#' # THIS WILL ERROR!
 #' drive_create("name-squatter", path = ghi)
 #' drive_mkdir("name-squatter", path = ghi, overwrite = FALSE)
 #'
-#' ## `overwrite = TRUE` moves the existing item to trash, then proceeds
+#' # `overwrite = TRUE` moves the existing item to trash, then proceeds
 #' drive_mkdir("name-squatter", path = ghi, overwrite = TRUE)
 #'
-#' ## clean up
+#' # list everything inside 'ghi'
+#' drive_ls('ghi')
+#'
+#' # clean up
 #' drive_rm(ghi)
-#' }
 drive_mkdir <- function(name,
                         path = NULL,
                         ...,

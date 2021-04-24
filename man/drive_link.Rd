@@ -7,9 +7,9 @@
 drive_link(file)
 }
 \arguments{
-\item{file}{Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with \code{\link[=as_id]{as_id()}}, or a
-\code{\link{dribble}}.}
+\item{file}{Something that identifies the file(s) of interest on your Google
+Drive. Can be a character vector of names/paths, a character vector of file
+ids or URLs marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}.}
 }
 \value{
 Character vector of file hyperlinks.
@@ -19,11 +19,11 @@ Returns the \code{"webViewLink"} for one or more files, which is the "link for
 opening the file in a relevant Google editor or viewer in a browser".
 }
 \examples{
-\dontrun{
-## get a few files into a dribble
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# get a few files into a dribble
 three_files <- drive_find(n_max = 3)
 
-## get their browser links
+# get their browser links
 drive_link(three_files)
-}
+\dontshow{\}) # examplesIf}
 }

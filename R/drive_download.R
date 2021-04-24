@@ -1,14 +1,22 @@
 #' Download a Drive file
 #'
 #' @description This function downloads a file from Google Drive. Native Google
-#' file types, such as Google Docs, Google Sheets, and Google Slides, must be
-#' exported to a conventional local file type. This can be specified:
+#'   file types, such as Google Docs, Google Sheets, and Google Slides, must be
+#'   exported to a conventional local file type. This can be specified:
+
 #'   * explicitly via `type`
 #'   * implicitly via the file extension of `path`
-#'   * not at all, i.e. rely on default built into googledrive
-#' @description To see what export file types are even possible, see the
-#' [Drive API documentation](https://developers.google.com/drive/v3/web/manage-downloads#downloading_google_documents).
-#' Returned dribble contains local path to downloaded file in `local_path`.
+#'   * not at all, i.e. rely on the built-in default
+#'
+#' @description To see what export file types are even possible, see the [Drive
+#'   API
+#'   documentation](https://developers.google.com/drive/api/v3/ref-export-formats)
+#'    or the result of `drive_about()$exportFormats`. The returned dribble
+#'   includes a `local_path` column.
+#'
+#' @seealso [Download
+#'   files](https://developers.google.com/drive/v3/web/manage-downloads#downloading_google_documents),
+#'    in the Drive API documentation.
 #'
 #' @template file-singular
 #' @param path Character. Path for output file. If absent, the default file name
@@ -23,8 +31,7 @@
 #' @template verbose
 #' @template dribble-return
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' # Upload a csv file into a Google Sheet
 #' file <- drive_upload(
 #'   drive_example("chicken.csv"),
@@ -46,7 +53,6 @@
 #' # Clean up
 #' unlink(c("chicken.csv", "chicken.xlsx", "my_csv_file.csv"))
 #' drive_rm(file)
-#' }
 drive_download <- function(file,
                            path = NULL,
                            type = NULL,

@@ -10,25 +10,23 @@
 #'
 #' @template dribble-return
 #'
-#' @examples
-#' \dontrun{
-#' ## Create a file to rename
+#' @examplesIf drive_has_token()
+#' # Create a file to rename
 #' file <- drive_create("file-to-rename")
 #'
-#' ## Rename it
+#' # Rename it
 #' file <- drive_rename(file, name = "renamed-file")
 #'
-#' ## `overwrite = FALSE` errors if something already exists at target filepath
-#' ## THIS WILL ERROR!
+#' # `overwrite = FALSE` errors if something already exists at target filepath
+#' # THIS WILL ERROR!
 #' drive_create("name-squatter")
 #' drive_rename(file, name = "name-squatter", overwrite = FALSE)
 #'
-#' ## `overwrite = TRUE` moves the existing item to trash, then proceeds
+#' # `overwrite = TRUE` moves the existing item to trash, then proceeds
 #' file <- drive_rename(file, name = "name-squatter", overwrite = TRUE)
 #'
-#' ## Clean up
+#' # Clean up
 #' drive_rm(file)
-#' }
 #' @export
 drive_rename <- function(file,
                          name = NULL,

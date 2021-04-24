@@ -42,12 +42,21 @@ named \code{c} in \verb{a/b/} or a file with default name in \verb{a/b/c/}? You 
 error and must make your intent clear.
 }
 \examples{
-\dontrun{
-# specify the path (substitute names or paths on your Drive!)
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# create some files for us to re-discover by name or filepath
+abc <- drive_create("abc", type = "folder")
+def <- drive_create("def", path = abc)
+
+# as_dribble() can work with file names or paths
 as_dribble("abc")
+as_dribble("def")
 as_dribble("abc/def")
+as_dribble(c("abc", "abc/def"))
 
 # specify the file id (substitute a real file id of your own!)
-as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
-}
+# as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
+
+# cleanup
+drive_find("abc") \%>\% drive_rm()
+\dontshow{\}) # examplesIf}
 }

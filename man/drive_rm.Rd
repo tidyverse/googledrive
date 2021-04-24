@@ -27,21 +27,21 @@ Caution: this will permanently delete your files! For a safer, reversible
 option, see \code{\link[=drive_trash]{drive_trash()}}.
 }
 \examples{
-\dontrun{
-## Create something to remove
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Create something to remove
 drive_upload(drive_example("chicken.txt"), name = "chicken-rm.txt")
 
-## Remove it by name
+# Remove it by name
 drive_rm("chicken-rm.txt")
 
-## Create several things to remove
+# Create several things to remove
 x1 <- drive_upload(drive_example("chicken.txt"), name = "chicken-abc.txt")
 drive_upload(drive_example("chicken.txt"), name = "chicken-def.txt")
 x2 <- drive_upload(drive_example("chicken.txt"), name = "chicken-ghi.txt")
 
-## Remove them all at once, specified in different ways
+# Remove them all at once, specified in different ways
 drive_rm(x1, "chicken-def.txt", as_id(x2))
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{files.delete} endpoint:

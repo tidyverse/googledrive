@@ -8,7 +8,7 @@ as_id(x, ...)
 }
 \arguments{
 \item{x}{A character vector of file or shared drive ids or URLs, a
-\code{\link{dribble}} or a suitable data frame.}
+\code{\link{dribble}}, or a suitable data frame.}
 
 \item{...}{Other arguments passed down to methods. (Not used.)}
 }
@@ -22,17 +22,11 @@ distinguish them from file names or paths.
 This is a generic function.
 }
 \examples{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 as_id("123abc")
 as_id("https://docs.google.com/spreadsheets/d/qawsedrf16273849/edit#gid=12345")
 
-\dontrun{
 x <- drive_find(n_max = 3)
 as_id(x)
-
-x <- drive_get("foofy")
-as_id(x)
-
-x <- shared_drive_find("work-stuff")
-as_id(x)
-}
+\dontshow{\}) # examplesIf}
 }

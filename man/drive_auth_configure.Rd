@@ -70,7 +70,7 @@ if (require(httr)) {
 }
 
 \dontrun{
-## bring your own app via JSON downloaded from Google Developers Console
+# bring your own app via JSON downloaded from Google Developers Console
 drive_auth_configure(
   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
 )

@@ -3,18 +3,16 @@
 #' Returns the `"webViewLink"` for one or more files, which is the "link for
 #' opening the file in a relevant Google editor or viewer in a browser".
 #'
-#' @template file-singular
+#' @template file-plural
 #'
 #' @return Character vector of file hyperlinks.
 #' @export
-#' @examples
-#' \dontrun{
-#' ## get a few files into a dribble
+#' @examplesIf drive_has_token()
+#' # get a few files into a dribble
 #' three_files <- drive_find(n_max = 3)
 #'
-#' ## get their browser links
+#' # get their browser links
 #' drive_link(three_files)
-#' }
 drive_link <- function(file) {
   file <- as_dribble(file)
   links <- purrr::map_chr(
@@ -40,10 +38,8 @@ drive_link <- function(file) {
 #'
 #' @return Character vector of file hyperlinks, from [drive_link()], invisibly.
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token() && rlang::is_interactive()
 #' drive_find(n_max = 1) %>% drive_browse()
-#' }
 drive_browse <- function(file = .Last.value) {
   file <- as_dribble(file)
   links <- drive_link(file)

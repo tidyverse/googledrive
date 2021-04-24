@@ -46,22 +46,22 @@ This is a wrapper for \code{\link[=drive_mv]{drive_mv()}} that only renames a fi
 If you would like to rename AND move the file, see \code{\link[=drive_mv]{drive_mv()}}.
 }
 \examples{
-\dontrun{
-## Create a file to rename
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Create a file to rename
 file <- drive_create("file-to-rename")
 
-## Rename it
+# Rename it
 file <- drive_rename(file, name = "renamed-file")
 
-## `overwrite = FALSE` errors if something already exists at target filepath
-## THIS WILL ERROR!
+# `overwrite = FALSE` errors if something already exists at target filepath
+# THIS WILL ERROR!
 drive_create("name-squatter")
 drive_rename(file, name = "name-squatter", overwrite = FALSE)
 
-## `overwrite = TRUE` moves the existing item to trash, then proceeds
+# `overwrite = TRUE` moves the existing item to trash, then proceeds
 file <- drive_rename(file, name = "name-squatter", overwrite = TRUE)
 
-## Clean up
+# Clean up
 drive_rm(file)
-}
+\dontshow{\}) # examplesIf}
 }

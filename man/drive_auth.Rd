@@ -93,27 +93,26 @@ Read more about gargle options, see \link[gargle:gargle_options]{gargle::gargle_
 }
 \examples{
 \dontrun{
-## load/refresh existing credentials, if available
-## otherwise, go to browser for authentication and authorization
+# load/refresh existing credentials, if available
+# otherwise, go to browser for authentication and authorization
 drive_auth()
 
-## see user associated with current token
+# see user associated with current token
 drive_user()
 
-## force use of a token associated with a specific email
+# force use of a token associated with a specific email
 drive_auth(email = "jenny@example.com")
 drive_user()
 
-## force a menu where you can choose from existing tokens or
-## choose to get a new one
+# force the OAuth web dance
 drive_auth(email = NA)
 
-## use a 'read only' scope, so it's impossible to edit or delete files
+# use a 'read only' scope, so it's impossible to edit or delete files
 drive_auth(
   scopes = "https://www.googleapis.com/auth/drive.readonly"
 )
 
-## use a service account token
+# use a service account token
 drive_auth(path = "foofy-83ee9e7c9c48.json")
 }
 }

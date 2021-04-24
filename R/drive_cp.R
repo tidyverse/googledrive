@@ -17,8 +17,7 @@
 #' @template verbose
 #' @template dribble-return
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' # Create a file to copy
 #' file <- drive_upload(drive_example("chicken.txt"), "chicken-cp.txt")
 #'
@@ -41,7 +40,7 @@
 #'
 #' # `overwrite = FALSE` errors if file already exists at target filepath
 #' # THIS WILL ERROR!
-#' drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = FALSE)
+#' # drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = FALSE)
 #'
 #' # `overwrite = TRUE` moves an existing file to trash, then proceeds
 #' drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = TRUE)
@@ -51,7 +50,7 @@
 #'
 #' # Delete all of our copies and the new folder!
 #' drive_find("chicken-cp") %>% drive_rm()
-#' drive_rm(folder)
+#' drive_find("new-folder") %>% drive_rm(folder)
 #'
 #' # upload a csv file to copy
 #' csv_file <- drive_upload(drive_example("chicken.csv"))
@@ -69,8 +68,8 @@
 #' # drive_browse(chicken_sheet)
 #'
 #' # clean up
-#' drive_rm(csv_file, chicken_sheet)
-#' }
+#' drive_find("chicken.csv") %>% drive_rm()
+#' drive_rm(chicken_sheet)
 #' @export
 drive_cp <- function(file,
                      path = NULL,

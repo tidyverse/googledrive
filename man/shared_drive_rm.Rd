@@ -34,7 +34,7 @@ shared_drive_rm("testdrive-01")
 shared_drive_rm(as_id(sd02))
 # remove by URL (or, rather, id found in URL)
 shared_drive_rm(as_id("https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"))
-## remove by dribble
+# remove by dribble
 shared_drive_rm(sd04)
 }
 }

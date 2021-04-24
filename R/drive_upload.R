@@ -30,8 +30,7 @@
 #'
 #' @template dribble-return
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' # upload a csv file
 #' chicken_csv <- drive_upload(
 #'   drive_example("chicken.csv"),
@@ -82,6 +81,7 @@
 #' # Clean up
 #' drive_rm(chicken)
 #'
+#' \dontrun{
 #' # Upload to a shared drive:
 #' #   * Shared drives are only available if your account is associated with a
 #' #     Google Workspace

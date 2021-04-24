@@ -69,7 +69,7 @@ special cases:
 }
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Create a blank Google Doc named 'WordStar' in
 # your 'My Drive' root folder and star it
 wordstar <- drive_create("WordStar", type = "document", starred = TRUE)
@@ -115,7 +115,7 @@ drive_create("VisiCalc", path = b4xl, overwrite = TRUE)
 
 # clean up
 drive_rm(wordstar, b4xl, execuvision)
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{files.create} endpoint:

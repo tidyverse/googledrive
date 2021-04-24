@@ -52,7 +52,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 Retrieve metadata for files specified via path or via file id.
 
 If the files are specified via \code{path}, the returned \code{\link{dribble}}
-will include a \code{path} column To add path information to any \code{\link{dribble}}
+will include a \code{path} column. To add path information to any \code{\link{dribble}}
 that lacks it, use \code{\link[=drive_reveal]{drive_reveal()}}, e.g., \code{drive_reveal(d, "path")}. If
 you want to list the contents of a folder, use \code{\link[=drive_ls]{drive_ls()}}. For general
 searching, use \code{\link[=drive_find]{drive_find()}}.
@@ -79,13 +79,14 @@ necessarily equal the number rows in the output.
 }
 
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # get info about your "My Drive" root folder
 drive_get("~/")
 # the API reserves the file id "root" for your root folder
 drive_get(id = "root")
 drive_get(id = "root") \%>\% drive_reveal("path")
 
+\dontrun{
 # The examples below are indicative of correct syntax.
 # But note these will generally result in an error or a
 # 0-row dribble, unless you replace the inputs with paths
@@ -118,6 +119,7 @@ drive_get(as_id("123456789"))
 # search all shared drives and other files user has accessed
 drive_get(c("this.jpg", "that-file"), corpus = "allDrives")
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{files.get} endpoint and, if you specify files by name or

@@ -36,7 +36,7 @@ include Google Docs, Google Sheets, and Google Slides. The returned
 Read more in \code{\link[=drive_reveal]{drive_reveal()}}.
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Upload file to publish
 file <- drive_upload(
   drive_example("chicken.csv"),
@@ -47,13 +47,13 @@ file <- drive_upload(
 file <- drive_publish(file)
 file$published
 
-## Unpublish file
+# Unpublish file
 file <- drive_unpublish(file)
 file$published
 
-## Clean up
+# Clean up
 drive_rm(file)
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{revisions.update} endpoint:

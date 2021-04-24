@@ -65,7 +65,7 @@ actually means: "add a new folder to this file's parents and remove the old
 one".
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # create a file to move
 file <- drive_upload(drive_example("chicken.txt"), "chicken-mv.txt")
 
@@ -100,5 +100,5 @@ drive_mv(file, path = "~/", name = "name-squatter", overwrite = TRUE)
 
 # Clean up
 drive_rm(file, folder)
-}
+\dontshow{\}) # examplesIf}
 }

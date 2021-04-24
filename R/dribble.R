@@ -159,19 +159,20 @@ as_parent <- function(d) {
 #'
 #' @name dribble-checks
 #' @param d A [`dribble`].
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' ## most of us have multiple files or folders on Google Drive
 #' d <- drive_find()
 #' is_dribble(d)
 #' no_file(d)
 #' single_file(d)
 #' some_files(d)
-#' confirm_single_file(d)
+#'
+#' # this will error
+#' # confirm_single_file(d)
+#'
 #' confirm_some_files(d)
 #' is_folder(d)
 #' is_mine(d)
-#' }
 NULL
 
 #' @export

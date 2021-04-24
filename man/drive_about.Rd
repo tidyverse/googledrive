@@ -16,14 +16,14 @@ This function mostly exists to power \code{\link[=drive_user]{drive_user()}}, wh
 useful information (the information on current user) and prints it nicely.
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 drive_about()
 
-# explore the names of available shared drive themes
+# explore the export formats available for Drive files, by MIME type
 about <- drive_about()
-about[["driveThemes"]] \%>\%
-  purrr::map_chr("id")
-}
+about[["exportFormats"]] \%>\%
+  purrr::map(unlist)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{about.get} endpoint:

@@ -4,8 +4,7 @@
 #'
 #' @template dribble-return
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' # Create a file and put it in the trash.
 #' file <- drive_upload(drive_example("chicken.txt"), "chicken-trash.txt")
 #' drive_trash("chicken-trash.txt")
@@ -19,7 +18,6 @@
 #'
 #' # Clean up
 #' drive_rm("chicken-trash.txt")
-#' }
 drive_trash <- function(file, verbose = deprecated()) {
   warn_for_verbose(verbose)
   invisible(drive_toggle_trash(file, trash = TRUE))

@@ -36,8 +36,7 @@
 #'
 #' @template dribble-return
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' # Upload a file to share
 #' file <- drive_upload(
 #'    drive_example("chicken.txt"),
@@ -51,7 +50,7 @@
 #'     role = "commenter",
 #'     type = "user",
 #'     emailAddress = "susan@example.com"
-#'   )
+#' )
 #'
 #' # Let a different specific person edit and customize the email notification
 #' file <- file %>%
@@ -70,7 +69,6 @@
 #'
 #' # Clean up
 #' drive_rm(file)
-#' }
 drive_share <- function(file,
                         role = c(
                           "reader", "commenter", "writer",

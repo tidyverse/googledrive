@@ -26,7 +26,7 @@
 #' sd <- shared_drive_update(sd, themeId = "bok_choy")
 #' sd <- shared_drive_update(sd, themeId = "cocktails")
 #'
-#' ## clean up
+#' # clean up
 #' shared_drive_rm(sd)
 #' }
 shared_drive_update <- function(shared_drive, ...) {

@@ -83,23 +83,23 @@ When \code{what = "published"} the \code{\link{dribble}} gains a logical variabl
 }
 
 \examples{
-\dontrun{
-## Get a nice, random selection of files
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get a nice, random selection of files
 files <- drive_find(n_max = 10, trashed = NA)
 
-## Reveal
-##   * paths (warning: can be slow for many files!)
-##   * if `trashed` or not
-##   * MIME type
-##   * permissions, i.e. sharing status
-##   * if `published` or not
+# Reveal
+#   * paths (warning: can be slow for many files!)
+#   * if `trashed` or not
+#   * MIME type
+#   * permissions, i.e. sharing status
+#   * if `published` or not
 drive_reveal(files, "path")
 drive_reveal(files, "trashed")
 drive_reveal(files, "mime_type")
 drive_reveal(files, "permissions")
 drive_reveal(files, "published")
 
-## 'root' is a special file id that always represents your root folder
+# 'root' is a special file id that always represents your root folder
 drive_get(id = "root") \%>\% drive_reveal("path")
-}
+\dontshow{\}) # examplesIf}
 }

@@ -23,13 +23,13 @@ a thin wrapper around \code{\link[=drive_about]{drive_about()}} that just extrac
 information (the information on current user) and prints it nicely.
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 drive_user()
 
-## more info is returned than is printed
+# more info is returned than is printed
 user <- drive_user()
-user[["permissionId"]]
-}
+str(user)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{about.get} endpoint:

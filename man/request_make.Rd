@@ -75,14 +75,14 @@ responses, one per page.
 }
 \examples{
 \dontrun{
-## build a request for an endpoint that is:
-##   * paginated
-##   * NOT privileged in googledrive, i.e. not covered by request_generate()
-## "comments" are a great example
-## https://developers.google.com/drive/v3/reference/comments
-##
-## Practice with a target file with > 2 comments
-## Note that we request 2 items (comments) per page
+# build a request for an endpoint that is:
+#   * paginated
+#   * NOT privileged in googledrive, i.e. not covered by request_generate()
+# "comments" are a great example
+# https://developers.google.com/drive/v3/reference/comments
+#
+# Practice with a target file with > 2 comments
+# Note that we request 2 items (comments) per page
 req <- build_request(
   path = "drive/v3/files/{fileId}/comments",
   method = "GET",
@@ -93,8 +93,8 @@ req <- build_request(
   ),
   token = googledrive::drive_token()
 )
-## make the paginated request, but cap it at 1 page
-## should get back exactly two comments
+# make the paginated request, but cap it at 1 page
+# should get back exactly two comments
 do_paginated_request(req, n_max = 1)
 }
 }

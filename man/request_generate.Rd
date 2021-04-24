@@ -53,14 +53,14 @@ and URL endpoint substitution (which is also enacted).
 }
 }
 \examples{
-\dontrun{
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 req <- request_generate(
   "drive.files.get",
   list(fileId = "abc"),
   token = drive_token()
 )
 req
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_develop]{gargle::request_build()}}

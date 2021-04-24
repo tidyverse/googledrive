@@ -11,15 +11,13 @@
 #'   [about resource](https://developers.google.com/drive/v3/reference/about#resource)
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf drive_has_token()
 #' drive_about()
 #'
-#' # explore the names of available shared drive themes
+#' # explore the export formats available for Drive files, by MIME type
 #' about <- drive_about()
-#' about[["driveThemes"]] %>%
-#'   purrr::map_chr("id")
-#' }
+#' about[["exportFormats"]] %>%
+#'   purrr::map(unlist)
 drive_about <- function() {
   request <- request_generate(
     endpoint = "drive.about.get",
