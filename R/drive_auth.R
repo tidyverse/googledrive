@@ -209,3 +209,42 @@ drive_api_key <- function() .auth$api_key
 #' @export
 #' @rdname drive_auth_configure
 drive_oauth_app <- function() .auth$app
+
+# unexported helpers that are nice for internal use ----
+drive_auth_internal <- function(account = c("docs", "testing"),
+                                scopes = NULL) {
+  stopifnot(gargle:::secret_can_decrypt("googledrive"))
+  account <- match.arg(account)
+  if (!is_interactive()) local_drive_quiet()
+  filename <- glue("googledrive-{account}.json")
+  # TODO: revisit when I do PKG_scopes()
+  # https://github.com/r-lib/gargle/issues/103
+  scopes <- scopes %||% "https://www.googleapis.com/auth/drive"
+  json <- gargle:::secret_read("googledrive", filename)
+  drive_auth(scopes = scopes, path = rawToChar(json))
+  print(drive_user())
+  invisible(TRUE)
+}
+
+drive_auth_docs <- function(scopes = NULL) {
+  drive_auth_internal("docs", scopes = scopes)
+}
+
+drive_auth_testing <- function(scopes = NULL) {
+  drive_auth_internal("testing", scopes = scopes)
+}
+
+local_deauth <- function(env = parent.frame()) {
+  original_cred <- .auth$get_cred()
+  original_auth_active <- .auth$auth_active
+  drive_bullets(c("i" = "Going into deauthorized state"))
+  withr::defer(
+    drive_bullets(c("i" = "Restoring previous auth state")),
+    envir = env
+  )
+  withr::defer({
+    .auth$set_cred(original_cred)
+    .auth$set_auth_active(original_auth_active)
+  }, envir = env)
+  drive_deauth()
+}

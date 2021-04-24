@@ -23,6 +23,12 @@
     auth_active = TRUE
   )
 
+  if (identical(Sys.getenv("IN_PKGDOWN"), "true") &&
+      gargle:::secret_can_decrypt("googledrive") &&
+      !is.null(curl::nslookup("drive.googleapis.com", error = FALSE))) {
+    utils::capture.output(drive_auth_docs())
+  }
+
   if (requireNamespace("dplyr", quietly = TRUE)) {
     register_s3_method("dplyr", "arrange", "dribble")
     register_s3_method("dplyr", "filter", "dribble")
