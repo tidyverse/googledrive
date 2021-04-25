@@ -244,26 +244,26 @@
 <p>Use <code>drive_bullets()</code> in combination with <code>cli_format_dribble()</code>, which formats individual Drive files and makes them into <code>"*"</code> bullets.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt; Error: Can't get Google credentials.</span>
-<span class="co">#&gt; Are you running googledrive in a non-interactive session? Consider:</span>
-<span class="co">#&gt;   * `drive_deauth()` to prevent the attempt to get credentials.</span>
-<span class="co">#&gt;   * Call `drive_auth()` directly with all necessary specifics.</span>
-<span class="co">#&gt;   * Read more in: https://gargle.r-lib.org/articles/non-interactive-auth.html</span>
 
 <span class="co"># if you know there's only 1 file</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>
-<span class="co">#&gt; Error in eval(expr, envir, enclos): object 'dat' not found</span>
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"File VERBED:"</span>, <span class="fu">cli_format_dribble</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error in is_dribble(d): object 'x' not found</span>
+<span class="co">#&gt; File VERBED:</span>
+<span class="co">#&gt; • upload-into-me-article-demo &lt;id: 1yP0o6H8l-4IUJj2LDGOoYp-vIfBb1gG2&gt;</span>
 
 <span class="co"># if you don't know how many files</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">dat</span>
-<span class="co">#&gt; Error in eval(expr, envir, enclos): object 'dat' not found</span>
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cli/man/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"File{?s} VERBED:{cli::qty(nrow(x))}"</span><span class="op">)</span>,
   <span class="fu">cli_format_dribble</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error in nrow(x): object 'x' not found</span></code></pre></div>
+<span class="co">#&gt; Files VERBED:</span>
+<span class="co">#&gt; • upload-into-me-article-demo &lt;id: 1yP0o6H8l-4IUJj2LDGOoYp-vIfBb1gG2&gt;</span>
+<span class="co">#&gt; • Rlogo.pdf &lt;id: 1cn7oVxQRgD0l_hCI4nrSSWrKeVFysUp7&gt;</span>
+<span class="co">#&gt; • THANKS &lt;id: 1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_du3&gt;</span>
+<span class="co">#&gt; • chicken-perm-article.txt &lt;id: 1oWpfPYR-77c-DdvoW30682F9Gde8Zpn-&gt;</span>
+<span class="co">#&gt; • googledrive-NEWS.md &lt;id: 15pfwRfXvpxekxhdERmSUnoxQY5K701y7&gt;</span>
+<span class="co">#&gt;   … and 5 more</span></code></pre></div>
 </div>
 </div>
 <div id="errors" class="section level2">
