@@ -114,14 +114,14 @@ do_paginated_request <- function(x,
     # talk about it in the status bar)
     # TODO: need to do something re: non-interactive work, e.g. Rmd
     total <- total + n(responses[[i]])
+    if (is.null(x$query$pageToken) || total >= n_max) {
+      break
+    }
     if (st) {
       cli::cli_status_update(
         id = sb,
         "{cli::symbol$arrow_right} Files retrieved so far: {total}"
       )
-    }
-    if (is.null(x$query$pageToken) || total >= n_max) {
-      break
     }
     i <- i + 1
   }
