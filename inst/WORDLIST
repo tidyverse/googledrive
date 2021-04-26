@@ -2,12 +2,14 @@ API's
 AppVeyor
 Auth
 AuthState
+CLI
 CMD
 Codecov
 Colaboratory
 D'Agostino
 GCE
 GCP
+IDEs
 JSON
 OAuth
 ORCID
@@ -18,6 +20,7 @@ VMs
 auth
 behaviour
 bigrquery
+cli
 colab
 commenter
 csv
@@ -39,6 +42,7 @@ lowerCamel
 magrittr
 oauth
 oob
+pkgdown
 pre
 programmatically
 purrr
