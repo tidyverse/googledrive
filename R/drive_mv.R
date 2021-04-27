@@ -131,7 +131,7 @@ drive_mv <- function(file,
   # correct, can be quite slow
   # once I eliminate the "multiple parent" accommodations, that might change
   tmp <- out
-  tmp$name <- paste0(append_slash(path$name), out$name)
+  tmp$name <- paste0(append_slash(path$path), out$name)
   drive_bullets(c(
     "Original file:",
     cli_format_dribble(file),
