@@ -185,9 +185,9 @@ opening the file in a relevant Google editor or viewer in a browser".</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file</th>
-      <td><p>Something that identifies the file of interest on your Google
-Drive. Can be a name or path, a file id or URL marked with <code><a href='as_id.html'>as_id()</a></code>, or a
-<code><a href='dribble.html'>dribble</a></code>.</p></td>
+      <td><p>Something that identifies the file(s) of interest on your Google
+Drive. Can be a character vector of names/paths, a character vector of file
+ids or URLs marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code>.</p></td>
     </tr>
     </table>
 
@@ -196,14 +196,14 @@ Drive. Can be a name or path, a file id or URL marked with <code><a href='as_id.
     <p>Character vector of file hyperlinks.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'>## get a few files into a dribble</span>
+    <pre class="examples"><div class='input'><span class='co'># get a few files into a dribble</span>
 <span class='va'>three_files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span>n_max <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 
-<span class='co'>## get their browser links</span>
+<span class='co'># get their browser links</span>
 <span class='fu'>drive_link</span><span class='op'>(</span><span class='va'>three_files</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+</div><div class='output co'>#&gt; [1] "https://drive.google.com/drive/folders/1yP0o6H8l-4IUJj2LDGOoYp-vIfBb1gG2"           
+#&gt; [2] "https://drive.google.com/file/d/1cn7oVxQRgD0l_hCI4nrSSWrKeVFysUp7/view?usp=drivesdk"
+#&gt; [3] "https://drive.google.com/file/d/1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_du3/view?usp=drivesdk"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

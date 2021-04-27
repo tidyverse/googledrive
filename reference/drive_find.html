@@ -339,7 +339,11 @@ Read more about <a href='shared_drives.html'>shared drives</a>.</p>
 <span class='fu'>drive_find</span><span class='op'>(</span>q <span class='op'>=</span> <span class='st'>"mimeType='application/vnd.google-apps.spreadsheet'"</span><span class='op'>)</span>
 
 <span class='co'># files whose names match a regex</span>
-<span class='fu'>drive_find</span><span class='op'>(</span>pattern <span class='op'>=</span> <span class='st'>"jt"</span><span class='op'>)</span>
+<span class='co'># the local, general, sometimes-slow-to-execute version</span>
+<span class='fu'>drive_find</span><span class='op'>(</span>pattern <span class='op'>=</span> <span class='st'>"ick"</span><span class='op'>)</span>
+<span class='co'># the server-side, executes-faster version</span>
+<span class='co'># NOTE: works only for a pattern at the beginning of file name</span>
+<span class='fu'>drive_find</span><span class='op'>(</span>q <span class='op'>=</span> <span class='st'>"name contains 'chick'"</span><span class='op'>)</span>
 
 <span class='co'># search for files located directly in your root folder</span>
 <span class='fu'>drive_find</span><span class='op'>(</span>q <span class='op'>=</span> <span class='st'>"'root' in parents"</span><span class='op'>)</span>
@@ -356,7 +360,7 @@ Read more about <a href='shared_drives.html'>shared drives</a>.</p>
 <span class='co'># various ways to specify q search clauses</span>
 <span class='co'># multiple q's</span>
 <span class='fu'>drive_find</span><span class='op'>(</span>q <span class='op'>=</span> <span class='st'>"name contains 'TEST'"</span>,
-           q <span class='op'>=</span> <span class='st'>"modifiedTime &gt; '2017-07-21T12:00:00'"</span><span class='op'>)</span>
+           q <span class='op'>=</span> <span class='st'>"modifiedTime &gt; '2020-07-21T12:00:00'"</span><span class='op'>)</span>
 <span class='co'># vector q</span>
 <span class='fu'>drive_find</span><span class='op'>(</span>q <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"starred = true"</span>, <span class='st'>"visibility = 'anyoneWithLink'"</span><span class='op'>)</span><span class='op'>)</span>
 
@@ -370,8 +374,9 @@ Read more about <a href='shared_drives.html'>shared drives</a>.</p>
 <span class='fu'>drive_find</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='cn'>NULL</span>, n_max <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
 
 <span class='co'># sort on various keys</span>
-<span class='fu'>drive_find</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='st'>"quotaBytesUsed"</span>, n_max <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
 <span class='fu'>drive_find</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='st'>"modifiedByMeTime"</span>, n_max <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+<span class='co'># request descending order</span>
+<span class='fu'>drive_find</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='st'>"quotaBytesUsed desc"</span>, n_max <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
 <span class='op'>}</span>
 
 </div></pre>

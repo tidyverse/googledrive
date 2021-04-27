@@ -225,19 +225,36 @@ represents, such as:</p><ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'>## most of us have multiple files or folders on Google Drive</span>
+    <pre class="examples"><div class='input'><span class='co'>## most of us have multiple files or folders on Google Drive</span>
 <span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='fu'>is_dribble</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
-<span class='fu'>no_file</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
-<span class='fu'>single_file</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
-<span class='fu'>some_files</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
-<span class='fu'>confirm_single_file</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>no_file</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>single_file</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>some_files</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='co'># this will error</span>
+<span class='co'># confirm_single_file(d)</span>
+
 <span class='fu'>confirm_some_files</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
-<span class='fu'>is_folder</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
-<span class='fu'>is_mine</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 13 x 3</span><span>
+#&gt;    name                        id                               drive_resource  
+#&gt;  </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                            </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> upload-into-me-article-demo 1yP0o6H8l-4IUJj2LDGOoYp-vIfBb1g… </span><span style='color: #949494;'>&lt;named list [32</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Rlogo.pdf                   1cn7oVxQRgD0l_hCI4nrSSWrKeVFysU… </span><span style='color: #949494;'>&lt;named list [39</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> THANKS                      1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_d… </span><span style='color: #949494;'>&lt;named list [39</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> chicken-perm-article.txt    1oWpfPYR-77c-DdvoW30682F9Gde8Zp… </span><span style='color: #949494;'>&lt;named list [39</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> googledrive-NEWS.md         15pfwRfXvpxekxhdERmSUnoxQY5K701… </span><span style='color: #949494;'>&lt;named list [38</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> def                         1hr4EFw3r5vAMm5Jgw2SsFluBpN-oAC… </span><span style='color: #949494;'>&lt;named list [32</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> BioC_mirrors.csv            1vV0fPdNOyo3Ti9ofA38MuTQm27pXvY… </span><span style='color: #949494;'>&lt;named list [38</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> logo.jpg                    1OFeNdd63NfoavqvDf5-xa3LORiamfK… </span><span style='color: #949494;'>&lt;named list [40</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> Rlogo.svg                   11sxsw-ux-UjQjzVdxd1wjNz37hJeBr… </span><span style='color: #949494;'>&lt;named list [40</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> DESCRIPTION                 1MjV4stVPhlMNz1AcrIizcL7yTcVaRu… </span><span style='color: #949494;'>&lt;named list [39</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> chicken.txt                 1xmwFZ_UN-CSs3Ic2aPUw22DbxZxoen… </span><span style='color: #949494;'>&lt;named list [39</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span> chicken.pdf                 1eK9ozP1TZjXfAgaAGmP9GrUTovGUaO… </span><span style='color: #949494;'>&lt;named list [39</span><span>…
+#&gt; </span><span style='color: #BCBCBC;'>13</span><span> chicken.jpg                 1JnGjIdruQXErd20xR_ecAzN3yP_fTc… </span><span style='color: #949494;'>&lt;named list [40</span><span>…</div><div class='input'><span class='fu'>is_folder</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt; [13] FALSE</div><div class='input'><span class='fu'>is_mine</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -195,15 +195,1187 @@ useful information (the information on current user) and prints it nicely.</p>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>drive_about</span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='co'># explore the names of available shared drive themes</span>
+    <pre class="examples"><div class='input'><span class='fu'>drive_about</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $kind
+#&gt; [1] "drive#about"
+#&gt; 
+#&gt; $user
+#&gt; $user$kind
+#&gt; [1] "drive#user"
+#&gt; 
+#&gt; $user$displayName
+#&gt; [1] "googledrive-docs@gargle-169921.iam.gserviceaccount.com"
+#&gt; 
+#&gt; $user$me
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $user$permissionId
+#&gt; [1] "09204227840243713330"
+#&gt; 
+#&gt; $user$emailAddress
+#&gt; [1] "googledrive-docs@gargle-169921.iam.gserviceaccount.com"
+#&gt; 
+#&gt; 
+#&gt; $storageQuota
+#&gt; $storageQuota$limit
+#&gt; [1] "16106127360"
+#&gt; 
+#&gt; $storageQuota$usage
+#&gt; [1] "1418572"
+#&gt; 
+#&gt; $storageQuota$usageInDrive
+#&gt; [1] "1418572"
+#&gt; 
+#&gt; $storageQuota$usageInDriveTrash
+#&gt; [1] "0"
+#&gt; 
+#&gt; 
+#&gt; $importFormats
+#&gt; $importFormats$`application/x-vnd.oasis.opendocument.presentation`
+#&gt; $importFormats$`application/x-vnd.oasis.opendocument.presentation`[[1]]
+#&gt; [1] "application/vnd.google-apps.presentation"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`text/tab-separated-values`
+#&gt; $importFormats$`text/tab-separated-values`[[1]]
+#&gt; [1] "application/vnd.google-apps.spreadsheet"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`image/jpeg`
+#&gt; $importFormats$`image/jpeg`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`image/bmp`
+#&gt; $importFormats$`image/bmp`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`image/gif`
+#&gt; $importFormats$`image/gif`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.ms-excel.sheet.macroenabled.12`
+#&gt; $importFormats$`application/vnd.ms-excel.sheet.macroenabled.12`[[1]]
+#&gt; [1] "application/vnd.google-apps.spreadsheet"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.wordprocessingml.template`
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.wordprocessingml.template`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.ms-powerpoint.presentation.macroenabled.12`
+#&gt; $importFormats$`application/vnd.ms-powerpoint.presentation.macroenabled.12`[[1]]
+#&gt; [1] "application/vnd.google-apps.presentation"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.ms-word.template.macroenabled.12`
+#&gt; $importFormats$`application/vnd.ms-word.template.macroenabled.12`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.wordprocessingml.document`
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.wordprocessingml.document`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`image/pjpeg`
+#&gt; $importFormats$`image/pjpeg`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.google-apps.script+text/plain`
+#&gt; $importFormats$`application/vnd.google-apps.script+text/plain`[[1]]
+#&gt; [1] "application/vnd.google-apps.script"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.ms-excel`
+#&gt; $importFormats$`application/vnd.ms-excel`[[1]]
+#&gt; [1] "application/vnd.google-apps.spreadsheet"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.sun.xml.writer`
+#&gt; $importFormats$`application/vnd.sun.xml.writer`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.ms-word.document.macroenabled.12`
+#&gt; $importFormats$`application/vnd.ms-word.document.macroenabled.12`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.ms-powerpoint.slideshow.macroenabled.12`
+#&gt; $importFormats$`application/vnd.ms-powerpoint.slideshow.macroenabled.12`[[1]]
+#&gt; [1] "application/vnd.google-apps.presentation"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`text/rtf`
+#&gt; $importFormats$`text/rtf`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.oasis.opendocument.spreadsheet`
+#&gt; $importFormats$`application/vnd.oasis.opendocument.spreadsheet`[[1]]
+#&gt; [1] "application/vnd.google-apps.spreadsheet"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`text/plain`
+#&gt; $importFormats$`text/plain`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/x-vnd.oasis.opendocument.spreadsheet`
+#&gt; $importFormats$`application/x-vnd.oasis.opendocument.spreadsheet`[[1]]
+#&gt; [1] "application/vnd.google-apps.spreadsheet"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/x-vnd.oasis.opendocument.text`
+#&gt; $importFormats$`application/x-vnd.oasis.opendocument.text`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`image/png`
+#&gt; $importFormats$`image/png`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/msword`
+#&gt; $importFormats$`application/msword`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/pdf`
+#&gt; $importFormats$`application/pdf`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/x-msmetafile`
+#&gt; $importFormats$`application/x-msmetafile`[[1]]
+#&gt; [1] "application/vnd.google-apps.drawing"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.spreadsheetml.template`
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.spreadsheetml.template`[[1]]
+#&gt; [1] "application/vnd.google-apps.spreadsheet"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.ms-powerpoint`
+#&gt; $importFormats$`application/vnd.ms-powerpoint`[[1]]
+#&gt; [1] "application/vnd.google-apps.presentation"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.ms-excel.template.macroenabled.12`
+#&gt; $importFormats$`application/vnd.ms-excel.template.macroenabled.12`[[1]]
+#&gt; [1] "application/vnd.google-apps.spreadsheet"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`image/x-bmp`
+#&gt; $importFormats$`image/x-bmp`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/rtf`
+#&gt; $importFormats$`application/rtf`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.presentationml.template`
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.presentationml.template`[[1]]
+#&gt; [1] "application/vnd.google-apps.presentation"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`image/x-png`
+#&gt; $importFormats$`image/x-png`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`text/html`
+#&gt; $importFormats$`text/html`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.oasis.opendocument.text`
+#&gt; $importFormats$`application/vnd.oasis.opendocument.text`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.presentationml.presentation`
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.presentationml.presentation`[[1]]
+#&gt; [1] "application/vnd.google-apps.presentation"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`[[1]]
+#&gt; [1] "application/vnd.google-apps.spreadsheet"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.google-apps.script+json`
+#&gt; $importFormats$`application/vnd.google-apps.script+json`[[1]]
+#&gt; [1] "application/vnd.google-apps.script"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.presentationml.slideshow`
+#&gt; $importFormats$`application/vnd.openxmlformats-officedocument.presentationml.slideshow`[[1]]
+#&gt; [1] "application/vnd.google-apps.presentation"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.ms-powerpoint.template.macroenabled.12`
+#&gt; $importFormats$`application/vnd.ms-powerpoint.template.macroenabled.12`[[1]]
+#&gt; [1] "application/vnd.google-apps.presentation"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`text/csv`
+#&gt; $importFormats$`text/csv`[[1]]
+#&gt; [1] "application/vnd.google-apps.spreadsheet"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`application/vnd.oasis.opendocument.presentation`
+#&gt; $importFormats$`application/vnd.oasis.opendocument.presentation`[[1]]
+#&gt; [1] "application/vnd.google-apps.presentation"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`image/jpg`
+#&gt; $importFormats$`image/jpg`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; $importFormats$`text/richtext`
+#&gt; $importFormats$`text/richtext`[[1]]
+#&gt; [1] "application/vnd.google-apps.document"
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $exportFormats
+#&gt; $exportFormats$`application/vnd.google-apps.document`
+#&gt; $exportFormats$`application/vnd.google-apps.document`[[1]]
+#&gt; [1] "application/rtf"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.document`[[2]]
+#&gt; [1] "application/vnd.oasis.opendocument.text"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.document`[[3]]
+#&gt; [1] "text/html"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.document`[[4]]
+#&gt; [1] "application/pdf"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.document`[[5]]
+#&gt; [1] "application/epub+zip"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.document`[[6]]
+#&gt; [1] "application/zip"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.document`[[7]]
+#&gt; [1] "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.document`[[8]]
+#&gt; [1] "text/plain"
+#&gt; 
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.spreadsheet`
+#&gt; $exportFormats$`application/vnd.google-apps.spreadsheet`[[1]]
+#&gt; [1] "application/x-vnd.oasis.opendocument.spreadsheet"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.spreadsheet`[[2]]
+#&gt; [1] "text/tab-separated-values"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.spreadsheet`[[3]]
+#&gt; [1] "application/pdf"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.spreadsheet`[[4]]
+#&gt; [1] "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.spreadsheet`[[5]]
+#&gt; [1] "text/csv"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.spreadsheet`[[6]]
+#&gt; [1] "application/zip"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.spreadsheet`[[7]]
+#&gt; [1] "application/vnd.oasis.opendocument.spreadsheet"
+#&gt; 
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.jam`
+#&gt; $exportFormats$`application/vnd.google-apps.jam`[[1]]
+#&gt; [1] "application/pdf"
+#&gt; 
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.script`
+#&gt; $exportFormats$`application/vnd.google-apps.script`[[1]]
+#&gt; [1] "application/vnd.google-apps.script+json"
+#&gt; 
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.presentation`
+#&gt; $exportFormats$`application/vnd.google-apps.presentation`[[1]]
+#&gt; [1] "application/vnd.oasis.opendocument.presentation"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.presentation`[[2]]
+#&gt; [1] "application/pdf"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.presentation`[[3]]
+#&gt; [1] "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.presentation`[[4]]
+#&gt; [1] "text/plain"
+#&gt; 
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.form`
+#&gt; $exportFormats$`application/vnd.google-apps.form`[[1]]
+#&gt; [1] "application/zip"
+#&gt; 
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.drawing`
+#&gt; $exportFormats$`application/vnd.google-apps.drawing`[[1]]
+#&gt; [1] "image/svg+xml"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.drawing`[[2]]
+#&gt; [1] "image/png"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.drawing`[[3]]
+#&gt; [1] "application/pdf"
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.drawing`[[4]]
+#&gt; [1] "image/jpeg"
+#&gt; 
+#&gt; 
+#&gt; $exportFormats$`application/vnd.google-apps.site`
+#&gt; $exportFormats$`application/vnd.google-apps.site`[[1]]
+#&gt; [1] "text/plain"
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $maxImportSizes
+#&gt; $maxImportSizes$`application/vnd.google-apps.document`
+#&gt; [1] "10485760"
+#&gt; 
+#&gt; $maxImportSizes$`application/vnd.google-apps.spreadsheet`
+#&gt; [1] "104857600"
+#&gt; 
+#&gt; $maxImportSizes$`application/vnd.google-apps.presentation`
+#&gt; [1] "104857600"
+#&gt; 
+#&gt; $maxImportSizes$`application/vnd.google-apps.drawing`
+#&gt; [1] "2097152"
+#&gt; 
+#&gt; 
+#&gt; $maxUploadSize
+#&gt; [1] "5242880000000"
+#&gt; 
+#&gt; $appInstalled
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $folderColorPalette
+#&gt; $folderColorPalette[[1]]
+#&gt; [1] "#ac725e"
+#&gt; 
+#&gt; $folderColorPalette[[2]]
+#&gt; [1] "#d06b64"
+#&gt; 
+#&gt; $folderColorPalette[[3]]
+#&gt; [1] "#f83a22"
+#&gt; 
+#&gt; $folderColorPalette[[4]]
+#&gt; [1] "#fa573c"
+#&gt; 
+#&gt; $folderColorPalette[[5]]
+#&gt; [1] "#ff7537"
+#&gt; 
+#&gt; $folderColorPalette[[6]]
+#&gt; [1] "#ffad46"
+#&gt; 
+#&gt; $folderColorPalette[[7]]
+#&gt; [1] "#fad165"
+#&gt; 
+#&gt; $folderColorPalette[[8]]
+#&gt; [1] "#fbe983"
+#&gt; 
+#&gt; $folderColorPalette[[9]]
+#&gt; [1] "#b3dc6c"
+#&gt; 
+#&gt; $folderColorPalette[[10]]
+#&gt; [1] "#7bd148"
+#&gt; 
+#&gt; $folderColorPalette[[11]]
+#&gt; [1] "#16a765"
+#&gt; 
+#&gt; $folderColorPalette[[12]]
+#&gt; [1] "#42d692"
+#&gt; 
+#&gt; $folderColorPalette[[13]]
+#&gt; [1] "#92e1c0"
+#&gt; 
+#&gt; $folderColorPalette[[14]]
+#&gt; [1] "#9fe1e7"
+#&gt; 
+#&gt; $folderColorPalette[[15]]
+#&gt; [1] "#9fc6e7"
+#&gt; 
+#&gt; $folderColorPalette[[16]]
+#&gt; [1] "#4986e7"
+#&gt; 
+#&gt; $folderColorPalette[[17]]
+#&gt; [1] "#9a9cff"
+#&gt; 
+#&gt; $folderColorPalette[[18]]
+#&gt; [1] "#b99aff"
+#&gt; 
+#&gt; $folderColorPalette[[19]]
+#&gt; [1] "#a47ae2"
+#&gt; 
+#&gt; $folderColorPalette[[20]]
+#&gt; [1] "#cd74e6"
+#&gt; 
+#&gt; $folderColorPalette[[21]]
+#&gt; [1] "#f691b2"
+#&gt; 
+#&gt; $folderColorPalette[[22]]
+#&gt; [1] "#cca6ac"
+#&gt; 
+#&gt; $folderColorPalette[[23]]
+#&gt; [1] "#cabdbf"
+#&gt; 
+#&gt; $folderColorPalette[[24]]
+#&gt; [1] "#8f8f8f"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes
+#&gt; $teamDriveThemes[[1]]
+#&gt; $teamDriveThemes[[1]]$id
+#&gt; [1] "abacus"
+#&gt; 
+#&gt; $teamDriveThemes[[1]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/Z5KeSUwxyWmRT9HGiVoXxqEp-KcWLSAkEgs3EgSHghCRi1_xPNFwdXbll6ivkDDqhtKabFeH1hw5fT3uDEmYDRVH3cNUXklNfZ0M8yuJ5Bwgu4w-vg=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[1]]$colorRgb
+#&gt; [1] "#ea6100"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[2]]
+#&gt; $teamDriveThemes[[2]]$id
+#&gt; [1] "blueprints"
+#&gt; 
+#&gt; $teamDriveThemes[[2]]$backgroundImageLink
+#&gt; [1] "https://lh3.googleusercontent.com/proxy/UjEpDwYsn-r3TcmSB4k58Z-cKBa_KWgNy5F9sx-O2KGGTJXNXODqmxLJY999NCZG80WDFvs93nF3ISv_qGEiI5slt5eyoFxBCWKuFm873RZEqPy-E6GN4a8=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[2]]$colorRgb
+#&gt; [1] "#4285f4"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[3]]
+#&gt; $teamDriveThemes[[3]]$id
+#&gt; [1] "bok_choy"
+#&gt; 
+#&gt; $teamDriveThemes[[3]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/xVkWcsvjuebP-UnWCIJp6fEqRUHwIJObjK5KawhB-ReWImKOVk5FnbhqnirdhAuZLS3VWAqnks3-3SDjhQMePR15YYfuF7stMy1R14jdcd2WyhSLex00=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[3]]$colorRgb
+#&gt; [1] "#689f38"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[4]]
+#&gt; $teamDriveThemes[[4]]$id
+#&gt; [1] "books"
+#&gt; 
+#&gt; $teamDriveThemes[[4]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/6Ok-qHt6muyfFg1x3Nd3y9M_iRUH5_aJRXq9JlTE6Z3a67qUFeVTdpLG80OBKpOtMXXffAPXtHMRkAMbzR-Q1e_dCqCntJAkV_q3U4VftNYC3k_V=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[4]]$colorRgb
+#&gt; [1] "#4285f4"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[5]]
+#&gt; $teamDriveThemes[[5]]$id
+#&gt; [1] "bread"
+#&gt; 
+#&gt; $teamDriveThemes[[5]]$backgroundImageLink
+#&gt; [1] "https://lh3.googleusercontent.com/proxy/laR76MvgkpxgcFyKbLRlDHThRQ4PLNNwbzuHzSr_uQAOzxCdGhLFBsdMHk_jVWlFBlLSyqODOoLkCaO_lhmu_9zB1_z81r7fPVDjVL007HcvxXHc=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[5]]$colorRgb
+#&gt; [1] "#ef6c00"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[6]]
+#&gt; $teamDriveThemes[[6]]$id
+#&gt; [1] "bubbles_color"
+#&gt; 
+#&gt; $teamDriveThemes[[6]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/E3mV_x9XxkOnITzjKrPB0k8U1Cl6I_gqIff5aswwKAAnd7XtXCDQXgu_CMnLI8kbaPqoiqF695_eSyrp5d2Fp-OGeK-_WtpNU3LQAZNCQjYHzd1I1V-uw_Zmkco=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[6]]$colorRgb
+#&gt; [1] "#f06292"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[7]]
+#&gt; $teamDriveThemes[[7]]$id
+#&gt; [1] "circuit"
+#&gt; 
+#&gt; $teamDriveThemes[[7]]$backgroundImageLink
+#&gt; [1] "https://lh3.googleusercontent.com/proxy/d_WN5RlW-1zH2gW_Kxj7hHqITZtlM7Zv-WlmBhdq6_43BeEHVxwCIhsqdxdWtCn2FYLH3bdPf0GeR3UCa9B2uXDrfwMOhnOaGwmJxAHLbC9K9Yp0VOg=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[7]]$colorRgb
+#&gt; [1] "#039be5"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[8]]
+#&gt; $teamDriveThemes[[8]]$id
+#&gt; [1] "clams"
+#&gt; 
+#&gt; $teamDriveThemes[[8]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/LlctuQjxc_XPvwI_INV2KqcfflGjEreBmM2mFXp_5q24UUblES7O1yMNJYYtyMrpcvkziHO8Pyqd0OcvQyRBmNgQE3QI4vD88GMuCHPrd5E1NNl3=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[8]]$colorRgb
+#&gt; [1] "#e91e63"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[9]]
+#&gt; $teamDriveThemes[[9]]$id
+#&gt; [1] "clovers"
+#&gt; 
+#&gt; $teamDriveThemes[[9]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/29RzK7cLA_mP_eh3Z0oAgElcC2DstGo9ujJNHecUyeoUIRbJ1npk_KhoNRtvBb5ZPVuv8dU5C5D0Ei18I_IPu_12ptLNoOioOvTAp_G9p0omV8gfHBg=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[9]]$colorRgb
+#&gt; [1] "#689f38"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[10]]
+#&gt; $teamDriveThemes[[10]]$id
+#&gt; [1] "cocktails"
+#&gt; 
+#&gt; $teamDriveThemes[[10]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/qVcF-uCcRs4eNsZFZHKDIiN_qdO20ifgGhQpi1t94SFzROGTb-1Kik2dbJ9_gk9G-QMawqhVQ_OVBE_5ZRAiqjhImQyfGSnnND7BEK1SiQYzRi_LpVfZnQ=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[10]]$colorRgb
+#&gt; [1] "#db4437"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[11]]
+#&gt; $teamDriveThemes[[11]]$id
+#&gt; [1] "concert"
+#&gt; 
+#&gt; $teamDriveThemes[[11]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/4rVgd0sxbyBKn2AF41Xn5alyAxc0nOgDAb6y1T3FnX6vntT6QQ0m8QgUlpr2J5rYLfCF9xh2cuGV7QxRSC13Ws2kgaDuf0Iopac-ZCBF6kgg40KXyCQ=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[11]]$colorRgb
+#&gt; [1] "#ef6c00"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[12]]
+#&gt; $teamDriveThemes[[12]]$id
+#&gt; [1] "desk"
+#&gt; 
+#&gt; $teamDriveThemes[[12]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/UzcLkepaZHw5GeAzjagJdp7-2DGaBMcj-9TU-X3o4PD1x_kQByZO_r-RDmBxS1iLzsq_MDEq4U_3w_qpTY_6VThyMPNk-Tz9lSEBUXXx-2ZclKA=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[12]]$colorRgb
+#&gt; [1] "#607d8b"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[13]]
+#&gt; $teamDriveThemes[[13]]$id
+#&gt; [1] "donut_coffee"
+#&gt; 
+#&gt; $teamDriveThemes[[13]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/7Vo64b_mo3aTCFRR5JrnmwVrkeigpQuVpT0mOfsBbK_kdvyNVGY3b9CsrTj0t7E7_iMMg1g3GRltFQuCIuQ7vEUUVuWgxXgycBJhYdgAkUVoQK_Y_BwE2Yh3ng=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[13]]$colorRgb
+#&gt; [1] "#f06292"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[14]]
+#&gt; $teamDriveThemes[[14]]$id
+#&gt; [1] "fabric_rolls"
+#&gt; 
+#&gt; $teamDriveThemes[[14]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/aTqxoPupRaxlFYZDmlKz-ijfIYlHBPKk4ykKx_QO7P9r2HQzMlbKyPW6ZoslKMs7NMWeoFxi1sCcX_LLBop27LjO3Kd5H9_oa1UymAO_QtFHmHVrcxCNiIW2UA=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[14]]$colorRgb
+#&gt; [1] "#78909c"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[15]]
+#&gt; $teamDriveThemes[[15]]$id
+#&gt; [1] "flags"
+#&gt; 
+#&gt; $teamDriveThemes[[15]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/D3i9Q2ZRdKAbGOFcE_zEOgRv2fX07_IDsfUdRBc4Kcwz8yBySLesQtcCM8wfdDxAlX3GqUueFwBdAU2HWuDib0uFsNgikds0N-iLhgdBEHDM3Gt9=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[15]]$colorRgb
+#&gt; [1] "#009688"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[16]]
+#&gt; $teamDriveThemes[[16]]$id
+#&gt; [1] "flower_field"
+#&gt; 
+#&gt; $teamDriveThemes[[16]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/Gq6BmAzf26j19jOlJSFuQmFUobewCcVkInfjlXCVOCU1Sp-GuieGumKHiaK9oAOpD-NICfQJukjbqNzlCG90O0XKj0VnDR0abL2N7KCy6wIJIoIvOoqgvzCaww=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[16]]$colorRgb
+#&gt; [1] "#e06055"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[17]]
+#&gt; $teamDriveThemes[[17]]$id
+#&gt; [1] "flowers"
+#&gt; 
+#&gt; $teamDriveThemes[[17]]$backgroundImageLink
+#&gt; [1] "https://lh3.googleusercontent.com/proxy/u56F0E7fTV972JarM1Q-rXAOOy-Zg-v5-Cm27-sKiV2hGdA3eeA1T9O1id4BfcuRdq46vXBbZT_tTl0JZNL4Ut0OMyh8op3IxOBGzKJpff9F7rVRCxw=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[17]]$colorRgb
+#&gt; [1] "#689f38"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[18]]
+#&gt; $teamDriveThemes[[18]]$id
+#&gt; [1] "glass"
+#&gt; 
+#&gt; $teamDriveThemes[[18]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/VPVLsbZj78Z8xpPMbAWjSF56mJZNw1Kyg7kN9LQ_pH6OA9z2v76rxC_8phHUXRst25qqFBRx14KxHwCDojH9ibzK3didVAx0g-uJqlb5s8-oz3ms=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[18]]$colorRgb
+#&gt; [1] "#0f9d58"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[19]]
+#&gt; $teamDriveThemes[[19]]$id
+#&gt; [1] "lighthouse"
+#&gt; 
+#&gt; $teamDriveThemes[[19]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/Pwl1rZFnKYnNRcSnIMnc_TsHX0E3OqbDuNT-yy3Ms9uUUjDGgGL21EQEYhoTdCN97pTSFRB086aNass2Kfk0mYOn0lnz-Vk2MrNJ1XrDkvwLmHCnliA-nL4=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[19]]$colorRgb
+#&gt; [1] "#4285f4"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[20]]
+#&gt; $teamDriveThemes[[20]]$id
+#&gt; [1] "maps"
+#&gt; 
+#&gt; $teamDriveThemes[[20]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/L8IbQigKrftSXEMsch8rXdBtZvlUiRZBfxIYiWbpp7S6oze0HZZ_QRcYP_EbEfkgZDU1QxGsVZffBzCRvhpPkgHhG53wVgj7M_nRxVZmOk-Lni0=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[20]]$colorRgb
+#&gt; [1] "#8d6e63"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[21]]
+#&gt; $teamDriveThemes[[21]]$id
+#&gt; [1] "mountains"
+#&gt; 
+#&gt; $teamDriveThemes[[21]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/1EIk6eaGyGTBI-Uug-G3KCwS_kE9esUIergJ2ohfcq5fmlMIYCDLtDbJgNSbAzQ6xB8VAKiE5w5jAYk3BofnuOpz5ccrcuuHwsamC2F34WOBg2_U9CJJwg=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[21]]$colorRgb
+#&gt; [1] "#5c6bc0"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[22]]
+#&gt; $teamDriveThemes[[22]]$id
+#&gt; [1] "notebook"
+#&gt; 
+#&gt; $teamDriveThemes[[22]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/iUd07dcNVNr6BO13gIGLhyorUezYWoxRf6nSJhT6nRK_NVvP3ABZAWS7vtXSZ6Th25OJ6q-mcYcHVE8pg4WrA9fZE8oVevnyuwLEOzOVHcH4IGac0Vto=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[22]]$colorRgb
+#&gt; [1] "#689f38"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[23]]
+#&gt; $teamDriveThemes[[23]]$id
+#&gt; [1] "paper_colored"
+#&gt; 
+#&gt; $teamDriveThemes[[23]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/crERnz0f_KJZ7mN9iBmz5_AQiLGyaGNQfmu_kOocXzLChlK84r2aPp6AodqrG42sRv1yk_Og_DEuBIumug6wC6j9EcrZ1tqs6tTtH3SvtqDAkyK4MBbIMNBPAKs=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[23]]$colorRgb
+#&gt; [1] "#9c27b0"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[24]]
+#&gt; $teamDriveThemes[[24]]$id
+#&gt; [1] "pencils"
+#&gt; 
+#&gt; $teamDriveThemes[[24]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/joaq8StlNK7Cp-apow03w_sP5HukbIrAHbZQRZJqpBhERCGYrixxXinALZ26nQ8N2o7NrR2reO4cGNJtfFnRQ9CtSnvXEjI3qM7uygrLlG3v573k71k=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[24]]$colorRgb
+#&gt; [1] "#0097a7"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[25]]
+#&gt; $teamDriveThemes[[25]]$id
+#&gt; [1] "roofing_metal"
+#&gt; 
+#&gt; $teamDriveThemes[[25]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/pP_tp2yMg1wR-SzCbN9_w-mKyNXyquaaYakAvjv9hFGHGFJ6JLCvZYlpVabm-kXAaEUgg2odQ-GTZ4HyAaTOaEfPmxjYTqWyrAnGnSQ1RPMlOT2y3rtmsPF2FF0=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[25]]$colorRgb
+#&gt; [1] "#039be5"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[26]]
+#&gt; $teamDriveThemes[[26]]$id
+#&gt; [1] "sticky_notes"
+#&gt; 
+#&gt; $teamDriveThemes[[26]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/UQ3zURt8as-FSzUcbkQQno8Dtk1oHeh38CyecfxIhSZArj6OIQ_ZTFR4sblspJxgHCKJKs4DSZB35UR4ReFEkN2SPo7OWqDRnMaz_MsMaVBXv0lw8kC_PTqfuQ=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[26]]$colorRgb
+#&gt; [1] "#0097a7"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[27]]
+#&gt; $teamDriveThemes[[27]]$id
+#&gt; [1] "table"
+#&gt; 
+#&gt; $teamDriveThemes[[27]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/0A5qGh2DnHThdgzOJuZymFC7vt5aYKky-QWAuFjVROgK2Bxe47CT1sz72FhocQp0L-Lro5fK5kXKW5-uyVE7f-LhgokET-_Ndhe8BRQaGKzMhgms=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[27]]$colorRgb
+#&gt; [1] "#8d6e63"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[28]]
+#&gt; $teamDriveThemes[[28]]$id
+#&gt; [1] "travel"
+#&gt; 
+#&gt; $teamDriveThemes[[28]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/eM-1oz45F6dCfOFQ2Yxr3ONAO7a549babd4jdMsBTqMErAeJ7fsk8EGPkDWi3IWoXxOA-cbftgzIDm0W7UCkepfhrONB_si1f8JfD3I0tt8IDT5hdA=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[28]]$colorRgb
+#&gt; [1] "#039be5"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[29]]
+#&gt; $teamDriveThemes[[29]]$id
+#&gt; [1] "waves"
+#&gt; 
+#&gt; $teamDriveThemes[[29]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/MZfhMLHMVQQCU6ynMhZ_G_Byd4Yk2-zzKFADDpRM33LnFr9nRha-K3Iyk07IUOaQyuOPtMPVHkQ9-q13e2tXQMaDcF6DsTCnSxJBimZAQ5thT3lU=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[29]]$colorRgb
+#&gt; [1] "#ff5722"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[30]]
+#&gt; $teamDriveThemes[[30]]$id
+#&gt; [1] "waves_blue"
+#&gt; 
+#&gt; $teamDriveThemes[[30]]$backgroundImageLink
+#&gt; [1] "https://lh3.googleusercontent.com/proxy/3culsw3bJyewo0Ql3IiKWm3HNeT54oEzDTVgNasW_V4L0FBZ-hazADPgfmLs06VL2p8b0vSyq9JFbtChXgRBAVX3iSZJeuRF19HYMwrOakDqL3GQMl_lZZ0=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[30]]$colorRgb
+#&gt; [1] "#5c6bc0"
+#&gt; 
+#&gt; 
+#&gt; $teamDriveThemes[[31]]
+#&gt; $teamDriveThemes[[31]]$id
+#&gt; [1] "wood"
+#&gt; 
+#&gt; $teamDriveThemes[[31]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/FzzFqxrPJvhI24W_ZIbk7TNz3AYOArCU2m0UG4FNhc_2XPXGgcoF9B8FBIz6PsIctYn8aI5NKnU1NlsjHQEpu0DsMnEG8SDNopZZnwVzcFuQ3X4=w1920-h216-n"
+#&gt; 
+#&gt; $teamDriveThemes[[31]]$colorRgb
+#&gt; [1] "#8d6e63"
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $driveThemes
+#&gt; $driveThemes[[1]]
+#&gt; $driveThemes[[1]]$id
+#&gt; [1] "abacus"
+#&gt; 
+#&gt; $driveThemes[[1]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/Z5KeSUwxyWmRT9HGiVoXxqEp-KcWLSAkEgs3EgSHghCRi1_xPNFwdXbll6ivkDDqhtKabFeH1hw5fT3uDEmYDRVH3cNUXklNfZ0M8yuJ5Bwgu4w-vg=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[1]]$colorRgb
+#&gt; [1] "#ea6100"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[2]]
+#&gt; $driveThemes[[2]]$id
+#&gt; [1] "blueprints"
+#&gt; 
+#&gt; $driveThemes[[2]]$backgroundImageLink
+#&gt; [1] "https://lh3.googleusercontent.com/proxy/UjEpDwYsn-r3TcmSB4k58Z-cKBa_KWgNy5F9sx-O2KGGTJXNXODqmxLJY999NCZG80WDFvs93nF3ISv_qGEiI5slt5eyoFxBCWKuFm873RZEqPy-E6GN4a8=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[2]]$colorRgb
+#&gt; [1] "#4285f4"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[3]]
+#&gt; $driveThemes[[3]]$id
+#&gt; [1] "bok_choy"
+#&gt; 
+#&gt; $driveThemes[[3]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/xVkWcsvjuebP-UnWCIJp6fEqRUHwIJObjK5KawhB-ReWImKOVk5FnbhqnirdhAuZLS3VWAqnks3-3SDjhQMePR15YYfuF7stMy1R14jdcd2WyhSLex00=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[3]]$colorRgb
+#&gt; [1] "#689f38"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[4]]
+#&gt; $driveThemes[[4]]$id
+#&gt; [1] "books"
+#&gt; 
+#&gt; $driveThemes[[4]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/6Ok-qHt6muyfFg1x3Nd3y9M_iRUH5_aJRXq9JlTE6Z3a67qUFeVTdpLG80OBKpOtMXXffAPXtHMRkAMbzR-Q1e_dCqCntJAkV_q3U4VftNYC3k_V=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[4]]$colorRgb
+#&gt; [1] "#4285f4"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[5]]
+#&gt; $driveThemes[[5]]$id
+#&gt; [1] "bread"
+#&gt; 
+#&gt; $driveThemes[[5]]$backgroundImageLink
+#&gt; [1] "https://lh3.googleusercontent.com/proxy/laR76MvgkpxgcFyKbLRlDHThRQ4PLNNwbzuHzSr_uQAOzxCdGhLFBsdMHk_jVWlFBlLSyqODOoLkCaO_lhmu_9zB1_z81r7fPVDjVL007HcvxXHc=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[5]]$colorRgb
+#&gt; [1] "#ef6c00"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[6]]
+#&gt; $driveThemes[[6]]$id
+#&gt; [1] "bubbles_color"
+#&gt; 
+#&gt; $driveThemes[[6]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/E3mV_x9XxkOnITzjKrPB0k8U1Cl6I_gqIff5aswwKAAnd7XtXCDQXgu_CMnLI8kbaPqoiqF695_eSyrp5d2Fp-OGeK-_WtpNU3LQAZNCQjYHzd1I1V-uw_Zmkco=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[6]]$colorRgb
+#&gt; [1] "#f06292"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[7]]
+#&gt; $driveThemes[[7]]$id
+#&gt; [1] "circuit"
+#&gt; 
+#&gt; $driveThemes[[7]]$backgroundImageLink
+#&gt; [1] "https://lh3.googleusercontent.com/proxy/d_WN5RlW-1zH2gW_Kxj7hHqITZtlM7Zv-WlmBhdq6_43BeEHVxwCIhsqdxdWtCn2FYLH3bdPf0GeR3UCa9B2uXDrfwMOhnOaGwmJxAHLbC9K9Yp0VOg=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[7]]$colorRgb
+#&gt; [1] "#039be5"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[8]]
+#&gt; $driveThemes[[8]]$id
+#&gt; [1] "clams"
+#&gt; 
+#&gt; $driveThemes[[8]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/LlctuQjxc_XPvwI_INV2KqcfflGjEreBmM2mFXp_5q24UUblES7O1yMNJYYtyMrpcvkziHO8Pyqd0OcvQyRBmNgQE3QI4vD88GMuCHPrd5E1NNl3=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[8]]$colorRgb
+#&gt; [1] "#e91e63"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[9]]
+#&gt; $driveThemes[[9]]$id
+#&gt; [1] "clovers"
+#&gt; 
+#&gt; $driveThemes[[9]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/29RzK7cLA_mP_eh3Z0oAgElcC2DstGo9ujJNHecUyeoUIRbJ1npk_KhoNRtvBb5ZPVuv8dU5C5D0Ei18I_IPu_12ptLNoOioOvTAp_G9p0omV8gfHBg=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[9]]$colorRgb
+#&gt; [1] "#689f38"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[10]]
+#&gt; $driveThemes[[10]]$id
+#&gt; [1] "cocktails"
+#&gt; 
+#&gt; $driveThemes[[10]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/qVcF-uCcRs4eNsZFZHKDIiN_qdO20ifgGhQpi1t94SFzROGTb-1Kik2dbJ9_gk9G-QMawqhVQ_OVBE_5ZRAiqjhImQyfGSnnND7BEK1SiQYzRi_LpVfZnQ=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[10]]$colorRgb
+#&gt; [1] "#db4437"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[11]]
+#&gt; $driveThemes[[11]]$id
+#&gt; [1] "concert"
+#&gt; 
+#&gt; $driveThemes[[11]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/4rVgd0sxbyBKn2AF41Xn5alyAxc0nOgDAb6y1T3FnX6vntT6QQ0m8QgUlpr2J5rYLfCF9xh2cuGV7QxRSC13Ws2kgaDuf0Iopac-ZCBF6kgg40KXyCQ=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[11]]$colorRgb
+#&gt; [1] "#ef6c00"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[12]]
+#&gt; $driveThemes[[12]]$id
+#&gt; [1] "desk"
+#&gt; 
+#&gt; $driveThemes[[12]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/UzcLkepaZHw5GeAzjagJdp7-2DGaBMcj-9TU-X3o4PD1x_kQByZO_r-RDmBxS1iLzsq_MDEq4U_3w_qpTY_6VThyMPNk-Tz9lSEBUXXx-2ZclKA=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[12]]$colorRgb
+#&gt; [1] "#607d8b"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[13]]
+#&gt; $driveThemes[[13]]$id
+#&gt; [1] "donut_coffee"
+#&gt; 
+#&gt; $driveThemes[[13]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/7Vo64b_mo3aTCFRR5JrnmwVrkeigpQuVpT0mOfsBbK_kdvyNVGY3b9CsrTj0t7E7_iMMg1g3GRltFQuCIuQ7vEUUVuWgxXgycBJhYdgAkUVoQK_Y_BwE2Yh3ng=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[13]]$colorRgb
+#&gt; [1] "#f06292"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[14]]
+#&gt; $driveThemes[[14]]$id
+#&gt; [1] "fabric_rolls"
+#&gt; 
+#&gt; $driveThemes[[14]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/aTqxoPupRaxlFYZDmlKz-ijfIYlHBPKk4ykKx_QO7P9r2HQzMlbKyPW6ZoslKMs7NMWeoFxi1sCcX_LLBop27LjO3Kd5H9_oa1UymAO_QtFHmHVrcxCNiIW2UA=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[14]]$colorRgb
+#&gt; [1] "#78909c"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[15]]
+#&gt; $driveThemes[[15]]$id
+#&gt; [1] "flags"
+#&gt; 
+#&gt; $driveThemes[[15]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/D3i9Q2ZRdKAbGOFcE_zEOgRv2fX07_IDsfUdRBc4Kcwz8yBySLesQtcCM8wfdDxAlX3GqUueFwBdAU2HWuDib0uFsNgikds0N-iLhgdBEHDM3Gt9=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[15]]$colorRgb
+#&gt; [1] "#009688"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[16]]
+#&gt; $driveThemes[[16]]$id
+#&gt; [1] "flower_field"
+#&gt; 
+#&gt; $driveThemes[[16]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/Gq6BmAzf26j19jOlJSFuQmFUobewCcVkInfjlXCVOCU1Sp-GuieGumKHiaK9oAOpD-NICfQJukjbqNzlCG90O0XKj0VnDR0abL2N7KCy6wIJIoIvOoqgvzCaww=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[16]]$colorRgb
+#&gt; [1] "#e06055"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[17]]
+#&gt; $driveThemes[[17]]$id
+#&gt; [1] "flowers"
+#&gt; 
+#&gt; $driveThemes[[17]]$backgroundImageLink
+#&gt; [1] "https://lh3.googleusercontent.com/proxy/u56F0E7fTV972JarM1Q-rXAOOy-Zg-v5-Cm27-sKiV2hGdA3eeA1T9O1id4BfcuRdq46vXBbZT_tTl0JZNL4Ut0OMyh8op3IxOBGzKJpff9F7rVRCxw=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[17]]$colorRgb
+#&gt; [1] "#689f38"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[18]]
+#&gt; $driveThemes[[18]]$id
+#&gt; [1] "glass"
+#&gt; 
+#&gt; $driveThemes[[18]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/VPVLsbZj78Z8xpPMbAWjSF56mJZNw1Kyg7kN9LQ_pH6OA9z2v76rxC_8phHUXRst25qqFBRx14KxHwCDojH9ibzK3didVAx0g-uJqlb5s8-oz3ms=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[18]]$colorRgb
+#&gt; [1] "#0f9d58"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[19]]
+#&gt; $driveThemes[[19]]$id
+#&gt; [1] "lighthouse"
+#&gt; 
+#&gt; $driveThemes[[19]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/Pwl1rZFnKYnNRcSnIMnc_TsHX0E3OqbDuNT-yy3Ms9uUUjDGgGL21EQEYhoTdCN97pTSFRB086aNass2Kfk0mYOn0lnz-Vk2MrNJ1XrDkvwLmHCnliA-nL4=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[19]]$colorRgb
+#&gt; [1] "#4285f4"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[20]]
+#&gt; $driveThemes[[20]]$id
+#&gt; [1] "maps"
+#&gt; 
+#&gt; $driveThemes[[20]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/L8IbQigKrftSXEMsch8rXdBtZvlUiRZBfxIYiWbpp7S6oze0HZZ_QRcYP_EbEfkgZDU1QxGsVZffBzCRvhpPkgHhG53wVgj7M_nRxVZmOk-Lni0=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[20]]$colorRgb
+#&gt; [1] "#8d6e63"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[21]]
+#&gt; $driveThemes[[21]]$id
+#&gt; [1] "mountains"
+#&gt; 
+#&gt; $driveThemes[[21]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/1EIk6eaGyGTBI-Uug-G3KCwS_kE9esUIergJ2ohfcq5fmlMIYCDLtDbJgNSbAzQ6xB8VAKiE5w5jAYk3BofnuOpz5ccrcuuHwsamC2F34WOBg2_U9CJJwg=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[21]]$colorRgb
+#&gt; [1] "#5c6bc0"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[22]]
+#&gt; $driveThemes[[22]]$id
+#&gt; [1] "notebook"
+#&gt; 
+#&gt; $driveThemes[[22]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/iUd07dcNVNr6BO13gIGLhyorUezYWoxRf6nSJhT6nRK_NVvP3ABZAWS7vtXSZ6Th25OJ6q-mcYcHVE8pg4WrA9fZE8oVevnyuwLEOzOVHcH4IGac0Vto=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[22]]$colorRgb
+#&gt; [1] "#689f38"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[23]]
+#&gt; $driveThemes[[23]]$id
+#&gt; [1] "paper_colored"
+#&gt; 
+#&gt; $driveThemes[[23]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/crERnz0f_KJZ7mN9iBmz5_AQiLGyaGNQfmu_kOocXzLChlK84r2aPp6AodqrG42sRv1yk_Og_DEuBIumug6wC6j9EcrZ1tqs6tTtH3SvtqDAkyK4MBbIMNBPAKs=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[23]]$colorRgb
+#&gt; [1] "#9c27b0"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[24]]
+#&gt; $driveThemes[[24]]$id
+#&gt; [1] "pencils"
+#&gt; 
+#&gt; $driveThemes[[24]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/joaq8StlNK7Cp-apow03w_sP5HukbIrAHbZQRZJqpBhERCGYrixxXinALZ26nQ8N2o7NrR2reO4cGNJtfFnRQ9CtSnvXEjI3qM7uygrLlG3v573k71k=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[24]]$colorRgb
+#&gt; [1] "#0097a7"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[25]]
+#&gt; $driveThemes[[25]]$id
+#&gt; [1] "roofing_metal"
+#&gt; 
+#&gt; $driveThemes[[25]]$backgroundImageLink
+#&gt; [1] "https://lh6.googleusercontent.com/proxy/pP_tp2yMg1wR-SzCbN9_w-mKyNXyquaaYakAvjv9hFGHGFJ6JLCvZYlpVabm-kXAaEUgg2odQ-GTZ4HyAaTOaEfPmxjYTqWyrAnGnSQ1RPMlOT2y3rtmsPF2FF0=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[25]]$colorRgb
+#&gt; [1] "#039be5"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[26]]
+#&gt; $driveThemes[[26]]$id
+#&gt; [1] "sticky_notes"
+#&gt; 
+#&gt; $driveThemes[[26]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/UQ3zURt8as-FSzUcbkQQno8Dtk1oHeh38CyecfxIhSZArj6OIQ_ZTFR4sblspJxgHCKJKs4DSZB35UR4ReFEkN2SPo7OWqDRnMaz_MsMaVBXv0lw8kC_PTqfuQ=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[26]]$colorRgb
+#&gt; [1] "#0097a7"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[27]]
+#&gt; $driveThemes[[27]]$id
+#&gt; [1] "table"
+#&gt; 
+#&gt; $driveThemes[[27]]$backgroundImageLink
+#&gt; [1] "https://lh5.googleusercontent.com/proxy/0A5qGh2DnHThdgzOJuZymFC7vt5aYKky-QWAuFjVROgK2Bxe47CT1sz72FhocQp0L-Lro5fK5kXKW5-uyVE7f-LhgokET-_Ndhe8BRQaGKzMhgms=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[27]]$colorRgb
+#&gt; [1] "#8d6e63"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[28]]
+#&gt; $driveThemes[[28]]$id
+#&gt; [1] "travel"
+#&gt; 
+#&gt; $driveThemes[[28]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/eM-1oz45F6dCfOFQ2Yxr3ONAO7a549babd4jdMsBTqMErAeJ7fsk8EGPkDWi3IWoXxOA-cbftgzIDm0W7UCkepfhrONB_si1f8JfD3I0tt8IDT5hdA=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[28]]$colorRgb
+#&gt; [1] "#039be5"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[29]]
+#&gt; $driveThemes[[29]]$id
+#&gt; [1] "waves"
+#&gt; 
+#&gt; $driveThemes[[29]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/MZfhMLHMVQQCU6ynMhZ_G_Byd4Yk2-zzKFADDpRM33LnFr9nRha-K3Iyk07IUOaQyuOPtMPVHkQ9-q13e2tXQMaDcF6DsTCnSxJBimZAQ5thT3lU=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[29]]$colorRgb
+#&gt; [1] "#ff5722"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[30]]
+#&gt; $driveThemes[[30]]$id
+#&gt; [1] "waves_blue"
+#&gt; 
+#&gt; $driveThemes[[30]]$backgroundImageLink
+#&gt; [1] "https://lh3.googleusercontent.com/proxy/3culsw3bJyewo0Ql3IiKWm3HNeT54oEzDTVgNasW_V4L0FBZ-hazADPgfmLs06VL2p8b0vSyq9JFbtChXgRBAVX3iSZJeuRF19HYMwrOakDqL3GQMl_lZZ0=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[30]]$colorRgb
+#&gt; [1] "#5c6bc0"
+#&gt; 
+#&gt; 
+#&gt; $driveThemes[[31]]
+#&gt; $driveThemes[[31]]$id
+#&gt; [1] "wood"
+#&gt; 
+#&gt; $driveThemes[[31]]$backgroundImageLink
+#&gt; [1] "https://lh4.googleusercontent.com/proxy/FzzFqxrPJvhI24W_ZIbk7TNz3AYOArCU2m0UG4FNhc_2XPXGgcoF9B8FBIz6PsIctYn8aI5NKnU1NlsjHQEpu0DsMnEG8SDNopZZnwVzcFuQ3X4=w1920-h216-n"
+#&gt; 
+#&gt; $driveThemes[[31]]$colorRgb
+#&gt; [1] "#8d6e63"
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $canCreateTeamDrives
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $canCreateDrives
+#&gt; [1] FALSE
+#&gt; </div><div class='input'>
+<span class='co'># explore the export formats available for Drive files, by MIME type</span>
 <span class='va'>about</span> <span class='op'>&lt;-</span> <span class='fu'>drive_about</span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>about</span><span class='op'>[[</span><span class='st'>"driveThemes"</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map_chr</a></span><span class='op'>(</span><span class='st'>"id"</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+<span class='va'>about</span><span class='op'>[[</span><span class='st'>"exportFormats"</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>unlist</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $`application/vnd.google-apps.document`
+#&gt; [1] "application/rtf"                                                        
+#&gt; [2] "application/vnd.oasis.opendocument.text"                                
+#&gt; [3] "text/html"                                                              
+#&gt; [4] "application/pdf"                                                        
+#&gt; [5] "application/epub+zip"                                                   
+#&gt; [6] "application/zip"                                                        
+#&gt; [7] "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+#&gt; [8] "text/plain"                                                             
+#&gt; 
+#&gt; $`application/vnd.google-apps.spreadsheet`
+#&gt; [1] "application/x-vnd.oasis.opendocument.spreadsheet"                 
+#&gt; [2] "text/tab-separated-values"                                        
+#&gt; [3] "application/pdf"                                                  
+#&gt; [4] "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+#&gt; [5] "text/csv"                                                         
+#&gt; [6] "application/zip"                                                  
+#&gt; [7] "application/vnd.oasis.opendocument.spreadsheet"                   
+#&gt; 
+#&gt; $`application/vnd.google-apps.jam`
+#&gt; [1] "application/pdf"
+#&gt; 
+#&gt; $`application/vnd.google-apps.script`
+#&gt; [1] "application/vnd.google-apps.script+json"
+#&gt; 
+#&gt; $`application/vnd.google-apps.presentation`
+#&gt; [1] "application/vnd.oasis.opendocument.presentation"                          
+#&gt; [2] "application/pdf"                                                          
+#&gt; [3] "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+#&gt; [4] "text/plain"                                                               
+#&gt; 
+#&gt; $`application/vnd.google-apps.form`
+#&gt; [1] "application/zip"
+#&gt; 
+#&gt; $`application/vnd.google-apps.drawing`
+#&gt; [1] "image/svg+xml"   "image/png"       "application/pdf" "image/jpeg"     
+#&gt; 
+#&gt; $`application/vnd.google-apps.site`
+#&gt; [1] "text/plain"
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

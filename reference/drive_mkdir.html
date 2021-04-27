@@ -196,11 +196,10 @@ with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Named parameters to pass along to the Drive API. Has the tidy dots
-semantics that come from using <code><a href='https://rlang.r-lib.org/reference/list2.html'>rlang::list2()</a></code>. You can affect the
-metadata of the target file by specifying properties of the Files resource
-via <code>...</code>. Read the "Request body" section of the Drive API docs for the
-associated endpoint to learn about relevant parameters.</p></td>
+      <td><p>Named parameters to pass along to the Drive API. Has <a href='https://rlang.r-lib.org/reference/dyn-dots.html'>dynamic dots</a> semantics. You can affect the metadata of the target file by
+specifying properties of the Files resource via <code>...</code>. Read the "Request
+body" section of the Drive API docs for the associated endpoint to learn
+about relevant parameters.</p></td>
     </tr>
     <tr>
       <th>overwrite</th>
@@ -243,37 +242,45 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'>## Create folder named 'ghi', then another below named it 'jkl' and star it</span>
+    <pre class="examples"><div class='input'><span class='co'># Create folder named 'ghi', then another below named it 'jkl' and star it</span>
 <span class='va'>ghi</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"ghi"</span><span class='op'>)</span>
-<span class='va'>jkl</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"ghi/jkl"</span>, starred <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='co'>## is 'jkl' really starred? YES</span>
+</div><div class='output co'>#&gt; <span class='message'>Created Drive file:</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>•</span><span> ghi </span><span style='color: #555555;'>&lt;id: 1I2k2mnJlaitjpba0p_oc4_AejW38KOWG&gt;</span><span></span></div><div class='output co'>#&gt; <span class='message'>With MIME type:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/vnd.google-apps.folder</span><span></span></div><div class='input'><span class='va'>jkl</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"ghi/jkl"</span>, starred <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Created Drive file:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> jkl </span><span style='color: #555555;'>&lt;id: 1JjRhmggtmtRDFsZNS42ZM0ZCO1xfBFfe&gt;</span><span></span></div><div class='output co'>#&gt; <span class='message'>With MIME type:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/vnd.google-apps.folder</span><span></span></div><div class='input'>
+<span class='co'># is 'jkl' really starred? YES</span>
 <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span><span class='op'>(</span><span class='va'>jkl</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"starred"</span><span class='op'>)</span>
-
-<span class='co'>## Another way to create folder 'mno' in folder 'ghi'</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='co'># Another way to create folder 'mno' in folder 'ghi'</span>
 <span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"mno"</span>, path <span class='op'>=</span> <span class='st'>"ghi"</span><span class='op'>)</span>
-
-<span class='co'>## Yet another way to create a folder named 'pqr' in folder 'ghi',</span>
-<span class='co'>## this time with parent folder stored in a dribble,</span>
-<span class='co'>## and setting the new folder's description</span>
+</div><div class='output co'>#&gt; <span class='message'>Created Drive file:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> mno </span><span style='color: #555555;'>&lt;id: 1qvqleK7ngLk8H4XQizq2-Qw1vTfCe0Az&gt;</span><span></span></div><div class='output co'>#&gt; <span class='message'>With MIME type:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/vnd.google-apps.folder</span><span></span></div><div class='input'>
+<span class='co'># Yet another way to create a folder named 'pqr' in folder 'ghi',</span>
+<span class='co'># this time with parent folder stored in a dribble,</span>
+<span class='co'># and setting the new folder's description</span>
 <span class='va'>pqr</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"pqr"</span>, path <span class='op'>=</span> <span class='va'>ghi</span>, description <span class='op'>=</span> <span class='st'>"I am a folder"</span><span class='op'>)</span>
-
-<span class='co'>## Did we really set the description? YES</span>
+</div><div class='output co'>#&gt; <span class='message'>Created Drive file:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> pqr </span><span style='color: #555555;'>&lt;id: 1NEegxYxgJ9sG3R1g38u0TJQ8I0KawxEF&gt;</span><span></span></div><div class='output co'>#&gt; <span class='message'>With MIME type:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/vnd.google-apps.folder</span><span></span></div><div class='input'>
+<span class='co'># Did we really set the description? YES</span>
 <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span><span class='op'>(</span><span class='va'>pqr</span>, <span class='st'>"drive_resource"</span>, <span class='fl'>1</span>, <span class='st'>"description"</span><span class='op'>)</span>
-
-<span class='co'>## `overwrite = FALSE` errors if something already exists at target filepath</span>
-<span class='co'>## THIS WILL ERROR!</span>
+</div><div class='output co'>#&gt; [1] "I am a folder"</div><div class='input'>
+<span class='co'># `overwrite = FALSE` errors if something already exists at target filepath</span>
+<span class='co'># THIS WILL ERROR!</span>
 <span class='fu'><a href='drive_create.html'>drive_create</a></span><span class='op'>(</span><span class='st'>"name-squatter"</span>, path <span class='op'>=</span> <span class='va'>ghi</span><span class='op'>)</span>
-<span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"name-squatter"</span>, path <span class='op'>=</span> <span class='va'>ghi</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='co'>## `overwrite = TRUE` moves the existing item to trash, then proceeds</span>
+</div><div class='output co'>#&gt; <span class='message'>Created Drive file:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1F3BaDpXq9lqi07dztpoc7QIwBANNlQ3U&gt;</span><span></span></div><div class='output co'>#&gt; <span class='message'>With MIME type:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/octet-stream</span><span></span></div><div class='input'><span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"name-squatter"</span>, path <span class='op'>=</span> <span class='va'>ghi</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error: One or more items already exist at the target filepath and `overwrite = FALSE`:</span>
+#&gt; <span class='error'>* ~/ghi/name-squatter: 1F3BaDpXq9lqi07dztpoc7QIwBANNlQ3U</span></div><div class='input'>
+<span class='co'># `overwrite = TRUE` moves the existing item to trash, then proceeds</span>
 <span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"name-squatter"</span>, path <span class='op'>=</span> <span class='va'>ghi</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='co'>## clean up</span>
+</div><div class='output co'>#&gt; <span class='message'>File trashed:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1F3BaDpXq9lqi07dztpoc7QIwBANNlQ3U&gt;</span><span></span></div><div class='output co'>#&gt; <span class='message'>Created Drive file:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1MPCSN3DC87pax4atBX48pGfkTMKN0egR&gt;</span><span></span></div><div class='output co'>#&gt; <span class='message'>With MIME type:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/vnd.google-apps.folder</span><span></span></div><div class='input'>
+<span class='co'># list everything inside 'ghi'</span>
+<span class='fu'><a href='drive_ls.html'>drive_ls</a></span><span class='op'>(</span><span class='st'>'ghi'</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 3</span><span>
+#&gt;   name          id                                drive_resource   
+#&gt; </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                             </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> name-squatter 1MPCSN3DC87pax4atBX48pGfkTMKN0egR </span><span style='color: #949494;'>&lt;named list [32]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> pqr           1NEegxYxgJ9sG3R1g38u0TJQ8I0KawxEF </span><span style='color: #949494;'>&lt;named list [33]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> mno           1qvqleK7ngLk8H4XQizq2-Qw1vTfCe0Az </span><span style='color: #949494;'>&lt;named list [32]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> jkl           1JjRhmggtmtRDFsZNS42ZM0ZCO1xfBFfe </span><span style='color: #949494;'>&lt;named list [32]&gt;</span><span></div><div class='input'>
+<span class='co'># clean up</span>
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>ghi</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+</div><div class='output co'>#&gt; <span class='message'>File deleted:</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>•</span><span> ghi </span><span style='color: #555555;'>&lt;id: 1I2k2mnJlaitjpba0p_oc4_AejW38KOWG&gt;</span><span></span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
