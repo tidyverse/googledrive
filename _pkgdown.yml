@@ -23,6 +23,24 @@ navbar:
       - text: "Change log"
         href: news/index.html
 
+articles:
+  - title: Common tasks
+    navbar: ~
+    contents:
+    - articles/file-identification
+    - articles/multiple-files
+    - articles/permissions
+
+  - title: Package configuration
+    navbar: Package configuration
+    contents:
+    - articles/bring-your-own-app
+
+  - title: Developer
+    desc: Articles documenting internal matters
+    contents:
+    - articles/messages-and-errors
+
 reference:
   - title: "Reach out and touch your files"
     desc: >
@@ -101,3 +119,6 @@ reference:
       - drive_api_key
       - drive_token
       - drive_has_token
+  - title: "Package-level configuration"
+    contents:
+      - googledrive-configuration
