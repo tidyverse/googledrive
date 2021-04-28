@@ -72,7 +72,7 @@ test_that("drive_update() uses multipart request to update media + metadata", {
   updatee <- drive_cp(nm_("update-fodder"), name = me_("update-me"))
   tmp <- tempfile()
   now <- as.character(Sys.time())
-  writeLines(now, tmp)
+  write_utf8(now, tmp)
 
   out <- drive_update(updatee, media = tmp, name = me_("update-me-new"))
   expect_identical(out$id, updatee$id)

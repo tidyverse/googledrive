@@ -40,7 +40,7 @@ test_that("drive_cp() can copy file in place", {
     scrub_filepath(cp_name) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(drive_cp_message)
+    write_utf8(drive_cp_message)
   )
 
   expect_identical(cp_file$name, cp_name)
@@ -70,7 +70,7 @@ test_that("drive_cp() can copy a file into a different folder", {
     scrub_filepath(cp_name) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(drive_cp_message)
+    write_utf8(drive_cp_message)
   )
   expect_identical(cp_file$name, cp_name)
 
@@ -123,7 +123,7 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
     scrub_filepath(cp_name) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(drive_cp_message)
+    write_utf8(drive_cp_message)
   )
 
   expect_identical(file_cp$name, me_("file-name"))

@@ -23,7 +23,7 @@ if (SETUP) {
 test_that("drive_download() won't overwrite existing file", {
   tmpdir <-  withr::local_tempdir()
   precious_filepath <- paste0(nm_("precious"), ".txt")
-  writeLines("I exist and I am special", file.path(tmpdir, precious_filepath))
+  write_utf8("I exist and I am special", file.path(tmpdir, precious_filepath))
   expect_snapshot(
     withr::with_dir(
       tmpdir,
@@ -54,7 +54,7 @@ test_that("drive_download() downloads a file and adds local_path column", {
     scrub_file_id()
 
   expect_snapshot(
-    writeLines(drive_download_message)
+    write_utf8(drive_download_message)
   )
 
   expect_true(file.exists(download_filepath))
@@ -88,7 +88,7 @@ test_that("drive_download() converts with explicit `type`", {
     scrub_filepath(file_to_download) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(drive_download_message)
+    write_utf8(drive_download_message)
   )
 
   expect_true(file.exists(file.path(tmpdir, download_filename)))
@@ -115,7 +115,7 @@ test_that("drive_download() converts with type implicit in `path`", {
     scrub_filepath(file_to_download) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(drive_download_message)
+    write_utf8(drive_download_message)
   )
 
   expect_true(file.exists(file.path(tmpdir, download_filename)))
@@ -142,7 +142,7 @@ test_that("drive_download() converts using default MIME type, if necessary", {
     scrub_filepath(file_to_download) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(drive_download_message)
+    write_utf8(drive_download_message)
   )
 
   expect_true(file.exists(file.path(tmpdir, download_filename)))

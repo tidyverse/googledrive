@@ -1,7 +1,7 @@
 # drive_mv() can rename file
 
     Code
-      writeLines(drive_mv_message)
+      write_utf8(drive_mv_message)
     Output
       Original file:
       * {name_1} <id: {FILE_ID}>
@@ -11,7 +11,7 @@
 # drive_mv() can move a file into a folder given as path
 
     Code
-      writeLines(drive_mv_message)
+      write_utf8(drive_mv_message)
     Output
       Original file:
       * {mv_name} <id: {FILE_ID}>
@@ -21,7 +21,7 @@
 # drive_mv() can move a file into a folder given as dribble
 
     Code
-      writeLines(drive_mv_message)
+      write_utf8(drive_mv_message)
     Output
       Original file:
       * {mv_name} <id: {FILE_ID}>
@@ -31,7 +31,7 @@
 # drive_mv() can rename and move, using `path` and `name`
 
     Code
-      writeLines(drive_mv_message)
+      write_utf8(drive_mv_message)
     Output
       Original file:
       * {name_1} <id: {FILE_ID}>
@@ -41,7 +41,7 @@
 # drive_mv() can rename and move, using `path` only
 
     Code
-      writeLines(drive_mv_message)
+      write_utf8(drive_mv_message)
     Output
       Original file:
       * {name_1} <id: {FILE_ID}>
