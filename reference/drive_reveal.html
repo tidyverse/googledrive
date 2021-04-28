@@ -124,19 +124,22 @@ associated with a specific file.
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/articles/bring-your-own-app.html">Bring your own OAuth app or API key</a>
-    </li>
-    <li>
       <a href="../articles/articles/file-identification.html">File Identification</a>
-    </li>
-    <li>
-      <a href="../articles/articles/messages-and-errors.html">Messages and errors in googledrive</a>
     </li>
     <li>
       <a href="../articles/articles/multiple-files.html">Dealing with multiple files</a>
     </li>
     <li>
       <a href="../articles/articles/permissions.html">File permissions</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Package configuration</li>
+    <li>
+      <a href="../articles/articles/bring-your-own-app.html">Bring your own OAuth app or API key</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -280,68 +283,68 @@ that indicates whether a file is shared and a new list-column
 </div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 10 x 4</span>
 #&gt;    name          path            id                              drive_resource 
 #&gt;    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                           </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>         </span>
-#&gt; <span style='color: #BCBCBC;'> 1</span><span> name-squatter ~/name-squatter 1sNc_Md08PxTTN_uAaXMRB_TqBOqk5… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span><span> name-squatter ~/name-squatter 1JGpuDdVeTzoB2HV1rj9N6qF7qGuy6… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.t… ~/chicken-cp.t… 1NemSGIUedKXR4nCJwZYGdmvcnaMy9… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-… ~/drive-quiet-… 1AcRKGfcvNVS7PrCWuUilVAq3UTgyT… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 5</span><span> name-squatter ~/name-squatter 1nxnniu_Vx5ZYfb7SeRbycDoVCETA_… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 6</span><span> name-squatter ~/name-squatter 1PrNxd43xjBMLXixcdoZnmUSxyUKzM… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span><span> name-squatter ~/name-squatter 1L-C9a95UWsSV9bR5Xg4s0XZriu096… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.t… ~/chicken-cp.t… 1OQJpbPYriLwxsQZmBiXGz7lr0PhJ2… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-… ~/drive-quiet-… 1gcgGBSOHdl5TL9mNvn4h-sGlES0u-… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'>10</span><span> name-squatter ~/name-squatter 1Bhw7MK2dm9CMukTDu2AdPt1utgAdT… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></div><div class='input'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"trashed"</span><span class='op'>)</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span><span> name-squatter ~/name-squatter 1FGGmgZtffITigN1LQEVde4xRueFoi… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span><span> name-squatter ~/name-squatter 1vbZ2Pm9Pjha2-UH3Qy298uhr_WL4F… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.t… ~/chicken-cp.t… 1-VWwA8dxHHgWnr575Hgo04CB9uyF5… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-… ~/drive-quiet-… 1FOSb_Oq4n9CNiRdFJgo_Sd_47opHS… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 5</span><span> name-squatter ~/name-squatter 1OQLMR8W7XrI5JNj5GxIpKOYqpre5_… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 6</span><span> name-squatter ~/name-squatter 1sNc_Md08PxTTN_uAaXMRB_TqBOqk5… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 7</span><span> name-squatter ~/name-squatter 1JGpuDdVeTzoB2HV1rj9N6qF7qGuy6… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.t… ~/chicken-cp.t… 1NemSGIUedKXR4nCJwZYGdmvcnaMy9… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-… ~/drive-quiet-… 1AcRKGfcvNVS7PrCWuUilVAq3UTgyT… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'>10</span><span> name-squatter ~/name-squatter 1nxnniu_Vx5ZYfb7SeRbycDoVCETA_… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></div><div class='input'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"trashed"</span><span class='op'>)</span>
 </div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 10 x 4</span>
 #&gt;    name            trashed id                                   drive_resource  
 #&gt;  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span>
-#&gt; <span style='color: #BCBCBC;'> 1</span><span> name-squatter   TRUE    1sNc_Md08PxTTN_uAaXMRB_TqBOqk5QdD    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span><span> name-squatter   TRUE    1JGpuDdVeTzoB2HV1rj9N6qF7qGuy6GCj    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.txt  TRUE    1NemSGIUedKXR4nCJwZYGdmvcnaMy963s    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-wo… TRUE    1AcRKGfcvNVS7PrCWuUilVAq3UTgyTSgqXz… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 5</span><span> name-squatter   TRUE    1nxnniu_Vx5ZYfb7SeRbycDoVCETA_VOL    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 6</span><span> name-squatter   TRUE    1PrNxd43xjBMLXixcdoZnmUSxyUKzMxfE    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span><span> name-squatter   TRUE    1L-C9a95UWsSV9bR5Xg4s0XZriu0967-l    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.txt  TRUE    1OQJpbPYriLwxsQZmBiXGz7lr0PhJ25lY    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-wo… TRUE    1gcgGBSOHdl5TL9mNvn4h-sGlES0u-T5zJB… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'>10</span><span> name-squatter   TRUE    1Bhw7MK2dm9CMukTDu2AdPt1utgAdTRkZ    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></div><div class='input'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"mime_type"</span><span class='op'>)</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span><span> name-squatter   TRUE    1FGGmgZtffITigN1LQEVde4xRueFoijxg    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span><span> name-squatter   TRUE    1vbZ2Pm9Pjha2-UH3Qy298uhr_WL4FPmJ    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.txt  TRUE    1-VWwA8dxHHgWnr575Hgo04CB9uyF5T7W    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-wo… TRUE    1FOSb_Oq4n9CNiRdFJgo_Sd_47opHScfvRn… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 5</span><span> name-squatter   TRUE    1OQLMR8W7XrI5JNj5GxIpKOYqpre5_oTR    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 6</span><span> name-squatter   TRUE    1sNc_Md08PxTTN_uAaXMRB_TqBOqk5QdD    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 7</span><span> name-squatter   TRUE    1JGpuDdVeTzoB2HV1rj9N6qF7qGuy6GCj    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.txt  TRUE    1NemSGIUedKXR4nCJwZYGdmvcnaMy963s    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-wo… TRUE    1AcRKGfcvNVS7PrCWuUilVAq3UTgyTSgqXz… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'>10</span><span> name-squatter   TRUE    1nxnniu_Vx5ZYfb7SeRbycDoVCETA_VOL    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></div><div class='input'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"mime_type"</span><span class='op'>)</span>
 </div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 10 x 4</span>
 #&gt;    name         mime_type               id                       drive_resource 
 #&gt;  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                    </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>         </span>
-#&gt; <span style='color: #BCBCBC;'> 1</span><span> name-squatt… application/octet-stre… 1sNc_Md08PxTTN_uAaXMRB_… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span><span> name-squatt… application/octet-stre… 1JGpuDdVeTzoB2HV1rj9N6q… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.… text/plain              1NemSGIUedKXR4nCJwZYGdm… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 4</span><span> drive-quiet… application/vnd.google… 1AcRKGfcvNVS7PrCWuUilVA… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 5</span><span> name-squatt… application/octet-stre… 1nxnniu_Vx5ZYfb7SeRbycD… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 6</span><span> name-squatt… application/octet-stre… 1PrNxd43xjBMLXixcdoZnmU… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span><span> name-squatt… application/octet-stre… 1L-C9a95UWsSV9bR5Xg4s0X… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.… text/plain              1OQJpbPYriLwxsQZmBiXGz7… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span><span> drive-quiet… application/vnd.google… 1gcgGBSOHdl5TL9mNvn4h-s… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'>10</span><span> name-squatt… application/octet-stre… 1Bhw7MK2dm9CMukTDu2AdPt… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></div><div class='input'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"permissions"</span><span class='op'>)</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span><span> name-squatt… application/octet-stre… 1FGGmgZtffITigN1LQEVde4… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span><span> name-squatt… application/octet-stre… 1vbZ2Pm9Pjha2-UH3Qy298u… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.… text/plain              1-VWwA8dxHHgWnr575Hgo04… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span><span> drive-quiet… application/vnd.google… 1FOSb_Oq4n9CNiRdFJgo_Sd… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 5</span><span> name-squatt… application/octet-stre… 1OQLMR8W7XrI5JNj5GxIpKO… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 6</span><span> name-squatt… application/octet-stre… 1sNc_Md08PxTTN_uAaXMRB_… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 7</span><span> name-squatt… application/octet-stre… 1JGpuDdVeTzoB2HV1rj9N6q… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.… text/plain              1NemSGIUedKXR4nCJwZYGdm… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 9</span><span> drive-quiet… application/vnd.google… 1AcRKGfcvNVS7PrCWuUilVA… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'>10</span><span> name-squatt… application/octet-stre… 1nxnniu_Vx5ZYfb7SeRbycD… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></div><div class='input'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"permissions"</span><span class='op'>)</span>
 </div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 10 x 5</span>
 #&gt;    name        shared id                       drive_resource  permissions_reso…
 #&gt;  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                    </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span>
-#&gt; <span style='color: #BCBCBC;'> 1</span><span> name-squat… FALSE  1sNc_Md08PxTTN_uAaXMRB_… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
-#&gt; <span style='color: #BCBCBC;'> 2</span><span> name-squat… FALSE  1JGpuDdVeTzoB2HV1rj9N6q… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
-#&gt; <span style='color: #BCBCBC;'> 3</span><span> chicken-cp… FALSE  1NemSGIUedKXR4nCJwZYGdm… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
-#&gt; <span style='color: #BCBCBC;'> 4</span><span> drive-quie… FALSE  1AcRKGfcvNVS7PrCWuUilVA… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
-#&gt; <span style='color: #BCBCBC;'> 5</span><span> name-squat… FALSE  1nxnniu_Vx5ZYfb7SeRbycD… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
-#&gt; <span style='color: #BCBCBC;'> 6</span><span> name-squat… FALSE  1PrNxd43xjBMLXixcdoZnmU… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
-#&gt; <span style='color: #BCBCBC;'> 7</span><span> name-squat… FALSE  1L-C9a95UWsSV9bR5Xg4s0X… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
-#&gt; <span style='color: #BCBCBC;'> 8</span><span> chicken-cp… FALSE  1OQJpbPYriLwxsQZmBiXGz7… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
-#&gt; <span style='color: #BCBCBC;'> 9</span><span> drive-quie… FALSE  1gcgGBSOHdl5TL9mNvn4h-s… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
-#&gt; <span style='color: #BCBCBC;'>10</span><span> name-squat… FALSE  1Bhw7MK2dm9CMukTDu2AdPt… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></div><div class='input'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"published"</span><span class='op'>)</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span><span> name-squat… FALSE  1FGGmgZtffITigN1LQEVde4… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
+#&gt; <span style='color: #BCBCBC;'> 2</span><span> name-squat… FALSE  1vbZ2Pm9Pjha2-UH3Qy298u… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
+#&gt; <span style='color: #BCBCBC;'> 3</span><span> chicken-cp… FALSE  1-VWwA8dxHHgWnr575Hgo04… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
+#&gt; <span style='color: #BCBCBC;'> 4</span><span> drive-quie… FALSE  1FOSb_Oq4n9CNiRdFJgo_Sd… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
+#&gt; <span style='color: #BCBCBC;'> 5</span><span> name-squat… FALSE  1OQLMR8W7XrI5JNj5GxIpKO… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
+#&gt; <span style='color: #BCBCBC;'> 6</span><span> name-squat… FALSE  1sNc_Md08PxTTN_uAaXMRB_… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
+#&gt; <span style='color: #BCBCBC;'> 7</span><span> name-squat… FALSE  1JGpuDdVeTzoB2HV1rj9N6q… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
+#&gt; <span style='color: #BCBCBC;'> 8</span><span> chicken-cp… FALSE  1NemSGIUedKXR4nCJwZYGdm… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
+#&gt; <span style='color: #BCBCBC;'> 9</span><span> drive-quie… FALSE  1AcRKGfcvNVS7PrCWuUilVA… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span>
+#&gt; <span style='color: #BCBCBC;'>10</span><span> name-squat… FALSE  1nxnniu_Vx5ZYfb7SeRbycD… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></div><div class='input'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"published"</span><span class='op'>)</span>
 </div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 10 x 5</span>
 #&gt;    name        published id                     drive_resource  revision_resour…
 #&gt;  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                  </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span>
-#&gt; <span style='color: #BCBCBC;'> 1</span><span> name-squat… FALSE     1sNc_Md08PxTTN_uAaXMR… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span><span> name-squat… FALSE     1JGpuDdVeTzoB2HV1rj9N… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 3</span><span> chicken-cp… FALSE     1NemSGIUedKXR4nCJwZYG… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [10</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 4</span><span> drive-quie… FALSE     1AcRKGfcvNVS7PrCWuUil… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [7]&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 5</span><span> name-squat… FALSE     1nxnniu_Vx5ZYfb7SeRby… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 6</span><span> name-squat… FALSE     1PrNxd43xjBMLXixcdoZn… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span><span> name-squat… FALSE     1L-C9a95UWsSV9bR5Xg4s… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span><span> chicken-cp… FALSE     1OQJpbPYriLwxsQZmBiXG… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [10</span><span>…</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span><span> drive-quie… FALSE     1gcgGBSOHdl5TL9mNvn4h… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [7]&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>10</span><span> name-squat… FALSE     1Bhw7MK2dm9CMukTDu2Ad… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></div><div class='input'>
+#&gt; <span style='color: #BCBCBC;'> 1</span><span> name-squat… FALSE     1FGGmgZtffITigN1LQEVd… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span><span> name-squat… FALSE     1vbZ2Pm9Pjha2-UH3Qy29… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 3</span><span> chicken-cp… FALSE     1-VWwA8dxHHgWnr575Hgo… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [10</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span><span> drive-quie… FALSE     1FOSb_Oq4n9CNiRdFJgo_… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [7]&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 5</span><span> name-squat… FALSE     1OQLMR8W7XrI5JNj5GxIp… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 6</span><span> name-squat… FALSE     1sNc_Md08PxTTN_uAaXMR… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 7</span><span> name-squat… FALSE     1JGpuDdVeTzoB2HV1rj9N… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 8</span><span> chicken-cp… FALSE     1NemSGIUedKXR4nCJwZYG… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [10</span><span>…</span>
+#&gt; <span style='color: #BCBCBC;'> 9</span><span> drive-quie… FALSE     1AcRKGfcvNVS7PrCWuUil… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [7]&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>10</span><span> name-squat… FALSE     1nxnniu_Vx5ZYfb7SeRby… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></div><div class='input'>
 <span class='co'># 'root' is a special file id that always represents your root folder</span>
 <span class='fu'><a href='drive_get.html'>drive_get</a></span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"root"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'>drive_reveal</span><span class='op'>(</span><span class='st'>"path"</span><span class='op'>)</span>
 </div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 4</span>

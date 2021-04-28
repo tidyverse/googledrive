@@ -125,19 +125,22 @@ includes a local_path column." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/articles/bring-your-own-app.html">Bring your own OAuth app or API key</a>
-    </li>
-    <li>
       <a href="../articles/articles/file-identification.html">File Identification</a>
-    </li>
-    <li>
-      <a href="../articles/articles/messages-and-errors.html">Messages and errors in googledrive</a>
     </li>
     <li>
       <a href="../articles/articles/multiple-files.html">Dealing with multiple files</a>
     </li>
     <li>
       <a href="../articles/articles/permissions.html">File permissions</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Package configuration</li>
+    <li>
+      <a href="../articles/articles/bring-your-own-app.html">Bring your own OAuth app or API key</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -256,23 +259,23 @@ in the Drive API documentation.</p></div>
   <span class='fu'><a href='drive_example.html'>drive_example</a></span><span class='op'>(</span><span class='st'>"chicken.csv"</span><span class='op'>)</span>,
   type <span class='op'>=</span> <span class='st'>"spreadsheet"</span>
 <span class='op'>)</span>
-</div><div class='co'>#&gt; Local file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>/home/runner/work/_temp/Library/googledrive/extdata/chicken.csv</span></div><div class='co'>#&gt; Uploaded into Drive file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1WGhnY_0v83PHXOoH6gSdyfpB93NoWp1KN_qD55PJKqA&gt;</span></div><div class='co'>#&gt; With MIME type:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/vnd.google-apps.spreadsheet</span></div><div class='input'>
+</div><div class='co'>#&gt; Local file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>/home/runner/work/_temp/Library/googledrive/extdata/chicken.csv</span></div><div class='co'>#&gt; Uploaded into Drive file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1UDfr4DZGsj4Tr_E1PXehBzj4yCLXS8PoE1f_WvX_y60&gt;</span></div><div class='co'>#&gt; With MIME type:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/vnd.google-apps.spreadsheet</span></div><div class='input'>
 <span class='co'># Download Sheet as csv, explicit type</span>
 <span class='va'>downloaded_file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_download</span><span class='op'>(</span><span class='va'>file</span>, type <span class='op'>=</span> <span class='st'>"csv"</span><span class='op'>)</span>
-</div><div class='co'>#&gt; File downloaded:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1WGhnY_0v83PHXOoH6gSdyfpB93NoWp1KN_qD55PJKqA&gt;</span></div><div class='co'>#&gt; Saved locally as:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>chicken.csv</span></div><div class='input'>
+</div><div class='co'>#&gt; File downloaded:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1UDfr4DZGsj4Tr_E1PXehBzj4yCLXS8PoE1f_WvX_y60&gt;</span></div><div class='co'>#&gt; Saved locally as:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>chicken.csv</span></div><div class='input'>
 <span class='co'># See local path to new file</span>
 <span class='va'>downloaded_file</span><span class='op'>$</span><span class='va'>local_path</span>
 </div><div class='co'>#&gt; [1] "chicken.csv"</div><div class='input'>
 <span class='co'># Download as csv, type implicit in file extension</span>
 <span class='fu'>drive_download</span><span class='op'>(</span><span class='va'>file</span>, path <span class='op'>=</span> <span class='st'>"my_csv_file.csv"</span><span class='op'>)</span>
-</div><div class='co'>#&gt; File downloaded:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1WGhnY_0v83PHXOoH6gSdyfpB93NoWp1KN_qD55PJKqA&gt;</span></div><div class='co'>#&gt; Saved locally as:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>my_csv_file.csv</span></div><div class='input'>
+</div><div class='co'>#&gt; File downloaded:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1UDfr4DZGsj4Tr_E1PXehBzj4yCLXS8PoE1f_WvX_y60&gt;</span></div><div class='co'>#&gt; Saved locally as:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>my_csv_file.csv</span></div><div class='input'>
 <span class='co'># Download with default name and type (xlsx)</span>
 <span class='fu'>drive_download</span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
-</div><div class='co'>#&gt; File downloaded:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1WGhnY_0v83PHXOoH6gSdyfpB93NoWp1KN_qD55PJKqA&gt;</span></div><div class='co'>#&gt; Saved locally as:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>chicken.xlsx</span></div><div class='input'>
+</div><div class='co'>#&gt; File downloaded:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1UDfr4DZGsj4Tr_E1PXehBzj4yCLXS8PoE1f_WvX_y60&gt;</span></div><div class='co'>#&gt; Saved locally as:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>chicken.xlsx</span></div><div class='input'>
 <span class='co'># Clean up</span>
 <span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"chicken.csv"</span>, <span class='st'>"chicken.xlsx"</span>, <span class='st'>"my_csv_file.csv"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
-</div><div class='co'>#&gt; File deleted:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1WGhnY_0v83PHXOoH6gSdyfpB93NoWp1KN_qD55PJKqA&gt;</span></div></pre>
+</div><div class='co'>#&gt; File deleted:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1UDfr4DZGsj4Tr_E1PXehBzj4yCLXS8PoE1f_WvX_y60&gt;</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

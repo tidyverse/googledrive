@@ -131,19 +131,22 @@ if (no hits) {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/articles/bring-your-own-app.html">Bring your own OAuth app or API key</a>
-    </li>
-    <li>
       <a href="../articles/articles/file-identification.html">File Identification</a>
-    </li>
-    <li>
-      <a href="../articles/articles/messages-and-errors.html">Messages and errors in googledrive</a>
     </li>
     <li>
       <a href="../articles/articles/multiple-files.html">Dealing with multiple files</a>
     </li>
     <li>
       <a href="../articles/articles/permissions.html">File permissions</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Package configuration</li>
+    <li>
+      <a href="../articles/articles/bring-your-own-app.html">Bring your own OAuth app or API key</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -276,25 +279,25 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 
 <span class='co'># PUT to a novel filepath --&gt; drive_put() delegates to drive_upload()</span>
 <span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_put</span><span class='op'>(</span><span class='va'>local_file</span><span class='op'>)</span>
-</div><div class='co'>#&gt; <span style='color: #00BBBB;'>ℹ</span><span> No pre-existing Drive file at this path. Calling </span><span style='color: #262626;background-color: #DADADA;'>`drive_upload()`</span><span>.</span></div><div class='co'>#&gt; Local file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>/tmp/RtmpC22gxo/drive_put_2b517fa602da.txt</span></div><div class='co'>#&gt; Uploaded into Drive file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> drive_put_2b517fa602da.txt </span><span style='color: #555555;'>&lt;id: 1Xz15Wd3T-AYNG8THQEJjatX1vTbs2IsS&gt;</span></div><div class='co'>#&gt; With MIME type:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>text/plain</span></div><div class='input'>
+</div><div class='co'>#&gt; <span style='color: #00BBBB;'>ℹ</span><span> No pre-existing Drive file at this path. Calling </span><span style='color: #262626;background-color: #DADADA;'>`drive_upload()`</span><span>.</span></div><div class='co'>#&gt; Local file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>/tmp/RtmpYJHz2Q/drive_put_2b621b16e56a.txt</span></div><div class='co'>#&gt; Uploaded into Drive file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> drive_put_2b621b16e56a.txt </span><span style='color: #555555;'>&lt;id: 1__7uxRNcJ5sfHH5xkNXeaBwJZBiUjrfO&gt;</span></div><div class='co'>#&gt; With MIME type:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>text/plain</span></div><div class='input'>
 <span class='co'># update the local file</span>
 <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='st'>"end"</span>, file <span class='op'>=</span> <span class='va'>local_file</span>, sep <span class='op'>=</span> <span class='st'>"\n"</span>, append <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># PUT again --&gt; drive_put() delegates to drive_update()</span>
 <span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_put</span><span class='op'>(</span><span class='va'>local_file</span><span class='op'>)</span>
-</div><div class='co'>#&gt; <span style='color: #00BBBB;'>ℹ</span><span> A Drive file already exists at this path. Calling </span><span style='color: #262626;background-color: #DADADA;'>`drive_update()`</span><span>.</span></div><div class='co'>#&gt; File updated:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> drive_put_2b517fa602da.txt </span><span style='color: #555555;'>&lt;id: 1Xz15Wd3T-AYNG8THQEJjatX1vTbs2IsS&gt;</span></div><div class='input'>
+</div><div class='co'>#&gt; <span style='color: #00BBBB;'>ℹ</span><span> A Drive file already exists at this path. Calling </span><span style='color: #262626;background-color: #DADADA;'>`drive_update()`</span><span>.</span></div><div class='co'>#&gt; File updated:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> drive_put_2b621b16e56a.txt </span><span style='color: #555555;'>&lt;id: 1__7uxRNcJ5sfHH5xkNXeaBwJZBiUjrfO&gt;</span></div><div class='input'>
 <span class='co'># create a second file at this filepath</span>
 <span class='va'>file2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_create.html'>drive_create</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span><span class='op'>(</span><span class='va'>local_file</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Created Drive file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> drive_put_2b517fa602da.txt </span><span style='color: #555555;'>&lt;id: 1Dy9YHrikUm0qkS81hU5NEK0xCL5YFADv&gt;</span></div><div class='co'>#&gt; With MIME type:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>text/plain</span></div><div class='input'>
+</div><div class='co'>#&gt; Created Drive file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> drive_put_2b621b16e56a.txt </span><span style='color: #555555;'>&lt;id: 1cSv86iWuk-9jyndjD0gp0ZlMF7rB77pW&gt;</span></div><div class='co'>#&gt; With MIME type:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>text/plain</span></div><div class='input'>
 <span class='co'># PUT again --&gt; ERROR</span>
 <span class='fu'>drive_put</span><span class='op'>(</span><span class='va'>local_file</span><span class='op'>)</span>
 </div><div class='co'>#&gt; <span class='error'>Error: </span>Multiple items already exist at the target filepath.
 #&gt; It's not clear what `drive_put()` should do. Aborting.
-#&gt;   * ~/drive_put_2b517fa602da.txt: 1Dy9YHrikUm0qkS81hU5NEK0xCL5YFADv
-#&gt;   * ~/drive_put_2b517fa602da.txt: 1Xz15Wd3T-AYNG8THQEJjatX1vTbs2IsS</div><div class='input'>
+#&gt;   * ~/drive_put_2b621b16e56a.txt: 1cSv86iWuk-9jyndjD0gp0ZlMF7rB77pW
+#&gt;   * ~/drive_put_2b621b16e56a.txt: 1__7uxRNcJ5sfHH5xkNXeaBwJZBiUjrfO</div><div class='input'>
 <span class='co'># clean-up</span>
 <span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span><span class='st'>"drive_put_.+[.]txt"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Files deleted:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> drive_put_2b517fa602da.txt </span><span style='color: #555555;'>&lt;id: 1Dy9YHrikUm0qkS81hU5NEK0xCL5YFADv&gt;</span></div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> drive_put_2b517fa602da.txt </span><span style='color: #555555;'>&lt;id: 1Xz15Wd3T-AYNG8THQEJjatX1vTbs2IsS&gt;</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>local_file</span><span class='op'>)</span>
+</div><div class='co'>#&gt; Files deleted:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> drive_put_2b621b16e56a.txt </span><span style='color: #555555;'>&lt;id: 1cSv86iWuk-9jyndjD0gp0ZlMF7rB77pW&gt;</span></div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> drive_put_2b621b16e56a.txt </span><span style='color: #555555;'>&lt;id: 1__7uxRNcJ5sfHH5xkNXeaBwJZBiUjrfO&gt;</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>local_file</span><span class='op'>)</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
