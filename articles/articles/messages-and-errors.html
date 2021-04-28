@@ -163,7 +163,7 @@
 <ul>
 <li>Use the <a href="https://cli.r-lib.org/index.html">cli package</a> to get interpolation, inline markup, and pluralization</li>
 <li>Eventually route through <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::inform()</a></code>, which is important because <code>inform()</code> prints to standard output in interactive sessions. This means that informational messages won’t have the same “look” as errors and can generally be more stylish, at least in IDEs like RStudio.</li>
-<li>Are under the control of the <code>googledrive_quiet</code> option. If it’s unset, the default is to show messages (unless we’re testing, i.e. the environment variable <code>TESTTHAT</code> is <code>"true"</code>). Doing <code><a href="https://rdrr.io/r/base/options.html">options(googledrive_quiet = TRUE)</a></code> will suppress messages. There are withr-style convenience helpers: <code><a href="../../reference/googledrive-configuration.html">local_drive_quiet()</a></code> and <code><a href="../../reference/googledrive-configuration.html">with_drive_quiet()</a></code>.</li>
+<li>Are under the control of the <code>googledrive_quiet</code> option. If it’s unset, the default is to show messages (unless we’re testing, i.e. the environment variable <code>TESTTHAT</code> is <code>"true"</code>). Doing <code>options(googledrive_quiet = TRUE)</code> will suppress messages. There are withr-style convenience helpers: <code><a href="../../reference/googledrive-configuration.html">local_drive_quiet()</a></code> and <code><a href="../../reference/googledrive-configuration.html">with_drive_quiet()</a></code>.</li>
 </ul>
 <div id="inline-styling" class="section level3">
 <h3 class="hasAnchor">
@@ -249,7 +249,7 @@
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"File VERBED:"</span>, <span class="fu">cli_format_dribble</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; File VERBED:</span>
-<span class="co">#&gt; • Rlogo.pdf &lt;id: 1cn7oVxQRgD0l_hCI4nrSSWrKeVFysUp7&gt;</span>
+<span class="co">#&gt; • Rlogo.pdf &lt;id: 1opPZyo4WUiue56qlF8SO5ipaTJwPLzZg&gt;</span>
 
 <span class="co"># if you don't know how many files</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">dat</span>
@@ -258,12 +258,12 @@
   <span class="fu">cli_format_dribble</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Files VERBED:</span>
-<span class="co">#&gt; • Rlogo.pdf &lt;id: 1cn7oVxQRgD0l_hCI4nrSSWrKeVFysUp7&gt;</span>
-<span class="co">#&gt; • THANKS &lt;id: 1zNZpVO4MCjNUFUHOwSv3WlyUh4Dq_du3&gt;</span>
-<span class="co">#&gt; • BioC_mirrors.csv &lt;id: 1vV0fPdNOyo3Ti9ofA38MuTQm27pXvYq5&gt;</span>
-<span class="co">#&gt; • logo.jpg &lt;id: 1OFeNdd63NfoavqvDf5-xa3LORiamfKXS&gt;</span>
-<span class="co">#&gt; • Rlogo.svg &lt;id: 11sxsw-ux-UjQjzVdxd1wjNz37hJeBrBu&gt;</span>
-<span class="co">#&gt;   … and 4 more</span></code></pre></div>
+<span class="co">#&gt; • Rlogo.pdf &lt;id: 1opPZyo4WUiue56qlF8SO5ipaTJwPLzZg&gt;</span>
+<span class="co">#&gt; • THANKS &lt;id: 1JCQ06Wj6AjntiyjnHsXmmcHZWCkBNgBJ&gt;</span>
+<span class="co">#&gt; • googledrive-NEWS.md &lt;id: 1wMnFwFSIG0eQ4UUUEbn6-udF3GoKY3xN&gt;</span>
+<span class="co">#&gt; • def &lt;id: 12xjsE3eIf84VSFF5hNhSEOnQF8DDSHkc&gt;</span>
+<span class="co">#&gt; • abc &lt;id: 1qkS667DEnvDzTuVBSyj5NeGzIGbrAy9Q&gt;</span>
+<span class="co">#&gt;   … and 5 more</span></code></pre></div>
 </div>
 </div>
 <div id="errors" class="section level2">

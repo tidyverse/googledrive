@@ -189,7 +189,7 @@ information (the information on current user) and prints it nicely.</p>
       <th>verbose</th>
       <td><p><a href='https://lifecycle.r-lib.org/articles/stages.html#deprecated'><img src='figures/lifecycle-deprecated.svg' alt='[Deprecated]' /></a> This logical argument to
 individual googledrive functions is deprecated. To globally suppress
-googledrive messaging, use <code><a href='https://rdrr.io/r/base/options.html'>options(googledrive_quiet = TRUE)</a></code> (the default
+googledrive messaging, use <code>options(googledrive_quiet = TRUE)</code> (the default
 behaviour is to emit informational messages). To suppress messaging in a
 more limited way, use the helpers <code><a href='googledrive-configuration.html'>local_drive_quiet()</a></code> or
 <code><a href='googledrive-configuration.html'>with_drive_quiet()</a></code>.</p></td>
@@ -208,19 +208,19 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>drive_user</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Logged in as:
-#&gt; <span style='color: #00BBBB;'>•</span><span> displayName: </span><span style='color: #00BB00;'>googledrive-docs@gargle-169921.iam.gserviceaccount.com</span><span>
-#&gt; </span><span style='color: #00BBBB;'>•</span><span> emailAddress: </span><span style='color: #0000BB;'>googledrive-docs@gargle-169921.iam.gserviceaccount.com</span><span></div><div class='input'>
+</div><div class='co'>#&gt; Logged in as:
+#&gt; <span style='color: #00BBBB;'>•</span><span> displayName: </span><span style='color: #00BB00;'>googledrive-docs@gargle-169921.iam.gserviceaccount.com</span>
+#&gt; <span style='color: #00BBBB;'>•</span><span> emailAddress: </span><span style='color: #0000BB;'>googledrive-docs@gargle-169921.iam.gserviceaccount.com</span></div><div class='input'>
 <span class='co'># more info is returned than is printed</span>
 <span class='va'>user</span> <span class='op'>&lt;-</span> <span class='fu'>drive_user</span><span class='op'>(</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>user</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; List of 5
+</div><div class='co'>#&gt; List of 5
 #&gt;  $ kind        : chr "drive#user"
 #&gt;  $ displayName : chr "googledrive-docs@gargle-169921.iam.gserviceaccount.com"
 #&gt;  $ me          : logi TRUE
 #&gt;  $ permissionId: chr "09204227840243713330"
 #&gt;  $ emailAddress: chr "googledrive-docs@gargle-169921.iam.gserviceaccount.com"
-#&gt;  - attr(*, "class")= chr [1:2] "drive_user" "list"</div></span></pre>
+#&gt;  - attr(*, "class")= chr [1:2] "drive_user" "list"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

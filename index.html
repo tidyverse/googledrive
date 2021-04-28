@@ -158,7 +158,7 @@
 <li>Hold on to all the other metadata sent back by the API</li>
 </ul>
 </li>
-<li>googledrive is “pipe-friendly” and, in fact, re-exports <code><a href="reference/%&gt;%.html">%&gt;%</a></code>, but does not require its use.</li>
+<li>googledrive is “pipe-friendly” and, in fact, re-exports <code>%&gt;%</code>, but does not require its use.</li>
 </ul>
 </div>
 <div id="quick-demo" class="section level3">
@@ -268,9 +268,9 @@
 <div id="share-files" class="section level4">
 <h4 class="hasAnchor">
 <a href="#share-files" class="anchor"></a>Share files</h4>
-<p>To allow other people to access your file, you need to change the sharing permissions. You can check the sharing status by running <code><a href="reference/drive_reveal.html">drive_reveal(..., "permissions")</a></code>, which adds a logical column <code>shared</code> and parks more detailed metadata in a <code>permissions_resource</code> variable.</p>
+<p>To allow other people to access your file, you need to change the sharing permissions. You can check the sharing status by running <code>drive_reveal(..., "permissions")</code>, which adds a logical column <code>shared</code> and parks more detailed metadata in a <code>permissions_resource</code> variable.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">chicken_sheet</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">chicken_sheet</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"permissions"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;   name        shared id                   drive_resource  permissions_reso…</span>
@@ -278,7 +278,7 @@
 <span class="co">#&gt; 1 README-chi… FALSE  1j2VsF1NcYlc6W9Owen… &lt;named list [3… &lt;named list [2]&gt;</span></code></pre></div>
 <p>Here’s how to grant anyone with the link permission to view this data set.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="va">chicken_sheet</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="op">(</span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="va">chicken_sheet</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
    <span class="fu"><a href="reference/drive_share.html">drive_share</a></span><span class="op">(</span>role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Permissions updated</span>
 <span class="co">#&gt;   * role = reader</span>
@@ -293,9 +293,9 @@
 <div id="publish-files" class="section level4">
 <h4 class="hasAnchor">
 <a href="#publish-files" class="anchor"></a>Publish files</h4>
-<p>Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running <code><a href="reference/drive_reveal.html">drive_reveal(..., "published")</a></code>, which adds a logical column <code>published</code> and parks more detailed metadata in a <code>revision_resource</code> variable.</p>
+<p>Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running <code>drive_reveal(..., "published")</code>, which adds a logical column <code>published</code> and parks more detailed metadata in a <code>revision_resource</code> variable.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">chicken_sheet</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">chicken_sheet</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"published"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 1 x 7</span>
 <span class="co">#&gt;   name  published shared id    drive_resource permissions_res…</span>
@@ -357,7 +357,7 @@
 <span class="co">#&gt;   * chicken.txt</span>
 <span class="co">#&gt; Saved locally as:</span>
 <span class="co">#&gt;   * chicken.txt</span>
-<span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "A chicken whose name was Chantecler"      </span>
 <span class="co">#&gt; [2] "Clucked in iambic pentameter"             </span>
 <span class="co">#&gt; [3] "It sat on a shelf, reading Song of Myself"</span>

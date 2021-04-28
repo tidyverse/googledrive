@@ -196,7 +196,7 @@ useful information (the information on current user) and prints it nicely.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>drive_about</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $kind
+</div><div class='co'>#&gt; $kind
 #&gt; [1] "drive#about"
 #&gt; 
 #&gt; $user
@@ -221,13 +221,13 @@ useful information (the information on current user) and prints it nicely.</p>
 #&gt; [1] "16106127360"
 #&gt; 
 #&gt; $storageQuota$usage
-#&gt; [1] "1416963"
+#&gt; [1] "1430472"
 #&gt; 
 #&gt; $storageQuota$usageInDrive
-#&gt; [1] "1416963"
+#&gt; [1] "1430472"
 #&gt; 
 #&gt; $storageQuota$usageInDriveTrash
-#&gt; [1] "330"
+#&gt; [1] "495"
 #&gt; 
 #&gt; 
 #&gt; $importFormats
@@ -1334,9 +1334,9 @@ useful information (the information on current user) and prints it nicely.</p>
 #&gt; </div><div class='input'>
 <span class='co'># explore the export formats available for Drive files, by MIME type</span>
 <span class='va'>about</span> <span class='op'>&lt;-</span> <span class='fu'>drive_about</span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>about</span><span class='op'>[[</span><span class='st'>"exportFormats"</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>%&gt;%</span>
+<span class='va'>about</span><span class='op'>[[</span><span class='st'>"exportFormats"</span><span class='op'>]</span><span class='op'>]</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span>
   <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>unlist</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $`application/vnd.google-apps.document`
+</div><div class='co'>#&gt; $`application/vnd.google-apps.document`
 #&gt; [1] "application/rtf"                                                        
 #&gt; [2] "application/vnd.oasis.opendocument.text"                                
 #&gt; [3] "text/html"                                                              
