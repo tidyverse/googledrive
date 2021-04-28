@@ -1,12 +1,6 @@
 ---
 title: "Bring your own OAuth app or API key"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Bring your own OAuth app or API key}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
-
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(

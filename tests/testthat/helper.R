@@ -1,7 +1,8 @@
-if (gargle:::secret_can_decrypt("googledrive") &&
-    !is.null(curl::nslookup("drive.googleapis.com", error = FALSE))) {
-  drive_auth_testing()
-} else {
+auth_success <- tryCatch(
+  drive_auth_testing(),
+  googledrive_auth_internal_error = function(e) NULL
+)
+if (!isTRUE(auth_success)) {
   drive_deauth()
 }
 

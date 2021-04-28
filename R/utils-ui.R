@@ -1,9 +1,9 @@
 sq <- function(x) glue::single_quote(x)
 bt <- function(x) glue::backtick(x)
 
-# message <- function(...) {
-#   abort("Internal error: use googledrive's UI functions, not {bt('message()')}")
-# }
+message <- function(...) {
+  abort("Internal error: use googledrive's UI functions, not {bt('message()')}")
+}
 
 warn_for_verbose <- function(verbose = TRUE, env = parent.frame()) {
   # this is about whether `verbose` was present in the **user's** call to the

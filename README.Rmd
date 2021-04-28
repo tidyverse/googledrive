@@ -6,22 +6,26 @@ output: github_document
 
 
 ```{r setup, include = FALSE}
-can_decrypt <- gargle:::secret_can_decrypt("googledrive")
+auth_success <- tryCatch(
+  googledrive:::drive_auth_docs(),
+  googledrive_auth_internal_error = function(e) e
+)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   error = TRUE,
-  purl = can_decrypt,
-  eval = can_decrypt
+  purl = googledrive::drive_has_token(),
+  eval = googledrive::drive_has_token()
 )
-if (can_decrypt) {
-  json <- gargle:::secret_read("googledrive", "googledrive-docs.json")
-  googledrive::drive_auth(path = rawToChar(json))
-}
 ```
 
-```{r eval = !can_decrypt, echo = FALSE, comment = NA}
-message("No token available. Code chunks will not be evaluated.")
+```{r eval = !googledrive::drive_has_token(), echo = FALSE, comment = NA}
+googledrive:::drive_bullets(c(
+  "Code chunks will not be evaluated, because:",
+  strsplit(auth_success$message, split = "\n")[[1]]
+))
+googledrive::drive_deauth()
 ```
 
 # googledrive <img src="man/figures/logo.png" align="right" height=140/>

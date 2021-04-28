@@ -3,22 +3,26 @@ output: github_document
 ---
 
 ```{r setup, include = FALSE}
-can_decrypt <- gargle:::secret_can_decrypt("googledrive")
+auth_success <- tryCatch(
+  googledrive:::drive_auth_docs(),
+  googledrive_auth_internal_error = function(e) e
+)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   error = TRUE,
-  purl = can_decrypt,
-  eval = can_decrypt
+  purl = googledrive::drive_has_token(),
+  eval = googledrive::drive_has_token()
 )
-if (can_decrypt) {
-  json <- gargle:::secret_read("googledrive", "googledrive-docs.json")
-  googledrive::drive_auth(path = rawToChar(json))
-}
 ```
 
-```{r eval = !can_decrypt, echo = FALSE, comment = NA}
-message("No token available. Code chunks will not be evaluated.")
+```{r eval = !googledrive::drive_has_token(), echo = FALSE, comment = NA}
+googledrive:::drive_bullets(c(
+  "Code chunks will not be evaluated, because:",
+  strsplit(auth_success$message, split = "\n")[[1]]
+))
+googledrive::drive_deauth()
 ```
 
 # googledrive
@@ -94,6 +98,7 @@ if (isTRUE(CLEAN)) {
   drive_rm(examples)
   drive_rm(basename(builtin))
   drive_rm("abc/")
+  drive_rm(drive_find("index-chicken"))
 }
 ```
 
@@ -143,8 +148,9 @@ You generally want to store the result of a googledrive call, as we do with `fil
 `as_id()` can be used to coerce various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and dribbles.
  
 ```{r}
-## let's retrieve same file by id (also a great way to force-refresh metadata)
 x$id
+
+# let's retrieve same file by id (also a great way to force-refresh metadata)
 drive_get(as_id(x$id))
 drive_get(as_id(x))
 ```
@@ -158,7 +164,7 @@ We can upload any file type.
 ```{r}
 (chicken <- drive_upload(
   drive_example("chicken.csv"),
-  "README-chicken.csv"
+  "index-chicken.csv"
 ))
 ```
 
@@ -167,10 +173,10 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 ```{r}
 drive_rm(chicken)
 
-## example of using a dribble as input
+# example of using a dribble as input
 chicken_sheet <- drive_upload(
   drive_example("chicken.csv"),
-  "README-chicken-sheet",
+  "index-chicken-sheet",
   type = "spreadsheet"
 )
 ```
@@ -192,6 +198,8 @@ Here's how to grant anyone with the link permission to view this data set.
 (chicken_sheet <- chicken_sheet %>%
    drive_share(role = "reader", type = "anyone"))
 ```
+
+This comes up so often, there's even a convenience wrapper, `drive_share_anyone()`.
 
 #### Publish files
 
@@ -215,15 +223,15 @@ By default, `drive_publish()` will publish your most recent version.
 We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. There are reasonable defaults or you can specify this explicitly via `type` or implicitly via the file extension in `path`. For example, if I would like to download the "chicken_sheet" Google Sheet as a `.csv` I could run the following.
 
 ```{r}
-drive_download("README-chicken-sheet", type = "csv")
+drive_download("index-chicken-sheet", type = "csv")
 ```
 
 Alternatively, I could specify type via the `path` parameter.
 
 ```{r}
 drive_download(
-  "README-chicken-sheet",
-  path = "README-chicken-sheet.csv",
+  "index-chicken-sheet",
+  path = "index-chicken-sheet.csv",
   overwrite = TRUE
 )
 ```
@@ -233,7 +241,7 @@ Notice in the example above, I specified `overwrite = TRUE`, in order to overwri
 Finally, you could just allow export to the default type. In the case of Google Sheets, this is an Excel workbook:
 
 ```{r}
-drive_download("README-chicken-sheet")
+drive_download("index-chicken-sheet")
 ```
 
 ##### All other files
@@ -241,7 +249,7 @@ drive_download("README-chicken-sheet")
 Downloading files that are *not* Google type files is even simpler, i.e. it does not require any conversion or type info.
 
 ```{r}
-## download it and prove we got it
+# download it and prove we got it
 drive_download("chicken.txt")
 readLines("chicken.txt") %>% head()
 ```
@@ -249,10 +257,10 @@ readLines("chicken.txt") %>% head()
 #### Clean up
 
 ```{r}
-drive_rm(chicken_sheet)
 file.remove(c(
-  "README-chicken-sheet.csv", "README-chicken-sheet.xlsx", "chicken.txt"
+  "index-chicken-sheet.csv", "index-chicken-sheet.xlsx", "chicken.txt"
 ))
+drive_find("index-chicken") %>% drive_rm()
 ```
 
 ## Privacy

@@ -1,31 +1,40 @@
 ---
 title: "Dealing with multiple files"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Dealing with multiple files}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include = FALSE}
-can_decrypt <- gargle:::secret_can_decrypt("googledrive")
+auth_success <- tryCatch(
+  googledrive:::drive_auth_docs(),
+  googledrive_auth_internal_error = function(e) e
+)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  cache = TRUE,
   error = TRUE,
-  purl = can_decrypt,
-  eval = can_decrypt
+  purl = googledrive::drive_has_token(),
+  eval = googledrive::drive_has_token()
 )
-if (can_decrypt) {
-  json <- gargle:::secret_read("googledrive", "googledrive-docs.json")
-  googledrive::drive_auth(path = rawToChar(json))
-}
+
 options(tidyverse.quiet = TRUE)
 ```
 
-```{r eval = !can_decrypt, echo = FALSE, comment = NA}
-message("No token available. Code chunks will not be evaluated.")
+```{r eval = !googledrive::drive_has_token(), echo = FALSE, comment = NA}
+googledrive:::drive_bullets(c(
+  "Code chunks will not be evaluated, because:",
+  strsplit(auth_success$message, split = "\n")[[1]]
+))
+googledrive::drive_deauth()
+```
+
+```{r, include = FALSE}
+# clean up if any previous runs left this lying around
+trash_me <- googledrive::drive_find(
+  "upload-into-me-article-demo", type = "folder"
+)
+if (googledrive::some_files(trash_me)) {
+  drive_trash(trash_me)
+}
 ```
 
 Some googledrive functions are built to naturally handle multiple files, while others operate on a single file.
@@ -79,7 +88,8 @@ Create a folder on your Drive and upload all files into this folder by iterating
 ```{r}
 folder <- drive_mkdir("upload-into-me-article-demo")
 with_drive_quiet(
-  files <- map(local_files, ~ drive_upload(.x, path = folder, verbose = FALSE)) )
+  files <- map(local_files, ~ drive_upload(.x, path = folder))
+)
 ```
 
 First, let's confirm that we uploaded the files into the new folder.
@@ -110,10 +120,10 @@ Imagine that we now wish these file names had a date prefix. First, form the new
 
 ```{r}
 (new_names <- glue("{Sys.Date()}_{basename(local_files)}"))
-files_dribble <- map2_df(files, new_names, drive_rename)
+files_dribble <- map2_dfr(files, new_names, drive_rename)
 ```
 
-We use `purrr::map2_df()` to work through `files`, the list of dribbles (= Drive files), and `new_names`, the vector of new names, and row bind the returned dribbles into a single dribble holding all files.
+We use `purrr::map2_dfr()` to work through `files`, the list of dribbles (= Drive files), and `new_names`, the vector of new names, and row bind the returned dribbles into a single dribble holding all files.
 
 Let's check on the contents of this folder again to confirm the new names:
 
@@ -121,7 +131,7 @@ Let's check on the contents of this folder again to confirm the new names:
 drive_ls(folder)
 ```
 
-Let's confirm that, by using `map2_df()` instead of `map2()`, we got a single dribble back, instead of a list of one-row dribbles:
+Let's confirm that, by using `map2_df2()` instead of `map2()`, we got a single dribble back, instead of a list of one-row dribbles:
 
 ```{r}
 files_dribble

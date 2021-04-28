@@ -1,32 +1,38 @@
 ---
 title: "File permissions"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{File permissions}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
-
 ```{r setup, include = FALSE}
-can_decrypt <- gargle:::secret_can_decrypt("googledrive")
+auth_success <- tryCatch(
+  googledrive:::drive_auth_docs(),
+  googledrive_auth_internal_error = function(e) e
+)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  cache = TRUE,
   error = TRUE,
-  purl = can_decrypt,
-  eval = can_decrypt
+  purl = googledrive::drive_has_token(),
+  eval = googledrive::drive_has_token()
 )
-if (can_decrypt) {
-  json <- gargle:::secret_read("googledrive", "googledrive-docs.json")
-  googledrive::drive_auth(path = rawToChar(json))
-}
+
 options(tidyverse.quiet = TRUE)
 ```
 
-```{r eval = !can_decrypt, echo = FALSE, comment = NA}
-message("No token available. Code chunks will not be evaluated.")
+```{r eval = !googledrive::drive_has_token(), echo = FALSE, comment = NA}
+googledrive:::drive_bullets(c(
+  "Code chunks will not be evaluated, because:",
+  strsplit(auth_success$message, split = "\n")[[1]]
+))
+googledrive::drive_deauth()
+```
+
+```{r, include = FALSE}
+# clean up if any previous runs left this lying around
+trash_me <- googledrive::drive_find("chicken-perm-article")
+if (googledrive::some_files(trash_me)) {
+  drive_trash(trash_me)
+}
 ```
 
 You can use googledrive to manage permissions on your Drive files, i.e. grant different people or groups of people various levels of access (read, comment, edit, etc.).
@@ -59,9 +65,16 @@ file <- file %>%
 
 Let's say we also want "anyone with a link" to be able to read the file.
 
-```{r}
+```{r eval = FALSE}
 file <- file %>%
   drive_share(role = "reader", type = "anyone")
+```
+
+This comes up often enough that we've made a convenience wrapper:
+
+```{r}
+file <- file %>%
+  drive_share_anyone()
 file
 ```
 

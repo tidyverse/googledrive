@@ -210,8 +210,26 @@ drive_oauth_app <- function() .auth$app
 # unexported helpers that are nice for internal use ----
 drive_auth_internal <- function(account = c("docs", "testing"),
                                 scopes = NULL) {
-  stopifnot(gargle:::secret_can_decrypt("googledrive"))
   account <- match.arg(account)
+  can_decrypt <- gargle:::secret_can_decrypt("googledrive")
+  online <- !is.null(curl::nslookup("drive.googleapis.com", error = FALSE))
+  if (!can_decrypt || !online) {
+    abort(
+      message = c(
+        "Auth unsuccessful:",
+        if (!can_decrypt) {
+          # TODO: presumably this pre-glue won't be necessary forever
+          c("x" = glue("Can't decrypt the {account} service account token"))
+        },
+        if (!online) {
+          c("x" = "We don't appear to be online (or maybe the Drive API is down?)")
+        }
+      ),
+      class = "googledrive_auth_internal_error",
+      can_decrypt = can_decrypt, online = online
+    )
+  }
+
   if (!is_interactive()) local_drive_quiet()
   filename <- glue("googledrive-{account}.json")
   # TODO: revisit when I do PKG_scopes()
