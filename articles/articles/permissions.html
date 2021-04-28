@@ -143,7 +143,7 @@
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt; • '/home/runner/work/_temp/Library/googledrive/extdata/chicken.txt'</span>
 <span class="co">#&gt; Uploaded into Drive file:</span>
-<span class="co">#&gt; • chicken-perm-article.txt &lt;id: 1KSXD3TaITPkCN9p07fiYTA0NUALEzvlb&gt;</span>
+<span class="co">#&gt; • chicken-perm-article.txt &lt;id: 1Pu6lMCVrqn-DcL7sSlgY6RdS89EJg7mn&gt;</span>
 <span class="co">#&gt; With MIME type:</span>
 <span class="co">#&gt; • 'text/plain'</span>
 
@@ -151,7 +151,7 @@
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;   name            shared id                   drive_resource  permissions_resou…</span>
 <span class="co">#&gt; * &lt;chr&gt;           &lt;lgl&gt;  &lt;chr&gt;                &lt;list&gt;          &lt;list&gt;            </span>
-<span class="co">#&gt; 1 chicken-perm-a… FALSE  1KSXD3TaITPkCN9p07f… &lt;named list [3… &lt;named list [2]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 chicken-perm-a… FALSE  1Pu6lMCVrqn-DcL7sSl… &lt;named list [3… &lt;named list [2]&gt;</span></code></pre></div>
 <p><code>shared = FALSE</code> indicates that this file is not yet shared with anyone and, for those so inclined, detailed information on permissions can be found in the <code>permissions_resource</code> list-column. Note that the <code>drive_resource</code>, which is always present in a dribble, typically also contains information on permissions. So if you just want to <em>know</em> about permissions, as opposed to modifying them, you can probably consult <code>drive_resource</code>.</p>
 <p>Let’s give a specific person permission to edit this file and a customized message, using the <code>emailAddress</code> and <code>emailMessage</code> parameters.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -165,20 +165,24 @@
 <p>Let’s say we also want “anyone with a link” to be able to read the file.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
-  <span class="fu"><a href="../../reference/drive_share.html">drive_share</a></span><span class="op">(</span>role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span>
+  <span class="fu"><a href="../../reference/drive_share.html">drive_share</a></span><span class="op">(</span>role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span></code></pre></div>
+<p>This comes up often enough that we’ve made a convenience wrapper:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/drive_share.html">drive_share_anyone</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Permissions updated:</span>
 <span class="co">#&gt; • role = reader</span>
 <span class="co">#&gt; • type = anyone</span>
 <span class="co">#&gt; For file:</span>
-<span class="co">#&gt; • chicken-perm-article.txt &lt;id: 1KSXD3TaITPkCN9p07fiYTA0NUALEzvlb&gt;</span>
+<span class="co">#&gt; • chicken-perm-article.txt &lt;id: 1Pu6lMCVrqn-DcL7sSlgY6RdS89EJg7mn&gt;</span>
 <span class="va">file</span>
 <span class="co">#&gt; # A tibble: 1 x 5</span>
 <span class="co">#&gt;   name            shared id                   drive_resource  permissions_resou…</span>
 <span class="co">#&gt; * &lt;chr&gt;           &lt;lgl&gt;  &lt;chr&gt;                &lt;list&gt;          &lt;list&gt;            </span>
-<span class="co">#&gt; 1 chicken-perm-a… TRUE   1KSXD3TaITPkCN9p07f… &lt;named list [3… &lt;named list [2]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 chicken-perm-a… TRUE   1Pu6lMCVrqn-DcL7sSl… &lt;named list [3… &lt;named list [2]&gt;</span></code></pre></div>
 <p>We see that the file is now <code>shared = TRUE</code>.</p>
 <p>Now that we’ve made a few updates to our permissions, the <code>permissions_resource</code> list-column has become more interesting. Here’s how to pull important information out of this and put into a tibble with one row per permission. (<em>Permission handling will become more formalized in future versions of googledrive. See <a href="https://github.com/tidyverse/googledrive/issues/180">the issue</a></em>). We use other packages in the tidyverse now for this data wrangling.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 
 <span class="va">perm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="va">file</span>, <span class="st">"permissions_resource"</span>, <span class="fl">1</span>, <span class="st">"permissions"</span><span class="op">)</span>
@@ -192,7 +196,7 @@
 <span class="op">)</span>
 <span class="va">permissions</span></code></pre></div>
 <p>We’ve suppressed execution of the above chunk but here’s some static, indicative output:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#&gt; # A tibble: 3 x 5</span>
 <span class="co">#&gt;   id           name            type   role  email                      </span>
 <span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                      </span>
@@ -202,10 +206,10 @@
 <div id="clean-up" class="section level2">
 <h2 class="hasAnchor">
 <a href="#clean-up" class="anchor"></a>Clean up</h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span>
 <span class="co">#&gt; File deleted:</span>
-<span class="co">#&gt; • chicken-perm-article.txt &lt;id: 1KSXD3TaITPkCN9p07fiYTA0NUALEzvlb&gt;</span></code></pre></div>
+<span class="co">#&gt; • chicken-perm-article.txt &lt;id: 1Pu6lMCVrqn-DcL7sSlgY6RdS89EJg7mn&gt;</span></code></pre></div>
 </div>
   </div>
 
