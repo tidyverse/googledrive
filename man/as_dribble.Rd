@@ -44,19 +44,19 @@ error and must make your intent clear.
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # create some files for us to re-discover by name or filepath
-abc <- drive_create("abc", type = "folder")
-def <- drive_create("def", path = abc)
+alfa <- drive_create("alfa", type = "folder")
+bravo <- drive_create("bravo", path = alfa)
 
 # as_dribble() can work with file names or paths
-as_dribble("abc")
-as_dribble("def")
-as_dribble("abc/def")
-as_dribble(c("abc", "abc/def"))
+as_dribble("alfa")
+as_dribble("bravo")
+as_dribble("alfa/bravo")
+as_dribble(c("alfa", "alfa/bravo"))
 
 # specify the file id (substitute a real file id of your own!)
 # as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
 
 # cleanup
-drive_find("abc") \%>\% drive_rm()
+drive_find("alfa") \%>\% drive_rm()
 \dontshow{\}) # examplesIf}
 }
