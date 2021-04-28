@@ -38,6 +38,7 @@ Suggests:
     covr,
     curl,
     dplyr,
+    downlit,
     knitr,
     mockr,
     rmarkdown,
@@ -48,7 +49,8 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
-    r-lib/cli
+    r-lib/cli,
+    r-lib/downlit
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
