@@ -1,3 +1,6 @@
+# opt-in to rlang using cli for message formatting
+.rlang_use_cli_format <- TRUE
+
 sq <- function(x) glue::single_quote(x)
 bt <- function(x) glue::backtick(x)
 

@@ -29,7 +29,7 @@ Imports:
     lifecycle,
     magrittr,
     purrr (>= 0.2.3),
-    rlang (>= 0.3.1),
+    rlang (>= 0.4.10.9002),
     tibble (>= 2.0.0),
     utils,
     uuid,
@@ -48,9 +48,10 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
-Remotes: 
+Remotes:  
     r-lib/cli,
-    r-lib/downlit
+    r-lib/downlit,
+    r-lib/rlang
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
