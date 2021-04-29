@@ -37,7 +37,7 @@ test_that("drive_mv() can rename file", {
     scrub_filepath(name_2) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(drive_mv_message)
+    write_utf8(drive_mv_message)
   )
 
   expect_s3_class(file, "dribble")
@@ -63,7 +63,7 @@ test_that("drive_mv() can move a file into a folder given as path", {
     scrub_filepath(mv_name) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(drive_mv_message)
+    write_utf8(drive_mv_message)
   )
 
   expect_s3_class(mv_file, "dribble")
@@ -91,7 +91,7 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
     scrub_filepath(mv_name) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(drive_mv_message)
+    write_utf8(drive_mv_message)
   )
 
   expect_s3_class(mv_file, "dribble")
@@ -119,7 +119,7 @@ test_that("drive_mv() can rename and move, using `path` and `name`", {
     scrub_filepath(name_2) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(drive_mv_message)
+    write_utf8(drive_mv_message)
   )
 
   expect_s3_class(mv_file, "dribble")
@@ -149,7 +149,7 @@ test_that("drive_mv() can rename and move, using `path` only", {
     scrub_filepath(name_2) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(drive_mv_message)
+    write_utf8(drive_mv_message)
   )
 
   expect_s3_class(mv_file, "dribble")

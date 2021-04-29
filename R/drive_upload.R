@@ -98,7 +98,9 @@ drive_upload <- function(media,
                          overwrite = NA,
                          verbose = deprecated()) {
   warn_for_verbose(verbose)
-  if (!file.exists(media)) {
+  if (file.exists(media)) {
+    media <- enc2utf8(media)
+  } else {
     stop_glue("\nFile does not exist:\n  * {media}")
   }
 
@@ -129,7 +131,7 @@ drive_upload <- function(media,
   meta_file <- withr::local_file(
     tempfile("drive-upload-meta", fileext = ".json")
   )
-  writeLines(jsonlite::toJSON(params), meta_file)
+  write_utf8(jsonlite::toJSON(params), meta_file)
   ## media uploads have unique body situations, so customizing here.
   request$body <- list(
     metadata = httr::upload_file(

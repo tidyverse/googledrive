@@ -119,7 +119,7 @@ drive_update_multipart <- function(file, media, meta) {
   meta_file <- withr::local_file(
     tempfile("drive-update-meta", fileext = ".json")
   )
-  writeLines(jsonlite::toJSON(meta), meta_file)
+  write_utf8(jsonlite::toJSON(meta), meta_file)
   ## media uploads have unique body situations, so customizing here.
   request$body <- list(
     metadata = httr::upload_file(

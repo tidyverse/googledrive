@@ -29,7 +29,7 @@ test_that("drive_put() works", {
   })
   defer_drive_rm(drive_find(me_("foo")))
 
-  writeLines(c("beginning", "middle"), local_file)
+  write_utf8(c("beginning", "middle"), local_file)
 
   local_drive_loud_and_wide()
   first_put <- capture.output(
@@ -41,7 +41,7 @@ test_that("drive_put() works", {
     scrub_filepath(put_file) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(first_put)
+    write_utf8(first_put)
   )
   expect_s3_class(original, "dribble")
 
@@ -63,7 +63,7 @@ test_that("drive_put() works", {
     scrub_filepath(put_file) %>%
     scrub_file_id()
   expect_snapshot(
-    writeLines(second_put)
+    write_utf8(second_put)
   )
   expect_identical(original$id, second$id)
 

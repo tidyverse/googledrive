@@ -1,7 +1,7 @@
 # drive_put() works
 
     Code
-      writeLines(first_put)
+      write_utf8(first_put)
     Output
       i No pre-existing Drive file at this path. Calling `drive_upload()`.
       Local file:
@@ -14,7 +14,7 @@
 ---
 
     Code
-      writeLines(second_put)
+      write_utf8(second_put)
     Output
       i A Drive file already exists at this path. Calling `drive_update()`.
       File updated:

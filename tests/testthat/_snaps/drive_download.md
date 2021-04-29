@@ -9,7 +9,7 @@
 # drive_download() downloads a file and adds local_path column
 
     Code
-      writeLines(drive_download_message)
+      write_utf8(drive_download_message)
     Output
       File downloaded:
       * {file_to_download} <id: {FILE_ID}>
@@ -26,7 +26,7 @@
 # drive_download() converts with explicit `type`
 
     Code
-      writeLines(drive_download_message)
+      write_utf8(drive_download_message)
     Output
       File downloaded:
       * {file_to_download} <id: {FILE_ID}>
@@ -36,7 +36,7 @@
 # drive_download() converts with type implicit in `path`
 
     Code
-      writeLines(drive_download_message)
+      write_utf8(drive_download_message)
     Output
       File downloaded:
       * {file_to_download} <id: {FILE_ID}>
@@ -46,7 +46,7 @@
 # drive_download() converts using default MIME type, if necessary
 
     Code
-      writeLines(drive_download_message)
+      write_utf8(drive_download_message)
     Output
       File downloaded:
       * {file_to_download} <id: {FILE_ID}>

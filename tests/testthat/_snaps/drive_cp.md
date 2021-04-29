@@ -1,7 +1,7 @@
 # drive_cp() can copy file in place
 
     Code
-      writeLines(drive_cp_message)
+      write_utf8(drive_cp_message)
     Output
       Original file:
       * i-am-a-file-TEST-drive-cp <id: {FILE_ID}>
@@ -11,7 +11,7 @@
 # drive_cp() can copy a file into a different folder
 
     Code
-      writeLines(drive_cp_message)
+      write_utf8(drive_cp_message)
     Output
       Original file:
       * i-am-a-file-TEST-drive-cp <id: {FILE_ID}>
@@ -36,7 +36,7 @@
 # drive_cp() takes name, assumes path is folder if both are specified
 
     Code
-      writeLines(drive_cp_message)
+      write_utf8(drive_cp_message)
     Output
       Original file:
       * i-am-a-file-TEST-drive-cp <id: {FILE_ID}>

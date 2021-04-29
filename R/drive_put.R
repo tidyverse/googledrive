@@ -55,7 +55,9 @@ drive_put <- function(media,
                       type = NULL,
                       verbose = deprecated()) {
   warn_for_verbose(verbose)
-  if (!file.exists(media)) {
+  if (file.exists(media)) {
+    media <- enc2utf8(media)
+  } else {
     stop_glue("\nFile does not exist:\n  * {media}")
   }
 
