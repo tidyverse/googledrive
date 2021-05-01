@@ -1,47 +1,92 @@
-# opt-in to rlang using cli for message formatting
+# use cli, possibly via rlang, for all messages and errors ----
 .rlang_use_cli_format <- TRUE
 
-sq <- function(x) glue::single_quote(x)
-bt <- function(x) glue::backtick(x)
-
-message <- function(...) {
-  abort("Internal error: use googledrive's UI functions, not {bt('message()')}")
-}
-
-warn_for_verbose <- function(verbose = TRUE, env = parent.frame()) {
-  # this is about whether `verbose` was present in the **user's** call to the
-  # calling function
-  # don't worry about the `verbose = TRUE` default here
-  if (!lifecycle::is_present(verbose) || isTRUE(verbose)) {
+drive_bullets <- function(text, .envir = parent.frame()) {
+  quiet <- drive_quiet() %|% is_testing()
+  if (quiet) {
     return(invisible())
   }
-
-  called_from <- sys.parent(1)
-  if (called_from == 0) {
-    # called from global env, presumably in a test or during development
-    caller <- "some_googledrive_function"
-  } else {
-    called_as <- sys.call(called_from)
-    if (is.call(called_as) && is.symbol(called_as[[1]])) {
-      caller <- as.character(called_as[[1]])
-    } else {
-      caller <- "some_googledrive_function"
-    }
-  }
-  lifecycle::deprecate_warn(
-    when = "2.0.0",
-    what = glue("{caller}(verbose)"),
-    details = glue("
-      Set `options(googledrive_quiet = TRUE)` to suppress all \\
-      googledrive messages.
-      For finer control, use `local_drive_quiet()` or `with_drive_quiet()`.
-      googledrive's `verbose` argument will be removed in the future."),
-    id = "googledrive_verbose"
-  )
-  local_drive_quiet(env = env)
-  invisible()
+  cli::cli_div(theme = list(
+    span.field = list(transform = single_quote_if_no_color),
+    # this is so cli_format.dribble controls its own coloring (vs. "blue")
+    span.val = list(color = NULL)
+  ))
+  cli::cli_bullets(text = text, .envir = .envir)
+  cli::cli_end()
 }
 
+single_quote_if_no_color <- function(x) quote_if_no_color(x, "'")
+double_quote_if_no_color <- function(x) quote_if_no_color(x, '"')
+
+quote_if_no_color <- function(x, quote = "'") {
+  # TODO: if a better way appears in cli, use it
+  # @gabor says: "if you want to have before and after for the no-color case
+  # only, we can have a selector for that, such as:
+  # span.field::no-color
+  # (but, at the time I write this, cli does not support this yet)
+  if (cli::num_ansi_colors() > 1) {
+    x
+  } else {
+    paste0(quote, x, quote)
+  }
+}
+
+#' @export
+#' @importFrom cli cli_format
+cli_format.dribble <- function(x, ...) {
+  if (nrow(x) == 0) {
+    return(character())
+  }
+  # TO THINK: it still feels weird to me that I could be returning a
+  # vector with length > 1, but cli's normal collapsing will butcher it
+  # I absolutely intend this method to only be used within bulletize_dribble()
+  id_string <- glue("<id:\u00a0{x$id}>") # \u00a0 is a nonbreaking space
+  glue("{x$name} {cli::col_grey(id_string)}")
+}
+
+bulletize_dribble <- function(x, bullet = "*", n_show = 5, n_fudge = 2) {
+  confirm_dribble(x)
+  bulletize(
+    cli_format(x),
+    bullet = bullet, n_show = n_show, n_fudge = n_fudge
+  )
+}
+
+bulletize <- function(x, bullet = "*", n_show = 5, n_fudge = 2) {
+  n <- length(x)
+  n_show_actual <- compute_n_show(n, n_show, n_fudge)
+  out <- utils::head(x, n_show_actual)
+  out <- set_names(out, bullet)
+  n_not_shown <- n - n_show_actual
+  if (n_not_shown > 0) {
+    out <- c(out, " " = glue("{cli::symbol$ellipsis} and {n_not_shown} more"))
+  }
+  out
+}
+
+# I don't want to do "... and x more" if x is silly, i.e. 1 or 2
+compute_n_show <- function(n, n_show_nominal = 5, n_fudge = 2) {
+  if (n > n_show_nominal && n - n_show_nominal > n_fudge) {
+    n_show_nominal
+  } else {
+    n
+  }
+}
+
+
+
+# useful to me during development, so I can see how my messages look w/o color
+local_no_color <- function(.envir = parent.frame()) {
+  withr::local_envvar(c("NO_COLOR" = 1), .local_envir = .envir)
+}
+
+with_no_color <- function(code) {
+  withr::with_envvar(c("NO_COLOR" = 1), code)
+}
+
+
+
+# making googldrive quiet vs. loud ----
 drive_quiet <- function() {
   getOption("googledrive_quiet", default = NA)
 }
@@ -136,72 +181,49 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
-drive_bullets <- function(text, .envir = parent.frame()) {
-  quiet <- drive_quiet() %|% is_testing()
-  if (quiet) {
+# dealing with how we've communicated in the past ---
+
+sq <- function(x) glue::single_quote(x)
+bt <- function(x) glue::backtick(x)
+
+message <- function(...) {
+  abort("Internal error: use googledrive's UI functions, not {bt('message()')}")
+}
+
+warn_for_verbose <- function(verbose = TRUE, env = parent.frame()) {
+  # this is about whether `verbose` was present in the **user's** call to the
+  # calling function
+  # don't worry about the `verbose = TRUE` default here
+  if (!lifecycle::is_present(verbose) || isTRUE(verbose)) {
     return(invisible())
   }
-  cli::cli_div(theme = list(
-    span.field = list(transform = single_quote_if_no_color),
-    # this is so cli_format.dribble controls its own coloring (vs. "blue")
-    span.val = list(color = NULL)
-  ))
-  cli::cli_bullets(text = text, .envir = .envir)
-  cli::cli_end()
-}
 
-quote_if_no_color <- function(x, quote = "'") {
-  # TODO: if a better way appears in cli, use it
-  # @gabor says: "if you want to have before and after for the no-color case
-  # only, we can have a selector for that, such as:
-  # span.field::no-color
-  # (but, at the time I write this, cli does not support this yet)
-  if (cli::num_ansi_colors() > 1) {
-    x
+  called_from <- sys.parent(1)
+  if (called_from == 0) {
+    # called from global env, presumably in a test or during development
+    caller <- "some_googledrive_function"
   } else {
-    paste0(quote, x, quote)
+    called_as <- sys.call(called_from)
+    if (is.call(called_as) && is.symbol(called_as[[1]])) {
+      caller <- as.character(called_as[[1]])
+    } else {
+      caller <- "some_googledrive_function"
+    }
   }
+  lifecycle::deprecate_warn(
+    when = "2.0.0",
+    what = glue("{caller}(verbose)"),
+    details = glue("
+      Set `options(googledrive_quiet = TRUE)` to suppress all \\
+      googledrive messages.
+      For finer control, use `local_drive_quiet()` or `with_drive_quiet()`.
+      googledrive's `verbose` argument will be removed in the future."),
+    id = "googledrive_verbose"
+  )
+  local_drive_quiet(env = env)
+  invisible()
 }
 
-single_quote_if_no_color <- function(x) quote_if_no_color(x, "'")
-double_quote_if_no_color <- function(x) quote_if_no_color(x, '"')
-
-#' @export
-#' @importFrom cli cli_format
-cli_format.dribble <- function(x, ...) {
-  confirm_single_file(x)
-  # \u00a0 is a nonbreaking space
-  id_string <- glue("<id:\u00a0{x$id}>")
-  glue("{x$name} {cli::col_grey(id_string)}")
-}
-
-cli_format_dribble <- function(x, bullet = "*") {
-  confirm_dribble(x)
-
-  n <- nrow(x)
-  n_show_nominal <- 5
-  if (n > n_show_nominal && n - n_show_nominal > 2) {
-    n_show <- n_show_nominal
-  } else {
-    n_show <- n
-  }
-
-  out <- purrr::map_chr(seq_len(n_show), ~ cli_format(x[.x, ]))
-  out <- set_names(out, rep_along(out, bullet))
-  if (n > n_show) {
-    out <- c(out, " " = glue("{cli::symbol$ellipsis} and {n - n_show} more"))
-  }
-  out
-}
-
-# useful to me during development, so I can see how my messages look w/o color
-local_no_color <- function(.envir = parent.frame()) {
-  withr::local_envvar(c("NO_COLOR" = 1), .local_envir = .envir)
-}
-
-with_no_color <- function(code) {
-  withr::with_envvar(c("NO_COLOR" = 1), code)
-}
 
 # old UI functions ----
 stop_glue <- function(..., .sep = "", .envir = parent.frame(),
