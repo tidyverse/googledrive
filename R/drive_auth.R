@@ -64,14 +64,15 @@ drive_auth <- function(email = gargle::gargle_oauth_email(),
     token = token
   )
   if (!inherits(cred, "Token2.0")) {
-    stop(
-      "Can't get Google credentials.\n",
-      "Are you running googledrive in a non-interactive session? Consider:\n",
-      "  * `drive_deauth()` to prevent the attempt to get credentials.\n",
-      "  * Call `drive_auth()` directly with all necessary specifics.\n",
-      "  * Read more in: https://gargle.r-lib.org/articles/non-interactive-auth.html",
-      call. = FALSE
-    )
+    abort(c(
+      "Can't get Google credentials",
+      "i" = "Are you running googledrive in a non-interactive session? \\
+             Consider:",
+      "*" = "{.fun drive_deauth} to prevent the attempt to get credentials",
+      "*" = "Call {.fun drive_auth} directly with all necessary specifics",
+      "i" = "See gargle's \"Non-interactive auth\" vignette for more details:",
+      "i" = "{.url https://gargle.r-lib.org/articles/non-interactive-auth.html}"
+    ))
   }
   .auth$set_cred(cred)
   .auth$set_auth_active(TRUE)
@@ -178,7 +179,9 @@ drive_has_token <- function() {
 #' drive_auth_configure(app = original_app, api_key = original_api_key)
 drive_auth_configure <- function(app, path, api_key) {
   if (!missing(app) && !missing(path)) {
-    stop("Must supply exactly one of `app` and `path`", call. = FALSE)
+    abort(
+      "Must supply exactly one of {.arg app} or {.arg path}, not both"
+    )
   }
   stopifnot(missing(api_key) || is.null(api_key) || is_string(api_key))
 

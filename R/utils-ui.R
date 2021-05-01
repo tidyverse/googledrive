@@ -6,6 +6,7 @@ drive_bullets <- function(text, .envir = parent.frame()) {
   if (quiet) {
     return(invisible())
   }
+  # TODO: these tweaks currently don't apply to abort() calls, but should
   cli::cli_div(theme = list(
     span.field = list(transform = single_quote_if_no_color),
     # this is so cli_format.dribble controls its own coloring (vs. "blue")
@@ -223,23 +224,3 @@ warn_for_verbose <- function(verbose = TRUE, env = parent.frame()) {
   local_drive_quiet(env = env)
   invisible()
 }
-
-
-# old UI functions ----
-stop_glue <- function(..., .sep = "", .envir = parent.frame(),
-                      call. = FALSE, .domain = NULL) {
-  stop(
-    glue(..., .sep = .sep, .envir = .envir),
-    call. = call., domain = .domain
-  )
-}
-
-stop_glue_data <- function(..., .sep = "", .envir = parent.frame(),
-                           call. = FALSE, .domain = NULL) {
-  stop(
-    glue_data(..., .sep = .sep, .envir = .envir),
-    call. = call., domain = .domain
-  )
-}
-
-stop_collapse <- function(x) stop(glue_collapse(x, sep = "\n"), call. = FALSE)

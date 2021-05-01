@@ -177,11 +177,15 @@ rationalize_corpus <- function(corpus) {
   validate_corpora(corpus[["corpora"]])
 
   if (corpus[["corpora"]] == "drive" && is.null(corpus[["driveId"]])) {
-    stop_glue("When `corpora = \"drive\"`, `shared_drive` cannot be NULL.")
+    abort('
+      When {.code corpus = "drive"}, you must also specify \\
+      the {.arg shared_drive}.')
   }
 
   if (corpus[["corpora"]] != "drive" && !is.null(corpus[["driveId"]])) {
-    stop_glue("When `corpora != \"drive\"`, don't specify a shared drive.")
+    abort('
+      When {.code corpus != "drive"}, you must not specify \\
+      a {.arg shared_drive}.')
   }
 
   corpus[["includeItemsFromAllDrives"]] <- TRUE
@@ -193,11 +197,16 @@ valid_corpora <- c("user", "drive", "allDrives", "domain")
 
 validate_corpora <- function(corpora) {
   if (!corpora %in% valid_corpora) {
-    stop_collapse(c(
-      "Invalid value for `corpora`:",
-      glue("  * {corpora}"),
-      "These are the only valid values:",
-      glue("  * {valid_corpora}")
+    # yes, I intentionally use `corpus` in this message, even
+    # though the actual API parameter is `corpora`
+    # googledrive's user-facing functions have `corpus` in their signature and
+    # the rationale is explained elsewhere in this file
+    abort(c(
+      "Invalid value for {.arg corpus}:",
+      x = "{.field {corpora}}",
+      "These are the only acceptable values:",
+      # TODO: really, these should be styled as `.field` also
+      bulletize(valid_corpora)
     ))
   }
   invisible(corpora)
@@ -235,10 +244,9 @@ as_shared_drive <- function(x, ...) UseMethod("as_shared_drive")
 
 #' @export
 as_shared_drive.default <- function(x, ...) {
-  stop_glue_data(
-    list(x = glue_collapse(class(x), sep = "/")),
-    "Don't know how to coerce object of class <{x}> into a dribble of shared drive(s)"
-  )
+  abort("
+    Don't know how to coerce an object of class {.cls {class(x)}} into \\
+    a shared drive {.cls dribble}.")
 }
 
 #' @export
@@ -266,7 +274,8 @@ as_shared_drive.list <- function(x, ...) {
 validate_shared_drive_dribble <- function(x) {
   stopifnot(inherits(x, "dribble"))
   if (!all(is_shared_drive(x))) {
-    stop_glue("All rows of shared drive dribble must contain a shared drive")
+    abort("
+      All rows of shared drive {.cls dribble} must contain a shared drive.")
   }
   x
 }

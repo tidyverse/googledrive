@@ -59,12 +59,12 @@ test_that("drive_upload() accepts body metadata via ...", {
 test_that("drive_upload() does not mangle name with multi-byte characters", {
   skip_if_no_token()
   skip_if_offline()
-  defer_drive_rm("multibyte-chars")
 
   # KATAKANA LETTERS MA RU TI
   tricky_bit <- "\u30DE\u30EB\u30C1"
-
   filename_1 <- me_(paste0("multibyte-chars-1-", tricky_bit))
+  defer_drive_rm(filename_1)
+
   file_1 <- drive_upload(
     drive_example("chicken.csv"),
     path = filename_1,

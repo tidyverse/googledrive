@@ -51,7 +51,10 @@ request_generate <- function(endpoint = character(),
                              token = drive_token()) {
   ept <- drive_endpoint(endpoint)
   if (is.null(ept)) {
-    stop_glue("\nEndpoint not recognized:\n  * {endpoint}")
+    abort(c(
+      "Endpoint not recognized:",
+      x = "{.field {endpoint}}"
+    ))
   }
 
   ## modifications specific to googledrive package

@@ -135,7 +135,7 @@ drive_find <- function(pattern = NULL,
                        team_drive = deprecated()) {
   warn_for_verbose(verbose)
   if (!is.null(pattern) && !(is_string(pattern))) {
-    stop_glue("`pattern` must be a character string.")
+    abort("{.arg pattern} must be a character string.")
   }
   stopifnot(is_toggle(trashed))
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
@@ -228,10 +228,7 @@ handle_shared_drives <- function(shared_drive, corpus) {
   if (!is.null(shared_drive)) {
     shared_drive <- as_shared_drive(shared_drive)
     if (no_file(shared_drive)) {
-      stop(
-        "Can't find the requested `shared_drive`.",
-        call. = FALSE
-      )
+      abort("Can't find the requested {.arg shared_drive}.")
     }
     shared_drive <- as_id(shared_drive)
   }

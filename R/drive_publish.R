@@ -54,14 +54,22 @@ drive_change_publish <- function(file,
 
   type_ok <- is_native(file)
   if (!all(type_ok)) {
-    file <- file[utils::head(which(!type_ok), 10), ]
+    file <- file[!type_ok, ]
     file <- promote(file, "mimeType")
-    bad_mime_types <- glue_data(file, "  * {name}: {mimeType}")
-    stop_collapse(c(
+    # cribbing from cli_format.dribble() / bulletize_dribble()
+    # I don't (yet) think it's worth making dribble formatting customizable,
+    # i.e. putting a template in the signature
+    b <- glue(
+      "<<file$name>> {.field <<file$mimeType>>}",
+      .open = "<<", .close = ">>"
+    )
+    abort(c(
       "Only native Google files can be published.",
-      "Files that do not qualify (or, at least, the first 10):",
-      bad_mime_types,
-      "Check out `drive_share()` to change sharing permissions."
+      "{.arg file} includes {?a/} file{?s} \\
+       with non-native MIME type{cli::qty(b)}",
+      bulletize(b),
+      "i" = "You can use {.fun drive_share} to change a file's sharing \\
+             permissions."
     ))
   }
 
@@ -82,7 +90,7 @@ drive_change_publish <- function(file,
   drive_bullets(c(
     cli::pluralize(
       "{cli::qty(n)}File{?s} now {if (publish) '' else 'NOT '}published:"),
-    cli_format_dribble(file)
+    bulletize_dribble(file)
   ))
   invisible(drive_reveal(file, "published"))
 }

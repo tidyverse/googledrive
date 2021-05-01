@@ -38,8 +38,10 @@ shared_drive_update <- function(shared_drive, ...) {
     return(invisible(dribble()))
   }
   if (!single_file(shared_drive)) {
-    drives <- glue_data(shared_drive, "  * {name}: {id}")
-    stop_collapse(c("Can't update multiple shared drives at once:", drives))
+    abort(c(
+      "Can't update multiple shared drives at once:",
+      bulletize_dribble(shared_drive)
+    ))
   }
 
   meta <- toCamel(list2(...))
@@ -61,7 +63,7 @@ shared_drive_update <- function(shared_drive, ...) {
   response <- request_make(request)
   out <- as_dribble(list(gargle::response_process(response)))
 
-  drive_bullets(c("Shared drive updated:", cli_format_dribble(out)))
+  drive_bullets(c("Shared drive updated:", bulletize_dribble(out)))
 
   invisible(out)
 }

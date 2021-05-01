@@ -2,6 +2,6 @@
 
     Code
       drive_ls(nm_("this-should-not-exist"))
-    Error <simpleError>
-      'path' does not identify at least one Drive file.
+    Error <rlang_error>
+      `path` does not identify at least one Drive file.
 

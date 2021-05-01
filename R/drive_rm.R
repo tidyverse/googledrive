@@ -47,6 +47,7 @@ drive_rm <- function(..., verbose = deprecated()) {
     drive_bullets(c(
       "!" = "No such file to delete."
     ))
+    return(invisible(file))
   }
 
   out <- purrr::map_lgl(file$id, delete_one)
@@ -55,7 +56,7 @@ drive_rm <- function(..., verbose = deprecated()) {
     successes <- file[out, ]
     drive_bullets(c(
       "File{?s} deleted:{cli::qty(nrow(successes))}",
-      cli_format_dribble(successes)
+      bulletize_dribble(successes)
     ))
   }
   # I'm not sure this ever comes up IRL?
@@ -64,7 +65,7 @@ drive_rm <- function(..., verbose = deprecated()) {
     failures <- file[!out, ]
     drive_bullets(c(
       "File{?s} NOT deleted:{cli::qty(nrow(failures))}",
-      cli_format_dribble(failures)
+      bulletize_dribble(failures)
     ))
   }
   invisible(out)

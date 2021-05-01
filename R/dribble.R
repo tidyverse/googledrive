@@ -38,30 +38,32 @@ validate_dribble <- function(x) {
 
   if (!has_dribble_cols(x)) {
     missing_cols <- setdiff(dribble_cols, colnames(x))
-    stop_collapse(
-      c(
-        "Invalid dribble. These required column names are missing:",
-        missing_cols
-      )
-    )
+    abort(c(
+      "Invalid {.cls dribble}. \\
+       {cli::qty(length(missing_cols))}{?This/These} required column{?s} \\
+       {?is/are} missing:",
+      set_names(missing_cols, "*")
+    ))
   }
 
   if (!has_dribble_coltypes(x)) {
     mistyped_cols <- dribble_cols[!dribble_coltypes_ok(x)]
-    stop_collapse(
-      c(
-        "Invalid dribble. These columns have the wrong type:",
-        mistyped_cols
-      )
-    )
+    abort(c(
+      "Invalid {.cls dribble}. \\
+       {cli::qty(length(mistyped_cols))}{?This/These} column{?s} {?has/have} \\
+       the wrong type:",
+      set_names(mistyped_cols, "*")
+    ))
   }
 
   if (!has_drive_resource(x)) {
-    stop_glue(
-      "Invalid dribble. Can't confirm `kind = \"drive#file\"` or ",
-      "`kind = \"drive#drive\"` for all elements of the nominal ",
-      "`drive_resource` column"
-    )
+    # \u00a0 is a nonbreaking space
+    abort(c(
+      'Invalid {.cls dribble}. Can\'t confirm \\
+       {.code kind\u00a0=\u00a0"drive#file"} or \\
+       {.code kind\u00a0=\u00a0"drive#drive"} \\
+       for all elements of the {.code drive_resource} column.'
+    ))
   }
   x
 }
@@ -130,20 +132,21 @@ as_parent <- function(d) {
   in_var <- deparse(substitute(d))
   d <- as_dribble(d)
   # wording chosen to work for folder and shared drive
+  invalid_parent <- "Parent specified via {.arg {in_var}} is invalid:"
   if (no_file(d)) {
-    stop_glue("Parent specified via {bt(in_var)} does not exist.")
+    abort(c(invalid_parent, x = "Does not exist."))
   }
   if (!single_file(d)) {
-    stop_glue(
-      "Parent specified via {bt(in_var)} doesn't uniquely ",
-      "identify exactly one folder or shared drive."
-    )
+    abort(c(
+      invalid_parent,
+      x = "Doesn't uniquely identify exactly one folder or shared drive."
+    ))
   }
   if (!is_parental(d)) {
-    stop_glue(
-      "Requested parent {bt(in_var)} is invalid: neither a folder ",
-      "nor a shared drive."
-    )
+    abort(c(
+      invalid_parent,
+      x = "Is neither a folder nor a shared drive."
+    ))
   }
   d
 }
@@ -206,7 +209,7 @@ some_files <- function(d) {
 #' @rdname dribble-checks
 confirm_dribble <- function(d) {
   if (!is_dribble(d)) {
-    stop_glue("Input is not a dribble.")
+    abort("Input is not a {.cls dribble}.")
   }
   d
 }
@@ -216,10 +219,10 @@ confirm_dribble <- function(d) {
 confirm_single_file <- function(d) {
   in_var <- deparse(substitute(d))
   if (no_file(d)) {
-    stop_glue("{sq(in_var)} does not identify at least one Drive file.")
+    abort("{.arg {in_var}} does not identify at least one Drive file.")
   }
   if (!single_file(d)) {
-    stop_glue("{sq(in_var)} identifies more than one Drive file.")
+    abort("{.arg {in_var}} identifies more than one Drive file.")
   }
   d
 }
@@ -229,7 +232,7 @@ confirm_single_file <- function(d) {
 confirm_some_files <- function(d) {
   in_var <- deparse(substitute(d))
   if (no_file(d)) {
-    stop_glue("{sq(in_var)} does not identify at least one Drive file.")
+    abort("{.arg {in_var}} does not identify at least one Drive file.")
   }
   d
 }

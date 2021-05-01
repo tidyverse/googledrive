@@ -82,7 +82,7 @@ drive_cp <- function(file,
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_parental(file)) {
-    stop_glue("The Drive API does not copy folders or shared drives.")
+    abort("The Drive API does not copy folders or shared drives.")
   }
 
   tmp <- rationalize_path_name(path, name)
@@ -118,9 +118,9 @@ drive_cp <- function(file,
 
   drive_bullets(c(
     "Original file:",
-    cli_format_dribble(file),
+    bulletize_dribble(file),
     "Copied to file:",
-    cli_format_dribble(tmp)
+    bulletize_dribble(tmp)
   ))
 
   invisible(out)

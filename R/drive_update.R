@@ -43,8 +43,11 @@ drive_update <- function(file,
                          ...,
                          verbose = deprecated()) {
   warn_for_verbose(verbose)
-  if (!is.null(media) && !file.exists(media)) {
-    stop_glue("\nLocal file does not exist:\n  * {media}")
+  if ((!is.null(media)) && (!file.exists(media))) {
+    abort(c(
+      "No file exists at the local {.arg media} path:",
+      x = "{.path {media}}"
+    ))
   }
 
   file <- as_dribble(file)
@@ -67,11 +70,12 @@ drive_update <- function(file,
     if (length(meta) == 0) {
       out <- drive_update_media(file, media)
     } else {
+      media <- enc2utf8(media)
       out <- drive_update_multipart(file, media, meta)
     }
   }
 
-  drive_bullets(c("File updated:", cli_format_dribble(out)))
+  drive_bullets(c("File updated:", bulletize_dribble(out)))
 
   invisible(out)
 }

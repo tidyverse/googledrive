@@ -7,7 +7,7 @@ test_that("bulletize() works", {
   expect_snapshot(cli::cli_bullets(bulletize(letters[1:8])))
   expect_snapshot(cli::cli_bullets(bulletize(letters[1:6], n_fudge = 0)))
   expect_snapshot(cli::cli_bullets(bulletize(letters[1:8], n_fudge = 3)))
-k})
+})
 
 test_that("warn_for_verbose() does nothing for `verbose = TRUE`", {
   expect_warning(warn_for_verbose(TRUE), NA)

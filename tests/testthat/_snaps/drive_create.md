@@ -16,15 +16,17 @@
 
     Code
       drive_create("a", path = "qweruiop")
-    Error <simpleError>
-      Parent specified via `path` does not exist.
+    Error <rlang_error>
+      Parent specified via `path` is invalid:
+      x Does not exist.
 
 # drive_create() errors if parent exists but is not a folder
 
     Code
       drive_create("a", path = x)
-    Error <simpleError>
-      Requested parent `path` is invalid: neither a folder nor a shared drive.
+    Error <rlang_error>
+      Parent specified via `path` is invalid:
+      x Is neither a folder nor a shared drive.
 
 # drive_create() catches invalid parameters
 

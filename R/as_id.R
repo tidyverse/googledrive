@@ -20,10 +20,9 @@ as_id <- function(x, ...) UseMethod("as_id")
 
 #' @export
 as_id.default <- function(x, ...) {
-  stop_glue_data(
-    list(x = glue_collapse(class(x), sep = "/")),
-    "Don't know how to coerce object of class <{x}> into a drive_id"
-  )
+  abort("
+    Don't know how to coerce an object of class {.cls {class(x)}} into \\
+    a {.cls drive_id}.")
 }
 
 #' @export

@@ -41,7 +41,7 @@ shared_drive_rm <- function(drive = NULL) {
     successes <- shared_drive[out, ]
     drive_bullets(c(
       "Shared drive{?s} deleted:{cli::qty(nrow(successes))}",
-      cli_format_dribble(successes)
+      bulletize_dribble(successes)
     ))
   }
   # I'm not sure this ever comes up IRL?
@@ -50,7 +50,7 @@ shared_drive_rm <- function(drive = NULL) {
     failures <- shared_drive[!out, ]
     drive_bullets(c(
       "Shared drive{?s} NOT deleted:{cli::qty(nrow(failures))}",
-      cli_format_dribble(failures)
+      bulletize_dribble(failures)
     ))
   }
   invisible(out)

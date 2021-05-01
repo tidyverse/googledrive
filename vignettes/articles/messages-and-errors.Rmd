@@ -53,7 +53,8 @@ The googledrive message helpers:
 How we use the inline classes:
 
 -   `.field` for the value of an argument, e.g. a MIME type
--   `.arg`, `.fun`, `.path` for their usual purpose
+-   `.code` for a column in a data frame
+-   `.arg`, `.fun`, `.path`, `.cls` for their usual purpose
 
 ```{r}
 drive_bullets(c(

@@ -58,7 +58,10 @@ drive_put <- function(media,
   if (file.exists(media)) {
     media <- enc2utf8(media)
   } else {
-    stop_glue("\nFile does not exist:\n  * {media}")
+    abort(c(
+      "No file exists at the local {.arg media} path:",
+      x = "{.path {media}}"
+    ))
   }
 
   tmp <- rationalize_path_name(path, name)
@@ -111,12 +114,13 @@ drive_put <- function(media,
 
   # Unhappy Path: multiple collisions
   hits <- drive_reveal(hits, "path")
-  msg <- glue("  * {hits$path}: {hits$id}")
-
-  msg <- c(
-    "Multiple items already exist at the target filepath.",
-    "It's not clear what `drive_put()` should do. Aborting.",
-    msg
-  )
-  stop_glue(glue_collapse(msg, sep = "\n"))
+  # a hack to make the `path` appear where we'd normally show `name`
+  # if I ever make cli_format.dribble() / bulletize_dribble() customizable
+  # with a template, this would be a place to use that
+  hits$name <- hits$path
+  abort(c(
+    "Multiple items already exist on Drive at the target filepath.",
+    "Unclear what {.fun drive_put} should do. Exiting.",
+    bulletize_dribble(hits)
+  ))
 }

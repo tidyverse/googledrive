@@ -2,9 +2,9 @@
 
     Code
       withr::with_dir(tmpdir, drive_download(dribble(), path = precious_filepath))
-    Error <simpleError>
-      Path exists and overwrite is FALSE:
-        * precious-TEST-drive-download.txt
+    Error <rlang_error>
+      Local `path` already exists and overwrite is `FALSE`:
+      * 'precious-TEST-drive-download.txt'
 
 # drive_download() downloads a file and adds local_path column
 
@@ -20,8 +20,8 @@
 
     Code
       drive_download(nm_("this-should-not-exist"))
-    Error <simpleError>
-      'file' does not identify at least one Drive file.
+    Error <rlang_error>
+      `file` does not identify at least one Drive file.
 
 # drive_download() converts with explicit `type`
 

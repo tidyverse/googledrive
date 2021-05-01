@@ -21,11 +21,11 @@ confirm_clear_path <- function(path, name) {
   if (is.null(name) &&
       !has_slash(path) &&
       drive_path_exists(append_slash(path))) {
-    stop_glue(
-      "Unclear if `path` specifies parent folder or full path\n",
-      "to the new file, including its name. ",
-      "See ?as_dribble() for details."
-    )
+    abort(c(
+      "Unclear if {.arg path} specifies parent folder or full path \\
+       to the new file, including its name.",
+      "See {.fun ?as_dribble} for advice on how to make this clear."
+    ))
   }
 }
 
@@ -52,22 +52,23 @@ check_for_overwrite <- function(parent = NULL, name, overwrite) {
 
   # Unhappy Paths: multiple collisions and/or not allowed to trash anything
   hits <- drive_reveal(hits, "path")
-  msg <- glue("  * {hits$path}: {hits$id}")
 
   if (overwrite) {
-    msg <- c(
+    abort(c(
       "Multiple items already exist at the target filepath.",
-      "Although `overwrite = TRUE`, it's not clear which item to overwrite.",
-      "Use `overwrite = NA` to suppress this check. Aborting.",
-      msg
-    )
+      bulletize_dribble(hits, bullet = "x"),
+      "Although {.code overwrite = TRUE}, it's not clear which item \\
+       to overwrite.",
+      "Use {.code overwrite = NA} to suppress this check. Exiting."
+    ))
   } else {
-    msg <- c(
-      "One or more items already exist at the target filepath and `overwrite = FALSE`:",
-      msg
-    )
+    abort(c(
+      # \u00a0 is a nonbreaking space
+      "{nrow(hits)} item{?s} already exist{?s/} at the target filepath \\
+       and {.code overwrite\u00a0=\u00a0FALSE}:",
+      bulletize_dribble(hits, bullet = "x")
+    ))
   }
-  stop_glue(glue_collapse(msg, sep = "\n"))
 }
 
 overwrite_hits <- function(parent = NULL, name, overwrite) {

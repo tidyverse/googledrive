@@ -2,7 +2,7 @@
 
     Code
       drive_upload("no-such-file", "File does not exist")
-    Error <simpleError>
-      File does not exist:
-        * no-such-file
+    Error <rlang_error>
+      No file exists at the local `media` path:
+      x 'no-such-file'
 

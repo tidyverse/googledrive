@@ -16,59 +16,78 @@
 
     Code
       validate_dribble(d)
-    Error <simpleError>
-      Invalid dribble. These columns have the wrong type:
-      id
+    Error <rlang_error>
+      Invalid <dribble>. This column has the wrong type:
+      * id
 
 ---
 
     Code
       validate_dribble(d)
-    Error <simpleError>
-      Invalid dribble. These required column names are missing:
-      name
+    Error <rlang_error>
+      Invalid <dribble>. These columns have the wrong type:
+      * name
+      * id
 
 ---
 
     Code
       validate_dribble(d)
-    Error <simpleError>
-      Invalid dribble. Can't confirm `kind = "drive#file"` or `kind = "drive#drive"` for all elements of the nominal `drive_resource` column
+    Error <rlang_error>
+      Invalid <dribble>. This required column is missing:
+      * name
+
+---
+
+    Code
+      validate_dribble(d)
+    Error <rlang_error>
+      Invalid <dribble>. These required columns are missing:
+      * name
+      * id
+
+---
+
+    Code
+      validate_dribble(d)
+    Error <rlang_error>
+      Invalid <dribble>. Can't confirm `kind = "drive#file"` or
+      `kind = "drive#drive"` for all elements of the `drive_resource` column.
 
 # dribble nrow checkers work
 
     Code
-      confirm_single_file(dribble())
-    Error <simpleError>
-      'dribble()' does not identify at least one Drive file.
+      confirm_single_file(d)
+    Error <rlang_error>
+      `d` does not identify at least one Drive file.
 
 ---
 
     Code
-      confirm_some_files(dribble())
-    Error <simpleError>
-      'dribble()' does not identify at least one Drive file.
+      confirm_some_files(d)
+    Error <rlang_error>
+      `d` does not identify at least one Drive file.
 
 ---
 
     Code
       confirm_single_file(d)
-    Error <simpleError>
-      'd' identifies more than one Drive file.
+    Error <rlang_error>
+      `d` identifies more than one Drive file.
 
 # as_dribble() default method handles unsuitable input
 
     Code
       as_dribble(1.3)
-    Error <simpleError>
-      Don't know how to coerce object of class <numeric> into a dribble
+    Error <rlang_error>
+      Don't know how to coerce an object of class <numeric> into a <dribble>.
 
 ---
 
     Code
       as_dribble(TRUE)
-    Error <simpleError>
-      Don't know how to coerce object of class <logical> into a dribble
+    Error <rlang_error>
+      Don't know how to coerce an object of class <logical> into a <dribble>.
 
 # as_dribble.list() catches bad input
 
@@ -81,6 +100,34 @@
 
     Code
       as_dribble(list(drib_lst))
-    Error <simpleError>
-      Invalid dribble. Can't confirm `kind = "drive#file"` or `kind = "drive#drive"` for all elements of the nominal `drive_resource` column
+    Error <rlang_error>
+      Invalid <dribble>. Can't confirm `kind = "drive#file"` or
+      `kind = "drive#drive"` for all elements of the `drive_resource` column.
+
+# as_parent() throws specific errors
+
+    Code
+      foo <- d[0, ]
+      as_parent(foo)
+    Error <rlang_error>
+      Parent specified via `foo` is invalid:
+      x Does not exist.
+
+---
+
+    Code
+      foo <- d
+      as_parent(foo)
+    Error <rlang_error>
+      Parent specified via `foo` is invalid:
+      x Doesn't uniquely identify exactly one folder or shared drive.
+
+---
+
+    Code
+      foo <- d[1, ]
+      as_parent(foo)
+    Error <rlang_error>
+      Invalid <dribble>. Can't confirm `kind = "drive#file"` or
+      `kind = "drive#drive"` for all elements of the `drive_resource` column.
 

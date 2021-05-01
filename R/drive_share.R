@@ -103,7 +103,7 @@ drive_share <- function(file,
       "*" = "role = {role}",
       "*" = "type = {type}",
       "For file{?s}:{cli::qty(nrow(successes))}",
-      cli_format_dribble(successes)
+      bulletize_dribble(successes)
     ))
   }
   # I'm not sure this ever comes up IRL?
@@ -112,7 +112,7 @@ drive_share <- function(file,
     failures <- file[!ok, ]
     drive_bullets(c(
       "Permissions were NOT updated for file{?s}:{cli::qty(nrow(failures))}",
-      cli_format_dribble(failures)
+      bulletize_dribble(failures)
     ))
   }
 

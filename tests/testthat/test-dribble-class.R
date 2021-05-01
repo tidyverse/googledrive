@@ -16,10 +16,14 @@ test_that("validate_dribble() checks class, var names, var types", {
   d <- dribble()
   d$id <- numeric()
   expect_snapshot(validate_dribble(d), error = TRUE)
+  d$name <- logical()
+  expect_snapshot(validate_dribble(d), error = TRUE)
 
   ## missing a required variable
   d <- dribble()
   d$name <- NULL
+  expect_snapshot(validate_dribble(d), error = TRUE)
+  d$id <- NULL
   expect_snapshot(validate_dribble(d), error = TRUE)
 
   ## list-col elements do not have `kind = "drive#file"`
@@ -68,11 +72,12 @@ test_that("`[` drops dribble class when not valid", {
 })
 
 test_that("dribble nrow checkers work", {
-  expect_true(no_file(dribble()))
-  expect_false(single_file(dribble()))
-  expect_false(some_files(dribble()))
-  expect_snapshot(confirm_single_file(dribble()), error = TRUE)
-  expect_snapshot(confirm_some_files(dribble()), error = TRUE)
+  d <- dribble()
+  expect_true(no_file(d))
+  expect_false(single_file(d))
+  expect_false(some_files(d))
+  expect_snapshot(confirm_single_file(d), error = TRUE)
+  expect_snapshot(confirm_some_files(d), error = TRUE)
 
   d <- new_dribble(
     tibble::tibble(
@@ -139,6 +144,40 @@ test_that("as_dribble.list() catches bad input", {
     kind = "whatever"
   )
   expect_snapshot(as_dribble(list(drib_lst)), error = TRUE)
+})
+
+test_that("as_parent() throws specific errors", {
+  d <- new_dribble(
+    tibble::tibble(
+      name = letters[1:4],
+      id = letters[4:1],
+      drive_resource = list(list(kind = "drive#WUT"))
+    )
+  )
+
+  expect_snapshot(
+    {
+      foo <- d[0, ]
+      as_parent(foo)
+    },
+    error = TRUE
+  )
+
+  expect_snapshot(
+    {
+      foo <- d
+      as_parent(foo)
+    },
+    error = TRUE
+  )
+
+  expect_snapshot(
+    {
+      foo <- d[1, ]
+      as_parent(foo)
+    },
+    error = TRUE
+  )
 })
 
 test_that("promote() works when elem present, absent, and input is trivial", {

@@ -54,10 +54,9 @@ as_dribble.dribble <- function(x, ...) x
 
 #' @export
 as_dribble.default <- function(x, ...) {
-  stop_glue_data(
-    list(x = glue_collapse(class(x), sep = "/")),
-    "Don't know how to coerce object of class <{x}> into a dribble"
-  )
+  abort("
+    Don't know how to coerce an object of class {.cls {class(x)}} into \\
+    a {.cls dribble}.")
 }
 
 #' @export
