@@ -32,6 +32,11 @@ quote_if_no_color <- function(x, quote = "'") {
   }
 }
 
+#' Map a cli-styled template over an object
+#'
+#' For internal use
+#'
+#' @keywords internal
 #' @export
 map_cli <- function(x, ...) UseMethod("map_cli")
 
