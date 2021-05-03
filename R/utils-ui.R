@@ -68,13 +68,16 @@ map_cli.dribble <- function(x,
   stopifnot(is.character(template))
 
   # if the template has length 1, I don't care if last element is named "out"
-  stopifnot(length(template) == 1 || tail(names(template), 1) == "out")
+  stopifnot(length(template) == 1 || utils::tail(names(template), 1) == "out")
 
   for (i in seq_len(length(template) - 1)) {
     x[names(template)[[i]]] <-
       with(x, glue(template[[i]], .open = .open, .close = .close))
   }
-  with(x, as.character(glue(tail(template, 1), .open = .open, .close = .close)))
+  with(
+    x,
+    as.character(glue(utils::tail(template, 1), .open = .open, .close = .close))
+  )
 }
 
 bulletize <- function(x, bullet = "*", n_show = 5, n_fudge = 2) {

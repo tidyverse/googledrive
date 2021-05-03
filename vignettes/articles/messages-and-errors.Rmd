@@ -166,7 +166,7 @@ We won't get into that here.
 (I don't consider the dribble styling to be finalized yet.)
 
 The result of `map_cli()` then gets processed with `bulletize()`, which adds the bullet-specifying names and does aesthetically pleasing truncation.
-
+  
 ```{r}
 bulletize(map_cli(letters))
 
