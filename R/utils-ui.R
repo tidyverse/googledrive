@@ -33,24 +33,48 @@ quote_if_no_color <- function(x, quote = "'") {
 }
 
 #' @export
-#' @importFrom cli cli_format
-cli_format.dribble <- function(x, ...) {
-  if (nrow(x) == 0) {
-    return(character())
-  }
-  # TO THINK: it still feels weird to me that I could be returning a
-  # vector with length > 1, but cli's normal collapsing will butcher it
-  # I absolutely intend this method to only be used within bulletize_dribble()
-  id_string <- glue("<id:\u00a0{x$id}>") # \u00a0 is a nonbreaking space
-  glue("{x$name} {cli::col_grey(id_string)}")
+map_cli <- function(x, ...) UseMethod("map_cli")
+
+#' @export
+map_cli.default <- function(x, ...) {
+  abort("
+    Don't know how to {.fun map_cli} an object of class {.cls {class(x)}}.")
 }
 
-bulletize_dribble <- function(x, bullet = "*", n_show = 5, n_fudge = 2) {
-  confirm_dribble(x)
-  bulletize(
-    cli_format(x),
-    bullet = bullet, n_show = n_show, n_fudge = n_fudge
-  )
+#' @export
+map_cli.NULL <- function(x, ...) NULL
+
+#' @export
+map_cli.character <- function(x,
+                              template = "{.field <<x>>}",
+                              .open = "<<", .close = ">>",
+                              ...) {
+  as.character(glue(template, .open = .open, .close = .close))
+}
+
+#' @export
+map_cli.dribble <- function(x,
+                            template = NULL,
+                            .open = "<<", .close = ">>",
+                            ...) {
+  # template can be a vector, in case some intermediate constructions are needed
+  # this is true for the default case
+  # templates should assume a data mask of `x`
+  template <- template %||%
+    c(
+      id_string = "<id:\u00a0<<id>>>", # \u00a0 is a nonbreaking space
+      out = "<<name>> {cli::col_grey('<<id_string>>')}"
+    )
+  stopifnot(is.character(template))
+
+  # if the template has length 1, I don't care if last element is named "out"
+  stopifnot(length(template) == 1 || tail(names(template), 1) == "out")
+
+  for (i in seq_len(length(template) - 1)) {
+    x[names(template)[[i]]] <-
+      with(x, glue(template[[i]], .open = .open, .close = .close))
+  }
+  with(x, as.character(glue(tail(template, 1), .open = .open, .close = .close)))
 }
 
 bulletize <- function(x, bullet = "*", n_show = 5, n_fudge = 2) {

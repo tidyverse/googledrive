@@ -75,7 +75,7 @@ drive_update <- function(file,
     }
   }
 
-  drive_bullets(c("File updated:", bulletize_dribble(out)))
+  drive_bullets(c("File updated:", bulletize(map_cli(out))))
 
   invisible(out)
 }

@@ -3,6 +3,9 @@ auth_success <- tryCatch(
   googledrive_auth_internal_error = function(e) NULL
 )
 if (!isTRUE(auth_success)) {
+  drive_bullets(c(
+    "!" = "Internal auth failed; calling {.fun drive_deauth}."
+  ))
   drive_deauth()
 }
 

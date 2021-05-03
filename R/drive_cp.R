@@ -118,9 +118,9 @@ drive_cp <- function(file,
 
   drive_bullets(c(
     "Original file:",
-    bulletize(cli_map(file)),
+    bulletize(map_cli(file)),
     "Copied to file:",
-    bulletize(cli_map(tmp))
+    bulletize(map_cli(tmp))
   ))
 
   invisible(out)

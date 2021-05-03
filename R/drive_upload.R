@@ -151,7 +151,7 @@ drive_upload <- function(media,
     "Local file:",
     "*" = "{.path {media}}",
     "Uploaded into Drive file:",
-    bulletize_dribble(out),
+    bulletize(map_cli(out)),
     "With MIME type:",
     "*" = "{.field {purrr::pluck(out, 'drive_resource', 1, 'mimeType')}}"
   ))

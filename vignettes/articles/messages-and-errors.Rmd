@@ -14,11 +14,22 @@ knitr::opts_chunk$set(
 library(googledrive)
 ```
 
-*In a hidden chunk here, I "export" the internal helpers covered below.*
+*Things I do in a hidden chunk here, to aid exposition about internal tooling:*
+
+* *"Export" the internal helpers covered below*
+* *(Attempt to) auth as the service account we use when rendering documentation*
+* *Set `.rlang_use_cli_format <- TRUE` in the global workspace, so my `rlang::abort()` calls have the same result as when coming from inside googledrive*
 
 ```{r include = FALSE}
 drive_bullets <- googledrive:::drive_bullets
-cli_format_dribble <- googledrive:::cli_format_dribble
+bulletize <- googledrive:::bulletize
+
+auth_success <- tryCatch(
+  googledrive:::drive_auth_docs(),
+  googledrive_auth_internal_error = function(e) e
+)
+
+.rlang_use_cli_format <- TRUE
 ```
 
 ## User-facing messages
@@ -53,8 +64,9 @@ The googledrive message helpers:
 How we use the inline classes:
 
 -   `.field` for the value of an argument, e.g. a MIME type
--   `.code` for a column in a data frame
--   `.arg`, `.fun`, `.path`, `.cls` for their usual purpose
+-   `.code` for a column in a data frame and for reserved words, such as
+    `NULL`, `TRUE`, and `NA`
+-   `.arg`, `.fun`, `.path`, `.cls`, `.url` for their usual purpose
 
 ```{r}
 drive_bullets(c(
@@ -73,7 +85,8 @@ Most relevant cli docs:
 
 I use the different bullet points in `drive_bullets()` to convey a mood.
 
-Exclamation mark `"!"`: I'm not throwing an error or warning, but I want to get the user's attention, because it seems likely (but not certain) that they misunderstand something about googledrive or Google Drive or their Drive files. Examples:
+Exclamation mark `"!"`: I'm not throwing an error or warning, but I want to get the user's attention, because it seems likely (but not certain) that they misunderstand something about googledrive or Google Drive or their Drive files.
+Examples:
 
 ```{r}
 drive_bullets(c(
@@ -103,6 +116,7 @@ drive_bullets(c(
   "i" = "No pre-existing file at this filepath. Calling \\
          {.fun drive_upload}."
 ))
+
 drive_bullets(c(
   "i" = "Pre-existing file at this filepath. Calling \\
          {.fun drive_update}."
@@ -116,25 +130,174 @@ drive_bullets(c(
 In cases where we determine there is nothing we can or should do, sometimes I use `"!"` and sometimes I use `"i"`.
 It depends on whether it feels like the user could or should have known that no work would be possible or needed.
 
-### Drive files as bullets
+### Programmatic generation of bullets
 
-Use `drive_bullets()` in combination with `cli_format_dribble()`, which formats individual Drive files and makes them into `"*"` bullets.
+Often we need to create bullets from an R object, such as a character vector or a dribble.
+What needs to happen:
+
+* Map a cli-using string template over the object to get a character vector
+* Truncate this vector in an aesthetically pleasing way
+* Apply names to this vector to get the desired bullet points
+
+`map_cli()` is an internal generic that turns an object into a vector of strings with cli markup.
+Currently `map_cli()` has methods for `character` and `dribble` (and `NULL` and a `default`).
 
 ```{r}
+map_cli(letters[1:3])
+```
+
+By default `map_cli.character()` just applies the `.field` style, i.e. the template is `"{.field <<x>>}"`.
+But the template can be customized, if you need something else.
+Note that we use non-standard glue delimiters (`<<` and `>>`, by default), because we are interpolating into a string with glue/cli markup, where `{}` has the usual meaning.
+
+```{r}
+map_cli(letters[4:6], template = "how about a path {.path <<x>>}?")
+```
+
+The `map_cli.dribble()` method makes a cli-marked up string for each row of the dribble, i.e. for each Drive file.
+
+```{r}
+dat <- drive_find(n_max = 5)
+map_cli(dat)
+```
+
+`map_cli.dribble()` also allows a custom template, but it's a more complicated and less common situation than for `character`.
+We won't get into that here.
+(I don't consider the dribble styling to be finalized yet.)
+
+The result of `map_cli()` then gets processed with `bulletize()`, which adds the bullet-specifying names and does aesthetically pleasing truncation.
+
+```{r}
+bulletize(map_cli(letters))
+
+bulletize(map_cli(letters), bullet = "x", n_show = 2)
+
+drive_bullets(c(
+  "These are surprising things:",
+  bulletize(map_cli(letters), bullet = "!")
+))
+
 dat <- drive_find(n_max = 10)
 
-# if you know there's only 1 file
-x <- dat[1, ]
-drive_bullets(c("File VERBED:", cli_format_dribble(x)))
-
-# if you don't know how many files
-x <- dat
 drive_bullets(c(
-  cli::pluralize("File{?s} VERBED:{cli::qty(nrow(x))}"),
-  cli_format_dribble(dat)
+  "Some Drive files:",
+  bulletize(map_cli(dat))
 ))
 ```
 
 ## Errors
 
-*I haven't gotten here yet*
+I am currently trying out <https://github.com/r-lib/rlang/pull/1176>, which means messages from `rlang::abort()` and `rlang::warn()` are processed via cli, just like those sent through `drive_bullets()`.
+
+Here are some current points of friction.
+
+### Who's in charge?
+
+This feels weird and asymmetrical:
+
+* If I want to throw an error, I call `rlang::abort()` (directly) and turn on
+  cli support by assigning `.rlang_use_cli_format <- TRUE` in my namespace.
+* If I want to emit an informational message, I call `cli::cli_bullets()`
+  (indirectly, because I need to tweak theme and respect package verbosity),
+  which sends the message through `rlang::inform()` for me.
+
+It's great that rlang and cli are working together to provide the UI.
+It just feels odd that I regard rlang as primary for errors (and warnings) and cli as primary for informational messages.
+
+### Theme tweaking
+
+I think it is inevitable that packages will need to tweak or add to the current cli theme.
+
+Examples:
+
+* I like to have a "quote if no color" fallback for, e.g., the `.field` style.
+* You might map an existing style to a domain-relevant term.
+* I'm considering making regular `"*"` bullets un-colored, because I might use
+  color in, e.g., Drive file formatting and I don't want too much color.
+  
+The obvious place to enact these tweaks is in the `drive_bullets()` wrapper I have around `cli::cli_bullets()`.
+This wrapper seems almost unavoidable, if I want to have package-specific verbosity control.
+
+But where do I put these tweaks so that they also affect `abort()`?
+This suggests the creation of another wrapper around `abort()`, but this is exactly what we are hoping to avoid.
+
+Notice how the letters are single-quoted when emitted by `drive_bullets()`, which is equipped with "quote if not color" behaviour, but are not when emitted by `abort()`.
+
+```{r}
+withr::with_envvar(
+  c("NO_COLOR" = 1),
+  {
+    drive_bullets(c(
+      "I want to chat about these fields:",
+      bulletize(map_cli(letters[1:3]))
+    ))
+    
+    # remember I did this hack:
+    # .rlang_use_cli_format <- TRUE, in global env, in hidden setup chunk
+    rlang::abort(c(
+      "I cannot work with these fields:",
+      bulletize(map_cli(letters[1:3]))
+    ))    
+  }
+)
+```
+
+It feels like the solution to this could be related to the solution of the previous point, with some richer package-level configuration for the combined use of rlang and cli.
+
+### Hard-to-reach switch
+
+In this document, it's hard to demo the difference between `drive_bullets()` and what `rlang::abort()` does *when called from googledrive*, because the switch to turn on cli-formatting is so tied to package namespace.
+The current hack is I define `.rlang_use_cli_format <- TRUE` in a hidden chunk.
+
+Is that the preferred long-term solution, when someone needs to do a small demo of rlang with cli switched on?
+
+### Message truncation
+
+`abort()` messages appear to get truncated.
+If you're inserting programmatically generated bullet points, this can mean an important part of the overall message is not actually presented to the user.
+
+Here I present a bulletized dribble via `abort()` and `drive_bullets()` (wrapper around `cli::cli_bullets()`).
+Note that we see message header, bullets, and conclusion.
+
+```{r}
+dat <- drive_find()
+dat <- rbind(dat, dat, dat)
+
+rlang::abort(c(
+  "Uh-oh, something is wrong with these Drive files:",
+  bulletize(map_cli(dat)),
+  "i" = "Advice on how to fix this"
+))
+
+drive_bullets(c(
+  "Yo, I have something to say about these Drive files:",
+  bulletize(map_cli(dat)),
+  "i" = "Advice on how to fix this"
+))
+```
+
+But what if I reveal info on more Drive files, instead of 5?
+The `abort()` message gets truncated.
+At least, it does in the Console.
+Maybe when rendering `.Rmd`, it does not?
+Interactively, I've even seen it truncate in the middle of a bullet point.
+
+```{r}
+rlang::abort(c(
+  "Uh-oh, something is wrong with these Drive files:",
+  bulletize(map_cli(dat), n_show = 20),
+  "i" = "Advice on how to fix this"
+))
+
+drive_bullets(c(
+  "Yo, I have something to say about these Drive files:",
+  bulletize(map_cli(dat), n_show = 20),
+  "i" = "Advice on how to fix this"
+))
+```
+
+### Message wrapping
+
+`abort()` sometimes wraps to a different width.
+I've seen this several times, but I can't reproduce it now.
+But somehow, it seems you can get into a state where `abort()` isn't wrapping to the same width as cli.

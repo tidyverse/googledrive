@@ -132,9 +132,9 @@ drive_mv <- function(file,
   tmp$name <- paste0(append_slash(path$path), out$name)
   drive_bullets(c(
     "Original file:",
-    bulletize_dribble(file),
+    bulletize(map_cli(file)),
     "Has been {action}:",
-    bulletize_dribble(tmp)
+    bulletize(map_cli(tmp))
   ))
 
   invisible(out)

@@ -10,7 +10,7 @@
 
     Code
       out <- drive_fields(c("name", "parents", "ownedByMe", "pancakes!"))
-    Message <cliMessage>
+    Warning <warning>
       Omitting fields that are not recognized as part of the Files resource:
-      * 'pancakes!'
+      * pancakes!
 

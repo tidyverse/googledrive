@@ -113,14 +113,12 @@ drive_put <- function(media,
   }
 
   # Unhappy Path: multiple collisions
+  # a hack to print `path` where we'd normally print `name`
   hits <- drive_reveal(hits, "path")
-  # a hack to make the `path` appear where we'd normally show `name`
-  # if I ever make cli_format.dribble() / bulletize_dribble() customizable
-  # with a template, this would be a place to use that
   hits$name <- hits$path
   abort(c(
     "Multiple items already exist on Drive at the target filepath.",
     "Unclear what {.fun drive_put} should do. Exiting.",
-    bulletize_dribble(hits)
+    bulletize(map_cli(hits))
   ))
 }

@@ -219,8 +219,7 @@ drive_auth_internal <- function(account = c("docs", "testing"),
       message = c(
         "Auth unsuccessful:",
         if (!can_decrypt) {
-          # TODO: presumably this pre-glue won't be necessary forever
-          c("x" = glue("Can't decrypt the {account} service account token"))
+          c("x" = "Can't decrypt the {.field {account}} service account token")
         },
         if (!online) {
           c("x" = "We don't appear to be online (or maybe the Drive API is down?)")

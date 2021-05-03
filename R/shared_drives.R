@@ -205,8 +205,7 @@ validate_corpora <- function(corpora) {
       "Invalid value for {.arg corpus}:",
       x = "{.field {corpora}}",
       "These are the only acceptable values:",
-      # TODO: really, these should be styled as `.field` also
-      bulletize(valid_corpora)
+      bulletize(map_cli(valid_corpora))
     ))
   }
   invisible(corpora)

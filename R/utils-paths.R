@@ -56,7 +56,7 @@ check_for_overwrite <- function(parent = NULL, name, overwrite) {
   if (overwrite) {
     abort(c(
       "Multiple items already exist at the target filepath.",
-      bulletize_dribble(hits, bullet = "x"),
+      bulletize(map_cli(hits, bullet = "x")),
       "Although {.code overwrite = TRUE}, it's not clear which item \\
        to overwrite.",
       "Use {.code overwrite = NA} to suppress this check. Exiting."
@@ -66,7 +66,7 @@ check_for_overwrite <- function(parent = NULL, name, overwrite) {
       # \u00a0 is a nonbreaking space
       "{nrow(hits)} item{?s} already exist{?s/} at the target filepath \\
        and {.code overwrite\u00a0=\u00a0FALSE}:",
-      bulletize_dribble(hits, bullet = "x")
+      bulletize(map_cli(hits, bullet = "x"))
     ))
   }
 }

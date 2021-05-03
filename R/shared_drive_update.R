@@ -40,7 +40,7 @@ shared_drive_update <- function(shared_drive, ...) {
   if (!single_file(shared_drive)) {
     abort(c(
       "Can't update multiple shared drives at once:",
-      bulletize_dribble(shared_drive)
+      bulletize(map_cli(shared_drive))
     ))
   }
 
@@ -63,7 +63,7 @@ shared_drive_update <- function(shared_drive, ...) {
   response <- request_make(request)
   out <- as_dribble(list(gargle::response_process(response)))
 
-  drive_bullets(c("Shared drive updated:", bulletize_dribble(out)))
+  drive_bullets(c("Shared drive updated:", bulletize(map_cli(out))))
 
   invisible(out)
 }

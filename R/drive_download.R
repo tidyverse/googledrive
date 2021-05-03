@@ -113,7 +113,7 @@ drive_download <- function(file,
   if (success) {
     drive_bullets(c(
       "File downloaded:",
-      bulletize_dribble(file),
+      bulletize(map_cli(file)),
       "Saved locally as:",
       "*" = "{.path {path}}"
     ))

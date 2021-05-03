@@ -42,7 +42,7 @@ validate_dribble <- function(x) {
       "Invalid {.cls dribble}. \\
        {cli::qty(length(missing_cols))}{?This/These} required column{?s} \\
        {?is/are} missing:",
-      set_names(missing_cols, "*")
+      bulletize(missing_cols)
     ))
   }
 
@@ -52,7 +52,7 @@ validate_dribble <- function(x) {
       "Invalid {.cls dribble}. \\
        {cli::qty(length(mistyped_cols))}{?This/These} column{?s} {?has/have} \\
        the wrong type:",
-      set_names(mistyped_cols, "*")
+      bulletize(mistyped_cols)
     ))
   }
 
