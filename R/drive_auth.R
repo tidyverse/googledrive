@@ -179,9 +179,7 @@ drive_has_token <- function() {
 #' drive_auth_configure(app = original_app, api_key = original_api_key)
 drive_auth_configure <- function(app, path, api_key) {
   if (!missing(app) && !missing(path)) {
-    abort(
-      "Must supply exactly one of {.arg app} or {.arg path}, not both"
-    )
+    abort("Must supply exactly one of {.arg app} or {.arg path}, not both")
   }
   stopifnot(missing(api_key) || is.null(api_key) || is_string(api_key))
 

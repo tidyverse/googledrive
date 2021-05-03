@@ -57,12 +57,15 @@ bulletize <- function(x, bullet = "*", n_show = 5, n_fudge = 2) {
   n <- length(x)
   n_show_actual <- compute_n_show(n, n_show, n_fudge)
   out <- utils::head(x, n_show_actual)
-  out <- set_names(out, bullet)
   n_not_shown <- n - n_show_actual
-  if (n_not_shown > 0) {
-    out <- c(out, " " = glue("{cli::symbol$ellipsis} and {n_not_shown} more"))
+
+  out <- set_names(out, bullet)
+
+  if (n_not_shown == 0) {
+    out
+  } else {
+    c(out, " " = glue("{cli::symbol$ellipsis} and {n_not_shown} more"))
   }
-  out
 }
 
 # I don't want to do "... and x more" if x is silly, i.e. 1 or 2
@@ -74,8 +77,6 @@ compute_n_show <- function(n, n_show_nominal = 5, n_fudge = 2) {
   }
 }
 
-
-
 # useful to me during development, so I can see how my messages look w/o color
 local_no_color <- function(.envir = parent.frame()) {
   withr::local_envvar(c("NO_COLOR" = 1), .local_envir = .envir)
@@ -84,8 +85,6 @@ local_no_color <- function(.envir = parent.frame()) {
 with_no_color <- function(code) {
   withr::with_envvar(c("NO_COLOR" = 1), code)
 }
-
-
 
 # making googldrive quiet vs. loud ----
 drive_quiet <- function() {

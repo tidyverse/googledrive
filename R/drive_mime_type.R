@@ -38,7 +38,7 @@ drive_mime_type <- function(type = NULL) {
     return(.drive$mime_tbl)
   }
   if (!(is.character(type))) {
-    abort("{.arg type} must be character")
+    abort("{.arg type} must be character.")
   }
 
   human_m <- match(
@@ -59,7 +59,7 @@ drive_mime_type <- function(type = NULL) {
   if (all(is.na(mime_type))) {
     abort(c(
       "Unrecognized {.arg type}:",
-      set_names(type, "*")
+      bulletize(type, bullet = "x")
     ))
   }
   mime_type

@@ -3,7 +3,7 @@
 # }
 
 writeLines <- function(...) {
-  abort("In this house, we use `write_utf8()` for UTF-8 reasons.")
+  abort("In this house, we use {.fun write_utf8} for UTF-8 reasons.")
 }
 
 # https://github.com/gaborcsardi/rencfaq#with-base-r

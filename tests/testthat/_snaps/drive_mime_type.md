@@ -3,14 +3,14 @@
     Code
       drive_mime_type(1)
     Error <rlang_error>
-      `type` must be character
+      `type` must be character.
 
 ---
 
     Code
       drive_mime_type(dribble())
     Error <rlang_error>
-      `type` must be character
+      `type` must be character.
 
 # drive_mime_type() errors for single unrecognized input
 
@@ -18,7 +18,7 @@
       drive_mime_type("nonsense")
     Error <rlang_error>
       Unrecognized `type`:
-      * nonsense
+      x nonsense
 
 # drive_extension() errors for invalid input
 
@@ -40,5 +40,5 @@
       drive_extension("nonsense")
     Error <rlang_error>
       Unrecognized `type`:
-      * nonsense
+      x nonsense
 
