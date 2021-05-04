@@ -29,7 +29,7 @@ Imports:
     lifecycle,
     magrittr,
     purrr (>= 0.2.3),
-    rlang (>= 0.4.10.9002),
+    rlang (>= 0.4.11.9000),
     tibble (>= 2.0.0),
     utils,
     uuid,
