@@ -103,7 +103,7 @@ drive_upload <- function(media,
   } else {
     abort(c(
       "No file exists at the local {.arg media} path:",
-      x = "{.path {media}}"
+      bulletize(map_cli(media, "{.path <<x>>}"), bullet = "x")
     ))
   }
 

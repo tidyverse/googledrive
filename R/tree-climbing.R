@@ -16,7 +16,7 @@ pth <- function(id, kids, elders, stop_value) {
   if (length(i) > 1) {
     abort(c(
       "This id appears more than once in the role of {.field kid}:",
-      "*" = "{.field {kids[i[1]]}}"
+      bulletize(map_cli(kids[i[1]]))
     ))
   }
 
@@ -34,8 +34,8 @@ pth <- function(id, kids, elders, stop_value) {
   if (length(seen_before)) {
     abort(c(
       "This id has itself as parent, possibly indirect:",
-      "*" = "{.field {seen_before}}",
-      "Cycles are not allowed."
+      bulletize(map_cli(seen_before)),
+      x = "Cycles are not allowed."
     ))
   }
 

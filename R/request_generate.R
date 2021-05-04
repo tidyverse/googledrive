@@ -53,7 +53,7 @@ request_generate <- function(endpoint = character(),
   if (is.null(ept)) {
     abort(c(
       "Endpoint not recognized:",
-      x = "{.field {endpoint}}"
+      bulletize(map_cli(endpoint))
     ))
   }
 

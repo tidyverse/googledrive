@@ -52,8 +52,7 @@
       validate_dribble(d)
     Error <rlang_error>
       Invalid <dribble>. Can't confirm `kind = "drive#file"` or
-      `kind = "drive#drive"` for all elements of the `drive_resource`
-      column.
+      `kind = "drive#drive"` for all elements of the `drive_resource` column.
 
 # dribble nrow checkers work
 
@@ -81,16 +80,14 @@
     Code
       as_dribble(1.3)
     Error <rlang_error>
-      Don't know how to coerce an object of class <numeric>
-      into a <dribble>.
+      Don't know how to coerce an object of class <numeric> into a <dribble>.
 
 ---
 
     Code
       as_dribble(TRUE)
     Error <rlang_error>
-      Don't know how to coerce an object of class <logical>
-      into a <dribble>.
+      Don't know how to coerce an object of class <logical> into a <dribble>.
 
 # as_dribble.list() catches bad input
 
@@ -105,8 +102,7 @@
       as_dribble(list(drib_lst))
     Error <rlang_error>
       Invalid <dribble>. Can't confirm `kind = "drive#file"` or
-      `kind = "drive#drive"` for all elements of the `drive_resource`
-      column.
+      `kind = "drive#drive"` for all elements of the `drive_resource` column.
 
 # as_parent() throws specific errors
 
@@ -133,6 +129,5 @@
       as_parent(foo)
     Error <rlang_error>
       Invalid <dribble>. Can't confirm `kind = "drive#file"` or
-      `kind = "drive#drive"` for all elements of the `drive_resource`
-      column.
+      `kind = "drive#drive"` for all elements of the `drive_resource` column.
 

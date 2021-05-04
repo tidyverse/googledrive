@@ -203,7 +203,7 @@ validate_corpora <- function(corpora) {
     # the rationale is explained elsewhere in this file
     abort(c(
       "Invalid value for {.arg corpus}:",
-      x = "{.field {corpora}}",
+      bulletize(map_cli(corpora), bullet = "x"),
       "These are the only acceptable values:",
       bulletize(map_cli(valid_corpora))
     ))

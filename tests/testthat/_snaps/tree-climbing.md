@@ -5,7 +5,7 @@
     Error <rlang_error>
       This id has itself as parent, possibly indirect:
       * a
-      Cycles are not allowed.
+      x Cycles are not allowed.
 
 ---
 
@@ -14,7 +14,7 @@
     Error <rlang_error>
       This id has itself as parent, possibly indirect:
       * a
-      Cycles are not allowed.
+      x Cycles are not allowed.
 
 # pth() errors for duplicated kid
 
@@ -31,5 +31,5 @@
     Error <rlang_error>
       This id has itself as parent, possibly indirect:
       * a
-      Cycles are not allowed.
+      x Cycles are not allowed.
 

@@ -62,7 +62,7 @@ drive_download <- function(file,
   if (!is.null(path) && file.exists(path) && !overwrite) {
     abort(c(
       "Local {.arg path} already exists and overwrite is {.code FALSE}:",
-      "*" = "{.path {path}}"
+      bulletize(map_cli(path, "{.path <<x>>}"))
     ))
   }
   file <- as_dribble(file)
@@ -134,7 +134,7 @@ get_export_mime_type <- function(mime_type) {
   if (!any(m)) {
     abort(c(
       "Not a recognized Google MIME type:",
-      "*" = "{.field {mime_type}}"
+      bulletize(map_cli(mime_type), bullet = "x")
     ))
   }
   .drive$translate_mime_types$mime_type_local[m]
@@ -150,9 +150,9 @@ verify_export_mime_type <- function(mime_type, export_type) {
     ## and use the human_type, if found
     abort(c(
       "Cannot export Google file of type:",
-      "*" = "{.field {mime_type}}",
+      bulletize(map_cli(mime_type)),
       "as a file of type:",
-      "*" = "{.field {export_type}}"
+      bulletize(map_cli(export_type))
     ))
   }
   export_type
