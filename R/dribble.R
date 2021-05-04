@@ -42,7 +42,7 @@ validate_dribble <- function(x) {
       "Invalid {.cls dribble}. \\
        {cli::qty(length(missing_cols))}{?This/These} required column{?s} \\
        {?is/are} missing:",
-      bulletize(missing_cols)
+      bulletize(map_cli(missing_cols, template = "{.code <<x>>}"))
     ))
   }
 
@@ -52,7 +52,7 @@ validate_dribble <- function(x) {
       "Invalid {.cls dribble}. \\
        {cli::qty(length(mistyped_cols))}{?This/These} column{?s} {?has/have} \\
        the wrong type:",
-      bulletize(mistyped_cols)
+      bulletize(map_cli(mistyped_cols, template = "{.code <<x>>}"))
     ))
   }
 
