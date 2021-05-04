@@ -58,7 +58,6 @@ import,application/vnd.google-apps.presentation,application/vnd.openxmlformats-o
 import,application/vnd.google-apps.presentation,application/vnd.openxmlformats-officedocument.presentationml.slideshow,NA
 import,application/vnd.google-apps.presentation,application/vnd.openxmlformats-officedocument.presentationml.template,NA
 import,application/vnd.google-apps.presentation,application/x-vnd.oasis.opendocument.presentation,NA
-import,application/vnd.google-apps.script,application/json,NA
 import,application/vnd.google-apps.script,application/vnd.google-apps.script+json,NA
 import,application/vnd.google-apps.script,application/vnd.google-apps.script+text/plain,NA
 import,application/vnd.google-apps.spreadsheet,application/vnd.ms-excel,NA
