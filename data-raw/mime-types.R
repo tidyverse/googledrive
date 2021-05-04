@@ -135,6 +135,4 @@ mime_tbl <- mime_tbl %>%
 mime_tbl <- mime_tbl %>%
   arrange(mime_type, ext)
 
-# remove `description`, to get a good clean diff
-# I'll revert this momentarily
-write_csv(select(mime_tbl, -description), file = here("inst", "extdata", "mime_tbl.csv"))
+write_csv(mime_tbl, file = here("inst", "extdata", "mime_tbl.csv"))
