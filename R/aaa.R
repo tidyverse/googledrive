@@ -15,29 +15,3 @@
   system.file("extdata", "files_fields.csv", package = "googledrive") %>%
   read.csv(stringsAsFactors = FALSE) %>%
   tibble::as_tibble()
-
-.onLoad <- function(libname, pkgname) {
-
-  .auth <<- gargle::init_AuthState(
-    package     = "googledrive",
-    auth_active = TRUE
-  )
-
-  if (identical(Sys.getenv("IN_PKGDOWN"), "true")) {
-    tryCatch(
-      drive_auth_docs(),
-      googledrive_auth_internal_error = function(e) NULL
-    )
-  }
-
-  if (requireNamespace("dplyr", quietly = TRUE)) {
-    register_s3_method("dplyr", "arrange", "dribble")
-    register_s3_method("dplyr", "filter", "dribble")
-    register_s3_method("dplyr", "mutate", "dribble")
-    register_s3_method("dplyr", "rename", "dribble")
-    register_s3_method("dplyr", "select", "dribble")
-    register_s3_method("dplyr", "slice", "dribble")
-  }
-
-  invisible()
-}
