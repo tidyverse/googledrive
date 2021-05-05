@@ -46,3 +46,11 @@ scrub_filepath <- function(message, replace_me) {
 scrub_file_id <- function(message) {
   gsub("<id: [a-zA-Z0-9_-]+>", "<id: {FILE_ID}>", message, perl = TRUE)
 }
+
+expect_dribble <- function(x) {
+   expect_s3_class(x, "dribble")
+}
+
+expect_bare_tibble <- function(x) {
+   expect_s3_class(x, c("tbl_df", "tbl", "data.frame"), exact = TRUE)
+}

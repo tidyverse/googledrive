@@ -77,18 +77,12 @@ dribble <- function(x = NULL) {
 
 #' @export
 `[.dribble` <- function(x, i, j, drop = FALSE) {
-  maybe_dribble(NextMethod())
+  dribble_maybe_reconstruct(NextMethod())
 }
 
-maybe_dribble <- function(x) {
-  if (is.data.frame(x) &&
-    has_dribble_cols(x) &&
-    has_dribble_coltypes(x) &&
-    has_drive_resource(x)) {
-    new_dribble(x)
-  } else {
-    as_tibble(x)
-  }
+#' @export
+`names<-.dribble` <- function(x, value) {
+  dribble_maybe_reconstruct(NextMethod())
 }
 
 #' @export

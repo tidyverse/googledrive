@@ -42,6 +42,9 @@
 #' @importFrom lifecycle deprecated
 #' @importFrom rlang :=
 #' @importFrom rlang %||%
+#' @importFrom vctrs vec_cast
+#' @importFrom vctrs vec_ptype2
+#' @importFrom vctrs vec_restore
 ## usethis namespace: end
 NULL
 
