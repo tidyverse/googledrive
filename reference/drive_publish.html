@@ -227,23 +227,37 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Upload file to publish</span>
-<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span><span class='op'>(</span>
-  <span class='fu'><a href='drive_example.html'>drive_example</a></span><span class='op'>(</span><span class='st'>"chicken.csv"</span><span class='op'>)</span>,
-  type <span class='op'>=</span> <span class='st'>"spreadsheet"</span>
-<span class='op'>)</span>
-</div><div class='co'>#&gt; Local file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>/home/runner/work/_temp/Library/googledrive/extdata/chicken.csv</span></div><div class='co'>#&gt; Uploaded into Drive file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 14YpPjLBzrEARQqR-59p_DZBAmnEL903JbXx1QLKOhmU&gt;</span></div><div class='co'>#&gt; With MIME type:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/vnd.google-apps.spreadsheet</span></div><div class='input'>
-<span class='co'># Publish file</span>
-<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_publish</span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
-</div><div class='co'>#&gt; File now published:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 14YpPjLBzrEARQqR-59p_DZBAmnEL903JbXx1QLKOhmU&gt;</span></div><div class='input'><span class='va'>file</span><span class='op'>$</span><span class='va'>published</span>
-</div><div class='co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='co'># Unpublish file</span>
-<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_unpublish</span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
-</div><div class='co'>#&gt; File now NOT published:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 14YpPjLBzrEARQqR-59p_DZBAmnEL903JbXx1QLKOhmU&gt;</span></div><div class='input'><span class='va'>file</span><span class='op'>$</span><span class='va'>published</span>
-</div><div class='co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='co'># Clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
-</div><div class='co'>#&gt; File deleted:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 14YpPjLBzrEARQqR-59p_DZBAmnEL903JbXx1QLKOhmU&gt;</span></div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># Upload file to publish</span></span>
+<span class='r-in'><span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'><a href='drive_example.html'>drive_example</a></span><span class='op'>(</span><span class='st'>"chicken.csv"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  type <span class='op'>=</span> <span class='st'>"spreadsheet"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Local file:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>/home/runner/work/_temp/Library/googledrive/extdata/chicken.csv</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Uploaded into Drive file:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1CG77zNBS4pLuYbq2VThqj9wsX55clrCe2BlRwmSj9MQ&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/vnd.google-apps.spreadsheet</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Publish file</span></span>
+<span class='r-in'><span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_publish</span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> File now published:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1CG77zNBS4pLuYbq2VThqj9wsX55clrCe2BlRwmSj9MQ&gt;</span></span>
+<span class='r-in'><span class='va'>file</span><span class='op'>$</span><span class='va'>published</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Unpublish file</span></span>
+<span class='r-in'><span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_unpublish</span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> File now NOT published:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1CG77zNBS4pLuYbq2VThqj9wsX55clrCe2BlRwmSj9MQ&gt;</span></span>
+<span class='r-in'><span class='va'>file</span><span class='op'>$</span><span class='va'>published</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] FALSE</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Clean up</span></span>
+<span class='r-in'><span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> File deleted:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken </span><span style='color: #555555;'>&lt;id: 1CG77zNBS4pLuYbq2VThqj9wsX55clrCe2BlRwmSj9MQ&gt;</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

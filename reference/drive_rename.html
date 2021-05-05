@@ -231,24 +231,45 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Create a file to rename</span>
-<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_create.html'>drive_create</a></span><span class='op'>(</span><span class='st'>"file-to-rename"</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Created Drive file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> file-to-rename </span><span style='color: #555555;'>&lt;id: 1-gWitIiQ7u2l0BRMMzq-YBhKTQQ3DHQc&gt;</span></div><div class='co'>#&gt; With MIME type:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/octet-stream</span></div><div class='input'>
-<span class='co'># Rename it</span>
-<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_rename</span><span class='op'>(</span><span class='va'>file</span>, name <span class='op'>=</span> <span class='st'>"renamed-file"</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Original file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> file-to-rename </span><span style='color: #555555;'>&lt;id: 1-gWitIiQ7u2l0BRMMzq-YBhKTQQ3DHQc&gt;</span></div><div class='co'>#&gt; Has been renamed:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> renamed-file </span><span style='color: #555555;'>&lt;id: 1-gWitIiQ7u2l0BRMMzq-YBhKTQQ3DHQc&gt;</span></div><div class='input'>
-<span class='co'># `overwrite = FALSE` errors if something already exists at target filepath</span>
-<span class='co'># THIS WILL ERROR!</span>
-<span class='fu'><a href='drive_create.html'>drive_create</a></span><span class='op'>(</span><span class='st'>"name-squatter"</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Created Drive file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 170dL8LgwHAPHNEj5g6rcICCgsWS1FGsF&gt;</span></div><div class='co'>#&gt; With MIME type:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/octet-stream</span></div><div class='input'><span class='fu'>drive_rename</span><span class='op'>(</span><span class='va'>file</span>, name <span class='op'>=</span> <span class='st'>"name-squatter"</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='co'>#&gt; <span class='error'>Error: </span>One or more items already exist at the target filepath and `overwrite = FALSE`:
-#&gt; * ~/name-squatter: 170dL8LgwHAPHNEj5g6rcICCgsWS1FGsF</div><div class='input'>
-<span class='co'># `overwrite = TRUE` moves the existing item to trash, then proceeds</span>
-<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_rename</span><span class='op'>(</span><span class='va'>file</span>, name <span class='op'>=</span> <span class='st'>"name-squatter"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='co'>#&gt; File trashed:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 170dL8LgwHAPHNEj5g6rcICCgsWS1FGsF&gt;</span></div><div class='co'>#&gt; Original file:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> renamed-file </span><span style='color: #555555;'>&lt;id: 1-gWitIiQ7u2l0BRMMzq-YBhKTQQ3DHQc&gt;</span></div><div class='co'>#&gt; Has been renamed:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1-gWitIiQ7u2l0BRMMzq-YBhKTQQ3DHQc&gt;</span></div><div class='input'>
-<span class='co'># Clean up</span>
-<span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
-</div><div class='co'>#&gt; File deleted:</div><div class='co'>#&gt; <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1-gWitIiQ7u2l0BRMMzq-YBhKTQQ3DHQc&gt;</span></div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># Create a file to rename</span></span>
+<span class='r-in'><span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_create.html'>drive_create</a></span><span class='op'>(</span><span class='st'>"file-to-rename"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> file-to-rename </span><span style='color: #555555;'>&lt;id: 1rr44UfWDeq2_gjAOstY39XuZBjRg27Kt&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/octet-stream</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Rename it</span></span>
+<span class='r-in'><span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_rename</span><span class='op'>(</span><span class='va'>file</span>, name <span class='op'>=</span> <span class='st'>"renamed-file"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> file-to-rename </span><span style='color: #555555;'>&lt;id: 1rr44UfWDeq2_gjAOstY39XuZBjRg27Kt&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Has been renamed:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> renamed-file </span><span style='color: #555555;'>&lt;id: 1rr44UfWDeq2_gjAOstY39XuZBjRg27Kt&gt;</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># `overwrite = FALSE` errors if something already exists at target filepath</span></span>
+<span class='r-in'><span class='co'># THIS WILL ERROR!</span></span>
+<span class='r-in'><span class='fu'><a href='drive_create.html'>drive_create</a></span><span class='op'>(</span><span class='st'>"name-squatter"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1Ly524aOZk62dLQzR_JFFkVtaksrzg4gN&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/octet-stream</span></span>
+<span class='r-in'><span class='fu'>drive_rename</span><span class='op'>(</span><span class='va'>file</span>, name <span class='op'>=</span> <span class='st'>"name-squatter"</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error:</span> One or more items already exist at the target filepath and `overwrite = FALSE`:</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> * ~/name-squatter: 1Ly524aOZk62dLQzR_JFFkVtaksrzg4gN</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># `overwrite = TRUE` moves the existing item to trash, then proceeds</span></span>
+<span class='r-in'><span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_rename</span><span class='op'>(</span><span class='va'>file</span>, name <span class='op'>=</span> <span class='st'>"name-squatter"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> File trashed:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1Ly524aOZk62dLQzR_JFFkVtaksrzg4gN&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> renamed-file </span><span style='color: #555555;'>&lt;id: 1rr44UfWDeq2_gjAOstY39XuZBjRg27Kt&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Has been renamed:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1rr44UfWDeq2_gjAOstY39XuZBjRg27Kt&gt;</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Clean up</span></span>
+<span class='r-in'><span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> File deleted:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1rr44UfWDeq2_gjAOstY39XuZBjRg27Kt&gt;</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

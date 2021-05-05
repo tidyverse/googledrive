@@ -224,623 +224,626 @@ returned.</p></td>
 googledrive.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>drive_endpoints</span><span class='op'>(</span><span class='op'>)</span>, <span class='fl'>3</span><span class='op'>)</span>, max.level <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='co'>#&gt; List of 3
-#&gt;  $ drive.about.get                :List of 7
-#&gt;   ..$ id         : chr "drive.about.get"
-#&gt;   ..$ httpMethod : chr "GET"
-#&gt;   ..$ path       : 'fs_path' chr "drive/v3/about"
-#&gt;   ..$ scopes     : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description: chr "Gets information about the user, the user's Drive, and system capabilities."
-#&gt;   ..$ response   : chr "About"
-#&gt;   ..$ parameters :List of 7
-#&gt;  $ drive.changes.getStartPageToken:List of 7
-#&gt;   ..$ id         : chr "drive.changes.getStartPageToken"
-#&gt;   ..$ httpMethod : chr "GET"
-#&gt;   ..$ path       : 'fs_path' chr "drive/v3/changes/startPageToken"
-#&gt;   ..$ parameters :List of 11
-#&gt;   ..$ scopes     : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description: chr "Gets the starting pageToken for listing future changes."
-#&gt;   ..$ response   : chr "StartPageToken"
-#&gt;  $ drive.changes.list             :List of 9
-#&gt;   ..$ id                  : chr "drive.changes.list"
-#&gt;   ..$ httpMethod          : chr "GET"
-#&gt;   ..$ path                : 'fs_path' chr "drive/v3/changes"
-#&gt;   ..$ parameters          :List of 20
-#&gt;   ..$ scopes              : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt;   ..$ description         : chr "Lists the changes for a user or shared drive."
-#&gt;   ..$ response            : chr "ChangeList"
-#&gt;   ..$ parameterOrder      : chr "pageToken"
-#&gt;   ..$ supportsSubscription: logi TRUE</div><div class='input'><span class='fu'>drive_endpoint</span><span class='op'>(</span><span class='st'>"drive.files.delete"</span><span class='op'>)</span>
-</div><div class='co'>#&gt; $id
-#&gt; [1] "drive.files.delete"
-#&gt; 
-#&gt; $httpMethod
-#&gt; [1] "DELETE"
-#&gt; 
-#&gt; $path
-#&gt; drive/v3/files/{fileId}
-#&gt; 
-#&gt; $parameters
-#&gt; $parameters$enforceSingleParent
-#&gt; $parameters$enforceSingleParent$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$enforceSingleParent$description
-#&gt; [1] "Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root."
-#&gt; 
-#&gt; $parameters$enforceSingleParent$default
-#&gt; [1] "false"
-#&gt; 
-#&gt; $parameters$enforceSingleParent$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$fileId
-#&gt; $parameters$fileId$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$fileId$description
-#&gt; [1] "The ID of the file."
-#&gt; 
-#&gt; $parameters$fileId$required
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $parameters$fileId$location
-#&gt; [1] "path"
-#&gt; 
-#&gt; 
-#&gt; $parameters$supportsAllDrives
-#&gt; $parameters$supportsAllDrives$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$supportsAllDrives$description
-#&gt; [1] "Whether the requesting application supports both My Drives and shared drives."
-#&gt; 
-#&gt; $parameters$supportsAllDrives$default
-#&gt; [1] "false"
-#&gt; 
-#&gt; $parameters$supportsAllDrives$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$supportsTeamDrives
-#&gt; $parameters$supportsTeamDrives$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$supportsTeamDrives$description
-#&gt; [1] "Deprecated use supportsAllDrives instead."
-#&gt; 
-#&gt; $parameters$supportsTeamDrives$default
-#&gt; [1] "false"
-#&gt; 
-#&gt; $parameters$supportsTeamDrives$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$alt
-#&gt; $parameters$alt$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$alt$description
-#&gt; [1] "Data format for the response."
-#&gt; 
-#&gt; $parameters$alt$default
-#&gt; [1] "json"
-#&gt; 
-#&gt; $parameters$alt$enum
-#&gt; [1] "json"
-#&gt; 
-#&gt; $parameters$alt$enumDescriptions
-#&gt; [1] "Responses with Content-Type of application/json"
-#&gt; 
-#&gt; $parameters$alt$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$fields
-#&gt; $parameters$fields$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$fields$description
-#&gt; [1] "Selector specifying which fields to include in a partial response."
-#&gt; 
-#&gt; $parameters$fields$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$key
-#&gt; $parameters$key$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$key$description
-#&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
-#&gt; 
-#&gt; $parameters$key$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$oauth_token
-#&gt; $parameters$oauth_token$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$oauth_token$description
-#&gt; [1] "OAuth 2.0 token for the current user."
-#&gt; 
-#&gt; $parameters$oauth_token$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$prettyPrint
-#&gt; $parameters$prettyPrint$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$prettyPrint$description
-#&gt; [1] "Returns response with indentations and line breaks."
-#&gt; 
-#&gt; $parameters$prettyPrint$default
-#&gt; [1] "true"
-#&gt; 
-#&gt; $parameters$prettyPrint$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$quotaUser
-#&gt; $parameters$quotaUser$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$quotaUser$description
-#&gt; [1] "An opaque string that represents a user for quota purposes. Must not exceed 40 characters."
-#&gt; 
-#&gt; $parameters$quotaUser$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$userIp
-#&gt; $parameters$userIp$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$userIp$description
-#&gt; [1] "Deprecated. Please use quotaUser instead."
-#&gt; 
-#&gt; $parameters$userIp$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $scopes
-#&gt; [1] "drive, drive.appdata, drive.file"
-#&gt; 
-#&gt; $description
-#&gt; [1] "Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted."
-#&gt; 
-#&gt; $parameterOrder
-#&gt; [1] "fileId"
-#&gt; </div><div class='input'><span class='fu'>drive_endpoint</span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>
-</div><div class='co'>#&gt; $id
-#&gt; [1] "drive.changes.watch"
-#&gt; 
-#&gt; $httpMethod
-#&gt; [1] "POST"
-#&gt; 
-#&gt; $path
-#&gt; drive/v3/changes/watch
-#&gt; 
-#&gt; $parameters
-#&gt; $parameters$driveId
-#&gt; $parameters$driveId$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$driveId$description
-#&gt; [1] "The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier."
-#&gt; 
-#&gt; $parameters$driveId$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$includeCorpusRemovals
-#&gt; $parameters$includeCorpusRemovals$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$includeCorpusRemovals$description
-#&gt; [1] "Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file."
-#&gt; 
-#&gt; $parameters$includeCorpusRemovals$default
-#&gt; [1] "false"
-#&gt; 
-#&gt; $parameters$includeCorpusRemovals$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$includeItemsFromAllDrives
-#&gt; $parameters$includeItemsFromAllDrives$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$includeItemsFromAllDrives$description
-#&gt; [1] "Whether both My Drive and shared drive items should be included in results."
-#&gt; 
-#&gt; $parameters$includeItemsFromAllDrives$default
-#&gt; [1] "false"
-#&gt; 
-#&gt; $parameters$includeItemsFromAllDrives$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$includePermissionsForView
-#&gt; $parameters$includePermissionsForView$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$includePermissionsForView$description
-#&gt; [1] "Specifies which additional view's permissions to include in the response. Only 'published' is supported."
-#&gt; 
-#&gt; $parameters$includePermissionsForView$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$includeRemoved
-#&gt; $parameters$includeRemoved$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$includeRemoved$description
-#&gt; [1] "Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access."
-#&gt; 
-#&gt; $parameters$includeRemoved$default
-#&gt; [1] "true"
-#&gt; 
-#&gt; $parameters$includeRemoved$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$includeTeamDriveItems
-#&gt; $parameters$includeTeamDriveItems$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$includeTeamDriveItems$description
-#&gt; [1] "Deprecated use includeItemsFromAllDrives instead."
-#&gt; 
-#&gt; $parameters$includeTeamDriveItems$default
-#&gt; [1] "false"
-#&gt; 
-#&gt; $parameters$includeTeamDriveItems$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$pageSize
-#&gt; $parameters$pageSize$type
-#&gt; [1] "integer"
-#&gt; 
-#&gt; $parameters$pageSize$description
-#&gt; [1] "The maximum number of changes to return per page."
-#&gt; 
-#&gt; $parameters$pageSize$default
-#&gt; [1] "100"
-#&gt; 
-#&gt; $parameters$pageSize$format
-#&gt; [1] "int32"
-#&gt; 
-#&gt; $parameters$pageSize$minimum
-#&gt; [1] "1"
-#&gt; 
-#&gt; $parameters$pageSize$maximum
-#&gt; [1] "1000"
-#&gt; 
-#&gt; $parameters$pageSize$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$pageToken
-#&gt; $parameters$pageToken$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$pageToken$description
-#&gt; [1] "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method."
-#&gt; 
-#&gt; $parameters$pageToken$required
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $parameters$pageToken$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$restrictToMyDrive
-#&gt; $parameters$restrictToMyDrive$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$restrictToMyDrive$description
-#&gt; [1] "Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive."
-#&gt; 
-#&gt; $parameters$restrictToMyDrive$default
-#&gt; [1] "false"
-#&gt; 
-#&gt; $parameters$restrictToMyDrive$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$spaces
-#&gt; $parameters$spaces$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$spaces$description
-#&gt; [1] "A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'."
-#&gt; 
-#&gt; $parameters$spaces$default
-#&gt; [1] "drive"
-#&gt; 
-#&gt; $parameters$spaces$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$supportsAllDrives
-#&gt; $parameters$supportsAllDrives$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$supportsAllDrives$description
-#&gt; [1] "Whether the requesting application supports both My Drives and shared drives."
-#&gt; 
-#&gt; $parameters$supportsAllDrives$default
-#&gt; [1] "false"
-#&gt; 
-#&gt; $parameters$supportsAllDrives$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$supportsTeamDrives
-#&gt; $parameters$supportsTeamDrives$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$supportsTeamDrives$description
-#&gt; [1] "Deprecated use supportsAllDrives instead."
-#&gt; 
-#&gt; $parameters$supportsTeamDrives$default
-#&gt; [1] "false"
-#&gt; 
-#&gt; $parameters$supportsTeamDrives$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$teamDriveId
-#&gt; $parameters$teamDriveId$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$teamDriveId$description
-#&gt; [1] "Deprecated use driveId instead."
-#&gt; 
-#&gt; $parameters$teamDriveId$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$address
-#&gt; $parameters$address$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$address$description
-#&gt; [1] "The address where notifications are delivered for this channel."
-#&gt; 
-#&gt; $parameters$address$location
-#&gt; [1] "body"
-#&gt; 
-#&gt; 
-#&gt; $parameters$expiration
-#&gt; $parameters$expiration$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$expiration$description
-#&gt; [1] "Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional."
-#&gt; 
-#&gt; $parameters$expiration$format
-#&gt; [1] "int64"
-#&gt; 
-#&gt; $parameters$expiration$location
-#&gt; [1] "body"
-#&gt; 
-#&gt; 
-#&gt; $parameters$id
-#&gt; $parameters$id$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$id$description
-#&gt; [1] "A UUID or similar unique string that identifies this channel."
-#&gt; 
-#&gt; $parameters$id$location
-#&gt; [1] "body"
-#&gt; 
-#&gt; 
-#&gt; $parameters$kind
-#&gt; $parameters$kind$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$kind$description
-#&gt; [1] "Identifies this as a notification channel used to watch for changes to a resource, which is \"api#channel\"."
-#&gt; 
-#&gt; $parameters$kind$default
-#&gt; [1] "api#channel"
-#&gt; 
-#&gt; $parameters$kind$location
-#&gt; [1] "body"
-#&gt; 
-#&gt; 
-#&gt; $parameters$params
-#&gt; $parameters$params$type
-#&gt; [1] "object"
-#&gt; 
-#&gt; $parameters$params$description
-#&gt; [1] "Additional parameters controlling delivery channel behavior. Optional."
-#&gt; 
-#&gt; $parameters$params$additionalProperties
-#&gt; $parameters$params$additionalProperties$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$params$additionalProperties$description
-#&gt; [1] "Declares a new parameter by name."
-#&gt; 
-#&gt; 
-#&gt; $parameters$params$location
-#&gt; [1] "body"
-#&gt; 
-#&gt; 
-#&gt; $parameters$payload
-#&gt; $parameters$payload$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$payload$description
-#&gt; [1] "A Boolean value to indicate whether payload is wanted. Optional."
-#&gt; 
-#&gt; $parameters$payload$location
-#&gt; [1] "body"
-#&gt; 
-#&gt; 
-#&gt; $parameters$resourceId
-#&gt; $parameters$resourceId$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$resourceId$description
-#&gt; [1] "An opaque ID that identifies the resource being watched on this channel. Stable across different API versions."
-#&gt; 
-#&gt; $parameters$resourceId$location
-#&gt; [1] "body"
-#&gt; 
-#&gt; 
-#&gt; $parameters$resourceUri
-#&gt; $parameters$resourceUri$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$resourceUri$description
-#&gt; [1] "A version-specific identifier for the watched resource."
-#&gt; 
-#&gt; $parameters$resourceUri$location
-#&gt; [1] "body"
-#&gt; 
-#&gt; 
-#&gt; $parameters$token
-#&gt; $parameters$token$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$token$description
-#&gt; [1] "An arbitrary string delivered to the target address with each notification delivered over this channel. Optional."
-#&gt; 
-#&gt; $parameters$token$location
-#&gt; [1] "body"
-#&gt; 
-#&gt; 
-#&gt; $parameters$type
-#&gt; $parameters$type$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$type$description
-#&gt; [1] "The type of delivery mechanism used for this channel. Valid values are \"web_hook\" (or \"webhook\"). Both values refer to a channel where Http requests are used to deliver messages."
-#&gt; 
-#&gt; $parameters$type$location
-#&gt; [1] "body"
-#&gt; 
-#&gt; 
-#&gt; $parameters$alt
-#&gt; $parameters$alt$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$alt$description
-#&gt; [1] "Data format for the response."
-#&gt; 
-#&gt; $parameters$alt$default
-#&gt; [1] "json"
-#&gt; 
-#&gt; $parameters$alt$enum
-#&gt; [1] "json"
-#&gt; 
-#&gt; $parameters$alt$enumDescriptions
-#&gt; [1] "Responses with Content-Type of application/json"
-#&gt; 
-#&gt; $parameters$alt$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$fields
-#&gt; $parameters$fields$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$fields$description
-#&gt; [1] "Selector specifying which fields to include in a partial response."
-#&gt; 
-#&gt; $parameters$fields$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$key
-#&gt; $parameters$key$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$key$description
-#&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
-#&gt; 
-#&gt; $parameters$key$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$oauth_token
-#&gt; $parameters$oauth_token$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$oauth_token$description
-#&gt; [1] "OAuth 2.0 token for the current user."
-#&gt; 
-#&gt; $parameters$oauth_token$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$prettyPrint
-#&gt; $parameters$prettyPrint$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $parameters$prettyPrint$description
-#&gt; [1] "Returns response with indentations and line breaks."
-#&gt; 
-#&gt; $parameters$prettyPrint$default
-#&gt; [1] "true"
-#&gt; 
-#&gt; $parameters$prettyPrint$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$quotaUser
-#&gt; $parameters$quotaUser$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$quotaUser$description
-#&gt; [1] "An opaque string that represents a user for quota purposes. Must not exceed 40 characters."
-#&gt; 
-#&gt; $parameters$quotaUser$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $parameters$userIp
-#&gt; $parameters$userIp$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $parameters$userIp$description
-#&gt; [1] "Deprecated. Please use quotaUser instead."
-#&gt; 
-#&gt; $parameters$userIp$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $scopes
-#&gt; [1] "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#&gt; 
-#&gt; $description
-#&gt; [1] "Subscribes to changes for a user."
-#&gt; 
-#&gt; $request
-#&gt; [1] "Channel"
-#&gt; 
-#&gt; $response
-#&gt; [1] "Channel"
-#&gt; 
-#&gt; $parameterOrder
-#&gt; [1] "pageToken"
-#&gt; 
-#&gt; $supportsSubscription
-#&gt; [1] TRUE
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>drive_endpoints</span><span class='op'>(</span><span class='op'>)</span>, <span class='fl'>3</span><span class='op'>)</span>, max.level <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> List of 3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ drive.about.get                :List of 7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ id         : chr "drive.about.get"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ httpMethod : chr "GET"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ path       : 'fs_path' chr "drive/v3/about"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ scopes     : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ description: chr "Gets information about the user, the user's Drive, and system capabilities."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ response   : chr "About"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ parameters :List of 7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ drive.changes.getStartPageToken:List of 7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ id         : chr "drive.changes.getStartPageToken"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ httpMethod : chr "GET"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ path       : 'fs_path' chr "drive/v3/changes/startPageToken"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ parameters :List of 11</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ scopes     : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ description: chr "Gets the starting pageToken for listing future changes."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ response   : chr "StartPageToken"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ drive.changes.list             :List of 9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ id                  : chr "drive.changes.list"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ httpMethod          : chr "GET"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ path                : 'fs_path' chr "drive/v3/changes"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ parameters          :List of 20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ scopes              : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ description         : chr "Lists the changes for a user or shared drive."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ response            : chr "ChangeList"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ parameterOrder      : chr "pageToken"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ..$ supportsSubscription: logi TRUE</span>
+<span class='r-in'><span class='fu'>drive_endpoint</span><span class='op'>(</span><span class='st'>"drive.files.delete"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $id</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "drive.files.delete"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $httpMethod</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "DELETE"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $path</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> drive/v3/files/{fileId}</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$enforceSingleParent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$enforceSingleParent$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$enforceSingleParent$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$enforceSingleParent$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "false"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$enforceSingleParent$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fileId</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fileId$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fileId$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "The ID of the file."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fileId$required</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fileId$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "path"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsAllDrives</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsAllDrives$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsAllDrives$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Whether the requesting application supports both My Drives and shared drives."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsAllDrives$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "false"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsAllDrives$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsTeamDrives</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsTeamDrives$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsTeamDrives$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Deprecated use supportsAllDrives instead."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsTeamDrives$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "false"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsTeamDrives$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Data format for the response."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "json"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$enum</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "json"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$enumDescriptions</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Responses with Content-Type of application/json"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fields</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fields$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fields$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Selector specifying which fields to include in a partial response."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fields$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$key</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$key$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$key$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$key$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$oauth_token</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$oauth_token$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$oauth_token$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "OAuth 2.0 token for the current user."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$oauth_token$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$prettyPrint</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$prettyPrint$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$prettyPrint$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Returns response with indentations and line breaks."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$prettyPrint$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "true"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$prettyPrint$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$quotaUser</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$quotaUser$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$quotaUser$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "An opaque string that represents a user for quota purposes. Must not exceed 40 characters."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$quotaUser$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$userIp</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$userIp$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$userIp$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Deprecated. Please use quotaUser instead."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$userIp$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $scopes</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "drive, drive.appdata, drive.file"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameterOrder</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "fileId"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'>drive_endpoint</span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $id</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "drive.changes.watch"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $httpMethod</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "POST"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $path</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> drive/v3/changes/watch</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$driveId</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$driveId$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$driveId$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$driveId$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeCorpusRemovals</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeCorpusRemovals$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeCorpusRemovals$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeCorpusRemovals$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "false"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeCorpusRemovals$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeItemsFromAllDrives</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeItemsFromAllDrives$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeItemsFromAllDrives$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Whether both My Drive and shared drive items should be included in results."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeItemsFromAllDrives$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "false"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeItemsFromAllDrives$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includePermissionsForView</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includePermissionsForView$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includePermissionsForView$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Specifies which additional view's permissions to include in the response. Only 'published' is supported."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includePermissionsForView$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeRemoved</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeRemoved$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeRemoved$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeRemoved$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "true"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeRemoved$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeTeamDriveItems</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeTeamDriveItems$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeTeamDriveItems$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Deprecated use includeItemsFromAllDrives instead."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeTeamDriveItems$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "false"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$includeTeamDriveItems$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageSize</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageSize$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "integer"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageSize$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "The maximum number of changes to return per page."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageSize$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "100"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageSize$format</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "int32"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageSize$minimum</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageSize$maximum</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "1000"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageSize$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageToken</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageToken$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageToken$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageToken$required</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$pageToken$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$restrictToMyDrive</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$restrictToMyDrive$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$restrictToMyDrive$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$restrictToMyDrive$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "false"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$restrictToMyDrive$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$spaces</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$spaces$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$spaces$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$spaces$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "drive"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$spaces$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsAllDrives</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsAllDrives$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsAllDrives$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Whether the requesting application supports both My Drives and shared drives."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsAllDrives$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "false"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsAllDrives$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsTeamDrives</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsTeamDrives$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsTeamDrives$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Deprecated use supportsAllDrives instead."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsTeamDrives$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "false"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$supportsTeamDrives$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$teamDriveId</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$teamDriveId$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$teamDriveId$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Deprecated use driveId instead."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$teamDriveId$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$address</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$address$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$address$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "The address where notifications are delivered for this channel."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$address$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "body"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$expiration</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$expiration$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$expiration$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$expiration$format</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "int64"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$expiration$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "body"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$id</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$id$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$id$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "A UUID or similar unique string that identifies this channel."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$id$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "body"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$kind</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$kind$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$kind$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Identifies this as a notification channel used to watch for changes to a resource, which is \"api#channel\"."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$kind$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "api#channel"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$kind$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "body"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$params</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$params$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "object"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$params$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Additional parameters controlling delivery channel behavior. Optional."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$params$additionalProperties</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$params$additionalProperties$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$params$additionalProperties$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Declares a new parameter by name."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$params$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "body"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$payload</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$payload$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$payload$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "A Boolean value to indicate whether payload is wanted. Optional."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$payload$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "body"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$resourceId</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$resourceId$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$resourceId$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "An opaque ID that identifies the resource being watched on this channel. Stable across different API versions."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$resourceId$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "body"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$resourceUri</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$resourceUri$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$resourceUri$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "A version-specific identifier for the watched resource."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$resourceUri$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "body"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$token</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$token$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$token$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "An arbitrary string delivered to the target address with each notification delivered over this channel. Optional."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$token$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "body"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$type$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$type$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "The type of delivery mechanism used for this channel. Valid values are \"web_hook\" (or \"webhook\"). Both values refer to a channel where Http requests are used to deliver messages."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$type$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "body"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Data format for the response."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "json"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$enum</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "json"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$enumDescriptions</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Responses with Content-Type of application/json"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$alt$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fields</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fields$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fields$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Selector specifying which fields to include in a partial response."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$fields$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$key</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$key$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$key$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$key$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$oauth_token</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$oauth_token$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$oauth_token$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "OAuth 2.0 token for the current user."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$oauth_token$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$prettyPrint</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$prettyPrint$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "boolean"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$prettyPrint$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Returns response with indentations and line breaks."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$prettyPrint$default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "true"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$prettyPrint$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$quotaUser</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$quotaUser$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$quotaUser$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "An opaque string that represents a user for quota purposes. Must not exceed 40 characters."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$quotaUser$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$userIp</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$userIp$type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "string"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$userIp$description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Deprecated. Please use quotaUser instead."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameters$userIp$location</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "query"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $scopes</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $description</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Subscribes to changes for a user."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $request</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Channel"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $response</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Channel"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $parameterOrder</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "pageToken"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $supportsSubscription</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

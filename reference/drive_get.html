@@ -281,55 +281,58 @@ path, also calls <code>files.list</code>:</p><ul>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># get info about your "My Drive" root folder</span>
-<span class='fu'>drive_get</span><span class='op'>(</span><span class='st'>"~/"</span><span class='op'>)</span>
-</div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 4</span>
-#&gt;   name     path  id                  drive_resource   
-#&gt;   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span>
-#&gt; <span style='color: #BCBCBC;'>1</span><span> My Drive ~/    0AO_RMaBzcP63Uk9PVA </span><span style='color: #949494;'>&lt;named list [30]&gt;</span></div><div class='input'><span class='co'># the API reserves the file id "root" for your root folder</span>
-<span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"root"</span><span class='op'>)</span>
-</div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 3</span>
-#&gt;   name     id                  drive_resource   
-#&gt; <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span>
-#&gt; <span style='color: #BCBCBC;'>1</span><span> My Drive 0AO_RMaBzcP63Uk9PVA </span><span style='color: #949494;'>&lt;named list [30]&gt;</span></div><div class='input'><span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"root"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='drive_reveal.html'>drive_reveal</a></span><span class='op'>(</span><span class='st'>"path"</span><span class='op'>)</span>
-</div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 4</span>
-#&gt;   name     path  id                  drive_resource   
-#&gt;   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span>
-#&gt; <span style='color: #BCBCBC;'>1</span><span> My Drive ~/    0AO_RMaBzcP63Uk9PVA </span><span style='color: #949494;'>&lt;named list [30]&gt;</span></div><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># The examples below are indicative of correct syntax.</span>
-<span class='co'># But note these will generally result in an error or a</span>
-<span class='co'># 0-row dribble, unless you replace the inputs with paths</span>
-<span class='co'># or file ids that exist in your Drive.</span>
-
-<span class='co'># multiple names</span>
-<span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"abc"</span>, <span class='st'>"def"</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># multiple names, one of which must be a folder</span>
-<span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"abc"</span>, <span class='st'>"def/"</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># query by file id(s)</span>
-<span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"abcdefgeh123456789"</span><span class='op'>)</span>
-<span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"abcdefgeh123456789"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"abcdefgh123456789"</span>, <span class='st'>"jklmnopq123456789"</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># apply to a browser URL for, e.g., a Google Sheet</span>
-<span class='va'>my_url</span> <span class='op'>&lt;-</span> <span class='st'>"https://docs.google.com/spreadsheets/d/FILE_ID/edit#gid=SHEET_ID"</span>
-<span class='fu'>drive_get</span><span class='op'>(</span><span class='va'>my_url</span><span class='op'>)</span>
-<span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='va'>my_url</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='va'>my_url</span><span class='op'>)</span>
-
-<span class='co'># access the shared drive named "foo"</span>
-<span class='co'># shared_drive params must be specified if getting by path</span>
-<span class='va'>foo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='shared_drive_get.html'>shared_drive_get</a></span><span class='op'>(</span><span class='st'>"foo"</span><span class='op'>)</span>
-<span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span><span class='op'>)</span>, shared_drive <span class='op'>=</span> <span class='va'>foo</span><span class='op'>)</span>
-<span class='co'># shared_drive params are not necessary if getting by id</span>
-<span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"123456789"</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># search all shared drives and other files user has accessed</span>
-<span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span><span class='op'>)</span>, corpus <span class='op'>=</span> <span class='st'>"allDrives"</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># get info about your "My Drive" root folder</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='st'>"~/"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path  id                  drive_resource   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> My Drive ~/    0AO_RMaBzcP63Uk9PVA </span><span style='color: #949494;'>&lt;named list [30]&gt;</span></span>
+<span class='r-in'><span class='co'># the API reserves the file id "root" for your root folder</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"root"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 x 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   name     id                  drive_resource   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> My Drive 0AO_RMaBzcP63Uk9PVA </span><span style='color: #949494;'>&lt;named list [30]&gt;</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"root"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='drive_reveal.html'>drive_reveal</a></span><span class='op'>(</span><span class='st'>"path"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path  id                  drive_resource   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> My Drive ~/    0AO_RMaBzcP63Uk9PVA </span><span style='color: #949494;'>&lt;named list [30]&gt;</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># The examples below are indicative of correct syntax.</span></span>
+<span class='r-in'><span class='co'># But note these will generally result in an error or a</span></span>
+<span class='r-in'><span class='co'># 0-row dribble, unless you replace the inputs with paths</span></span>
+<span class='r-in'><span class='co'># or file ids that exist in your Drive.</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># multiple names</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"abc"</span>, <span class='st'>"def"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># multiple names, one of which must be a folder</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"abc"</span>, <span class='st'>"def/"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># query by file id(s)</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"abcdefgeh123456789"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"abcdefgeh123456789"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"abcdefgh123456789"</span>, <span class='st'>"jklmnopq123456789"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># apply to a browser URL for, e.g., a Google Sheet</span></span>
+<span class='r-in'><span class='va'>my_url</span> <span class='op'>&lt;-</span> <span class='st'>"https://docs.google.com/spreadsheets/d/FILE_ID/edit#gid=SHEET_ID"</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='va'>my_url</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='va'>my_url</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='va'>my_url</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># access the shared drive named "foo"</span></span>
+<span class='r-in'><span class='co'># shared_drive params must be specified if getting by path</span></span>
+<span class='r-in'><span class='va'>foo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='shared_drive_get.html'>shared_drive_get</a></span><span class='op'>(</span><span class='st'>"foo"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span><span class='op'>)</span>, shared_drive <span class='op'>=</span> <span class='va'>foo</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># shared_drive params are not necessary if getting by id</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"123456789"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># search all shared drives and other files user has accessed</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"this.jpg"</span>, <span class='st'>"that-file"</span><span class='op'>)</span>, corpus <span class='op'>=</span> <span class='st'>"allDrives"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

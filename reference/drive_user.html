@@ -210,20 +210,22 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>drive_user</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Logged in as:
-#&gt; <span style='color: #00BBBB;'>•</span><span> displayName: </span><span style='color: #00BB00;'>googledrive-docs@gargle-169921.iam.gserviceaccount.com</span>
-#&gt; <span style='color: #00BBBB;'>•</span><span> emailAddress: </span><span style='color: #0000BB;'>googledrive-docs@gargle-169921.iam.gserviceaccount.com</span></div><div class='input'>
-<span class='co'># more info is returned than is printed</span>
-<span class='va'>user</span> <span class='op'>&lt;-</span> <span class='fu'>drive_user</span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>user</span><span class='op'>)</span>
-</div><div class='co'>#&gt; List of 5
-#&gt;  $ kind        : chr "drive#user"
-#&gt;  $ displayName : chr "googledrive-docs@gargle-169921.iam.gserviceaccount.com"
-#&gt;  $ me          : logi TRUE
-#&gt;  $ permissionId: chr "09204227840243713330"
-#&gt;  $ emailAddress: chr "googledrive-docs@gargle-169921.iam.gserviceaccount.com"
-#&gt;  - attr(*, "class")= chr [1:2] "drive_user" "list"</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>drive_user</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Logged in as:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> displayName: </span><span style='color: #00BB00;'>googledrive-docs@gargle-169921.iam.gserviceaccount.com</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> emailAddress: </span><span style='color: #0000BB;'>googledrive-docs@gargle-169921.iam.gserviceaccount.com</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># more info is returned than is printed</span></span>
+<span class='r-in'><span class='va'>user</span> <span class='op'>&lt;-</span> <span class='fu'>drive_user</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>user</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> List of 5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ kind        : chr "drive#user"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ displayName : chr "googledrive-docs@gargle-169921.iam.gserviceaccount.com"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ me          : logi TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ permissionId: chr "09204227840243713330"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ emailAddress: chr "googledrive-docs@gargle-169921.iam.gserviceaccount.com"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  - attr(*, "class")= chr [1:2] "drive_user" "list"</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -220,33 +220,37 @@ Drive API.</p></td>
     <p>Character. MIME type.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## get the mime type for Google Spreadsheets</span>
-<span class='fu'>drive_mime_type</span><span class='op'>(</span><span class='st'>"spreadsheet"</span><span class='op'>)</span>
-</div><div class='co'>#&gt; [1] "application/vnd.google-apps.spreadsheet"</div><div class='input'>
-<span class='co'>## get the mime type for jpegs</span>
-<span class='fu'>drive_mime_type</span><span class='op'>(</span><span class='st'>"jpeg"</span><span class='op'>)</span>
-</div><div class='co'>#&gt; [1] "image/jpeg"</div><div class='input'>
-<span class='co'>## it's vectorized</span>
-<span class='fu'>drive_mime_type</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"presentation"</span>, <span class='st'>"pdf"</span>, <span class='st'>"image/gif"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; [1] "application/vnd.google-apps.presentation"
-#&gt; [2] "application/pdf"                         
-#&gt; [3] "image/gif"                               </div><div class='input'>
-<span class='co'>## see the internal tibble of MIME types known to the Drive API</span>
-<span class='fu'>drive_mime_type</span><span class='op'>(</span><span class='fu'><a href='expose.html'>expose</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 78 x 4</span>
-#&gt;    mime_type                                            ext   human_type default
-#&gt;    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                                </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>  </span>
-#&gt; <span style='color: #BCBCBC;'> 1</span><span> text/tab-separated-values                            tsv   tsv        TRUE   </span>
-#&gt; <span style='color: #BCBCBC;'> 2</span><span> application/x-vnd.oasis.opendocument.presentation    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span>
-#&gt; <span style='color: #BCBCBC;'> 3</span><span> image/jpeg                                           jpeg  jpeg       TRUE   </span>
-#&gt; <span style='color: #BCBCBC;'> 4</span><span> image/jpeg                                           jpg   jpg        FALSE  </span>
-#&gt; <span style='color: #BCBCBC;'> 5</span><span> image/jpeg                                           jpe   jpe        FALSE  </span>
-#&gt; <span style='color: #BCBCBC;'> 6</span><span> image/bmp                                            </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span>
-#&gt; <span style='color: #BCBCBC;'> 7</span><span> image/gif                                            gif   gif        TRUE   </span>
-#&gt; <span style='color: #BCBCBC;'> 8</span><span> application/vnd.ms-excel.sheet.macroenabled.12       </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span>
-#&gt; <span style='color: #BCBCBC;'> 9</span><span> application/vnd.openxmlformats-officedocument.wordp… dotx  dotx       TRUE   </span>
-#&gt; <span style='color: #BCBCBC;'>10</span><span> application/vnd.ms-powerpoint.presentation.macroena… </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span>
-#&gt; <span style='color: #949494;'># … with 68 more rows</span></div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>## get the mime type for Google Spreadsheets</span></span>
+<span class='r-in'><span class='fu'>drive_mime_type</span><span class='op'>(</span><span class='st'>"spreadsheet"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "application/vnd.google-apps.spreadsheet"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## get the mime type for jpegs</span></span>
+<span class='r-in'><span class='fu'>drive_mime_type</span><span class='op'>(</span><span class='st'>"jpeg"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "image/jpeg"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## it's vectorized</span></span>
+<span class='r-in'><span class='fu'>drive_mime_type</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"presentation"</span>, <span class='st'>"pdf"</span>, <span class='st'>"image/gif"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "application/vnd.google-apps.presentation"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2] "application/pdf"                         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3] "image/gif"                               </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## see the internal tibble of MIME types known to the Drive API</span></span>
+<span class='r-in'><span class='fu'>drive_mime_type</span><span class='op'>(</span><span class='fu'><a href='expose.html'>expose</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 78 x 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    mime_type                          ext   description       human_type default</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>  </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> application/epub+zip               </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>                </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> application/msword                 doc   </span><span style='color: #BB0000;'>NA</span><span>                doc        TRUE   </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> application/msword                 dot   </span><span style='color: #BB0000;'>NA</span><span>                dot        FALSE  </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> application/pdf                    pdf   </span><span style='color: #BB0000;'>NA</span><span>                pdf        TRUE   </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> application/rtf                    rtf   </span><span style='color: #BB0000;'>NA</span><span>                rtf        TRUE   </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> application/vnd.google-apps.audio  </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>                audio      </span><span style='color: #BB0000;'>NA</span><span>     </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> application/vnd.google-apps.docum… </span><span style='color: #BB0000;'>NA</span><span>    Google Docs       document   </span><span style='color: #BB0000;'>NA</span><span>     </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> application/vnd.google-apps.drawi… </span><span style='color: #BB0000;'>NA</span><span>    Google Drawing    drawing    </span><span style='color: #BB0000;'>NA</span><span>     </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> application/vnd.google-apps.drive… </span><span style='color: #BB0000;'>NA</span><span>    3rd party shortc… drive-sdk  </span><span style='color: #BB0000;'>NA</span><span>     </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> application/vnd.google-apps.file   </span><span style='color: #BB0000;'>NA</span><span>    Google Drive file file       </span><span style='color: #BB0000;'>NA</span><span>     </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 68 more rows</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
