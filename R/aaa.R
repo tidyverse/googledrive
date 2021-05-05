@@ -25,7 +25,7 @@
 
   if (identical(Sys.getenv("IN_PKGDOWN"), "true")) {
     tryCatch(
-      googledrive:::drive_auth_docs(),
+      drive_auth_docs(),
       googledrive_auth_internal_error = function(e) NULL
     )
   }
