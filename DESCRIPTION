@@ -33,7 +33,7 @@ Imports:
     tibble (>= 2.0.0),
     utils,
     uuid,
-    vctrs,
+    vctrs (>= 0.3.0),
     withr
 Suggests: 
     covr,
