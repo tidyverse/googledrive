@@ -9,12 +9,12 @@
       1 a     b     <named list [1]>
       2 b     a     <named list [1]>
 
-# new_dribble() requires data.frame and adds the dribble class
+# new_dribble() requires a list and adds the dribble class
 
     Code
       new_dribble(1:3)
     Error <simpleError>
-      inherits(x, "data.frame") is not TRUE
+      `x` must be a list
 
 # validate_dribble() checks class, var names, var types
 

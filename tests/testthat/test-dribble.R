@@ -16,9 +16,10 @@ test_that("dribble() creates empty dribble", {
   expect_equal(nrow(dribble()), 0)
 })
 
-test_that("new_dribble() requires data.frame and adds the dribble class", {
+test_that("new_dribble() requires a list and adds the dribble class", {
   expect_snapshot(new_dribble(1:3), error = TRUE)
-  expect_s3_class(new_dribble(data.frame(x = 1:3)), "dribble")
+  expect_dribble(new_dribble(list(x = 1:3)))
+  expect_dribble(new_dribble(data.frame(x = 1:3)))
 })
 
 test_that("validate_dribble() checks class, var names, var types", {

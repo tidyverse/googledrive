@@ -30,7 +30,6 @@ NULL
 # https://github.com/hadley/adv-r/blob/master/S3.Rmd
 
 new_dribble <- function(x) {
-  stopifnot(inherits(x, "data.frame"))
   # new_tibble0() strips attributes
   structure(
     new_tibble0(x),
@@ -77,11 +76,12 @@ validate_dribble <- function(x) {
 }
 
 dribble <- function(x = NULL) {
-  x <- x %||% tibble::tibble(
-    name = character(),
-    id = character(),
-    drive_resource = list()
-  )
+  x <- x %||%
+    list(
+      name = character(),
+      id = character(),
+      drive_resource = list()
+    )
   validate_dribble(new_dribble(x))
 }
 
@@ -104,10 +104,7 @@ tbl_sum.dribble <- function(x) {
 #' @export
 #' @importFrom tibble as_tibble
 as_tibble.dribble <- function(x, ...) {
-  as_tibble(
-    structure(x, class = class(tibble::tibble())),
-    ...
-  )
+  as_tibble(new_tibble0(x), ...)
 }
 
 dribble_cols <- c("name", "id", "drive_resource")
