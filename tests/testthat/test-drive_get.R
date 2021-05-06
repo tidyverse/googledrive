@@ -60,11 +60,11 @@ test_that("drive_get(path = ...) works", {
   skip_if_offline()
 
   one_file <- drive_get(nm_("thing02"))
-  expect_s3_class(one_file, "dribble")
+  expect_dribble(one_file)
   expect_identical(nrow(one_file), 1L)
 
   two_files <- drive_get(c(nm_("thing02"), nm_("thing03")))
-  expect_s3_class(two_files, "dribble")
+  expect_dribble(two_files)
   expect_identical(two_files$name, c(nm_("thing02"), nm_("thing03")))
 })
 

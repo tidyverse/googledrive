@@ -31,6 +31,21 @@ In the current release, `verbose = FALSE` is still honored, but generates a warn
 
 `local_drive_quiet()` and `with_drive_quiet()` are [withr-style](https://withr.r-lib.org) convenience helpers for setting `googledrive_quiet = TRUE` for some limited scope.
 
+## Other changes
+
+* We've modernized the mechanisms by which the `dribble` class is (or is not)
+  retained by various data frame operations.
+  This boils down to updating or adding methods used by the base, dplyr,
+  pillar/tibble, and vctrs packages.
+  
+  We focus on compatibility with dplyr >= 1.0.0, which was released a year ago.
+  googledrive only Suggests dplyr, so all this really means is that `dribble`
+  manipulation via dplyr now works best with dplyr >= 1.0.0.
+
+## Dependency changes
+
+vctrs is new in Imports (but was already an indirect hard dependency via tibble).
+
 # googledrive 1.0.1
 
 Patch release to modify a test for compatibility with an upcoming release of gargle.

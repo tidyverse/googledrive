@@ -17,9 +17,10 @@
 #'   which is good for humans, but keeps it bundled with the file's unique id
 #'   and other metadata, which are needed for API calls.
 #'
-#' @description In general, the dribble class will be retained even after
-#'   subsetting, as long as the required variables are present and of the
-#'   correct type.
+#' @description In general, the `dribble` class will be retained even after
+#'   manipulation, as long as the required variables are present and of the
+#'   correct type. This works best for manipulations via the dplyr and vctrs
+#'   packages.
 #'
 #' @name dribble
 #' @seealso [as_dribble()]
@@ -29,8 +30,11 @@ NULL
 # https://github.com/hadley/adv-r/blob/master/S3.Rmd
 
 new_dribble <- function(x) {
-  stopifnot(inherits(x, "data.frame"))
-  structure(x, class = c("dribble", "tbl_df", "tbl", "data.frame"))
+  # new_tibble0() strips attributes
+  structure(
+    new_tibble0(x),
+    class = c("dribble", "tbl_df", "tbl", "data.frame")
+  )
 }
 
 validate_dribble <- function(x) {
@@ -56,6 +60,11 @@ validate_dribble <- function(x) {
     )
   }
 
+  # TODO: should I make sure there are no NAs in the id column?
+  # let's wait and see if we ever experience any harm from NOT checking this
+  # also, that feels more like something to enforce by creating a proper
+  # S3 vctr for Drive file ids and it might be odd to make NAs unacceptable
+
   if (!has_drive_resource(x)) {
     stop_glue(
       "Invalid dribble. Can't confirm `kind = \"drive#file\"` or ",
@@ -67,37 +76,34 @@ validate_dribble <- function(x) {
 }
 
 dribble <- function(x = NULL) {
-  x <- x %||% tibble::tibble(
-    name = character(),
-    id = character(),
-    drive_resource = list()
-  )
+  x <- x %||%
+    list(
+      name = character(),
+      id = character(),
+      drive_resource = list()
+    )
   validate_dribble(new_dribble(x))
 }
 
 #' @export
 `[.dribble` <- function(x, i, j, drop = FALSE) {
-  maybe_dribble(NextMethod())
-}
-
-maybe_dribble <- function(x) {
-  if (is.data.frame(x) &&
-    has_dribble_cols(x) &&
-    has_dribble_coltypes(x) &&
-    has_drive_resource(x)) {
-    new_dribble(x)
-  } else {
-    as_tibble(x)
-  }
+  dribble_maybe_reconstruct(NextMethod())
 }
 
 #' @export
-#' @importFrom tibble as_tibble
+`names<-.dribble` <- function(x, value) {
+  dribble_maybe_reconstruct(NextMethod())
+}
+
+#' @export
+tbl_sum.dribble <- function(x) {
+  orig <- NextMethod()
+  c("A dribble" = unname(orig))
+}
+
+#' @export
 as_tibble.dribble <- function(x, ...) {
-  as_tibble(
-    structure(x, class = class(tibble::tibble())),
-    ...
-  )
+  as_tibble(new_tibble0(x), ...)
 }
 
 dribble_cols <- c("name", "id", "drive_resource")
@@ -124,7 +130,7 @@ has_drive_resource <- function(x) {
   all(!is.na(kind) & kind %in% c("drive#file", "drive#drive", "drive#teamDrive"))
 }
 
-#' Coerce to Drive files
+#' Coerce to a `dribble`
 #'
 #' @description
 #' Converts various representations of Google Drive files into a [`dribble`],

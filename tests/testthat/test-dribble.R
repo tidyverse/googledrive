@@ -1,12 +1,25 @@
 # ---- tests ----
+
+test_that("tbl_sum.dribble method works", {
+  d <- new_dribble(
+    tibble::tibble(
+      name = letters[1:2],
+      id = letters[2:1],
+      drive_resource = list(list(kind = "drive#file"))
+    )
+  )
+  expect_snapshot(print(d))
+})
+
 test_that("dribble() creates empty dribble", {
-  expect_s3_class(dribble(), "dribble")
+  expect_dribble(dribble())
   expect_equal(nrow(dribble()), 0)
 })
 
-test_that("new_dribble() requires data.frame and adds the dribble class", {
+test_that("new_dribble() requires a list and adds the dribble class", {
   expect_snapshot(new_dribble(1:3), error = TRUE)
-  expect_s3_class(new_dribble(data.frame(x = 1:3)), "dribble")
+  expect_dribble(new_dribble(list(x = 1:3)))
+  expect_dribble(new_dribble(data.frame(x = 1:3)))
 })
 
 test_that("validate_dribble() checks class, var names, var types", {
@@ -45,13 +58,13 @@ test_that("`[` retains dribble class when possible", {
       drive_resource = list(list(kind = "drive#file"))
     )
   )
-  expect_s3_class(d, "dribble")
-  expect_s3_class(d[1, ], "dribble")
-  expect_s3_class(d[1:2, ], "dribble")
-  expect_s3_class(d[1:3], "dribble")
+  expect_dribble(d)
+  expect_dribble(d[1, ])
+  expect_dribble(d[1:2, ])
+  expect_dribble(d[1:3])
   d$foo <- "foo"
-  expect_s3_class(d, "dribble")
-  expect_s3_class(d[-4], "dribble")
+  expect_dribble(d)
+  expect_dribble(d[-4])
 })
 
 test_that("`[` drops dribble class when not valid", {
@@ -62,7 +75,7 @@ test_that("`[` drops dribble class when not valid", {
       drive_resource = list(list(kind = "drive#file"))
     )
   )
-  expect_s3_class(d, "dribble")
+  expect_dribble(d)
   expect_false(inherits(d[1], "dribble"))
   expect_false(inherits(d[, 1], "dribble"))
 })
@@ -123,7 +136,7 @@ test_that("as_dribble.list() works for good input", {
     kind = "drive#file"
   )
   expect_silent(d <- as_dribble(list(drib_lst)))
-  expect_s3_class(d, "dribble")
+  expect_dribble(d)
 })
 
 test_that("as_dribble.list() catches bad input", {

@@ -42,6 +42,11 @@
 #' @importFrom lifecycle deprecated
 #' @importFrom rlang :=
 #' @importFrom rlang %||%
+#' @importFrom tibble as_tibble
+#' @importFrom tibble tbl_sum
+#' @importFrom vctrs vec_cast
+#' @importFrom vctrs vec_ptype2
+#' @importFrom vctrs vec_restore
 ## usethis namespace: end
 NULL
 

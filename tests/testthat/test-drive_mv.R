@@ -40,7 +40,7 @@ test_that("drive_mv() can rename file", {
     write_utf8(drive_mv_message)
   )
 
-  expect_s3_class(file, "dribble")
+  expect_dribble(file)
   expect_identical(nrow(file), 1L)
 })
 
@@ -66,7 +66,7 @@ test_that("drive_mv() can move a file into a folder given as path", {
     write_utf8(drive_mv_message)
   )
 
-  expect_s3_class(mv_file, "dribble")
+  expect_dribble(mv_file)
   expect_identical(nrow(mv_file), 1L)
   destination <- drive_get(nm_("move-files-into-me"))
   expect_identical(mv_file$drive_resource[[1]]$parents[[1]], destination$id)
@@ -94,7 +94,7 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
     write_utf8(drive_mv_message)
   )
 
-  expect_s3_class(mv_file, "dribble")
+  expect_dribble(mv_file)
   expect_identical(nrow(mv_file), 1L)
   expect_identical(mv_file$drive_resource[[1]]$parents[[1]], destination$id)
 })
@@ -122,7 +122,7 @@ test_that("drive_mv() can rename and move, using `path` and `name`", {
     write_utf8(drive_mv_message)
   )
 
-  expect_s3_class(mv_file, "dribble")
+  expect_dribble(mv_file)
   expect_identical(nrow(mv_file), 1L)
 })
 
@@ -152,6 +152,6 @@ test_that("drive_mv() can rename and move, using `path` only", {
     write_utf8(drive_mv_message)
   )
 
-  expect_s3_class(mv_file, "dribble")
+  expect_dribble(mv_file)
   expect_identical(nrow(mv_file), 1L)
 })

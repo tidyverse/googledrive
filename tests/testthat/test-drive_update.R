@@ -51,7 +51,7 @@ test_that("no op if no media, no metadata", {
   expect_snapshot(
     out <- drive_update(nm_("update-fodder")),
   )
-  expect_s3_class(out, "dribble")
+  expect_dribble(out)
 })
 
 test_that("drive_update() can update metadata only", {
