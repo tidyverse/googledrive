@@ -1,4 +1,16 @@
 # ---- tests ----
+
+test_that("tbl_sum.dribble method works", {
+  d <- new_dribble(
+    tibble::tibble(
+      name = letters[1:2],
+      id = letters[2:1],
+      drive_resource = list(list(kind = "drive#file"))
+    )
+  )
+  expect_snapshot(print(d))
+})
+
 test_that("dribble() creates empty dribble", {
   expect_s3_class(dribble(), "dribble")
   expect_equal(nrow(dribble()), 0)

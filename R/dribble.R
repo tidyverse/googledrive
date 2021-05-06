@@ -95,6 +95,12 @@ dribble <- function(x = NULL) {
 }
 
 #' @export
+tbl_sum.dribble <- function(x) {
+  orig <- NextMethod()
+  c("A dribble" = unname(orig))
+}
+
+#' @export
 #' @importFrom tibble as_tibble
 as_tibble.dribble <- function(x, ...) {
   as_tibble(
