@@ -23,9 +23,10 @@ The \code{dribble} format is handy because it exposes the file name,
 which is good for humans, but keeps it bundled with the file's unique id
 and other metadata, which are needed for API calls.
 
-In general, the dribble class will be retained even after
-subsetting, as long as the required variables are present and of the
-correct type.
+In general, the \code{dribble} class will be retained even after
+manipulation, as long as the required variables are present and of the
+correct type. This works best for manipulations via the dplyr and vctrs
+packages.
 }
 \seealso{
 \code{\link[=as_dribble]{as_dribble()}}

@@ -17,9 +17,10 @@
 #'   which is good for humans, but keeps it bundled with the file's unique id
 #'   and other metadata, which are needed for API calls.
 #'
-#' @description In general, the dribble class will be retained even after
-#'   subsetting, as long as the required variables are present and of the
-#'   correct type.
+#' @description In general, the `dribble` class will be retained even after
+#'   manipulation, as long as the required variables are present and of the
+#'   correct type. This works best for manipulations via the dplyr and vctrs
+#'   packages.
 #'
 #' @name dribble
 #' @seealso [as_dribble()]
