@@ -30,7 +30,11 @@ NULL
 
 new_dribble <- function(x) {
   stopifnot(inherits(x, "data.frame"))
-  structure(x, class = c("dribble", "tbl_df", "tbl", "data.frame"))
+  # new_tibble0() strips attributes
+  structure(
+    new_tibble0(x),
+    class = c("dribble", "tbl_df", "tbl", "data.frame")
+  )
 }
 
 validate_dribble <- function(x) {
@@ -55,6 +59,11 @@ validate_dribble <- function(x) {
       )
     )
   }
+
+  # TODO: should I make sure there are no NAs in the id column?
+  # let's wait and see if we ever experience any harm from NOT checking this
+  # also, that feels more like something to enforce by creating a proper
+  # S3 vctr for Drive file ids and it might be odd to make NAs unacceptable
 
   if (!has_drive_resource(x)) {
     stop_glue(
