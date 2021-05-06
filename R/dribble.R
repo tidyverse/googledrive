@@ -102,7 +102,6 @@ tbl_sum.dribble <- function(x) {
 }
 
 #' @export
-#' @importFrom tibble as_tibble
 as_tibble.dribble <- function(x, ...) {
   as_tibble(new_tibble0(x), ...)
 }
