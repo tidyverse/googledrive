@@ -29,12 +29,12 @@ test_that("drive_trash() moves files to trash and drive_untrash() undoes", {
   trashee2 <- drive_cp(nm_("trash-fodder"), name = me_("trashee-2"))
 
   out <- drive_trash(c(me_("trashee-1"), me_("trashee-2")))
-  expect_s3_class(out, "dribble")
+  expect_dribble(out)
   expect_setequal(out$name, c(me_("trashee-1"), me_("trashee-2")))
   expect_true(all(drive_reveal(out, "trashed")[["trashed"]]))
 
   out <- drive_untrash(c(me_("trashee-1"), me_("trashee-2")))
-  expect_s3_class(out, "dribble")
+  expect_dribble(out)
   expect_setequal(out$name, c(me_("trashee-1"), me_("trashee-2")))
   expect_false(any(drive_reveal(out, "trashed")[["trashed"]]))
 })
