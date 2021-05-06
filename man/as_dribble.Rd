@@ -2,7 +2,7 @@
 % Please edit documentation in R/dribble.R
 \name{as_dribble}
 \alias{as_dribble}
-\title{Coerce to Drive files}
+\title{Coerce to a \code{dribble}}
 \usage{
 as_dribble(x, ...)
 }

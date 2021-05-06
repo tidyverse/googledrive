@@ -130,7 +130,7 @@ has_drive_resource <- function(x) {
   all(!is.na(kind) & kind %in% c("drive#file", "drive#drive", "drive#teamDrive"))
 }
 
-#' Coerce to Drive files
+#' Coerce to a `dribble`
 #'
 #' @description
 #' Converts various representations of Google Drive files into a [`dribble`],
