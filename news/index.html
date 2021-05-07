@@ -199,6 +199,21 @@
 <p>The <code>verbose</code> argument of all <code>drive_*()</code> functions is deprecated and will be removed in a future release. In the current release, <code>verbose = FALSE</code> is still honored, but generates a warning.</p>
 <p><code><a href="../reference/googledrive-configuration.html">local_drive_quiet()</a></code> and <code><a href="../reference/googledrive-configuration.html">with_drive_quiet()</a></code> are <a href="https://withr.r-lib.org">withr-style</a> convenience helpers for setting <code>googledrive_quiet = TRUE</code> for some limited scope.</p>
 </div>
+<div id="other-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-changes" class="anchor"></a>Other changes</h2>
+<ul>
+<li>
+<p>We’ve modernized the mechanisms by which the <code>dribble</code> class is (or is not) retained by various data frame operations. This boils down to updating or adding methods used by the base, dplyr, pillar/tibble, and vctrs packages.</p>
+<p>We focus on compatibility with dplyr &gt;= 1.0.0, which was released a year ago. googledrive only Suggests dplyr, so all this really means is that <code>dribble</code> manipulation via dplyr now works best with dplyr &gt;= 1.0.0.</p>
+</li>
+</ul>
+</div>
+<div id="dependency-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#dependency-changes" class="anchor"></a>Dependency changes</h2>
+<p>vctrs is new in Imports (but was already an indirect hard dependency via tibble).</p>
+</div>
 </div>
     <div id="googledrive-101" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.1">
@@ -361,9 +376,9 @@
 <span id="cb3-9"><a href="#cb3-9"></a>}</span></code></pre></div>
 </div>
 </div>
-<div id="other-changes" class="section level2">
+<div id="other-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-changes" class="anchor"></a>Other changes</h2>
+<a href="#other-changes-1" class="anchor"></a>Other changes</h2>
 <p>All functions that support <code>...</code> as a way to pass more parameters to the Drive API now have “tidy dots semantics”: <code>!!!</code> is supported for splicing and <code>!!</code> can be used on the LHS of <code>:=</code>. Full docs are in <a href="https://rlang.r-lib.org/reference/tidy-dots.html"><code>rlang::list2()</code></a>.</p>
 <p><code><a href="../reference/drive_find.html">drive_find()</a></code> now sorts by “recency”, by default.</p>
 <p><code><a href="../reference/drive_create.html">drive_create()</a></code> is a new function that creates a new empty file, with an optional file type specification (<a href='https://github.com/tidyverse/googledrive/issues/258'>#258</a>, <a href='https://github.com/ianmcook'>@ianmcook</a>). <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code> becomes a thin wrapper around <code><a href="../reference/drive_create.html">drive_create()</a></code>, with the file type hard-wired to “folder”.</p>
@@ -372,9 +387,9 @@
 <p>Colaboratory notebooks now have some MIME type support, in terms of the <code>type</code> argument in various functions (<a href="https://colab.research.google.com/" class="uri">https://colab.research.google.com/</a>). The internal table of known MIME types includes <code>"application/vnd.google.colab"</code>, which is associated with the file extension <code>.ipynb</code> and the human-oriented nickname <code>"colab"</code> (<a href='https://github.com/tidyverse/googledrive/issues/207'>#207</a>).</p>
 <p><code><a href="../reference/drive_endpoints.html">drive_endpoints()</a></code> gains a singular friend, <code><a href="../reference/drive_endpoints.html">drive_endpoint()</a></code> which returns exactly one endpoint. These helpers index into the internal list of Drive API endpoints with <code>[</code> and <code>[[</code>, respectively.</p>
 </div>
-<div id="dependency-changes" class="section level2">
+<div id="dependency-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#dependency-changes" class="anchor"></a>Dependency changes</h2>
+<a href="#dependency-changes-1" class="anchor"></a>Dependency changes</h2>
 <p>R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2). See <a href="https://www.tidyverse.org/articles/2019/04/r-version-support/">Which versions of R do tidyverse packages support?</a>.</p>
 <p>gargle and magrittr are newly Imported.</p>
 <p>rprojroot has been removed from Suggests, because we can now use a version of testthat recent enough to offer <code><a href="https://testthat.r-lib.org/reference/test_path.html">testthat::test_path()</a></code>.</p>
