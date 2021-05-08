@@ -262,21 +262,21 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Local file:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>/home/runner/work/_temp/Library/googledrive/extdata/chicken.txt</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Uploaded into Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv.txt </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv.txt </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>text/plain</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># rename it, but leave in current folder (root folder, in this case)</span></span>
 <span class='r-in'><span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mv</span><span class='op'>(</span><span class='va'>file</span>, <span class='st'>"chicken-mv-renamed.txt"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv.txt </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv.txt </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Has been renamed:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-renamed.txt </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-renamed.txt </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># create a folder to move the file into</span></span>
 <span class='r-in'><span class='va'>folder</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span><span class='op'>(</span><span class='st'>"mv-folder"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> mv-folder </span><span style='color: #555555;'>&lt;id: 1DCwApUstPqNqFXVN5Ge2XiqK10_83qd8&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> mv-folder </span><span style='color: #555555;'>&lt;id: 136LSZHwlY4VFNXGV0nN_BmEsTmSsA-NP&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/vnd.google-apps.folder</span></span>
 <span class='r-in'></span>
@@ -285,58 +285,58 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'><span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mv</span><span class='op'>(</span><span class='va'>file</span>, path <span class='op'>=</span> <span class='va'>folder</span>, name <span class='op'>=</span> <span class='st'>"chicken-mv-re-renamed.txt"</span><span class='op'>)</span></span>
 <span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>Unknown or uninitialised column: `path`.</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-renamed.txt </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-renamed.txt </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Has been renamed and moved:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># verify renamed file is now in the folder</span></span>
 <span class='r-in'><span class='fu'><a href='drive_ls.html'>drive_ls</a></span><span class='op'>(</span><span class='va'>folder</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 3</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name                      id                                drive_resource   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                             </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> chicken-mv-re-renamed.txt 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe </span><span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> chicken-mv-re-renamed.txt 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI </span><span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># move the file back to root folder</span></span>
 <span class='r-in'><span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mv</span><span class='op'>(</span><span class='va'>file</span>, <span class='st'>"~/"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Has been moved:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> ~/chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> ~/chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># move it again</span></span>
 <span class='r-in'><span class='co'># specify destination as path with trailing slash</span></span>
 <span class='r-in'><span class='co'># to ensure we get a move vs. renaming it to "mv-folder"</span></span>
 <span class='r-in'><span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mv</span><span class='op'>(</span><span class='va'>file</span>, <span class='st'>"mv-folder/"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Has been moved:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> ~/mv-folder/chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> ~/mv-folder/chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># `overwrite = FALSE` errors if something already exists at target filepath</span></span>
 <span class='r-in'><span class='co'># THIS WILL ERROR!</span></span>
 <span class='r-in'><span class='fu'><a href='drive_create.html'>drive_create</a></span><span class='op'>(</span><span class='st'>"name-squatter"</span>, path <span class='op'>=</span> <span class='st'>"~/"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1EBo1uoRnJ5WDikkjO8KiDeAJr0JZuCu4&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1bDi-ufoRrlyG9C5lEK_Noko6_PXthjp0&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/octet-stream</span></span>
 <span class='r-in'><span class='fu'>drive_mv</span><span class='op'>(</span><span class='va'>file</span>, path <span class='op'>=</span> <span class='st'>"~/"</span>, name <span class='op'>=</span> <span class='st'>"name-squatter"</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
 <span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error:</span> One or more items already exist at the target filepath and `overwrite = FALSE`:</span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> * ~/name-squatter: 1EBo1uoRnJ5WDikkjO8KiDeAJr0JZuCu4</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> * ~/name-squatter: 1bDi-ufoRrlyG9C5lEK_Noko6_PXthjp0</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># `overwrite = TRUE` moves the existing item to trash, then proceeds</span></span>
 <span class='r-in'><span class='fu'>drive_mv</span><span class='op'>(</span><span class='va'>file</span>, path <span class='op'>=</span> <span class='st'>"~/"</span>, name <span class='op'>=</span> <span class='st'>"name-squatter"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> File trashed:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1EBo1uoRnJ5WDikkjO8KiDeAJr0JZuCu4&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> name-squatter </span><span style='color: #555555;'>&lt;id: 1bDi-ufoRrlyG9C5lEK_Noko6_PXthjp0&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Has been renamed and moved:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> ~/name-squatter </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> ~/name-squatter </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Clean up</span></span>
 <span class='r-in'><span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>file</span>, <span class='va'>folder</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Files deleted:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1Egys1O99NjzF5mike3RvaP2A-1RgpMVe&gt;</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> mv-folder </span><span style='color: #555555;'>&lt;id: 1DCwApUstPqNqFXVN5Ge2XiqK10_83qd8&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> chicken-mv-re-renamed.txt </span><span style='color: #555555;'>&lt;id: 1-mJzLMNfBYnqCvp5E2-epOo5MwzlFJZI&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> mv-folder </span><span style='color: #555555;'>&lt;id: 136LSZHwlY4VFNXGV0nN_BmEsTmSsA-NP&gt;</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
