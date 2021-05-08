@@ -55,7 +55,7 @@ test_that("drive_reveal() can return date-times", {
   expect_s3_class(out$created_time, "POSIXct")
 })
 
-test_that("drive_reveal() return list-column for non-existent `what`", {
+test_that("drive_reveal() returns list-column for non-existent `what`", {
   skip_if_no_token()
   skip_if_offline()
 
