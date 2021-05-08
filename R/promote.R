@@ -1,26 +1,49 @@
 # promote an element in drive_resource into a top-level column
-# if new, it will be the second column, presumably after `name`
-# if a column by that name already exists, it is overwritten in place
-# if you request `this_var`, we look for `thisVar` in drive_resource
-# but use `this_var` as the variable name
 #
-# morally, this is a lot like tidyr::hoist()
+# if you request `this_var` or `thisVar`, we look for `thisVar` in
+# drive_resource, but use the original input as the variable name
+#
+# if a column by that name already exists, it is overwritten in place
+# otherwise, the new column will be the second column, presumably after `name`
+#
+# morally, this is a lot like tidyr::hoist(), but with a more specific mandate
 promote <- function(d, elem) {
-  elem_orig <- elem
-  elem <- camelCase(elem)
-  present <- any(purrr::map_lgl(d$drive_resource, ~elem %in% names(.x)))
-  if (present) {
-    val <- purrr::simplify(purrr::map(d$drive_resource, elem))
-    ## TO DO: find a way to emulate .default behavior from type-specific
-    ## mappers ... might need to create my own simplify()
-    ## https://github.com/tidyverse/purrr/issues/336
-    ## as this stands, you will get a list-column whenever there is at
-    ## least one NULL
-  } else {
-    ## TO DO: do we really want promote() to be this forgiving?
-    ## adds a placeholder column for elem if not present in drive_resource
-    ## ensure elem is added, even if there are zero rows
+  elemCamelCase <- camelCase(elem)
+
+  x <- map(d$drive_resource, elemCamelCase)
+  absent <- all(map_lgl(x, is_null))
+
+  if (absent) {
+    # TO DO: do we really want promote() to be this forgiving?
+    # adds a placeholder column for elem if not present in drive_resource
+    # ensure elem is added, even if there are zero rows
     val <- rep_len(list(NULL), nrow(d))
+  } else {
+    val <- simplify_col(x)
   }
-  put_column(d, nm = elem_orig, val = val, .after = 1)
+
+  put_column(d, nm = elem, val = val, .after = 1)
+}
+
+# simplified version of tidyr:::simplify_col()
+simplify_col <- function(x) {
+  is_list <- map_lgl(x, is_list)
+  is_vec  <- map_lgl(x, ~ vctrs::vec_is(.x) || is_null(.x))
+  is_not_vec <- !is_vec
+  if (any(is_list | is_not_vec)) {
+    return(x)
+  }
+
+  n <- map_int(x, vctrs::vec_size)
+  is_scalar <- n %in% c(0, 1)
+  if (any(!is_scalar)) {
+    return(x)
+  }
+
+  x[n == 0] <- list(NA)
+
+  tryCatch(
+    vctrs::vec_c(!!!x),
+    vctrs_error_incompatible_type = function(e) x
+  )
 }

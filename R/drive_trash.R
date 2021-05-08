@@ -69,16 +69,6 @@ toggle_trash_one <- function(id, trash = TRUE) {
   as_dribble(list(proc_res))
 }
 
-drive_reveal_trashed <- function(file) {
-  confirm_dribble(file)
-  if (no_file(file)) {
-    return(
-      put_column(dribble(), nm = "trashed", val = logical(), .after = "name")
-    )
-  }
-  promote(file, "trashed")
-}
-
 #' Empty Drive Trash
 #'
 #' @description Caution, this will permanently delete files in your Drive trash.
