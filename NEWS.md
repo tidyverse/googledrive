@@ -33,6 +33,11 @@ In the current release, `verbose = FALSE` is still honored, but generates a warn
 
 ## Other changes
 
+* `drive_reveal(what = "property_name")` now works for any property found in
+  the file metadata stored in the `drive_resource` column. The new column is
+  also simplified in more cases now, e.g. to `character` or `logical`. If the
+  `property_name` suggests it's a date-time, we return `POSIXct`.
+
 * We've modernized the mechanisms by which the `dribble` class is (or is not)
   retained by various data frame operations.
   This boils down to updating or adding methods used by the base, dplyr,
