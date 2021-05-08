@@ -14,11 +14,12 @@
 #' `drive_reveal()` can also **hoist** any property out of the `drive_resource`
 #' list-column, when the property's name is passed as the `what` argument. The
 #' resulting new column is simplified if it is easy to do so, e.g., if the
-#' individual elements are all string or logical. If `what` extracts a datetime,
-#' we return [`POSIXct`][DateTimeClasses]. Otherwise, you'll get a list-column.
-#' If this makes you sad, consider using `tidyr::hoist()` instead. It is more
-#' powerful due to a richer "plucking specification" and its `ptype` and
-#' `transform` arguments. Another useful function is `tidyr::unnest_wider()`.
+#' individual elements are all string or logical. If `what` extracts a
+#' date-time, we return [`POSIXct`][DateTimeClasses]. Otherwise, you'll get a
+#' list-column. If this makes you sad, consider using `tidyr::hoist()` instead.
+#' It is more powerful due to a richer "plucking specification" and its `ptype`
+#' and `transform` arguments. Another useful function is
+#' `tidyr::unnest_wider()`.
 #'
 #' @template not-like-your-local-file-system
 #'

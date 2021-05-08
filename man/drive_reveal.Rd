@@ -54,11 +54,12 @@ form. For example, revealing a file's \code{"path"}, \code{"permissions"}, or
 \code{drive_reveal()} can also \strong{hoist} any property out of the \code{drive_resource}
 list-column, when the property's name is passed as the \code{what} argument. The
 resulting new column is simplified if it is easy to do so, e.g., if the
-individual elements are all string or logical. If \code{what} extracts a datetime,
-we return \code{\link[=DateTimeClasses]{POSIXct}}. Otherwise, you'll get a list-column.
-If this makes you sad, consider using \code{tidyr::hoist()} instead. It is more
-powerful due to a richer "plucking specification" and its \code{ptype} and
-\code{transform} arguments. Another useful function is \code{tidyr::unnest_wider()}.
+individual elements are all string or logical. If \code{what} extracts a
+date-time, we return \code{\link[=DateTimeClasses]{POSIXct}}. Otherwise, you'll get a
+list-column. If this makes you sad, consider using \code{tidyr::hoist()} instead.
+It is more powerful due to a richer "plucking specification" and its \code{ptype}
+and \code{transform} arguments. Another useful function is
+\code{tidyr::unnest_wider()}.
 }
 \section{Special considerations for paths}{
 
