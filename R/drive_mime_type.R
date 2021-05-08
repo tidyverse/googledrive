@@ -103,13 +103,3 @@ one_ext <- function(type) {
   }
   m
 }
-
-drive_reveal_mime_type <- function(file) {
-  confirm_dribble(file)
-  if (no_file(file)) {
-    return(
-      put_column(dribble(), nm = "mime_type", val = character(), .after = "name")
-    )
-  }
-  promote(file, "mime_type")
-}

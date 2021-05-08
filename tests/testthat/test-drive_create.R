@@ -46,7 +46,7 @@ test_that("drive_create() create specific things in root folder", {
   expect_identical(out$name, me_("docs-in-root"))
   expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
   expect_identical(
-    drive_reveal_mime_type(out)$mime_type,
+    drive_reveal(out, "mime_type")$mime_type,
     drive_mime_type("document")
   )
 
@@ -56,7 +56,7 @@ test_that("drive_create() create specific things in root folder", {
   expect_identical(out$name, me_("sheets-in-root"))
   expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
   expect_identical(
-    drive_reveal_mime_type(out)$mime_type,
+    drive_reveal(out, "mime_type")$mime_type,
     drive_mime_type("spreadsheet")
   )
 
@@ -66,7 +66,7 @@ test_that("drive_create() create specific things in root folder", {
   expect_identical(out$name, me_("slides-in-root"))
   expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
   expect_identical(
-    drive_reveal_mime_type(out)$mime_type,
+    drive_reveal(out, "mime_type")$mime_type,
     drive_mime_type("presentation")
   )
 })
@@ -81,7 +81,7 @@ test_that("drive_mkdir() creates a folder in root folder", {
   expect_identical(out$name, me_("folder-in-root"))
   expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
   expect_identical(
-    drive_reveal_mime_type(out)$mime_type,
+    drive_reveal(out, "mime_type")$mime_type,
     drive_mime_type("folder")
   )
 })
