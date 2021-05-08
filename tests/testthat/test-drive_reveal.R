@@ -21,6 +21,9 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("drive_reveal() works", {
+  skip_if_no_token()
+  skip_if_offline()
+
   dat <- drive_find(nm_(""))
 
   expect_snapshot(
@@ -43,6 +46,9 @@ test_that("drive_reveal() works", {
 })
 
 test_that("drive_reveal() can return date-times", {
+  skip_if_no_token()
+  skip_if_offline()
+
   dat <- drive_find(nm_(""))
 
   out <- drive_reveal(dat, "created_time")
@@ -50,6 +56,9 @@ test_that("drive_reveal() can return date-times", {
 })
 
 test_that("drive_reveal() return list-column for non-existent `what`", {
+  skip_if_no_token()
+  skip_if_offline()
+
   dat <- drive_find(nm_(""))
 
   out <- drive_reveal(dat, "i_do_not_exist")
