@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add column(s) with new information — drive_reveal • googledrive</title>
+<title>Add a new column of Drive file information — drive_reveal • googledrive</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,17 +49,26 @@
 
 
 
-<meta property="og:title" content="Add column(s) with new information — drive_reveal" />
+<meta property="og:title" content="Add a new column of Drive file information — drive_reveal" />
 <meta property="og:description" content="drive_reveal() adds extra information about your Drive files that is not
-automatically present in the default dribble produced by googledrive. Why
-is this info not always present?
-You don't always care about it.
-It may require calling different endpoints in the Drive API. Example:
-determining if a file has been &quot;published on the web&quot;.
-It might require additional API calls. Example: figuring out the path(s)
-associated with a specific file.
+readily available in the default dribble produced by googledrive. Why is
+this info not always included in the default dribble?
+You don't always care about it. There is a lot of esoteric information in
+the drive_resource that has little value for most users.
+It might be &quot;expensive&quot; to get this information and put it into a usable
+form. For example, revealing a file's &quot;path&quot;, &quot;permissions&quot;, or
+&quot;published&quot; status all require additional API calls.
 
-" />
+
+drive_reveal() can also hoist any property out of the drive_resource
+list-column, when the property's name is passed as the what argument. The
+resulting new column is simplified if it is easy to do so, e.g., if the
+individual elements are all string or logical. If what extracts a
+date-time, we return POSIXct. Otherwise, you'll get a
+list-column. If this makes you sad, consider using tidyr::hoist() instead.
+It is more powerful due to a richer &quot;plucking specification&quot; and its ptype
+and transform arguments. Another useful function is
+tidyr::unnest_wider()." />
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -179,28 +188,34 @@ associated with a specific file.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add column(s) with new information</h1>
+    <h1>Add a new column of Drive file information</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/drive_reveal.R'><code>R/drive_reveal.R</code></a></small>
     <div class="hidden name"><code>drive_reveal.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p><code>drive_reveal()</code> adds extra information about your Drive files that is not
-automatically present in the default <code><a href='dribble.html'>dribble</a></code> produced by googledrive. Why
-is this info not always present?</p><ol>
-<li><p>You don't always care about it.</p></li>
-<li><p>It may require calling different endpoints in the Drive API. Example:
-determining if a file has been "published on the web".</p></li>
-<li><p>It might require additional API calls. Example: figuring out the path(s)
-associated with a specific file.</p></li>
-</ol>
+readily available in the default <code><a href='dribble.html'>dribble</a></code> produced by googledrive. Why is
+this info not always included in the default <code>dribble</code>?</p><ul>
+<li><p>You don't always care about it. There is a lot of esoteric information in
+the <code>drive_resource</code> that has little value for most users.</p></li>
+<li><p>It might be "expensive" to get this information and put it into a usable
+form. For example, revealing a file's <code>"path"</code>, <code>"permissions"</code>, or
+<code>"published"</code> status all require additional API calls.</p></li>
+</ul>
 
+<p><code>drive_reveal()</code> can also <strong>hoist</strong> any property out of the <code>drive_resource</code>
+list-column, when the property's name is passed as the <code>what</code> argument. The
+resulting new column is simplified if it is easy to do so, e.g., if the
+individual elements are all string or logical. If <code>what</code> extracts a
+date-time, we return <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code>. Otherwise, you'll get a
+list-column. If this makes you sad, consider using <code><a href='https://tidyr.tidyverse.org/reference/hoist.html'>tidyr::hoist()</a></code> instead.
+It is more powerful due to a richer "plucking specification" and its <code>ptype</code>
+and <code>transform</code> arguments. Another useful function is
+<code><a href='https://tidyr.tidyverse.org/reference/hoist.html'>tidyr::unnest_wider()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>drive_reveal</span><span class='op'>(</span>
-  <span class='va'>file</span>,
-  what <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"path"</span>, <span class='st'>"trashed"</span>, <span class='st'>"mime_type"</span>, <span class='st'>"permissions"</span>, <span class='st'>"published"</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>file</span>, what <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"path"</span>, <span class='st'>"permissions"</span>, <span class='st'>"published"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,12 +228,27 @@ ids or URLs marked with <code><a href='as_id.html'>as_id()</a></code>, or a <cod
     </tr>
     <tr>
       <th>what</th>
-      <td><p>Character, describing the type of info you want to add:</p><ul>
-<li><p>path. Warning: this can be slow, especially if called on many files.</p></li>
-<li><p>trashed</p></li>
-<li><p>mime_type</p></li>
-<li><p>permissions. Who is this file shared with and in which roles?</p></li>
-<li><p>published</p></li>
+      <td><p>Character, describing the type of info you want to add. These
+values get special handling (more details below):</p><ul>
+<li><p><code>path</code></p></li>
+<li><p><code>permissions</code></p></li>
+<li><p><code>published</code></p></li>
+</ul>
+
+<p>You can also request any property in the <code>drive_resource</code> column by name.
+The request can be in <code>camelCase</code> or <code>snake_case</code>, but the new column name
+will always be <code>snake_case</code>. Some examples of <code>what</code>:</p><ul>
+<li><p><code>mime_type</code> (or <code>mimeType</code>)</p></li>
+<li><p><code>trashed</code></p></li>
+<li><p><code>starred</code></p></li>
+<li><p><code>description</code></p></li>
+<li><p><code>version</code></p></li>
+<li><p><code>web_view_link</code> (or <code>webViewLink</code>)</p></li>
+<li><p><code>modified_time</code> (or <code>modifiedTime</code>)</p></li>
+<li><p><code>created_time</code> (or <code>createdTime</code>)</p></li>
+<li><p><code>owned_by_me</code> (or <code>ownedByMe</code>)</p></li>
+<li><p><code>size</code></p></li>
+<li><p><code>quota_bytes_used</code> (or <code>quotaBytesUsed</code>)</p></li>
 </ul></td>
     </tr>
     </table>
@@ -242,21 +272,17 @@ single file can be represented by multiple paths.</p></li>
 name or path and a Drive file or folder. This implies the length of the input
 (i.e. the number of input paths or the number of rows in a dribble) will not
 necessarily equal the number rows in the output.</p>
-    <h2 class="hasAnchor" id="trashed"><a class="anchor" href="#trashed"></a>Trashed</h2>
+    <h2 class="hasAnchor" id="file-path"><a class="anchor" href="#file-path"></a>File path</h2>
 
     
 
-<p>When <code>what = "trashed"</code>, the <code><a href='dribble.html'>dribble</a></code> gains a logical variable that
-indicates whether a file is in the trash.</p>
-    <h2 class="hasAnchor" id="mime-type"><a class="anchor" href="#mime-type"></a>MIME type</h2>
-
-    <p>When <code>what = "mime_type"</code>, the <code><a href='dribble.html'>dribble</a></code> gains a
-variable of MIME types.</p>
+<p>When <code>what = "path"</code> the <code><a href='dribble.html'>dribble</a></code> gains a character column holding each
+file's path. This can be <em>very slow</em> so use with caution.</p>
     <h2 class="hasAnchor" id="permissions"><a class="anchor" href="#permissions"></a>Permissions</h2>
 
     
 
-<p>When <code>what = "permissions"</code> the <code><a href='dribble.html'>dribble</a></code> gains a logical variable <code>shared</code>
+<p>When <code>what = "permissions"</code> the <code><a href='dribble.html'>dribble</a></code> gains a logical column <code>shared</code>
 that indicates whether a file is shared and a new list-column
 <code>permissions_resource</code> containing lists of
 <a href='https://developers.google.com/drive/v3/reference/permissions#resource'>Permissions resources</a>.</p>
@@ -264,94 +290,226 @@ that indicates whether a file is shared and a new list-column
 
     
 
-<p>When <code>what = "published"</code> the <code><a href='dribble.html'>dribble</a></code> gains a logical variable
+<p>When <code>what = "published"</code> the <code><a href='dribble.html'>dribble</a></code> gains a logical column
 <code>published</code> that indicates whether a file is published and a new list-column
 <code>revision_resource</code> containing lists of
 <a href='https://developers.google.com/drive/v3/reference/revisions#resource'>Revisions resources</a>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>To learn more about the properties present in the metadata of a
+Drive file (which is what's in the <code>drive_resource</code> list-column of a
+<code><a href='dribble.html'>dribble</a></code>), see the API docs:</p><ul>
+<li><p><a href='https://developers.google.com/drive/api/v3/reference/files#resource-representations'>https://developers.google.com/drive/api/v3/reference/files#resource-representations</a></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='co'># Get a nice, random selection of files</span></span>
+    <pre class="examples"><span class='r-in'><span class='co'># Get a few of your files</span></span>
 <span class='r-in'><span class='va'>files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span>n_max <span class='op'>=</span> <span class='fl'>10</span>, trashed <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># Reveal</span></span>
-<span class='r-in'><span class='co'>#   * paths (warning: can be slow for many files!)</span></span>
-<span class='r-in'><span class='co'>#   * if `trashed` or not</span></span>
-<span class='r-in'><span class='co'>#   * MIME type</span></span>
-<span class='r-in'><span class='co'>#   * permissions, i.e. sharing status</span></span>
-<span class='r-in'><span class='co'>#   * if `published` or not</span></span>
+<span class='r-in'><span class='co'># the "special" cases that require additional API calls and can be slow</span></span>
 <span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"path"</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    name          path            id                              drive_resource </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                           </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>         </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatter ~/name-squatter 1X3bO2d29oxcQkvwu3NlSkZOByZ9Ux… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatter ~/name-squatter 1bDi-ufoRrlyG9C5lEK_Noko6_PXth… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.t… ~/chicken-cp.t… 15opbP7Ae4ypd_I4Bqfrepx37-v6Oj… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-… ~/drive-quiet-… 15uUOAyQBOO6ydP3PqwUC1VHeFL5Yu… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatter ~/name-squatter 1qVl1pNR2UmjGjqp-ibZuAX4WG7NFJ… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatter ~/name-squatter 1IFdFy9A-7PCuOS4JQdcrW34OR9uPU… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatter ~/name-squatter 1EBo1uoRnJ5WDikkjO8KiDeAJr0JZu… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.t… ~/chicken-cp.t… 1eYuJhLBwcF2beFGwvDrZgXeXwbq74… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-… ~/drive-quiet-… 1f5xDckeKMOeSVLMeQb3BlHdsC_xS6… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatter ~/name-squatter 1A3z5iibb6edehwvKOXIk4aKV5S1Lo… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"trashed"</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    name            trashed id                                   drive_resource  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatter   TRUE    1X3bO2d29oxcQkvwu3NlSkZOByZ9Uxp3D    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatter   TRUE    1bDi-ufoRrlyG9C5lEK_Noko6_PXthjp0    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.txt  TRUE    15opbP7Ae4ypd_I4Bqfrepx37-v6OjtAg    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-wo… TRUE    15uUOAyQBOO6ydP3PqwUC1VHeFL5Yufxi1R… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatter   TRUE    1qVl1pNR2UmjGjqp-ibZuAX4WG7NFJdnD    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatter   TRUE    1IFdFy9A-7PCuOS4JQdcrW34OR9uPULSv    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatter   TRUE    1EBo1uoRnJ5WDikkjO8KiDeAJr0JZuCu4    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.txt  TRUE    1eYuJhLBwcF2beFGwvDrZgXeXwbq74Mqe    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-wo… TRUE    1f5xDckeKMOeSVLMeQb3BlHdsC_xS6s_Raw… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatter   TRUE    1A3z5iibb6edehwvKOXIk4aKV5S1LoHpb    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
-<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"mime_type"</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    name         mime_type               id                       drive_resource </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                    </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>         </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatt… application/octet-stre… 1X3bO2d29oxcQkvwu3NlSkZ… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatt… application/octet-stre… 1bDi-ufoRrlyG9C5lEK_Nok… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.… text/plain              15opbP7Ae4ypd_I4Bqfrepx… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet… application/vnd.google… 15uUOAyQBOO6ydP3PqwUC1V… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatt… application/octet-stre… 1qVl1pNR2UmjGjqp-ibZuAX… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatt… application/octet-stre… 1IFdFy9A-7PCuOS4JQdcrW3… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatt… application/octet-stre… 1EBo1uoRnJ5WDikkjO8KiDe… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.… text/plain              1eYuJhLBwcF2beFGwvDrZgX… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet… application/vnd.google… 1f5xDckeKMOeSVLMeQb3BlH… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatt… application/octet-stre… 1A3z5iibb6edehwvKOXIk4a… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatter ~/name-squatter 1NHumAFaMZOeePbdr7OqftpzdVLn8j… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatter ~/name-squatter 1bPZf1M1G3HwVGUc1S2pry38uXDnhD… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.t… ~/chicken-cp.t… 1kXc2CrFooJXPWqDtl6aFd4SISfHJw… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-… ~/drive-quiet-… 1L3PmqiUY-wV9bXbXnGdt5WqHxCd6P… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatter ~/name-squatter 1rgI3bMxPvs-est6HP4utxvmKa0thf… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatter ~/name-squatter 1X3bO2d29oxcQkvwu3NlSkZOByZ9Ux… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatter ~/name-squatter 1bDi-ufoRrlyG9C5lEK_Noko6_PXth… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.t… ~/chicken-cp.t… 15opbP7Ae4ypd_I4Bqfrepx37-v6Oj… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-… ~/drive-quiet-… 15uUOAyQBOO6ydP3PqwUC1VHeFL5Yu… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatter ~/name-squatter 1qVl1pNR2UmjGjqp-ibZuAX4WG7NFJ… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
 <span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"permissions"</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 5</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    name        shared id                       drive_resource  permissions_reso…</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                    </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squat… FALSE  1X3bO2d29oxcQkvwu3NlSkZ… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squat… FALSE  1bDi-ufoRrlyG9C5lEK_Nok… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp… FALSE  15opbP7Ae4ypd_I4Bqfrepx… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quie… FALSE  15uUOAyQBOO6ydP3PqwUC1V… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squat… FALSE  1qVl1pNR2UmjGjqp-ibZuAX… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squat… FALSE  1IFdFy9A-7PCuOS4JQdcrW3… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squat… FALSE  1EBo1uoRnJ5WDikkjO8KiDe… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp… FALSE  1eYuJhLBwcF2beFGwvDrZgX… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quie… FALSE  1f5xDckeKMOeSVLMeQb3BlH… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squat… FALSE  1A3z5iibb6edehwvKOXIk4a… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squat… FALSE  1NHumAFaMZOeePbdr7Oqftp… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squat… FALSE  1bPZf1M1G3HwVGUc1S2pry3… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp… FALSE  1kXc2CrFooJXPWqDtl6aFd4… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quie… FALSE  1L3PmqiUY-wV9bXbXnGdt5W… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squat… FALSE  1rgI3bMxPvs-est6HP4utxv… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squat… FALSE  1X3bO2d29oxcQkvwu3NlSkZ… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squat… FALSE  1bDi-ufoRrlyG9C5lEK_Nok… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp… FALSE  15opbP7Ae4ypd_I4Bqfrepx… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quie… FALSE  15uUOAyQBOO6ydP3PqwUC1V… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squat… FALSE  1qVl1pNR2UmjGjqp-ibZuAX… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [2]&gt;</span><span> </span></span>
 <span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"published"</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 5</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    name        published id                     drive_resource  revision_resour…</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                  </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squat… FALSE     1X3bO2d29oxcQkvwu3NlS… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squat… FALSE     1bDi-ufoRrlyG9C5lEK_N… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp… FALSE     15opbP7Ae4ypd_I4Bqfre… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [10</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quie… FALSE     15uUOAyQBOO6ydP3PqwUC… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [7]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squat… FALSE     1qVl1pNR2UmjGjqp-ibZu… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squat… FALSE     1IFdFy9A-7PCuOS4JQdcr… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squat… FALSE     1EBo1uoRnJ5WDikkjO8Ki… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp… FALSE     1eYuJhLBwcF2beFGwvDrZ… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [10</span><span>…</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quie… FALSE     1f5xDckeKMOeSVLMeQb3B… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [7]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squat… FALSE     1A3z5iibb6edehwvKOXIk… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squat… FALSE     1NHumAFaMZOeePbdr7Oqf… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squat… FALSE     1bPZf1M1G3HwVGUc1S2pr… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp… FALSE     1kXc2CrFooJXPWqDtl6aF… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [10</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quie… FALSE     1L3PmqiUY-wV9bXbXnGdt… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [7]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squat… FALSE     1rgI3bMxPvs-est6HP4ut… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squat… FALSE     1X3bO2d29oxcQkvwu3NlS… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squat… FALSE     1bDi-ufoRrlyG9C5lEK_N… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp… FALSE     15opbP7Ae4ypd_I4Bqfre… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [10</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quie… FALSE     15uUOAyQBOO6ydP3PqwUC… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [7]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squat… FALSE     1qVl1pNR2UmjGjqp-ibZu… </span><span style='color: #949494;'>&lt;named list [3</span><span>… </span><span style='color: #949494;'>&lt;named list [9]&gt;</span></span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># 'root' is a special file id that always represents your root folder</span></span>
-<span class='r-in'><span class='fu'><a href='drive_get.html'>drive_get</a></span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"root"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'>drive_reveal</span><span class='op'>(</span><span class='st'>"path"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># the "simple" cases of digging info out of `drive_resource`</span></span>
+<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"trashed"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    name            trashed id                                   drive_resource  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatter   TRUE    1NHumAFaMZOeePbdr7OqftpzdVLn8jV33    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatter   TRUE    1bPZf1M1G3HwVGUc1S2pry38uXDnhDQvU    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.txt  TRUE    1kXc2CrFooJXPWqDtl6aFd4SISfHJwkyp    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-wo… TRUE    1L3PmqiUY-wV9bXbXnGdt5WqHxCd6Pmp2vu… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatter   TRUE    1rgI3bMxPvs-est6HP4utxvmKa0thfrtN    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatter   TRUE    1X3bO2d29oxcQkvwu3NlSkZOByZ9Uxp3D    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatter   TRUE    1bDi-ufoRrlyG9C5lEK_Noko6_PXthjp0    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.txt  TRUE    15opbP7Ae4ypd_I4Bqfrepx37-v6OjtAg    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-wo… TRUE    15uUOAyQBOO6ydP3PqwUC1VHeFL5Yufxi1R… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatter   TRUE    1qVl1pNR2UmjGjqp-ibZuAX4WG7NFJdnD    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"mime_type"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    name         mime_type               id                       drive_resource </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                    </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>         </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatt… application/octet-stre… 1NHumAFaMZOeePbdr7Oqftp… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatt… application/octet-stre… 1bPZf1M1G3HwVGUc1S2pry3… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.… text/plain              1kXc2CrFooJXPWqDtl6aFd4… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet… application/vnd.google… 1L3PmqiUY-wV9bXbXnGdt5W… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatt… application/octet-stre… 1rgI3bMxPvs-est6HP4utxv… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatt… application/octet-stre… 1X3bO2d29oxcQkvwu3NlSkZ… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatt… application/octet-stre… 1bDi-ufoRrlyG9C5lEK_Nok… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.… text/plain              15opbP7Ae4ypd_I4Bqfrepx… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet… application/vnd.google… 15uUOAyQBOO6ydP3PqwUC1V… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatt… application/octet-stre… 1qVl1pNR2UmjGjqp-ibZuAX… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"starred"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    name            starred id                                   drive_resource  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatter   FALSE   1NHumAFaMZOeePbdr7OqftpzdVLn8jV33    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatter   FALSE   1bPZf1M1G3HwVGUc1S2pry38uXDnhDQvU    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.txt  FALSE   1kXc2CrFooJXPWqDtl6aFd4SISfHJwkyp    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-wo… FALSE   1L3PmqiUY-wV9bXbXnGdt5WqHxCd6Pmp2vu… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatter   FALSE   1rgI3bMxPvs-est6HP4utxvmKa0thfrtN    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatter   FALSE   1X3bO2d29oxcQkvwu3NlSkZOByZ9Uxp3D    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatter   FALSE   1bDi-ufoRrlyG9C5lEK_Noko6_PXthjp0    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.txt  FALSE   15opbP7Ae4ypd_I4Bqfrepx37-v6OjtAg    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-wo… FALSE   15uUOAyQBOO6ydP3PqwUC1VHeFL5Yufxi1R… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatter   FALSE   1qVl1pNR2UmjGjqp-ibZuAX4WG7NFJdnD    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"description"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    name           description id                                drive_resource  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                             </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatter  </span><span style='color: #949494;'>&lt;NULL&gt;</span><span>      1NHumAFaMZOeePbdr7OqftpzdVLn8jV33 </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatter  </span><span style='color: #949494;'>&lt;NULL&gt;</span><span>      1bPZf1M1G3HwVGUc1S2pry38uXDnhDQvU </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.txt </span><span style='color: #949494;'>&lt;NULL&gt;</span><span>      1kXc2CrFooJXPWqDtl6aFd4SISfHJwkyp </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-w… </span><span style='color: #949494;'>&lt;NULL&gt;</span><span>      1L3PmqiUY-wV9bXbXnGdt5WqHxCd6Pmp… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatter  </span><span style='color: #949494;'>&lt;NULL&gt;</span><span>      1rgI3bMxPvs-est6HP4utxvmKa0thfrtN </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatter  </span><span style='color: #949494;'>&lt;NULL&gt;</span><span>      1X3bO2d29oxcQkvwu3NlSkZOByZ9Uxp3D </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatter  </span><span style='color: #949494;'>&lt;NULL&gt;</span><span>      1bDi-ufoRrlyG9C5lEK_Noko6_PXthjp0 </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.txt </span><span style='color: #949494;'>&lt;NULL&gt;</span><span>      15opbP7Ae4ypd_I4Bqfrepx37-v6OjtAg </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-w… </span><span style='color: #949494;'>&lt;NULL&gt;</span><span>      15uUOAyQBOO6ydP3PqwUC1VHeFL5Yufx… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatter  </span><span style='color: #949494;'>&lt;NULL&gt;</span><span>      1qVl1pNR2UmjGjqp-ibZuAX4WG7NFJdnD </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"version"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    name            version id                                   drive_resource  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatter   2       1NHumAFaMZOeePbdr7OqftpzdVLn8jV33    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatter   2       1bPZf1M1G3HwVGUc1S2pry38uXDnhDQvU    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.txt  3       1kXc2CrFooJXPWqDtl6aFd4SISfHJwkyp    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-wo… 10      1L3PmqiUY-wV9bXbXnGdt5WqHxCd6Pmp2vu… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatter   2       1rgI3bMxPvs-est6HP4utxvmKa0thfrtN    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatter   2       1X3bO2d29oxcQkvwu3NlSkZOByZ9Uxp3D    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatter   2       1bDi-ufoRrlyG9C5lEK_Noko6_PXthjp0    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.txt  3       15opbP7Ae4ypd_I4Bqfrepx37-v6OjtAg    </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-wo… 10      15uUOAyQBOO6ydP3PqwUC1VHeFL5Yufxi1R… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatter   2       1qVl1pNR2UmjGjqp-ibZuAX4WG7NFJdnD    </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"web_view_link"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    name      web_view_link                      id                drive_resource</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>        </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squ… https://drive.google.com/file/d/1… 1NHumAFaMZOeePbd… </span><span style='color: #949494;'>&lt;named list [</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squ… https://drive.google.com/file/d/1… 1bPZf1M1G3HwVGUc… </span><span style='color: #949494;'>&lt;named list [</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-… https://drive.google.com/file/d/1… 1kXc2CrFooJXPWqD… </span><span style='color: #949494;'>&lt;named list [</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-qu… https://docs.google.com/document/… 1L3PmqiUY-wV9bXb… </span><span style='color: #949494;'>&lt;named list [</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squ… https://drive.google.com/file/d/1… 1rgI3bMxPvs-est6… </span><span style='color: #949494;'>&lt;named list [</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squ… https://drive.google.com/file/d/1… 1X3bO2d29oxcQkvw… </span><span style='color: #949494;'>&lt;named list [</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squ… https://drive.google.com/file/d/1… 1bDi-ufoRrlyG9C5… </span><span style='color: #949494;'>&lt;named list [</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-… https://drive.google.com/file/d/1… 15opbP7Ae4ypd_I4… </span><span style='color: #949494;'>&lt;named list [</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-qu… https://docs.google.com/document/… 15uUOAyQBOO6ydP3… </span><span style='color: #949494;'>&lt;named list [</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squ… https://drive.google.com/file/d/1… 1qVl1pNR2UmjGjqp… </span><span style='color: #949494;'>&lt;named list [</span><span>…</span></span>
+<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"modified_time"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    name         modified_time       id                           drive_resource </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                        </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>         </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatt… 2021-05-09 </span><span style='color: #949494;'>13:48:40</span><span> 1NHumAFaMZOeePbdr7OqftpzdVL… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatt… 2021-05-09 </span><span style='color: #949494;'>13:48:24</span><span> 1bPZf1M1G3HwVGUc1S2pry38uXD… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.… 2021-05-09 </span><span style='color: #949494;'>13:47:33</span><span> 1kXc2CrFooJXPWqDtl6aFd4SISf… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet… 2021-05-08 </span><span style='color: #949494;'>13:49:29</span><span> 1L3PmqiUY-wV9bXbXnGdt5WqHxC… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatt… 2021-05-08 </span><span style='color: #949494;'>13:49:20</span><span> 1rgI3bMxPvs-est6HP4utxvmKa0… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatt… 2021-05-08 </span><span style='color: #949494;'>13:48:45</span><span> 1X3bO2d29oxcQkvwu3NlSkZOByZ… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatt… 2021-05-08 </span><span style='color: #949494;'>13:48:30</span><span> 1bDi-ufoRrlyG9C5lEK_Noko6_P… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.… 2021-05-08 </span><span style='color: #949494;'>13:47:41</span><span> 15opbP7Ae4ypd_I4Bqfrepx37-v… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet… 2021-05-07 </span><span style='color: #949494;'>13:50:32</span><span> 15uUOAyQBOO6ydP3PqwUC1VHeFL… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatt… 2021-05-07 </span><span style='color: #949494;'>13:50:23</span><span> 1qVl1pNR2UmjGjqp-ibZuAX4WG7… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"created_time"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    name         created_time        id                           drive_resource </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                        </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>         </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatt… 2021-05-09 </span><span style='color: #949494;'>13:48:40</span><span> 1NHumAFaMZOeePbdr7OqftpzdVL… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatt… 2021-05-09 </span><span style='color: #949494;'>13:48:24</span><span> 1bPZf1M1G3HwVGUc1S2pry38uXD… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.… 2021-05-09 </span><span style='color: #949494;'>13:47:33</span><span> 1kXc2CrFooJXPWqDtl6aFd4SISf… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet… 2021-05-08 </span><span style='color: #949494;'>13:49:25</span><span> 1L3PmqiUY-wV9bXbXnGdt5WqHxC… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatt… 2021-05-08 </span><span style='color: #949494;'>13:49:20</span><span> 1rgI3bMxPvs-est6HP4utxvmKa0… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatt… 2021-05-08 </span><span style='color: #949494;'>13:48:45</span><span> 1X3bO2d29oxcQkvwu3NlSkZOByZ… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatt… 2021-05-08 </span><span style='color: #949494;'>13:48:30</span><span> 1bDi-ufoRrlyG9C5lEK_Noko6_P… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.… 2021-05-08 </span><span style='color: #949494;'>13:47:41</span><span> 15opbP7Ae4ypd_I4Bqfrepx37-v… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet… 2021-05-07 </span><span style='color: #949494;'>13:50:29</span><span> 15uUOAyQBOO6ydP3PqwUC1VHeFL… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatt… 2021-05-07 </span><span style='color: #949494;'>13:50:23</span><span> 1qVl1pNR2UmjGjqp-ibZuAX4WG7… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"owned_by_me"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    name           owned_by_me id                                drive_resource  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                             </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatter  TRUE        1NHumAFaMZOeePbdr7OqftpzdVLn8jV33 </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatter  TRUE        1bPZf1M1G3HwVGUc1S2pry38uXDnhDQvU </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.txt TRUE        1kXc2CrFooJXPWqDtl6aFd4SISfHJwkyp </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-w… TRUE        1L3PmqiUY-wV9bXbXnGdt5WqHxCd6Pmp… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatter  TRUE        1rgI3bMxPvs-est6HP4utxvmKa0thfrtN </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatter  TRUE        1X3bO2d29oxcQkvwu3NlSkZOByZ9Uxp3D </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatter  TRUE        1bDi-ufoRrlyG9C5lEK_Noko6_PXthjp0 </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.txt TRUE        15opbP7Ae4ypd_I4Bqfrepx37-v6OjtAg </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-w… TRUE        15uUOAyQBOO6ydP3PqwUC1VHeFL5Yufx… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatter  TRUE        1qVl1pNR2UmjGjqp-ibZuAX4WG7NFJdnD </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"size"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    name            size  id                                     drive_resource  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                  </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatter   0     1NHumAFaMZOeePbdr7OqftpzdVLn8jV33      </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatter   0     1bPZf1M1G3HwVGUc1S2pry38uXDnhDQvU      </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.txt  165   1kXc2CrFooJXPWqDtl6aFd4SISfHJwkyp      </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-wo… </span><span style='color: #BB0000;'>NA</span><span>    1L3PmqiUY-wV9bXbXnGdt5WqHxCd6Pmp2vuWJ… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatter   0     1rgI3bMxPvs-est6HP4utxvmKa0thfrtN      </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatter   0     1X3bO2d29oxcQkvwu3NlSkZOByZ9Uxp3D      </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatter   0     1bDi-ufoRrlyG9C5lEK_Noko6_PXthjp0      </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.txt  165   15opbP7Ae4ypd_I4Bqfrepx37-v6OjtAg      </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-wo… </span><span style='color: #BB0000;'>NA</span><span>    15uUOAyQBOO6ydP3PqwUC1VHeFL5Yufxi1RRd… </span><span style='color: #949494;'>&lt;named list [34</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatter   0     1qVl1pNR2UmjGjqp-ibZuAX4WG7NFJdnD      </span><span style='color: #949494;'>&lt;named list [38</span><span>…</span></span>
+<span class='r-in'><span class='fu'>drive_reveal</span><span class='op'>(</span><span class='va'>files</span>, <span class='st'>"quota_bytes_used"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 10 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    name          quota_bytes_used id                             drive_resource </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                          </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>         </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> name-squatter 0                1NHumAFaMZOeePbdr7OqftpzdVLn8… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> name-squatter 0                1bPZf1M1G3HwVGUc1S2pry38uXDnh… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> chicken-cp.t… 165              1kXc2CrFooJXPWqDtl6aFd4SISfHJ… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> drive-quiet-… 0                1L3PmqiUY-wV9bXbXnGdt5WqHxCd6… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> name-squatter 0                1rgI3bMxPvs-est6HP4utxvmKa0th… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> name-squatter 0                1X3bO2d29oxcQkvwu3NlSkZOByZ9U… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> name-squatter 0                1bDi-ufoRrlyG9C5lEK_Noko6_PXt… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> chicken-cp.t… 165              15opbP7Ae4ypd_I4Bqfrepx37-v6O… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> drive-quiet-… 0                15uUOAyQBOO6ydP3PqwUC1VHeFL5Y… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> name-squatter 0                1qVl1pNR2UmjGjqp-ibZuAX4WG7NF… </span><span style='color: #949494;'>&lt;named list [3</span><span>…</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># 'root' is a special file id that represents your My Drive root folder</span></span>
+<span class='r-in'><span class='fu'><a href='drive_get.html'>drive_get</a></span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"root"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>drive_reveal</span><span class='op'>(</span><span class='st'>"path"</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path  id                  drive_resource   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>

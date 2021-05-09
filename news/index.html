@@ -203,6 +203,7 @@
 <h2 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h2>
 <ul>
+<li><p><code>drive_reveal(what = "property_name")</code> now works for any property found in the file metadata stored in the <code>drive_resource</code> column. The new column is also simplified in more cases now, e.g. to <code>character</code> or <code>logical</code>. If the <code>property_name</code> suggests it’s a date-time, we return <code>POSIXct</code>.</p></li>
 <li>
 <p>We’ve modernized the mechanisms by which the <code>dribble</code> class is (or is not) retained by various data frame operations. This boils down to updating or adding methods used by the base, dplyr, pillar/tibble, and vctrs packages.</p>
 <p>We focus on compatibility with dplyr &gt;= 1.0.0, which was released a year ago. googledrive only Suggests dplyr, so all this really means is that <code>dribble</code> manipulation via dplyr now works best with dplyr &gt;= 1.0.0.</p>
