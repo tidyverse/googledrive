@@ -19,14 +19,16 @@ Drive. Can be a name or path, a file id or URL marked with \code{\link[=as_id]{a
 \code{\link{dribble}}.}
 
 \item{path}{Specifies target destination for the new file on Google
-Drive. Can be an actual path (character), a file id marked with \code{\link[=as_id]{as_id()}},
-or a \code{\link{dribble}}. If specified as an actual path, it is best to explicitly
-indicate if it's a folder by including a trailing slash, since it cannot
-always be worked out from the context of the call. Defaults to "Copy of \code{FILE-NAME}".}
+Drive. Can be an actual path (character), a file id marked with
+\code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. If specified as an actual path, it is best
+to explicitly indicate if it's a folder by including a trailing slash,
+since it cannot always be worked out from the context of the call.
+By default, the new file has the same parent folder as the
+source file.}
 
 \item{name}{Character, new file name if not specified as part of
-\code{path}. This will force \code{path} to be treated as a folder, even if it is
-character and lacks a trailing slash. Defaults to "Copy of \code{FILE-NAME}".}
+\code{path}. This will force \code{path} to be interpreted as a folder, even if it
+is character and lacks a trailing slash. Defaults to "Copy of \code{FILE-NAME}".}
 
 \item{...}{Named parameters to pass along to the Drive API. Has \link[rlang:dyn-dots]{dynamic dots} semantics. You can affect the metadata of the target file by
 specifying properties of the Files resource via \code{...}. Read the "Request

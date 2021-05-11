@@ -11,13 +11,15 @@
 #'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
 #'
 #' @template media
-#' @template path
-#' @templateVar name file
-#' @templateVar default If not given or unknown, will default to the "My Drive"
-#'   root folder.
-#' @template name
-#' @templateVar name file
-#' @templateVar default Will default to its local name.
+#' @eval param_path(
+#'   thing = "new file",
+#'   default_notes = "By default, the file is created in the current
+#'     user's \"My Drive\" root folder."
+#' )
+#' @eval param_name(
+#'   thing = "file",
+#'   default_notes = "Defaults to the file's local name."
+#' )
 #' @param type Character. If `type = NULL`, a MIME type is automatically
 #'   determined from the file extension, if possible. If the source file is of a
 #'   suitable type, you can request conversion to Google Doc, Sheet or Slides by

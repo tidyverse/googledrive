@@ -6,12 +6,15 @@
 #'   * <https://developers.google.com/drive/v3/reference/files/copy>
 #'
 #' @template file-singular
-#' @template path
-#' @templateVar name file
-#' @templateVar default {}
-#' @template name
-#' @templateVar name file
-#' @templateVar default Defaults to "Copy of `FILE-NAME`".
+#' @eval param_path(
+#'   thing = "new file",
+#'   default_notes = "By default, the new file has the same parent folder as the
+#'      source file."
+#' )
+#' @eval param_name(
+#'   thing = "file",
+#'   default_notes = "Defaults to \"Copy of `FILE-NAME`\"."
+#' )
 #' @template dots-metadata
 #' @template overwrite
 #' @template verbose

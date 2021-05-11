@@ -9,12 +9,14 @@
 #' one".
 #'
 #' @template file-singular
-#' @template path
-#' @templateVar name file
-#' @templateVar default {}
-#' @template name
-#' @templateVar name file
-#' @templateVar default Defaults to current name.
+#' @eval param_path(
+#'   thing = "file",
+#'   default_notes = "By default, the file stays in its current folder."
+#' )
+#' @eval param_name(
+#'   thing = "file",
+#'   default_notes = "By default, the file keeps its current name."
+#' )
 #' @template overwrite
 #' @template verbose
 #'
