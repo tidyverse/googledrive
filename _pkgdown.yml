@@ -82,12 +82,18 @@ reference:
       Manipulate and explore shared drives
     contents:
       - matches("shared_drive")
+  - title: "Shortcuts"
+    desc: >
+      Similar to local file shortcuts, aliases, or symbolic links
+    contents:
+      - shortcut_create
   - title: "Dribble object"
     desc: >
       Metadata about Drive files is stored in a "Drive tibble" a.k.a. a dribble
     contents:
       - dribble
       - as_dribble
+      - drive_reveal
       - as_id
       - dribble-checks
   - title: "Authorization"
