@@ -21,6 +21,9 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("shortcut_create() works", {
+  skip_if_no_token()
+  skip_if_offline()
+
   target_file <- drive_get(nm_("top-level-file"))
   folder <- drive_get(nm_("i-am-a-folder"))
 
@@ -44,6 +47,9 @@ test_that("shortcut_create() works", {
 })
 
 test_that("shortcut_create() requires `name` to control `overwrite`", {
+  skip_if_no_token()
+  skip_if_offline()
+
   # TODO: consider a snapshot test once the rlang+cli transition completes
   expect_error(
     shortcut_create(nm_("top-level-file"), overwrite = FALSE)
