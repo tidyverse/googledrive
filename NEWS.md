@@ -19,6 +19,25 @@ Where to learn more:
 * [Team Drives is being renamed to shared drives](https://workspaceupdates.googleblog.com/2019/04/shared-drives.html) from Google Workspace blog
 * [Upcoming changes to the Google Drive API and Google Picker API](https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api) from the Google Cloud blog
 
+## Single parenting and shortcuts
+
+As of 2020-09-30, Drive no longer allows a file to be placed in multiple folders; going forward, every file will have exactly 1 parent folder.
+In many cases that parent is just the top-level or root folder of your "My Drive" or of a shared drive.
+This change has been accompanied by the introduction of file **shortcuts**, which function much like symbolic or "soft" links.
+Shortcuts are the new way to make a file appear to be in more than one place or, said another way, the new way for one Drive file to be associated with more than one Drive filepath.
+A shortcut is a special type of Drive file, characterized by the `application/vnd.google-apps.shortcut` MIME type.
+
+Drive has been migrating existing files to the one-parent state, i.e., "single parenting" them.
+Drive selects the most suitable parent folder to keep, "based on the hierarchy's properties", and replaces any other parent-child relationships with a shortcut.
+
+`shortcut_create()` is a new function to create a shortcut to a Drive file.
+
+Further reading about these changes:
+
+* [Simplifying Google Drive’s folder structure and sharing models](https://cloud.google.com/blog/products/g-suite/simplifying-google-drives-folder-structure-and-sharing-models)
+* [Single-parenting behavior changes](https://developers.google.com/drive/api/v3/ref-single-parent)
+* [Create a shortcut to a Drive file](https://developers.google.com/drive/api/v3/shortcuts)
+
 ## User interface
 
 The user interface has gotten more stylish, thanks to the cli package (<https://cli.r-lib.org>).

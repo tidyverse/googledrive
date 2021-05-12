@@ -78,9 +78,13 @@ drive_create <- function(name,
                          verbose = deprecated()) {
   warn_for_verbose(verbose)
 
+  # in the special case of creating a shortcut, `name` is not required
+  if (!identical(drive_mime_type(type), drive_mime_type("shortcut"))) {
+    stopifnot(is_string(name))
+  }
   # the order and role of `path` and `name` is naturally inverted here,
   # relative to all other related functions, hence we pre-process
-  stopifnot(is_string(name))
+
   if (is.null(path)) {
     path <- name
     name <- NULL
