@@ -340,6 +340,14 @@ is_folder <- function(d) {
 
 #' @export
 #' @rdname dribble-checks
+is_shortcut <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  purrr::map_chr(d$drive_resource, "mimeType") ==
+    "application/vnd.google-apps.shortcut"
+}
+
+#' @export
+#' @rdname dribble-checks
 is_native <- function(d) {
   stopifnot(inherits(d, "dribble"))
   d <- promote(d, "mimeType")

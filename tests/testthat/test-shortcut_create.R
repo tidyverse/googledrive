@@ -44,6 +44,7 @@ test_that("shortcut_create() works", {
     folder$id
   )
   expect_match(sc$name, "custom-named-shortcut")
+  expect_true(is_shortcut(sc))
 })
 
 test_that("shortcut_create() requires `name` to control `overwrite`", {

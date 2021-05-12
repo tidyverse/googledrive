@@ -86,7 +86,7 @@ reference:
     desc: >
       Similar to local file shortcuts, aliases, or symbolic links
     contents:
-      - shortcut_create
+      - matches("shortcut")
   - title: "Dribble object"
     desc: >
       Metadata about Drive files is stored in a "Drive tibble" a.k.a. a dribble
