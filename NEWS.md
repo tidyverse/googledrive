@@ -22,11 +22,12 @@ Where to learn more:
 ## Single parenting and shortcuts
 
 As of 2020-09-30, Drive no longer allows a file to be placed in multiple folders; going forward, every file will have exactly 1 parent folder.
+In many cases that parent is just the top-level or root folder of your "My Drive" or of a shared drive.
 This change has been accompanied by the introduction of file **shortcuts**, which function much like symbolic or "soft" links.
-Shortcuts are the new way to have a file appear to be in more than one place or, said another way, the new way for one Drive file to be associated with more than one Drive filepath.
-A shortcut is a special type of Drive file, similar to a folder, characterized by the `application/vnd.google-apps.shortcut` MIME type.
+Shortcuts are the new way to make a file appear to be in more than one place or, said another way, the new way for one Drive file to be associated with more than one Drive filepath.
+A shortcut is a special type of Drive file, characterized by the `application/vnd.google-apps.shortcut` MIME type.
 
-Drive has been migrating existing files to the one-parent state, a.k.a. "single parenting" them.
+Drive has been migrating existing files to the one-parent state, i.e., "single parenting" them.
 Drive selects the most suitable parent folder to keep, "based on the hierarchy's properties", and replaces any other parent-child relationships with a shortcut.
 
 `shortcut_create()` is a new function to create a shortcut to a Drive file.
