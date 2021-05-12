@@ -12,7 +12,7 @@
     )
   }
 
-  # in rlang 0.4.1, `is_installed()` doesn't have `version` arg yet
+  # in rlang 0.4.10, `is_installed()` doesn't have `version` arg yet
   if (is_installed("dplyr") && utils::packageVersion("dplyr") >= "1.0.0") {
     vctrs::s3_register(
       "dplyr::dplyr_reconstruct",
