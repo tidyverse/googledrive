@@ -37,6 +37,7 @@ Further reading about these changes:
 * [Simplifying Google Drive’s folder structure and sharing models](https://cloud.google.com/blog/products/g-suite/simplifying-google-drives-folder-structure-and-sharing-models)
 * [Single-parenting behavior changes](https://developers.google.com/drive/api/v3/ref-single-parent)
 * [Create a shortcut to a Drive file](https://developers.google.com/drive/api/v3/shortcuts)
+* [Find files & folders with Google Drive shortcuts](https://support.google.com/drive/answer/9700156)
 
 ## User interface
 
