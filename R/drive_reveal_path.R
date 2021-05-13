@@ -90,10 +90,7 @@ get_nodes <- function(path,
                       shared_drive = NULL,
                       corpus = NULL) {
   path_parts <- map(path, partition_path, maybe_name = TRUE)
-  ## workaround for purrr <= 0.2.2.2
-  name <- map(path_parts, "name")
-  name <- purrr::flatten_chr(purrr::map_if(name, is.null, ~NA_character_))
-  # name <- map_chr(path_parts, "name", .default = NA)
+  name <- map_chr(path_parts, "name", .default = NA)
   names <- unique(name)
   names <- names[!is.na(names)]
   names <- glue("name = {sq(names)}")
