@@ -175,7 +175,7 @@ shortcut_resolve <- function(file) {
     ))
   }
 
-  invisible(out)
+  out
 }
 
 resolve_one <- function(name, id, drive_resource, ...) {
