@@ -17,7 +17,7 @@
 #' # explore the export formats available for Drive files, by MIME type
 #' about <- drive_about()
 #' about[["exportFormats"]] %>%
-#'   map(unlist)
+#'   purrr::map(unlist)
 drive_about <- function() {
   request <- request_generate(
     endpoint = "drive.about.get",
