@@ -39,7 +39,7 @@ shared_drive_find <- function(pattern = NULL,
   )
 
   res_tbl <- proc_res_list %>%
-    purrr::map("drives") %>%
+    map("drives") %>%
     purrr::flatten() %>%
     as_dribble()
 

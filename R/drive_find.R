@@ -186,7 +186,7 @@ drive_find <- function(pattern = NULL,
   )
 
   res_tbl <- proc_res_list %>%
-    purrr::map("files") %>%
+    map("files") %>%
     purrr::flatten() %>%
     as_dribble()
 

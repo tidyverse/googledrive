@@ -73,7 +73,7 @@ drive_change_publish <- function(file,
   params[["revisionId"]] <- "head"
   params[["fields"]] <- "*"
 
-  revision_resource <- purrr::map(
+  revision_resource <- map(
     file$id,
     change_publish_one,
     params = params
@@ -99,11 +99,11 @@ change_publish_one <- function(id, params) {
 
 drive_reveal_published <- function(file) {
   confirm_dribble(file)
-  revision_resource <- purrr::map(file$id, get_publish_one)
+  revision_resource <- map(file$id, get_publish_one)
   file <- put_column(
     file,
     nm = "published",
-    val = purrr::map_lgl(revision_resource, "published", .default = FALSE),
+    val = map_lgl(revision_resource, "published", .default = FALSE),
     .after = 1
   )
   put_column(

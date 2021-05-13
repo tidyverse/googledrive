@@ -207,8 +207,8 @@ test_that("check_for_overwrite() does its job", {
   )
   expect_identical(first$name, second$name)
   expect_identical(
-    purrr::pluck(first, "drive_resource", 1, "parents"),
-    purrr::pluck(second, "drive_resource", 1, "parents")
+    pluck(first, "drive_resource", 1, "parents"),
+    pluck(second, "drive_resource", 1, "parents")
   )
   expect_false(first$id == second$id)
 

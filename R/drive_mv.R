@@ -81,7 +81,7 @@ drive_mv <- function(file,
   params <- list()
 
   # load (path, name) into params ... maybe
-  parents_before <- purrr::pluck(file, "drive_resource", 1, "parents")
+  parents_before <- pluck(file, "drive_resource", 1, "parents")
   n_parents_before <- length(parents_before)
   if (!is.null(path)) {
     path <- as_parent(path)

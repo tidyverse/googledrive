@@ -35,7 +35,7 @@ shared_drive_rm <- function(drive = NULL) {
     return(invisible(logical(0)))
   }
 
-  out <- purrr::map_lgl(as_id(shared_drive), delete_one_shared_drive)
+  out <- map_lgl(as_id(shared_drive), delete_one_shared_drive)
 
   if (any(out)) {
     successes <- shared_drive[out, ]

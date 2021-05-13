@@ -107,7 +107,7 @@ drive_get <- function(path = NULL,
   }
 
   if (is.null(path)) {
-    as_dribble(purrr::map(as_id(id), get_one_file))
+    as_dribble(map(as_id(id), get_one_file))
   } else {
     dribble_from_path(path, shared_drive, corpus)
   }

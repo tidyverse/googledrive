@@ -125,7 +125,7 @@ has_dribble_coltypes <- function(x) {
 }
 
 has_drive_resource <- function(x) {
-  kind <- purrr::map_chr(x$drive_resource, "kind", .default = NA_character_)
+  kind <- map_chr(x$drive_resource, "kind", .default = NA_character_)
   # TODO: remove `drive#teamDrive` here, when possible
   all(!is.na(kind) & kind %in% c("drive#file", "drive#drive", "drive#teamDrive"))
 }
@@ -209,12 +209,12 @@ as_dribble.list <- function(x, ...) {
   if (length(x) == 0) return(dribble())
 
   required_nms <- c("name", "id", "kind")
-  stopifnot(purrr::map_lgl(x, ~all(required_nms %in% names(.x))))
+  stopifnot(map_lgl(x, ~all(required_nms %in% names(.x))))
 
   as_dribble(
     tibble::tibble(
-      name = purrr::map_chr(x, "name"),
-      id = purrr::map_chr(x, "id"),
+      name = map_chr(x, "name"),
+      id = map_chr(x, "id"),
       drive_resource = x
     )
   )
@@ -334,7 +334,7 @@ confirm_some_files <- function(d) {
 #' @rdname dribble-checks
 is_folder <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  purrr::map_chr(d$drive_resource, "mimeType") ==
+  map_chr(d$drive_resource, "mimeType") ==
     "application/vnd.google-apps.folder"
 }
 
@@ -342,7 +342,7 @@ is_folder <- function(d) {
 #' @rdname dribble-checks
 is_shortcut <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  purrr::map_chr(d$drive_resource, "mimeType") ==
+  map_chr(d$drive_resource, "mimeType") ==
     "application/vnd.google-apps.shortcut"
 }
 
@@ -358,8 +358,8 @@ is_native <- function(d) {
 #' @rdname dribble-checks
 is_parental <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  kind <- purrr::map_chr(d$drive_resource, "kind")
-  mime_type <- purrr::map_chr(d$drive_resource, "mimeType", .default = NA)
+  kind <- map_chr(d$drive_resource, "kind")
+  mime_type <- map_chr(d$drive_resource, "mimeType", .default = NA)
   # TODO: remove `drive#teamDrive` here, when possible
   kind == "drive#teamDrive" |
     kind == "drive#drive" |
@@ -371,12 +371,12 @@ is_parental <- function(d) {
 ## TO DO: do I need to do anything about shared drives here?
 is_mine <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  purrr::map_lgl(d$drive_resource, list("owners", 1, "me"))
+  map_lgl(d$drive_resource, list("owners", 1, "me"))
 }
 
 #' @export
 #' @rdname dribble-checks
 is_shared_drive <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  purrr::map_chr(d$drive_resource, "kind") == "drive#drive"
+  map_chr(d$drive_resource, "kind") == "drive#drive"
 }

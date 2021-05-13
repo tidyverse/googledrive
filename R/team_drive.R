@@ -70,5 +70,5 @@ team_drive_update <- function(team_drive, ..., verbose = deprecated()) {
 #' @rdname deprecated-team-drive-functions
 is_team_drive <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  purrr::map_chr(d$drive_resource, "kind") == "drive#teamDrive"
+  map_chr(d$drive_resource, "kind") == "drive#teamDrive"
 }

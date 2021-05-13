@@ -164,7 +164,7 @@ test_that("drive_get() works with a URL", {
 
   file <- drive_find(nm_("thing02"))
 
-  out <- drive_get(purrr::pluck(file, "drive_resource", 1, "webViewLink"))
+  out <- drive_get(pluck(file, "drive_resource", 1, "webViewLink"))
   expect_identical(file$id, out$id)
 
 })

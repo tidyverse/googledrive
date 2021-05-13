@@ -41,7 +41,7 @@ as_id.data.frame <- function(x, ...) as_id(validate_dribble(new_dribble(x)))
 #' @export
 as_id.character <- function(x, ...) {
   if (length(x) == 0L) return(x)
-  structure(purrr::map_chr(x, get_one_id), class = "drive_id")
+  structure(map_chr(x, get_one_id), class = "drive_id")
 }
 
 ## we anticipate file-id-containing URLs in these forms:

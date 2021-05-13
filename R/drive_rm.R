@@ -37,7 +37,7 @@ drive_rm <- function(..., verbose = deprecated()) {
   }
 
   # explicitly select on var name to exclude 'path', if present
-  file <- purrr::map(dots, ~as_dribble(.x)[c("name", "id", "drive_resource")])
+  file <- map(dots, ~as_dribble(.x)[c("name", "id", "drive_resource")])
   file <- exec(rbind, !!!file)
   # filter to the unique file ids (multiple parents mean drive_get() and
   # therefore as_dribble() can return >1 row representing a single file)
@@ -49,7 +49,7 @@ drive_rm <- function(..., verbose = deprecated()) {
     ))
   }
 
-  out <- purrr::map_lgl(file$id, delete_one)
+  out <- map_lgl(file$id, delete_one)
 
   if (any(out)) {
     successes <- file[out, ]

@@ -92,11 +92,11 @@ test_that("drive_update() can add a parent", {
     name = me_("DESCRIPTION"),
     starred = TRUE
   )
-  orig_parents <- unlist(purrr::pluck(uploadee, "drive_resource", 1, "parents"))
+  orig_parents <- unlist(pluck(uploadee, "drive_resource", 1, "parents"))
 
   folder <- drive_get(nm_("upload-into-me"))
   updatee <- drive_update(uploadee, addParents = as_id(folder))
-  new_parents <- unlist(purrr::pluck(updatee, "drive_resource", 1, "parents"))
+  new_parents <- unlist(pluck(updatee, "drive_resource", 1, "parents"))
 
   expect_identical(
     setdiff(new_parents, orig_parents),

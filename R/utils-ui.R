@@ -183,7 +183,7 @@ cli_format_dribble <- function(x, bullet = "*") {
     n_show <- n
   }
 
-  out <- purrr::map_chr(seq_len(n_show), ~ cli_format(x[.x, ]))
+  out <- map_chr(seq_len(n_show), ~ cli_format(x[.x, ]))
   out <- set_names(out, rep_along(out, bullet))
   if (n > n_show) {
     out <- c(out, " " = glue("{cli::symbol$ellipsis} and {n - n_show} more"))

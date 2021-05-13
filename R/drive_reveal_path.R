@@ -9,7 +9,7 @@ drive_reveal_path <- function(file) {
 
   shared_drive <- NULL
   corpus <- NULL
-  sid <- purrr::map_chr(file$drive_resource, "driveId", .default = NA)
+  sid <- map_chr(file$drive_resource, "driveId", .default = NA)
   sid <- unique(sid[!is.na(sid)])
   if (length(sid) > 0) {
     if (length(sid) == 1) {
@@ -28,7 +28,7 @@ drive_reveal_path <- function(file) {
   nodes <- nodes[!duplicated(nodes$id), ]
 
   ROOT_ID <- root_id()
-  x <- purrr::map(file$id, ~pathify_one_id(.x, nodes, ROOT_ID))
+  x <- map(file$id, ~pathify_one_id(.x, nodes, ROOT_ID))
 
   ## TO DO: message if a dribble doesn't have exactly 1 row?
   exec(rbind, !!!x)
@@ -56,7 +56,7 @@ dribble_from_path <- function(path = NULL,
   if (nrow(nodes) == 0) return(dribble_with_path())
 
   ROOT_ID <- root_id()
-  x <- purrr::map(path, ~pathify_one_path(.x, nodes, ROOT_ID))
+  x <- map(path, ~pathify_one_path(.x, nodes, ROOT_ID))
 
   ## TO DO: message if a dribble doesn't have exactly 1 row?
   exec(rbind, !!!x)
@@ -89,11 +89,11 @@ pathify_one_path <- function(op, nodes, root_id) {
 get_nodes <- function(path,
                       shared_drive = NULL,
                       corpus = NULL) {
-  path_parts <- purrr::map(path, partition_path, maybe_name = TRUE)
+  path_parts <- map(path, partition_path, maybe_name = TRUE)
   ## workaround for purrr <= 0.2.2.2
-  name <- purrr::map(path_parts, "name")
+  name <- map(path_parts, "name")
   name <- purrr::flatten_chr(purrr::map_if(name, is.null, ~NA_character_))
-  # name <- purrr::map_chr(path_parts, "name", .default = NA)
+  # name <- map_chr(path_parts, "name", .default = NA)
   names <- unique(name)
   names <- names[!is.na(names)]
   names <- glue("name = {sq(names)}")
@@ -163,7 +163,7 @@ add_id_path <- function(nodes, root_id, leaf = NULL) {
   stopifnot(!anyDuplicated(nodes$id))
   leaf <- leaf %||% rep.int(TRUE, nrow(nodes))
   nodes$id_path <- list(character())
-  nodes$id_path[leaf] <- purrr::map(
+  nodes$id_path[leaf] <- map(
     nodes$id[leaf],
     ~pth(.x, kids = nodes$id, elders = nodes$parents, stop_value = root_id)
   )
@@ -181,9 +181,9 @@ add_id_path <- function(nodes, root_id, leaf = NULL) {
 ##   * path = list-column of lists of length-1 character vectors of paths
 ## each such character vector is a root-ward path for a leaf
 add_path <- function(nodes, root_id) {
-  nodes$path <- purrr::map(
+  nodes$path <- map(
     nodes$id_path,
-    ~purrr::map(
+    ~map(
       .x,
       stringify_path,
       key = nodes$id,

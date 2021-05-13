@@ -91,7 +91,7 @@ drive_extension <- function(type = NULL) {
   stopifnot(is.character(type))
 
   type <- drive_mime_type(type)
-  m <- purrr::map_int(type, one_ext)
+  m <- map_int(type, one_ext)
   .drive$mime_tbl$ext[m]
 }
 

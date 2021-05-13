@@ -86,7 +86,7 @@
     Code
       as_dribble(list(drib_lst))
     Error <simpleError>
-      purrr::map_lgl(x, ~all(required_nms %in% names(.x))) is not TRUE
+      map_lgl(x, ~all(required_nms %in% names(.x))) is not TRUE
 
 ---
 

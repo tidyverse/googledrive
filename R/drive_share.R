@@ -89,13 +89,13 @@ drive_share <- function(file,
   params[["type"]] <- type
   params[["fields"]] <- "*"
   ## this resource pertains only to the affected permission
-  permission_out <- purrr::map(
+  permission_out <- map(
     file$id,
     drive_share_one,
     params = params
   )
 
-  ok <- purrr::map_chr(permission_out, "type") == type
+  ok <- map_chr(permission_out, "type") == type
   if (any(ok)) {
     successes <- file[ok, ]
     drive_bullets(c(
@@ -140,14 +140,14 @@ drive_share_one <- function(id, params) {
 
 drive_reveal_permissions <- function(file) {
   confirm_dribble(file)
-  permissions_resource <- purrr::map(file$id, list_permissions_one)
+  permissions_resource <- map(file$id, list_permissions_one)
   # TODO: revisit this in light of Team Drives --> shared drives
   ## can't use promote() here (yet) because Team Drive files don't have
   ## `shared` and their NULLs would force `shared` to be a list-column
   file <- put_column(
     file,
     nm = "shared",
-    val = purrr::map_lgl(file$drive_resource, "shared", .default = NA),
+    val = map_lgl(file$drive_resource, "shared", .default = NA),
     .after = "name"
   )
   put_column(

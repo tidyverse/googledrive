@@ -36,6 +36,6 @@ test_that("drive_share() adds permissions", {
   file <- drive_share(file, role = "commenter", type = "anyone")
   expect_true(file$shared)
   perms <- file[["permissions_resource"]][[1]][["permissions"]]
-  expect_setequal(purrr::map_chr(perms, "role"), c("owner", "commenter"))
-  expect_setequal(purrr::map_chr(perms, "type"), c("user", "anyone"))
+  expect_setequal(map_chr(perms, "role"), c("owner", "commenter"))
+  expect_setequal(map_chr(perms, "type"), c("user", "anyone"))
 })

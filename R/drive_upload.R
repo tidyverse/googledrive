@@ -152,7 +152,7 @@ drive_upload <- function(media,
     "Uploaded into Drive file:",
     cli_format_dribble(out),
     "With MIME type:",
-    "*" = "{.field {purrr::pluck(out, 'drive_resource', 1, 'mimeType')}}"
+    "*" = "{.field {pluck(out, 'drive_resource', 1, 'mimeType')}}"
   ))
   invisible(out)
 }

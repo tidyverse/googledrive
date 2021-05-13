@@ -44,7 +44,7 @@ drive_toggle_trash <- function(file, trash) {
     return(invisible(dribble()))
   }
 
-  out <- purrr::map(file$id, toggle_trash_one, trash = trash)
+  out <- map(file$id, toggle_trash_one, trash = trash)
   out <- do.call(rbind, out)
 
   drive_bullets(c(
