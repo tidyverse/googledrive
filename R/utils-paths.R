@@ -93,6 +93,7 @@ is_path <- function(x) is.character(x) && !inherits(x, "drive_id")
 
 is_string <- function(x) length(x) == 1L && is_path(x)
 
+# TODO: revisit this when leading '/' starts to mean shared drive
 is_rootpath <- function(path) {
   is_string(path) && grepl("^~$|^/$|^~/$", path)
 }
