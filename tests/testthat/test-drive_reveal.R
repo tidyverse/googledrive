@@ -67,3 +67,13 @@ test_that("drive_reveal() returns list-column for non-existent `what`", {
   out <- drive_reveal(dat, "non_existent_time")
   expect_true(all(map_lgl(out$non_existent_time, is_null)))
 })
+
+test_that("drive_reveal() inserts columns, even with 0 rows", {
+  x <- dribble()
+  x <- drive_reveal(x, "mime_type")
+  x <- drive_reveal(x, "starred")
+  expect_equal(
+    names(x),
+    c("name", "starred", "mime_type", "id", "drive_resource")
+  )
+})

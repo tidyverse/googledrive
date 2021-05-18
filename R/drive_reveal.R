@@ -148,7 +148,7 @@ drive_reveal_this <- function(file, this) {
   if (no_file(file)) {
     return(
       put_column(
-        dribble(),
+        file,
         nm = elem_snake_case,
         val = list(),
         .after = "name"
