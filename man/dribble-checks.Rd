@@ -11,6 +11,7 @@
 \alias{confirm_some_files}
 \alias{is_folder}
 \alias{is_shortcut}
+\alias{is_folder_shortcut}
 \alias{is_native}
 \alias{is_parental}
 \alias{is_mine}
@@ -34,6 +35,8 @@ confirm_some_files(d)
 is_folder(d)
 
 is_shortcut(d)
+
+is_folder_shortcut(d)
 
 is_native(d)
 
