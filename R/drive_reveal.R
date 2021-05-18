@@ -40,6 +40,22 @@
 #' `revision_resource` containing lists of
 #' [Revisions resources](https://developers.google.com/drive/v3/reference/revisions#resource).
 #'
+
+#' @section Parent:
+#' When `what = "parent"` the [`dribble`] gains a character column `id_parent`
+#' that is the file id of this item's parent folder. This information is
+#' available in the `drive_resource`, but can't just be hoisted out:
+#' * Google Drive used to allow files to have multiple parents, but this is no
+#'   longer supported and googledrive now assumes this is impossible. However,
+#'   we have seen (very old) files that still have >1 parent folder. If we see
+#'   this we message about it and drop all but the first parent.
+#' * The `parents` property in `drive_resource` has an "extra" layer of nesting
+#'   and needs to be flattened.
+#'
+
+#' If you really want the raw `parents` property, call `drive_reveal(what =
+#' "parents")`.
+
 #' @template file-plural
 
 #' @param what Character, describing the type of info you want to add. These
@@ -47,6 +63,7 @@
 #'   * `path`
 #'   * `permissions`
 #'   * `published`
+#'   * `parent`
 #'
 
 #'   You can also request any property in the `drive_resource` column by name.
@@ -85,6 +102,10 @@
 #' drive_reveal(files, "permissions")
 #' drive_reveal(files, "published")
 #'
+#' # a "special" case of digging info out of `drive_resource`, then processing
+#' # a bit
+#' drive_reveal(files, "parent")
+#'
 #' # the "simple" cases of digging info out of `drive_resource`
 #' drive_reveal(files, "trashed")
 #' drive_reveal(files, "mime_type")
@@ -102,16 +123,17 @@
 #' drive_get(id = "root") %>%
 #'   drive_reveal("path")
 drive_reveal <- function(file,
-                         what = c("path", "permissions", "published")) {
+                         what = c("path", "permissions", "published", "parent")) {
   stopifnot(is_string(what))
   file <- as_dribble(file)
 
-  if (what %in% c("path", "permissions", "published")) {
+  if (what %in% c("path", "permissions", "published", "parent")) {
     reveal <- switch(
       what,
       "path"        = drive_reveal_path,
       "permissions" = drive_reveal_permissions,
-      "published"   = drive_reveal_published
+      "published"   = drive_reveal_published,
+      "parent"      = drive_reveal_parent
     )
     return(reveal(file))
   }
@@ -145,4 +167,33 @@ drive_reveal_this <- function(file, this) {
   }
 
   out
+}
+
+drive_reveal_parent <- function(file) {
+  confirm_dribble(file)
+
+  file <- drive_reveal(file, "parents")
+  # due to the historical use of multiple parents, there is a gratuitous level
+  # of nesting here
+  file$parents <- map(file$parents, 1)
+
+  n_parents <- lengths(file$parents)
+  has_multiple_parents <- n_parents > 1
+  if (any(has_multiple_parents)) {
+    drive_bullets(c(
+      "{sum(has_multiple_parents)} file{?s} {?has/have} >1 parent, which is a \\
+       remnant of legacy Drive behaviour:",
+      cli_format_dribble(file[has_multiple_parents, ]),
+      "!" = "Only the first parent will be used"
+    ))
+  }
+
+  file <- put_column(
+    file,
+    nm = "id_parent",
+    val = map_chr(file$parents, 1, .default = NA),
+    .after = "name"
+  )
+  file$parents <- NULL
+  file
 }

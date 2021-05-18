@@ -4,7 +4,7 @@
 \alias{drive_reveal}
 \title{Add a new column of Drive file information}
 \usage{
-drive_reveal(file, what = c("path", "permissions", "published"))
+drive_reveal(file, what = c("path", "permissions", "published", "parent"))
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
@@ -17,6 +17,7 @@ values get special handling (more details below):
 \item \code{path}
 \item \code{permissions}
 \item \code{published}
+\item \code{parent}
 }
 
 You can also request any property in the \code{drive_resource} column by name.
@@ -100,6 +101,23 @@ When \code{what = "published"} the \code{\link{dribble}} gains a logical column
 \href{https://developers.google.com/drive/v3/reference/revisions#resource}{Revisions resources}.
 }
 
+\section{Parent}{
+
+When \code{what = "parent"} the \code{\link{dribble}} gains a character column \code{id_parent}
+that is the file id of this item's parent folder. This information is
+available in the \code{drive_resource}, but can't just be hoisted out:
+\itemize{
+\item Google Drive used to allow files to have multiple parents, but this is no
+longer supported and googledrive now assumes this is impossible. However,
+we have seen (very old) files that still have >1 parent folder. If we see
+this we message about it and drop all but the first parent.
+\item The \code{parents} property in \code{drive_resource} has an "extra" layer of nesting
+and needs to be flattened.
+}
+
+If you really want the raw \code{parents} property, call \code{drive_reveal(what = "parents")}.
+}
+
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Get a few of your files
@@ -109,6 +127,10 @@ files <- drive_find(n_max = 10, trashed = NA)
 drive_reveal(files, "path")
 drive_reveal(files, "permissions")
 drive_reveal(files, "published")
+
+# a "special" case of digging info out of `drive_resource`, then processing
+# a bit
+drive_reveal(files, "parent")
 
 # the "simple" cases of digging info out of `drive_resource`
 drive_reveal(files, "trashed")
