@@ -1,5 +1,11 @@
 # path utilities that CAN call the Drive API ----
-root_folder <- function() drive_get(id = "root")
+root_folder <- function() {
+  # inlining env_cache() logic, so I don't need bleeding edge rlang
+  if (!env_has(.googledrive, "root_folder")) {
+    env_poke(.googledrive, "root_folder", drive_get(id = "root"))
+  }
+  env_get(.googledrive, "root_folder")
+}
 root_id <- function() root_folder()$id
 
 rationalize_path_name <- function(path = NULL, name = NULL) {

@@ -15,3 +15,6 @@
   system.file("extdata", "files_fields.csv", package = "googledrive") %>%
   read.csv(stringsAsFactors = FALSE) %>%
   tibble::as_tibble()
+
+# environment to hold other data that is convenient to cache
+.googledrive <- new.env(parent = emptyenv())

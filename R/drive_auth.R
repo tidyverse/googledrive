@@ -53,6 +53,7 @@ drive_auth <- function(email = gargle::gargle_oauth_email(),
                        cache = gargle::gargle_oauth_cache(),
                        use_oob = gargle::gargle_oob_default(),
                        token = NULL) {
+  env_unbind(.googledrive, "root_folder")
   cred <- gargle::token_fetch(
     scopes = scopes,
     app = drive_oauth_app() %||% gargle::tidyverse_app(),
@@ -96,6 +97,7 @@ drive_auth <- function(email = gargle::gargle_oauth_email(),
 drive_deauth <- function() {
   .auth$set_auth_active(FALSE)
   .auth$clear_cred()
+  env_unbind(.googledrive, "root_folder")
   invisible()
 }
 
