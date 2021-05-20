@@ -116,7 +116,7 @@ test_that("bind_cols() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
   x <- readRDS(test_file("just_a_dribble.rds"))
 
-  y <- tibble::tibble(x = rep(1, vctrs::vec_size(x)))
+  y <- tibble(x = rep(1, vctrs::vec_size(x)))
   expect_dribble(dplyr::bind_cols(x, y))
 })
 
@@ -207,7 +207,7 @@ test_that("left_join() can keep dribble class", {
 
   expect_dribble(dplyr::left_join(x, x, by = names(x)))
 
-  y <- tibble::tibble(id = x$id[[1]], x = 1)
+  y <- tibble(id = x$id[[1]], x = 1)
   expect_dribble(dplyr::left_join(x, y, by = "id"))
 })
 
@@ -225,7 +225,7 @@ test_that("right_join() restores to the type of first input", {
   skip_if_not_installed("dplyr", "1.0.0")
   x <- readRDS(test_file("just_a_dribble.rds"))
 
-  y <- tibble::tibble(id = x$id[[1]], x = 1)
+  y <- tibble(id = x$id[[1]], x = 1)
   # technically dribble structure is intact, but `y` is a bare tibble!
   expect_bare_tibble(dplyr::right_join(y, x, by = "id"))
 })
@@ -241,7 +241,7 @@ test_that("anti_join() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
   x <- readRDS(test_file("just_a_dribble.rds"))
 
-  y <- tibble::tibble(id = x$id[[1]])
+  y <- tibble(id = x$id[[1]])
   result <- dplyr::anti_join(x, y, by = "id")
   expect_equal(nrow(result), nrow(x) - 1)
   expect_dribble(result)

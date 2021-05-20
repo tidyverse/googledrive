@@ -149,7 +149,7 @@ shortcut_create <- function(file,
 shortcut_resolve <- function(file) {
   file <- as_dribble(file)
   out <- purrr::pmap(file, resolve_one)
-  out <- vctrs::vec_rbind(!!!out)
+  out <- vec_rbind(!!!out)
 
   is_sc <- !is.na(out$name_shortcut)
   n_shortcuts <- sum(is_sc)

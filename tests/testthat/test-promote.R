@@ -9,7 +9,7 @@ test_that("promote() works when input has zero rows", {
 })
 
 test_that("promote() works when elem uniformly present or absent", {
-  x <- tibble::tibble(
+  x <- tibble(
     name = c("a", "b", "c"),
     id = c("1", "2", "3"),
     drive_resource = list(
@@ -31,7 +31,7 @@ test_that("promote() works when elem uniformly present or absent", {
 })
 
 test_that("promote() works when elem is partially present", {
-  x <- tibble::tibble(
+  x <- tibble(
     name = c("a", "b", "c"),
     id = c("1", "2", "3"),
     drive_resource = list(
@@ -56,7 +56,7 @@ test_that("promote() works when elem is partially present", {
 })
 
 test_that("promote() replaces existing element in situ", {
-  x <- tibble::tibble(
+  x <- tibble(
     name = "a",
     foo = "b",
     bar = "c",
@@ -72,7 +72,7 @@ test_that("promote() replaces existing element in situ", {
 })
 
 test_that("promote() does snake_case to camelCase conversion internally", {
-  x <- tibble::tibble(
+  x <- tibble(
     name = "name",
     id = "id",
     drive_resource = list(
@@ -81,8 +81,8 @@ test_that("promote() does snake_case to camelCase conversion internally", {
   )
 
   out <- promote(x, "this_that")
-  expect_identical(out[2], tibble::tibble(this_that = "hi"))
+  expect_identical(out[2], tibble(this_that = "hi"))
 
   out <- promote(x, "thisThat")
-  expect_identical(out[2], tibble::tibble(thisThat = "hi"))
+  expect_identical(out[2], tibble(thisThat = "hi"))
 })

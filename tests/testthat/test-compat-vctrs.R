@@ -36,7 +36,7 @@ test_that("vec_ptype2() is working", {
   x3 <- x
   x3$z <- 2
 
-  tbl <- tibble::tibble(x = 1)
+  tbl <- tibble(x = 1)
   df <- data.frame(x = 1)
 
   # dribble-dribble

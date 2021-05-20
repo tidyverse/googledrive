@@ -2,7 +2,7 @@
 
 test_that("tbl_sum.dribble method works", {
   d <- new_dribble(
-    tibble::tibble(
+    tibble(
       name = letters[1:2],
       id = letters[2:1],
       drive_resource = list(list(kind = "drive#file"))
@@ -37,7 +37,7 @@ test_that("validate_dribble() checks class, var names, var types", {
 
   ## list-col elements do not have `kind = "drive#file"`
   d <- new_dribble(
-    tibble::tibble(
+    tibble(
       name = "a",
       id = "1",
       drive_resource = list(kind = "whatever")
@@ -52,7 +52,7 @@ test_that("as_tibble() drops the dribble class", {
 
 test_that("`[` retains dribble class when possible", {
   d <- new_dribble(
-    tibble::tibble(
+    tibble(
       name = letters[1:4],
       id = letters[4:1],
       drive_resource = list(list(kind = "drive#file"))
@@ -69,7 +69,7 @@ test_that("`[` retains dribble class when possible", {
 
 test_that("`[` drops dribble class when not valid", {
   d <- new_dribble(
-    tibble::tibble(
+    tibble(
       name = letters[1:4],
       id = letters[4:1],
       drive_resource = list(list(kind = "drive#file"))
@@ -88,7 +88,7 @@ test_that("dribble nrow checkers work", {
   expect_snapshot(confirm_some_files(dribble()), error = TRUE)
 
   d <- new_dribble(
-    tibble::tibble(
+    tibble(
       name = "a",
       id = "b",
       drive_resource = list(list(kind = "drive#file"))

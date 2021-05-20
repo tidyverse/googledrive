@@ -212,7 +212,7 @@ as_dribble.list <- function(x, ...) {
   stopifnot(map_lgl(x, ~all(required_nms %in% names(.x))))
 
   as_dribble(
-    tibble::tibble(
+    tibble(
       name = map_chr(x, "name"),
       id = map_chr(x, "id"),
       drive_resource = x
