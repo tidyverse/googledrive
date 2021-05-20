@@ -115,7 +115,8 @@ drive_cp <- function(file,
 
   # doing this in a hacky way because drive_reveal_path(), which is more
   # correct, can be quite slow
-  # once I eliminate the "multiple parent" accommodations, that might change
+  # if I introduce a way to look only at immediate parents, maybe I could
+  # use it here
   tmp <- out
   tmp$name <- paste0(append_slash(path$path), out$name)
 

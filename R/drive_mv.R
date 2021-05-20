@@ -129,7 +129,8 @@ drive_mv <- function(file,
 
   # doing this in a hacky way because drive_reveal_path(), which is more
   # correct, can be quite slow
-  # once I eliminate the "multiple parent" accommodations, that might change
+  # if I introduce a way to look only at immediate parents, maybe I could
+  # use it here
   tmp <- out
   # TODO: if user's `path` is a shared drive, the `path` dribble here does not
   # have a `path` column

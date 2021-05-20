@@ -130,7 +130,7 @@ drive_reveal <- function(file,
   if (what %in% c("path", "permissions", "published", "parent")) {
     reveal <- switch(
       what,
-      "path"        = drive_reveal_path,
+      "path"        = drive_reveal_canonical_path,
       "permissions" = drive_reveal_permissions,
       "published"   = drive_reveal_published,
       "parent"      = drive_reveal_parent

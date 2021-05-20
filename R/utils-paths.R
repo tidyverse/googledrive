@@ -39,7 +39,9 @@ drive_path_exists <- function(path) {
   stopifnot(is_path(path))
   if (length(path) == 0) return(logical(0))
   stopifnot(length(path) == 1)
-  some_files(drive_get(path = path))
+  with_drive_quiet(
+    some_files(drive_get(path = path))
+  )
 }
 
 # `parent` is NULL or the file ID of a folder
@@ -99,13 +101,6 @@ is_path <- function(x) is.character(x) && !inherits(x, "drive_id")
 
 is_string <- function(x) length(x) == 1L && is_path(x)
 
-# TODO: revisit this when leading '/' starts to mean shared drive
-is_rootpath <- function(path) {
-  is_string(path) && grepl("^~$|^/$|^~/$", path)
-}
-
-is_rooted <- function(path) grepl("^~", path)
-
 ## turn '~' into `~/`
 ## turn leading `/` into leading `~/`
 rootize_path <- function(path) {
@@ -128,15 +123,6 @@ append_slash <- function(path) {
 ## "a/b/" and "a/b" both return "a/b"
 strip_slash <- function(path) {
   gsub("/$", "", path)
-}
-
-split_path <- function(path = "") {
-  path <- path %||% ""
-  unlist(strsplit(rootize_path(path), "/"))
-}
-
-unsplit_path <- function(...) {
-  gsub("^/*", "", file.path(...))
 }
 
 ## partitions path into

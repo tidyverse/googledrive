@@ -30,26 +30,6 @@ test_that("rootize_path() standardizes root", {
   expect_identical(rootize_path("a/bc"), "a/bc")
 })
 
-test_that("split_path() splits paths", {
-  expect_identical(split_path(""), character(0))
-  expect_identical(split_path("~"), "~")
-  expect_identical(split_path("~/"), "~")
-  expect_identical(split_path("/"), "~")
-  expect_identical(split_path("/abc"), c("~", "abc"))
-  expect_identical(split_path("/abc/"), c("~", "abc"))
-  expect_identical(split_path("/a/bc/"), c("~", "a", "bc"))
-  expect_identical(split_path("a/bc"), c("a", "bc"))
-  expect_identical(split_path("a/bc/"), c("a", "bc"))
-})
-
-test_that("unsplit_path() is file.path(), but never leads with /'s", {
-  expect_identical(unsplit_path(), character(0))
-  expect_identical(unsplit_path(""), "")
-  expect_identical(unsplit_path("", "a"), "a")
-  expect_identical(unsplit_path("", "", "a"), "a")
-  expect_identical(unsplit_path("a", "b"), file.path("a", "b"))
-})
-
 test_that("append_slash() appends a slash or declines to do so", {
   expect_identical(append_slash("a"), "a/")
   expect_identical(append_slash("a/"), "a/")
@@ -65,17 +45,6 @@ test_that("strip_slash() strips a trailing slash", {
   expect_identical(strip_slash("/"), "")
   expect_identical(strip_slash(""), "")
   expect_identical(strip_slash(character(0)), character(0))
-})
-
-test_that("is_rootpath() recognizes requests for root folder", {
-  expect_true(is_rootpath("~"))
-  expect_true(is_rootpath("~/"))
-  expect_true(is_rootpath("/"))
-  expect_false(is_rootpath(NULL))
-  expect_false(is_rootpath(character(0)))
-  expect_false(is_rootpath("abc"))
-  expect_false(is_rootpath("/abc"))
-  expect_false(is_rootpath("~/abc"))
 })
 
 test_that("file_ext_safe() returns NULL unless there's a usable extension", {
@@ -207,8 +176,8 @@ test_that("check_for_overwrite() does its job", {
   )
   expect_identical(first$name, second$name)
   expect_identical(
-    pluck(first, "drive_resource", 1, "parents"),
-    pluck(second, "drive_resource", 1, "parents")
+    drive_reveal(first, "parent")$id_parent,
+    drive_reveal(second, "parent")$id_parent
   )
   expect_false(first$id == second$id)
 

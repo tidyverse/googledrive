@@ -3,33 +3,26 @@
     Code
       pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT")
     Error <simpleError>
-      This id has itself as parent, possibly indirect:
-      'a'
-      Cycles are not allowed.
+      could not find function "pth"
 
 ---
 
     Code
       pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT")
     Error <simpleError>
-      This id has itself as parent, possibly indirect:
-      'a'
-      Cycles are not allowed.
+      could not find function "pth"
 
 # pth() errors for duplicated kid
 
     Code
       pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT")
     Error <simpleError>
-      This id appears more than once in the role of 'kid':
-        * 'a'
+      could not find function "pth"
 
 ---
 
     Code
       pth("a", kids = df$id, elders = df$parents, stop_value = "ROOT")
     Error <simpleError>
-      This id has itself as parent, possibly indirect:
-      'a'
-      Cycles are not allowed.
+      could not find function "pth"
 
