@@ -129,11 +129,3 @@ get_one_file <- function(id) {
   response <- request_make(request)
   gargle::response_process(response)
 }
-
-dribble_with_path <- function() {
-  put_column(dribble(), nm = "path", val = character(), .after = "name")
-}
-
-dribble_with_path_for_root <- function() {
-  put_column(root_folder(), nm = "path", val = "~/", .after = "name")
-}

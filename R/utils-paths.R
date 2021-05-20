@@ -96,6 +96,9 @@ overwrite_hits <- function(parent = NULL, name, overwrite) {
 }
 
 # path utilities that are "mechanical", i.e. they NEVER call the Drive API ----
+dribble_with_path <- function() {
+  put_column(dribble(), nm = "path", val = character(), .after = "name")
+}
 
 is_path <- function(x) is.character(x) && !inherits(x, "drive_id")
 
