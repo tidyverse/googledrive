@@ -62,27 +62,18 @@ It is more powerful due to a richer "plucking specification" and its \code{ptype
 and \code{transform} arguments. Another useful function is
 \code{tidyr::unnest_wider()}.
 }
-\section{Special considerations for paths}{
-
-Note that Google Drive does NOT behave like your local file system:
-\itemize{
-\item File and folder names need not be unique, even at a given level of
-the hierarchy. A single name or file path can be associated with multiple
-files (or zero or exactly one).
-\item A file can have more than one direct parent. This implies that a
-single file can be represented by multiple paths.
-}
-
-Bottom line: Do not assume there is a one-to-one relationship between file
-name or path and a Drive file or folder. This implies the length of the input
-(i.e. the number of input paths or the number of rows in a dribble) will not
-necessarily equal the number rows in the output.
-}
-
 \section{File path}{
+ When \code{what = "path"} the \code{\link{dribble}} gains a character
+column holding each file's path. This can be \emph{very slow}, so use with
+caution.
 
-When \code{what = "path"} the \code{\link{dribble}} gains a character column holding each
-file's path. This can be \emph{very slow} so use with caution.
+The example path \verb{~/a/b/} illustrates two conventions used in googledrive:
+\itemize{
+\item The leading \verb{~/} means that the folder \code{a} is located in the current
+user's "My Drive" root folder.
+\item The trailing \code{/} means that \code{b}, located in \code{a}, is \emph{a folder or a folder
+shortcut}.
+}
 }
 
 \section{Permissions}{
