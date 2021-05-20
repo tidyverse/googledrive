@@ -52,12 +52,20 @@ test_that("resolve_paths() works, basic scenarios", {
     name = "d", id = "4",
     drive_resource = list(list(kind = "drive#file", parents = list(list("3"))))
   )
-  out <- resolve_paths(as_dribble(x), ancestors)
+  with_mock(
+    root_id = function() "", {
+      out <- resolve_paths(as_dribble(x), ancestors)
+    }
+  )
   expect_equal(out$path, "a/b/c/d")
 
   # target is a folder
   x$drive_resource <- list(c(dr_folder, parents = list(list("3"))))
-  out <- resolve_paths(as_dribble(x), ancestors)
+  with_mock(
+    root_id = function() "", {
+      out <- resolve_paths(as_dribble(x), ancestors)
+    }
+  )
   expect_equal(out$path, "a/b/c/d/")
 
   # target's parent is not among the elders
@@ -65,7 +73,11 @@ test_that("resolve_paths() works, basic scenarios", {
     name = "e", id = "4",
     drive_resource = list(list(kind = "drive#file", parents = list(list("9"))))
   )
-  out <- resolve_paths(as_dribble(x), ancestors)
+  with_mock(
+    root_id = function() "", {
+      out <- resolve_paths(as_dribble(x), ancestors)
+    }
+  )
   expect_equal(out$path, "e")
 })
 
@@ -102,7 +114,11 @@ test_that("resolve_paths() works, with some name duplication", {
       list(kind = "drive#file", parents = list(list("7")))
     )
   )
-  out <- resolve_paths(as_dribble(x), ancestors)
+  with_mock(
+    root_id = function() "", {
+      out <- resolve_paths(as_dribble(x), ancestors)
+    }
+  )
   expect_equal(out$path[1], "~/a/b/c")
   expect_equal(out$path[2], "~/b/a/d")
 })
