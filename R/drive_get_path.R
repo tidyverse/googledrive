@@ -2,8 +2,7 @@
 # drive_get(path =)
 # drive_reveal(what = "path")
 
-drive_reveal_path <- function(x,
-                              ancestors = c("none", "parents", "all")) {
+drive_reveal_path <- function(x, ancestors = c("none", "parents", "all")) {
   stopifnot(inherits(x, "dribble"))
   if (no_file(x)) return(dribble_with_path())
   ancestors <- ancestors %||% dribble()
@@ -117,8 +116,8 @@ get_immediate_parents <- function(x) {
   stopifnot(inherits(x, "dribble"))
   x <- drive_reveal(x, "parent")
   parent_ids <- unique(x$id_parent[!is.na(x$id_parent)])
-  # TODO: must deal with the case where don't have permission to drive_get()
-  # one of these ids
+  # TODO: I suspect I must deal with the case where don't have permission to
+  # drive_get() one of these ids, but I haven't tripped up on this yet myself.
   # TODO: could possibly be nice to limit the fields
   drive_get(id = as_id(parent_ids))
 }
