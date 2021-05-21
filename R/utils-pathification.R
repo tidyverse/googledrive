@@ -232,8 +232,16 @@ finalize <- function(dat, candidates) {
   }
 
   index <- unlist(scratch$m)
-  index <- index[!duplicated(index)]
-  vec_slice(candidates, index)
+  dupes <- duplicated(index)
+  if (any(dupes)) {
+    multis <- vec_slice(candidates, unique(index[dupes]))
+    drive_bullets(c(
+      "{nrow(multis)} file{?s} {?is/are} associated with >1 input {.arg path}",
+      cli_format_dribble(multis)
+    ))
+  }
+
+  vec_slice(candidates, index[!dupes])
 }
 
 get_by_name <- function(names, shared_drive = NULL, corpus = NULL) {
