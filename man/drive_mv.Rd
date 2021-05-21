@@ -58,12 +58,6 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Move a Drive file to a different folder, give it a different name, or both.
-Note that folders on Google Drive are not like folders on your local
-filesystem. They are more like a label, which implies that a Drive file can
-have multiple folders as direct parent! However, most people still use and
-think of them like "regular" folders. When we say "move a Drive file", it
-actually means: "add a new folder to this file's parents and remove the old
-one".
 }
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
