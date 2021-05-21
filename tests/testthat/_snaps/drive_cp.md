@@ -16,7 +16,7 @@
       Original file:
       * i-am-a-file-TEST-drive-cp <id: {FILE_ID}>
       Copied to file:
-      * i-am-a-folder-TEST-drive-cp/{cp_name} <id: {FILE_ID}>
+      * {cp_name} <id: {FILE_ID}>
 
 # drive_cp() doesn't tolerate ambiguity in `path`
 
@@ -41,7 +41,7 @@
       Original file:
       * i-am-a-file-TEST-drive-cp <id: {FILE_ID}>
       Copied to file:
-      * i-am-a-folder-TEST-drive-cp/{cp_name} <id: {FILE_ID}>
+      * {cp_name} <id: {FILE_ID}>
 
 ---
 
