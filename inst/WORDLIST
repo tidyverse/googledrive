@@ -29,7 +29,6 @@ determinine
 dplyr
 fileOrganizer
 filepath
-filesystem
 funder
 ggplot
 gmailr
@@ -49,9 +48,11 @@ purrr
 rebranded
 recency
 rprojroot
+setwise
 targetted
 targetting
 testthat
+th
 threshhold
 tibble
 tibble's
