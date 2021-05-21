@@ -1,8 +1,12 @@
-# TODO: I can probably use this in drive_cp and drive_mv now
+# all the helpers behind:
+# drive_get(path =)
+# drive_reveal(what = "path")
+
 drive_reveal_path <- function(x,
                               ancestors = c("none", "parents", "all")) {
   stopifnot(inherits(x, "dribble"))
   if (no_file(x)) return(dribble_with_path())
+  ancestors <- ancestors %||% dribble()
 
   if (!inherits(ancestors, "dribble")) {
     ancestors <- arg_match(ancestors)
