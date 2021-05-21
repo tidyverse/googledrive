@@ -142,7 +142,7 @@ drive_get <- function(path = NULL,
   if (is.null(path)) {
     as_dribble(map(as_id(id), get_one_file))
   } else {
-    dribble_from_path(path, shared_drive, corpus)
+    drive_get_path(path, shared_drive, corpus)
   }
 }
 

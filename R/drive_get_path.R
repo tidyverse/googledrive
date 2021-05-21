@@ -30,6 +30,8 @@ drive_reveal_canonical_path <- function(x) {
   drive_reveal_path(x, ancestors = "all")
 }
 
+# TODO: can this somehow be unified with drive_find()'s fussing about with
+# (shared_drive, corpus) and with shared_drive_params()?
 sort_out_shared_drive_and_corpus <- function(x) {
   shared_drive <- NULL
   corpus <- NULL
@@ -44,9 +46,9 @@ sort_out_shared_drive_and_corpus <- function(x) {
   list(shared_drive = shared_drive, corpus = corpus)
 }
 
-dribble_from_path <- function(path = NULL,
-                              shared_drive = NULL,
-                              corpus = NULL) {
+drive_get_path <- function(path = NULL,
+                           shared_drive = NULL,
+                           corpus = NULL) {
   if (length(path) == 0) return(dribble_with_path())
   stopifnot(is_path(path))
   path <- rootize_path2(path)
