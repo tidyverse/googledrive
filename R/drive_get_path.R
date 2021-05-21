@@ -50,11 +50,11 @@ drive_get_path <- function(path = NULL,
                            corpus = NULL) {
   if (length(path) == 0) return(dribble_with_path())
   stopifnot(is_path(path))
-  path <- rootize_path2(path)
+  path <- rootize_path(path)
 
-  pp_dat <- pp(path)
+  last_path_part <- get_last_path_part(path)
   candidates <- get_by_name(
-    pp_dat$tail,
+    last_path_part,
     shared_drive = shared_drive, corpus = corpus
   )
   candidates <- drive_reveal_path(candidates)
@@ -62,7 +62,7 @@ drive_get_path <- function(path = NULL,
   # setup a tibble to structure the work
   dat <- tibble(
     orig_path = path,
-    doomed = !map_lgl(pp_dat$tail, path_has_match, haystack = candidates$path),
+    doomed = !map_lgl(last_path_part, path_has_match, haystack = candidates$path),
     done = FALSE
   )
 
@@ -274,27 +274,17 @@ get_by_name <- function(names, shared_drive = NULL, corpus = NULL) {
   found
 }
 
-pp <- function(path) {
+# you might think this can be merged with partition_path(), but their purposes
+# are different enough that it's not worth it
+get_last_path_part <- function(path) {
   stopifnot(is_path(path))
-  path <- rootize_path2(path)
+  path <- rootize_path(path)
 
-  # NOTE: we ignore (but retain) a leading or trailing slash
+  # NOTE: we ignore (but retain) a trailing slash
   # why? googledrive encourages the user to use a trailing slash to explicitly
   # indicate a path that refers to a folder
-  # TODO: likewise, we use a leading slash to indicate a path on a shared drive
-  slash_pos <- gregexpr(pattern = "./.", path)
+  slash_pos <- gregexpr(pattern = "/.", path)
   no_slash <- map_lgl(slash_pos, ~all(.x == -1))
-  last_slash <- map_int(slash_pos, max) + 1
-  head <- ifelse(no_slash, NA_character_, substr(path, 1, last_slash))
-  tail <- ifelse(no_slash, path, substr(path, last_slash + 1, nchar(path)))
-  tibble(head, tail)
-}
-
-# turn '~' and `/` into `~/`
-# TODO: should `/` just be an error, if we're going to use that to indicate
-# shared drive?
-rootize_path2 <- function(path) {
-  if (length(path) == 0) return(path)
-  stopifnot(is.character(path))
-  sub("^~$", "~/", path)
+  last_slash <- map_int(slash_pos, max)
+  ifelse(no_slash, path, substr(path, last_slash + 1, nchar(path)))
 }

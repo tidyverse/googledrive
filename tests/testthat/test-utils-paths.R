@@ -28,24 +28,20 @@ test_that("root_folder() and root_id() work", {
 })
 
 test_that("rootize_path() standardizes root", {
+  expect_identical(rootize_path(NULL), NULL)
+  expect_identical(rootize_path(character()), character())
   expect_identical(rootize_path("~"), "~/")
   expect_identical(rootize_path("~/"), "~/")
-  expect_identical(rootize_path("/"), "~/")
-  expect_identical(rootize_path(NULL), NULL)
-  expect_identical(rootize_path(""), "")
-  expect_identical(rootize_path("~abc"), "~abc")
-  expect_identical(rootize_path("~/abc"), "~/abc")
-  expect_identical(rootize_path("/abc/"), "~/abc/")
-  expect_identical(rootize_path("~/a/bc/"), "~/a/bc/")
-  expect_identical(rootize_path("~a/bc"), "~a/bc")
-  expect_identical(rootize_path("a"), "a")
-  expect_identical(rootize_path("a/bc"), "a/bc")
+})
+
+test_that("rootize_path() errors for leading slash", {
+  expect_error(rootize_path("/"))
+  expect_error(rootize_path("/abc"))
 })
 
 test_that("append_slash() appends a slash or declines to do so", {
   expect_identical(append_slash("a"), "a/")
   expect_identical(append_slash("a/"), "a/")
-  expect_identical(append_slash("/"), "/")
   expect_identical(append_slash(""), "")
   expect_identical(append_slash(c("a", "")), c("a/", ""))
   expect_identical(append_slash(character(0)), character(0))
@@ -54,7 +50,6 @@ test_that("append_slash() appends a slash or declines to do so", {
 test_that("strip_slash() strips a trailing slash", {
   expect_identical(strip_slash("a"), "a")
   expect_identical(strip_slash("a/"), "a")
-  expect_identical(strip_slash("/"), "")
   expect_identical(strip_slash(""), "")
   expect_identical(strip_slash(character(0)), character(0))
 })
@@ -76,17 +71,13 @@ test_that("partition_path() splits into stuff before/after last slash", {
 
   expect_identical(partition_path("~"), f("~/", NULL))
   expect_identical(partition_path("~/"), f("~/", NULL))
-  expect_identical(partition_path("/"), f("~/", NULL))
 
   ## maybe_name = TRUE --> use `path` as is, don't append slash
   expect_identical(partition_path("~/a", TRUE), f("~/", "a"))
-  expect_identical(partition_path("/a", TRUE), f("~/", "a"))
-  expect_identical(partition_path("/a/", TRUE), f("~/a/", NULL))
   expect_identical(partition_path("a/", TRUE), f("a/", NULL))
   expect_identical(partition_path("a", TRUE), f(NULL, "a"))
 
   expect_identical(partition_path("~/a/b/", TRUE), f("~/a/b/", NULL))
-  expect_identical(partition_path("/a/b/", TRUE), f("~/a/b/", NULL))
   expect_identical(partition_path("a/b/", TRUE), f("a/b/", NULL))
   expect_identical(partition_path("a/b", TRUE), f("a/", "b"))
 })

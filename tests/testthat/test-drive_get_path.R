@@ -1,35 +1,25 @@
-test_that("pp() works", {
-  expect_head_tail <- function(x, h, t) {
-    expect_equal(
-      pp(x),
-      tibble(head = as.character(h), tail = as.character(t))
-    )
+test_that("get_last_path_part() works", {
+  expect_last_part <- function(x, tail) {
+    expect_equal(get_last_path_part(x), tail)
   }
-  expect_head_tail("~", NA, "~/")
-  expect_head_tail("~/", NA, "~/")
-  # TODO: decide what should happen with `/`
+  expect_last_part("~", "~/")
+  expect_last_part("~/", "~/")
 
-  expect_head_tail("abc", NA, "abc")
-  expect_head_tail("abc/", NA, "abc/")
-  expect_head_tail("/abc", NA, "/abc")
+  expect_last_part("abc", "abc")
+  expect_last_part("abc/", "abc/")
 
-  expect_head_tail("~/abc", "~/", "abc")
-  expect_head_tail("~/abc/", "~/", "abc/")
-  expect_head_tail("/abc/", NA, "/abc/")
+  expect_last_part("~/abc", "abc")
+  expect_last_part("~/abc/", "abc/")
 
-  expect_head_tail("~/abc/def", "~/abc/", "def")
-  expect_head_tail("~/abc/def/", "~/abc/", "def/")
-  expect_head_tail("/abc/def", "/abc/", "def")
-  expect_head_tail("/abc/def/", "/abc/", "def/")
-  expect_head_tail("abc/def", "abc/", "def")
-  expect_head_tail("abc/def/", "abc/", "def/")
+  expect_last_part("~/abc/def", "def")
+  expect_last_part("~/abc/def/", "def/")
+  expect_last_part("abc/def",  "def")
+  expect_last_part("abc/def/", "def/")
 
-  expect_head_tail("~/abc/def/ghi", "~/abc/def/", "ghi")
-  expect_head_tail("~/abc/def/ghi/", "~/abc/def/", "ghi/")
-  expect_head_tail("/abc/def/ghi", "/abc/def/", "ghi")
-  expect_head_tail("/abc/def/ghi/", "/abc/def/", "ghi/")
-  expect_head_tail("abc/def/ghi", "abc/def/", "ghi")
-  expect_head_tail("abc/def/ghi/", "abc/def/", "ghi/")
+  expect_last_part("~/abc/def/ghi", "ghi")
+  expect_last_part("~/abc/def/ghi/", "ghi/")
+  expect_last_part("abc/def/ghi", "ghi")
+  expect_last_part("abc/def/ghi/", "ghi/")
 })
 
 test_that("resolve_paths() works, basic scenarios", {
