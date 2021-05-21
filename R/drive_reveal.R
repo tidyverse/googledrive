@@ -21,12 +21,19 @@
 #' and `transform` arguments. Another useful function is
 #' `tidyr::unnest_wider()`.
 #'
-#' @template not-like-your-local-file-system
 #'
 
-#' @section File path:
-#' When `what = "path"` the [`dribble`] gains a character column holding each
-#' file's path. This can be *very slow* so use with caution.
+#' @section File path: When `what = "path"` the [`dribble`] gains a character
+#'   column holding each file's path. This can be *very slow*, so use with
+#'   caution.
+#'
+#'   The example path `~/a/b/` illustrates two conventions used in googledrive:
+
+#'   * The leading `~/` means that the folder `a` is located in the current
+#'   user's "My Drive" root folder.
+
+#'   * The trailing `/` means that `b`, located in `a`, is *a folder or a folder
+#'   shortcut*.
 
 #' @section Permissions:
 #' When `what = "permissions"` the [`dribble`] gains a logical column `shared`
@@ -130,7 +137,7 @@ drive_reveal <- function(file,
   if (what %in% c("path", "permissions", "published", "parent")) {
     reveal <- switch(
       what,
-      "path"        = drive_reveal_path,
+      "path"        = drive_reveal_canonical_path,
       "permissions" = drive_reveal_permissions,
       "published"   = drive_reveal_published,
       "parent"      = drive_reveal_parent

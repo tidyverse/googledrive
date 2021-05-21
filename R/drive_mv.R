@@ -1,12 +1,6 @@
 #' Move a Drive file
 #'
 #' Move a Drive file to a different folder, give it a different name, or both.
-#' Note that folders on Google Drive are not like folders on your local
-#' filesystem. They are more like a label, which implies that a Drive file can
-#' have multiple folders as direct parent! However, most people still use and
-#' think of them like "regular" folders. When we say "move a Drive file", it
-#' actually means: "add a new folder to this file's parents and remove the old
-#' one".
 #'
 #' @template file-singular
 #' @eval param_path(
@@ -127,18 +121,13 @@ drive_mv <- function(file,
   )
   action = glue_collapse(names(actions)[actions], sep = ",", last = " and ")
 
-  # doing this in a hacky way because drive_reveal_path(), which is more
-  # correct, can be quite slow
-  # once I eliminate the "multiple parent" accommodations, that might change
-  tmp <- out
-  # TODO: if user's `path` is a shared drive, the `path` dribble here does not
-  # have a `path` column
-  tmp$name <- paste0(append_slash(path$path), out$name)
   drive_bullets(c(
     "Original file:",
     cli_format_dribble(file),
     "Has been {action}:",
-    cli_format_dribble(tmp)
+    # drive_reveal_path() puts immediate parent in the path, if specified
+    # TODO: still need to request that `path` is revealed, instead of `name`
+    cli_format_dribble(drive_reveal_path(out, ancestors = path))
   ))
 
   invisible(out)

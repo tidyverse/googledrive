@@ -65,14 +65,13 @@
 #'   mime_type = drive_mime_type("spreadsheet")
 #' )
 #' # is it really a Google Sheet?
-#' purrr::pluck(chicken_sheet, "drive_resource", 1, "mimeType")
+#' drive_reveal(chicken_sheet, "mime_type")$mime_type
 #'
 #' # go see the new Sheet in the browser
 #' # drive_browse(chicken_sheet)
 #'
 #' # clean up
-#' drive_find("chicken.csv") %>% drive_rm()
-#' drive_rm(chicken_sheet)
+#' drive_rm(csv_file, chicken_sheet)
 #' @export
 drive_cp <- function(file,
                      path = NULL,
@@ -113,17 +112,13 @@ drive_cp <- function(file,
   proc_res <- gargle::response_process(res)
   out <- as_dribble(list(proc_res))
 
-  # doing this in a hacky way because drive_reveal_path(), which is more
-  # correct, can be quite slow
-  # once I eliminate the "multiple parent" accommodations, that might change
-  tmp <- out
-  tmp$name <- paste0(append_slash(path$path), out$name)
-
   drive_bullets(c(
     "Original file:",
     cli_format_dribble(file),
     "Copied to file:",
-    cli_format_dribble(tmp)
+    # drive_reveal_path() puts immediate parent in the path, if specified
+    # TODO: still need to request that `path` is revealed, instead of `name`
+    cli_format_dribble(drive_reveal_path(out, ancestors = path))
   ))
 
   invisible(out)

@@ -112,14 +112,13 @@ chicken_sheet <- drive_cp(
   mime_type = drive_mime_type("spreadsheet")
 )
 # is it really a Google Sheet?
-purrr::pluck(chicken_sheet, "drive_resource", 1, "mimeType")
+drive_reveal(chicken_sheet, "mime_type")$mime_type
 
 # go see the new Sheet in the browser
 # drive_browse(chicken_sheet)
 
 # clean up
-drive_find("chicken.csv") \%>\% drive_rm()
-drive_rm(chicken_sheet)
+drive_rm(csv_file, chicken_sheet)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

@@ -39,7 +39,9 @@ drive_path_exists <- function(path) {
   stopifnot(is_path(path))
   if (length(path) == 0) return(logical(0))
   stopifnot(length(path) == 1)
-  some_files(drive_get(path = path))
+  with_drive_quiet(
+    some_files(drive_get(path = path))
+  )
 }
 
 # `parent` is NULL or the file ID of a folder
@@ -94,24 +96,25 @@ overwrite_hits <- function(parent = NULL, name, overwrite) {
 }
 
 # path utilities that are "mechanical", i.e. they NEVER call the Drive API ----
+dribble_with_path <- function() {
+  put_column(dribble(), nm = "path", val = character(), .after = "name")
+}
 
 is_path <- function(x) is.character(x) && !inherits(x, "drive_id")
 
 is_string <- function(x) length(x) == 1L && is_path(x)
 
-# TODO: revisit this when leading '/' starts to mean shared drive
-is_rootpath <- function(path) {
-  is_string(path) && grepl("^~$|^/$|^~/$", path)
-}
-
-is_rooted <- function(path) grepl("^~", path)
-
-## turn '~' into `~/`
-## turn leading `/` into leading `~/`
+# turn '~' into `~/`
 rootize_path <- function(path) {
   if (length(path) == 0) return(path)
   stopifnot(is.character(path))
-  sub("^~$|^/", "~/", path)
+  leading_slash <- startsWith(path, "/")
+  if (any(leading_slash)) {
+    # TODO: come back to this message after merging the PR switching to
+    # cli_abort()
+    abort("googledrive does not allow paths to start with `/`")
+  }
+  sub("^~$", "~/", path)
 }
 
 ## does path have a trailing slash?
@@ -130,22 +133,13 @@ strip_slash <- function(path) {
   gsub("/$", "", path)
 }
 
-split_path <- function(path = "") {
-  path <- path %||% ""
-  unlist(strsplit(rootize_path(path), "/"))
-}
-
-unsplit_path <- function(...) {
-  gsub("^/*", "", file.path(...))
-}
-
-## partitions path into
-##   * name = substring after the last `/`
-##   * parent = substring up to the last `/`, processed with rootize_path()
-## if there is no `/`, put the input into `name`
-## use maybe_name if you have external info re: how to interpret the path
-## maybe_name = TRUE --> path could end in a name
-## maybe_name = FALSE --> path is known to be a directory
+# partitions path into
+#   * name = substring after the last `/`
+#   * parent = substring up to the last `/`
+# if there is no `/`, put the input into `name`
+# use maybe_name if you have external info re: how to interpret the path
+# maybe_name = TRUE --> path could end in a name
+# maybe_name = FALSE --> path is known to be a directory
 partition_path <- function(path, maybe_name = FALSE) {
   out <- list(parent = NULL, name = NULL)
   if (length(path) < 1) {

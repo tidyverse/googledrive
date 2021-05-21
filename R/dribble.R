@@ -196,7 +196,9 @@ as_dribble.default <- function(x, ...) {
 as_dribble.NULL <- function(x, ...) dribble()
 
 #' @export
-as_dribble.character <- function(x, ...) drive_get(path = x)
+as_dribble.character <- function(x, ...) {
+  with_drive_quiet(drive_get(path = x))
+}
 
 #' @export
 as_dribble.drive_id <- function(x, ...) drive_get(id = x)
@@ -334,7 +336,7 @@ confirm_some_files <- function(d) {
 #' @rdname dribble-checks
 is_folder <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  map_chr(d$drive_resource, "mimeType") ==
+  map_chr(d$drive_resource, "mimeType", .default = NA) ==
     "application/vnd.google-apps.folder"
 }
 
@@ -342,7 +344,7 @@ is_folder <- function(d) {
 #' @rdname dribble-checks
 is_shortcut <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  map_chr(d$drive_resource, "mimeType") ==
+  map_chr(d$drive_resource, "mimeType", .default = NA) ==
     "application/vnd.google-apps.shortcut"
 }
 

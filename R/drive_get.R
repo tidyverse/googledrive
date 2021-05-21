@@ -1,22 +1,41 @@
 #' Get Drive files by path or id
 #'
-#' @description Retrieve metadata for files specified via path or via file id.
+#' Retrieves metadata for files specified via `path` or via file `id`. This
+#' function is quite straightforward if you specify files by `id`. But there are
+#' some important considerations when you specify your target files by `path`.
+#' See below for more. If the target files are specified via `path`, the
+#' returned [`dribble`] will include a `path` column.
+
+#' @section Getting by `path`:
 #'
-#' @template not-like-your-local-file-system
+#'   Google Drive does NOT behave like your local file system! File and folder
+#'   names need not be unique, even at a given level of the hierarchy. This
+#'   means that a single path can describe multiple files (or 0 or exactly 1).
 #'
-#' @description If the files are specified via `path`, the returned [`dribble`]
-#'   will include a `path` column. To add path information to any [`dribble`]
-#'   that lacks it, use [drive_reveal()], e.g., `drive_reveal(d, "path")`. If
-#'   you want to list the contents of a folder, use [drive_ls()]. For general
-#'   searching, use [drive_find()].
+#'   A single file can also be compatible with multiple paths, i.e. one path
+#'   could be more specific than the other. A file located at `~/alfa/bravo` can
+#'   be found as `bravo`, `alfa/bravo`, and `~/alfa/bravo`. If all 3 of those
+#'   were included in the input `path`, they would be represented by a
+#'   **single** row in the output.
+#'
+#'   Therefore, it's best to think of `drive_get()` as a setwise operation when
+#'   using file paths. Do not assume that the `i`-th input path corresponds to
+#'   row `i` in the output (although it often does!). If there's not a 1-to-1
+#'   relationship between the input and output, this will be announced in a
+#'   message.
+
+#' @section Files that you don't own:
 #'
 #'   If you want to get a file via `path` and it's not necessarily on your My
 #'   Drive, you may need to specify the `shared_drive` or `corpus` arguments to
 #'   search other collections of items. Read more about [shared
 #'   drives][shared_drives].
-
 #'
-#' @seealso Wraps the `files.get` endpoint and, if you specify files by name or
+#' @seealso To add path information to any [`dribble`] that lacks it, use
+#'   [`drive_reveal(d, "path")`][drive_reveal()]. To list the contents of a
+#'   folder, use [drive_ls()]. For general searching, use [drive_find()].
+#'
+#' Wraps the `files.get` endpoint and, if you specify files by name or
 #'   path, also calls `files.list`:
 #'   * <https://developers.google.com/drive/api/v3/reference/files/get>
 #'   * <https://developers.google.com/drive/api/v3/reference/files/list>
@@ -43,6 +62,20 @@
 #' # the API reserves the file id "root" for your root folder
 #' drive_get(id = "root")
 #' drive_get(id = "root") %>% drive_reveal("path")
+#'
+#' # set up some files to get by path
+#' alfalfa <- drive_mkdir("alfalfa")
+#' broccoli <- drive_upload(
+#'   drive_example("chicken.txt"),
+#'   name = "broccoli", path = alfalfa
+#' )
+#' drive_get("broccoli")
+#' drive_get("alfalfa/broccoli")
+#' drive_get("~/alfalfa/broccoli")
+#' drive_get(c("broccoli", "alfalfa/", "~/alfalfa/broccoli"))
+#'
+#' # clean up
+#' drive_rm(alfalfa)
 #'
 #' \dontrun{
 #' # The examples below are indicative of correct syntax.
@@ -109,7 +142,7 @@ drive_get <- function(path = NULL,
   if (is.null(path)) {
     as_dribble(map(as_id(id), get_one_file))
   } else {
-    dribble_from_path(path, shared_drive, corpus)
+    drive_get_path(path, shared_drive, corpus)
   }
 }
 
@@ -128,12 +161,4 @@ get_one_file <- function(id) {
   )
   response <- request_make(request)
   gargle::response_process(response)
-}
-
-dribble_with_path <- function() {
-  put_column(dribble(), nm = "path", val = character(), .after = "name")
-}
-
-dribble_with_path_for_root <- function() {
-  put_column(root_folder(), nm = "path", val = "~/", .after = "name")
 }

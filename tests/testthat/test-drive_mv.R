@@ -68,8 +68,11 @@ test_that("drive_mv() can move a file into a folder given as path", {
 
   expect_dribble(mv_file)
   expect_identical(nrow(mv_file), 1L)
-  destination <- drive_get(nm_("move-files-into-me"))
-  expect_identical(mv_file$drive_resource[[1]]$parents[[1]], destination$id)
+  with_drive_quiet(
+    destination <- drive_get(nm_("move-files-into-me"))
+  )
+  mv_file <- drive_reveal(mv_file, "parent")
+  expect_equal(mv_file$id_parent, destination$id)
 })
 
 test_that("drive_mv() can move a file into a folder given as dribble", {
