@@ -50,15 +50,11 @@
 
 
 <meta property="og:title" content="Get Drive files by path or id — drive_get" />
-<meta property="og:description" content="Retrieve metadata for files specified via path or via file id.
-If the files are specified via path, the returned dribble
-will include a path column. To add path information to any dribble
-that lacks it, use drive_reveal(), e.g., drive_reveal(d, &quot;path&quot;). If
-you want to list the contents of a folder, use drive_ls(). For general
-searching, use drive_find().
-If you want to get a file via path and it's not necessarily on your My
-Drive, you may need to specify the shared_drive or corpus arguments to
-search other collections of items. Read more about shared drives." />
+<meta property="og:description" content="Retrieves metadata for files specified via path or via file id. This
+function is quite straightforward if you specify files by id. But there are
+some important considerations when you specify your target files by path.
+See below for more. If the target files are specified via path, the
+returned dribble will include a path column." />
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -184,15 +180,11 @@ search other collections of items. Read more about shared drives." />
     </div>
 
     <div class="ref-description">
-    <p>Retrieve metadata for files specified via path or via file id.</p>
-<p>If the files are specified via <code>path</code>, the returned <code><a href='dribble.html'>dribble</a></code>
-will include a <code>path</code> column. To add path information to any <code><a href='dribble.html'>dribble</a></code>
-that lacks it, use <code><a href='drive_reveal.html'>drive_reveal()</a></code>, e.g., <code>drive_reveal(d, "path")</code>. If
-you want to list the contents of a folder, use <code><a href='drive_ls.html'>drive_ls()</a></code>. For general
-searching, use <code><a href='drive_find.html'>drive_find()</a></code>.</p>
-<p>If you want to get a file via <code>path</code> and it's not necessarily on your My
-Drive, you may need to specify the <code>shared_drive</code> or <code>corpus</code> arguments to
-search other collections of items. Read more about <a href='shared_drives.html'>shared drives</a>.</p>
+    <p>Retrieves metadata for files specified via <code>path</code> or via file <code>id</code>. This
+function is quite straightforward if you specify files by <code>id</code>. But there are
+some important considerations when you specify your target files by <code>path</code>.
+See below for more. If the target files are specified via <code>path</code>, the
+returned <code><a href='dribble.html'>dribble</a></code> will include a <code>path</code> column.</p>
     </div>
 
     <pre class="usage"><span class='fu'>drive_get</span><span class='op'>(</span>
@@ -255,25 +247,38 @@ Drive API have replaced Team Drives with shared drives.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
-    <h2 class="hasAnchor" id="special-considerations-for-paths"><a class="anchor" href="#special-considerations-for-paths"></a>Special considerations for paths</h2>
+    <h2 class="hasAnchor" id="getting-by-path"><a class="anchor" href="#getting-by-path"></a>Getting by <code>path</code></h2>
 
     
 
-<p>Note that Google Drive does NOT behave like your local file system:</p><ul>
-<li><p>File and folder names need not be unique, even at a given level of
-the hierarchy. A single name or file path can be associated with multiple
-files (or zero or exactly one).</p></li>
-<li><p>A file can have more than one direct parent. This implies that a
-single file can be represented by multiple paths.</p></li>
-</ul>
 
-<p>Bottom line: Do not assume there is a one-to-one relationship between file
-name or path and a Drive file or folder. This implies the length of the input
-(i.e. the number of input paths or the number of rows in a dribble) will not
-necessarily equal the number rows in the output.</p>
+<p>Google Drive does NOT behave like your local file system! File and folder
+names need not be unique, even at a given level of the hierarchy. This
+means that a single path can describe multiple files (or 0 or exactly 1).</p>
+<p>A single file can also be compatible with multiple paths, i.e. one path
+could be more specific than the other. A file located at <code>~/alfa/bravo</code> can
+be found as <code>bravo</code>, <code>alfa/bravo</code>, and <code>~/alfa/bravo</code>. If all 3 of those
+were included in the input <code>path</code>, they would be represented by a
+<strong>single</strong> row in the output.</p>
+<p>Therefore, it's best to think of <code>drive_get()</code> as a setwise operation when
+using file paths. Do not assume that the <code>i</code>-th input path corresponds to
+row <code>i</code> in the output (although it often does!). If there's not a 1-to-1
+relationship between the input and output, this will be announced in a
+message.</p>
+    <h2 class="hasAnchor" id="files-that-you-don-t-own"><a class="anchor" href="#files-that-you-don-t-own"></a>Files that you don't own</h2>
+
+    
+
+
+<p>If you want to get a file via <code>path</code> and it's not necessarily on your My
+Drive, you may need to specify the <code>shared_drive</code> or <code>corpus</code> arguments to
+search other collections of items. Read more about <a href='shared_drives.html'>shared drives</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Wraps the <code>files.get</code> endpoint and, if you specify files by name or
+    <div class='dont-index'><p>To add path information to any <code><a href='dribble.html'>dribble</a></code> that lacks it, use
+<code><a href='drive_reveal.html'>drive_reveal(d, "path")</a></code>. To list the contents of a
+folder, use <code><a href='drive_ls.html'>drive_ls()</a></code>. For general searching, use <code><a href='drive_find.html'>drive_find()</a></code>.</p>
+<p>Wraps the <code>files.get</code> endpoint and, if you specify files by name or
 path, also calls <code>files.list</code>:</p><ul>
 <li><p><a href='https://developers.google.com/drive/api/v3/reference/files/get'>https://developers.google.com/drive/api/v3/reference/files/get</a></p></li>
 <li><p><a href='https://developers.google.com/drive/api/v3/reference/files/list'>https://developers.google.com/drive/api/v3/reference/files/list</a></p></li>
@@ -283,9 +288,10 @@ path, also calls <code>files.list</code>:</p><ul>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='co'># get info about your "My Drive" root folder</span></span>
 <span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='st'>"~/"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span><span> 1 path resolved to exactly 1 file</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path  id                  drive_resource   </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> My Drive ~/    0AO_RMaBzcP63Uk9PVA </span><span style='color: #949494;'>&lt;named list [30]&gt;</span></span>
 <span class='r-in'><span class='co'># the API reserves the file id "root" for your root folder</span></span>
 <span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"root"</span><span class='op'>)</span></span>
@@ -296,8 +302,57 @@ path, also calls <code>files.list</code>:</p><ul>
 <span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"root"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='drive_reveal.html'>drive_reveal</a></span><span class='op'>(</span><span class='st'>"path"</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path  id                  drive_resource   </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> My Drive ~/    0AO_RMaBzcP63Uk9PVA </span><span style='color: #949494;'>&lt;named list [30]&gt;</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># set up some files to get by path</span></span>
+<span class='r-in'><span class='va'>alfalfa</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span><span class='op'>(</span><span class='st'>"alfalfa"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> alfalfa </span><span style='color: #555555;'>&lt;id: 1r8Tq5reu4Ol5bJx5mIjm4MP3UX7oz66V&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>application/vnd.google-apps.folder</span></span>
+<span class='r-in'><span class='va'>broccoli</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'><a href='drive_example.html'>drive_example</a></span><span class='op'>(</span><span class='st'>"chicken.txt"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  name <span class='op'>=</span> <span class='st'>"broccoli"</span>, path <span class='op'>=</span> <span class='va'>alfalfa</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Local file:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #0000BB;'>/home/runner/work/_temp/Library/googledrive/extdata/chicken.txt</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Uploaded into Drive file:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> broccoli </span><span style='color: #555555;'>&lt;id: 14yOdNBFfUQh4RmCAnaq9unNxMgoA1xdf&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> </span><span style='color: #00BB00;'>text/plain</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='st'>"broccoli"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span><span> 1 path resolved to exactly 1 file</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path     id                                drive_resource   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                             </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> broccoli broccoli 14yOdNBFfUQh4RmCAnaq9unNxMgoA1xdf </span><span style='color: #949494;'>&lt;named list [38]&gt;</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='st'>"alfalfa/broccoli"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span><span> 1 path resolved to exactly 1 file</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path             id                                drive_resource   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                             </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> broccoli alfalfa/broccoli 14yOdNBFfUQh4RmCAnaq9unNxMgoA1xdf </span><span style='color: #949494;'>&lt;named list [38]&gt;</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='st'>"~/alfalfa/broccoli"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span><span> 1 path resolved to exactly 1 file</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path               id                                drive_resource  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                             </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> broccoli ~/alfalfa/broccoli 14yOdNBFfUQh4RmCAnaq9unNxMgoA1xdf </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"broccoli"</span>, <span class='st'>"alfalfa/"</span>, <span class='st'>"~/alfalfa/broccoli"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span><span> 3 paths resolved to exactly 1 file</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 1 file is associated with &gt;1 input <span style='color: #262626;background-color: #DADADA;'>`path`</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> broccoli </span><span style='color: #555555;'>&lt;id: 14yOdNBFfUQh4RmCAnaq9unNxMgoA1xdf&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 2 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path               id                                drive_resource  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                             </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>          </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> broccoli ~/alfalfa/broccoli 14yOdNBFfUQh4RmCAnaq9unNxMgoA1xdf </span><span style='color: #949494;'>&lt;named list [39</span><span>…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span> alfalfa  ~/alfalfa/         1r8Tq5reu4Ol5bJx5mIjm4MP3UX7oz66V </span><span style='color: #949494;'>&lt;named list [32</span><span>…</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># clean up</span></span>
+<span class='r-in'><span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>alfalfa</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> File deleted:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span><span> alfalfa </span><span style='color: #555555;'>&lt;id: 1r8Tq5reu4Ol5bJx5mIjm4MP3UX7oz66V&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='co'># The examples below are indicative of correct syntax.</span></span>
