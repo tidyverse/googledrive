@@ -41,8 +41,24 @@
 #' @importFrom glue glue_collapse
 #' @importFrom glue glue_data
 #' @importFrom lifecycle deprecated
+#' @importFrom purrr map
+#' @importFrom purrr map_chr
+#' @importFrom purrr map_if
+#' @importFrom purrr map_int
+#' @importFrom purrr map_lgl
+#' @importFrom purrr map2
+#' @importFrom purrr pluck
 #' @importFrom rlang :=
 #' @importFrom rlang %||%
+#' @importFrom tibble as_tibble
+#' @importFrom tibble tbl_sum
+#' @importFrom tibble tibble
+#' @importFrom vctrs vec_cast
+#' @importFrom vctrs vec_ptype2
+#' @importFrom vctrs vec_rbind
+#' @importFrom vctrs vec_restore
+#' @importFrom vctrs vec_size
+#' @importFrom vctrs vec_slice
 ## usethis namespace: end
 NULL
 

@@ -35,13 +35,13 @@ shared_drive_get <- function(name = NULL, id = NULL) {
   }
 
   if (!is.null(name)) {
-    stopifnot(all(purrr::map_lgl(name, is_string)))
+    stopifnot(all(map_lgl(name, is_string)))
     return(shared_drive_from_name(name))
   }
 
   stopifnot(is.character(id))
   # TODO: use a batch requeset
-  as_dribble(purrr::map(as_id(id), get_one_shared_drive_id))
+  as_dribble(map(as_id(id), get_one_shared_drive_id))
 }
 
 get_one_shared_drive_id <- function(id) {

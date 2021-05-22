@@ -29,9 +29,10 @@ test_that("drive_cp() can copy file in place", {
 
   cp_name <- me_("i-am-a-file")
   defer_drive_rm(cp_name)
-  local_drive_loud_and_wide()
 
   file <- drive_get(nm_("i-am-a-file"))
+
+  local_drive_loud_and_wide()
   drive_cp_message <- capture.output(
     cp_file <- drive_cp(file, name = cp_name),
     type = "message"
@@ -58,10 +59,11 @@ test_that("drive_cp() can copy a file into a different folder", {
 
   cp_name <- me_("i-am-a-file")
   defer_drive_rm(cp_name)
-  local_drive_loud_and_wide(110)
 
   file <- drive_get(nm_("i-am-a-file"))
   folder <- drive_get(nm_("i-am-a-folder"))
+
+  local_drive_loud_and_wide(110)
   drive_cp_message <- capture.output(
     cp_file <- drive_cp(file, path = folder, name = cp_name),
     type = "message"
@@ -74,8 +76,9 @@ test_that("drive_cp() can copy a file into a different folder", {
   )
   expect_identical(cp_file$name, cp_name)
 
-  ## should have folder as parent
-  expect_identical(cp_file$drive_resource[[1]]$parents[[1]], folder$id)
+  # should have folder as parent
+  file <- drive_reveal(cp_file, "parent")
+  expect_identical(file$id_parent, folder$id)
 })
 
 test_that("drive_cp() doesn't tolerate ambiguity in `path`", {

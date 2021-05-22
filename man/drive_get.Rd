@@ -49,33 +49,38 @@ Drive API have replaced Team Drives with shared drives.}
 An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
-Retrieve metadata for files specified via path or via file id.
+Retrieves metadata for files specified via \code{path} or via file \code{id}. This
+function is quite straightforward if you specify files by \code{id}. But there are
+some important considerations when you specify your target files by \code{path}.
+See below for more. If the target files are specified via \code{path}, the
+returned \code{\link{dribble}} will include a \code{path} column.
+}
+\section{Getting by \code{path}}{
 
-If the files are specified via \code{path}, the returned \code{\link{dribble}}
-will include a \code{path} column. To add path information to any \code{\link{dribble}}
-that lacks it, use \code{\link[=drive_reveal]{drive_reveal()}}, e.g., \code{drive_reveal(d, "path")}. If
-you want to list the contents of a folder, use \code{\link[=drive_ls]{drive_ls()}}. For general
-searching, use \code{\link[=drive_find]{drive_find()}}.
+
+Google Drive does NOT behave like your local file system! File and folder
+names need not be unique, even at a given level of the hierarchy. This
+means that a single path can describe multiple files (or 0 or exactly 1).
+
+A single file can also be compatible with multiple paths, i.e. one path
+could be more specific than the other. A file located at \verb{~/alfa/bravo} can
+be found as \code{bravo}, \code{alfa/bravo}, and \verb{~/alfa/bravo}. If all 3 of those
+were included in the input \code{path}, they would be represented by a
+\strong{single} row in the output.
+
+Therefore, it's best to think of \code{drive_get()} as a setwise operation when
+using file paths. Do not assume that the \code{i}-th input path corresponds to
+row \code{i} in the output (although it often does!). If there's not a 1-to-1
+relationship between the input and output, this will be announced in a
+message.
+}
+
+\section{Files that you don't own}{
+
 
 If you want to get a file via \code{path} and it's not necessarily on your My
 Drive, you may need to specify the \code{shared_drive} or \code{corpus} arguments to
 search other collections of items. Read more about \link[=shared_drives]{shared drives}.
-}
-\section{Special considerations for paths}{
-
-Note that Google Drive does NOT behave like your local file system:
-\itemize{
-\item File and folder names need not be unique, even at a given level of
-the hierarchy. A single name or file path can be associated with multiple
-files (or zero or exactly one).
-\item A file can have more than one direct parent. This implies that a
-single file can be represented by multiple paths.
-}
-
-Bottom line: Do not assume there is a one-to-one relationship between file
-name or path and a Drive file or folder. This implies the length of the input
-(i.e. the number of input paths or the number of rows in a dribble) will not
-necessarily equal the number rows in the output.
 }
 
 \examples{
@@ -85,6 +90,20 @@ drive_get("~/")
 # the API reserves the file id "root" for your root folder
 drive_get(id = "root")
 drive_get(id = "root") \%>\% drive_reveal("path")
+
+# set up some files to get by path
+alfalfa <- drive_mkdir("alfalfa")
+broccoli <- drive_upload(
+  drive_example("chicken.txt"),
+  name = "broccoli", path = alfalfa
+)
+drive_get("broccoli")
+drive_get("alfalfa/broccoli")
+drive_get("~/alfalfa/broccoli")
+drive_get(c("broccoli", "alfalfa/", "~/alfalfa/broccoli"))
+
+# clean up
+drive_rm(alfalfa)
 
 \dontrun{
 # The examples below are indicative of correct syntax.
@@ -122,6 +141,10 @@ drive_get(c("this.jpg", "that-file"), corpus = "allDrives")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+To add path information to any \code{\link{dribble}} that lacks it, use
+\code{\link[=drive_reveal]{drive_reveal(d, "path")}}. To list the contents of a
+folder, use \code{\link[=drive_ls]{drive_ls()}}. For general searching, use \code{\link[=drive_find]{drive_find()}}.
+
 Wraps the \code{files.get} endpoint and, if you specify files by name or
 path, also calls \code{files.list}:
 \itemize{

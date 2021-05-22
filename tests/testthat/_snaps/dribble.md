@@ -1,9 +1,20 @@
-# new_dribble() requires data.frame and adds the dribble class
+# tbl_sum.dribble method works
+
+    Code
+      print(d)
+    Output
+      # A dribble: 2 x 3
+        name  id    drive_resource  
+      * <chr> <chr> <list>          
+      1 a     b     <named list [1]>
+      2 b     a     <named list [1]>
+
+# new_dribble() requires a list and adds the dribble class
 
     Code
       new_dribble(1:3)
     Error <simpleError>
-      inherits(x, "data.frame") is not TRUE
+      `x` must be a list
 
 # validate_dribble() checks class, var names, var types
 
@@ -94,7 +105,7 @@
     Code
       as_dribble(list(drib_lst))
     Error <simpleError>
-      purrr::map_lgl(x, ~all(required_nms %in% names(.x))) is not TRUE
+      map_lgl(x, ~all(required_nms %in% names(.x))) is not TRUE
 
 ---
 

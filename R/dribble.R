@@ -17,9 +17,10 @@
 #'   which is good for humans, but keeps it bundled with the file's unique id
 #'   and other metadata, which are needed for API calls.
 #'
-#' @description In general, the dribble class will be retained even after
-#'   subsetting, as long as the required variables are present and of the
-#'   correct type.
+#' @description In general, the `dribble` class will be retained even after
+#'   manipulation, as long as the required variables are present and of the
+#'   correct type. This works best for manipulations via the dplyr and vctrs
+#'   packages.
 #'
 #' @name dribble
 #' @seealso [as_dribble()]
@@ -29,8 +30,11 @@ NULL
 # https://github.com/hadley/adv-r/blob/master/S3.Rmd
 
 new_dribble <- function(x) {
-  stopifnot(inherits(x, "data.frame"))
-  structure(x, class = c("dribble", "tbl_df", "tbl", "data.frame"))
+  # new_tibble0() strips attributes
+  structure(
+    new_tibble0(x),
+    class = c("dribble", "tbl_df", "tbl", "data.frame")
+  )
 }
 
 validate_dribble <- function(x) {
@@ -56,6 +60,11 @@ validate_dribble <- function(x) {
     ))
   }
 
+  # TODO: should I make sure there are no NAs in the id column?
+  # let's wait and see if we ever experience any harm from NOT checking this
+  # also, that feels more like something to enforce by creating a proper
+  # S3 vctr for Drive file ids and it might be odd to make NAs unacceptable
+
   if (!has_drive_resource(x)) {
     # \u00a0 is a nonbreaking space
     cli_abort(c(
@@ -69,37 +78,34 @@ validate_dribble <- function(x) {
 }
 
 dribble <- function(x = NULL) {
-  x <- x %||% tibble::tibble(
-    name = character(),
-    id = character(),
-    drive_resource = list()
-  )
+  x <- x %||%
+    list(
+      name = character(),
+      id = character(),
+      drive_resource = list()
+    )
   validate_dribble(new_dribble(x))
 }
 
 #' @export
 `[.dribble` <- function(x, i, j, drop = FALSE) {
-  maybe_dribble(NextMethod())
-}
-
-maybe_dribble <- function(x) {
-  if (is.data.frame(x) &&
-    has_dribble_cols(x) &&
-    has_dribble_coltypes(x) &&
-    has_drive_resource(x)) {
-    new_dribble(x)
-  } else {
-    as_tibble(x)
-  }
+  dribble_maybe_reconstruct(NextMethod())
 }
 
 #' @export
-#' @importFrom tibble as_tibble
+`names<-.dribble` <- function(x, value) {
+  dribble_maybe_reconstruct(NextMethod())
+}
+
+#' @export
+tbl_sum.dribble <- function(x) {
+  orig <- NextMethod()
+  c("A dribble" = unname(orig))
+}
+
+#' @export
 as_tibble.dribble <- function(x, ...) {
-  as_tibble(
-    structure(x, class = class(tibble::tibble())),
-    ...
-  )
+  as_tibble(new_tibble0(x), ...)
 }
 
 dribble_cols <- c("name", "id", "drive_resource")
@@ -121,9 +127,100 @@ has_dribble_coltypes <- function(x) {
 }
 
 has_drive_resource <- function(x) {
-  kind <- purrr::map_chr(x$drive_resource, "kind", .default = NA_character_)
+  kind <- map_chr(x$drive_resource, "kind", .default = NA_character_)
   # TODO: remove `drive#teamDrive` here, when possible
   all(!is.na(kind) & kind %in% c("drive#file", "drive#drive", "drive#teamDrive"))
+}
+
+#' Coerce to a `dribble`
+#'
+#' @description
+#' Converts various representations of Google Drive files into a [`dribble`],
+#' the object used by googledrive to hold Drive file metadata. Files can be
+#' specified via:
+#'   * File path. File name is an important special case.
+#'   * File id. Mark with [as_id()] to distinguish from file path.
+#'   * Data frame or [`dribble`]. Once you've successfully used googledrive to
+#'     identify the files of interest, you'll have a [`dribble`]. Pass it into
+#'     downstream functions.
+#'   * List representing [Files resource](https://developers.google.com/drive/v3/reference/files#resource)
+#'     objects. Mostly for internal use.
+#'
+#' This is a generic function.
+#'
+#' For maximum clarity, get your files into a [`dribble`] (or capture file id)
+#' as early as possible. When specifying via path, it's best to include the
+#' trailing slash when you're targetting a folder. If you want the folder `foo`,
+#' say `foo/`, not `foo`.
+#'
+#' Some functions, such as [drive_cp()], [drive_mkdir()], [drive_mv()], and
+#' [drive_upload()], can accept the new file or folder name as the last part of
+#' `path`, when `name` is not given. But if you say `a/b/c` (no trailing slash)
+#' and a folder `a/b/c/` already exists, it's unclear what you want. A file
+#' named `c` in `a/b/` or a file with default name in `a/b/c/`? You get an
+#' error and must make your intent clear.
+#'
+#' @param x A vector of Drive file paths, a vector of file ids marked
+#'   with [as_id()], a list of Files Resource objects, or a suitable data
+#'   frame.
+#' @param ... Other arguments passed down to methods. (Not used.)
+#' @export
+#' @examplesIf drive_has_token()
+#' # create some files for us to re-discover by name or filepath
+#' alfa <- drive_create("alfa", type = "folder")
+#' bravo <- drive_create("bravo", path = alfa)
+#'
+#' # as_dribble() can work with file names or paths
+#' as_dribble("alfa")
+#' as_dribble("bravo")
+#' as_dribble("alfa/bravo")
+#' as_dribble(c("alfa", "alfa/bravo"))
+#'
+#' # specify the file id (substitute a real file id of your own!)
+#' # as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
+#'
+#' # cleanup
+#' drive_find("alfa") %>% drive_rm()
+as_dribble <- function(x, ...) UseMethod("as_dribble")
+
+#' @export
+as_dribble.dribble <- function(x, ...) x
+
+#' @export
+as_dribble.default <- function(x, ...) {
+  cli_abort("
+    Don't know how to coerce an object of class {.cls {class(x)}} into \\
+    a {.cls dribble}.")
+}
+
+#' @export
+as_dribble.NULL <- function(x, ...) dribble()
+
+#' @export
+as_dribble.character <- function(x, ...) {
+  with_drive_quiet(drive_get(path = x))
+}
+
+#' @export
+as_dribble.drive_id <- function(x, ...) drive_get(id = x)
+
+#' @export
+as_dribble.data.frame <- function(x, ...) validate_dribble(new_dribble(x))
+
+#' @export
+as_dribble.list <- function(x, ...) {
+  if (length(x) == 0) return(dribble())
+
+  required_nms <- c("name", "id", "kind")
+  stopifnot(map_lgl(x, ~all(required_nms %in% names(.x))))
+
+  as_dribble(
+    tibble(
+      name = map_chr(x, "name"),
+      id = map_chr(x, "id"),
+      drive_resource = x
+    )
+  )
 }
 
 # used across several functions that create a file or modify "parentage"
@@ -241,8 +338,28 @@ confirm_some_files <- function(d) {
 #' @rdname dribble-checks
 is_folder <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  purrr::map_chr(d$drive_resource, "mimeType") ==
+  map_chr(d$drive_resource, "mimeType", .default = NA) ==
     "application/vnd.google-apps.folder"
+}
+
+#' @export
+#' @rdname dribble-checks
+is_shortcut <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  map_chr(d$drive_resource, "mimeType", .default = NA) ==
+    "application/vnd.google-apps.shortcut"
+}
+
+#' @export
+#' @rdname dribble-checks
+is_folder_shortcut <- function(d) {
+  stopifnot(inherits(d, "dribble"))
+  is_shortcut(d) &
+    (map_chr(
+      d$drive_resource,
+      c("shortcutDetails", "targetMimeType"),
+      .default = ""
+    ) == "application/vnd.google-apps.folder")
 }
 
 #' @export
@@ -257,8 +374,8 @@ is_native <- function(d) {
 #' @rdname dribble-checks
 is_parental <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  kind <- purrr::map_chr(d$drive_resource, "kind")
-  mime_type <- purrr::map_chr(d$drive_resource, "mimeType", .default = NA)
+  kind <- map_chr(d$drive_resource, "kind")
+  mime_type <- map_chr(d$drive_resource, "mimeType", .default = NA)
   # TODO: remove `drive#teamDrive` here, when possible
   kind == "drive#teamDrive" |
     kind == "drive#drive" |
@@ -270,37 +387,12 @@ is_parental <- function(d) {
 ## TO DO: do I need to do anything about shared drives here?
 is_mine <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  purrr::map_lgl(d$drive_resource, list("owners", 1, "me"))
+  map_lgl(d$drive_resource, list("owners", 1, "me"))
 }
 
 #' @export
 #' @rdname dribble-checks
 is_shared_drive <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  purrr::map_chr(d$drive_resource, "kind") == "drive#drive"
-}
-
-## promote an element in drive_resource into a top-level variable
-## if new, it will be the second column, presumably after `name`
-## if variable by that name already exists, it is overwritten in place
-## if you request `this_var`, we look for `thisVar` in drive_resource
-## but use `this_var` as the variable name
-promote <- function(d, elem) {
-  elem_orig <- elem
-  elem <- camelCase(elem)
-  present <- any(purrr::map_lgl(d$drive_resource, ~elem %in% names(.x)))
-  if (present) {
-    val <- purrr::simplify(purrr::map(d$drive_resource, elem))
-    ## TO DO: find a way to emulate .default behavior from type-specific
-    ## mappers ... might need to create my own simplify()
-    ## https://github.com/tidyverse/purrr/issues/336
-    ## as this stands, you will get a list-column whenever there is at
-    ## least one NULL
-  } else {
-    ## TO DO: do we really want promote() to be this forgiving?
-    ## adds a placeholder column for elem if not present in drive_resource
-    ## ensure elem is added, even if there are zero rows
-    val <- rep_len(list(NULL), nrow(d))
-  }
-  put_column(d, nm = elem_orig, val = val, .after = 1)
+  map_chr(d$drive_resource, "kind") == "drive#drive"
 }

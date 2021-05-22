@@ -33,7 +33,7 @@ trash_me <- googledrive::drive_find(
   "upload-into-me-article-demo", type = "folder"
 )
 if (googledrive::some_files(trash_me)) {
-  drive_trash(trash_me)
+  googledrive::drive_trash(trash_me)
 }
 ```
 
@@ -45,8 +45,8 @@ Functions that expect a single file:
 * `drive_cp()`  
 * `drive_download()` 
 * `drive_ls()`
-* `drive_mkdir()`
 * `drive_mv()`  
+* `drive_put()`
 * `drive_rename()`  
 * `drive_update()`
 * `drive_upload()`
@@ -112,7 +112,7 @@ But what if not? You can always row bind individual dribbles into one big dribbl
 bind_rows(files)
 ```
 
-Below we show another way to finesse this by using a variant of `purrr::map()` that does this for us, namely `map_df()`.
+Below we show another way to finesse this by using a variant of `purrr::map()` that does this for us, namely `map_dfr()`.
 
 ### Rename
 

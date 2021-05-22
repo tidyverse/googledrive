@@ -17,15 +17,16 @@ drive_mv(
 Drive. Can be a name or path, a file id or URL marked with \code{\link[=as_id]{as_id()}}, or a
 \code{\link{dribble}}.}
 
-\item{path}{Specifies target destination for the new file on Google
-Drive. Can be an actual path (character), a file id marked with \code{\link[=as_id]{as_id()}},
-or a \code{\link{dribble}}. If specified as an actual path, it is best to explicitly
-indicate if it's a folder by including a trailing slash, since it cannot
-always be worked out from the context of the call. Defaults to current name.}
+\item{path}{Specifies target destination for the file on Google
+Drive. Can be an actual path (character), a file id marked with
+\code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. If specified as an actual path, it is best
+to explicitly indicate if it's a folder by including a trailing slash,
+since it cannot always be worked out from the context of the call.
+By default, the file stays in its current folder.}
 
 \item{name}{Character, new file name if not specified as part of
-\code{path}. This will force \code{path} to be treated as a folder, even if it is
-character and lacks a trailing slash. Defaults to current name.}
+\code{path}. This will force \code{path} to be interpreted as a folder, even if it
+is character and lacks a trailing slash. By default, the file keeps its current name.}
 
 \item{overwrite}{Logical, indicating whether to check for a pre-existing file
 at the targetted "filepath". The quotes around "filepath" refer to the fact
@@ -57,12 +58,6 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 Move a Drive file to a different folder, give it a different name, or both.
-Note that folders on Google Drive are not like folders on your local
-filesystem. They are more like a label, which implies that a Drive file can
-have multiple folders as direct parent! However, most people still use and
-think of them like "regular" folders. When we say "move a Drive file", it
-actually means: "add a new folder to this file's parents and remove the old
-one".
 }
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

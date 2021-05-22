@@ -1,20 +1,16 @@
 #' Move a Drive file
 #'
 #' Move a Drive file to a different folder, give it a different name, or both.
-#' Note that folders on Google Drive are not like folders on your local
-#' filesystem. They are more like a label, which implies that a Drive file can
-#' have multiple folders as direct parent! However, most people still use and
-#' think of them like "regular" folders. When we say "move a Drive file", it
-#' actually means: "add a new folder to this file's parents and remove the old
-#' one".
 #'
 #' @template file-singular
-#' @template path
-#' @templateVar name file
-#' @templateVar default {}
-#' @template name
-#' @templateVar name file
-#' @templateVar default Defaults to current name.
+#' @eval param_path(
+#'   thing = "file",
+#'   default_notes = "By default, the file stays in its current folder."
+#' )
+#' @eval param_name(
+#'   thing = "file",
+#'   default_notes = "By default, the file keeps its current name."
+#' )
 #' @template overwrite
 #' @template verbose
 #'
@@ -79,7 +75,7 @@ drive_mv <- function(file,
   params <- list()
 
   # load (path, name) into params ... maybe
-  parents_before <- purrr::pluck(file, "drive_resource", 1, "parents")
+  parents_before <- pluck(file, "drive_resource", 1, "parents")
   n_parents_before <- length(parents_before)
   if (!is.null(path)) {
     path <- as_parent(path)
@@ -125,16 +121,13 @@ drive_mv <- function(file,
   )
   action = glue_collapse(names(actions)[actions], sep = ",", last = " and ")
 
-  # doing this in a hacky way because drive_reveal_path(), which is more
-  # correct, can be quite slow
-  # once I eliminate the "multiple parent" accommodations, that might change
-  tmp <- out
-  tmp$name <- paste0(append_slash(path$path), out$name)
   drive_bullets(c(
     "Original file:",
     bulletize(map_cli(file)),
     "Has been {action}:",
-    bulletize(map_cli(tmp))
+    # drive_reveal_path() puts immediate parent in the path, if specified
+    # TODO: still need to request that `path` is revealed, instead of `name`
+    bulletize(map_cli(drive_reveal_path(out, ancestors = path)))
   ))
 
   invisible(out)

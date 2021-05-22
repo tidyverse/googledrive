@@ -60,11 +60,11 @@ test_that("drive_get(path = ...) works", {
   skip_if_offline()
 
   one_file <- drive_get(nm_("thing02"))
-  expect_s3_class(one_file, "dribble")
+  expect_dribble(one_file)
   expect_identical(nrow(one_file), 1L)
 
   two_files <- drive_get(c(nm_("thing02"), nm_("thing03")))
-  expect_s3_class(two_files, "dribble")
+  expect_dribble(two_files)
   expect_identical(two_files$name, c(nm_("thing02"), nm_("thing03")))
 })
 
@@ -78,7 +78,7 @@ test_that("drive_get(path = ...) is correct wrt folder-ness, path config, rooted
   skip_if_no_token()
   skip_if_offline()
 
-  ## files with these names exist, but not in this path configuration
+  # files with these names exist, but not in this path configuration
   out <- drive_get(c(nm_("thing01"), nm_("thing02")))
   expect_true(all(c(nm_("thing01"), nm_("thing02")) %in% out$name))
   expect_identical(
@@ -86,7 +86,7 @@ test_that("drive_get(path = ...) is correct wrt folder-ness, path config, rooted
     dribble_with_path()
   )
 
-  ## file exists, but we don't get if specify it must be in root
+  # file exists, but we don't get if specify it must be in root
   out <- drive_get(nm_("thing04"))
   expect_identical(out$name, nm_("thing04"))
   expect_identical(
@@ -94,22 +94,21 @@ test_that("drive_get(path = ...) is correct wrt folder-ness, path config, rooted
     dribble_with_path()
   )
 
-  ## several files/folders exist with this name, but we only want roooted ones
+  # several files/folders exist with this name, but we only want rooted ones
   out <- drive_get(file.path("~", nm_("thing01")))
-  out <- promote(out, "parents")
-  expect_match(unlist(out$parents), root_id())
+  out <- drive_reveal(out, "parent")
+  ROOT_ID <- root_id()
+  expect_true(all(out$id_parent == ROOT_ID))
 
-  ## several files/folders exist with this name, but we only want folders
+  # several files/folders exist with this name, but we only want folders
   out <- drive_get(append_slash(nm_("thing01")))
-  out <- promote(out, "mimeType")
-  expect_match(out$mimeType, "folder$")
+  expect_true(all(is_folder(out)))
 
-  ## several files/folders exist with this name, but we only want rooted folders
+  # several files/folders exist with this name, but we only want rooted folders
   out <- drive_get(append_slash(file.path("~", nm_("thing01"))))
-  out <- promote(out, "mimeType")
-  out <- promote(out, "parents")
-  expect_match(out$mimeType, "folder$")
-  expect_match(unlist(out$parents), root_id())
+  expect_true(all(is_folder(out)))
+  out <- drive_reveal(out, "parent")
+  expect_true(all(out$id_parent == ROOT_ID))
 })
 
 test_that("drive_get() gets root folder", {
@@ -117,11 +116,12 @@ test_that("drive_get() gets root folder", {
   skip_if_offline()
 
   from_path <- drive_get("~/")
-  from_path$path <- NULL
   from_id <- drive_get(id = "root")
   from_id2 <- drive_get(as_id("root"))
-  expect_identical(from_path, from_id)
-  expect_identical(from_path, from_id2)
+  expect_equal(from_path$name, from_id$name)
+  expect_equal(from_path$id, from_id$id)
+  expect_equal(from_path$name, from_id2$name)
+  expect_equal(from_path$id, from_id2$id)
 })
 
 test_that("drive_get(path = ...) puts trailing slash on a folder", {
@@ -129,8 +129,7 @@ test_that("drive_get(path = ...) puts trailing slash on a folder", {
   skip_if_offline()
 
   out <- drive_get(nm_("thing01"))
-  out <- out %>% promote("mimeType")
-  out <- out[out$mimeType == "application/vnd.google-apps.folder", ]
+  out <- vec_slice(out, is_folder(out))
   expect_match(out$path, "/$")
 })
 
@@ -154,8 +153,8 @@ test_that("drive_get() + drive_reveal_path() <--> drive_get() roundtrip", {
   path_from_file <- drive_reveal_path(file_from_id)
   file_from_path <- drive_get(path_from_file$path)
 
-  expect_identical(file_from_id$id, file_from_path$id)
-  expect_identical(path_from_file$path, file_from_path$path)
+  expect_equal(file_from_id$id, file_from_path$id)
+  expect_equal(path_from_file$path, file_from_path$path)
 })
 
 test_that("drive_get() works with a URL", {
@@ -164,7 +163,6 @@ test_that("drive_get() works with a URL", {
 
   file <- drive_find(nm_("thing02"))
 
-  out <- drive_get(purrr::pluck(file, "drive_resource", 1, "webViewLink"))
+  out <- drive_get(pluck(file, "drive_resource", 1, "webViewLink"))
   expect_identical(file$id, out$id)
-
 })

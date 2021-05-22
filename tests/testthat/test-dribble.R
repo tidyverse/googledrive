@@ -1,12 +1,25 @@
 # ---- tests ----
+
+test_that("tbl_sum.dribble method works", {
+  d <- new_dribble(
+    tibble(
+      name = letters[1:2],
+      id = letters[2:1],
+      drive_resource = list(list(kind = "drive#file"))
+    )
+  )
+  expect_snapshot(print(d))
+})
+
 test_that("dribble() creates empty dribble", {
-  expect_s3_class(dribble(), "dribble")
+  expect_dribble(dribble())
   expect_equal(nrow(dribble()), 0)
 })
 
-test_that("new_dribble() requires data.frame and adds the dribble class", {
+test_that("new_dribble() requires a list and adds the dribble class", {
   expect_snapshot(new_dribble(1:3), error = TRUE)
-  expect_s3_class(new_dribble(data.frame(x = 1:3)), "dribble")
+  expect_dribble(new_dribble(list(x = 1:3)))
+  expect_dribble(new_dribble(data.frame(x = 1:3)))
 })
 
 test_that("validate_dribble() checks class, var names, var types", {
@@ -28,7 +41,7 @@ test_that("validate_dribble() checks class, var names, var types", {
 
   ## list-col elements do not have `kind = "drive#file"`
   d <- new_dribble(
-    tibble::tibble(
+    tibble(
       name = "a",
       id = "1",
       drive_resource = list(kind = "whatever")
@@ -43,30 +56,30 @@ test_that("as_tibble() drops the dribble class", {
 
 test_that("`[` retains dribble class when possible", {
   d <- new_dribble(
-    tibble::tibble(
+    tibble(
       name = letters[1:4],
       id = letters[4:1],
       drive_resource = list(list(kind = "drive#file"))
     )
   )
-  expect_s3_class(d, "dribble")
-  expect_s3_class(d[1, ], "dribble")
-  expect_s3_class(d[1:2, ], "dribble")
-  expect_s3_class(d[1:3], "dribble")
+  expect_dribble(d)
+  expect_dribble(d[1, ])
+  expect_dribble(d[1:2, ])
+  expect_dribble(d[1:3])
   d$foo <- "foo"
-  expect_s3_class(d, "dribble")
-  expect_s3_class(d[-4], "dribble")
+  expect_dribble(d)
+  expect_dribble(d[-4])
 })
 
 test_that("`[` drops dribble class when not valid", {
   d <- new_dribble(
-    tibble::tibble(
+    tibble(
       name = letters[1:4],
       id = letters[4:1],
       drive_resource = list(list(kind = "drive#file"))
     )
   )
-  expect_s3_class(d, "dribble")
+  expect_dribble(d)
   expect_false(inherits(d[1], "dribble"))
   expect_false(inherits(d[, 1], "dribble"))
 })
@@ -80,7 +93,7 @@ test_that("dribble nrow checkers work", {
   expect_snapshot(confirm_some_files(d), error = TRUE)
 
   d <- new_dribble(
-    tibble::tibble(
+    tibble(
       name = "a",
       id = "b",
       drive_resource = list(list(kind = "drive#file"))
@@ -128,7 +141,7 @@ test_that("as_dribble.list() works for good input", {
     kind = "drive#file"
   )
   expect_silent(d <- as_dribble(list(drib_lst)))
-  expect_s3_class(d, "dribble")
+  expect_dribble(d)
 })
 
 test_that("as_dribble.list() catches bad input", {
@@ -178,94 +191,4 @@ test_that("as_parent() throws specific errors", {
     },
     error = TRUE
   )
-})
-
-test_that("promote() works when elem present, absent, and input is trivial", {
-  x <- tibble::tibble(
-    name = c("a", "b", "c"),
-    id = c("1", "2", "3"),
-    drive_resource = list(
-      list(foo = "a1"),
-      list(foo = "b2"),
-      list(foo = "c3", baz = "c3")
-    )
-  )
-
-  ## foo is uniformly present
-  out <- promote(x, "foo")
-  expect_identical(
-    out,
-    tibble::tibble(
-      name = x$name,
-      foo = c("a1", "b2", "c3"),
-      id = x$id,
-      drive_resource = x$drive_resource
-    )
-  )
-
-  ## bar is uniformly absent
-  out <- promote(x, "bar")
-  expect_identical(
-    out,
-    tibble::tibble(
-      name = x$name,
-      bar = list(NULL, NULL, NULL),
-      id = x$id,
-      drive_resource = x$drive_resource
-    )
-  )
-
-  ## baz is present sometimes
-  out <- promote(x, "baz")
-  expect_identical(
-    out,
-    tibble::tibble(
-      name = x$name,
-      baz = list(NULL, NULL, "c3"),
-      id = x$id,
-      drive_resource = x$drive_resource
-    )
-  )
-
-  ## input dribble has zero rows
-  out <- promote(dribble(), "bar")
-  expect_identical(
-    out,
-    as_dribble(
-      tibble::tibble(
-        name = character(0),
-        bar = list(),
-        id = character(0),
-        drive_resource = list()
-      )
-    )
-  )
-})
-
-test_that("promote() replaces existing element in situ", {
-  x <- tibble::tibble(
-    name = "a",
-    foo = "b",
-    bar = "c",
-    id = "1",
-    drive_resource = list(
-      list(foo = "d", bar = "e")
-    )
-  )
-  x2 <- promote(x, "foo")
-  x3 <- promote(x2, "bar")
-  expect_identical(x3$foo, "d")
-  expect_identical(x3$bar, "e")
-})
-
-test_that("promote() does snake_case to camelCase conversion", {
-  x <- tibble::tibble(
-    name = "name",
-    id = "id",
-    drive_resource = list(
-      list(thisThat = "hi")
-    )
-  )
-  out <- promote(x, "this_that")
-  expect_identical(out[2], tibble::tibble(this_that = "hi"))
 })

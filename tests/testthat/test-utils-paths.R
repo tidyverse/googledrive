@@ -15,45 +15,33 @@ if (SETUP) {
 }
 
 # ---- tests ----
+test_that("root_folder() and root_id() work", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  expect_snapshot(
+    root_folder()
+  )
+  expect_snapshot(
+    root_id()
+  )
+})
+
 test_that("rootize_path() standardizes root", {
+  expect_identical(rootize_path(NULL), NULL)
+  expect_identical(rootize_path(character()), character())
   expect_identical(rootize_path("~"), "~/")
   expect_identical(rootize_path("~/"), "~/")
-  expect_identical(rootize_path("/"), "~/")
-  expect_identical(rootize_path(NULL), NULL)
-  expect_identical(rootize_path(""), "")
-  expect_identical(rootize_path("~abc"), "~abc")
-  expect_identical(rootize_path("~/abc"), "~/abc")
-  expect_identical(rootize_path("/abc/"), "~/abc/")
-  expect_identical(rootize_path("~/a/bc/"), "~/a/bc/")
-  expect_identical(rootize_path("~a/bc"), "~a/bc")
-  expect_identical(rootize_path("a"), "a")
-  expect_identical(rootize_path("a/bc"), "a/bc")
 })
 
-test_that("split_path() splits paths", {
-  expect_identical(split_path(""), character(0))
-  expect_identical(split_path("~"), "~")
-  expect_identical(split_path("~/"), "~")
-  expect_identical(split_path("/"), "~")
-  expect_identical(split_path("/abc"), c("~", "abc"))
-  expect_identical(split_path("/abc/"), c("~", "abc"))
-  expect_identical(split_path("/a/bc/"), c("~", "a", "bc"))
-  expect_identical(split_path("a/bc"), c("a", "bc"))
-  expect_identical(split_path("a/bc/"), c("a", "bc"))
-})
-
-test_that("unsplit_path() is file.path(), but never leads with /'s", {
-  expect_identical(unsplit_path(), character(0))
-  expect_identical(unsplit_path(""), "")
-  expect_identical(unsplit_path("", "a"), "a")
-  expect_identical(unsplit_path("", "", "a"), "a")
-  expect_identical(unsplit_path("a", "b"), file.path("a", "b"))
+test_that("rootize_path() errors for leading slash", {
+  expect_error(rootize_path("/"))
+  expect_error(rootize_path("/abc"))
 })
 
 test_that("append_slash() appends a slash or declines to do so", {
   expect_identical(append_slash("a"), "a/")
   expect_identical(append_slash("a/"), "a/")
-  expect_identical(append_slash("/"), "/")
   expect_identical(append_slash(""), "")
   expect_identical(append_slash(c("a", "")), c("a/", ""))
   expect_identical(append_slash(character(0)), character(0))
@@ -62,20 +50,8 @@ test_that("append_slash() appends a slash or declines to do so", {
 test_that("strip_slash() strips a trailing slash", {
   expect_identical(strip_slash("a"), "a")
   expect_identical(strip_slash("a/"), "a")
-  expect_identical(strip_slash("/"), "")
   expect_identical(strip_slash(""), "")
   expect_identical(strip_slash(character(0)), character(0))
-})
-
-test_that("is_rootpath() recognizes requests for root folder", {
-  expect_true(is_rootpath("~"))
-  expect_true(is_rootpath("~/"))
-  expect_true(is_rootpath("/"))
-  expect_false(is_rootpath(NULL))
-  expect_false(is_rootpath(character(0)))
-  expect_false(is_rootpath("abc"))
-  expect_false(is_rootpath("/abc"))
-  expect_false(is_rootpath("~/abc"))
 })
 
 test_that("file_ext_safe() returns NULL unless there's a usable extension", {
@@ -95,17 +71,13 @@ test_that("partition_path() splits into stuff before/after last slash", {
 
   expect_identical(partition_path("~"), f("~/", NULL))
   expect_identical(partition_path("~/"), f("~/", NULL))
-  expect_identical(partition_path("/"), f("~/", NULL))
 
   ## maybe_name = TRUE --> use `path` as is, don't append slash
   expect_identical(partition_path("~/a", TRUE), f("~/", "a"))
-  expect_identical(partition_path("/a", TRUE), f("~/", "a"))
-  expect_identical(partition_path("/a/", TRUE), f("~/a/", NULL))
   expect_identical(partition_path("a/", TRUE), f("a/", NULL))
   expect_identical(partition_path("a", TRUE), f(NULL, "a"))
 
   expect_identical(partition_path("~/a/b/", TRUE), f("~/a/b/", NULL))
-  expect_identical(partition_path("/a/b/", TRUE), f("~/a/b/", NULL))
   expect_identical(partition_path("a/b/", TRUE), f("a/b/", NULL))
   expect_identical(partition_path("a/b", TRUE), f("a/", "b"))
 })
@@ -207,8 +179,8 @@ test_that("check_for_overwrite() does its job", {
   )
   expect_identical(first$name, second$name)
   expect_identical(
-    purrr::pluck(first, "drive_resource", 1, "parents"),
-    purrr::pluck(second, "drive_resource", 1, "parents")
+    drive_reveal(first, "parent")$id_parent,
+    drive_reveal(second, "parent")$id_parent
   )
   expect_false(first$id == second$id)
 

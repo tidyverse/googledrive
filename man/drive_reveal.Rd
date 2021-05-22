@@ -2,25 +2,39 @@
 % Please edit documentation in R/drive_reveal.R
 \name{drive_reveal}
 \alias{drive_reveal}
-\title{Add column(s) with new information}
+\title{Add a new column of Drive file information}
 \usage{
-drive_reveal(
-  file,
-  what = c("path", "trashed", "mime_type", "permissions", "published")
-)
+drive_reveal(file, what = c("path", "permissions", "published", "parent"))
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
 ids or URLs marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}.}
 
-\item{what}{Character, describing the type of info you want to add:
+\item{what}{Character, describing the type of info you want to add. These
+values get special handling (more details below):
 \itemize{
-\item path. Warning: this can be slow, especially if called on many files.
-\item trashed
-\item mime_type
-\item permissions. Who is this file shared with and in which roles?
-\item published
+\item \code{path}
+\item \code{permissions}
+\item \code{published}
+\item \code{parent}
+}
+
+You can also request any property in the \code{drive_resource} column by name.
+The request can be in \code{camelCase} or \code{snake_case}, but the new column name
+will always be \code{snake_case}. Some examples of \code{what}:
+\itemize{
+\item \code{mime_type} (or \code{mimeType})
+\item \code{trashed}
+\item \code{starred}
+\item \code{description}
+\item \code{version}
+\item \code{web_view_link} (or \code{webViewLink})
+\item \code{modified_time} (or \code{modifiedTime})
+\item \code{created_time} (or \code{createdTime})
+\item \code{owned_by_me} (or \code{ownedByMe})
+\item \code{size}
+\item \code{quota_bytes_used} (or \code{quotaBytesUsed})
 }}
 }
 \value{
@@ -28,47 +42,43 @@ An object of class \code{\link{dribble}}, a tibble with one row per item.
 }
 \description{
 \code{drive_reveal()} adds extra information about your Drive files that is not
-automatically present in the default \code{\link{dribble}} produced by googledrive. Why
-is this info not always present?
-\enumerate{
-\item You don't always care about it.
-\item It may require calling different endpoints in the Drive API. Example:
-determining if a file has been "published on the web".
-\item It might require additional API calls. Example: figuring out the path(s)
-associated with a specific file.
-}
-}
-\section{Special considerations for paths}{
-
-Note that Google Drive does NOT behave like your local file system:
+readily available in the default \code{\link{dribble}} produced by googledrive. Why is
+this info not always included in the default \code{dribble}?
 \itemize{
-\item File and folder names need not be unique, even at a given level of
-the hierarchy. A single name or file path can be associated with multiple
-files (or zero or exactly one).
-\item A file can have more than one direct parent. This implies that a
-single file can be represented by multiple paths.
+\item You don't always care about it. There is a lot of esoteric information in
+the \code{drive_resource} that has little value for most users.
+\item It might be "expensive" to get this information and put it into a usable
+form. For example, revealing a file's \code{"path"}, \code{"permissions"}, or
+\code{"published"} status all require additional API calls.
 }
 
-Bottom line: Do not assume there is a one-to-one relationship between file
-name or path and a Drive file or folder. This implies the length of the input
-(i.e. the number of input paths or the number of rows in a dribble) will not
-necessarily equal the number rows in the output.
+\code{drive_reveal()} can also \strong{hoist} any property out of the \code{drive_resource}
+list-column, when the property's name is passed as the \code{what} argument. The
+resulting new column is simplified if it is easy to do so, e.g., if the
+individual elements are all string or logical. If \code{what} extracts a
+date-time, we return \code{\link[=DateTimeClasses]{POSIXct}}. Otherwise, you'll get a
+list-column. If this makes you sad, consider using \code{tidyr::hoist()} instead.
+It is more powerful due to a richer "plucking specification" and its \code{ptype}
+and \code{transform} arguments. Another useful function is
+\code{tidyr::unnest_wider()}.
 }
+\section{File path}{
+ When \code{what = "path"} the \code{\link{dribble}} gains a character
+column holding each file's path. This can be \emph{very slow}, so use with
+caution.
 
-\section{Trashed}{
-
-When \code{what = "trashed"}, the \code{\link{dribble}} gains a logical variable that
-indicates whether a file is in the trash.
+The example path \verb{~/a/b/} illustrates two conventions used in googledrive:
+\itemize{
+\item The leading \verb{~/} means that the folder \code{a} is located in the current
+user's "My Drive" root folder.
+\item The trailing \code{/} means that \code{b}, located in \code{a}, is \emph{a folder or a folder
+shortcut}.
 }
-
-\section{MIME type}{
- When \code{what = "mime_type"}, the \code{\link{dribble}} gains a
-variable of MIME types.
 }
 
 \section{Permissions}{
 
-When \code{what = "permissions"} the \code{\link{dribble}} gains a logical variable \code{shared}
+When \code{what = "permissions"} the \code{\link{dribble}} gains a logical column \code{shared}
 that indicates whether a file is shared and a new list-column
 \code{permissions_resource} containing lists of
 \href{https://developers.google.com/drive/v3/reference/permissions#resource}{Permissions resources}.
@@ -76,30 +86,66 @@ that indicates whether a file is shared and a new list-column
 
 \section{Publishing}{
 
-When \code{what = "published"} the \code{\link{dribble}} gains a logical variable
+When \code{what = "published"} the \code{\link{dribble}} gains a logical column
 \code{published} that indicates whether a file is published and a new list-column
 \code{revision_resource} containing lists of
 \href{https://developers.google.com/drive/v3/reference/revisions#resource}{Revisions resources}.
 }
 
+\section{Parent}{
+
+When \code{what = "parent"} the \code{\link{dribble}} gains a character column \code{id_parent}
+that is the file id of this item's parent folder. This information is
+available in the \code{drive_resource}, but can't just be hoisted out:
+\itemize{
+\item Google Drive used to allow files to have multiple parents, but this is no
+longer supported and googledrive now assumes this is impossible. However,
+we have seen (very old) files that still have >1 parent folder. If we see
+this we message about it and drop all but the first parent.
+\item The \code{parents} property in \code{drive_resource} has an "extra" layer of nesting
+and needs to be flattened.
+}
+
+If you really want the raw \code{parents} property, call \code{drive_reveal(what = "parents")}.
+}
+
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Get a nice, random selection of files
+# Get a few of your files
 files <- drive_find(n_max = 10, trashed = NA)
 
-# Reveal
-#   * paths (warning: can be slow for many files!)
-#   * if `trashed` or not
-#   * MIME type
-#   * permissions, i.e. sharing status
-#   * if `published` or not
+# the "special" cases that require additional API calls and can be slow
 drive_reveal(files, "path")
-drive_reveal(files, "trashed")
-drive_reveal(files, "mime_type")
 drive_reveal(files, "permissions")
 drive_reveal(files, "published")
 
-# 'root' is a special file id that always represents your root folder
-drive_get(id = "root") \%>\% drive_reveal("path")
+# a "special" case of digging info out of `drive_resource`, then processing
+# a bit
+drive_reveal(files, "parent")
+
+# the "simple" cases of digging info out of `drive_resource`
+drive_reveal(files, "trashed")
+drive_reveal(files, "mime_type")
+drive_reveal(files, "starred")
+drive_reveal(files, "description")
+drive_reveal(files, "version")
+drive_reveal(files, "web_view_link")
+drive_reveal(files, "modified_time")
+drive_reveal(files, "created_time")
+drive_reveal(files, "owned_by_me")
+drive_reveal(files, "size")
+drive_reveal(files, "quota_bytes_used")
+
+# 'root' is a special file id that represents your My Drive root folder
+drive_get(id = "root") \%>\%
+  drive_reveal("path")
 \dontshow{\}) # examplesIf}
+}
+\seealso{
+To learn more about the properties present in the metadata of a
+Drive file (which is what's in the \code{drive_resource} list-column of a
+\code{\link{dribble}}), see the API docs:
+\itemize{
+\item \url{https://developers.google.com/drive/api/v3/reference/files#resource-representations}
+}
 }

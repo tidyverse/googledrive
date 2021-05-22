@@ -1,26 +1,26 @@
 # ---- tests ----
 test_that("put_column() adds a column in the right place", {
-  df <- tibble::tibble(v1 = 1, v2 = 2)
+  df <- tibble(v1 = 1, v2 = 2)
   expect_identical(
     put_column(df, nm = "insert", val = 3, .after = "v1"),
-    tibble::tibble(v1 = 1, insert = 3, v2 = 2)
+    tibble(v1 = 1, insert = 3, v2 = 2)
   )
 })
 
 test_that("put_column() updates an existing column", {
-  df <- tibble::tibble(v1 = 1, v2 = 2)
+  df <- tibble(v1 = 1, v2 = 2)
   expect_identical(
     put_column(df, nm = "v3", val = "hi"),
-    tibble::tibble(v1 = 1, v2 = 2, v3 = "hi")
+    tibble(v1 = 1, v2 = 2, v3 = "hi")
   )
 })
 
 test_that("put_column() works with an expression", {
-  df <- tibble::tibble(v1 = 1, v2 = 2)
+  df <- tibble(v1 = 1, v2 = 2)
   stuff <- "stuff"
   expect_identical(
     put_column(df, nm = "v3", val = stuff),
-    tibble::tibble(v1 = 1, v2 = 2, v3 = "stuff")
+    tibble(v1 = 1, v2 = 2, v3 = "stuff")
   )
 })
 

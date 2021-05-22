@@ -91,7 +91,7 @@ drive_extension <- function(type = NULL) {
   stopifnot(is.character(type))
 
   type <- drive_mime_type(type)
-  m <- purrr::map_int(type, one_ext)
+  m <- map_int(type, one_ext)
   .drive$mime_tbl$ext[m]
 }
 
@@ -102,14 +102,4 @@ one_ext <- function(type) {
     m <- NA_integer_
   }
   m
-}
-
-drive_reveal_mime_type <- function(file) {
-  confirm_dribble(file)
-  if (no_file(file)) {
-    return(
-      put_column(dribble(), nm = "mime_type", val = character(), .after = "name")
-    )
-  }
-  promote(file, "mime_type")
 }

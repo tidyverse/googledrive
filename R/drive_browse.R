@@ -15,7 +15,7 @@
 #' drive_link(three_files)
 drive_link <- function(file) {
   file <- as_dribble(file)
-  links <- purrr::map_chr(
+  links <- map_chr(
     file$drive_resource,
     "webViewLink",
     .default = NA_character_

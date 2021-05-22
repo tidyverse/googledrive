@@ -43,7 +43,7 @@ test_that("drive_put() works", {
   expect_snapshot(
     write_utf8(first_put)
   )
-  expect_s3_class(original, "dribble")
+  expect_dribble(original)
 
   with_drive_quiet(
     drive_download(original, path = download_target)

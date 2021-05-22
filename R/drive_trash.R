@@ -44,7 +44,7 @@ drive_toggle_trash <- function(file, trash) {
     return(invisible(dribble()))
   }
 
-  out <- purrr::map(file$id, toggle_trash_one, trash = trash)
+  out <- map(file$id, toggle_trash_one, trash = trash)
   out <- do.call(rbind, out)
 
   drive_bullets(c(
@@ -67,16 +67,6 @@ toggle_trash_one <- function(id, trash = TRUE) {
   response <- request_make(request)
   proc_res <- gargle::response_process(response)
   as_dribble(list(proc_res))
-}
-
-drive_reveal_trashed <- function(file) {
-  confirm_dribble(file)
-  if (no_file(file)) {
-    return(
-      put_column(dribble(), nm = "trashed", val = logical(), .after = "name")
-    )
-  }
-  promote(file, "trashed")
 }
 
 #' Empty Drive Trash

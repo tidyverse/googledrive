@@ -19,7 +19,7 @@ with_mock <- function(..., .parent = parent.frame()) {
 
 nm_fun <- function(context, user = Sys.info()["user"]) {
   y <- purrr::compact(list(context, user))
-  function(x) as.character(glue::glue_collapse(c(x, y), sep = "-"))
+  function(x) as.character(glue_collapse(c(x, y), sep = "-"))
 }
 
 expect_error_free <- function(...) {
@@ -48,4 +48,12 @@ scrub_filepath <- function(message, replace_me) {
 
 scrub_file_id <- function(message) {
   gsub("<id: [a-zA-Z0-9_-]+>", "<id: {FILE_ID}>", message, perl = TRUE)
+}
+
+expect_dribble <- function(x) {
+   expect_s3_class(x, "dribble")
+}
+
+expect_bare_tibble <- function(x) {
+   expect_s3_class(x, c("tbl_df", "tbl", "data.frame"), exact = TRUE)
 }
