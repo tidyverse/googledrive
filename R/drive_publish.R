@@ -56,7 +56,7 @@ drive_change_publish <- function(file,
   if (!all(type_ok)) {
     file <- file[!type_ok, ]
     file <- promote(file, "mimeType")
-    abort(c(
+    cli_abort(c(
       "Only native Google files can be published.",
       "{.arg file} includes {?a/} file{?s} \\
        with non-native MIME type{cli::qty(nrow(file))}",

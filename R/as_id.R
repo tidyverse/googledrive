@@ -20,7 +20,7 @@ as_id <- function(x, ...) UseMethod("as_id")
 
 #' @export
 as_id.default <- function(x, ...) {
-  abort("
+  cli_abort("
     Don't know how to coerce an object of class {.cls {class(x)}} into \\
     a {.cls drive_id}.")
 }

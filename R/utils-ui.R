@@ -1,12 +1,9 @@
-# use cli, possibly via rlang, for all messages and errors ----
-.rlang_use_cli_format <- TRUE
-
 drive_bullets <- function(text, .envir = parent.frame()) {
   quiet <- drive_quiet() %|% is_testing()
   if (quiet) {
     return(invisible())
   }
-  # TODO: these tweaks currently don't apply to abort() calls, but should
+  # TODO: these tweaks currently don't apply to cli_abort() calls, but should
   cli::cli_div(theme = list(
     span.field = list(transform = single_quote_if_no_color),
     # this is so cli_format.dribble controls its own coloring (vs. "blue")
@@ -42,7 +39,7 @@ map_cli <- function(x, ...) UseMethod("map_cli")
 
 #' @export
 map_cli.default <- function(x, ...) {
-  abort("
+  cli_abort("
     Don't know how to {.fun map_cli} an object of class {.cls {class(x)}}.")
 }
 
@@ -91,7 +88,7 @@ bulletize <- function(x, bullet = "*", n_show = 5, n_fudge = 2) {
   out <- utils::head(x, n_show_actual)
   n_not_shown <- n - n_show_actual
 
-  out <- set_names(out, bullet)
+  out <- set_names(out, rep_along(out, bullet))
 
   if (n_not_shown == 0) {
     out
@@ -219,6 +216,7 @@ sq <- function(x) glue::single_quote(x)
 bt <- function(x) glue::backtick(x)
 
 message <- function(...) {
+  # TODO: switch this to cli_abort()
   abort("Internal error: use googledrive's UI functions, not {bt('message()')}")
 }
 

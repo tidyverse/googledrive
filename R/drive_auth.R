@@ -64,7 +64,7 @@ drive_auth <- function(email = gargle::gargle_oauth_email(),
     token = token
   )
   if (!inherits(cred, "Token2.0")) {
-    abort(c(
+    cli_abort(c(
       "Can't get Google credentials",
       "i" = "Are you running googledrive in a non-interactive session? \\
              Consider:",
@@ -179,7 +179,7 @@ drive_has_token <- function() {
 #' drive_auth_configure(app = original_app, api_key = original_api_key)
 drive_auth_configure <- function(app, path, api_key) {
   if (!missing(app) && !missing(path)) {
-    abort("Must supply exactly one of {.arg app} or {.arg path}, not both")
+    cli_abort("Must supply exactly one of {.arg app} or {.arg path}, not both")
   }
   stopifnot(missing(api_key) || is.null(api_key) || is_string(api_key))
 
@@ -215,7 +215,7 @@ drive_auth_internal <- function(account = c("docs", "testing"),
   can_decrypt <- gargle:::secret_can_decrypt("googledrive")
   online <- !is.null(curl::nslookup("drive.googleapis.com", error = FALSE))
   if (!can_decrypt || !online) {
-    abort(
+    cli_abort(
       message = c(
         "Auth unsuccessful:",
         if (!can_decrypt) {

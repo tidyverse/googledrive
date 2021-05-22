@@ -82,7 +82,7 @@ drive_cp <- function(file,
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_parental(file)) {
-    abort("The Drive API does not copy folders or shared drives.")
+    cli_abort("The Drive API does not copy folders or shared drives.")
   }
 
   tmp <- rationalize_path_name(path, name)

@@ -38,7 +38,7 @@ shared_drive_update <- function(shared_drive, ...) {
     return(invisible(dribble()))
   }
   if (!single_file(shared_drive)) {
-    abort(c(
+    cli_abort(c(
       "Can't update multiple shared drives at once:",
       bulletize(map_cli(shared_drive))
     ))

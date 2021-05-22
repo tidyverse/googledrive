@@ -177,13 +177,13 @@ rationalize_corpus <- function(corpus) {
   validate_corpora(corpus[["corpora"]])
 
   if (corpus[["corpora"]] == "drive" && is.null(corpus[["driveId"]])) {
-    abort('
+    cli_abort('
       When {.code corpus = "drive"}, you must also specify \\
       the {.arg shared_drive}.')
   }
 
   if (corpus[["corpora"]] != "drive" && !is.null(corpus[["driveId"]])) {
-    abort('
+    cli_abort('
       When {.code corpus != "drive"}, you must not specify \\
       a {.arg shared_drive}.')
   }
@@ -201,7 +201,7 @@ validate_corpora <- function(corpora) {
     # though the actual API parameter is `corpora`
     # googledrive's user-facing functions have `corpus` in their signature and
     # the rationale is explained elsewhere in this file
-    abort(c(
+    cli_abort(c(
       "Invalid value for {.arg corpus}:",
       bulletize(map_cli(corpora), bullet = "x"),
       "These are the only acceptable values:",
@@ -243,7 +243,7 @@ as_shared_drive <- function(x, ...) UseMethod("as_shared_drive")
 
 #' @export
 as_shared_drive.default <- function(x, ...) {
-  abort("
+  cli_abort("
     Don't know how to coerce an object of class {.cls {class(x)}} into \\
     a shared drive {.cls dribble}.")
 }
@@ -273,7 +273,7 @@ as_shared_drive.list <- function(x, ...) {
 validate_shared_drive_dribble <- function(x) {
   stopifnot(inherits(x, "dribble"))
   if (!all(is_shared_drive(x))) {
-    abort("
+    cli_abort("
       All rows of shared drive {.cls dribble} must contain a shared drive.")
   }
   x

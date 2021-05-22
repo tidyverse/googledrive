@@ -58,7 +58,7 @@ drive_put <- function(media,
   if (file.exists(media)) {
     media <- enc2utf8(media)
   } else {
-    abort(c(
+    cli_abort(c(
       "No file exists at the local {.arg media} path:",
       bulletize(map_cli(media, "{.path <<x>>}"), bullet = "x")
     ))
@@ -116,7 +116,7 @@ drive_put <- function(media,
   # a hack to print `path` where we'd normally print `name`
   hits <- drive_reveal(hits, "path")
   hits$name <- hits$path
-  abort(c(
+  cli_abort(c(
     "Multiple items already exist on Drive at the target filepath.",
     "Unclear what {.fun drive_put} should do. Exiting.",
     bulletize(map_cli(hits))

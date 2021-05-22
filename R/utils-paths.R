@@ -21,7 +21,7 @@ confirm_clear_path <- function(path, name) {
   if (is.null(name) &&
       !has_slash(path) &&
       drive_path_exists(append_slash(path))) {
-    abort(c(
+    cli_abort(c(
       "Unclear if {.arg path} specifies parent folder or full path \\
        to the new file, including its name.",
       "See {.fun ?as_dribble} for advice on how to make this clear."
@@ -54,7 +54,7 @@ check_for_overwrite <- function(parent = NULL, name, overwrite) {
   hits <- drive_reveal(hits, "path")
 
   if (overwrite) {
-    abort(c(
+    cli_abort(c(
       "Multiple items already exist at the target filepath.",
       bulletize(map_cli(hits, bullet = "x")),
       "Although {.code overwrite = TRUE}, it's not clear which item \\
@@ -62,7 +62,7 @@ check_for_overwrite <- function(parent = NULL, name, overwrite) {
       "Use {.code overwrite = NA} to suppress this check. Exiting."
     ))
   } else {
-    abort(c(
+    cli_abort(c(
       # \u00a0 is a nonbreaking space
       "{nrow(hits)} item{?s} already exist{?s/} at the target filepath \\
        and {.code overwrite\u00a0=\u00a0FALSE}:",

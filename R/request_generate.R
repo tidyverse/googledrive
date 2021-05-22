@@ -51,7 +51,7 @@ request_generate <- function(endpoint = character(),
                              token = drive_token()) {
   ept <- drive_endpoint(endpoint)
   if (is.null(ept)) {
-    abort(c(
+    cli_abort(c(
       "Endpoint not recognized:",
       bulletize(map_cli(endpoint))
     ))

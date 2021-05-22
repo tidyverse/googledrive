@@ -36,6 +36,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom cli cli_abort
 #' @importFrom glue glue
 #' @importFrom glue glue_collapse
 #' @importFrom glue glue_data

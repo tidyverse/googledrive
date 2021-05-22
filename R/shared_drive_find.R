@@ -22,7 +22,7 @@ shared_drive_find <- function(pattern = NULL,
                               n_max = Inf,
                               ...) {
   if (!is.null(pattern) && !(is_string(pattern))) {
-    abort("{.arg pattern} must be a character string.")
+    cli_abort("{.arg pattern} must be a character string.")
   }
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
   if (n_max < 1) return(dribble())

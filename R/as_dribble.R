@@ -54,7 +54,7 @@ as_dribble.dribble <- function(x, ...) x
 
 #' @export
 as_dribble.default <- function(x, ...) {
-  abort("
+  cli_abort("
     Don't know how to coerce an object of class {.cls {class(x)}} into \\
     a {.cls dribble}.")
 }
