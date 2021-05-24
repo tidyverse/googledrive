@@ -70,7 +70,7 @@ jobs:
         run: |
           options(width = 100)
           pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
+          sessionInfo()
         shell: Rscript {0}
 
       - name: Print debugging
@@ -80,7 +80,7 @@ jobs:
         shell: bash
         run: |
           echo "$RUNNER_OS"
-          echo $R_VERSION
+          echo "$R_VERSION""
 
       - name: Don't use tar from old Rtools to store the cache
         if: ${{ runner.os == 'Windows' && steps.install-r.outputs.installed-r-version == '3.6' }}
