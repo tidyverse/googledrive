@@ -37,14 +37,20 @@ test_that("shortcut_create() works", {
 
   target_file <- drive_get(nm_("top-level-file"))
   folder <- drive_get(nm_("i-am-a-folder"))
+  sc_name <- me_("custom-named-shortcut")
 
-  # TODO: consider a snapshot test once the rlang+cli transition completes
-  sc <- shortcut_create(
-    target_file,
-    path = folder,
-    name = me_("custom-named-shortcut")
+  local_drive_loud_and_wide()
+  shortcut_create_message <- capture.output(
+    sc <- shortcut_create(target_file, path = folder, name = sc_name),
+    type = "message"
   )
   defer_drive_rm(sc)
+  shortcut_create_message <- shortcut_create_message %>%
+    scrub_filepath(sc_name) %>%
+    scrub_file_id()
+  expect_snapshot(
+    write_utf8(shortcut_create_message)
+  )
 
   expect_true(is_shortcut(sc))
   expect_equal(
@@ -58,9 +64,9 @@ test_that("shortcut_create() requires `name` to control `overwrite`", {
   skip_if_no_token()
   skip_if_offline()
 
-  # TODO: consider a snapshot test once the rlang+cli transition completes
-  expect_error(
-    shortcut_create(nm_("top-level-file"), overwrite = FALSE)
+  expect_snapshot(
+    shortcut_create(nm_("top-level-file"), overwrite = FALSE),
+    error = TRUE
   )
 })
 
