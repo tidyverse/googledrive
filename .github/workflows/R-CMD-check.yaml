@@ -47,6 +47,15 @@ jobs:
         shell: bash
         run:  echo "$PATH"
 
+      - name: Store original PATH
+        shell: bash
+        run: |
+          echo "original_path=$PATH" >> $GITHUB_ENV
+
+      - name: Echo original PATH
+        run: |
+          echo "${{ env.original_path }}"
+
       - uses: r-lib/actions/setup-r@v1
         id: install-r
         with:
