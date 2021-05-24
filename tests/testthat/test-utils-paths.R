@@ -35,7 +35,7 @@ test_that("rootize_path() standardizes root", {
 })
 
 test_that("rootize_path() errors for leading slash", {
-  expect_error(rootize_path("/"))
+  expect_snapshot(rootize_path("/"), error = TRUE)
   expect_error(rootize_path("/abc"))
 })
 

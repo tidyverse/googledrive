@@ -111,9 +111,7 @@ rootize_path <- function(path) {
   stopifnot(is.character(path))
   leading_slash <- startsWith(path, "/")
   if (any(leading_slash)) {
-    # TODO: come back to this message after merging the PR switching to
-    # cli_abort()
-    abort("googledrive does not allow paths to start with `/`")
+    cli_abort("{.pkg googledrive} does not allow paths to start with {.code /}")
   }
   sub("^~$", "~/", path)
 }
