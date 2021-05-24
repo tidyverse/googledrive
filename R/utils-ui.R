@@ -216,8 +216,9 @@ sq <- function(x) glue::single_quote(x)
 bt <- function(x) glue::backtick(x)
 
 message <- function(...) {
-  # TODO: switch this to cli_abort()
-  abort("Internal error: use googledrive's UI functions, not {bt('message()')}")
+  cli_abort("
+    Internal error: use the UI functions in {.pkg googledrive} \\
+    instead of {.fun message}")
 }
 
 warn_for_verbose <- function(verbose = TRUE, env = parent.frame()) {
