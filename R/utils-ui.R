@@ -11,7 +11,7 @@ drive_theme <- function() {
     # the standard bullet should be "normal" color
     ".memo .memo-item-*" = list(
       "text-exdent" = 2,
-      before = function(x) paste0(cli::col_none(cli::symbol$bullet), " ")
+      before = function(x) paste0(cli::symbol$bullet, " ")
     )
   )
 }
