@@ -27,12 +27,12 @@ drive_bullets <- function(text, .envir = parent.frame()) {
 
 drive_abort <- function(message, ..., .envir = parent.frame()) {
   cli::cli_div(theme = drive_theme())
-  cli_abort(message = message, ..., .envir = .envir)
+  cli::cli_abort(message = message, ..., .envir = .envir)
 }
 
 drive_warn <- function(message, ..., .envir = parent.frame()) {
   cli::cli_div(theme = drive_theme())
-  cli_warn(message = message, ..., .envir = .envir)
+  cli::cli_warn(message = message, ..., .envir = .envir)
 }
 
 single_quote_if_no_color <- function(x) quote_if_no_color(x, "'")
