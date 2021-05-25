@@ -17,4 +17,10 @@ param_name <- function(thing = "THING", default_notes = "") {
       is character and lacks a trailing slash. {default_notes}")
 }
 
+return_dribble <- function(extras = "") {
+  glue("
+    @return An object of class [`dribble`], a tibble with one row per item.
+    {extras}")
+}
+
 # nocov end

@@ -34,7 +34,8 @@
 #'   `"domain"`). Read the API docs linked below for more details.
 #' @template verbose
 #'
-#' @template dribble-return
+#' @eval return_dribble(extras = "There will be extra columns, `shared` and
+#'   `permissions_resource`.")
 #' @export
 #' @examplesIf drive_has_token()
 #' # Upload a file to share

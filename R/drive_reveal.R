@@ -89,7 +89,8 @@
 #'   * `size`
 #'   * `quota_bytes_used` (or `quotaBytesUsed`)
 #'
-#' @template dribble-return
+#' @eval return_dribble(extras = "The additional info requested via `what`
+#'   appears in one (or more) extra columns.")
 #'
 
 #' @seealso To learn more about the properties present in the metadata of a

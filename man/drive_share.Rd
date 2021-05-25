@@ -52,6 +52,8 @@ more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_qu
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.
+There will be extra columns, \code{shared} and
+\code{permissions_resource}.
 }
 \description{
 Grant individuals or other groups access to files, including permission to

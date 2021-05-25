@@ -2,7 +2,7 @@
 #' @template file-plural
 #' @template verbose
 #'
-#' @template dribble-return
+#' @eval return_dribble()
 #' @export
 #' @examplesIf drive_has_token()
 #' # Create a file and put it in the trash.

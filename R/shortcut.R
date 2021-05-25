@@ -23,7 +23,7 @@
 #' )
 
 #' @template overwrite
-#' @template dribble-return
+#' @eval return_dribble()
 #' @export
 
 #' @seealso
@@ -107,7 +107,8 @@ shortcut_create <- function(file,
 #'
 #' @template file-plural
 #'
-#' @template dribble-return
+#' @eval return_dribble(extras = "Extra columns `name_shortcut` and
+#'   `id_shortcut` refer to the original shortcut.")
 #' @export
 #'
 #' @examplesIf drive_has_token()

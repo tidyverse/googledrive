@@ -10,7 +10,7 @@
 #'   an existing parent folder, as well as the new name.
 #' @inheritParams drive_create
 #'
-#' @template dribble-return
+#' @eval return_dribble()
 #' @export
 #' @examplesIf drive_has_token()
 #' # Create folder named 'ghi', then another below named it 'jkl' and star it

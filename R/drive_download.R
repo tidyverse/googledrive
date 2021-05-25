@@ -29,7 +29,7 @@
 #' @param overwrite A logical scalar. If local `path` already exists, do you
 #'   want to overwrite it?
 #' @template verbose
-#' @template dribble-return
+#' @eval return_dribble()
 #' @export
 #' @examplesIf drive_has_token()
 #' # Upload a csv file into a Google Sheet

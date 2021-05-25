@@ -11,7 +11,7 @@
 #' @param ... Properties to set in `name = value` form. See the "Request
 #'   body" section of the Drive API docs for this endpoint.
 #'
-#' @template dribble-return
+#' @eval return_dribble()
 #' @export
 #' @examples
 #' \dontrun{

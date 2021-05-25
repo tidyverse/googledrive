@@ -68,7 +68,7 @@
 #' @template verbose
 #' @template team_drive-singular
 #'
-#' @template dribble-return
+#' @eval return_dribble()
 #' @examples
 #' \dontrun{
 #' # list "My Drive" w/o regard for folder hierarchy

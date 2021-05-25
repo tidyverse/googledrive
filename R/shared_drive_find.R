@@ -12,7 +12,7 @@
 #' @param ... Other parameters to pass along in the request, such as `pageSize`
 #'   or `useDomainAdminAccess`.
 #'
-#' @template dribble-return
+#' @eval return_dribble()
 #' @export
 #' @examples
 #' \dontrun{

@@ -47,6 +47,8 @@ Drive API have replaced Team Drives with shared drives.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per item.
+If the target files were specified via \code{path},
+there will be a \code{path} column.
 }
 \description{
 Retrieves metadata for files specified via \code{path} or via file \code{id}. This
@@ -68,11 +70,15 @@ be found as \code{bravo}, \code{alfa/bravo}, and \verb{~/alfa/bravo}. If all 3 o
 were included in the input \code{path}, they would be represented by a
 \strong{single} row in the output.
 
-Therefore, it's best to think of \code{drive_get()} as a setwise operation when
-using file paths. Do not assume that the \code{i}-th input path corresponds to
-row \code{i} in the output (although it often does!). If there's not a 1-to-1
-relationship between the input and output, this will be announced in a
-message.
+It's best to think of \code{drive_get()} as a setwise operation when using file
+paths. Do not assume that the \code{i}-th input path corresponds to row \code{i} in
+the output (although it often does!). If there's not a 1-to-1 relationship
+between the input and output, this will be announced in a message.
+
+\code{drive_get()} performs just enough path resolution to uniquely identify a
+file compatible with each input \code{path}, for all \code{path}s at once. If you
+absolutely want the full canonical path, run the output of \code{drive_get()}
+through \code{\link[=drive_reveal]{drive_reveal(d, "path")}}`.
 }
 
 \section{Files that you don't own}{

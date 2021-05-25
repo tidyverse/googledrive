@@ -30,7 +30,7 @@
 #' @template overwrite
 #' @template verbose
 #'
-#' @template dribble-return
+#' @eval return_dribble()
 #' @export
 #' @examplesIf drive_has_token()
 #' # upload a csv file

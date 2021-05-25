@@ -15,7 +15,8 @@
 #' specify other values.
 #' @template verbose
 #'
-#' @template dribble-return
+#' @eval return_dribble(extras = "There will be extra columns, `published` and
+#'   `revisions_resource`.")
 #' @export
 #' @examplesIf drive_has_token()
 #' # Upload file to publish

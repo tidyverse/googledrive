@@ -23,7 +23,7 @@
 #'
 #' @inheritParams drive_upload
 #'
-#' @template dribble-return
+#' @eval return_dribble()
 #' @export
 #' @examplesIf drive_has_token()
 #' # create a local file to work with

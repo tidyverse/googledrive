@@ -18,11 +18,16 @@
 #'   were included in the input `path`, they would be represented by a
 #'   **single** row in the output.
 #'
-#'   Therefore, it's best to think of `drive_get()` as a setwise operation when
-#'   using file paths. Do not assume that the `i`-th input path corresponds to
-#'   row `i` in the output (although it often does!). If there's not a 1-to-1
-#'   relationship between the input and output, this will be announced in a
-#'   message.
+#'   It's best to think of `drive_get()` as a setwise operation when using file
+#'   paths. Do not assume that the `i`-th input path corresponds to row `i` in
+#'   the output (although it often does!). If there's not a 1-to-1 relationship
+#'   between the input and output, this will be announced in a message.
+#'
+#'   `drive_get()` performs just enough path resolution to uniquely identify a
+#'   file compatible with each input `path`, for all `path`s at once. If you
+#'   absolutely want the full canonical path, run the output of `drive_get()`
+#'   through [`drive_reveal(d, "path")`][drive_reveal()]`.
+#'
 
 #' @section Files that you don't own:
 #'
@@ -53,7 +58,8 @@
 #' @template verbose
 #' @template team_drive-singular
 #'
-#' @template dribble-return
+#' @eval return_dribble(extras = "If the target files were specified via `path`,
+#'   there will be a `path` column.")
 #' @export
 #'
 #' @examplesIf drive_has_token()

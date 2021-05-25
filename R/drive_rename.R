@@ -8,7 +8,7 @@
 #' @template overwrite
 #' @template verbose
 #'
-#' @template dribble-return
+#' @eval return_dribble()
 #'
 #' @examplesIf drive_has_token()
 #' # Create a file to rename

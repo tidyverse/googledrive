@@ -15,7 +15,7 @@
 #'   with [as_id()]). If both `name` and `id` are non-`NULL`, `id` is silently
 #'   ignored.
 #'
-#' @template dribble-return
+#' @eval return_dribble()
 #' @export
 #' @examples
 #' \dontrun{

@@ -13,7 +13,7 @@
 #'   `path` (`recursive = FALSE`, the default) or all children, including
 #'   indirect (`recursive = TRUE`).
 #'
-#' @template dribble-return
+#' @eval return_dribble()
 #' @export
 #' @examples
 #' \dontrun{
