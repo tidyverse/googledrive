@@ -113,12 +113,17 @@ drive_put <- function(media,
   }
 
   # Unhappy Path: multiple collisions
-  # a hack to print `path` where we'd normally print `name`
-  hits <- drive_reveal(hits, "path")
-  hits$name <- hits$path
   cli_abort(c(
     "Multiple items already exist on Drive at the target filepath.",
     "Unclear what {.fun drive_put} should do. Exiting.",
-    bulletize(map_cli(hits))
+    # drive_reveal_path() puts immediate parent, if specified, in the `path`
+    # then we reveal `path`, instead of `name`
+    bulletize(map_cli(
+      drive_reveal_path(hits, ancestors = path),
+      template = c(
+        id_string = "<id:\u00a0<<id>>>", # \u00a0 is a nonbreaking space
+        out = "<<path>> {cli::col_grey('<<id_string>>')}"
+      )
+    ))
   ))
 }
