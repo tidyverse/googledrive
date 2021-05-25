@@ -4,9 +4,9 @@
       write_utf8(drive_cp_message)
     Output
       Original file:
-      * i-am-a-file-TEST-drive-cp <id: {FILE_ID}>
+      * 'i-am-a-file-TEST-drive-cp' <id: {FILE_ID}>
       Copied to file:
-      * {cp_name} <id: {FILE_ID}>
+      * '{cp_name}' <id: {FILE_ID}>
 
 # drive_cp() can copy a file into a different folder
 
@@ -14,9 +14,9 @@
       write_utf8(drive_cp_message)
     Output
       Original file:
-      * i-am-a-file-TEST-drive-cp <id: {FILE_ID}>
+      * 'i-am-a-file-TEST-drive-cp' <id: {FILE_ID}>
       Copied to file:
-      * i-am-a-folder-TEST-drive-cp/{cp_name} <id: {FILE_ID}>
+      * 'i-am-a-folder-TEST-drive-cp/{cp_name}' <id: {FILE_ID}>
 
 # drive_cp() doesn't tolerate ambiguity in `path`
 
@@ -40,9 +40,9 @@
       write_utf8(drive_cp_message)
     Output
       Original file:
-      * i-am-a-file-TEST-drive-cp <id: {FILE_ID}>
+      * 'i-am-a-file-TEST-drive-cp' <id: {FILE_ID}>
       Copied to file:
-      * i-am-a-folder-TEST-drive-cp/{cp_name} <id: {FILE_ID}>
+      * 'i-am-a-folder-TEST-drive-cp/{cp_name}' <id: {FILE_ID}>
 
 ---
 

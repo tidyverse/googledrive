@@ -60,7 +60,7 @@ drive_download <- function(file,
                            verbose = deprecated()) {
   warn_for_verbose(verbose)
   if (!is.null(path) && file.exists(path) && !overwrite) {
-    cli_abort(c(
+    drive_abort(c(
       "Local {.arg path} already exists and overwrite is {.code FALSE}:",
       bulletize(map_cli(path, "{.path <<x>>}"))
     ))
@@ -118,7 +118,7 @@ drive_download <- function(file,
       "*" = "{.path {path}}"
     ))
   } else {
-    cli_abort("Download failed.")
+    drive_abort("Download failed.")
   }
   invisible(put_column(file, nm = "local_path", val = path, .after = "name"))
 }
@@ -132,7 +132,7 @@ get_export_mime_type <- function(mime_type) {
   m <- .drive$translate_mime_types$mime_type_google == mime_type &
     is_true(.drive$translate_mime_types$default)
   if (!any(m)) {
-    cli_abort(c(
+    drive_abort(c(
       "Not a recognized Google MIME type:",
       bulletize(map_cli(mime_type), bullet = "x")
     ))
@@ -148,7 +148,7 @@ verify_export_mime_type <- function(mime_type, export_type) {
   if (!ok) {
     ## to be really nice, we would look these up in drive_mime_type() tibble
     ## and use the human_type, if found
-    cli_abort(c(
+    drive_abort(c(
       "Cannot export Google file of type:",
       bulletize(map_cli(mime_type)),
       "as a file of type:",

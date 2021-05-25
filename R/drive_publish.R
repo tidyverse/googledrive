@@ -56,11 +56,11 @@ drive_change_publish <- function(file,
   if (!all(type_ok)) {
     file <- file[!type_ok, ]
     file <- promote(file, "mimeType")
-    cli_abort(c(
+    drive_abort(c(
       "Only native Google files can be published.",
       "{.arg file} includes {?a/} file{?s} \\
        with non-native MIME type{cli::qty(nrow(file))}",
-      bulletize(map_cli(file, "<<name>>: {.field <<mimeType>>}")),
+      bulletize(map_cli(file, "{.drivepath <<name>>}: {.field <<mimeType>>}")),
       "i" = "You can use {.fun drive_share} to change a file's sharing \\
              permissions."
     ))

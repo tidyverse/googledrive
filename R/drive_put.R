@@ -58,7 +58,7 @@ drive_put <- function(media,
   if (file.exists(media)) {
     media <- enc2utf8(media)
   } else {
-    cli_abort(c(
+    drive_abort(c(
       "No file exists at the local {.arg media} path:",
       bulletize(map_cli(media, "{.path <<x>>}"), bullet = "x")
     ))
@@ -113,7 +113,7 @@ drive_put <- function(media,
   }
 
   # Unhappy Path: multiple collisions
-  cli_abort(c(
+  drive_abort(c(
     "Multiple items already exist on Drive at the target filepath.",
     "Unclear what {.fun drive_put} should do. Exiting.",
     # drive_reveal_path() puts immediate parent, if specified, in the `path`
@@ -122,7 +122,7 @@ drive_put <- function(media,
       drive_reveal_path(hits, ancestors = path),
       template = c(
         id_string = "<id:\u00a0<<id>>>", # \u00a0 is a nonbreaking space
-        out = "<<path>> {cli::col_grey('<<id_string>>')}"
+        out = "{.drivepath <<path>>} {cli::col_grey('<<id_string>>')}"
       )
     ))
   ))

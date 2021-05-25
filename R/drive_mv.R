@@ -131,7 +131,7 @@ drive_mv <- function(file,
       drive_reveal_path(out, ancestors = path),
       template = c(
         id_string = "<id:\u00a0<<id>>>", # \u00a0 is a nonbreaking space
-        out = "<<path>> {cli::col_grey('<<id_string>>')}"
+        out = "{.drivepath <<path>>} {cli::col_grey('<<id_string>>')}"
       )
     ))
   ))

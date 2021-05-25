@@ -1,16 +1,33 @@
+drive_theme <- function() {
+  list(
+    span.field = list(transform = single_quote_if_no_color),
+    # I want to style the Drive file names similar to cli's `.file` style,
+    # except cyan instead of blue
+    span.drivepath = list(
+      color = "cyan",
+      fmt = utils::getFromNamespace("quote_weird_name", "cli")
+    ),
+    # since we're using color so much elsewhere, e.g. Drive file names, I think
+    # the standard bullet should be "normal" color
+    ".memo .memo-item-*" = list(
+      "text-exdent" = 2,
+      before = function(x) paste0(cli::col_none(cli::symbol$bullet), " ")
+    )
+  )
+}
+
 drive_bullets <- function(text, .envir = parent.frame()) {
   quiet <- drive_quiet() %|% is_testing()
   if (quiet) {
     return(invisible())
   }
-  # TODO: these tweaks currently don't apply to cli_abort() calls, but should
-  cli::cli_div(theme = list(
-    span.field = list(transform = single_quote_if_no_color),
-    # this is so cli_format.dribble controls its own coloring (vs. "blue")
-    span.val = list(color = NULL)
-  ))
+  cli::cli_div(theme = drive_theme())
   cli::cli_bullets(text = text, .envir = .envir)
-  cli::cli_end()
+}
+
+drive_abort <- function(message, ..., .envir = parent.frame()) {
+  cli::cli_div(theme = drive_theme())
+  cli_abort(message = message, ..., .envir = .envir)
 }
 
 single_quote_if_no_color <- function(x) quote_if_no_color(x, "'")
@@ -39,7 +56,7 @@ map_cli <- function(x, ...) UseMethod("map_cli")
 
 #' @export
 map_cli.default <- function(x, ...) {
-  cli_abort("
+  drive_abort("
     Don't know how to {.fun map_cli} an object of class {.cls {class(x)}}.")
 }
 
@@ -65,7 +82,7 @@ map_cli.dribble <- function(x,
   template <- template %||%
     c(
       id_string = "<id:\u00a0<<id>>>", # \u00a0 is a nonbreaking space
-      out = "<<name>> {cli::col_grey('<<id_string>>')}"
+      out = "{.drivepath <<name>>} {cli::col_grey('<<id_string>>')}"
     )
   stopifnot(is.character(template))
 
@@ -216,7 +233,7 @@ sq <- function(x) glue::single_quote(x)
 bt <- function(x) glue::backtick(x)
 
 message <- function(...) {
-  cli_abort("
+  drive_abort("
     Internal error: use the UI functions in {.pkg googledrive} \\
     instead of {.fun message}")
 }

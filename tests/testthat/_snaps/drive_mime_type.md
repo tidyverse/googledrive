@@ -18,7 +18,7 @@
       drive_mime_type("nonsense")
     Error <rlang_error>
       Unrecognized `type`:
-      x nonsense
+      x 'nonsense'
 
 # drive_extension() errors for invalid input
 
@@ -40,5 +40,5 @@
       drive_extension("nonsense")
     Error <rlang_error>
       Unrecognized `type`:
-      x nonsense
+      x 'nonsense'
 

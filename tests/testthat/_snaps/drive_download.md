@@ -12,7 +12,7 @@
       write_utf8(drive_download_message)
     Output
       File downloaded:
-      * {file_to_download} <id: {FILE_ID}>
+      * '{file_to_download}' <id: {FILE_ID}>
       Saved locally as:
       * '{download_filepath}'
 
@@ -29,7 +29,7 @@
       write_utf8(drive_download_message)
     Output
       File downloaded:
-      * {file_to_download} <id: {FILE_ID}>
+      * '{file_to_download}' <id: {FILE_ID}>
       Saved locally as:
       * '{download_filename}'
 
@@ -39,7 +39,7 @@
       write_utf8(drive_download_message)
     Output
       File downloaded:
-      * {file_to_download} <id: {FILE_ID}>
+      * '{file_to_download}' <id: {FILE_ID}>
       Saved locally as:
       * '{download_filename}'
 
@@ -49,7 +49,7 @@
       write_utf8(drive_download_message)
     Output
       File downloaded:
-      * {file_to_download} <id: {FILE_ID}>
+      * '{file_to_download}' <id: {FILE_ID}>
       Saved locally as:
       * '{download_filename}'
 

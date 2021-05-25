@@ -44,7 +44,7 @@ drive_update <- function(file,
                          verbose = deprecated()) {
   warn_for_verbose(verbose)
   if ((!is.null(media)) && (!file.exists(media))) {
-    cli_abort(c(
+    drive_abort(c(
       "No file exists at the local {.arg media} path:",
       bulletize(map_cli(media, "{.path <<x>>}"), bullet = "x")
     ))

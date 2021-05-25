@@ -25,12 +25,12 @@
       shared_drive_params(corpora = "foo")
     Error <rlang_error>
       Invalid value for `corpus`:
-      x foo
+      x 'foo'
       These are the only acceptable values:
-      * user
-      * drive
-      * allDrives
-      * domain
+      * 'user'
+      * 'drive'
+      * 'allDrives'
+      * 'domain'
 
 # `corpora = "drive"` requires shared drive specification
 

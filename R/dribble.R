@@ -42,7 +42,7 @@ validate_dribble <- function(x) {
 
   if (!has_dribble_cols(x)) {
     missing_cols <- setdiff(dribble_cols, colnames(x))
-    cli_abort(c(
+    drive_abort(c(
       "Invalid {.cls dribble}. \\
        {cli::qty(length(missing_cols))}{?This/These} required column{?s} \\
        {?is/are} missing:",
@@ -52,7 +52,7 @@ validate_dribble <- function(x) {
 
   if (!has_dribble_coltypes(x)) {
     mistyped_cols <- dribble_cols[!dribble_coltypes_ok(x)]
-    cli_abort(c(
+    drive_abort(c(
       "Invalid {.cls dribble}. \\
        {cli::qty(length(mistyped_cols))}{?This/These} column{?s} {?has/have} \\
        the wrong type:",
@@ -67,7 +67,7 @@ validate_dribble <- function(x) {
 
   if (!has_drive_resource(x)) {
     # \u00a0 is a nonbreaking space
-    cli_abort(c(
+    drive_abort(c(
       'Invalid {.cls dribble}. Can\'t confirm \\
        {.code kind\u00a0=\u00a0"drive#file"} or \\
        {.code kind\u00a0=\u00a0"drive#drive"} \\
@@ -188,7 +188,7 @@ as_dribble.dribble <- function(x, ...) x
 
 #' @export
 as_dribble.default <- function(x, ...) {
-  cli_abort("
+  drive_abort("
     Don't know how to coerce an object of class {.cls {class(x)}} into \\
     a {.cls dribble}.")
 }
@@ -231,16 +231,16 @@ as_parent <- function(d) {
   # wording chosen to work for folder and shared drive
   invalid_parent <- "Parent specified via {.arg {in_var}} is invalid:"
   if (no_file(d)) {
-    cli_abort(c(invalid_parent, x = "Does not exist."))
+    drive_abort(c(invalid_parent, x = "Does not exist."))
   }
   if (!single_file(d)) {
-    cli_abort(c(
+    drive_abort(c(
       invalid_parent,
       x = "Doesn't uniquely identify exactly one folder or shared drive."
     ))
   }
   if (!is_parental(d)) {
-    cli_abort(c(
+    drive_abort(c(
       invalid_parent,
       x = "Is neither a folder nor a shared drive."
     ))
@@ -306,7 +306,7 @@ some_files <- function(d) {
 #' @rdname dribble-checks
 confirm_dribble <- function(d) {
   if (!is_dribble(d)) {
-    cli_abort("Input is not a {.cls dribble}.")
+    drive_abort("Input is not a {.cls dribble}.")
   }
   d
 }
@@ -316,10 +316,10 @@ confirm_dribble <- function(d) {
 confirm_single_file <- function(d) {
   in_var <- deparse(substitute(d))
   if (no_file(d)) {
-    cli_abort("{.arg {in_var}} does not identify at least one Drive file.")
+    drive_abort("{.arg {in_var}} does not identify at least one Drive file.")
   }
   if (!single_file(d)) {
-    cli_abort("{.arg {in_var}} identifies more than one Drive file.")
+    drive_abort("{.arg {in_var}} identifies more than one Drive file.")
   }
   d
 }
@@ -329,7 +329,7 @@ confirm_single_file <- function(d) {
 confirm_some_files <- function(d) {
   in_var <- deparse(substitute(d))
   if (no_file(d)) {
-    cli_abort("{.arg {in_var}} does not identify at least one Drive file.")
+    drive_abort("{.arg {in_var}} does not identify at least one Drive file.")
   }
   d
 }

@@ -103,7 +103,7 @@ drive_upload <- function(media,
   if (file.exists(media)) {
     media <- enc2utf8(media)
   } else {
-    cli_abort(c(
+    drive_abort(c(
       "No file exists at the local {.arg media} path:",
       bulletize(map_cli(media, "{.path <<x>>}"), bullet = "x")
     ))

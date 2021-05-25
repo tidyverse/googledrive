@@ -84,7 +84,7 @@ drive_cp <- function(file,
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_parental(file)) {
-    cli_abort("The Drive API does not copy folders or shared drives.")
+    drive_abort("The Drive API does not copy folders or shared drives.")
   }
 
   tmp <- rationalize_path_name(path, name)
@@ -122,7 +122,7 @@ drive_cp <- function(file,
       drive_reveal_path(out, ancestors = path),
       template = c(
         id_string = "<id:\u00a0<<id>>>", # \u00a0 is a nonbreaking space
-        out = "<<path>> {cli::col_grey('<<id_string>>')}"
+        out = "{.drivepath <<path>>} {cli::col_grey('<<id_string>>')}"
       )
     ))
   ))

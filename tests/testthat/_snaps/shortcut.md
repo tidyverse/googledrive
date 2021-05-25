@@ -4,7 +4,7 @@
       write_utf8(shortcut_create_message)
     Output
       Created Drive file:
-      * {sc_name} <id: {FILE_ID}>
+      * '{sc_name}' <id: {FILE_ID}>
       With MIME type:
       * 'application/vnd.google-apps.shortcut'
 

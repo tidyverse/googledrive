@@ -72,7 +72,7 @@ shortcut_create <- function(file,
   target <- confirm_single_file(target)
 
   if (is.null(name) && (isTRUE(overwrite) || isFALSE(overwrite))) {
-    cli_abort("
+    drive_abort("
       You must specify the shortcut's {.arg name} in order to specify \\
       {.arg overwrite} behaviour.")
   }
@@ -170,8 +170,9 @@ shortcut_resolve <- function(file) {
         template = c(
           id_shortcut_string = "<id:\u00a0<<id_shortcut>>>",
           id_string = "<id:\u00a0<<id>>>",
-          out = "<<name_shortcut>> {cli::col_grey('<<id_shortcut_string>>')} \\
-                 -> <<name>> {cli::col_grey('<<id_string>>')}"
+          out = "{.drivepath <<name_shortcut>>} \\
+                 {cli::col_grey('<<id_shortcut_string>>')} \\
+                 -> {.drivepath <<name>>} {cli::col_grey('<<id_string>>')}"
         )
       ))
     ))
