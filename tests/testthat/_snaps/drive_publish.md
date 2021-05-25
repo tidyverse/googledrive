@@ -2,9 +2,9 @@
 
     Code
       drive_publish(drive_pdf)
-    Error <simpleError>
+    Error <rlang_error>
       Only native Google files can be published.
-      Files that do not qualify (or, at least, the first 10):
-        * foo_pdf-TEST-drive-publish: application/pdf
-      Check out `drive_share()` to change sharing permissions.
+      `file` includes a file with non-native MIME type
+      * 'foo_pdf-TEST-drive-publish': 'application/pdf'
+      i You can use `drive_share()` to change a file's sharing permissions.
 

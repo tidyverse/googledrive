@@ -123,11 +123,17 @@ drive_mv <- function(file,
 
   drive_bullets(c(
     "Original file:",
-    cli_format_dribble(file),
+    bulletize(map_cli(file)),
     "Has been {action}:",
-    # drive_reveal_path() puts immediate parent in the path, if specified
-    # TODO: still need to request that `path` is revealed, instead of `name`
-    cli_format_dribble(drive_reveal_path(out, ancestors = path))
+    # drive_reveal_path() puts immediate parent, if specified, in the `path`
+    # then we reveal `path`, instead of `name`
+    bulletize(map_cli(
+      drive_reveal_path(out, ancestors = path),
+      template = c(
+        id_string = "<id:\u00a0<<id>>>", # \u00a0 is a nonbreaking space
+        out = "{.drivepath <<path>>} {cli::col_grey('<<id_string>>')}"
+      )
+    ))
   ))
 
   invisible(out)

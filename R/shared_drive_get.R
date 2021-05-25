@@ -46,7 +46,8 @@ shared_drive_get <- function(name = NULL, id = NULL) {
 
 get_one_shared_drive_id <- function(id) {
   if (!isTRUE(nzchar(id, keepNA = TRUE))) {
-    stop_glue("Shared drive ids must not be NA and cannot be the empty string.")
+    drive_abort("
+      Shared drive ids must not be {.code NA} and cannot be the empty string.")
   }
   request <- request_generate(
     endpoint = "drive.drives.get",

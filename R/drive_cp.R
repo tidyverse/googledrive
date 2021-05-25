@@ -39,7 +39,7 @@
 #' # `starred` is not an actual argument to `drive_cp()`,
 #' # it just gets passed through to the API.
 #' x <- drive_cp("chicken-cp.txt", name = "chicken-cp-starred.txt", starred = TRUE)
-#' purrr::pluck(x, "drive_resource", 1, "starred")
+#' drive_reveal(x, "starred")
 #'
 #' # `overwrite = FALSE` errors if file already exists at target filepath
 #' # THIS WILL ERROR!
@@ -84,7 +84,7 @@ drive_cp <- function(file,
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_parental(file)) {
-    stop_glue("The Drive API does not copy folders or shared drives.")
+    drive_abort("The Drive API does not copy folders or shared drives.")
   }
 
   tmp <- rationalize_path_name(path, name)
@@ -114,11 +114,17 @@ drive_cp <- function(file,
 
   drive_bullets(c(
     "Original file:",
-    cli_format_dribble(file),
+    bulletize(map_cli(file)),
     "Copied to file:",
-    # drive_reveal_path() puts immediate parent in the path, if specified
-    # TODO: still need to request that `path` is revealed, instead of `name`
-    cli_format_dribble(drive_reveal_path(out, ancestors = path))
+    # drive_reveal_path() puts immediate parent, if specified, in the `path`
+    # then we reveal `path`, instead of `name`
+    bulletize(map_cli(
+      drive_reveal_path(out, ancestors = path),
+      template = c(
+        id_string = "<id:\u00a0<<id>>>", # \u00a0 is a nonbreaking space
+        out = "{.drivepath <<path>>} {cli::col_grey('<<id_string>>')}"
+      )
+    ))
   ))
 
   invisible(out)

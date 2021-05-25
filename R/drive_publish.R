@@ -54,14 +54,15 @@ drive_change_publish <- function(file,
 
   type_ok <- is_native(file)
   if (!all(type_ok)) {
-    file <- file[utils::head(which(!type_ok), 10), ]
+    file <- file[!type_ok, ]
     file <- promote(file, "mimeType")
-    bad_mime_types <- glue_data(file, "  * {name}: {mimeType}")
-    stop_collapse(c(
+    drive_abort(c(
       "Only native Google files can be published.",
-      "Files that do not qualify (or, at least, the first 10):",
-      bad_mime_types,
-      "Check out `drive_share()` to change sharing permissions."
+      "{.arg file} includes {?a/} file{?s} \\
+       with non-native MIME type{cli::qty(nrow(file))}",
+      bulletize(map_cli(file, "{.drivepath <<name>>}: {.field <<mimeType>>}")),
+      "i" = "You can use {.fun drive_share} to change a file's sharing \\
+             permissions."
     ))
   }
 
@@ -82,7 +83,7 @@ drive_change_publish <- function(file,
   drive_bullets(c(
     cli::pluralize(
       "{cli::qty(n)}File{?s} now {if (publish) '' else 'NOT '}published:"),
-    cli_format_dribble(file)
+    bulletize(map_cli(file))
   ))
   invisible(drive_reveal(file, "published"))
 }

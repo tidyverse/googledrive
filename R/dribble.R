@@ -42,22 +42,22 @@ validate_dribble <- function(x) {
 
   if (!has_dribble_cols(x)) {
     missing_cols <- setdiff(dribble_cols, colnames(x))
-    stop_collapse(
-      c(
-        "Invalid dribble. These required column names are missing:",
-        missing_cols
-      )
-    )
+    drive_abort(c(
+      "Invalid {.cls dribble}. \\
+       {cli::qty(length(missing_cols))}{?This/These} required column{?s} \\
+       {?is/are} missing:",
+      bulletize(map_cli(missing_cols, template = "{.code <<x>>}"))
+    ))
   }
 
   if (!has_dribble_coltypes(x)) {
     mistyped_cols <- dribble_cols[!dribble_coltypes_ok(x)]
-    stop_collapse(
-      c(
-        "Invalid dribble. These columns have the wrong type:",
-        mistyped_cols
-      )
-    )
+    drive_abort(c(
+      "Invalid {.cls dribble}. \\
+       {cli::qty(length(mistyped_cols))}{?This/These} column{?s} {?has/have} \\
+       the wrong type:",
+      bulletize(map_cli(mistyped_cols, template = "{.code <<x>>}"))
+    ))
   }
 
   # TODO: should I make sure there are no NAs in the id column?
@@ -66,11 +66,13 @@ validate_dribble <- function(x) {
   # S3 vctr for Drive file ids and it might be odd to make NAs unacceptable
 
   if (!has_drive_resource(x)) {
-    stop_glue(
-      "Invalid dribble. Can't confirm `kind = \"drive#file\"` or ",
-      "`kind = \"drive#drive\"` for all elements of the nominal ",
-      "`drive_resource` column"
-    )
+    # \u00a0 is a nonbreaking space
+    drive_abort(c(
+      'Invalid {.cls dribble}. Can\'t confirm \\
+       {.code kind\u00a0=\u00a0"drive#file"} or \\
+       {.code kind\u00a0=\u00a0"drive#drive"} \\
+       for all elements of the {.code drive_resource} column.'
+    ))
   }
   x
 }
@@ -186,10 +188,9 @@ as_dribble.dribble <- function(x, ...) x
 
 #' @export
 as_dribble.default <- function(x, ...) {
-  stop_glue_data(
-    list(x = glue_collapse(class(x), sep = "/")),
-    "Don't know how to coerce object of class <{x}> into a dribble"
-  )
+  drive_abort("
+    Don't know how to coerce an object of class {.cls {class(x)}} into \\
+    a {.cls dribble}.")
 }
 
 #' @export
@@ -228,20 +229,21 @@ as_parent <- function(d) {
   in_var <- deparse(substitute(d))
   d <- as_dribble(d)
   # wording chosen to work for folder and shared drive
+  invalid_parent <- "Parent specified via {.arg {in_var}} is invalid:"
   if (no_file(d)) {
-    stop_glue("Parent specified via {bt(in_var)} does not exist.")
+    drive_abort(c(invalid_parent, x = "Does not exist."))
   }
   if (!single_file(d)) {
-    stop_glue(
-      "Parent specified via {bt(in_var)} doesn't uniquely ",
-      "identify exactly one folder or shared drive."
-    )
+    drive_abort(c(
+      invalid_parent,
+      x = "Doesn't uniquely identify exactly one folder or shared drive."
+    ))
   }
   if (!is_parental(d)) {
-    stop_glue(
-      "Requested parent {bt(in_var)} is invalid: neither a folder ",
-      "nor a shared drive."
-    )
+    drive_abort(c(
+      invalid_parent,
+      x = "Is neither a folder nor a shared drive."
+    ))
   }
   d
 }
@@ -304,7 +306,7 @@ some_files <- function(d) {
 #' @rdname dribble-checks
 confirm_dribble <- function(d) {
   if (!is_dribble(d)) {
-    stop_glue("Input is not a dribble.")
+    drive_abort("Input is not a {.cls dribble}.")
   }
   d
 }
@@ -314,10 +316,10 @@ confirm_dribble <- function(d) {
 confirm_single_file <- function(d) {
   in_var <- deparse(substitute(d))
   if (no_file(d)) {
-    stop_glue("{sq(in_var)} does not identify at least one Drive file.")
+    drive_abort("{.arg {in_var}} does not identify at least one Drive file.")
   }
   if (!single_file(d)) {
-    stop_glue("{sq(in_var)} identifies more than one Drive file.")
+    drive_abort("{.arg {in_var}} identifies more than one Drive file.")
   }
   d
 }
@@ -327,7 +329,7 @@ confirm_single_file <- function(d) {
 confirm_some_files <- function(d) {
   in_var <- deparse(substitute(d))
   if (no_file(d)) {
-    stop_glue("{sq(in_var)} does not identify at least one Drive file.")
+    drive_abort("{.arg {in_var}} does not identify at least one Drive file.")
   }
   d
 }

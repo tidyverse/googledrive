@@ -103,7 +103,10 @@ drive_upload <- function(media,
   if (file.exists(media)) {
     media <- enc2utf8(media)
   } else {
-    stop_glue("\nFile does not exist:\n  * {media}")
+    drive_abort(c(
+      "No file exists at the local {.arg media} path:",
+      bulletize(map_cli(media, "{.path <<x>>}"), bullet = "x")
+    ))
   }
 
   tmp <- rationalize_path_name(path, name)
@@ -150,7 +153,7 @@ drive_upload <- function(media,
     "Local file:",
     "*" = "{.path {media}}",
     "Uploaded into Drive file:",
-    cli_format_dribble(out),
+    bulletize(map_cli(out)),
     "With MIME type:",
     "*" = "{.field {pluck(out, 'drive_resource', 1, 'mimeType')}}"
   ))

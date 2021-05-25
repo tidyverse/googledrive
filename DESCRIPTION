@@ -21,7 +21,7 @@ BugReports: https://github.com/tidyverse/googledrive/issues
 Depends: 
     R (>= 3.3)
 Imports: 
-    cli (>= 2.4.0.9000),
+    cli (>= 2.5.0.9000),
     gargle (>= 1.1.0),
     glue (>= 1.4.2),
     httr,
@@ -38,8 +38,8 @@ Imports:
 Suggests: 
     covr,
     curl,
-    dplyr (>= 1.0.0),
     downlit,
+    dplyr (>= 1.0.0),
     knitr,
     mockr,
     rmarkdown,

@@ -86,7 +86,7 @@ drive_cp("chicken-cp.txt", path = folder, name = "chicken-cp-three.txt")
 # `starred` is not an actual argument to `drive_cp()`,
 # it just gets passed through to the API.
 x <- drive_cp("chicken-cp.txt", name = "chicken-cp-starred.txt", starred = TRUE)
-purrr::pluck(x, "drive_resource", 1, "starred")
+drive_reveal(x, "starred")
 
 # `overwrite = FALSE` errors if file already exists at target filepath
 # THIS WILL ERROR!

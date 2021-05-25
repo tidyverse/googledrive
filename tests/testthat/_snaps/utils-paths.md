@@ -15,6 +15,13 @@
     Output
       [1] "0AK935f1rlmIZUk9PVA"
 
+# rootize_path() errors for leading slash
+
+    Code
+      rootize_path("/")
+    Error <rlang_error>
+      googledrive does not allow paths to start with `/`
+
 # partition_path() fails for bad input
 
     Code

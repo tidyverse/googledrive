@@ -72,11 +72,9 @@ shortcut_create <- function(file,
   target <- confirm_single_file(target)
 
   if (is.null(name) && (isTRUE(overwrite) || isFALSE(overwrite))) {
-    # TODO: I'm phoning this message in, since I know I will merge the
-    # abort+cli stuff soon
-    stop_glue(
-      "You must specify the shortcut's `name` in order to specify `overwrite` behaviour."
-    )
+    drive_abort("
+      You must specify the shortcut's {.arg name} in order to specify \\
+      {.arg overwrite} behaviour.")
   }
 
   drive_create(
@@ -167,11 +165,16 @@ shortcut_resolve <- function(file) {
         "Resolved {n_resolved} of {n_shortcuts} shortcut{?s} found \\
          in {nrow(out)} file{?s}:"
       },
-      # TODO: work on this message once I merge the cli+conditions PR
-      # use the approach developed there for customizing dribble printing
-      # reveal a bit about original shortcut (beginning of name?) then
-      # standard info about what it resolved to
-      cli_format_dribble(out[is_sc, ])
+      bulletize(map_cli(
+        out[is_sc, ],
+        template = c(
+          id_shortcut_string = "<id:\u00a0<<id_shortcut>>>",
+          id_string = "<id:\u00a0<<id>>>",
+          out = "{.drivepath <<name_shortcut>>} \\
+                 {cli::col_grey('<<id_shortcut_string>>')} \\
+                 -> {.drivepath <<name>>} {cli::col_grey('<<id_string>>')}"
+        )
+      ))
     ))
   }
 

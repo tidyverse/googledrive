@@ -214,37 +214,44 @@ finalize <- function(dat, candidates) {
   report_weird_stuff <- function(x, indicator, problem) {
     weird <- vec_slice(x, x[["status"]] == indicator)
     if (vec_size(weird) == 0) return()
-    # TODO: come back and work on these messages after cli dust settles
     drive_bullets(c(
       "!" = "Problem with {nrow(weird)} path{?s}: {problem}",
-      weird[["path"]]
+      # these really should be sub-bullets, but not possible at this time
+      bulletize(map_cli(weird[["orig_path"]], "{.path <<x>>}"), bullet = " ")
     ))
   }
   report_weird_stuff(scratch, "unmatched", "no files found by this name")
   report_weird_stuff(scratch, "undone", "no file has such a canonical path")
-  report_weird_stuff(scratch, "unspecific", "multiple files compatible with this path")
-
-  if (sum(scratch$status == "resolved") > 0) {
-    # TODO: maybe distinguish "all resolved" vs. "some resolved"
-    drive_bullets(c(
-      v = "{sum(scratch$status == 'resolved')} path{?s} resolved to exactly 1 file"
-    ))
-  } else {
-    # TODO: this wording is tough
-    drive_bullets(c(
-      x = "No path resolved to exactly 1 file"
-    ))
-  }
+  report_weird_stuff(scratch, "unspecific", "path is compatible with more than 1 file")
 
   index <- unlist(scratch$m)
   dupes <- duplicated(index)
   if (any(dupes)) {
     multis <- vec_slice(candidates, unique(index[dupes]))
+
     drive_bullets(c(
-      "{nrow(multis)} file{?s} {?is/are} associated with >1 input {.arg path}",
-      cli_format_dribble(multis)
+      "!" = "{nrow(multis)} file{?s} in the output {?is/are} associated with \\
+             more than 1 input {.arg path}",
+      # these really should be sub-bullets, but not possible at this time
+      bulletize(map_cli(multis), bullet = " ")
     ))
   }
+
+  resolved <- scratch$status == "resolved"
+  if (all(resolved)) {
+    if (nrow(scratch) > 1) {
+      msg <- "All {nrow(scratch)} input `path`s resolved to exactly 1 file."
+    } else {
+      msg <- "The input {.arg path} resolved to exactly 1 file."
+    }
+  } else if (any(resolved)) {
+    msg <- "{sum(scratch$status == 'resolved')} out of {nrow(scratch)} input \\
+            paths resolved to exactly 1 file."
+  } else {
+    # TODO: this wording is not great, yet I don't know what would be better
+    msg <- "No path resolved to exactly 1 file."
+  }
+  drive_bullets(c(v = msg))
 
   vec_slice(candidates, index[!dupes])
 }

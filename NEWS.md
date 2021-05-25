@@ -42,6 +42,7 @@ Further reading about these changes:
 ## User interface
 
 The user interface has gotten more stylish, thanks to the cli package (<https://cli.r-lib.org>).
+All informational messages, warnings, and errors are now emitted via cli, which uses rlang's condition functions under-the-hood.
 
 `googledrive_quiet` is a new option to suppress informational messages from googledrive.
 Unless it's explicitly set to `FALSE`, the default is to message.
@@ -69,7 +70,13 @@ In the current release, `verbose = FALSE` is still honored, but generates a warn
 
 ## Dependency changes
 
-vctrs is new in Imports (but was already an indirect hard dependency via tibble).
+cli, lifecycle, and withr are new in Imports.
+
+vctrs is new in Imports, but was already an indirect hard dependency via tibble.
+
+mockr is new in Suggests.
+
+curl moves from Imports to Suggests, but remains an indirect hard dependency.
 
 # googledrive 1.0.1
 

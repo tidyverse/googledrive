@@ -62,7 +62,6 @@ test_that("drive_upload() does not mangle name with multi-byte characters", {
 
   # KATAKANA LETTERS MA RU TI
   tricky_bit <- "\u30DE\u30EB\u30C1"
-
   filename_1 <- me_(paste0("multibyte-chars-1-", tricky_bit))
   defer_drive_rm(filename_1)
 

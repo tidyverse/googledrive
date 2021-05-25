@@ -21,11 +21,13 @@ auth
 behaviour
 bigrquery
 cli
+cli's
 colab
 commenter
 csv
 de
 determinine
+dev
 dplyr
 fileOrganizer
 filepath
@@ -37,8 +39,10 @@ https
 httr
 httr's
 ing
+lifecycle
 lowerCamel
 magrittr
+mockr
 oauth
 oob
 pkgdown
@@ -47,6 +51,7 @@ programmatically
 purrr
 rebranded
 recency
+rlang's
 rprojroot
 setwise
 targetted
@@ -60,5 +65,6 @@ tidyverse
 un
 unexamined
 vctrs
+vectorization
 vectorized
 withr

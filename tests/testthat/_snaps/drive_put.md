@@ -7,7 +7,7 @@
       Local file:
       * '{local_file}'
       Uploaded into Drive file:
-      * {put_file} <id: {FILE_ID}>
+      * '{put_file}' <id: {FILE_ID}>
       With MIME type:
       * 'text/plain'
 
@@ -18,5 +18,5 @@
     Output
       i A Drive file already exists at this path. Calling `drive_update()`.
       File updated:
-      * {put_file} <id: {FILE_ID}>
+      * '{put_file}' <id: {FILE_ID}>
 

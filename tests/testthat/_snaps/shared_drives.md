@@ -23,26 +23,26 @@
 
     Code
       shared_drive_params(corpora = "foo")
-    Error <simpleError>
-      Invalid value for `corpora`:
-        * foo
-      These are the only valid values:
-        * user
-        * drive
-        * allDrives
-        * domain
+    Error <rlang_error>
+      Invalid value for `corpus`:
+      x 'foo'
+      These are the only acceptable values:
+      * 'user'
+      * 'drive'
+      * 'allDrives'
+      * 'domain'
 
 # `corpora = "drive"` requires shared drive specification
 
     Code
       shared_drive_params(corpora = "drive")
-    Error <simpleError>
-      When `corpora = "drive"`, `shared_drive` cannot be NULL.
+    Error <rlang_error>
+      When `corpus = "drive"`, you must also specify the `shared_drive`.
 
 # `corpora != "drive"` rejects shared drive specification
 
     Code
       shared_drive_params(corpora = "user", driveId = "123")
-    Error <simpleError>
-      When `corpora != "drive"`, don't specify a shared drive.
+    Error <rlang_error>
+      When `corpus != "drive"`, you must not specify a `shared_drive`.
 
