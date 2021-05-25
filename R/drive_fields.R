@@ -60,7 +60,7 @@ drive_fields <- function(fields = NULL,
   out <- intersect(fields, .drive$files_fields$name)
   if (!setequal(fields, out)) {
     bad_fields <- setdiff(fields, out)
-    cli::cli_warn(c(
+    drive_warn(c(
       "Omitting fields that are not recognized as part of the Files resource:",
       bulletize(map_cli(bad_fields))
     ))
