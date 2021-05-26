@@ -17,11 +17,6 @@ with_mock <- function(..., .parent = parent.frame()) {
   mockr::with_mock(..., .parent = .parent, .env = "googledrive")
 }
 
-nm_fun <- function(context, user = Sys.info()["user"]) {
-  y <- purrr::compact(list(context, user))
-  function(x) as.character(glue_collapse(c(x, y), sep = "-"))
-}
-
 expect_error_free <- function(...) {
   expect_error(..., regexp = NA)
 }

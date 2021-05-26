@@ -1,6 +1,6 @@
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-shortcut")
-nm_ <- nm_fun("TEST-shortcut", NULL)
+nm_ <- nm_fun("TEST-shortcut", user_run = FALSE)
 
 # ---- clean ----
 if (CLEAN) {
@@ -39,7 +39,7 @@ test_that("shortcut_create() works", {
   folder <- drive_get(nm_("i-am-a-folder"))
   sc_name <- me_("custom-named-shortcut")
 
-  local_drive_loud_and_wide()
+  local_drive_loud_and_wide(120)
   shortcut_create_message <- capture.output(
     sc <- shortcut_create(target_file, path = folder, name = sc_name),
     type = "message"

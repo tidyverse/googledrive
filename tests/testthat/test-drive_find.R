@@ -1,6 +1,6 @@
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-drive-find")
-nm_ <- nm_fun("TEST-drive-find", NULL)
+nm_ <- nm_fun("TEST-drive-find", user_run = FALSE)
 
 # ---- clean ----
 if (CLEAN) {

@@ -228,6 +228,10 @@ with_drive_quiet <- function(code) {
   withr::with_options(list(googledrive_quiet = TRUE), code = code)
 }
 
+with_drive_loud <- function(code) {
+  withr::with_options(list(googledrive_quiet = FALSE), code = code)
+}
+
 is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }

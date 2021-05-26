@@ -1,6 +1,6 @@
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-path-utils")
-nm_ <- nm_fun("TEST-path-utils", NULL)
+nm_ <- nm_fun("TEST-path-utils", user_run = FALSE)
 
 # ---- clean ----
 if (CLEAN) {

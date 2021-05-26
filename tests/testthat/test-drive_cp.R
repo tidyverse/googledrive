@@ -1,6 +1,6 @@
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-drive-cp")
-nm_ <- nm_fun("TEST-drive-cp", NULL)
+nm_ <- nm_fun("TEST-drive-cp", user_run = FALSE)
 
 # ---- clean ----
 if (CLEAN) {
@@ -63,7 +63,7 @@ test_that("drive_cp() can copy a file into a different folder", {
   file <- drive_get(nm_("i-am-a-file"))
   folder <- drive_get(nm_("i-am-a-folder"))
 
-  local_drive_loud_and_wide(110)
+  local_drive_loud_and_wide(120)
   drive_cp_message <- capture.output(
     cp_file <- drive_cp(file, path = folder, name = cp_name),
     type = "message"
@@ -110,7 +110,7 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
 
   cp_name <- me_("file-name")
   defer_drive_rm(cp_name)
-  local_drive_loud_and_wide(110)
+  local_drive_loud_and_wide(120)
 
   # if given `path` and `name`, assumes `path` is a folder
   # the message capture trick is necessary because cp_name includes {user}

@@ -1,6 +1,6 @@
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-drive-trash")
-nm_ <- nm_fun("TEST-drive-trash", NULL)
+nm_ <- nm_fun("TEST-drive-trash", user_run = FALSE)
 
 # ---- setup ----
 if (SETUP) {

@@ -1,6 +1,6 @@
 # ---- nm_fun ----
 me_ <- nm_fun("TEST-drive-put")
-nm_ <- nm_fun("TEST-drive-put", NULL)
+nm_ <- nm_fun("TEST-drive-put", user_run = FALSE)
 
 # ---- clean ----
 if (CLEAN) {
@@ -31,7 +31,7 @@ test_that("drive_put() works", {
 
   write_utf8(c("beginning", "middle"), local_file)
 
-  local_drive_loud_and_wide(110)
+  local_drive_loud_and_wide(120)
   first_put <- capture.output(
     original <- drive_put(local_file),
     type = "message"

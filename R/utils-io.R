@@ -27,3 +27,19 @@ write_utf8 <- function(text, path = NULL) {
   # telling R to skip translation to the native encoding
   base::writeLines(utf8, con = con, useBytes = TRUE)
 }
+
+# used for building functions that construct Drive file names in tests ----
+nm_fun <- function(context, user_run = TRUE) {
+  user_run <- if (isTRUE(user_run)) nm_user_run() else NULL
+  y <- purrr::compact(list(context, user_run))
+  function(x = character()) as.character(glue_collapse(c(x, y), sep = "-"))
+}
+
+nm_user_run <- function() {
+  if(as.logical(Sys.getenv("GITHUB_ACTIONS", unset = "false"))) {
+    glue("gha-{Sys.getenv('GITHUB_WORKFLOW')}-{Sys.getenv('GITHUB_RUN_ID')}")
+  } else {
+    random_id <- strsplit(uuid::UUIDgenerate(TRUE), "-")[[1]][[1]]
+    glue("{Sys.info()['user']}-{random_id}")
+  }
+}

@@ -1,5 +1,5 @@
 # ---- nm_fun ----
-nm_ <- nm_fun("TEST-drive-publish", NULL)
+nm_ <- nm_fun("TEST-drive-publish", user_run = FALSE)
 
 # ---- clean ----
 if (CLEAN) {
