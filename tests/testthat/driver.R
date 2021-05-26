@@ -45,7 +45,11 @@ header <- "
 
 #' This script aggregates the test-related {action} code from all test files.
 
-library(googledrive)
+#+ setup, include = FALSE, cache = FALSE
+knitr::opts_chunk$set(collapse = TRUE, comment = '#>', error = TRUE)
+
+#+ body
+pkgload::load_all(here::here())
 source(here::here('tests', 'testthat', 'helper.R'))
 drive_user()
 

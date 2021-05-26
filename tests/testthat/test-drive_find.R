@@ -1,12 +1,13 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-drive-find")
-nm_ <- nm_fun("TEST-drive-find", user_run = FALSE)
+me_ <- nm_fun("TEST-drive_find")
+nm_ <- nm_fun("TEST-drive_find", user_run = FALSE)
 
 # ---- clean ----
 if (CLEAN) {
   drive_trash(c(
     nm_("find-me"),
-    nm_("this-should-not-exist")
+    nm_("this-should-not-exist"),
+    nm_("copy-me")
   ))
 }
 

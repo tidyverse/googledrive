@@ -4,7 +4,7 @@
       withr::with_dir(tmpdir, drive_download(dribble(), path = precious_filepath))
     Error <rlang_error>
       Local `path` already exists and overwrite is `FALSE`:
-      * 'precious-TEST-drive-download.txt'
+      * 'precious-TEST-drive_download.txt'
 
 # drive_download() downloads a file and adds local_path column
 

@@ -1,11 +1,12 @@
 # ---- nm_fun ----
-nm_ <- nm_fun("TEST-drive-ls", user_run = FALSE)
+nm_ <- nm_fun("TEST-drive_ls", user_run = FALSE)
 
 # ---- clean ----
 if (CLEAN) {
   drive_trash(c(
     nm_("list-me"),
-    nm_("this-should-not-exist")
+    nm_("this-should-not-exist"),
+    nm_("topdir")
   ))
 }
 

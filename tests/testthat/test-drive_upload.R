@@ -1,6 +1,6 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-drive-upload")
-nm_ <- nm_fun("TEST-drive-upload", user_run = FALSE)
+me_ <- nm_fun("TEST-drive_upload")
+nm_ <- nm_fun("TEST-drive_upload", user_run = FALSE)
 
 # ---- clean ----
 if (CLEAN) {
