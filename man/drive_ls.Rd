@@ -19,7 +19,7 @@ shared drive, it must be passed as a \code{\link{dribble}}.}
 indirect (\code{recursive = TRUE}).}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per item.
+An object of class \code{\link{dribble}}, a tibble with one row per file.
 }
 \description{
 List the contents of a folder or shared drive, recursively or not. This is a

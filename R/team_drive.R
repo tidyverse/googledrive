@@ -10,7 +10,7 @@
 #' @inheritParams is_shared_drive
 #' @template team_drive-plural
 #'
-#' @eval return_dribble()
+#' @eval return_dribble("shared drive")
 #'
 #' @keywords internal
 #' @name deprecated-team-drive-functions

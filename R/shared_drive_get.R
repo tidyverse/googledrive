@@ -15,7 +15,7 @@
 #'   with [as_id()]). If both `name` and `id` are non-`NULL`, `id` is silently
 #'   ignored.
 #'
-#' @eval return_dribble()
+#' @eval return_dribble("shared drive")
 #' @export
 #' @examples
 #' \dontrun{

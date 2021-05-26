@@ -8,7 +8,7 @@
 #' @param name Character. Name of the new shared drive. Must be non-empty and not
 #'   entirely whitespace.
 #'
-#' @eval return_dribble()
+#' @eval return_dribble("shared drive")
 #' @export
 #' @examples
 #' \dontrun{

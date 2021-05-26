@@ -59,7 +59,7 @@ more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_qu
 Drive API have replaced Team Drives with shared drives.}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per item.
+An object of class \code{\link{dribble}}, a tibble with one row per file.
 }
 \description{
 This is the closest googledrive function to what you can do at

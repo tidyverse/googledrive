@@ -11,7 +11,7 @@ shared_drive_create(name)
 entirely whitespace.}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per item.
+An object of class \code{\link{dribble}}, a tibble with one row per shared drive.
 }
 \description{
 A shared drive supports files owned by an organization rather than an

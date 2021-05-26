@@ -19,7 +19,7 @@ filtered locally, via the \code{pattern} argument.}
 or \code{useDomainAdminAccess}.}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per item.
+An object of class \code{\link{dribble}}, a tibble with one row per shared drive.
 }
 \description{
 This is the closest googledrive function to what you get from

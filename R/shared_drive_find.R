@@ -12,7 +12,7 @@
 #' @param ... Other parameters to pass along in the request, such as `pageSize`
 #'   or `useDomainAdminAccess`.
 #'
-#' @eval return_dribble()
+#' @eval return_dribble("shared drive")
 #' @export
 #' @examples
 #' \dontrun{

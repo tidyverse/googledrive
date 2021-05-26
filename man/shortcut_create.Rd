@@ -45,7 +45,7 @@ Note that existence checks, based on filepath, are expensive operations, i.e.
 they require additional API calls.}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per item.
+An object of class \code{\link{dribble}}, a tibble with one row per file.
 }
 \description{
 Creates a shortcut to the target Drive \code{file}, which could be a folder. A

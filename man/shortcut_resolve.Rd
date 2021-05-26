@@ -12,7 +12,7 @@ Drive. Can be a character vector of names/paths, a character vector of file
 ids or URLs marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}.}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per item.
+An object of class \code{\link{dribble}}, a tibble with one row per file.
 Extra columns \code{name_shortcut} and
 \code{id_shortcut} refer to the original shortcut.
 }

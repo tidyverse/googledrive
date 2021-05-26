@@ -11,7 +11,7 @@
 #' @param ... Properties to set in `name = value` form. See the "Request
 #'   body" section of the Drive API docs for this endpoint.
 #'
-#' @eval return_dribble()
+#' @eval return_dribble("shared drive")
 #' @export
 #' @examples
 #' \dontrun{

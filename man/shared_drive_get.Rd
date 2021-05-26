@@ -15,7 +15,7 @@ with \code{\link[=as_id]{as_id()}}). If both \code{name} and \code{id} are non-\
 ignored.}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per item.
+An object of class \code{\link{dribble}}, a tibble with one row per shared drive.
 }
 \description{
 Retrieve metadata for shared drives specified by name or id. Note that Google

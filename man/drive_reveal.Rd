@@ -38,7 +38,7 @@ will always be \code{snake_case}. Some examples of \code{what}:
 }}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per item.
+An object of class \code{\link{dribble}}, a tibble with one row per file.
 The additional info requested via \code{what}
 appears in one (or more) extra columns.
 }

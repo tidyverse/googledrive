@@ -51,7 +51,7 @@ more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_qu
 \code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per item.
+An object of class \code{\link{dribble}}, a tibble with one row per file.
 There will be extra columns, \code{shared} and
 \code{permissions_resource}.
 }

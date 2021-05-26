@@ -16,7 +16,7 @@ more about \link[=shared_drives]{shared drives}.}
 body" section of the Drive API docs for this endpoint.}
 }
 \value{
-An object of class \code{\link{dribble}}, a tibble with one row per item.
+An object of class \code{\link{dribble}}, a tibble with one row per shared drive.
 }
 \description{
 Update the metadata of an existing shared drive, e.g. its background image or
