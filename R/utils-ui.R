@@ -214,7 +214,7 @@ local_drive_loud <- function(env = parent.frame()) {
 
 # keeps wrapping from wreaking havoc on snapshot tests, esp. when I have to
 # find and replace volatile bits of text
-local_drive_loud_and_wide <- function(cli.width = 85, env = parent.frame()) {
+local_drive_loud_and_wide <- function(cli.width = 120, env = parent.frame()) {
   withr::local_options(list(
     googledrive_quiet = FALSE,
     cli.width = cli.width
