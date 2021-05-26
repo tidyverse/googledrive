@@ -31,7 +31,7 @@ test_that("drive_put() works", {
 
   write_utf8(c("beginning", "middle"), local_file)
 
-  local_drive_loud_and_wide(130)
+  local_drive_loud_and_wide(140)
   first_put <- capture.output(
     original <- drive_put(local_file),
     type = "message"
