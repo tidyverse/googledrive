@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract and/or mark as file id — as_id • googledrive</title>
+<title>Map a cli-styled template over an object — map_cli • googledrive</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,10 +49,8 @@
 
 
 
-<meta property="og:title" content="Extract and/or mark as file id — as_id" />
-<meta property="og:description" content="Gets file ids from various inputs and marks them as such, to
-distinguish them from file names or paths.
-This is a generic function." />
+<meta property="og:title" content="Map a cli-styled template over an object — map_cli" />
+<meta property="og:description" content="For internal use" />
 <meta property="og:image" content="https://googledrive.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -172,54 +170,19 @@ This is a generic function." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract and/or mark as file id</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/as_id.R'><code>R/as_id.R</code></a></small>
-    <div class="hidden name"><code>as_id.Rd</code></div>
+    <h1>Map a cli-styled template over an object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/utils-ui.R'><code>R/utils-ui.R</code></a></small>
+    <div class="hidden name"><code>map_cli.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Gets file ids from various inputs and marks them as such, to
-distinguish them from file names or paths.</p>
-<p>This is a generic function.</p>
+    <p>For internal use</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_id</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>map_cli</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>A character vector of file or shared drive ids or URLs, a
-<code><a href='dribble.html'>dribble</a></code>, or a suitable data frame.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Other arguments passed down to methods. (Not used.)</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character vector bearing the S3 class <code>drive_id</code>.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>as_id</span><span class='op'>(</span><span class='st'>"123abc"</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "123abc"</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"class")</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "drive_id"</span>
-<span class='r-in'><span class='fu'>as_id</span><span class='op'>(</span><span class='st'>"https://docs.google.com/spreadsheets/d/qawsedrf16273849/edit#gid=12345"</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "qawsedrf16273849"</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"class")</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "drive_id"</span>
-<span class='r-in'></span>
-<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span>n_max <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'>as_id</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "1opPZyo4WUiue56qlF8SO5ipaTJwPLzZg" "1JCQ06Wj6AjntiyjnHsXmmcHZWCkBNgBJ"</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [3] "1wMnFwFSIG0eQ4UUUEbn6-udF3GoKY3xN"</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"class")</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "drive_id"</span>
-</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

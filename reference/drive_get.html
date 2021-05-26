@@ -246,7 +246,9 @@ Drive API have replaced Team Drives with shared drives.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.
+If the target files were specified via <code>path</code>,
+there will be a <code>path</code> column.</p>
     <h2 class="hasAnchor" id="getting-by-path"><a class="anchor" href="#getting-by-path"></a>Getting by <code>path</code></h2>
 
     
@@ -260,11 +262,14 @@ could be more specific than the other. A file located at <code>~/alfa/bravo</cod
 be found as <code>bravo</code>, <code>alfa/bravo</code>, and <code>~/alfa/bravo</code>. If all 3 of those
 were included in the input <code>path</code>, they would be represented by a
 <strong>single</strong> row in the output.</p>
-<p>Therefore, it's best to think of <code>drive_get()</code> as a setwise operation when
-using file paths. Do not assume that the <code>i</code>-th input path corresponds to
-row <code>i</code> in the output (although it often does!). If there's not a 1-to-1
-relationship between the input and output, this will be announced in a
-message.</p>
+<p>It's best to think of <code>drive_get()</code> as a setwise operation when using file
+paths. Do not assume that the <code>i</code>-th input path corresponds to row <code>i</code> in
+the output (although it often does!). If there's not a 1-to-1 relationship
+between the input and output, this will be announced in a message.</p>
+<p><code>drive_get()</code> performs just enough path resolution to uniquely identify a
+file compatible with each input <code>path</code>, for all <code>path</code>s at once. If you
+absolutely want the full canonical path, run the output of <code>drive_get()</code>
+through <code><a href='drive_reveal.html'>drive_reveal(d, "path")</a></code>`.</p>
     <h2 class="hasAnchor" id="files-that-you-don-t-own"><a class="anchor" href="#files-that-you-don-t-own"></a>Files that you don't own</h2>
 
     
@@ -288,7 +293,7 @@ path, also calls <code>files.list</code>:</p><ul>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='co'># get info about your "My Drive" root folder</span></span>
 <span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='st'>"~/"</span><span class='op'>)</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> 1 path resolved to exactly 1 file</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> The input <span style='color: #262626; background-color: #DADADA;'>`path`</span> resolved to exactly 1 file.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path  id                  drive_resource   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>               <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>           </span>
@@ -308,51 +313,51 @@ path, also calls <code>files.list</code>:</p><ul>
 <span class='r-in'><span class='co'># set up some files to get by path</span></span>
 <span class='r-in'><span class='va'>alfalfa</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span><span class='op'>(</span><span class='st'>"alfalfa"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> alfalfa <span style='color: #555555;'>&lt;id: 1RR1PrpSTzRhufGnTmZf6DhAYyC9UXE5x&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>alfalfa</span> <span style='color: #555555;'>&lt;id: 1XxraAXWcVd0Crl5Ssc1uTk6wPaoaQJEC&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> <span style='color: #00BB00;'>application/vnd.google-apps.folder</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.folder</span></span>
 <span class='r-in'><span class='va'>broccoli</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span><span class='op'>(</span></span>
 <span class='r-in'>  <span class='fu'><a href='drive_example.html'>drive_example</a></span><span class='op'>(</span><span class='st'>"chicken.txt"</span><span class='op'>)</span>,</span>
 <span class='r-in'>  name <span class='op'>=</span> <span class='st'>"broccoli"</span>, path <span class='op'>=</span> <span class='va'>alfalfa</span></span>
 <span class='r-in'><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Local file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> <span style='color: #0000BB;'>/home/runner/work/_temp/Library/googledrive/extdata/chicken.txt</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #0000BB;'>/home/runner/work/_temp/Library/googledrive/extdata/chicken.txt</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Uploaded into Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> broccoli <span style='color: #555555;'>&lt;id: 1cOgtAr_dGjC4PpB-FdOoTcfZg6Gpce4x&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>broccoli</span> <span style='color: #555555;'>&lt;id: 1puu1_BFkBrBZxAMOR9SCKNhLOFuRUvyk&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> <span style='color: #00BB00;'>text/plain</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>text/plain</span></span>
 <span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='st'>"broccoli"</span><span class='op'>)</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> 1 path resolved to exactly 1 file</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> The input <span style='color: #262626; background-color: #DADADA;'>`path`</span> resolved to exactly 1 file.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path     id                                drive_resource   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                             <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>           </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> broccoli broccoli 1cOgtAr_dGjC4PpB-FdOoTcfZg6Gpce4x <span style='color: #949494;'>&lt;named list [38]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> broccoli broccoli 1puu1_BFkBrBZxAMOR9SCKNhLOFuRUvyk <span style='color: #949494;'>&lt;named list [38]&gt;</span></span>
 <span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='st'>"alfalfa/broccoli"</span><span class='op'>)</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> 1 path resolved to exactly 1 file</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> The input <span style='color: #262626; background-color: #DADADA;'>`path`</span> resolved to exactly 1 file.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path             id                                drive_resource   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                             <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>           </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> broccoli alfalfa/broccoli 1cOgtAr_dGjC4PpB-FdOoTcfZg6Gpce4x <span style='color: #949494;'>&lt;named list [38]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> broccoli alfalfa/broccoli 1puu1_BFkBrBZxAMOR9SCKNhLOFuRUvyk <span style='color: #949494;'>&lt;named list [38]&gt;</span></span>
 <span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='st'>"~/alfalfa/broccoli"</span><span class='op'>)</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> 1 path resolved to exactly 1 file</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> The input <span style='color: #262626; background-color: #DADADA;'>`path`</span> resolved to exactly 1 file.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path               id                                drive_resource  </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                             <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>          </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> broccoli ~/alfalfa/broccoli 1cOgtAr_dGjC4PpB-FdOoTcfZg6Gpce4x <span style='color: #949494;'>&lt;named list [39</span>…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> broccoli ~/alfalfa/broccoli 1puu1_BFkBrBZxAMOR9SCKNhLOFuRUvyk <span style='color: #949494;'>&lt;named list [39</span>…</span>
 <span class='r-in'><span class='fu'>drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"broccoli"</span>, <span class='st'>"alfalfa/"</span>, <span class='st'>"~/alfalfa/broccoli"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> 3 paths resolved to exactly 1 file</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> 1 file is associated with &gt;1 input <span style='color: #262626; background-color: #DADADA;'>`path`</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> broccoli <span style='color: #555555;'>&lt;id: 1cOgtAr_dGjC4PpB-FdOoTcfZg6Gpce4x&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BBBB00;'>!</span> 1 file in the output is associated with more than 1 input <span style='color: #262626; background-color: #DADADA;'>`path`</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   <span style='color: #00BBBB;'>broccoli</span> <span style='color: #555555;'>&lt;id: 1puu1_BFkBrBZxAMOR9SCKNhLOFuRUvyk&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> All 3 input `path`s resolved to exactly 1 file.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 2 x 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name     path               id                                drive_resource  </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                             <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>          </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> broccoli ~/alfalfa/broccoli 1cOgtAr_dGjC4PpB-FdOoTcfZg6Gpce4x <span style='color: #949494;'>&lt;named list [39</span>…</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> alfalfa  ~/alfalfa/         1RR1PrpSTzRhufGnTmZf6DhAYyC9UXE5x <span style='color: #949494;'>&lt;named list [32</span>…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> broccoli ~/alfalfa/broccoli 1puu1_BFkBrBZxAMOR9SCKNhLOFuRUvyk <span style='color: #949494;'>&lt;named list [39</span>…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> alfalfa  ~/alfalfa/         1XxraAXWcVd0Crl5Ssc1uTk6wPaoaQJEC <span style='color: #949494;'>&lt;named list [32</span>…</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># clean up</span></span>
 <span class='r-in'><span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>alfalfa</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> File deleted:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BBBB;'>•</span> alfalfa <span style='color: #555555;'>&lt;id: 1RR1PrpSTzRhufGnTmZf6DhAYyC9UXE5x&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>alfalfa</span> <span style='color: #555555;'>&lt;id: 1XxraAXWcVd0Crl5Ssc1uTk6wPaoaQJEC&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='co'># The examples below are indicative of correct syntax.</span></span>
