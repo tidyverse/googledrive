@@ -8,6 +8,7 @@
 #'
 #' @param name Name for the new folder or, optionally, a path that specifies
 #'   an existing parent folder, as well as the new name.
+#' @eval param_path_known_parent("folder")
 #' @inheritParams drive_create
 #'
 #' @eval return_dribble()

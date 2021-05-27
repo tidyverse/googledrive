@@ -10,9 +10,10 @@ drive_mkdir(name, path = NULL, ..., overwrite = NA, verbose = deprecated())
 \item{name}{Name for the new folder or, optionally, a path that specifies
 an existing parent folder, as well as the new name.}
 
-\item{path}{Target destination for the new item, i.e. a folder or a shared
-drive. Can be given as an actual path (character), a file id or URL marked
-with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root folder.}
+\item{path}{Target destination for the new folder, i.e. a folder or a
+shared drive. Can be given as an actual path (character), a file id or URL
+marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root
+folder.}
 
 \item{...}{Named parameters to pass along to the Drive API. Has \link[rlang:dyn-dots]{dynamic dots} semantics. You can affect the metadata of the target file by
 specifying properties of the Files resource via \code{...}. Read the "Request

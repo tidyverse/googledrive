@@ -10,6 +10,14 @@ param_path <- function(thing = "THING", default_notes = "") {
       {default_notes}")
 }
 
+param_path_known_parent <- function(thing = "item") {
+  glue("
+    @param path Target destination for the new {thing}, i.e. a folder or a
+     shared drive. Can be given as an actual path (character), a file id or URL
+     marked with [as_id()], or a [`dribble`]. Defaults to your \"My Drive\" root
+     folder.")
+}
+
 param_name <- function(thing = "THING", default_notes = "") {
   glue("
     @param name Character, new {thing} name if not specified as part of

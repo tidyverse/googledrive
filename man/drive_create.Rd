@@ -17,9 +17,10 @@ drive_create(
 \item{name}{Name for the new file or, optionally, a path that specifies
 an existing parent folder, as well as the new file name.}
 
-\item{path}{Target destination for the new item, i.e. a folder or a shared
-drive. Can be given as an actual path (character), a file id or URL marked
-with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root folder.}
+\item{path}{Target destination for the new item, i.e. a folder or a
+shared drive. Can be given as an actual path (character), a file id or URL
+marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root
+folder.}
 
 \item{type}{Character. Create a blank Google Doc, Sheet or Slides by
 setting \code{type} to \code{document}, \code{spreadsheet}, or \code{presentation},

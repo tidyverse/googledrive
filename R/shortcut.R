@@ -9,11 +9,7 @@
 #'
 #' @template file-singular
 
-#' @eval param_path(
-#'   thing = "shortcut",
-#'   default_notes = "By default, the shortcut is created in the current
-#'     user's \"My Drive\" root folder."
-#' )
+#' @eval param_path_known_parent("shortcut")
 #' @eval param_name(
 #'   thing = "shortcut",
 #'   default_notes = "By default, the shortcut starts out with the same name as

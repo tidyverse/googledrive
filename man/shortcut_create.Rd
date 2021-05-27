@@ -11,13 +11,10 @@ shortcut_create(file, path = NULL, name = NULL, overwrite = NA)
 Drive. Can be a name or path, a file id or URL marked with \code{\link[=as_id]{as_id()}}, or a
 \code{\link{dribble}}.}
 
-\item{path}{Specifies target destination for the shortcut on Google
-Drive. Can be an actual path (character), a file id marked with
-\code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. If specified as an actual path, it is best
-to explicitly indicate if it's a folder by including a trailing slash,
-since it cannot always be worked out from the context of the call.
-By default, the shortcut is created in the current
-user's "My Drive" root folder.}
+\item{path}{Target destination for the new shortcut, i.e. a folder or a
+shared drive. Can be given as an actual path (character), a file id or URL
+marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root
+folder.}
 
 \item{name}{Character, new shortcut name if not specified as part of
 \code{path}. This will force \code{path} to be interpreted as a folder, even if it
