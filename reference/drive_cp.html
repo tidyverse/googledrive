@@ -252,7 +252,7 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
+    <p>An object of class <code><a href='dribble.html'>dribble</a></code>, a tibble with one row per file.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Wraps the <code>files.copy</code> endpoint:</p><ul>
@@ -266,35 +266,35 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Local file:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #0000BB;'>/home/runner/work/_temp/Library/googledrive/extdata/chicken.txt</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Uploaded into Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1aXacngkkY3VkCn4zLFQgWrndiTf-hTs2&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1ddzxhXxu_U9OyRDC5RkqHj0BYiieHgeH&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>text/plain</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Make a "Copy of" copy in same folder as the original</span></span>
 <span class='r-in'><span class='fu'>drive_cp</span><span class='op'>(</span><span class='st'>"chicken-cp.txt"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1aXacngkkY3VkCn4zLFQgWrndiTf-hTs2&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1ddzxhXxu_U9OyRDC5RkqHj0BYiieHgeH&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Copied to file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>Copy of chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1Nx1p2354ZX6MzlfpICtoP6-NE44RQkDd&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>Copy of chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1Ks1xwd4-c3h1L5xHYqVoFWRglX-DR9Ot&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Make an explicitly named copy in same folder as the original</span></span>
 <span class='r-in'><span class='fu'>drive_cp</span><span class='op'>(</span><span class='st'>"chicken-cp.txt"</span>, <span class='st'>"chicken-cp-two.txt"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1aXacngkkY3VkCn4zLFQgWrndiTf-hTs2&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1ddzxhXxu_U9OyRDC5RkqHj0BYiieHgeH&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Copied to file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp-two.txt</span> <span style='color: #555555;'>&lt;id: 1TT-4MYavxxqObdZ5hXz2ti1RGPAs1LQ8&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp-two.txt</span> <span style='color: #555555;'>&lt;id: 1PH-VFhQwDrY0PJqFSV50_GBU-b6iblyu&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Make an explicitly named copy in a different folder</span></span>
 <span class='r-in'><span class='va'>folder</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span><span class='op'>(</span><span class='st'>"new-folder"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>new-folder</span> <span style='color: #555555;'>&lt;id: 1T2lzb7M8gaX6v8Ct5LdEAVCUvoOeDh80&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>new-folder</span> <span style='color: #555555;'>&lt;id: 18rb8GyVGWiptRwcPoObJC4in04Xilgps&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.folder</span></span>
 <span class='r-in'><span class='fu'>drive_cp</span><span class='op'>(</span><span class='st'>"chicken-cp.txt"</span>, path <span class='op'>=</span> <span class='va'>folder</span>, name <span class='op'>=</span> <span class='st'>"chicken-cp-three.txt"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1aXacngkkY3VkCn4zLFQgWrndiTf-hTs2&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1ddzxhXxu_U9OyRDC5RkqHj0BYiieHgeH&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Copied to file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>new-folder/chicken-cp-three.txt</span> <span style='color: #555555;'>&lt;id: 1w1hHr7HXPx-wcXh-0mBAurjP7iiS2RJ3&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>new-folder/chicken-cp-three.txt</span> <span style='color: #555555;'>&lt;id: 1iNXeVTjtNzIt77Uk8pBfdaM4oumyWBIr&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Make an explicitly named copy and star it.</span></span>
 <span class='r-in'><span class='co'># The starring is an example of providing metadata via `...`.</span></span>
@@ -302,14 +302,14 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'><span class='co'># it just gets passed through to the API.</span></span>
 <span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>drive_cp</span><span class='op'>(</span><span class='st'>"chicken-cp.txt"</span>, name <span class='op'>=</span> <span class='st'>"chicken-cp-starred.txt"</span>, starred <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1aXacngkkY3VkCn4zLFQgWrndiTf-hTs2&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1ddzxhXxu_U9OyRDC5RkqHj0BYiieHgeH&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Copied to file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp-starred.txt</span> <span style='color: #555555;'>&lt;id: 1xoBC8vviljeuEwQk4fRrewEzTW5t47To&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp-starred.txt</span> <span style='color: #555555;'>&lt;id: 1g81fE6Pk0fcRCz_xBKgX4c3vqLfO41wb&gt;</span></span>
 <span class='r-in'><span class='fu'><a href='drive_reveal.html'>drive_reveal</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"starred"</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 1 x 4</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name                  starred id                              drive_resource  </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                           <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>          </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> chicken-cp-starred.t… TRUE    1xoBC8vviljeuEwQk4fRrewEzTW5t4… <span style='color: #949494;'>&lt;named list [38</span>…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> chicken-cp-starred.t… TRUE    1g81fE6Pk0fcRCz_xBKgX4c3vqLfO4… <span style='color: #949494;'>&lt;named list [38</span>…</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># `overwrite = FALSE` errors if file already exists at target filepath</span></span>
 <span class='r-in'><span class='co'># THIS WILL ERROR!</span></span>
@@ -318,41 +318,41 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'><span class='co'># `overwrite = TRUE` moves an existing file to trash, then proceeds</span></span>
 <span class='r-in'><span class='fu'>drive_cp</span><span class='op'>(</span><span class='st'>"chicken-cp.txt"</span>, name <span class='op'>=</span> <span class='st'>"chicken-cp.txt"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> File trashed:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1aXacngkkY3VkCn4zLFQgWrndiTf-hTs2&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1ddzxhXxu_U9OyRDC5RkqHj0BYiieHgeH&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1aXacngkkY3VkCn4zLFQgWrndiTf-hTs2&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1ddzxhXxu_U9OyRDC5RkqHj0BYiieHgeH&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Copied to file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1o_w62FyIwwOyQ4lw_YQ6fFZFkY5ib4j5&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1GtvOKpONuofiu1Bv0t_dHZxDHinqcrjC&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Behold all of our copies!</span></span>
 <span class='r-in'><span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span><span class='st'>"chicken-cp"</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 5 x 3</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name                   id                                drive_resource   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                             <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>           </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> chicken-cp.txt         1o_w62FyIwwOyQ4lw_YQ6fFZFkY5ib4j5 <span style='color: #949494;'>&lt;named list [38]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> chicken-cp-starred.txt 1xoBC8vviljeuEwQk4fRrewEzTW5t47To <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> chicken-cp-three.txt   1w1hHr7HXPx-wcXh-0mBAurjP7iiS2RJ3 <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> chicken-cp-two.txt     1TT-4MYavxxqObdZ5hXz2ti1RGPAs1LQ8 <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Copy of chicken-cp.txt 1Nx1p2354ZX6MzlfpICtoP6-NE44RQkDd <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> chicken-cp.txt         1GtvOKpONuofiu1Bv0t_dHZxDHinqcrjC <span style='color: #949494;'>&lt;named list [38]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> chicken-cp-starred.txt 1g81fE6Pk0fcRCz_xBKgX4c3vqLfO41wb <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> chicken-cp-three.txt   1iNXeVTjtNzIt77Uk8pBfdaM4oumyWBIr <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> chicken-cp-two.txt     1PH-VFhQwDrY0PJqFSV50_GBU-b6iblyu <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Copy of chicken-cp.txt 1Ks1xwd4-c3h1L5xHYqVoFWRglX-DR9Ot <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Delete all of our copies and the new folder!</span></span>
 <span class='r-in'><span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span><span class='st'>"chicken-cp"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Files deleted:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1o_w62FyIwwOyQ4lw_YQ6fFZFkY5ib4j5&gt;</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp-starred.txt</span> <span style='color: #555555;'>&lt;id: 1xoBC8vviljeuEwQk4fRrewEzTW5t47To&gt;</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp-three.txt</span> <span style='color: #555555;'>&lt;id: 1w1hHr7HXPx-wcXh-0mBAurjP7iiS2RJ3&gt;</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp-two.txt</span> <span style='color: #555555;'>&lt;id: 1TT-4MYavxxqObdZ5hXz2ti1RGPAs1LQ8&gt;</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>Copy of chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1Nx1p2354ZX6MzlfpICtoP6-NE44RQkDd&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1GtvOKpONuofiu1Bv0t_dHZxDHinqcrjC&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp-starred.txt</span> <span style='color: #555555;'>&lt;id: 1g81fE6Pk0fcRCz_xBKgX4c3vqLfO41wb&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp-three.txt</span> <span style='color: #555555;'>&lt;id: 1iNXeVTjtNzIt77Uk8pBfdaM4oumyWBIr&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp-two.txt</span> <span style='color: #555555;'>&lt;id: 1PH-VFhQwDrY0PJqFSV50_GBU-b6iblyu&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>Copy of chicken-cp.txt</span> <span style='color: #555555;'>&lt;id: 1Ks1xwd4-c3h1L5xHYqVoFWRglX-DR9Ot&gt;</span></span>
 <span class='r-in'><span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span><span class='st'>"new-folder"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>folder</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> File deleted:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>new-folder</span> <span style='color: #555555;'>&lt;id: 1T2lzb7M8gaX6v8Ct5LdEAVCUvoOeDh80&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>new-folder</span> <span style='color: #555555;'>&lt;id: 18rb8GyVGWiptRwcPoObJC4in04Xilgps&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># upload a csv file to copy</span></span>
 <span class='r-in'><span class='va'>csv_file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_upload.html'>drive_upload</a></span><span class='op'>(</span><span class='fu'><a href='drive_example.html'>drive_example</a></span><span class='op'>(</span><span class='st'>"chicken.csv"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Local file:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #0000BB;'>/home/runner/work/_temp/Library/googledrive/extdata/chicken.csv</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Uploaded into Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken.csv</span> <span style='color: #555555;'>&lt;id: 1z113EBxqaBYcPq0nb2SdTDqCER5mKH-b&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken.csv</span> <span style='color: #555555;'>&lt;id: 1ryzbc3Hq17uWyO_aoSf8qy0sUsknZsyb&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>text/csv</span></span>
 <span class='r-in'></span>
@@ -363,9 +363,9 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'>  mime_type <span class='op'>=</span> <span class='fu'><a href='drive_mime_type.html'>drive_mime_type</a></span><span class='op'>(</span><span class='st'>"spreadsheet"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken.csv</span> <span style='color: #555555;'>&lt;id: 1z113EBxqaBYcPq0nb2SdTDqCER5mKH-b&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken.csv</span> <span style='color: #555555;'>&lt;id: 1ryzbc3Hq17uWyO_aoSf8qy0sUsknZsyb&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Copied to file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp</span> <span style='color: #555555;'>&lt;id: 1efbIWHBJfDPhzzS06htwr2GeBHUiTVT22qOP87ALvhM&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp</span> <span style='color: #555555;'>&lt;id: 16hLQ4g5OQpI9LZtMQCvaTXuLakj36VWm04jBK0rZvAg&gt;</span></span>
 <span class='r-in'><span class='co'># is it really a Google Sheet?</span></span>
 <span class='r-in'><span class='fu'><a href='drive_reveal.html'>drive_reveal</a></span><span class='op'>(</span><span class='va'>chicken_sheet</span>, <span class='st'>"mime_type"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>mime_type</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "application/vnd.google-apps.spreadsheet"</span>
@@ -376,8 +376,8 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'><span class='co'># clean up</span></span>
 <span class='r-in'><span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>csv_file</span>, <span class='va'>chicken_sheet</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Files deleted:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken.csv</span> <span style='color: #555555;'>&lt;id: 1z113EBxqaBYcPq0nb2SdTDqCER5mKH-b&gt;</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp</span> <span style='color: #555555;'>&lt;id: 1efbIWHBJfDPhzzS06htwr2GeBHUiTVT22qOP87ALvhM&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken.csv</span> <span style='color: #555555;'>&lt;id: 1ryzbc3Hq17uWyO_aoSf8qy0sUsknZsyb&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-cp</span> <span style='color: #555555;'>&lt;id: 16hLQ4g5OQpI9LZtMQCvaTXuLakj36VWm04jBK0rZvAg&gt;</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
