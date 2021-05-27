@@ -7,7 +7,8 @@
 #' @param path Specifies a single folder on Google Drive whose contents you want
 #'   to list. Can be an actual path (character), a file id or URL marked with
 #'   [as_id()], or a [`dribble`]. If it is a shared drive or is a folder on a
-#'   shared drive, it must be passed as a [`dribble`].
+#'   shared drive, it must be passed as a [`dribble`]. If `path` is a shortcut
+#'   to a folder, it is automatically resolved to its target folder.
 #' @param ... Any parameters that are valid for [drive_find()].
 #' @param recursive Logical, indicating if you want only direct children of
 #'   `path` (`recursive = FALSE`, the default) or all children, including

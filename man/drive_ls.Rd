@@ -10,7 +10,8 @@ drive_ls(path = NULL, ..., recursive = FALSE)
 \item{path}{Specifies a single folder on Google Drive whose contents you want
 to list. Can be an actual path (character), a file id or URL marked with
 \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. If it is a shared drive or is a folder on a
-shared drive, it must be passed as a \code{\link{dribble}}.}
+shared drive, it must be passed as a \code{\link{dribble}}. If \code{path} is a shortcut
+to a folder, it is automatically resolved to its target folder.}
 
 \item{...}{Any parameters that are valid for \code{\link[=drive_find]{drive_find()}}.}
 

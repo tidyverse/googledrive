@@ -14,7 +14,8 @@ Drive. Can be a name or path, a file id or URL marked with \code{\link[=as_id]{a
 \item{path}{Target destination for the new shortcut, i.e. a folder or a
 shared drive. Can be given as an actual path (character), a file id or URL
 marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. Defaults to your "My Drive" root
-folder.}
+folder. If \code{path} is a shortcut to a folder, it is automatically resolved
+to its target folder.}
 
 \item{name}{Character, new shortcut name if not specified as part of
 \code{path}. This will force \code{path} to be interpreted as a folder, even if it

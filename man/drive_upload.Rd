@@ -19,9 +19,14 @@ drive_upload(
 
 \item{path}{Specifies target destination for the new file on Google
 Drive. Can be an actual path (character), a file id marked with
-\code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}. If specified as an actual path, it is best
-to explicitly indicate if it's a folder by including a trailing slash,
-since it cannot always be worked out from the context of the call.
+\code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}}.
+
+If \code{path} is a shortcut to a folder, it is automatically resolved to its
+target folder.
+
+If \code{path} is given as a path (as opposed to a \code{dribble} or an id), it is
+best to explicitly indicate if it's a folder by including a trailing
+slash, since it cannot always be worked out from the context of the call.
 By default, the file is created in the current
 user's "My Drive" root folder.}
 
