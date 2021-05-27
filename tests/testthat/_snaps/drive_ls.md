@@ -3,5 +3,6 @@
     Code
       drive_ls(nm_("this-should-not-exist"))
     Error <rlang_error>
-      `path` does not identify at least one Drive file.
+      Parent specified via `path` is invalid:
+      x Does not exist.
 

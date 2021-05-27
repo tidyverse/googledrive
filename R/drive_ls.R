@@ -36,11 +36,7 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
     return(drive_find(...))
   }
 
-  if (is_path(path)) {
-    path <- append_slash(path)
-  }
-  path <- as_dribble(path)
-  path <- confirm_single_file(path)
+  path <- as_parent(path)
 
   params <- list2(...)
   if (is_shared_drive(path)) {

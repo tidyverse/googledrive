@@ -227,6 +227,9 @@ as_dribble.list <- function(x, ...) {
 # processes a putative parent folder or shared drive
 as_parent <- function(d) {
   in_var <- deparse(substitute(d))
+  if (is_path(d)) {
+    d <- append_slash(d)
+  }
   d <- as_dribble(d)
   # wording chosen to work for folder and shared drive
   invalid_parent <- "Parent specified via {.arg {in_var}} is invalid:"
