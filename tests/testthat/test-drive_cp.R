@@ -6,6 +6,7 @@ nm_ <- nm_fun("TEST-drive_cp", user_run = FALSE)
 if (CLEAN) {
   drive_trash(c(
     nm_("i-am-a-folder"),
+    nm_("copy-to-folder-shortcut"),
     nm_("not-unique-folder"),
     nm_("i-am-a-file")
   ))
@@ -14,6 +15,7 @@ if (CLEAN) {
 # ---- setup ----
 if (SETUP) {
   drive_mkdir(nm_("i-am-a-folder"))
+  shortcut_create(nm_("i-am-a-folder"), name = nm_("copy-to-folder-shortcut"))
   drive_mkdir(name = nm_("not-unique-folder"), path = as_id(googledrive:::root_id()))
   drive_mkdir(name = nm_("not-unique-folder"), path = as_id(googledrive:::root_id()))
   drive_upload(
@@ -149,4 +151,22 @@ test_that("drive_cp() takes name, assumes path is folder if both are specified",
     ),
     error = TRUE
   )
+})
+
+test_that("drive_cp() can copy to a folder-shortcut", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  target_parent <- drive_get(nm_("i-am-a-folder"))
+  file_to_copy <- drive_get(nm_("i-am-a-file"))
+
+  cp_name <- me_("i-am-a-file")
+  defer_drive_rm(cp_name)
+
+  out <- drive_cp(
+    file_to_copy,
+    path = nm_("copy-to-folder-shortcut"),
+    name = cp_name
+  )
+  expect_equal(drive_reveal(out, "parent")$id_parent, target_parent$id)
 })

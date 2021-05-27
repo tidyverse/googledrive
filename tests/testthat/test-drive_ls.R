@@ -5,6 +5,7 @@ nm_ <- nm_fun("TEST-drive_ls", user_run = FALSE)
 if (CLEAN) {
   drive_trash(c(
     nm_("list-me"),
+    nm_("list-a-folder-shortcut"),
     nm_("this-should-not-exist"),
     nm_("topdir")
   ))
@@ -21,6 +22,7 @@ if (SETUP) {
     file.path(R.home("doc"), "html", "about.html"),
     path = file.path(nm_("list-me"), nm_("about-html"))
   )
+  shortcut_create(nm_("list-me"), name = nm_("list-a-folder-shortcut"))
 
   ## for testing `recursive = TRUE`
   top <- drive_mkdir(nm_("topdir"))
@@ -74,6 +76,31 @@ test_that("drive_ls() outputs contents of folder", {
   ## id
   out3 <- drive_ls(as_id(d$id))
   expect_identical(out[c("name", "id")], out3[c("name", "id")])
+})
+
+test_that("drive_ls() list contents of the target of a folder shortcut", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  target_name <- nm_("list-me")
+  shortcut_name <- nm_("list-a-folder-shortcut")
+
+  direct_ls <- drive_ls(target_name)
+
+  local_drive_loud_and_wide()
+  drive_ls_message <- capture.output(
+    indirect_ls <- drive_ls(shortcut_name),
+    type = "message"
+  )
+  drive_ls_message <- drive_ls_message %>%
+    scrub_filepath(target_name) %>%
+    scrub_filepath(shortcut_name) %>%
+    scrub_file_id()
+  expect_snapshot(
+    write_utf8(drive_ls_message)
+  )
+
+  expect_equal(direct_ls$id, indirect_ls$id)
 })
 
 test_that("drive_ls() passes ... through to drive_find()", {

@@ -6,6 +6,7 @@ nm_ <- nm_fun("TEST-drive_mv", user_run = FALSE)
 if (CLEAN) {
   drive_trash(c(
     nm_("move-files-into-me"),
+    nm_("move-to-folder-shortcut"),
     nm_("DESC"),
     nm_("DESC-renamed")
   ))
@@ -14,6 +15,7 @@ if (CLEAN) {
 # ---- setup ----
 if (SETUP) {
   drive_mkdir(nm_("move-files-into-me"))
+  shortcut_create(nm_("move-files-into-me"), name = nm_("move-to-folder-shortcut"))
 }
 
 # ---- tests ----
@@ -157,4 +159,22 @@ test_that("drive_mv() can rename and move, using `path` only", {
 
   expect_dribble(mv_file)
   expect_identical(nrow(mv_file), 1L)
+})
+
+test_that("drive_mv() can move using a folder shortcut", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  name <- me_("move-me-via-folder-shortcut")
+  defer_drive_rm(name)
+  mv_file <- drive_upload(system.file("DESCRIPTION"), name)
+
+  target_parent <- drive_get(nm_("move-files-into-me"))
+  shortcut <-  nm_("move-to-folder-shortcut")
+
+  # since I'm not specifying name, append slash to make clear that I regard
+  # `path` as a parent specification
+  out <- drive_mv(mv_file, path = append_slash(shortcut))
+
+  expect_equal(drive_reveal(out, "parent")$id_parent, target_parent$id)
 })

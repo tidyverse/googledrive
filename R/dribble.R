@@ -242,6 +242,12 @@ as_parent <- function(d) {
       x = "Doesn't uniquely identify exactly one folder or shared drive."
     ))
   }
+  if (is_folder_shortcut(d)) {
+    drive_bullets(c(
+      i = "Parent specified via {.arg {in_var}} is a shortcut; resolving to \\
+           its target folder"))
+    d <- shortcut_resolve(d)
+  }
   if (!is_parental(d)) {
     drive_abort(c(
       invalid_parent,

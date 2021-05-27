@@ -5,13 +5,15 @@ nm_ <- nm_fun("TEST-drive_create", user_run = FALSE)
 # ---- clean ----
 if (CLEAN) {
   drive_trash(c(
-    nm_("create-in-me")
+    nm_("create-in-me"),
+    nm_("create-in-folder-shortcut")
   ))
 }
 
 # ---- setup ----
 if (SETUP) {
   drive_mkdir(nm_("create-in-me"))
+  shortcut_create(nm_("create-in-me"), name = nm_("create-in-folder-shortcut"))
 }
 
 # ---- tests ----
@@ -31,6 +33,8 @@ test_that("drive_create() errors if parent exists but is not a folder", {
   skip_if_offline()
   x <- drive_find(
     q = "mimeType != 'application/vnd.google-apps.folder'",
+    # make sure we don't somehow find a folder-shortcut
+    q = "mimeType != 'application/vnd.google-apps.shortcut'",
     n_max = 1
   )
   expect_snapshot(drive_create("a", path = x), error = TRUE)
@@ -127,15 +131,33 @@ test_that("drive_create() parent separately, as a path", {
   skip_if_offline()
   defer_drive_rm(c(me_("e"), me_("f")))
 
-  ## no trailing slash on parent
+  # no trailing slash on parent
   out <- drive_create(me_("e"), path = nm_("create-in-me"))
   expect_dribble(out)
   expect_identical(out$name, me_("e"))
 
-  ## yes trailing slash on parent
-  out <- drive_create(me_("f"), path = file.path(nm_("create-in-me"), ""))
+  # yes trailing slash on parent
+  out <- drive_create(me_("f"), path = append_slash(nm_("create-in-me")))
   expect_dribble(out)
   expect_identical(out$name, me_("f"))
+})
+
+test_that("drive_create() deals with folder-shortcut as path", {
+  skip_if_no_token()
+  skip_if_offline()
+  defer_drive_rm(c(me_("g"), me_("h")))
+
+  target_parent_name <- nm_("create-in-me")
+  shortcut_name <- nm_("create-in-folder-shortcut")
+  target_parent <- drive_get(target_parent_name)
+
+  # no trailing slash on parent
+  out <- drive_create(me_("g"), path = shortcut_name)
+  expect_equal(drive_reveal(out, "parent")$id_parent, target_parent$id)
+
+  # yes trailing slash on parent
+  out <- drive_create(me_("h"), path = append_slash(shortcut_name))
+  expect_equal(drive_reveal(out, "parent")$id_parent, target_parent$id)
 })
 
 test_that("drive_create() catches invalid parameters", {

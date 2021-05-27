@@ -6,6 +6,7 @@ nm_ <- nm_fun("TEST-drive_upload", user_run = FALSE)
 if (CLEAN) {
   drive_trash(c(
     nm_("upload-into-me"),
+    nm_("uploade-via-folder-shortcut"),
     nm_("DESCRIPTION")
   ))
 }
@@ -13,6 +14,7 @@ if (CLEAN) {
 # ---- setup ----
 if (SETUP) {
   drive_mkdir(nm_("upload-into-me"))
+  shortcut_create(nm_("upload-into-me"), name = nm_("upload-via-folder-shortcut"))
 }
 
 # ---- tests ----
@@ -39,6 +41,25 @@ test_that("drive_upload() places file in non-root folder, with new name", {
   expect_identical(nrow(uploadee), 1L)
   expect_identical(uploadee$drive_resource[[1]]$parents[[1]], destination$id)
 })
+
+test_that("drive_upload() can place file via folder-shortcut", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  upload_name <- me_("upload-via-shortcut-folder")
+  defer_drive_rm(upload_name)
+
+  target_parent <- drive_get(nm_("upload-into-me"))
+  shortcut <-  nm_("upload-via-folder-shortcut")
+
+  uploadee <- drive_upload(
+    system.file("DESCRIPTION"),
+    path = shortcut,
+    name = upload_name
+  )
+  expect_equal(drive_reveal(uploadee, "parent")$id_parent, target_parent$id)
+})
+
 
 test_that("drive_upload() accepts body metadata via ...", {
   skip_if_no_token()

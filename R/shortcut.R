@@ -156,7 +156,7 @@ shortcut_resolve <- function(file) {
     ))
   } else {
     drive_bullets(c(
-      if (n_shortcuts == n_resolved) {
+      i = if (n_shortcuts == n_resolved) {
         "Resolved {n_resolved} shortcut{?s} found in {nrow(out)} file{?s}:"
       } else {
         "Resolved {n_resolved} of {n_shortcuts} shortcut{?s} found \\
@@ -178,6 +178,8 @@ shortcut_resolve <- function(file) {
   out
 }
 
+# TODO: why does this have such an annoying signature? why not dribble in,
+# dribble out?
 resolve_one <- function(name, id, drive_resource, ...) {
   target_id <- pluck(drive_resource, "shortcutDetails", "targetId")
   if (is_null(target_id)) {
