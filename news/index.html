@@ -194,10 +194,38 @@
 <div id="single-parenting-and-shortcuts" class="section level2">
 <h2 class="hasAnchor">
 <a href="#single-parenting-and-shortcuts" class="anchor"></a>Single parenting and shortcuts</h2>
-<p>As of 2020-09-30, Drive no longer allows a file to be placed in multiple folders; going forward, every file will have exactly 1 parent folder. In many cases that parent is just the top-level or root folder of your “My Drive” or of a shared drive. This change has been accompanied by the introduction of file <strong>shortcuts</strong>, which function much like symbolic or “soft” links. Shortcuts are the new way to make a file appear to be in more than one place or, said another way, the new way for one Drive file to be associated with more than one Drive filepath. A shortcut is a special type of Drive file, characterized by the <code>application/vnd.google-apps.shortcut</code> MIME type.</p>
+<p>As of 2020-09-30, Drive no longer allows a file to be placed in multiple folders; going forward, every file will have exactly 1 parent folder. In many cases that parent is just the top-level or root folder of your “My Drive” or of a shared drive.</p>
+<p>This change has been accompanied by the introduction of file <strong>shortcuts</strong>, which function much like symbolic or “soft” links. Shortcuts are the new way to make a file appear to be in more than one place or, said another way, the new way for one Drive file to be associated with more than one Drive filepath. A shortcut is a special type of Drive file, characterized by the <code>application/vnd.google-apps.shortcut</code> MIME type. You can make a shortcut to any Drive file, including to a Drive folder.</p>
 <p>Drive has been migrating existing files to the one-parent state, i.e., “single parenting” them. Drive selects the most suitable parent folder to keep, “based on the hierarchy’s properties”, and replaces any other parent-child relationships with a shortcut.</p>
-<p><code><a href="../reference/shortcut_create.html">shortcut_create()</a></code> is a new function to create a shortcut to a Drive file.</p>
-<p>Further reading about these changes:</p>
+<p>New functions related to shortcuts:</p>
+<ul>
+<li>
+<code><a href="../reference/shortcut_create.html">shortcut_create()</a></code>: creates a shortcut to a specific Drive file (or folder).</li>
+<li>
+<code><a href="../reference/shortcut_resolve.html">shortcut_resolve()</a></code>: resolves a shortcut to its target, i.e. the file it refers to. Works for multiple files at once, i.e. the input can be a mix of shortcuts and non-shortcuts. The non-shortcuts are passed through and the shortcuts are replaced by their targets.</li>
+</ul>
+<p>How interacts with googledrive’s support for specifying file by filepath:</p>
+<ul>
+<li>Main principle: shortcuts are first-class Drive files that we assume users will need to manipulate with googledrive. In general, there is no automatic resolution to the target file.</li>
+<li>
+<code>drive_reveal(what = "path")</code> returns the canonical path, i.e. there will be no shortcuts among the non-terminal “folder” parts of the returned path.</li>
+<li>
+<code>drive_get(path = "foo/")</code> can retrieve a folder named “foo” or a shortcut named “foo”, whose target is a folder.</li>
+<li>When a shortcut-to-a-folder is specified as the <code>path</code>, in a context where it unambiguously specifies a parent folder, the <code>path</code> <strong>is</strong> auto-resolved to its target folder. This is the exception to the “no automatic resolution” rule. Functions affected:
+<ul>
+<li><code>drive_ls(path, ...)</code></li>
+<li>
+<code>drive_create(name, path, ...)</code> and its convenience wrappers <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code> and <code><a href="../reference/shortcut_create.html">shortcut_create()</a></code>
+</li>
+<li><code>drive_cp(file, path, ...)</code></li>
+<li><code>drive_mv(file, path, ...)</code></li>
+<li>
+<code>drive_upload(media, path, ...)</code> and its close friend <code><a href="../reference/drive_put.html">drive_put()</a></code>
+</li>
+</ul>
+</li>
+</ul>
+<p>Further reading about changes to the Drive folder model:</p>
 <ul>
 <li><a href="https://cloud.google.com/blog/products/g-suite/simplifying-google-drives-folder-structure-and-sharing-models">Simplifying Google Drive’s folder structure and sharing models</a></li>
 <li><a href="https://developers.google.com/drive/api/v3/ref-single-parent">Single-parenting behavior changes</a></li>
