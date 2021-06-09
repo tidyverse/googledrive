@@ -46,7 +46,7 @@ drive_update <- function(file,
   if ((!is.null(media)) && (!file.exists(media))) {
     drive_abort(c(
       "No file exists at the local {.arg media} path:",
-      bulletize(map_cli(media, "{.path <<x>>}"), bullet = "x")
+      bulletize(gargle_map_cli(media, "{.path <<x>>}"), bullet = "x")
     ))
   }
 
@@ -75,7 +75,7 @@ drive_update <- function(file,
     }
   }
 
-  drive_bullets(c("File updated:", bulletize(map_cli(out))))
+  drive_bullets(c("File updated:", bulletize(gargle_map_cli(out))))
 
   invisible(out)
 }

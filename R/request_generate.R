@@ -53,7 +53,7 @@ request_generate <- function(endpoint = character(),
   if (is.null(ept)) {
     drive_abort(c(
       "Endpoint not recognized:",
-      bulletize(map_cli(endpoint))
+      bulletize(gargle_map_cli(endpoint))
     ))
   }
 

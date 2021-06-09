@@ -123,11 +123,11 @@ drive_mv <- function(file,
 
   drive_bullets(c(
     "Original file:",
-    bulletize(map_cli(file)),
+    bulletize(gargle_map_cli(file)),
     "Has been {action}:",
     # drive_reveal_path() puts immediate parent, if specified, in the `path`
     # then we reveal `path`, instead of `name`
-    bulletize(map_cli(
+    bulletize(gargle_map_cli(
       drive_reveal_path(out, ancestors = path),
       template = c(
         id_string = "<id:\u00a0<<id>>>", # \u00a0 is a nonbreaking space

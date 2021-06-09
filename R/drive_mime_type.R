@@ -59,7 +59,7 @@ drive_mime_type <- function(type = NULL) {
   if (all(is.na(mime_type))) {
     drive_abort(c(
       "Unrecognized {.arg type}:",
-      bulletize(map_cli(type), bullet = "x")
+      bulletize(gargle_map_cli(type), bullet = "x")
     ))
   }
   mime_type

@@ -191,7 +191,7 @@ drive_reveal_parent <- function(file) {
     drive_bullets(c(
       "{sum(has_multiple_parents)} file{?s} {?has/have} >1 parent, which is a \\
        remnant of legacy Drive behaviour:",
-      bulletize(map_cli(file[has_multiple_parents, ])),
+      bulletize(gargle_map_cli(file[has_multiple_parents, ])),
       "!" = "Only the first parent will be used"
     ))
   }

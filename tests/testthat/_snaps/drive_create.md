@@ -36,5 +36,5 @@
     Output
       <error/gargle_error_bad_params>
       These parameters are unknown:
-      * bunny
+      * 'bunny'
 

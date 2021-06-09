@@ -51,36 +51,20 @@ quote_if_no_color <- function(x, quote = "'") {
   }
 }
 
-#' Map a cli-styled template over an object
-#'
-#' For internal use
-#'
-#' @keywords internal
-#' @export
-map_cli <- function(x, ...) UseMethod("map_cli")
+# useful to me during development, so I can see how my messages look w/o color
+local_no_color <- function(.envir = parent.frame()) {
+  withr::local_envvar(c("NO_COLOR" = 1), .local_envir = .envir)
+}
 
-#' @export
-map_cli.default <- function(x, ...) {
-  drive_abort("
-    Don't know how to {.fun map_cli} an object of class {.cls {class(x)}}.")
+with_no_color <- function(code) {
+  withr::with_envvar(c("NO_COLOR" = 1), code)
 }
 
 #' @export
-map_cli.NULL <- function(x, ...) NULL
-
-#' @export
-map_cli.character <- function(x,
-                              template = "{.field <<x>>}",
-                              .open = "<<", .close = ">>",
-                              ...) {
-  as.character(glue(template, .open = .open, .close = .close))
-}
-
-#' @export
-map_cli.dribble <- function(x,
-                            template = NULL,
-                            .open = "<<", .close = ">>",
-                            ...) {
+gargle_map_cli.dribble <- function(x,
+                                   template = NULL,
+                                   .open = "<<", .close = ">>",
+                                   ...) {
   # template can be a vector, in case some intermediate constructions are needed
   # this is true for the default case
   # templates should assume a data mask of `x`
@@ -102,39 +86,6 @@ map_cli.dribble <- function(x,
     x,
     as.character(glue(utils::tail(template, 1), .open = .open, .close = .close))
   )
-}
-
-bulletize <- function(x, bullet = "*", n_show = 5, n_fudge = 2) {
-  n <- length(x)
-  n_show_actual <- compute_n_show(n, n_show, n_fudge)
-  out <- utils::head(x, n_show_actual)
-  n_not_shown <- n - n_show_actual
-
-  out <- set_names(out, rep_along(out, bullet))
-
-  if (n_not_shown == 0) {
-    out
-  } else {
-    c(out, " " = glue("{cli::symbol$ellipsis} and {n_not_shown} more"))
-  }
-}
-
-# I don't want to do "... and x more" if x is silly, i.e. 1 or 2
-compute_n_show <- function(n, n_show_nominal = 5, n_fudge = 2) {
-  if (n > n_show_nominal && n - n_show_nominal > n_fudge) {
-    n_show_nominal
-  } else {
-    n
-  }
-}
-
-# useful to me during development, so I can see how my messages look w/o color
-local_no_color <- function(.envir = parent.frame()) {
-  withr::local_envvar(c("NO_COLOR" = 1), .local_envir = .envir)
-}
-
-with_no_color <- function(code) {
-  withr::with_envvar(c("NO_COLOR" = 1), code)
 }
 
 # making googldrive quiet vs. loud ----

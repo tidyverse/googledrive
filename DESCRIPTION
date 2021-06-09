@@ -22,7 +22,7 @@ Depends:
     R (>= 3.3)
 Imports: 
     cli (>= 2.5.0.9000),
-    gargle (>= 1.1.0),
+    gargle (>= 1.1.0.9000),
     glue (>= 1.4.2),
     httr,
     jsonlite,
@@ -51,7 +51,8 @@ VignetteBuilder:
     knitr
 Remotes: 
     r-lib/cli,
-    r-lib/downlit
+    r-lib/downlit,
+    r-lib/gargle
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US

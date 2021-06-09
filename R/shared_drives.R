@@ -203,9 +203,9 @@ validate_corpora <- function(corpora) {
     # the rationale is explained elsewhere in this file
     drive_abort(c(
       "Invalid value for {.arg corpus}:",
-      bulletize(map_cli(corpora), bullet = "x"),
+      bulletize(gargle_map_cli(corpora), bullet = "x"),
       "These are the only acceptable values:",
-      bulletize(map_cli(valid_corpora))
+      bulletize(gargle_map_cli(valid_corpora))
     ))
   }
   invisible(corpora)

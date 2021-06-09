@@ -104,7 +104,7 @@ drive_share <- function(file,
       "*" = "role = {role}",
       "*" = "type = {type}",
       "For file{?s}:{cli::qty(nrow(successes))}",
-      bulletize(map_cli(successes))
+      bulletize(gargle_map_cli(successes))
     ))
   }
   # I'm not sure this ever comes up IRL?
@@ -113,7 +113,7 @@ drive_share <- function(file,
     failures <- file[!ok, ]
     drive_bullets(c(
       "Permissions were NOT updated for file{?s}:{cli::qty(nrow(failures))}",
-      bulletize(map_cli(failures))
+      bulletize(gargle_map_cli(failures))
     ))
   }
 

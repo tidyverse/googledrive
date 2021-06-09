@@ -22,7 +22,8 @@ library(googledrive)
 ```{r include = FALSE}
 drive_bullets <- googledrive:::drive_bullets
 drive_abort <- googledrive:::drive_abort
-bulletize <- googledrive:::bulletize
+bulletize <- gargle::bulletize
+gargle_map_cli <- gargle::gargle_map_cli
 
 auth_success <- tryCatch(
   googledrive:::drive_auth_docs(),
@@ -55,7 +56,8 @@ The googledrive message helpers:
 
 -   Use the [cli package](https://cli.r-lib.org/index.html) to get interpolation, inline markup, and pluralization.
 
--   Eventually route through `rlang::inform()`, which is important because `inform()` prints to standard output in interactive sessions. This means that informational messages won't have the same "look" as errors and can generally be more stylish, at least in IDEs like RStudio.
+-   Eventually route through `rlang::inform()`, which is important because `inform()` prints to standard output in interactive sessions.
+    This means that informational messages won't have the same "look" as errors and can generally be more stylish, at least in IDEs like RStudio.
 
 -   Use some googledrive-wide style choices, such as:
 
@@ -63,7 +65,10 @@ The googledrive message helpers:
     -   The built-in `.field` style is tweaked to be flanked by single quotes in a no-color situation.
     -   The typical "\*" bullet isn't colored, since we've got so much other color going on.
 
--   Are under the control of the `googledrive_quiet` option. If it's unset, the default is to show messages (unless we're testing, i.e. the environment variable `TESTTHAT` is `"true"`). Doing `options(googledrive_quiet = TRUE)` will suppress messages. There are withr-style convenience helpers: `local_drive_quiet()` and `with_drive_quiet()`.
+-   Are under the control of the `googledrive_quiet` option.
+    If it's unset, the default is to show messages (unless we're testing, i.e. the environment variable `TESTTHAT` is `"true"`).
+    Doing `options(googledrive_quiet = TRUE)` will suppress messages.
+    There are withr-style convenience helpers: `local_drive_quiet()` and `with_drive_quiet()`.
 
 ### Inline styling
 
@@ -145,55 +150,56 @@ What needs to happen:
 -   Truncate this vector in an aesthetically pleasing way
 -   Apply names to this vector to get the desired bullet points
 
-`map_cli()` is an internal generic that turns an object into a vector of strings with cli markup.
-Currently `map_cli()` has methods for `character` and `dribble` (and `NULL` and a `default`).
+`gargle_map_cli()` is a new generic in gargle that turns an object into a vector of strings with cli markup.
+Currently gargle exports methods for `character` (and `NULL` and a `default`) and googlesheets4 defines a method for `dribble`.
+This is likely to be replaced by something in cli itself in due course.
 
 ```{r}
-map_cli(letters[1:3])
+gargle_map_cli(letters[1:3])
 ```
 
-By default `map_cli.character()` just applies the `.field` style, i.e. the template is `"{.field <<x>>}"`.
+By default `gargle_map_cli.character()` just applies the `.field` style, i.e. the template is `"{.field <<x>>}"`.
 But the template can be customized, if you need something else.
 Note that we use non-standard glue delimiters (`<<` and `>>`, by default), because we are interpolating into a string with glue/cli markup, where `{}` has the usual meaning.
 
 ```{r}
-map_cli(letters[4:6], template = "how about a path {.path <<x>>}?")
+gargle_map_cli(letters[4:6], template = "how about a path {.path <<x>>}?")
 ```
 
-The `map_cli.dribble()` method makes a cli-marked up string for each row of the dribble, i.e. for each Drive file.
+The `gargle_map_cli.dribble()` method makes a cli-marked up string for each row of the dribble, i.e. for each Drive file.
 
 ```{r}
 dat <- drive_find(n_max = 5)
-map_cli(dat)
+gargle_map_cli(dat)
 ```
 
-`map_cli.dribble()` also allows a custom template, but it's a more complicated and less common situation than for `character`.
+`gargle_map_cli.dribble()` also allows a custom template, but it's a more complicated and less common situation than for `character`.
 We won't get into that here.
 (I don't consider the dribble styling to be finalized yet.)
 
-The result of `map_cli()` then gets processed with `bulletize()`, which adds the bullet-specifying names and does aesthetically pleasing truncation.
+The result of `gargle_map_cli()` then gets processed with `gargle::bulletize()`, which adds the bullet-specifying names and does aesthetically pleasing truncation.
 
 ```{r}
-bulletize(map_cli(letters))
+bulletize(gargle_map_cli(letters))
 
-bulletize(map_cli(letters), bullet = "x", n_show = 2)
+bulletize(gargle_map_cli(letters), bullet = "x", n_show = 2)
 
 drive_bullets(c(
   "These are surprising things:",
-  bulletize(map_cli(letters), bullet = "!")
+  bulletize(gargle_map_cli(letters), bullet = "!")
 ))
 
 dat <- drive_find(n_max = 10)
 
 drive_bullets(c(
   "Some Drive files:",
-  bulletize(map_cli(dat))
+  bulletize(gargle_map_cli(dat))
 ))
 ```
 
-it's conceivable that cli will gain a better way of vectorization, but this works for now.
+It's conceivable that cli will gain a better way of vectorization, but this works for now.
 
-Known dysfunction: it's inefficient to `map_cli()` over the whole object, then truncate with `bulletize()`.
+Known dysfunction: it's inefficient to `gargle_map_cli()` over the whole object, then truncate with `bulletize()`.
 But it's easy.
 There are contexts, like tibble printing, where formatting stuff that will never see the light of day is really punishing.
 But I'm not sure I really have to worry about that.

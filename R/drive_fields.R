@@ -62,7 +62,7 @@ drive_fields <- function(fields = NULL,
     bad_fields <- setdiff(fields, out)
     drive_warn(c(
       "Omitting fields that are not recognized as part of the Files resource:",
-      bulletize(map_cli(bad_fields))
+      bulletize(gargle_map_cli(bad_fields))
     ))
   }
   out

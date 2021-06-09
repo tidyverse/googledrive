@@ -30,6 +30,6 @@ shared_drive_create <- function(name) {
   response <- request_make(request)
   out <- as_dribble(list(gargle::response_process(response)))
 
-  drive_bullets(c("Shared drive created:", bulletize(map_cli(out))))
+  drive_bullets(c("Shared drive created:", bulletize(gargle_map_cli(out))))
   invisible(out)
 }

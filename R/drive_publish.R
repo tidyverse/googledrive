@@ -61,7 +61,7 @@ drive_change_publish <- function(file,
       "Only native Google files can be published.",
       "{.arg file} includes {?a/} file{?s} \\
        with non-native MIME type{cli::qty(nrow(file))}",
-      bulletize(map_cli(file, "{.drivepath <<name>>}: {.field <<mimeType>>}")),
+      bulletize(gargle_map_cli(file, "{.drivepath <<name>>}: {.field <<mimeType>>}")),
       "i" = "You can use {.fun drive_share} to change a file's sharing \\
              permissions."
     ))
@@ -84,7 +84,7 @@ drive_change_publish <- function(file,
   drive_bullets(c(
     cli::pluralize(
       "{cli::qty(n)}File{?s} now {if (publish) '' else 'NOT '}published:"),
-    bulletize(map_cli(file))
+    bulletize(gargle_map_cli(file))
   ))
   invisible(drive_reveal(file, "published"))
 }

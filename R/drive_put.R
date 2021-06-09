@@ -60,7 +60,7 @@ drive_put <- function(media,
   } else {
     drive_abort(c(
       "No file exists at the local {.arg media} path:",
-      bulletize(map_cli(media, "{.path <<x>>}"), bullet = "x")
+      bulletize(gargle_map_cli(media, "{.path <<x>>}"), bullet = "x")
     ))
   }
 
@@ -118,7 +118,7 @@ drive_put <- function(media,
     "Unclear what {.fun drive_put} should do. Exiting.",
     # drive_reveal_path() puts immediate parent, if specified, in the `path`
     # then we reveal `path`, instead of `name`
-    bulletize(map_cli(
+    bulletize(gargle_map_cli(
       drive_reveal_path(hits, ancestors = path),
       template = c(
         id_string = "<id:\u00a0<<id>>>", # \u00a0 is a nonbreaking space

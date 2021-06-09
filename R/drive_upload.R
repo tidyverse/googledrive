@@ -105,7 +105,7 @@ drive_upload <- function(media,
   } else {
     drive_abort(c(
       "No file exists at the local {.arg media} path:",
-      bulletize(map_cli(media, "{.path <<x>>}"), bullet = "x")
+      bulletize(gargle_map_cli(media, "{.path <<x>>}"), bullet = "x")
     ))
   }
 
@@ -153,7 +153,7 @@ drive_upload <- function(media,
     "Local file:",
     "*" = "{.path {media}}",
     "Uploaded into Drive file:",
-    bulletize(map_cli(out)),
+    bulletize(gargle_map_cli(out)),
     "With MIME type:",
     "*" = "{.field {pluck(out, 'drive_resource', 1, 'mimeType')}}"
   ))

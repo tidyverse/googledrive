@@ -115,9 +115,9 @@ drive_create <- function(name,
 
   drive_bullets(c(
     "Created Drive file:",
-    bulletize(map_cli(out)),
+    bulletize(gargle_map_cli(out)),
     "With MIME type:",
-    bulletize(map_cli(purrr::pluck(out, 'drive_resource', 1, 'mimeType')))
+    bulletize(gargle_map_cli(purrr::pluck(out, 'drive_resource', 1, 'mimeType')))
   ))
   invisible(out)
 }

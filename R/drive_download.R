@@ -62,7 +62,7 @@ drive_download <- function(file,
   if (!is.null(path) && file.exists(path) && !overwrite) {
     drive_abort(c(
       "Local {.arg path} already exists and overwrite is {.code FALSE}:",
-      bulletize(map_cli(path, "{.path <<x>>}"))
+      bulletize(gargle_map_cli(path, "{.path <<x>>}"))
     ))
   }
   file <- as_dribble(file)
@@ -113,7 +113,7 @@ drive_download <- function(file,
   if (success) {
     drive_bullets(c(
       "File downloaded:",
-      bulletize(map_cli(file)),
+      bulletize(gargle_map_cli(file)),
       "Saved locally as:",
       "*" = "{.path {path}}"
     ))
@@ -134,7 +134,7 @@ get_export_mime_type <- function(mime_type) {
   if (!any(m)) {
     drive_abort(c(
       "Not a recognized Google MIME type:",
-      bulletize(map_cli(mime_type), bullet = "x")
+      bulletize(gargle_map_cli(mime_type), bullet = "x")
     ))
   }
   .drive$translate_mime_types$mime_type_local[m]
@@ -150,9 +150,9 @@ verify_export_mime_type <- function(mime_type, export_type) {
     ## and use the human_type, if found
     drive_abort(c(
       "Cannot export Google file of type:",
-      bulletize(map_cli(mime_type)),
+      bulletize(gargle_map_cli(mime_type)),
       "as a file of type:",
-      bulletize(map_cli(export_type))
+      bulletize(gargle_map_cli(export_type))
     ))
   }
   export_type

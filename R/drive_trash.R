@@ -49,7 +49,7 @@ drive_toggle_trash <- function(file, trash) {
 
   drive_bullets(c(
     "{cli::qty(nrow(out))}File{?s} {VERBED}:",
-    bulletize(map_cli(out))
+    bulletize(gargle_map_cli(out))
   ))
 
   invisible(out)

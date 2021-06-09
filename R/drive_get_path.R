@@ -217,7 +217,7 @@ finalize <- function(dat, candidates) {
     drive_bullets(c(
       "!" = "Problem with {nrow(weird)} path{?s}: {problem}",
       # these really should be sub-bullets, but not possible at this time
-      bulletize(map_cli(weird[["orig_path"]], "{.path <<x>>}"), bullet = " ")
+      bulletize(gargle_map_cli(weird[["orig_path"]], "{.path <<x>>}"), bullet = " ")
     ))
   }
   report_weird_stuff(scratch, "unmatched", "no files found by this name")
@@ -233,7 +233,7 @@ finalize <- function(dat, candidates) {
       "!" = "{nrow(multis)} file{?s} in the output {?is/are} associated with \\
              more than 1 input {.arg path}",
       # these really should be sub-bullets, but not possible at this time
-      bulletize(map_cli(multis), bullet = " ")
+      bulletize(gargle_map_cli(multis), bullet = " ")
     ))
   }
 

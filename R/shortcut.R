@@ -162,7 +162,7 @@ shortcut_resolve <- function(file) {
         "Resolved {n_resolved} of {n_shortcuts} shortcut{?s} found \\
          in {nrow(out)} file{?s}:"
       },
-      bulletize(map_cli(
+      bulletize(gargle_map_cli(
         out[is_sc, ],
         template = c(
           id_shortcut_string = "<id:\u00a0<<id_shortcut>>>",

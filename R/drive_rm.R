@@ -56,7 +56,7 @@ drive_rm <- function(..., verbose = deprecated()) {
     successes <- file[out, ]
     drive_bullets(c(
       "File{?s} deleted:{cli::qty(nrow(successes))}",
-      bulletize(map_cli(successes))
+      bulletize(gargle_map_cli(successes))
     ))
   }
   # I'm not sure this ever comes up IRL?
@@ -65,7 +65,7 @@ drive_rm <- function(..., verbose = deprecated()) {
     failures <- file[!out, ]
     drive_bullets(c(
       "File{?s} NOT deleted:{cli::qty(nrow(failures))}",
-      bulletize(map_cli(failures))
+      bulletize(gargle_map_cli(failures))
     ))
   }
   invisible(out)

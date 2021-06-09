@@ -41,7 +41,7 @@ shared_drive_rm <- function(drive = NULL) {
     successes <- shared_drive[out, ]
     drive_bullets(c(
       "Shared drive{?s} deleted:{cli::qty(nrow(successes))}",
-      bulletize(map_cli(successes))
+      bulletize(gargle_map_cli(successes))
     ))
   }
   # I'm not sure this ever comes up IRL?
@@ -50,7 +50,7 @@ shared_drive_rm <- function(drive = NULL) {
     failures <- shared_drive[!out, ]
     drive_bullets(c(
       "Shared drive{?s} NOT deleted:{cli::qty(nrow(failures))}",
-      bulletize(map_cli(failures))
+      bulletize(gargle_map_cli(failures))
     ))
   }
   invisible(out)

@@ -22,8 +22,10 @@ Note, however, that the email associated with a token when it's cached is
 always determined from the token itself, never from this argument. Use \code{NA}
 or \code{FALSE} to match nothing and force the OAuth dance in the browser. Use
 \code{TRUE} to allow email auto-discovery, if exactly one matching token is
-found in the cache. Defaults to the option named "gargle_oauth_email",
-retrieved by \code{\link[gargle:gargle_options]{gargle_oauth_email()}}.}
+found in the cache. Specify just the domain with a glob pattern, e.g.
+\code{"*@example.com"}, to create code that "just works" for both
+\code{alice@example.com} and \code{bob@example.com}. Defaults to the option named
+"gargle_oauth_email", retrieved by \code{\link[gargle:gargle_options]{gargle_oauth_email()}}.}
 
 \item{path}{JSON identifying the service account, in one of the forms
 supported for the \code{txt} argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a
@@ -79,8 +81,12 @@ However, when necessary, this function allows the user to explicitly:
 are multiple cached tokens, this can clarify which one to use. It can
 also force googledrive to switch from one identity to another. If
 there's no cached token for the email, this triggers a return to the
-browser to choose the identity and give consent.
-\item Use a service account token.
+browser to choose the identity and give consent. You can specify just
+the domain by using a glob pattern. This means that a script
+containing \code{email = "*@example.com"} can be run without further
+tweaks on the machine of either \code{alice@example.com} or
+\code{bob@example.com}.
+\item Use a service account token or workload identity federation.
 \item Bring their own \link[httr:Token-class]{Token2.0}.
 \item Specify non-default behavior re: token caching and out-of-bound
 authentication.
