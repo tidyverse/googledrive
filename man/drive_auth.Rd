@@ -36,8 +36,8 @@ For certain token flows, the
 \code{"https://www.googleapis.com/auth/userinfo.email"} scope is unconditionally
 included. This grants permission to retrieve the email address associated
 with a token; gargle uses this to index cached OAuth tokens. This grants no
-permission to view or send email. It is considered a low value scope and
-does not appear on the consent screen.}
+permission to view or send email and is generally considered a low-value
+scope.}
 
 \item{cache}{Specifies the OAuth token cache. Defaults to the option named
 "gargle_oauth_cache", retrieved via \code{\link[gargle:gargle_options]{gargle_oauth_cache()}}.}
