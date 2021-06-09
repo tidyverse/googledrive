@@ -195,7 +195,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_mkdir.html">drive_mkdir</a></span><span class="op">(</span><span class="st">"upload-into-me-article-demo"</span><span class="op">)</span>
 <span class="co">#&gt; Created Drive file:</span>
-<span class="co">#&gt; • 'upload-into-me-article-demo' &lt;id: 1sgM0HzXchMmronF0bSxcFnAd9TzBWjEW&gt;</span>
+<span class="co">#&gt; • 'upload-into-me-article-demo' &lt;id: 1AaTSJDrPf5mAtEePVsB42WV1sWi9Bgle&gt;</span>
 <span class="co">#&gt; With MIME type:</span>
 <span class="co">#&gt; • 'application/vnd.google-apps.folder'</span>
 <span class="fu"><a href="../../reference/googledrive-configuration.html">with_drive_quiet</a></span><span class="op">(</span>
@@ -207,10 +207,10 @@
 <span class="co">#&gt; # A dribble: 4 x 3</span>
 <span class="co">#&gt;   name        id                                drive_resource   </span>
 <span class="co">#&gt; * &lt;chr&gt;       &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 chicken.txt 147EgS3ISViYAJuipo6WCfAwWvC_OXCd3 &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 2 chicken.pdf 1VLZEJ3CxkX6ZUdnhp2wFsQlynyvjINh0 &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 3 chicken.jpg 1AcCsYO9_6NeupWGYcA3VRQn_4ResKJJE &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 4 chicken.csv 1B4rAJf5OsE5akrpc99Mc5wTk5grWXGPr &lt;named list [38]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 chicken.txt 1zsMnr1bDXJuYm8eanjcK1DkBVqWAoDPH &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 2 chicken.pdf 1ZqLHXlaJggUuGRNuuXTiKOxSTBv4POOY &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 3 chicken.jpg 164BFb_RIj9phZUwxe75bvkvNUgPogMMc &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 4 chicken.csv 1k6UVA-855zQKvlhGD97SOBBfDVI2HNm1 &lt;named list [38]&gt;</span></code></pre></div>
 <p>Now let’s reflect on the <code>files</code> object returned by this operation. <code>files</code> is a list of <strong>dribbles</strong>, one per uploaded file.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">files</span>, max.level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
@@ -226,10 +226,10 @@
 <span class="co">#&gt; # A dribble: 4 x 3</span>
 <span class="co">#&gt;   name        id                                drive_resource   </span>
 <span class="co">#&gt; * &lt;chr&gt;       &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 chicken.csv 1B4rAJf5OsE5akrpc99Mc5wTk5grWXGPr &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 2 chicken.jpg 1AcCsYO9_6NeupWGYcA3VRQn_4ResKJJE &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 3 chicken.pdf 1VLZEJ3CxkX6ZUdnhp2wFsQlynyvjINh0 &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 4 chicken.txt 147EgS3ISViYAJuipo6WCfAwWvC_OXCd3 &lt;named list [38]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 chicken.csv 1k6UVA-855zQKvlhGD97SOBBfDVI2HNm1 &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 2 chicken.jpg 164BFb_RIj9phZUwxe75bvkvNUgPogMMc &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 3 chicken.pdf 1ZqLHXlaJggUuGRNuuXTiKOxSTBv4POOY &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 4 chicken.txt 1zsMnr1bDXJuYm8eanjcK1DkBVqWAoDPH &lt;named list [38]&gt;</span></code></pre></div>
 <p>Below we show another way to finesse this by using a variant of <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> that does this for us, namely <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code>.</p>
 </div>
 <div id="rename" class="section level3">
@@ -238,27 +238,27 @@
 <p>Imagine that we now wish these file names had a date prefix. First, form the new names. We use <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code> for string interpolation but you could also use <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code>. Second, we map over two inputs: the list of dribbles from above and the vector of new names.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="va">new_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"{Sys.Date()}_{basename(local_files)}"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; 2021-06-08_chicken.csv</span>
-<span class="co">#&gt; 2021-06-08_chicken.jpg</span>
-<span class="co">#&gt; 2021-06-08_chicken.pdf</span>
-<span class="co">#&gt; 2021-06-08_chicken.txt</span>
+<span class="co">#&gt; 2021-06-09_chicken.csv</span>
+<span class="co">#&gt; 2021-06-09_chicken.jpg</span>
+<span class="co">#&gt; 2021-06-09_chicken.pdf</span>
+<span class="co">#&gt; 2021-06-09_chicken.txt</span>
 <span class="va">files_dribble</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2_dfr</a></span><span class="op">(</span><span class="va">files</span>, <span class="va">new_names</span>, <span class="va">drive_rename</span><span class="op">)</span>
 <span class="co">#&gt; Original file:</span>
-<span class="co">#&gt; • 'chicken.csv' &lt;id: 1B4rAJf5OsE5akrpc99Mc5wTk5grWXGPr&gt;</span>
+<span class="co">#&gt; • 'chicken.csv' &lt;id: 1k6UVA-855zQKvlhGD97SOBBfDVI2HNm1&gt;</span>
 <span class="co">#&gt; Has been renamed:</span>
-<span class="co">#&gt; • '2021-06-08_chicken.csv' &lt;id: 1B4rAJf5OsE5akrpc99Mc5wTk5grWXGPr&gt;</span>
+<span class="co">#&gt; • '2021-06-09_chicken.csv' &lt;id: 1k6UVA-855zQKvlhGD97SOBBfDVI2HNm1&gt;</span>
 <span class="co">#&gt; Original file:</span>
-<span class="co">#&gt; • 'chicken.jpg' &lt;id: 1AcCsYO9_6NeupWGYcA3VRQn_4ResKJJE&gt;</span>
+<span class="co">#&gt; • 'chicken.jpg' &lt;id: 164BFb_RIj9phZUwxe75bvkvNUgPogMMc&gt;</span>
 <span class="co">#&gt; Has been renamed:</span>
-<span class="co">#&gt; • '2021-06-08_chicken.jpg' &lt;id: 1AcCsYO9_6NeupWGYcA3VRQn_4ResKJJE&gt;</span>
+<span class="co">#&gt; • '2021-06-09_chicken.jpg' &lt;id: 164BFb_RIj9phZUwxe75bvkvNUgPogMMc&gt;</span>
 <span class="co">#&gt; Original file:</span>
-<span class="co">#&gt; • 'chicken.pdf' &lt;id: 1VLZEJ3CxkX6ZUdnhp2wFsQlynyvjINh0&gt;</span>
+<span class="co">#&gt; • 'chicken.pdf' &lt;id: 1ZqLHXlaJggUuGRNuuXTiKOxSTBv4POOY&gt;</span>
 <span class="co">#&gt; Has been renamed:</span>
-<span class="co">#&gt; • '2021-06-08_chicken.pdf' &lt;id: 1VLZEJ3CxkX6ZUdnhp2wFsQlynyvjINh0&gt;</span>
+<span class="co">#&gt; • '2021-06-09_chicken.pdf' &lt;id: 1ZqLHXlaJggUuGRNuuXTiKOxSTBv4POOY&gt;</span>
 <span class="co">#&gt; Original file:</span>
-<span class="co">#&gt; • 'chicken.txt' &lt;id: 147EgS3ISViYAJuipo6WCfAwWvC_OXCd3&gt;</span>
+<span class="co">#&gt; • 'chicken.txt' &lt;id: 1zsMnr1bDXJuYm8eanjcK1DkBVqWAoDPH&gt;</span>
 <span class="co">#&gt; Has been renamed:</span>
-<span class="co">#&gt; • '2021-06-08_chicken.txt' &lt;id: 147EgS3ISViYAJuipo6WCfAwWvC_OXCd3&gt;</span></code></pre></div>
+<span class="co">#&gt; • '2021-06-09_chicken.txt' &lt;id: 1zsMnr1bDXJuYm8eanjcK1DkBVqWAoDPH&gt;</span></code></pre></div>
 <p>We use <code><a href="https://purrr.tidyverse.org/reference/map2.html">purrr::map2_dfr()</a></code> to work through <code>files</code>, the list of dribbles (= Drive files), and <code>new_names</code>, the vector of new names, and row bind the returned dribbles into a single dribble holding all files.</p>
 <p>Let’s check on the contents of this folder again to confirm the new names:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -266,20 +266,20 @@
 <span class="co">#&gt; # A dribble: 4 x 3</span>
 <span class="co">#&gt;   name                   id                                drive_resource   </span>
 <span class="co">#&gt; * &lt;chr&gt;                  &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 2021-06-08_chicken.txt 147EgS3ISViYAJuipo6WCfAwWvC_OXCd3 &lt;named list [39]&gt;</span>
-<span class="co">#&gt; 2 2021-06-08_chicken.pdf 1VLZEJ3CxkX6ZUdnhp2wFsQlynyvjINh0 &lt;named list [39]&gt;</span>
-<span class="co">#&gt; 3 2021-06-08_chicken.jpg 1AcCsYO9_6NeupWGYcA3VRQn_4ResKJJE &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 4 2021-06-08_chicken.csv 1B4rAJf5OsE5akrpc99Mc5wTk5grWXGPr &lt;named list [38]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 2021-06-09_chicken.txt 1zsMnr1bDXJuYm8eanjcK1DkBVqWAoDPH &lt;named list [39]&gt;</span>
+<span class="co">#&gt; 2 2021-06-09_chicken.pdf 1ZqLHXlaJggUuGRNuuXTiKOxSTBv4POOY &lt;named list [39]&gt;</span>
+<span class="co">#&gt; 3 2021-06-09_chicken.jpg 164BFb_RIj9phZUwxe75bvkvNUgPogMMc &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 4 2021-06-09_chicken.csv 1k6UVA-855zQKvlhGD97SOBBfDVI2HNm1 &lt;named list [38]&gt;</span></code></pre></div>
 <p>Let’s confirm that, by using <code>map2_df2()</code> instead of <code><a href="https://purrr.tidyverse.org/reference/map2.html">map2()</a></code>, we got a single dribble back, instead of a list of one-row dribbles:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">files_dribble</span>
 <span class="co">#&gt; # A dribble: 4 x 3</span>
 <span class="co">#&gt;   name                   id                                drive_resource   </span>
 <span class="co">#&gt; * &lt;chr&gt;                  &lt;chr&gt;                             &lt;list&gt;           </span>
-<span class="co">#&gt; 1 2021-06-08_chicken.csv 1B4rAJf5OsE5akrpc99Mc5wTk5grWXGPr &lt;named list [38]&gt;</span>
-<span class="co">#&gt; 2 2021-06-08_chicken.jpg 1AcCsYO9_6NeupWGYcA3VRQn_4ResKJJE &lt;named list [40]&gt;</span>
-<span class="co">#&gt; 3 2021-06-08_chicken.pdf 1VLZEJ3CxkX6ZUdnhp2wFsQlynyvjINh0 &lt;named list [39]&gt;</span>
-<span class="co">#&gt; 4 2021-06-08_chicken.txt 147EgS3ISViYAJuipo6WCfAwWvC_OXCd3 &lt;named list [39]&gt;</span></code></pre></div>
+<span class="co">#&gt; 1 2021-06-09_chicken.csv 1k6UVA-855zQKvlhGD97SOBBfDVI2HNm1 &lt;named list [38]&gt;</span>
+<span class="co">#&gt; 2 2021-06-09_chicken.jpg 164BFb_RIj9phZUwxe75bvkvNUgPogMMc &lt;named list [40]&gt;</span>
+<span class="co">#&gt; 3 2021-06-09_chicken.pdf 1ZqLHXlaJggUuGRNuuXTiKOxSTBv4POOY &lt;named list [39]&gt;</span>
+<span class="co">#&gt; 4 2021-06-09_chicken.txt 1zsMnr1bDXJuYm8eanjcK1DkBVqWAoDPH &lt;named list [39]&gt;</span></code></pre></div>
 <p>What if you wanted to get a list back, because your downstream operations include yet more <code><a href="https://purrr.tidyverse.org/reference/map.html">map()</a></code>ing? Then you would use <code><a href="https://purrr.tidyverse.org/reference/map2.html">map2()</a></code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">files_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span><span class="va">files</span>, <span class="va">new_names</span>, <span class="va">drive_rename</span><span class="op">)</span></code></pre></div>
@@ -297,7 +297,7 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">folder</span><span class="op">)</span>
 <span class="co">#&gt; File deleted:</span>
-<span class="co">#&gt; • 'upload-into-me-article-demo' &lt;id: 1sgM0HzXchMmronF0bSxcFnAd9TzBWjEW&gt;</span></code></pre></div>
+<span class="co">#&gt; • 'upload-into-me-article-demo' &lt;id: 1AaTSJDrPf5mAtEePVsB42WV1sWi9Bgle&gt;</span></code></pre></div>
 </div>
 </div>
   </div>
