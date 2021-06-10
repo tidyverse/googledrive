@@ -250,12 +250,12 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
     <pre class="examples"><span class='r-in'><span class='co'># Create folder named 'ghi', then another below named it 'jkl' and star it</span></span>
 <span class='r-in'><span class='va'>ghi</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"ghi"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>ghi</span> <span style='color: #555555;'>&lt;id: 1-fGxyicVLFc1Xl9G8vJ3lLuSlcYoT9do&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>ghi</span> <span style='color: #555555;'>&lt;id: 1wI92mg6CFKa6vuYYmodRNsGt9Nw7Sh-m&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.folder</span></span>
 <span class='r-in'><span class='va'>jkl</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"ghi/jkl"</span>, starred <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>jkl</span> <span style='color: #555555;'>&lt;id: 14Rpg13ZS9Z22W8qRysA9kCSiy6r3yGGy&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>jkl</span> <span style='color: #555555;'>&lt;id: 1BTuaQ_XAPQdxWj_wEA6XhILd2aX-MC_8&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.folder</span></span>
 <span class='r-in'></span>
@@ -266,7 +266,7 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'><span class='co'># Another way to create folder 'mno' in folder 'ghi'</span></span>
 <span class='r-in'><span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"mno"</span>, path <span class='op'>=</span> <span class='st'>"ghi"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>mno</span> <span style='color: #555555;'>&lt;id: 1cwdGn_LFUW4ChXABpr11MgAxR01ivS8t&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>mno</span> <span style='color: #555555;'>&lt;id: 1un5VWDjun4P_riH8URbyd7EpALfu3-mp&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.folder</span></span>
 <span class='r-in'></span>
@@ -275,7 +275,7 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'><span class='co'># and setting the new folder's description</span></span>
 <span class='r-in'><span class='va'>pqr</span> <span class='op'>&lt;-</span> <span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"pqr"</span>, path <span class='op'>=</span> <span class='va'>ghi</span>, description <span class='op'>=</span> <span class='st'>"I am a folder"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>pqr</span> <span style='color: #555555;'>&lt;id: 1CDxDP6dpadbB4S2g1P_8SkMLOiVD3bCx&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>pqr</span> <span style='color: #555555;'>&lt;id: 1VR6NCwPzeNpGKz1UV4jJLbp3CyNZJtHk&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.folder</span></span>
 <span class='r-in'></span>
@@ -287,19 +287,19 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'><span class='co'># THIS WILL ERROR!</span></span>
 <span class='r-in'><span class='fu'><a href='drive_create.html'>drive_create</a></span><span class='op'>(</span><span class='st'>"name-squatter"</span>, path <span class='op'>=</span> <span class='va'>ghi</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>name-squatter</span> <span style='color: #555555;'>&lt;id: 1jjyY09T2CYwIAkpbc2NHWwIMJB7ADZh4&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>name-squatter</span> <span style='color: #555555;'>&lt;id: 1u9fJNvNxd29bj0GPJczNwAHXjdNq0T6k&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/octet-stream</span></span>
 <span class='r-in'><span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"name-squatter"</span>, path <span class='op'>=</span> <span class='va'>ghi</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
 <span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error:</span> <span style='font-weight: bold;'>1 item already exists at the target filepath and </span><span style='color: #262626; background-color: #DADADA; font-weight: bold;'>`overwrite = FALSE`</span><span style='font-weight: bold;'>:</span></span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>name-squatter</span> <span style='color: #555555;'>&lt;id: 1jjyY09T2CYwIAkpbc2NHWwIMJB7ADZh4&gt;</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>name-squatter</span> <span style='color: #555555;'>&lt;id: 1u9fJNvNxd29bj0GPJczNwAHXjdNq0T6k&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># `overwrite = TRUE` moves the existing item to trash, then proceeds</span></span>
 <span class='r-in'><span class='fu'>drive_mkdir</span><span class='op'>(</span><span class='st'>"name-squatter"</span>, path <span class='op'>=</span> <span class='va'>ghi</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> File trashed:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>name-squatter</span> <span style='color: #555555;'>&lt;id: 1jjyY09T2CYwIAkpbc2NHWwIMJB7ADZh4&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>name-squatter</span> <span style='color: #555555;'>&lt;id: 1u9fJNvNxd29bj0GPJczNwAHXjdNq0T6k&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>name-squatter</span> <span style='color: #555555;'>&lt;id: 1ArpERDtGgN0AsliEP777s5Knd0mwNwgy&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>name-squatter</span> <span style='color: #555555;'>&lt;id: 131ivBfrC0bO-3Rirf5VpU4z0spVffEUq&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.folder</span></span>
 <span class='r-in'></span>
@@ -308,15 +308,15 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 4 x 3</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name          id                                drive_resource   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                             <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>           </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> name-squatter 1ArpERDtGgN0AsliEP777s5Knd0mwNwgy <span style='color: #949494;'>&lt;named list [32]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> pqr           1CDxDP6dpadbB4S2g1P_8SkMLOiVD3bCx <span style='color: #949494;'>&lt;named list [33]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> mno           1cwdGn_LFUW4ChXABpr11MgAxR01ivS8t <span style='color: #949494;'>&lt;named list [32]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> jkl           14Rpg13ZS9Z22W8qRysA9kCSiy6r3yGGy <span style='color: #949494;'>&lt;named list [32]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> name-squatter 131ivBfrC0bO-3Rirf5VpU4z0spVffEUq <span style='color: #949494;'>&lt;named list [32]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> pqr           1VR6NCwPzeNpGKz1UV4jJLbp3CyNZJtHk <span style='color: #949494;'>&lt;named list [33]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> mno           1un5VWDjun4P_riH8URbyd7EpALfu3-mp <span style='color: #949494;'>&lt;named list [32]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> jkl           1BTuaQ_XAPQdxWj_wEA6XhILd2aX-MC_8 <span style='color: #949494;'>&lt;named list [32]&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># clean up</span></span>
 <span class='r-in'><span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>ghi</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> File deleted:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>ghi</span> <span style='color: #555555;'>&lt;id: 1-fGxyicVLFc1Xl9G8vJ3lLuSlcYoT9do&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>ghi</span> <span style='color: #555555;'>&lt;id: 1wI92mg6CFKa6vuYYmodRNsGt9Nw7Sh-m&gt;</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
