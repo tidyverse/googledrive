@@ -59,17 +59,18 @@ wrapper around \code{\link[gargle:token_fetch]{gargle::token_fetch()}}.
 
 By default, you are directed to a web browser, asked to sign in to your
 Google account, and to grant googledrive permission to operate on your
-behalf with Google Drive. By default, these user credentials are cached in a
-folder below your home directory, \verb{~/.R/gargle/gargle-oauth}, from where
+behalf with Google Drive. By default, with your permission, these user
+credentials are cached in a folder below your home directory, from where
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
 tokens are less likely to be synced to the cloud by accident.
 
-If you are interacting with R from a web-based platform, like RStudio
-Server or Cloud, you need to use a variant of this flow, known as
-out-of-band auth ("oob"). If this does not happen automatically, you
-can request it yourself with \code{use_oob = TRUE} or, more persistently, by
-setting an option via \code{options(gargle_oob_default = TRUE)}.
+If you are interacting with R within a browser (applies to RStudio Server,
+RStudio Workbench, and RStudio Cloud), you need a variant of this flow,
+known as out-of-band auth ("oob"). If this does not happen
+automatically, you can request it yourself with \code{use_oob = TRUE} or,
+more persistently, by setting an option via
+\code{options(gargle_oob_default = TRUE)}.
 }
 \details{
 Most users, most of the time, do not need to call \code{drive_auth()}
@@ -90,6 +91,7 @@ tweaks on the machine of either \code{alice@example.com} or
 \item Bring their own \link[httr:Token-class]{Token2.0}.
 \item Specify non-default behavior re: token caching and out-of-bound
 authentication.
+\item Customize scopes.
 }
 
 For details on the many ways to find a token, see
