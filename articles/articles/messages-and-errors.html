@@ -145,7 +145,7 @@
 <div id="user-facing-messages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#user-facing-messages" class="anchor"></a>User-facing messages</h2>
-<p>Everything should be emitted by helpers in <code>utils-ui.R</code>: specifically, <code>drive_bullets()</code> (and, for errors, <code>drive_abort()</code>). These helpers are all wrappers around cli functions, such as <code><a href="https://rdrr.io/pkg/cli/man/cli_bullets.html">cli::cli_bullets()</a></code>.</p>
+<p>Everything should be emitted by helpers in <code>utils-ui.R</code>: specifically, <code>drive_bullets()</code> (and, for errors, <code>drive_abort()</code>). These helpers are all wrappers around cli functions, such as <code><a href="https://cli.r-lib.org/reference/cli_bullets.html">cli::cli_bullets()</a></code>.</p>
 <p><em>These may not demo well via pkgdown, but the interactive experience is nice.</em></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
@@ -331,7 +331,7 @@
 <div id="errors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#errors" class="anchor"></a>Errors</h2>
-<p>I am currently using <code><a href="https://rdrr.io/pkg/cli/man/cli_abort.html">cli::cli_abort()</a></code>, which is present in the dev version of cli (as of late May 2021, cli version 2.5.0.9000).</p>
+<p>I am currently using <code><a href="https://cli.r-lib.org/reference/cli_abort.html">cli::cli_abort()</a></code>, which is present in the dev version of cli (as of late May 2021, cli version 2.5.0.9000).</p>
 <p>It’s wrapped as <code>drive_abort()</code>, for the same reason as <code>drive_bullets()</code>, namely to apply some package-wide style tweaks.</p>
 <p>The mechanics of <code>drive_abort()</code> usage are basically the same as <code>drive_bullets()</code>.</p>
 </div>
