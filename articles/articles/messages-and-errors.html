@@ -268,40 +268,40 @@
 <li>Truncate this vector in an aesthetically pleasing way</li>
 <li>Apply names to this vector to get the desired bullet points</li>
 </ul>
-<p><code><a href="../../reference/map_cli.html">map_cli()</a></code> is an internal generic that turns an object into a vector of strings with cli markup. Currently <code><a href="../../reference/map_cli.html">map_cli()</a></code> has methods for <code>character</code> and <code>dribble</code> (and <code>NULL</code> and a <code>default</code>).</p>
+<p><code>gargle_map_cli()</code> is a new generic in gargle that turns an object into a vector of strings with cli markup. Currently gargle exports methods for <code>character</code> (and <code>NULL</code> and a <code>default</code>) and googlesheets4 defines a method for <code>dribble</code>. This is likely to be replaced by something in cli itself in due course.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/map_cli.html">map_cli</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; [1] "{.field a}" "{.field b}" "{.field c}"</span></code></pre></div>
-<p>By default <code>map_cli.character()</code> just applies the <code>.field</code> style, i.e. the template is <code>"{.field &lt;&lt;x&gt;&gt;}"</code>. But the template can be customized, if you need something else. Note that we use non-standard glue delimiters (<code>&lt;&lt;</code> and <code>&gt;&gt;</code>, by default), because we are interpolating into a string with glue/cli markup, where <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> has the usual meaning.</p>
+<p>By default <code>gargle_map_cli.character()</code> just applies the <code>.field</code> style, i.e. the template is <code>"{.field &lt;&lt;x&gt;&gt;}"</code>. But the template can be customized, if you need something else. Note that we use non-standard glue delimiters (<code>&lt;&lt;</code> and <code>&gt;&gt;</code>, by default), because we are interpolating into a string with glue/cli markup, where <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> has the usual meaning.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/map_cli.html">map_cli</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, template <span class="op">=</span> <span class="st">"how about a path {.path &lt;&lt;x&gt;&gt;}?"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, template <span class="op">=</span> <span class="st">"how about a path {.path &lt;&lt;x&gt;&gt;}?"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "how about a path {.path d}?" "how about a path {.path e}?"</span>
 <span class="co">#&gt; [3] "how about a path {.path f}?"</span></code></pre></div>
-<p>The <code>map_cli.dribble()</code> method makes a cli-marked up string for each row of the dribble, i.e. for each Drive file.</p>
+<p>The <code>gargle_map_cli.dribble()</code> method makes a cli-marked up string for each row of the dribble, i.e. for each Drive file.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-<span class="fu"><a href="../../reference/map_cli.html">map_cli</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
+<span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
 <span class="co">#&gt; [1] "{.drivepath Rlogo.pdf} {cli::col_grey('&lt;id: 1opPZyo4WUiue56qlF8SO5ipaTJwPLzZg&gt;')}"          </span>
 <span class="co">#&gt; [2] "{.drivepath THANKS} {cli::col_grey('&lt;id: 1JCQ06Wj6AjntiyjnHsXmmcHZWCkBNgBJ&gt;')}"             </span>
 <span class="co">#&gt; [3] "{.drivepath googledrive-NEWS.md} {cli::col_grey('&lt;id: 1wMnFwFSIG0eQ4UUUEbn6-udF3GoKY3xN&gt;')}"</span>
 <span class="co">#&gt; [4] "{.drivepath def} {cli::col_grey('&lt;id: 12xjsE3eIf84VSFF5hNhSEOnQF8DDSHkc&gt;')}"                </span>
 <span class="co">#&gt; [5] "{.drivepath abc} {cli::col_grey('&lt;id: 1qkS667DEnvDzTuVBSyj5NeGzIGbrAy9Q&gt;')}"</span></code></pre></div>
-<p><code>map_cli.dribble()</code> also allows a custom template, but it’s a more complicated and less common situation than for <code>character</code>. We won’t get into that here. (I don’t consider the dribble styling to be finalized yet.)</p>
-<p>The result of <code><a href="../../reference/map_cli.html">map_cli()</a></code> then gets processed with <code>bulletize()</code>, which adds the bullet-specifying names and does aesthetically pleasing truncation.</p>
+<p><code>gargle_map_cli.dribble()</code> also allows a custom template, but it’s a more complicated and less common situation than for <code>character</code>. We won’t get into that here. (I don’t consider the dribble styling to be finalized yet.)</p>
+<p>The result of <code>gargle_map_cli()</code> then gets processed with <code><a href="https://gargle.r-lib.org/reference/bulletize.html">gargle::bulletize()</a></code>, which adds the bullet-specifying names and does aesthetically pleasing truncation.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">bulletize</span><span class="op">(</span><span class="fu"><a href="../../reference/map_cli.html">map_cli</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;               *               *               *               *               * </span>
 <span class="co">#&gt;    "{.field a}"    "{.field b}"    "{.field c}"    "{.field d}"    "{.field e}" </span>
 <span class="co">#&gt;                 </span>
 <span class="co">#&gt; "… and 21 more"</span>
 
-<span class="fu">bulletize</span><span class="op">(</span><span class="fu"><a href="../../reference/map_cli.html">map_cli</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"x"</span>, n_show <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"x"</span>, n_show <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;               x               x                 </span>
 <span class="co">#&gt;    "{.field a}"    "{.field b}" "… and 24 more"</span>
 
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"These are surprising things:"</span>,
-  <span class="fu">bulletize</span><span class="op">(</span><span class="fu"><a href="../../reference/map_cli.html">map_cli</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"!"</span><span class="op">)</span>
+  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"!"</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; These are surprising things:</span>
 <span class="co">#&gt; ! 'a'</span>
@@ -315,7 +315,7 @@
 
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"Some Drive files:"</span>,
-  <span class="fu">bulletize</span><span class="op">(</span><span class="fu"><a href="../../reference/map_cli.html">map_cli</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Some Drive files:</span>
 <span class="co">#&gt; • 'Rlogo.pdf' &lt;id: 1opPZyo4WUiue56qlF8SO5ipaTJwPLzZg&gt;</span>
@@ -324,8 +324,8 @@
 <span class="co">#&gt; • 'def' &lt;id: 12xjsE3eIf84VSFF5hNhSEOnQF8DDSHkc&gt;</span>
 <span class="co">#&gt; • 'abc' &lt;id: 1qkS667DEnvDzTuVBSyj5NeGzIGbrAy9Q&gt;</span>
 <span class="co">#&gt;   … and 5 more</span></code></pre></div>
-<p>it’s conceivable that cli will gain a better way of vectorization, but this works for now.</p>
-<p>Known dysfunction: it’s inefficient to <code><a href="../../reference/map_cli.html">map_cli()</a></code> over the whole object, then truncate with <code>bulletize()</code>. But it’s easy. There are contexts, like tibble printing, where formatting stuff that will never see the light of day is really punishing. But I’m not sure I really have to worry about that.</p>
+<p>It’s conceivable that cli will gain a better way of vectorization, but this works for now.</p>
+<p>Known dysfunction: it’s inefficient to <code>gargle_map_cli()</code> over the whole object, then truncate with <code>bulletize()</code>. But it’s easy. There are contexts, like tibble printing, where formatting stuff that will never see the light of day is really punishing. But I’m not sure I really have to worry about that.</p>
 </div>
 </div>
 <div id="errors" class="section level2">
