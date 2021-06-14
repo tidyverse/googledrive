@@ -275,7 +275,7 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'><span class='co'># your 'My Drive' root folder and star it</span></span>
 <span class='r-in'><span class='va'>wordstar</span> <span class='op'>&lt;-</span> <span class='fu'>drive_create</span><span class='op'>(</span><span class='st'>"WordStar"</span>, type <span class='op'>=</span> <span class='st'>"document"</span>, starred <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>WordStar</span> <span style='color: #555555;'>&lt;id: 1uPwIr4mYlWII6f5RtvTi4LmiFmORiVC3eVgNm7rdMNA&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>WordStar</span> <span style='color: #555555;'>&lt;id: 1XP_llPRzalqOtWIkRvArFU0x4H1HBxd1gH3b5QDcpP4&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.document</span></span>
 <span class='r-in'></span>
@@ -291,7 +291,7 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'>  description <span class='op'>=</span> <span class='st'>"deeply nested bullet lists FTW"</span></span>
 <span class='r-in'><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>ExecuVision</span> <span style='color: #555555;'>&lt;id: 1O-wZUogVsUGu-zl1_ajk951EZKGol9OrMnDtBLz04lI&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>ExecuVision</span> <span style='color: #555555;'>&lt;id: 10ie5UYeFriPHRxHoN-c2XXkvSKjXlHjHvm5JHQmqXBQ&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.presentation</span></span>
 <span class='r-in'></span>
@@ -306,19 +306,19 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'><span class='co'># then create an empty new Google Sheet in it</span></span>
 <span class='r-in'><span class='va'>b4xl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_mkdir.html'>drive_mkdir</a></span><span class='op'>(</span><span class='st'>"b4xl"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>b4xl</span> <span style='color: #555555;'>&lt;id: 1Ck6IUWlZhWUt6ugK8ntwRbUw8OHOx1Ks&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>b4xl</span> <span style='color: #555555;'>&lt;id: 1pKUSXNYHqweO_KiObTN9xFjsl9pQ_aMc&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.folder</span></span>
 <span class='r-in'><span class='fu'>drive_create</span><span class='op'>(</span><span class='st'>"VisiCalc"</span>, path <span class='op'>=</span> <span class='va'>b4xl</span>, type <span class='op'>=</span> <span class='st'>"spreadsheet"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>VisiCalc</span> <span style='color: #555555;'>&lt;id: 1rzhCrTE5jeW03vgNJC_wIgymcOIz3aq7gl6YvFCCb9Y&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>VisiCalc</span> <span style='color: #555555;'>&lt;id: 1PINKe3QYj4k1edZmDCk_K2F4Rf0lEK2zOeeB2fFeRBI&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.spreadsheet</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Another way to create a Google Sheet in the folder 'b4xl'</span></span>
 <span class='r-in'><span class='fu'>drive_create</span><span class='op'>(</span><span class='st'>"b4xl/SuperCalc"</span>, type <span class='op'>=</span> <span class='st'>"spreadsheet"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>SuperCalc</span> <span style='color: #555555;'>&lt;id: 16Xt7MoY7-TVyoXTfweqd01hEDIetZ_X5GgqqbP2eUbA&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>SuperCalc</span> <span style='color: #555555;'>&lt;id: 1meh7A61zGMhDRW0hGZV2vakSvd0FnOnmsUV08VBh9S0&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.spreadsheet</span></span>
 <span class='r-in'></span>
@@ -326,7 +326,7 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-in'><span class='co'># this time specifying parent `path` as a character</span></span>
 <span class='r-in'><span class='fu'>drive_create</span><span class='op'>(</span><span class='st'>"Lotus 1-2-3"</span>, path <span class='op'>=</span> <span class='st'>"b4xl"</span>, type <span class='op'>=</span> <span class='st'>"spreadsheet"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>Lotus 1-2-3</span> <span style='color: #555555;'>&lt;id: 1K1-c1vpqlAzT4ARB53XfNIXAha056Sy6f4yf4p09Jdw&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>Lotus 1-2-3</span> <span style='color: #555555;'>&lt;id: 1S92SWsh9BKVA_k3xy_JFpP7j45A41uDoY0OUKuzhc3k&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/vnd.google-apps.spreadsheet</span></span>
 <span class='r-in'></span>
@@ -335,31 +335,31 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 3 x 3</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   name        id                                           drive_resource   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                        <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>           </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Lotus 1-2-3 1K1-c1vpqlAzT4ARB53XfNIXAha056Sy6f4yf4p09Jdw <span style='color: #949494;'>&lt;named list [34]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> SuperCalc   16Xt7MoY7-TVyoXTfweqd01hEDIetZ_X5GgqqbP2eUbA <span style='color: #949494;'>&lt;named list [34]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> VisiCalc    1rzhCrTE5jeW03vgNJC_wIgymcOIz3aq7gl6YvFCCb9Y <span style='color: #949494;'>&lt;named list [34]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Lotus 1-2-3 1S92SWsh9BKVA_k3xy_JFpP7j45A41uDoY0OUKuzhc3k <span style='color: #949494;'>&lt;named list [34]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> SuperCalc   1meh7A61zGMhDRW0hGZV2vakSvd0FnOnmsUV08VBh9S0 <span style='color: #949494;'>&lt;named list [34]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> VisiCalc    1PINKe3QYj4k1edZmDCk_K2F4Rf0lEK2zOeeB2fFeRBI <span style='color: #949494;'>&lt;named list [34]&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># `overwrite = FALSE` errors if file already exists at target filepath</span></span>
 <span class='r-in'><span class='co'># THIS WILL ERROR!</span></span>
 <span class='r-in'><span class='fu'>drive_create</span><span class='op'>(</span><span class='st'>"VisiCalc"</span>, path <span class='op'>=</span> <span class='va'>b4xl</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
 <span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error:</span> <span style='font-weight: bold;'>1 item already exists at the target filepath and </span><span style='color: #262626; background-color: #DADADA; font-weight: bold;'>`overwrite = FALSE`</span><span style='font-weight: bold;'>:</span></span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>VisiCalc</span> <span style='color: #555555;'>&lt;id: 1rzhCrTE5jeW03vgNJC_wIgymcOIz3aq7gl6YvFCCb9Y&gt;</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>VisiCalc</span> <span style='color: #555555;'>&lt;id: 1PINKe3QYj4k1edZmDCk_K2F4Rf0lEK2zOeeB2fFeRBI&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># `overwrite = TRUE` moves an existing file to trash, then proceeds</span></span>
 <span class='r-in'><span class='fu'>drive_create</span><span class='op'>(</span><span class='st'>"VisiCalc"</span>, path <span class='op'>=</span> <span class='va'>b4xl</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> File trashed:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>VisiCalc</span> <span style='color: #555555;'>&lt;id: 1rzhCrTE5jeW03vgNJC_wIgymcOIz3aq7gl6YvFCCb9Y&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>VisiCalc</span> <span style='color: #555555;'>&lt;id: 1PINKe3QYj4k1edZmDCk_K2F4Rf0lEK2zOeeB2fFeRBI&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Created Drive file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>VisiCalc</span> <span style='color: #555555;'>&lt;id: 1FPoaMN_zKV-Vyv2lDKOLKJqX8UaTk1vm&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>VisiCalc</span> <span style='color: #555555;'>&lt;id: 1j-DOKbVZiW4ku3glwEYc7QM8iaZYwfa7&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> With MIME type:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BB00;'>application/octet-stream</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># clean up</span></span>
 <span class='r-in'><span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='va'>wordstar</span>, <span class='va'>b4xl</span>, <span class='va'>execuvision</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Files deleted:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>WordStar</span> <span style='color: #555555;'>&lt;id: 1uPwIr4mYlWII6f5RtvTi4LmiFmORiVC3eVgNm7rdMNA&gt;</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>b4xl</span> <span style='color: #555555;'>&lt;id: 1Ck6IUWlZhWUt6ugK8ntwRbUw8OHOx1Ks&gt;</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>ExecuVision</span> <span style='color: #555555;'>&lt;id: 1O-wZUogVsUGu-zl1_ajk951EZKGol9OrMnDtBLz04lI&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>WordStar</span> <span style='color: #555555;'>&lt;id: 1XP_llPRzalqOtWIkRvArFU0x4H1HBxd1gH3b5QDcpP4&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>b4xl</span> <span style='color: #555555;'>&lt;id: 1pKUSXNYHqweO_KiObTN9xFjsl9pQ_aMc&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>ExecuVision</span> <span style='color: #555555;'>&lt;id: 10ie5UYeFriPHRxHoN-c2XXkvSKjXlHjHvm5JHQmqXBQ&gt;</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
