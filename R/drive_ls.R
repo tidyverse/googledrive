@@ -42,6 +42,11 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   params <- list2(...)
   if (is_shared_drive(path)) {
     params[["shared_drive"]] <- as_id(path)
+  } else {
+    shared_drive <- pluck(path, "drive_resource", 1, "driveId")
+    if (!is.null(shared_drive)) {
+      params[["shared_drive"]] <- params[["shared_drive"]] %||% as_id(shared_drive)
+    }
   }
 
   parent <- path[["id"]]
