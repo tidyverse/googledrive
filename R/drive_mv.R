@@ -2,6 +2,10 @@
 #'
 #' Move a Drive file to a different folder, give it a different name, or both.
 #'
+
+#' @seealso Makes a metadata-only requiest to the `files.update` endpoint:
+#'   * <https://developers.google.com/drive/v3/reference/files/update>
+
 #' @template file-singular
 #' @eval param_path(
 #'   thing = "file",
@@ -76,21 +80,10 @@ drive_mv <- function(file,
 
   # load (path, name) into params ... maybe
   parents_before <- pluck(file, "drive_resource", 1, "parents")
-  n_parents_before <- length(parents_before)
   if (!is.null(path)) {
     path <- as_parent(path)
     if (!path$id %in% parents_before) {
       params[["addParents"]] <- path$id
-      if (n_parents_before == 1) {
-        params[["removeParents"]] <- parents_before
-      } else if (n_parents_before > 1) {
-        warning(
-          "File started with multiple parents!\n",
-          "New parent folder has been added, but no existing parent has ",
-          "been removed.\n",
-          "Not clear which parent(s) should be removed."
-        )
-      }
     }
   }
   if (!is.null(name) && name != file$name) {
@@ -113,13 +106,11 @@ drive_mv <- function(file,
   params[["fields"]] <- "*"
   out <- drive_update_metadata(file, params)
 
-  parent_added <- !is.null(params[["addParents"]])
   actions <- c(
     renamed = !identical(out$name, file$name),
-    moved = parent_added && n_parents_before < 2,
-    `added to folder` = parent_added && n_parents_before > 1
+    moved = !is.null(params[["addParents"]])
   )
-  action = glue_collapse(names(actions)[actions], sep = ",", last = " and ")
+  action <- glue_collapse(names(actions)[actions], last = " and ")
 
   drive_bullets(c(
     "Original file:",
