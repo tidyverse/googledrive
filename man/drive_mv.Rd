@@ -102,3 +102,9 @@ drive_mv(file, path = "~/", name = "name-squatter", overwrite = TRUE)
 drive_rm(file, folder)
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Makes a metadata-only requiest to the \code{files.update} endpoint:
+\itemize{
+\item \url{https://developers.google.com/drive/v3/reference/files/update}
+}
+}
