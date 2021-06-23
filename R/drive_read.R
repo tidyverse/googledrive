@@ -268,7 +268,14 @@ choose_as <- function(mime_type) {
 
 # stubs for eventual calls to httr2 functions by these same names
 resp_body_string <- function(resp, encoding = NULL) {
-  httr::content(resp, as = "text", encoding = encoding)
+  out <- httr::content(resp, as = "text", encoding = encoding)
+  # Learned this fact the hard way (quoting from Wikipedia):
+  # Google Docs also adds a BOM when converting a Doc to a plain text file
+  # for download.
+  # https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8
+  # Therefore we remove such a BOM, if present
+  # UTF-8 representation of BOM: ef bb bf
+  sub("\uFEFF", "", out)
 }
 
 resp_body_raw <- function(resp) {
