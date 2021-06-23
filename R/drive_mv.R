@@ -3,7 +3,7 @@
 #' Move a Drive file to a different folder, give it a different name, or both.
 #'
 
-#' @seealso Makes a metadata-only requiest to the `files.update` endpoint:
+#' @seealso Makes a metadata-only request to the `files.update` endpoint:
 #'   * <https://developers.google.com/drive/v3/reference/files/update>
 
 #' @template file-singular
