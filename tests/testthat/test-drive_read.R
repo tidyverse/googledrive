@@ -62,4 +62,8 @@ test_that("drive_read() can handle non UTF-8 input, if informed", {
     names(imdb),
     c("Votes", "Rating", "Title", "Year", "Decade")
   )
+  leon <- "\u004C\u00E9\u006F\u006E"
+  expect_equal(imdb$Title[[1]], leon)
+  eight_and_a_half <- "\u0038\u00BD"
+  expect_equal(imdb$Title[[31]], eight_and_a_half)
 })
