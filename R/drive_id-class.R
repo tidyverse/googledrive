@@ -1,3 +1,29 @@
+new_drive_id <- function(x = character()) {
+  stopifnot(is.character(x))
+  structure(x, class = "drive_id")
+}
+
+validate_drive_id <- function(x) {
+  # among practitioners, It Is Known that file IDs have >= 25 characters
+  # but I'm not convinced the pros outweigh the cons re: checking length
+  # for example, in tests, it's nice to not worry about this
+  regex <- "^[a-zA-Z0-9_-]+$"
+  ok <- grepl(regex, x) | is.na(x)
+  if (all(ok)) {
+    return(x)
+  }
+
+  # pragmatism around cli styling a path that is the empty string
+  empty <- !nzchar(x)
+  x[empty] <- "\"\""
+
+  drive_abort(c(
+    "A {.cls drive_id} must match this regular expression: {.code {regex}}",
+    "Invalid input{?s}:{cli::qty(sum(!ok))}",
+    bulletize(gargle_map_cli(x[!ok]), bullet = "x")
+  ))
+}
+
 #' Extract and/or mark as file id
 #'
 #' @description Gets file ids from various inputs and marks them as such, to
@@ -40,7 +66,8 @@ as_id.data.frame <- function(x, ...) as_id(validate_dribble(new_dribble(x)))
 #' @export
 as_id.character <- function(x, ...) {
   if (length(x) == 0L) return(x)
-  structure(map_chr(x, get_one_id), class = "drive_id")
+  out <- map_chr(x, get_one_id)
+  validate_drive_id(new_drive_id(out))
 }
 
 ## we anticipate file-id-containing URLs in these forms:

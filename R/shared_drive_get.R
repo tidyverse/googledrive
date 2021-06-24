@@ -40,19 +40,14 @@ shared_drive_get <- function(name = NULL, id = NULL) {
   }
 
   stopifnot(is.character(id))
-  # TODO: use a batch requeset
+  # TODO: use a batch request
   as_dribble(map(as_id(id), get_one_shared_drive_id))
 }
 
 get_one_shared_drive_id <- function(id) {
-  id <- as_id(id)
   if (is.na(id)) {
     drive_abort("
       Can't {.fun shared_drive_get} a shared drive when {.arg id} is {.code NA}.")
-  }
-  if (!isTRUE(nzchar(id, keepNA = TRUE))) {
-    drive_abort("
-      Shared drive ids must not be {.code NA} and cannot be the empty string.")
   }
   request <- request_generate(
     endpoint = "drive.drives.get",

@@ -10,7 +10,9 @@
     Code
       drive_get(id = "")
     Error <rlang_error>
-      A <drive_id> can't be the empty string.
+      A <drive_id> must match this regular expression: `^[a-zA-Z0-9_-]+$`
+      Invalid input:
+      x '""'
 
 ---
 
