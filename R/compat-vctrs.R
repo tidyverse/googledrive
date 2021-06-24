@@ -30,24 +30,24 @@ vec_restore.dribble <- function(x, to, ...) {
 
 #' @export
 vec_ptype2.dribble.dribble <- function(x, y, ..., x_arg = "", y_arg = "") {
-  out <- vctrs::df_ptype2(x, y, ..., x_arg = x_arg, y_arg = y_arg)
+  out <- df_ptype2(x, y, ..., x_arg = x_arg, y_arg = y_arg)
   dribble_maybe_reconstruct(out)
 }
 #' @export
 vec_ptype2.dribble.tbl_df <- function(x, y, ..., x_arg = "", y_arg = "") {
-  vctrs::tib_ptype2(x, y, ..., x_arg = x_arg, y_arg = y_arg)
+  tib_ptype2(x, y, ..., x_arg = x_arg, y_arg = y_arg)
 }
 #' @export
 vec_ptype2.tbl_df.dribble <- function(x, y, ..., x_arg = "", y_arg = "") {
-  vctrs::tib_ptype2(x, y, ..., x_arg = x_arg, y_arg = y_arg)
+  tib_ptype2(x, y, ..., x_arg = x_arg, y_arg = y_arg)
 }
 #' @export
 vec_ptype2.dribble.data.frame <- function(x, y, ..., x_arg = "", y_arg = "") {
-  vctrs::tib_ptype2(x, y, ..., x_arg = x_arg, y_arg = y_arg)
+  tib_ptype2(x, y, ..., x_arg = x_arg, y_arg = y_arg)
 }
 #' @export
 vec_ptype2.data.frame.dribble <- function(x, y, ..., x_arg = "", y_arg = "") {
-  vctrs::tib_ptype2(x, y, ..., x_arg = x_arg, y_arg = y_arg)
+  tib_ptype2(x, y, ..., x_arg = x_arg, y_arg = y_arg)
 }
 
 # ------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ vec_ptype2.data.frame.dribble <- function(x, y, ..., x_arg = "", y_arg = "") {
 
 #' @export
 vec_cast.dribble.dribble <- function(x, to, ..., x_arg = "", to_arg = "") {
-  out <- vctrs::df_cast(x, to, ..., x_arg = x_arg, to_arg = to_arg)
+  out <- df_cast(x, to, ..., x_arg = x_arg, to_arg = to_arg)
   dribble_maybe_reconstruct(out)
 }
 #' @export
@@ -83,7 +83,7 @@ vec_cast.dribble.tbl_df <- function(x, to, ..., x_arg = "", to_arg = "") {
 }
 #' @export
 vec_cast.tbl_df.dribble <- function(x, to, ..., x_arg = "", to_arg = "") {
-  vctrs::tib_cast(x, to, ..., x_arg = x_arg, to_arg = to_arg)
+  tib_cast(x, to, ..., x_arg = x_arg, to_arg = to_arg)
 }
 #' @export
 vec_cast.dribble.data.frame <- function(x, to, ..., x_arg = "", to_arg = "") {
@@ -91,12 +91,12 @@ vec_cast.dribble.data.frame <- function(x, to, ..., x_arg = "", to_arg = "") {
 }
 #' @export
 vec_cast.data.frame.dribble <- function(x, to, ..., x_arg = "", to_arg = "") {
-  vctrs::df_cast(x, to, ..., x_arg = x_arg, to_arg = to_arg)
+  df_cast(x, to, ..., x_arg = x_arg, to_arg = to_arg)
 }
 
 # ------------------------------------------------------------------------------
 
 stop_incompatible_cast_dribble <- function(x, to, ..., x_arg, to_arg) {
   details <- "Can't cast to a <dribble> because the resulting structure is likely invalid."
-  vctrs::stop_incompatible_cast(x, to, x_arg = x_arg, to_arg = to_arg, details = details)
+  stop_incompatible_cast(x, to, x_arg = x_arg, to_arg = to_arg, details = details)
 }

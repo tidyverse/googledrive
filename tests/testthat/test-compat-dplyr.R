@@ -44,7 +44,7 @@ test_that("can add columns and retain dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
   x <- readRDS(test_file("just_a_dribble.rds"))
 
-  cols <- list(x = rep(1, vctrs::vec_size(x)))
+  cols <- list(x = rep(1, vec_size(x)))
 
   result <- dplyr::dplyr_col_modify(x, cols)
 
@@ -56,14 +56,14 @@ test_that("modifying dribble columns removes dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
   x <- readRDS(test_file("just_a_dribble.rds"))
 
-  cols <- list(name = rep(1L, vctrs::vec_size(x)))
+  cols <- list(name = rep(1L, vec_size(x)))
 
   result <- dplyr::dplyr_col_modify(x, cols)
 
   expect_bare_tibble(result)
   expect_identical(result$name, cols$name)
 
-  cols <- list(drive_resource = rep(list(a = "a"), vctrs::vec_size(x)))
+  cols <- list(drive_resource = rep(list(a = "a"), vec_size(x)))
 
   result <- dplyr::dplyr_col_modify(x, cols)
 
@@ -116,7 +116,7 @@ test_that("bind_cols() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
   x <- readRDS(test_file("just_a_dribble.rds"))
 
-  y <- tibble(x = rep(1, vctrs::vec_size(x)))
+  y <- tibble(x = rep(1, vec_size(x)))
   expect_dribble(dplyr::bind_cols(x, y))
 })
 

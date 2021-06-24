@@ -5,8 +5,8 @@
 test_that("vec_restore() returns a dribble when it should", {
   x <- readRDS(test_file("just_a_dribble.rds"))
 
-  expect_identical(vctrs::vec_restore(x, x), x)
-  expect_dribble(vctrs::vec_restore(x, x))
+  expect_identical(vec_restore(x, x), x)
+  expect_dribble(vec_restore(x, x))
 })
 
 test_that("vec_restore() returns dribble when row slicing", {
@@ -15,15 +15,15 @@ test_that("vec_restore() returns dribble when row slicing", {
   row1 <- x[1, ]
   row0 <- x[0, ]
 
-  expect_dribble(vctrs::vec_restore(row1, x))
-  expect_dribble(vctrs::vec_restore(row0, x))
+  expect_dribble(vec_restore(row1, x))
+  expect_dribble(vec_restore(row0, x))
 })
 
 test_that("vec_restore() returns bare tibble if `x` loses dribble cols", {
   x <- readRDS(test_file("just_a_dribble.rds"))
 
   col <- x[1]
-  expect_bare_tibble(vctrs::vec_restore(col, x))
+  expect_bare_tibble(vec_restore(col, x))
 })
 
 # vec_ptype2() ----
@@ -40,30 +40,30 @@ test_that("vec_ptype2() is working", {
   df <- data.frame(x = 1)
 
   # dribble-dribble
-  expect_identical(vctrs::vec_ptype2(x, x), vctrs::vec_slice(x, NULL))
+  expect_identical(vec_ptype2(x, x), vec_slice(x, NULL))
   expect_identical(
-    vctrs::vec_ptype2(x2, x3),
-    new_dribble(vctrs::df_ptype2(x2, x3))
+    vec_ptype2(x2, x3),
+    new_dribble(df_ptype2(x2, x3))
   )
 
   # dribble-tbl_df
   expect_identical(
-    vctrs::vec_ptype2(x, tbl),
-    vctrs::vec_ptype2(new_tibble0(x), tbl)
+    vec_ptype2(x, tbl),
+    vec_ptype2(new_tibble0(x), tbl)
   )
   expect_identical(
-    vctrs::vec_ptype2(tbl, x),
-    vctrs::vec_ptype2(tbl, new_tibble0(x))
+    vec_ptype2(tbl, x),
+    vec_ptype2(tbl, new_tibble0(x))
   )
 
   # dribble-df
   expect_identical(
-    vctrs::vec_ptype2(x, df),
-    vctrs::vec_ptype2(new_tibble0(x), df)
+    vec_ptype2(x, df),
+    vec_ptype2(new_tibble0(x), df)
   )
   expect_identical(
-    vctrs::vec_ptype2(df, x),
-    vctrs::vec_ptype2(df, new_tibble0(x))
+    vec_ptype2(df, x),
+    vec_ptype2(df, new_tibble0(x))
   )
 })
 
@@ -81,23 +81,23 @@ test_that("vec_cast() is working", {
   df <- as.data.frame(tbl)
 
   # dribble-dribble
-  expect_identical(vctrs::vec_cast(x, x), x)
+  expect_identical(vec_cast(x, x), x)
 
   x2_expect <- x
   x2_expect$y <- NA_real_
-  expect_identical(vctrs::vec_cast(x, x2), x2_expect)
+  expect_identical(vec_cast(x, x2), x2_expect)
 
   expect_error(
-    vctrs::vec_cast(x2, x3), class = "vctrs_error_cast_lossy_dropped"
+    vec_cast(x2, x3), class = "vctrs_error_cast_lossy_dropped"
   )
 
   # dribble-tbl_df
-  expect_identical(vctrs::vec_cast(x, tbl), tbl)
-  expect_error(vctrs::vec_cast(tbl, x), class = "vctrs_error_incompatible_type")
+  expect_identical(vec_cast(x, tbl), tbl)
+  expect_error(vec_cast(tbl, x), class = "vctrs_error_incompatible_type")
 
   # dribble-df
-  expect_identical(vctrs::vec_cast(x, df), df)
-  expect_error(vctrs::vec_cast(df, x), class = "vctrs_error_incompatible_type")
+  expect_identical(vec_cast(x, df), df)
+  expect_error(vec_cast(df, x), class = "vctrs_error_incompatible_type")
 })
 
 # vctrs methods ----
@@ -105,14 +105,14 @@ test_that("vec_cast() is working", {
 test_that("vec_ptype() returns a dribble", {
   x <- readRDS(test_file("just_a_dribble.rds"))
 
-  expect_dribble(vctrs::vec_ptype(x))
+  expect_dribble(vec_ptype(x))
 })
 
 test_that("vec_slice() generally returns a dribble", {
   x <- readRDS(test_file("just_a_dribble.rds"))
 
-  expect_dribble(vctrs::vec_slice(x, 0))
-  expect_dribble(vctrs::vec_slice(x, 1:2))
+  expect_dribble(vec_slice(x, 0))
+  expect_dribble(vec_slice(x, 1:2))
 })
 
 test_that("vec_c() works", {
@@ -120,9 +120,9 @@ test_that("vec_c() works", {
 
   tbl <- new_tibble0(x)
 
-  expect_identical(vctrs::vec_c(x), x)
-  expect_identical(vctrs::vec_c(x, x), new_dribble(vctrs::vec_c(tbl, tbl)))
-  expect_identical(vctrs::vec_c(x[1:5, ], x[6:10, ]), x)
+  expect_identical(vec_c(x), x)
+  expect_identical(vec_c(x, x), new_dribble(vec_c(tbl, tbl)))
+  expect_identical(vec_c(x[1:5, ], x[6:10, ]), x)
 })
 
 test_that("vec_rbind() works", {
@@ -130,12 +130,12 @@ test_that("vec_rbind() works", {
 
   tbl <- new_tibble0(x)
 
-  expect_identical(vctrs::vec_rbind(x), x)
+  expect_identical(vec_rbind(x), x)
   expect_identical(
-    vctrs::vec_rbind(x, x),
-    new_dribble(vctrs::vec_rbind(tbl, tbl))
+    vec_rbind(x, x),
+    new_dribble(vec_rbind(tbl, tbl))
   )
-  expect_identical(vctrs::vec_rbind(x[1:5, ], x[6:10, ]), x)
+  expect_identical(vec_rbind(x[1:5, ], x[6:10, ]), x)
 })
 
 test_that("vec_cbind() returns a bare tibble", {
@@ -145,13 +145,13 @@ test_that("vec_cbind() returns a bare tibble", {
 
   # Unlike vec_c() and vec_rbind(), the prototype of the output comes
   # from doing `x[0]`, which will drop the dribble class
-  expect_identical(vctrs::vec_cbind(x), vctrs::vec_cbind(tbl))
+  expect_identical(vec_cbind(x), vec_cbind(tbl))
   expect_identical(
-    vctrs::vec_cbind(x, x, .name_repair = "minimal"),
-    vctrs::vec_cbind(tbl, tbl, .name_repair = "minimal")
+    vec_cbind(x, x, .name_repair = "minimal"),
+    vec_cbind(tbl, tbl, .name_repair = "minimal")
   )
   expect_identical(
-    vctrs::vec_cbind(x, tbl, .name_repair = "minimal"),
-    vctrs::vec_cbind(tbl, tbl, .name_repair = "minimal")
+    vec_cbind(x, tbl, .name_repair = "minimal"),
+    vec_cbind(tbl, tbl, .name_repair = "minimal")
   )
 })
