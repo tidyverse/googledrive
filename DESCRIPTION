@@ -28,6 +28,7 @@ Imports:
     jsonlite,
     lifecycle,
     magrittr,
+    pillar,
     purrr (>= 0.2.3),
     rlang (>= 0.4.9),
     tibble (>= 2.0.0),
