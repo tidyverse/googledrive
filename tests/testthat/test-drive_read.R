@@ -1,5 +1,4 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-drive_read")
 nm_ <- nm_fun("TEST-drive_read", user_run = FALSE)
 
 # ---- clean ----
@@ -34,6 +33,9 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("drive_read() can extract text", {
+  skip_if_no_token()
+  skip_if_offline()
+
   suppressMessages(
     r_desc <- drive_read(nm_("DESC"))
   )
@@ -43,6 +45,9 @@ test_that("drive_read() can extract text", {
 })
 
 test_that("drive_read() works on a native Google file", {
+  skip_if_no_token()
+  skip_if_offline()
+
   suppressMessages(
     chicken_poem <- drive_read(nm_("chicken_doc"), type = "text/plain")
   )
@@ -54,6 +59,9 @@ test_that("drive_read() works on a native Google file", {
 })
 
 test_that("drive_read() can handle non UTF-8 input, if informed", {
+  skip_if_no_token()
+  skip_if_offline()
+
   suppressMessages(
     imdb <- drive_read(nm_("imdb_latin1_csv"), encoding = "latin1")
   )
