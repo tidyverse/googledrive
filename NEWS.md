@@ -82,6 +82,10 @@ In the current release, `verbose = FALSE` is still honored, but generates a warn
 
 ## Other changes
 
+* `drive_read()` is a new function that reads the content of a Drive file
+  directly into an R object, skipping the step of downloading to a local file
+  (#81).
+
 * `drive_reveal(what = "property_name")` now works for any property found in
   the file metadata stored in the `drive_resource` column. The new column is
   also simplified in more cases now, e.g. to `character` or `logical`. If the
