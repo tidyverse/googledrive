@@ -196,6 +196,9 @@ finalize <- function(dat, candidates) {
   # (remember this filter goes a bit beyond the name, e.g. maybe folder-hood)
   scratch$status[scratch$doomed] <- "unmatched"
 
+  # empty_string: special case of doomed
+  scratch$status[!nzchar(scratch$orig_path)] <- "empty_string"
+
   # not doomed, but undone: these could be valid paths, but we won't know until
   # we start resolving non-canonical paths
   scratch$status[!scratch$done & !scratch$doomed] <- "undone"
@@ -224,6 +227,13 @@ finalize <- function(dat, candidates) {
   report_weird_stuff(scratch, "undone", "no file has such a canonical path")
   report_weird_stuff(scratch, "unspecific", "path is compatible with more than 1 file")
 
+  n_empty_string <- sum(scratch$status == "empty_string")
+  if (n_empty_string > 0) {
+    drive_bullets(c(
+      "!" = "Problem with {n_empty_string} path{?s}: \\
+             path is empty string"))
+  }
+
   index <- unlist(scratch$m)
   dupes <- duplicated(index)
   if (any(dupes)) {
@@ -240,18 +250,19 @@ finalize <- function(dat, candidates) {
   resolved <- scratch$status == "resolved"
   if (all(resolved)) {
     if (nrow(scratch) > 1) {
-      msg <- "All {nrow(scratch)} input `path`s resolved to exactly 1 file."
+      b <- c(v = "All {nrow(scratch)} input {.arg path}s resolved to exactly \\
+                  1 file.")
     } else {
-      msg <- "The input {.arg path} resolved to exactly 1 file."
+      b <- c(v = "The input {.arg path} resolved to exactly 1 file.")
     }
   } else if (any(resolved)) {
-    msg <- "{sum(scratch$status == 'resolved')} out of {nrow(scratch)} input \\
-            paths resolved to exactly 1 file."
+    b <- c("!" = "{sum(scratch$status == 'resolved')} out of {nrow(scratch)} \\
+                  input paths resolved to exactly 1 file.")
   } else {
     # TODO: this wording is not great, yet I don't know what would be better
-    msg <- "No path resolved to exactly 1 file."
+    b <- c("!" = "No path resolved to exactly 1 file.")
   }
-  drive_bullets(c(v = msg))
+  drive_bullets(b)
 
   vec_slice(candidates, index[!dupes])
 }

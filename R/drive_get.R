@@ -146,17 +146,22 @@ drive_get <- function(path = NULL,
   }
 
   if (is.null(path)) {
-    as_dribble(map(as_id(id), get_one_file))
+    as_dribble(map(id, get_one_file_id))
   } else {
     drive_get_path(path, shared_drive, corpus)
   }
 }
 
-get_one_file <- function(id) {
+get_one_file_id <- function(id) {
+  id <- as_id(id)
+  if (is.na(id)) {
+    drive_abort("Can't {.fun drive_get} a file when {.arg id} is {.code NA}.")
+  }
   # when id = "", drive.files.get actually becomes a call to drive.files.list
   # and, therefore, returns 100 files by default ... don't let that happen
-  if (!isTRUE(nzchar(id, keepNA = TRUE))) {
-    drive_abort("File ids must not be {.code NA} and cannot be the empty string.")
+  # TODO: this will be addressed in a better by a coming PR
+  if (id == "") {
+    drive_abort("A {.cls drive_id} can't be the empty string.")
   }
   request <- request_generate(
     endpoint = "drive.files.get",

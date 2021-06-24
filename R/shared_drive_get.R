@@ -45,6 +45,11 @@ shared_drive_get <- function(name = NULL, id = NULL) {
 }
 
 get_one_shared_drive_id <- function(id) {
+  id <- as_id(id)
+  if (is.na(id)) {
+    drive_abort("
+      Can't {.fun shared_drive_get} a shared drive when {.arg id} is {.code NA}.")
+  }
   if (!isTRUE(nzchar(id, keepNA = TRUE))) {
     drive_abort("
       Shared drive ids must not be {.code NA} and cannot be the empty string.")

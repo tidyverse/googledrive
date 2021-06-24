@@ -35,12 +35,17 @@ test_that("drive_get() 'no input' edge cases", {
   skip_if_offline()
 
   expect_identical(drive_get(), dribble_with_path())
-  expect_identical(drive_get(""), dribble_with_path())
   expect_identical(drive_get(NULL), dribble_with_path())
   expect_identical(drive_get(character(0)), dribble_with_path())
 
   expect_snapshot(drive_get(id = NA_character_), error = TRUE)
   expect_snapshot(drive_get(id = ""), error = TRUE)
+
+  local_drive_loud()
+  expect_snapshot(
+    dat <- drive_get("")
+  )
+  expect_equal(dat, dribble_with_path())
 })
 
 test_that("drive_get() gives n-row output for n ids as input", {
