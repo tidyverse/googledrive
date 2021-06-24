@@ -275,7 +275,7 @@ resp_body_string <- function(resp, encoding = NULL) {
   # https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8
   # Therefore we remove such a BOM, if present
   # UTF-8 representation of BOM: ef bb bf
-  sub("\uFEFF", "", out)
+  sub("^\uFEFF", "", out)
 }
 
 resp_body_raw <- function(resp) {
