@@ -49,7 +49,7 @@ test_that("drive_read() works on a native Google file", {
   chicken_poem <- strsplit(chicken_poem, split = "(\r\n|\r|\n)")[[1]]
   expect_setequal(
     chicken_poem,
-    readLines(drive_example("chicken.txt"))
+    read_utf8(drive_example("chicken.txt"))
   )
 })
 

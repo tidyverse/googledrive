@@ -77,7 +77,7 @@ test_that("drive_update() uses multipart request to update media + metadata", {
   out <- drive_update(updatee, media = tmp, name = me_("update-me-new"))
   expect_identical(out$id, updatee$id)
   drive_download(updatee, tmp, overwrite = TRUE)
-  now_out <- readLines(tmp)
+  now_out <- read_utf8(tmp)
   expect_identical(now, now_out)
   expect_identical(out$name, me_("update-me-new"))
 })
