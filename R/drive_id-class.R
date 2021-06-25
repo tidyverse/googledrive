@@ -1,6 +1,6 @@
 new_drive_id <- function(x = character()) {
-  stopifnot(is.character(x))
-  structure(x, class = "drive_id")
+  vec_assert(x, character())
+  new_vctr(x, class = "drive_id")
 }
 
 validate_drive_id <- function(x) {
@@ -13,15 +13,54 @@ validate_drive_id <- function(x) {
     return(x)
   }
 
-  # pragmatism around cli styling a path that is the empty string
-  empty <- !nzchar(x)
-  x[empty] <- "\"\""
+  # proceed with plain character vector
+  x <- unclass(x)
+  # pragmatism re: how to cli-style a path that is the empty string
+  x[!nzchar(x)] <- "\"\""
 
   drive_abort(c(
     "A {.cls drive_id} must match this regular expression: {.code {regex}}",
     "Invalid input{?s}:{cli::qty(sum(!ok))}",
     bulletize(gargle_map_cli(x[!ok]), bullet = "x")
   ))
+}
+
+is_drive_id <- function(x) {
+  inherits(x, "drive_id")
+}
+
+#' @export
+gargle_map_cli.drive_id <- function(x, ...) {
+  # x <- unclass(x)
+  # NextMethod()
+  # TODO: I know this is gross, but I cannot figure out any "nice" way
+  # to delegate to the character method :(
+  gargle_map_cli(unclass(x))
+}
+
+#' @export
+vec_ptype2.drive_id.drive_id <- function(x, y, ...) new_drive_id()
+#' @export
+vec_ptype2.drive_id.character <- function(x, y, ...) character()
+#' @export
+vec_ptype2.character.drive_id <- function(x, y, ...) character()
+
+#' @export
+vec_cast.drive_id.drive_id <- function(x, to, ...) x
+#' @export
+vec_cast.drive_id.character <- function(x, to, ...) {
+  validate_drive_id(new_drive_id(x))
+}
+#' @export
+vec_cast.character.drive_id <- function(x, to, ...) vec_data(x)
+
+#' @export
+vec_ptype_abbr.drive_id <- function(x) "drv_id"
+
+#' @importFrom pillar pillar_shaft
+#' @export
+pillar_shaft.drive_id <- function(x, ...) {
+  pillar::new_pillar_shaft_simple(x, min_width = 7)
 }
 
 #' Extract and/or mark as file id
