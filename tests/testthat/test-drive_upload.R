@@ -39,7 +39,7 @@ test_that("drive_upload() places file in non-root folder, with new name", {
 
   expect_dribble(uploadee)
   expect_identical(nrow(uploadee), 1L)
-  expect_identical(uploadee$drive_resource[[1]]$parents[[1]], destination$id)
+  expect_identical(drive_reveal(uploadee, "parent")$id_parent, destination$id)
 })
 
 test_that("drive_upload() can place file via folder-shortcut", {

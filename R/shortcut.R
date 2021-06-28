@@ -71,7 +71,7 @@ shortcut_create <- function(file,
     name = name,
     path = path,
     type = "shortcut",
-    shortcutDetails = list(targetId = target$id),
+    shortcutDetails = list(targetId = as.character(target$id)),
     overwrite = overwrite
   )
 }

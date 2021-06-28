@@ -60,9 +60,9 @@ test_that("as_id() works with dribble and dribble-ish data frames", {
   x <- readRDS(test_file("just_a_dribble.rds"))
 
   expect_s3_class(as_id(x), "drive_id")
-  expect_identical(unclass(as_id(x)), x$id)
+  expect_identical(as_id(x), x$id)
 
   class(x) <- class(x)[-1]
   expect_s3_class(as_id(x), "drive_id")
-  expect_identical(unclass(as_id(x)), x$id)
+  expect_identical(as_id(x), x$id)
 })

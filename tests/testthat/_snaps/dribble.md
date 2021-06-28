@@ -4,10 +4,10 @@
       print(d)
     Output
       # A dribble: 2 x 3
-        name  id    drive_resource  
-      * <chr> <chr> <list>          
-      1 a     b     <named list [1]>
-      2 b     a     <named list [1]>
+        name  id       drive_resource  
+        <chr> <drv_id> <list>          
+      1 a     b        <named list [1]>
+      2 b     a        <named list [1]>
 
 # new_dribble() requires a list and adds the dribble class
 
@@ -139,6 +139,6 @@
       foo <- d[1, ]
       as_parent(foo)
     Error <rlang_error>
-      Invalid <dribble>. Can't confirm `kind = "drive#file"` or
-      `kind = "drive#drive"` for all elements of the `drive_resource` column.
+      Parent specified via `foo` is invalid:
+      x Is neither a folder nor a shared drive.
 

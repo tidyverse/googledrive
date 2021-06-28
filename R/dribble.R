@@ -31,10 +31,12 @@ NULL
 
 new_dribble <- function(x) {
   # new_tibble0() strips attributes
-  structure(
+  out <- structure(
     new_tibble0(x),
     class = c("dribble", "tbl_df", "tbl", "data.frame")
   )
+  out$id <- new_drive_id(unclass(out$id))
+  out
 }
 
 validate_dribble <- function(x) {
@@ -126,6 +128,10 @@ has_dribble_coltypes <- function(x) {
   all(dribble_coltypes_ok(x))
 }
 
+id_can_be_drive_id <- function(x) {
+  all(is_valid_drive_id(x))
+}
+
 has_drive_resource <- function(x) {
   kind <- map_chr(x$drive_resource, "kind", .default = NA_character_)
   # TODO: remove `drive#teamDrive` here, when possible
@@ -183,8 +189,8 @@ has_drive_resource <- function(x) {
 #' drive_find("alfa") %>% drive_rm()
 as_dribble <- function(x, ...) UseMethod("as_dribble")
 
-#' @export
-as_dribble.dribble <- function(x, ...) x
+# #' @export
+#as_dribble.dribble <- function(x, ...) x
 
 #' @export
 as_dribble.default <- function(x, ...) {
@@ -384,7 +390,7 @@ is_native <- function(d) {
 is_parental <- function(d) {
   stopifnot(inherits(d, "dribble"))
   kind <- map_chr(d$drive_resource, "kind")
-  mime_type <- map_chr(d$drive_resource, "mimeType", .default = NA)
+  mime_type <- map_chr(d$drive_resource, "mimeType", .default = "")
   # TODO: remove `drive#teamDrive` here, when possible
   kind == "drive#teamDrive" |
     kind == "drive#drive" |

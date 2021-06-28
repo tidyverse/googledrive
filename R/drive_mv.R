@@ -84,7 +84,7 @@ drive_mv <- function(file,
   if (!is.null(path)) {
     path <- as_parent(path)
     if (!path$id %in% parents_before) {
-      params[["addParents"]] <- path$id
+      params[["addParents"]] <- as.character(path$id)
     }
   }
   if (!is.null(name) && name != file$name) {

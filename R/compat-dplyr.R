@@ -14,8 +14,8 @@ dribble_is_reconstructable <- function(data) {
   is_list(data) &&
     has_dribble_cols(data) &&
     has_dribble_coltypes(data) &&
+    id_can_be_drive_id(data$id) &&
     has_drive_resource(data)
-
 }
 
 new_tibble0 <- function(x, ..., class = NULL) {

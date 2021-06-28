@@ -89,7 +89,7 @@ drive_update_media <- function(file, media) {
   request <- request_generate(
     endpoint = "drive.files.update.media",
     params = list(
-      fileId = file$id,
+      fileId = as.character(file$id),
       uploadType = "media",
       fields = "*"
     )
@@ -105,7 +105,7 @@ drive_update_metadata <- function(file, meta) {
   request <- request_generate(
     endpoint = "drive.files.update",
     params = c(
-      fileId = file$id,
+      fileId = as.character(file$id),
       meta
     )
   )
@@ -117,7 +117,7 @@ drive_update_multipart <- function(file, media, meta) {
   request <- request_generate(
     endpoint = "drive.files.update.media",
     params = c(
-      fileId = file$id,
+      fileId = as.character(file$id),
       uploadType = "multipart",
       ## We provide the metadata here even though it's overwritten below,
       ## so that request_generate() still validates it.

@@ -96,7 +96,7 @@ drive_create <- function(name,
   # load (path, name) into params
   if (!is.null(path)) {
     path <- as_parent(path)
-    params[["parents"]] <- list(path[["id"]])
+    params[["parents"]] <- list(as.character(path[["id"]]))
   }
   params[["name"]] <- name
   check_for_overwrite(params[["parents"]], params[["name"]], overwrite)

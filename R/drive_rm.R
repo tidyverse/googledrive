@@ -42,7 +42,7 @@ drive_rm <- function(..., verbose = deprecated()) {
 
   # explicitly select on var name to exclude 'path', if present
   file <- map(dots, ~as_dribble(.x)[c("name", "id", "drive_resource")])
-  file <- exec(rbind, !!!file)
+  file <- vec_rbind(!!!file)
   # filter to the unique file ids (multiple parents mean drive_get() and
   # therefore as_dribble() can return >1 row representing a single file)
   file <- file[!duplicated(file$id), ]
@@ -78,7 +78,7 @@ drive_rm <- function(..., verbose = deprecated()) {
 delete_one <- function(id) {
   request <- request_generate(
     endpoint = "drive.files.delete",
-    params = list(fileId = id)
+    params = list(fileId = as.character(id))
   )
   response <- request_make(request)
   gargle::response_process(response)

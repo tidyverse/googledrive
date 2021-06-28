@@ -127,7 +127,7 @@ drive_share_anyone <- function(file, verbose = deprecated()) {
 }
 
 drive_share_one <- function(id, params) {
-  params[["fileId"]] <- id
+  params[["fileId"]] <- as.character(id)
   request <- request_generate(
     endpoint = "drive.permissions.create",
     params = params
@@ -159,7 +159,7 @@ list_permissions_one <- function(id) {
   request <- request_generate(
     endpoint = "drive.permissions.list",
     params = list(
-      fileId = id,
+      fileId = as.character(id),
       fields = "*"
     )
   )

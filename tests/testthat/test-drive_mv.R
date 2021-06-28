@@ -101,7 +101,7 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
 
   expect_dribble(mv_file)
   expect_identical(nrow(mv_file), 1L)
-  expect_identical(mv_file$drive_resource[[1]]$parents[[1]], destination$id)
+  expect_identical(drive_reveal(mv_file, "parent")$id_parent , destination$id)
 })
 
 test_that("drive_mv() can rename and move, using `path` and `name`", {

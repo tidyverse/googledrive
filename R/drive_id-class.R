@@ -4,11 +4,7 @@ new_drive_id <- function(x = character()) {
 }
 
 validate_drive_id <- function(x) {
-  # among practitioners, It Is Known that file IDs have >= 25 characters
-  # but I'm not convinced the pros outweigh the cons re: checking length
-  # for example, in tests, it's nice to not worry about this
-  regex <- "^[a-zA-Z0-9_-]+$"
-  ok <- grepl(regex, x) | is.na(x)
+  ok <- is_valid_drive_id(x)
   if (all(ok)) {
     return(x)
   }
@@ -19,10 +15,20 @@ validate_drive_id <- function(x) {
   x[!nzchar(x)] <- "\"\""
 
   drive_abort(c(
-    "A {.cls drive_id} must match this regular expression: {.code {regex}}",
+    "A {.cls drive_id} must match this regular expression: \\
+     {.code {drive_id_regex()}}",
     "Invalid input{?s}:{cli::qty(sum(!ok))}",
     bulletize(gargle_map_cli(x[!ok]), bullet = "x")
   ))
+}
+
+drive_id_regex <- function() "^[a-zA-Z0-9_-]+$"
+
+is_valid_drive_id <- function(x) {
+  # among practitioners, It Is Known that file IDs have >= 25 characters
+  # but I'm not convinced the pros outweigh the cons re: checking length
+  # for example, in tests, it's nice to not worry about this
+  grepl(drive_id_regex(), x) | is.na(x)
 }
 
 is_drive_id <- function(x) {
@@ -60,7 +66,34 @@ vec_ptype_abbr.drive_id <- function(x) "drv_id"
 #' @importFrom pillar pillar_shaft
 #' @export
 pillar_shaft.drive_id <- function(x, ...) {
-  pillar::new_pillar_shaft_simple(x, min_width = 7)
+  # out <- format(x)
+  # pillar::new_pillar_shaft_simple(x, min_width = 3)
+
+  #out <- format(paste0(substr(x, 1, 7), cli::symbol$continue))
+  out <- format(
+    cli::ansi_strtrim(unclass(x), width = 8, ellipsis = cli::symbol$continue)
+  )
+  pillar::new_pillar_shaft_simple(out, min_width = 3)
+
+  # full <- format(x)
+  # trunc <- format(paste0(substr(x, 1, 7), cli::symbol$continue))
+  # pillar::new_pillar_shaft(
+  #   list(full = full, trunc = trunc),
+  #   width = pillar::get_max_extent(full),
+  #   min_width = pillar::get_max_extent(trunc),
+  #   class = "pillar_shaft_drive_id"
+  # )
+}
+
+#' @export
+format.pillar_shaft_drive_id <- function(x, width, ...) {
+  if (pillar::get_max_extent(x$full) <= width) {
+    ornament <- x$full
+  } else {
+    ornament <- x$trunc
+  }
+
+  pillar::new_ornament(ornament, width = 9, align = "left")
 }
 
 #' Extract and/or mark as file id

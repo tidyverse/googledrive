@@ -48,7 +48,7 @@ test_that("drive_create() create specific things in root folder", {
   out <- drive_create(me_("docs-in-root"), type = "document")
   expect_dribble(out)
   expect_identical(out$name, me_("docs-in-root"))
-  expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
+  expect_identical(drive_reveal(out, "parent")[["id_parent"]], root_id())
   expect_identical(
     drive_reveal(out, "mime_type")$mime_type,
     drive_mime_type("document")
@@ -58,7 +58,7 @@ test_that("drive_create() create specific things in root folder", {
   out <- drive_create(me_("sheets-in-root"), type = "spreadsheet")
   expect_dribble(out)
   expect_identical(out$name, me_("sheets-in-root"))
-  expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
+  expect_identical(drive_reveal(out, "parent")[["id_parent"]], root_id())
   expect_identical(
     drive_reveal(out, "mime_type")$mime_type,
     drive_mime_type("spreadsheet")
@@ -68,7 +68,7 @@ test_that("drive_create() create specific things in root folder", {
   out <- drive_create(me_("slides-in-root"), type = "presentation")
   expect_dribble(out)
   expect_identical(out$name, me_("slides-in-root"))
-  expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
+  expect_identical(drive_reveal(out, "parent")[["id_parent"]], root_id())
   expect_identical(
     drive_reveal(out, "mime_type")$mime_type,
     drive_mime_type("presentation")
@@ -83,7 +83,7 @@ test_that("drive_mkdir() creates a folder in root folder", {
   out <- drive_mkdir(me_("folder-in-root"))
   expect_dribble(out)
   expect_identical(out$name, me_("folder-in-root"))
-  expect_identical(out$drive_resource[[1]]$parents[[1]], root_id())
+  expect_identical(drive_reveal(out, "parent")[["id_parent"]], root_id())
   expect_identical(
     drive_reveal(out, "mime_type")$mime_type,
     drive_mime_type("folder")
@@ -99,10 +99,7 @@ test_that("drive_create() accepts parent folder given as dribble", {
   out <- drive_create(me_("a"), PARENT)
   expect_dribble(out)
   expect_identical(out$name, me_("a"))
-  expect_identical(
-    as_id(out$drive_resource[[1]]$parents[[1]]),
-    as_id(PARENT)
-  )
+  expect_identical(drive_reveal(out, "parent")[["id_parent"]], as_id(PARENT))
 })
 
 test_that("drive_create() accepts parent folder given as file id", {

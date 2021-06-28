@@ -73,7 +73,7 @@ drive_put <- function(media,
   # load (path, name) into params
   if (!is.null(path)) {
     path <- as_parent(path)
-    params[["parents"]] <- path$id
+    params[["parents"]] <- as.character(path$id)
   }
   params[["name"]] <- name %||% basename(media)
 
