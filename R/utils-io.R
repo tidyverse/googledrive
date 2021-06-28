@@ -1,5 +1,5 @@
 readLines <- function(...) {
-  drive_abort("In this house, we use{.fun read_utf8} for UTF-8 reasons.")
+  drive_abort("In this house, we use {.fun read_utf8} for UTF-8 reasons.")
 }
 
 writeLines <- function(...) {
