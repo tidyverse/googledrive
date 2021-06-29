@@ -1,8 +1,8 @@
-#' Read a Drive file
+#' Read the content of a Drive file
 #'
 #' @description These functions return the content of a Drive file as either a
 #'   string or raw bytes. You will likely need to do additional work to parse
-#'   the content into an R object that is useful to you.
+#'   the content into a useful R object.
 #'
 #'   [drive_download()] is the more generally useful function, but for certain
 #'   file types, such as comma-separated values (MIME type `text/csv`), it can

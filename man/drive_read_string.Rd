@@ -3,7 +3,7 @@
 \name{drive_read_string}
 \alias{drive_read_string}
 \alias{drive_read_raw}
-\title{Read a Drive file}
+\title{Read the content of a Drive file}
 \usage{
 drive_read_string(file, type = NULL, encoding = NULL)
 
@@ -31,7 +31,7 @@ the \emph{input} \code{file}.}
 \description{
 These functions return the content of a Drive file as either a
 string or raw bytes. You will likely need to do additional work to parse
-the content into an R object that is useful to you.
+the content into a useful R object.
 
 \code{\link[=drive_download]{drive_download()}} is the more generally useful function, but for certain
 file types, such as comma-separated values (MIME type \code{text/csv}), it can
