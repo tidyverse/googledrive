@@ -2,17 +2,29 @@
 .drive <- new.env(parent = emptyenv())
 
 .drive$translate_mime_types <-
-  system.file("extdata", "translate_mime_types.csv", package = "googledrive") %>%
+  system.file(
+    "extdata", "translate_mime_types.csv",
+    package = "googledrive",
+    mustWork = TRUE
+  ) %>%
   read.csv(stringsAsFactors = FALSE) %>%
   as_tibble()
 
 .drive$mime_tbl <-
-  system.file("extdata", "mime_tbl.csv", package = "googledrive") %>%
+  system.file(
+    "extdata", "mime_tbl.csv",
+    package = "googledrive",
+    mustWork = TRUE
+  ) %>%
   read.csv(stringsAsFactors = FALSE) %>%
   as_tibble()
 
 .drive$files_fields <-
-  system.file("extdata", "files_fields.csv", package = "googledrive") %>%
+  system.file(
+    "extdata", "files_fields.csv",
+    package = "googledrive",
+    mustWork = TRUE
+  ) %>%
   read.csv(stringsAsFactors = FALSE) %>%
   as_tibble()
 
