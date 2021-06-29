@@ -13,16 +13,13 @@ if (CLEAN) {
 # ---- setup ----
 if (SETUP) {
   drive_upload(system.file("DESCRIPTION"), name = nm_("DESC"))
+
   drive_upload(
     drive_example("chicken.txt"),
     name = nm_("chicken_doc"),
     type = "document"
   )
-  drive_upload(
-    drive_example("chicken.csv"),
-    name = nm_("chicken_sheet"),
-    type = "spreadsheet"
-  )
+
   tfile <- tempfile(fileext = ".csv")
   curl::curl_download(
     "https://matthew-brett.github.io/cfd2019/data/imdblet_latin.csv",
@@ -32,16 +29,29 @@ if (SETUP) {
 }
 
 # ---- tests ----
-test_that("drive_read() can extract text", {
+test_that("drive_read_string() extracts text", {
   skip_if_no_token()
   skip_if_offline()
 
   suppressMessages(
-    r_desc <- drive_read(nm_("DESC"))
+    r_desc <- drive_read_string(nm_("DESC"))
   )
   r_desc <- as.list(read.dcf(textConnection(r_desc))[1, ])
   expect_equal(r_desc$Package, "base")
   expect_equal(r_desc$Title, "The R Base Package")
+})
+
+test_that("drive_read_raw() returns bytes", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  suppressMessages(
+    r_desc_raw <- drive_read_raw(nm_("DESC"))
+  )
+  suppressMessages(
+    r_desc_string <- drive_read_string(nm_("DESC"))
+  )
+  expect_equal(rawToChar(r_desc_raw), r_desc_string)
 })
 
 test_that("drive_read() works on a native Google file", {
@@ -49,7 +59,7 @@ test_that("drive_read() works on a native Google file", {
   skip_if_offline()
 
   suppressMessages(
-    chicken_poem <- drive_read(nm_("chicken_doc"), type = "text/plain")
+    chicken_poem <- drive_read_string(nm_("chicken_doc"), type = "text/plain")
   )
   chicken_poem <- strsplit(chicken_poem, split = "(\r\n|\r|\n)")[[1]]
   expect_setequal(
@@ -63,7 +73,7 @@ test_that("drive_read() can handle non UTF-8 input, if informed", {
   skip_if_offline()
 
   suppressMessages(
-    imdb <- drive_read(nm_("imdb_latin1_csv"), encoding = "latin1")
+    imdb <- drive_read_string(nm_("imdb_latin1_csv"), encoding = "latin1")
   )
   imdb <- read.csv(text = imdb, stringsAsFactors = FALSE, encoding = "UTF-8")
   expect_equal(
