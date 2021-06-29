@@ -64,7 +64,7 @@ translate_mime_types <- translate_mime_types %>%
 
 write_csv(
   translate_mime_types,
-  file = here("inst", "extdata", "translate_mime_types.csv")
+  file = here("inst", "extdata", "data", "translate_mime_types.csv")
 )
 
 # general table of MIME types Google knows about
@@ -135,4 +135,4 @@ mime_tbl <- mime_tbl %>%
 mime_tbl <- mime_tbl %>%
   arrange(mime_type, ext)
 
-write_csv(mime_tbl, file = here("inst", "extdata", "mime_tbl.csv"))
+write_csv(mime_tbl, file = here("inst", "extdata", "data", "mime_tbl.csv"))

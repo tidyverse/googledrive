@@ -13,4 +13,4 @@ df <- tibble(
   desc = map_chr(ff, "description")
 )
 
-write_csv(df, here("inst", "extdata", "files_fields.csv"))
+write_csv(df, here("inst", "extdata", "data", "files_fields.csv"))
