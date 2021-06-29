@@ -23,7 +23,7 @@
 #'   is the file's name on Google Drive and the default location is working
 #'   directory, possibly with an added file extension.
 #' @param type Character. Only consulted if `file` is a native Google file.
-#'   Specifies the desired type of the downloaded file. Will be processed via
+#'   Specifies the desired type of the exported file. Will be processed via
 #'   [drive_mime_type()], so either a file extension like `"pdf"` or a full MIME
 #'   type like `"application/pdf"` is acceptable.
 #' @param overwrite A logical scalar. If local `path` already exists, do you

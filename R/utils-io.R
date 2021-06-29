@@ -1,9 +1,17 @@
-# readLines <- function(...) {
-#   drive_abort("In this house, we use ??? for UTF-8 reasons.")
-# }
+readLines <- function(...) {
+  drive_abort("In this house, we use {.fun read_utf8} for UTF-8 reasons.")
+}
 
 writeLines <- function(...) {
   drive_abort("In this house, we use {.fun write_utf8} for UTF-8 reasons.")
+}
+
+# https://github.com/gaborcsardi/rencfaq#with-base-r
+read_utf8 <- function (path) {
+  opts <- options(encoding = "native.enc")
+  withr::defer(options(opts))
+  x <- base::readLines(path, encoding = "UTF-8", warn = FALSE)
+  x
 }
 
 # https://github.com/gaborcsardi/rencfaq#with-base-r

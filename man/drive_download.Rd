@@ -22,7 +22,7 @@ is the file's name on Google Drive and the default location is working
 directory, possibly with an added file extension.}
 
 \item{type}{Character. Only consulted if \code{file} is a native Google file.
-Specifies the desired type of the downloaded file. Will be processed via
+Specifies the desired type of the exported file. Will be processed via
 \code{\link[=drive_mime_type]{drive_mime_type()}}, so either a file extension like \code{"pdf"} or a full MIME
 type like \code{"application/pdf"} is acceptable.}
 

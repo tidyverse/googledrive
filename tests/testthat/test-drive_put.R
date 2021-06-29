@@ -49,8 +49,8 @@ test_that("drive_put() works", {
     drive_download(original, path = download_target)
   )
   expect_identical(
-    readLines(local_file),
-    readLines(download_target)
+    read_utf8(local_file),
+    read_utf8(download_target)
   )
 
   cat("end", file = local_file, sep = "\n", append = TRUE)
@@ -71,8 +71,8 @@ test_that("drive_put() works", {
     drive_download(original, path = download_target, overwrite = TRUE)
   )
   expect_identical(
-    readLines(local_file),
-    readLines(download_target)
+    read_utf8(local_file),
+    read_utf8(download_target)
   )
 
   with_drive_quiet(
