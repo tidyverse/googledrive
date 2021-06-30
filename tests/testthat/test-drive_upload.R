@@ -87,7 +87,7 @@ test_that("drive_upload() does not mangle name with multi-byte characters", {
   defer_drive_rm(filename_1)
 
   file_1 <- drive_upload(
-    drive_example("chicken.csv"),
+    drive_example_local("chicken.csv"),
     path = filename_1,
     type = "spreadsheet"
   )
@@ -103,7 +103,7 @@ test_that("drive_upload() does not mangle name with multi-byte characters", {
   # https://github.com/curl/curl/issues/345
   # filename_2 <- me_(paste0("multibyte-chars-2-", tricky_bit))
   # filename_2 <- file.path(tempdir(), filename_2)
-  # file.copy(drive_example("chicken.csv"), filename_2)
+  # file.copy(drive_example_local("chicken.csv"), filename_2)
   # expect_true(file.exists(filename_2))
   # file_2 <- drive_upload(media = filename_2)
   # expect_equal(charToRaw(file_2$name), charToRaw(filename_2))

@@ -82,17 +82,15 @@ depending on whether the Drive file already exists, see \code{\link[=drive_put]{
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # upload a csv file
-chicken_csv <- drive_upload(
-  drive_example("chicken.csv"),
-  "chicken-upload.csv"
-)
+chicken_csv <- drive_example_local("chicken.csv") \%>\%
+  drive_upload("chicken-upload.csv")
 
 # or convert it to a Google Sheet
-chicken_sheet <- drive_upload(
-  drive_example("chicken.csv"),
-  name = "chicken-sheet-upload.csv",
-  type = "spreadsheet"
-)
+chicken_sheet <- drive_example_local("chicken.csv") \%>\%
+  drive_upload(
+    name = "chicken-sheet-upload.csv",
+    type = "spreadsheet"
+  )
 
 # check out the new Sheet!
 drive_browse(chicken_sheet)
@@ -101,10 +99,8 @@ drive_browse(chicken_sheet)
 drive_find("chicken.*upload") \%>\% drive_rm()
 
 # Upload a file and, at the same time, star it
-chicken <- drive_upload(
-  drive_example("chicken.jpg"),
-  starred = "true"
-)
+chicken <- drive_example_local("chicken.jpg") \%>\%
+  drive_upload(starred = "true")
 
 # Is is really starred? YES
 purrr::pluck(chicken, "drive_resource", 1, "starred")
@@ -115,18 +111,18 @@ drive_rm(chicken)
 # `overwrite = FALSE` errors if something already exists at target filepath
 # THIS WILL ERROR!
 drive_create("name-squatter")
-drive_upload(
-  drive_example("chicken.jpg"),
-  name = "name-squatter",
-  overwrite = FALSE
-)
+drive_example_local("chicken.jpg") \%>\%
+  drive_upload(
+    name = "name-squatter",
+    overwrite = FALSE
+  )
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
-chicken <- drive_upload(
-  drive_example("chicken.jpg"),
-  name = "name-squatter",
-  overwrite = TRUE
-)
+chicken <- drive_example_local("chicken.jpg") \%>\%
+  drive_upload(
+    name = "name-squatter",
+    overwrite = TRUE
+  )
 
 # Clean up
 drive_rm(chicken)

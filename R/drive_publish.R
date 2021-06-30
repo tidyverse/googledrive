@@ -19,11 +19,9 @@
 #'   `revisions_resource`.")
 #' @export
 #' @examplesIf drive_has_token()
-#' # Upload file to publish
-#' file <- drive_upload(
-#'   drive_example("chicken.csv"),
-#'   type = "spreadsheet"
-#' )
+#' # Create a file to publish
+#' file <- drive_example_remote("chicken_sheet") %>%
+#'   drive_cp()
 #'
 #' # Publish file
 #' file <- drive_publish(file)

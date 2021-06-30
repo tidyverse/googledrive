@@ -39,11 +39,9 @@ Read more in \code{\link[=drive_reveal]{drive_reveal()}}.
 }
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Upload file to publish
-file <- drive_upload(
-  drive_example("chicken.csv"),
-  type = "spreadsheet"
-)
+# Create a file to publish
+file <- drive_example_remote("chicken_sheet") \%>\%
+  drive_cp()
 
 # Publish file
 file <- drive_publish(file)

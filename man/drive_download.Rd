@@ -55,27 +55,23 @@ includes a \code{local_path} column.
 }
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Upload a csv file into a Google Sheet
-file <- drive_upload(
-  drive_example("chicken.csv"),
-  type = "spreadsheet"
-)
+# Target one of the official example files
+(src_file <- drive_example_remote("chicken_sheet"))
 
 # Download Sheet as csv, explicit type
-downloaded_file <- drive_download(file, type = "csv")
+downloaded_file <- drive_download(src_file, type = "csv")
 
 # See local path to new file
 downloaded_file$local_path
 
 # Download as csv, type implicit in file extension
-drive_download(file, path = "my_csv_file.csv")
+drive_download(src_file, path = "my_csv_file.csv")
 
 # Download with default name and type (xlsx)
-drive_download(file)
+drive_download(src_file)
 
 # Clean up
-unlink(c("chicken.csv", "chicken.xlsx", "my_csv_file.csv"))
-drive_rm(file)
+unlink(c("chicken_sheet.csv", "chicken_sheet.xlsx", "my_csv_file.csv"))
 \dontshow{\}) # examplesIf}
 }
 \seealso{

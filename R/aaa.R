@@ -7,7 +7,7 @@
     package = "googledrive",
     mustWork = TRUE
   ) %>%
-  read.csv(stringsAsFactors = FALSE) %>%
+  utils::read.csv(stringsAsFactors = FALSE) %>%
   as_tibble()
 
 .drive$mime_tbl <-
@@ -16,7 +16,7 @@
     package = "googledrive",
     mustWork = TRUE
   ) %>%
-  read.csv(stringsAsFactors = FALSE) %>%
+  utils::read.csv(stringsAsFactors = FALSE) %>%
   as_tibble()
 
 .drive$files_fields <-
@@ -25,7 +25,7 @@
     package = "googledrive",
     mustWork = TRUE
   ) %>%
-  read.csv(stringsAsFactors = FALSE) %>%
+  utils::read.csv(stringsAsFactors = FALSE) %>%
   as_tibble()
 
 # environment to hold other data that is convenient to cache

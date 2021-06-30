@@ -72,7 +72,7 @@
 #' # set up some files to get by path
 #' alfalfa <- drive_mkdir("alfalfa")
 #' broccoli <- drive_upload(
-#'   drive_example("chicken.txt"),
+#'   drive_example_local("chicken.txt"),
 #'   name = "broccoli", path = alfalfa
 #' )
 #' drive_get("broccoli")

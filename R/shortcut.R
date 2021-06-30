@@ -27,39 +27,33 @@
 
 #'
 #' @examplesIf drive_has_token()
-#' # Create a file to make a shortcut to
-#' file <- drive_upload(
-#'   drive_example("chicken.csv"),
-#'   name = "chicken-sheet-for-shortcut",
-#'   type = "spreadsheet"
-#' )
+#' # Target one of the official example files
+#' (src_file <- drive_example_remote("chicken_sheet"))
 #'
 #' # Create a shortcut in the default location with the default name
-#' sc1 <- shortcut_create(file)
-#' # This shortcut could now be moved, renamed, etc., which is probably a good
-#' # idea, since it's confusing to have a file and same-named shortcut
-#' # in the same place!
+#' sc1 <- shortcut_create(src_file)
+#' # This shortcut could now be moved, renamed, etc.
 #'
 #' # Create a shortcut in the default location with a custom name
-#' sc2 <- file %>%
-#'   shortcut_create(name = "chicken-sheet-second-shortcut")
+#' sc2 <- src_file %>%
+#'   shortcut_create(name = "chicken_sheet_second_shortcut")
 #'
 #' # Create a folder, then put a shortcut there, with default name
-#' folder <- drive_mkdir("chicken-sheet-shortcut-folder")
-#' sc3 = file %>%
+#' folder <- drive_mkdir("chicken_sheet_shortcut_folder")
+#' sc3 <- src_file %>%
 #'   shortcut_create(folder)
 #'
 #' # Look at all these shortcuts
-#' (dat <- drive_find("chicken-sheet", type = "shortcut"))
+#' (dat <- drive_find("chicken_sheet", type = "shortcut"))
 #'
-#' # Get the id of the original file from the shortcuts
+#' # Confirm the shortcuts all target the original file
 #' dat <- dat %>%
 #'   drive_reveal("shortcut_details")
 #' purrr::map_chr(dat$shortcut_details, "targetId")
-#' as_id(file)
+#' as_id(src_file)
 #'
 #' # Clean up
-#' drive_rm(sc1, sc2, sc3, file, folder)
+#' drive_rm(sc1, sc2, sc3, folder)
 shortcut_create <- function(file,
                             path = NULL,
                             name = NULL,
@@ -109,11 +103,8 @@ shortcut_create <- function(file,
 #'
 #' @examplesIf drive_has_token()
 #' # Create a file to make a shortcut to
-#' file <- drive_upload(
-#'   drive_example("chicken.csv"),
-#'   name = "chicken-sheet-for-shortcut",
-#'   type = "spreadsheet"
-#' )
+#' file <- drive_example_remote("chicken_sheet") %>%
+#'   drive_cp(name = "chicken-sheet-for-shortcut")
 #'
 #' # Create a shortcut
 #' sc1 <- file %>%

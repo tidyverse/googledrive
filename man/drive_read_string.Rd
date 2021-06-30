@@ -44,25 +44,17 @@ for \code{\link[=drive_download]{drive_download()}} for more.
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # comma-separated values --> data.frame or tibble
-chicken_csv <- drive_example("chicken.csv") \%>\%
-  drive_upload()
+(chicken_csv <- drive_example_remote("chicken.csv"))
 chicken_csv \%>\%
   drive_read_string() \%>\%
   read.csv(text = .)
 
-# clean up comma-separated values
-drive_rm("chicken.csv")
-
 # Google Doc --> character vector
-chicken_doc <- drive_example("chicken.txt") \%>\%
-  drive_upload(type = "document")
+(chicken_doc <- drive_example_remote("chicken_doc"))
 chicken_doc \%>\%
   # NOTE: we must specify an export MIME type
   drive_read_string(type = "text/plain") \%>\%
   strsplit(split = "(\r\n|\r|\n)") \%>\%
   .[[1]]
-
-# clean up Google Doc
-drive_rm(chicken_doc)
 \dontshow{\}) # examplesIf}
 }

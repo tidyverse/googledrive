@@ -67,7 +67,7 @@ reference:
       - drive_trash
       - drive_empty_trash
       - drive_rm
-      - drive_example
+      - starts_with("drive_example")
   - title: "Share your files with the world"
     desc: >
       View or change the sharing and publishing status of Drive files

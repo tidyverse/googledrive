@@ -67,7 +67,8 @@ Move a Drive file to a different folder, give it a different name, or both.
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # create a file to move
-file <- drive_upload(drive_example("chicken.txt"), "chicken-mv.txt")
+file <- drive_example_remote("chicken.txt") \%>\%
+  drive_cp("chicken-mv.txt")
 
 # rename it, but leave in current folder (root folder, in this case)
 file <- drive_mv(file, "chicken-mv-renamed.txt")

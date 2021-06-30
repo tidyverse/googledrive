@@ -19,49 +19,45 @@
 #' @template overwrite
 #' @template verbose
 #' @eval return_dribble()
+#' @export
 #'
 #' @examplesIf drive_has_token()
-#' # Create a file to copy
-#' file <- drive_upload(drive_example("chicken.txt"), "chicken-cp.txt")
+#' # Target one of the official example files
+#' (src_file <- drive_example_remote("chicken.txt"))
 #'
-#' # Make a "Copy of" copy in same folder as the original
-#' drive_cp("chicken-cp.txt")
+#' # Make a "Copy of" copy in your My Drive
+#' cp1 <- drive_cp(src_file)
 #'
-#' # Make an explicitly named copy in same folder as the original
-#' drive_cp("chicken-cp.txt", "chicken-cp-two.txt")
-#'
-#' # Make an explicitly named copy in a different folder
-#' folder <- drive_mkdir("new-folder")
-#' drive_cp("chicken-cp.txt", path = folder, name = "chicken-cp-three.txt")
-#'
-#' # Make an explicitly named copy and star it.
+#' # Make an explicitly named copy, in a different folder, and star it.
 #' # The starring is an example of providing metadata via `...`.
 #' # `starred` is not an actual argument to `drive_cp()`,
 #' # it just gets passed through to the API.
-#' x <- drive_cp("chicken-cp.txt", name = "chicken-cp-starred.txt", starred = TRUE)
-#' drive_reveal(x, "starred")
+#' folder <- drive_mkdir("drive-cp-folder")
+#' cp2 <- drive_cp(
+#'   src_file,
+#'   path = folder,
+#'   name = "chicken-cp.txt",
+#'   starred = TRUE
+#' )
+#' drive_reveal(cp2, "starred")
 #'
 #' # `overwrite = FALSE` errors if file already exists at target filepath
 #' # THIS WILL ERROR!
-#' # drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = FALSE)
+#' # drive_cp(src_file, name = "Copy of chicken.txt", overwrite = FALSE)
 #'
 #' # `overwrite = TRUE` moves an existing file to trash, then proceeds
-#' drive_cp("chicken-cp.txt", name = "chicken-cp.txt", overwrite = TRUE)
-#'
-#' # Behold all of our copies!
-#' drive_find("chicken-cp")
+#' cp3 <- drive_cp(src_file, name = "Copy of chicken.txt", overwrite = TRUE)
 #'
 #' # Delete all of our copies and the new folder!
-#' drive_find("chicken-cp") %>% drive_rm()
-#' drive_find("new-folder") %>% drive_rm(folder)
+#' drive_rm(cp1, cp2, cp3, folder)
 #'
-#' # upload a csv file to copy
-#' csv_file <- drive_upload(drive_example("chicken.csv"))
+#' # Target an official example file that's a csv file
+#' (csv_file <- drive_example_remote("chicken.csv"))
 #'
 #' # copy AND AT THE SAME TIME convert it to a Google Sheet
 #' chicken_sheet <- drive_cp(
 #'   csv_file,
-#'   name = "chicken-cp",
+#'   name = "chicken-sheet-copy",
 #'   mime_type = drive_mime_type("spreadsheet")
 #' )
 #' # is it really a Google Sheet?
@@ -71,8 +67,7 @@
 #' # drive_browse(chicken_sheet)
 #'
 #' # clean up
-#' drive_rm(csv_file, chicken_sheet)
-#' @export
+#' drive_rm(chicken_sheet)
 drive_cp <- function(file,
                      path = NULL,
                      name = NULL,

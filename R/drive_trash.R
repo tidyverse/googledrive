@@ -6,7 +6,8 @@
 #' @export
 #' @examplesIf drive_has_token()
 #' # Create a file and put it in the trash.
-#' file <- drive_upload(drive_example("chicken.txt"), "chicken-trash.txt")
+#' file <- drive_example_remote("chicken.txt") %>%
+#'   drive_cp("chicken-trash.txt")
 #' drive_trash("chicken-trash.txt")
 #'
 #' # Confirm it's in the trash

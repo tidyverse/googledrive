@@ -20,11 +20,12 @@
 #'
 #' @examplesIf drive_has_token()
 #' # Create a new file, so we can update it
-#' x <- drive_upload(drive_example("chicken.csv"))
+#' x <- drive_example_remote("chicken.csv") %>%
+#'   drive_cp()
 #'
 #' # Update the file with new media
 #' x <- x %>%
-#'   drive_update(drive_example("chicken.txt"))
+#'   drive_update(drive_example_local("chicken.txt"))
 #'
 #' # Update the file with new metadata.
 #' # Notice here `name` is not an argument of `drive_update()`, we are passing
@@ -34,7 +35,10 @@
 #'
 #' # Update the file with new media AND new metadata
 #' x <- x %>%
-#'   drive_update(drive_example("chicken.txt"), name = "chicken-poem-again.txt")
+#'   drive_update(
+#'     drive_example_local("chicken.txt"),
+#'     name = "chicken-poem-again.txt"
+#'   )
 #'
 #' # Clean up
 #' drive_rm(x)

@@ -1,5 +1,10 @@
 name,mime_type,id
+chicken_doc,application/vnd.google-apps.document,1X9pd4nOjl33zDFfTjw-_eFL7Qb9_g6VfVFDp1PPae94
+chicken_sheet,application/vnd.google-apps.spreadsheet,1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU
 chicken.csv,text/csv,1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7
 chicken.jpg,image/jpeg,1b2_ZjzgvrSw0hBMgn-rnEbjp3Uq0XTKJ
 chicken.pdf,application/pdf,13OQcAo8hkh0Ja5Wxlmi4a8aNvPK7pDkO
 chicken.txt,text/plain,1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y
+imdb_latin1.csv,text/csv,1YJSVa0LTaVtGrZ4eVXYrSQ4y50uFl5bw
+r_about.html,text/html,1sfCT0zqDz3vpZZlv_4nFlhq2WMaKqjow
+r_logo.jpg,image/jpeg,1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW

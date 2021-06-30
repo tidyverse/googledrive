@@ -38,12 +38,9 @@
 #'   `permissions_resource`.")
 #' @export
 #' @examplesIf drive_has_token()
-#' # Upload a file to share
-#' file <- drive_upload(
-#'    drive_example("chicken.txt"),
-#'    name = "chicken-share.txt",
-#'    type = "document"
-#' )
+#' # Create a file to share
+#' file <- drive_example_remote("chicken_doc") %>%
+#'   drive_cp(name = "chicken-share.txt")
 #'
 #' # Let a specific person comment
 #' file <- file %>%
@@ -51,7 +48,7 @@
 #'     role = "commenter",
 #'     type = "user",
 #'     emailAddress = "susan@example.com"
-#' )
+#'   )
 #'
 #' # Let a different specific person edit and customize the email notification
 #' file <- file %>%

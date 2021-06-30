@@ -42,7 +42,7 @@ Let's upload a file and view its permissions.
 ```{r}
 library(googledrive)
 
-file <- drive_example("chicken.txt") %>%
+file <- drive_example_local("chicken.txt") %>%
   drive_upload(name = "chicken-perm-article.txt") %>% 
   drive_reveal("permissions")
 

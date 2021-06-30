@@ -75,12 +75,12 @@ library(tidyverse)
 
 ### Upload
 
-Use the example files that ship with googledrive. This looks a bit odd, but the first call returns their names and the second returns full paths on the local system.
+Use the example files that ship with googledrive.
 
 ```{r}
-local_files <- drive_example() %>% 
-  drive_example()
-basename(local_files)
+local_files <- drive_examples_local()
+local_files <- set_names(local_files, basename(local_files))
+local_files
 ```
 
 Create a folder on your Drive and upload all files into this folder by iterating over the `local_files` using `purrr::map()`.

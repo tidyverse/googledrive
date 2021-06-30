@@ -13,7 +13,7 @@ if (CLEAN) {
 # ---- setup ----
 if (SETUP) {
   # some "simple" cases of digging info out of `drive_resource`
-  f <- drive_example("chicken.txt")
+  f <- drive_example_local("chicken.txt")
   drive_upload(f, nm_("i-am-starred"), starred = TRUE)
   drive_upload(f, nm_("i-have-a-description"), description = "description!")
   drive_upload(f, nm_("i-am-a-google-doc"), type = "document")

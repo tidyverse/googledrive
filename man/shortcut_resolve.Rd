@@ -38,11 +38,8 @@ specific error.
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Create a file to make a shortcut to
-file <- drive_upload(
-  drive_example("chicken.csv"),
-  name = "chicken-sheet-for-shortcut",
-  type = "spreadsheet"
-)
+file <- drive_example_remote("chicken_sheet") \%>\%
+  drive_cp(name = "chicken-sheet-for-shortcut")
 
 # Create a shortcut
 sc1 <- file \%>\%

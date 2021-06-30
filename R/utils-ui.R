@@ -125,36 +125,34 @@ drive_quiet <- function() {
 #' the withr package (<https://withr.r-lib.org>).
 #'
 #' @export
-#' @examples
-#' if (drive_has_token()) {
-#'   # message: "Created Drive file"
-#'   (x <- drive_create("drive-quiet-demo", type = "document"))
+
+#' @examplesIf drive_has_token()
+#' # message: "Created Drive file"
+#' (x <- drive_create("drive-quiet-demo", type = "document"))
 #'
-#'   # message: "File updated"
-#'   x <- drive_update(x, starred = TRUE)
-#'   purrr::pluck(x, "drive_resource", 1, "starred")
+#' # message: "File updated"
+#' x <- drive_update(x, starred = TRUE)
+#' drive_reveal(x, "starred")
 #'
-#'   # suppress messages for a small amount of code
-#'   with_drive_quiet(
-#'     x <- drive_update(x, name = "drive-quiet-works")
-#'   )
-#'   x$name
+#' # suppress messages for a small amount of code
+#' with_drive_quiet(
+#'   x <- drive_update(x, name = "drive-quiet-works")
+#' )
+#' x$name
 #'
-#'   # message: "File updated"
-#'   x <- drive_update(x, media = drive_example("chicken.txt"))
+#' # message: "File updated"
+#' x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #'
-#'   # suppress messages within a specific scope, e.g. function
-#'   unstar <- function(y) {
-#'     local_drive_quiet()
-#'     drive_update(y, starred = FALSE)
-#'   }
-#'   x <- unstar(x)
-#'   purrr::pluck(x, "drive_resource", 1, "starred")
-#'
-#'   # clean up
-#'   drive_trash(x)
-#'   rm(unstar)
+#' # suppress messages within a specific scope, e.g. function
+#' unstar <- function(y) {
+#'   local_drive_quiet()
+#'   drive_update(y, starred = FALSE)
 #' }
+#' x <- unstar(x)
+#' drive_reveal(x, "starred")
+#'
+#' # clean up
+#' drive_rm(x)
 local_drive_quiet <- function(env = parent.frame()) {
   withr::local_options(list(googledrive_quiet = TRUE), .local_envir = env)
 }

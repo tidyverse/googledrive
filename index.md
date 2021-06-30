@@ -1,13 +1,14 @@
 
 # googledrive
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/googledrive)](https://cran.r-project.org/package=googledrive)
-[![Travis Build
-Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master)
+<!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/googledrive)](https://CRAN.R-project.org/package=googledrive)
+[![R-CMD-check](https://github.com/tidyverse/googledrive/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googledrive/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/tidyverse/googledrive/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/googledrive?branch=master)
+<!-- badges: end -->
 
 ## Overview
 
@@ -54,21 +55,25 @@ package to deal on your behalf with Google Drive.
 
 ``` r
 drive_find(n_max = 30)
-#> # A tibble: 12 x 3
-#>    name                id                                drive_resource   
-#>  * <chr>               <chr>                             <list>           
-#>  1 Rlogo.pdf           1opPZyo4WUiue56qlF8SO5ipaTJwPLzZg <named list [39]>
-#>  2 THANKS              1JCQ06Wj6AjntiyjnHsXmmcHZWCkBNgBJ <named list [39]>
-#>  3 googledrive-NEWS.md 1wMnFwFSIG0eQ4UUUEbn6-udF3GoKY3xN <named list [38]>
-#>  4 def                 12xjsE3eIf84VSFF5hNhSEOnQF8DDSHkc <named list [32]>
-#>  5 abc                 1qkS667DEnvDzTuVBSyj5NeGzIGbrAy9Q <named list [32]>
-#>  6 BioC_mirrors.csv    1f-Ua7sUZq1g5YycA1mXwlVRrYn1lN15o <named list [38]>
-#>  7 logo.jpg            1yhwnYA0TfXZ5lykclxIPyjvSBLL3h_Y0 <named list [40]>
-#>  8 Rlogo.svg           1vhSTljYBXwOqILwgZ8hC3XKzVC98I5x3 <named list [40]>
-#>  9 DESCRIPTION         1U4iwGpIa1SVPuiki3bs2fS-EltIvL3JD <named list [39]>
-#> 10 chicken.txt         1af6w2ZU-JjwI7jrKW1OGiiRbM2GMTbil <named list [39]>
-#> 11 chicken.pdf         1nL7iro5YQLt1d77acGiHoawmPTWonh6p <named list [39]>
-#> 12 chicken.jpg         1QQhNDl_f2W-UxacIfCBaftUopfqi1Tw1 <named list [40]>
+#> # A dribble: 16 x 3
+#>    name               id                                        drive_resource  
+#>  * <chr>              <chr>                                     <list>          
+#>  1 chicken_sheet      1s0kEHcqG2PyciERoGq52L_Qwzp4y3__rBVKSx7E… <named list [35…
+#>  2 r_logo.jpg         1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud         <named list [41…
+#>  3 THANKS             19URV7BT0_E1KhYdfDODszK5aiELOwTSz         <named list [40…
+#>  4 googledrive-NEWS.… 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm         <named list [39…
+#>  5 def                1ALSW_Nqs7FsPOcrJ6MqyBoRm03gansmn         <named list [33…
+#>  6 abc                1o89YN5n4325GbUA86Wp6pRH3dsTsE5iC         <named list [33…
+#>  7 BioC_mirrors.csv   13tMFbhAHoeHLFS5xu19GbDjf6GWJSxyN         <named list [39…
+#>  8 Rlogo.svg          1lCQGxjyoc9mQz719I8sKil_m2Nuhw0Fq         <named list [41…
+#>  9 DESCRIPTION        1KKYhtcdJMKh4WYeri5TOPEeAtzdN_cqV         <named list [40…
+#> 10 r_about.html       1mHtQhvJyDk5dX9ktKbeIoVW-wwWK0__N         <named list [40…
+#> 11 imdb_latin1.csv    1S5HxY7a-Jb_fV4C3T6fkGyPpXfI_yb4w         <named list [39…
+#> 12 chicken.txt        1xMvlJHia_qYNZmucaStDcOF9A9PD4BOT         <named list [40…
+#> 13 chicken.pdf        1au0aK6YCTra2sucTRus8ZaUhbaLpinTn         <named list [40…
+#> 14 chicken.jpg        1-BF1c4kWCkkByQbcLT-b2Hv6vnVsbqa_         <named list [41…
+#> 15 chicken.csv        12212CXY_TopUMIKYu_l8hU5UXI8lrzQF         <named list [39…
+#> 16 chicken_doc        11GY4Q4BUG3m5U4CnZP564lYvGydvZe2XZOkwCfx… <named list [35…
 ```
 
 You can narrow the query by specifying a `pattern` you’d like to match
@@ -91,11 +96,11 @@ by “anyone with a link”, do this:
 
 ``` r
 (files <- drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'")))
-#> # A tibble: 2 x 3
-#>   name      id                                drive_resource   
-#> * <chr>     <chr>                             <list>           
-#> 1 Rlogo.pdf 1opPZyo4WUiue56qlF8SO5ipaTJwPLzZg <named list [39]>
-#> 2 THANKS    1JCQ06Wj6AjntiyjnHsXmmcHZWCkBNgBJ <named list [39]>
+#> # A dribble: 2 x 3
+#>   name       id                                drive_resource   
+#> * <chr>      <chr>                             <list>           
+#> 1 r_logo.jpg 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud <named list [41]>
+#> 2 THANKS     19URV7BT0_E1KhYdfDODszK5aiELOwTSz <named list [40]>
 ```
 
 You generally want to store the result of a googledrive call, as we do
@@ -110,31 +115,32 @@ files by name (path, really) or by Drive file id using `drive_get()`.
 
 ``` r
 (x <- drive_get("~/abc/def/googledrive-NEWS.md"))
-#> # A tibble: 1 x 4
+#> ✓ The input `path` resolved to exactly 1 file.
+#> # A dribble: 1 x 4
 #>   name            path                  id                      drive_resource  
-#>   <chr>           <chr>                 <chr>                   <list>          
-#> 1 googledrive-NE… ~/abc/def/googledriv… 1wMnFwFSIG0eQ4UUUEbn6-… <named list [38…
+#> * <chr>           <chr>                 <chr>                   <list>          
+#> 1 googledrive-NE… ~/abc/def/googledriv… 1h1lhFfQrDZevE2OEX10-r… <named list [39…
 ```
 
-`as_id()` can be used to coerce various inputs into a marked vector of
+`as_id()` can be used to convert various inputs into a marked vector of
 file ids. It works on file ids (for obvious reasons!), various forms of
-Drive URLs, and dribbles.
+Drive URLs, and `dribble`s.
 
 ``` r
 x$id
-#> [1] "1wMnFwFSIG0eQ4UUUEbn6-udF3GoKY3xN"
+#> [1] "1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm"
 
 # let's retrieve same file by id (also a great way to force-refresh metadata)
 drive_get(as_id(x$id))
-#> # A tibble: 1 x 3
+#> # A dribble: 1 x 3
 #>   name                id                                drive_resource   
 #> * <chr>               <chr>                             <list>           
-#> 1 googledrive-NEWS.md 1wMnFwFSIG0eQ4UUUEbn6-udF3GoKY3xN <named list [38]>
+#> 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm <named list [39]>
 drive_get(as_id(x))
-#> # A tibble: 1 x 3
+#> # A dribble: 1 x 3
 #>   name                id                                drive_resource   
 #> * <chr>               <chr>                             <list>           
-#> 1 googledrive-NEWS.md 1wMnFwFSIG0eQ4UUUEbn6-udF3GoKY3xN <named list [38]>
+#> 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm <named list [39]>
 ```
 
 In general, googledrive functions that operate on files allow you to
@@ -149,19 +155,19 @@ We can upload any file type.
 
 ``` r
 (chicken <- drive_upload(
-  drive_example("chicken.csv"),
+  drive_example_local("chicken.csv"),
   "index-chicken.csv"
 ))
 #> Local file:
-#> • '/Users/jenny/Library/R/4.0/library/googledrive/extdata/chicken.csv'
+#> • '/private/tmp/RtmpjiK39B/temp_libpathdbea1991e33f/googledrive/extdata/example_files/chicken.csv'
 #> Uploaded into Drive file:
-#> • index-chicken.csv <id: 1E9M-4etojxjfsGbwCtsc7kZPJMleGo8f>
+#> • 'index-chicken.csv' <id: 1ut3Adahr0eenCq7lRUmy08zCadhvMPQo>
 #> With MIME type:
 #> • 'text/csv'
-#> # A tibble: 1 x 3
+#> # A dribble: 1 x 3
 #>   name              id                                drive_resource   
 #> * <chr>             <chr>                             <list>           
-#> 1 index-chicken.csv 1E9M-4etojxjfsGbwCtsc7kZPJMleGo8f <named list [38]>
+#> 1 index-chicken.csv 1ut3Adahr0eenCq7lRUmy08zCadhvMPQo <named list [39]>
 ```
 
 Notice that file was uploaded as `text/csv`. Since this was a `.csv`
@@ -172,18 +178,18 @@ Google Spreadsheet. Let’s delete this file first.
 ``` r
 drive_rm(chicken)
 #> File deleted:
-#> • index-chicken.csv <id: 1E9M-4etojxjfsGbwCtsc7kZPJMleGo8f>
+#> • 'index-chicken.csv' <id: 1ut3Adahr0eenCq7lRUmy08zCadhvMPQo>
 
 # example of using a dribble as input
-chicken_sheet <- drive_upload(
-  drive_example("chicken.csv"),
-  "index-chicken-sheet",
-  type = "spreadsheet"
-)
+chicken_sheet <- drive_example_local("chicken.csv") %>% 
+  drive_upload(
+    name = "index-chicken-sheet",
+    type = "spreadsheet"
+  )
 #> Local file:
-#> • '/Users/jenny/Library/R/4.0/library/googledrive/extdata/chicken.csv'
+#> • '/private/tmp/RtmpjiK39B/temp_libpathdbea1991e33f/googledrive/extdata/example_files/chicken.csv'
 #> Uploaded into Drive file:
-#> • index-chicken-sheet <id: 1ytBqCIcUoVwXRB3xIc2xVdjsauX-067HxZNh4beTNR4>
+#> • 'index-chicken-sheet' <id: 1MBTalz_OKoutHmi-nbyEXRriqkNhqioHKZiiMF0g60k>
 #> With MIME type:
 #> • 'application/vnd.google-apps.spreadsheet'
 ```
@@ -200,10 +206,10 @@ and parks more detailed metadata in a `permissions_resource` variable.
 ``` r
 chicken_sheet %>% 
   drive_reveal("permissions")
-#> # A tibble: 1 x 5
+#> # A dribble: 1 x 5
 #>   name         shared id                       drive_resource  permissions_reso…
 #> * <chr>        <lgl>  <chr>                    <list>          <list>           
-#> 1 index-chick… FALSE  1ytBqCIcUoVwXRB3xIc2xVd… <named list [3… <named list [2]>
+#> 1 index-chick… FALSE  1MBTalz_OKoutHmi-nbyEXR… <named list [3… <named list [2]>
 ```
 
 Here’s how to grant anyone with the link permission to view this data
@@ -216,11 +222,11 @@ set.
 #> • role = reader
 #> • type = anyone
 #> For file:
-#> • index-chicken-sheet <id: 1ytBqCIcUoVwXRB3xIc2xVdjsauX-067HxZNh4beTNR4>
-#> # A tibble: 1 x 5
+#> • 'index-chicken-sheet' <id: 1MBTalz_OKoutHmi-nbyEXRriqkNhqioHKZiiMF0g60k>
+#> # A dribble: 1 x 5
 #>   name         shared id                       drive_resource  permissions_reso…
 #> * <chr>        <lgl>  <chr>                    <list>          <list>           
-#> 1 index-chick… TRUE   1ytBqCIcUoVwXRB3xIc2xVd… <named list [3… <named list [2]>
+#> 1 index-chick… TRUE   1MBTalz_OKoutHmi-nbyEXR… <named list [3… <named list [2]>
 ```
 
 This comes up so often, there’s even a convenience wrapper,
@@ -237,10 +243,10 @@ variable.
 ``` r
 chicken_sheet %>% 
   drive_reveal("published")
-#> # A tibble: 1 x 7
+#> # A dribble: 1 x 7
 #>   name   published shared id    drive_resource permissions_res… revision_resour…
 #> * <chr>  <lgl>     <lgl>  <chr> <list>         <list>           <list>          
-#> 1 index… FALSE     TRUE   1ytB… <named list [… <named list [2]> <named list [7]>
+#> 1 index… FALSE     TRUE   1MBT… <named list [… <named list [2]> <named list [7]>
 ```
 
 By default, `drive_publish()` will publish your most recent version.
@@ -248,11 +254,11 @@ By default, `drive_publish()` will publish your most recent version.
 ``` r
 (chicken_sheet <- drive_publish(chicken_sheet))
 #> File now published:
-#> • index-chicken-sheet <id: 1ytBqCIcUoVwXRB3xIc2xVdjsauX-067HxZNh4beTNR4>
-#> # A tibble: 1 x 7
+#> • 'index-chicken-sheet' <id: 1MBTalz_OKoutHmi-nbyEXRriqkNhqioHKZiiMF0g60k>
+#> # A dribble: 1 x 7
 #>   name   published shared id    drive_resource permissions_res… revision_resour…
 #> * <chr>  <lgl>     <lgl>  <chr> <list>         <list>           <list>          
-#> 1 index… TRUE      TRUE   1ytB… <named list [… <named list [2]> <named list [9]>
+#> 1 index… TRUE      TRUE   1MBT… <named list [… <named list [2]> <named list [9]>
 ```
 
 #### Download files
@@ -269,7 +275,7 @@ extension in `path`. For example, if I would like to download the
 ``` r
 drive_download("index-chicken-sheet", type = "csv")
 #> File downloaded:
-#> • index-chicken-sheet <id: 1ytBqCIcUoVwXRB3xIc2xVdjsauX-067HxZNh4beTNR4>
+#> • 'index-chicken-sheet' <id: 1MBTalz_OKoutHmi-nbyEXRriqkNhqioHKZiiMF0g60k>
 #> Saved locally as:
 #> • 'index-chicken-sheet.csv'
 ```
@@ -283,7 +289,7 @@ drive_download(
   overwrite = TRUE
 )
 #> File downloaded:
-#> • index-chicken-sheet <id: 1ytBqCIcUoVwXRB3xIc2xVdjsauX-067HxZNh4beTNR4>
+#> • 'index-chicken-sheet' <id: 1MBTalz_OKoutHmi-nbyEXRriqkNhqioHKZiiMF0g60k>
 #> Saved locally as:
 #> • 'index-chicken-sheet.csv'
 ```
@@ -297,7 +303,7 @@ Google Sheets, this is an Excel workbook:
 ``` r
 drive_download("index-chicken-sheet")
 #> File downloaded:
-#> • index-chicken-sheet <id: 1ytBqCIcUoVwXRB3xIc2xVdjsauX-067HxZNh4beTNR4>
+#> • 'index-chicken-sheet' <id: 1MBTalz_OKoutHmi-nbyEXRriqkNhqioHKZiiMF0g60k>
 #> Saved locally as:
 #> • 'index-chicken-sheet.xlsx'
 ```
@@ -311,7 +317,7 @@ i.e. it does not require any conversion or type info.
 # download it and prove we got it
 drive_download("chicken.txt")
 #> File downloaded:
-#> • chicken.txt <id: 1af6w2ZU-JjwI7jrKW1OGiiRbM2GMTbil>
+#> • 'chicken.txt' <id: 1xMvlJHia_qYNZmucaStDcOF9A9PD4BOT>
 #> Saved locally as:
 #> • 'chicken.txt'
 readLines("chicken.txt") %>% head()
@@ -332,7 +338,7 @@ file.remove(c(
 #> [1] TRUE TRUE TRUE
 drive_find("index-chicken") %>% drive_rm()
 #> File deleted:
-#> • index-chicken-sheet <id: 1ytBqCIcUoVwXRB3xIc2xVdjsauX-067HxZNh4beTNR4>
+#> • 'index-chicken-sheet' <id: 1MBTalz_OKoutHmi-nbyEXRriqkNhqioHKZiiMF0g60k>
 ```
 
 ## Privacy

@@ -27,10 +27,11 @@ googledrive::drive_deauth()
 
 # googledrive
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/googledrive)](https://cran.r-project.org/package=googledrive)
-[![Travis Build Status](https://travis-ci.org/tidyverse/googledrive.svg?branch=master)](https://travis-ci.org/tidyverse/googledrive)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googledrive?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googledrive)
-[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/googledrive/master.svg)](https://codecov.io/github/tidyverse/googledrive?branch=master) 
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/googledrive)](https://CRAN.R-project.org/package=googledrive)
+[![R-CMD-check](https://github.com/tidyverse/googledrive/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googledrive/actions)
+[![Codecov test coverage](https://codecov.io/gh/tidyverse/googledrive/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/googledrive?branch=master)
+<!-- badges: end -->
 
 ## Overview
 
@@ -65,19 +66,20 @@ library("googledrive")
 
 CLEAN <- SETUP <- FALSE
 
-examples <- drive_example()
+examples <- drive_examples_remote()
 builtin <- c(
   system.file("DESCRIPTION"),
-  R.home("doc/html/Rlogo.pdf"),
   R.home("doc/html/Rlogo.svg"),
-  R.home("doc/html/logo.jpg"),
   R.home("doc/BioC_mirrors.csv"),
   R.home("doc/THANKS")
 )
 
 if (isTRUE(SETUP)) {
-  purrr::map(examples, ~ drive_upload(drive_example(.x)))
-  purrr::map( builtin, ~ drive_upload(.x))
+  purrr::map2(
+    examples$id, examples$name,
+    ~ drive_cp(as_id(.x), name = .y)
+  )
+  purrr::map(builtin, ~ drive_upload(.x))
 
   drive_mkdir("abc")
   abc_def <- drive_mkdir("abc/def")
@@ -88,8 +90,8 @@ if (isTRUE(SETUP)) {
   )
   
   THANKS <- drive_get("THANKS")
-  Rlogo_pdf <- drive_get("Rlogo.pdf")
-  x <- list(THANKS, Rlogo_pdf)
+  r_logo <- drive_get("r_logo.jpg")
+  x <- list(THANKS, r_logo)
   purrr::map(x, ~ drive_update(.x, starred = TRUE))
   purrr::map(x, ~ drive_share(.x, role = "reader", type = "anyone"))
 }
@@ -145,7 +147,7 @@ You generally want to store the result of a googledrive call, as we do with `fil
 (x <- drive_get("~/abc/def/googledrive-NEWS.md"))
 ```
 
-`as_id()` can be used to coerce various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and dribbles.
+`as_id()` can be used to convert various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and `dribble`s.
  
 ```{r}
 x$id
@@ -163,7 +165,7 @@ We can upload any file type.
 
 ```{r}
 (chicken <- drive_upload(
-  drive_example("chicken.csv"),
+  drive_example_local("chicken.csv"),
   "index-chicken.csv"
 ))
 ```
@@ -174,11 +176,11 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 drive_rm(chicken)
 
 # example of using a dribble as input
-chicken_sheet <- drive_upload(
-  drive_example("chicken.csv"),
-  "index-chicken-sheet",
-  type = "spreadsheet"
-)
+chicken_sheet <- drive_example_local("chicken.csv") %>% 
+  drive_upload(
+    name = "index-chicken-sheet",
+    type = "spreadsheet"
+  )
 ```
 
 Much better!

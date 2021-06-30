@@ -15,7 +15,7 @@ if (SETUP) {
   drive_upload(system.file("DESCRIPTION"), name = nm_("DESC"))
 
   drive_upload(
-    drive_example("chicken.txt"),
+    drive_example_local("chicken.txt"),
     name = nm_("chicken_doc"),
     type = "document"
   )
@@ -64,7 +64,7 @@ test_that("drive_read() works on a native Google file", {
   chicken_poem <- strsplit(chicken_poem, split = "(\r\n|\r|\n)")[[1]]
   expect_setequal(
     chicken_poem,
-    read_utf8(drive_example("chicken.txt"))
+    read_utf8(drive_example_local("chicken.txt"))
   )
 })
 
@@ -75,7 +75,7 @@ test_that("drive_read() can handle non UTF-8 input, if informed", {
   suppressMessages(
     imdb <- drive_read_string(nm_("imdb_latin1_csv"), encoding = "latin1")
   )
-  imdb <- read.csv(text = imdb, stringsAsFactors = FALSE, encoding = "UTF-8")
+  imdb <- utils::read.csv(text = imdb, stringsAsFactors = FALSE, encoding = "UTF-8")
   expect_equal(
     names(imdb),
     c("Votes", "Rating", "Title", "Year", "Decade")

@@ -82,6 +82,14 @@ In the current release, `verbose = FALSE` is still honored, but generates a warn
 
 ## Other changes
 
+* We now share a variety of world-readable, persistent example files on Drive,
+  for use in examples and documentation. These remote example files complement
+  the local example files that were already included in googledrive.
+  
+  `drive_example()` is deprecated in favor of these accessors for example files:
+  - Plural forms:`drive_examples_remote()`, `drive_examples_local()`
+  - Singular forms: `drive_example_remote()`, `drive_example_local()`
+
 * `drive_read_string()` and `drive_read_raw()` are new functions that read the
   content of a Drive file directly into R, skipping the step of downloading to a
   local file (#81).
