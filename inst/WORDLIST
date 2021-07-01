@@ -1,5 +1,4 @@
 API's
-AppVeyor
 Auth
 AuthState
 CLI
@@ -35,11 +34,11 @@ funder
 ggplot
 gmailr
 googledrive's
+googlesheets
 https
 httr
 httr's
 ing
-json
 lifecycle
 lowerCamel
 magrittr
@@ -52,6 +51,7 @@ programmatically
 purrr
 rebranded
 recency
+reprexes
 rlang's
 rprojroot
 setwise

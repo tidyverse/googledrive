@@ -39,6 +39,7 @@ articles:
   - title: Developer
     desc: Articles documenting internal matters
     contents:
+    - articles/example-files
     - articles/messages-and-errors
 
 reference:
