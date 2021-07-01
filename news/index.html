@@ -245,6 +245,16 @@
 <h2 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h2>
 <ul>
+<li>
+<p>We now share a variety of world-readable, persistent example files on Drive, for use in examples and documentation. These remote example files complement the local example files that were already included in googledrive.</p>
+<p><code><a href="../reference/googledrive-deprecated.html">drive_example()</a></code> is deprecated in favor of these accessors for example files:</p>
+<ul>
+<li>Plural forms:<code><a href="../reference/drive_examples.html">drive_examples_remote()</a></code>, <code><a href="../reference/drive_examples.html">drive_examples_local()</a></code>
+</li>
+<li>Singular forms: <code><a href="../reference/drive_examples.html">drive_example_remote()</a></code>, <code><a href="../reference/drive_examples.html">drive_example_local()</a></code>
+</li>
+</ul>
+</li>
 <li><p><code><a href="../reference/drive_read_string.html">drive_read_string()</a></code> and <code><a href="../reference/drive_read_string.html">drive_read_raw()</a></code> are new functions that read the content of a Drive file directly into R, skipping the step of downloading to a local file (<a href='https://github.com/tidyverse/googledrive/issues/81'>#81</a>).</p></li>
 <li><p><code>drive_reveal(what = "property_name")</code> now works for any property found in the file metadata stored in the <code>drive_resource</code> column. The new column is also simplified in more cases now, e.g. to <code>character</code> or <code>logical</code>. If the <code>property_name</code> suggests it’s a date-time, we return <code>POSIXct</code>.</p></li>
 <li>

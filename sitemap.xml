@@ -52,7 +52,7 @@
     <loc>https://googledrive.tidyverse.org/reference/drive_endpoints.html</loc>
   </url>
   <url>
-    <loc>https://googledrive.tidyverse.org/reference/drive_example.html</loc>
+    <loc>https://googledrive.tidyverse.org/reference/drive_examples.html</loc>
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/reference/drive_extension.html</loc>
@@ -167,6 +167,9 @@
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/articles/articles/bring-your-own-app.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/articles/articles/example-files.html</loc>
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/articles/articles/file-identification.html</loc>

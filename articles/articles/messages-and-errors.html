@@ -281,11 +281,11 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
 <span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
-<span class="co">#&gt; [1] "{.drivepath Rlogo.pdf} {cli::col_grey('&lt;id: 1opPZyo4WUiue56qlF8SO5ipaTJwPLzZg&gt;')}"          </span>
-<span class="co">#&gt; [2] "{.drivepath THANKS} {cli::col_grey('&lt;id: 1JCQ06Wj6AjntiyjnHsXmmcHZWCkBNgBJ&gt;')}"             </span>
-<span class="co">#&gt; [3] "{.drivepath googledrive-NEWS.md} {cli::col_grey('&lt;id: 1wMnFwFSIG0eQ4UUUEbn6-udF3GoKY3xN&gt;')}"</span>
-<span class="co">#&gt; [4] "{.drivepath def} {cli::col_grey('&lt;id: 12xjsE3eIf84VSFF5hNhSEOnQF8DDSHkc&gt;')}"                </span>
-<span class="co">#&gt; [5] "{.drivepath abc} {cli::col_grey('&lt;id: 1qkS667DEnvDzTuVBSyj5NeGzIGbrAy9Q&gt;')}"</span></code></pre></div>
+<span class="co">#&gt; [1] "{.drivepath chicken_sheet} {cli::col_grey('&lt;id: 1s0kEHcqG2PyciERoGq52L_Qwzp4y3__rBVKSx7E_j88&gt;')}"</span>
+<span class="co">#&gt; [2] "{.drivepath r_logo.jpg} {cli::col_grey('&lt;id: 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud&gt;')}"              </span>
+<span class="co">#&gt; [3] "{.drivepath THANKS} {cli::col_grey('&lt;id: 19URV7BT0_E1KhYdfDODszK5aiELOwTSz&gt;')}"                  </span>
+<span class="co">#&gt; [4] "{.drivepath googledrive-NEWS.md} {cli::col_grey('&lt;id: 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm&gt;')}"     </span>
+<span class="co">#&gt; [5] "{.drivepath def} {cli::col_grey('&lt;id: 1ALSW_Nqs7FsPOcrJ6MqyBoRm03gansmn&gt;')}"</span></code></pre></div>
 <p><code>gargle_map_cli.dribble()</code> also allows a custom template, but it’s a more complicated and less common situation than for <code>character</code>. We won’t get into that here. (I don’t consider the dribble styling to be finalized yet.)</p>
 <p>The result of <code>gargle_map_cli()</code> then gets processed with <code><a href="https://gargle.r-lib.org/reference/bulletize.html">gargle::bulletize()</a></code>, which adds the bullet-specifying names and does aesthetically pleasing truncation.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -318,11 +318,11 @@
   <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Some Drive files:</span>
-<span class="co">#&gt; • 'Rlogo.pdf' &lt;id: 1opPZyo4WUiue56qlF8SO5ipaTJwPLzZg&gt;</span>
-<span class="co">#&gt; • 'THANKS' &lt;id: 1JCQ06Wj6AjntiyjnHsXmmcHZWCkBNgBJ&gt;</span>
-<span class="co">#&gt; • 'googledrive-NEWS.md' &lt;id: 1wMnFwFSIG0eQ4UUUEbn6-udF3GoKY3xN&gt;</span>
-<span class="co">#&gt; • 'def' &lt;id: 12xjsE3eIf84VSFF5hNhSEOnQF8DDSHkc&gt;</span>
-<span class="co">#&gt; • 'abc' &lt;id: 1qkS667DEnvDzTuVBSyj5NeGzIGbrAy9Q&gt;</span>
+<span class="co">#&gt; • 'chicken_sheet' &lt;id: 1s0kEHcqG2PyciERoGq52L_Qwzp4y3__rBVKSx7E_j88&gt;</span>
+<span class="co">#&gt; • 'r_logo.jpg' &lt;id: 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud&gt;</span>
+<span class="co">#&gt; • 'THANKS' &lt;id: 19URV7BT0_E1KhYdfDODszK5aiELOwTSz&gt;</span>
+<span class="co">#&gt; • 'googledrive-NEWS.md' &lt;id: 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm&gt;</span>
+<span class="co">#&gt; • 'def' &lt;id: 1ALSW_Nqs7FsPOcrJ6MqyBoRm03gansmn&gt;</span>
 <span class="co">#&gt;   … and 5 more</span></code></pre></div>
 <p>It’s conceivable that cli will gain a better way of vectorization, but this works for now.</p>
 <p>Known dysfunction: it’s inefficient to <code>gargle_map_cli()</code> over the whole object, then truncate with <code>bulletize()</code>. But it’s easy. There are contexts, like tibble printing, where formatting stuff that will never see the light of day is really punishing. But I’m not sure I really have to worry about that.</p>
