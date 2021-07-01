@@ -1,7 +1,7 @@
 ## This file is the interface between googledrive and the
 ## auth functionality in gargle.
 
-# Initialization happens in .onLoad
+# Initialization happens in .onLoad()
 .auth <- NULL
 
 ## The roxygen comments for these functions are mostly generated from data
