@@ -58,22 +58,3 @@ drive_share_anyone(x)
 # curl::curl_download("https://httpbin.org/html", destfile = tfile)
 # curl::curl_download("https://httpbin.org/xml", destfile = tfile)
 # curl::curl_download("https://httpbin.org/json", destfile = tfile)
-
-dat <- drive_find()
-
-if (anyDuplicated(dat$name)) {
-  stop("Duplicated file names! You are making a huge mistake.")
-}
-
-dat <- dat %>%
-  drive_reveal("mime_type") %>%
-  select(name, mime_type, id) %>%
-  arrange(name, mime_type)
-
-# I write to csv, then load from there, because the visibility afforded by a
-# plain old csv file is useful to me, e.g. easy to see change over time
-# I don't want this in sysdata.rda
-write_csv(
-  dat,
-  file = here("inst", "extdata", "data", "remote_example_files.csv")
-)

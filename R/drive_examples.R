@@ -124,20 +124,14 @@ local_example_files <- function() {
 
 remote_example_files <- function() {
   # inlining env_cache() logic, so I don't need bleeding edge rlang
-  # TODO: this would be the place to learn the ids of remote example sheets
-  # dynamically, if I ever did that
   if (!env_has(.googledrive, "remote_example_files")) {
-    dat <- utils::read.csv(
-      system.file(
-        "extdata", "data", "remote_example_files.csv",
-        package = "googledrive", mustWork = TRUE
-      ),
-      stringsAsFactors = FALSE
-    )
+    inventory_id <- "1XiwJJdoqoZ876OoSTjsnBZ5SxxUg6gUC"
     if (!drive_has_token()) { # don't trigger auth just for this
       local_drive_quiet()
       local_deauth()
     }
+    dat_string <- drive_read_string(as_id(inventory_id), encoding = "UTF-8")
+    dat <- utils::read.csv(text = dat_string, stringsAsFactors = FALSE)
     env_poke(.googledrive, "remote_example_files", as_dribble(as_id(dat$id)))
   }
   env_get(.googledrive, "remote_example_files")
