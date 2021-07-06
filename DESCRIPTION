@@ -49,6 +49,11 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
+Config/Needs/website:
+    pkgdown,
+    tidyverse,
+    r-lib/downlit,
+    tidyverse/tidytemplate
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
