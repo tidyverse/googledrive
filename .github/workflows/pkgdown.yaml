@@ -57,6 +57,7 @@ jobs:
           pak::local_install_dev_deps(upgrade = TRUE)
           pak::pkg_install("tidyverse")
           pak::pkg_install("tidyverse/tidytemplate")
+          pak::pkg_install("r-lib/downlit")
           pak::pkg_install("pkgdown")
         shell: Rscript {0}
 
