@@ -65,10 +65,12 @@ pillar_shaft.drive_id <- function(x, ...) {
   # out <- format(x)
   # pillar::new_pillar_shaft_simple(x, min_width = 3)
 
-  #out <- format(paste0(substr(x, 1, 7), cli::symbol$continue))
-  out <- format(
-    cli::ansi_strtrim(unclass(x), width = 8, ellipsis = cli::symbol$continue)
-  )
+  # at this point, I could just do:
+  # out <- format(paste0(substr(x, 1, 7), cli::symbol$continue))
+  # but an ANSI-safe method is what's recommended and feels more future-proof
+  out <- format(safe_ansi_strtrim(
+    unclass(x), width = 8, ellipsis = cli::symbol$continue
+  ))
   pillar::new_pillar_shaft_simple(out, min_width = 3)
 
   # full <- format(x)
@@ -79,6 +81,21 @@ pillar_shaft.drive_id <- function(x, ...) {
   #   min_width = pillar::get_max_extent(trunc),
   #   class = "pillar_shaft_drive_id"
   # )
+}
+
+# safe for NAs
+# https://github.com/r-lib/cli/issues/309
+safe_ansi_strtrim <- function(x,
+                              width = console_width(),
+                              ellipsis = symbol$ellipsis) {
+  not_na <- !is.na(x)
+  out <- rep_along(x, NA_character_)
+  out[not_na] <- cli::ansi_strtrim(
+    x[not_na],
+    width = width,
+    ellipsis = ellipsis
+  )
+  out
 }
 
 #' @export
