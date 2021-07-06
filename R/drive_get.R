@@ -162,7 +162,7 @@ get_one_file_id <- function(id) {
   request <- request_generate(
     endpoint = "drive.files.get",
     params = list(
-      fileId = as.character(id),
+      fileId = id,
       fields = "*"
     )
   )

@@ -88,7 +88,7 @@ drive_change_publish <- function(file,
 }
 
 change_publish_one <- function(id, params) {
-  params[["fileId"]] <- as.character(id)
+  params[["fileId"]] <- id
   request <- request_generate(
     endpoint = "drive.revisions.update",
     params = params
@@ -117,7 +117,7 @@ get_publish_one <- function(id) {
   request <- request_generate(
     endpoint = "drive.revisions.get",
     params = list(
-      fileId = as.character(id),
+      fileId = id,
       revisionId = "head",
       fields = "*"
     )

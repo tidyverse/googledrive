@@ -60,7 +60,7 @@ toggle_trash_one <- function(id, trash = TRUE) {
   request <- request_generate(
     endpoint = "drive.files.update",
     params = list(
-      fileId = as.character(id),
+      fileId = id,
       trashed = trash,
       fields = "*"
     )

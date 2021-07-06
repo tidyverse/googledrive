@@ -78,7 +78,7 @@ drive_rm <- function(..., verbose = deprecated()) {
 delete_one <- function(id) {
   request <- request_generate(
     endpoint = "drive.files.delete",
-    params = list(fileId = as.character(id))
+    params = list(fileId = id)
   )
   response <- request_make(request)
   gargle::response_process(response)

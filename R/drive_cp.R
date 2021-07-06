@@ -91,13 +91,13 @@ drive_cp <- function(file,
   # load (path, name) into params
   if (!is.null(path)) {
     path <- as_parent(path)
-    params[["parents"]] <- list(as.character(path$id))
+    params[["parents"]] <- list(path$id)
   }
   params[["name"]] <- name %||% glue("Copy of {file$name}")
   check_for_overwrite(params[["parents"]], params[["name"]], overwrite)
 
   params[["fields"]] <- params[["fields"]] %||% "*"
-  params[["fileId"]] <- as.character(file$id)
+  params[["fileId"]] <- file$id
 
   request <- request_generate(
     endpoint = "drive.files.copy",

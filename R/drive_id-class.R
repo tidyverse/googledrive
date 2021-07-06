@@ -1,6 +1,6 @@
 new_drive_id <- function(x = character()) {
   vec_assert(x, character())
-  new_vctr(x, class = "drive_id")
+  new_vctr(x, class = "drive_id", inherit_base_type = TRUE)
 }
 
 validate_drive_id <- function(x) {

@@ -86,7 +86,7 @@ drive_download <- function(file,
     request <- request_generate(
       endpoint = "drive.files.export",
       params = list(
-        fileId = as.character(file$id),
+        fileId = file$id,
         mimeType = export_type
       )
     )
@@ -94,7 +94,7 @@ drive_download <- function(file,
     request <- request_generate(
       endpoint = "drive.files.get",
       params = list(
-        fileId = as.character(file$id),
+        fileId = file$id,
         alt = "media"
       )
     )
