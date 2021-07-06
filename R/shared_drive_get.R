@@ -29,7 +29,7 @@
 shared_drive_get <- function(name = NULL, id = NULL) {
   if (length(name) + length(id) == 0) return(dribble())
 
-  if (!is.null(name) && inherits(name, "drive_id")) {
+  if (!is.null(name) && is_drive_id(name)) {
     id <- name
     name <- NULL
   }

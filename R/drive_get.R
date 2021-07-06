@@ -140,7 +140,7 @@ drive_get <- function(path = NULL,
     path <- as_id(path)
   }
 
-  if (!is.null(path) && inherits(path, "drive_id")) {
+  if (!is.null(path) && is_drive_id(path)) {
     id <- path
     path <- NULL
   }
