@@ -5,7 +5,8 @@ if (FALSE) {
   ## how the test file was created
   saveRDS(
     drive_find(n_max = 10),
-    test_file("just_a_dribble.rds")
+    test_file("just_a_dribble.rds"),
+    version = 2
   )
 }
 
