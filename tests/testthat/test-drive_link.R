@@ -4,7 +4,7 @@ if (FALSE) {
   # using shared-drive-capable token ...
   files <- drive_find(corpus = "allDrives", n_max = 10)
   sds <- shared_drive_find()
-  x <- rbind(files, sds)
+  x <- vec_rbind(files, sds)
   saveRDS(x, test_file("mix_of_files_and_teamdrives.rds"), version = 2)
 }
 

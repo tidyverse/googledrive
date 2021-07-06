@@ -16,8 +16,8 @@ if (CLEAN) {
 if (SETUP) {
   drive_mkdir(nm_("i-am-a-folder"))
   shortcut_create(nm_("i-am-a-folder"), name = nm_("copy-to-folder-shortcut"))
-  drive_mkdir(name = nm_("not-unique-folder"), path = as_id(googledrive:::root_id()))
-  drive_mkdir(name = nm_("not-unique-folder"), path = as_id(googledrive:::root_id()))
+  drive_mkdir(name = nm_("not-unique-folder"), path = googledrive:::root_id())
+  drive_mkdir(name = nm_("not-unique-folder"), path = googledrive:::root_id())
   drive_upload(
     system.file("DESCRIPTION"),
     nm_("i-am-a-file")
