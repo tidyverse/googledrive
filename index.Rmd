@@ -153,7 +153,7 @@ You generally want to store the result of a googledrive call, as we do with `fil
 x$id
 
 # let's retrieve same file by id (also a great way to force-refresh metadata)
-drive_get(as_id(x$id))
+drive_get(x$id)
 drive_get(as_id(x))
 ```
 
