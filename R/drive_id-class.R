@@ -37,11 +37,7 @@ is_drive_id <- function(x) {
 
 #' @export
 gargle_map_cli.drive_id <- function(x, ...) {
-  # x <- unclass(x)
-  # NextMethod()
-  # TODO: I know this is gross, but I cannot figure out any "nice" way
-  # to delegate to the character method :(
-  gargle_map_cli(unclass(x))
+  NextMethod()
 }
 
 #' @export
