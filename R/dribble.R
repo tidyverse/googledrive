@@ -189,9 +189,6 @@ has_drive_resource <- function(x) {
 #' drive_find("alfa") %>% drive_rm()
 as_dribble <- function(x, ...) UseMethod("as_dribble")
 
-# #' @export
-#as_dribble.dribble <- function(x, ...) x
-
 #' @export
 as_dribble.default <- function(x, ...) {
   drive_abort("
