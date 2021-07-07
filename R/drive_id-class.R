@@ -81,6 +81,8 @@ pillar_shaft.drive_id <- function(x, ...) {
   #   min_width = pillar::get_max_extent(trunc),
   #   class = "pillar_shaft_drive_id"
   # )
+
+  # TODO: should I format NAs like character NAs? how?
 }
 
 # safe for NAs
