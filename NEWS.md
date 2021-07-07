@@ -1,7 +1,5 @@
 # googledrive (development version)
 
-*We anticipate the next release of googledrive will have version v2.0.0.*
-
 ## Team Drives are dead! Long live shared drives!
 
 Google Drive has rebranded Team Drives as **shared drives**.
