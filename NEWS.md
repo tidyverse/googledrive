@@ -1,4 +1,4 @@
-# googledrive (development version)
+# googledrive 2.0.0
 
 ## Team Drives are dead! Long live shared drives!
 
