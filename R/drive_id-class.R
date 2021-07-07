@@ -12,6 +12,8 @@ validate_drive_id <- function(x) {
   # proceed with plain character vector
   x <- unclass(x)
   # pragmatism re: how to cli-style a path that is the empty string
+  # this is related to the use of gargle_map_cli() for vectorized styling
+  # if cli gains native vectorization, this may become unnecessary
   x[!nzchar(x)] <- "\"\""
 
   drive_abort(c(
@@ -59,56 +61,15 @@ vec_cast.character.drive_id <- function(x, to, ...) vec_data(x)
 #' @export
 vec_ptype_abbr.drive_id <- function(x) "drv_id"
 
-#' @importFrom pillar pillar_shaft
 #' @export
 pillar_shaft.drive_id <- function(x, ...) {
-  # out <- format(x)
-  # pillar::new_pillar_shaft_simple(x, min_width = 3)
-
-  # at this point, I could just do:
-  # out <- format(paste0(substr(x, 1, 7), cli::symbol$continue))
-  # but an ANSI-safe method is what's recommended and feels more future-proof
-  out <- format(safe_ansi_strtrim(
-    unclass(x), width = 8, ellipsis = cli::symbol$continue
-  ))
-  pillar::new_pillar_shaft_simple(out, min_width = 3)
-
-  # full <- format(x)
-  # trunc <- format(paste0(substr(x, 1, 7), cli::symbol$continue))
-  # pillar::new_pillar_shaft(
-  #   list(full = full, trunc = trunc),
-  #   width = pillar::get_max_extent(full),
-  #   min_width = pillar::get_max_extent(trunc),
-  #   class = "pillar_shaft_drive_id"
-  # )
-
-  # TODO: should I format NAs like character NAs? how?
-}
-
-# safe for NAs
-# https://github.com/r-lib/cli/issues/309
-safe_ansi_strtrim <- function(x,
-                              width = console_width(),
-                              ellipsis = symbol$ellipsis) {
-  not_na <- !is.na(x)
-  out <- rep_along(x, NA_character_)
-  out[not_na] <- cli::ansi_strtrim(
-    x[not_na],
-    width = width,
-    ellipsis = ellipsis
-  )
-  out
-}
-
-#' @export
-format.pillar_shaft_drive_id <- function(x, width, ...) {
-  if (pillar::get_max_extent(x$full) <= width) {
-    ornament <- x$full
-  } else {
-    ornament <- x$trunc
-  }
-
-  pillar::new_ornament(ornament, width = 9, align = "left")
+  # I would like to present drive_id in full, space permitting, or truncate
+  # it severely. Anything in between is a waste of horizontal space.
+  # But this is not currently possible: https://github.com/r-lib/pillar/issues/331
+  # Explored here in https://github.com/tidyverse/googledrive/pull/364
+  # Current compromise is to use pillar_shaft.character.
+  # Not sure why I can't access via NextMethod().
+  pillar::pillar_shaft(unclass(x))
 }
 
 #' Extract and/or mark as file id
