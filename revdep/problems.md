@@ -1,39 +1,139 @@
-# reproducible
+# googlesheets4
 
 <details>
 
-* Version: 1.0.0
-* Source code: https://github.com/cran/reproducible
-* URL: https://reproducible.predictiveecology.org, https://github.com/PredictiveEcology/reproducible
-* BugReports: https://github.com/PredictiveEcology/reproducible/issues
-* Date/Publication: 2020-02-20 17:30:02 UTC
-* Number of recursive dependencies: 122
+* Version: 0.3.0
+* GitHub: https://github.com/tidyverse/googlesheets4
+* Source code: https://github.com/cran/googlesheets4
+* Date/Publication: 2021-03-04 17:50:02 UTC
+* Number of recursive dependencies: 71
 
-Run `revdep_details(,"reproducible")` for more info
+Run `revdep_details(, "googlesheets4")` for more info
 
 </details>
 
 ## In both
 
-*   checking tests ...
+*   checking LazyData ... NOTE
     ```
-     ERROR
-    Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
-      3      readRDS   Saving to repo 0.0349459648  secs
-      4      readRDS Whole Cache call 0.0486907959  secs
-        objectNames hashElements             hash objSize
-      1        file         file aef056635a52922b   24139
-      2        .FUN         .FUN 7a8f2865ef4bc06d    1256
-        functionName         component  elapsedTime units
-      1      readRDS           Hashing 0.0008139610  secs
-      2      readRDS Loading from repo 0.0008709431  secs
-      3      readRDS  Whole Cache call 0.0174100399  secs
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 313 | SKIPPED: 68 | WARNINGS: 30 | FAILED: 1 ]
-      1. Error: prepInputs doesn't work (part 3) (@test-postProcess.R#40) 
-      
-      Error: testthat unit tests failed
-      Execution halted
+      'LazyData' is specified without a 'data' directory
+    ```
+
+# mailmerge
+
+<details>
+
+* Version: 0.2.1
+* GitHub: https://github.com/andrie/mailmerge
+* Source code: https://github.com/cran/mailmerge
+* Date/Publication: 2021-05-11 09:20:06 UTC
+* Number of recursive dependencies: 89
+
+Run `revdep_details(, "mailmerge")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘dplyr’ ‘googlesheets4’ ‘lifecycle’ ‘withr’
+      All declared Imports should be used.
+    ```
+
+# rchie
+
+<details>
+
+* Version: 1.0.2
+* GitHub: https://github.com/noamross/rchie
+* Source code: https://github.com/cran/rchie
+* Date/Publication: 2019-05-07 22:11:19 UTC
+* Number of recursive dependencies: 52
+
+Run `revdep_details(, "rchie")` for more info
+
+</details>
+
+## In both
+
+*   checking LazyData ... NOTE
+    ```
+      'LazyData' is specified without a 'data' directory
+    ```
+
+# rgee
+
+<details>
+
+* Version: 1.0.9
+* GitHub: https://github.com/r-spatial/rgee
+* Source code: https://github.com/cran/rgee
+* Date/Publication: 2021-04-24 04:20:02 UTC
+* Number of recursive dependencies: 138
+
+Run `revdep_details(, "rgee")` for more info
+
+</details>
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.0Mb
+      sub-directories of 1Mb or more:
+        doc   3.6Mb
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘R6’
+      All declared Imports should be used.
+    ```
+
+# SpaDES.tools
+
+<details>
+
+* Version: 0.3.8
+* GitHub: https://github.com/PredictiveEcology/SpaDES.tools
+* Source code: https://github.com/cran/SpaDES.tools
+* Date/Publication: 2021-06-07 17:00:05 UTC
+* Number of recursive dependencies: 131
+
+Run `revdep_details(, "SpaDES.tools")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘Require’
+      All declared Imports should be used.
+    ```
+
+# tidyverse
+
+<details>
+
+* Version: 1.3.1
+* GitHub: https://github.com/tidyverse/tidyverse
+* Source code: https://github.com/cran/tidyverse
+* Date/Publication: 2021-04-15 13:20:02 UTC
+* Number of recursive dependencies: 106
+
+Run `revdep_details(, "tidyverse")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘dtplyr’ ‘googledrive’ ‘googlesheets4’
+      All declared Imports should be used.
     ```
 
