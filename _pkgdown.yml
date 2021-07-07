@@ -52,6 +52,7 @@ reference:
       - drive_get
       - drive_reveal
       - drive_browse
+      - starts_with("drive_read")
   - title: "File creation and deletion"
     desc: >
       Create or delete Drive files and folders
