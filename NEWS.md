@@ -108,13 +108,11 @@ In the current release, `verbose = FALSE` is still honored, but generates a warn
 
 * The `drive_id` S3 class is now implemented more fully, using the vctrs
   package (#93, #364):
-  
-  - The `id` column of a `dribble` is now an instance of `drive_id`.
-  - The `id` column is a better citizen when printing a `dribble`: it can be
-    truncated when space is limited.
+
   - The `drive_id` class will persist after mundane operations, like subsetting.
   - You can no longer put strings that are obviously invalid into a `drive_id`
     object.
+  - The `id` column of a `dribble` is now an instance of `drive_id`.
 
 ## Dependency changes
 
