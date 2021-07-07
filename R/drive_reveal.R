@@ -199,7 +199,7 @@ drive_reveal_parent <- function(file) {
   file <- put_column(
     file,
     nm = "id_parent",
-    val = map_chr(file$parents, 1, .default = NA),
+    val = as_id(map_chr(file$parents, 1, .default = NA)),
     .after = "name"
   )
   file$parents <- NULL

@@ -14,13 +14,13 @@ dribble_is_reconstructable <- function(data) {
   is_list(data) &&
     has_dribble_cols(data) &&
     has_dribble_coltypes(data) &&
+    id_can_be_drive_id(data$id) &&
     has_drive_resource(data)
-
 }
 
 new_tibble0 <- function(x, ..., class = NULL) {
   # Handle the 0-column case correctly by using `new_data_frame()`.
   # This also correctly strips any attributes except `names` off `x`.
-  x <- vctrs::new_data_frame(x)
+  x <- new_data_frame(x)
   tibble::new_tibble(x, nrow = nrow(x), class = class)
 }

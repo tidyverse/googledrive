@@ -159,7 +159,7 @@ test_that("check_for_overwrite() does its job", {
 
   PARENT_ID <- drive_get(nm_("create-in-me"))$id
 
-  first <- drive_create(me_("name-collision"), path = as_id(PARENT_ID))
+  first <- drive_create(me_("name-collision"), path = PARENT_ID)
 
   expect_error(
     check_for_overwrite(
@@ -173,7 +173,7 @@ test_that("check_for_overwrite() does its job", {
   expect_error_free(
     second <- drive_create(
       me_("name-collision"),
-      path = as_id(PARENT_ID),
+      path = PARENT_ID,
       overwrite = TRUE
     )
   )
@@ -187,7 +187,7 @@ test_that("check_for_overwrite() does its job", {
   expect_error_free(
     drive_create(
       me_("name-collision"),
-      path = as_id(PARENT_ID),
+      path = PARENT_ID,
       overwrite = NA
     )
   )

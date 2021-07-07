@@ -28,13 +28,13 @@ promote <- function(d, elem) {
 # simplified version of tidyr:::simplify_col()
 simplify_col <- function(x) {
   is_list <- map_lgl(x, is_list)
-  is_vec  <- map_lgl(x, ~ vctrs::vec_is(.x) || is_null(.x))
+  is_vec  <- map_lgl(x, ~ vec_is(.x) || is_null(.x))
   is_not_vec <- !is_vec
   if (any(is_list | is_not_vec)) {
     return(x)
   }
 
-  n <- map_int(x, vctrs::vec_size)
+  n <- map_int(x, vec_size)
   is_scalar <- n %in% c(0, 1)
   if (any(!is_scalar)) {
     return(x)
@@ -43,7 +43,7 @@ simplify_col <- function(x) {
   x[n == 0] <- list(NA)
 
   tryCatch(
-    vctrs::vec_c(!!!x),
+    vec_c(!!!x),
     vctrs_error_incompatible_type = function(e) x
   )
 }

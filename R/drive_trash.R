@@ -46,7 +46,7 @@ drive_toggle_trash <- function(file, trash) {
   }
 
   out <- map(file$id, toggle_trash_one, trash = trash)
-  out <- do.call(rbind, out)
+  out <- vec_rbind(!!!out)
 
   drive_bullets(c(
     "{cli::qty(nrow(out))}File{?s} {VERBED}:",

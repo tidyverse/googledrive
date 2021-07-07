@@ -101,7 +101,7 @@ dribble_with_path <- function() {
   put_column(dribble(), nm = "path", val = character(), .after = "name")
 }
 
-is_path <- function(x) is.character(x) && !inherits(x, "drive_id")
+is_path <- function(x) is.character(x) && !is_drive_id(x)
 
 is_string <- function(x) length(x) == 1L && is_path(x)
 

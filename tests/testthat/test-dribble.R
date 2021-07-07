@@ -18,8 +18,9 @@ test_that("dribble() creates empty dribble", {
 
 test_that("new_dribble() requires a list and adds the dribble class", {
   expect_snapshot(new_dribble(1:3), error = TRUE)
-  expect_dribble(new_dribble(list(x = 1:3)))
-  expect_dribble(new_dribble(data.frame(x = 1:3)))
+  expect_dribble(new_dribble(list(
+    name = "NAME", id = "ID", drive_resource = list("DRIVE_RESOURCE")
+  )))
 })
 
 test_that("validate_dribble() checks class, var names, var types", {
@@ -164,7 +165,7 @@ test_that("as_parent() throws specific errors", {
     tibble::tibble(
       name = letters[1:4],
       id = letters[4:1],
-      drive_resource = list(list(kind = "drive#WUT"))
+      drive_resource = list(list(kind = "drive#file"))
     )
   )
 

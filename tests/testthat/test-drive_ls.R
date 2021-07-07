@@ -74,7 +74,7 @@ test_that("drive_ls() outputs contents of folder", {
   expect_identical(out[c("name", "id")], out2[c("name", "id")])
 
   ## id
-  out3 <- drive_ls(as_id(d$id))
+  out3 <- drive_ls(d$id)
   expect_identical(out[c("name", "id")], out3[c("name", "id")])
 })
 

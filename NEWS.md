@@ -108,11 +108,21 @@ In the current release, `verbose = FALSE` is still honored, but generates a warn
   googledrive only Suggests dplyr, so all this really means is that `dribble`
   manipulation via dplyr now works best with dplyr >= 1.0.0.
 
+* The `drive_id` S3 class is now implemented more fully, using the vctrs
+  package (#93, #364):
+  
+  - The `id` column of a `dribble` is now an instance of `drive_id`.
+  - The `id` column is a better citizen when printing a `dribble`: it can be
+    truncated when space is limited.
+  - The `drive_id` class will persist after mundane operations, like subsetting.
+  - You can no longer put strings that are obviously invalid into a `drive_id`
+    object.
+
 ## Dependency changes
 
 cli, lifecycle, and withr are new in Imports.
 
-vctrs is new in Imports, but was already an indirect hard dependency via tibble.
+pillar and vctrs are new in Imports, but were already indirect hard dependencies via tibble.
 
 mockr is new in Suggests.
 

@@ -54,7 +54,7 @@ test_that("shortcut_create() works", {
 
   expect_true(is_shortcut(sc))
   expect_equal(
-    unlist(drive_reveal(sc, "parents")$parents),
+    drive_reveal(sc, "parent")$id_parent,
     folder$id
   )
   expect_match(sc$name, "custom-named-shortcut")

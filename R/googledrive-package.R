@@ -33,6 +33,7 @@
 #'
 #' @keywords internal
 #' @import rlang
+#' @import vctrs
 "_PACKAGE"
 
 ## usethis namespace: start
@@ -42,6 +43,7 @@
 #' @importFrom glue glue_collapse
 #' @importFrom glue glue_data
 #' @importFrom lifecycle deprecated
+#' @importFrom pillar pillar_shaft
 #' @importFrom purrr map
 #' @importFrom purrr map_chr
 #' @importFrom purrr map_if
@@ -52,12 +54,6 @@
 #' @importFrom tibble as_tibble
 #' @importFrom tibble tbl_sum
 #' @importFrom tibble tibble
-#' @importFrom vctrs vec_cast
-#' @importFrom vctrs vec_ptype2
-#' @importFrom vctrs vec_rbind
-#' @importFrom vctrs vec_restore
-#' @importFrom vctrs vec_size
-#' @importFrom vctrs vec_slice
 ## usethis namespace: end
 NULL
 

@@ -102,27 +102,25 @@ drive_update_media <- function(file, media) {
 }
 
 drive_update_metadata <- function(file, meta) {
+  params <- meta %||% list()
+  params$fileId <- file$id
   request <- request_generate(
     endpoint = "drive.files.update",
-    params = c(
-      fileId = file$id,
-      meta
-    )
+    params = params
   )
   response <- request_make(request)
   as_dribble(list(gargle::response_process(response)))
 }
 
 drive_update_multipart <- function(file, media, meta) {
+  # We include the metadata here even though it's overwritten below,
+  # so that request_generate() still validates it.
+  params <- meta %||% list()
+  params$fileId <- file$id
+  params$uploadType <- "multipart"
   request <- request_generate(
     endpoint = "drive.files.update.media",
-    params = c(
-      fileId = file$id,
-      uploadType = "multipart",
-      ## We provide the metadata here even though it's overwritten below,
-      ## so that request_generate() still validates it.
-      meta
-    )
+    params = params
   )
   meta_file <- withr::local_file(
     tempfile("drive-update-meta", fileext = ".json")
