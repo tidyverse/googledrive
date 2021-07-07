@@ -124,6 +124,6 @@ drive_rm(chicken_sheet)
 \seealso{
 Wraps the \code{files.copy} endpoint:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/files/copy}
+\item \url{https://developers.google.com/drive/api/v3/reference/files/copy}
 }
 }

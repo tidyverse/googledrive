@@ -14,9 +14,9 @@
 #' @description `prep_fields()` prepares fields for inclusion as query
 #'   parameters.
 #'
-#' @seealso [Working with partial
-#' resources](https://developers.google.com/drive/v3/web/performance#partial),
-#' in the Drive API documentation.
+#' @seealso [Improve
+#'   performance](https://developers.google.com/drive/api/v3/performance), in
+#'   the Drive API documentation.
 #'
 #' @param fields Character vector of field names. If `resource = "files"`, they
 #'   are checked for validity. Otherwise, they are passed through.

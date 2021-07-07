@@ -5,10 +5,10 @@
 #' depending on whether the Drive file already exists, see [drive_put()].
 #'
 #' @seealso Wraps the `files.create` endpoint:
-#'   * <https://developers.google.com/drive/v3/reference/files/create>
+#'   * <https://developers.google.com/drive/api/v3/reference/files/create>
 #'
 #' MIME types that can be converted to native Google formats:
-#'    * <https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19>
+#'    * <https://developers.google.com/drive/api/v3/manage-uploads#import_to_google_docs_types>
 #'
 #' @template media
 #' @eval param_path(

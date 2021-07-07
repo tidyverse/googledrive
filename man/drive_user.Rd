@@ -34,6 +34,6 @@ str(user)
 \seealso{
 Wraps the \code{about.get} endpoint:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/about/get}
+\item \url{https://developers.google.com/drive/api/v3/reference/about/get}
 }
 }

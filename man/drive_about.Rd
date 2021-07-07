@@ -8,7 +8,7 @@ drive_about()
 }
 \value{
 A list representation of a Drive
-\href{https://developers.google.com/drive/v3/reference/about#resource}{about resource}
+\href{https://developers.google.com/drive/api/v3/reference/about}{about resource}
 }
 \description{
 Gets information about the user, the user's Drive, and system capabilities.
@@ -28,6 +28,6 @@ about[["exportFormats"]] \%>\%
 \seealso{
 Wraps the \code{about.get} endpoint:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/about/get}
+\item \url{https://developers.google.com/drive/api/v3/reference/about/get}
 }
 }

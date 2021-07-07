@@ -15,8 +15,8 @@
 #'   includes a `local_path` column.
 #'
 #' @seealso [Download
-#'   files](https://developers.google.com/drive/v3/web/manage-downloads#downloading_google_documents),
-#'    in the Drive API documentation.
+#'   files](https://developers.google.com/drive/api/v3/manage-downloads), in the
+#'   Drive API documentation.
 #'
 #' @template file-singular
 #' @param path Character. Path for output file. If absent, the default file name

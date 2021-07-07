@@ -75,6 +75,6 @@ unlink(c("chicken_sheet.csv", "chicken_sheet.xlsx", "my_csv_file.csv"))
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\href{https://developers.google.com/drive/v3/web/manage-downloads#downloading_google_documents}{Download files},
-in the Drive API documentation.
+\href{https://developers.google.com/drive/api/v3/manage-downloads}{Download files}, in the
+Drive API documentation.
 }

@@ -4,7 +4,7 @@
 #' including a folder, use [drive_update()].
 #'
 #' @seealso Wraps the `files.create` endpoint:
-#'   * <https://developers.google.com/drive/v3/reference/files/create>
+#'   * <https://developers.google.com/drive/api/v3/reference/files/create>
 #'
 #' @param name Name for the new folder or, optionally, a path that specifies
 #'   an existing parent folder, as well as the new name.

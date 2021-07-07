@@ -63,11 +63,11 @@ drive_rm(x)
 \seealso{
 Wraps the \code{files.update} endpoint:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/files/update}
+\item \url{https://developers.google.com/drive/api/v3/reference/files/update}
 }
 
 This function supports media upload:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/web/manage-uploads}
+\item \url{https://developers.google.com/drive/api/v3/manage-uploads}
 }
 }

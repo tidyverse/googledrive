@@ -5,10 +5,10 @@
 #' useful information (the information on current user) and prints it nicely.
 #'
 #' @seealso Wraps the `about.get` endpoint:
-#'   * <https://developers.google.com/drive/v3/reference/about/get>
+#'   * <https://developers.google.com/drive/api/v3/reference/about/get>
 #'
 #' @return A list representation of a Drive
-#'   [about resource](https://developers.google.com/drive/v3/reference/about#resource)
+#'   [about resource](https://developers.google.com/drive/api/v3/reference/about)
 #' @export
 #'
 #' @examplesIf drive_has_token()

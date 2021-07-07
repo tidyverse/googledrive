@@ -141,11 +141,11 @@ drive_upload("fascinating.csv", path = sd)
 \seealso{
 Wraps the \code{files.create} endpoint:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/files/create}
+\item \url{https://developers.google.com/drive/api/v3/reference/files/create}
 }
 
 MIME types that can be converted to native Google formats:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/web/manage-uploads#importing_to_google_docs_types_wzxhzdk18wzxhzdk19}
+\item \url{https://developers.google.com/drive/api/v3/manage-uploads#import_to_google_docs_types}
 }
 }

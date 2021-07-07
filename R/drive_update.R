@@ -5,10 +5,10 @@
 #' depending on whether the Drive file already exists, see [drive_put()].
 #'
 #' @seealso Wraps the `files.update` endpoint:
-#'   * <https://developers.google.com/drive/v3/reference/files/update>
+#'   * <https://developers.google.com/drive/api/v3/reference/files/update>
 #'
 #' This function supports media upload:
-#'   * <https://developers.google.com/drive/v3/web/manage-uploads>
+#'   * <https://developers.google.com/drive/api/v3/manage-uploads>
 #'
 #' @template file-singular
 #' @template media

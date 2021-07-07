@@ -23,7 +23,7 @@ specified via:
 \item Data frame or \code{\link{dribble}}. Once you've successfully used googledrive to
 identify the files of interest, you'll have a \code{\link{dribble}}. Pass it into
 downstream functions.
-\item List representing \href{https://developers.google.com/drive/v3/reference/files#resource}{Files resource}
+\item List representing \href{https://developers.google.com/drive/api/v3/reference/files}{Files resource}
 objects. Mostly for internal use.
 }
 

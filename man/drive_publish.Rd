@@ -58,6 +58,6 @@ drive_rm(file)
 \seealso{
 Wraps the \code{revisions.update} endpoint:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/revisions/update}
+\item \url{https://developers.google.com/drive/api/v3/reference/revisions/update}
 }
 }

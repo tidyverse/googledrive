@@ -35,7 +35,7 @@ Note that, if auth has been de-activated via \code{\link[=drive_deauth]{drive_de
 \code{token}, and \code{url}, suitable as input for \code{\link[=request_make]{request_make()}}.
 }
 \description{
-Build a request, using knowledge of the \href{https://developers.google.com/drive/v3/web/about-sdk}{Drive v3 API} from its
+Build a request, using knowledge of the \href{https://developers.google.com/drive/api/v3/about-sdk}{Drive v3 API} from its
 \href{https://www.googleapis.com/discovery/v1/apis/drive/v3/rest}{Discovery Document}. Most
 users should, instead, use higher-level wrappers that facilitate common
 tasks, such as uploading or downloading Drive files. The functions here are

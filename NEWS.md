@@ -295,7 +295,7 @@ Colaboratory notebooks now have some MIME type support, in terms of the `type` a
 
 ## Dependency changes
 
-R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2). See [Which versions of R do tidyverse packages support?](https://www.tidyverse.org/articles/2019/04/r-version-support/).
+R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2). See [Which versions of R do tidyverse packages support?](https://www.tidyverse.org/blog/2019/04/r-version-support/).
 
 gargle and magrittr are newly Imported.
 

@@ -149,7 +149,7 @@ has_drive_resource <- function(x) {
 #'   * Data frame or [`dribble`]. Once you've successfully used googledrive to
 #'     identify the files of interest, you'll have a [`dribble`]. Pass it into
 #'     downstream functions.
-#'   * List representing [Files resource](https://developers.google.com/drive/v3/reference/files#resource)
+#'   * List representing [Files resource](https://developers.google.com/drive/api/v3/reference/files)
 #'     objects. Mostly for internal use.
 #'
 #' This is a generic function.

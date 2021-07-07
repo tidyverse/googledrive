@@ -44,6 +44,6 @@ drive_fields(c("name", "parents", "ownedByMe", "pancakes!"))
 prep_fields(c("name", "parents", "kind"))
 }
 \seealso{
-\href{https://developers.google.com/drive/v3/web/performance#partial}{Working with partial resources},
-in the Drive API documentation.
+\href{https://developers.google.com/drive/api/v3/performance}{Improve performance}, in
+the Drive API documentation.
 }

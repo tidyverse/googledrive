@@ -39,13 +39,13 @@
 #' When `what = "permissions"` the [`dribble`] gains a logical column `shared`
 #' that indicates whether a file is shared and a new list-column
 #' `permissions_resource` containing lists of
-#' [Permissions resources](https://developers.google.com/drive/v3/reference/permissions#resource).
+#' [Permissions resources](https://developers.google.com/drive/api/v3/reference/permissions).
 #'
 #' @section Publishing:
 #' When `what = "published"` the [`dribble`] gains a logical column
 #' `published` that indicates whether a file is published and a new list-column
 #' `revision_resource` containing lists of
-#' [Revisions resources](https://developers.google.com/drive/v3/reference/revisions#resource).
+#' [Revisions resources](https://developers.google.com/drive/api/v3/reference/revisions).
 #'
 
 #' @section Parent:

@@ -4,7 +4,7 @@
 #'
 
 #' @seealso Makes a metadata-only request to the `files.update` endpoint:
-#'   * <https://developers.google.com/drive/v3/reference/files/update>
+#'   * <https://developers.google.com/drive/api/v3/reference/files/update>
 
 #' @template file-singular
 #' @eval param_path(

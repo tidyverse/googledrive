@@ -106,6 +106,6 @@ drive_rm(file, folder)
 \seealso{
 Makes a metadata-only request to the \code{files.update} endpoint:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/files/update}
+\item \url{https://developers.google.com/drive/api/v3/reference/files/update}
 }
 }

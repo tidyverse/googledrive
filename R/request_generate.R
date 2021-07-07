@@ -1,7 +1,7 @@
 #' Build a request for the Google Drive API
 #'
 #' @description Build a request, using knowledge of the [Drive v3
-#'   API](https://developers.google.com/drive/v3/web/about-sdk) from its
+#'   API](https://developers.google.com/drive/api/v3/about-sdk) from its
 #'   [Discovery
 #'   Document](https://www.googleapis.com/discovery/v1/apis/drive/v3/rest). Most
 #'   users should, instead, use higher-level wrappers that facilitate common

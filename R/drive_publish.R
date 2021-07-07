@@ -6,7 +6,7 @@
 #' Read more in [drive_reveal()].
 #'
 #' @seealso Wraps the `revisions.update` endpoint:
-#'   * <https://developers.google.com/drive/v3/reference/revisions/update>
+#'   * <https://developers.google.com/drive/api/v3/reference/revisions/update>
 #'
 #' @template file-plural
 #' @param ... Name-value pairs to add to the API request body (see API docs

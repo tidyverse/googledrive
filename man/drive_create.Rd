@@ -122,6 +122,6 @@ drive_rm(wordstar, b4xl, execuvision)
 \seealso{
 Wraps the \code{files.create} endpoint:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/files/create}
+\item \url{https://developers.google.com/drive/api/v3/reference/files/create}
 }
 }

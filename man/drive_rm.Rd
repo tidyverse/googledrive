@@ -50,6 +50,6 @@ drive_rm(x1, "chicken-def.txt", as_id(x2))
 \seealso{
 Wraps the \code{files.delete} endpoint:
 \itemize{
-\item \url{https://developers.google.com/drive/v3/reference/files/delete}
+\item \url{https://developers.google.com/drive/api/v3/reference/files/delete}
 }
 }

@@ -83,7 +83,7 @@ shortcut}.
 When \code{what = "permissions"} the \code{\link{dribble}} gains a logical column \code{shared}
 that indicates whether a file is shared and a new list-column
 \code{permissions_resource} containing lists of
-\href{https://developers.google.com/drive/v3/reference/permissions#resource}{Permissions resources}.
+\href{https://developers.google.com/drive/api/v3/reference/permissions}{Permissions resources}.
 }
 
 \section{Publishing}{
@@ -91,7 +91,7 @@ that indicates whether a file is shared and a new list-column
 When \code{what = "published"} the \code{\link{dribble}} gains a logical column
 \code{published} that indicates whether a file is published and a new list-column
 \code{revision_resource} containing lists of
-\href{https://developers.google.com/drive/v3/reference/revisions#resource}{Revisions resources}.
+\href{https://developers.google.com/drive/api/v3/reference/revisions}{Revisions resources}.
 }
 
 \section{Parent}{
