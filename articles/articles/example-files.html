@@ -184,7 +184,7 @@
   <span class="fu"><a href="../../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"mime_type"</span><span class="op">)</span>
 <span class="co">#&gt; # A dribble: 9 x 4</span>
 <span class="co">#&gt;   name        mime_type                 id                       drive_resource </span>
-<span class="co">#&gt; * &lt;chr&gt;       &lt;chr&gt;                     &lt;chr&gt;                    &lt;list&gt;         </span>
+<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                     &lt;drv_id&gt;                 &lt;list&gt;         </span>
 <span class="co">#&gt; 1 chicken_doc application/vnd.google-a… 1X9pd4nOjl33zDFfTjw-_eF… &lt;named list [3…</span>
 <span class="co">#&gt; 2 chicken_sh… application/vnd.google-a… 1SeFXkr3XdzPSuWauzPdN-X… &lt;named list [3…</span>
 <span class="co">#&gt; 3 chicken.csv text/csv                  1VOh6wWbRfuQLxbLg87o58v… &lt;named list [3…</span>
@@ -253,7 +253,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/drive_examples.html">drive_examples_remote</a></span><span class="op">(</span><span class="st">"chicken"</span><span class="op">)</span>
 <span class="co">#&gt; # A dribble: 6 x 3</span>
 <span class="co">#&gt;   name          id                                           drive_resource   </span>
-<span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt;                                        &lt;list&gt;           </span>
+<span class="co">#&gt;   &lt;chr&gt;         &lt;drv_id&gt;                                     &lt;list&gt;           </span>
 <span class="co">#&gt; 1 chicken_doc   1X9pd4nOjl33zDFfTjw-_eFL7Qb9_g6VfVFDp1PPae94 &lt;named list [30]&gt;</span>
 <span class="co">#&gt; 2 chicken_sheet 1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU &lt;named list [30]&gt;</span>
 <span class="co">#&gt; 3 chicken.csv   1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7            &lt;named list [34]&gt;</span>
@@ -264,7 +264,7 @@
 <span class="fu"><a href="../../reference/drive_examples.html">drive_example_remote</a></span><span class="op">(</span><span class="st">"logo"</span><span class="op">)</span>
 <span class="co">#&gt; # A dribble: 1 x 3</span>
 <span class="co">#&gt;   name       id                                drive_resource   </span>
-<span class="co">#&gt; * &lt;chr&gt;      &lt;chr&gt;                             &lt;list&gt;           </span>
+<span class="co">#&gt;   &lt;chr&gt;      &lt;drv_id&gt;                          &lt;list&gt;           </span>
 <span class="co">#&gt; 1 r_logo.jpg 1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW &lt;named list [36]&gt;</span></code></pre></div>
 <p>Here’s how you might use one of these examples to start demonstrating something with googledrive:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">

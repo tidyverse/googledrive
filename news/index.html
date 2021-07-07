@@ -177,7 +177,6 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#googledrive-development-version" class="anchor"></a>googledrive (development version)<small> Unreleased </small>
 </h1>
-<p><em>We anticipate the next release of googledrive will have version v2.0.0.</em></p>
 <div id="team-drives-are-dead-long-live-shared-drives" class="section level2">
 <h2 class="hasAnchor">
 <a href="#team-drives-are-dead-long-live-shared-drives" class="anchor"></a>Team Drives are dead! Long live shared drives!</h2>
@@ -261,13 +260,21 @@
 <p>We’ve modernized the mechanisms by which the <code>dribble</code> class is (or is not) retained by various data frame operations. This boils down to updating or adding methods used by the base, dplyr, pillar/tibble, and vctrs packages.</p>
 <p>We focus on compatibility with dplyr &gt;= 1.0.0, which was released a year ago. googledrive only Suggests dplyr, so all this really means is that <code>dribble</code> manipulation via dplyr now works best with dplyr &gt;= 1.0.0.</p>
 </li>
+<li>
+<p>The <code>drive_id</code> S3 class is now implemented more fully, using the vctrs package (<a href='https://github.com/tidyverse/googledrive/issues/93'>#93</a>, <a href='https://github.com/tidyverse/googledrive/issues/364'>#364</a>):</p>
+<ul>
+<li>The <code>drive_id</code> class will persist after mundane operations, like subsetting.</li>
+<li>You can no longer put strings that are obviously invalid into a <code>drive_id</code> object.</li>
+<li>The <code>id</code> column of a <code>dribble</code> is now an instance of <code>drive_id</code>.</li>
+</ul>
+</li>
 </ul>
 </div>
 <div id="dependency-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dependency-changes" class="anchor"></a>Dependency changes</h2>
 <p>cli, lifecycle, and withr are new in Imports.</p>
-<p>vctrs is new in Imports, but was already an indirect hard dependency via tibble.</p>
+<p>pillar and vctrs are new in Imports, but were already indirect hard dependencies via tibble.</p>
 <p>mockr is new in Suggests.</p>
 <p>curl moves from Imports to Suggests, but remains an indirect hard dependency.</p>
 </div>
@@ -447,7 +454,7 @@
 <div id="dependency-changes-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dependency-changes-1" class="anchor"></a>Dependency changes</h2>
-<p>R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2). See <a href="https://www.tidyverse.org/articles/2019/04/r-version-support/">Which versions of R do tidyverse packages support?</a>.</p>
+<p>R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2). See <a href="https://www.tidyverse.org/blog/2019/04/r-version-support/">Which versions of R do tidyverse packages support?</a>.</p>
 <p>gargle and magrittr are newly Imported.</p>
 <p>rprojroot has been removed from Suggests, because we can now use a version of testthat recent enough to offer <code><a href="https://testthat.r-lib.org/reference/test_path.html">testthat::test_path()</a></code>.</p>
 </div>

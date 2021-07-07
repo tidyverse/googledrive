@@ -173,7 +173,7 @@ This is a generic function." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract and/or mark as file id</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/as_id.R'><code>R/as_id.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googledrive/blob/master/R/drive_id-class.R'><code>R/drive_id-class.R</code></a></small>
     <div class="hidden name"><code>as_id.Rd</code></div>
     </div>
 
@@ -205,21 +205,18 @@ distinguish them from file names or paths.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='fu'>as_id</span><span class='op'>(</span><span class='st'>"123abc"</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "123abc"</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"class")</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "drive_id"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;drive_id[1]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 123abc</span>
 <span class='r-in'><span class='fu'>as_id</span><span class='op'>(</span><span class='st'>"https://docs.google.com/spreadsheets/d/qawsedrf16273849/edit#gid=12345"</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "qawsedrf16273849"</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"class")</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "drive_id"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;drive_id[1]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] qawsedrf16273849</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span>n_max <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'>as_id</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "11hxI7y15T5NziC826-RnkPJg4RZ3AVWx"           </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [2] "1s0kEHcqG2PyciERoGq52L_Qwzp4y3__rBVKSx7E_j88"</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [3] "1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud"           </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"class")</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "drive_id"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;drive_id[3]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1ojuxa0OiKuCamKswjRRrhKDrCGi35BsW           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2] 1s0kEHcqG2PyciERoGq52L_Qwzp4y3__rBVKSx7E_j88</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3] 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud           </span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
