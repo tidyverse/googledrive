@@ -26,3 +26,9 @@
 
   invisible()
 }
+
+release_bullets <- function() {
+  c(
+    '`devtools::build_rmd("index.Rmd")`'
+  )
+}
