@@ -66,11 +66,11 @@ drive_auth <- function(email = gargle::gargle_oauth_email(),
   )
   if (!inherits(cred, "Token2.0")) {
     drive_abort(c(
-      "Can't get Google credentials",
-      "i" = "Are you running googledrive in a non-interactive session? \\
+      "Can't get Google credentials.",
+      "i" = "Are you running {.pkg googledrive} in a non-interactive session? \\
              Consider:",
-      "*" = "{.fun drive_deauth} to prevent the attempt to get credentials",
-      "*" = "Call {.fun drive_auth} directly with all necessary specifics",
+      "*" = "Call {.fun drive_deauth} to prevent the attempt to get credentials.",
+      "*" = "Call {.fun drive_auth} directly with all necessary specifics.",
       "i" = "See gargle's \"Non-interactive auth\" vignette for more details:",
       "i" = "{.url https://gargle.r-lib.org/articles/non-interactive-auth.html}"
     ))
