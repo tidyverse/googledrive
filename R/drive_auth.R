@@ -221,10 +221,10 @@ drive_auth_internal <- function(account = c("docs", "testing"),
       message = c(
         "Auth unsuccessful:",
         if (!can_decrypt) {
-          c("x" = "Can't decrypt the {.field {account}} service account token")
+          c("x" = "Can't decrypt the {.field {account}} service account token.")
         },
         if (!online) {
-          c("x" = "We don't appear to be online (or maybe the Drive API is down?)")
+          c("x" = "We don't appear to be online. Or maybe the Drive API is down?")
         }
       ),
       class = "googledrive_auth_internal_error",
@@ -254,9 +254,9 @@ drive_auth_testing <- function(scopes = NULL) {
 local_deauth <- function(env = parent.frame()) {
   original_cred <- .auth$get_cred()
   original_auth_active <- .auth$auth_active
-  drive_bullets(c("i" = "Going into deauthorized state"))
+  drive_bullets(c("i" = "Going into deauthorized state."))
   withr::defer(
-    drive_bullets(c("i" = "Restoring previous auth state")),
+    drive_bullets(c("i" = "Restoring previous auth state.")),
     envir = env
   )
   withr::defer({
