@@ -38,11 +38,13 @@ the example files. See \code{vignette("example-files", package = "googledrive")}
 for more.
 }
 \examples{
-drive_examples_remote()
-drive_examples_remote("chicken")
-drive_example_remote("chicken_doc")
-
 drive_examples_local() \%>\% basename()
 drive_examples_local("chicken") \%>\% basename()
 drive_example_local("imdb")
+
+\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+drive_examples_remote()
+drive_examples_remote("chicken")
+drive_example_remote("chicken_doc")
+\dontshow{\}) # examplesIf}
 }

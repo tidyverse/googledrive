@@ -22,13 +22,14 @@
 
 #' @name drive_examples
 #' @examples
-#' drive_examples_remote()
-#' drive_examples_remote("chicken")
-#' drive_example_remote("chicken_doc")
-#'
 #' drive_examples_local() %>% basename()
 #' drive_examples_local("chicken") %>% basename()
 #' drive_example_local("imdb")
+#'
+#' @examplesIf drive_has_token()
+#' drive_examples_remote()
+#' drive_examples_remote("chicken")
+#' drive_example_remote("chicken_doc")
 NULL
 
 #' @rdname drive_examples
