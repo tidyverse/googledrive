@@ -12,7 +12,7 @@ if (FALSE) {
 test_that("as_id() copes with no input, NULL, and length-0 input", {
   expect_null(as_id())
   expect_null(as_id(NULL))
-  expect_identical(as_id(character(0)), character(0))
+  expect_identical(as_id(character()), new_drive_id())
 })
 
 test_that("as_id() errors for unanticipated input", {

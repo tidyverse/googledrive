@@ -1,3 +1,26 @@
+#' `drive_id` class
+#'
+#' @description
+
+#' `drive_id` is an S3 class to mark strings as Drive file ids, in order to
+#' distinguish them from Drive file names or paths. `as_id()` converts various
+#' inputs into an instance of `drive_id`.
+#'
+#' `as_id()` is a generic function.
+
+#' @param x A character vector of file or shared drive ids or URLs, a
+#'   [`dribble`], or a suitable data frame.
+#' @param ... Other arguments passed down to methods. (Not used.)
+#' @return A character vector bearing the S3 class `drive_id`.
+#' @name drive_id
+#' @examplesIf drive_has_token()
+#' as_id("123abc")
+#' as_id("https://docs.google.com/spreadsheets/d/qawsedrf16273849/edit#gid=12345")
+#'
+#' x <- drive_find(n_max = 3)
+#' as_id(x)
+NULL
+
 new_drive_id <- function(x = character()) {
   vec_assert(x, character())
   new_vctr(x, class = "drive_id", inherit_base_type = TRUE)
@@ -10,7 +33,7 @@ validate_drive_id <- function(x) {
   }
 
   # proceed with plain character vector
-  x <- unclass(x)
+  x <- vec_data(x)
   # pragmatism re: how to cli-style a path that is the empty string
   # this is related to the use of gargle_map_cli() for vectorized styling
   # if cli gains native vectorization, this may become unnecessary
@@ -22,6 +45,36 @@ validate_drive_id <- function(x) {
     "Invalid input{?s}:{cli::qty(sum(!ok))}",
     bulletize(gargle_map_cli(x[!ok]), bullet = "x")
   ))
+}
+
+#' @export
+#' @rdname drive_id
+as_id <- function(x, ...) UseMethod("as_id")
+
+#' @export
+as_id.default <- function(x, ...) {
+  drive_abort("
+    Don't know how to coerce an object of class {.cls {class(x)}} into \\
+    a {.cls drive_id}.")
+}
+
+#' @export
+as_id.NULL <- function(x, ...) NULL
+
+#' @export
+as_id.drive_id <- function(x, ...) x
+
+#' @export
+as_id.dribble <- function(x, ...) as_id(x$id)
+
+#' @export
+as_id.data.frame <- function(x, ...) as_id(validate_dribble(new_dribble(x)))
+
+#' @export
+as_id.character <- function(x, ...) {
+  if (length(x) == 0L) return(new_drive_id())
+  out <- map_chr(x, get_one_id)
+  validate_drive_id(new_drive_id(out))
 }
 
 drive_id_regex <- function() "^[a-zA-Z0-9_-]+$"
@@ -70,52 +123,6 @@ pillar_shaft.drive_id <- function(x, ...) {
   # Current compromise is to use pillar_shaft.character.
   # Not sure why I can't access via NextMethod().
   pillar::pillar_shaft(unclass(x))
-}
-
-#' Extract and/or mark as file id
-#'
-#' @description Gets file ids from various inputs and marks them as such, to
-#'   distinguish them from file names or paths.
-#'
-#' @description This is a generic function.
-#'
-#' @param x A character vector of file or shared drive ids or URLs, a
-#'   [`dribble`], or a suitable data frame.
-#' @param ... Other arguments passed down to methods. (Not used.)
-#' @return A character vector bearing the S3 class `drive_id`.
-#' @export
-#' @examplesIf drive_has_token()
-#' as_id("123abc")
-#' as_id("https://docs.google.com/spreadsheets/d/qawsedrf16273849/edit#gid=12345")
-#'
-#' x <- drive_find(n_max = 3)
-#' as_id(x)
-as_id <- function(x, ...) UseMethod("as_id")
-
-#' @export
-as_id.default <- function(x, ...) {
-  drive_abort("
-    Don't know how to coerce an object of class {.cls {class(x)}} into \\
-    a {.cls drive_id}.")
-}
-
-#' @export
-as_id.NULL <- function(x, ...) NULL
-
-#' @export
-as_id.drive_id <- function(x, ...) x
-
-#' @export
-as_id.dribble <- function(x, ...) as_id(x$id)
-
-#' @export
-as_id.data.frame <- function(x, ...) as_id(validate_dribble(new_dribble(x)))
-
-#' @export
-as_id.character <- function(x, ...) {
-  if (length(x) == 0L) return(x)
-  out <- map_chr(x, get_one_id)
-  validate_drive_id(new_drive_id(out))
 }
 
 ## we anticipate file-id-containing URLs in these forms:
