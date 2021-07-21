@@ -73,7 +73,7 @@ The user interface has gotten more stylish, thanks to the cli package (<https://
 All informational messages, warnings, and errors are now emitted via cli, which uses rlang's condition functions under-the-hood.
 
 `googledrive_quiet` is a new option to suppress informational messages from googledrive.
-Unless it's explicitly set to `FALSE`, the default is to message.
+Unless it's explicitly set to `TRUE`, the default is to message.
 
 The `verbose` argument of all `drive_*()` functions is deprecated and will be removed in a future release.
 In the current release, `verbose = FALSE` is still honored, but generates a warning.
