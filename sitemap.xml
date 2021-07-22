@@ -7,9 +7,6 @@
     <loc>https://googledrive.tidyverse.org/reference/as_dribble.html</loc>
   </url>
   <url>
-    <loc>https://googledrive.tidyverse.org/reference/as_id.html</loc>
-  </url>
-  <url>
     <loc>https://googledrive.tidyverse.org/reference/as_shared_drive.html</loc>
   </url>
   <url>
@@ -68,6 +65,9 @@
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/reference/drive_has_token.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/reference/drive_id.html</loc>
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/reference/drive_link.html</loc>

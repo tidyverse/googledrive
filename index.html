@@ -219,7 +219,7 @@
 <span class="co">#&gt;   name            path                  id                      drive_resource  </span>
 <span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;                 &lt;drv_id&gt;                &lt;list&gt;          </span>
 <span class="co">#&gt; 1 googledrive-NE… ~/abc/def/googledriv… 1h1lhFfQrDZevE2OEX10-r… &lt;named list [39…</span></code></pre></div>
-<p><code><a href="reference/as_id.html">as_id()</a></code> can be used to convert various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and <code>dribble</code>s.</p>
+<p><code><a href="reference/drive_id.html">as_id()</a></code> can be used to convert various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and <code>dribble</code>s.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">$</span><span class="va">id</span>
 <span class="co">#&gt; &lt;drive_id[1]&gt;</span>
@@ -231,12 +231,12 @@
 <span class="co">#&gt;   name                id                                drive_resource   </span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;drv_id&gt;                          &lt;list&gt;           </span>
 <span class="co">#&gt; 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm &lt;named list [39]&gt;</span>
-<span class="fu"><a href="reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="fu"><a href="reference/as_id.html">as_id</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="fu"><a href="reference/drive_id.html">as_id</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A dribble: 1 x 3</span>
 <span class="co">#&gt;   name                id                                drive_resource   </span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;drv_id&gt;                          &lt;list&gt;           </span>
 <span class="co">#&gt; 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm &lt;named list [39]&gt;</span></code></pre></div>
-<p>In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a <code>dribble</code>. If it’s ambiguous, use <code><a href="reference/as_id.html">as_id()</a></code> to mark a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.</p>
+<p>In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a <code>dribble</code>. If it’s ambiguous, use <code><a href="reference/drive_id.html">as_id()</a></code> to mark a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.</p>
 </div>
 <div id="upload-files" class="section level4">
 <h4 class="hasAnchor">

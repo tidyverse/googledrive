@@ -197,7 +197,7 @@ This is a generic function." />
 <code><a href='dribble.html'>dribble</a></code>, the object used by googledrive to hold Drive file metadata.
 Shared drives can be specified via</p><ul>
 <li><p>Name</p></li>
-<li><p>Shared drive id, marked with <code><a href='as_id.html'>as_id()</a></code> to distinguish from name</p></li>
+<li><p>Shared drive id, marked with <code><a href='drive_id.html'>as_id()</a></code> to distinguish from name</p></li>
 <li><p>Data frame or <code><a href='dribble.html'>dribble</a></code> consisting solely of shared drives</p></li>
 <li><p>List representing <a href='https://developers.google.com/drive/api/v3/reference/drives#resource-representations'>Drives resource</a>
 objects (mostly for internal use)</p></li>
@@ -218,7 +218,7 @@ earlier concept of Team Drives. Learn more about <a href='shared_drives.html'>sh
     <tr>
       <th>x</th>
       <td><p>A vector of shared drive names, a vector of shared drive ids marked
-with <code><a href='as_id.html'>as_id()</a></code>, a list of Drives resource objects, or a suitable data
+with <code><a href='drive_id.html'>as_id()</a></code>, a list of Drives resource objects, or a suitable data
 frame.</p></td>
     </tr>
     <tr>
@@ -234,7 +234,7 @@ frame.</p></td>
 <span class='r-in'><span class='fu'>as_shared_drive</span><span class='op'>(</span><span class='st'>"abc"</span><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># specify the id (substitute one of your own!)</span></span>
-<span class='r-in'><span class='fu'>as_shared_drive</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"0AOPK1X2jaNckUk9PVA"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>as_shared_drive</span><span class='op'>(</span><span class='fu'><a href='drive_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"0AOPK1X2jaNckUk9PVA"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
 </pre>
   </div>

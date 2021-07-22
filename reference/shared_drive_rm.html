@@ -197,7 +197,7 @@ earlier concept of Team Drives. Learn more about <a href='shared_drives.html'>sh
       <th>drive</th>
       <td><p>Anything that identifies the shared drive(s) of interest. Can
 be a character vector of names, a character vector of file ids or URLs
-marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code> consisting only of shared drives.</p></td>
+marked with <code><a href='drive_id.html'>as_id()</a></code>, or a <code><a href='dribble.html'>dribble</a></code> consisting only of shared drives.</p></td>
     </tr>
     </table>
 
@@ -222,9 +222,9 @@ marked with <code><a href='as_id.html'>as_id()</a></code>, or a <code><a href='d
 <span class='r-in'><span class='co'># remove by name</span></span>
 <span class='r-in'><span class='fu'>shared_drive_rm</span><span class='op'>(</span><span class='st'>"testdrive-01"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='co'># remove by id</span></span>
-<span class='r-in'><span class='fu'>shared_drive_rm</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='va'>sd02</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>shared_drive_rm</span><span class='op'>(</span><span class='fu'><a href='drive_id.html'>as_id</a></span><span class='op'>(</span><span class='va'>sd02</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'><span class='co'># remove by URL (or, rather, id found in URL)</span></span>
-<span class='r-in'><span class='fu'>shared_drive_rm</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>shared_drive_rm</span><span class='op'>(</span><span class='fu'><a href='drive_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'><span class='co'># remove by dribble</span></span>
 <span class='r-in'><span class='fu'>shared_drive_rm</span><span class='op'>(</span><span class='va'>sd04</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>

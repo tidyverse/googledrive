@@ -208,12 +208,12 @@ earlier concept of Team Drives. Learn more about <a href='shared_drives.html'>sh
     <tr>
       <th>name</th>
       <td><p>Character vector of names. A character vector marked with
-<code><a href='as_id.html'>as_id()</a></code> is treated as if it was provided via the <code>id</code> argument.</p></td>
+<code><a href='drive_id.html'>as_id()</a></code> is treated as if it was provided via the <code>id</code> argument.</p></td>
     </tr>
     <tr>
       <th>id</th>
       <td><p>Character vector of shared drive ids or URLs (it is first processed
-with <code><a href='as_id.html'>as_id()</a></code>). If both <code>name</code> and <code>id</code> are non-<code>NULL</code>, <code>id</code> is silently
+with <code><a href='drive_id.html'>as_id()</a></code>). If both <code>name</code> and <code>id</code> are non-<code>NULL</code>, <code>id</code> is silently
 ignored.</p></td>
     </tr>
     </table>
@@ -226,8 +226,8 @@ ignored.</p></td>
     <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='fu'>shared_drive_get</span><span class='op'>(</span><span class='st'>"my-awesome-shared-drive"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'>shared_drive_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"apple"</span>, <span class='st'>"orange"</span>, <span class='st'>"banana"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'>shared_drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"KCmiHLXUk9PVA-0AJNG"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'>shared_drive_get</span><span class='op'>(</span><span class='fu'><a href='as_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"https://drive.google.com/drive/u/0/folders/KCmiHLXUk9PVA-0AJNG"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>shared_drive_get</span><span class='op'>(</span><span class='fu'><a href='drive_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"KCmiHLXUk9PVA-0AJNG"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>shared_drive_get</span><span class='op'>(</span><span class='fu'><a href='drive_id.html'>as_id</a></span><span class='op'>(</span><span class='st'>"https://drive.google.com/drive/u/0/folders/KCmiHLXUk9PVA-0AJNG"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'>shared_drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"KCmiHLXUk9PVA-0AJNG"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'>shared_drive_get</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"https://drive.google.com/drive/u/0/folders/KCmiHLXUk9PVA-0AJNG"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
