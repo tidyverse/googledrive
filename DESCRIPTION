@@ -51,7 +51,6 @@ Suggests:
 VignetteBuilder: 
     knitr
 Config/Needs/website:
-    pkgdown,
     tidyverse,
     r-lib/downlit,
     tidyverse/tidytemplate
