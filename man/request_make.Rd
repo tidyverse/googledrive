@@ -83,7 +83,7 @@ responses, one per page.
 #
 # Practice with a target file with > 2 comments
 # Note that we request 2 items (comments) per page
-req <- build_request(
+req <- gargle::request_build(
   path = "drive/v3/files/{fileId}/comments",
   method = "GET",
   params = list(
