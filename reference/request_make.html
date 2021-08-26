@@ -295,7 +295,7 @@ content, one component per page.</p>
 <span class='r-in'><span class='co'>#</span></span>
 <span class='r-in'><span class='co'># Practice with a target file with &gt; 2 comments</span></span>
 <span class='r-in'><span class='co'># Note that we request 2 items (comments) per page</span></span>
-<span class='r-in'><span class='va'>req</span> <span class='op'>&lt;-</span> <span class='fu'>build_request</span><span class='op'>(</span></span>
+<span class='r-in'><span class='va'>req</span> <span class='op'>&lt;-</span> <span class='fu'>gargle</span><span class='fu'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/request_develop.html'>request_build</a></span><span class='op'>(</span></span>
 <span class='r-in'>  path <span class='op'>=</span> <span class='st'>"drive/v3/files/{fileId}/comments"</span>,</span>
 <span class='r-in'>  method <span class='op'>=</span> <span class='st'>"GET"</span>,</span>
 <span class='r-in'>  params <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span></span>
