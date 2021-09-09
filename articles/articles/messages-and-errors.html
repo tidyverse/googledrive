@@ -224,7 +224,6 @@
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ! Ignoring `type`. Only consulted for native Google file types.</span>
 <span class="co">#&gt;   MIME type of `file`: 'mime_type'.</span>
-
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"!"</span> <span class="op">=</span> <span class="st">"Currently only fields for the {.field files} resource can be \\
          checked for validity."</span>,
@@ -232,12 +231,10 @@
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ! Currently only fields for the 'files' resource can be checked for validity.</span>
 <span class="co">#&gt;   Nothing done.</span>
-
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"!"</span> <span class="op">=</span> <span class="st">"No updates specified."</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ! No updates specified.</span>
-
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"!"</span> <span class="op">=</span> <span class="st">"No such file to delete."</span>
 <span class="op">)</span><span class="op">)</span>
@@ -249,13 +246,11 @@
          {.fun drive_upload}."</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ℹ No pre-existing file at this filepath. Calling `drive_upload()`.</span>
-
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"i"</span> <span class="op">=</span> <span class="st">"Pre-existing file at this filepath. Calling \\
          {.fun drive_update}."</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ℹ Pre-existing file at this filepath. Calling `drive_update()`.</span>
-
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"i"</span> <span class="op">=</span> <span class="st">"Not logged in as any specific Google user."</span>
 <span class="op">)</span><span class="op">)</span>
@@ -297,11 +292,9 @@
 <span class="co">#&gt;    "{.field a}"    "{.field b}"    "{.field c}"    "{.field d}"    "{.field e}" </span>
 <span class="co">#&gt;                 </span>
 <span class="co">#&gt; "… and 21 more"</span>
-
 <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"x"</span>, n_show <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;               x               x                 </span>
 <span class="co">#&gt;    "{.field a}"    "{.field b}" "… and 24 more"</span>
-
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"These are surprising things:"</span>,
   <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"!"</span><span class="op">)</span>
@@ -313,7 +306,6 @@
 <span class="co">#&gt; ! 'd'</span>
 <span class="co">#&gt; ! 'e'</span>
 <span class="co">#&gt;   … and 21 more</span>
-
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
