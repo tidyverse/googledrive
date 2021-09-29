@@ -224,6 +224,7 @@
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ! Ignoring `type`. Only consulted for native Google file types.</span>
 <span class="co">#&gt;   MIME type of `file`: 'mime_type'.</span>
+
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"!"</span> <span class="op">=</span> <span class="st">"Currently only fields for the {.field files} resource can be \\
          checked for validity."</span>,
@@ -231,10 +232,12 @@
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ! Currently only fields for the 'files' resource can be checked for validity.</span>
 <span class="co">#&gt;   Nothing done.</span>
+
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"!"</span> <span class="op">=</span> <span class="st">"No updates specified."</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ! No updates specified.</span>
+
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"!"</span> <span class="op">=</span> <span class="st">"No such file to delete."</span>
 <span class="op">)</span><span class="op">)</span>
@@ -246,11 +249,13 @@
          {.fun drive_upload}."</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ℹ No pre-existing file at this filepath. Calling `drive_upload()`.</span>
+
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"i"</span> <span class="op">=</span> <span class="st">"Pre-existing file at this filepath. Calling \\
          {.fun drive_update}."</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ℹ Pre-existing file at this filepath. Calling `drive_update()`.</span>
+
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"i"</span> <span class="op">=</span> <span class="st">"Not logged in as any specific Google user."</span>
 <span class="op">)</span><span class="op">)</span>
@@ -279,11 +284,11 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
 <span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
-<span class="co">#&gt; [1] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1-qeA3T-TDKdrahSVYiPKWqP4RCS6jQag&gt;')}"</span>
-<span class="co">#&gt; [2] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1A9-8f575VxhKaYC9eUollyZKdIfyykgp&gt;')}"</span>
-<span class="co">#&gt; [3] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1wq4dTdy9hL_z6uwQlol7775LFdXQ2Fe_&gt;')}"</span>
-<span class="co">#&gt; [4] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 18zRh_AyqeAhSz-uPpirQGId4x44ejJeZ&gt;')}"</span>
-<span class="co">#&gt; [5] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1_PwAo5QYC94jxMtZKHaNIlZ-BpRSwwvc&gt;')}"</span></code></pre></div>
+<span class="co">#&gt; [1] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1c4k1juF_VlETUmrGF_kNaydTOkNUObYG&gt;')}"</span>
+<span class="co">#&gt; [2] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1-qeA3T-TDKdrahSVYiPKWqP4RCS6jQag&gt;')}"</span>
+<span class="co">#&gt; [3] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1A9-8f575VxhKaYC9eUollyZKdIfyykgp&gt;')}"</span>
+<span class="co">#&gt; [4] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1wq4dTdy9hL_z6uwQlol7775LFdXQ2Fe_&gt;')}"</span>
+<span class="co">#&gt; [5] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 18zRh_AyqeAhSz-uPpirQGId4x44ejJeZ&gt;')}"</span></code></pre></div>
 <p><code>gargle_map_cli.dribble()</code> also allows a custom template, but it’s a more complicated and less common situation than for <code>character</code>. We won’t get into that here. (I don’t consider the dribble styling to be finalized yet.)</p>
 <p>The result of <code>gargle_map_cli()</code> then gets processed with <code><a href="https://gargle.r-lib.org/reference/bulletize.html">gargle::bulletize()</a></code>, which adds the bullet-specifying names and does aesthetically pleasing truncation.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -292,9 +297,11 @@
 <span class="co">#&gt;    "{.field a}"    "{.field b}"    "{.field c}"    "{.field d}"    "{.field e}" </span>
 <span class="co">#&gt;                 </span>
 <span class="co">#&gt; "… and 21 more"</span>
+
 <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"x"</span>, n_show <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;               x               x                 </span>
 <span class="co">#&gt;    "{.field a}"    "{.field b}" "… and 24 more"</span>
+
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"These are surprising things:"</span>,
   <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"!"</span><span class="op">)</span>
@@ -306,6 +313,7 @@
 <span class="co">#&gt; ! 'd'</span>
 <span class="co">#&gt; ! 'e'</span>
 <span class="co">#&gt;   … and 21 more</span>
+
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
@@ -313,11 +321,11 @@
   <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Some Drive files:</span>
+<span class="co">#&gt; • 'name-squatter' &lt;id: 1c4k1juF_VlETUmrGF_kNaydTOkNUObYG&gt;</span>
 <span class="co">#&gt; • 'name-squatter' &lt;id: 1-qeA3T-TDKdrahSVYiPKWqP4RCS6jQag&gt;</span>
 <span class="co">#&gt; • 'name-squatter' &lt;id: 1A9-8f575VxhKaYC9eUollyZKdIfyykgp&gt;</span>
 <span class="co">#&gt; • 'name-squatter' &lt;id: 1wq4dTdy9hL_z6uwQlol7775LFdXQ2Fe_&gt;</span>
 <span class="co">#&gt; • 'name-squatter' &lt;id: 18zRh_AyqeAhSz-uPpirQGId4x44ejJeZ&gt;</span>
-<span class="co">#&gt; • 'name-squatter' &lt;id: 1_PwAo5QYC94jxMtZKHaNIlZ-BpRSwwvc&gt;</span>
 <span class="co">#&gt;   … and 5 more</span></code></pre></div>
 <p>It’s conceivable that cli will gain a better way of vectorization, but this works for now.</p>
 <p>Known dysfunction: it’s inefficient to <code>gargle_map_cli()</code> over the whole object, then truncate with <code>bulletize()</code>. But it’s easy. There are contexts, like tibble printing, where formatting stuff that will never see the light of day is really punishing. But I’m not sure I really have to worry about that.</p>
