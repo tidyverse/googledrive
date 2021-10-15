@@ -284,11 +284,11 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
 <span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
-<span class="co">#&gt; [1] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1BtAxk5ZF99CEhH84vq2VxeE66Mgg8k6k&gt;')}"</span>
-<span class="co">#&gt; [2] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1Zmvd7_zUP8d17F8sAYCprmWOT2oBoYGN&gt;')}"</span>
-<span class="co">#&gt; [3] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 19Y7bQtDs43oc96Vhaj6w9ou7dfaBVKHw&gt;')}"</span>
-<span class="co">#&gt; [4] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1w2FUce0a1Esv2K9sEn4s8gPZE7cHTj4v&gt;')}"</span>
-<span class="co">#&gt; [5] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 18hzoJiJruyXqtE4zrd25MAe5Y5-Vi2xH&gt;')}"</span></code></pre></div>
+<span class="co">#&gt; [1] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1xbsMhPsrsOn-GLv4YDgmFJTfB0moPEGA&gt;')}"</span>
+<span class="co">#&gt; [2] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1BtAxk5ZF99CEhH84vq2VxeE66Mgg8k6k&gt;')}"</span>
+<span class="co">#&gt; [3] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1Zmvd7_zUP8d17F8sAYCprmWOT2oBoYGN&gt;')}"</span>
+<span class="co">#&gt; [4] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 19Y7bQtDs43oc96Vhaj6w9ou7dfaBVKHw&gt;')}"</span>
+<span class="co">#&gt; [5] "{.drivepath name-squatter} {cli::col_grey('&lt;id: 1w2FUce0a1Esv2K9sEn4s8gPZE7cHTj4v&gt;')}"</span></code></pre></div>
 <p><code>gargle_map_cli.dribble()</code> also allows a custom template, but it’s a more complicated and less common situation than for <code>character</code>. We won’t get into that here. (I don’t consider the dribble styling to be finalized yet.)</p>
 <p>The result of <code>gargle_map_cli()</code> then gets processed with <code><a href="https://gargle.r-lib.org/reference/bulletize.html">gargle::bulletize()</a></code>, which adds the bullet-specifying names and does aesthetically pleasing truncation.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -321,11 +321,11 @@
   <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Some Drive files:</span>
+<span class="co">#&gt; • 'name-squatter' &lt;id: 1xbsMhPsrsOn-GLv4YDgmFJTfB0moPEGA&gt;</span>
 <span class="co">#&gt; • 'name-squatter' &lt;id: 1BtAxk5ZF99CEhH84vq2VxeE66Mgg8k6k&gt;</span>
 <span class="co">#&gt; • 'name-squatter' &lt;id: 1Zmvd7_zUP8d17F8sAYCprmWOT2oBoYGN&gt;</span>
 <span class="co">#&gt; • 'name-squatter' &lt;id: 19Y7bQtDs43oc96Vhaj6w9ou7dfaBVKHw&gt;</span>
 <span class="co">#&gt; • 'name-squatter' &lt;id: 1w2FUce0a1Esv2K9sEn4s8gPZE7cHTj4v&gt;</span>
-<span class="co">#&gt; • 'name-squatter' &lt;id: 18hzoJiJruyXqtE4zrd25MAe5Y5-Vi2xH&gt;</span>
 <span class="co">#&gt;   … and 5 more</span></code></pre></div>
 <p>It’s conceivable that cli will gain a better way of vectorization, but this works for now.</p>
 <p>Known dysfunction: it’s inefficient to <code>gargle_map_cli()</code> over the whole object, then truncate with <code>bulletize()</code>. But it’s easy. There are contexts, like tibble printing, where formatting stuff that will never see the light of day is really punishing. But I’m not sure I really have to worry about that.</p>
