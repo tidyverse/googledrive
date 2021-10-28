@@ -30,7 +30,7 @@ googledrive::drive_deauth()
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/googledrive)](https://CRAN.R-project.org/package=googledrive)
 [![R-CMD-check](https://github.com/tidyverse/googledrive/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googledrive/actions)
-[![Codecov test coverage](https://codecov.io/gh/tidyverse/googledrive/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/googledrive?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/tidyverse/googledrive/branch/main/graph/badge.svg)](https://codecov.io/gh/tidyverse/googledrive?branch=main)
 <!-- badges: end -->
 
 ## Overview

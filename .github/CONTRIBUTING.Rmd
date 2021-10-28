@@ -19,7 +19,7 @@ output:
     - GOOD PR title: "Obtain user's intent via mind-reading; fixes #86".
     - BAD PR title: "Fixes #1043". Please remind us all what issue #1043 is about!
     - BAD PR title: "Something about #345". This will not actually close issue #345 upon merging. [Use the magic words](https://help.github.com/articles/closing-issues-using-keywords/).
-  * Add a bullet to `NEWS.md` with a concise description of the change, if it's something a user would want to know when updating the package. [dplyr's `NEWS.md`](https://github.com/tidyverse/dplyr/blob/master/NEWS.md) is a good source of examples. Note the sentence format, the inclusion of GitHub username, and links to relevant issue(s)/PR(s). We will handle any organization into sub-sections just prior to a release. What merits a bullet?
+  * Add a bullet to `NEWS.md` with a concise description of the change, if it's something a user would want to know when updating the package. [dplyr's `NEWS.md`](https://github.com/tidyverse/dplyr/blob/main/NEWS.md) is a good source of examples. Note the sentence format, the inclusion of GitHub username, and links to relevant issue(s)/PR(s). We will handle any organization into sub-sections just prior to a release. What merits a bullet?
     - Fixing a typo in the docs does not, but it is still awesome and deeply appreciated.
     - Fixing a bug or adding a new feature is bullet-worthy.
 
@@ -61,7 +61,7 @@ For small changes, it's fine to test your specific change locally and make a PR.
 
 #### Auth
 
-A token is put into force at the beginning of a test run by the first few lines of [tests/testthat/helper.R](https://github.com/tidyverse/googledrive/blob/master/tests/testthat/helper.R).
+A token is put into force at the beginning of a test run by the first few lines of [tests/testthat/helper.R](https://github.com/tidyverse/googledrive/blob/main/tests/testthat/helper.R).
 
   * This reflects the approach documented in the gargle vignette [Managing tokens securely](https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html). We use embedded, encrypted service account token.
   * If you want to use a token you already have, edit those lines to use any of the techniques described in the gargle vignette [Non-interactive auth](https://gargle.r-lib.org/articles/non-interactive-auth.html). Don't commit and submit this change as part of a pull request; just use it as a pragmatic way to run tests with a token you have on hand.
@@ -123,7 +123,10 @@ Note that the current user is appended! This is so that concurrent test runs do 
 
 ### Continuous integration
 
-googledrive is checked on the current R release on Windows, via [AppVeyor](https://ci.appveyor.com/project/tidyverse/googledrive), and on several versions of R on Linux, via [Travis CI](https://travis-ci.org/tidyverse/googledrive). We use [codecov](https://codecov.io/github/tidyverse/googledrive?branch=master) to track the test coverage. In general, the package is subjected to `R CMD check`, unit tests, and test coverage analysis after every push to GitHub. There are encrypted service account tokens on both AppVeyor and Travis CI, so tests against the Drive API can be run.
+googledrive is checked on a large matrix of R versions and operating systems via GitHub Actions.
+We use [codecov](https://codecov.io/github/tidyverse/googledrive?branch=main) to track the test coverage.
+In general, the package is subjected to `R CMD check`, unit tests, and test coverage analysis after every push to GitHub.
+For internal branches, an encrypted service account token is available on GHA, so tests against the Drive API can be run.
 
 Things are a bit different for pull requests from outside contributors, however. These PRs do not have access to the encrypted tokens, therefore many tests must be skipped. The PR will still be vetted via `R CMD check` and tests that do not call the Drive API can still be run. After you make a PR, it's a good idea to check back after a few minutes to see all of these results. If there are problems, read the log and try to correct the problem proactively. We "squash and merge" most pull requests, internal or external, so don't agonize over the commit history.
 

@@ -1,5 +1,5 @@
 # camelCase() and toCamel() taken from
-# https://github.com/rstats-db/bigrquery/blob/master/R/camelCase.R
+# https://github.com/r-dbi/bigrquery/blob/main/R/camelCase.R
 
 # in theory, belongs in gargle
 # but then we'd need to export it and I'm not sure it's worth it
