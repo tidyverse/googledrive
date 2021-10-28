@@ -13,6 +13,5 @@
     Code
       shortcut_create(nm_("top-level-file"), overwrite = FALSE)
     Error <rlang_error>
-      You must specify the shortcut's `name` in order to specify `overwrite`
-      behaviour.
+      You must specify the shortcut's `name` in order to specify `overwrite` behaviour.
 

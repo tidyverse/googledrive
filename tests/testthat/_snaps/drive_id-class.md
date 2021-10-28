@@ -3,8 +3,7 @@
     Code
       as_id(mean)
     Error <rlang_error>
-      Don't know how to coerce an object of class <function> into a
-      <drive_id>.
+      Don't know how to coerce an object of class <function> into a <drive_id>.
 
 ---
 

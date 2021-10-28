@@ -23,8 +23,7 @@
     Code
       drive_cp(file, nm_("i-am-a-folder"))
     Error <rlang_error>
-      Unclear if `path` specifies parent folder or full path to the new file,
-      including its name.
+      Unclear if `path` specifies parent folder or full path to the new file, including its name.
       See `?as_dribble()` for advice on how to make this clear.
 
 # drive_cp() errors if asked to copy a folder
