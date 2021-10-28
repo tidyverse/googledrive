@@ -40,7 +40,7 @@ purrr::map_chr(themes, "id")
 sd <- shared_drive_update(sd, themeId = "bok_choy")
 sd <- shared_drive_update(sd, themeId = "cocktails")
 
-# clean up
+# Clean up
 shared_drive_rm(sd)
 }
 }

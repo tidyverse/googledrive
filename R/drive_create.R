@@ -66,7 +66,7 @@
 #' # `overwrite = TRUE` moves an existing file to trash, then proceeds
 #' drive_create("VisiCalc", path = b4xl, overwrite = TRUE)
 #'
-#' # clean up
+#' # Clean up
 #' drive_rm(wordstar, b4xl, execuvision)
 drive_create <- function(name,
                          path = NULL,

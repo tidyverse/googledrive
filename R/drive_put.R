@@ -45,7 +45,7 @@
 #' # PUT again --> ERROR
 #' drive_put(local_file)
 #'
-#' # clean-up
+#' # Clean up
 #' drive_find("drive_put_.+[.]txt") %>% drive_rm()
 #' unlink(local_file)
 drive_put <- function(media,

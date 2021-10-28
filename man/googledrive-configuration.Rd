@@ -90,7 +90,7 @@ unstar <- function(y) {
 x <- unstar(x)
 drive_reveal(x, "starred")
 
-# clean up
+# Clean up
 drive_rm(x)
 \dontshow{\}) # examplesIf}
 }

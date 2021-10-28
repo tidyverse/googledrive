@@ -108,7 +108,7 @@ drive_get("alfalfa/broccoli")
 drive_get("~/alfalfa/broccoli")
 drive_get(c("broccoli", "alfalfa/", "~/alfalfa/broccoli"))
 
-# clean up
+# Clean up
 drive_rm(alfalfa)
 
 \dontrun{

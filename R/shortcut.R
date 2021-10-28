@@ -130,7 +130,7 @@ shortcut_create <- function(file,
 #' shortcut_resolve(sc_dat)
 #' # No error, but resolution is unsuccessful due to non-existent target
 #'
-#' # Clean-up
+#' # Clean up
 #' drive_rm(sc_dat)
 shortcut_resolve <- function(file) {
   file <- as_dribble(file)

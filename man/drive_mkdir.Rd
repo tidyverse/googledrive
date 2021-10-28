@@ -84,7 +84,7 @@ drive_mkdir("name-squatter-mkdir", path = ghi, overwrite = TRUE)
 # list everything inside 'ghi'
 drive_ls('ghi')
 
-# clean up
+# Clean up
 drive_rm(ghi)
 \dontshow{\}) # examplesIf}
 }

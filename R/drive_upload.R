@@ -47,7 +47,7 @@
 #' # check out the new Sheet!
 #' drive_browse(chicken_sheet)
 #'
-#' # clean-up
+#' # Clean up
 #' drive_find("chicken.*upload") %>% drive_rm()
 #'
 #' # Upload a file and, at the same time, star it

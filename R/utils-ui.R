@@ -151,7 +151,7 @@ drive_quiet <- function() {
 #' x <- unstar(x)
 #' drive_reveal(x, "starred")
 #'
-#' # clean up
+#' # Clean up
 #' drive_rm(x)
 local_drive_quiet <- function(env = parent.frame()) {
   withr::local_options(list(googledrive_quiet = TRUE), .local_envir = env)

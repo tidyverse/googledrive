@@ -43,7 +43,7 @@
 #' # list everything inside 'ghi'
 #' drive_ls('ghi')
 #'
-#' # clean up
+#' # Clean up
 #' drive_rm(ghi)
 drive_mkdir <- function(name,
                         path = NULL,

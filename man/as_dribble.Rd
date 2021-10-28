@@ -56,7 +56,7 @@ as_dribble(c("alfa", "alfa/bravo"))
 # specify the file id (substitute a real file id of your own!)
 # as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
 
-# cleanup
+# Clean up
 drive_find("alfa") \%>\% drive_rm()
 \dontshow{\}) # examplesIf}
 }

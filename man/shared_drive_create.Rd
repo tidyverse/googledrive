@@ -23,7 +23,7 @@ earlier concept of Team Drives. Learn more about \link[=shared_drives]{shared dr
 \dontrun{
 shared_drive_create("my-awesome-shared-drive")
 
-# clean up
+# Clean up
 shared_drive_rm("my-awesome-shared-drive")
 }
 }

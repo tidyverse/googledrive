@@ -65,7 +65,7 @@ drive_rm(file)
 shortcut_resolve(sc_dat)
 # No error, but resolution is unsuccessful due to non-existent target
 
-# Clean-up
+# Clean up
 drive_rm(sc_dat)
 \dontshow{\}) # examplesIf}
 }

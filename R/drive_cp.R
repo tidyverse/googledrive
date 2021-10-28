@@ -66,7 +66,7 @@
 #' # go see the new Sheet in the browser
 #' # drive_browse(chicken_sheet)
 #'
-#' # clean up
+#' # Clean up
 #' drive_rm(chicken_sheet)
 drive_cp <- function(file,
                      path = NULL,
