@@ -34,11 +34,11 @@
 #'
 #' # `overwrite = FALSE` errors if something already exists at target filepath
 #' # THIS WILL ERROR!
-#' drive_create("name-squatter", path = ghi)
-#' drive_mkdir("name-squatter", path = ghi, overwrite = FALSE)
+#' drive_create("name-squatter-mkdir", path = ghi)
+#' drive_mkdir("name-squatter-mkdir", path = ghi, overwrite = FALSE)
 #'
 #' # `overwrite = TRUE` moves the existing item to trash, then proceeds
-#' drive_mkdir("name-squatter", path = ghi, overwrite = TRUE)
+#' drive_mkdir("name-squatter-mkdir", path = ghi, overwrite = TRUE)
 #'
 #' # list everything inside 'ghi'
 #' drive_ls('ghi')

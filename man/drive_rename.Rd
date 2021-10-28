@@ -55,11 +55,11 @@ file <- drive_rename(file, name = "renamed-file")
 
 # `overwrite = FALSE` errors if something already exists at target filepath
 # THIS WILL ERROR!
-drive_create("name-squatter")
-drive_rename(file, name = "name-squatter", overwrite = FALSE)
+drive_create("name-squatter-rename")
+drive_rename(file, name = "name-squatter-rename", overwrite = FALSE)
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
-file <- drive_rename(file, name = "name-squatter", overwrite = TRUE)
+file <- drive_rename(file, name = "name-squatter-rename", overwrite = TRUE)
 
 # Clean up
 drive_rm(file)

@@ -110,17 +110,17 @@ drive_rm(chicken)
 
 # `overwrite = FALSE` errors if something already exists at target filepath
 # THIS WILL ERROR!
-drive_create("name-squatter")
+drive_create("name-squatter-upload")
 drive_example_local("chicken.jpg") \%>\%
   drive_upload(
-    name = "name-squatter",
+    name = "name-squatter-upload",
     overwrite = FALSE
   )
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
 chicken <- drive_example_local("chicken.jpg") \%>\%
   drive_upload(
-    name = "name-squatter",
+    name = "name-squatter-upload",
     overwrite = TRUE
   )
 

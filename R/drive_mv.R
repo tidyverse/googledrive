@@ -48,11 +48,11 @@
 #'
 #' # `overwrite = FALSE` errors if something already exists at target filepath
 #' # THIS WILL ERROR!
-#' drive_create("name-squatter", path = "~/")
-#' drive_mv(file, path = "~/", name = "name-squatter", overwrite = FALSE)
+#' drive_create("name-squatter-mv", path = "~/")
+#' drive_mv(file, path = "~/", name = "name-squatter-mv", overwrite = FALSE)
 #'
 #' # `overwrite = TRUE` moves the existing item to trash, then proceeds
-#' drive_mv(file, path = "~/", name = "name-squatter", overwrite = TRUE)
+#' drive_mv(file, path = "~/", name = "name-squatter-mv", overwrite = TRUE)
 #'
 #' # Clean up
 #' drive_rm(file, folder)
