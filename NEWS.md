@@ -1,5 +1,7 @@
 # googledrive (development version)
 
+`drive_mv()` no longer errors with "A shared drive item must have exactly one parent." when moving a file on a shared drive (#377).
+
 # googledrive 2.0.0
 
 ## Team Drives are dead! Long live shared drives!
