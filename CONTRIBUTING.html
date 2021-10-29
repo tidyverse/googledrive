@@ -203,12 +203,14 @@
 <li>Website: The pkgdown-created website is built and deployed automatically via Travis-CI. Some changes require an edit to the <code>reference</code> section of <code>_pkgdown.yml</code>, i.e. to make sure that a function appears there.</li>
 <li>If the PR is related to an issue, link to it in the description, with <a href="https://help.github.com/articles/autolinked-references-and-urls/">the <code>#15</code> syntax</a> and the issue slug for context. If the PR is meant to close an issue, make sure one of the commit messages includes <a href="https://help.github.com/articles/closing-issues-using-keywords/">text like <code>closes #44</code> or <code>fixes #101</code></a>. Provide the issue number and slug in the description, even if the issue is mentioned in the title, because auto-linking does not work in the PR title.
 <ul>
-<li>GOOD PR title: “Obtain user’s intent via mind-reading; fixes #86”.</li>
-<li>BAD PR title: “Fixes #1043”. Please remind us all what issue #1043 is about!</li>
+<li>GOOD PR title: “Obtain user’s intent via mind-reading; fixes
+#86”.</li>
+<li>BAD PR title: “Fixes #1043”. Please remind us all what issue
+#1043 is about!</li>
 <li>BAD PR title: “Something about #345”. This will not actually close issue #345 upon merging. <a href="https://help.github.com/articles/closing-issues-using-keywords/">Use the magic words</a>.</li>
 </ul>
 </li>
-<li>Add a bullet to <code>NEWS.md</code> with a concise description of the change, if it’s something a user would want to know when updating the package. <a href="https://github.com/tidyverse/dplyr/blob/master/NEWS.md">dplyr’s <code>NEWS.md</code></a> is a good source of examples. Note the sentence format, the inclusion of GitHub username, and links to relevant issue(s)/PR(s). We will handle any organization into sub-sections just prior to a release. What merits a bullet?
+<li>Add a bullet to <code>NEWS.md</code> with a concise description of the change, if it’s something a user would want to know when updating the package. <a href="https://github.com/tidyverse/dplyr/blob/main/NEWS.md">dplyr’s <code>NEWS.md</code></a> is a good source of examples. Note the sentence format, the inclusion of GitHub username, and links to relevant issue(s)/PR(s). We will handle any organization into sub-sections just prior to a release. What merits a bullet?
 <ul>
 <li>Fixing a typo in the docs does not, but it is still awesome and deeply appreciated.</li>
 <li>Fixing a bug or adding a new feature is bullet-worthy.</li>
@@ -236,7 +238,7 @@
 <div id="documentation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h3>
-<p>We use <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a>, specifically with the <a href="https://roxygen2.r-lib.org/articles/rd-formatting.html">Markdown syntax</a>, to create <code>NAMESPACE</code> and all <code>.Rd</code> files. All edits to documentation should be done in roxygen comments above the associated function or object.</p>
+<p>We use <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a>, specifically with the <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html">Markdown syntax</a>, to create <code>NAMESPACE</code> and all <code>.Rd</code> files. All edits to documentation should be done in roxygen comments above the associated function or object.</p>
 <p>Use templates or inheritance to repeat documentation whenever it is helpful, but without actually repeating its source.</p>
 <p>Use internal and external links liberally, i.e. to other docs in googledrive or to Drive API resources.</p>
 <p>We encourage working examples that include any necessary setup and teardown. In most cases, you’ll have to put them inside a <code>\dontrun{}</code>.</p>
@@ -251,7 +253,7 @@
 <div id="auth" class="section level4">
 <h4 class="hasAnchor">
 <a href="#auth" class="anchor"></a>Auth</h4>
-<p>A token is put into force at the beginning of a test run by the first few lines of <a href="https://github.com/tidyverse/googledrive/blob/master/tests/testthat/helper.R">tests/testthat/helper.R</a>.</p>
+<p>A token is put into force at the beginning of a test run by the first few lines of <a href="https://github.com/tidyverse/googledrive/blob/main/tests/testthat/helper.R">tests/testthat/helper.R</a>.</p>
 <ul>
 <li>This reflects the approach documented in the gargle vignette <a href="https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html">Managing tokens securely</a>. We use embedded, encrypted service account token.</li>
 <li>If you want to use a token you already have, edit those lines to use any of the techniques described in the gargle vignette <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html">Non-interactive auth</a>. Don’t commit and submit this change as part of a pull request; just use it as a pragmatic way to run tests with a token you have on hand.</li>
@@ -277,7 +279,7 @@
 <li><p>When you are truly ready to perform setup or clean, edit the code to set the <code>SETUP</code> or <code>CLEAN</code> variable to <code>TRUE</code> instead of <code>FALSE</code>. This friction is intentional, so you don’t accidentally create or delete lots of Drive files without meaning to.</p></li>
 <li><p>Render <code>all-test-setup.R</code> with the Knit button in RStudio or like so:</p></li>
 </ol>
-<!-- end list --><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html">render</a></span><span class="op">(</span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_path.html">test_path</a></span><span class="op">(</span><span class="st">"all-test-setup.R"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>You could also just source it, but it’s nice to have a report that records what actually happened.</p>
 <p>You should now be able to run the tests via <em>Build &gt; Test Package</em> or <em>Build &gt; Check Package</em> in RStudio or via <code>devtools::test()</code>.</p>
@@ -292,7 +294,7 @@
 <a href="#adding-tests" class="anchor"></a>Adding tests</h4>
 <p>If you’re going to add or modify tests, follow these conventions:</p>
 <ul>
-<li>Test files are marked up with knitr chunk headers in comments, e.g. <code># ---- clean ----</code> or <code># ---- tests ----</code>. This is what enables the <code>driver.R</code> script to isolate the setup or cleaning code. Don’t break that.</li>
+<li>Test files are marked up with knitr chunk headers in comments, e.g. <code># ---- clean ----</code> or <code># ---- tests ----</code>. This is what enables the <code>driver.R</code> script to isolate the setup or cleaning code. Don’t break that.</li>
 <li>Any file that is truly necessary and can be setup in advance and persist? Do it, in order to make future test runs faster. Put the associated setup and clean code at the top of the test file.</li>
 <li>All test files should have a name that documents why they exist and who made them. Use the <code># ---- nm_fun ----</code> chunk to define naming functions used in that test file (see existing files for examples). Always use one of these functions to generate file names. Use <code>nm_()</code> for test files that persist. Use <code>me_()</code> for ephemeral test files that are created and destroyed in one test run.</li>
 </ul>
@@ -308,7 +310,7 @@
 <div id="continuous-integration" class="section level3">
 <h3 class="hasAnchor">
 <a href="#continuous-integration" class="anchor"></a>Continuous integration</h3>
-<p>googledrive is checked on the current R release on Windows, via <a href="https://ci.appveyor.com/project/tidyverse/googledrive">AppVeyor</a>, and on several versions of R on Linux, via <a href="https://travis-ci.org/tidyverse/googledrive">Travis CI</a>. We use <a href="https://codecov.io/github/tidyverse/googledrive?branch=master">codecov</a> to track the test coverage. In general, the package is subjected to <code>R CMD check</code>, unit tests, and test coverage analysis after every push to GitHub. There are encrypted service account tokens on both AppVeyor and Travis CI, so tests against the Drive API can be run.</p>
+<p>googledrive is checked on a large matrix of R versions and operating systems via GitHub Actions. We use <a href="https://codecov.io/github/tidyverse/googledrive?branch=main">codecov</a> to track the test coverage. In general, the package is subjected to <code>R CMD check</code>, unit tests, and test coverage analysis after every push to GitHub. For internal branches, an encrypted service account token is available on GHA, so tests against the Drive API can be run.</p>
 <p>Things are a bit different for pull requests from outside contributors, however. These PRs do not have access to the encrypted tokens, therefore many tests must be skipped. The PR will still be vetted via <code>R CMD check</code> and tests that do not call the Drive API can still be run. After you make a PR, it’s a good idea to check back after a few minutes to see all of these results. If there are problems, read the log and try to correct the problem proactively. We “squash and merge” most pull requests, internal or external, so don’t agonize over the commit history.</p>
 </div>
 </div>
