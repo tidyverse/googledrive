@@ -217,52 +217,52 @@ more limited way, use the helpers <code><a href='googledrive-configuration.html'
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Original file:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken.txt</span> <span style='color: #555555;'>&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Copied to file:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-trash.txt</span> <span style='color: #555555;'>&lt;id: 11Gh2x7xsHb3MYfVelFmEuZTBKMPgHoIW&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-trash.txt</span> <span style='color: #555555;'>&lt;id: 1K5d3MMaIWmiJBc22AKphHf7z-XzkjEDW&gt;</span></span>
 <span class='r-in'><span class='fu'>drive_trash</span><span class='op'>(</span><span class='st'>"chicken-trash.txt"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> File trashed:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-trash.txt</span> <span style='color: #555555;'>&lt;id: 11Gh2x7xsHb3MYfVelFmEuZTBKMPgHoIW&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-trash.txt</span> <span style='color: #555555;'>&lt;id: 1K5d3MMaIWmiJBc22AKphHf7z-XzkjEDW&gt;</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Confirm it's in the trash</span></span>
 <span class='r-in'><span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span>trashed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 96 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 93 × 3</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    name                 id                                drive_resource   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;drv_id&gt;</span>                          <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>           </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> chicken-trash.txt    11Gh2x7xsHb3MYfVelFmEuZTBKMPgHoIW <span style='color: #949494;'>&lt;named list [40]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> name-squatter-rename 1PKQRDdGePbv3DlrnqcXNW5CY0lYdFQvJ <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> name-squatter-mv     1jpl1mlKsjB2BXvfAK1G05byyVUtLpOWD <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> name-squatter-upload 17sVOMK6VVAM1YrxBFa7m08AhtyusfOOU <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> name-squatter-rename 1aarnobNyvHba-LzAQh6vLA8ejS5oRoug <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> name-squatter-mv     1TEAUf-0CZW1FQk-KNUmK48ksYUXwx_Ml <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> name-squatter-upload 1Qv5wZ2jhvduHYC_nvnC1hSmooVsC722e <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> name-squatter-rename 137Jxl0cqokNrL7t1hIuJt6r6YoAOdgDN <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> name-squatter-mv     1-XEMZu4I01UaTdKsl5ScedF8Li8g8KS1 <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> name-squatter-upload 1kNGpIuJwteaATN2fOBTS25KDAB5kLqz8 <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 86 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> chicken-trash.txt    1K5d3MMaIWmiJBc22AKphHf7z-XzkjEDW <span style='color: #949494;'>&lt;named list [40]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> name-squatter-rename 1XueHVNUkCkFQ2X9q9xyrCscJPs2-THYL <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> name-squatter-mv     1p5Vr26vHK86e26Zj3J8zFrS6IbxUSbRW <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> name-squatter-upload 1YKu9R-8TZP7W0wDOTzJHi1BJZsdS_fWf <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> name-squatter-rename 1PKQRDdGePbv3DlrnqcXNW5CY0lYdFQvJ <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> name-squatter-mv     1jpl1mlKsjB2BXvfAK1G05byyVUtLpOWD <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> name-squatter-upload 17sVOMK6VVAM1YrxBFa7m08AhtyusfOOU <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> name-squatter-rename 1aarnobNyvHba-LzAQh6vLA8ejS5oRoug <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> name-squatter-mv     1TEAUf-0CZW1FQk-KNUmK48ksYUXwx_Ml <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> name-squatter-upload 1Qv5wZ2jhvduHYC_nvnC1hSmooVsC722e <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 83 more rows</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Remove it from the trash and confirm</span></span>
 <span class='r-in'><span class='fu'>drive_untrash</span><span class='op'>(</span><span class='st'>"chicken-trash.txt"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> File untrashed:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-trash.txt</span> <span style='color: #555555;'>&lt;id: 11Gh2x7xsHb3MYfVelFmEuZTBKMPgHoIW&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-trash.txt</span> <span style='color: #555555;'>&lt;id: 1K5d3MMaIWmiJBc22AKphHf7z-XzkjEDW&gt;</span></span>
 <span class='r-in'><span class='fu'><a href='drive_find.html'>drive_find</a></span><span class='op'>(</span>trashed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 95 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A dribble: 92 × 3</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    name                 id                                drive_resource   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;drv_id&gt;</span>                          <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>           </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> name-squatter-rename 1PKQRDdGePbv3DlrnqcXNW5CY0lYdFQvJ <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> name-squatter-mv     1jpl1mlKsjB2BXvfAK1G05byyVUtLpOWD <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> name-squatter-upload 17sVOMK6VVAM1YrxBFa7m08AhtyusfOOU <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> name-squatter-rename 1aarnobNyvHba-LzAQh6vLA8ejS5oRoug <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> name-squatter-mv     1TEAUf-0CZW1FQk-KNUmK48ksYUXwx_Ml <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> name-squatter-upload 1Qv5wZ2jhvduHYC_nvnC1hSmooVsC722e <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> name-squatter-rename 137Jxl0cqokNrL7t1hIuJt6r6YoAOdgDN <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> name-squatter-mv     1-XEMZu4I01UaTdKsl5ScedF8Li8g8KS1 <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> name-squatter-upload 1kNGpIuJwteaATN2fOBTS25KDAB5kLqz8 <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> name-squatter-rename 16rtEkQ4Xv29VPNMywuhsTAZCb7GMRxrH <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 85 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> name-squatter-rename 1XueHVNUkCkFQ2X9q9xyrCscJPs2-THYL <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> name-squatter-mv     1p5Vr26vHK86e26Zj3J8zFrS6IbxUSbRW <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> name-squatter-upload 1YKu9R-8TZP7W0wDOTzJHi1BJZsdS_fWf <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> name-squatter-rename 1PKQRDdGePbv3DlrnqcXNW5CY0lYdFQvJ <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> name-squatter-mv     1jpl1mlKsjB2BXvfAK1G05byyVUtLpOWD <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> name-squatter-upload 17sVOMK6VVAM1YrxBFa7m08AhtyusfOOU <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> name-squatter-rename 1aarnobNyvHba-LzAQh6vLA8ejS5oRoug <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> name-squatter-mv     1TEAUf-0CZW1FQk-KNUmK48ksYUXwx_Ml <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> name-squatter-upload 1Qv5wZ2jhvduHYC_nvnC1hSmooVsC722e <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> name-squatter-rename 137Jxl0cqokNrL7t1hIuJt6r6YoAOdgDN <span style='color: #949494;'>&lt;named list [39]&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 82 more rows</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Clean up</span></span>
 <span class='r-in'><span class='fu'><a href='drive_rm.html'>drive_rm</a></span><span class='op'>(</span><span class='st'>"chicken-trash.txt"</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> File deleted:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-trash.txt</span> <span style='color: #555555;'>&lt;id: 11Gh2x7xsHb3MYfVelFmEuZTBKMPgHoIW&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>chicken-trash.txt</span> <span style='color: #555555;'>&lt;id: 1K5d3MMaIWmiJBc22AKphHf7z-XzkjEDW&gt;</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
