@@ -1,7 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://googledrive.tidyverse.org/404.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/SUPPORT.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/articles/bring-your-own-app.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/articles/example-files.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/articles/file-identification.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/articles/googledrive.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/articles/messages-and-errors.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/articles/multiple-files.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/articles/permissions.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/authors.html</loc>
+  </url>
+  <url>
     <loc>https://googledrive.tidyverse.org/index.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/news/index.html</loc>
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/reference/as_dribble.html</loc>
@@ -133,6 +181,9 @@
     <loc>https://googledrive.tidyverse.org/reference/googledrive-package.html</loc>
   </url>
   <url>
+    <loc>https://googledrive.tidyverse.org/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://googledrive.tidyverse.org/reference/pipe.html</loc>
   </url>
   <url>
@@ -164,26 +215,5 @@
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/reference/shortcut_resolve.html</loc>
-  </url>
-  <url>
-    <loc>https://googledrive.tidyverse.org/articles/articles/bring-your-own-app.html</loc>
-  </url>
-  <url>
-    <loc>https://googledrive.tidyverse.org/articles/articles/example-files.html</loc>
-  </url>
-  <url>
-    <loc>https://googledrive.tidyverse.org/articles/articles/file-identification.html</loc>
-  </url>
-  <url>
-    <loc>https://googledrive.tidyverse.org/articles/articles/messages-and-errors.html</loc>
-  </url>
-  <url>
-    <loc>https://googledrive.tidyverse.org/articles/articles/multiple-files.html</loc>
-  </url>
-  <url>
-    <loc>https://googledrive.tidyverse.org/articles/articles/permissions.html</loc>
-  </url>
-  <url>
-    <loc>https://googledrive.tidyverse.org/articles/googledrive.html</loc>
   </url>
 </urlset>

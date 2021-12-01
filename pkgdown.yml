@@ -1,15 +1,15 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.0
 pkgdown_sha: ~
 articles:
-  articles/bring-your-own-app: bring-your-own-app.html
-  articles/example-files: example-files.html
-  articles/file-identification: file-identification.html
-  articles/messages-and-errors: messages-and-errors.html
-  articles/multiple-files: multiple-files.html
-  articles/permissions: permissions.html
+  bring-your-own-app: bring-your-own-app.html
+  example-files: example-files.html
+  file-identification: file-identification.html
+  messages-and-errors: messages-and-errors.html
+  multiple-files: multiple-files.html
+  permissions: permissions.html
   googledrive: googledrive.html
-last_built: 2021-11-29T13:44Z
+last_built: 2021-12-01T13:48Z
 urls:
   reference: https://googledrive.tidyverse.org/reference
   article: https://googledrive.tidyverse.org/articles

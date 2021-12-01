@@ -35,6 +35,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -49,8 +51,8 @@
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="index.html">googledrive</a>
         <div class="info hidden-xs hidden-sm">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.9000</span>
+          <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.9000</span>
         </div>
       </div>
     </div>
@@ -70,22 +72,24 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/articles/file-identification.html">File Identification</a>
+      <a href="articles/file-identification.html">File Identification</a>
     </li>
     <li>
-      <a href="articles/articles/multiple-files.html">Dealing with multiple files</a>
+      <a href="articles/multiple-files.html">Dealing with multiple files</a>
     </li>
     <li>
-      <a href="articles/articles/permissions.html">File permissions</a>
-    </li>
-    <li class="divider">
-    <li class="dropdown-header">Package configuration</li>
-    <li>
-      <a href="articles/articles/bring-your-own-app.html">Bring your own OAuth app or API key</a>
+      <a href="articles/permissions.html">File permissions</a>
     </li>
     <li class="divider">
+    </li>
+<li class="dropdown-header">Package configuration</li>
     <li>
-      <a href="articles/index.html">More...</a>
+      <a href="articles/bring-your-own-app.html">Bring your own OAuth app or API key</a>
+    </li>
+    <li class="divider">
+    </li>
+<li>
+      <a href="articles/index.html">More articles...</a>
     </li>
   </ul>
 </li>
@@ -98,19 +102,20 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Blog posts</li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2021/07/googledrive-2-0-0/">Version 2.0.0</a>
+      <a href="https://www.tidyverse.org/blog/2021/07/googledrive-2-0-0/" class="external-link">Version 2.0.0</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2019/08/googledrive-1-0-0/">Version 1.0.0</a>
+      <a href="https://www.tidyverse.org/blog/2019/08/googledrive-1-0-0/" class="external-link">Version 1.0.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="news/index.html">Change log</a>
     </li>
   </ul>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/googledrive/">
+  <a href="https://github.com/tidyverse/googledrive/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -127,34 +132,34 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="googledrive" class="section level1">
+<div class="section level1">
 
 <!-- badges: start -->
 
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>googledrive allows you to interact with files on Google Drive from R.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>Install from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"googledrive"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"googledrive"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<div id="load-googledrive" class="section level3">
-<h3 class="hasAnchor">
-<a href="#load-googledrive" class="anchor"></a>Load googledrive</h3>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<div class="section level3">
+<h3 id="load-googledrive">Load googledrive<a class="anchor" aria-label="anchor" href="#load-googledrive"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://googledrive.tidyverse.org">"googledrive"</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://googledrive.tidyverse.org">"googledrive"</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="package-conventions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#package-conventions" class="anchor"></a>Package conventions</h3>
+<div class="section level3">
+<h3 id="package-conventions">Package conventions<a class="anchor" aria-label="anchor" href="#package-conventions"></a>
+</h3>
 <ul>
 <li>Most functions begin with the prefix <code>drive_</code>. Auto-completion is your friend.</li>
 <li>Goal is to allow Drive access that feels similar to Unix file system utilities, e.g., <code>find</code>, <code>ls</code>, <code>mv</code>, <code>cp</code>, <code>mkdir</code>, and <code>rm</code>.</li>
@@ -168,10 +173,10 @@
 <li>googledrive is “pipe-friendly” and, in fact, re-exports <code>%&gt;%</code>, but does not require its use.</li>
 </ul>
 </div>
-<div id="quick-demo" class="section level3">
-<h3 class="hasAnchor">
-<a href="#quick-demo" class="anchor"></a>Quick demo</h3>
-<p>Here’s how to list up to <code>n_max</code> of the files you see in <a href="https://drive.google.com">My Drive</a>. You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.</p>
+<div class="section level3">
+<h3 id="quick-demo">Quick demo<a class="anchor" aria-label="anchor" href="#quick-demo"></a>
+</h3>
+<p>Here’s how to list up to <code>n_max</code> of the files you see in <a href="https://drive.google.com" class="external-link">My Drive</a>. You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
 <span class="co">#&gt; # A dribble: 30 × 3</span>
@@ -194,18 +199,18 @@
 <span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span>     <span class="co">## Google Sheets!</span>
 <span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span>             <span class="co">## MIME type = "text/csv"</span>
 <span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"application/pdf"</span><span class="op">)</span> <span class="co">## MIME type = "application/pdf"</span></code></pre></div>
-<p>Alternatively, you can refine the search using the <code>q</code> query parameter. Accepted search clauses can be found in the <a href="https://developers.google.com/drive/v3/web/search-parameters">Google Drive API documentation</a>. For example, to see all files that you’ve starred and that are readable by “anyone with a link”, do this:</p>
+<p>Alternatively, you can refine the search using the <code>q</code> query parameter. Accepted search clauses can be found in the <a href="https://developers.google.com/drive/v3/web/search-parameters" class="external-link">Google Drive API documentation</a>. For example, to see all files that you’ve starred and that are readable by “anyone with a link”, do this:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="op">(</span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A dribble: 2 × 3</span>
 <span class="co">#&gt;   name       id                                drive_resource   </span>
 <span class="co">#&gt;   &lt;chr&gt;      &lt;drv_id&gt;                          &lt;list&gt;           </span>
 <span class="co">#&gt; 1 r_logo.jpg 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud &lt;named list [41]&gt;</span>
 <span class="co">#&gt; 2 THANKS     19URV7BT0_E1KhYdfDODszK5aiELOwTSz &lt;named list [40]&gt;</span></code></pre></div>
 <p>You generally want to store the result of a googledrive call, as we do with <code>files</code> above. <code>files</code> is a dribble with info on several files and can be used as the input for downstream calls. It can also be manipulated as a regular data frame at any point.</p>
-<div id="identify-files" class="section level4">
-<h4 class="hasAnchor">
-<a href="#identify-files" class="anchor"></a>Identify files</h4>
+<div class="section level4">
+<h4 id="identify-files">Identify files<a class="anchor" aria-label="anchor" href="#identify-files"></a>
+</h4>
 <p><code><a href="reference/drive_find.html">drive_find()</a></code> searches by file properties, but you can also identify files by name (path, really) or by Drive file id using <code><a href="reference/drive_get.html">drive_get()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"~/abc/def/googledrive-NEWS.md"</span><span class="op">)</span><span class="op">)</span>
@@ -233,9 +238,9 @@
 <span class="co">#&gt; 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm &lt;named list [39]&gt;</span></code></pre></div>
 <p>In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a <code>dribble</code>. If it’s ambiguous, use <code><a href="reference/drive_id.html">as_id()</a></code> to mark a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.</p>
 </div>
-<div id="upload-files" class="section level4">
-<h4 class="hasAnchor">
-<a href="#upload-files" class="anchor"></a>Upload files</h4>
+<div class="section level4">
+<h4 id="upload-files">Upload files<a class="anchor" aria-label="anchor" href="#upload-files"></a>
+</h4>
 <p>We can upload any file type.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="va">chicken</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/drive_upload.html">drive_upload</a></span><span class="op">(</span>
@@ -259,7 +264,7 @@
 <span class="co">#&gt; • 'index-chicken.csv' &lt;id: 14y8vNq9VXYuOuoHsexumu4y73hqBP_RB&gt;</span>
 
 <span class="co"># example of using a dribble as input</span>
-<span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+<span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/drive_upload.html">drive_upload</a></span><span class="op">(</span>
     name <span class="op">=</span> <span class="st">"index-chicken-sheet"</span>,
     type <span class="op">=</span> <span class="st">"spreadsheet"</span>
@@ -272,12 +277,12 @@
 <span class="co">#&gt; • 'application/vnd.google-apps.spreadsheet'</span></code></pre></div>
 <p>Much better!</p>
 </div>
-<div id="share-files" class="section level4">
-<h4 class="hasAnchor">
-<a href="#share-files" class="anchor"></a>Share files</h4>
+<div class="section level4">
+<h4 id="share-files">Share files<a class="anchor" aria-label="anchor" href="#share-files"></a>
+</h4>
 <p>To allow other people to access your file, you need to change the sharing permissions. You can check the sharing status by running <code>drive_reveal(..., "permissions")</code>, which adds a logical column <code>shared</code> and parks more detailed metadata in a <code>permissions_resource</code> variable.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">chicken_sheet</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">chicken_sheet</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"permissions"</span><span class="op">)</span>
 <span class="co">#&gt; # A dribble: 1 × 5</span>
 <span class="co">#&gt;   name                shared id                drive_resource  permissions_reso…</span>
@@ -285,7 +290,7 @@
 <span class="co">#&gt; 1 index-chicken-sheet FALSE  17oaVZ09fbpjdV-K… &lt;named list [3… &lt;named list [2]&gt;</span></code></pre></div>
 <p>Here’s how to grant anyone with the link permission to view this data set.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="va">chicken_sheet</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="op">(</span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="va">chicken_sheet</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
    <span class="fu"><a href="reference/drive_share.html">drive_share</a></span><span class="op">(</span>role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Permissions updated:</span>
 <span class="co">#&gt; • role = reader</span>
@@ -298,12 +303,12 @@
 <span class="co">#&gt; 1 index-chicken-sheet TRUE   17oaVZ09fbpjdV-K… &lt;named list [3… &lt;named list [2]&gt;</span></code></pre></div>
 <p>This comes up so often, there’s even a convenience wrapper, <code><a href="reference/drive_share.html">drive_share_anyone()</a></code>.</p>
 </div>
-<div id="publish-files" class="section level4">
-<h4 class="hasAnchor">
-<a href="#publish-files" class="anchor"></a>Publish files</h4>
+<div class="section level4">
+<h4 id="publish-files">Publish files<a class="anchor" aria-label="anchor" href="#publish-files"></a>
+</h4>
 <p>Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running <code>drive_reveal(..., "published")</code>, which adds a logical column <code>published</code> and parks more detailed metadata in a <code>revision_resource</code> variable.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">chicken_sheet</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">chicken_sheet</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"published"</span><span class="op">)</span>
 <span class="co">#&gt; # A dribble: 1 × 7</span>
 <span class="co">#&gt;   name   published shared id    drive_resource permissions_res… revision_resour…</span>
@@ -319,12 +324,12 @@
 <span class="co">#&gt;   &lt;chr&gt;  &lt;lgl&gt;     &lt;lgl&gt;  &lt;drv&gt; &lt;list&gt;         &lt;list&gt;           &lt;list&gt;          </span>
 <span class="co">#&gt; 1 index… TRUE      TRUE   17oa… &lt;named list [… &lt;named list [2]&gt; &lt;named list [9]&gt;</span></code></pre></div>
 </div>
-<div id="download-files" class="section level4">
-<h4 class="hasAnchor">
-<a href="#download-files" class="anchor"></a>Download files</h4>
-<div id="google-files" class="section level5">
-<h5 class="hasAnchor">
-<a href="#google-files" class="anchor"></a>Google files</h5>
+<div class="section level4">
+<h4 id="download-files">Download files<a class="anchor" aria-label="anchor" href="#download-files"></a>
+</h4>
+<div class="section level5">
+<h5 id="google-files">Google files<a class="anchor" aria-label="anchor" href="#google-files"></a>
+</h5>
 <p>We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. There are reasonable defaults or you can specify this explicitly via <code>type</code> or implicitly via the file extension in <code>path</code>. For example, if I would like to download the “chicken_sheet” Google Sheet as a <code>.csv</code> I could run the following.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/drive_download.html">drive_download</a></span><span class="op">(</span><span class="st">"index-chicken-sheet"</span>, type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span>
@@ -352,9 +357,9 @@
 <span class="co">#&gt; Saved locally as:</span>
 <span class="co">#&gt; • 'index-chicken-sheet.xlsx'</span></code></pre></div>
 </div>
-<div id="all-other-files" class="section level5">
-<h5 class="hasAnchor">
-<a href="#all-other-files" class="anchor"></a>All other files</h5>
+<div class="section level5">
+<h5 id="all-other-files">All other files<a class="anchor" aria-label="anchor" href="#all-other-files"></a>
+</h5>
 <p>Downloading files that are <em>not</em> Google type files is even simpler, i.e. it does not require any conversion or type info.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># download it and prove we got it</span>
@@ -363,7 +368,7 @@
 <span class="co">#&gt; • 'chicken.txt' &lt;id: 1xMvlJHia_qYNZmucaStDcOF9A9PD4BOT&gt;</span>
 <span class="co">#&gt; Saved locally as:</span>
 <span class="co">#&gt; • 'chicken.txt'</span>
-<span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "A chicken whose name was Chantecler"      </span>
 <span class="co">#&gt; [2] "Clucked in iambic pentameter"             </span>
 <span class="co">#&gt; [3] "It sat on a shelf, reading Song of Myself"</span>
@@ -372,85 +377,93 @@
 <span class="co">#&gt; [6] "—Richard Maxson"</span></code></pre></div>
 </div>
 </div>
-<div id="clean-up" class="section level4">
-<h4 class="hasAnchor">
-<a href="#clean-up" class="anchor"></a>Clean up</h4>
+<div class="section level4">
+<h4 id="clean-up">Clean up<a class="anchor" aria-label="anchor" href="#clean-up"></a>
+</h4>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.remove</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
   <span class="st">"index-chicken-sheet.csv"</span>, <span class="st">"index-chicken-sheet.xlsx"</span>, <span class="st">"chicken.txt"</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE TRUE TRUE</span>
-<span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="st">"index-chicken"</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="st">"index-chicken"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; File deleted:</span>
 <span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 17oaVZ09fbpjdV-KMUdcguAD8i1hKeSjNZnq_fbR4iiw&gt;</span></code></pre></div>
 </div>
 </div>
 </div>
-<div id="privacy" class="section level2">
-<h2 class="hasAnchor">
-<a href="#privacy" class="anchor"></a>Privacy</h2>
-<p><a href="https://www.tidyverse.org/google_privacy_policy">Privacy policy</a></p>
+<div class="section level2">
+<h2 id="privacy">Privacy<a class="anchor" aria-label="anchor" href="#privacy"></a>
+</h2>
+<p><a href="https://www.tidyverse.org/google_privacy_policy" class="external-link">Privacy policy</a></p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=googledrive">https://​cloud.r-project.org/​package=googledrive</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/tidyverse/googledrive/">https://​github.com/​tidyverse/​googledrive/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/tidyverse/googledrive/issues">https://​github.com/​tidyverse/​googledrive/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=googledrive" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/tidyverse/googledrive/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/tidyverse/googledrive/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Lucy D'Agostino McGowan <br><small class="roles"> Author </small>  </li>
-<li>
-<a href="https://jennybryan.org">Jennifer Bryan</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6983-2759" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>
-<a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a> <br><small class="roles"> Copyright holder, funder </small>  </li>
+<li><a href="authors.html#citation">Citing googledrive</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=googledrive"><img src="https://www.r-pkg.org/badges/version/googledrive" alt="CRAN status"></a></li>
-<li><a href="https://github.com/tidyverse/googledrive/actions"><img src="https://github.com/tidyverse/googledrive/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/tidyverse/googledrive?branch=main"><img src="https://codecov.io/gh/tidyverse/googledrive/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li>Lucy D'Agostino McGowan <br><small class="roles"> Author </small>  </li>
+<li>
+<a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6983-2759" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a> <br><small class="roles"> Copyright holder, funder </small>  </li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://CRAN.R-project.org/package=googledrive" class="external-link"><img src="https://www.r-pkg.org/badges/version/googledrive" alt="CRAN status"></a></li>
+<li><a href="https://github.com/tidyverse/googledrive/actions" class="external-link"><img src="https://github.com/tidyverse/googledrive/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/gh/tidyverse/googledrive?branch=main" class="external-link"><img src="https://codecov.io/gh/tidyverse/googledrive/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="tidyverse">
-  <p>googledrive is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>googledrive is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org" class="external-link">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
   <p>
-    Developed by Lucy D'Agostino McGowan, <a href="https://jennybryan.org">Jennifer Bryan</a>, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+    Developed by .
+    Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>
 
@@ -459,6 +472,8 @@
 
   
 
+
+  
 
   </body>
 </html>
