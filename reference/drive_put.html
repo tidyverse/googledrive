@@ -198,9 +198,9 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu">drive_put</span><span class="op">(</span><span class="va">local_file</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> No pre-existing Drive file at this path. Calling <span style="color: #262626; background-color: #DADADA;">`drive_upload()`</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Local file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">/tmp/Rtmp8g3ktH/drive_put_34345e1f9909.txt</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">/tmp/RtmpmhZhbI/drive_put_344e56968baa.txt</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uploaded into Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_34345e1f9909.txt</span> <span style="color: #555555;">&lt;id: 1tD6ib19JrY9qfhFxxeaqEe9Xo6ZFDdc-&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_344e56968baa.txt</span> <span style="color: #555555;">&lt;id: 1uDQ6EnbhwHl-ErFYmd6Ho89TI9WmzUIl&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">text/plain</span></span>
 <span class="r-in"></span>
@@ -211,12 +211,12 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu">drive_put</span><span class="op">(</span><span class="va">local_file</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> A Drive file already exists at this path. Calling <span style="color: #262626; background-color: #DADADA;">`drive_update()`</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File updated:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_34345e1f9909.txt</span> <span style="color: #555555;">&lt;id: 1tD6ib19JrY9qfhFxxeaqEe9Xo6ZFDdc-&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_344e56968baa.txt</span> <span style="color: #555555;">&lt;id: 1uDQ6EnbhwHl-ErFYmd6Ho89TI9WmzUIl&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># create a second file at this filepath</span></span>
 <span class="r-in"><span class="va">file2</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_create.html">drive_create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">local_file</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_34345e1f9909.txt</span> <span style="color: #555555;">&lt;id: 13lZzLMRQB_-vnX9USIUwlxSMUbrIYvrM&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_344e56968baa.txt</span> <span style="color: #555555;">&lt;id: 1P1qt1nqtH0KoOC0YQ0gkM3cT1NXLT9Dc&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">text/plain</span></span>
 <span class="r-in"></span>
@@ -224,14 +224,14 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span class="fu">drive_put</span><span class="op">(</span><span class="va">local_file</span><span class="op">)</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Multiple items already exist on Drive at the target filepath.</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> Unclear what <span style="color: #262626; background-color: #DADADA;">`drive_put()`</span> should do. Exiting.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_34345e1f9909.txt</span> <span style="color: #555555;">&lt;id: 13lZzLMRQB_-vnX9USIUwlxSMUbrIYvrM&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_34345e1f9909.txt</span> <span style="color: #555555;">&lt;id: 1tD6ib19JrY9qfhFxxeaqEe9Xo6ZFDdc-&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_344e56968baa.txt</span> <span style="color: #555555;">&lt;id: 1P1qt1nqtH0KoOC0YQ0gkM3cT1NXLT9Dc&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_344e56968baa.txt</span> <span style="color: #555555;">&lt;id: 1uDQ6EnbhwHl-ErFYmd6Ho89TI9WmzUIl&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Clean up</span></span>
 <span class="r-in"><span class="fu"><a href="drive_find.html">drive_find</a></span><span class="op">(</span><span class="st">"drive_put_.+[.]txt"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_34345e1f9909.txt</span> <span style="color: #555555;">&lt;id: 13lZzLMRQB_-vnX9USIUwlxSMUbrIYvrM&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_34345e1f9909.txt</span> <span style="color: #555555;">&lt;id: 1tD6ib19JrY9qfhFxxeaqEe9Xo6ZFDdc-&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_344e56968baa.txt</span> <span style="color: #555555;">&lt;id: 1P1qt1nqtH0KoOC0YQ0gkM3cT1NXLT9Dc&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_344e56968baa.txt</span> <span style="color: #555555;">&lt;id: 1uDQ6EnbhwHl-ErFYmd6Ho89TI9WmzUIl&gt;</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">local_file</span><span class="op">)</span></span>
 </code></pre></div>
     </div>
