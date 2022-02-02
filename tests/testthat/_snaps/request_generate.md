@@ -5,7 +5,9 @@
         token = NULL), class = "gargle_error_bad_params"))
     Output
       <error/gargle_error_bad_params>
-      These parameters are unknown:
-      * 'chicken'
-      * 'bunny'
+      Error in `gargle::request_develop()`:
+      ! These parameters are unknown:
+      x 'chicken'
+      x 'bunny'
+      i API endpoint: 'drive.files.list'
 
