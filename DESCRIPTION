@@ -22,7 +22,7 @@ Depends:
     R (>= 3.3)
 Imports: 
     cli (>= 3.0.0),
-    gargle (>= 1.2.0.9001),
+    gargle (>= 1.2.0.9002),
     glue (>= 1.4.2),
     httr,
     jsonlite,
