@@ -28,13 +28,3 @@
       Parent specified via `path` is invalid:
       x Is neither a folder nor a shared drive.
 
-# drive_create() catches invalid parameters
-
-    Code
-      (expect_error(drive_create("hi", bunny = "foofoo"), class = "gargle_error_bad_params")
-      )
-    Output
-      <error/gargle_error_bad_params>
-      These parameters are unknown:
-      * 'bunny'
-

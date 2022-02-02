@@ -157,17 +157,6 @@ test_that("drive_create() deals with folder-shortcut as path", {
   expect_equal(drive_reveal(out, "parent")$id_parent, target_parent$id)
 })
 
-test_that("drive_create() catches invalid parameters", {
-  skip_if_no_token()
-  skip_if_offline()
-  expect_snapshot(
-    (expect_error(
-      drive_create("hi", bunny = "foofoo"),
-      class = "gargle_error_bad_params"
-    ))
-  )
-})
-
 test_that("drive_create() accepts metadata via ...", {
   skip_if_no_token()
   skip_if_offline()
