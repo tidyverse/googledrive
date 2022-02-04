@@ -156,7 +156,7 @@ has_drive_resource <- function(x) {
 #'
 #' For maximum clarity, get your files into a [`dribble`] (or capture file id)
 #' as early as possible. When specifying via path, it's best to include the
-#' trailing slash when you're targetting a folder. If you want the folder `foo`,
+#' trailing slash when you're targeting a folder. If you want the folder `foo`,
 #' say `foo/`, not `foo`.
 #'
 #' Some functions, such as [drive_cp()], [drive_mkdir()], [drive_mv()], and

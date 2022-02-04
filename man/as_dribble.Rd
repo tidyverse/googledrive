@@ -31,7 +31,7 @@ This is a generic function.
 
 For maximum clarity, get your files into a \code{\link{dribble}} (or capture file id)
 as early as possible. When specifying via path, it's best to include the
-trailing slash when you're targetting a folder. If you want the folder \code{foo},
+trailing slash when you're targeting a folder. If you want the folder \code{foo},
 say \verb{foo/}, not \code{foo}.
 
 Some functions, such as \code{\link[=drive_cp]{drive_cp()}}, \code{\link[=drive_mkdir]{drive_mkdir()}}, \code{\link[=drive_mv]{drive_mv()}}, and
