@@ -11,20 +11,12 @@ template:
     in_header: |
       <script defer data-domain="googledrive.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 
-navbar:
-  components:
-    home: ~
-    news:
-      text: News
-      menu:
-      - text: "Blog posts"
-      - text: "Version 2.0.0"
-        href: https://www.tidyverse.org/blog/2021/07/googledrive-2-0-0/
-      - text: "Version 1.0.0"
-        href: https://www.tidyverse.org/blog/2019/08/googledrive-1-0-0/
-      - text: "------------------"
-      - text: "Change log"
-        href: news/index.html
+news:
+  releases:
+    - text: "Version 2.0.0"
+      href: https://www.tidyverse.org/blog/2021/07/googledrive-2-0-0/
+    - text: "Version 1.0.0"
+      href: https://www.tidyverse.org/blog/2019/08/googledrive-1-0-0/
 
 articles:
   - title: Common tasks
