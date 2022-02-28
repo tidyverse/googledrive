@@ -151,8 +151,10 @@ drive_find(page_size = 5, n_max = 15)
 
 # various ways to specify q search clauses
 # multiple q's
-drive_find(q = "name contains 'TEST'",
-           q = "modifiedTime > '2020-07-21T12:00:00'")
+drive_find(
+  q = "name contains 'TEST'",
+  q = "modifiedTime > '2020-07-21T12:00:00'"
+)
 # vector q
 drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
 

@@ -169,7 +169,6 @@ drive_has_token <- function() {
 #'   drive_oauth_app()
 #'   drive_api_key()
 #' }
-#'
 #' \dontrun{
 #' # bring your own app via JSON downloaded from Google Developers Console
 #' drive_auth_configure(
@@ -259,9 +258,12 @@ local_deauth <- function(env = parent.frame()) {
     drive_bullets(c("i" = "Restoring previous auth state.")),
     envir = env
   )
-  withr::defer({
-    .auth$set_cred(original_cred)
-    .auth$set_auth_active(original_auth_active)
-  }, envir = env)
+  withr::defer(
+    {
+      .auth$set_cred(original_cred)
+      .auth$set_auth_active(original_auth_active)
+    },
+    envir = env
+  )
   drive_deauth()
 }

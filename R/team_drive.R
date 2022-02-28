@@ -61,10 +61,10 @@ team_drive_update <- function(team_drive, ..., verbose = deprecated()) {
 
 #' @export
 #' @rdname deprecated-team-drive-functions
- as_team_drive <- function(x, ...) {
+as_team_drive <- function(x, ...) {
   lifecycle::deprecate_warn("2.0.0", "as_team_drive()", "as_shared_drive()")
   as_shared_drive(x, ...)
- }
+}
 
 #' @export
 #' @rdname deprecated-team-drive-functions

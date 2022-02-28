@@ -72,7 +72,9 @@ as_id.data.frame <- function(x, ...) as_id(validate_dribble(new_dribble(x)))
 
 #' @export
 as_id.character <- function(x, ...) {
-  if (length(x) == 0L) return(new_drive_id())
+  if (length(x) == 0L) {
+    return(new_drive_id())
+  }
   out <- map_chr(x, get_one_id)
   validate_drive_id(new_drive_id(out))
 }
@@ -134,7 +136,9 @@ id_regexp <- "(/d/|/folders/|id=)[^/]+"
 is_drive_url <- function(x) grepl("^http", x) & grepl(id_regexp, x)
 
 get_one_id <- function(x) {
-  if (!grepl("^http|/", x)) return(x)
+  if (!grepl("^http|/", x)) {
+    return(x)
+  }
 
   id_loc <- regexpr(id_regexp, x)
   if (id_loc == -1) {

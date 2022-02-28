@@ -43,7 +43,9 @@ drive_link <- function(file) {
 drive_browse <- function(file = .Last.value) {
   file <- as_dribble(file)
   links <- drive_link(file)
-  if (!interactive() || no_file(file)) return(invisible(links))
+  if (!interactive() || no_file(file)) {
+    return(invisible(links))
+  }
   if (!single_file(file)) {
     drive_bullets(c("v" = "Browsing the first file of {nrow(file)}."))
   }

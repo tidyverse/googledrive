@@ -21,7 +21,7 @@ if (SETUP) {
 
 # ---- tests ----
 test_that("drive_download() won't overwrite existing file", {
-  tmpdir <-  withr::local_tempdir()
+  tmpdir <- withr::local_tempdir()
   precious_filepath <- paste0(nm_("precious"), ".txt")
   write_utf8("I exist and I am special", file.path(tmpdir, precious_filepath))
   expect_snapshot(

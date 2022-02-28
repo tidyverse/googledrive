@@ -50,7 +50,7 @@ test_that("drive_upload() can place file via folder-shortcut", {
   defer_drive_rm(upload_name)
 
   target_parent <- drive_get(nm_("upload-into-me"))
-  shortcut <-  nm_("upload-via-folder-shortcut")
+  shortcut <- nm_("upload-via-folder-shortcut")
 
   uploadee <- drive_upload(
     system.file("DESCRIPTION"),

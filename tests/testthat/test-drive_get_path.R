@@ -13,7 +13,7 @@ test_that("get_last_path_part() works", {
 
   expect_last_part("~/abc/def", "def")
   expect_last_part("~/abc/def/", "def/")
-  expect_last_part("abc/def",  "def")
+  expect_last_part("abc/def", "def")
   expect_last_part("abc/def/", "def/")
 
   expect_last_part("~/abc/def/ghi", "ghi")
@@ -43,7 +43,8 @@ test_that("resolve_paths() works, basic scenarios", {
     drive_resource = list(list(kind = "drive#file", parents = list(list("3"))))
   )
   with_mock(
-    root_id = function() "", {
+    root_id = function() "",
+    {
       out <- resolve_paths(as_dribble(x), ancestors)
     }
   )
@@ -52,7 +53,8 @@ test_that("resolve_paths() works, basic scenarios", {
   # target is a folder
   x$drive_resource <- list(c(dr_folder, parents = list(list("3"))))
   with_mock(
-    root_id = function() "", {
+    root_id = function() "",
+    {
       out <- resolve_paths(as_dribble(x), ancestors)
     }
   )
@@ -64,7 +66,8 @@ test_that("resolve_paths() works, basic scenarios", {
     drive_resource = list(list(kind = "drive#file", parents = list(list("9"))))
   )
   with_mock(
-    root_id = function() "", {
+    root_id = function() "",
+    {
       out <- resolve_paths(as_dribble(x), ancestors)
     }
   )
@@ -83,8 +86,8 @@ test_that("resolve_paths() works, with some name duplication", {
   dr_folder <-
     list(kind = "drive#file", mimeType = "application/vnd.google-apps.folder")
   ancestors <- tibble(
-    name     = c("~", "a", "a", "b", "b", "b", "a"),
-    id       = c("1", "2", "3", "4", "5", "6", "7"),
+    name = c("~", "a", "a", "b", "b", "b", "a"),
+    id = c("1", "2", "3", "4", "5", "6", "7"),
     id_parent = c(NA, "1", "1", "1", "2", "3", "4"),
     drive_resource = list(
       c(dr_folder, parents = list(list())),
@@ -105,7 +108,8 @@ test_that("resolve_paths() works, with some name duplication", {
     )
   )
   with_mock(
-    root_id = function() "", {
+    root_id = function() "",
+    {
       out <- resolve_paths(as_dribble(x), ancestors)
     }
   )

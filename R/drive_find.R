@@ -103,8 +103,10 @@
 #'
 #' # various ways to specify q search clauses
 #' # multiple q's
-#' drive_find(q = "name contains 'TEST'",
-#'            q = "modifiedTime > '2020-07-21T12:00:00'")
+#' drive_find(
+#'   q = "name contains 'TEST'",
+#'   q = "modifiedTime > '2020-07-21T12:00:00'"
+#' )
 #' # vector q
 #' drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
 #'
@@ -149,7 +151,9 @@ drive_find <- function(pattern = NULL,
     shared_drive <- shared_drive %||% team_drive
   }
 
-  if (n_max < 1) return(dribble())
+  if (n_max < 1) {
+    return(dribble())
+  }
 
   params <- toCamel(list2(...))
   params[["fields"]] <- params[["fields"]] %||% "*"
@@ -239,6 +243,8 @@ handle_shared_drives <- function(shared_drive, corpus) {
     )
     corpus <- "allDrives"
   }
-  if (is.null(shared_drive) && is.null(corpus)) return()
+  if (is.null(shared_drive) && is.null(corpus)) {
+    return()
+  }
   shared_drive_params(shared_drive, corpus)
 }

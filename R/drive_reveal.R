@@ -167,7 +167,7 @@ drive_reveal_this <- function(file, this) {
   out <- promote(file, elem_snake_case)
 
   if (is_dttm && is.character(out[[elem_snake_case]])) {
-    out[[elem_snake_case]] <-as.POSIXct(
+    out[[elem_snake_case]] <- as.POSIXct(
       out[[elem_snake_case]],
       format = "%Y-%m-%dT%H:%M:%OSZ",
       tz = "UTC"

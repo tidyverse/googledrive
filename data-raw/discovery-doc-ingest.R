@@ -23,7 +23,7 @@ if (length(existing) < 1) {
 
 dd <- read_discovery_document(x)
 
-methods      <- get_raw_methods(dd)
+methods <- get_raw_methods(dd)
 
 methods <- methods %>% map(groom_properties,  dd)
 methods <- methods %>% map(add_schema_params, dd)

@@ -7,7 +7,7 @@ writeLines <- function(...) {
 }
 
 # https://github.com/gaborcsardi/rencfaq#with-base-r
-read_utf8 <- function (path) {
+read_utf8 <- function(path) {
   opts <- options(encoding = "native.enc")
   withr::defer(options(opts))
   x <- base::readLines(path, encoding = "UTF-8", warn = FALSE)
@@ -44,7 +44,7 @@ nm_fun <- function(context, user_run = TRUE) {
 }
 
 nm_user_run <- function() {
-  if(as.logical(Sys.getenv("GITHUB_ACTIONS", unset = "false"))) {
+  if (as.logical(Sys.getenv("GITHUB_ACTIONS", unset = "false"))) {
     glue("gha-{Sys.getenv('GITHUB_WORKFLOW')}-{Sys.getenv('GITHUB_RUN_ID')}")
   } else {
     random_id <- strsplit(uuid::UUIDgenerate(TRUE), "-")[[1]][[1]]

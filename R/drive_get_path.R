@@ -4,7 +4,9 @@
 
 drive_reveal_path <- function(x, ancestors = c("none", "parents", "all")) {
   stopifnot(inherits(x, "dribble"))
-  if (no_file(x)) return(dribble_with_path())
+  if (no_file(x)) {
+    return(dribble_with_path())
+  }
   ancestors <- ancestors %||% dribble()
 
   if (!inherits(ancestors, "dribble")) {
@@ -48,7 +50,9 @@ sort_out_shared_drive_and_corpus <- function(x) {
 drive_get_path <- function(path = NULL,
                            shared_drive = NULL,
                            corpus = NULL) {
-  if (length(path) == 0) return(dribble_with_path())
+  if (length(path) == 0) {
+    return(dribble_with_path())
+  }
   stopifnot(is_path(path))
   path <- rootize_path(path)
 
@@ -125,7 +129,7 @@ get_immediate_parents <- function(x) {
 resolve_paths <- function(d, folders = dribble()) {
   probands <- pthize(d)
   ancestors <- pthize(folders)
-  raw_paths <- map(probands, ~pth(list(.x), ancestors))
+  raw_paths <- map(probands, ~ pth(list(.x), ancestors))
   pretty_paths <- map_chr(raw_paths, pathify)
   put_column(d, nm = "path", val = pretty_paths, .after = "name")
 }
@@ -146,16 +150,19 @@ pthize <- function(d) {
 
 # turns the output of pth() (a list) into a filepath (a string)
 pathify <- function(x) {
-  x <- map_if(x, ~ .x$id == root_id(), ~ {.x$name <- "~"; .x})
+  x <- map_if(x, ~ .x$id == root_id(), ~ {
+    .x$name <- "~"
+    .x
+  })
 
   last_mime_type <- pluck(last(x), "mime_type")
   last_is_folder <- identical(last_mime_type, drive_mime_type("folder"))
   last_is_folder_shortcut <-
     identical(last_mime_type, drive_mime_type("shortcut")) &&
-    identical(
-      pluck(last(x), "shortcut_details", "targetMimeType"),
-      drive_mime_type("folder")
-    )
+      identical(
+        pluck(last(x), "shortcut_details", "targetMimeType"),
+        drive_mime_type("folder")
+      )
   if (last_is_folder || last_is_folder_shortcut) {
     nm <- pluck(last(x), "name")
     purrr::pluck(x, length(x), "name") <- append_slash(nm)
@@ -216,7 +223,9 @@ finalize <- function(dat, candidates) {
 
   report_weird_stuff <- function(x, indicator, problem) {
     weird <- vec_slice(x, x[["status"]] == indicator)
-    if (vec_size(weird) == 0) return()
+    if (vec_size(weird) == 0) {
+      return()
+    }
     drive_bullets(c(
       "!" = "Problem with {nrow(weird)} path{?s}: {problem}",
       # these really should be sub-bullets, but not possible at this time
@@ -231,7 +240,8 @@ finalize <- function(dat, candidates) {
   if (n_empty_string > 0) {
     drive_bullets(c(
       "!" = "Problem with {n_empty_string} path{?s}: \\
-             path is empty string"))
+             path is empty string"
+    ))
   }
 
   index <- unlist(scratch$m)
@@ -280,7 +290,7 @@ get_by_name <- function(names, shared_drive = NULL, corpus = NULL) {
   } else {
     found <- drive_find(
       q = or(q_clauses),
-      #fields = prep_fields(fields),
+      # fields = prep_fields(fields),
       shared_drive = shared_drive, corpus = corpus
     )
   }
@@ -302,7 +312,7 @@ get_last_path_part <- function(path) {
   # why? googledrive encourages the user to use a trailing slash to explicitly
   # indicate a path that refers to a folder
   slash_pos <- gregexpr(pattern = "/.", path)
-  no_slash <- map_lgl(slash_pos, ~all(.x == -1))
+  no_slash <- map_lgl(slash_pos, ~ all(.x == -1))
   last_slash <- map_int(slash_pos, max)
   ifelse(no_slash, path, substr(path, last_slash + 1, nchar(path)))
 }

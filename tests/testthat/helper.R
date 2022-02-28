@@ -46,9 +46,9 @@ scrub_file_id <- function(message) {
 }
 
 expect_dribble <- function(x) {
-   expect_s3_class(x, "dribble")
+  expect_s3_class(x, "dribble")
 }
 
 expect_bare_tibble <- function(x) {
-   expect_s3_class(x, c("tbl_df", "tbl", "data.frame"), exact = TRUE)
+  expect_s3_class(x, c("tbl_df", "tbl", "data.frame"), exact = TRUE)
 }

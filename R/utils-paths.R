@@ -25,8 +25,8 @@ rationalize_path_name <- function(path = NULL, name = NULL) {
 
 confirm_clear_path <- function(path, name) {
   if (is.null(name) &&
-      !has_slash(path) &&
-      drive_path_exists(append_slash(path))) {
+    !has_slash(path) &&
+    drive_path_exists(append_slash(path))) {
     drive_abort(c(
       "Unclear if {.arg path} specifies parent folder or full path \\
        to the new file, including its name.",
@@ -37,7 +37,9 @@ confirm_clear_path <- function(path, name) {
 
 drive_path_exists <- function(path) {
   stopifnot(is_path(path))
-  if (length(path) == 0) return(logical(0))
+  if (length(path) == 0) {
+    return(logical(0))
+  }
   stopifnot(length(path) == 1)
   with_drive_quiet(
     some_files(drive_get(path = path))
@@ -107,7 +109,9 @@ is_string <- function(x) length(x) == 1L && is_path(x)
 
 # turn '~' into `~/`
 rootize_path <- function(path) {
-  if (length(path) == 0) return(path)
+  if (length(path) == 0) {
+    return(path)
+  }
   stopifnot(is.character(path))
   leading_slash <- startsWith(path, "/")
   if (any(leading_slash)) {
@@ -123,7 +127,9 @@ has_slash <- function(path) {
 
 ## "a/b/" and "a/b" both return "a/b/"
 append_slash <- function(path) {
-  if (length(path) < 1) return(path)
+  if (length(path) < 1) {
+    return(path)
+  }
   ifelse(has_slash(path) | path == "", path, paste0(path, "/"))
 }
 

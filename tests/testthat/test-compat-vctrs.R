@@ -88,7 +88,8 @@ test_that("vec_cast() is working", {
   expect_identical(vec_cast(x, x2), x2_expect)
 
   expect_error(
-    vec_cast(x2, x3), class = "vctrs_error_cast_lossy_dropped"
+    vec_cast(x2, x3),
+    class = "vctrs_error_cast_lossy_dropped"
   )
 
   # dribble-tbl_df

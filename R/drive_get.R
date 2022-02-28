@@ -123,7 +123,9 @@ drive_get <- function(path = NULL,
                       verbose = deprecated(),
                       team_drive = deprecated()) {
   warn_for_verbose(verbose)
-  if (length(path) + length(id) == 0) return(dribble_with_path())
+  if (length(path) + length(id) == 0) {
+    return(dribble_with_path())
+  }
   stopifnot(is.null(path) || is.character(path))
   stopifnot(is.null(id) || is.character(id))
 

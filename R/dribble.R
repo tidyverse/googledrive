@@ -212,10 +212,12 @@ as_dribble.data.frame <- function(x, ...) validate_dribble(new_dribble(x))
 
 #' @export
 as_dribble.list <- function(x, ...) {
-  if (length(x) == 0) return(dribble())
+  if (length(x) == 0) {
+    return(dribble())
+  }
 
   required_nms <- c("name", "id", "kind")
-  stopifnot(map_lgl(x, ~all(required_nms %in% names(.x))))
+  stopifnot(map_lgl(x, ~ all(required_nms %in% names(.x))))
 
   as_dribble(
     tibble(
@@ -248,7 +250,8 @@ as_parent <- function(d) {
   if (is_folder_shortcut(d)) {
     drive_bullets(c(
       i = "Parent specified via {.arg {in_var}} is a shortcut; resolving to \\
-           its target folder"))
+           its target folder"
+    ))
     d <- shortcut_resolve(d)
   }
   if (!is_parental(d)) {

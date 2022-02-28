@@ -41,7 +41,7 @@
 #' drive_mkdir("name-squatter-mkdir", path = ghi, overwrite = TRUE)
 #'
 #' # list everything inside 'ghi'
-#' drive_ls('ghi')
+#' drive_ls("ghi")
 #'
 #' # Clean up
 #' drive_rm(ghi)

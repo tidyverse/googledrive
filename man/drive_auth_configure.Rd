@@ -68,7 +68,6 @@ if (require(httr)) {
   drive_oauth_app()
   drive_api_key()
 }
-
 \dontrun{
 # bring your own app via JSON downloaded from Google Developers Console
 drive_auth_configure(

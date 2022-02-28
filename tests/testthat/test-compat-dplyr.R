@@ -129,7 +129,8 @@ test_that("summarise() always drops the dribble class", {
 
   expect_bare_tibble(dplyr::summarise(x, y = 1))
   expect_bare_tibble(dplyr::summarise(
-    x, name = name[1], id = id[1], drive_resource = drive_resource[1]
+    x,
+    name = name[1], id = id[1], drive_resource = drive_resource[1]
   ))
 })
 
@@ -259,6 +260,6 @@ test_that("nest_join() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
   x <- readRDS(test_file("just_a_dribble.rds"))
 
-  y <- dplyr::mutate(x, foo =  "bar")
+  y <- dplyr::mutate(x, foo = "bar")
   expect_dribble(dplyr::nest_join(x, y, by = names(x)))
 })

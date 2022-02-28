@@ -81,7 +81,8 @@ drive_change_publish <- function(file,
   n <- nrow(file)
   drive_bullets(c(
     cli::pluralize(
-      "{cli::qty(n)}File{?s} now {if (publish) '' else 'NOT '}published:"),
+      "{cli::qty(n)}File{?s} now {if (publish) '' else 'NOT '}published:"
+    ),
     bulletize(gargle_map_cli(file))
   ))
   invisible(drive_reveal(file, "published"))

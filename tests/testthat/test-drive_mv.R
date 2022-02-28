@@ -101,7 +101,7 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
 
   expect_dribble(mv_file)
   expect_identical(nrow(mv_file), 1L)
-  expect_identical(drive_reveal(mv_file, "parent")$id_parent , destination$id)
+  expect_identical(drive_reveal(mv_file, "parent")$id_parent, destination$id)
 })
 
 test_that("drive_mv() can rename and move, using `path` and `name`", {
@@ -170,7 +170,7 @@ test_that("drive_mv() can move using a folder shortcut", {
   mv_file <- drive_upload(system.file("DESCRIPTION"), name)
 
   target_parent <- drive_get(nm_("move-files-into-me"))
-  shortcut <-  nm_("move-to-folder-shortcut")
+  shortcut <- nm_("move-to-folder-shortcut")
 
   # since I'm not specifying name, append slash to make clear that I regard
   # `path` as a parent specification

@@ -9,7 +9,7 @@
 
 #' @export
 vec_restore.dribble <- function(x, to, ...) {
-   dribble_maybe_reconstruct(x)
+  dribble_maybe_reconstruct(x)
 }
 
 # ------------------------------------------------------------------------------

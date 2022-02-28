@@ -25,7 +25,9 @@ shared_drive_find <- function(pattern = NULL,
     drive_abort("{.arg pattern} must be a character string.")
   }
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
-  if (n_max < 1) return(dribble())
+  if (n_max < 1) {
+    return(dribble())
+  }
 
   ## what could possibly come via `...` here? pageSize (or fields)
   params <- toCamel(list2(...))
