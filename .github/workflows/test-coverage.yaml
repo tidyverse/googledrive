@@ -35,5 +35,5 @@ jobs:
           needs: coverage
 
       - name: Test coverage
-        run: covr::codecov()
+        run: covr::codecov(quiet = FALSE)
         shell: Rscript {0}
