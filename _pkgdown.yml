@@ -11,13 +11,6 @@ template:
     in_header: |
       <script defer data-domain="googledrive.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 
-home:
-  strip_header: true
-
-authors:
-  Jennifer Bryan:
-    href: https://jennybryan.org
-
 navbar:
   components:
     home: ~
