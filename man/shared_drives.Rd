@@ -76,8 +76,8 @@ Here is some of the best official Google reading about shared drives:
 \item \href{https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api}{Upcoming changes to the Google Drive API and Google Picker API} from the Google Cloud blog
 \item \url{https://developers.google.com/drive/api/v3/about-shareddrives}
 \item \url{https://developers.google.com/drive/api/v3/shared-drives-diffs}
-\item \href{https://support.google.com/a/users/answer/9310351}{Get started with shared drives} from Google Workspace Learning Center
-\item \href{https://support.google.com/a/users/answer/9310156}{Best practices for shared drives} from Google Workspace Learning Center
+\item Get started with shared drives: \verb{https://support.google.com/a/users/answer/9310351} from Google Workspace Learning Center
+\item Best practices for shared drives: \verb{https://support.google.com/a/users/answer/9310156} from Google Workspace Learning Center
 }
 }
 

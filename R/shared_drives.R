@@ -72,8 +72,8 @@
 #' * [Upcoming changes to the Google Drive API and Google Picker API](https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api) from the Google Cloud blog
 #' * <https://developers.google.com/drive/api/v3/about-shareddrives>
 #' * <https://developers.google.com/drive/api/v3/shared-drives-diffs>
-#' * [Get started with shared drives](https://support.google.com/a/users/answer/9310351) from Google Workspace Learning Center
-#' * [Best practices for shared drives](https://support.google.com/a/users/answer/9310156) from Google Workspace Learning Center
+#' * Get started with shared drives: `https://support.google.com/a/users/answer/9310351` from Google Workspace Learning Center
+#' * Best practices for shared drives: `https://support.google.com/a/users/answer/9310156` from Google Workspace Learning Center
 
 
 #' @section API docs:
