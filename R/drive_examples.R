@@ -147,7 +147,7 @@ check_needle <- function(needle) {
   ))
 }
 
-#' @name googledrive-deprecated
+#' @rdname googledrive-deprecated
 #' @export
 drive_example <- function(path = NULL) {
   if (is.null(path)) {

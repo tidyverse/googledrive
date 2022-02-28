@@ -196,7 +196,7 @@ message <- function(...) {
     instead of {.fun message}")
 }
 
-warn_for_verbose <- function(verbose = TRUE, env = parent.frame()) {
+warn_for_verbose <- function(verbose = TRUE, env = caller_env()) {
   # this is about whether `verbose` was present in the **user's** call to the
   # calling function
   # don't worry about the `verbose = TRUE` default here
