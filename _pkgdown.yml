@@ -1,7 +1,15 @@
 url: https://googledrive.tidyverse.org
 
+development:
+  mode: auto
+
 template:
   package: tidytemplate
+  bootstrap: 5
+
+  includes:
+    in_header: |
+      <script defer data-domain="googledrive.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 
 home:
   strip_header: true
