@@ -1,18 +1,12 @@
 Package: googledrive
 Title: An Interface to Google Drive
 Version: 2.0.0.9000
-Authors@R: 
-    c(person(given = "Lucy",
-             family = "D'Agostino McGowan",
-             role = "aut",
-             email = "ld.mcgowan@vanderbilt.edu"),
-      person(given = "Jennifer",
-             family = "Bryan",
-             role = c("aut", "cre"),
-             email = "jenny@rstudio.com",
-             comment = c(ORCID = "0000-0002-6983-2759")),
-      person(given = "RStudio",
-             role = c("cph", "fnd")))
+Authors@R: c(
+    person("Lucy", "D'Agostino McGowan", , "ld.mcgowan@vanderbilt.edu", role = "aut"),
+    person("Jennifer", "Bryan", , "jenny@rstudio.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-6983-2759")),
+    person("RStudio", role = c("cph", "fnd"))
+  )
 Description: Manage Google Drive files from R.
 License: MIT + file LICENSE
 URL: https://googledrive.tidyverse.org,
@@ -50,6 +44,8 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
+Remotes: 
+    r-lib/gargle
 Config/Needs/website:
     tidyverse,
     tidyverse/tidytemplate
@@ -58,5 +54,3 @@ Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Remotes:  
-    r-lib/gargle
