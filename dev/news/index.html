@@ -114,7 +114,8 @@
 <ul><li><a href="https://cloud.google.com/blog/products/g-suite/simplifying-google-drives-folder-structure-and-sharing-models" class="external-link">Simplifying Google Drive’s folder structure and sharing models</a></li>
 <li><a href="https://developers.google.com/drive/api/v3/ref-single-parent" class="external-link">Single-parenting behavior changes</a></li>
 <li><a href="https://developers.google.com/drive/api/v3/shortcuts" class="external-link">Create a shortcut to a Drive file</a></li>
-<li><a href="https://support.google.com/drive/answer/9700156" class="external-link">Find files &amp; folders with Google Drive shortcuts</a></li>
+<li>Find files &amp; folders with Google Drive shortcuts: <code>https://support.google.com/drive/answer/9700156</code>
+</li>
 </ul></div>
 <div class="section level3">
 <h3 id="user-interface-2-0-0">User interface<a class="anchor" aria-label="anchor" href="#user-interface-2-0-0"></a></h3>
@@ -283,7 +284,7 @@
 </div>
 <div class="section level3">
 <h3 id="other-changes-1-0-0">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-1-0-0"></a></h3>
-<p>All functions that support <code>...</code> as a way to pass more parameters to the Drive API now have “tidy dots semantics”: <code>!!!</code> is supported for splicing and <code>!!</code> can be used on the LHS of <code>:=</code>. Full docs are in <a href="https://rlang.r-lib.org/reference/tidy-dots.html" class="external-link"><code>rlang::list2()</code></a>.</p>
+<p>All functions that support <code>...</code> as a way to pass more parameters to the Drive API now have “tidy dots semantics”: <code>!!!</code> is supported for splicing and <code>!!</code> can be used on the LHS of <code>:=</code>. Full docs are in <a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic dots</a>.</p>
 <p><code><a href="../reference/drive_find.html">drive_find()</a></code> now sorts by “recency”, by default.</p>
 <p><code><a href="../reference/drive_create.html">drive_create()</a></code> is a new function that creates a new empty file, with an optional file type specification (<a href="https://github.com/tidyverse/googledrive/issues/258" class="external-link">#258</a>, <a href="https://github.com/ianmcook" class="external-link">@ianmcook</a>). <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code> becomes a thin wrapper around <code><a href="../reference/drive_create.html">drive_create()</a></code>, with the file type hard-wired to “folder”.</p>
 <p>In <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code>, the optional parent directory is now known as <code>path</code> instead of <code>parent</code>. This is more consistent with everything else in googledrive, which became very obvious when adding <code><a href="../reference/drive_create.html">drive_create()</a></code> and the general <code>overwrite</code> functionality.</p>
