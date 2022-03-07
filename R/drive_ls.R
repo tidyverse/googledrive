@@ -73,7 +73,9 @@ folders_below <- function(id) {
 }
 
 folder_kids_of <- function(id) {
+  shared_drive_id <- drive_get(id)$drive_resource[[1]]$driveId
   drive_find(
+    shared_drive = as_id(shared_drive_id),
     type = "folder",
     q = glue("{sq(id)} in parents"),
     fields = prep_fields(c("kind", "name", "id"))
