@@ -2,7 +2,7 @@
 
     Code
       out <- drive_fields(x, resource = "foo")
-    Message <cliMessage>
+    Message
       ! Currently only fields for the 'files' resource can be checked for validity.
         Nothing done.
 
@@ -10,7 +10,8 @@
 
     Code
       out <- drive_fields(c("name", "parents", "ownedByMe", "pancakes!"))
-    Warning <rlang_warning>
+    Condition
+      Warning:
       Omitting fields that are not recognized as part of the Files resource:
       * 'pancakes!'
 

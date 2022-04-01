@@ -2,22 +2,25 @@
 
     Code
       as_id(mean)
-    Error <rlang_error>
-      Don't know how to coerce an object of class <function> into a <drive_id>.
+    Condition
+      Error in `as_id()`:
+      ! Don't know how to coerce an object of class <function> into a <drive_id>.
 
 ---
 
     Code
       as_id(1.2)
-    Error <rlang_error>
-      Don't know how to coerce an object of class <numeric> into a <drive_id>.
+    Condition
+      Error in `as_id()`:
+      ! Don't know how to coerce an object of class <numeric> into a <drive_id>.
 
 ---
 
     Code
       as_id(1L)
-    Error <rlang_error>
-      Don't know how to coerce an object of class <integer> into a <drive_id>.
+    Condition
+      Error in `as_id()`:
+      ! Don't know how to coerce an object of class <integer> into a <drive_id>.
 
 # drive_id's are formatted OK
 
@@ -104,8 +107,9 @@
 
     Code
       validate_drive_id("")
-    Error <rlang_error>
-      A <drive_id> must match this regular expression: `^[a-zA-Z0-9_-]+$`
+    Condition
+      Error in `validate_drive_id()`:
+      ! A <drive_id> must match this regular expression: `^[a-zA-Z0-9_-]+$`
       Invalid input:
       x '""'
 
@@ -113,8 +117,9 @@
 
     Code
       validate_drive_id("a@&")
-    Error <rlang_error>
-      A <drive_id> must match this regular expression: `^[a-zA-Z0-9_-]+$`
+    Condition
+      Error in `validate_drive_id()`:
+      ! A <drive_id> must match this regular expression: `^[a-zA-Z0-9_-]+$`
       Invalid input:
       x 'a@&'
 
@@ -122,8 +127,9 @@
 
     Code
       x[2] <- ""
-    Error <rlang_error>
-      A <drive_id> must match this regular expression: `^[a-zA-Z0-9_-]+$`
+    Condition
+      Error in `validate_drive_id()`:
+      ! A <drive_id> must match this regular expression: `^[a-zA-Z0-9_-]+$`
       Invalid input:
       x '""'
 
