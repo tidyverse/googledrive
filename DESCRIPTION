@@ -24,7 +24,7 @@ Imports:
     magrittr,
     pillar,
     purrr (>= 0.2.3),
-    rlang (>= 0.4.9),
+    rlang (>= 1.0.2),
     tibble (>= 2.0.0),
     utils,
     uuid,
