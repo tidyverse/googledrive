@@ -68,12 +68,10 @@
     </div>
 
 <div id="contributing-to-googledrive" class="section level1">
-
 <ul><li><a href="#making-a-pull-request">Making a pull request</a></li>
 <li><a href="#package-philosophy">Package philosophy</a></li>
 <li>
-<a href="#package-mechanics">Package mechanics</a>
-<ul><li><a href="#documentation">Documentation</a></li>
+<a href="#package-mechanics">Package mechanics</a><ul><li><a href="#documentation">Documentation</a></li>
 <li><a href="#testing">Testing</a></li>
 <li><a href="#continuous-integration">Continuous integration</a></li>
 </ul></li>
@@ -87,13 +85,11 @@
 <li>Tests: please <em>try</em> to run our tests or at least those that exercise your PR. Add tests, if relevant. If things go sideways, just say so. We are painfully aware that it’s not easy to test API-wrapping, auth-requiring packages like googledrive and are open to constructive feedback. More below.</li>
 <li>Documentation: Update the documentation source, if your PR changes any behavior. We use <a href="https://cran.r-project.org/package=roxygen2" class="external-link">roxygen2</a>, so you must edit the roxygen comments above the function; never edit <code>NAMESPACE</code> or <code>.Rd</code> files by hand. More below.</li>
 <li>Website: The pkgdown-created website is built and deployed automatically via Travis-CI. Some changes require an edit to the <code>reference</code> section of <code>_pkgdown.yml</code>, i.e. to make sure that a function appears there.</li>
-<li>If the PR is related to an issue, link to it in the description, with <a href="https://help.github.com/articles/autolinked-references-and-urls/" class="external-link">the <code>#15</code> syntax</a> and the issue slug for context. If the PR is meant to close an issue, make sure one of the commit messages includes <a href="https://help.github.com/articles/closing-issues-using-keywords/" class="external-link">text like <code>closes #44</code> or <code>fixes #101</code></a>. Provide the issue number and slug in the description, even if the issue is mentioned in the title, because auto-linking does not work in the PR title.
-<ul><li>GOOD PR title: “Obtain user’s intent via mind-reading; fixes #86”.</li>
+<li>If the PR is related to an issue, link to it in the description, with <a href="https://help.github.com/articles/autolinked-references-and-urls/" class="external-link">the <code>#15</code> syntax</a> and the issue slug for context. If the PR is meant to close an issue, make sure one of the commit messages includes <a href="https://help.github.com/articles/closing-issues-using-keywords/" class="external-link">text like <code>closes #44</code> or <code>fixes #101</code></a>. Provide the issue number and slug in the description, even if the issue is mentioned in the title, because auto-linking does not work in the PR title.<ul><li>GOOD PR title: “Obtain user’s intent via mind-reading; fixes #86”.</li>
 <li>BAD PR title: “Fixes #1043”. Please remind us all what issue #1043 is about!</li>
 <li>BAD PR title: “Something about #345”. This will not actually close issue #345 upon merging. <a href="https://help.github.com/articles/closing-issues-using-keywords/" class="external-link">Use the magic words</a>.</li>
 </ul></li>
-<li>Add a bullet to <code>NEWS.md</code> with a concise description of the change, if it’s something a user would want to know when updating the package. <a href="https://github.com/tidyverse/dplyr/blob/main/NEWS.md" class="external-link">dplyr’s <code>NEWS.md</code></a> is a good source of examples. Note the sentence format, the inclusion of GitHub username, and links to relevant issue(s)/PR(s). We will handle any organization into sub-sections just prior to a release. What merits a bullet?
-<ul><li>Fixing a typo in the docs does not, but it is still awesome and deeply appreciated.</li>
+<li>Add a bullet to <code>NEWS.md</code> with a concise description of the change, if it’s something a user would want to know when updating the package. <a href="https://github.com/tidyverse/dplyr/blob/main/NEWS.md" class="external-link">dplyr’s <code>NEWS.md</code></a> is a good source of examples. Note the sentence format, the inclusion of GitHub username, and links to relevant issue(s)/PR(s). We will handle any organization into sub-sections just prior to a release. What merits a bullet?<ul><li>Fixing a typo in the docs does not, but it is still awesome and deeply appreciated.</li>
 <li>Fixing a bug or adding a new feature is bullet-worthy.</li>
 </ul></li>
 </ul></div>
@@ -140,8 +136,7 @@
 <span class="co">## leaves behind:</span>
 <span class="co">##   * all-test-setup.R</span>
 <span class="co">##   * all-test-clean.R</span></code></pre></div>
-<ul><li>This creates two R scripts: <code>tests/testthat/all-test-setup.R</code> and <code>tests/testthat/all-test-clean.R</code>. Inspect them.</li>
-</ul></li>
+<ul><li>This creates two R scripts: <code>tests/testthat/all-test-setup.R</code> and <code>tests/testthat/all-test-clean.R</code>. Inspect them.</li></ul></li>
 <li><p>When you are truly ready to perform setup or clean, edit the code to set the <code>SETUP</code> or <code>CLEAN</code> variable to <code>TRUE</code> instead of <code>FALSE</code>. This friction is intentional, so you don’t accidentally create or delete lots of Drive files without meaning to.</p></li>
 <li><p>Render <code>all-test-setup.R</code> with the Knit button in RStudio or like so:</p></li>
 </ol><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -192,7 +187,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
   </div></footer></body></html>

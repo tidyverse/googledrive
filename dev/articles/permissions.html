@@ -118,7 +118,7 @@
 <span class="co">#&gt; Local file:</span>
 <span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.txt</span></span>
 <span class="co">#&gt; Uploaded into Drive file:</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1h7aDD_zmigDV1AWlL14jtVy5MrLbNr2c&gt;</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1ly5-ImswKgiEuWTJtXssMZv_8zezf4CF&gt;</span></span>
 <span class="co">#&gt; With MIME type:</span>
 <span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">text/plain</span></span>
 
@@ -126,7 +126,7 @@
 <span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 5</span></span>
 <span class="co">#&gt;   name                     shared id       drive_resource permissions_res…</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-perm-article.txt FALSE  1h7aDD_… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-perm-article.txt FALSE  1ly5-Im… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span></code></pre></div>
 <p><code>shared = FALSE</code> indicates that this file is not yet shared with anyone and, for those so inclined, detailed information on permissions can be found in the <code>permissions_resource</code> list-column. Note that the <code>drive_resource</code>, which is always present in a dribble, typically also contains information on permissions. So if you just want to <em>know</em> about permissions, as opposed to modifying them, you can probably consult <code>drive_resource</code>.</p>
 <p>Let’s give a specific person permission to edit this file and a customized message, using the <code>emailAddress</code> and <code>emailMessage</code> parameters.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -149,12 +149,12 @@
 <span class="co">#&gt; <span style="color: #00BBBB;">•</span> role = reader</span>
 <span class="co">#&gt; <span style="color: #00BBBB;">•</span> type = anyone</span>
 <span class="co">#&gt; For file:</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1h7aDD_zmigDV1AWlL14jtVy5MrLbNr2c&gt;</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1ly5-ImswKgiEuWTJtXssMZv_8zezf4CF&gt;</span></span>
 <span class="va">file</span>
 <span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 5</span></span>
 <span class="co">#&gt;   name                     shared id       drive_resource permissions_res…</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-perm-article.txt TRUE   1h7aDD_… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-perm-article.txt TRUE   1ly5-Im… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span></code></pre></div>
 <p>We see that the file is now <code>shared = TRUE</code>.</p>
 <p>Now that we’ve made a few updates to our permissions, the <code>permissions_resource</code> list-column has become more interesting. Here’s how to pull important information out of this and put into a tibble with one row per permission. (<em>Permission handling will become more formalized in future versions of googledrive. See <a href="https://github.com/tidyverse/googledrive/issues/180" class="external-link">the issue</a></em>). We use other packages in the tidyverse now for this data wrangling.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -184,7 +184,7 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span>
 <span class="co">#&gt; File deleted:</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1h7aDD_zmigDV1AWlL14jtVy5MrLbNr2c&gt;</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1ly5-ImswKgiEuWTJtXssMZv_8zezf4CF&gt;</span></span></code></pre></div>
 </div>
   </main>
 </div>
@@ -200,7 +200,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
   </div></footer>
