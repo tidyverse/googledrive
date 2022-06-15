@@ -22,6 +22,7 @@ articles:
   - title: Common tasks
     navbar: ~
     contents:
+    - googledrive
     - articles/file-identification
     - articles/multiple-files
     - articles/permissions
