@@ -95,6 +95,8 @@ depending on whether the Drive file already exists, see <code><a href="drive_put
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>media</dt>
 <dd><p>Character, path to the local file to upload.</p></dd>
+
+
 <dt>path</dt>
 <dd><p>Specifies target destination for the new file on Google
 Drive. Can be an actual path (character), a file id marked with
@@ -106,10 +108,14 @@ best to explicitly indicate if it's a folder by including a trailing
 slash, since it cannot always be worked out from the context of the call.
 By default, the file is created in the current
 user's "My Drive" root folder.</p></dd>
+
+
 <dt>name</dt>
 <dd><p>Character, new file name if not specified as part of
 <code>path</code>. This will force <code>path</code> to be interpreted as a folder, even if it
 is character and lacks a trailing slash. Defaults to the file's local name.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>Character. If <code>type = NULL</code>, a MIME type is automatically
 determined from the file extension, if possible. If the source file is of a
@@ -117,11 +123,15 @@ suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting <code>type</code> to <code>document</code>, <code>spreadsheet</code>, or <code>presentation</code>,
 respectively. All non-<code>NULL</code> values for <code>type</code> are pre-processed with
 <code><a href="drive_mime_type.html">drive_mime_type()</a></code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Named parameters to pass along to the Drive API. Has <a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic dots</a> semantics. You can affect the metadata of the target file by
 specifying properties of the Files resource via <code>...</code>. Read the "Request
 body" section of the Drive API docs for the associated endpoint to learn
 about relevant parameters.</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p>Logical, indicating whether to check for a pre-existing file
 at the targetted "filepath". The quotes around "filepath" refer to the fact
@@ -136,6 +146,8 @@ thrown if two or more pre-existing files are found.</p></li>
 <li><p><code>FALSE</code>: Error if there is any pre-existing file at the filepath.</p></li>
 </ul><p>Note that existence checks, based on filepath, are expensive operations, i.e.
 they require additional API calls.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This logical argument to
 individual googledrive functions is deprecated. To globally suppress
@@ -143,10 +155,13 @@ googledrive messaging, use <code>options(googledrive_quiet = TRUE)</code> (the d
 behaviour is to emit informational messages). To suppress messaging in a
 more limited way, use the helpers <code><a href="googledrive-configuration.html">local_drive_quiet()</a></code> or
 <code><a href="googledrive-configuration.html">with_drive_quiet()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.</p>
+    
+
+<p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -163,7 +178,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Local file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.csv</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uploaded into Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-upload.csv</span> <span style="color: #555555;">&lt;id: 1aOviXBKBTV82E2CMmracETsQdsj70-Gu&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-upload.csv</span> <span style="color: #555555;">&lt;id: 1ly74rnRxo0em-NjdHMYtIAHVAG_YFjqt&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">text/csv</span></span>
 <span class="r-in"></span>
@@ -176,7 +191,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Local file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.csv</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uploaded into Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-sheet-upload</span> <span style="color: #555555;">&lt;id: 1bYnTl2cXilyuFGdplmLZ8NP-TdkKkQKJZm6_mngFu74&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-sheet-upload</span> <span style="color: #555555;">&lt;id: 1mE6jenRxijvNI4vnb5l05UyovCIjEHgRqDeWPrmSebc&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">application/vnd.google-apps.spreadsheet</span></span>
 <span class="r-in"></span>
@@ -186,8 +201,8 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span class="co"># Clean up</span></span>
 <span class="r-in"><span class="fu"><a href="drive_find.html">drive_find</a></span><span class="op">(</span><span class="st">"chicken.*upload"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-sheet-upload</span> <span style="color: #555555;">&lt;id: 1bYnTl2cXilyuFGdplmLZ8NP-TdkKkQKJZm6_mngFu74&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-upload.csv</span> <span style="color: #555555;">&lt;id: 1aOviXBKBTV82E2CMmracETsQdsj70-Gu&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-sheet-upload</span> <span style="color: #555555;">&lt;id: 1mE6jenRxijvNI4vnb5l05UyovCIjEHgRqDeWPrmSebc&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-upload.csv</span> <span style="color: #555555;">&lt;id: 1ly74rnRxo0em-NjdHMYtIAHVAG_YFjqt&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Upload a file and, at the same time, star it</span></span>
 <span class="r-in"><span class="va">chicken</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.jpg"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
@@ -195,7 +210,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Local file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.jpg</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uploaded into Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.jpg</span> <span style="color: #555555;">&lt;id: 1fegc3A9kl3-Ln7z9uj2hfn0lbBhFmi7z&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.jpg</span> <span style="color: #555555;">&lt;id: 14w6uQ4zhGChAKk3qZtjfbHhW2aNi3_rn&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">image/jpeg</span></span>
 <span class="r-in"></span>
@@ -206,13 +221,13 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span class="co"># Clean up</span></span>
 <span class="r-in"><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">chicken</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.jpg</span> <span style="color: #555555;">&lt;id: 1fegc3A9kl3-Ln7z9uj2hfn0lbBhFmi7z&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.jpg</span> <span style="color: #555555;">&lt;id: 14w6uQ4zhGChAKk3qZtjfbHhW2aNi3_rn&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># `overwrite = FALSE` errors if something already exists at target filepath</span></span>
 <span class="r-in"><span class="co"># THIS WILL ERROR!</span></span>
 <span class="r-in"><span class="fu"><a href="drive_create.html">drive_create</a></span><span class="op">(</span><span class="st">"name-squatter-upload"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1UOTMIowu312usg6sVxe-nuVfAJx5sbjM&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1nEBx38s-Yuw7_P6hUotX_4-zYbFqS7Zr&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">application/octet-stream</span></span>
 <span class="r-in"><span class="fu"><a href="drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.jpg"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
@@ -222,7 +237,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in">  <span class="op">)</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_for_overwrite(params[["parents"]], params[["name"]], overwrite):</span> 1 item already exists at the target filepath and `overwrite =</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> FALSE`:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1UOTMIowu312usg6sVxe-nuVfAJx5sbjM&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1nEBx38s-Yuw7_P6hUotX_4-zYbFqS7Zr&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># `overwrite = TRUE` moves the existing item to trash, then proceeds</span></span>
 <span class="r-in"><span class="va">chicken</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.jpg"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
@@ -231,18 +246,18 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in">    overwrite <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span class="r-in">  <span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1UOTMIowu312usg6sVxe-nuVfAJx5sbjM&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1nEBx38s-Yuw7_P6hUotX_4-zYbFqS7Zr&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Local file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.jpg</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uploaded into Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1chRjdHF_Ji3g9P_WS_mGe6Jo-OOP8ulp&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1NiFoB6sTWevFqiNnYd1-br5fBx-N-gPc&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">image/jpeg</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Clean up</span></span>
 <span class="r-in"><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">chicken</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1chRjdHF_Ji3g9P_WS_mGe6Jo-OOP8ulp&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1NiFoB6sTWevFqiNnYd1-br5fBx-N-gPc&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="co"># Upload to a shared drive:</span></span>
@@ -266,7 +281,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

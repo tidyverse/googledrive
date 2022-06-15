@@ -89,13 +89,19 @@ depending on whether the Drive file already exists, see <code><a href="drive_put
 <dd><p>Something that identifies the file of interest on your Google
 Drive. Can be a name or path, a file id or URL marked with <code><a href="drive_id.html">as_id()</a></code>, or a
 <code><a href="dribble.html">dribble</a></code>.</p></dd>
+
+
 <dt>media</dt>
 <dd><p>Character, path to the local file to upload.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Named parameters to pass along to the Drive API. Has <a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic dots</a> semantics. You can affect the metadata of the target file by
 specifying properties of the Files resource via <code>...</code>. Read the "Request
 body" section of the Drive API docs for the associated endpoint to learn
 about relevant parameters.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This logical argument to
 individual googledrive functions is deprecated. To globally suppress
@@ -103,10 +109,13 @@ googledrive messaging, use <code>options(googledrive_quiet = TRUE)</code> (the d
 behaviour is to emit informational messages). To suppress messaging in a
 more limited way, use the helpers <code><a href="googledrive-configuration.html">local_drive_quiet()</a></code> or
 <code><a href="googledrive-configuration.html">with_drive_quiet()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.</p>
+    
+
+<p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -123,13 +132,13 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.csv</span> <span style="color: #555555;">&lt;id: 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Copy of chicken.csv</span> <span style="color: #555555;">&lt;id: 1oRkH3tkM-_pL4DKmCw18RvlLOzb5llxC&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Copy of chicken.csv</span> <span style="color: #555555;">&lt;id: 1VRbx4xoXw3CknIYu552q_7QNwgQg25-e&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Update the file with new media</span></span>
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">drive_update</span><span class="op">(</span><span class="fu"><a href="drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File updated:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Copy of chicken.csv</span> <span style="color: #555555;">&lt;id: 1oRkH3tkM-_pL4DKmCw18RvlLOzb5llxC&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Copy of chicken.csv</span> <span style="color: #555555;">&lt;id: 1VRbx4xoXw3CknIYu552q_7QNwgQg25-e&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Update the file with new metadata.</span></span>
 <span class="r-in"><span class="co"># Notice here `name` is not an argument of `drive_update()`, we are passing</span></span>
@@ -137,7 +146,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">drive_update</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"CHICKENS!"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File updated:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> '<span style="color: #00BBBB;">CHICKENS!</span>' <span style="color: #555555;">&lt;id: 1oRkH3tkM-_pL4DKmCw18RvlLOzb5llxC&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> '<span style="color: #00BBBB;">CHICKENS!</span>' <span style="color: #555555;">&lt;id: 1VRbx4xoXw3CknIYu552q_7QNwgQg25-e&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Update the file with new media AND new metadata</span></span>
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
@@ -146,12 +155,12 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in">    name <span class="op">=</span> <span class="st">"chicken-poem-again.txt"</span></span>
 <span class="r-in">  <span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File updated:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-poem-again.txt</span> <span style="color: #555555;">&lt;id: 1oRkH3tkM-_pL4DKmCw18RvlLOzb5llxC&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-poem-again.txt</span> <span style="color: #555555;">&lt;id: 1VRbx4xoXw3CknIYu552q_7QNwgQg25-e&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Clean up</span></span>
 <span class="r-in"><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-poem-again.txt</span> <span style="color: #555555;">&lt;id: 1oRkH3tkM-_pL4DKmCw18RvlLOzb5llxC&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-poem-again.txt</span> <span style="color: #555555;">&lt;id: 1VRbx4xoXw3CknIYu552q_7QNwgQg25-e&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -165,7 +174,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

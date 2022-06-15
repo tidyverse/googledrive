@@ -104,22 +104,30 @@ special cases:</p><ul><li><p>Creating a folder? Use <code><a href="drive_mkdir.h
     <dl><dt>name</dt>
 <dd><p>Name for the new file or, optionally, a path that specifies
 an existing parent folder, as well as the new file name.</p></dd>
+
+
 <dt>path</dt>
 <dd><p>Target destination for the new item, i.e. a folder or a
 shared drive. Can be given as an actual path (character), a file id or URL
 marked with <code><a href="drive_id.html">as_id()</a></code>, or a <code><a href="dribble.html">dribble</a></code>. Defaults to your "My Drive" root
 folder. If <code>path</code> is a shortcut to a folder, it is automatically resolved
 to its target folder.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>Character. Create a blank Google Doc, Sheet or Slides by
 setting <code>type</code> to <code>document</code>, <code>spreadsheet</code>, or <code>presentation</code>,
 respectively. All non-<code>NULL</code> values for <code>type</code> are pre-processed with
 <code><a href="drive_mime_type.html">drive_mime_type()</a></code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Named parameters to pass along to the Drive API. Has <a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic dots</a> semantics. You can affect the metadata of the target file by
 specifying properties of the Files resource via <code>...</code>. Read the "Request
 body" section of the Drive API docs for the associated endpoint to learn
 about relevant parameters.</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p>Logical, indicating whether to check for a pre-existing file
 at the targetted "filepath". The quotes around "filepath" refer to the fact
@@ -134,6 +142,8 @@ thrown if two or more pre-existing files are found.</p></li>
 <li><p><code>FALSE</code>: Error if there is any pre-existing file at the filepath.</p></li>
 </ul><p>Note that existence checks, based on filepath, are expensive operations, i.e.
 they require additional API calls.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This logical argument to
 individual googledrive functions is deprecated. To globally suppress
@@ -141,10 +151,13 @@ googledrive messaging, use <code>options(googledrive_quiet = TRUE)</code> (the d
 behaviour is to emit informational messages). To suppress messaging in a
 more limited way, use the helpers <code><a href="googledrive-configuration.html">local_drive_quiet()</a></code> or
 <code><a href="googledrive-configuration.html">with_drive_quiet()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.</p>
+    
+
+<p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -158,7 +171,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span class="co"># your 'My Drive' root folder and star it</span></span>
 <span class="r-in"><span class="va">wordstar</span> <span class="op">&lt;-</span> <span class="fu">drive_create</span><span class="op">(</span><span class="st">"WordStar"</span>, type <span class="op">=</span> <span class="st">"document"</span>, starred <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">WordStar</span> <span style="color: #555555;">&lt;id: 1aEzXTgxTELp5kVfPgY8sZ3mTmOAh32YZJ0qvd901m2E&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">WordStar</span> <span style="color: #555555;">&lt;id: 1Nx6Sjl3-4gI15isNy6uTSDzoJavkOD220slXp-wh5TA&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">application/vnd.google-apps.document</span></span>
 <span class="r-in"></span>
@@ -174,7 +187,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in">  description <span class="op">=</span> <span class="st">"deeply nested bullet lists FTW"</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">ExecuVision</span> <span style="color: #555555;">&lt;id: 1sXPPgHCrS-Y1W7RmfZoz5nFNvqMVCStZXjhCUXD7KmQ&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">ExecuVision</span> <span style="color: #555555;">&lt;id: 1QROrb_EIFEhcv7Ld_G6U-T4T-QpekofxYUJTxp7yYg4&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">application/vnd.google-apps.presentation</span></span>
 <span class="r-in"></span>
@@ -197,7 +210,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span class="co"># Another way to create a Google Sheet in the folder 'b4xl'</span></span>
 <span class="r-in"><span class="fu">drive_create</span><span class="op">(</span><span class="st">"b4xl/SuperCalc"</span>, type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">SuperCalc</span> <span style="color: #555555;">&lt;id: 1H8EagpruvXsXfWUSLQncZztoe5v9UfkK8rUVHx8CLJY&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">SuperCalc</span> <span style="color: #555555;">&lt;id: 1YMFQZYXeBji9BONdLtWIc5L93ouooYGfd0giHENU95I&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">application/vnd.google-apps.spreadsheet</span></span>
 <span class="r-in"></span>
@@ -205,26 +218,26 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span class="co"># this time specifying parent `path` as a character</span></span>
 <span class="r-in"><span class="fu">drive_create</span><span class="op">(</span><span class="st">"Lotus 1-2-3"</span>, path <span class="op">=</span> <span class="st">"b4xl"</span>, type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 1Uv8q72VvGVsd8L5vRyXGVWb6ACexVjgiye22xC-Jfy0&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 1nlY_SRbsRIU6EmfEnUxzOWJWHf83H5TnczNYx-eSjFw&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">application/vnd.google-apps.spreadsheet</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Did we really create those Sheets in the intended folder? YES</span></span>
 <span class="r-in"><span class="fu"><a href="drive_ls.html">drive_ls</a></span><span class="op">(</span><span class="st">"b4xl"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 79 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 85 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name        id                                           drive_resource</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Lotus 1-2-3 1Uv8q72VvGVsd8L5vRyXGVWb6ACexVjgiye22xC-Jfy0 &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> SuperCalc   1H8EagpruvXsXfWUSLQncZztoe5v9UfkK8rUVHx8CLJY &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3 1D1Z4Lrg5IhbqIyUyynaXmNti5KqVQBGJcG-UW-wAO10 &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc   1HxVRnj8OfYiAayG8qGzO_bN1V2X3ALdNBiR4rkc1lRA &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Lotus 1-2-3 1gE83Ti33J4l6BExW7c3sK2LTd8KxxPbpOyknzCm-R0Y &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> SuperCalc   1JF5o9QvvYIh80fFE5nQvpQyUTz3UIrdnQ2tvKo-zgXA &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Lotus 1-2-3 1nhAXos6Pab1uizmosIUM0SjmDtw3L9HNnWso8Hs6fvM &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SuperCalc   1u7dY_hwU5vpxuIOtqsdqbjslMIgINQjx0WQZllTJT3I &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Lotus 1-2-3 1rMfGIFMou7ziakc9AMJCdAeaGFxkQWhckmgvPId-mbY &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> SuperCalc   1i_6d80sie9Hz_FSEyuHY1BHHY_MSImZ2DrkMGmP4nrg &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 69 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Lotus 1-2-3 1nlY_SRbsRIU6EmfEnUxzOWJWHf83H5TnczNYx-eSjFw &lt;named list&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> SuperCalc   1YMFQZYXeBji9BONdLtWIc5L93ouooYGfd0giHENU95I &lt;named list&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3 1TVS5FZsfCx7kwG4E7L1W3JbLTZp5Ns-EHnaqwuc2ojA &lt;named list&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc   1ct41k2q3-l0dtAaYnpY1zA8FQ_H4HkSAT1EO0-_jMqs &lt;named list&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Lotus 1-2-3 1BlXD28hp1LfRYL3zAV8uV1nTWm09OhBgBhY8tdcomC8 &lt;named list&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> SuperCalc   1djlsISh2IlhBYzrTt3tnzFfNdr6RLi8udGTIpXB_LUA &lt;named list&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Lotus 1-2-3 1Uv8q72VvGVsd8L5vRyXGVWb6ACexVjgiye22xC-Jfy0 &lt;named list&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SuperCalc   1H8EagpruvXsXfWUSLQncZztoe5v9UfkK8rUVHx8CLJY &lt;named list&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Lotus 1-2-3 1D1Z4Lrg5IhbqIyUyynaXmNti5KqVQBGJcG-UW-wAO10 &lt;named list&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> SuperCalc   1HxVRnj8OfYiAayG8qGzO_bN1V2X3ALdNBiR4rkc1lRA &lt;named list&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 75 more rows</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># `overwrite = FALSE` errors if file already exists at target filepath</span></span>
 <span class="r-in"><span class="co"># THIS WILL ERROR!</span></span>
@@ -251,7 +264,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

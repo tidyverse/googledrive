@@ -116,18 +116,26 @@ includes a <code>local_path</code> column.</p>
 <dd><p>Something that identifies the file of interest on your Google
 Drive. Can be a name or path, a file id or URL marked with <code><a href="drive_id.html">as_id()</a></code>, or a
 <code><a href="dribble.html">dribble</a></code>.</p></dd>
+
+
 <dt>path</dt>
 <dd><p>Character. Path for output file. If absent, the default file name
 is the file's name on Google Drive and the default location is working
 directory, possibly with an added file extension.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>Character. Only consulted if <code>file</code> is a native Google file.
 Specifies the desired type of the exported file. Will be processed via
 <code><a href="drive_mime_type.html">drive_mime_type()</a></code>, so either a file extension like <code>"pdf"</code> or a full MIME
 type like <code>"application/pdf"</code> is acceptable.</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p>A logical scalar. If local <code>path</code> already exists, do you
 want to overwrite it?</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This logical argument to
 individual googledrive functions is deprecated. To globally suppress
@@ -135,10 +143,13 @@ googledrive messaging, use <code>options(googledrive_quiet = TRUE)</code> (the d
 behaviour is to emit informational messages). To suppress messaging in a
 more limited way, use the helpers <code><a href="googledrive-configuration.html">local_drive_quiet()</a></code> or
 <code><a href="googledrive-configuration.html">with_drive_quiet()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.</p>
+    
+
+<p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -195,7 +206,7 @@ Drive API documentation.</p></div>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

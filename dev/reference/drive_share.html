@@ -103,6 +103,8 @@ read, comment, or edit. The returned <code><a href="dribble.html">dribble</a></c
 <dd><p>Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
 ids or URLs marked with <code><a href="drive_id.html">as_id()</a></code>, or a <code><a href="dribble.html">dribble</a></code>.</p></dd>
+
+
 <dt>role</dt>
 <dd><p>Character. The role to grant. Must be one of:</p><ul><li><p>owner (not allowed in shared drives)</p></li>
 <li><p>organizer (applies to shared drives)</p></li>
@@ -111,17 +113,23 @@ ids or URLs marked with <code><a href="drive_id.html">as_id()</a></code>, or a <
 <li><p>commenter</p></li>
 <li><p>reader</p></li>
 </ul></dd>
+
+
 <dt>type</dt>
 <dd><p>Character. Describes the grantee. Must be one of:</p><ul><li><p>user</p></li>
 <li><p>group</p></li>
 <li><p>domain</p></li>
 <li><p>anyone</p></li>
 </ul></dd>
+
+
 <dt>...</dt>
 <dd><p>Name-value pairs to add to the API request. This is where you
 provide additional information, such as the <code>emailAddress</code> (when grantee
 <code>type</code> is <code>"group"</code> or <code>"user"</code>) or the <code>domain</code> (when grantee type is
 <code>"domain"</code>). Read the API docs linked below for more details.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This logical argument to
 individual googledrive functions is deprecated. To globally suppress
@@ -129,10 +137,13 @@ googledrive messaging, use <code>options(googledrive_quiet = TRUE)</code> (the d
 behaviour is to emit informational messages). To suppress messaging in a
 more limited way, use the helpers <code><a href="googledrive-configuration.html">local_drive_quiet()</a></code> or
 <code><a href="googledrive-configuration.html">with_drive_quiet()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.
+    
+
+<p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.
 There will be extra columns, <code>shared</code> and
 <code>permissions_resource</code>.</p>
     </div>
@@ -151,7 +162,7 @@ There will be extra columns, <code>shared</code> and
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken_doc</span> <span style="color: #555555;">&lt;id: 1X9pd4nOjl33zDFfTjw-_eFL7Qb9_g6VfVFDp1PPae94&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1jsogKDFaFzjxEZ0JcY5kzZu-JdSBhvEhLmKFSRJeS0M&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1PzzqhdLRPgzzjRuFPltAVKY2OslTmwva2TyfVS_SG9U&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Let a specific person comment</span></span>
 <span class="r-in"><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
@@ -164,7 +175,7 @@ There will be extra columns, <code>shared</code> and
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> role = commenter</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> type = user</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> For file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1jsogKDFaFzjxEZ0JcY5kzZu-JdSBhvEhLmKFSRJeS0M&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1PzzqhdLRPgzzjRuFPltAVKY2OslTmwva2TyfVS_SG9U&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Let a different specific person edit and customize the email notification</span></span>
 <span class="r-in"><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
@@ -178,7 +189,7 @@ There will be extra columns, <code>shared</code> and
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> role = writer</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> type = user</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> For file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1jsogKDFaFzjxEZ0JcY5kzZu-JdSBhvEhLmKFSRJeS0M&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1PzzqhdLRPgzzjRuFPltAVKY2OslTmwva2TyfVS_SG9U&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Let anyone read the file</span></span>
 <span class="r-in"><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
@@ -187,19 +198,19 @@ There will be extra columns, <code>shared</code> and
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> role = reader</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> type = anyone</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> For file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1jsogKDFaFzjxEZ0JcY5kzZu-JdSBhvEhLmKFSRJeS0M&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1PzzqhdLRPgzzjRuFPltAVKY2OslTmwva2TyfVS_SG9U&gt;</span></span>
 <span class="r-in"><span class="co"># Single-purpose wrapper function for this</span></span>
 <span class="r-in"><span class="fu">drive_share_anyone</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Permissions updated:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> role = reader</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> type = anyone</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> For file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1jsogKDFaFzjxEZ0JcY5kzZu-JdSBhvEhLmKFSRJeS0M&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1PzzqhdLRPgzzjRuFPltAVKY2OslTmwva2TyfVS_SG9U&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Clean up</span></span>
 <span class="r-in"><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1jsogKDFaFzjxEZ0JcY5kzZu-JdSBhvEhLmKFSRJeS0M&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken-share.txt</span> <span style="color: #555555;">&lt;id: 1PzzqhdLRPgzzjRuFPltAVKY2OslTmwva2TyfVS_SG9U&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -213,7 +224,7 @@ There will be extra columns, <code>shared</code> and
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>
