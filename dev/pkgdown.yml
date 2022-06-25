@@ -1,5 +1,5 @@
 pandoc: 2.14.2
-pkgdown: 2.0.4
+pkgdown: 2.0.5
 pkgdown_sha: ~
 articles:
   bring-your-own-app: bring-your-own-app.html
@@ -9,7 +9,7 @@ articles:
   multiple-files: multiple-files.html
   permissions: permissions.html
   googledrive: googledrive.html
-last_built: 2022-06-24T13:56Z
+last_built: 2022-06-25T13:43Z
 urls:
   reference: https://googledrive.tidyverse.org/reference
   article: https://googledrive.tidyverse.org/articles

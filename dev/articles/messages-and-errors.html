@@ -255,11 +255,11 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
 <span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
-<span class="co">#&gt; [1] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 1_a1VbpMi5ViSQkGuTVg5oqigQ-clbg6evI2kzgQVemI&gt;')}"</span>
-<span class="co">#&gt; [2] "{.drivepath SuperCalc} {cli::col_grey('&lt;id: 1yfkXHHQ8zujl8U4EiN65s7KQCB7biUhtidY5ZWEYKxU&gt;')}"  </span>
-<span class="co">#&gt; [3] "{.drivepath ExecuVision} {cli::col_grey('&lt;id: 1p3T7j78urqfcMabADC5Cs9EsMvAixpS-o5sbY6BA2q4&gt;')}"</span>
-<span class="co">#&gt; [4] "{.drivepath WordStar} {cli::col_grey('&lt;id: 1PWCzGkkcboKeGWslW3pd8LEWxHV2KKttGV_1owsKUWU&gt;')}"   </span>
-<span class="co">#&gt; [5] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 1DlMteiW7lG3yoDRcxipSMrAL2sKKfeU1XL7JzdCO_b8&gt;')}"</span></code></pre></div>
+<span class="co">#&gt; [1] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 1ejszp7yr4fGAsVgOyItqwCRdVZHCe4zS_YmhMkC-8hE&gt;')}"</span>
+<span class="co">#&gt; [2] "{.drivepath SuperCalc} {cli::col_grey('&lt;id: 1vX7bC4zSZ43_eRy9Cd0-Wmy1F6U0o3Nq3nw1NYC_y4s&gt;')}"  </span>
+<span class="co">#&gt; [3] "{.drivepath ExecuVision} {cli::col_grey('&lt;id: 15jqznOwPMdftLuOOPkQzh-IMeBDl6ywO_FiT6vMSTOs&gt;')}"</span>
+<span class="co">#&gt; [4] "{.drivepath WordStar} {cli::col_grey('&lt;id: 1GhKCVIhP3J6iXb9abdg1DSQG7cDvmw2_LsCiR8WV_A8&gt;')}"   </span>
+<span class="co">#&gt; [5] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 1_a1VbpMi5ViSQkGuTVg5oqigQ-clbg6evI2kzgQVemI&gt;')}"</span></code></pre></div>
 <p><code>gargle_map_cli.dribble()</code> also allows a custom template, but it’s a more complicated and less common situation than for <code>character</code>. We won’t get into that here. (I don’t consider the dribble styling to be finalized yet.)</p>
 <p>The result of <code>gargle_map_cli()</code> then gets processed with <code><a href="https://gargle.r-lib.org/reference/bulletize.html" class="external-link">gargle::bulletize()</a></code>, which adds the bullet-specifying names and does aesthetically pleasing truncation.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -292,11 +292,11 @@
   <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Some Drive files:</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 1ejszp7yr4fGAsVgOyItqwCRdVZHCe4zS_YmhMkC-8hE&gt;</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">SuperCalc</span> <span style="color: #555555;">&lt;id: 1vX7bC4zSZ43_eRy9Cd0-Wmy1F6U0o3Nq3nw1NYC_y4s&gt;</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">ExecuVision</span> <span style="color: #555555;">&lt;id: 15jqznOwPMdftLuOOPkQzh-IMeBDl6ywO_FiT6vMSTOs&gt;</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">WordStar</span> <span style="color: #555555;">&lt;id: 1GhKCVIhP3J6iXb9abdg1DSQG7cDvmw2_LsCiR8WV_A8&gt;</span></span>
 <span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 1_a1VbpMi5ViSQkGuTVg5oqigQ-clbg6evI2kzgQVemI&gt;</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">SuperCalc</span> <span style="color: #555555;">&lt;id: 1yfkXHHQ8zujl8U4EiN65s7KQCB7biUhtidY5ZWEYKxU&gt;</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">ExecuVision</span> <span style="color: #555555;">&lt;id: 1p3T7j78urqfcMabADC5Cs9EsMvAixpS-o5sbY6BA2q4&gt;</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">WordStar</span> <span style="color: #555555;">&lt;id: 1PWCzGkkcboKeGWslW3pd8LEWxHV2KKttGV_1owsKUWU&gt;</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 1DlMteiW7lG3yoDRcxipSMrAL2sKKfeU1XL7JzdCO_b8&gt;</span></span>
 <span class="co">#&gt;   … and 5 more</span></code></pre></div>
 <p>It’s conceivable that cli will gain a better way of vectorization, but this works for now.</p>
 <p>Known dysfunction: it’s inefficient to <code>gargle_map_cli()</code> over the whole object, then truncate with <code>bulletize()</code>. But it’s easy. There are contexts, like tibble printing, where formatting stuff that will never see the light of day is really punishing. But I’m not sure I really have to worry about that.</p>
@@ -324,7 +324,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
   </div></footer>
