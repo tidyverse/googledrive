@@ -77,7 +77,7 @@ opening the file in a relevant Google editor or viewer in a browser".</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">drive_link</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">drive_link</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -97,14 +97,14 @@ ids or URLs marked with <code><a href="drive_id.html">as_id()</a></code>, or a <
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># get a few files into a dribble</span></span>
-<span class="r-in"><span class="va">three_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># get their browser links</span></span>
-<span class="r-in"><span class="fu">drive_link</span><span class="op">(</span><span class="va">three_files</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://drive.google.com/file/d/1BdhH2LgTHGPRmt30t0TiucV2_AE8sVnF/view?usp=drivesdk"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "https://docs.google.com/spreadsheets/d/1hUQPskKjOHBdzm7IUnrtf9Pw8mS_VqrzEXPtpByRTpw/edit?usp=drivesdk"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "https://docs.google.com/spreadsheets/d/1OJRDr5aO-M6jV-FvLZY4ZQsWE2UBF8ZrkjVezKPb1Ws/edit?usp=drivesdk"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># get a few files into a dribble</span></span></span>
+<span class="r-in"><span><span class="va">three_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># get their browser links</span></span></span>
+<span class="r-in"><span><span class="fu">drive_link</span><span class="op">(</span><span class="va">three_files</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://docs.google.com/spreadsheets/d/1OttI1HUP2FCNSZlj4Pw7SxeAbkAj_uhtsjO8XzjrKjg/edit?usp=drivesdk"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "https://docs.google.com/spreadsheets/d/1ZlrCr3Q19Fu7D9wLEPmBVy3M9Y05R477crgw1r_NFtE/edit?usp=drivesdk"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "https://docs.google.com/presentation/d/1u2jYXfHIuSCryHBFiZOXmZT501YjObd8zKxGg29ErDg/edit?usp=drivesdk"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

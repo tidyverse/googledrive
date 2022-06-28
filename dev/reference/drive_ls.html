@@ -80,7 +80,7 @@ search is limited to direct or indirect children of <code>path</code>.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">drive_ls</span><span class="op">(</span>path <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, recursive <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">drive_ls</span><span class="op">(</span>path <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, recursive <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -112,20 +112,20 @@ indirect (<code>recursive = TRUE</code>).</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># get contents of the folder 'abc' (non-recursive)</span></span>
-<span class="r-in"><span class="fu">drive_ls</span><span class="op">(</span><span class="st">"abc"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># get contents of folder 'abc' whose names contain the letters 'def'</span></span>
-<span class="r-in"><span class="fu">drive_ls</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"abc"</span>, pattern <span class="op">=</span> <span class="st">"def"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># get all Google spreadsheets in folder 'abc'</span></span>
-<span class="r-in"><span class="co"># whose names contain the letters 'def'</span></span>
-<span class="r-in"><span class="fu">drive_ls</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"abc"</span>, pattern <span class="op">=</span> <span class="st">"def"</span>, type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># get all the files below 'abc', recursively, that are starred</span></span>
-<span class="r-in"><span class="fu">drive_ls</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"abc"</span>, q <span class="op">=</span> <span class="st">"starred = true"</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># get contents of the folder 'abc' (non-recursive)</span></span></span>
+<span class="r-in"><span><span class="fu">drive_ls</span><span class="op">(</span><span class="st">"abc"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># get contents of folder 'abc' whose names contain the letters 'def'</span></span></span>
+<span class="r-in"><span><span class="fu">drive_ls</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"abc"</span>, pattern <span class="op">=</span> <span class="st">"def"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># get all Google spreadsheets in folder 'abc'</span></span></span>
+<span class="r-in"><span><span class="co"># whose names contain the letters 'def'</span></span></span>
+<span class="r-in"><span><span class="fu">drive_ls</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"abc"</span>, pattern <span class="op">=</span> <span class="st">"def"</span>, type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># get all the files below 'abc', recursively, that are starred</span></span></span>
+<span class="r-in"><span><span class="fu">drive_ls</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"abc"</span>, q <span class="op">=</span> <span class="st">"starred = true"</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

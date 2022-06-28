@@ -103,7 +103,7 @@ for a file. Three types of input are acceptable:</p><ul><li><p>Native Google Dri
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">drive_mime_type</span><span class="op">(</span>type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">drive_mime_type</span><span class="op">(</span>type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -124,22 +124,22 @@ Drive API.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## get the mime type for Google Spreadsheets</span></span>
-<span class="r-in"><span class="fu">drive_mime_type</span><span class="op">(</span><span class="st">"spreadsheet"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## get the mime type for Google Spreadsheets</span></span></span>
+<span class="r-in"><span><span class="fu">drive_mime_type</span><span class="op">(</span><span class="st">"spreadsheet"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/vnd.google-apps.spreadsheet"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## get the mime type for jpegs</span></span>
-<span class="r-in"><span class="fu">drive_mime_type</span><span class="op">(</span><span class="st">"jpeg"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## get the mime type for jpegs</span></span></span>
+<span class="r-in"><span><span class="fu">drive_mime_type</span><span class="op">(</span><span class="st">"jpeg"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "image/jpeg"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## it's vectorized</span></span>
-<span class="r-in"><span class="fu">drive_mime_type</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"presentation"</span>, <span class="st">"pdf"</span>, <span class="st">"image/gif"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## it's vectorized</span></span></span>
+<span class="r-in"><span><span class="fu">drive_mime_type</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"presentation"</span>, <span class="st">"pdf"</span>, <span class="st">"image/gif"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/vnd.google-apps.presentation"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] "application/pdf"                         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] "image/gif"                               </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## see the internal tibble of MIME types known to the Drive API</span></span>
-<span class="r-in"><span class="fu">drive_mime_type</span><span class="op">(</span><span class="fu"><a href="expose.html">expose</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## see the internal tibble of MIME types known to the Drive API</span></span></span>
+<span class="r-in"><span><span class="fu">drive_mime_type</span><span class="op">(</span><span class="fu"><a href="expose.html">expose</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 78 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    mime_type                          ext   description human_type default</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>

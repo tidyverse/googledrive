@@ -108,7 +108,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span></span></code></pre></div>
 <p><em>Things I do in a hidden chunk here, to aid exposition about internal tooling:</em></p>
 <ul>
 <li><em>“Export” the internal helpers covered below</em></li>
@@ -120,24 +120,24 @@
 <p>Everything should be emitted by helpers in <code>utils-ui.R</code>: specifically, <code>drive_bullets()</code> (and, for errors, <code>drive_abort()</code>). These helpers are all wrappers around cli functions, such as <code><a href="https://cli.r-lib.org/reference/cli_bullets.html" class="external-link">cli::cli_bullets()</a></code>.</p>
 <p><em>These may not demo well via pkgdown, but the interactive experience is nice.</em></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-        <span class="st">"noindent"</span>,
-  <span class="st">" "</span> <span class="op">=</span> <span class="st">"indent"</span>,
-  <span class="st">"*"</span> <span class="op">=</span> <span class="st">"bullet"</span>,
-  <span class="st">"&gt;"</span> <span class="op">=</span> <span class="st">"arrow"</span>,
-  <span class="st">"v"</span> <span class="op">=</span> <span class="st">"success"</span>,
-  <span class="st">"x"</span> <span class="op">=</span> <span class="st">"danger"</span>,
-  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"warning"</span>,
-  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"info"</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; noindent</span>
-<span class="co">#&gt;   indent</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> bullet</span>
-<span class="co">#&gt; → arrow</span>
-<span class="co">#&gt; <span style="color: #00BB00;">✔</span> success</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> danger</span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> warning</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> info</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>        <span class="st">"noindent"</span>,</span>
+<span>  <span class="st">" "</span> <span class="op">=</span> <span class="st">"indent"</span>,</span>
+<span>  <span class="st">"*"</span> <span class="op">=</span> <span class="st">"bullet"</span>,</span>
+<span>  <span class="st">"&gt;"</span> <span class="op">=</span> <span class="st">"arrow"</span>,</span>
+<span>  <span class="st">"v"</span> <span class="op">=</span> <span class="st">"success"</span>,</span>
+<span>  <span class="st">"x"</span> <span class="op">=</span> <span class="st">"danger"</span>,</span>
+<span>  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"warning"</span>,</span>
+<span>  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"info"</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; noindent</span></span>
+<span><span class="co">#&gt;   indent</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> bullet</span></span>
+<span><span class="co">#&gt; → arrow</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> success</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> danger</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> warning</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> info</span></span></code></pre></div>
 <p>The helpers encourage consistent styling and make it possible to selectively silence messages coming from googledrive. The googledrive message helpers:</p>
 <ul>
 <li><p>Use the <a href="https://cli.r-lib.org/index.html" class="external-link">cli package</a> to get interpolation, inline markup, and pluralization.</p></li>
@@ -168,14 +168,14 @@
 <code>.arg</code>, <code>.fun</code>, <code>.path</code>, <code>.cls</code>, <code>.url</code> for their usual purpose</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"We need to talk about the {.arg foofy} argument to {.fun blarg}"</span>,
-  <span class="st">"You provided {.field a_very_weird_value} and I suspect you're confused \\
-   about something"</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; We need to talk about the `foofy` argument to `blarg()`</span>
-<span class="co">#&gt; You provided <span style="color: #00BB00;">a_very_weird_value</span> and I suspect you're confused about</span>
-<span class="co">#&gt; something</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"We need to talk about the {.arg foofy} argument to {.fun blarg}"</span>,</span>
+<span>  <span class="st">"You provided {.field a_very_weird_value} and I suspect you're confused \\</span></span>
+<span><span class="st">   about something"</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; We need to talk about the `foofy` argument to `blarg()`</span></span>
+<span><span class="co">#&gt; You provided <span style="color: #00BB00;">a_very_weird_value</span> and I suspect you're confused about</span></span>
+<span><span class="co">#&gt; something</span></span></code></pre></div>
 <p>Most relevant cli docs:</p>
 <ul>
 <li><a href="https://cli.r-lib.org/reference/inline-markup.html" class="external-link">CLI inline markup</a></li>
@@ -188,49 +188,49 @@
 <p>I use the different bullet points in <code>drive_bullets()</code> to convey a mood.</p>
 <p>Exclamation mark <code>"!"</code>: I’m not throwing an error or warning, but I want to get the user’s attention, because it seems likely (but not certain) that they misunderstand something about googledrive or Google Drive or their Drive files. Examples:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"Ignoring {.arg type}. Only consulted for native Google file types."</span>,
-  <span class="st">" "</span> <span class="op">=</span> <span class="st">"MIME type of {.arg file}: {.field mime_type}."</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Ignoring `type`. Only consulted for native Google file types.</span>
-<span class="co">#&gt;   MIME type of `file`: <span style="color: #00BB00;">mime_type</span>.</span>
-
-<span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"Currently only fields for the {.field files} resource can be \\
-         checked for validity."</span>,
-  <span class="st">" "</span> <span class="op">=</span> <span class="st">"Nothing done."</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Currently only fields for the <span style="color: #00BB00;">files</span> resource can be checked for</span>
-<span class="co">#&gt;   validity.</span>
-<span class="co">#&gt;   Nothing done.</span>
-
-<span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"No updates specified."</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> No updates specified.</span>
-
-<span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"No such file to delete."</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> No such file to delete.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"Ignoring {.arg type}. Only consulted for native Google file types."</span>,</span>
+<span>  <span class="st">" "</span> <span class="op">=</span> <span class="st">"MIME type of {.arg file}: {.field mime_type}."</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Ignoring `type`. Only consulted for native Google file types.</span></span>
+<span><span class="co">#&gt;   MIME type of `file`: <span style="color: #00BB00;">mime_type</span>.</span></span>
+<span></span>
+<span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"Currently only fields for the {.field files} resource can be \\</span></span>
+<span><span class="st">         checked for validity."</span>,</span>
+<span>  <span class="st">" "</span> <span class="op">=</span> <span class="st">"Nothing done."</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Currently only fields for the <span style="color: #00BB00;">files</span> resource can be checked for</span></span>
+<span><span class="co">#&gt;   validity.</span></span>
+<span><span class="co">#&gt;   Nothing done.</span></span>
+<span></span>
+<span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"No updates specified."</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> No updates specified.</span></span>
+<span></span>
+<span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"No such file to delete."</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> No such file to delete.</span></span></code></pre></div>
 <p>Information “i”: I’m just keeping you informed of how my work is going.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"No pre-existing file at this filepath. Calling \\
-         {.fun drive_upload}."</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> No pre-existing file at this filepath. Calling `drive_upload()`.</span>
-
-<span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"Pre-existing file at this filepath. Calling \\
-         {.fun drive_update}."</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Pre-existing file at this filepath. Calling `drive_update()`.</span>
-
-<span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"Not logged in as any specific Google user."</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Not logged in as any specific Google user.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"No pre-existing file at this filepath. Calling \\</span></span>
+<span><span class="st">         {.fun drive_upload}."</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> No pre-existing file at this filepath. Calling `drive_upload()`.</span></span>
+<span></span>
+<span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"Pre-existing file at this filepath. Calling \\</span></span>
+<span><span class="st">         {.fun drive_update}."</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Pre-existing file at this filepath. Calling `drive_update()`.</span></span>
+<span></span>
+<span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"Not logged in as any specific Google user."</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Not logged in as any specific Google user.</span></span></code></pre></div>
 <p>In cases where we determine there is nothing we can or should do, sometimes I use <code>"!"</code> and sometimes I use <code>"i"</code>. It depends on whether it feels like the user could or should have known that no work would be possible or needed.</p>
 </div>
 <div class="section level3">
@@ -244,60 +244,60 @@
 </ul>
 <p><code>gargle_map_cli()</code> is a new generic in gargle that turns an object into a vector of strings with cli markup. Currently gargle exports methods for <code>character</code> (and <code>NULL</code> and a <code>default</code>) and googlesheets4 defines a method for <code>dribble</code>. This is likely to be replaced by something in cli itself in due course.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; [1] "{.field a}" "{.field b}" "{.field c}"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "{.field a}" "{.field b}" "{.field c}"</span></span></code></pre></div>
 <p>By default <code>gargle_map_cli.character()</code> just applies the <code>.field</code> style, i.e. the template is <code>"{.field &lt;&lt;x&gt;&gt;}"</code>. But the template can be customized, if you need something else. Note that we use non-standard glue delimiters (<code>&lt;&lt;</code> and <code>&gt;&gt;</code>, by default), because we are interpolating into a string with glue/cli markup, where <code><a href="https://rdrr.io/r/base/Paren.html" class="external-link">{}</a></code> has the usual meaning.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, template <span class="op">=</span> <span class="st">"how about a path {.path &lt;&lt;x&gt;&gt;}?"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "how about a path {.path d}?" "how about a path {.path e}?"</span>
-<span class="co">#&gt; [3] "how about a path {.path f}?"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, template <span class="op">=</span> <span class="st">"how about a path {.path &lt;&lt;x&gt;&gt;}?"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "how about a path {.path d}?" "how about a path {.path e}?"</span></span>
+<span><span class="co">#&gt; [3] "how about a path {.path f}?"</span></span></code></pre></div>
 <p>The <code>gargle_map_cli.dribble()</code> method makes a cli-marked up string for each row of the dribble, i.e. for each Drive file.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-<span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
-<span class="co">#&gt; [1] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 1hUQPskKjOHBdzm7IUnrtf9Pw8mS_VqrzEXPtpByRTpw&gt;')}"</span>
-<span class="co">#&gt; [2] "{.drivepath SuperCalc} {cli::col_grey('&lt;id: 1OJRDr5aO-M6jV-FvLZY4ZQsWE2UBF8ZrkjVezKPb1Ws&gt;')}"  </span>
-<span class="co">#&gt; [3] "{.drivepath ExecuVision} {cli::col_grey('&lt;id: 1Q3bEaFAFioNS8XOm9h2iUZRKGLB4ZuPJ98hJ_KPXuQY&gt;')}"</span>
-<span class="co">#&gt; [4] "{.drivepath WordStar} {cli::col_grey('&lt;id: 10wc3QGUwoxappnhxOYYm5Qdln5eljoUZi1fj3y67HCk&gt;')}"   </span>
-<span class="co">#&gt; [5] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 16uhocyM4bfvAIXSB2CkLH0RXo9jEI4NKvUDPYFOQOIk&gt;')}"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 1OttI1HUP2FCNSZlj4Pw7SxeAbkAj_uhtsjO8XzjrKjg&gt;')}"</span></span>
+<span><span class="co">#&gt; [2] "{.drivepath SuperCalc} {cli::col_grey('&lt;id: 1ZlrCr3Q19Fu7D9wLEPmBVy3M9Y05R477crgw1r_NFtE&gt;')}"  </span></span>
+<span><span class="co">#&gt; [3] "{.drivepath ExecuVision} {cli::col_grey('&lt;id: 1u2jYXfHIuSCryHBFiZOXmZT501YjObd8zKxGg29ErDg&gt;')}"</span></span>
+<span><span class="co">#&gt; [4] "{.drivepath WordStar} {cli::col_grey('&lt;id: 1QF8XEexnXUF9X2Q053Q5pCVlCq3t1rL4te7SCpkdpM8&gt;')}"   </span></span>
+<span><span class="co">#&gt; [5] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 1hUQPskKjOHBdzm7IUnrtf9Pw8mS_VqrzEXPtpByRTpw&gt;')}"</span></span></code></pre></div>
 <p><code>gargle_map_cli.dribble()</code> also allows a custom template, but it’s a more complicated and less common situation than for <code>character</code>. We won’t get into that here. (I don’t consider the dribble styling to be finalized yet.)</p>
 <p>The result of <code>gargle_map_cli()</code> then gets processed with <code><a href="https://gargle.r-lib.org/reference/bulletize.html" class="external-link">gargle::bulletize()</a></code>, which adds the bullet-specifying names and does aesthetically pleasing truncation.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;               *               *               *               * </span>
-<span class="co">#&gt;    "{.field a}"    "{.field b}"    "{.field c}"    "{.field d}" </span>
-<span class="co">#&gt;               *                 </span>
-<span class="co">#&gt;    "{.field e}" "… and 21 more"</span>
-
-<span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"x"</span>, n_show <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt;               x               x                 </span>
-<span class="co">#&gt;    "{.field a}"    "{.field b}" "… and 24 more"</span>
-
-<span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"These are surprising things:"</span>,
-  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"!"</span><span class="op">)</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; These are surprising things:</span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">a</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">b</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">c</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">d</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">e</span></span>
-<span class="co">#&gt;   … and 21 more</span>
-
-<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-
-<span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"Some Drive files:"</span>,
-  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Some Drive files:</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 1hUQPskKjOHBdzm7IUnrtf9Pw8mS_VqrzEXPtpByRTpw&gt;</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">SuperCalc</span> <span style="color: #555555;">&lt;id: 1OJRDr5aO-M6jV-FvLZY4ZQsWE2UBF8ZrkjVezKPb1Ws&gt;</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">ExecuVision</span> <span style="color: #555555;">&lt;id: 1Q3bEaFAFioNS8XOm9h2iUZRKGLB4ZuPJ98hJ_KPXuQY&gt;</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">WordStar</span> <span style="color: #555555;">&lt;id: 10wc3QGUwoxappnhxOYYm5Qdln5eljoUZi1fj3y67HCk&gt;</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 16uhocyM4bfvAIXSB2CkLH0RXo9jEI4NKvUDPYFOQOIk&gt;</span></span>
-<span class="co">#&gt;   … and 5 more</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;               *               *               *               * </span></span>
+<span><span class="co">#&gt;    "{.field a}"    "{.field b}"    "{.field c}"    "{.field d}" </span></span>
+<span><span class="co">#&gt;               *                 </span></span>
+<span><span class="co">#&gt;    "{.field e}" "… and 21 more"</span></span>
+<span></span>
+<span><span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"x"</span>, n_show <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#&gt;               x               x                 </span></span>
+<span><span class="co">#&gt;    "{.field a}"    "{.field b}" "… and 24 more"</span></span>
+<span></span>
+<span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"These are surprising things:"</span>,</span>
+<span>  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"!"</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; These are surprising things:</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">a</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">b</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">c</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">d</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">e</span></span></span>
+<span><span class="co">#&gt;   … and 21 more</span></span>
+<span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Some Drive files:"</span>,</span>
+<span>  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Some Drive files:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 1OttI1HUP2FCNSZlj4Pw7SxeAbkAj_uhtsjO8XzjrKjg&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">SuperCalc</span> <span style="color: #555555;">&lt;id: 1ZlrCr3Q19Fu7D9wLEPmBVy3M9Y05R477crgw1r_NFtE&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">ExecuVision</span> <span style="color: #555555;">&lt;id: 1u2jYXfHIuSCryHBFiZOXmZT501YjObd8zKxGg29ErDg&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">WordStar</span> <span style="color: #555555;">&lt;id: 1QF8XEexnXUF9X2Q053Q5pCVlCq3t1rL4te7SCpkdpM8&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 1hUQPskKjOHBdzm7IUnrtf9Pw8mS_VqrzEXPtpByRTpw&gt;</span></span></span>
+<span><span class="co">#&gt;   … and 5 more</span></span></code></pre></div>
 <p>It’s conceivable that cli will gain a better way of vectorization, but this works for now.</p>
 <p>Known dysfunction: it’s inefficient to <code>gargle_map_cli()</code> over the whole object, then truncate with <code>bulletize()</code>. But it’s easy. There are contexts, like tibble printing, where formatting stuff that will never see the light of day is really punishing. But I’m not sure I really have to worry about that.</p>
 </div>

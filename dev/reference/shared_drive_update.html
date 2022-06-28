@@ -89,7 +89,7 @@ earlier concept of Team Drives. Learn more about <a href="shared_drives.html">sh
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">shared_drive_update</span><span class="op">(</span><span class="va">shared_drive</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">shared_drive_update</span><span class="op">(</span><span class="va">shared_drive</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -120,21 +120,21 @@ body" section of the Drive API docs for this endpoint.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># create a shared drive</span></span>
-<span class="r-in"><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="shared_drive_create.html">shared_drive_create</a></span><span class="op">(</span><span class="st">"I love themes!"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># see the themes available to you</span></span>
-<span class="r-in"><span class="va">themes</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_about.html">drive_about</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">driveThemes</span></span>
-<span class="r-in"><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span><span class="va">themes</span>, <span class="st">"id"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># cycle through various themes for this shared drive</span></span>
-<span class="r-in"><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu">shared_drive_update</span><span class="op">(</span><span class="va">sd</span>, themeId <span class="op">=</span> <span class="st">"bok_choy"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu">shared_drive_update</span><span class="op">(</span><span class="va">sd</span>, themeId <span class="op">=</span> <span class="st">"cocktails"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Clean up</span></span>
-<span class="r-in"><span class="fu"><a href="shared_drive_rm.html">shared_drive_rm</a></span><span class="op">(</span><span class="va">sd</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># create a shared drive</span></span></span>
+<span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="shared_drive_create.html">shared_drive_create</a></span><span class="op">(</span><span class="st">"I love themes!"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># see the themes available to you</span></span></span>
+<span class="r-in"><span><span class="va">themes</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_about.html">drive_about</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">driveThemes</span></span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span><span class="va">themes</span>, <span class="st">"id"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># cycle through various themes for this shared drive</span></span></span>
+<span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu">shared_drive_update</span><span class="op">(</span><span class="va">sd</span>, themeId <span class="op">=</span> <span class="st">"bok_choy"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu">shared_drive_update</span><span class="op">(</span><span class="va">sd</span>, themeId <span class="op">=</span> <span class="st">"cocktails"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Clean up</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="shared_drive_rm.html">shared_drive_rm</a></span><span class="op">(</span><span class="va">sd</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -83,7 +83,7 @@ earlier concept of Team Drives. Learn more about <a href="shared_drives.html">sh
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">shared_drive_rm</span><span class="op">(</span>drive <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">shared_drive_rm</span><span class="op">(</span>drive <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -108,22 +108,22 @@ marked with <code><a href="drive_id.html">as_id()</a></code>, or a <code><a href
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Create shared drives to remove in various ways</span></span>
-<span class="r-in"><span class="fu"><a href="shared_drive_create.html">shared_drive_create</a></span><span class="op">(</span><span class="st">"testdrive-01"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sd02</span> <span class="op">&lt;-</span> <span class="fu"><a href="shared_drive_create.html">shared_drive_create</a></span><span class="op">(</span><span class="st">"testdrive-02"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="shared_drive_create.html">shared_drive_create</a></span><span class="op">(</span><span class="st">"testdrive-03"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sd04</span> <span class="op">&lt;-</span> <span class="fu"><a href="shared_drive_create.html">shared_drive_create</a></span><span class="op">(</span><span class="st">"testdrive-04"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># remove by name</span></span>
-<span class="r-in"><span class="fu">shared_drive_rm</span><span class="op">(</span><span class="st">"testdrive-01"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># remove by id</span></span>
-<span class="r-in"><span class="fu">shared_drive_rm</span><span class="op">(</span><span class="fu"><a href="drive_id.html">as_id</a></span><span class="op">(</span><span class="va">sd02</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># remove by URL (or, rather, id found in URL)</span></span>
-<span class="r-in"><span class="fu">shared_drive_rm</span><span class="op">(</span><span class="fu"><a href="drive_id.html">as_id</a></span><span class="op">(</span><span class="st">"https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># remove by dribble</span></span>
-<span class="r-in"><span class="fu">shared_drive_rm</span><span class="op">(</span><span class="va">sd04</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Create shared drives to remove in various ways</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="shared_drive_create.html">shared_drive_create</a></span><span class="op">(</span><span class="st">"testdrive-01"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sd02</span> <span class="op">&lt;-</span> <span class="fu"><a href="shared_drive_create.html">shared_drive_create</a></span><span class="op">(</span><span class="st">"testdrive-02"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="shared_drive_create.html">shared_drive_create</a></span><span class="op">(</span><span class="st">"testdrive-03"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sd04</span> <span class="op">&lt;-</span> <span class="fu"><a href="shared_drive_create.html">shared_drive_create</a></span><span class="op">(</span><span class="st">"testdrive-04"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># remove by name</span></span></span>
+<span class="r-in"><span><span class="fu">shared_drive_rm</span><span class="op">(</span><span class="st">"testdrive-01"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># remove by id</span></span></span>
+<span class="r-in"><span><span class="fu">shared_drive_rm</span><span class="op">(</span><span class="fu"><a href="drive_id.html">as_id</a></span><span class="op">(</span><span class="va">sd02</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># remove by URL (or, rather, id found in URL)</span></span></span>
+<span class="r-in"><span><span class="fu">shared_drive_rm</span><span class="op">(</span><span class="fu"><a href="drive_id.html">as_id</a></span><span class="op">(</span><span class="st">"https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># remove by dribble</span></span></span>
+<span class="r-in"><span><span class="fu">shared_drive_rm</span><span class="op">(</span><span class="va">sd04</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

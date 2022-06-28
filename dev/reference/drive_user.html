@@ -80,7 +80,7 @@ information (the information on current user) and prints it nicely.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">drive_user</span><span class="op">(</span>verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">drive_user</span><span class="op">(</span>verbose <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -108,14 +108,14 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">drive_user</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">drive_user</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Logged in as:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> displayName: <span style="color: #00BB00;">googledrive-docs@gargle-169921.iam.gserviceaccount.com</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> emailAddress: <span style="color: #0000BB;">googledrive-docs@gargle-169921.iam.gserviceaccount.com</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># more info is returned than is printed</span></span>
-<span class="r-in"><span class="va">user</span> <span class="op">&lt;-</span> <span class="fu">drive_user</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">user</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># more info is returned than is printed</span></span></span>
+<span class="r-in"><span><span class="va">user</span> <span class="op">&lt;-</span> <span class="fu">drive_user</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">user</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ kind        : chr "drive#user"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ displayName : chr "googledrive-docs@gargle-169921.iam.gserviceaccount.com"</span>

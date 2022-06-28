@@ -80,7 +80,7 @@ useful information (the information on current user) and prints it nicely.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">drive_about</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">drive_about</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -100,7 +100,7 @@ useful information (the information on current user) and prints it nicely.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">drive_about</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">drive_about</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $kind</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "drive#about"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -129,10 +129,10 @@ useful information (the information on current user) and prints it nicely.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "16106127360"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $storageQuota$usage</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "3181315"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "3187870"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $storageQuota$usageInDrive</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "3181315"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "3187870"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $storageQuota$usageInDriveTrash</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "0"</span>
@@ -1240,11 +1240,11 @@ useful information (the information on current user) and prints it nicely.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $canCreateDrives</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># explore the export formats available for Drive files, by MIME type</span></span>
-<span class="r-in"><span class="va">about</span> <span class="op">&lt;-</span> <span class="fu">drive_about</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">about</span><span class="op">[[</span><span class="st">"exportFormats"</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">unlist</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># explore the export formats available for Drive files, by MIME type</span></span></span>
+<span class="r-in"><span><span class="va">about</span> <span class="op">&lt;-</span> <span class="fu">drive_about</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">about</span><span class="op">[[</span><span class="st">"exportFormats"</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">unlist</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`application/vnd.google-apps.document`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/rtf"                                                        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] "application/vnd.oasis.opendocument.text"                                </span>

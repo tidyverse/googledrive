@@ -98,9 +98,9 @@ for <code><a href="drive_download.html">drive_download()</a></code> for more.</p
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">drive_read_string</span><span class="op">(</span><span class="va">file</span>, type <span class="op">=</span> <span class="cn">NULL</span>, encoding <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-
-<span class="fu">drive_read_raw</span><span class="op">(</span><span class="va">file</span>, type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">drive_read_string</span><span class="op">(</span><span class="va">file</span>, type <span class="op">=</span> <span class="cn">NULL</span>, encoding <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">drive_read_raw</span><span class="op">(</span><span class="va">file</span>, type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -133,15 +133,15 @@ the <em>input</em> <code>file</code>.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># comma-separated values --&gt; data.frame or tibble</span></span>
-<span class="r-in"><span class="op">(</span><span class="va">chicken_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_examples.html">drive_example_remote</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># comma-separated values --&gt; data.frame or tibble</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">chicken_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_examples.html">drive_example_remote</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 1 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name        id                                drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> chicken.csv 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7 <span style="color: #949494;">&lt;named list [35]&gt;</span></span>
-<span class="r-in"><span class="va">chicken_csv</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">drive_read_string</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">.</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">chicken_csv</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">drive_read_string</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">.</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No encoding supplied: defaulting to UTF-8.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   chicken            breed     sex</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1         Foghorn Leghorn          Leghorn rooster</span>
@@ -155,18 +155,18 @@ the <em>input</em> <code>file</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 Listen. We'll either die free chickens or we die trying.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4                                     Bawk, buck, ba-gawk.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5                      Put Captain Solo in the cargo hold.</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Google Doc --&gt; character vector</span></span>
-<span class="r-in"><span class="op">(</span><span class="va">chicken_doc</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_examples.html">drive_example_remote</a></span><span class="op">(</span><span class="st">"chicken_doc"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Google Doc --&gt; character vector</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">chicken_doc</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_examples.html">drive_example_remote</a></span><span class="op">(</span><span class="st">"chicken_doc"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 1 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name        id                                           drive_resource</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> chicken_doc 1X9pd4nOjl33zDFfTjw-_eFL7Qb9_g6VfVFDp1PPae94 &lt;named list&gt;  </span>
-<span class="r-in"><span class="va">chicken_doc</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="co"># NOTE: we must specify an export MIME type</span></span>
-<span class="r-in">  <span class="fu">drive_read_string</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"text/plain"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span>split <span class="op">=</span> <span class="st">"(\r\n|\r|\n)"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span class="r-in"><span><span class="va">chicken_doc</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="co"># NOTE: we must specify an export MIME type</span></span></span>
+<span class="r-in"><span>  <span class="fu">drive_read_string</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"text/plain"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span>split <span class="op">=</span> <span class="st">"(\r\n|\r|\n)"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No encoding supplied: defaulting to UTF-8.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "A chicken whose name was Chantecler"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Clucked in iambic pentameter"             </span>

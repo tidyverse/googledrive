@@ -92,17 +92,17 @@ search within a specific folder or shared drive, use <code><a href="drive_ls.htm
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">drive_find</span><span class="op">(</span>
-  pattern <span class="op">=</span> <span class="cn">NULL</span>,
-  trashed <span class="op">=</span> <span class="cn">FALSE</span>,
-  type <span class="op">=</span> <span class="cn">NULL</span>,
-  n_max <span class="op">=</span> <span class="cn">Inf</span>,
-  shared_drive <span class="op">=</span> <span class="cn">NULL</span>,
-  corpus <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>,
-  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,
-  team_drive <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">drive_find</span><span class="op">(</span></span>
+<span>  pattern <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  trashed <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  n_max <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  shared_drive <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  corpus <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  team_drive <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -233,61 +233,61 @@ Read more about <a href="shared_drives.html">shared drives</a>.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># list "My Drive" w/o regard for folder hierarchy</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># filter for folders, the easy way and the hard way</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"folder"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>q <span class="op">=</span> <span class="st">"mimeType = 'application/vnd.google-apps.folder'"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># filter for Google Sheets, the easy way and the hard way</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>q <span class="op">=</span> <span class="st">"mimeType='application/vnd.google-apps.spreadsheet'"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># files whose names match a regex</span></span>
-<span class="r-in"><span class="co"># the local, general, sometimes-slow-to-execute version</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"ick"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># the server-side, executes-faster version</span></span>
-<span class="r-in"><span class="co"># NOTE: works only for a pattern at the beginning of file name</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>q <span class="op">=</span> <span class="st">"name contains 'chick'"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># search for files located directly in your root folder</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>q <span class="op">=</span> <span class="st">"'root' in parents"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># FYI: this is equivalent to</span></span>
-<span class="r-in"><span class="fu"><a href="drive_ls.html">drive_ls</a></span><span class="op">(</span><span class="st">"~/"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># control page size or cap the number of files returned</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>pageSize <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># all params passed through `...` can be camelCase or snake_case</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>page_size <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">58</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>page_size <span class="op">=</span> <span class="fl">5</span>, n_max <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># various ways to specify q search clauses</span></span>
-<span class="r-in"><span class="co"># multiple q's</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span></span>
-<span class="r-in">  q <span class="op">=</span> <span class="st">"name contains 'TEST'"</span>,</span>
-<span class="r-in">  q <span class="op">=</span> <span class="st">"modifiedTime &gt; '2020-07-21T12:00:00'"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="co"># vector q</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># default `trashed = FALSE` excludes files in the trash</span></span>
-<span class="r-in"><span class="co"># `trashed = TRUE` consults ONLY file in the trash</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>trashed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># `trashed = NA` disregards trash status completely</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>trashed <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># suppress the default sorting on recency</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>order_by <span class="op">=</span> <span class="cn">NULL</span>, n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># sort on various keys</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>order_by <span class="op">=</span> <span class="st">"modifiedByMeTime"</span>, n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># request descending order</span></span>
-<span class="r-in"><span class="fu">drive_find</span><span class="op">(</span>order_by <span class="op">=</span> <span class="st">"quotaBytesUsed desc"</span>, n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># list "My Drive" w/o regard for folder hierarchy</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># filter for folders, the easy way and the hard way</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"folder"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>q <span class="op">=</span> <span class="st">"mimeType = 'application/vnd.google-apps.folder'"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># filter for Google Sheets, the easy way and the hard way</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>q <span class="op">=</span> <span class="st">"mimeType='application/vnd.google-apps.spreadsheet'"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># files whose names match a regex</span></span></span>
+<span class="r-in"><span><span class="co"># the local, general, sometimes-slow-to-execute version</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"ick"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># the server-side, executes-faster version</span></span></span>
+<span class="r-in"><span><span class="co"># NOTE: works only for a pattern at the beginning of file name</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>q <span class="op">=</span> <span class="st">"name contains 'chick'"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># search for files located directly in your root folder</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>q <span class="op">=</span> <span class="st">"'root' in parents"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># FYI: this is equivalent to</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="drive_ls.html">drive_ls</a></span><span class="op">(</span><span class="st">"~/"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># control page size or cap the number of files returned</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>pageSize <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># all params passed through `...` can be camelCase or snake_case</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>page_size <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">58</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>page_size <span class="op">=</span> <span class="fl">5</span>, n_max <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># various ways to specify q search clauses</span></span></span>
+<span class="r-in"><span><span class="co"># multiple q's</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  q <span class="op">=</span> <span class="st">"name contains 'TEST'"</span>,</span></span>
+<span class="r-in"><span>  q <span class="op">=</span> <span class="st">"modifiedTime &gt; '2020-07-21T12:00:00'"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># vector q</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># default `trashed = FALSE` excludes files in the trash</span></span></span>
+<span class="r-in"><span><span class="co"># `trashed = TRUE` consults ONLY file in the trash</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>trashed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># `trashed = NA` disregards trash status completely</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>trashed <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># suppress the default sorting on recency</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>order_by <span class="op">=</span> <span class="cn">NULL</span>, n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># sort on various keys</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>order_by <span class="op">=</span> <span class="st">"modifiedByMeTime"</span>, n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># request descending order</span></span></span>
+<span class="r-in"><span><span class="fu">drive_find</span><span class="op">(</span>order_by <span class="op">=</span> <span class="st">"quotaBytesUsed desc"</span>, n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

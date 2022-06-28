@@ -144,9 +144,9 @@ to shared drives. While it's always a good idea to get things into a
     
 
 <p>To search one specific shared drive, pass its name, marked id, or
-<code><a href="dribble.html">dribble</a></code> to <code>shared_drive</code> somewhere in the call, like so:</p><div class="sourceCode"><pre><code><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, shared_drive <span class="op">=</span> <span class="st">"i_am_a_shared_drive_name"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, shared_drive <span class="op">=</span> <span class="fu"><a href="../reference/drive_id.html">as_id</a></span><span class="op">(</span><span class="st">"i_am_a_shared_drive_id"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, shared_drive <span class="op">=</span> <span class="va">i_am_a_shared_drive_dribble</span><span class="op">)</span></code></pre></div>
+<code><a href="dribble.html">dribble</a></code> to <code>shared_drive</code> somewhere in the call, like so:</p><div class="sourceCode"><pre><code><span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, shared_drive <span class="op">=</span> <span class="st">"i_am_a_shared_drive_name"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, shared_drive <span class="op">=</span> <span class="fu"><a href="../reference/drive_id.html">as_id</a></span><span class="op">(</span><span class="st">"i_am_a_shared_drive_id"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, shared_drive <span class="op">=</span> <span class="va">i_am_a_shared_drive_dribble</span><span class="op">)</span></span></code></pre></div>
 
 <p>The value provided to <code>shared_drive</code> is pre-processed with
 <code><a href="as_shared_drive.html">as_shared_drive()</a></code>.</p>
@@ -156,9 +156,9 @@ to shared drives. While it's always a good idea to get things into a
     
 
 <p>To search other collections, pass the <code>corpus</code> parameter somewhere in the
-call, like so:</p><div class="sourceCode"><pre><code><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, corpus <span class="op">=</span> <span class="st">"user"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, corpus <span class="op">=</span> <span class="st">"allDrives"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, corpus <span class="op">=</span> <span class="st">"domain"</span><span class="op">)</span></code></pre></div>
+call, like so:</p><div class="sourceCode"><pre><code><span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, corpus <span class="op">=</span> <span class="st">"user"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, corpus <span class="op">=</span> <span class="st">"allDrives"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, corpus <span class="op">=</span> <span class="st">"domain"</span><span class="op">)</span></span></code></pre></div>
 
 <p>Possible values of <code>corpus</code> and what they mean:</p><ul><li><p><code>"user"</code>: Queries files that the user has accessed, including both shared
 drive and My Drive files.</p></li>
