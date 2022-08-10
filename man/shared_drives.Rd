@@ -34,10 +34,12 @@ to shared drives. While it's always a good idea to get things into a
 \section{Specific shared drive}{
 
 To search one specific shared drive, pass its name, marked id, or
-\code{\link{dribble}} to \code{shared_drive} somewhere in the call, like so:\preformatted{drive_find(..., shared_drive = "i_am_a_shared_drive_name")
+\code{\link{dribble}} to \code{shared_drive} somewhere in the call, like so:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{drive_find(..., shared_drive = "i_am_a_shared_drive_name")
 drive_find(..., shared_drive = as_id("i_am_a_shared_drive_id"))
 drive_find(..., shared_drive = i_am_a_shared_drive_dribble)
-}
+}\if{html}{\out{</div>}}
 
 The value provided to \code{shared_drive} is pre-processed with
 \code{\link[=as_shared_drive]{as_shared_drive()}}.
@@ -46,10 +48,12 @@ The value provided to \code{shared_drive} is pre-processed with
 \section{Other collections}{
 
 To search other collections, pass the \code{corpus} parameter somewhere in the
-call, like so:\preformatted{drive_find(..., corpus = "user")
+call, like so:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{drive_find(..., corpus = "user")
 drive_find(..., corpus = "allDrives")
 drive_find(..., corpus = "domain")
-}
+}\if{html}{\out{</div>}}
 
 Possible values of \code{corpus} and what they mean:
 \itemize{

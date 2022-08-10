@@ -46,18 +46,22 @@ means, in order of decreasing scope:
 \itemize{
 \item Put \code{options(googledrive_quiet = TRUE)} in a start-up file, such as
 \code{.Rprofile}, or at the top of your R script
-\item Use \code{local_drive_quiet()} to silence googledrive in a specific scope\preformatted{foo <- function() \{
+\item Use \code{local_drive_quiet()} to silence googledrive in a specific scope
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{foo <- function() \{
   ...
   local_drive_quiet()
   drive_this(...)
   drive_that(...)
   ...
 \}
-}
-\item Use \code{with_drive_quiet()} to run a small bit of code silently\preformatted{with_drive_quiet(
+}\if{html}{\out{</div>}}
+\item Use \code{with_drive_quiet()} to run a small bit of code silently
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{with_drive_quiet(
   drive_something(...)
 )
-}
+}\if{html}{\out{</div>}}
 }
 
 \code{local_drive_quiet()} and \code{with_drive_quiet()} follow the conventions of the

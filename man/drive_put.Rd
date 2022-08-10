@@ -63,7 +63,9 @@ PUTs new media into a Drive file, in the HTTP sense:
 }
 
 This is a convenience wrapper around \code{\link[=drive_upload]{drive_upload()}} and
-\code{\link[=drive_update]{drive_update()}}. In pseudo-code:\preformatted{target_filepath <- <determined from `path`, `name`, and `media`>
+\code{\link[=drive_update]{drive_update()}}. In pseudo-code:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{target_filepath <- <determined from `path`, `name`, and `media`>
 hits <- <get all Drive files at target_filepath>
 if (no hits) \{
   drive_upload(media, path, name, type, ...)
@@ -72,7 +74,7 @@ if (no hits) \{
 \} else \{
   ERROR
 \}
-}
+}\if{html}{\out{</div>}}
 }
 \examples{
 \dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
