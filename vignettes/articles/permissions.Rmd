@@ -31,7 +31,7 @@ googledrive::drive_deauth()
 # clean up if any previous runs left this lying around
 trash_me <- googledrive::drive_find("chicken-perm-article")
 if (googledrive::some_files(trash_me)) {
-  drive_trash(trash_me)
+  googledrive::drive_trash(trash_me)
 }
 ```
 
