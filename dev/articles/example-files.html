@@ -155,19 +155,12 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_examples.html">drive_examples_remote</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"mime_type"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 9 × 4</span></span></span>
-<span><span class="co">#&gt;   name            mime_type                             id    drive_reso…¹</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 <span style="color: #949494; font-style: italic;">&lt;drv&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken_doc     application/vnd.google-apps.document  1X9p… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chicken_sheet   application/vnd.google-apps.spreadsh… 1SeF… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> chicken.csv     text/csv                              1VOh… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> chicken.jpg     image/jpeg                            1b2_… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> chicken.pdf     application/pdf                       13OQ… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> chicken.txt     text/plain                            1wOL… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> imdb_latin1.csv text/csv                              1YJS… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> r_about.html    text/html                             1sfC… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> r_logo.jpg      image/jpeg                            1J4v… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `gargle::response_process()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Client error: (403) Forbidden</span></span>
+<span><span class="co">#&gt; User rate limit exceeded.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> message: User rate limit exceeded.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> domain: usageLimits</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> reason: userRateLimitExceeded</span></span></code></pre></div>
 <p>You’ll notice there are two files that aren’t among the local example files, but that are derived from them:</p>
 <ul>
 <li>
