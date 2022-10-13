@@ -219,11 +219,11 @@ warn_for_verbose <- function(verbose = TRUE, env = caller_env()) {
   lifecycle::deprecate_warn(
     when = "2.0.0",
     what = glue("{caller}(verbose)"),
-    details = glue("
-      Set `options(googledrive_quiet = TRUE)` to suppress all \\
-      googledrive messages.
-      For finer control, use `local_drive_quiet()` or `with_drive_quiet()`.
-      googledrive's `verbose` argument will be removed in the future."),
+    details = c(
+      "Set `options(googledrive_quiet = TRUE)` to suppress all googledrive messages.",
+      "For finer control, use `local_drive_quiet()` or `with_drive_quiet()`.",
+      "googledrive's `verbose` argument will be removed in the future."
+    ),
     id = "googledrive_verbose"
   )
   local_drive_quiet(env = env)
