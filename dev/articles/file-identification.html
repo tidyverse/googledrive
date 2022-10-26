@@ -107,32 +107,55 @@
 
     
     
-<p>The most natural way to identify a file is by its <strong>name</strong>. The Drive API, however, fundamentally identifies a file by its unique id. googledrive makes it easy to specify your file of interest by name at first, but then immediately capture that in a way that includes the file’s id. This facilitates downstream file operations.</p>
-<p>googledrive holds information on Drive files in what we call a <strong>dribble</strong>, a Drive tibble. A <a href="https://tibble.tidyverse.org/reference/tbl_df-class.html" class="external-link">tibble</a> is the variant of the data frame that is used throughout the <a href="https://www.tidyverse.org" class="external-link">tidyverse</a>. A googledrive dribble will have one row per file and is guaranteed to have these variables:</p>
+<p>The most natural way to identify a file is by its
+<strong>name</strong>. The Drive API, however, fundamentally identifies
+a file by its unique id. googledrive makes it easy to specify your file
+of interest by name at first, but then immediately capture that in a way
+that includes the file’s id. This facilitates downstream file
+operations.</p>
+<p>googledrive holds information on Drive files in what we call a
+<strong>dribble</strong>, a Drive tibble. A <a href="https://tibble.tidyverse.org/reference/tbl_df-class.html" class="external-link">tibble</a>
+is the variant of the data frame that is used throughout the <a href="https://www.tidyverse.org" class="external-link">tidyverse</a>. A googledrive dribble
+will have one row per file and is guaranteed to have these
+variables:</p>
 <ul>
 <li>
 <code>name</code>: The file’s name.</li>
 <li>
 <code>id</code>: The file’s unique id.</li>
 <li>
-<code>drive_resource</code>: A list column containing Drive API metadata that is internally useful and possibly interesting to some users. The typical user will leave this variable unexamined. Just let it be.</li>
+<code>drive_resource</code>: A list column containing Drive API
+metadata that is internally useful and possibly interesting to some
+users. The typical user will leave this variable unexamined. Just let it
+be.</li>
 </ul>
-<p>Some functions add additional variables, but the three above are always present. <code><a href="../reference/drive_reveal.html">drive_reveal()</a></code>, for example, can add file paths, MIME types, trash status, and information about permissions and publishing. Use your usual techniques for data frame manipulation in order to isolate specific rows – files, in this case – that you want to operate on. For example, you can manipulate the dribble with dplyr verbs such as <code><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter()</a></code>, <code>mutate()</code>, <code>arrange()</code>, and <code>slice()</code>.</p>
+<p>Some functions add additional variables, but the three above are
+always present. <code><a href="../reference/drive_reveal.html">drive_reveal()</a></code>, for example, can add file
+paths, MIME types, trash status, and information about permissions and
+publishing. Use your usual techniques for data frame manipulation in
+order to isolate specific rows – files, in this case – that you want to
+operate on. For example, you can manipulate the dribble with dplyr verbs
+such as <code><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter()</a></code>, <code>mutate()</code>,
+<code>arrange()</code>, and <code>slice()</code>.</p>
 <div class="section level2">
 <h2 id="how-to-get-one-or-more-files-in-a-dribble">How to get one or more files in a dribble<a class="anchor" aria-label="anchor" href="#how-to-get-one-or-more-files-in-a-dribble"></a>
 </h2>
-<p>How do you get files into a dribble in the first place? Two main functions for this:</p>
+<p>How do you get files into a dribble in the first place? Two main
+functions for this:</p>
 <ul>
 <li>
-<code><a href="../reference/drive_find.html">drive_find()</a></code>: Similar to <a href="https://drive.google.com" class="external-link uri">https://drive.google.com</a>. Lists all your files or lets you narrow things down based on name or file properties.</li>
+<code><a href="../reference/drive_find.html">drive_find()</a></code>: Similar to <a href="https://drive.google.com" class="external-link uri">https://drive.google.com</a>. Lists all your files or lets
+you narrow things down based on name or file properties.</li>
 <li>
-<code><a href="../reference/drive_get.html">drive_get()</a></code>: Get files by name – file path, actually – or by id, including by URL.</li>
+<code><a href="../reference/drive_get.html">drive_get()</a></code>: Get files by name – file path, actually –
+or by id, including by URL.</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="drive_find">drive_find()<a class="anchor" aria-label="anchor" href="#drive_find"></a>
 </h2>
-<p>Read the help for complete documentation but here are some of the many ways to call <code><a href="../reference/drive_find.html">drive_find()</a></code>:</p>
+<p>Read the help for complete documentation but here are some of the
+many ways to call <code><a href="../reference/drive_find.html">drive_find()</a></code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span>
@@ -144,12 +167,14 @@
 <span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>q <span class="op">=</span> <span class="st">"fullText contains 'project'"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>q <span class="op">=</span> <span class="st">"modifiedTime &gt; '2019-04-21T12:00:00'"</span>, order_by <span class="op">=</span> <span class="st">"recency"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><code><a href="../reference/drive_find.html">drive_find()</a></code> is for exhaustive file listing or filtering on file properties.</p>
+<p><code><a href="../reference/drive_find.html">drive_find()</a></code> is for exhaustive file listing or filtering
+on file properties.</p>
 </div>
 <div class="section level2">
 <h2 id="drive_get">drive_get()<a class="anchor" aria-label="anchor" href="#drive_get"></a>
 </h2>
-<p>Read the help for complete documentation but here are how calls to <code><a href="../reference/drive_get.html">drive_get()</a></code> can look:</p>
+<p>Read the help for complete documentation but here are how calls to
+<code><a href="../reference/drive_get.html">drive_get()</a></code> can look:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"i_am_a_file_name"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"i/am/a/deeply/buried/file.txt"</span><span class="op">)</span></span>
@@ -160,19 +185,25 @@
 <span><span class="fu"><a href="../reference/drive_get.html">drive_get</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"abcdefghijklm"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/drive_get.html">drive_get</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"abcdefghijklm"</span>, <span class="st">"nopqrstuvwxyz"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="fu"><a href="../reference/drive_id.html">as_id</a></span><span class="op">(</span><span class="st">"https://docs.google.com/document/d/abcdefghijklm/edit"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><code><a href="../reference/drive_get.html">drive_get()</a></code> is for targetted file fetching based on name, path, id, or URL.</p>
+<p><code><a href="../reference/drive_get.html">drive_get()</a></code> is for targetted file fetching based on
+name, path, id, or URL.</p>
 </div>
 <div class="section level2">
 <h2 id="other-handy-functions">Other handy functions<a class="anchor" aria-label="anchor" href="#other-handy-functions"></a>
 </h2>
-<p><code><a href="../reference/drive_reveal.html">drive_reveal()</a></code> adds bonus information to the dribble, either by excavating it from the <code>drive_resource</code> variable or by calling the Drive API. Use it on a dribble containing files of interest.</p>
+<p><code><a href="../reference/drive_reveal.html">drive_reveal()</a></code> adds bonus information to the dribble,
+either by excavating it from the <code>drive_resource</code> variable or
+by calling the Drive API. Use it on a dribble containing files of
+interest.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"path"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"trashed"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"mime_type"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"permissions"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">files</span>, <span class="st">"published"</span><span class="op">)</span></span></code></pre></div>
-<p><code><a href="../reference/drive_ls.html">drive_ls()</a></code> lists files below a specified folder. It’s a thin wrapper around <code><a href="../reference/drive_find.html">drive_find()</a></code>, so all those capabilities are available.</p>
+<p><code><a href="../reference/drive_ls.html">drive_ls()</a></code> lists files below a specified folder. It’s a
+thin wrapper around <code><a href="../reference/drive_find.html">drive_find()</a></code>, so all those capabilities
+are available.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_ls.html">drive_ls</a></span><span class="op">(</span><span class="st">"i/am/a/folder/"</span>, type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span></code></pre></div>
 <p><code><a href="../reference/drive_browse.html">drive_browse()</a></code> will open a file in your browser.</p>

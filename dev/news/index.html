@@ -99,7 +99,8 @@
 <code>drive_reveal(what = "path")</code> returns the canonical path, i.e. there will be no shortcuts among the non-terminal “folder” parts of the returned path.</li>
 <li>
 <code>drive_get(path = "foo/")</code> can retrieve a folder named “foo” or a shortcut named “foo”, whose target is a folder.</li>
-<li>When a shortcut-to-a-folder is specified as the <code>path</code>, in a context where it unambiguously specifies a parent folder, the <code>path</code> <strong>is</strong> auto-resolved to its target folder. This is the exception to the “no automatic resolution” rule. Functions affected:<ul><li><code>drive_ls(path, ...)</code></li>
+<li>When a shortcut-to-a-folder is specified as the <code>path</code>, in a context where it unambiguously specifies a parent folder, the <code>path</code> <strong>is</strong> auto-resolved to its target folder. This is the exception to the “no automatic resolution” rule. Functions affected:
+<ul><li><code>drive_ls(path, ...)</code></li>
 <li>
 <code>drive_create(name, path, ...)</code> and its convenience wrappers <code><a href="../reference/drive_mkdir.html">drive_mkdir()</a></code> and <code><a href="../reference/shortcut_create.html">shortcut_create()</a></code>
 </li>
@@ -178,7 +179,8 @@
 <ul><li>Help for <a href="https://googledrive.tidyverse.org/reference/drive_auth.html"><code>drive_auth()</code></a> <em>all that most users need</em>
 </li>
 <li>
-<em>details for more advanced users</em><ul><li><a href="https://googledrive.tidyverse.org/articles/articles/bring-your-own-app.html">Bring your own OAuth app or API key</a></li>
+<em>details for more advanced users</em>
+<ul><li><a href="https://googledrive.tidyverse.org/articles/articles/bring-your-own-app.html">Bring your own OAuth app or API key</a></li>
 <li><a href="https://gargle.r-lib.org/articles/get-api-credentials.html" class="external-link">How to get your own API credentials</a></li>
 <li><a href="https://gargle.r-lib.org/articles/non-interactive-auth.html" class="external-link">Non-interactive auth</a></li>
 <li><a href="https://gargle.r-lib.org/articles/auth-from-web.html" class="external-link">Auth when using R in the browser</a></li>
@@ -220,7 +222,8 @@
 </ul><p>For full details see the resources listed in <em>Where to learn more</em> above. The change that probably affects the most code is the way to provide a service account token: - Previously: <code>drive_auth(service_token = "/path/to/your/service-account-token.json")</code> (v0.1.3 and earlier) - Now: <code>drive_auth(path = "/path/to/your/service-account-token.json")</code> (&gt;= v1.0.0)</p>
 <p>Auth configuration has also changed:</p>
 <ul><li>
-<code><a href="../reference/drive_auth_configure.html">drive_auth_configure()</a></code> is a variant of the now-deprecated <code><a href="../reference/googledrive-deprecated.html">drive_auth_config()</a></code> whose explicit and only job is to <em>set</em> aspects of the configuration, i.e. the OAuth app or API key.<ul><li>Use <code><a href="../reference/drive_auth_configure.html">drive_oauth_app()</a></code> (new) and <code><a href="../reference/drive_auth_configure.html">drive_api_key()</a></code> to <em>retrieve</em> a user-configured app or API key, if such exist.</li>
+<code><a href="../reference/drive_auth_configure.html">drive_auth_configure()</a></code> is a variant of the now-deprecated <code><a href="../reference/googledrive-deprecated.html">drive_auth_config()</a></code> whose explicit and only job is to <em>set</em> aspects of the configuration, i.e. the OAuth app or API key.
+<ul><li>Use <code><a href="../reference/drive_auth_configure.html">drive_oauth_app()</a></code> (new) and <code><a href="../reference/drive_auth_configure.html">drive_api_key()</a></code> to <em>retrieve</em> a user-configured app or API key, if such exist.</li>
 <li>These functions no longer return built-in auth assets, although built-in assets still exist and are used in the absence of user configuration.</li>
 </ul></li>
 <li>
@@ -302,10 +305,12 @@
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.2" id="googledrive-012">googledrive 0.1.2<a class="anchor" aria-label="anchor" href="#googledrive-012"></a></h2><p class="text-muted">CRAN release: 2018-10-06</p>
-<ul><li>Internal usage of <code>glue::collapse()</code> modified to call <code><a href="https://glue.tidyverse.org/reference/glue_collapse.html" class="external-link">glue::glue_collapse()</a></code> if glue v1.3.0 or later is installed and <code>glue::collapse()</code> otherwise. Eliminates a deprecation warning emanating from glue. (<a href="https://github.com/tidyverse/googledrive/issues/222" class="external-link">#222</a> <a href="https://github.com/jimhester" class="external-link">@jimhester</a>)</li></ul></div>
+<ul><li>Internal usage of <code>glue::collapse()</code> modified to call <code><a href="https://glue.tidyverse.org/reference/glue_collapse.html" class="external-link">glue::glue_collapse()</a></code> if glue v1.3.0 or later is installed and <code>glue::collapse()</code> otherwise. Eliminates a deprecation warning emanating from glue. (<a href="https://github.com/tidyverse/googledrive/issues/222" class="external-link">#222</a> <a href="https://github.com/jimhester" class="external-link">@jimhester</a>)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="googledrive-011">googledrive 0.1.1<a class="anchor" aria-label="anchor" href="#googledrive-011"></a></h2><p class="text-muted">CRAN release: 2017-08-28</p>
-<ul><li>initial CRAN release</li></ul></div>
+<ul><li>initial CRAN release</li>
+</ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
