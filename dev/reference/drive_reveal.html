@@ -17,7 +17,7 @@ date-time, we return POSIXct. Otherwise, you'll get a
 list-column. If this makes you sad, consider using tidyr::hoist() instead.
 It is more powerful due to a richer &quot;plucking specification&quot; and its ptype
 and transform arguments. Another useful function is
-tidyr::unnest_wider()."><title>Add a new column of Drive file information — drive_reveal • googledrive</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.4/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.4/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Add a new column of Drive file information — drive_reveal"><meta property="og:description" content="drive_reveal() adds extra information about your Drive files that is not
+tidyr::unnest_wider()."><title>Add a new column of Drive file information — drive_reveal • googledrive</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.4/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.4/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Add a new column of Drive file information — drive_reveal"><meta property="og:description" content="drive_reveal() adds extra information about your Drive files that is not
 readily available in the default dribble produced by googledrive. Why is
 this info not always included in the default dribble?
 You don't always care about it. There is a lot of esoteric information in
@@ -228,47 +228,47 @@ Drive file (which is what's in the <code>drive_resource</code> list-column of a
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 path                   id             drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename ~/name-squatter-rename 1Zyp-SaDaHVFX… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     ~/name-squatter-mv     1ylBAwuWrZFos… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          ~/b4xl/Lotus 1-2-3     19xYsHl_Xe46x… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            ~/b4xl/SuperCalc       1REWrPZGeUQKe… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          ~/ExecuVision          1sNkUto8RX3Dh… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             ~/WordStar             1aRvCHaTYyFoH… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload ~/name-squatter-upload 10Dr7TMz2zPyq… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename ~/name-squatter-rename 1IcPxxQUi-2zF… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     ~/name-squatter-mv     1ReH0e-_gd48s… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          ~/b4xl/Lotus 1-2-3     1GQ4qypZEa8Ur… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename ~/name-squatter-rename 18Y-yuwOk8-Sc… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     ~/name-squatter-mv     1Jf9Kj8sJ5JYZ… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          ~/b4xl/Lotus 1-2-3     1Z1SA9OnZaLQk… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            ~/b4xl/SuperCalc       1uuUtGhKHPBQq… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          ~/ExecuVision          1cpSRFNox7HHW… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             ~/WordStar             1wVjvcRSEUqS7… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload ~/name-squatter-upload 1_4TqBIXNO1Md… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename ~/name-squatter-rename 1Zyp-SaDaHVFX… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     ~/name-squatter-mv     1ylBAwuWrZFos… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          ~/b4xl/Lotus 1-2-3     19xYsHl_Xe46x… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"permissions"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 shared id                drive_reso…¹ permission…²</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename FALSE  1Zyp-SaDaHVFXhVl… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     FALSE  1ylBAwuWrZFospMO… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          FALSE  19xYsHl_Xe46xRof… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            FALSE  1REWrPZGeUQKewMf… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          FALSE  1sNkUto8RX3Dhu2j… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             FALSE  1aRvCHaTYyFoHU9R… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload FALSE  10Dr7TMz2zPyqU1v… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename FALSE  1IcPxxQUi-2zFWUY… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     FALSE  1ReH0e-_gd48ssgB… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          FALSE  1GQ4qypZEa8UrNZK… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename FALSE  18Y-yuwOk8-ScCLm… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     FALSE  1Jf9Kj8sJ5JYZPiV… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          FALSE  1Z1SA9OnZaLQkTGe… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            FALSE  1uuUtGhKHPBQqQ85… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          FALSE  1cpSRFNox7HHWCJ1… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             FALSE  1wVjvcRSEUqS7RA3… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload FALSE  1_4TqBIXNO1MdKLh… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename FALSE  1Zyp-SaDaHVFXhVl… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     FALSE  1ylBAwuWrZFospMO… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          FALSE  19xYsHl_Xe46xRof… &lt;named list&gt; &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​drive_resource,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​permissions_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"published"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 published id             drive_reso…¹ revision_r…²</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename FALSE     1Zyp-SaDaHVFX… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     FALSE     1ylBAwuWrZFos… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          FALSE     19xYsHl_Xe46x… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            FALSE     1REWrPZGeUQKe… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          FALSE     1sNkUto8RX3Dh… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             FALSE     1aRvCHaTYyFoH… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload FALSE     10Dr7TMz2zPyq… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename FALSE     1IcPxxQUi-2zF… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     FALSE     1ReH0e-_gd48s… &lt;named list&gt; &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          FALSE     1GQ4qypZEa8Ur… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename FALSE     18Y-yuwOk8-Sc… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     FALSE     1Jf9Kj8sJ5JYZ… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          FALSE     1Z1SA9OnZaLQk… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            FALSE     1uuUtGhKHPBQq… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          FALSE     1cpSRFNox7HHW… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             FALSE     1wVjvcRSEUqS7… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload FALSE     1_4TqBIXNO1Md… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename FALSE     1Zyp-SaDaHVFX… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     FALSE     1ylBAwuWrZFos… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          FALSE     19xYsHl_Xe46x… &lt;named list&gt; &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​drive_resource, ²​revision_resource</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># a "special" case of digging info out of `drive_resource`, then processing</span></span></span>
@@ -277,16 +277,16 @@ Drive file (which is what's in the <code>drive_resource</code> list-column of a
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 id_parent                       id    drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;drv&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 0AO_RMaBzcP63Uk9PVA             1Zyp… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     0AO_RMaBzcP63Uk9PVA             1ylB… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          1S0iWntXFsr7UqMZUnzVm1j7QLssl_… 19xY… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            1S0iWntXFsr7UqMZUnzVm1j7QLssl_… 1REW… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          0AO_RMaBzcP63Uk9PVA             1sNk… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             0AO_RMaBzcP63Uk9PVA             1aRv… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 0AO_RMaBzcP63Uk9PVA             10Dr… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 0AO_RMaBzcP63Uk9PVA             1IcP… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     0AO_RMaBzcP63Uk9PVA             1ReH… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          1S0iWntXFsr7UqMZUnzVm1j7QLssl_… 1GQ4… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 0AO_RMaBzcP63Uk9PVA             18Y-… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     0AO_RMaBzcP63Uk9PVA             1Jf9… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          1S0iWntXFsr7UqMZUnzVm1j7QLssl_… 1Z1S… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            1S0iWntXFsr7UqMZUnzVm1j7QLssl_… 1uuU… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          0AO_RMaBzcP63Uk9PVA             1cpS… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             0AO_RMaBzcP63Uk9PVA             1wVj… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 0AO_RMaBzcP63Uk9PVA             1_4T… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 0AO_RMaBzcP63Uk9PVA             1Zyp… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     0AO_RMaBzcP63Uk9PVA             1ylB… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          1S0iWntXFsr7UqMZUnzVm1j7QLssl_… 19xY… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># the "simple" cases of digging info out of `drive_resource`</span></span></span>
@@ -294,166 +294,166 @@ Drive file (which is what's in the <code>drive_resource</code> list-column of a
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 trashed id                            drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename TRUE    1Zyp-SaDaHVFXhVl_ZMZJUEQW_0q… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     TRUE    1ylBAwuWrZFospMOCFkZKkRmw3YN… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          FALSE   19xYsHl_Xe46xRofXbCvdPkbtqbZ… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            FALSE   1REWrPZGeUQKewMfIJhVzXpjDNfv… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          FALSE   1sNkUto8RX3Dhu2jat_e2EXiOq51… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             FALSE   1aRvCHaTYyFoHU9RPhvSpPY8Jue0… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload TRUE    10Dr7TMz2zPyqU1vbBDCFGdWGRLu… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename TRUE    1IcPxxQUi-2zFWUYC_BqSq3FmpMF… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     TRUE    1ReH0e-_gd48ssgBMipsTxVnJOCW… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          FALSE   1GQ4qypZEa8UrNZKJK1zKoMvu9Tr… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename TRUE    18Y-yuwOk8-ScCLmlv-WyFNPLcu2… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     TRUE    1Jf9Kj8sJ5JYZPiVB6rUoaGXv-Ms… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          FALSE   1Z1SA9OnZaLQkTGebcb4XZ93so_p… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            FALSE   1uuUtGhKHPBQqQ85wrq7xfsYJSMj… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          FALSE   1cpSRFNox7HHWCJ1TNfFa_R4YuvA… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             FALSE   1wVjvcRSEUqS7RA3vhxgU9VpKy1G… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload TRUE    1_4TqBIXNO1MdKLhODyhOtyWpqXF… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename TRUE    1Zyp-SaDaHVFXhVl_ZMZJUEQW_0q… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     TRUE    1ylBAwuWrZFospMOCFkZKkRmw3YN… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          FALSE   19xYsHl_Xe46xRofXbCvdPkbtqbZ… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"mime_type"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 mime_type                       id    drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;drv&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename application/octet-stream        1Zyp… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     application/octet-stream        1ylB… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          application/vnd.google-apps.sp… 19xY… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            application/vnd.google-apps.sp… 1REW… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          application/vnd.google-apps.pr… 1sNk… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             application/vnd.google-apps.do… 1aRv… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload application/octet-stream        10Dr… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename application/octet-stream        1IcP… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     application/octet-stream        1ReH… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          application/vnd.google-apps.sp… 1GQ4… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename application/octet-stream        18Y-… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     application/octet-stream        1Jf9… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          application/vnd.google-apps.sp… 1Z1S… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            application/vnd.google-apps.sp… 1uuU… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          application/vnd.google-apps.pr… 1cpS… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             application/vnd.google-apps.do… 1wVj… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload application/octet-stream        1_4T… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename application/octet-stream        1Zyp… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     application/octet-stream        1ylB… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          application/vnd.google-apps.sp… 19xY… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"starred"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 starred id                            drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename FALSE   1Zyp-SaDaHVFXhVl_ZMZJUEQW_0q… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     FALSE   1ylBAwuWrZFospMOCFkZKkRmw3YN… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          FALSE   19xYsHl_Xe46xRofXbCvdPkbtqbZ… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            FALSE   1REWrPZGeUQKewMfIJhVzXpjDNfv… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          FALSE   1sNkUto8RX3Dhu2jat_e2EXiOq51… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             TRUE    1aRvCHaTYyFoHU9RPhvSpPY8Jue0… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload FALSE   10Dr7TMz2zPyqU1vbBDCFGdWGRLu… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename FALSE   1IcPxxQUi-2zFWUYC_BqSq3FmpMF… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     FALSE   1ReH0e-_gd48ssgBMipsTxVnJOCW… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          FALSE   1GQ4qypZEa8UrNZKJK1zKoMvu9Tr… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename FALSE   18Y-yuwOk8-ScCLmlv-WyFNPLcu2… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     FALSE   1Jf9Kj8sJ5JYZPiVB6rUoaGXv-Ms… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          FALSE   1Z1SA9OnZaLQkTGebcb4XZ93so_p… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            FALSE   1uuUtGhKHPBQqQ85wrq7xfsYJSMj… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          FALSE   1cpSRFNox7HHWCJ1TNfFa_R4YuvA… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             TRUE    1wVjvcRSEUqS7RA3vhxgU9VpKy1G… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload FALSE   1_4TqBIXNO1MdKLhODyhOtyWpqXF… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename FALSE   1Zyp-SaDaHVFXhVl_ZMZJUEQW_0q… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     FALSE   1ylBAwuWrZFospMOCFkZKkRmw3YN… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          FALSE   19xYsHl_Xe46xRofXbCvdPkbtqbZ… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"description"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 description                    id     drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;drv_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename <span style="color: #BB0000;">NA</span>                             1Zyp-… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     <span style="color: #BB0000;">NA</span>                             1ylBA… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          <span style="color: #BB0000;">NA</span>                             19xYs… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            <span style="color: #BB0000;">NA</span>                             1REWr… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          deeply nested bullet lists FTW 1sNkU… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             <span style="color: #BB0000;">NA</span>                             1aRvC… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload <span style="color: #BB0000;">NA</span>                             10Dr7… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename <span style="color: #BB0000;">NA</span>                             1IcPx… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     <span style="color: #BB0000;">NA</span>                             1ReH0… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          <span style="color: #BB0000;">NA</span>                             1GQ4q… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename <span style="color: #BB0000;">NA</span>                             18Y-y… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     <span style="color: #BB0000;">NA</span>                             1Jf9K… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          <span style="color: #BB0000;">NA</span>                             1Z1SA… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            <span style="color: #BB0000;">NA</span>                             1uuUt… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          deeply nested bullet lists FTW 1cpSR… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             <span style="color: #BB0000;">NA</span>                             1wVjv… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload <span style="color: #BB0000;">NA</span>                             1_4Tq… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename <span style="color: #BB0000;">NA</span>                             1Zyp-… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     <span style="color: #BB0000;">NA</span>                             1ylBA… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          <span style="color: #BB0000;">NA</span>                             19xYs… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"version"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 version id                            drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 2       1Zyp-SaDaHVFXhVl_ZMZJUEQW_0q… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     2       1ylBAwuWrZFospMOCFkZKkRmw3YN… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          4       19xYsHl_Xe46xRofXbCvdPkbtqbZ… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            4       1REWrPZGeUQKewMfIJhVzXpjDNfv… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          3       1sNkUto8RX3Dhu2jat_e2EXiOq51… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             3       1aRvCHaTYyFoHU9RPhvSpPY8Jue0… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 2       10Dr7TMz2zPyqU1vbBDCFGdWGRLu… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 2       1IcPxxQUi-2zFWUYC_BqSq3FmpMF… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     2       1ReH0e-_gd48ssgBMipsTxVnJOCW… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          4       1GQ4qypZEa8UrNZKJK1zKoMvu9Tr… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 2       18Y-yuwOk8-ScCLmlv-WyFNPLcu2… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     2       1Jf9Kj8sJ5JYZPiVB6rUoaGXv-Ms… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          4       1Z1SA9OnZaLQkTGebcb4XZ93so_p… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            4       1uuUtGhKHPBQqQ85wrq7xfsYJSMj… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          3       1cpSRFNox7HHWCJ1TNfFa_R4YuvA… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             3       1wVjvcRSEUqS7RA3vhxgU9VpKy1G… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 2       1_4TqBIXNO1MdKLhODyhOtyWpqXF… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 2       1Zyp-SaDaHVFXhVl_ZMZJUEQW_0q… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     2       1ylBAwuWrZFospMOCFkZKkRmw3YN… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          4       19xYsHl_Xe46xRofXbCvdPkbtqbZ… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"web_view_link"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 web_view_link                   id    drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;drv&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename https://drive.google.com/file/… 1Zyp… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     https://drive.google.com/file/… 1ylB… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          https://docs.google.com/spread… 19xY… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            https://docs.google.com/spread… 1REW… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          https://docs.google.com/presen… 1sNk… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             https://docs.google.com/docume… 1aRv… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload https://drive.google.com/file/… 10Dr… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename https://drive.google.com/file/… 1IcP… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     https://drive.google.com/file/… 1ReH… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          https://docs.google.com/spread… 1GQ4… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename https://drive.google.com/file/… 18Y-… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     https://drive.google.com/file/… 1Jf9… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          https://docs.google.com/spread… 1Z1S… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            https://docs.google.com/spread… 1uuU… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          https://docs.google.com/presen… 1cpS… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             https://docs.google.com/docume… 1wVj… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload https://drive.google.com/file/… 1_4T… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename https://drive.google.com/file/… 1Zyp… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     https://drive.google.com/file/… 1ylB… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          https://docs.google.com/spread… 19xY… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"modified_time"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 modified_time       id                drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 2022-12-15 <span style="color: #949494;">13:43:45</span> 1Zyp-SaDaHVFXhVl… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     2022-12-15 <span style="color: #949494;">13:43:20</span> 1ylBAwuWrZFospMO… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          2022-12-15 <span style="color: #949494;">13:42:50</span> 19xYsHl_Xe46xRof… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            2022-12-15 <span style="color: #949494;">13:42:47</span> 1REWrPZGeUQKewMf… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          2022-12-15 <span style="color: #949494;">13:42:43</span> 1sNkUto8RX3Dhu2j… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             2022-12-15 <span style="color: #949494;">13:42:40</span> 1aRvCHaTYyFoHU9R… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 2022-12-14 <span style="color: #949494;">13:45:33</span> 10Dr7TMz2zPyqU1v… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 2022-12-14 <span style="color: #949494;">13:44:39</span> 1IcPxxQUi-2zFWUY… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     2022-12-14 <span style="color: #949494;">13:44:13</span> 1ReH0e-_gd48ssgB… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          2022-12-14 <span style="color: #949494;">13:43:38</span> 1GQ4qypZEa8UrNZK… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 2022-12-16 <span style="color: #949494;">13:41:39</span> 18Y-yuwOk8-ScCLm… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     2022-12-16 <span style="color: #949494;">13:41:17</span> 1Jf9Kj8sJ5JYZPiV… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          2022-12-16 <span style="color: #949494;">13:40:48</span> 1Z1SA9OnZaLQkTGe… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            2022-12-16 <span style="color: #949494;">13:40:47</span> 1uuUtGhKHPBQqQ85… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          2022-12-16 <span style="color: #949494;">13:40:42</span> 1cpSRFNox7HHWCJ1… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             2022-12-16 <span style="color: #949494;">13:40:39</span> 1wVjvcRSEUqS7RA3… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 2022-12-15 <span style="color: #949494;">13:44:34</span> 1_4TqBIXNO1MdKLh… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 2022-12-15 <span style="color: #949494;">13:43:45</span> 1Zyp-SaDaHVFXhVl… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     2022-12-15 <span style="color: #949494;">13:43:20</span> 1ylBAwuWrZFospMO… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          2022-12-15 <span style="color: #949494;">13:42:50</span> 19xYsHl_Xe46xRof… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"created_time"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 created_time        id                drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 2022-12-15 <span style="color: #949494;">13:43:45</span> 1Zyp-SaDaHVFXhVl… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     2022-12-15 <span style="color: #949494;">13:43:20</span> 1ylBAwuWrZFospMO… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          2022-12-15 <span style="color: #949494;">13:42:50</span> 19xYsHl_Xe46xRof… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            2022-12-15 <span style="color: #949494;">13:42:47</span> 1REWrPZGeUQKewMf… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          2022-12-15 <span style="color: #949494;">13:42:43</span> 1sNkUto8RX3Dhu2j… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             2022-12-15 <span style="color: #949494;">13:42:40</span> 1aRvCHaTYyFoHU9R… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 2022-12-14 <span style="color: #949494;">13:45:33</span> 10Dr7TMz2zPyqU1v… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 2022-12-14 <span style="color: #949494;">13:44:39</span> 1IcPxxQUi-2zFWUY… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     2022-12-14 <span style="color: #949494;">13:44:13</span> 1ReH0e-_gd48ssgB… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          2022-12-14 <span style="color: #949494;">13:43:38</span> 1GQ4qypZEa8UrNZK… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 2022-12-16 <span style="color: #949494;">13:41:39</span> 18Y-yuwOk8-ScCLm… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     2022-12-16 <span style="color: #949494;">13:41:17</span> 1Jf9Kj8sJ5JYZPiV… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          2022-12-16 <span style="color: #949494;">13:40:48</span> 1Z1SA9OnZaLQkTGe… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            2022-12-16 <span style="color: #949494;">13:40:46</span> 1uuUtGhKHPBQqQ85… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          2022-12-16 <span style="color: #949494;">13:40:41</span> 1cpSRFNox7HHWCJ1… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             2022-12-16 <span style="color: #949494;">13:40:38</span> 1wVjvcRSEUqS7RA3… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 2022-12-15 <span style="color: #949494;">13:44:34</span> 1_4TqBIXNO1MdKLh… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 2022-12-15 <span style="color: #949494;">13:43:45</span> 1Zyp-SaDaHVFXhVl… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     2022-12-15 <span style="color: #949494;">13:43:20</span> 1ylBAwuWrZFospMO… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          2022-12-15 <span style="color: #949494;">13:42:50</span> 19xYsHl_Xe46xRof… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"owned_by_me"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 owned_by_me id                        drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename TRUE        1Zyp-SaDaHVFXhVl_ZMZJUEQ… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     TRUE        1ylBAwuWrZFospMOCFkZKkRm… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          TRUE        19xYsHl_Xe46xRofXbCvdPkb… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            TRUE        1REWrPZGeUQKewMfIJhVzXpj… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          TRUE        1sNkUto8RX3Dhu2jat_e2EXi… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             TRUE        1aRvCHaTYyFoHU9RPhvSpPY8… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload TRUE        10Dr7TMz2zPyqU1vbBDCFGdW… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename TRUE        1IcPxxQUi-2zFWUYC_BqSq3F… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     TRUE        1ReH0e-_gd48ssgBMipsTxVn… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          TRUE        1GQ4qypZEa8UrNZKJK1zKoMv… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename TRUE        18Y-yuwOk8-ScCLmlv-WyFNP… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     TRUE        1Jf9Kj8sJ5JYZPiVB6rUoaGX… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          TRUE        1Z1SA9OnZaLQkTGebcb4XZ93… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            TRUE        1uuUtGhKHPBQqQ85wrq7xfsY… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          TRUE        1cpSRFNox7HHWCJ1TNfFa_R4… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             TRUE        1wVjvcRSEUqS7RA3vhxgU9Vp… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload TRUE        1_4TqBIXNO1MdKLhODyhOtyW… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename TRUE        1Zyp-SaDaHVFXhVl_ZMZJUEQ… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     TRUE        1ylBAwuWrZFospMOCFkZKkRm… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          TRUE        19xYsHl_Xe46xRofXbCvdPkb… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"size"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 size  id                              drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 0     1Zyp-SaDaHVFXhVl_ZMZJUEQW_0qvc… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     0     1ylBAwuWrZFospMOCFkZKkRmw3YNJb… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          1024  19xYsHl_Xe46xRofXbCvdPkbtqbZZl… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            1024  1REWrPZGeUQKewMfIJhVzXpjDNfvca… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          3483  1sNkUto8RX3Dhu2jat_e2EXiOq51BM… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             1024  1aRvCHaTYyFoHU9RPhvSpPY8Jue0u3… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 0     10Dr7TMz2zPyqU1vbBDCFGdWGRLurf… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 0     1IcPxxQUi-2zFWUYC_BqSq3FmpMFZa… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     0     1ReH0e-_gd48ssgBMipsTxVnJOCW1X… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          1024  1GQ4qypZEa8UrNZKJK1zKoMvu9TrK-… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 0     18Y-yuwOk8-ScCLmlv-WyFNPLcu2sc… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     0     1Jf9Kj8sJ5JYZPiVB6rUoaGXv-Ms0j… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          1024  1Z1SA9OnZaLQkTGebcb4XZ93so_pVS… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            1024  1uuUtGhKHPBQqQ85wrq7xfsYJSMj2f… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          3483  1cpSRFNox7HHWCJ1TNfFa_R4YuvAAH… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             1024  1wVjvcRSEUqS7RA3vhxgU9VpKy1GVg… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 0     1_4TqBIXNO1MdKLhODyhOtyWpqXFmq… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 0     1Zyp-SaDaHVFXhVl_ZMZJUEQW_0qvc… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     0     1ylBAwuWrZFospMOCFkZKkRmw3YNJb… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          1024  19xYsHl_Xe46xRofXbCvdPkbtqbZZl… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"quota_bytes_used"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                 quota_bytes_used id                   drive_reso…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 0                1Zyp-SaDaHVFXhVl_ZM… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     0                1ylBAwuWrZFospMOCFk… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          1024             19xYsHl_Xe46xRofXbC… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            1024             1REWrPZGeUQKewMfIJh… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          3483             1sNkUto8RX3Dhu2jat_… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             1024             1aRvCHaTYyFoHU9RPhv… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 0                10Dr7TMz2zPyqU1vbBD… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 0                1IcPxxQUi-2zFWUYC_B… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     0                1ReH0e-_gd48ssgBMip… &lt;named list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          1024             1GQ4qypZEa8UrNZKJK1… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 0                18Y-yuwOk8-ScCLmlv-… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     0                1Jf9Kj8sJ5JYZPiVB6r… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Lotus 1-2-3          1024             1Z1SA9OnZaLQkTGebcb… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SuperCalc            1024             1uuUtGhKHPBQqQ85wrq… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ExecuVision          3483             1cpSRFNox7HHWCJ1TNf… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> WordStar             1024             1wVjvcRSEUqS7RA3vhx… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-upload 0                1_4TqBIXNO1MdKLhODy… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-rename 0                1Zyp-SaDaHVFXhVl_ZM… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-mv     0                1ylBAwuWrZFospMOCFk… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Lotus 1-2-3          1024             19xYsHl_Xe46xRofXbC… &lt;named list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 'root' is a special file id that represents your My Drive root folder</span></span></span>
@@ -476,7 +476,7 @@ Drive file (which is what's in the <code>drive_resource</code> list-column of a
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
   </div></footer></body></html>
