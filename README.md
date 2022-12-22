@@ -42,18 +42,18 @@ on <https://drive.google.com> (up to `n_max = 25`, in this case):
 library("googledrive")
 drive_find(n_max = 25)
 #> # A dribble: 25 × 3
-#>    name                       id                                drive_resource
-#>    <chr>                      <drv_id>                          <list>        
-#>  1 2021-09-16_r_logo.jpg      1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D <named list>  
-#>  2 2021-09-16_r_about.html    1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ <named list>  
-#>  3 2021-09-16_imdb_latin1.csv 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw <named list>  
-#>  4 2021-09-16_chicken.txt     1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7 <named list>  
-#>  5 2021-09-16_chicken.pdf     14Hd6_VQAeEgcwBBJamc-FUlnXhp117T2 <named list>  
-#>  6 2021-09-16_chicken.jpg     1aslW1T-B8UKzAEotDWpmRFaMyMux5-it <named list>  
-#>  7 2021-09-16_chicken.csv     1Mj--zJYZJSMKsNVjk2tYFef5LnCsNoDT <named list>  
-#>  8 pqr                        143iq-CswFTwJTjVfKkcFMDW0jYqDeUj2 <named list>  
-#>  9 mno                        1gcUTnFbsF6uioJrLCsVQ78_F1wEzyNtI <named list>  
-#> 10 jkl                        17T40phn99w0hY-B_Ev0deTvVg9fmUSnt <named list>  
+#>    name        id                                           drive_resource   
+#>    <chr>       <drv_id>                                     <list>           
+#>  1 Lotus 1-2-3 1WaRXQYmqqc0Y_dwGHK1BNUITYJMidsxhk2hyRi2Ip5c <named list [36]>
+#>  2 SuperCalc   1eHOkbsxBEo6MeH2iL6NhOsx7KSmp03AS99BRXNe5JNo <named list [36]>
+#>  3 ExecuVision 1yJOdIFYEngyu-ou3xrUn4HgvluRXvmEtRvEUGglQg0Y <named list [37]>
+#>  4 WordStar    1BArmW-ClrWz-VEH5Wk1dy21VmxdJ7mUkVboCUFKi2lM <named list [36]>
+#>  5 Lotus 1-2-3 1TzUNjVyNeknJEJMAV-j_gxXUU160wDU0D7J0Efm15ro <named list [36]>
+#>  6 SuperCalc   19lruwoovxQgRyeDpryhqBRtC9ijKxlZO_uSqCDirw1M <named list [36]>
+#>  7 ExecuVision 1m31QKg2maTqEvdNOLx1zJOxltW4eXTa7QDLhRVhiEGY <named list [37]>
+#>  8 WordStar    1jhPZkMKHugCSyTJEaBHrK7ikeiZ_xmHCGMZw9LeTfaw <named list [36]>
+#>  9 Lotus 1-2-3 1sCG9aDVppEAAOcIFSH31307_7Xrz7Kz0ksOmeTTF8p0 <named list [36]>
+#> 10 SuperCalc   1BSVeaMP9TURi43rGLZy_BOKtFu-3OL7mmoD-DjbaU1Q <named list [36]>
 #> # … with 15 more rows
 ```
 
