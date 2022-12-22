@@ -3,7 +3,9 @@
     Code
       drive_get(id = NA_character_)
     Condition
-      Error in `.f()`:
+      Error in `map()`:
+      i In index: 1.
+      Caused by error in `.f()`:
       ! Can't `drive_get()` a file when `id` is `NA`.
 
 ---
