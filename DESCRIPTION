@@ -46,7 +46,7 @@ VignetteBuilder:
     knitr
 Remotes: 
     r-lib/gargle,
-    tidyverse/purrr#1034
+    tidyverse/purrr
 Config/Needs/website:
     tidyverse,
     tidyverse/tidytemplate
