@@ -23,7 +23,7 @@ Imports:
     lifecycle,
     magrittr,
     pillar,
-    purrr (>= 0.2.3),
+    purrr (>= 1.0.0.9000),
     rlang (>= 1.0.2),
     tibble (>= 2.0.0),
     utils,
@@ -45,7 +45,8 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
-    r-lib/gargle
+    r-lib/gargle,
+    tidyverse/purrr
 Config/Needs/website:
     tidyverse,
     tidyverse/tidytemplate
