@@ -208,7 +208,7 @@ warn_for_verbose <- function(verbose = TRUE,
 
   lifecycle::deprecate_warn(
     when = "2.0.0",
-    what = I(cli::format_inline("The {.arg verbose} argument")),
+    what = I("The `verbose` argument"),
     details = c(
       "Set `options(googledrive_quiet = TRUE)` to suppress all googledrive messages.",
       "For finer control, use `local_drive_quiet()` or `with_drive_quiet()`.",
