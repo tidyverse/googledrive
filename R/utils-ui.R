@@ -199,9 +199,10 @@ message <- function(...) {
 warn_for_verbose <- function(verbose = TRUE,
                              env = caller_env(),
                              user_env = caller_env(2)) {
-  # this is about whether `verbose` was present in the **user's** call to the
-  # calling function
-  # don't worry about the `verbose = TRUE` default in warn_for_verbose()
+  # This function is not meant to be called directly, so don't worry about its
+  # default of `verbose = TRUE`.
+  # In authentic, indirect usage of this helper, this picks up on whether
+  # `verbose` was present in the **user's** call to the calling function.
   if (!lifecycle::is_present(verbose) || isTRUE(verbose)) {
     return(invisible())
   }
@@ -218,7 +219,7 @@ warn_for_verbose <- function(verbose = TRUE,
     always = identical(env, global_env()),
     id = "googledrive_verbose"
   )
-  # only set the option during organic, indirect usage
+  # only set the option during authentic, indirect usage
   if (!identical(env, global_env())) {
     local_drive_quiet(env = env)
   }
