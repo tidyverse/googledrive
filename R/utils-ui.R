@@ -216,8 +216,7 @@ warn_for_verbose <- function(verbose = TRUE,
       "googledrive's `verbose` argument will be removed in the future."
     ),
     user_env = user_env,
-    always = identical(env, global_env()),
-    id = "googledrive_verbose"
+    always = identical(env, global_env())
   )
   # only set the option during authentic, indirect usage
   if (!identical(env, global_env())) {
