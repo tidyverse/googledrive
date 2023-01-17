@@ -196,36 +196,40 @@ message <- function(...) {
     instead of {.fun message}")
 }
 
-warn_for_verbose <- function(verbose = TRUE, env = caller_env()) {
-  # this is about whether `verbose` was present in the **user's** call to the
-  # calling function
-  # don't worry about the `verbose = TRUE` default here
+warn_for_verbose <- function(verbose = TRUE,
+                             env = caller_env(),
+                             user_env = caller_env(2)) {
+  # This function is not meant to be called directly, so don't worry about its
+  # default of `verbose = TRUE`.
+  # In authentic, indirect usage of this helper, this picks up on whether
+  # `verbose` was present in the **user's** call to the calling function.
   if (!lifecycle::is_present(verbose) || isTRUE(verbose)) {
     return(invisible())
   }
 
-  called_from <- sys.parent(1)
-  if (called_from == 0) {
-    # called from global env, presumably in a test or during development
-    caller <- "some_googledrive_function"
+  fc <- frame_call(env)
+  caller <- if (is.null(fc)) NULL else call_name(fc)
+  if (is.null(caller)) {
+    what = I("The `verbose` argument")
   } else {
-    called_as <- sys.call(called_from)
-    if (is.call(called_as) && is.symbol(called_as[[1]])) {
-      caller <- as.character(called_as[[1]])
-    } else {
-      caller <- "some_googledrive_function"
-    }
+    what = glue("{caller}(verbose)")
   }
+
   lifecycle::deprecate_warn(
     when = "2.0.0",
-    what = glue("{caller}(verbose)"),
+    what = what,
     details = c(
       "Set `options(googledrive_quiet = TRUE)` to suppress all googledrive messages.",
       "For finer control, use `local_drive_quiet()` or `with_drive_quiet()`.",
       "googledrive's `verbose` argument will be removed in the future."
     ),
+    user_env = user_env,
+    always = identical(env, global_env()),
     id = "googledrive_verbose"
   )
-  local_drive_quiet(env = env)
+  # only set the option during authentic, indirect usage
+  if (!identical(env, global_env())) {
+    local_drive_quiet(env = env)
+  }
   invisible()
 }
