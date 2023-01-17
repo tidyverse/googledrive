@@ -207,16 +207,25 @@ warn_for_verbose <- function(verbose = TRUE,
     return(invisible())
   }
 
+  fc <- frame_call(env)
+  caller <- if (is.null(fc)) NULL else call_name(fc)
+  if (is.null(caller)) {
+    what = I("The `verbose` argument")
+  } else {
+    what = glue("{caller}(verbose)")
+  }
+
   lifecycle::deprecate_warn(
     when = "2.0.0",
-    what = I("The `verbose` argument"),
+    what = what,
     details = c(
       "Set `options(googledrive_quiet = TRUE)` to suppress all googledrive messages.",
       "For finer control, use `local_drive_quiet()` or `with_drive_quiet()`.",
       "googledrive's `verbose` argument will be removed in the future."
     ),
     user_env = user_env,
-    always = identical(env, global_env())
+    always = identical(env, global_env()),
+    id = "googledrive_verbose"
   )
   # only set the option during authentic, indirect usage
   if (!identical(env, global_env())) {
