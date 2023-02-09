@@ -190,7 +190,7 @@ by iterating over the <code>local_files</code> using
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_mkdir.html">drive_mkdir</a></span><span class="op">(</span><span class="st">"upload-into-me-article-demo"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Created Drive file:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">upload-into-me-article-demo</span> <span style="color: #555555;">&lt;id: 1-vNduqo4Ihyh6ZLNWntCYA_LMnJueAlu&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">upload-into-me-article-demo</span> <span style="color: #555555;">&lt;id: 10CqrEYN1h45hF_StdLHK11LbTHNDO8Qs&gt;</span></span></span>
 <span><span class="co">#&gt; With MIME type:</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">application/vnd.google-apps.folder</span></span></span>
 <span><span class="fu"><a href="../reference/googledrive-configuration.html">with_drive_quiet</a></span><span class="op">(</span></span>
@@ -203,13 +203,13 @@ folder.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 7 × 3</span></span></span>
 <span><span class="co">#&gt;   name            id                                drive_resource   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> r_logo.jpg      14Y5HbTyfb2ZrxfZJH_NSl3hR8VDWqZnP <span style="color: #949494;">&lt;named list [43]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> r_about.html    18g7f7o5ksSznZgdZwCgnncLiFWPmozoC <span style="color: #949494;">&lt;named list [42]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> imdb_latin1.csv 1T3C5PeABf4EuUNFDrfETamZsfdNgyOOg <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> chicken.txt     1NmF5kYMFZxdSwq-ZI4Nq5Ge8KELyqcPa <span style="color: #949494;">&lt;named list [42]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> chicken.pdf     1xB93RSxeQ_WrS3wmcjnsEaNxpMim4gti <span style="color: #949494;">&lt;named list [42]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> chicken.jpg     1qZahfltCCZu0vDxOO47jkWa2CR_5bkur <span style="color: #949494;">&lt;named list [43]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> chicken.csv     1lqMkF_8TptDuobxxyIPm-U5Bd0yAuRmx <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> r_logo.jpg      1h4wa39stb_5do6hpiZRpAnl96ZOyW6SU <span style="color: #949494;">&lt;named list [43]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> r_about.html    1xn0htRWfRN0D80DCSe38R2iwyGlk54yg <span style="color: #949494;">&lt;named list [42]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> imdb_latin1.csv 1XTiV49Zq07k-fvO6XjfSmjZMpYU_F8Nh <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> chicken.txt     1Nt_0XD8lBSlHJxiUMda5JM_ruD_C3cYw <span style="color: #949494;">&lt;named list [42]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> chicken.pdf     1TZQXcznecPoKgFxPGtcSnHoeMLGn2-ol <span style="color: #949494;">&lt;named list [42]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> chicken.jpg     1h_0qKdaleh1CCkRDntas0jaasPMEG0Nj <span style="color: #949494;">&lt;named list [43]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> chicken.csv     1dsD4OWT5_odV1bXqj-Xu1j2QkwUWRdf7 <span style="color: #949494;">&lt;named list [42]&gt;</span></span></span></code></pre></div>
 <p>Now let’s reflect on the <code>files</code> object returned by this
 operation. <code>files</code> is a list of <strong>dribbles</strong>,
 one per uploaded file.</p>
@@ -232,13 +232,13 @@ big dribble yourself with, e.g., <code><a href="https://dplyr.tidyverse.org/refe
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 7 × 3</span></span></span>
 <span><span class="co">#&gt;   name            id                                drive_resource   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken.csv     1lqMkF_8TptDuobxxyIPm-U5Bd0yAuRmx <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chicken.jpg     1qZahfltCCZu0vDxOO47jkWa2CR_5bkur <span style="color: #949494;">&lt;named list [43]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> chicken.pdf     1xB93RSxeQ_WrS3wmcjnsEaNxpMim4gti <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> chicken.txt     1NmF5kYMFZxdSwq-ZI4Nq5Ge8KELyqcPa <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> imdb_latin1.csv 1T3C5PeABf4EuUNFDrfETamZsfdNgyOOg <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> r_about.html    18g7f7o5ksSznZgdZwCgnncLiFWPmozoC <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> r_logo.jpg      14Y5HbTyfb2ZrxfZJH_NSl3hR8VDWqZnP <span style="color: #949494;">&lt;named list [43]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken.csv     1dsD4OWT5_odV1bXqj-Xu1j2QkwUWRdf7 <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chicken.jpg     1h_0qKdaleh1CCkRDntas0jaasPMEG0Nj <span style="color: #949494;">&lt;named list [43]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> chicken.pdf     1TZQXcznecPoKgFxPGtcSnHoeMLGn2-ol <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> chicken.txt     1Nt_0XD8lBSlHJxiUMda5JM_ruD_C3cYw <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> imdb_latin1.csv 1XTiV49Zq07k-fvO6XjfSmjZMpYU_F8Nh <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> r_about.html    1xn0htRWfRN0D80DCSe38R2iwyGlk54yg <span style="color: #949494;">&lt;named list [41]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> r_logo.jpg      1h4wa39stb_5do6hpiZRpAnl96ZOyW6SU <span style="color: #949494;">&lt;named list [43]&gt;</span></span></span></code></pre></div>
 <p>Below we show another way to finesse this by using a variant of
 <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map()</a></code> that does this for us, namely
 <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr()</a></code>.</p>
@@ -253,42 +253,42 @@ map over two inputs: the list of dribbles from above and the vector of
 new names.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">new_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"{Sys.Date()}_{basename(local_files)}"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2023-02-08_chicken.csv</span></span>
-<span><span class="co">#&gt; 2023-02-08_chicken.jpg</span></span>
-<span><span class="co">#&gt; 2023-02-08_chicken.pdf</span></span>
-<span><span class="co">#&gt; 2023-02-08_chicken.txt</span></span>
-<span><span class="co">#&gt; 2023-02-08_imdb_latin1.csv</span></span>
-<span><span class="co">#&gt; 2023-02-08_r_about.html</span></span>
-<span><span class="co">#&gt; 2023-02-08_r_logo.jpg</span></span>
+<span><span class="co">#&gt; 2023-02-09_chicken.csv</span></span>
+<span><span class="co">#&gt; 2023-02-09_chicken.jpg</span></span>
+<span><span class="co">#&gt; 2023-02-09_chicken.pdf</span></span>
+<span><span class="co">#&gt; 2023-02-09_chicken.txt</span></span>
+<span><span class="co">#&gt; 2023-02-09_imdb_latin1.csv</span></span>
+<span><span class="co">#&gt; 2023-02-09_r_about.html</span></span>
+<span><span class="co">#&gt; 2023-02-09_r_logo.jpg</span></span>
 <span><span class="va">files_dribble</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map2_dfr</a></span><span class="op">(</span><span class="va">files</span>, <span class="va">new_names</span>, <span class="va">drive_rename</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Original file:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.csv</span> <span style="color: #555555;">&lt;id: 1lqMkF_8TptDuobxxyIPm-U5Bd0yAuRmx&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.csv</span> <span style="color: #555555;">&lt;id: 1dsD4OWT5_odV1bXqj-Xu1j2QkwUWRdf7&gt;</span></span></span>
 <span><span class="co">#&gt; Has been renamed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-08_chicken.csv</span> <span style="color: #555555;">&lt;id: 1lqMkF_8TptDuobxxyIPm-U5Bd0yAuRmx&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-09_chicken.csv</span> <span style="color: #555555;">&lt;id: 1dsD4OWT5_odV1bXqj-Xu1j2QkwUWRdf7&gt;</span></span></span>
 <span><span class="co">#&gt; Original file:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.jpg</span> <span style="color: #555555;">&lt;id: 1qZahfltCCZu0vDxOO47jkWa2CR_5bkur&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.jpg</span> <span style="color: #555555;">&lt;id: 1h_0qKdaleh1CCkRDntas0jaasPMEG0Nj&gt;</span></span></span>
 <span><span class="co">#&gt; Has been renamed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-08_chicken.jpg</span> <span style="color: #555555;">&lt;id: 1qZahfltCCZu0vDxOO47jkWa2CR_5bkur&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-09_chicken.jpg</span> <span style="color: #555555;">&lt;id: 1h_0qKdaleh1CCkRDntas0jaasPMEG0Nj&gt;</span></span></span>
 <span><span class="co">#&gt; Original file:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.pdf</span> <span style="color: #555555;">&lt;id: 1xB93RSxeQ_WrS3wmcjnsEaNxpMim4gti&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.pdf</span> <span style="color: #555555;">&lt;id: 1TZQXcznecPoKgFxPGtcSnHoeMLGn2-ol&gt;</span></span></span>
 <span><span class="co">#&gt; Has been renamed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-08_chicken.pdf</span> <span style="color: #555555;">&lt;id: 1xB93RSxeQ_WrS3wmcjnsEaNxpMim4gti&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-09_chicken.pdf</span> <span style="color: #555555;">&lt;id: 1TZQXcznecPoKgFxPGtcSnHoeMLGn2-ol&gt;</span></span></span>
 <span><span class="co">#&gt; Original file:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1NmF5kYMFZxdSwq-ZI4Nq5Ge8KELyqcPa&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1Nt_0XD8lBSlHJxiUMda5JM_ruD_C3cYw&gt;</span></span></span>
 <span><span class="co">#&gt; Has been renamed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-08_chicken.txt</span> <span style="color: #555555;">&lt;id: 1NmF5kYMFZxdSwq-ZI4Nq5Ge8KELyqcPa&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-09_chicken.txt</span> <span style="color: #555555;">&lt;id: 1Nt_0XD8lBSlHJxiUMda5JM_ruD_C3cYw&gt;</span></span></span>
 <span><span class="co">#&gt; Original file:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">imdb_latin1.csv</span> <span style="color: #555555;">&lt;id: 1T3C5PeABf4EuUNFDrfETamZsfdNgyOOg&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">imdb_latin1.csv</span> <span style="color: #555555;">&lt;id: 1XTiV49Zq07k-fvO6XjfSmjZMpYU_F8Nh&gt;</span></span></span>
 <span><span class="co">#&gt; Has been renamed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-08_imdb_latin1.csv</span> <span style="color: #555555;">&lt;id: 1T3C5PeABf4EuUNFDrfETamZsfdNgyOOg&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-09_imdb_latin1.csv</span> <span style="color: #555555;">&lt;id: 1XTiV49Zq07k-fvO6XjfSmjZMpYU_F8Nh&gt;</span></span></span>
 <span><span class="co">#&gt; Original file:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">r_about.html</span> <span style="color: #555555;">&lt;id: 18g7f7o5ksSznZgdZwCgnncLiFWPmozoC&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">r_about.html</span> <span style="color: #555555;">&lt;id: 1xn0htRWfRN0D80DCSe38R2iwyGlk54yg&gt;</span></span></span>
 <span><span class="co">#&gt; Has been renamed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-08_r_about.html</span> <span style="color: #555555;">&lt;id: 18g7f7o5ksSznZgdZwCgnncLiFWPmozoC&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-09_r_about.html</span> <span style="color: #555555;">&lt;id: 1xn0htRWfRN0D80DCSe38R2iwyGlk54yg&gt;</span></span></span>
 <span><span class="co">#&gt; Original file:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">r_logo.jpg</span> <span style="color: #555555;">&lt;id: 14Y5HbTyfb2ZrxfZJH_NSl3hR8VDWqZnP&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">r_logo.jpg</span> <span style="color: #555555;">&lt;id: 1h4wa39stb_5do6hpiZRpAnl96ZOyW6SU&gt;</span></span></span>
 <span><span class="co">#&gt; Has been renamed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-08_r_logo.jpg</span> <span style="color: #555555;">&lt;id: 14Y5HbTyfb2ZrxfZJH_NSl3hR8VDWqZnP&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">2023-02-09_r_logo.jpg</span> <span style="color: #555555;">&lt;id: 1h4wa39stb_5do6hpiZRpAnl96ZOyW6SU&gt;</span></span></span></code></pre></div>
 <p>We use <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::map2_dfr()</a></code> to work through
 <code>files</code>, the list of dribbles (= Drive files), and
 <code>new_names</code>, the vector of new names, and row bind the
@@ -300,13 +300,13 @@ names:</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 7 × 3</span></span></span>
 <span><span class="co">#&gt;   name                       id                               drive_reso…¹</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-02-08_r_logo.jpg      14Y5HbTyfb2ZrxfZJH_NSl3hR8VDWqZ… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-02-08_r_about.html    18g7f7o5ksSznZgdZwCgnncLiFWPmoz… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-02-08_imdb_latin1.csv 1T3C5PeABf4EuUNFDrfETamZsfdNgyO… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2023-02-08_chicken.txt     1NmF5kYMFZxdSwq-ZI4Nq5Ge8KELyqc… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2023-02-08_chicken.pdf     1xB93RSxeQ_WrS3wmcjnsEaNxpMim4g… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2023-02-08_chicken.jpg     1qZahfltCCZu0vDxOO47jkWa2CR_5bk… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2023-02-08_chicken.csv     1lqMkF_8TptDuobxxyIPm-U5Bd0yAuR… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-02-09_r_logo.jpg      1h4wa39stb_5do6hpiZRpAnl96ZOyW6… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-02-09_r_about.html    1xn0htRWfRN0D80DCSe38R2iwyGlk54… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-02-09_imdb_latin1.csv 1XTiV49Zq07k-fvO6XjfSmjZMpYU_F8… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2023-02-09_chicken.txt     1Nt_0XD8lBSlHJxiUMda5JM_ruD_C3c… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2023-02-09_chicken.pdf     1TZQXcznecPoKgFxPGtcSnHoeMLGn2-… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2023-02-09_chicken.jpg     1h_0qKdaleh1CCkRDntas0jaasPMEG0… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2023-02-09_chicken.csv     1dsD4OWT5_odV1bXqj-Xu1j2QkwUWRd… &lt;named list&gt;</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span></span></code></pre></div>
 <p>Let’s confirm that, by using <code>map2_df2()</code> instead of
 <code><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2()</a></code>, we got a single dribble back, instead of a list of
@@ -316,13 +316,13 @@ one-row dribbles:</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 7 × 3</span></span></span>
 <span><span class="co">#&gt;   name                       id                               drive_reso…¹</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-02-08_chicken.csv     1lqMkF_8TptDuobxxyIPm-U5Bd0yAuR… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-02-08_chicken.jpg     1qZahfltCCZu0vDxOO47jkWa2CR_5bk… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-02-08_chicken.pdf     1xB93RSxeQ_WrS3wmcjnsEaNxpMim4g… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2023-02-08_chicken.txt     1NmF5kYMFZxdSwq-ZI4Nq5Ge8KELyqc… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2023-02-08_imdb_latin1.csv 1T3C5PeABf4EuUNFDrfETamZsfdNgyO… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2023-02-08_r_about.html    18g7f7o5ksSznZgdZwCgnncLiFWPmoz… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2023-02-08_r_logo.jpg      14Y5HbTyfb2ZrxfZJH_NSl3hR8VDWqZ… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-02-09_chicken.csv     1dsD4OWT5_odV1bXqj-Xu1j2QkwUWRd… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-02-09_chicken.jpg     1h_0qKdaleh1CCkRDntas0jaasPMEG0… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-02-09_chicken.pdf     1TZQXcznecPoKgFxPGtcSnHoeMLGn2-… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2023-02-09_chicken.txt     1Nt_0XD8lBSlHJxiUMda5JM_ruD_C3c… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2023-02-09_imdb_latin1.csv 1XTiV49Zq07k-fvO6XjfSmjZMpYU_F8… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2023-02-09_r_about.html    1xn0htRWfRN0D80DCSe38R2iwyGlk54… &lt;named list&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2023-02-09_r_logo.jpg      1h4wa39stb_5do6hpiZRpAnl96ZOyW6… &lt;named list&gt;</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span></span></code></pre></div>
 <p>What if you wanted to get a list back, because your downstream
 operations include yet more <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map()</a></code>ing? Then you would use
@@ -348,7 +348,7 @@ way to delete these files is to delete their enclosing folder.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">folder</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File deleted:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">upload-into-me-article-demo</span> <span style="color: #555555;">&lt;id: 1-vNduqo4Ihyh6ZLNWntCYA_LMnJueAlu&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">upload-into-me-article-demo</span> <span style="color: #555555;">&lt;id: 10CqrEYN1h45hF_StdLHK11LbTHNDO8Qs&gt;</span></span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
