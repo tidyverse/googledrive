@@ -308,11 +308,11 @@ up string for each row of the dribble, i.e. for each Drive file.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 1wEymZVjOgD_-OK3tLml3RNkYpmJ9NYWQbmb4jqvvAhY&gt;')}"</span></span>
-<span><span class="co">#&gt; [2] "{.drivepath SuperCalc} {cli::col_grey('&lt;id: 1Q7koz_xzeyJYVf7-vWO9FoLv84OAQT3stqfsGRsC3FA&gt;')}"  </span></span>
-<span><span class="co">#&gt; [3] "{.drivepath ExecuVision} {cli::col_grey('&lt;id: 1HqNR28iLmpZKHVkwCR74qM0WvYsyxJWyrpWlNur7PYc&gt;')}"</span></span>
-<span><span class="co">#&gt; [4] "{.drivepath WordStar} {cli::col_grey('&lt;id: 1mOEdp3A-e2EPpZNOqgdpi4LnvOwWCb_AGafRtrKhwA4&gt;')}"   </span></span>
-<span><span class="co">#&gt; [5] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 1eQBVH3zF4cvG301ErVLRMEMuZXJEDc-DLIWjnQQbD-k&gt;')}"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 1UEQ1yKTCk3vk5osQyI3ZWQIz3i8oyfVuSujGJDb9oWo&gt;')}"</span></span>
+<span><span class="co">#&gt; [2] "{.drivepath SuperCalc} {cli::col_grey('&lt;id: 1u5-cpJ5RRDZTVEjn9jheZF5PqeQIpDaG8_xQij68J5g&gt;')}"  </span></span>
+<span><span class="co">#&gt; [3] "{.drivepath ExecuVision} {cli::col_grey('&lt;id: 1s3HHvDG5aQAVICPeuroeRXflRXTvoURnMeBkQCHlRTI&gt;')}"</span></span>
+<span><span class="co">#&gt; [4] "{.drivepath WordStar} {cli::col_grey('&lt;id: 12W49Mqu8T2bBAPD1RYCSbLKORVzxkPN3gdCSa_xFN7Y&gt;')}"   </span></span>
+<span><span class="co">#&gt; [5] "{.drivepath Lotus 1-2-3} {cli::col_grey('&lt;id: 1wEymZVjOgD_-OK3tLml3RNkYpmJ9NYWQbmb4jqvvAhY&gt;')}"</span></span></code></pre></div>
 <p><code>gargle_map_cli.dribble()</code> also allows a custom template,
 but it’s a more complicated and less common situation than for
 <code>character</code>. We won’t get into that here. (I don’t consider
@@ -350,11 +350,11 @@ and does aesthetically pleasing truncation.</p>
 <span>  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Some Drive files:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 1UEQ1yKTCk3vk5osQyI3ZWQIz3i8oyfVuSujGJDb9oWo&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">SuperCalc</span> <span style="color: #555555;">&lt;id: 1u5-cpJ5RRDZTVEjn9jheZF5PqeQIpDaG8_xQij68J5g&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">ExecuVision</span> <span style="color: #555555;">&lt;id: 1s3HHvDG5aQAVICPeuroeRXflRXTvoURnMeBkQCHlRTI&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">WordStar</span> <span style="color: #555555;">&lt;id: 12W49Mqu8T2bBAPD1RYCSbLKORVzxkPN3gdCSa_xFN7Y&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 1wEymZVjOgD_-OK3tLml3RNkYpmJ9NYWQbmb4jqvvAhY&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">SuperCalc</span> <span style="color: #555555;">&lt;id: 1Q7koz_xzeyJYVf7-vWO9FoLv84OAQT3stqfsGRsC3FA&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">ExecuVision</span> <span style="color: #555555;">&lt;id: 1HqNR28iLmpZKHVkwCR74qM0WvYsyxJWyrpWlNur7PYc&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">WordStar</span> <span style="color: #555555;">&lt;id: 1mOEdp3A-e2EPpZNOqgdpi4LnvOwWCb_AGafRtrKhwA4&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">Lotus 1-2-3</span> <span style="color: #555555;">&lt;id: 1eQBVH3zF4cvG301ErVLRMEMuZXJEDc-DLIWjnQQbD-k&gt;</span></span></span>
 <span><span class="co">#&gt;   … and 5 more</span></span></code></pre></div>
 <p>It’s conceivable that cli will gain a better way of vectorization,
 but this works for now.</p>
