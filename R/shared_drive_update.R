@@ -53,12 +53,10 @@ shared_drive_update <- function(shared_drive, ...) {
   }
 
   meta$fields <- meta$fields %||% "*"
+  meta$driveId <- shared_drive$id
   request <- request_generate(
     endpoint = "drive.drives.update",
-    params = c(
-      driveId = as_id(shared_drive),
-      meta
-    )
+    params = meta
   )
   response <- request_make(request)
   out <- as_dribble(list(gargle::response_process(response)))
