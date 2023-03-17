@@ -132,7 +132,7 @@ drive_upload <- function(media,
   meta_file <- withr::local_file(
     tempfile("drive-upload-meta", fileext = ".json")
   )
-  write_utf8(jsonlite::toJSON(params), meta_file)
+  write_utf8(jsonlite::toJSON(params, auto_unbox = TRUE), meta_file)
   ## media uploads have unique body situations, so customizing here.
   request$body <- list(
     metadata = httr::upload_file(
