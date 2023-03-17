@@ -114,7 +114,7 @@ vec_cast.drive_id.character <- function(x, to, ...) {
 vec_cast.character.drive_id <- function(x, to, ...) vec_data(x)
 
 #' @export
-vec_ptype_abbr.drive_id <- function(x) "drv_id"
+vec_ptype_abbr.drive_id <- function(x, ...) "drv_id"
 
 #' @export
 pillar_shaft.drive_id <- function(x, ...) {
