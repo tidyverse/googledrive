@@ -3,8 +3,8 @@
     Code
       drive_create()
     Condition
-      Error in `is_string()`:
-      ! argument "name" is missing, with no default
+      Error in `drive_create()`:
+      ! `name` is absent but must be supplied.
 
 ---
 
