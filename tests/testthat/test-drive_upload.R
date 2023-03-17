@@ -6,7 +6,7 @@ nm_ <- nm_fun("TEST-drive_upload", user_run = FALSE)
 if (CLEAN) {
   drive_trash(c(
     nm_("upload-into-me"),
-    nm_("uploade-via-folder-shortcut"),
+    nm_("upload-via-folder-shortcut"),
     nm_("DESCRIPTION")
   ))
 }
