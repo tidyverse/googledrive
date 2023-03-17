@@ -75,10 +75,10 @@ drive_create <- function(name,
                          overwrite = NA,
                          verbose = deprecated()) {
   warn_for_verbose(verbose)
-  check_required(name)
 
   # in the special case of creating a shortcut, `name` is not required
   if (!identical(drive_mime_type(type), drive_mime_type("shortcut"))) {
+    check_required(name)
     stopifnot(is_string(name))
   }
   # the order and role of `path` and `name` is naturally inverted here,
