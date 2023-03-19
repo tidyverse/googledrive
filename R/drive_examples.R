@@ -7,13 +7,13 @@
 #'
 #' @param matches A regular expression that matches the name of the desired
 #'   example file(s). This argument is optional for the plural forms
-#'   (`drive_examples_local()` and `drive_examples_remote()` and, if provided,
+#'   (`drive_examples_local()` and `drive_examples_remote()`) and, if provided,
 #'   multiple matches are allowed. The single forms (`drive_example_local()` and
-#'   `drive_example_reomote()` require this argument and require that there is
+#'   `drive_example_remote()`) require this argument and require that there is
 #'   exactly one match.
 
 #'
-#' @return
+#' @returns
 
 #' * For `drive_example_local()` and `drive_examples_local()`, one or more local
 #' filepaths.
@@ -145,16 +145,4 @@ check_needle <- function(needle) {
   drive_abort(c(
     "{.arg matches} must be a string, not {.cls class(needle)}"
   ))
-}
-
-#' @rdname googledrive-deprecated
-#' @export
-drive_example <- function(path = NULL) {
-  if (is.null(path)) {
-    lifecycle::deprecate_warn("2.0.0", "drive_example()", "drive_examples_local()")
-    drive_examples_local()
-  } else {
-    lifecycle::deprecate_warn("2.0.0", "drive_example()", "drive_example_local()")
-    drive_example_local(path)
-  }
 }
