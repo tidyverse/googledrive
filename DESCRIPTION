@@ -45,7 +45,6 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
-    r-lib/gargle,
     tidyverse/purrr
 Config/Needs/website:
     tidyverse,
