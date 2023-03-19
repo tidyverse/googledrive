@@ -13,7 +13,7 @@ URL: https://googledrive.tidyverse.org,
     https://github.com/tidyverse/googledrive
 BugReports: https://github.com/tidyverse/googledrive/issues
 Depends: 
-    R (>= 3.4)
+    R (>= 3.5)
 Imports: 
     cli (>= 3.0.0),
     gargle (>= 1.3.0),
