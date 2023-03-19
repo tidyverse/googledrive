@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# googledrive <img src="man/figures/logo.png" align="right" height=140/>
+# googledrive <a href="https://googledrive.tidyverse.org"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 
@@ -44,16 +44,16 @@ drive_find(n_max = 25)
 #> # A dribble: 25 × 3
 #>    name        id                                           drive_resource   
 #>    <chr>       <drv_id>                                     <list>           
-#>  1 Lotus 1-2-3 1WaRXQYmqqc0Y_dwGHK1BNUITYJMidsxhk2hyRi2Ip5c <named list [36]>
-#>  2 SuperCalc   1eHOkbsxBEo6MeH2iL6NhOsx7KSmp03AS99BRXNe5JNo <named list [36]>
-#>  3 ExecuVision 1yJOdIFYEngyu-ou3xrUn4HgvluRXvmEtRvEUGglQg0Y <named list [37]>
-#>  4 WordStar    1BArmW-ClrWz-VEH5Wk1dy21VmxdJ7mUkVboCUFKi2lM <named list [36]>
-#>  5 Lotus 1-2-3 1TzUNjVyNeknJEJMAV-j_gxXUU160wDU0D7J0Efm15ro <named list [36]>
-#>  6 SuperCalc   19lruwoovxQgRyeDpryhqBRtC9ijKxlZO_uSqCDirw1M <named list [36]>
-#>  7 ExecuVision 1m31QKg2maTqEvdNOLx1zJOxltW4eXTa7QDLhRVhiEGY <named list [37]>
-#>  8 WordStar    1jhPZkMKHugCSyTJEaBHrK7ikeiZ_xmHCGMZw9LeTfaw <named list [36]>
-#>  9 Lotus 1-2-3 1sCG9aDVppEAAOcIFSH31307_7Xrz7Kz0ksOmeTTF8p0 <named list [36]>
-#> 10 SuperCalc   1BSVeaMP9TURi43rGLZy_BOKtFu-3OL7mmoD-DjbaU1Q <named list [36]>
+#>  1 Lotus 1-2-3 1SQF6dCJqp-SKtlJL1V7I85Dmi8FiN41Tc_n4ZChFdjw <named list [36]>
+#>  2 SuperCalc   1UjS64lUYg6hNaSsRJ36pU1edKSwLrPAykrJCZOoRDqM <named list [36]>
+#>  3 ExecuVision 1trDZHrDR7_340KL2HZw3iW66OaS5Uq9iwmW_fdlFBIk <named list [37]>
+#>  4 WordStar    1sPYkLduB-N6i_8Ql8rQZpEDfPODRv32wPgwAKZAQyBQ <named list [36]>
+#>  5 Lotus 1-2-3 10VK-34k0yOzxfTQIW1M6nBeq_IOpbyqtEHJLNWusKBo <named list [36]>
+#>  6 SuperCalc   1gReZE8dQGxxL-IkI94fP7q7xpoc5NpVeIyI1dxhtlrw <named list [36]>
+#>  7 ExecuVision 1zUu6BtAgRr06iUd0liZ82COEQBZR3YxKw2NiP9uBA3A <named list [37]>
+#>  8 WordStar    1jjj5IGt2kkSAHd1mFYHqPNemnxkNr96g2QEfUQCcgI8 <named list [36]>
+#>  9 Lotus 1-2-3 1-VN4iZ1-gCDPMCFgqg0RxcW8GvD8hgoQNjtFSIBYUUc <named list [36]>
+#> 10 SuperCalc   1ZXmNZxlxjtuUlmFF0fdImeFoeIw65d7Cz9gYnm4Trz8 <named list [36]>
 #> # … with 15 more rows
 ```
 
