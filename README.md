@@ -27,8 +27,8 @@ install.packages("googledrive")
 Or install the development version from GitHub:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("tidyverse/googledrive")
+# install.packages("pak")
+pak::pak("tidyverse/googledrive")
 ```
 
 ## Usage
