@@ -65,9 +65,9 @@ and \code{transform} arguments. Another useful function is
 \code{tidyr::unnest_wider()}.
 }
 \section{File path}{
- When \code{what = "path"} the \code{\link{dribble}} gains a character
-column holding each file's path. This can be \emph{very slow}, so use with
-caution.
+
+When \code{what = "path"} the \code{\link{dribble}} gains a character column holding each
+file's path. This can be \emph{very slow}, so use with caution.
 
 The example path \verb{~/a/b/} illustrates two conventions used in googledrive:
 \itemize{

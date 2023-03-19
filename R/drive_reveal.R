@@ -23,11 +23,11 @@
 #'
 #'
 
-#' @section File path: When `what = "path"` the [`dribble`] gains a character
-#'   column holding each file's path. This can be *very slow*, so use with
-#'   caution.
+#' @section File path:
+#' When `what = "path"` the [`dribble`] gains a character column holding each
+#' file's path. This can be *very slow*, so use with caution.
 #'
-#'   The example path `~/a/b/` illustrates two conventions used in googledrive:
+#' The example path `~/a/b/` illustrates two conventions used in googledrive:
 
 #'   * The leading `~/` means that the folder `a` is located in the current
 #'   user's "My Drive" root folder.
