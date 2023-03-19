@@ -30,7 +30,7 @@ articles:
   - title: Package configuration
     navbar: Package configuration
     contents:
-    - articles/bring-your-own-app
+    - articles/bring-your-own-client
 
   - title: Developer
     desc: Articles documenting internal matters

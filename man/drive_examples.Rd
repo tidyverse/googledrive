@@ -19,9 +19,9 @@ drive_example_remote(matches)
 \arguments{
 \item{matches}{A regular expression that matches the name of the desired
 example file(s). This argument is optional for the plural forms
-(\code{drive_examples_local()} and \code{drive_examples_remote()} and, if provided,
+(\code{drive_examples_local()} and \code{drive_examples_remote()}) and, if provided,
 multiple matches are allowed. The single forms (\code{drive_example_local()} and
-\code{drive_example_reomote()} require this argument and require that there is
+\code{drive_example_remote()}) require this argument and require that there is
 exactly one match.}
 }
 \value{

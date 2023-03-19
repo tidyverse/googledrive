@@ -3,30 +3,34 @@
 \name{drive_auth_configure}
 \alias{drive_auth_configure}
 \alias{drive_api_key}
-\alias{drive_oauth_app}
+\alias{drive_oauth_client}
 \title{Edit and view auth configuration}
 \usage{
-drive_auth_configure(app, path, api_key)
+drive_auth_configure(client, path, api_key, app = deprecated())
 
 drive_api_key()
 
-drive_oauth_app()
+drive_oauth_client()
 }
 \arguments{
-\item{app}{OAuth app, in the sense of \code{\link[httr:oauth_app]{httr::oauth_app()}}.}
+\item{client}{A Google OAuth client, presumably constructed via
+\code{\link[gargle:gargle_oauth_client_from_json]{gargle::gargle_oauth_client_from_json()}}. Note, however, that it is
+preferred to specify the client with JSON, using the \code{path} argument.}
 
-\item{path}{JSON downloaded from Google Cloud Platform Console, containing a
-client id (aka key) and secret, in one of the forms supported for the \code{txt}
-argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a file path or JSON string).}
+\item{path}{JSON downloaded from \href{https://console.cloud.google.com}{Google Cloud Console}, containing a client id and
+secret, in one of the forms supported for the \code{txt} argument of
+\code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a file path or JSON string).}
 
 \item{api_key}{API key.}
+
+\item{app}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Replaced by the \code{client}
+argument.}
 }
 \value{
 \itemize{
 \item \code{drive_auth_configure()}: An object of R6 class
 \link[gargle:AuthState-class]{gargle::AuthState}, invisibly.
-\item \code{drive_oauth_app()}: the current user-configured
-\code{\link[httr:oauth_app]{httr::oauth_app()}}.
+\item \code{drive_oauth_client()}: the current user-configured OAuth client.
 \item \code{drive_api_key()}: the current user-configured API key.
 }
 }
@@ -35,48 +39,44 @@ These functions give more control over and visibility into the auth
 configuration than \code{\link[=drive_auth]{drive_auth()}} does. \code{drive_auth_configure()}
 lets the user specify their own:
 \itemize{
-\item OAuth app, which is used when obtaining a user token.
+\item OAuth client, which is used when obtaining a user token.
 \item API key. If googledrive is de-authorized via \code{\link[=drive_deauth]{drive_deauth()}}, all
 requests are sent with an API key in lieu of a token.
-See the vignette
-\href{https://gargle.r-lib.org/articles/get-api-credentials.html}{How to get your own API credentials}
+}
+
+See the \code{vignette("get-api-credentials", package = "gargle")}
 for more.
 If the user does not configure these settings, internal defaults
 are used.
-\code{drive_oauth_app()} and \code{drive_api_key()} retrieve the
-currently configured OAuth app and API key, respectively.
-}
+
+\code{drive_oauth_client()} and \code{drive_api_key()} retrieve the
+currently configured OAuth client and API key, respectively.
 }
 \examples{
-# see and store the current user-configured OAuth app (probaby `NULL`)
-(original_app <- drive_oauth_app())
+# see and store the current user-configured OAuth client (probaby `NULL`)
+(original_client <- drive_oauth_client())
 
 # see and store the current user-configured API key (probaby `NULL`)
 (original_api_key <- drive_api_key())
 
-if (require(httr)) {
-  # bring your own app via client id (aka key) and secret
-  google_app <- httr::oauth_app(
-    "my-awesome-google-api-wrapping-package",
-    key = "123456789.apps.googleusercontent.com",
-    secret = "abcdefghijklmnopqrstuvwxyz"
-  )
-  google_key <- "the-key-I-got-for-a-google-API"
-  drive_auth_configure(app = google_app, api_key = google_key)
-
-  # confirm the changes
-  drive_oauth_app()
-  drive_api_key()
-}
-\dontrun{
-# bring your own app via JSON downloaded from Google Developers Console
-drive_auth_configure(
-  path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
+# the preferred way to configure your own client is via a JSON file
+# downloaded from Google Developers Console
+# this example JSON is indicative, but fake
+path_to_json <- system.file(
+  "extdata", "data", "client_secret_123.googleusercontent.com.json",
+  package = "googledrive"
 )
-}
+drive_auth_configure(path = path_to_json)
+
+# this is also obviously a fake API key
+drive_auth_configure(api_key = "the_key_I_got_for_a_google_API")
+
+# confirm the changes
+drive_oauth_client()
+drive_api_key()
 
 # restore original auth config
-drive_auth_configure(app = original_app, api_key = original_api_key)
+drive_auth_configure(client = original_client, api_key = original_api_key)
 }
 \seealso{
 Other auth functions: 
