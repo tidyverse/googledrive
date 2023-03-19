@@ -1,6 +1,3 @@
-# You can control the level of verbosity with the global option
-# lifecycle_verbosity. It can be set to "warning" to warn every time.
-
 test_that("drive_auth_config() is deprecated", {
   withr::local_options(lifecycle_verbosity = "warning")
   expect_snapshot(
