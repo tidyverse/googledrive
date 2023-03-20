@@ -2,8 +2,9 @@
 
     Code
       drive_ls(nm_("this-should-not-exist"))
-    Error <rlang_error>
-      Parent specified via `path` is invalid:
+    Condition
+      Error in `as_parent()`:
+      ! Parent specified via `path` is invalid:
       x Does not exist.
 
 # drive_ls() list contents of the target of a folder shortcut
