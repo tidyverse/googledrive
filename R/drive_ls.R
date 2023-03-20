@@ -51,7 +51,7 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
 
   parent <- path[["id"]]
   if (isTRUE(recursive)) {
-    parent <- c(parent, folders_below(parent))
+    parent <- c(parent, folders_below(parent, params[["shared_drive"]]))
   }
   parent <- glue("{sq(parent)} in parents")
   parent <- glue("({or(parent)})")
@@ -60,20 +60,25 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   exec(drive_find, !!!params)
 }
 
-folders_below <- function(id) {
-  folder_kids <- folder_kids_of(id)
+folders_below <- function(id, shared_drive = NULL) {
+  folder_kids <- folder_kids_of(id, shared_drive = shared_drive)
   if (length(folder_kids) == 0) {
     character()
   } else {
     c(
       folder_kids,
-      unlist(lapply(folder_kids, folders_below), recursive = FALSE)
+      unlist(lapply(
+        folder_kids,
+        folders_below,
+        shared_drive = shared_drive
+      ), recursive = FALSE)
     )
   }
 }
 
-folder_kids_of <- function(id) {
+folder_kids_of <- function(id, shared_drive = NULL) {
   drive_find(
+    shared_drive = as_id(shared_drive),
     type = "folder",
     q = glue("{sq(id)} in parents"),
     fields = prep_fields(c("kind", "name", "id"))
