@@ -10,6 +10,8 @@ Version 1.3.0 of gargle introduced some changes around OAuth and googledrive is 
 
 ## Other
 
+`drive_ls(recursive = TRUE)` now works when the target folder is on a shared drive (#265, @Falnesio).
+
 `drive_mv()` no longer errors with "A shared drive item must have exactly one parent." when moving a file on a shared drive (#377).
 
 `drive_auth_config()` was deprecated in googledrive 1.0.0 (released 2019-08-19) and is now defunct.
