@@ -9,7 +9,7 @@ they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
 tokens are less likely to be synced to the cloud by accident.
 If you are interacting with R within a browser (applies to RStudio Server,
-RStudio Workbench, and RStudio Cloud), you need a variant of this flow,
+Posit Workbench, and Posit Cloud), you need a variant of this flow,
 known as out-of-band auth ("oob"). If this does not happen
 automatically, you can request it yourself with use_oob = TRUE or,
 more persistently, by setting an option via
@@ -23,7 +23,7 @@ they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
 tokens are less likely to be synced to the cloud by accident.
 If you are interacting with R within a browser (applies to RStudio Server,
-RStudio Workbench, and RStudio Cloud), you need a variant of this flow,
+Posit Workbench, and Posit Cloud), you need a variant of this flow,
 known as out-of-band auth ("oob"). If this does not happen
 automatically, you can request it yourself with use_oob = TRUE or,
 more persistently, by setting an option via
@@ -60,7 +60,7 @@ options(gargle_oob_default = TRUE).'><meta property="og:image" content="https://
     <a class="dropdown-item" href="../articles/permissions.html">File permissions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Package configuration</h6>
-    <a class="dropdown-item" href="../articles/bring-your-own-app.html">Bring your own OAuth app or API key</a>
+    <a class="dropdown-item" href="../articles/bring-your-own-client.html">Bring your own OAuth client or API key</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
@@ -107,7 +107,7 @@ they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
 tokens are less likely to be synced to the cloud by accident.</p>
 <p>If you are interacting with R within a browser (applies to RStudio Server,
-RStudio Workbench, and RStudio Cloud), you need a variant of this flow,
+Posit Workbench, and Posit Cloud), you need a variant of this flow,
 known as out-of-band auth ("oob"). If this does not happen
 automatically, you can request it yourself with <code>use_oob = TRUE</code> or,
 more persistently, by setting an option via
@@ -162,13 +162,12 @@ scope.</p></dd>
 
 <dt>cache</dt>
 <dd><p>Specifies the OAuth token cache. Defaults to the option named
-"gargle_oauth_cache", retrieved via <code><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oauth_cache()</a></code>.</p></dd>
+<code>"gargle_oauth_cache"</code>, retrieved via <code><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oauth_cache()</a></code>.</p></dd>
 
 
 <dt>use_oob</dt>
-<dd><p>Whether to prefer "out of band" authentication. Defaults to
-the option named "gargle_oob_default", retrieved via
-<code><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oob_default()</a></code>.</p></dd>
+<dd><p>Whether to prefer out-of-band authentication. Defaults to the
+value returned by <code><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oob_default()</a></code>.</p></dd>
 
 
 <dt>token</dt>
@@ -199,7 +198,7 @@ authentication.</p></li>
 <li><p>Customize scopes.</p></li>
 </ul><p>For details on the many ways to find a token, see
 <code><a href="https://gargle.r-lib.org/reference/token_fetch.html" class="external-link">gargle::token_fetch()</a></code>. For deeper control over auth, use
-<code><a href="drive_auth_configure.html">drive_auth_configure()</a></code> to bring your own OAuth app or API key.
+<code><a href="drive_auth_configure.html">drive_auth_configure()</a></code> to bring your own OAuth client or API key.
 Read more about gargle options, see <a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle::gargle_options</a>.</p>
     </div>
     <div class="section level2">
@@ -243,7 +242,7 @@ Read more about gargle options, see <a href="https://gargle.r-lib.org/reference/
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p></p><p>Developed by Lucy D’Agostino McGowan, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
+  <p></p><p>Developed by Lucy D’Agostino McGowan, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
