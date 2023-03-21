@@ -14,6 +14,8 @@ Version 1.3.0 of gargle introduced some changes around OAuth and googledrive is 
 
 `drive_mv()` no longer errors with "A shared drive item must have exactly one parent." when moving a file on a shared drive (#377).
 
+`drive_auth()` now warns if the user specifies both `email` and `path`, because this is almost always an error (#420).
+
 `drive_auth_config()` was deprecated in googledrive 1.0.0 (released 2019-08-19) and is now defunct.
 
 `drive_example()` was deprecated in googledrive 2.0.0 (released 2021-07-08) and is now defunct.
