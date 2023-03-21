@@ -53,7 +53,18 @@ drive_auth <- function(email = gargle::gargle_oauth_email(),
                        cache = gargle::gargle_oauth_cache(),
                        use_oob = gargle::gargle_oob_default(),
                        token = NULL) {
+  if (!missing(email) && !missing(path)) {
+    drive_warn(c(
+      "It is very unusual to provide both {.arg email} and \\
+       {.arg path} to {.fun drive_auth}.",
+      "They relate to two different auth methods.",
+      "The {.arg path} argument is only for a service account token.",
+      "If you need to specify your own OAuth client, use \\
+      {.fun drive_auth_configure}."
+    ))
+  }
   env_unbind(.googledrive, "root_folder")
+
   cred <- gargle::token_fetch(
     scopes = scopes,
     app = drive_oauth_client() %||% gargle::tidyverse_client(),
