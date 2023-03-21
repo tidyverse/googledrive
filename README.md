@@ -42,18 +42,18 @@ on <https://drive.google.com> (up to `n_max = 25`, in this case):
 library("googledrive")
 drive_find(n_max = 25)
 #> # A dribble: 25 × 3
-#>    name        id                                           drive_resource   
-#>    <chr>       <drv_id>                                     <list>           
-#>  1 Lotus 1-2-3 1SQF6dCJqp-SKtlJL1V7I85Dmi8FiN41Tc_n4ZChFdjw <named list [36]>
-#>  2 SuperCalc   1UjS64lUYg6hNaSsRJ36pU1edKSwLrPAykrJCZOoRDqM <named list [36]>
-#>  3 ExecuVision 1trDZHrDR7_340KL2HZw3iW66OaS5Uq9iwmW_fdlFBIk <named list [37]>
-#>  4 WordStar    1sPYkLduB-N6i_8Ql8rQZpEDfPODRv32wPgwAKZAQyBQ <named list [36]>
-#>  5 Lotus 1-2-3 10VK-34k0yOzxfTQIW1M6nBeq_IOpbyqtEHJLNWusKBo <named list [36]>
-#>  6 SuperCalc   1gReZE8dQGxxL-IkI94fP7q7xpoc5NpVeIyI1dxhtlrw <named list [36]>
-#>  7 ExecuVision 1zUu6BtAgRr06iUd0liZ82COEQBZR3YxKw2NiP9uBA3A <named list [37]>
-#>  8 WordStar    1jjj5IGt2kkSAHd1mFYHqPNemnxkNr96g2QEfUQCcgI8 <named list [36]>
-#>  9 Lotus 1-2-3 1-VN4iZ1-gCDPMCFgqg0RxcW8GvD8hgoQNjtFSIBYUUc <named list [36]>
-#> 10 SuperCalc   1ZXmNZxlxjtuUlmFF0fdImeFoeIw65d7Cz9gYnm4Trz8 <named list [36]>
+#>    name                       id                                drive_resource
+#>    <chr>                      <drv_id>                          <list>        
+#>  1 2021-09-16_r_logo.jpg      1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D <named list>  
+#>  2 2021-09-16_r_about.html    1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ <named list>  
+#>  3 2021-09-16_imdb_latin1.csv 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw <named list>  
+#>  4 2021-09-16_chicken.txt     1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7 <named list>  
+#>  5 2021-09-16_chicken.pdf     14Hd6_VQAeEgcwBBJamc-FUlnXhp117T2 <named list>  
+#>  6 2021-09-16_chicken.jpg     1aslW1T-B8UKzAEotDWpmRFaMyMux5-it <named list>  
+#>  7 2021-09-16_chicken.csv     1Mj--zJYZJSMKsNVjk2tYFef5LnCsNoDT <named list>  
+#>  8 pqr                        143iq-CswFTwJTjVfKkcFMDW0jYqDeUj2 <named list>  
+#>  9 mno                        1gcUTnFbsF6uioJrLCsVQ78_F1wEzyNtI <named list>  
+#> 10 jkl                        17T40phn99w0hY-B_Ev0deTvVg9fmUSnt <named list>  
 #> # … with 15 more rows
 ```
 
