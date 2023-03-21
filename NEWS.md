@@ -6,13 +6,15 @@ Version 1.3.0 of gargle introduced some changes around OAuth and googledrive is 
 
 * `drive_oauth_client()` is a new function to replace the now-deprecated `drive_oauth_app()`.
 * The new `client` argument of `drive_auth_configure()` replaces the now-deprecated `app` argument.
-* The documentation of `drive_auth_configure()` emphasizes that the preferred way to "bring you own OAuth client" is by providing the JSON downloaded from Google Developers Console.
+* The documentation of `drive_auth_configure()` emphasizes that the preferred way to "bring your own OAuth client" is by providing the JSON downloaded from Google Developers Console.
 
-## Other
+## Shared drives
 
 `drive_ls(recursive = TRUE)` now works when the target folder is on a shared drive (#265, @Falnesio).
 
 `drive_mv()` no longer errors with "A shared drive item must have exactly one parent." when moving a file on a shared drive (#377).
+
+## Other
 
 `drive_auth()` now warns if the user specifies both `email` and `path`, because this is almost always an error (#420).
 
