@@ -75,12 +75,16 @@
 <ul><li>
 <code><a href="../reference/drive_auth_configure.html">drive_oauth_client()</a></code> is a new function to replace the now-deprecated <code><a href="../reference/googledrive-deprecated.html">drive_oauth_app()</a></code>.</li>
 <li>The new <code>client</code> argument of <code><a href="../reference/drive_auth_configure.html">drive_auth_configure()</a></code> replaces the now-deprecated <code>app</code> argument.</li>
-<li>The documentation of <code><a href="../reference/drive_auth_configure.html">drive_auth_configure()</a></code> emphasizes that the preferred way to “bring you own OAuth client” is by providing the JSON downloaded from Google Developers Console.</li>
+<li>The documentation of <code><a href="../reference/drive_auth_configure.html">drive_auth_configure()</a></code> emphasizes that the preferred way to “bring your own OAuth client” is by providing the JSON downloaded from Google Developers Console.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="other-development-version">Other<a class="anchor" aria-label="anchor" href="#other-development-version"></a></h3>
+<h3 id="shared-drives-development-version">Shared drives<a class="anchor" aria-label="anchor" href="#shared-drives-development-version"></a></h3>
 <p><code>drive_ls(recursive = TRUE)</code> now works when the target folder is on a shared drive (<a href="https://github.com/tidyverse/googledrive/issues/265" class="external-link">#265</a>, <a href="https://github.com/Falnesio" class="external-link">@Falnesio</a>).</p>
 <p><code><a href="../reference/drive_mv.html">drive_mv()</a></code> no longer errors with “A shared drive item must have exactly one parent.” when moving a file on a shared drive (<a href="https://github.com/tidyverse/googledrive/issues/377" class="external-link">#377</a>).</p>
+</div>
+<div class="section level3">
+<h3 id="other-development-version">Other<a class="anchor" aria-label="anchor" href="#other-development-version"></a></h3>
+<p><code><a href="../reference/drive_auth.html">drive_auth()</a></code> now warns if the user specifies both <code>email</code> and <code>path</code>, because this is almost always an error (<a href="https://github.com/tidyverse/googledrive/issues/420" class="external-link">#420</a>).</p>
 <p><code><a href="../reference/googledrive-deprecated.html">drive_auth_config()</a></code> was deprecated in googledrive 1.0.0 (released 2019-08-19) and is now defunct.</p>
 <p><code><a href="../reference/googledrive-deprecated.html">drive_example()</a></code> was deprecated in googledrive 2.0.0 (released 2021-07-08) and is now defunct.</p>
 </div>
@@ -125,7 +129,7 @@
 </li>
 </ul></li>
 </ul><p>Further reading about changes to the Drive folder model:</p>
-<ul><li><a href="https://cloud.google.com/blog/products/g-suite/simplifying-google-drives-folder-structure-and-sharing-models" class="external-link">Simplifying Google Drive’s folder structure and sharing models</a></li>
+<ul><li><a href="https://workspace.google.com/blog/product-announcements/simplifying-google-drives-folder-structure-and-sharing-models" class="external-link">Simplifying Google Drive’s folder structure and sharing models</a></li>
 <li><a href="https://developers.google.com/drive/api/v3/ref-single-parent" class="external-link">Single-parenting behavior changes</a></li>
 <li><a href="https://developers.google.com/drive/api/v3/shortcuts" class="external-link">Create a shortcut to a Drive file</a></li>
 <li>Find files &amp; folders with Google Drive shortcuts: <code>https://support.google.com/drive/answer/9700156</code>
