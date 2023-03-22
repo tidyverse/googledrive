@@ -45,19 +45,18 @@
       print(x)
     Output
       # A dribble: 10 x 3
-         name                                 id                          drive_reso~1
-         <chr>                                <drv_id>                    <list>      
-       1 foo_sheet-TEST-drive_publish         1CEefQCUc5T7B4yrawnNfqwdWE~ <named list>
-       2 foo_doc-TEST-drive_publish           1oUrQNg-2lcAieZyCqoQ_vDwYL~ <named list>
-       3 DESC-TEST-drive_mv-jenny-7694ef72    1V6qQhCVkgVRLUL24_lExApTkl~ <named list>
-       4 DESC-TEST-drive_mv-jenny-7694ef72    1uBR1UMWUXQ02OS9B6sQ3-98Z7~ <named list>
-       5 name-collision-TEST-path-utils-jenny 1U_5_O1-Od_q30wQVhGgZlMevF~ <named list>
-       6 DESCRIPTION-TEST-drive-update-jenny  1Y2O_otAmg7BN0Bk_5d-i9ZlGc~ <named list>
-       7 name-collision-TEST-path-utils-jenny 1o_UmldMPpRfr4JlVyZKu1ZR2v~ <named list>
-       8 DESC-TEST-drive-mv-jenny             1oa-yeDNPd8x7sddbwHEWjGadY~ <named list>
-       9 DESC-TEST-drive-mv-jenny             1yeH1TqZczcPvhZoJvSOnG2_rf~ <named list>
-      10 DESC-TEST-drive-mv-jenny             1qSmvJtYUf6w1UtnA4XWUmG_qr~ <named list>
-      # ... with abbreviated variable name 1: drive_resource
+         name                                 id                        drive_resource
+         <chr>                                <drv_id>                  <list>        
+       1 foo_sheet-TEST-drive_publish         1CEefQCUc5T7B4yrawnNfqwd~ <named list>  
+       2 foo_doc-TEST-drive_publish           1oUrQNg-2lcAieZyCqoQ_vDw~ <named list>  
+       3 DESC-TEST-drive_mv-jenny-7694ef72    1V6qQhCVkgVRLUL24_lExApT~ <named list>  
+       4 DESC-TEST-drive_mv-jenny-7694ef72    1uBR1UMWUXQ02OS9B6sQ3-98~ <named list>  
+       5 name-collision-TEST-path-utils-jenny 1U_5_O1-Od_q30wQVhGgZlMe~ <named list>  
+       6 DESCRIPTION-TEST-drive-update-jenny  1Y2O_otAmg7BN0Bk_5d-i9Zl~ <named list>  
+       7 name-collision-TEST-path-utils-jenny 1o_UmldMPpRfr4JlVyZKu1ZR~ <named list>  
+       8 DESC-TEST-drive-mv-jenny             1oa-yeDNPd8x7sddbwHEWjGa~ <named list>  
+       9 DESC-TEST-drive-mv-jenny             1yeH1TqZczcPvhZoJvSOnG2_~ <named list>  
+      10 DESC-TEST-drive-mv-jenny             1qSmvJtYUf6w1UtnA4XWUmG_~ <named list>  
 
 ---
 
@@ -65,19 +64,18 @@
       print(drive_reveal(x, "mime_type"))
     Output
       # A dribble: 10 x 4
-         name                                 mime_type             id    drive_reso~1
-         <chr>                                <chr>                 <drv> <list>      
-       1 foo_sheet-TEST-drive_publish         application/vnd.goog~ 1CEe~ <named list>
-       2 foo_doc-TEST-drive_publish           application/vnd.goog~ 1oUr~ <named list>
-       3 DESC-TEST-drive_mv-jenny-7694ef72    text/plain            1V6q~ <named list>
-       4 DESC-TEST-drive_mv-jenny-7694ef72    text/plain            1uBR~ <named list>
-       5 name-collision-TEST-path-utils-jenny application/octet-st~ 1U_5~ <named list>
-       6 DESCRIPTION-TEST-drive-update-jenny  text/plain            1Y2O~ <named list>
-       7 name-collision-TEST-path-utils-jenny application/octet-st~ 1o_U~ <named list>
-       8 DESC-TEST-drive-mv-jenny             text/plain            1oa-~ <named list>
-       9 DESC-TEST-drive-mv-jenny             text/plain            1yeH~ <named list>
-      10 DESC-TEST-drive-mv-jenny             text/plain            1qSm~ <named list>
-      # ... with abbreviated variable name 1: drive_resource
+         name                                 mime_type           id    drive_resource
+         <chr>                                <chr>               <drv> <list>        
+       1 foo_sheet-TEST-drive_publish         application/vnd.go~ 1CEe~ <named list>  
+       2 foo_doc-TEST-drive_publish           application/vnd.go~ 1oUr~ <named list>  
+       3 DESC-TEST-drive_mv-jenny-7694ef72    text/plain          1V6q~ <named list>  
+       4 DESC-TEST-drive_mv-jenny-7694ef72    text/plain          1uBR~ <named list>  
+       5 name-collision-TEST-path-utils-jenny application/octet-~ 1U_5~ <named list>  
+       6 DESCRIPTION-TEST-drive-update-jenny  text/plain          1Y2O~ <named list>  
+       7 name-collision-TEST-path-utils-jenny application/octet-~ 1o_U~ <named list>  
+       8 DESC-TEST-drive-mv-jenny             text/plain          1oa-~ <named list>  
+       9 DESC-TEST-drive-mv-jenny             text/plain          1yeH~ <named list>  
+      10 DESC-TEST-drive-mv-jenny             text/plain          1qSm~ <named list>  
 
 ---
 
@@ -85,19 +83,18 @@
       print(x)
     Output
       # A dribble: 10 x 3
-         name                                 id                          drive_reso~1
-         <chr>                                <drv_id>                    <list>      
-       1 foo_sheet-TEST-drive_publish         <NA>                        <named list>
-       2 foo_doc-TEST-drive_publish           1oUrQNg-2lcAieZyCqoQ_vDwYL~ <named list>
-       3 DESC-TEST-drive_mv-jenny-7694ef72    1V6qQhCVkgVRLUL24_lExApTkl~ <named list>
-       4 DESC-TEST-drive_mv-jenny-7694ef72    1uBR1UMWUXQ02OS9B6sQ3-98Z7~ <named list>
-       5 name-collision-TEST-path-utils-jenny 1U_5_O1-Od_q30wQVhGgZlMevF~ <named list>
-       6 DESCRIPTION-TEST-drive-update-jenny  1Y2O_otAmg7BN0Bk_5d-i9ZlGc~ <named list>
-       7 name-collision-TEST-path-utils-jenny 1o_UmldMPpRfr4JlVyZKu1ZR2v~ <named list>
-       8 DESC-TEST-drive-mv-jenny             1oa-yeDNPd8x7sddbwHEWjGadY~ <named list>
-       9 DESC-TEST-drive-mv-jenny             1yeH1TqZczcPvhZoJvSOnG2_rf~ <named list>
-      10 DESC-TEST-drive-mv-jenny             1qSmvJtYUf6w1UtnA4XWUmG_qr~ <named list>
-      # ... with abbreviated variable name 1: drive_resource
+         name                                 id                        drive_resource
+         <chr>                                <drv_id>                  <list>        
+       1 foo_sheet-TEST-drive_publish         <NA>                      <named list>  
+       2 foo_doc-TEST-drive_publish           1oUrQNg-2lcAieZyCqoQ_vDw~ <named list>  
+       3 DESC-TEST-drive_mv-jenny-7694ef72    1V6qQhCVkgVRLUL24_lExApT~ <named list>  
+       4 DESC-TEST-drive_mv-jenny-7694ef72    1uBR1UMWUXQ02OS9B6sQ3-98~ <named list>  
+       5 name-collision-TEST-path-utils-jenny 1U_5_O1-Od_q30wQVhGgZlMe~ <named list>  
+       6 DESCRIPTION-TEST-drive-update-jenny  1Y2O_otAmg7BN0Bk_5d-i9Zl~ <named list>  
+       7 name-collision-TEST-path-utils-jenny 1o_UmldMPpRfr4JlVyZKu1ZR~ <named list>  
+       8 DESC-TEST-drive-mv-jenny             1oa-yeDNPd8x7sddbwHEWjGa~ <named list>  
+       9 DESC-TEST-drive-mv-jenny             1yeH1TqZczcPvhZoJvSOnG2_~ <named list>  
+      10 DESC-TEST-drive-mv-jenny             1qSmvJtYUf6w1UtnA4XWUmG_~ <named list>  
 
 # gargle_map_cli() is implemented for drive_id
 

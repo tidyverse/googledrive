@@ -22,7 +22,7 @@ Imports:
     jsonlite,
     lifecycle,
     magrittr,
-    pillar,
+    pillar (>= 1.9.0),
     purrr (>= 1.0.1),
     rlang (>= 1.0.2),
     tibble (>= 2.0.0),
