@@ -17,7 +17,7 @@ date-time, we return POSIXct. Otherwise, you'll get a
 list-column. If this makes you sad, consider using tidyr::hoist() instead.
 It is more powerful due to a richer &quot;plucking specification&quot; and its ptype
 and transform arguments. Another useful function is
-tidyr::unnest_wider()."><title>Add a new column of Drive file information — drive_reveal • googledrive</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet"><link href="../deps/_Source%20Code%20Pro-0.4.0/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Add a new column of Drive file information — drive_reveal"><meta property="og:description" content="drive_reveal() adds extra information about your Drive files that is not
+tidyr::unnest_wider()."><title>Add a new column of Drive file information — drive_reveal • googledrive</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.5/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.5/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Add a new column of Drive file information — drive_reveal"><meta property="og:description" content="drive_reveal() adds extra information about your Drive files that is not
 readily available in the default dribble produced by googledrive. Why is
 this info not always included in the default dribble?
 You don't always care about it. There is a lot of esoteric information in
@@ -46,7 +46,7 @@ tidyr::unnest_wider()."><meta property="og:image" content="https://googledrive.t
     
     <a class="navbar-brand me-2" href="../index.html">googledrive</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@ tidyr::unnest_wider()."><meta property="og:image" content="https://googledrive.t
     <a class="dropdown-item" href="../articles/permissions.html">File permissions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Package configuration</h6>
-    <a class="dropdown-item" href="../articles/bring-your-own-app.html">Bring your own OAuth app or API key</a>
+    <a class="dropdown-item" href="../articles/bring-your-own-client.html">Bring your own OAuth client or API key</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
@@ -120,12 +120,12 @@ date-time, we return <code><a href="https://rdrr.io/r/base/DateTimeClasses.html"
 list-column. If this makes you sad, consider using <code><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">tidyr::hoist()</a></code> instead.
 It is more powerful due to a richer "plucking specification" and its <code>ptype</code>
 and <code>transform</code> arguments. Another useful function is
-<code><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">tidyr::unnest_wider()</a></code>.</p>
+<code><a href="https://tidyr.tidyverse.org/reference/unnest_wider.html" class="external-link">tidyr::unnest_wider()</a></code>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">file</span>, what <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"path"</span>, <span class="st">"permissions"</span>, <span class="st">"published"</span>, <span class="st">"parent"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">file</span>, what <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"path"</span>, <span class="st">"permissions"</span>, <span class="st">"published"</span>, <span class="st">"parent"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -133,7 +133,9 @@ and <code>transform</code> arguments. Another useful function is
     <dl><dt>file</dt>
 <dd><p>Something that identifies the file(s) of interest on your Google
 Drive. Can be a character vector of names/paths, a character vector of file
-ids or URLs marked with <code><a href="as_id.html">as_id()</a></code>, or a <code><a href="dribble.html">dribble</a></code>.</p></dd>
+ids or URLs marked with <code><a href="drive_id.html">as_id()</a></code>, or a <code><a href="dribble.html">dribble</a></code>.</p></dd>
+
+
 <dt>what</dt>
 <dd><p>Character, describing the type of info you want to add. These
 values get special handling (more details below):</p><ul><li><p><code>path</code></p></li>
@@ -154,17 +156,24 @@ will always be <code>snake_case</code>. Some examples of <code>what</code>:</p><
 <li><p><code>size</code></p></li>
 <li><p><code>quota_bytes_used</code> (or <code>quotaBytesUsed</code>)</p></li>
 </ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.
-The additional info requested via <code>what</code>appears in one (or more) extra columns.</p>
+    
+
+<p>An object of class <code><a href="dribble.html">dribble</a></code>, a tibble with one row per file.
+The additional info requested via <code>what</code></p>
+
+
+<p>appears in one (or more) extra columns.</p>
     </div>
     <div class="section level2">
     <h2 id="file-path">File path<a class="anchor" aria-label="anchor" href="#file-path"></a></h2>
-    <p>When <code>what = "path"</code> the <code><a href="dribble.html">dribble</a></code> gains a character
-column holding each file's path. This can be <em>very slow</em>, so use with
-caution.</p>
+    
+
+<p>When <code>what = "path"</code> the <code><a href="dribble.html">dribble</a></code> gains a character column holding each
+file's path. This can be <em>very slow</em>, so use with caution.</p>
 <p>The example path <code>~/a/b/</code> illustrates two conventions used in googledrive:</p><ul><li><p>The leading <code>~/</code> means that the folder <code>a</code> is located in the current
 user's "My Drive" root folder.</p></li>
 <li><p>The trailing <code>/</code> means that <code>b</code>, located in <code>a</code>, is <em>a folder or a folder
@@ -212,229 +221,245 @@ Drive file (which is what's in the <code>drive_resource</code> list-column of a
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Get a few of your files</span></span>
-<span class="r-in"><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">10</span>, trashed <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># the "special" cases that require additional API calls and can be slow</span></span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"path"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Get a few of your files</span></span></span>
+<span class="r-in"><span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">10</span>, trashed <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># the "special" cases that require additional API calls and can be slow</span></span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"path"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 path                   id           drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        ~/name-squatter        1-_5PDgzasA… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        ~/name-squatter        1dFvJgKgzUN… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload ~/name-squatter-upload 1M4oChRy-At… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename ~/name-squatter-rename 1lTdRtQkBAo… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     ~/name-squatter-mv     13FlFYR1XVH… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload ~/name-squatter-upload 1IvdfcQYjy9… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename ~/name-squatter-rename 1CNKHlM84Xt… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     ~/name-squatter-mv     1uSg8aTc3ZL… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload ~/name-squatter-upload 1uEsx5dENLF… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename ~/name-squatter-rename 1FlZtCAUMzk… &lt;named list&gt;  </span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"permissions"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 path                   id             drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename ~/name-squatter-rename 1jSPf-Gwcghp4… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     ~/name-squatter-mv     18wnmVISj5u58… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload ~/name-squatter-upload 1zkLlNcGvKLze… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename ~/name-squatter-rename 1mhXA-3pJ9FOG… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     ~/name-squatter-mv     1EyvNzLtRWM1t… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload ~/name-squatter-upload 1txEKET9WRLU7… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename ~/name-squatter-rename 1OHXrA9Ah3gzZ… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     ~/name-squatter-mv     15WQs7F38hGkh… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload ~/name-squatter-upload 19FqfgV9Om1tU… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename ~/name-squatter-rename 1gpuisUphif9o… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"permissions"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 shared id          drive_resource permissions_res…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        FALSE  1-_5PDgzas… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        FALSE  1dFvJgKgzU… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload FALSE  1M4oChRy-A… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename FALSE  1lTdRtQkBA… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     FALSE  13FlFYR1XV… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload FALSE  1IvdfcQYjy… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename FALSE  1CNKHlM84X… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     FALSE  1uSg8aTc3Z… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload FALSE  1uEsx5dENL… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename FALSE  1FlZtCAUMz… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [2]&gt;</span></span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"published"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 shared id                drive_reso…¹ permission…²</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename FALSE  1jSPf-Gwcghp4i_j… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     FALSE  18wnmVISj5u58imT… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload FALSE  1zkLlNcGvKLzenM-… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename FALSE  1mhXA-3pJ9FOGXnn… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     FALSE  1EyvNzLtRWM1tgfy… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload FALSE  1txEKET9WRLU7PJ2… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename FALSE  1OHXrA9Ah3gzZmLn… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     FALSE  15WQs7F38hGkh664… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload FALSE  19FqfgV9Om1tUBGM… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename FALSE  1gpuisUphif9ox6S… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​drive_resource,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​permissions_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"published"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 published id       drive_resource revision_resour…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        FALSE     1-_5PDg… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [9]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        FALSE     1dFvJgK… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [9]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload FALSE     1M4oChR… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [9]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename FALSE     1lTdRtQ… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [9]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     FALSE     13FlFYR… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [9]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload FALSE     1IvdfcQ… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [9]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename FALSE     1CNKHlM… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [9]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     FALSE     1uSg8aT… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [9]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload FALSE     1uEsx5d… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [9]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename FALSE     1FlZtCA… &lt;named list&gt;   <span style="color: #949494;">&lt;named list [9]&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># a "special" case of digging info out of `drive_resource`, then processing</span></span>
-<span class="r-in"><span class="co"># a bit</span></span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"parent"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 published id             drive_reso…¹ revision_r…²</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename FALSE     1jSPf-Gwcghp4… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     FALSE     18wnmVISj5u58… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload FALSE     1zkLlNcGvKLze… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename FALSE     1mhXA-3pJ9FOG… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     FALSE     1EyvNzLtRWM1t… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload FALSE     1txEKET9WRLU7… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename FALSE     1OHXrA9Ah3gzZ… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     FALSE     15WQs7F38hGkh… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload FALSE     19FqfgV9Om1tU… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename FALSE     1gpuisUphif9o… &lt;named list&gt; &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​drive_resource, ²​revision_resource</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># a "special" case of digging info out of `drive_resource`, then processing</span></span></span>
+<span class="r-in"><span><span class="co"># a bit</span></span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"parent"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 id_parent           id              drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        0AO_RMaBzcP63Uk9PVA 1-_5PDgzasAnym… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        0AO_RMaBzcP63Uk9PVA 1dFvJgKgzUN-Dm… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 0AO_RMaBzcP63Uk9PVA 1M4oChRy-AtnKm… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1lTdRtQkBAowb_… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     0AO_RMaBzcP63Uk9PVA 13FlFYR1XVHqXX… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 0AO_RMaBzcP63Uk9PVA 1IvdfcQYjy9rG8… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1CNKHlM84Xtqwu… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     0AO_RMaBzcP63Uk9PVA 1uSg8aTc3ZLgtv… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 0AO_RMaBzcP63Uk9PVA 1uEsx5dENLFGEk… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1FlZtCAUMzkP6Y… &lt;named list&gt;  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># the "simple" cases of digging info out of `drive_resource`</span></span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"trashed"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 id_parent           id                drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1jSPf-Gwcghp4i_j… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     0AO_RMaBzcP63Uk9PVA 18wnmVISj5u58imT… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 0AO_RMaBzcP63Uk9PVA 1zkLlNcGvKLzenM-… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1mhXA-3pJ9FOGXnn… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     0AO_RMaBzcP63Uk9PVA 1EyvNzLtRWM1tgfy… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 0AO_RMaBzcP63Uk9PVA 1txEKET9WRLU7PJ2… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1OHXrA9Ah3gzZmLn… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     0AO_RMaBzcP63Uk9PVA 15WQs7F38hGkh664… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 0AO_RMaBzcP63Uk9PVA 19FqfgV9Om1tUBGM… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1gpuisUphif9ox6S… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># the "simple" cases of digging info out of `drive_resource`</span></span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"trashed"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 trashed id                          drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        TRUE    1-_5PDgzasAnymjMKa8YjFGGdh… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        TRUE    1dFvJgKgzUN-DmPW8py8_0fmfX… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload TRUE    1M4oChRy-AtnKmWjbtxODfU0p0… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename TRUE    1lTdRtQkBAowb_hGwdWP5oq7nA… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     TRUE    13FlFYR1XVHqXXuTqadeeZeKvV… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload TRUE    1IvdfcQYjy9rG8oPegbuP2Q9Jt… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename TRUE    1CNKHlM84Xtqwu7yquED7vWW8q… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     TRUE    1uSg8aTc3ZLgtv_PC7D8kbusgc… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload TRUE    1uEsx5dENLFGEkJvGm3qpvmjUC… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename TRUE    1FlZtCAUMzkP6Yr61Rlu3qzT-x… &lt;named list&gt;  </span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"mime_type"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 trashed id                            drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename TRUE    1jSPf-Gwcghp4i_j6AiJEFenWXmq… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     TRUE    18wnmVISj5u58imTfg35e-Fff_0Z… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload TRUE    1zkLlNcGvKLzenM-pCZ6OC219oHW… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename TRUE    1mhXA-3pJ9FOGXnntBvbybB-Ezc4… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     TRUE    1EyvNzLtRWM1tgfyln_QNqDINwjX… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload TRUE    1txEKET9WRLU7PJ22E_-MCudopGg… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename TRUE    1OHXrA9Ah3gzZmLnAiestYCoSbV4… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     TRUE    15WQs7F38hGkh6645EALxwm2r01G… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload TRUE    19FqfgV9Om1tUBGMdajCyWXsvlqc… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename TRUE    1gpuisUphif9ox6SwF8hq7RgJhar… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"mime_type"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 mime_type                id         drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        application/octet-stream 1-_5PDgza… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        application/octet-stream 1dFvJgKgz… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload application/octet-stream 1M4oChRy-… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename application/octet-stream 1lTdRtQkB… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     application/octet-stream 13FlFYR1X… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload application/octet-stream 1IvdfcQYj… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename application/octet-stream 1CNKHlM84… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     application/octet-stream 1uSg8aTc3… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload application/octet-stream 1uEsx5dEN… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename application/octet-stream 1FlZtCAUM… &lt;named list&gt;  </span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"starred"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 mime_type                id           drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename application/octet-stream 1jSPf-Gwcgh… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     application/octet-stream 18wnmVISj5u… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload application/octet-stream 1zkLlNcGvKL… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename application/octet-stream 1mhXA-3pJ9F… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     application/octet-stream 1EyvNzLtRWM… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload application/octet-stream 1txEKET9WRL… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename application/octet-stream 1OHXrA9Ah3g… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     application/octet-stream 15WQs7F38hG… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload application/octet-stream 19FqfgV9Om1… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename application/octet-stream 1gpuisUphif… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"starred"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 starred id                          drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        FALSE   1-_5PDgzasAnymjMKa8YjFGGdh… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        FALSE   1dFvJgKgzUN-DmPW8py8_0fmfX… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload FALSE   1M4oChRy-AtnKmWjbtxODfU0p0… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename FALSE   1lTdRtQkBAowb_hGwdWP5oq7nA… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     FALSE   13FlFYR1XVHqXXuTqadeeZeKvV… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload FALSE   1IvdfcQYjy9rG8oPegbuP2Q9Jt… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename FALSE   1CNKHlM84Xtqwu7yquED7vWW8q… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     FALSE   1uSg8aTc3ZLgtv_PC7D8kbusgc… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload FALSE   1uEsx5dENLFGEkJvGm3qpvmjUC… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename FALSE   1FlZtCAUMzkP6Yr61Rlu3qzT-x… &lt;named list&gt;  </span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"description"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 starred id                            drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename FALSE   1jSPf-Gwcghp4i_j6AiJEFenWXmq… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     FALSE   18wnmVISj5u58imTfg35e-Fff_0Z… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload FALSE   1zkLlNcGvKLzenM-pCZ6OC219oHW… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename FALSE   1mhXA-3pJ9FOGXnntBvbybB-Ezc4… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     FALSE   1EyvNzLtRWM1tgfyln_QNqDINwjX… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload FALSE   1txEKET9WRLU7PJ22E_-MCudopGg… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename FALSE   1OHXrA9Ah3gzZmLnAiestYCoSbV4… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     FALSE   15WQs7F38hGkh6645EALxwm2r01G… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload FALSE   19FqfgV9Om1tUBGMdajCyWXsvlqc… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename FALSE   1gpuisUphif9ox6SwF8hq7RgJhar… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"description"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 description id                      drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        <span style="color: #949494;">&lt;NULL&gt;</span>      1-_5PDgzasAnymjMKa8YjF… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        <span style="color: #949494;">&lt;NULL&gt;</span>      1dFvJgKgzUN-DmPW8py8_0… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload <span style="color: #949494;">&lt;NULL&gt;</span>      1M4oChRy-AtnKmWjbtxODf… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename <span style="color: #949494;">&lt;NULL&gt;</span>      1lTdRtQkBAowb_hGwdWP5o… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     <span style="color: #949494;">&lt;NULL&gt;</span>      13FlFYR1XVHqXXuTqadeeZ… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload <span style="color: #949494;">&lt;NULL&gt;</span>      1IvdfcQYjy9rG8oPegbuP2… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename <span style="color: #949494;">&lt;NULL&gt;</span>      1CNKHlM84Xtqwu7yquED7v… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     <span style="color: #949494;">&lt;NULL&gt;</span>      1uSg8aTc3ZLgtv_PC7D8kb… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload <span style="color: #949494;">&lt;NULL&gt;</span>      1uEsx5dENLFGEkJvGm3qpv… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename <span style="color: #949494;">&lt;NULL&gt;</span>      1FlZtCAUMzkP6Yr61Rlu3q… &lt;named list&gt;  </span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"version"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 description id                        drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename <span style="color: #949494;">&lt;NULL&gt;</span>      1jSPf-Gwcghp4i_j6AiJEFen… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     <span style="color: #949494;">&lt;NULL&gt;</span>      18wnmVISj5u58imTfg35e-Ff… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload <span style="color: #949494;">&lt;NULL&gt;</span>      1zkLlNcGvKLzenM-pCZ6OC21… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename <span style="color: #949494;">&lt;NULL&gt;</span>      1mhXA-3pJ9FOGXnntBvbybB-… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     <span style="color: #949494;">&lt;NULL&gt;</span>      1EyvNzLtRWM1tgfyln_QNqDI… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload <span style="color: #949494;">&lt;NULL&gt;</span>      1txEKET9WRLU7PJ22E_-MCud… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename <span style="color: #949494;">&lt;NULL&gt;</span>      1OHXrA9Ah3gzZmLnAiestYCo… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     <span style="color: #949494;">&lt;NULL&gt;</span>      15WQs7F38hGkh6645EALxwm2… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload <span style="color: #949494;">&lt;NULL&gt;</span>      19FqfgV9Om1tUBGMdajCyWXs… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename <span style="color: #949494;">&lt;NULL&gt;</span>      1gpuisUphif9ox6SwF8hq7Rg… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"version"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 version id                          drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        2       1-_5PDgzasAnymjMKa8YjFGGdh… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        2       1dFvJgKgzUN-DmPW8py8_0fmfX… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 2       1M4oChRy-AtnKmWjbtxODfU0p0… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 2       1lTdRtQkBAowb_hGwdWP5oq7nA… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     2       13FlFYR1XVHqXXuTqadeeZeKvV… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 2       1IvdfcQYjy9rG8oPegbuP2Q9Jt… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 2       1CNKHlM84Xtqwu7yquED7vWW8q… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     2       1uSg8aTc3ZLgtv_PC7D8kbusgc… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 2       1uEsx5dENLFGEkJvGm3qpvmjUC… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 2       1FlZtCAUMzkP6Yr61Rlu3qzT-x… &lt;named list&gt;  </span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"web_view_link"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 version id                            drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 2       1jSPf-Gwcghp4i_j6AiJEFenWXmq… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     2       18wnmVISj5u58imTfg35e-Fff_0Z… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 2       1zkLlNcGvKLzenM-pCZ6OC219oHW… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 2       1mhXA-3pJ9FOGXnntBvbybB-Ezc4… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     2       1EyvNzLtRWM1tgfyln_QNqDINwjX… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 2       1txEKET9WRLU7PJ22E_-MCudopGg… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 2       1OHXrA9Ah3gzZmLnAiestYCoSbV4… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     2       15WQs7F38hGkh6645EALxwm2r01G… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 2       19FqfgV9Om1tUBGMdajCyWXsvlqc… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 2       1gpuisUphif9ox6SwF8hq7RgJhar… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"web_view_link"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 web_view_link                 id    drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;drv&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        https://drive.google.com/fil… 1-_5… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        https://drive.google.com/fil… 1dFv… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload https://drive.google.com/fil… 1M4o… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename https://drive.google.com/fil… 1lTd… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     https://drive.google.com/fil… 13Fl… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload https://drive.google.com/fil… 1Ivd… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename https://drive.google.com/fil… 1CNK… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     https://drive.google.com/fil… 1uSg… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload https://drive.google.com/fil… 1uEs… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename https://drive.google.com/fil… 1FlZ… &lt;named list&gt;  </span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"modified_time"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 web_view_link                   id    drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;drv&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename https://drive.google.com/file/… 1jSP… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     https://drive.google.com/file/… 18wn… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload https://drive.google.com/file/… 1zkL… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename https://drive.google.com/file/… 1mhX… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     https://drive.google.com/file/… 1Eyv… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload https://drive.google.com/file/… 1txE… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename https://drive.google.com/file/… 1OHX… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     https://drive.google.com/file/… 15WQ… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload https://drive.google.com/file/… 19Fq… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename https://drive.google.com/file/… 1gpu… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"modified_time"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 modified_time       id              drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        2022-02-28 <span style="color: #949494;">17:13:21</span> 1-_5PDgzasAnym… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        2022-02-28 <span style="color: #949494;">17:13:05</span> 1dFvJgKgzUN-Dm… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 2022-02-28 <span style="color: #949494;">16:45:10</span> 1M4oChRy-AtnKm… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 2022-02-28 <span style="color: #949494;">16:44:33</span> 1lTdRtQkBAowb_… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     2022-02-28 <span style="color: #949494;">16:44:16</span> 13FlFYR1XVHqXX… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 2022-02-28 <span style="color: #949494;">16:26:47</span> 1IvdfcQYjy9rG8… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 2022-02-28 <span style="color: #949494;">16:26:04</span> 1CNKHlM84Xtqwu… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     2022-02-28 <span style="color: #949494;">16:25:41</span> 1uSg8aTc3ZLgtv… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 2022-02-28 <span style="color: #949494;">13:43:47</span> 1uEsx5dENLFGEk… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 2022-02-28 <span style="color: #949494;">13:43:14</span> 1FlZtCAUMzkP6Y… &lt;named list&gt;  </span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"created_time"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 modified_time       id                drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 2023-03-22 <span style="color: #949494;">16:34:04</span> 1jSPf-Gwcghp4i_j… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     2023-03-22 <span style="color: #949494;">16:33:46</span> 18wnmVISj5u58imT… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 2023-03-22 <span style="color: #949494;">13:42:25</span> 1zkLlNcGvKLzenM-… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 2023-03-22 <span style="color: #949494;">13:41:33</span> 1mhXA-3pJ9FOGXnn… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     2023-03-22 <span style="color: #949494;">13:41:12</span> 1EyvNzLtRWM1tgfy… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 2023-03-21 <span style="color: #949494;">13:44:09</span> 1txEKET9WRLU7PJ2… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 2023-03-21 <span style="color: #949494;">13:43:10</span> 1OHXrA9Ah3gzZmLn… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     2023-03-21 <span style="color: #949494;">13:42:38</span> 15WQs7F38hGkh664… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 2023-03-20 <span style="color: #949494;">13:47:09</span> 19FqfgV9Om1tUBGM… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 2023-03-20 <span style="color: #949494;">13:45:58</span> 1gpuisUphif9ox6S… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"created_time"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 created_time        id              drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        2022-02-28 <span style="color: #949494;">17:13:21</span> 1-_5PDgzasAnym… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        2022-02-28 <span style="color: #949494;">17:13:05</span> 1dFvJgKgzUN-Dm… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 2022-02-28 <span style="color: #949494;">16:45:10</span> 1M4oChRy-AtnKm… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 2022-02-28 <span style="color: #949494;">16:44:33</span> 1lTdRtQkBAowb_… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     2022-02-28 <span style="color: #949494;">16:44:16</span> 13FlFYR1XVHqXX… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 2022-02-28 <span style="color: #949494;">16:26:47</span> 1IvdfcQYjy9rG8… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 2022-02-28 <span style="color: #949494;">16:26:04</span> 1CNKHlM84Xtqwu… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     2022-02-28 <span style="color: #949494;">16:25:41</span> 1uSg8aTc3ZLgtv… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 2022-02-28 <span style="color: #949494;">13:43:47</span> 1uEsx5dENLFGEk… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 2022-02-28 <span style="color: #949494;">13:43:14</span> 1FlZtCAUMzkP6Y… &lt;named list&gt;  </span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"owned_by_me"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 created_time        id                drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 2023-03-22 <span style="color: #949494;">16:34:04</span> 1jSPf-Gwcghp4i_j… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     2023-03-22 <span style="color: #949494;">16:33:46</span> 18wnmVISj5u58imT… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 2023-03-22 <span style="color: #949494;">13:42:25</span> 1zkLlNcGvKLzenM-… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 2023-03-22 <span style="color: #949494;">13:41:33</span> 1mhXA-3pJ9FOGXnn… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     2023-03-22 <span style="color: #949494;">13:41:12</span> 1EyvNzLtRWM1tgfy… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 2023-03-21 <span style="color: #949494;">13:44:09</span> 1txEKET9WRLU7PJ2… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 2023-03-21 <span style="color: #949494;">13:43:10</span> 1OHXrA9Ah3gzZmLn… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     2023-03-21 <span style="color: #949494;">13:42:38</span> 15WQs7F38hGkh664… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 2023-03-20 <span style="color: #949494;">13:47:09</span> 19FqfgV9Om1tUBGM… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 2023-03-20 <span style="color: #949494;">13:45:58</span> 1gpuisUphif9ox6S… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"owned_by_me"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 owned_by_me id                      drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        TRUE        1-_5PDgzasAnymjMKa8YjF… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        TRUE        1dFvJgKgzUN-DmPW8py8_0… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload TRUE        1M4oChRy-AtnKmWjbtxODf… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename TRUE        1lTdRtQkBAowb_hGwdWP5o… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     TRUE        13FlFYR1XVHqXXuTqadeeZ… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload TRUE        1IvdfcQYjy9rG8oPegbuP2… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename TRUE        1CNKHlM84Xtqwu7yquED7v… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     TRUE        1uSg8aTc3ZLgtv_PC7D8kb… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload TRUE        1uEsx5dENLFGEkJvGm3qpv… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename TRUE        1FlZtCAUMzkP6Yr61Rlu3q… &lt;named list&gt;  </span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"size"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 owned_by_me id                        drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename TRUE        1jSPf-Gwcghp4i_j6AiJEFen… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     TRUE        18wnmVISj5u58imTfg35e-Ff… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload TRUE        1zkLlNcGvKLzenM-pCZ6OC21… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename TRUE        1mhXA-3pJ9FOGXnntBvbybB-… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     TRUE        1EyvNzLtRWM1tgfyln_QNqDI… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload TRUE        1txEKET9WRLU7PJ22E_-MCud… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename TRUE        1OHXrA9Ah3gzZmLnAiestYCo… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     TRUE        15WQs7F38hGkh6645EALxwm2… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload TRUE        19FqfgV9Om1tUBGMdajCyWXs… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename TRUE        1gpuisUphif9ox6SwF8hq7Rg… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"size"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 size  id                            drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        0     1-_5PDgzasAnymjMKa8YjFGGdhq-… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        0     1dFvJgKgzUN-DmPW8py8_0fmfXuv… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 0     1M4oChRy-AtnKmWjbtxODfU0p00g… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 0     1lTdRtQkBAowb_hGwdWP5oq7nAxM… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     0     13FlFYR1XVHqXXuTqadeeZeKvV_e… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 0     1IvdfcQYjy9rG8oPegbuP2Q9JtrW… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 0     1CNKHlM84Xtqwu7yquED7vWW8qR1… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     0     1uSg8aTc3ZLgtv_PC7D8kbusgcnp… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 0     1uEsx5dENLFGEkJvGm3qpvmjUCIJ… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 0     1FlZtCAUMzkP6Yr61Rlu3qzT-xIN… &lt;named list&gt;  </span>
-<span class="r-in"><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"quota_bytes_used"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 size  id                              drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 0     1jSPf-Gwcghp4i_j6AiJEFenWXmq7m… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     0     18wnmVISj5u58imTfg35e-Fff_0ZJf… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 0     1zkLlNcGvKLzenM-pCZ6OC219oHWgm… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 0     1mhXA-3pJ9FOGXnntBvbybB-Ezc4In… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     0     1EyvNzLtRWM1tgfyln_QNqDINwjXjN… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 0     1txEKET9WRLU7PJ22E_-MCudopGgxu… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 0     1OHXrA9Ah3gzZmLnAiestYCoSbV4Ov… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     0     15WQs7F38hGkh6645EALxwm2r01GvW… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 0     19FqfgV9Om1tUBGMdajCyWXsvlqcu2… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 0     1gpuisUphif9ox6SwF8hq7RgJhariw… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span><span class="fu">drive_reveal</span><span class="op">(</span><span class="va">files</span>, <span class="st">"quota_bytes_used"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 quota_bytes_used id                 drive_resource</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter        0                1-_5PDgzasAnymjMK… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter        0                1dFvJgKgzUN-DmPW8… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 0                1M4oChRy-AtnKmWjb… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 0                1lTdRtQkBAowb_hGw… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     0                13FlFYR1XVHqXXuTq… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 0                1IvdfcQYjy9rG8oPe… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 0                1CNKHlM84Xtqwu7yq… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     0                1uSg8aTc3ZLgtv_PC… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 0                1uEsx5dENLFGEkJvG… &lt;named list&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 0                1FlZtCAUMzkP6Yr61… &lt;named list&gt;  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># 'root' is a special file id that represents your My Drive root folder</span></span>
-<span class="r-in"><span class="fu"><a href="drive_get.html">drive_get</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"root"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">drive_reveal</span><span class="op">(</span><span class="st">"path"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                 quota_bytes_used id                   drive_reso…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> name-squatter-rename 0                1jSPf-Gwcghp4i_j6Ai… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name-squatter-mv     0                18wnmVISj5u58imTfg3… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name-squatter-upload 0                1zkLlNcGvKLzenM-pCZ… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> name-squatter-rename 0                1mhXA-3pJ9FOGXnntBv… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> name-squatter-mv     0                1EyvNzLtRWM1tgfyln_… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> name-squatter-upload 0                1txEKET9WRLU7PJ22E_… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> name-squatter-rename 0                1OHXrA9Ah3gzZmLnAie… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> name-squatter-mv     0                15WQs7F38hGkh6645EA… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> name-squatter-upload 0                19FqfgV9Om1tUBGMdaj… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> name-squatter-rename 0                1gpuisUphif9ox6SwF8… &lt;named list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># 'root' is a special file id that represents your My Drive root folder</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="drive_get.html">drive_get</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"root"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">drive_reveal</span><span class="op">(</span><span class="st">"path"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 1 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name     path  id                  drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
@@ -448,11 +473,11 @@ Drive file (which is what's in the <code>drive_resource</code> list-column of a
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p></p><p>Developed by Lucy D’Agostino McGowan, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
+  <p></p><p>Developed by Lucy D’Agostino McGowan, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
   </div></footer></body></html>

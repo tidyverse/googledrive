@@ -19,7 +19,7 @@
     <loc>https://googledrive.tidyverse.org/SUPPORT.html</loc>
   </url>
   <url>
-    <loc>https://googledrive.tidyverse.org/articles/bring-your-own-app.html</loc>
+    <loc>https://googledrive.tidyverse.org/articles/bring-your-own-client.html</loc>
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/articles/example-files.html</loc>
@@ -53,9 +53,6 @@
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/reference/as_dribble.html</loc>
-  </url>
-  <url>
-    <loc>https://googledrive.tidyverse.org/reference/as_id.html</loc>
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/reference/as_shared_drive.html</loc>
@@ -116,6 +113,9 @@
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/reference/drive_has_token.html</loc>
+  </url>
+  <url>
+    <loc>https://googledrive.tidyverse.org/reference/drive_id.html</loc>
   </url>
   <url>
     <loc>https://googledrive.tidyverse.org/reference/drive_link.html</loc>

@@ -22,7 +22,7 @@ entry&quot; for working with shared drives. Use these functions to capture your
 target(s) in a dribble to pass along to other googledrive functions.
 The flexibility to refer to files by name or path does not apply as broadly
 to shared drives. While it's always a good idea to get things into a
-dribble early, for shared drives it's often required."><title>Access shared drives — shared_drives • googledrive</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet"><link href="../deps/_Source%20Code%20Pro-0.4.0/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Access shared drives — shared_drives"><meta property="og:description" content="A shared drive supports files owned by an organization rather than an
+dribble early, for shared drives it's often required."><title>Access shared drives — shared_drives • googledrive</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.5/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.5/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Access shared drives — shared_drives"><meta property="og:description" content="A shared drive supports files owned by an organization rather than an
 individual user. Shared drives follow different sharing and ownership models
 from a specific user's &quot;My Drive&quot;. Shared drives are the successors to the
 earlier concept of Team Drives.
@@ -56,7 +56,7 @@ dribble early, for shared drives it's often required."><meta property="og:image"
     
     <a class="navbar-brand me-2" href="../index.html">googledrive</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +78,7 @@ dribble early, for shared drives it's often required."><meta property="og:image"
     <a class="dropdown-item" href="../articles/permissions.html">File permissions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Package configuration</h6>
-    <a class="dropdown-item" href="../articles/bring-your-own-app.html">Bring your own OAuth app or API key</a>
+    <a class="dropdown-item" href="../articles/bring-your-own-client.html">Bring your own OAuth client or API key</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
@@ -144,10 +144,10 @@ to shared drives. While it's always a good idea to get things into a
     
 
 <p>To search one specific shared drive, pass its name, marked id, or
-<code><a href="dribble.html">dribble</a></code> to <code>shared_drive</code> somewhere in the call, like so:</p><div class="sourceCode"><pre><code><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, shared_drive <span class="op">=</span> <span class="st">"i_am_a_shared_drive_name"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, shared_drive <span class="op">=</span> <span class="fu"><a href="../reference/as_id.html">as_id</a></span><span class="op">(</span><span class="st">"i_am_a_shared_drive_id"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, shared_drive <span class="op">=</span> <span class="va">i_am_a_shared_drive_dribble</span><span class="op">)</span></code></pre></div>
-
+<code><a href="dribble.html">dribble</a></code> to <code>shared_drive</code> somewhere in the call, like so:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">shared_drive =</span> <span class="st">"i_am_a_shared_drive_name"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">shared_drive =</span> <span class="fu">as_id</span>(<span class="st">"i_am_a_shared_drive_id"</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">shared_drive =</span> i_am_a_shared_drive_dribble)</span></code></pre><p></p></div>
 <p>The value provided to <code>shared_drive</code> is pre-processed with
 <code><a href="as_shared_drive.html">as_shared_drive()</a></code>.</p>
     </div>
@@ -156,10 +156,10 @@ to shared drives. While it's always a good idea to get things into a
     
 
 <p>To search other collections, pass the <code>corpus</code> parameter somewhere in the
-call, like so:</p><div class="sourceCode"><pre><code><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, corpus <span class="op">=</span> <span class="st">"user"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, corpus <span class="op">=</span> <span class="st">"allDrives"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="va">...</span>, corpus <span class="op">=</span> <span class="st">"domain"</span><span class="op">)</span></code></pre></div>
-
+call, like so:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">corpus =</span> <span class="st">"user"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">corpus =</span> <span class="st">"allDrives"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">corpus =</span> <span class="st">"domain"</span>)</span></code></pre><p></p></div>
 <p>Possible values of <code>corpus</code> and what they mean:</p><ul><li><p><code>"user"</code>: Queries files that the user has accessed, including both shared
 drive and My Drive files.</p></li>
 <li><p><code>"drive"</code>: Queries all items in the shared drive specified via
@@ -181,8 +181,8 @@ shared drive and My Drive files.</p></li>
 <li><p><a href="https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api" class="external-link">Upcoming changes to the Google Drive API and Google Picker API</a> from the Google Cloud blog</p></li>
 <li><p><a href="https://developers.google.com/drive/api/v3/about-shareddrives" class="external-link">https://developers.google.com/drive/api/v3/about-shareddrives</a></p></li>
 <li><p><a href="https://developers.google.com/drive/api/v3/shared-drives-diffs" class="external-link">https://developers.google.com/drive/api/v3/shared-drives-diffs</a></p></li>
-<li><p><a href="https://support.google.com/a/users/answer/9310351" class="external-link">Get started with shared drives</a> from Google Workspace Learning Center</p></li>
-<li><p><a href="https://support.google.com/a/users/answer/9310156" class="external-link">Best practices for shared drives</a> from Google Workspace Learning Center</p></li>
+<li><p>Get started with shared drives: <code>https://support.google.com/a/users/answer/9310351</code> from Google Workspace Learning Center</p></li>
+<li><p>Best practices for shared drives: <code>https://support.google.com/a/users/answer/9310156</code> from Google Workspace Learning Center</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="api-docs">API docs<a class="anchor" aria-label="anchor" href="#api-docs"></a></h2>
@@ -211,11 +211,11 @@ googledrive sends it for all applicable endpoints, all the time.</p></li>
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p></p><p>Developed by Lucy D’Agostino McGowan, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
+  <p></p><p>Developed by Lucy D’Agostino McGowan, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
   </div></footer></body></html>
