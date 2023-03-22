@@ -24,3 +24,4 @@
 ^CRAN-RELEASE$
 ^\.covrignore$
 ^tests/testthat/all-test.+
+^CRAN-SUBMISSION$
