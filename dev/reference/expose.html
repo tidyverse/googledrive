@@ -26,7 +26,7 @@ its full glory. This is inspired by the waiver() object in ggplot2."><meta prope
     
     <a class="navbar-brand me-2" href="../index.html">googledrive</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,19 +106,19 @@ its full glory. This is inspired by the <code>waiver()</code> object in ggplot2.
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="drive_mime_type.html">drive_mime_type</a></span><span class="op">(</span><span class="fu">expose</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 78 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    mime_type                             ext   description human…¹ default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> application/epub+zip                  <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> application/msword                    doc   <span style="color: #BB0000;">NA</span>          doc     TRUE   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> application/msword                    dot   <span style="color: #BB0000;">NA</span>          dot     FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> application/pdf                       pdf   <span style="color: #BB0000;">NA</span>          pdf     TRUE   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> application/rtf                       rtf   <span style="color: #BB0000;">NA</span>          rtf     TRUE   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> application/vnd.google-apps.audio     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>          audio   <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> application/vnd.google-apps.document  <span style="color: #BB0000;">NA</span>    Google Docs docume… <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> application/vnd.google-apps.drawing   <span style="color: #BB0000;">NA</span>    Google Dra… drawing <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> application/vnd.google-apps.drive-sdk <span style="color: #BB0000;">NA</span>    3rd party … drive-… <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> application/vnd.google-apps.file      <span style="color: #BB0000;">NA</span>    Google Dri… file    <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 68 more rows, and abbreviated variable name ¹​human_type</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    mime_type                          ext   description human_type default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> application/epub+zip               <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> application/msword                 doc   <span style="color: #BB0000;">NA</span>          doc        TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> application/msword                 dot   <span style="color: #BB0000;">NA</span>          dot        FALSE  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> application/pdf                    pdf   <span style="color: #BB0000;">NA</span>          pdf        TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> application/rtf                    rtf   <span style="color: #BB0000;">NA</span>          rtf        TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> application/vnd.google-apps.audio  <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>          audio      <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> application/vnd.google-apps.docum… <span style="color: #BB0000;">NA</span>    Google Docs document   <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> application/vnd.google-apps.drawi… <span style="color: #BB0000;">NA</span>    Google Dra… drawing    <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> application/vnd.google-apps.drive… <span style="color: #BB0000;">NA</span>    3rd party … drive-sdk  <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> application/vnd.google-apps.file   <span style="color: #BB0000;">NA</span>    Google Dri… file       <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 68 more rows</span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_fields.html">drive_fields</a></span><span class="op">(</span><span class="fu">expose</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 55 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                         desc                                      </span>
@@ -133,7 +133,7 @@ its full glory. This is inspired by the <code>waiver()</code> object in ggplot2.
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> explicitlyTrashed            <span style="color: #949494;">"</span>Whether the file has been explicitly tra…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> exportLinks                  <span style="color: #949494;">"</span>Links for exporting Google Docs to speci…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> fileExtension                <span style="color: #949494;">"</span>The final component of fullFileExtension…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 45 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 45 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
