@@ -9,7 +9,7 @@ drive_theme <- function() {
     ),
     # since we're using color so much elsewhere, e.g. Drive file names, I think
     # the standard bullet should be "normal" color
-    ".memo .memo-item-*" = list(
+    ".bullets .bullet-*" = list(
       "text-exdent" = 2,
       before = function(x) paste0(cli::symbol$bullet, " ")
     )
