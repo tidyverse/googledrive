@@ -16,7 +16,10 @@ test_that("drive_auth_configure works", {
   drive_auth_configure(client = gargle::gargle_client())
   expect_s3_class(drive_oauth_client(), "gargle_oauth_client")
 
-  drive_auth_configure(path = test_path("test-files/client_secret_123.googleusercontent.com.json"))
+  drive_auth_configure(path = system.file(
+    "extdata", "client_secret_installed.googleusercontent.com.json",
+    package = "gargle"
+  ))
   expect_s3_class(drive_oauth_client(), "gargle_oauth_client")
 
   drive_auth_configure(client = NULL)

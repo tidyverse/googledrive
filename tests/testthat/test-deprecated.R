@@ -18,8 +18,8 @@ test_that("drive_auth_configure(app =) is deprecated in favor of client", {
 
   client <- gargle::gargle_oauth_client_from_json(
     system.file(
-      "extdata", "data", "client_secret_123.googleusercontent.com.json",
-      package = "googledrive"
+      "extdata", "client_secret_installed.googleusercontent.com.json",
+      package = "gargle"
     ),
     name = "test-client"
   )
