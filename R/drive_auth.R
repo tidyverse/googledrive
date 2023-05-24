@@ -53,21 +53,12 @@ drive_auth <- function(email = gargle::gargle_oauth_email(),
                        cache = gargle::gargle_oauth_cache(),
                        use_oob = gargle::gargle_oob_default(),
                        token = NULL) {
-  if (!missing(email) && !missing(path)) {
-    drive_warn(c(
-      "It is very unusual to provide both {.arg email} and \\
-       {.arg path} to {.fun drive_auth}.",
-      "They relate to two different auth methods.",
-      "The {.arg path} argument is only for a service account token.",
-      "If you need to specify your own OAuth client, use \\
-      {.fun drive_auth_configure}."
-    ))
-  }
+  gargle::check_is_service_account(path, hint = "drive_auth_configure")
   env_unbind(.googledrive, "root_folder")
 
   cred <- gargle::token_fetch(
     scopes = scopes,
-    app = drive_oauth_client() %||% gargle::tidyverse_client(),
+    client = drive_oauth_client() %||% gargle::tidyverse_client(),
     email = email,
     path = path,
     package = "googledrive",
@@ -206,7 +197,7 @@ drive_auth_configure <- function(client, path, api_key, app = deprecated()) {
   stopifnot(missing(client) || is.null(client) || inherits(client, "gargle_oauth_client"))
 
   if (!missing(client) || !missing(path)) {
-    .auth$set_app(client)
+    .auth$set_client(client)
   }
 
   if (!missing(api_key)) {
@@ -225,7 +216,7 @@ drive_api_key <- function() {
 #' @export
 #' @rdname drive_auth_configure
 drive_oauth_client <- function() {
-  .auth$app
+  .auth$client
 }
 
 # unexported helpers that are nice for internal use ----
