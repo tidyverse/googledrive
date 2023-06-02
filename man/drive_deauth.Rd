@@ -18,13 +18,16 @@ via \code{\link[=drive_auth_configure]{drive_auth_configure()}} and retrieve tha
 In the absence of a user-configured key, a built-in default key is used.
 }
 \examples{
-\dontrun{
+\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 drive_deauth()
 drive_user()
-public_file <-
-  drive_get(as_id("1Hj-k7NpPSyeOR3R7j4KuWnru6kZaqqOAE8_db5gowIM"))
+
+# in a deauth'ed state, we can still get metadata on a world-readable file
+public_file <- drive_example_remote("chicken.csv")
+public_file
+# we can still download it too
 drive_download(public_file)
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other auth functions: 

@@ -126,7 +126,7 @@ For details on the many ways to find a token, see
 To learn more about gargle options, see \link[gargle:gargle_options]{gargle::gargle_options}.
 }
 \examples{
-\dontrun{
+\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # load/refresh existing credentials, if available
 # otherwise, go to browser for authentication and authorization
 drive_auth()
@@ -148,7 +148,7 @@ drive_auth(
 
 # use a service account token
 drive_auth(path = "foofy-83ee9e7c9c48.json")
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other auth functions: 

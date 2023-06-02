@@ -1,5 +1,5 @@
-## This file is the interface between googledrive and the
-## auth functionality in gargle.
+# This file is the interface between googledrive and the
+# auth functionality in gargle.
 
 # Initialization happens in .onLoad()
 .auth <- NULL
@@ -23,8 +23,7 @@ gargle_lookup_table <- list(
 #' @family auth functions
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf rlang::is_interactive()
 #' # load/refresh existing credentials, if available
 #' # otherwise, go to browser for authentication and authorization
 #' drive_auth()
@@ -46,7 +45,6 @@ gargle_lookup_table <- list(
 #'
 #' # use a service account token
 #' drive_auth(path = "foofy-83ee9e7c9c48.json")
-#' }
 drive_auth <- function(email = gargle::gargle_oauth_email(),
                        path = NULL,
                        scopes = "https://www.googleapis.com/auth/drive",
@@ -55,6 +53,10 @@ drive_auth <- function(email = gargle::gargle_oauth_email(),
                        token = NULL) {
   gargle::check_is_service_account(path, hint = "drive_auth_configure")
   env_unbind(.googledrive, "root_folder")
+
+  # If `token` is not `NULL`, it's much better to error noisily now, before
+  # getting silently swallowed by `token_fetch()`.
+  force(token)
 
   cred <- gargle::token_fetch(
     scopes = scopes,
@@ -89,14 +91,15 @@ drive_auth <- function(email = gargle::gargle_oauth_email(),
 #'
 #' @family auth functions
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf rlang::is_interactive()
 #' drive_deauth()
 #' drive_user()
-#' public_file <-
-#'   drive_get(as_id("1Hj-k7NpPSyeOR3R7j4KuWnru6kZaqqOAE8_db5gowIM"))
+#'
+#' # in a deauth'ed state, we can still get metadata on a world-readable file
+#' public_file <- drive_example_remote("chicken.csv")
+#' public_file
+#' # we can still download it too
 #' drive_download(public_file)
-#' }
 drive_deauth <- function() {
   .auth$set_auth_active(FALSE)
   .auth$clear_cred()
