@@ -223,7 +223,7 @@ drive_oauth_client <- function() {
 drive_auth_internal <- function(account = c("docs", "testing"),
                                 scopes = NULL) {
   account <- match.arg(account)
-  can_decrypt <- gargle:::secret_has_key("GOOGLEDRIVE_KEY")
+  can_decrypt <- gargle::secret_has_key("GOOGLEDRIVE_KEY")
   online <- !is.null(curl::nslookup("drive.googleapis.com", error = FALSE))
   if (!can_decrypt || !online) {
     drive_abort(
