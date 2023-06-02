@@ -11,9 +11,12 @@ GCP
 IDEs
 JSON
 OAuth
+OOB
 ORCID
+PBC
 PUTs
 RESTful
+RStudio
 Tidyverse
 VMs
 auth
@@ -21,7 +24,6 @@ behaviour
 bigrquery
 cli
 cli's
-colab
 commenter
 csv
 de
@@ -35,7 +37,6 @@ ggplot
 gmailr
 googledrive's
 googlesheets
-https
 httr
 httr's
 ing
@@ -43,8 +44,6 @@ lifecycle
 lowerCamel
 magrittr
 mockr
-oauth
-oob
 pkgdown
 pre
 programmatically
@@ -56,7 +55,6 @@ rlang's
 rprojroot
 setwise
 targetted
-targetting
 testthat
 th
 threshhold
