@@ -31,3 +31,38 @@ test_that("drive_auth_configure works", {
   drive_auth_configure(api_key = NULL)
   expect_null(drive_api_key())
 })
+
+# drive_scopes() ----
+test_that("drive_scopes() reveals Drive scopes", {
+  expect_snapshot(drive_scopes())
+})
+
+test_that("drive_scopes() substitutes actual scope for short form", {
+  expect_equal(
+    drive_scopes(c(
+      "full",
+      "drive",
+      "drive.readonly"
+    )),
+    c(
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/drive.readonly"
+    )
+  )
+})
+
+test_that("drive_scopes() passes unrecognized scopes through", {
+  expect_equal(
+    drive_scopes(c(
+      "email",
+      "drive.metadata.readonly",
+      "https://www.googleapis.com/auth/cloud-platform"
+    )),
+    c(
+      "email",
+      "https://www.googleapis.com/auth/drive.metadata.readonly",
+      "https://www.googleapis.com/auth/cloud-platform"
+    )
+  )
+})

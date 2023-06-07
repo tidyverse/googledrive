@@ -1,5 +1,11 @@
 # googledrive (development version)
 
+* `drive_scopes()` is a new function to access scopes used with the Drive API.
+  When called without arguments, `drive_scopes()` returns a named vector scopes,
+  where the names are the associated short aliases.  `drive_scopes()` can also
+  be called with a character vector; any element that's recognized as a short
+  alias is replaced with the associated full scope (#430).
+
 # googledrive 2.1.0
 
 ## Syncing up with gargle

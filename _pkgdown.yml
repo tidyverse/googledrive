@@ -103,6 +103,7 @@ reference:
       - drive_auth
       - drive_deauth
       - drive_auth_configure
+      - drive_scopes
   - title: "Drive API spec"
     desc: >
       Summon info about or check input against the Drive API spec

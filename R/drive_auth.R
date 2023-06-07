@@ -20,6 +20,21 @@ gargle_lookup_table <- list(
 #' @eval gargle:::PREFIX_auth_details(gargle_lookup_table)
 #' @eval gargle:::PREFIX_auth_params()
 #'
+#' @param scopes One or more API scopes. Each scope can be specified in full or,
+#'   for Drive API-specific scopes, in an abbreviated form that is recognized by
+#'   [drive_scopes()]:
+#'   * "full" = "https://www.googleapis.com/auth/drive" (the default)
+#'   * "drive.readonly" = "https://www.googleapis.com/auth/drive.readonly"
+#'   * "drive.file" = "https://www.googleapis.com/auth/drive.file"
+#'   * "drive.appdata" = "https://www.googleapis.com/auth/drive.appdata"
+#'   * "drive.metadata" = "https://www.googleapis.com/auth/drive.metadata"
+#'   * "drive.metadata.readonly" = "https://www.googleapis.com/auth/drive.metadata.readonly"
+#'   * "drive.photos.readonly" = "https://www.googleapis.com/auth/drive.photos.readonly"
+#'   * "drive.scripts" = "https://www.googleapis.com/auth/drive.scripts
+#'
+#'   See <https://developers.google.com/drive/api/guides/api-specific-auth> for
+#'   details on the permissions for each scope.
+#'
 #' @family auth functions
 #' @export
 #'
@@ -47,11 +62,12 @@ gargle_lookup_table <- list(
 #' drive_auth(path = "foofy-83ee9e7c9c48.json")
 drive_auth <- function(email = gargle::gargle_oauth_email(),
                        path = NULL,
-                       scopes = "https://www.googleapis.com/auth/drive",
+                       scopes = "full",
                        cache = gargle::gargle_oauth_cache(),
                        use_oob = gargle::gargle_oob_default(),
                        token = NULL) {
   gargle::check_is_service_account(path, hint = "drive_auth_configure")
+  scopes <- drive_scopes(scopes)
   env_unbind(.googledrive, "root_folder")
 
   # If `token` is not `NULL`, it's much better to error noisily now, before
@@ -220,6 +236,50 @@ drive_api_key <- function() {
 #' @rdname drive_auth_configure
 drive_oauth_client <- function() {
   .auth$client
+}
+
+#' Produce scopes specific to the Drive API
+#'
+#' When called with no arguments, `drive_scopes()` returns a named character vector
+#' of scopes associated with the Drive API. If `drive_scopes(scopes =)` is given,
+#' an abbreviated entry such as `"drive.readonly"` is expanded to a full scope
+#' (`"https://www.googleapis.com/auth/drive.readonly"` in this case).
+#' Unrecognized scopes are passed through unchanged.
+#'
+#' @inheritParams drive_auth
+#'
+#' @seealso <https://developers.google.com/drive/api/guides/api-specific-auth> for details on
+#'   the permissions for each scope.
+#' @returns A character vector of scopes.
+#' @family auth functions
+#' @export
+#' @examples
+#' drive_scopes("full")
+#' drive_scopes("drive.readonly")
+#' drive_scopes()
+drive_scopes <- function(scopes = NULL) {
+  if (is.null(scopes)) {
+    drive_api_scopes
+  } else {
+    resolve_scopes(user_scopes = scopes, package_scopes = drive_api_scopes)
+  }
+}
+
+drive_api_scopes <- c(
+  full = "https://www.googleapis.com/auth/drive",
+  drive = "https://www.googleapis.com/auth/drive",
+  drive.readonly = "https://www.googleapis.com/auth/drive.readonly",
+  drive.file = "https://www.googleapis.com/auth/drive.file",
+  drive.appdata = "https://www.googleapis.com/auth/drive.appdata",
+  drive.metadata = "https://www.googleapis.com/auth/drive.metadata",
+  drive.metadata.readonly = "https://www.googleapis.com/auth/drive.metadata.readonly",
+  drive.photos.readonly = "https://www.googleapis.com/auth/drive.photos.readonly",
+  drive.scripts = "https://www.googleapis.com/auth/drive.scripts"
+)
+
+resolve_scopes <- function(user_scopes, package_scopes) {
+  m <- match(user_scopes, names(package_scopes))
+  ifelse(is.na(m), user_scopes, package_scopes[m])
 }
 
 # unexported helpers that are nice for internal use ----

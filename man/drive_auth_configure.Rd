@@ -81,6 +81,7 @@ drive_auth_configure(client = original_client, api_key = original_api_key)
 \seealso{
 Other auth functions: 
 \code{\link{drive_auth}()},
-\code{\link{drive_deauth}()}
+\code{\link{drive_deauth}()},
+\code{\link{drive_scopes}()}
 }
 \concept{auth functions}

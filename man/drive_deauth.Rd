@@ -32,6 +32,7 @@ drive_download(public_file)
 \seealso{
 Other auth functions: 
 \code{\link{drive_auth_configure}()},
-\code{\link{drive_auth}()}
+\code{\link{drive_auth}()},
+\code{\link{drive_scopes}()}
 }
 \concept{auth functions}

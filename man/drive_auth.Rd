@@ -7,7 +7,7 @@
 drive_auth(
   email = gargle::gargle_oauth_email(),
   path = NULL,
-  scopes = "https://www.googleapis.com/auth/drive",
+  scopes = "full",
   cache = gargle::gargle_oauth_cache(),
   use_oob = gargle::gargle_oob_default(),
   token = NULL
@@ -41,15 +41,22 @@ default behavior).}
 supported for the \code{txt} argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a
 file path or JSON string).}
 
-\item{scopes}{A character vector of scopes to request. Pick from those listed
-at \url{https://developers.google.com/identity/protocols/oauth2/scopes}.
+\item{scopes}{One or more API scopes. Each scope can be specified in full or,
+for Drive API-specific scopes, in an abbreviated form that is recognized by
+\code{\link[=drive_scopes]{drive_scopes()}}:
+\itemize{
+\item "full" = "https://www.googleapis.com/auth/drive" (the default)
+\item "drive.readonly" = "https://www.googleapis.com/auth/drive.readonly"
+\item "drive.file" = "https://www.googleapis.com/auth/drive.file"
+\item "drive.appdata" = "https://www.googleapis.com/auth/drive.appdata"
+\item "drive.metadata" = "https://www.googleapis.com/auth/drive.metadata"
+\item "drive.metadata.readonly" = "https://www.googleapis.com/auth/drive.metadata.readonly"
+\item "drive.photos.readonly" = "https://www.googleapis.com/auth/drive.photos.readonly"
+\item "drive.scripts" = "https://www.googleapis.com/auth/drive.scripts
+}
 
-For certain token flows, the
-\code{"https://www.googleapis.com/auth/userinfo.email"} scope is unconditionally
-included. This grants permission to retrieve the email address associated
-with a token; gargle uses this to index cached OAuth tokens. This grants no
-permission to view or send email and is generally considered a low-value
-scope.}
+See \url{https://developers.google.com/drive/api/guides/api-specific-auth} for
+details on the permissions for each scope.}
 
 \item{cache}{Specifies the OAuth token cache. Defaults to the option named
 \code{"gargle_oauth_cache"}, retrieved via \code{\link[gargle:gargle_oauth_cache]{gargle_oauth_cache()}}.}
@@ -153,6 +160,7 @@ drive_auth(path = "foofy-83ee9e7c9c48.json")
 \seealso{
 Other auth functions: 
 \code{\link{drive_auth_configure}()},
-\code{\link{drive_deauth}()}
+\code{\link{drive_deauth}()},
+\code{\link{drive_scopes}()}
 }
 \concept{auth functions}
