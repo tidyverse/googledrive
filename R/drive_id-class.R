@@ -118,13 +118,35 @@ vec_ptype_abbr.drive_id <- function(x, ...) "drv_id"
 
 #' @export
 pillar_shaft.drive_id <- function(x, ...) {
-  # I would like to present drive_id in full, space permitting, or truncate
-  # it severely. Anything in between is a waste of horizontal space.
-  # But this is not currently possible: https://github.com/r-lib/pillar/issues/331
-  # Explored here in https://github.com/tidyverse/googledrive/pull/364
-  # Current compromise is to use pillar_shaft.character.
-  # Not sure why I can't access via NextMethod().
-  pillar::pillar_shaft(unclass(x))
+  # The goal is to either see drive_id in full (which would allow, e.g. copy
+  # and paste) or to truncate it severely and leave room for more interesting
+  # columns, such as the Drive file name.
+  # Anything in between these two extremes seems like a waste of horizontal space.
+
+  x_valid <- !is.na(x)
+
+  # It's important to keep NA in the vector!
+  out <- rep(NA_character_, vec_size(x))
+  out[x_valid] <- format(x[x_valid])
+  out_short <- out
+
+  # nchar("<drv_id>") is 8
+  n <- 8
+  trunkate <- function(x) {
+    glue("{substr(x, 1, n - 1)}{cli::symbol$continue}")
+  }
+  out_width <- nchar(trimws(out))
+  too_wide <- which(x_valid & out_width > n)
+  if (any(too_wide)) {
+    out_short[too_wide] <- trunkate(out_short[too_wide])
+  }
+
+  have_color <- cli::num_ansi_colors() > 1
+  pillar::new_pillar_shaft_simple(
+    out,
+    short_formatted = out_short,
+    na = if (have_color) pillar::style_na("NA") else "<NA>"
+  )
 }
 
 ## we anticipate file-id-containing URLs in these forms:
