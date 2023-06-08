@@ -54,7 +54,7 @@ drive_find(n_max = 25)
 #>  8 pqr                        143iq-CswFTwJTjVfKkcFMDW0jYqDeUj2 <named list>  
 #>  9 mno                        1gcUTnFbsF6uioJrLCsVQ78_F1wEzyNtI <named list>  
 #> 10 jkl                        17T40phn99w0hY-B_Ev0deTvVg9fmUSnt <named list>  
-#> # … with 15 more rows
+#> # ℹ 15 more rows
 ```
 
 ## Contributing
