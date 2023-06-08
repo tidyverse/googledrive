@@ -53,4 +53,4 @@ Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Remotes:  
-    r-lib/gargle
+    url::https://github.com/r-lib/gargle/archive/main.tar.gz
