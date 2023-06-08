@@ -69,7 +69,10 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="googledrive-development-version">googledrive (development version)<a class="anchor" aria-label="anchor" href="#googledrive-development-version"></a></h2>
-</div>
+<ul><li><p>All requests now route through <code><a href="https://gargle.r-lib.org/reference/request_retry.html" class="external-link">gargle::request_retry()</a></code> (<a href="https://github.com/tidyverse/googledrive/issues/380" class="external-link">#380</a>).</p></li>
+<li><p><code><a href="../reference/drive_scopes.html">drive_scopes()</a></code> is a new function to access scopes relevant to the Drive API. When called without arguments, <code><a href="../reference/drive_scopes.html">drive_scopes()</a></code> returns a named vector of scopes, where the names are the associated short aliases. <code><a href="../reference/drive_scopes.html">drive_scopes()</a></code> can also be called with a character vector; any element that’s recognized as a short alias is replaced with the associated full scope (<a href="https://github.com/tidyverse/googledrive/issues/430" class="external-link">#430</a>).</p></li>
+<li><p>Various internal changes to sync up with gargle v1.5.0.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.0" id="googledrive-210">googledrive 2.1.0<a class="anchor" aria-label="anchor" href="#googledrive-210"></a></h2><p class="text-muted">CRAN release: 2023-03-22</p>
 <div class="section level3">

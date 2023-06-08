@@ -101,7 +101,7 @@ tokens are less likely to be synced to the cloud by accident.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">drive_auth</span><span class="op">(</span></span>
 <span>  email <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oauth_email</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  path <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  scopes <span class="op">=</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>,</span>
+<span>  scopes <span class="op">=</span> <span class="st">"full"</span>,</span>
 <span>  cache <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oauth_cache</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  use_oob <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oob_default</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -138,14 +138,18 @@ file path or JSON string).</p></dd>
 
 
 <dt>scopes</dt>
-<dd><p>A character vector of scopes to request. Pick from those listed
-at <a href="https://developers.google.com/identity/protocols/oauth2/scopes" class="external-link">https://developers.google.com/identity/protocols/oauth2/scopes</a>.</p>
-<p>For certain token flows, the
-<code>"https://www.googleapis.com/auth/userinfo.email"</code> scope is unconditionally
-included. This grants permission to retrieve the email address associated
-with a token; gargle uses this to index cached OAuth tokens. This grants no
-permission to view or send email and is generally considered a low-value
-scope.</p></dd>
+<dd><p>One or more API scopes. Each scope can be specified in full or,
+for Drive API-specific scopes, in an abbreviated form that is recognized by
+<code><a href="drive_scopes.html">drive_scopes()</a></code>:</p><ul><li><p>"full" = "https://www.googleapis.com/auth/drive" (the default)</p></li>
+<li><p>"drive.readonly" = "https://www.googleapis.com/auth/drive.readonly"</p></li>
+<li><p>"drive.file" = "https://www.googleapis.com/auth/drive.file"</p></li>
+<li><p>"drive.appdata" = "https://www.googleapis.com/auth/drive.appdata"</p></li>
+<li><p>"drive.metadata" = "https://www.googleapis.com/auth/drive.metadata"</p></li>
+<li><p>"drive.metadata.readonly" = "https://www.googleapis.com/auth/drive.metadata.readonly"</p></li>
+<li><p>"drive.photos.readonly" = "https://www.googleapis.com/auth/drive.photos.readonly"</p></li>
+<li><p>"drive.scripts" = "https://www.googleapis.com/auth/drive.scripts</p></li>
+</ul><p>See <a href="https://developers.google.com/drive/api/guides/api-specific-auth" class="external-link">https://developers.google.com/drive/api/guides/api-specific-auth</a> for
+details on the permissions for each scope.</p></dd>
 
 
 <dt>cache</dt>
@@ -211,7 +215,8 @@ To learn more about gargle options, see <a href="https://gargle.r-lib.org/refere
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other auth functions: 
 <code><a href="drive_auth_configure.html">drive_auth_configure</a>()</code>,
-<code><a href="drive_deauth.html">drive_deauth</a>()</code></p></div>
+<code><a href="drive_deauth.html">drive_deauth</a>()</code>,
+<code><a href="drive_scopes.html">drive_scopes</a>()</code></p></div>
     </div>
 
     <div class="section level2">
