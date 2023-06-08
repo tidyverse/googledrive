@@ -2,11 +2,13 @@
 
 * All requests now route through `gargle::request_retry()` (#380).
 
-* `drive_scopes()` is a new function to access scopes used with the Drive API.
-  When called without arguments, `drive_scopes()` returns a named vector scopes,
-  where the names are the associated short aliases.  `drive_scopes()` can also
-  be called with a character vector; any element that's recognized as a short
-  alias is replaced with the associated full scope (#430).
+* `drive_scopes()` is a new function to access scopes relevant to the Drive API.
+  When called without arguments, `drive_scopes()` returns a named vector of
+  scopes, where the names are the associated short aliases. `drive_scopes()` can
+  also be called with a character vector; any element that's recognized as a
+  short alias is replaced with the associated full scope (#430).
+  
+* Various internal changes to sync up with gargle v1.5.0.
 
 # googledrive 2.1.0
 
