@@ -30,7 +30,7 @@
 #' @export
 #' @family low-level API functions
 request_make <- function(x, ...) {
-  gargle::request_make(x, ..., user_agent = drive_ua())
+  gargle::request_retry(x, ..., user_agent = drive_ua())
 }
 
 #' @rdname request_make

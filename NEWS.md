@@ -1,5 +1,7 @@
 # googledrive (development version)
 
+* All requests now route through `gargle::request_retry()` (#380).
+
 * `drive_scopes()` is a new function to access scopes used with the Drive API.
   When called without arguments, `drive_scopes()` returns a named vector scopes,
   where the names are the associated short aliases.  `drive_scopes()` can also
