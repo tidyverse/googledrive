@@ -11,7 +11,8 @@ drive_scopes(scopes = NULL)
 for Drive API-specific scopes, in an abbreviated form that is recognized by
 \code{\link[=drive_scopes]{drive_scopes()}}:
 \itemize{
-\item "full" = "https://www.googleapis.com/auth/drive" (the default)
+\item "drive" = "https://www.googleapis.com/auth/drive" (the default)
+\item "full" = "https://www.googleapis.com/auth/drive" (same as "drive")
 \item "drive.readonly" = "https://www.googleapis.com/auth/drive.readonly"
 \item "drive.file" = "https://www.googleapis.com/auth/drive.file"
 \item "drive.appdata" = "https://www.googleapis.com/auth/drive.appdata"

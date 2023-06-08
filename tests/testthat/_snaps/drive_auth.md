@@ -11,9 +11,9 @@
     Code
       drive_scopes()
     Output
-                                                           full 
-                        "https://www.googleapis.com/auth/drive" 
                                                           drive 
+                        "https://www.googleapis.com/auth/drive" 
+                                                           full 
                         "https://www.googleapis.com/auth/drive" 
                                                  drive.readonly 
                "https://www.googleapis.com/auth/drive.readonly" 

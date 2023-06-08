@@ -8,7 +8,7 @@ drive_auth(
   email = gargle::gargle_oauth_email(),
   path = NULL,
   subject = NULL,
-  scopes = "full",
+  scopes = "drive",
   cache = gargle::gargle_oauth_cache(),
   use_oob = gargle::gargle_oob_default(),
   token = NULL
@@ -55,7 +55,8 @@ any other \code{scopes} being requested.}
 for Drive API-specific scopes, in an abbreviated form that is recognized by
 \code{\link[=drive_scopes]{drive_scopes()}}:
 \itemize{
-\item "full" = "https://www.googleapis.com/auth/drive" (the default)
+\item "drive" = "https://www.googleapis.com/auth/drive" (the default)
+\item "full" = "https://www.googleapis.com/auth/drive" (same as "drive")
 \item "drive.readonly" = "https://www.googleapis.com/auth/drive.readonly"
 \item "drive.file" = "https://www.googleapis.com/auth/drive.file"
 \item "drive.appdata" = "https://www.googleapis.com/auth/drive.appdata"
@@ -159,9 +160,7 @@ drive_user()
 drive_auth(email = NA)
 
 # use a 'read only' scope, so it's impossible to edit or delete files
-drive_auth(
-  scopes = "https://www.googleapis.com/auth/drive.readonly"
-)
+drive_auth(scopes = "drive.readonly")
 
 # use a service account token
 drive_auth(path = "foofy-83ee9e7c9c48.json")

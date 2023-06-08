@@ -23,7 +23,8 @@ gargle_lookup_table <- list(
 #' @param scopes One or more API scopes. Each scope can be specified in full or,
 #'   for Drive API-specific scopes, in an abbreviated form that is recognized by
 #'   [drive_scopes()]:
-#'   * "full" = "https://www.googleapis.com/auth/drive" (the default)
+#'   * "drive" = "https://www.googleapis.com/auth/drive" (the default)
+#'   * "full" = "https://www.googleapis.com/auth/drive" (same as "drive")
 #'   * "drive.readonly" = "https://www.googleapis.com/auth/drive.readonly"
 #'   * "drive.file" = "https://www.googleapis.com/auth/drive.file"
 #'   * "drive.appdata" = "https://www.googleapis.com/auth/drive.appdata"
@@ -54,15 +55,13 @@ gargle_lookup_table <- list(
 #' drive_auth(email = NA)
 #'
 #' # use a 'read only' scope, so it's impossible to edit or delete files
-#' drive_auth(
-#'   scopes = "https://www.googleapis.com/auth/drive.readonly"
-#' )
+#' drive_auth(scopes = "drive.readonly")
 #'
 #' # use a service account token
 #' drive_auth(path = "foofy-83ee9e7c9c48.json")
 drive_auth <- function(email = gargle::gargle_oauth_email(),
                        path = NULL, subject = NULL,
-                       scopes = "full",
+                       scopes = "drive",
                        cache = gargle::gargle_oauth_cache(),
                        use_oob = gargle::gargle_oob_default(),
                        token = NULL) {
@@ -267,8 +266,8 @@ drive_scopes <- function(scopes = NULL) {
 }
 
 drive_api_scopes <- c(
-  full = "https://www.googleapis.com/auth/drive",
   drive = "https://www.googleapis.com/auth/drive",
+  full = "https://www.googleapis.com/auth/drive",
   drive.readonly = "https://www.googleapis.com/auth/drive.readonly",
   drive.file = "https://www.googleapis.com/auth/drive.file",
   drive.appdata = "https://www.googleapis.com/auth/drive.appdata",
