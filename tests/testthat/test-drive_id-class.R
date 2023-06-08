@@ -4,7 +4,7 @@ if (FALSE) {
   ## see also test-dplyr-compatbility.R
   saveRDS(
     drive_find(n_max = 10),
-    test_file("just_a_dribble.rds")
+    test_fixture("just_a_dribble.rds")
   )
 }
 
@@ -56,7 +56,7 @@ test_that("as_id() extracts ids from Drive URLs but not other URLs", {
 })
 
 test_that("as_id() works with dribble and dribble-ish data frames", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_true(is_drive_id(as_id(x)))
   expect_identical(as_id(x), x$id)
@@ -67,7 +67,7 @@ test_that("as_id() works with dribble and dribble-ish data frames", {
 })
 
 test_that("presence of drive_id column doesn't prevent row binding of dribbles", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   alfa <- x[1:2, ]
   bravo <- x[3:4, ]
@@ -80,12 +80,12 @@ test_that("presence of drive_id column doesn't prevent row binding of dribbles",
 
 ## how drive_ids look when printed
 test_that("drive_id's are formatted OK", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
   expect_snapshot(print(x$id))
 })
 
 test_that("drive_ids look OK in a dribble and truncate gracefully", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_snapshot(print(x))
   expect_snapshot(print(drive_reveal(x, "mime_type")))

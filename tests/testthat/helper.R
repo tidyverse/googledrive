@@ -22,8 +22,8 @@ expect_error_free <- function(...) {
 }
 
 # usage:
-# test_file("something.rds")
-test_file <- function(name) testthat::test_path("test-files", name)
+# test_fixture("something.rds")
+test_fixture <- function(name) testthat::test_path("test-fixtures", name)
 
 defer_drive_rm <- function(..., env = parent.frame()) {
   withr::defer(

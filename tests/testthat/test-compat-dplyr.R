@@ -5,7 +5,7 @@ if (FALSE) {
   ## how the test file was created
   saveRDS(
     drive_find(n_max = 10),
-    test_file("just_a_dribble.rds"),
+    test_fixture("just_a_dribble.rds"),
     version = 2
   )
 }
@@ -14,7 +14,7 @@ if (FALSE) {
 
 test_that("dplyr_reconstruct() returns a dribble when it should", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(x)
   expect_identical(dplyr::dplyr_reconstruct(x, x), x)
@@ -22,7 +22,7 @@ test_that("dplyr_reconstruct() returns a dribble when it should", {
 
 test_that("dplyr_reconstruct() returns dribble when row slicing", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   row1 <- x[1, ]
   row0 <- x[0, ]
@@ -33,7 +33,7 @@ test_that("dplyr_reconstruct() returns dribble when row slicing", {
 
 test_that("dplyr_reconstruct() returns bare tibble if dribble-ness is lost", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   col <- x[1]
   expect_bare_tibble(dplyr::dplyr_reconstruct(col, x))
@@ -43,7 +43,7 @@ test_that("dplyr_reconstruct() returns bare tibble if dribble-ness is lost", {
 
 test_that("can add columns and retain dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   cols <- list(x = rep(1, vec_size(x)))
 
@@ -55,7 +55,7 @@ test_that("can add columns and retain dribble class", {
 
 test_that("modifying dribble columns removes dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   cols <- list(name = rep(1L, vec_size(x)))
 
@@ -74,7 +74,7 @@ test_that("modifying dribble columns removes dribble class", {
 
 test_that("replacing dribble col with the exact same col retains dribble-ness", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   cols <- list(id = x$id)
 
@@ -88,7 +88,7 @@ test_that("replacing dribble col with the exact same col retains dribble-ness", 
 
 test_that("row slicing generally keeps the dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(dplyr::dplyr_row_slice(x, 0))
   expect_dribble(dplyr::dplyr_row_slice(x, 3))
@@ -96,7 +96,7 @@ test_that("row slicing generally keeps the dribble class", {
 
 test_that("dribble class is kept if row order is changed", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   loc <- rev(seq_len(nrow(x)))
   expect_dribble(dplyr::dplyr_row_slice(x, loc))
@@ -106,7 +106,7 @@ test_that("dribble class is kept if row order is changed", {
 
 test_that("bind_rows() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(dplyr::bind_rows(x[1:2, ], x[3, ]))
 })
@@ -115,7 +115,7 @@ test_that("bind_rows() can keep dribble class", {
 
 test_that("bind_cols() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   y <- tibble(x = rep(1, vec_size(x)))
   expect_dribble(dplyr::bind_cols(x, y))
@@ -125,7 +125,7 @@ test_that("bind_cols() can keep dribble class", {
 
 test_that("summarise() always drops the dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_bare_tibble(dplyr::summarise(x, y = 1))
   expect_bare_tibble(dplyr::summarise(
@@ -138,7 +138,7 @@ test_that("summarise() always drops the dribble class", {
 
 test_that("group_by() always returns a bare grouped-df or bare tibble", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_bare_tibble(dplyr::group_by(x))
   expect_s3_class(
@@ -152,7 +152,7 @@ test_that("group_by() always returns a bare grouped-df or bare tibble", {
 
 test_that("ungroup() returns a dribble", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(dplyr::ungroup(x))
 })
@@ -161,7 +161,7 @@ test_that("ungroup() returns a dribble", {
 
 test_that("relocate() keeps the dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   x <- dplyr::relocate(x, id)
   expect_dribble(x)
@@ -171,7 +171,7 @@ test_that("relocate() keeps the dribble class", {
 
 test_that("distinct() keeps the dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(dplyr::distinct(x))
 })
@@ -180,7 +180,7 @@ test_that("distinct() keeps the dribble class", {
 
 test_that("dribble class can be retained by dplyr verbs", {
   skip_if_not_installed("dplyr")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(dplyr::arrange(x, name))
   expect_dribble(dplyr::filter(x, grepl("-TEST-", name)))
@@ -194,7 +194,7 @@ test_that("dribble class can be retained by dplyr verbs", {
 
 test_that("dribble class can be dropped by dplyr verbs", {
   skip_if_not_installed("dplyr")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_false(inherits(dplyr::mutate(x, name = 1L), "dribble"))
   expect_false(inherits(dplyr::rename(x, HEY = name), "dribble"))
@@ -205,7 +205,7 @@ test_that("dribble class can be dropped by dplyr verbs", {
 
 test_that("left_join() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(dplyr::left_join(x, x, by = names(x)))
 
@@ -215,7 +215,7 @@ test_that("left_join() can keep dribble class", {
 
 test_that("right_join() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(dplyr::right_join(x, x, by = names(x)))
 
@@ -225,7 +225,7 @@ test_that("right_join() can keep dribble class", {
 
 test_that("right_join() restores to the type of first input", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   y <- tibble(id = x$id[[1]], x = 1)
   # technically dribble structure is intact, but `y` is a bare tibble!
@@ -234,14 +234,14 @@ test_that("right_join() restores to the type of first input", {
 
 test_that("full_join() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(dplyr::full_join(x, x, by = names(x)))
 })
 
 test_that("anti_join() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   y <- tibble(id = x$id[[1]])
   result <- dplyr::anti_join(x, y, by = "id")
@@ -251,14 +251,14 @@ test_that("anti_join() can keep dribble class", {
 
 test_that("semi_join() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(dplyr::semi_join(x, x, by = names(x)))
 })
 
 test_that("nest_join() can keep dribble class", {
   skip_if_not_installed("dplyr", "1.0.0")
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   y <- dplyr::mutate(x, foo = "bar")
   expect_dribble(dplyr::nest_join(x, y, by = names(x)))

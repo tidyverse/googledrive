@@ -3,14 +3,14 @@
 # vec_restore() ----
 
 test_that("vec_restore() returns a dribble when it should", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_identical(vec_restore(x, x), x)
   expect_dribble(vec_restore(x, x))
 })
 
 test_that("vec_restore() returns dribble when row slicing", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   row1 <- x[1, ]
   row0 <- x[0, ]
@@ -20,7 +20,7 @@ test_that("vec_restore() returns dribble when row slicing", {
 })
 
 test_that("vec_restore() returns bare tibble if `x` loses dribble cols", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   col <- x[1]
   expect_bare_tibble(vec_restore(col, x))
@@ -29,7 +29,7 @@ test_that("vec_restore() returns bare tibble if `x` loses dribble cols", {
 # vec_ptype2() ----
 
 test_that("vec_ptype2() is working", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   x2 <- x
   x2$y <- 1
@@ -70,7 +70,7 @@ test_that("vec_ptype2() is working", {
 # vec_cast() ----
 
 test_that("vec_cast() is working", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   x2 <- x
   x2$y <- 1
@@ -104,20 +104,20 @@ test_that("vec_cast() is working", {
 # vctrs methods ----
 
 test_that("vec_ptype() returns a dribble", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(vec_ptype(x))
 })
 
 test_that("vec_slice() generally returns a dribble", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   expect_dribble(vec_slice(x, 0))
   expect_dribble(vec_slice(x, 1:2))
 })
 
 test_that("vec_c() works", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   tbl <- new_tibble0(x)
 
@@ -127,7 +127,7 @@ test_that("vec_c() works", {
 })
 
 test_that("vec_rbind() works", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   tbl <- new_tibble0(x)
 
@@ -140,7 +140,7 @@ test_that("vec_rbind() works", {
 })
 
 test_that("vec_cbind() returns a bare tibble", {
-  x <- readRDS(test_file("just_a_dribble.rds"))
+  x <- readRDS(test_fixture("just_a_dribble.rds"))
 
   tbl <- new_tibble0(x)
 
