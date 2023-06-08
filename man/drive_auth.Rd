@@ -43,8 +43,8 @@ supported for the \code{txt} argument of \code{\link[jsonlite:fromJSON]{jsonlite
 file path or JSON string).}
 
 \item{subject}{An optional subject claim. Specify this if you wish to use the
-service account represented by \code{path} to impersonate a normal user (the
-\code{subject}). Before this can work, an administrator must grant the service
+service account represented by \code{path} to impersonate the \code{subject}, who is
+a normal user. Before this can work, an administrator must grant the service
 account domain-wide authority. Identify the user to impersonate via their
 email, e.g. \code{subject = "user@example.com"}. Note that gargle automatically
 adds the non-sensitive \code{"https://www.googleapis.com/auth/userinfo.email"}
