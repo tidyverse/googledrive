@@ -19,6 +19,7 @@ RESTful
 RStudio
 Tidyverse
 VMs
+appdata
 auth
 behaviour
 bigrquery
@@ -35,8 +36,10 @@ filepath
 funder
 ggplot
 gmailr
+googleapis
 googledrive's
 googlesheets
+https
 httr
 httr's
 ing
@@ -48,6 +51,7 @@ pkgdown
 pre
 programmatically
 purrr
+readonly
 rebranded
 recency
 reprexes
@@ -67,3 +71,4 @@ vctrs
 vectorization
 vectorized
 withr
+www
