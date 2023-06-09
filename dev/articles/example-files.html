@@ -169,17 +169,17 @@ their MIME type.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_examples.html">drive_examples_remote</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"mime_type"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 9 × 4</span></span></span>
-<span><span class="co">#&gt;   name            mime_type                           id    drive_resource</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;drv&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken_doc     application/vnd.google-apps.docume… 1X9p… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chicken_sheet   application/vnd.google-apps.spread… 1SeF… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> chicken.csv     text/csv                            1VOh… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> chicken.jpg     image/jpeg                          1b2_… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> chicken.pdf     application/pdf                     13OQ… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> chicken.txt     text/plain                          1wOL… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> imdb_latin1.csv text/csv                            1YJS… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> r_about.html    text/html                           1sfC… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> r_logo.jpg      image/jpeg                          1J4v… <span style="color: #949494;">&lt;named list&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   name            mime_type                        id       drive_resource</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                            <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken_doc     application/vnd.google-apps.doc… 1X9pd4n… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chicken_sheet   application/vnd.google-apps.spr… 1SeFXkr… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> chicken.csv     text/csv                         1VOh6wW… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> chicken.jpg     image/jpeg                       1b2_Zjz… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> chicken.pdf     application/pdf                  13OQcAo… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> chicken.txt     text/plain                       1wOLeWV… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> imdb_latin1.csv text/csv                         1YJSVa0… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> r_about.html    text/html                        1sfCT0z… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> r_logo.jpg      image/jpeg                       1J4v-iy… <span style="color: #949494;">&lt;named list&gt;</span></span></span></code></pre></div>
 <p>You’ll notice there are two files that aren’t among the local example
 files, but that are derived from them:</p>
 <ul>
@@ -247,14 +247,14 @@ the singular form to target exactly one file.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_examples.html">drive_examples_remote</a></span><span class="op">(</span><span class="st">"chicken"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 6 × 3</span></span></span>
-<span><span class="co">#&gt;   name          id                                          drive_resource</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken_doc   1X9pd4nOjl33zDFfTjw-_eFL7Qb9_g6VfVFDp1PPae… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chicken_sheet 1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wS… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> chicken.csv   1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7           <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> chicken.jpg   1b2_ZjzgvrSw0hBMgn-rnEbjp3Uq0XTKJ           <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> chicken.pdf   13OQcAo8hkh0Ja5Wxlmi4a8aNvPK7pDkO           <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> chicken.txt   1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y           <span style="color: #949494;">&lt;named list&gt;</span></span></span>
+<span><span class="co">#&gt;   name          id       drive_resource   </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken_doc   1X9pd4n… <span style="color: #949494;">&lt;named list [30]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chicken_sheet 1SeFXkr… <span style="color: #949494;">&lt;named list [30]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> chicken.csv   1VOh6wW… <span style="color: #949494;">&lt;named list [36]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> chicken.jpg   1b2_Zjz… <span style="color: #949494;">&lt;named list [38]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> chicken.pdf   13OQcAo… <span style="color: #949494;">&lt;named list [37]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> chicken.txt   1wOLeWV… <span style="color: #949494;">&lt;named list [37]&gt;</span></span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/drive_examples.html">drive_example_remote</a></span><span class="op">(</span><span class="st">"logo"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 3</span></span></span>
