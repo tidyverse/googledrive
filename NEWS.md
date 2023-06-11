@@ -1,4 +1,4 @@
-# googledrive (development version)
+# googledrive 2.1.1
 
 * `drive_auth(subject =)` is a new argument that can be used with
   `drive_auth(path =)`, i.e. when using a service account. The `path` and
