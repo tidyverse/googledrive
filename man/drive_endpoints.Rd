@@ -30,8 +30,10 @@ this data.
 The names of this list (or the \code{id} sub-elements) are the nicknames that can
 be used to specify an endpoint in \code{\link[=request_generate]{request_generate()}}. For each endpoint, we
 store its nickname or \code{id}, the associated HTTP verb, the \code{path}, and details
-about the parameters. This list is derived programmatically from the \href{https://www.googleapis.com/discovery/v1/apis/drive/v3/rest}{Drive API v3 Discovery Document} using
-the approach described in the \href{https://gargle.r-lib.org/articles/request-helper-functions.html#discovery-documents}{Discovery Documents section}
+about the parameters. This list is derived programmatically from the Drive
+API v3 Discovery Document
+(\verb{https://www.googleapis.com/discovery/v1/apis/drive/v3/rest}) using the
+approach described in the \href{https://gargle.r-lib.org/articles/request-helper-functions.html#discovery-documents}{Discovery Documents section}
 of the gargle vignette \href{https://gargle.r-lib.org/articles/request-helper-functions.html}{Request helper functions}.
 }
 \examples{

@@ -10,10 +10,10 @@
 #' The names of this list (or the `id` sub-elements) are the nicknames that can
 #' be used to specify an endpoint in [request_generate()]. For each endpoint, we
 #' store its nickname or `id`, the associated HTTP verb, the `path`, and details
-#' about the parameters. This list is derived programmatically from the [Drive
-#' API v3 Discovery
-#' Document](https://www.googleapis.com/discovery/v1/apis/drive/v3/rest) using
-#' the approach described in the [Discovery Documents
+#' about the parameters. This list is derived programmatically from the Drive
+#' API v3 Discovery Document
+#' (`https://www.googleapis.com/discovery/v1/apis/drive/v3/rest`) using the
+#' approach described in the [Discovery Documents
 #' section](https://gargle.r-lib.org/articles/request-helper-functions.html#discovery-documents)
 #' of the gargle vignette [Request helper
 #' functions](https://gargle.r-lib.org/articles/request-helper-functions.html).

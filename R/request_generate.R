@@ -2,10 +2,10 @@
 #'
 #' @description Build a request, using knowledge of the [Drive v3
 #'   API](https://developers.google.com/drive/api/v3/about-sdk) from its
-#'   [Discovery
-#'   Document](https://www.googleapis.com/discovery/v1/apis/drive/v3/rest). Most
-#'   users should, instead, use higher-level wrappers that facilitate common
-#'   tasks, such as uploading or downloading Drive files. The functions here are
+#'   Discovery Document
+#'   (`https://www.googleapis.com/discovery/v1/apis/drive/v3/rest`). Most users
+#'   should, instead, use higher-level wrappers that facilitate common tasks,
+#'   such as uploading or downloading Drive files. The functions here are
 #'   intended for internal use and for programming around the Drive API.
 #'
 #' @description `request_generate()` lets you provide the bare minimum of input.
@@ -25,7 +25,7 @@
 #'   for an API key in the absence of a token is explained in Google's document
 #'   "Credentials, access, security, and identity"
 #'   (`https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279`).
-#'    In order of precedence, these sources are consulted: the formal `key`
+#'   In order of precedence, these sources are consulted: the formal `key`
 #'   argument, a `key` parameter in `params`, a user-configured API key fetched
 #'   via [drive_api_key()], a built-in key shipped with googledrive. See
 #'   [drive_auth_configure()] for details on a user-configured key.

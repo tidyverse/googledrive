@@ -37,9 +37,10 @@ Note that, if auth has been de-activated via \code{\link[=drive_deauth]{drive_de
 }
 \description{
 Build a request, using knowledge of the \href{https://developers.google.com/drive/api/v3/about-sdk}{Drive v3 API} from its
-\href{https://www.googleapis.com/discovery/v1/apis/drive/v3/rest}{Discovery Document}. Most
-users should, instead, use higher-level wrappers that facilitate common
-tasks, such as uploading or downloading Drive files. The functions here are
+Discovery Document
+(\verb{https://www.googleapis.com/discovery/v1/apis/drive/v3/rest}). Most users
+should, instead, use higher-level wrappers that facilitate common tasks,
+such as uploading or downloading Drive files. The functions here are
 intended for internal use and for programming around the Drive API.
 
 \code{request_generate()} lets you provide the bare minimum of input.
