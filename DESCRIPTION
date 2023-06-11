@@ -16,7 +16,7 @@ Depends:
     R (>= 3.6)
 Imports: 
     cli (>= 3.0.0),
-    gargle (>= 1.4.0.9000),
+    gargle (>= 1.5.0),
     glue (>= 1.4.2),
     httr,
     jsonlite,
@@ -31,15 +31,11 @@ Imports:
     vctrs (>= 0.3.0),
     withr
 Suggests: 
-    covr,
     curl,
-    downlit,
     dplyr (>= 1.0.0),
     knitr,
     mockr,
     rmarkdown,
-    roxygen2,
-    sodium,
     spelling,
     testthat (>= 3.1.3)
 VignetteBuilder: 
@@ -52,5 +48,3 @@ Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Remotes:  
-    url::https://github.com/r-lib/gargle/archive/main.tar.gz
