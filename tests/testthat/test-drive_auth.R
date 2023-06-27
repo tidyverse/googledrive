@@ -5,8 +5,8 @@ test_that("drive_auth_configure works", {
     drive_auth_configure(client = old_client, api_key = old_api_key)
   )
 
-  expect_error_free(drive_oauth_client())
-  expect_error_free(drive_api_key())
+  expect_no_error(drive_oauth_client())
+  expect_no_error(drive_api_key())
 
   expect_snapshot(
     drive_auth_configure(client = gargle::gargle_client(), path = "PATH"),
