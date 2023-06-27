@@ -23,6 +23,7 @@ test_that("get_last_path_part() works", {
 })
 
 test_that("resolve_paths() works, basic scenarios", {
+  skip_if_not_installed("mockr")
   # a -- b -- c -- d
   # ??? -- e
   dr_folder <-
@@ -75,6 +76,7 @@ test_that("resolve_paths() works, basic scenarios", {
 })
 
 test_that("resolve_paths() works, with some name duplication", {
+  skip_if_not_installed("mockr")
   #     name(id)
   #      ___~(1) __
   #     /       \    \
