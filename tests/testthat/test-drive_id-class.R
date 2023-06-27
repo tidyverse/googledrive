@@ -72,7 +72,7 @@ test_that("presence of drive_id column doesn't prevent row binding of dribbles",
   alfa <- x[1:2, ]
   bravo <- x[3:4, ]
 
-  expect_error_free(
+  expect_no_error(
     out <- vec_rbind(alfa, bravo)
   )
   expect_equal(out[c("name", "id")], x[1:4, c("name", "id")])
@@ -102,19 +102,19 @@ test_that("gargle_map_cli() is implemented for drive_id", {
 
 ## low-level helpers
 test_that("new_drive_id() handles 0-length input and NA", {
-  expect_error_free(
+  expect_no_error(
     out <- new_drive_id(character())
   )
   expect_length(out, 0)
   expect_true(is_drive_id(out))
 
-  expect_error_free(
+  expect_no_error(
     out <- new_drive_id(NA_character_)
   )
   expect_true(is.na(out))
   expect_true(is_drive_id(out))
 
-  expect_error_free(
+  expect_no_error(
     out <- new_drive_id(c(NA_character_, "abc"))
   )
   expect_true(is.na(out[1]))

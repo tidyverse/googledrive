@@ -171,7 +171,7 @@ test_that("check_for_overwrite() does its job", {
     "already exist"
   )
 
-  expect_error_free(
+  expect_no_error(
     second <- drive_create(
       me_("name-collision"),
       path = PARENT_ID,
@@ -185,7 +185,7 @@ test_that("check_for_overwrite() does its job", {
   )
   expect_false(first$id == second$id)
 
-  expect_error_free(
+  expect_no_error(
     drive_create(
       me_("name-collision"),
       path = PARENT_ID,
