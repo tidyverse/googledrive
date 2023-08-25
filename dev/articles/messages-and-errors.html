@@ -308,11 +308,11 @@ up string for each row of the dribble, i.e. for each Drive file.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "{.drivepath 2021-09-16_r_logo.jpg} {cli::col_grey('&lt;id: 1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D&gt;')}"     </span></span>
-<span><span class="co">#&gt; [2] "{.drivepath 2021-09-16_r_about.html} {cli::col_grey('&lt;id: 1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ&gt;')}"   </span></span>
-<span><span class="co">#&gt; [3] "{.drivepath 2021-09-16_imdb_latin1.csv} {cli::col_grey('&lt;id: 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw&gt;')}"</span></span>
-<span><span class="co">#&gt; [4] "{.drivepath 2021-09-16_chicken.txt} {cli::col_grey('&lt;id: 1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7&gt;')}"    </span></span>
-<span><span class="co">#&gt; [5] "{.drivepath 2021-09-16_chicken.pdf} {cli::col_grey('&lt;id: 14Hd6_VQAeEgcwBBJamc-FUlnXhp117T2&gt;')}"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "{.drivepath name-squatter-mkdir} {cli::col_grey('&lt;id: 133y_XLyA9kwOda1oBw4w3Xa0nAg0Bhzr&gt;')}"</span></span>
+<span><span class="co">#&gt; [2] "{.drivepath pqr} {cli::col_grey('&lt;id: 1VQz8Z1-y_YtZoB3riGPLOj40UYXHQ03Y&gt;')}"                </span></span>
+<span><span class="co">#&gt; [3] "{.drivepath mno} {cli::col_grey('&lt;id: 1Ts735as1j_PSLkQInXL4zQrQtIwV2enc&gt;')}"                </span></span>
+<span><span class="co">#&gt; [4] "{.drivepath jkl} {cli::col_grey('&lt;id: 1ULDzZZ5U3I167WtToFcC3wx19Bf-a9Lw&gt;')}"                </span></span>
+<span><span class="co">#&gt; [5] "{.drivepath bravo} {cli::col_grey('&lt;id: 1jjzpjVI30o_AKurLktZFMPeltAUqQY0b&gt;')}"</span></span></code></pre></div>
 <p><code>gargle_map_cli.dribble()</code> also allows a custom template,
 but it’s a more complicated and less common situation than for
 <code>character</code>. We won’t get into that here. (I don’t consider
@@ -350,11 +350,11 @@ and does aesthetically pleasing truncation.</p>
 <span>  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Some Drive files:</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">2021-09-16_r_logo.jpg</span> <span style="color: #555555;">&lt;id: 1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D&gt;</span></span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">2021-09-16_r_about.html</span> <span style="color: #555555;">&lt;id: 1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ&gt;</span></span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">2021-09-16_imdb_latin1.csv</span> <span style="color: #555555;">&lt;id: 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw&gt;</span></span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">2021-09-16_chicken.txt</span> <span style="color: #555555;">&lt;id: 1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7&gt;</span></span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">2021-09-16_chicken.pdf</span> <span style="color: #555555;">&lt;id: 14Hd6_VQAeEgcwBBJamc-FUlnXhp117T2&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">name-squatter-mkdir</span> <span style="color: #555555;">&lt;id: 133y_XLyA9kwOda1oBw4w3Xa0nAg0Bhzr&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">pqr</span> <span style="color: #555555;">&lt;id: 1VQz8Z1-y_YtZoB3riGPLOj40UYXHQ03Y&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">mno</span> <span style="color: #555555;">&lt;id: 1Ts735as1j_PSLkQInXL4zQrQtIwV2enc&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">jkl</span> <span style="color: #555555;">&lt;id: 1ULDzZZ5U3I167WtToFcC3wx19Bf-a9Lw&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">bravo</span> <span style="color: #555555;">&lt;id: 1jjzpjVI30o_AKurLktZFMPeltAUqQY0b&gt;</span></span></span>
 <span><span class="co">#&gt;   … and 5 more</span></span></code></pre></div>
 <p>It’s conceivable that cli will gain a better way of vectorization,
 but this works for now.</p>
