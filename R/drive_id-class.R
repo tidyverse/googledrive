@@ -153,7 +153,7 @@ pillar_shaft.drive_id <- function(x, ...) {
 ##       /d/FILE_ID   Drive file
 ## /folders/FILE_ID   Drive folder
 ##       id=FILE_ID   uploaded blob
-id_regexp <- "(/d/|/folders/|id=)[^/]+"
+id_regexp <- "(/d/|/folders/|id=)[^/?]+"
 
 is_drive_url <- function(x) grepl("^http", x) & grepl(id_regexp, x)
 

@@ -30,15 +30,17 @@ test_that("as_id() extracts ids from Drive URLs but not other URLs", {
   x <- c(
     "https://docs.google.com/document/d/doc12345/edit",
     "https://drive.google.com/drive/folders/folder12345",
+    # https://github.com/tidyverse/googledrive/issues/450
+    "https://drive.google.com/drive/folders/folder12345?usp=drive_link",
     "https://drive.google.com/open?id=blob12345",
     "https://docs.google.com/a/example.com/spreadsheets/d/team12345",
-    ## Team Drive URL
+    # Team Drive URL
     "https://drive.google.com/drive/u/0/folders/teamdrive12345"
   )
   expect_identical(
     as_id(x),
     as_id(c(
-      "doc12345", "folder12345", "blob12345",
+      "doc12345", "folder12345", "folder12345", "blob12345",
       "team12345", "teamdrive12345"
     ))
   )
