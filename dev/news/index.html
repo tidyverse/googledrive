@@ -299,15 +299,15 @@
 <p>Sometimes you have a file you will repeatedly send to Drive, i.e. the first time you run an analysis, you create the file and, when you re-run it, you update the file. Previously this was hard to express with googledrive.</p>
 <p><code><a href="../reference/drive_put.html">drive_put()</a></code> is useful here and refers to the HTTP verb <code>PUT</code>: create the thing if it doesn’t exist or, if it does, replace its contents. A good explanation of <code>PUT</code> is <a href="https://medium.com/backticks-tildes/restful-api-design-put-vs-patch-4a061aa3ed0b" class="external-link">RESTful API Design – PUT vs PATCH</a>.</p>
 <p>In pseudo-code, here’s the basic idea of <code><a href="../reference/drive_put.html">drive_put()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>target_filepath <span class="ot">&lt;-</span> <span class="er">&lt;</span>determined from arguments <span class="st">`</span><span class="at">path</span><span class="st">`</span>, <span class="st">`</span><span class="at">name</span><span class="st">`</span>, and <span class="st">`</span><span class="at">media</span><span class="st">`</span><span class="sc">&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>hits <span class="ot">&lt;-</span> <span class="er">&lt;</span>get all Drive files at target_filepath<span class="sc">&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (no hits) {</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">drive_upload</span>(media, path, name, type, ..., verbose)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (exactly <span class="dv">1</span> hit) {</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">drive_update</span>(hit, media, ..., verbose)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a> ERROR</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>target_filepath <span class="ot">&lt;-</span> <span class="er">&lt;</span>determined from arguments <span class="st">`</span><span class="at">path</span><span class="st">`</span>, <span class="st">`</span><span class="at">name</span><span class="st">`</span>, and <span class="st">`</span><span class="at">media</span><span class="st">`</span><span class="sc">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>hits <span class="ot">&lt;-</span> <span class="er">&lt;</span>get all Drive files at target_filepath<span class="sc">&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="cf">if</span> (no hits) {</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a> <span class="fu">drive_upload</span>(media, path, name, type, ..., verbose)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (exactly <span class="dv">1</span> hit) {</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a> <span class="fu">drive_update</span>(hit, media, ..., verbose)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a> ERROR</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </div>
 <div class="section level3">

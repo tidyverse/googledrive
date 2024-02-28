@@ -105,15 +105,15 @@ if (no hits) {
 <li><p>If the file does not already exist, we create a new file.</p></li>
 </ul><p>This is a convenience wrapper around <code><a href="drive_upload.html">drive_upload()</a></code> and
 <code><a href="drive_update.html">drive_update()</a></code>. In pseudo-code:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>target_filepath <span class="ot">&lt;-</span> <span class="er">&lt;</span>determined from <span class="st">`</span><span class="at">path</span><span class="st">`</span>, <span class="st">`</span><span class="at">name</span><span class="st">`</span>, and <span class="st">`</span><span class="at">media</span><span class="st">`</span><span class="sc">&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>hits <span class="ot">&lt;-</span> <span class="er">&lt;</span>get all Drive files at target_filepath<span class="sc">&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (no hits) {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drive_upload</span>(media, path, name, type, ...)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (exactly <span class="dv">1</span> hit) {</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drive_update</span>(hit, media, ...)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  ERROR</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>target_filepath <span class="ot">&lt;-</span> <span class="er">&lt;</span>determined from <span class="st">`</span><span class="at">path</span><span class="st">`</span>, <span class="st">`</span><span class="at">name</span><span class="st">`</span>, and <span class="st">`</span><span class="at">media</span><span class="st">`</span><span class="sc">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>hits <span class="ot">&lt;-</span> <span class="er">&lt;</span>get all Drive files at target_filepath<span class="sc">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="cf">if</span> (no hits) {</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="fu">drive_upload</span>(media, path, name, type, ...)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (exactly <span class="dv">1</span> hit) {</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">drive_update</span>(hit, media, ...)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  ERROR</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>}</span></code></pre><p></p></div>
     </div>
 
     <div class="section level2">
@@ -195,9 +195,9 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu">drive_put</span><span class="op">(</span><span class="va">local_file</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> No pre-existing Drive file at this path. Calling `drive_upload()`.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Local file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">/tmp/RtmpsQek66/drive_put_17d0e87379d.txt</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">/tmp/RtmppwJ6yN/drive_put_17c516ea7f94.txt</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uploaded into Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_17d0e87379d.txt</span> <span style="color: #555555;">&lt;id: 1nczGn2bENWy5qBFaZZnkHBB9U3k_02k0&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_17c516ea7f94.txt</span> <span style="color: #555555;">&lt;id: 1qOm2DTWOzN2DnbCGVDnGFOZi_XLjylTg&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">text/plain</span></span>
 <span class="r-in"><span></span></span>
@@ -208,12 +208,12 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu">drive_put</span><span class="op">(</span><span class="va">local_file</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> A Drive file already exists at this path. Calling `drive_update()`.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File updated:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_17d0e87379d.txt</span> <span style="color: #555555;">&lt;id: 1nczGn2bENWy5qBFaZZnkHBB9U3k_02k0&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_17c516ea7f94.txt</span> <span style="color: #555555;">&lt;id: 1qOm2DTWOzN2DnbCGVDnGFOZi_XLjylTg&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create a second file at this filepath</span></span></span>
 <span class="r-in"><span><span class="va">file2</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_create.html">drive_create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">local_file</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_17d0e87379d.txt</span> <span style="color: #555555;">&lt;id: 1ly2fwDa_i4GM_reYm3QTSv-8o_GMraD4&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_17c516ea7f94.txt</span> <span style="color: #555555;">&lt;id: 10KBGdnu88xQ8KaDaPgEP3_PDazr9zZz1&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">text/plain</span></span>
 <span class="r-in"><span></span></span>
@@ -221,14 +221,14 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span><span class="fu">drive_put</span><span class="op">(</span><span class="va">local_file</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in drive_put(local_file):</span> Multiple items already exist on Drive at the target filepath.</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> Unclear what `drive_put()` should do. Exiting.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">drive_put_17d0e87379d.txt</span> <span style="color: #555555;">&lt;id: 1ly2fwDa_i4GM_reYm3QTSv-8o_GMraD4&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">drive_put_17d0e87379d.txt</span> <span style="color: #555555;">&lt;id: 1nczGn2bENWy5qBFaZZnkHBB9U3k_02k0&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">drive_put_17c516ea7f94.txt</span> <span style="color: #555555;">&lt;id: 10KBGdnu88xQ8KaDaPgEP3_PDazr9zZz1&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">drive_put_17c516ea7f94.txt</span> <span style="color: #555555;">&lt;id: 1qOm2DTWOzN2DnbCGVDnGFOZi_XLjylTg&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_find.html">drive_find</a></span><span class="op">(</span><span class="st">"drive_put_.+[.]txt"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_17d0e87379d.txt</span> <span style="color: #555555;">&lt;id: 1ly2fwDa_i4GM_reYm3QTSv-8o_GMraD4&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_17d0e87379d.txt</span> <span style="color: #555555;">&lt;id: 1nczGn2bENWy5qBFaZZnkHBB9U3k_02k0&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_17c516ea7f94.txt</span> <span style="color: #555555;">&lt;id: 10KBGdnu88xQ8KaDaPgEP3_PDazr9zZz1&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive_put_17c516ea7f94.txt</span> <span style="color: #555555;">&lt;id: 1qOm2DTWOzN2DnbCGVDnGFOZi_XLjylTg&gt;</span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">local_file</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>

@@ -145,9 +145,9 @@ to shared drives. While it's always a good idea to get things into a
 
 <p>To search one specific shared drive, pass its name, marked id, or
 <code><a href="dribble.html">dribble</a></code> to <code>shared_drive</code> somewhere in the call, like so:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">shared_drive =</span> <span class="st">"i_am_a_shared_drive_name"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">shared_drive =</span> <span class="fu">as_id</span>(<span class="st">"i_am_a_shared_drive_id"</span>))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">shared_drive =</span> i_am_a_shared_drive_dribble)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">shared_drive =</span> <span class="st">"i_am_a_shared_drive_name"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">shared_drive =</span> <span class="fu">as_id</span>(<span class="st">"i_am_a_shared_drive_id"</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">shared_drive =</span> i_am_a_shared_drive_dribble)</span></code></pre><p></p></div>
 <p>The value provided to <code>shared_drive</code> is pre-processed with
 <code><a href="as_shared_drive.html">as_shared_drive()</a></code>.</p>
     </div>
@@ -157,9 +157,9 @@ to shared drives. While it's always a good idea to get things into a
 
 <p>To search other collections, pass the <code>corpus</code> parameter somewhere in the
 call, like so:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">corpus =</span> <span class="st">"user"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">corpus =</span> <span class="st">"allDrives"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">corpus =</span> <span class="st">"domain"</span>)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">corpus =</span> <span class="st">"user"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">corpus =</span> <span class="st">"allDrives"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">drive_find</span>(..., <span class="at">corpus =</span> <span class="st">"domain"</span>)</span></code></pre><p></p></div>
 <p>Possible values of <code>corpus</code> and what they mean:</p><ul><li><p><code>"user"</code>: Queries files that the user has accessed, including both shared
 drive and My Drive files.</p></li>
 <li><p><code>"drive"</code>: Queries all items in the shared drive specified via

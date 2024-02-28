@@ -1,4 +1,4 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
@@ -9,7 +9,7 @@ articles:
   multiple-files: multiple-files.html
   permissions: permissions.html
   googledrive: googledrive.html
-last_built: 2024-02-27T13:38Z
+last_built: 2024-02-28T13:39Z
 urls:
   reference: https://googledrive.tidyverse.org/reference
   article: https://googledrive.tidyverse.org/articles
