@@ -132,13 +132,13 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.csv</span> <span style="color: #555555;">&lt;id: 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.csv</span> <span style="color: #555555;">&lt;id: 1Xaeee2ccDz0T_c3oa-Q8HQ6wVwjWCGCF&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.csv</span> <span style="color: #555555;">&lt;id: 1M_Zhgj3gLWhVEfwuM5VQ3QMjt0UhAz5v&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Update the file with new media</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">drive_update</span><span class="op">(</span><span class="fu"><a href="drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File updated:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.csv</span> <span style="color: #555555;">&lt;id: 1Xaeee2ccDz0T_c3oa-Q8HQ6wVwjWCGCF&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.csv</span> <span style="color: #555555;">&lt;id: 1M_Zhgj3gLWhVEfwuM5VQ3QMjt0UhAz5v&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Update the file with new metadata.</span></span></span>
 <span class="r-in"><span><span class="co"># Notice here `name` is not an argument of `drive_update()`, we are passing</span></span></span>
@@ -146,7 +146,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">drive_update</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"CHICKENS!"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File updated:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • '<span style="color: #00BBBB;">CHICKENS!</span>' <span style="color: #555555;">&lt;id: 1Xaeee2ccDz0T_c3oa-Q8HQ6wVwjWCGCF&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • '<span style="color: #00BBBB;">CHICKENS!</span>' <span style="color: #555555;">&lt;id: 1M_Zhgj3gLWhVEfwuM5VQ3QMjt0UhAz5v&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Update the file with new media AND new metadata</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
@@ -155,12 +155,12 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span>    name <span class="op">=</span> <span class="st">"chicken-poem-again.txt"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File updated:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-poem-again.txt</span> <span style="color: #555555;">&lt;id: 1Xaeee2ccDz0T_c3oa-Q8HQ6wVwjWCGCF&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-poem-again.txt</span> <span style="color: #555555;">&lt;id: 1M_Zhgj3gLWhVEfwuM5VQ3QMjt0UhAz5v&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-poem-again.txt</span> <span style="color: #555555;">&lt;id: 1Xaeee2ccDz0T_c3oa-Q8HQ6wVwjWCGCF&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-poem-again.txt</span> <span style="color: #555555;">&lt;id: 1M_Zhgj3gLWhVEfwuM5VQ3QMjt0UhAz5v&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
