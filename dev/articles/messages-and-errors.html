@@ -228,8 +228,9 @@ Google Drive or their Drive files. Examples:</p>
 <span>  <span class="st">" "</span> <span class="op">=</span> <span class="st">"MIME type of {.arg file}: {.field mime_type}."</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Ignoring `type`. Only consulted for native Google file types.</span></span>
-<span><span class="co">#&gt;   MIME type of `file`: <span style="color: #00BB00;">mime_type</span>.</span></span>
-<span></span>
+<span><span class="co">#&gt;   MIME type of `file`: <span style="color: #00BB00;">mime_type</span>.</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"Currently only fields for the {.field files} resource can be \\</span></span>
 <span><span class="st">         checked for validity."</span>,</span>
@@ -237,32 +238,36 @@ Google Drive or their Drive files. Examples:</p>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Currently only fields for the <span style="color: #00BB00;">files</span> resource can be checked for</span></span>
 <span><span class="co">#&gt;   validity.</span></span>
-<span><span class="co">#&gt;   Nothing done.</span></span>
-<span></span>
+<span><span class="co">#&gt;   Nothing done.</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"No updates specified."</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> No updates specified.</span></span>
-<span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> No updates specified.</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"No such file to delete."</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> No such file to delete.</span></span></code></pre></div>
 <p>Information “i”: I’m just keeping you informed of how my work is
 going.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"No pre-existing file at this filepath. Calling \\</span></span>
 <span><span class="st">         {.fun drive_upload}."</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> No pre-existing file at this filepath. Calling `drive_upload()`.</span></span>
-<span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> No pre-existing file at this filepath. Calling `drive_upload()`.</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"Pre-existing file at this filepath. Calling \\</span></span>
 <span><span class="st">         {.fun drive_update}."</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Pre-existing file at this filepath. Calling `drive_update()`.</span></span>
-<span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Pre-existing file at this filepath. Calling `drive_update()`.</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"Not logged in as any specific Google user."</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
@@ -289,7 +294,7 @@ exports methods for <code>character</code> (and <code>NULL</code> and a
 <code>default</code>) and googlesheets4 defines a method for
 <code>dribble</code>. This is likely to be replaced by something in cli
 itself in due course.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "{.field a}" "{.field b}" "{.field c}"</span></span></code></pre></div>
 <p>By default <code>gargle_map_cli.character()</code> just applies the
@@ -299,13 +304,13 @@ customized, if you need something else. Note that we use non-standard
 glue delimiters (<code>&lt;&lt;</code> and <code>&gt;&gt;</code>, by
 default), because we are interpolating into a string with glue/cli
 markup, where <code><a href="https://rdrr.io/r/base/Paren.html" class="external-link">{}</a></code> has the usual meaning.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, template <span class="op">=</span> <span class="st">"how about a path {.path &lt;&lt;x&gt;&gt;}?"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "how about a path {.path d}?" "how about a path {.path e}?"</span></span>
 <span><span class="co">#&gt; [3] "how about a path {.path f}?"</span></span></code></pre></div>
 <p>The <code>gargle_map_cli.dribble()</code> method makes a cli-marked
 up string for each row of the dribble, i.e. for each Drive file.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "{.drivepath 2021-09-16_r_logo.jpg} {cli::col_grey('&lt;id: 1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D&gt;')}"     </span></span>
@@ -320,17 +325,19 @@ the dribble styling to be finalized yet.)</p>
 <p>The result of <code>gargle_map_cli()</code> then gets processed with
 <code><a href="https://gargle.r-lib.org/reference/bulletize.html" class="external-link">gargle::bulletize()</a></code>, which adds the bullet-specifying names
 and does aesthetically pleasing truncation.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;               *               *               *               * </span></span>
 <span><span class="co">#&gt;    "{.field a}"    "{.field b}"    "{.field c}"    "{.field d}" </span></span>
 <span><span class="co">#&gt;               *                 </span></span>
-<span><span class="co">#&gt;    "{.field e}" "… and 21 more"</span></span>
-<span></span>
+<span><span class="co">#&gt;    "{.field e}" "… and 21 more"</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"x"</span>, n_show <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt;               x               x                 </span></span>
-<span><span class="co">#&gt;    "{.field a}"    "{.field b}" "… and 24 more"</span></span>
-<span></span>
+<span><span class="co">#&gt;    "{.field a}"    "{.field b}" "… and 24 more"</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"These are surprising things:"</span>,</span>
 <span>  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, bullet <span class="op">=</span> <span class="st">"!"</span><span class="op">)</span></span>
@@ -341,8 +348,9 @@ and does aesthetically pleasing truncation.</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">c</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">d</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">e</span></span></span>
-<span><span class="co">#&gt;   … and 21 more</span></span>
-<span></span>
+<span><span class="co">#&gt;   … and 21 more</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">drive_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
