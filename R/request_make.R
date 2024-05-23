@@ -5,7 +5,7 @@
 #' wrappers that facilitate common tasks, such as uploading or downloading Drive
 #' files. The functions here are intended for internal use and for programming
 #' around the Drive API. Three functions are documented here:
-#'   * `request_make()` does the bare minimum: calls [gargle::request_make()],
+#'   * `request_make()` does the bare minimum: calls [gargle::request_retry()],
 #'     only adding the googledrive user agent. Typically the input is created
 #'     with [request_generate()] and the output is processed with
 #'     [gargle::response_process()].
