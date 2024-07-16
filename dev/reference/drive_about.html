@@ -138,6 +138,11 @@ useful information (the information on current user) and prints it nicely.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/vnd.google-apps.document"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $importFormats$`text/x-markdown`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $importFormats$`text/x-markdown`[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/vnd.google-apps.document"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $importFormats$`image/gif`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $importFormats$`image/gif`[[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/vnd.google-apps.document"</span>
@@ -241,6 +246,11 @@ useful information (the information on current user) and prints it nicely.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $importFormats$`application/x-msmetafile`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $importFormats$`application/x-msmetafile`[[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/vnd.google-apps.drawing"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $importFormats$`text/markdown`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $importFormats$`text/markdown`[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/vnd.google-apps.document"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $importFormats$`application/vnd.openxmlformats-officedocument.spreadsheetml.template`</span>
@@ -349,15 +359,21 @@ useful information (the information on current user) and prints it nicely.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/pdf"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $exportFormats$`application/vnd.google-apps.document`[[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/epub+zip"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "text/x-markdown"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $exportFormats$`application/vnd.google-apps.document`[[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/zip"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "text/markdown"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $exportFormats$`application/vnd.google-apps.document`[[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/vnd.openxmlformats-officedocument.wordprocessingml.document"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/epub+zip"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $exportFormats$`application/vnd.google-apps.document`[[8]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/zip"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $exportFormats$`application/vnd.google-apps.document`[[9]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/vnd.openxmlformats-officedocument.wordprocessingml.document"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $exportFormats$`application/vnd.google-apps.document`[[10]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "text/plain"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -1235,14 +1251,16 @@ useful information (the information on current user) and prints it nicely.</p>
 <span class="r-in"><span><span class="va">about</span><span class="op">[[</span><span class="st">"exportFormats"</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">unlist</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`application/vnd.google-apps.document`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/rtf"                                                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "application/vnd.oasis.opendocument.text"                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "text/html"                                                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "application/pdf"                                                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "application/epub+zip"                                                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "application/zip"                                                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [7] "application/vnd.openxmlformats-officedocument.wordprocessingml.document"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [8] "text/plain"                                                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "application/rtf"                                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2] "application/vnd.oasis.opendocument.text"                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "text/html"                                                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "application/pdf"                                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "text/x-markdown"                                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "text/markdown"                                                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "application/epub+zip"                                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "application/zip"                                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "application/vnd.openxmlformats-officedocument.wordprocessingml.document"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "text/plain"                                                             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`application/vnd.google-apps.vid`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "video/mp4"</span>
