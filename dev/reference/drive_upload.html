@@ -161,7 +161,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Local file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.csv</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uploaded into Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-upload.csv</span> <span style="color: #555555;">&lt;id: 1-4IYDCTfRtGqOxR_AHJpEToJpZyqS6za&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-upload.csv</span> <span style="color: #555555;">&lt;id: 1Sqks4C9Te53wsJHHnRZAA6Bf6TcKSafK&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">text/csv</span></span>
 <span class="r-in"><span></span></span>
@@ -171,21 +171,20 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span>    name <span class="op">=</span> <span class="st">"chicken-sheet-upload.csv"</span>,</span></span>
 <span class="r-in"><span>    type <span class="op">=</span> <span class="st">"spreadsheet"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Local file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.csv</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Uploaded into Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-sheet-upload</span> <span style="color: #555555;">&lt;id: 1QTQF0eh33FcMZvtRI-SsseHaMHT9OaRXx-w7OOjxqhA&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">application/vnd.google-apps.spreadsheet</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in drive_upload(., name = "chicken-sheet-upload.csv", type = "spreadsheet"):</span> Client error: (403) Forbidden</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> User rate limit exceeded.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> message: User rate limit exceeded.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> domain: usageLimits</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> reason: userRateLimitExceeded</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># check out the new Sheet!</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_browse.html">drive_browse</a></span><span class="op">(</span><span class="va">chicken_sheet</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'chicken_sheet' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_find.html">drive_find</a></span><span class="op">(</span><span class="st">"chicken.*upload"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Files deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-sheet-upload</span> <span style="color: #555555;">&lt;id: 1QTQF0eh33FcMZvtRI-SsseHaMHT9OaRXx-w7OOjxqhA&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-upload.csv</span> <span style="color: #555555;">&lt;id: 1-4IYDCTfRtGqOxR_AHJpEToJpZyqS6za&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-upload.csv</span> <span style="color: #555555;">&lt;id: 1Sqks4C9Te53wsJHHnRZAA6Bf6TcKSafK&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Upload a file and, at the same time, star it</span></span></span>
 <span class="r-in"><span><span class="va">chicken</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.jpg"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
@@ -193,7 +192,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Local file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.jpg</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uploaded into Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.jpg</span> <span style="color: #555555;">&lt;id: 1gm7oauwiiH3XY4ivDU6FN833uXTLhxzn&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.jpg</span> <span style="color: #555555;">&lt;id: 1QxMa8o-na24rHSYNwQZe-BrUWL23hNDB&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">image/jpeg</span></span>
 <span class="r-in"><span></span></span>
@@ -204,13 +203,13 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">chicken</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.jpg</span> <span style="color: #555555;">&lt;id: 1gm7oauwiiH3XY4ivDU6FN833uXTLhxzn&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.jpg</span> <span style="color: #555555;">&lt;id: 1QxMa8o-na24rHSYNwQZe-BrUWL23hNDB&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `overwrite = FALSE` errors if something already exists at target filepath</span></span></span>
 <span class="r-in"><span><span class="co"># THIS WILL ERROR!</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_create.html">drive_create</a></span><span class="op">(</span><span class="st">"name-squatter-upload"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1EWVz4VVOvITwDai5uMVjRQtLFLZmd43e&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1gBB0-FUsVRS5lO1wNr5NQzmrD76oG_jG&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">application/octet-stream</span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.jpg"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
@@ -220,7 +219,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_for_overwrite(params[["parents"]], params[["name"]], overwrite):</span> 1 item already exists at the target filepath and `overwrite =</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> FALSE`:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1EWVz4VVOvITwDai5uMVjRQtLFLZmd43e&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1gBB0-FUsVRS5lO1wNr5NQzmrD76oG_jG&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `overwrite = TRUE` moves the existing item to trash, then proceeds</span></span></span>
 <span class="r-in"><span><span class="va">chicken</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.jpg"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
@@ -229,18 +228,18 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span>    overwrite <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1EWVz4VVOvITwDai5uMVjRQtLFLZmd43e&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1gBB0-FUsVRS5lO1wNr5NQzmrD76oG_jG&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Local file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.jpg</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uploaded into Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1l7WLNWP_3GfiGxwlYHYbUMYrkpcLV0Ps&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1IZVRxO3qG7qivOsSUXz30_BOeK49POi8&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">image/jpeg</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">chicken</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1l7WLNWP_3GfiGxwlYHYbUMYrkpcLV0Ps&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">name-squatter-upload</span> <span style="color: #555555;">&lt;id: 1IZVRxO3qG7qivOsSUXz30_BOeK49POi8&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># Upload to a shared drive:</span></span></span>
