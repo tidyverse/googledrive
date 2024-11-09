@@ -141,7 +141,7 @@ they require additional API calls.</p></dd>
 <span class="r-in"><span><span class="co"># Create a shortcut in the default location with the default name</span></span></span>
 <span class="r-in"><span><span class="va">sc1</span> <span class="op">&lt;-</span> <span class="fu">shortcut_create</span><span class="op">(</span><span class="va">src_file</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet</span> <span style="color: #555555;">&lt;id: 1CBqQyUJskH1c5JNsQL_K4kJ5U5W68vWN&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet</span> <span style="color: #555555;">&lt;id: 1cVoDh9P8-RGryX7L05x6jmfhigDg4bYU&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">application/vnd.google-apps.shortcut</span></span>
 <span class="r-in"><span><span class="co"># This shortcut could now be moved, renamed, etc.</span></span></span>
@@ -150,20 +150,20 @@ they require additional API calls.</p></dd>
 <span class="r-in"><span><span class="va">sc2</span> <span class="op">&lt;-</span> <span class="va">src_file</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">shortcut_create</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"chicken_sheet_second_shortcut"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet_second_shortcut</span> <span style="color: #555555;">&lt;id: 1jET1GNE2pz636ICXrJsZ4I6fGeqYH_Gg&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet_second_shortcut</span> <span style="color: #555555;">&lt;id: 1eYOV4qlSR1k_hmrj3C-bmNnytx39D4i8&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">application/vnd.google-apps.shortcut</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create a folder, then put a shortcut there, with default name</span></span></span>
 <span class="r-in"><span><span class="va">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_mkdir.html">drive_mkdir</a></span><span class="op">(</span><span class="st">"chicken_sheet_shortcut_folder"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet_shortcut_folder</span> <span style="color: #555555;">&lt;id: 1AF5Rbe-cpnt4JFkCYNlraf9c3dtpme2Y&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet_shortcut_folder</span> <span style="color: #555555;">&lt;id: 1_Ug3ZX0KI-K7so10Rm4MCz3qpLnijd4Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">application/vnd.google-apps.folder</span></span>
 <span class="r-in"><span><span class="va">sc3</span> <span class="op">&lt;-</span> <span class="va">src_file</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">shortcut_create</span><span class="op">(</span><span class="va">folder</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet</span> <span style="color: #555555;">&lt;id: 1kzJ_zjIdWgbXj4da5PYuDAwgg7Qtl2f0&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet</span> <span style="color: #555555;">&lt;id: 1F-Pf_ioMQ8L_zPIr5mvI5s0L-uSeX7cp&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">application/vnd.google-apps.shortcut</span></span>
 <span class="r-in"><span></span></span>
@@ -172,9 +172,9 @@ they require additional API calls.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name                          id       drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> chicken_sheet                 1kzJ_zj… <span style="color: #949494;">&lt;named list [32]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> chicken_sheet_second_shortcut 1jET1GN… <span style="color: #949494;">&lt;named list [32]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> chicken_sheet                 1CBqQyU… <span style="color: #949494;">&lt;named list [32]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> chicken_sheet                 1F-Pf_i… <span style="color: #949494;">&lt;named list [32]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> chicken_sheet_second_shortcut 1eYOV4q… <span style="color: #949494;">&lt;named list [32]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> chicken_sheet                 1cVoDh9… <span style="color: #949494;">&lt;named list [32]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Confirm the shortcuts all target the original file</span></span></span>
 <span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
@@ -190,10 +190,10 @@ they require additional API calls.</p></dd>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">sc1</span>, <span class="va">sc2</span>, <span class="va">sc3</span>, <span class="va">folder</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet</span> <span style="color: #555555;">&lt;id: 1CBqQyUJskH1c5JNsQL_K4kJ5U5W68vWN&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet_second_shortcut</span> <span style="color: #555555;">&lt;id: 1jET1GNE2pz636ICXrJsZ4I6fGeqYH_Gg&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet</span> <span style="color: #555555;">&lt;id: 1kzJ_zjIdWgbXj4da5PYuDAwgg7Qtl2f0&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet_shortcut_folder</span> <span style="color: #555555;">&lt;id: 1AF5Rbe-cpnt4JFkCYNlraf9c3dtpme2Y&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet</span> <span style="color: #555555;">&lt;id: 1cVoDh9P8-RGryX7L05x6jmfhigDg4bYU&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet_second_shortcut</span> <span style="color: #555555;">&lt;id: 1eYOV4qlSR1k_hmrj3C-bmNnytx39D4i8&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet</span> <span style="color: #555555;">&lt;id: 1F-Pf_ioMQ8L_zPIr5mvI5s0L-uSeX7cp&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet_shortcut_folder</span> <span style="color: #555555;">&lt;id: 1_Ug3ZX0KI-K7so10Rm4MCz3qpLnijd4Y&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
