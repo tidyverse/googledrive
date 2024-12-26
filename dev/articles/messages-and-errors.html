@@ -294,11 +294,11 @@ up string for each row of the dribble, i.e. for each Drive file.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "{.drivepath name-squatter-mv} {cli::col_grey('&lt;id: 1KzVSgiHO0UXoFBk3hepNrA6PAf9gVWjK&gt;')}"      </span></span>
-<span><span class="co">#&gt; [2] "{.drivepath chicken-mv-renamed.txt} {cli::col_grey('&lt;id: 11rHwQKky4JSXilPIOP-4sBgB6-FZi25L&gt;')}"</span></span>
-<span><span class="co">#&gt; [3] "{.drivepath name-squatter-mv} {cli::col_grey('&lt;id: 12HaButRIMZfX5_2-k1z7dxDgq35GRuzm&gt;')}"      </span></span>
-<span><span class="co">#&gt; [4] "{.drivepath chicken-mv-renamed.txt} {cli::col_grey('&lt;id: 1pIiJk-pv1jEBAT8_nd8EqvG9SFJ44gBx&gt;')}"</span></span>
-<span><span class="co">#&gt; [5] "{.drivepath name-squatter-mv} {cli::col_grey('&lt;id: 1thU6vmJ83I16I3GpRofSe15l5POkXbnQ&gt;')}"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "{.drivepath name-squatter-mv} {cli::col_grey('&lt;id: 1wQOQt5o6mu2qoyWQ_l_67NN1_K06lr6J&gt;')}"      </span></span>
+<span><span class="co">#&gt; [2] "{.drivepath chicken-mv-renamed.txt} {cli::col_grey('&lt;id: 1iKe4x3Zgi1PiKukxfxybVvE3Vkn9GIlq&gt;')}"</span></span>
+<span><span class="co">#&gt; [3] "{.drivepath name-squatter-mv} {cli::col_grey('&lt;id: 1KzVSgiHO0UXoFBk3hepNrA6PAf9gVWjK&gt;')}"      </span></span>
+<span><span class="co">#&gt; [4] "{.drivepath chicken-mv-renamed.txt} {cli::col_grey('&lt;id: 11rHwQKky4JSXilPIOP-4sBgB6-FZi25L&gt;')}"</span></span>
+<span><span class="co">#&gt; [5] "{.drivepath name-squatter-mv} {cli::col_grey('&lt;id: 12HaButRIMZfX5_2-k1z7dxDgq35GRuzm&gt;')}"</span></span></code></pre></div>
 <p><code>gargle_map_cli.dribble()</code> also allows a custom template,
 but it’s a more complicated and less common situation than for
 <code>character</code>. We won’t get into that here. (I don’t consider
@@ -336,11 +336,11 @@ and does aesthetically pleasing truncation.</p>
 <span>  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Some Drive files:</span></span>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1wQOQt5o6mu2qoyWQ_l_67NN1_K06lr6J&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-mv-renamed.txt</span> <span style="color: #555555;">&lt;id: 1iKe4x3Zgi1PiKukxfxybVvE3Vkn9GIlq&gt;</span></span></span>
 <span><span class="co">#&gt; • <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1KzVSgiHO0UXoFBk3hepNrA6PAf9gVWjK&gt;</span></span></span>
 <span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-mv-renamed.txt</span> <span style="color: #555555;">&lt;id: 11rHwQKky4JSXilPIOP-4sBgB6-FZi25L&gt;</span></span></span>
 <span><span class="co">#&gt; • <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 12HaButRIMZfX5_2-k1z7dxDgq35GRuzm&gt;</span></span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-mv-renamed.txt</span> <span style="color: #555555;">&lt;id: 1pIiJk-pv1jEBAT8_nd8EqvG9SFJ44gBx&gt;</span></span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1thU6vmJ83I16I3GpRofSe15l5POkXbnQ&gt;</span></span></span>
 <span><span class="co">#&gt;   … and 5 more</span></span></code></pre></div>
 <p>It’s conceivable that cli will gain a better way of vectorization,
 but this works for now.</p>
