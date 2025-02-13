@@ -119,18 +119,18 @@ the Drive API documentation.</p></div>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># get a tibble of all fields for the Files resource + indicator of defaults</span></span></span>
 <span class="r-in"><span><span class="fu">drive_fields</span><span class="op">(</span><span class="fu"><a href="expose.html">expose</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 55 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                         desc                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> appProperties                <span style="color: #949494;">"</span>A collection of arbitrary key-value pair…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> capabilities                 <span style="color: #949494;">"</span>Capabilities the current user has on thi…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> contentHints                 <span style="color: #949494;">"</span>Additional information about the content…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> copyRequiresWriterPermission <span style="color: #949494;">"</span>Whether the options to copy, print, or d…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> createdTime                  <span style="color: #949494;">"</span>The time at which the file was created (…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> description                  <span style="color: #949494;">"</span>A short description of the file.<span style="color: #949494;">"</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> driveId                      <span style="color: #949494;">"</span>ID of the shared drive the file resides …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> explicitlyTrashed            <span style="color: #949494;">"</span>Whether the file has been explicitly tra…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> exportLinks                  <span style="color: #949494;">"</span>Links for exporting Google Docs to speci…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> fileExtension                <span style="color: #949494;">"</span>The final component of fullFileExtension…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name                         desc                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> appProperties                <span style="color: #949494;">"</span>A collection of arbitrary key-value p…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> capabilities                 <span style="color: #949494;">"</span>Capabilities the current user has on …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> contentHints                 <span style="color: #949494;">"</span>Additional information about the cont…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> copyRequiresWriterPermission <span style="color: #949494;">"</span>Whether the options to copy, print, o…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> createdTime                  <span style="color: #949494;">"</span>The time at which the file was create…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> description                  <span style="color: #949494;">"</span>A short description of the file.<span style="color: #949494;">"</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> driveId                      <span style="color: #949494;">"</span>ID of the shared drive the file resid…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> explicitlyTrashed            <span style="color: #949494;">"</span>Whether the file has been explicitly …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> exportLinks                  <span style="color: #949494;">"</span>Links for exporting Google Docs to sp…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> fileExtension                <span style="color: #949494;">"</span>The final component of fullFileExtens…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 45 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># invalid fields are removed and throw warning</span></span></span>
