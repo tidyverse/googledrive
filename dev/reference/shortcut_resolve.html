@@ -131,13 +131,13 @@ Extra columns <code>name_shortcut</code> and
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken_sheet</span> <span style="color: #555555;">&lt;id: 1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-sheet-for-shortcut</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1fFH76Fi-eCLwtsEwpmAC98uBjWC4Kvx-BJuDOOvVLY4&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1uqWmhQxzdFuuBxsLtYnugPxLxA_243_0OMdUv_gdkDI&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create a shortcut</span></span></span>
 <span class="r-in"><span><span class="va">sc1</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="shortcut_create.html">shortcut_create</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"shortcut-1"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-1</span> <span style="color: #555555;">&lt;id: 1LUqFJqUF7EkokV3c_3PqD7D9FyJ93672&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-1</span> <span style="color: #555555;">&lt;id: 1gftyNWT8I4hvw4MzqvL5nnd4UX-63Mjc&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">application/vnd.google-apps.shortcut</span></span>
 <span class="r-in"><span></span></span>
@@ -145,66 +145,66 @@ Extra columns <code>name_shortcut</code> and
 <span class="r-in"><span><span class="va">sc1</span> <span class="op">&lt;-</span> <span class="va">sc1</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="drive_cp.html">drive_cp</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"shortcut-2"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-1</span> <span style="color: #555555;">&lt;id: 1LUqFJqUF7EkokV3c_3PqD7D9FyJ93672&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-1</span> <span style="color: #555555;">&lt;id: 1gftyNWT8I4hvw4MzqvL5nnd4UX-63Mjc&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-2</span> <span style="color: #555555;">&lt;id: 1dEzpz8njhLMNweamgTCPpLARaLMUv5Zi&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-2</span> <span style="color: #555555;">&lt;id: 1SvUjPlKrnNfCg_0XwHqWz0xax5_Abipy&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get the shortcuts</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">sc_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_find.html">drive_find</a></span><span class="op">(</span><span class="st">"-[12]$"</span>, type <span class="op">=</span> <span class="st">"shortcut"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 2 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name       id                                drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> shortcut-2 1dEzpz8njhLMNweamgTCPpLARaLMUv5Zi <span style="color: #949494;">&lt;named list [33]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> shortcut-1 1LUqFJqUF7EkokV3c_3PqD7D9FyJ93672 <span style="color: #949494;">&lt;named list [33]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> shortcut-2 1SvUjPlKrnNfCg_0XwHqWz0xax5_Abipy <span style="color: #949494;">&lt;named list [33]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> shortcut-1 1gftyNWT8I4hvw4MzqvL5nnd4UX-63Mjc <span style="color: #949494;">&lt;named list [33]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Resolve them</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">resolved</span> <span class="op">&lt;-</span> <span class="fu">shortcut_resolve</span><span class="op">(</span><span class="va">sc_dat</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Resolved 2 shortcuts found in 2 files:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-2</span> <span style="color: #555555;">&lt;id: 1dEzpz8njhLMNweamgTCPpLARaLMUv5Zi&gt;</span> -&gt;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-2</span> <span style="color: #555555;">&lt;id: 1SvUjPlKrnNfCg_0XwHqWz0xax5_Abipy&gt;</span> -&gt;</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #00BBBB;">chicken-sheet-for-shortcut</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1fFH76Fi-eCLwtsEwpmAC98uBjWC4Kvx-BJuDOOvVLY4&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-1</span> <span style="color: #555555;">&lt;id: 1LUqFJqUF7EkokV3c_3PqD7D9FyJ93672&gt;</span> -&gt;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1uqWmhQxzdFuuBxsLtYnugPxLxA_243_0OMdUv_gdkDI&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-1</span> <span style="color: #555555;">&lt;id: 1gftyNWT8I4hvw4MzqvL5nnd4UX-63Mjc&gt;</span> -&gt;</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #00BBBB;">chicken-sheet-for-shortcut</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1fFH76Fi-eCLwtsEwpmAC98uBjWC4Kvx-BJuDOOvVLY4&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1uqWmhQxzdFuuBxsLtYnugPxLxA_243_0OMdUv_gdkDI&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 2 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name                id       name_shortcut id_shortcut drive_resource</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> chicken-sheet-for-… 1fFH76F… shortcut-2    1dEzpz8…    <span style="color: #949494;">&lt;named list&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> chicken-sheet-for-… 1fFH76F… shortcut-1    1LUqFJq…    <span style="color: #949494;">&lt;named list&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> chicken-sheet-for-… 1uqWmhQ… shortcut-2    1SvUjPl…    <span style="color: #949494;">&lt;named list&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> chicken-sheet-for-… 1uqWmhQ… shortcut-1    1gftyNW…    <span style="color: #949494;">&lt;named list&gt;</span>  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">resolved</span><span class="op">$</span><span class="va">id</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;drive_id[2]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1fFH76Fi-eCLwtsEwpmAC98uBjWC4Kvx-BJuDOOvVLY4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] 1fFH76Fi-eCLwtsEwpmAC98uBjWC4Kvx-BJuDOOvVLY4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1uqWmhQxzdFuuBxsLtYnugPxLxA_243_0OMdUv_gdkDI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] 1uqWmhQxzdFuuBxsLtYnugPxLxA_243_0OMdUv_gdkDI</span>
 <span class="r-in"><span><span class="va">file</span><span class="op">$</span><span class="va">id</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;drive_id[1]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1fFH76Fi-eCLwtsEwpmAC98uBjWC4Kvx-BJuDOOvVLY4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1uqWmhQxzdFuuBxsLtYnugPxLxA_243_0OMdUv_gdkDI</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Delete the target file</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-sheet-for-shortcut</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1fFH76Fi-eCLwtsEwpmAC98uBjWC4Kvx-BJuDOOvVLY4&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1uqWmhQxzdFuuBxsLtYnugPxLxA_243_0OMdUv_gdkDI&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># (Try to) resolve the shortcuts again</span></span></span>
 <span class="r-in"><span><span class="fu">shortcut_resolve</span><span class="op">(</span><span class="va">sc_dat</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Resolved 0 of 2 shortcuts found in 2 files:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-2</span> <span style="color: #555555;">&lt;id: 1dEzpz8njhLMNweamgTCPpLARaLMUv5Zi&gt;</span> -&gt; <span style="color: #00BBBB;">NA</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1fFH76Fi-eCLwtsEwpmAC98uBjWC4Kvx-BJuDOOvVLY4&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-1</span> <span style="color: #555555;">&lt;id: 1LUqFJqUF7EkokV3c_3PqD7D9FyJ93672&gt;</span> -&gt; <span style="color: #00BBBB;">NA</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1fFH76Fi-eCLwtsEwpmAC98uBjWC4Kvx-BJuDOOvVLY4&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-2</span> <span style="color: #555555;">&lt;id: 1SvUjPlKrnNfCg_0XwHqWz0xax5_Abipy&gt;</span> -&gt; <span style="color: #00BBBB;">NA</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1uqWmhQxzdFuuBxsLtYnugPxLxA_243_0OMdUv_gdkDI&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-1</span> <span style="color: #555555;">&lt;id: 1gftyNWT8I4hvw4MzqvL5nnd4UX-63Mjc&gt;</span> -&gt; <span style="color: #00BBBB;">NA</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1uqWmhQxzdFuuBxsLtYnugPxLxA_243_0OMdUv_gdkDI&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 2 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name  id       name_shortcut id_shortcut drive_resource  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="color: #BB0000;">NA</span>    1fFH76F… shortcut-2    1dEzpz8…    <span style="color: #949494;">&lt;named list [3]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> <span style="color: #BB0000;">NA</span>    1fFH76F… shortcut-1    1LUqFJq…    <span style="color: #949494;">&lt;named list [3]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="color: #BB0000;">NA</span>    1uqWmhQ… shortcut-2    1SvUjPl…    <span style="color: #949494;">&lt;named list [3]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> <span style="color: #BB0000;">NA</span>    1uqWmhQ… shortcut-1    1gftyNW…    <span style="color: #949494;">&lt;named list [3]&gt;</span></span>
 <span class="r-in"><span><span class="co"># No error, but resolution is unsuccessful due to non-existent target</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">sc_dat</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-2</span> <span style="color: #555555;">&lt;id: 1dEzpz8njhLMNweamgTCPpLARaLMUv5Zi&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-1</span> <span style="color: #555555;">&lt;id: 1LUqFJqUF7EkokV3c_3PqD7D9FyJ93672&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-2</span> <span style="color: #555555;">&lt;id: 1SvUjPlKrnNfCg_0XwHqWz0xax5_Abipy&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">shortcut-1</span> <span style="color: #555555;">&lt;id: 1gftyNWT8I4hvw4MzqvL5nnd4UX-63Mjc&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
