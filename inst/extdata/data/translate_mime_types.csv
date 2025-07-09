@@ -6,13 +6,16 @@ export,application/vnd.google-apps.document,application/vnd.oasis.opendocument.t
 export,application/vnd.google-apps.document,application/vnd.openxmlformats-officedocument.wordprocessingml.document,TRUE
 export,application/vnd.google-apps.document,application/zip,FALSE
 export,application/vnd.google-apps.document,text/html,FALSE
+export,application/vnd.google-apps.document,text/markdown,FALSE
 export,application/vnd.google-apps.document,text/plain,FALSE
+export,application/vnd.google-apps.document,text/x-markdown,FALSE
 export,application/vnd.google-apps.drawing,application/pdf,FALSE
 export,application/vnd.google-apps.drawing,image/jpeg,FALSE
 export,application/vnd.google-apps.drawing,image/png,TRUE
 export,application/vnd.google-apps.drawing,image/svg+xml,FALSE
 export,application/vnd.google-apps.form,application/zip,TRUE
 export,application/vnd.google-apps.jam,application/pdf,FALSE
+export,application/vnd.google-apps.mail-layout,text/plain,FALSE
 export,application/vnd.google-apps.presentation,application/pdf,FALSE
 export,application/vnd.google-apps.presentation,application/vnd.oasis.opendocument.presentation,FALSE
 export,application/vnd.google-apps.presentation,application/vnd.openxmlformats-officedocument.presentationml.presentation,TRUE
@@ -26,6 +29,7 @@ export,application/vnd.google-apps.spreadsheet,application/x-vnd.oasis.opendocum
 export,application/vnd.google-apps.spreadsheet,application/zip,FALSE
 export,application/vnd.google-apps.spreadsheet,text/csv,FALSE
 export,application/vnd.google-apps.spreadsheet,text/tab-separated-values,FALSE
+export,application/vnd.google-apps.vid,video/mp4,FALSE
 import,application/vnd.google-apps.document,application/msword,NA
 import,application/vnd.google-apps.document,application/pdf,NA
 import,application/vnd.google-apps.document,application/rtf,NA
@@ -45,9 +49,11 @@ import,application/vnd.google-apps.document,image/png,NA
 import,application/vnd.google-apps.document,image/x-bmp,NA
 import,application/vnd.google-apps.document,image/x-png,NA
 import,application/vnd.google-apps.document,text/html,NA
+import,application/vnd.google-apps.document,text/markdown,NA
 import,application/vnd.google-apps.document,text/plain,NA
 import,application/vnd.google-apps.document,text/richtext,NA
 import,application/vnd.google-apps.document,text/rtf,NA
+import,application/vnd.google-apps.document,text/x-markdown,NA
 import,application/vnd.google-apps.drawing,application/x-msmetafile,NA
 import,application/vnd.google-apps.presentation,application/vnd.ms-powerpoint,NA
 import,application/vnd.google-apps.presentation,application/vnd.ms-powerpoint.presentation.macroenabled.12,NA
