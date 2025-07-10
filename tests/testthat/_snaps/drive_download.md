@@ -55,3 +55,13 @@
       Saved locally as:
       * '{download_filename}'
 
+# drive_download() respects given extension when `type` specified
+
+    Code
+      write_utf8(drive_download_message)
+    Output
+      File downloaded:
+      * '{file_to_download}' <id: {FILE_ID}>
+      Saved locally as:
+      * '{download_filename}.NA'
+
