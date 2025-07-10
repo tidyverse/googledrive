@@ -148,7 +148,7 @@ test_that("drive_download() converts using default MIME type, if necessary", {
   expect_true(file.exists(file.path(tmpdir, download_filename)))
 })
 
-test_that("drive_download() respects given extension when `type` specified", {
+test_that("drive_download() respects `path` when `type` specified and no default extension", {
   skip_if_no_token()
   skip_if_offline()
 

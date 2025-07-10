@@ -55,7 +55,7 @@
       Saved locally as:
       * '{download_filename}'
 
-# drive_download() respects given extension when `type` specified
+# drive_download() respects `path` when `type` specified and no default extension
 
     Code
       write_utf8(drive_download_message)
@@ -63,5 +63,5 @@
       File downloaded:
       * '{file_to_download}' <id: {FILE_ID}>
       Saved locally as:
-      * '{download_filename}.NA'
+      * '{download_filename}'
 
