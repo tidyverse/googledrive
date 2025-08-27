@@ -137,14 +137,14 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-mv.txt</span> <span style="color: #555555;">&lt;id: 1SyhS172wHj8OzvgDJw-9-vWMkcbbx74x&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-mv.txt</span> <span style="color: #555555;">&lt;id: 13X4XMbOhTKmYt8nPPUJHWPXeavdUGtt9&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># rename it, but leave in current folder (root folder, in this case)</span></span></span>
 <span class="r-in"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu">drive_mv</span><span class="op">(</span><span class="va">file</span>, <span class="st">"chicken-mv-renamed.txt"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-mv.txt</span> <span style="color: #555555;">&lt;id: 1SyhS172wHj8OzvgDJw-9-vWMkcbbx74x&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-mv.txt</span> <span style="color: #555555;">&lt;id: 13X4XMbOhTKmYt8nPPUJHWPXeavdUGtt9&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Has been renamed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-mv-renamed.txt</span> <span style="color: #555555;">&lt;id: 1SyhS172wHj8OzvgDJw-9-vWMkcbbx74x&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-mv-renamed.txt</span> <span style="color: #555555;">&lt;id: 13X4XMbOhTKmYt8nPPUJHWPXeavdUGtt9&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create a folder to move the file into</span></span></span>
 <span class="r-in"><span><span class="va">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_mkdir.html">drive_mkdir</a></span><span class="op">(</span><span class="st">"mv-folder"</span><span class="op">)</span></span></span>
@@ -170,37 +170,37 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span><span class="co"># to ensure we get a move vs. renaming it to "mv-folder"</span></span></span>
 <span class="r-in"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu">drive_mv</span><span class="op">(</span><span class="va">file</span>, <span class="st">"mv-folder/"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-mv-renamed.txt</span> <span style="color: #555555;">&lt;id: 1SyhS172wHj8OzvgDJw-9-vWMkcbbx74x&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-mv-renamed.txt</span> <span style="color: #555555;">&lt;id: 13X4XMbOhTKmYt8nPPUJHWPXeavdUGtt9&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Has been moved:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">mv-folder/chicken-mv-renamed.txt</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1SyhS172wHj8OzvgDJw-9-vWMkcbbx74x&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 13X4XMbOhTKmYt8nPPUJHWPXeavdUGtt9&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `overwrite = FALSE` errors if something already exists at target filepath</span></span></span>
 <span class="r-in"><span><span class="co"># THIS WILL ERROR!</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_create.html">drive_create</a></span><span class="op">(</span><span class="st">"name-squatter-mv"</span>, path <span class="op">=</span> <span class="st">"~/"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1UAs2pbq2Gan9mGF1gVQ_HypHu-RYffhG&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1qB0NuufNSV-66RHtuby61j2mYsrAMYn-&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">application/octet-stream</span></span>
 <span class="r-in"><span><span class="fu">drive_mv</span><span class="op">(</span><span class="va">file</span>, path <span class="op">=</span> <span class="st">"~/"</span>, name <span class="op">=</span> <span class="st">"name-squatter-mv"</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_for_overwrite(parent = params[["addParents"]] %||% parent_before,     name = params[["name"]] %||% file$name, overwrite = overwrite):</span> 364 items already exist at the target filepath and `overwrite =</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_for_overwrite(parent = params[["addParents"]] %||% parent_before,     name = params[["name"]] %||% file$name, overwrite = overwrite):</span> 365 items already exist at the target filepath and `overwrite =</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> FALSE`:</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1qB0NuufNSV-66RHtuby61j2mYsrAMYn-&gt;</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1UAs2pbq2Gan9mGF1gVQ_HypHu-RYffhG&gt;</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1GJnu8zzjkOxVTxz4yQvhKArNutctFqEB&gt;</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1xt_BlB3D1yuw8tyuRCSQqkfr5iuXmr82&gt;</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 19z-ObjOrXFqre5cUZhJaMFDLuh2bUNKl&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1N7dr55XdtGsTgl1BBuk7p6vYWx8b9_DS&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   … and 359 more</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span>   … and 360 more</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `overwrite = TRUE` moves the existing item to trash, then proceeds</span></span></span>
 <span class="r-in"><span><span class="fu">drive_mv</span><span class="op">(</span><span class="va">file</span>, path <span class="op">=</span> <span class="st">"~/"</span>, name <span class="op">=</span> <span class="st">"name-squatter-mv"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_for_overwrite(parent = params[["addParents"]] %||% parent_before,     name = params[["name"]] %||% file$name, overwrite = overwrite):</span> Multiple items already exist at the target filepath.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1qB0NuufNSV-66RHtuby61j2mYsrAMYn-&gt;</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1UAs2pbq2Gan9mGF1gVQ_HypHu-RYffhG&gt;</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1GJnu8zzjkOxVTxz4yQvhKArNutctFqEB&gt;</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1xt_BlB3D1yuw8tyuRCSQqkfr5iuXmr82&gt;</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 19z-ObjOrXFqre5cUZhJaMFDLuh2bUNKl&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">name-squatter-mv</span> <span style="color: #555555;">&lt;id: 1N7dr55XdtGsTgl1BBuk7p6vYWx8b9_DS&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   … and 359 more</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span>   … and 360 more</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> Although `overwrite = TRUE`, it's not clear which item to overwrite.</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> Use `overwrite = NA` to suppress this check. Exiting.</span>
 <span class="r-in"><span></span></span>
