@@ -4,6 +4,11 @@ source(
   system.file("discovery-doc-ingest", "ingest-functions.R", package = "gargle")
 )
 
+download_discovery_document("drive:v3")
+# you can try to do some diffing here, but I haven't had much success with this
+# currently am comparing a 2021 disc doc to 2025 and there are 632 diffs
+# just YOLOing now
+
 existing <- list_discovery_documents("drive")
 if (length(existing) > 1) {
   rlang::warn("MULTIPLE DISCOVERY DOCUMENTS FOUND. FIX THIS!")
