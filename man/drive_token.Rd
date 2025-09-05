@@ -20,7 +20,7 @@ If auth has been deactivated via \code{\link[=drive_deauth]{drive_deauth()}}, \c
 returns \code{NULL}.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 req <- request_generate(
   "drive.files.get",
   list(fileId = "abc"),

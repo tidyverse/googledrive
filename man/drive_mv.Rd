@@ -65,7 +65,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per file.
 Move a Drive file to a different folder, give it a different name, or both.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # create a file to move
 file <- drive_example_remote("chicken.txt") \%>\%
   drive_cp("chicken-mv.txt")
