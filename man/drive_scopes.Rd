@@ -45,8 +45,8 @@ drive_scopes()
 the permissions for each scope.
 
 Other auth functions: 
-\code{\link{drive_auth_configure}()},
 \code{\link{drive_auth}()},
+\code{\link{drive_auth_configure}()},
 \code{\link{drive_deauth}()}
 }
 \concept{auth functions}

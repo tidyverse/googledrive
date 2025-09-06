@@ -16,7 +16,7 @@ This function mostly exists to power \code{\link[=drive_user]{drive_user()}}, wh
 useful information (the information on current user) and prints it nicely.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 drive_about()
 
 # explore the export formats available for Drive files, by MIME type

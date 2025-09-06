@@ -54,7 +54,7 @@ Creates a new Drive folder. To update the metadata of an existing Drive file,
 including a folder, use \code{\link[=drive_update]{drive_update()}}.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Create folder named 'ghi', then another below named it 'jkl' and star it
 ghi <- drive_mkdir("ghi")
 jkl <- drive_mkdir("ghi/jkl", starred = TRUE)

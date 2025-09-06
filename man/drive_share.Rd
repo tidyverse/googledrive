@@ -64,7 +64,7 @@ read, comment, or edit. The returned \code{\link{dribble}} will have extra colum
 "make this \code{file} readable by 'anyone with a link'".
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Create a file to share
 file <- drive_example_remote("chicken_doc") \%>\%
   drive_cp(name = "chicken-share.txt")

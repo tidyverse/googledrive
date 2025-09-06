@@ -42,7 +42,7 @@ named \code{c} in \verb{a/b/} or a file with default name in \verb{a/b/c/}? You 
 error and must make your intent clear.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # create some files for us to re-discover by name or filepath
 alfa <- drive_create("alfa", type = "folder")
 bravo <- drive_create("bravo", path = alfa)

@@ -42,7 +42,7 @@ Sheets or Docs, must be exported as a conventional MIME type. See the help
 for \code{\link[=drive_download]{drive_download()}} for more.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # comma-separated values --> data.frame or tibble
 (chicken_csv <- drive_example_remote("chicken.csv"))
 chicken_csv \%>\%

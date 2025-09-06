@@ -80,7 +80,7 @@ of an existing Drive file, use \code{\link[=drive_update]{drive_update()}}. To u
 depending on whether the Drive file already exists, see \code{\link[=drive_put]{drive_put()}}.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # upload a csv file
 chicken_csv <- drive_example_local("chicken.csv") \%>\%
   drive_upload("chicken-upload.csv")

@@ -46,7 +46,7 @@ This is a wrapper for \code{\link[=drive_mv]{drive_mv()}} that only renames a fi
 If you would like to rename AND move the file, see \code{\link[=drive_mv]{drive_mv()}}.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Create a file to rename
 file <- drive_create("file-to-rename")
 
