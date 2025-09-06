@@ -1,32 +1,37 @@
 mime_type,ext,description,human_type,default
-application/epub+zip,NA,NA,NA,NA
+application/epub+zip,epub,NA,epub,FALSE
 application/msword,doc,NA,doc,TRUE
-application/msword,dot,NA,dot,FALSE
 application/pdf,pdf,NA,pdf,TRUE
 application/rtf,rtf,NA,rtf,TRUE
 application/vnd.google-apps.audio,NA,NA,audio,NA
 application/vnd.google-apps.document,NA,Google Docs,document,NA
-application/vnd.google-apps.drawing,NA,Google Drawing,drawing,NA
-application/vnd.google-apps.drive-sdk,NA,3rd party shortcut,drive-sdk,NA
+application/vnd.google-apps.drawing,NA,Google Drawings,drawing,NA
+application/vnd.google-apps.drive-sdk,NA,Third-party shortcut,drive-sdk,NA
 application/vnd.google-apps.file,NA,Google Drive file,file,NA
 application/vnd.google-apps.folder,NA,Google Drive folder,folder,NA
 application/vnd.google-apps.form,NA,Google Forms,form,NA
 application/vnd.google-apps.fusiontable,NA,Google Fusion Tables,fusiontable,NA
+application/vnd.google-apps.jam,NA,Google Jamboard,jam,NA
+application/vnd.google-apps.mail-layout,NA,Email layout,mail-layout,NA
 application/vnd.google-apps.map,NA,Google My Maps,map,NA
-application/vnd.google-apps.photo,NA,NA,photo,NA
+application/vnd.google-apps.photo,NA,Google Photos,photo,NA
 application/vnd.google-apps.presentation,NA,Google Slides,presentation,NA
-application/vnd.google-apps.script,NA,Google Apps Scripts,script,NA
+application/vnd.google-apps.script,NA,Google Apps Script,script,NA
 application/vnd.google-apps.script+json,NA,NA,script+json,NA
 application/vnd.google-apps.script+text/plain,NA,NA,script+text/plain,NA
 application/vnd.google-apps.shortcut,NA,Shortcut,shortcut,NA
 application/vnd.google-apps.site,NA,Google Sites,site,NA
 application/vnd.google-apps.spreadsheet,NA,Google Sheets,spreadsheet,NA
 application/vnd.google-apps.unknown,NA,NA,unknown,NA
+application/vnd.google-apps.vid,NA,Google Vids,vid,NA
 application/vnd.google-apps.video,NA,NA,video,NA
 application/vnd.google.colab,ipynb,Colab notebook,colab,TRUE
-application/vnd.ms-excel,xlb,NA,xlb,FALSE
+application/vnd.ms-excel,xla,NA,xla,FALSE
+application/vnd.ms-excel,xlc,NA,xlc,FALSE
+application/vnd.ms-excel,xlm,NA,xlm,FALSE
 application/vnd.ms-excel,xls,NA,xls,TRUE
 application/vnd.ms-excel,xlt,NA,xlt,FALSE
+application/vnd.ms-excel,xlw,NA,xlw,FALSE
 application/vnd.ms-excel.sheet.macroenabled.12,NA,NA,NA,NA
 application/vnd.ms-excel.template.macroenabled.12,NA,NA,NA,NA
 application/vnd.ms-powerpoint,pps,NA,pps,FALSE
@@ -52,8 +57,9 @@ application/x-vnd.oasis.opendocument.presentation,NA,NA,NA,NA
 application/x-vnd.oasis.opendocument.spreadsheet,NA,NA,NA,NA
 application/x-vnd.oasis.opendocument.text,NA,NA,NA,NA
 application/zip,zip,NA,zip,TRUE
-image/bmp,NA,NA,NA,NA
+image/bmp,bmp,NA,bmp,FALSE
 image/gif,gif,NA,gif,TRUE
+image/jpeg,jfif,NA,jfif,FALSE
 image/jpeg,jpe,NA,jpe,FALSE
 image/jpeg,jpeg,NA,jpeg,TRUE
 image/jpeg,jpg,NA,jpg,FALSE
@@ -68,12 +74,17 @@ text/csv,csv,NA,csv,TRUE
 text/html,htm,NA,htm,FALSE
 text/html,html,NA,html,TRUE
 text/html,shtml,NA,shtml,FALSE
-text/plain,asc,NA,asc,FALSE
+text/markdown,markdown,NA,markdown,FALSE
+text/markdown,md,NA,md,TRUE
 text/plain,brf,NA,brf,FALSE
 text/plain,pot,NA,pot,FALSE
 text/plain,srt,NA,srt,FALSE
 text/plain,text,NA,text,FALSE
 text/plain,txt,NA,txt,TRUE
-text/richtext,rtx,NA,rtx,TRUE
+text/richtext,NA,NA,NA,NA
 text/rtf,NA,NA,NA,NA
 text/tab-separated-values,tsv,NA,tsv,TRUE
+text/x-markdown,NA,NA,NA,NA
+video/mp4,m4v,NA,m4v,FALSE
+video/mp4,mp4,NA,mp4,FALSE
+video/mp4,mpg4,NA,mpg4,FALSE
