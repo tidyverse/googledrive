@@ -1,5 +1,7 @@
 # googledrive (development version)
 
+* `as_id()` (and hence `drive_download()`) work for Google Colab links (#459, @MichaelChirico).
+
 # googledrive 2.1.1
 
 * `drive_auth(subject =)` is a new argument that can be used with
