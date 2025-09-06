@@ -12,11 +12,11 @@ License: MIT + file LICENSE
 URL: https://googledrive.tidyverse.org,
     https://github.com/tidyverse/googledrive
 BugReports: https://github.com/tidyverse/googledrive/issues
-Depends: 
+Depends:
     R (>= 3.6)
-Imports: 
+Imports:
     cli (>= 3.0.0),
-    gargle (>= 1.5.0),
+    gargle (>= 1.6.0),
     glue (>= 1.4.2),
     httr,
     jsonlite,
@@ -30,7 +30,7 @@ Imports:
     uuid,
     vctrs (>= 0.3.0),
     withr
-Suggests: 
+Suggests:
     curl,
     dplyr (>= 1.0.0),
     knitr,
@@ -38,7 +38,7 @@ Suggests:
     rmarkdown,
     spelling,
     testthat (>= 3.1.5)
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Config/Needs/website:
     tidyverse,
