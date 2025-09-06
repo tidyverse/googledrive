@@ -34,7 +34,6 @@ Suggests:
     curl,
     dplyr (>= 1.0.0),
     knitr,
-    mockr,
     rmarkdown,
     spelling,
     testthat (>= 3.1.5)

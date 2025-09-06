@@ -23,6 +23,10 @@ test_that("get_last_path_part() works", {
 })
 
 test_that("resolve_paths() works, basic scenarios", {
+  local_mocked_bindings(
+    root_id = function() ""
+  )
+
   # a -- b -- c -- d
   # ??? -- e
   dr_folder <-
@@ -43,22 +47,12 @@ test_that("resolve_paths() works, basic scenarios", {
     id = "4",
     drive_resource = list(list(kind = "drive#file", parents = list(list("3"))))
   )
-  with_mock(
-    root_id = function() "",
-    {
-      out <- resolve_paths(as_dribble(x), ancestors)
-    }
-  )
+  out <- resolve_paths(as_dribble(x), ancestors)
   expect_equal(out$path, "a/b/c/d")
 
   # target is a folder
   x$drive_resource <- list(c(dr_folder, parents = list(list("3"))))
-  with_mock(
-    root_id = function() "",
-    {
-      out <- resolve_paths(as_dribble(x), ancestors)
-    }
-  )
+  out <- resolve_paths(as_dribble(x), ancestors)
   expect_equal(out$path, "a/b/c/d/")
 
   # target's parent is not among the elders
@@ -67,16 +61,15 @@ test_that("resolve_paths() works, basic scenarios", {
     id = "4",
     drive_resource = list(list(kind = "drive#file", parents = list(list("9"))))
   )
-  with_mock(
-    root_id = function() "",
-    {
-      out <- resolve_paths(as_dribble(x), ancestors)
-    }
-  )
+  out <- resolve_paths(as_dribble(x), ancestors)
   expect_equal(out$path, "e")
 })
 
 test_that("resolve_paths() works, with some name duplication", {
+  local_mocked_bindings(
+    root_id = function() ""
+  )
+
   #     name(id)
   #      ___~(1) __
   #     /       \    \
@@ -110,12 +103,8 @@ test_that("resolve_paths() works, with some name duplication", {
       list(kind = "drive#file", parents = list(list("7")))
     )
   )
-  with_mock(
-    root_id = function() "",
-    {
-      out <- resolve_paths(as_dribble(x), ancestors)
-    }
-  )
+  out <- resolve_paths(as_dribble(x), ancestors)
+
   expect_equal(out$path[1], "~/a/b/c")
   expect_equal(out$path[2], "~/b/a/d")
 })
