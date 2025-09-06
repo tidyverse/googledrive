@@ -25,3 +25,5 @@
 ^\.covrignore$
 ^tests/testthat/all-test.+
 ^CRAN-SUBMISSION$
+^[.]?air[.]toml$
+^\.vscode$

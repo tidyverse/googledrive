@@ -45,9 +45,7 @@ drive_unpublish <- function(file, ..., verbose = deprecated()) {
   drive_change_publish(file = file, publish = FALSE, ...)
 }
 
-drive_change_publish <- function(file,
-                                 publish = TRUE,
-                                 ...) {
+drive_change_publish <- function(file, publish = TRUE, ...) {
   file <- as_dribble(file)
   file <- confirm_some_files(file)
 
@@ -59,7 +57,10 @@ drive_change_publish <- function(file,
       "Only native Google files can be published.",
       "{.arg file} includes {?a/} file{?s} \\
        with non-native MIME type{cli::qty(nrow(file))}",
-      bulletize(gargle_map_cli(file, "{.drivepath <<name>>}: {.field <<mimeType>>}")),
+      bulletize(gargle_map_cli(
+        file,
+        "{.drivepath <<name>>}: {.field <<mimeType>>}"
+      )),
       "i" = "You can use {.fun drive_share} to change a file's sharing \\
              permissions."
     ))

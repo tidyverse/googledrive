@@ -15,7 +15,8 @@ test_that("request_generate() errors for unrecognized parameters", {
     (expect_error(
       request_generate(
         endpoint = "drive.files.list",
-        params = params, token = NULL
+        params = params,
+        token = NULL
       ),
       class = "gargle_error_bad_params"
     ))

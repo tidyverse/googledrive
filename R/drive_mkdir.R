@@ -45,11 +45,13 @@
 #'
 #' # Clean up
 #' drive_rm(ghi)
-drive_mkdir <- function(name,
-                        path = NULL,
-                        ...,
-                        overwrite = NA,
-                        verbose = deprecated()) {
+drive_mkdir <- function(
+  name,
+  path = NULL,
+  ...,
+  overwrite = NA,
+  verbose = deprecated()
+) {
   warn_for_verbose(verbose)
 
   drive_create(

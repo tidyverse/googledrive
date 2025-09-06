@@ -36,9 +36,9 @@ NULL
 #' @export
 drive_examples_local <- function(matches) {
   out <- many_files(
-    needle    = matches,
-    haystack  = local_example_files(),
-    where     = "local"
+    needle = matches,
+    haystack = local_example_files(),
+    where = "local"
   )
   out$path
 }
@@ -47,9 +47,9 @@ drive_examples_local <- function(matches) {
 #' @export
 drive_examples_remote <- function(matches) {
   many_files(
-    needle    = matches,
-    haystack  = remote_example_files(),
-    where     = "remote"
+    needle = matches,
+    haystack = remote_example_files(),
+    where = "remote"
   )
 }
 
@@ -57,9 +57,9 @@ drive_examples_remote <- function(matches) {
 #' @export
 drive_example_local <- function(matches) {
   out <- one_file(
-    needle    = matches,
-    haystack  = local_example_files(),
-    where     = "local"
+    needle = matches,
+    haystack = local_example_files(),
+    where = "local"
   )
   out$path
 }
@@ -68,9 +68,9 @@ drive_example_local <- function(matches) {
 #' @export
 drive_example_remote <- function(matches) {
   one_file(
-    needle    = matches,
-    haystack  = remote_example_files(),
-    where     = "remote"
+    needle = matches,
+    haystack = remote_example_files(),
+    where = "remote"
   )
 }
 
@@ -84,7 +84,8 @@ many_files <- function(needle, haystack, where = c("local", "remote")) {
     if (!any(sel)) {
       drive_abort(
         "Can't find a {where} example file with a name that matches \\
-        \"{needle}\".")
+        \"{needle}\"."
+      )
     }
     out <- haystack[sel, ]
   }
@@ -109,8 +110,10 @@ local_example_files <- function() {
   if (!env_has(.googledrive, "local_example_files")) {
     pths <- list.files(
       system.file(
-        "extdata", "example_files",
-        package = "googledrive", mustWork = TRUE
+        "extdata",
+        "example_files",
+        package = "googledrive",
+        mustWork = TRUE
       ),
       full.names = TRUE
     )
@@ -127,7 +130,8 @@ remote_example_files <- function() {
   # inlining env_cache() logic, so I don't need bleeding edge rlang
   if (!env_has(.googledrive, "remote_example_files")) {
     inventory_id <- "1XiwJJdoqoZ876OoSTjsnBZ5SxxUg6gUC"
-    if (!drive_has_token()) { # don't trigger auth just for this
+    if (!drive_has_token()) {
+      # don't trigger auth just for this
       local_drive_quiet()
       local_deauth()
     }

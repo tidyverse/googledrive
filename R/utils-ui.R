@@ -61,10 +61,13 @@ with_no_color <- function(code) {
 }
 
 #' @export
-gargle_map_cli.dribble <- function(x,
-                                   template = NULL,
-                                   .open = "<<", .close = ">>",
-                                   ...) {
+gargle_map_cli.dribble <- function(
+  x,
+  template = NULL,
+  .open = "<<",
+  .close = ">>",
+  ...
+) {
   # template can be a vector, in case some intermediate constructions are needed
   # this is true for the default case
   # templates should assume a data mask of `x`
@@ -164,10 +167,13 @@ local_drive_loud <- function(env = parent.frame()) {
 # keeps wrapping from wreaking havoc on snapshot tests, esp. when I have to
 # find and replace volatile bits of text
 local_drive_loud_and_wide <- function(cli.width = 150, env = parent.frame()) {
-  withr::local_options(list(
-    googledrive_quiet = FALSE,
-    cli.width = cli.width
-  ), .local_envir = env)
+  withr::local_options(
+    list(
+      googledrive_quiet = FALSE,
+      cli.width = cli.width
+    ),
+    .local_envir = env
+  )
 }
 
 #' @rdname googledrive-configuration
@@ -191,14 +197,18 @@ sq <- function(x) glue::single_quote(x)
 bt <- function(x) glue::backtick(x)
 
 message <- function(...) {
-  drive_abort("
+  drive_abort(
+    "
     Internal error: use the UI functions in {.pkg googledrive} \\
-    instead of {.fun message}")
+    instead of {.fun message}"
+  )
 }
 
-warn_for_verbose <- function(verbose = TRUE,
-                             env = caller_env(),
-                             user_env = caller_env(2)) {
+warn_for_verbose <- function(
+  verbose = TRUE,
+  env = caller_env(),
+  user_env = caller_env(2)
+) {
   # This function is not meant to be called directly, so don't worry about its
   # default of `verbose = TRUE`.
   # In authentic, indirect usage of this helper, this picks up on whether

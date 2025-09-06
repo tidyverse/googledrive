@@ -67,14 +67,20 @@
 #'
 #' # Clean up
 #' drive_rm(file)
-drive_share <- function(file,
-                        role = c(
-                          "reader", "commenter", "writer",
-                          "fileOrganizer", "owner", "organizer"
-                        ),
-                        type = c("user", "group", "domain", "anyone"),
-                        ...,
-                        verbose = deprecated()) {
+drive_share <- function(
+  file,
+  role = c(
+    "reader",
+    "commenter",
+    "writer",
+    "fileOrganizer",
+    "owner",
+    "organizer"
+  ),
+  type = c("user", "group", "domain", "anyone"),
+  ...,
+  verbose = deprecated()
+) {
   warn_for_verbose(verbose)
 
   role <- match.arg(role)

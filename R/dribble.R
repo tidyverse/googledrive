@@ -135,7 +135,9 @@ id_can_be_drive_id <- function(x) {
 has_drive_resource <- function(x) {
   kind <- map_chr(x$drive_resource, "kind", .default = NA_character_)
   # TODO: remove `drive#teamDrive` here, when possible
-  all(!is.na(kind) & kind %in% c("drive#file", "drive#drive", "drive#teamDrive"))
+  all(
+    !is.na(kind) & kind %in% c("drive#file", "drive#drive", "drive#teamDrive")
+  )
 }
 
 #' Coerce to a `dribble`
@@ -191,9 +193,11 @@ as_dribble <- function(x, ...) UseMethod("as_dribble")
 
 #' @export
 as_dribble.default <- function(x, ...) {
-  drive_abort("
+  drive_abort(
+    "
     Don't know how to coerce an object of class {.cls {class(x)}} into \\
-    a {.cls dribble}.")
+    a {.cls dribble}."
+  )
 }
 
 #' @export
@@ -374,7 +378,8 @@ is_folder_shortcut <- function(d) {
       d$drive_resource,
       c("shortcutDetails", "targetMimeType"),
       .default = ""
-    ) == "application/vnd.google-apps.folder")
+    ) ==
+      "application/vnd.google-apps.folder")
 }
 
 #' @export

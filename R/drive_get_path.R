@@ -47,9 +47,7 @@ sort_out_shared_drive_and_corpus <- function(x) {
   list(shared_drive = shared_drive, corpus = corpus)
 }
 
-drive_get_path <- function(path = NULL,
-                           shared_drive = NULL,
-                           corpus = NULL) {
+drive_get_path <- function(path = NULL, shared_drive = NULL, corpus = NULL) {
   if (length(path) == 0) {
     return(dribble_with_path())
   }
@@ -59,14 +57,19 @@ drive_get_path <- function(path = NULL,
   last_path_part <- get_last_path_part(path)
   candidates <- get_by_name(
     last_path_part,
-    shared_drive = shared_drive, corpus = corpus
+    shared_drive = shared_drive,
+    corpus = corpus
   )
   candidates <- drive_reveal_path(candidates)
 
   # setup a tibble to structure the work
   dat <- tibble(
     orig_path = path,
-    doomed = !map_lgl(last_path_part, path_has_match, haystack = candidates$path),
+    doomed = !map_lgl(
+      last_path_part,
+      path_has_match,
+      haystack = candidates$path
+    ),
     done = FALSE
   )
 
@@ -142,27 +145,34 @@ pthize <- function(d) {
     drive_reveal("shortcut_details")
   purrr::transpose(
     d[c(
-      "id", "id_parent", # needed to resolve path relationships
-      "name", "mime_type", "shortcut_details" # needed to create path string
+      "id",
+      "id_parent", # needed to resolve path relationships
+      "name",
+      "mime_type",
+      "shortcut_details" # needed to create path string
     )]
   )
 }
 
 # turns the output of pth() (a list) into a filepath (a string)
 pathify <- function(x) {
-  x <- map_if(x, ~ .x$id == root_id(), ~ {
-    .x$name <- "~"
-    .x
-  })
+  x <- map_if(
+    x,
+    ~ .x$id == root_id(),
+    ~ {
+      .x$name <- "~"
+      .x
+    }
+  )
 
   last_mime_type <- pluck(last(x), "mime_type")
   last_is_folder <- identical(last_mime_type, drive_mime_type("folder"))
   last_is_folder_shortcut <-
     identical(last_mime_type, drive_mime_type("shortcut")) &&
-      identical(
-        pluck(last(x), "shortcut_details", "targetMimeType"),
-        drive_mime_type("folder")
-      )
+    identical(
+      pluck(last(x), "shortcut_details", "targetMimeType"),
+      drive_mime_type("folder")
+    )
   if (last_is_folder || last_is_folder_shortcut) {
     nm <- pluck(last(x), "name")
     purrr::pluck(x, length(x), "name") <- append_slash(nm)
@@ -229,12 +239,19 @@ finalize <- function(dat, candidates) {
     drive_bullets(c(
       "!" = "Problem with {nrow(weird)} path{?s}: {problem}",
       # these really should be sub-bullets, but not possible at this time
-      bulletize(gargle_map_cli(weird[["orig_path"]], "{.path <<x>>}"), bullet = " ")
+      bulletize(
+        gargle_map_cli(weird[["orig_path"]], "{.path <<x>>}"),
+        bullet = " "
+      )
     ))
   }
   report_weird_stuff(scratch, "unmatched", "no files found by this name")
   report_weird_stuff(scratch, "undone", "no file has such a canonical path")
-  report_weird_stuff(scratch, "unspecific", "path is compatible with more than 1 file")
+  report_weird_stuff(
+    scratch,
+    "unspecific",
+    "path is compatible with more than 1 file"
+  )
 
   n_empty_string <- sum(scratch$status == "empty_string")
   if (n_empty_string > 0) {
@@ -260,14 +277,18 @@ finalize <- function(dat, candidates) {
   resolved <- scratch$status == "resolved"
   if (all(resolved)) {
     if (nrow(scratch) > 1) {
-      b <- c(v = "All {nrow(scratch)} input {.arg path}s resolved to exactly \\
-                  1 file.")
+      b <- c(
+        v = "All {nrow(scratch)} input {.arg path}s resolved to exactly \\
+                  1 file."
+      )
     } else {
       b <- c(v = "The input {.arg path} resolved to exactly 1 file.")
     }
   } else if (any(resolved)) {
-    b <- c("!" = "{sum(scratch$status == 'resolved')} out of {nrow(scratch)} \\
-                  input paths resolved to exactly 1 file.")
+    b <- c(
+      "!" = "{sum(scratch$status == 'resolved')} out of {nrow(scratch)} \\
+                  input paths resolved to exactly 1 file."
+    )
   } else {
     # TODO: this wording is not great, yet I don't know what would be better
     b <- c("!" = "No path resolved to exactly 1 file.")
@@ -291,7 +312,8 @@ get_by_name <- function(names, shared_drive = NULL, corpus = NULL) {
     found <- drive_find(
       q = or(q_clauses),
       # fields = prep_fields(fields),
-      shared_drive = shared_drive, corpus = corpus
+      shared_drive = shared_drive,
+      corpus = corpus
     )
   }
 

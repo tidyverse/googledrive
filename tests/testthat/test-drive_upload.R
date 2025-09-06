@@ -14,7 +14,10 @@ if (CLEAN) {
 # ---- setup ----
 if (SETUP) {
   drive_mkdir(nm_("upload-into-me"))
-  shortcut_create(nm_("upload-into-me"), name = nm_("upload-via-folder-shortcut"))
+  shortcut_create(
+    nm_("upload-into-me"),
+    name = nm_("upload-via-folder-shortcut")
+  )
 }
 
 # ---- tests ----

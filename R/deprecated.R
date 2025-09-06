@@ -48,7 +48,9 @@ drive_auth_config <- function(active, app, path, api_key) {
 #' @export
 drive_oauth_app <- function() {
   lifecycle::deprecate_warn(
-    "2.1.0", "drive_oauth_app()", "drive_oauth_client()"
+    "2.1.0",
+    "drive_oauth_app()",
+    "drive_oauth_client()"
   )
   drive_oauth_client()
 }

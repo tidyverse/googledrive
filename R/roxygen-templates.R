@@ -1,7 +1,8 @@
 # nocov start
 
 param_path <- function(thing = "THING", default_notes = "") {
-  glue("
+  glue(
+    "
     @param path Specifies target destination for the {thing} on Google
       Drive. Can be an actual path (character), a file id marked with
       [as_id()], or a [`dribble`].
@@ -12,29 +13,36 @@ param_path <- function(thing = "THING", default_notes = "") {
       If `path` is given as a path (as opposed to a `dribble` or an id), it is
       best to explicitly indicate if it's a folder by including a trailing
       slash, since it cannot always be worked out from the context of the call.
-      {default_notes}")
+      {default_notes}"
+  )
 }
 
 param_path_known_parent <- function(thing = "item") {
-  glue("
+  glue(
+    "
     @param path Target destination for the new {thing}, i.e. a folder or a
      shared drive. Can be given as an actual path (character), a file id or URL
      marked with [as_id()], or a [`dribble`]. Defaults to your \"My Drive\" root
      folder. If `path` is a shortcut to a folder, it is automatically resolved
-     to its target folder.")
+     to its target folder."
+  )
 }
 
 param_name <- function(thing = "THING", default_notes = "") {
-  glue("
+  glue(
+    "
     @param name Character, new {thing} name if not specified as part of
       `path`. This will force `path` to be interpreted as a folder, even if it
-      is character and lacks a trailing slash. {default_notes}")
+      is character and lacks a trailing slash. {default_notes}"
+  )
 }
 
 return_dribble <- function(item = "file", extras = "") {
-  glue("
+  glue(
+    "
     @return An object of class [`dribble`], a tibble with one row per {item}.
-    {extras}")
+    {extras}"
+  )
 }
 
 # nocov end
