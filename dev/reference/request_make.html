@@ -4,7 +4,7 @@ process the response(s). Most users should, instead, use higher-level
 wrappers that facilitate common tasks, such as uploading or downloading Drive
 files. The functions here are intended for internal use and for programming
 around the Drive API. Three functions are documented here:
-request_make() does the bare minimum: calls gargle::request_make(),
+request_make() does the bare minimum: calls gargle::request_retry(),
 only adding the googledrive user agent. Typically the input is created
 with request_generate() and the output is processed with
 gargle::response_process().
@@ -24,7 +24,7 @@ process the response(s). Most users should, instead, use higher-level
 wrappers that facilitate common tasks, such as uploading or downloading Drive
 files. The functions here are intended for internal use and for programming
 around the Drive API. Three functions are documented here:
-request_make() does the bare minimum: calls gargle::request_make(),
+request_make() does the bare minimum: calls gargle::request_retry(),
 only adding the googledrive user agent. Typically the input is created
 with request_generate() and the output is processed with
 gargle::response_process().
@@ -96,7 +96,7 @@ responses, one per page.
 process the response(s). Most users should, instead, use higher-level
 wrappers that facilitate common tasks, such as uploading or downloading Drive
 files. The functions here are intended for internal use and for programming
-around the Drive API. Three functions are documented here:</p><ul><li><p><code>request_make()</code> does the bare minimum: calls <code><a href="https://gargle.r-lib.org/reference/request_make.html" class="external-link">gargle::request_make()</a></code>,
+around the Drive API. Three functions are documented here:</p><ul><li><p><code>request_make()</code> does the bare minimum: calls <code><a href="https://gargle.r-lib.org/reference/request_retry.html" class="external-link">gargle::request_retry()</a></code>,
 only adding the googledrive user agent. Typically the input is created
 with <code><a href="request_generate.html">request_generate()</a></code> and the output is processed with
 <code><a href="https://gargle.r-lib.org/reference/response_process.html" class="external-link">gargle::response_process()</a></code>.</p></li>
@@ -165,7 +165,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>request_make()</code>: Object of class <code>response</code> from httr.</p>
+    <p><code>request_make()</code>: Object of class <code>response</code> from <a href="https://httr.r-lib.org/reference/httr-package.html" class="external-link">httr::httr</a>.</p>
 <p><code>do_request()</code>: List representing the content returned by a single
 request.</p>
 <p><code>do_paginated_request()</code>: List of lists, representing the returned
