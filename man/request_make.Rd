@@ -42,7 +42,7 @@ more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_qu
 \code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
 }
 \value{
-\code{request_make()}: Object of class \code{response} from \link{httr}.
+\code{request_make()}: Object of class \code{response} from \link[httr:httr-package]{httr::httr}.
 
 \code{do_request()}: List representing the content returned by a single
 request.
@@ -57,7 +57,7 @@ wrappers that facilitate common tasks, such as uploading or downloading Drive
 files. The functions here are intended for internal use and for programming
 around the Drive API. Three functions are documented here:
 \itemize{
-\item \code{request_make()} does the bare minimum: calls \code{\link[gargle:request_make]{gargle::request_make()}},
+\item \code{request_make()} does the bare minimum: calls \code{\link[gargle:request_retry]{gargle::request_retry()}},
 only adding the googledrive user agent. Typically the input is created
 with \code{\link[=request_generate]{request_generate()}} and the output is processed with
 \code{\link[gargle:response_process]{gargle::response_process()}}.

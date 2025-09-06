@@ -130,18 +130,20 @@
 #' # 'root' is a special file id that represents your My Drive root folder
 #' drive_get(id = "root") %>%
 #'   drive_reveal("path")
-drive_reveal <- function(file,
-                         what = c("path", "permissions", "published", "parent")) {
+drive_reveal <- function(
+  file,
+  what = c("path", "permissions", "published", "parent")
+) {
   stopifnot(is_string(what))
   file <- as_dribble(file)
 
   if (what %in% c("path", "permissions", "published", "parent")) {
     reveal <- switch(
       what,
-      "path"        = drive_reveal_canonical_path,
+      "path" = drive_reveal_canonical_path,
       "permissions" = drive_reveal_permissions,
-      "published"   = drive_reveal_published,
-      "parent"      = drive_reveal_parent
+      "published" = drive_reveal_published,
+      "parent" = drive_reveal_parent
     )
     return(reveal(file))
   }

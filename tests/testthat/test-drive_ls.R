@@ -134,8 +134,8 @@ test_that("`recursive` does its job", {
   out <- drive_ls(nm_("topdir"), recursive = FALSE)
   expect_true(
     all(
-      c(nm_("apple"), nm_("folder1-level1"), nm_("folder2-level1"))
-      %in% out$name
+      c(nm_("apple"), nm_("folder1-level1"), nm_("folder2-level1")) %in%
+        out$name
     )
   )
 
@@ -143,9 +143,14 @@ test_that("`recursive` does its job", {
   expect_true(
     all(
       c(
-        nm_("apple"), nm_("folder1-level1"), nm_("folder2-level1"),
-        nm_("banana"), nm_("folder1-level2"), nm_("cranberry")
-      ) %in% out$name
+        nm_("apple"),
+        nm_("folder1-level1"),
+        nm_("folder2-level1"),
+        nm_("banana"),
+        nm_("folder1-level2"),
+        nm_("cranberry")
+      ) %in%
+        out$name
     )
   )
 

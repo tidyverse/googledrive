@@ -12,7 +12,7 @@ if (length(dd_cache) == 0) {
   dd_content <- content(dd_get)
   json_fname <- dd_content[c("revision", "id")] %>%
     c("discovery-document") %>%
-    map(~str_replace_all(.x, ":", "-")) %>%
+    map(~ str_replace_all(.x, ":", "-")) %>%
     str_c(collapse = "_") %>%
     str_c(".json") %>%
     find_package_root_file("data-raw", .)
@@ -30,15 +30,17 @@ dd_content <- fromJSON(json_fname)
 ## extract the method collections and bring to same level of hierarchy
 endpoints <- c("about", "files", "permissions", "revisions", "teamdrives") %>%
   set_names() %>%
-  map(~dd_content[[c("resources", .x, "methods")]]) %>%
-  imap(function(.x, nm) set_names(.x, ~paste(nm, ., sep = "."))) %>%
+  map(~ dd_content[[c("resources", .x, "methods")]]) %>%
+  imap(function(.x, nm) set_names(.x, ~ paste(nm, ., sep = "."))) %>%
   flatten()
 # str(endpoints, max.level = 1)
 # listviewer::jsonedit(endpoints)
 
 add_schema_params <- function(endpoint, nm) {
   req <- endpoint$request$`$ref`
-  if (is.null(req) || req == "Channel") return(endpoint)
+  if (is.null(req) || req == "Channel") {
+    return(endpoint)
+  }
   message_glue("{nm} gains {req} schema params\n")
   endpoint$parameters <- c(
     endpoint$parameters,
@@ -95,14 +97,14 @@ edf <- edf %>%
   select(id, httpMethod, path, parameters, scopes, description, everything())
 
 edf$path <- edf$path %>%
-  modify_if(~!grepl("drive/v3", .x), ~paste0("drive/v3/", .x))
+  modify_if(~ !grepl("drive/v3", .x), ~ paste0("drive/v3/", .x))
 
 edf$scopes <- edf$scopes %>%
-  map(~gsub("https://www.googleapis.com/auth/", "", .)) %>%
+  map(~ gsub("https://www.googleapis.com/auth/", "", .)) %>%
   map_chr(str_c, collapse = ", ")
 
 edf$parameterOrder <- edf$parameterOrder %>%
-  modify_if(~length(.x) < 1, ~NA_character_) %>%
+  modify_if(~ length(.x) < 1, ~NA_character_) %>%
   map_chr(str_c, collapse = ", ")
 
 edf$response <- edf$response %>%

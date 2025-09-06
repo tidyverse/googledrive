@@ -115,7 +115,7 @@ However, when necessary, \code{drive_auth()} allows the user to explicitly:
 \item Bring your own \code{token}.
 \item Customize \code{scopes}.
 \item Use a non-default \code{cache} folder or turn caching off.
-\item Explicitly request out-of-bound (OOB) auth via \code{use_oob}.
+\item Explicitly request out-of-band (OOB) auth via \code{use_oob}.
 }
 
 If you are interacting with R within a browser (applies to RStudio
@@ -144,7 +144,7 @@ For details on the many ways to find a token, see
 To learn more about gargle options, see \link[gargle:gargle_options]{gargle::gargle_options}.
 }
 \examples{
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 # load/refresh existing credentials, if available
 # otherwise, go to browser for authentication and authorization
 drive_auth()

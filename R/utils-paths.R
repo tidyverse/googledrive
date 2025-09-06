@@ -24,9 +24,11 @@ rationalize_path_name <- function(path = NULL, name = NULL) {
 }
 
 confirm_clear_path <- function(path, name) {
-  if (is.null(name) &&
-    !has_slash(path) &&
-    drive_path_exists(append_slash(path))) {
+  if (
+    is.null(name) &&
+      !has_slash(path) &&
+      drive_path_exists(append_slash(path))
+  ) {
     drive_abort(c(
       "Unclear if {.arg path} specifies parent folder or full path \\
        to the new file, including its name.",
@@ -115,7 +117,9 @@ rootize_path <- function(path) {
   stopifnot(is.character(path))
   leading_slash <- startsWith(path, "/")
   if (any(leading_slash)) {
-    drive_abort("{.pkg googledrive} does not allow paths to start with {.code /}")
+    drive_abort(
+      "{.pkg googledrive} does not allow paths to start with {.code /}"
+    )
   }
   sub("^~$", "~/", path)
 }

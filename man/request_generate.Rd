@@ -55,7 +55,7 @@ and URL endpoint substitution (which is also enacted).
 }
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 req <- request_generate(
   "drive.files.get",
   list(fileId = "abc"),

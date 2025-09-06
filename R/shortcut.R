@@ -54,17 +54,16 @@
 #'
 #' # Clean up
 #' drive_rm(sc1, sc2, sc3, folder)
-shortcut_create <- function(file,
-                            path = NULL,
-                            name = NULL,
-                            overwrite = NA) {
+shortcut_create <- function(file, path = NULL, name = NULL, overwrite = NA) {
   target <- as_dribble(file)
   target <- confirm_single_file(target)
 
   if (is.null(name) && (isTRUE(overwrite) || isFALSE(overwrite))) {
-    drive_abort("
+    drive_abort(
+      "
       You must specify the shortcut's {.arg name} in order to specify \\
-      {.arg overwrite} behaviour.")
+      {.arg overwrite} behaviour."
+    )
   }
 
   drive_create(

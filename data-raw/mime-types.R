@@ -51,8 +51,8 @@ translate_mime_types <- translate_mime_types %>%
   mutate(
     default = case_when(
       action == "import" ~ NA,
-      is.na(default)     ~ FALSE,
-      TRUE               ~ TRUE
+      is.na(default) ~ FALSE,
+      TRUE ~ TRUE
     )
   )
 
@@ -116,9 +116,9 @@ mime_tbl <- mime_tbl %>%
   left_join(default_ext) %>%
   mutate(
     default = case_when(
-      is.na(ext)     ~ NA,
+      is.na(ext) ~ NA,
       is.na(default) ~ FALSE,
-      TRUE           ~ TRUE
+      TRUE ~ TRUE
     )
   )
 

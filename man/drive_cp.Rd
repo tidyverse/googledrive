@@ -72,7 +72,7 @@ An object of class \code{\link{dribble}}, a tibble with one row per file.
 Copies an existing Drive file into a new file id.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Target one of the official example files
 (src_file <- drive_example_remote("chicken.txt"))
 

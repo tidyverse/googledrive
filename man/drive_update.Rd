@@ -34,7 +34,7 @@ API-speak), new metadata, or both.  To create a new file or update existing,
 depending on whether the Drive file already exists, see \code{\link[=drive_put]{drive_put()}}.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Create a new file, so we can update it
 x <- drive_example_remote("chicken.csv") \%>\%
   drive_cp()

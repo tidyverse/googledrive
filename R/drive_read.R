@@ -46,10 +46,12 @@ drive_read_raw <- function(file, type = NULL) {
   drive_read_impl(file = file, type = type, as = "raw")
 }
 
-drive_read_impl <- function(file,
-                            type = NULL,
-                            as = c("string", "raw"),
-                            encoding = NULL) {
+drive_read_impl <- function(
+  file,
+  type = NULL,
+  as = c("string", "raw"),
+  encoding = NULL
+) {
   as <- match.arg(as)
   file <- as_dribble(file)
   file <- confirm_single_file(file)

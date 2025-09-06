@@ -88,13 +88,15 @@
 #' sd <- shared_drive_get("Marketing")
 #' drive_upload("fascinating.csv", path = sd)
 #' }
-drive_upload <- function(media,
-                         path = NULL,
-                         name = NULL,
-                         type = NULL,
-                         ...,
-                         overwrite = NA,
-                         verbose = deprecated()) {
+drive_upload <- function(
+  media,
+  path = NULL,
+  name = NULL,
+  type = NULL,
+  ...,
+  overwrite = NA,
+  verbose = deprecated()
+) {
   warn_for_verbose(verbose)
   if (file.exists(media)) {
     media <- enc2utf8(media)

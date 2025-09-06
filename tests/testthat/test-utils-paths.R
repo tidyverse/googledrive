@@ -136,18 +136,16 @@ test_that("rationalize_path_name() won't hit API if we can infer `path` is a fol
 })
 
 test_that("rationalize_path_name() populates `path` and `name` and correctly", {
-  with_mock(
-    confirm_clear_path = function(path, name) NULL,
-    {
-      expect_identical(
-        rationalize_path_name(path = "FILE_NAME", name = NULL),
-        list(path = NULL, name = "FILE_NAME")
-      )
-      expect_identical(
-        rationalize_path_name(path = "PARENT_FOLDER/FILE_NAME", name = NULL),
-        list(path = "PARENT_FOLDER/", name = "FILE_NAME")
-      )
-    }
+  local_mocked_bindings(
+    confirm_clear_path = function(path, name) NULL
+  )
+  expect_identical(
+    rationalize_path_name(path = "FILE_NAME", name = NULL),
+    list(path = NULL, name = "FILE_NAME")
+  )
+  expect_identical(
+    rationalize_path_name(path = "PARENT_FOLDER/FILE_NAME", name = NULL),
+    list(path = "PARENT_FOLDER/", name = "FILE_NAME")
   )
 })
 

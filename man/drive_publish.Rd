@@ -38,7 +38,7 @@ include Google Docs, Google Sheets, and Google Slides. The returned
 Read more in \code{\link[=drive_reveal]{drive_reveal()}}.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Create a file to publish
 file <- drive_example_remote("chicken_sheet") \%>\%
   drive_cp()

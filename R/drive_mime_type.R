@@ -96,8 +96,9 @@ drive_extension <- function(type = NULL) {
 }
 
 one_ext <- function(type) {
-  m <- which(.drive$mime_tbl$mime_type %in% type &
-    is_true(.drive$mime_tbl$default))
+  m <- which(
+    .drive$mime_tbl$mime_type %in% type & is_true(.drive$mime_tbl$default)
+  )
   if (length(m) == 0L) {
     m <- NA_integer_
   }
