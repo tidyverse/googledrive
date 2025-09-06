@@ -45,10 +45,12 @@
 #'   token = drive_token()
 #' )
 #' req
-request_generate <- function(endpoint = character(),
-                             params = list(),
-                             key = NULL,
-                             token = drive_token()) {
+request_generate <- function(
+  endpoint = character(),
+  params = list(),
+  key = NULL,
+  token = drive_token()
+) {
   ept <- drive_endpoint(endpoint)
   if (is.null(ept)) {
     drive_abort(c(
@@ -58,8 +60,10 @@ request_generate <- function(endpoint = character(),
   }
 
   ## modifications specific to googledrive package
-  params$key <- key %||% params$key %||%
-    drive_api_key() %||% gargle::tidyverse_api_key()
+  params$key <- key %||%
+    params$key %||%
+    drive_api_key() %||%
+    gargle::tidyverse_api_key()
   if (!is.null(ept$parameters$supportsAllDrives)) {
     params$supportsAllDrives <- TRUE
   }

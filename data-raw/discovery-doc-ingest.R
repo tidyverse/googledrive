@@ -18,10 +18,12 @@ if (length(existing) < 1) {
   rlang::inform("Downloading Discovery Document")
   x <- download_discovery_document("drive:v3")
 } else {
-  msg <- glue::glue("
+  msg <- glue::glue(
+    "
     Using existing Discovery Document:
       * {existing}
-    ")
+    "
+  )
   rlang::inform(msg)
   x <- here::here("data-raw", existing)
 }
@@ -30,7 +32,7 @@ dd <- read_discovery_document(x)
 
 methods <- get_raw_methods(dd)
 
-methods <- methods %>% map(groom_properties,  dd)
+methods <- methods %>% map(groom_properties, dd)
 methods <- methods %>% map(add_schema_params, dd)
 methods <- methods %>% map(add_global_params, dd)
 
@@ -44,7 +46,11 @@ mediafy <- function(target_id, methods) {
     pluck(target_method, "mediaUpload", "protocols", "simple", "path")
   new$parameters <- c(
     new$parameters,
-    uploadType = list(list(type = "string", required = TRUE, location = "query"))
+    uploadType = list(list(
+      type = "string",
+      required = TRUE,
+      location = "query"
+    ))
   )
 
   methods[[new$id]] <- new

@@ -76,11 +76,13 @@ do_request <- function(x, ...) {
 #' # should get back exactly two comments
 #' do_paginated_request(req, n_max = 1)
 #' }
-do_paginated_request <- function(x,
-                                 ...,
-                                 n_max = Inf,
-                                 n = function(res) 1,
-                                 verbose = deprecated()) {
+do_paginated_request <- function(
+  x,
+  ...,
+  n_max = Inf,
+  n = function(res) 1,
+  verbose = deprecated()
+) {
   warn_for_verbose(verbose)
 
   ## when traversing pages, you can't cleanly separate the task into
@@ -103,7 +105,9 @@ do_paginated_request <- function(x,
   # what's a non-jargon-y and general way to say:
   # "we're hitting a paginated endpoint and we're working with pageSize n"
   st <- show_status()
-  if (st) sb <- cli::cli_status(msg = character())
+  if (st) {
+    sb <- cli::cli_status(msg = character())
+  }
   repeat {
     page <- request_make(x, ...)
     responses[[i]] <- gargle::response_process(page)
@@ -135,9 +139,15 @@ show_status <- function() {
 
 drive_ua <- function() {
   httr::user_agent(paste0(
-    "googledrive/", utils::packageVersion("googledrive"), " ",
-    "(GPN:RStudio; )", " ",
-    "gargle/", utils::packageVersion("gargle"), " ",
-    "httr/", utils::packageVersion("httr")
+    "googledrive/",
+    utils::packageVersion("googledrive"),
+    " ",
+    "(GPN:RStudio; )",
+    " ",
+    "gargle/",
+    utils::packageVersion("gargle"),
+    " ",
+    "httr/",
+    utils::packageVersion("httr")
   ))
 }

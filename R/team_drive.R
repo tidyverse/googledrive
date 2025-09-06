@@ -18,10 +18,12 @@ NULL
 
 #' @export
 #' @rdname deprecated-team-drive-functions
-team_drive_find <- function(pattern = NULL,
-                            n_max = Inf,
-                            ...,
-                            verbose = deprecated()) {
+team_drive_find <- function(
+  pattern = NULL,
+  n_max = Inf,
+  ...,
+  verbose = deprecated()
+) {
   warn_for_verbose(verbose)
   lifecycle::deprecate_warn("2.0.0", "team_drive_find()", "shared_drive_find()")
   shared_drive_find(pattern = pattern, n_max = n_max, ...)
@@ -39,7 +41,11 @@ team_drive_get <- function(name = NULL, id = NULL, verbose = deprecated()) {
 #' @rdname deprecated-team-drive-functions
 team_drive_create <- function(name, verbose = deprecated()) {
   warn_for_verbose(verbose)
-  lifecycle::deprecate_warn("2.0.0", "team_drive_create()", "shared_drive_create()")
+  lifecycle::deprecate_warn(
+    "2.0.0",
+    "team_drive_create()",
+    "shared_drive_create()"
+  )
   shared_drive_create(name = name)
 }
 
@@ -55,7 +61,11 @@ team_drive_rm <- function(team_drive = NULL, verbose = deprecated()) {
 #' @rdname deprecated-team-drive-functions
 team_drive_update <- function(team_drive, ..., verbose = deprecated()) {
   warn_for_verbose(verbose)
-  lifecycle::deprecate_warn("2.0.0", "team_drive_update()", "shared_drive_update()")
+  lifecycle::deprecate_warn(
+    "2.0.0",
+    "team_drive_update()",
+    "shared_drive_update()"
+  )
   shared_drive_update(drive = team_drive, ...)
 }
 

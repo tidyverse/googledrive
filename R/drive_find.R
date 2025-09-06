@@ -126,15 +126,17 @@
 #' }
 #'
 #' @export
-drive_find <- function(pattern = NULL,
-                       trashed = FALSE,
-                       type = NULL,
-                       n_max = Inf,
-                       shared_drive = NULL,
-                       corpus = NULL,
-                       ...,
-                       verbose = deprecated(),
-                       team_drive = deprecated()) {
+drive_find <- function(
+  pattern = NULL,
+  trashed = FALSE,
+  type = NULL,
+  n_max = Inf,
+  shared_drive = NULL,
+  corpus = NULL,
+  ...,
+  verbose = deprecated(),
+  team_drive = deprecated()
+) {
   warn_for_verbose(verbose)
   if (!is.null(pattern) && !(is_string(pattern))) {
     drive_abort("{.arg pattern} must be a character string.")

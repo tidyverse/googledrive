@@ -15,7 +15,10 @@ if (CLEAN) {
 # ---- setup ----
 if (SETUP) {
   drive_mkdir(nm_("move-files-into-me"))
-  shortcut_create(nm_("move-files-into-me"), name = nm_("move-to-folder-shortcut"))
+  shortcut_create(
+    nm_("move-files-into-me"),
+    name = nm_("move-to-folder-shortcut")
+  )
 }
 
 # ---- tests ----

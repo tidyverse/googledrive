@@ -42,10 +42,7 @@
 #'
 #' # Clean up
 #' drive_rm(x)
-drive_update <- function(file,
-                         media = NULL,
-                         ...,
-                         verbose = deprecated()) {
+drive_update <- function(file, media = NULL, ..., verbose = deprecated()) {
   warn_for_verbose(verbose)
   if ((!is.null(media)) && (!file.exists(media))) {
     drive_abort(c(

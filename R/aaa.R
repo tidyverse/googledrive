@@ -3,7 +3,9 @@
 
 .drive$translate_mime_types <-
   system.file(
-    "extdata", "data", "translate_mime_types.csv",
+    "extdata",
+    "data",
+    "translate_mime_types.csv",
     package = "googledrive",
     mustWork = TRUE
   ) %>%
@@ -12,7 +14,9 @@
 
 .drive$mime_tbl <-
   system.file(
-    "extdata", "data", "mime_tbl.csv",
+    "extdata",
+    "data",
+    "mime_tbl.csv",
     package = "googledrive",
     mustWork = TRUE
   ) %>%
@@ -21,7 +25,9 @@
 
 .drive$files_fields <-
   system.file(
-    "extdata", "data", "files_fields.csv",
+    "extdata",
+    "data",
+    "files_fields.csv",
     package = "googledrive",
     mustWork = TRUE
   ) %>%

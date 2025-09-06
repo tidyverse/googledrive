@@ -47,7 +47,11 @@ test_that("promote() works when elem is partially present", {
   )
   expect_identical(
     promote(x, "qux"),
-    tibble::add_column(x, qux = list(NULL, list(letter = "b"), NULL), .after = 1)
+    tibble::add_column(
+      x,
+      qux = list(NULL, list(letter = "b"), NULL),
+      .after = 1
+    )
   )
   expect_identical(
     promote(x, "baz"),

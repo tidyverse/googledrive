@@ -17,7 +17,9 @@ test_that("drive_link() extracts links for files and Team Drives, alike", {
 })
 
 test_that("drive_browse() passes links through", {
-  if (interactive()) skip("interactive() is TRUE")
+  if (interactive()) {
+    skip("interactive() is TRUE")
+  }
   x <- readRDS(test_fixture("mix_of_files_and_teamdrives.rds"))
   expect_identical(drive_browse(x), drive_link(x))
 })

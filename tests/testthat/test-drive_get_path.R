@@ -39,7 +39,8 @@ test_that("resolve_paths() works, basic scenarios", {
   )
 
   x <- tibble(
-    name = "d", id = "4",
+    name = "d",
+    id = "4",
     drive_resource = list(list(kind = "drive#file", parents = list(list("3"))))
   )
   with_mock(
@@ -62,7 +63,8 @@ test_that("resolve_paths() works, basic scenarios", {
 
   # target's parent is not among the elders
   x <- tibble(
-    name = "e", id = "4",
+    name = "e",
+    id = "4",
     drive_resource = list(list(kind = "drive#file", parents = list(list("9"))))
   )
   with_mock(
@@ -101,7 +103,8 @@ test_that("resolve_paths() works, with some name duplication", {
   )
 
   x <- tibble(
-    name = c("c", "d"), id = c("8", "9"),
+    name = c("c", "d"),
+    id = c("8", "9"),
     drive_resource = list(
       list(kind = "drive#file", parents = list(list("5"))),
       list(kind = "drive#file", parents = list(list("7")))

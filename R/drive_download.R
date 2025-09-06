@@ -49,11 +49,13 @@
 #'
 #' # Clean up
 #' unlink(c("chicken_sheet.csv", "chicken_sheet.xlsx", "my_csv_file.csv"))
-drive_download <- function(file,
-                           path = NULL,
-                           type = NULL,
-                           overwrite = FALSE,
-                           verbose = deprecated()) {
+drive_download <- function(
+  file,
+  path = NULL,
+  type = NULL,
+  overwrite = FALSE,
+  verbose = deprecated()
+) {
   warn_for_verbose(verbose)
   if (!is.null(path) && file.exists(path) && !overwrite) {
     drive_abort(c(
