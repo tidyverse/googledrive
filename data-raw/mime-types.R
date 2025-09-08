@@ -1,11 +1,22 @@
-# tables of MIME types
+# Generate a table of MIME types that maps between types that are specific to
+# Google Workspace and Google Drive and other MIME types
+
+# For example, what MIME types can be uploaded and converted to a Sheet?
+# Excel or csv, etc.
+
+# What MIME types can a Sheet be exported to as a local file?
+# Excel or csv or even pdf
+
+# Google Workspace and Google Drive supported MIME types
+# Example: application/vnd.google-apps.spreadsheet
 # https://developers.google.com/drive/api/v3/mime-types
+
 # https://developers.google.com/drive/api/v3/manage-downloads
-# https://developers.google.com/drive/api/v3/ref-export-formats
+
+# Export MIME types for Google Workspace documents
+# https://developers.google.com/workspace/drive/api/guides/ref-export-formats
 
 library(tidyverse)
-library(httr)
-library(rvest)
 library(here)
 library(googledrive)
 
@@ -66,73 +77,3 @@ write_csv(
   translate_mime_types,
   file = here("inst", "extdata", "data", "translate_mime_types.csv")
 )
-
-# general table of MIME types Google knows about
-
-# The following table lists MIME types that are specific Google Workspace and
-# Google Drive
-url <- "https://developers.google.com/drive/api/v3/mime-types"
-
-google_mime_types <- GET(url) %>%
-  content() %>%
-  html_table(fill = TRUE) %>%
-  flatten() %>%
-  as_tibble() %>%
-  select(
-    mime_type = `MIME Type`,
-    description = Description
-  ) %>%
-  mutate(description = na_if(description, ""))
-
-mime_tbl <- translate_mime_types %>%
-  select(mime_type = mime_type_local) %>%
-  distinct() %>%
-  bind_rows(google_mime_types)
-
-# use mime::mimemap map extensions
-mime_ext <- mime::mimemap %>%
-  enframe(name = "ext", value = "mime_type") %>%
-  select(mime_type, ext)
-
-mime_tbl <- mime_ext %>%
-  right_join(mime_tbl, by = "mime_type")
-
-google_prefix <- "application/vnd.google-apps."
-mime_tbl <- mime_tbl %>%
-  mutate(
-    human_type = ifelse(
-      grepl(google_prefix, mime_type, fixed = TRUE),
-      sub(google_prefix, "", mime_type, fixed = TRUE),
-      ext
-    )
-  )
-
-# where did this csv come from? these must be my choices
-default_ext <- here("data-raw", "extension-mime-type-defaults.csv") %>%
-  read_csv() %>%
-  mutate(default = TRUE)
-
-mime_tbl <- mime_tbl %>%
-  left_join(default_ext) %>%
-  mutate(
-    default = case_when(
-      is.na(ext)     ~ NA,
-      is.na(default) ~ FALSE,
-      TRUE           ~ TRUE
-    )
-  )
-
-mime_tbl <- mime_tbl %>%
-  add_row(
-    # TODO(jennybc): consider also "application/vnd.google.colaboratory"
-    mime_type = "application/vnd.google.colab",
-    ext = "ipynb",
-    description = "Colab notebook",
-    human_type = "colab",
-    default = TRUE
-  )
-
-mime_tbl <- mime_tbl %>%
-  arrange(mime_type, ext)
-
-write_csv(mime_tbl, file = here("inst", "extdata", "data", "mime_tbl.csv"))
