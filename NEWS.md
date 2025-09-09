@@ -1,5 +1,8 @@
 # googledrive (development version)
 
+* `drive_upload()` and `drive_download()` support the conversion of a local
+  markdown file to a Google Doc and vice versa (#465, @ateucher).
+
 # googledrive 2.1.1
 
 * `drive_auth(subject =)` is a new argument that can be used with
