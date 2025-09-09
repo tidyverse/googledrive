@@ -32,9 +32,9 @@ dd <- read_discovery_document(x)
 
 methods <- get_raw_methods(dd)
 
-methods <- methods %>% map(groom_properties, dd)
-methods <- methods %>% map(add_schema_params, dd)
-methods <- methods %>% map(add_global_params, dd)
+methods <- methods |> map(groom_properties, dd)
+methods <- methods |> map(add_schema_params, dd)
+methods <- methods |> map(add_global_params, dd)
 
 ## duplicate two methods to create a companion for media
 ## simpler to do this here, in data, than in wrapper functions

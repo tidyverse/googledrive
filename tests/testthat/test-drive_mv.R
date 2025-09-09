@@ -37,9 +37,9 @@ test_that("drive_mv() can rename file", {
     file <- drive_mv(file, name = name_2),
     type = "message"
   )
-  drive_mv_message <- drive_mv_message %>%
-    scrub_filepath(name_1) %>%
-    scrub_filepath(name_2) %>%
+  drive_mv_message <- drive_mv_message |>
+    scrub_filepath(name_1) |>
+    scrub_filepath(name_2) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(drive_mv_message)
@@ -64,8 +64,8 @@ test_that("drive_mv() can move a file into a folder given as path", {
     mv_file <- drive_mv(mv_file, paste0(nm_("move-files-into-me"), "/")),
     type = "message"
   )
-  drive_mv_message <- drive_mv_message %>%
-    scrub_filepath(mv_name) %>%
+  drive_mv_message <- drive_mv_message |>
+    scrub_filepath(mv_name) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(drive_mv_message)
@@ -95,8 +95,8 @@ test_that("drive_mv() can move a file into a folder given as dribble", {
     mv_file <- drive_mv(mv_file, destination),
     type = "message"
   )
-  drive_mv_message <- drive_mv_message %>%
-    scrub_filepath(mv_name) %>%
+  drive_mv_message <- drive_mv_message |>
+    scrub_filepath(mv_name) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(drive_mv_message)
@@ -122,9 +122,9 @@ test_that("drive_mv() can rename and move, using `path` and `name`", {
     mv_file <- drive_mv(mv_file, nm_("move-files-into-me"), name_2),
     type = "message"
   )
-  drive_mv_message <- drive_mv_message %>%
-    scrub_filepath(name_1) %>%
-    scrub_filepath(name_2) %>%
+  drive_mv_message <- drive_mv_message |>
+    scrub_filepath(name_1) |>
+    scrub_filepath(name_2) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(drive_mv_message)
@@ -152,9 +152,9 @@ test_that("drive_mv() can rename and move, using `path` only", {
     ),
     type = "message"
   )
-  drive_mv_message <- drive_mv_message %>%
-    scrub_filepath(name_1) %>%
-    scrub_filepath(name_2) %>%
+  drive_mv_message <- drive_mv_message |>
+    scrub_filepath(name_1) |>
+    scrub_filepath(name_2) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(drive_mv_message)

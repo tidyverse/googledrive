@@ -191,9 +191,9 @@ drive_find <- function(
     n = function(x) length(x$files)
   )
 
-  res_tbl <- proc_res_list %>%
-    map("files") %>%
-    purrr::flatten() %>%
+  res_tbl <- proc_res_list |>
+    map("files") |>
+    purrr::flatten() |>
     as_dribble()
 
   # there is some evidence of overlap in the results returned in different

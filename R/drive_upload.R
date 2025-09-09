@@ -34,11 +34,11 @@
 #' @export
 #' @examplesIf drive_has_token()
 #' # upload a csv file
-#' chicken_csv <- drive_example_local("chicken.csv") %>%
+#' chicken_csv <- drive_example_local("chicken.csv") |>
 #'   drive_upload("chicken-upload.csv")
 #'
 #' # or convert it to a Google Sheet
-#' chicken_sheet <- drive_example_local("chicken.csv") %>%
+#' chicken_sheet <- drive_example_local("chicken.csv") |>
 #'   drive_upload(
 #'     name = "chicken-sheet-upload.csv",
 #'     type = "spreadsheet"
@@ -48,10 +48,10 @@
 #' drive_browse(chicken_sheet)
 #'
 #' # Clean up
-#' drive_find("chicken.*upload") %>% drive_rm()
+#' drive_find("chicken.*upload") |> drive_rm()
 #'
 #' # Upload a file and, at the same time, star it
-#' chicken <- drive_example_local("chicken.jpg") %>%
+#' chicken <- drive_example_local("chicken.jpg") |>
 #'   drive_upload(starred = "true")
 #'
 #' # Is is really starred? YES
@@ -63,14 +63,14 @@
 #' # `overwrite = FALSE` errors if something already exists at target filepath
 #' # THIS WILL ERROR!
 #' drive_create("name-squatter-upload")
-#' drive_example_local("chicken.jpg") %>%
+#' drive_example_local("chicken.jpg") |>
 #'   drive_upload(
 #'     name = "name-squatter-upload",
 #'     overwrite = FALSE
 #'   )
 #'
 #' # `overwrite = TRUE` moves the existing item to trash, then proceeds
-#' chicken <- drive_example_local("chicken.jpg") %>%
+#' chicken <- drive_example_local("chicken.jpg") |>
 #'   drive_upload(
 #'     name = "name-squatter-upload",
 #'     overwrite = TRUE

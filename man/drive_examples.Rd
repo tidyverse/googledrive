@@ -38,8 +38,8 @@ the example files. See \code{vignette("example-files", package = "googledrive")}
 for more.
 }
 \examples{
-drive_examples_local() \%>\% basename()
-drive_examples_local("chicken") \%>\% basename()
+drive_examples_local() |> basename()
+drive_examples_local("chicken") |> basename()
 drive_example_local("imdb")
 
 \dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}

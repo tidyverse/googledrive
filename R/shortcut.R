@@ -35,19 +35,19 @@
 #' # This shortcut could now be moved, renamed, etc.
 #'
 #' # Create a shortcut in the default location with a custom name
-#' sc2 <- src_file %>%
+#' sc2 <- src_file |>
 #'   shortcut_create(name = "chicken_sheet_second_shortcut")
 #'
 #' # Create a folder, then put a shortcut there, with default name
 #' folder <- drive_mkdir("chicken_sheet_shortcut_folder")
-#' sc3 <- src_file %>%
+#' sc3 <- src_file |>
 #'   shortcut_create(folder)
 #'
 #' # Look at all these shortcuts
 #' (dat <- drive_find("chicken_sheet", type = "shortcut"))
 #'
 #' # Confirm the shortcuts all target the original file
-#' dat <- dat %>%
+#' dat <- dat |>
 #'   drive_reveal("shortcut_details")
 #' purrr::map_chr(dat$shortcut_details, "targetId")
 #' as_id(src_file)
@@ -102,15 +102,15 @@ shortcut_create <- function(file, path = NULL, name = NULL, overwrite = NA) {
 #'
 #' @examplesIf drive_has_token()
 #' # Create a file to make a shortcut to
-#' file <- drive_example_remote("chicken_sheet") %>%
+#' file <- drive_example_remote("chicken_sheet") |>
 #'   drive_cp(name = "chicken-sheet-for-shortcut")
 #'
 #' # Create a shortcut
-#' sc1 <- file %>%
+#' sc1 <- file |>
 #'   shortcut_create(name = "shortcut-1")
 #'
 #' # Create a second shortcut by copying the first
-#' sc1 <- sc1 %>%
+#' sc1 <- sc1 |>
 #'   drive_cp(name = "shortcut-2")
 #'
 #' # Get the shortcuts
@@ -174,9 +174,9 @@ resolve_one <- function(name, id, drive_resource, ...) {
   target_id <- pluck(drive_resource, "shortcutDetails", "targetId")
   if (is_null(target_id)) {
     return(
-      list(drive_resource) %>%
-        as_dribble() %>%
-        put_column(nm = "id_shortcut", val = NA_character_, .after = "id") %>%
+      list(drive_resource) |>
+        as_dribble() |>
+        put_column(nm = "id_shortcut", val = NA_character_, .after = "id") |>
         put_column(nm = "name_shortcut", val = NA_character_, .after = "id")
     )
   }
@@ -190,8 +190,8 @@ resolve_one <- function(name, id, drive_resource, ...) {
       }
     }
   )
-  out %>%
-    put_column(nm = "id_shortcut", val = id, .after = "id") %>%
+  out |>
+    put_column(nm = "id_shortcut", val = id, .after = "id") |>
     put_column(nm = "name_shortcut", val = name, .after = "id")
 }
 

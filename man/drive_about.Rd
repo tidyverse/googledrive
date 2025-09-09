@@ -21,7 +21,7 @@ drive_about()
 
 # explore the export formats available for Drive files, by MIME type
 about <- drive_about()
-about[["exportFormats"]] \%>\%
+about[["exportFormats"]] |>
   purrr::map(unlist)
 \dontshow{\}) # examplesIf}
 }

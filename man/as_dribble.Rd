@@ -57,6 +57,6 @@ as_dribble(c("alfa", "alfa/bravo"))
 # as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
 
 # Clean up
-drive_find("alfa") \%>\% drive_rm()
+drive_find("alfa") |> drive_rm()
 \dontshow{\}) # examplesIf}
 }

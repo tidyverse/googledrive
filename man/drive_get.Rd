@@ -95,7 +95,7 @@ search other collections of items. Read more about \link[=shared_drives]{shared 
 drive_get("~/")
 # the API reserves the file id "root" for your root folder
 drive_get(id = "root")
-drive_get(id = "root") \%>\% drive_reveal("path")
+drive_get(id = "root") |> drive_reveal("path")
 
 # set up some files to get by path
 alfalfa <- drive_mkdir("alfalfa")

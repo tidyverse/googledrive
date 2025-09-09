@@ -20,7 +20,7 @@
 #' @export
 #' @examplesIf drive_has_token()
 #' # Create a file to publish
-#' file <- drive_example_remote("chicken_sheet") %>%
+#' file <- drive_example_remote("chicken_sheet") |>
 #'   drive_cp()
 #'
 #' # Publish file

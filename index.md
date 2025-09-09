@@ -43,7 +43,7 @@ library("googledrive")
   - Give humans what they want: the file name
   - Track what the API wants: the file ID
   - Hold on to all the other metadata sent back by the API
-- googledrive is “pipe-friendly” and, in fact, re-exports `%>%`, but
+- googledrive is “pipe-friendly” and, in fact, re-exports `|>`, but
   does not require its use.
 
 ### Quick demo
@@ -57,17 +57,17 @@ package to deal on your behalf with Google Drive.
 drive_find(n_max = 30)
 #> # A dribble: 30 × 3
 #>    name                       id                                drive_resource
-#>    <chr>                      <drv_id>                          <list>        
-#>  1 2021-09-16_r_logo.jpg      1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D <named list>  
-#>  2 2021-09-16_r_about.html    1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ <named list>  
-#>  3 2021-09-16_imdb_latin1.csv 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw <named list>  
-#>  4 2021-09-16_chicken.txt     1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7 <named list>  
-#>  5 2021-09-16_chicken.pdf     14Hd6_VQAeEgcwBBJamc-FUlnXhp117T2 <named list>  
-#>  6 2021-09-16_chicken.jpg     1aslW1T-B8UKzAEotDWpmRFaMyMux5-it <named list>  
-#>  7 2021-09-16_chicken.csv     1Mj--zJYZJSMKsNVjk2tYFef5LnCsNoDT <named list>  
-#>  8 pqr                        143iq-CswFTwJTjVfKkcFMDW0jYqDeUj2 <named list>  
-#>  9 mno                        1gcUTnFbsF6uioJrLCsVQ78_F1wEzyNtI <named list>  
-#> 10 jkl                        17T40phn99w0hY-B_Ev0deTvVg9fmUSnt <named list>  
+#>    <chr>                      <drv_id>                          <list>
+#>  1 2021-09-16_r_logo.jpg      1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D <named list>
+#>  2 2021-09-16_r_about.html    1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ <named list>
+#>  3 2021-09-16_imdb_latin1.csv 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw <named list>
+#>  4 2021-09-16_chicken.txt     1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7 <named list>
+#>  5 2021-09-16_chicken.pdf     14Hd6_VQAeEgcwBBJamc-FUlnXhp117T2 <named list>
+#>  6 2021-09-16_chicken.jpg     1aslW1T-B8UKzAEotDWpmRFaMyMux5-it <named list>
+#>  7 2021-09-16_chicken.csv     1Mj--zJYZJSMKsNVjk2tYFef5LnCsNoDT <named list>
+#>  8 pqr                        143iq-CswFTwJTjVfKkcFMDW0jYqDeUj2 <named list>
+#>  9 mno                        1gcUTnFbsF6uioJrLCsVQ78_F1wEzyNtI <named list>
+#> 10 jkl                        17T40phn99w0hY-B_Ev0deTvVg9fmUSnt <named list>
 #> # ℹ 20 more rows
 ```
 
@@ -92,8 +92,8 @@ by “anyone with a link”, do this:
 ``` r
 (files <- drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'")))
 #> # A dribble: 2 × 3
-#>   name       id                                drive_resource   
-#>   <chr>      <drv_id>                          <list>           
+#>   name       id                                drive_resource
+#>   <chr>      <drv_id>                          <list>
 #> 1 r_logo.jpg 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud <named list [43]>
 #> 2 THANKS     19URV7BT0_E1KhYdfDODszK5aiELOwTSz <named list [42]>
 ```
@@ -112,8 +112,8 @@ files by name (path, really) or by Drive file id using `drive_get()`.
 (x <- drive_get("~/abc/def/googledrive-NEWS.md"))
 #> ✔ The input `path` resolved to exactly 1 file.
 #> # A dribble: 1 × 4
-#>   name                path                          id       drive_resource   
-#>   <chr>               <chr>                         <drv_id> <list>           
+#>   name                path                          id       drive_resource
+#>   <chr>               <chr>                         <drv_id> <list>
 #> 1 googledrive-NEWS.md ~/abc/def/googledrive-NEWS.md 1h1lhFf… <named list [41]>
 ```
 
@@ -129,13 +129,13 @@ x$id
 # let's retrieve same file by id (also a great way to force-refresh metadata)
 drive_get(x$id)
 #> # A dribble: 1 × 3
-#>   name                id                                drive_resource   
-#>   <chr>               <drv_id>                          <list>           
+#>   name                id                                drive_resource
+#>   <chr>               <drv_id>                          <list>
 #> 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm <named list [41]>
 drive_get(as_id(x))
 #> # A dribble: 1 × 3
-#>   name                id                                drive_resource   
-#>   <chr>               <drv_id>                          <list>           
+#>   name                id                                drive_resource
+#>   <chr>               <drv_id>                          <list>
 #> 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm <named list [41]>
 ```
 
@@ -161,8 +161,8 @@ We can upload any file type.
 #> With MIME type:
 #> • 'text/csv'
 #> # A dribble: 1 × 3
-#>   name              id                                drive_resource   
-#>   <chr>             <drv_id>                          <list>           
+#>   name              id                                drive_resource
+#>   <chr>             <drv_id>                          <list>
 #> 1 index-chicken.csv 1dE2U3TUvYulwE88ucBPQHP0-CB4zEK7P <named list [41]>
 ```
 
@@ -177,7 +177,7 @@ drive_rm(chicken)
 #> • 'index-chicken.csv' <id: 1dE2U3TUvYulwE88ucBPQHP0-CB4zEK7P>
 
 # example of using a dribble as input
-chicken_sheet <- drive_example_local("chicken.csv") %>% 
+chicken_sheet <- drive_example_local("chicken.csv") |>
   drive_upload(
     name = "index-chicken-sheet",
     type = "spreadsheet"
@@ -200,11 +200,11 @@ sharing permissions. You can check the sharing status by running
 and parks more detailed metadata in a `permissions_resource` variable.
 
 ``` r
-chicken_sheet %>% 
+chicken_sheet |>
   drive_reveal("permissions")
 #> # A dribble: 1 × 5
 #>   name                shared id       drive_resource    permissions_resource
-#>   <chr>               <lgl>  <drv_id> <list>            <list>              
+#>   <chr>               <lgl>  <drv_id> <list>            <list>
 #> 1 index-chicken-sheet FALSE  1KXgDfk… <named list [36]> <named list [2]>
 ```
 
@@ -212,7 +212,7 @@ Here’s how to grant anyone with the link permission to view this data
 set.
 
 ``` r
-(chicken_sheet <- chicken_sheet %>%
+(chicken_sheet <- chicken_sheet |>
    drive_share(role = "reader", type = "anyone"))
 #> Permissions updated:
 #> • role = reader
@@ -221,7 +221,7 @@ set.
 #> • 'index-chicken-sheet' <id: 1KXgDfk3IfJg833XokFhKDahY9aDml-183NHPz3qXlAY>
 #> # A dribble: 1 × 5
 #>   name                shared id       drive_resource    permissions_resource
-#>   <chr>               <lgl>  <drv_id> <list>            <list>              
+#>   <chr>               <lgl>  <drv_id> <list>            <list>
 #> 1 index-chicken-sheet TRUE   1KXgDfk… <named list [37]> <named list [2]>
 ```
 
@@ -237,12 +237,12 @@ online. You can check your publication status by running
 variable.
 
 ``` r
-chicken_sheet %>% 
+chicken_sheet |>
   drive_reveal("published")
 #> # A dribble: 1 × 7
 #>   name             published shared id       drive_resource permissions_resource
-#>   <chr>            <lgl>     <lgl>  <drv_id> <list>         <list>              
-#> 1 index-chicken-s… FALSE     TRUE   1KXgDfk… <named list>   <named list [2]>    
+#>   <chr>            <lgl>     <lgl>  <drv_id> <list>         <list>
+#> 1 index-chicken-s… FALSE     TRUE   1KXgDfk… <named list>   <named list [2]>
 #> # ℹ 1 more variable: revision_resource <list>
 ```
 
@@ -254,8 +254,8 @@ By default, `drive_publish()` will publish your most recent version.
 #> • 'index-chicken-sheet' <id: 1KXgDfk3IfJg833XokFhKDahY9aDml-183NHPz3qXlAY>
 #> # A dribble: 1 × 7
 #>   name             published shared id       drive_resource permissions_resource
-#>   <chr>            <lgl>     <lgl>  <drv_id> <list>         <list>              
-#> 1 index-chicken-s… TRUE      TRUE   1KXgDfk… <named list>   <named list [2]>    
+#>   <chr>            <lgl>     <lgl>  <drv_id> <list>         <list>
+#> 1 index-chicken-s… TRUE      TRUE   1KXgDfk… <named list>   <named list [2]>
 #> # ℹ 1 more variable: revision_resource <list>
 ```
 
@@ -318,12 +318,12 @@ drive_download("chicken.txt")
 #> • 'chicken.txt' <id: 1xMvlJHia_qYNZmucaStDcOF9A9PD4BOT>
 #> Saved locally as:
 #> • 'chicken.txt'
-readLines("chicken.txt") %>% head()
-#> [1] "A chicken whose name was Chantecler"      
-#> [2] "Clucked in iambic pentameter"             
+readLines("chicken.txt") |> head()
+#> [1] "A chicken whose name was Chantecler"
+#> [2] "Clucked in iambic pentameter"
 #> [3] "It sat on a shelf, reading Song of Myself"
-#> [4] "And laid eggs with a perfect diameter."   
-#> [5] ""                                         
+#> [4] "And laid eggs with a perfect diameter."
+#> [5] ""
 #> [6] "—Richard Maxson"
 ```
 
@@ -334,7 +334,7 @@ file.remove(c(
   "index-chicken-sheet.csv", "index-chicken-sheet.xlsx", "chicken.txt"
 ))
 #> [1] TRUE TRUE TRUE
-drive_find("index-chicken") %>% drive_rm()
+drive_find("index-chicken") |> drive_rm()
 #> File deleted:
 #> • 'index-chicken-sheet' <id: 1KXgDfk3IfJg833XokFhKDahY9aDml-183NHPz3qXlAY>
 ```

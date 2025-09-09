@@ -22,8 +22,8 @@
 
 #' @name drive_examples
 #' @examples
-#' drive_examples_local() %>% basename()
-#' drive_examples_local("chicken") %>% basename()
+#' drive_examples_local() |> basename()
+#' drive_examples_local("chicken") |> basename()
 #' drive_example_local("imdb")
 #'
 #' @examplesIf drive_has_token()

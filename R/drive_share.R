@@ -39,11 +39,11 @@
 #' @export
 #' @examplesIf drive_has_token()
 #' # Create a file to share
-#' file <- drive_example_remote("chicken_doc") %>%
+#' file <- drive_example_remote("chicken_doc") |>
 #'   drive_cp(name = "chicken-share.txt")
 #'
 #' # Let a specific person comment
-#' file <- file %>%
+#' file <- file |>
 #'   drive_share(
 #'     role = "commenter",
 #'     type = "user",
@@ -51,7 +51,7 @@
 #'   )
 #'
 #' # Let a different specific person edit and customize the email notification
-#' file <- file %>%
+#' file <- file |>
 #'   drive_share(
 #'     role = "writer",
 #'     type = "user",
@@ -60,7 +60,7 @@
 #'   )
 #'
 #' # Let anyone read the file
-#' file <- file %>%
+#' file <- file |>
 #'   drive_share(role = "reader", type = "anyone")
 #' # Single-purpose wrapper function for this
 #' drive_share_anyone(file)

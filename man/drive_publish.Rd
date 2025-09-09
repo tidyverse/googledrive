@@ -40,7 +40,7 @@ Read more in \code{\link[=drive_reveal]{drive_reveal()}}.
 \examples{
 \dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Create a file to publish
-file <- drive_example_remote("chicken_sheet") \%>\%
+file <- drive_example_remote("chicken_sheet") |>
   drive_cp()
 
 # Publish file

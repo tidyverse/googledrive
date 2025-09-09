@@ -19,9 +19,9 @@ if (anyDuplicated(dat$name)) {
   stop("Duplicated file names! You are making a huge mistake.")
 }
 
-dat <- dat %>%
-  drive_reveal("mime_type") %>%
-  select(name, mime_type, id) %>%
+dat <- dat |>
+  drive_reveal("mime_type") |>
+  select(name, mime_type, id) |>
   arrange(name, mime_type)
 
 # record in local csv, because the visibility afforded by a plain old csv file
@@ -32,7 +32,7 @@ write_csv(
 )
 
 # keep just (name, id) for the official lookup Sheet
-dat2 <- dat %>%
+dat2 <- dat |>
   select(name, id)
 dat2
 

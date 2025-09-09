@@ -29,11 +29,11 @@ test_files <- list.files(
   full.names = TRUE
 )
 
-clean_code <- test_files %>%
-  map(do_one, chunk = "clean") %>%
+clean_code <- test_files |>
+  map(do_one, chunk = "clean") |>
   compact()
-setup_code <- test_files %>%
-  map(do_one, chunk = "setup") %>%
+setup_code <- test_files |>
+  map(do_one, chunk = "setup") |>
   compact()
 
 header <- "

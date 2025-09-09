@@ -5,7 +5,7 @@ title: "Example Files"
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>", 
+  comment = "#>",
   error = TRUE
 )
 ```
@@ -36,21 +36,21 @@ basename(x)
 You can filter the files by providing a regular expression.
 
 ```{r}
-drive_examples_local("csv") %>% basename()
+drive_examples_local("csv") |> basename()
 ```
 
 If you want exactly one file, use the singular `drive_example_local()` and provide the file's name (or any sufficiently specific regular expression):
 
 ```{r}
-drive_examples_local("chicken.jpg") %>% basename()
+drive_examples_local("chicken.jpg") |> basename()
 
-drive_examples_local("imdb") %>% basename()
+drive_examples_local("imdb") |> basename()
 ```
 
 Here's how you might use one of these examples to start demonstrating something with googledrive:
 
 ```{r eval = FALSE}
-new_google_sheet <- drive_examples_local("chicken.csv") %>% 
+new_google_sheet <- drive_examples_local("chicken.csv") |>
   drive_upload(type = "spreadsheet")
 # ... example or reprex continues ...
 ```
@@ -61,7 +61,7 @@ Call `drive_examples_remote()` to get a `dribble` of the remote example files.
 Here I also reveal their MIME type.
 
 ```{r}
-drive_examples_remote() %>% 
+drive_examples_remote() |>
   drive_reveal("mime_type")
 ```
 
@@ -73,7 +73,7 @@ You'll notice there are two files that aren't among the local example files, but
 Here's a clickable table of the remote example files:
 
 ```{r include = FALSE}
-dat <- drive_examples_remote() %>% 
+dat <- drive_examples_remote() |>
   drive_reveal("webViewLink")
 dat2 <- tibble::tibble(
   `name (these are links)` =  glue::glue_data(dat, "[{name}]({web_view_link})"),
@@ -98,7 +98,7 @@ drive_example_remote("logo")
 Here's how you might use one of these examples to start demonstrating something with googledrive:
 
 ```{r eval = FALSE}
-new_google_doc <- drive_examples_remote("chicken_doc") %>% 
+new_google_doc <- drive_examples_remote("chicken_doc") |>
   drive_cp(name = "I have a chicken problem")
 # ... example or reprex continues ...
 ```
