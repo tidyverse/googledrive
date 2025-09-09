@@ -159,9 +159,9 @@ mime_tbl_4 <- mime_tbl_3 %>%
   left_join(default_ext) %>%
   mutate(
     default = case_when(
-      is.na(ext)     ~ NA,
+      is.na(ext) ~ NA,
       is.na(default) ~ FALSE,
-      TRUE           ~ TRUE
+      TRUE ~ TRUE
     )
   )
 
@@ -179,6 +179,7 @@ mime_tbl_5 <- mime_tbl_4 %>%
 # text/richtext --> rtf
 # text/rtf      --> rtf
 # text/x-markdown --> md
+# fmt: skip
 patch <- tribble(
   ~mime_type, ~ext, ~default,
   "text/richtext", "rtf", TRUE,
