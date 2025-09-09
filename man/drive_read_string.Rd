@@ -45,16 +45,14 @@ for \code{\link[=drive_download]{drive_download()}} for more.
 \dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # comma-separated values --> data.frame or tibble
 (chicken_csv <- drive_example_remote("chicken.csv"))
-chicken_csv |>
-  drive_read_string() |>
-  read.csv(text = .)
+read.csv(text = chicken_csv |> drive_read_string())
 
 # Google Doc --> character vector
 (chicken_doc <- drive_example_remote("chicken_doc"))
 chicken_doc |>
   # NOTE: we must specify an export MIME type
   drive_read_string(type = "text/plain") |>
-  strsplit(split = "(\r\n|\r|\n)") |>
-  (\(.) .[[1]])()
+  strsplit(split = "(\r\n|\r|\n)")
+  (\(x) x[[1]])()
 \dontshow{\}) # examplesIf}
 }
