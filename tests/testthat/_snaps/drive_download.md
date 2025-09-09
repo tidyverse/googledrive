@@ -55,7 +55,7 @@
       Saved locally as:
       * '{download_filename}'
 
-# drive_download() respects `path` when `type` specified and no default extension
+# drive_download() can convert a Google Doc to local markdown
 
     Code
       write_utf8(drive_download_message)
