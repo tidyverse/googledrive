@@ -76,7 +76,8 @@ builtin <- c(
 
 if (isTRUE(SETUP)) {
   purrr::map2(
-    examples$id, examples$name,
+    examples$id,
+    examples$name,
     ~ drive_cp(as_id(.x), name = .y)
   )
   purrr::map(builtin, ~ drive_upload(.x))
@@ -112,7 +113,7 @@ if (isTRUE(CLEAN)) {
   - Give humans what they want: the file name
   - Track what the API wants: the file ID
   - Hold on to all the other metadata sent back by the API
-* googledrive is "pipe-friendly" and, in fact, re-exports `|>`, but does not require its use.
+* googledrive is "pipe-friendly" (either the base `|>` or magrittr `%>%` pipe), but does not require its use.
 
 ### Quick demo
 
@@ -126,8 +127,8 @@ You can narrow the query by specifying a `pattern` you'd like to match names aga
 
 ```{r eval = FALSE}
 drive_find(pattern = "chicken")
-drive_find(type = "spreadsheet")     ## Google Sheets!
-drive_find(type = "csv")             ## MIME type = "text/csv"
+drive_find(type = "spreadsheet") ## Google Sheets!
+drive_find(type = "csv") ## MIME type = "text/csv"
 drive_find(type = "application/pdf") ## MIME type = "application/pdf"
 ```
 
@@ -198,7 +199,7 @@ Here's how to grant anyone with the link permission to view this data set.
 
 ```{r}
 (chicken_sheet <- chicken_sheet |>
-   drive_share(role = "reader", type = "anyone"))
+  drive_share(role = "reader", type = "anyone"))
 ```
 
 This comes up so often, there's even a convenience wrapper, `drive_share_anyone()`.
@@ -260,7 +261,9 @@ readLines("chicken.txt") |> head()
 
 ```{r}
 file.remove(c(
-  "index-chicken-sheet.csv", "index-chicken-sheet.xlsx", "chicken.txt"
+  "index-chicken-sheet.csv",
+  "index-chicken-sheet.xlsx",
+  "chicken.txt"
 ))
 drive_find("index-chicken") |> drive_rm()
 ```
