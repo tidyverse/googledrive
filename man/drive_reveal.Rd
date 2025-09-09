@@ -139,7 +139,7 @@ drive_reveal(files, "size")
 drive_reveal(files, "quota_bytes_used")
 
 # 'root' is a special file id that represents your My Drive root folder
-drive_get(id = "root") \%>\%
+drive_get(id = "root") |>
   drive_reveal("path")
 \dontshow{\}) # examplesIf}
 }

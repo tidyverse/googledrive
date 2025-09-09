@@ -22,7 +22,7 @@
 #' @export
 #' @examplesIf drive_has_token()
 #' # create a file to move
-#' file <- drive_example_remote("chicken.txt") %>%
+#' file <- drive_example_remote("chicken.txt") |>
 #'   drive_cp("chicken-mv.txt")
 #'
 #' # rename it, but leave in current folder (root folder, in this case)

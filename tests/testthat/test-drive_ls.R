@@ -92,9 +92,9 @@ test_that("drive_ls() list contents of the target of a folder shortcut", {
     indirect_ls <- drive_ls(shortcut_name),
     type = "message"
   )
-  drive_ls_message <- drive_ls_message %>%
-    scrub_filepath(target_name) %>%
-    scrub_filepath(shortcut_name) %>%
+  drive_ls_message <- drive_ls_message |>
+    scrub_filepath(target_name) |>
+    scrub_filepath(shortcut_name) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(drive_ls_message)

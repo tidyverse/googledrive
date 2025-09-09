@@ -42,8 +42,8 @@ Let's upload a file and view its permissions.
 ```{r}
 library(googledrive)
 
-file <- drive_example_local("chicken.txt") %>%
-  drive_upload(name = "chicken-perm-article.txt") %>% 
+file <- drive_example_local("chicken.txt") |>
+  drive_upload(name = "chicken-perm-article.txt") |>
   drive_reveal("permissions")
 
 file
@@ -54,7 +54,7 @@ file
 Let's give a specific person permission to edit this file and a customized message, using the `emailAddress` and `emailMessage` parameters.
 
 ```{r, eval = FALSE}
-file <- file %>%
+file <- file |>
   drive_share(
     role = "writer",
     type = "user",
@@ -66,14 +66,14 @@ file <- file %>%
 Let's say we also want "anyone with a link" to be able to read the file.
 
 ```{r eval = FALSE}
-file <- file %>%
+file <- file |>
   drive_share(role = "reader", type = "anyone")
 ```
 
 This comes up often enough that we've made a convenience wrapper:
 
 ```{r}
-file <- file %>%
+file <- file |>
   drive_share_anyone()
 file
 ```
@@ -101,10 +101,10 @@ We've suppressed execution of the above chunk but here's some static, indicative
 
 ```{r eval = FALSE}
 #> # A tibble: 3 x 5
-#>   id           name            type   role  email                      
-#>   <chr>        <chr>           <chr>  <chr> <chr>                      
-#> 1 12345678901… Serena Somebody user   writ… serena@example.com          
-#> 2 anyoneWithL… NA              anyone read… NA                         
+#>   id           name            type   role  email
+#>   <chr>        <chr>           <chr>  <chr> <chr>
+#> 1 12345678901… Serena Somebody user   writ… serena@example.com
+#> 2 anyoneWithL… NA              anyone read… NA
 #> 3 98765432109… Orville Owner   user   owner orville@example.com
 ```
 

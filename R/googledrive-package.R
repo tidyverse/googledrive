@@ -17,8 +17,8 @@
 #'   give people what they want (file name), track what the API wants (file id),
 #'   and to hold the metadata needed for general file operations.
 #'
-#'   googledrive is "pipe-friendly" and, in fact, re-exports `%>%`, but does not
-#'   require its use.
+#'   googledrive is "pipe-friendly" (either the base `|>` or magrittr `%>%`
+#'   pipe), but does not require its use.
 #'
 #'   Please see the googledrive website for full documentation:
 

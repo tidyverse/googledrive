@@ -8,8 +8,8 @@
     "translate_mime_types.csv",
     package = "googledrive",
     mustWork = TRUE
-  ) %>%
-  utils::read.csv(stringsAsFactors = FALSE) %>%
+  ) |>
+  utils::read.csv(stringsAsFactors = FALSE) |>
   as_tibble()
 
 .drive$mime_tbl <-
@@ -19,8 +19,8 @@
     "mime_tbl.csv",
     package = "googledrive",
     mustWork = TRUE
-  ) %>%
-  utils::read.csv(stringsAsFactors = FALSE) %>%
+  ) |>
+  utils::read.csv(stringsAsFactors = FALSE) |>
   as_tibble()
 
 .drive$files_fields <-
@@ -30,8 +30,8 @@
     "files_fields.csv",
     package = "googledrive",
     mustWork = TRUE
-  ) %>%
-  utils::read.csv(stringsAsFactors = FALSE) %>%
+  ) |>
+  utils::read.csv(stringsAsFactors = FALSE) |>
   as_tibble()
 
 # environment to hold other data that is convenient to cache

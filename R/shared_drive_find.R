@@ -38,9 +38,9 @@ shared_drive_find <- function(pattern = NULL, n_max = Inf, ...) {
     n = function(x) length(x$drives)
   )
 
-  res_tbl <- proc_res_list %>%
-    map("drives") %>%
-    purrr::flatten() %>%
+  res_tbl <- proc_res_list |>
+    map("drives") |>
+    purrr::flatten() |>
     as_dribble()
 
   if (!is.null(pattern)) {

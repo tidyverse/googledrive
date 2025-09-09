@@ -58,7 +58,7 @@ test_that("drive_update() can update metadata only", {
   defer_drive_rm(me_("update-me"))
 
   updatee <- drive_cp(nm_("update-fodder"), name = me_("update-me"))
-  out <- drive_update(updatee, starred = TRUE) %>% promote("starred")
+  out <- drive_update(updatee, starred = TRUE) |> promote("starred")
   expect_true(out$starred)
 })
 

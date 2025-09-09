@@ -19,6 +19,6 @@ Visits a file on Google Drive in your default browser.
 }
 \examples{
 \dontshow{if (drive_has_token() && rlang::is_interactive()) withAutoprint(\{ # examplesIf}
-drive_find(n_max = 1) \%>\% drive_browse()
+drive_find(n_max = 1) |> drive_browse()
 \dontshow{\}) # examplesIf}
 }

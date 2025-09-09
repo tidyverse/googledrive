@@ -5,16 +5,16 @@ library(tidyverse)
 devtools::load_all(find_package_root_file())
 
 ## load the API spec, including download if necessary
-dd_cache <- find_package_root_file("data-raw") %>%
+dd_cache <- find_package_root_file("data-raw") |>
   list.files(pattern = "discovery-document.json$", full.names = TRUE)
 if (length(dd_cache) == 0) {
   dd_get <- GET("https://www.googleapis.com/discovery/v1/apis/drive/v3/rest")
   dd_content <- content(dd_get)
-  json_fname <- dd_content[c("revision", "id")] %>%
-    c("discovery-document") %>%
-    map(~ str_replace_all(.x, ":", "-")) %>%
-    str_c(collapse = "_") %>%
-    str_c(".json") %>%
+  json_fname <- dd_content[c("revision", "id")] |>
+    c("discovery-document") |>
+    map(~ str_replace_all(.x, ":", "-")) |>
+    str_c(collapse = "_") |>
+    str_c(".json") |>
     find_package_root_file("data-raw", .)
   write_lines(
     content(dd_get, as = "text"),
@@ -28,10 +28,10 @@ dd_content <- fromJSON(json_fname)
 ## listviewer::jsonedit(dd_content)
 
 ## extract the method collections and bring to same level of hierarchy
-endpoints <- c("about", "files", "permissions", "revisions", "teamdrives") %>%
-  set_names() %>%
-  map(~ dd_content[[c("resources", .x, "methods")]]) %>%
-  imap(function(.x, nm) set_names(.x, ~ paste(nm, ., sep = "."))) %>%
+endpoints <- c("about", "files", "permissions", "revisions", "teamdrives") |>
+  set_names() |>
+  map(~ dd_content[[c("resources", .x, "methods")]]) |>
+  imap(function(.x, nm) set_names(.x, ~ paste(nm, ., sep = "."))) |>
   flatten()
 # str(endpoints, max.level = 1)
 # listviewer::jsonedit(endpoints)
@@ -78,46 +78,46 @@ endpoints[[c("files.create.media", "parameters")]] <- c(
   uploadType = list(list(type = "string", required = TRUE, location = "query"))
 )
 
-nms <- endpoints %>%
-  map(names) %>%
+nms <- endpoints |>
+  map(names) |>
   reduce(union)
 
 ## tibble with one row per endpoint
-edf <- endpoints %>%
-  transpose(.names = nms) %>%
-  simplify_all(.type = character(1)) %>%
-  as_tibble() %>%
+edf <- endpoints |>
+  transpose(.names = nms) |>
+  simplify_all(.type = character(1)) |>
+  as_tibble() |>
   arrange(id)
 ## View(edf)
 
 ## clean up individual variables
 
 ## enforce my own order
-edf <- edf %>%
+edf <- edf |>
   select(id, httpMethod, path, parameters, scopes, description, everything())
 
-edf$path <- edf$path %>%
+edf$path <- edf$path |>
   modify_if(~ !grepl("drive/v3", .x), ~ paste0("drive/v3/", .x))
 
-edf$scopes <- edf$scopes %>%
-  map(~ gsub("https://www.googleapis.com/auth/", "", .)) %>%
+edf$scopes <- edf$scopes |>
+  map(~ gsub("https://www.googleapis.com/auth/", "", .)) |>
   map_chr(str_c, collapse = ", ")
 
-edf$parameterOrder <- edf$parameterOrder %>%
-  modify_if(~ length(.x) < 1, ~NA_character_) %>%
+edf$parameterOrder <- edf$parameterOrder |>
+  modify_if(~ length(.x) < 1, ~NA_character_) |>
   map_chr(str_c, collapse = ", ")
 
-edf$response <- edf$response %>%
+edf$response <- edf$response |>
   map_chr("$ref", .null = NA_character_)
-edf$request <- edf$request %>%
+edf$request <- edf$request |>
   map_chr("$ref", .null = NA_character_)
 ## View(edf)
 
 ## loooong side journey to clean up parameters; give them
 ##   * common sub-elements, even if sparsely unpopulated
 ##   * common order
-params <- edf %>%
-  select(id, parameters) %>%
+params <- edf |>
+  select(id, parameters) |>
   {
     ## unnest() won't work with a list ... doing it manually
     tibble(
@@ -125,9 +125,9 @@ params <- edf %>%
       parameters = purrr::flatten(.$parameters),
       pname = names(parameters)
     )
-  } %>%
+  } |>
   select(id, pname, parameters)
-# params$parameters %>% map(names) %>% reduce(union)
+# params$parameters |> map(names) |> reduce(union)
 
 ## keeping repeated and enum so it can generalize to sheets in the future.
 nms <-
@@ -135,38 +135,38 @@ nms <-
 
 ## tibble with one row per parameter
 ## variables method and pname keep track of endpoint and parameter name
-params <- params$parameters %>%
-  transpose(.names = nms) %>%
-  as_tibble() %>%
-  add_column(pname = params$pname, .before = 1) %>%
+params <- params$parameters |>
+  transpose(.names = nms) |>
+  as_tibble() |>
+  add_column(pname = params$pname, .before = 1) |>
   add_column(id = params$id, .before = 1)
-params <- params %>%
+params <- params |>
   mutate(
-    location = location %>% map(1, .null = "body") %>% flatten_chr(),
-    required = required %>% map(1, .null = NA) %>% flatten_lgl(),
-    type = type %>% map(1, .null = NA) %>% flatten_chr(),
-    repeated = repeated %>% map(1, .null = NA) %>% flatten_lgl(),
-    format = format %>% map(1, .null = NA) %>% flatten_chr(),
-    enum = enum %>% map(1, .null = NA) %>% flatten_chr(),
-    description = description %>% map(1, .null = NA) %>% flatten_chr()
+    location = location |> map(1, .null = "body") |> flatten_chr(),
+    required = required |> map(1, .null = NA) |> flatten_lgl(),
+    type = type |> map(1, .null = NA) |> flatten_chr(),
+    repeated = repeated |> map(1, .null = NA) |> flatten_lgl(),
+    format = format |> map(1, .null = NA) |> flatten_chr(),
+    enum = enum |> map(1, .null = NA) |> flatten_chr(),
+    description = description |> map(1, .null = NA) |> flatten_chr()
   )
 ## repack all the info for each parameter into a list
-repacked <- params %>%
-  select(-id, -pname) %>%
+repacked <- params |>
+  select(-id, -pname) |>
   pmap(list)
-params <- params %>%
-  select(id, pname) %>%
+params <- params |>
+  select(id, pname) |>
   mutate(pdata = repacked)
 ## repack all the parameters for each method into a named list
-params <- params %>%
-  group_by(id) %>%
-  nest(.key = parameters) %>%
+params <- params |>
+  group_by(id) |>
+  nest(.key = parameters) |>
   mutate(parameters = map(parameters, deframe))
 
 ## replace the parameters in the main endpoint tibble
-edf <- edf %>%
-  select(-parameters) %>%
-  left_join(params) %>%
+edf <- edf |>
+  select(-parameters) |>
+  left_join(params) |>
   select(id, httpMethod, path, parameters, everything())
 ## View(edf)
 
@@ -183,8 +183,8 @@ saveRDS(edf, file = out_fname)
 
 ## full spec as list
 ## transpose again, back to a list with one component per endpoint
-elist <- edf %>%
-  pmap(list) %>%
+elist <- edf |>
+  pmap(list) |>
   set_names(edf$id)
 ## View(elist)
 
@@ -200,16 +200,16 @@ out_fname <- str_replace(
   "discovery-document.json",
   "endpoints-list.json"
 )
-elist %>%
-  toJSON(pretty = TRUE) %>%
+elist |>
+  toJSON(pretty = TRUE) |>
   writeLines(out_fname)
 
 ## partial spec as list, i.e. keep only the variables I currently use to
 ## create the API
 ## convert to my naming scheme, which is more consistent with general use
-.endpoints <- edf %>%
-  select(id, method = httpMethod, path, parameters) %>%
-  pmap(list) %>%
+.endpoints <- edf |>
+  select(id, method = httpMethod, path, parameters) |>
+  pmap(list) |>
   set_names(edf$id)
 attr(.endpoints, "base_url") <- dd_content$baseUrl
 ## View(.endpoints)

@@ -58,9 +58,9 @@ test_that("drive_download() downloads a file and adds local_path column", {
     type = "message"
   )
   # the order of scrubbing matters here
-  drive_download_message <- drive_download_message %>%
-    scrub_filepath(download_filepath) %>%
-    scrub_filepath(file_to_download) %>%
+  drive_download_message <- drive_download_message |>
+    scrub_filepath(download_filepath) |>
+    scrub_filepath(file_to_download) |>
     scrub_file_id()
 
   expect_snapshot(
@@ -93,9 +93,9 @@ test_that("drive_download() converts with explicit `type`", {
     ),
     type = "message"
   )
-  drive_download_message <- drive_download_message %>%
-    scrub_filepath(download_filename) %>%
-    scrub_filepath(file_to_download) %>%
+  drive_download_message <- drive_download_message |>
+    scrub_filepath(download_filename) |>
+    scrub_filepath(file_to_download) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(drive_download_message)
@@ -120,9 +120,9 @@ test_that("drive_download() converts with type implicit in `path`", {
     ),
     type = "message"
   )
-  drive_download_message <- drive_download_message %>%
-    scrub_filepath(download_filename) %>%
-    scrub_filepath(file_to_download) %>%
+  drive_download_message <- drive_download_message |>
+    scrub_filepath(download_filename) |>
+    scrub_filepath(file_to_download) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(drive_download_message)
@@ -147,9 +147,9 @@ test_that("drive_download() converts using default MIME type, if necessary", {
     ),
     type = "message"
   )
-  drive_download_message <- drive_download_message %>%
-    scrub_filepath(download_filename) %>%
-    scrub_filepath(file_to_download) %>%
+  drive_download_message <- drive_download_message |>
+    scrub_filepath(download_filename) |>
+    scrub_filepath(file_to_download) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(drive_download_message)

@@ -76,7 +76,8 @@ builtin <- c(
 
 if (isTRUE(SETUP)) {
   purrr::map2(
-    examples$id, examples$name,
+    examples$id,
+    examples$name,
     ~ drive_cp(as_id(.x), name = .y)
   )
   purrr::map(builtin, ~ drive_upload(.x))
@@ -88,7 +89,7 @@ if (isTRUE(SETUP)) {
     path = abc_def,
     name = "googledrive-NEWS.md"
   )
-  
+
   THANKS <- drive_get("THANKS")
   r_logo <- drive_get("r_logo.jpg")
   x <- list(THANKS, r_logo)
@@ -112,7 +113,7 @@ if (isTRUE(CLEAN)) {
   - Give humans what they want: the file name
   - Track what the API wants: the file ID
   - Hold on to all the other metadata sent back by the API
-* googledrive is "pipe-friendly" and, in fact, re-exports `%>%`, but does not require its use.
+* googledrive is "pipe-friendly" (either the base `|>` or magrittr `%>%` pipe), but does not require its use.
 
 ### Quick demo
 
@@ -126,8 +127,8 @@ You can narrow the query by specifying a `pattern` you'd like to match names aga
 
 ```{r eval = FALSE}
 drive_find(pattern = "chicken")
-drive_find(type = "spreadsheet")     ## Google Sheets!
-drive_find(type = "csv")             ## MIME type = "text/csv"
+drive_find(type = "spreadsheet") ## Google Sheets!
+drive_find(type = "csv") ## MIME type = "text/csv"
 drive_find(type = "application/pdf") ## MIME type = "application/pdf"
 ```
 
@@ -148,7 +149,7 @@ You generally want to store the result of a googledrive call, as we do with `fil
 ```
 
 `as_id()` can be used to convert various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and `dribble`s.
- 
+
 ```{r}
 x$id
 
@@ -161,7 +162,7 @@ In general, googledrive functions that operate on files allow you to specify the
 
 #### Upload files
 
-We can upload any file type. 
+We can upload any file type.
 
 ```{r}
 (chicken <- drive_upload(
@@ -176,7 +177,7 @@ Notice that file was uploaded as `text/csv`. Since this was a `.csv` document, a
 drive_rm(chicken)
 
 # example of using a dribble as input
-chicken_sheet <- drive_example_local("chicken.csv") %>% 
+chicken_sheet <- drive_example_local("chicken.csv") |>
   drive_upload(
     name = "index-chicken-sheet",
     type = "spreadsheet"
@@ -190,15 +191,15 @@ Much better!
 To allow other people to access your file, you need to change the sharing permissions. You can check the sharing status by running `drive_reveal(..., "permissions")`, which adds a logical column `shared` and parks more detailed metadata in a `permissions_resource` variable.
 
 ```{r}
-chicken_sheet %>% 
+chicken_sheet |>
   drive_reveal("permissions")
 ```
 
 Here's how to grant anyone with the link permission to view this data set.
 
 ```{r}
-(chicken_sheet <- chicken_sheet %>%
-   drive_share(role = "reader", type = "anyone"))
+(chicken_sheet <- chicken_sheet |>
+  drive_share(role = "reader", type = "anyone"))
 ```
 
 This comes up so often, there's even a convenience wrapper, `drive_share_anyone()`.
@@ -208,7 +209,7 @@ This comes up so often, there's even a convenience wrapper, `drive_share_anyone(
 Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running `drive_reveal(..., "published")`, which adds a logical column `published` and parks more detailed metadata in a `revision_resource` variable.
 
 ```{r}
-chicken_sheet %>% 
+chicken_sheet |>
   drive_reveal("published")
 ```
 
@@ -253,16 +254,18 @@ Downloading files that are *not* Google type files is even simpler, i.e. it does
 ```{r}
 # download it and prove we got it
 drive_download("chicken.txt")
-readLines("chicken.txt") %>% head()
+readLines("chicken.txt") |> head()
 ```
 
 #### Clean up
 
 ```{r}
 file.remove(c(
-  "index-chicken-sheet.csv", "index-chicken-sheet.xlsx", "chicken.txt"
+  "index-chicken-sheet.csv",
+  "index-chicken-sheet.xlsx",
+  "chicken.txt"
 ))
-drive_find("index-chicken") %>% drive_rm()
+drive_find("index-chicken") |> drive_rm()
 ```
 
 ## Privacy

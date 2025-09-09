@@ -67,7 +67,7 @@ Move a Drive file to a different folder, give it a different name, or both.
 \examples{
 \dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # create a file to move
-file <- drive_example_remote("chicken.txt") \%>\%
+file <- drive_example_remote("chicken.txt") |>
   drive_cp("chicken-mv.txt")
 
 # rename it, but leave in current folder (root folder, in this case)

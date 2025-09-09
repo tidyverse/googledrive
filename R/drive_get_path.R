@@ -139,9 +139,9 @@ resolve_paths <- function(d, folders = dribble()) {
 
 # converts files in a dribble to the form used in pth()
 pthize <- function(d) {
-  d <- d %>%
-    drive_reveal("mime_type") %>%
-    drive_reveal("parent") %>%
+  d <- d |>
+    drive_reveal("mime_type") |>
+    drive_reveal("parent") |>
     drive_reveal("shortcut_details")
   purrr::transpose(
     d[c(

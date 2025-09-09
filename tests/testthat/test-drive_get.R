@@ -143,8 +143,8 @@ test_that("drive_reveal_path() puts trailing slash on a folder", {
   skip_if_offline()
 
   out <- drive_find(nm_("thing01"), type = "folder")
-  out <- out %>% drive_reveal_path()
-  out <- out %>% promote("mimeType")
+  out <- out |> drive_reveal_path()
+  out <- out |> promote("mimeType")
   expect_match(out$path, "/$")
 })
 

@@ -188,7 +188,7 @@ has_drive_resource <- function(x) {
 #' # as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
 #'
 #' # Clean up
-#' drive_find("alfa") %>% drive_rm()
+#' drive_find("alfa") |> drive_rm()
 as_dribble <- function(x, ...) UseMethod("as_dribble")
 
 #' @export
