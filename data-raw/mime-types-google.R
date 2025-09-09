@@ -62,8 +62,8 @@ translate_mime_types <- translate_mime_types %>%
   mutate(
     default = case_when(
       action == "import" ~ NA,
-      is.na(default)     ~ FALSE,
-      TRUE               ~ TRUE
+      is.na(default) ~ FALSE,
+      TRUE ~ TRUE
     )
   )
 
