@@ -69,7 +69,7 @@ the withr package (\url{https://withr.r-lib.org}).
 }
 
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 

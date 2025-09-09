@@ -48,12 +48,14 @@
 #' # Clean up
 #' drive_find("drive_put_.+[.]txt") %>% drive_rm()
 #' unlink(local_file)
-drive_put <- function(media,
-                      path = NULL,
-                      name = NULL,
-                      ...,
-                      type = NULL,
-                      verbose = deprecated()) {
+drive_put <- function(
+  media,
+  path = NULL,
+  name = NULL,
+  ...,
+  type = NULL,
+  verbose = deprecated()
+) {
   warn_for_verbose(verbose)
   if (file.exists(media)) {
     media <- enc2utf8(media)

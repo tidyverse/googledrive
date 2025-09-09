@@ -27,7 +27,7 @@ Caution: this will permanently delete your files! For a safer, reversible
 option, see \code{\link[=drive_trash]{drive_trash()}}.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Target one of the official example files to copy (then remove)
 (src_file <- drive_example_remote("chicken.txt"))
 

@@ -36,8 +36,7 @@
 #'
 #' # prepare fields for query
 #' prep_fields(c("name", "parents", "kind"))
-drive_fields <- function(fields = NULL,
-                         resource = "files") {
+drive_fields <- function(fields = NULL, resource = "files") {
   if (!identical(resource, "files")) {
     drive_bullets(c(
       "!" = "Currently only fields for the {.field files} resource can be \\

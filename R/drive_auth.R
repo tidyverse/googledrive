@@ -7,11 +7,11 @@
 ## The roxygen comments for these functions are mostly generated from data
 ## in this list and template text maintained in gargle.
 gargle_lookup_table <- list(
-  PACKAGE     = "googledrive",
-  YOUR_STUFF  = "your Drive files",
-  PRODUCT     = "Google Drive",
-  API         = "Drive API",
-  PREFIX      = "drive"
+  PACKAGE = "googledrive",
+  YOUR_STUFF = "your Drive files",
+  PRODUCT = "Google Drive",
+  API = "Drive API",
+  PREFIX = "drive"
 )
 
 #' Authorize googledrive
@@ -59,12 +59,15 @@ gargle_lookup_table <- list(
 #'
 #' # use a service account token
 #' drive_auth(path = "foofy-83ee9e7c9c48.json")
-drive_auth <- function(email = gargle::gargle_oauth_email(),
-                       path = NULL, subject = NULL,
-                       scopes = "drive",
-                       cache = gargle::gargle_oauth_cache(),
-                       use_oob = gargle::gargle_oob_default(),
-                       token = NULL) {
+drive_auth <- function(
+  email = gargle::gargle_oauth_email(),
+  path = NULL,
+  subject = NULL,
+  scopes = "drive",
+  cache = gargle::gargle_oauth_cache(),
+  use_oob = gargle::gargle_oob_default(),
+  token = NULL
+) {
   gargle::check_is_service_account(path, hint = "drive_auth_configure")
   scopes <- drive_scopes(scopes)
   env_unbind(.googledrive, "root_folder")
@@ -205,7 +208,9 @@ drive_auth_configure <- function(client, path, api_key, app = deprecated()) {
   }
 
   if (!missing(client) && !missing(path)) {
-    drive_abort("Must supply exactly one of {.arg client} or {.arg path}, not both")
+    drive_abort(
+      "Must supply exactly one of {.arg client} or {.arg path}, not both"
+    )
   }
   stopifnot(missing(api_key) || is.null(api_key) || is_string(api_key))
 
@@ -213,7 +218,11 @@ drive_auth_configure <- function(client, path, api_key, app = deprecated()) {
     stopifnot(is_string(path))
     client <- gargle::gargle_oauth_client_from_json(path)
   }
-  stopifnot(missing(client) || is.null(client) || inherits(client, "gargle_oauth_client"))
+  stopifnot(
+    missing(client) ||
+      is.null(client) ||
+      inherits(client, "gargle_oauth_client")
+  )
 
   if (!missing(client) || !missing(path)) {
     .auth$set_client(client)
@@ -283,8 +292,7 @@ resolve_scopes <- function(user_scopes, package_scopes) {
 }
 
 # unexported helpers that are nice for internal use ----
-drive_auth_internal <- function(account = c("docs", "testing"),
-                                scopes = NULL) {
+drive_auth_internal <- function(account = c("docs", "testing"), scopes = NULL) {
   account <- match.arg(account)
   can_decrypt <- gargle::secret_has_key("GOOGLEDRIVE_KEY")
   online <- !is.null(curl::nslookup("drive.googleapis.com", error = FALSE))
@@ -296,15 +304,20 @@ drive_auth_internal <- function(account = c("docs", "testing"),
           c("x" = "Can't decrypt the {.field {account}} service account token.")
         },
         if (!online) {
-          c("x" = "We don't appear to be online. Or maybe the Drive API is down?")
+          c(
+            "x" = "We don't appear to be online. Or maybe the Drive API is down?"
+          )
         }
       ),
       class = "googledrive_auth_internal_error",
-      can_decrypt = can_decrypt, online = online
+      can_decrypt = can_decrypt,
+      online = online
     )
   }
 
-  if (!is_interactive()) local_drive_quiet()
+  if (!is_interactive()) {
+    local_drive_quiet()
+  }
   filename <- glue("googledrive-{account}.json")
   # TODO: revisit when I do PKG_scopes()
   # https://github.com/r-lib/gargle/issues/103

@@ -68,12 +68,14 @@
 #'
 #' # Clean up
 #' drive_rm(wordstar, b4xl, execuvision)
-drive_create <- function(name,
-                         path = NULL,
-                         type = NULL,
-                         ...,
-                         overwrite = NA,
-                         verbose = deprecated()) {
+drive_create <- function(
+  name,
+  path = NULL,
+  type = NULL,
+  ...,
+  overwrite = NA,
+  verbose = deprecated()
+) {
   warn_for_verbose(verbose)
 
   # in the special case of creating a shortcut, `name` is not required
@@ -118,7 +120,12 @@ drive_create <- function(name,
     "Created Drive file:",
     bulletize(gargle_map_cli(out)),
     "With MIME type:",
-    bulletize(gargle_map_cli(purrr::pluck(out, "drive_resource", 1, "mimeType")))
+    bulletize(gargle_map_cli(purrr::pluck(
+      out,
+      "drive_resource",
+      1,
+      "mimeType"
+    )))
   ))
   invisible(out)
 }

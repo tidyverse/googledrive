@@ -56,11 +56,13 @@
 #'
 #' # Clean up
 #' drive_rm(file, folder)
-drive_mv <- function(file,
-                     path = NULL,
-                     name = NULL,
-                     overwrite = NA,
-                     verbose = deprecated()) {
+drive_mv <- function(
+  file,
+  path = NULL,
+  name = NULL,
+  overwrite = NA,
+  verbose = deprecated()
+) {
   warn_for_verbose(verbose)
 
   file <- as_dribble(file)
@@ -101,7 +103,7 @@ drive_mv <- function(file,
 
   check_for_overwrite(
     parent = params[["addParents"]] %||% parent_before,
-    name   = params[["name"]]       %||% file$name,
+    name = params[["name"]] %||% file$name,
     overwrite = overwrite
   )
 

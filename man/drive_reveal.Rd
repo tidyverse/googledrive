@@ -112,7 +112,7 @@ If you really want the raw \code{parents} property, call \code{drive_reveal(what
 }
 
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Get a few of your files
 files <- drive_find(n_max = 10, trashed = NA)
 

@@ -90,7 +90,7 @@ search other collections of items. Read more about \link[=shared_drives]{shared 
 }
 
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # get info about your "My Drive" root folder
 drive_get("~/")
 # the API reserves the file id "root" for your root folder
