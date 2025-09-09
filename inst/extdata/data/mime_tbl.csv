@@ -81,10 +81,10 @@ text/plain,pot,NA,pot,FALSE
 text/plain,srt,NA,srt,FALSE
 text/plain,text,NA,text,FALSE
 text/plain,txt,NA,txt,TRUE
-text/richtext,NA,NA,NA,NA
-text/rtf,NA,NA,NA,NA
+text/richtext,rtf,NA,NA,TRUE
+text/rtf,rtf,NA,NA,TRUE
 text/tab-separated-values,tsv,NA,tsv,TRUE
-text/x-markdown,NA,NA,NA,NA
+text/x-markdown,md,NA,NA,TRUE
 video/mp4,m4v,NA,m4v,FALSE
 video/mp4,mp4,NA,mp4,FALSE
 video/mp4,mpg4,NA,mpg4,FALSE
