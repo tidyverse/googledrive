@@ -185,6 +185,9 @@ file_ext_safe <- function(x) {
 
 ## add an extension if it is not already present
 apply_extension <- function(path, ext) {
+  if (is.na(ext) || ext == "") {
+    return(path)
+  }
   ext_orig <- file_ext_safe(path)
   if (!identical(ext, ext_orig)) {
     path <- paste(path, ext, sep = ".")

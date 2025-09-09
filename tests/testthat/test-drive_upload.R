@@ -111,3 +111,39 @@ test_that("drive_upload() does not mangle name with multi-byte characters", {
   # file_2 <- drive_upload(media = filename_2)
   # expect_equal(charToRaw(file_2$name), charToRaw(filename_2))
 })
+
+test_that("drive_upload() can convert local markdown to a Doc", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  file_to_upload <- system.file(
+    "extdata",
+    "example_files",
+    "markdown.md",
+    package = "googledrive"
+  )
+  upload_name <- me_("upload-md-to-doc")
+  defer_drive_rm(upload_name)
+  local_drive_loud_and_wide()
+
+  drive_upload_message <- capture.output(
+    uploadee <- drive_upload(
+      file_to_upload,
+      name = upload_name,
+      type = "document"
+    ),
+    type = "message"
+  )
+  drive_upload_message <- drive_upload_message %>%
+    scrub_filepath(upload_name) %>%
+    scrub_filepath(file_to_upload) %>%
+    scrub_file_id()
+  expect_snapshot(
+    write_utf8(drive_upload_message)
+  )
+
+  expect_equal(
+    pluck(uploadee, "drive_resource", 1, "mimeType"),
+    drive_mime_type("document")
+  )
+})

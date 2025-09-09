@@ -212,3 +212,7 @@ test_that("check_for_overwrite() copes with `parent = NULL`", {
     "already exist"
   )
 })
+
+test_that("apply_extension() doesn't apply 'NA' as an extension", {
+  expect_equal(apply_extension("somefile", NA), "somefile")
+})
