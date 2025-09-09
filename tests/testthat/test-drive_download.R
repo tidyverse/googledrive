@@ -17,6 +17,16 @@ if (SETUP) {
     nm_("DESC-doc"),
     type = "document"
   )
+  drive_upload(
+    system.file(
+      "extdata",
+      "example_files",
+      "markdown.md",
+      package = "googledrive"
+    ),
+    nm_("markdown-doc"),
+    type = "document"
+  )
 }
 
 # ---- tests ----
@@ -146,4 +156,45 @@ test_that("drive_download() converts using default MIME type, if necessary", {
   )
 
   expect_true(file.exists(file.path(tmpdir, download_filename)))
+})
+
+test_that("drive_download() can convert a Google Doc to local markdown", {
+  skip_if_no_token()
+  skip_if_offline()
+
+  file_to_download <- nm_("markdown-doc")
+  tmpdir <- withr::local_tempdir(file_to_download)
+  download_filename <- paste0(file_to_download, ".md")
+  local_drive_loud_and_wide()
+
+  drive_download_message <- capture.output(
+    withr::with_dir(
+      tmpdir,
+      drive_download(file = file_to_download, type = "md")
+    ),
+    type = "message"
+  )
+  drive_download_message <- drive_download_message %>%
+    scrub_filepath(download_filename) %>%
+    scrub_filepath(file_to_download) %>%
+    scrub_file_id()
+  expect_snapshot(
+    write_utf8(drive_download_message)
+  )
+
+  download_filepath <- file.path(tmpdir, download_filename)
+
+  expect_true(file.exists(download_filepath))
+
+  upload_lines <- read_utf8(system.file(
+    "extdata",
+    "example_files",
+    "markdown.md",
+    package = "googledrive"
+  ))
+  upload_lines <- upload_lines[upload_lines != ""]
+  download_lines <- read_utf8(download_filepath)
+  download_lines <- download_lines[download_lines != ""]
+
+  expect_equal(upload_lines, download_lines)
 })

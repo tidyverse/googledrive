@@ -22,13 +22,13 @@ test_that("drive_mime_type() returns MIME type for Drive native type", {
 
 test_that("drive_mime_type() returns MIME type for file extension", {
   expect_identical(
-    drive_mime_type(c("pdf", "jpeg")),
-    c("application/pdf", "image/jpeg")
+    drive_mime_type(c("pdf", "jpeg", "md")),
+    c("application/pdf", "image/jpeg", "text/markdown")
   )
 })
 
 test_that("drive_mime_type() returns MIME type for MIME type", {
-  input <- c("application/vnd.ms-excel", "text/html")
+  input <- c("application/vnd.ms-excel", "text/html", "text/x-markdown")
   expect_identical(drive_mime_type(input), input)
 })
 
@@ -55,8 +55,8 @@ test_that("drive_extension() returns NULL if no input", {
 
 test_that("drive_extension() returns file extension for MIME type", {
   expect_identical(
-    drive_extension(c("application/pdf", "image/jpeg")),
-    c("pdf", "jpeg")
+    drive_extension(c("application/pdf", "image/jpeg", "text/x-markdown")),
+    c("pdf", "jpeg", "md")
   )
 })
 
