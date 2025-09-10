@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">googledrive</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,7 +83,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>File permissions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googledrive/blob/v2.1.1/vignettes/articles/permissions.Rmd" class="external-link"><code>vignettes/articles/permissions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googledrive/blob/v2.1.2/vignettes/articles/permissions.Rmd" class="external-link"><code>vignettes/articles/permissions.Rmd</code></a></small>
       <div class="d-none name"><code>permissions.Rmd</code></div>
     </div>
 
@@ -96,13 +96,13 @@ i.e. grant different people or groups of people various levels of access
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/drive_upload.html">drive_upload</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"chicken-perm-article.txt"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/drive_upload.html">drive_upload</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"chicken-perm-article.txt"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"permissions"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Local file:</span></span>
 <span><span class="co">#&gt; • <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.txt</span></span></span>
 <span><span class="co">#&gt; Uploaded into Drive file:</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1py1YxPW2BT2090ThXHp0c1P4oG25XFo7&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1nf_2lxk3EHnKQ-776MUL5rSlqmA5gUGI&gt;</span></span></span>
 <span><span class="co">#&gt; With MIME type:</span></span>
 <span><span class="co">#&gt; • <span style="color: #00BB00;">text/plain</span></span></span>
 <span></span>
@@ -110,7 +110,7 @@ i.e. grant different people or groups of people various levels of access
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 5</span></span></span>
 <span><span class="co">#&gt;   name              shared id       drive_resource permissions_resource</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-perm-art… FALSE  1py1YxP… <span style="color: #949494;">&lt;named list&gt;</span>   <span style="color: #949494;">&lt;named list [2]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-perm-art… FALSE  1nf_2lx… <span style="color: #949494;">&lt;named list&gt;</span>   <span style="color: #949494;">&lt;named list [2]&gt;</span></span></span></code></pre></div>
 <p><code>shared = FALSE</code> indicates that this file is not yet
 shared with anyone and, for those so inclined, detailed information on
 permissions can be found in the <code>permissions_resource</code>
@@ -123,7 +123,7 @@ opposed to modifying them, you can probably consult
 customized message, using the <code>emailAddress</code> and
 <code>emailMessage</code> parameters.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_share.html">drive_share</a></span><span class="op">(</span></span>
 <span>    role <span class="op">=</span> <span class="st">"writer"</span>,</span>
 <span>    type <span class="op">=</span> <span class="st">"user"</span>,</span>
@@ -133,22 +133,22 @@ customized message, using the <code>emailAddress</code> and
 <p>Let’s say we also want “anyone with a link” to be able to read the
 file.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_share.html">drive_share</a></span><span class="op">(</span>role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span></span></code></pre></div>
 <p>This comes up often enough that we’ve made a convenience wrapper:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_share.html">drive_share_anyone</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Permissions updated:</span></span>
 <span><span class="co">#&gt; • role = reader</span></span>
 <span><span class="co">#&gt; • type = anyone</span></span>
 <span><span class="co">#&gt; For file:</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1py1YxPW2BT2090ThXHp0c1P4oG25XFo7&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1nf_2lxk3EHnKQ-776MUL5rSlqmA5gUGI&gt;</span></span></span>
 <span><span class="va">file</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 5</span></span></span>
 <span><span class="co">#&gt;   name              shared id       drive_resource permissions_resource</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-perm-art… TRUE   1py1YxP… <span style="color: #949494;">&lt;named list&gt;</span>   <span style="color: #949494;">&lt;named list [2]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-perm-art… TRUE   1nf_2lx… <span style="color: #949494;">&lt;named list&gt;</span>   <span style="color: #949494;">&lt;named list [2]&gt;</span></span></span></code></pre></div>
 <p>We see that the file is now <code>shared = TRUE</code>.</p>
 <p>Now that we’ve made a few updates to our permissions, the
 <code>permissions_resource</code> list-column has become more
@@ -174,10 +174,10 @@ data wrangling.</p>
 indicative output:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#&gt; # A tibble: 3 x 5</span></span>
-<span><span class="co">#&gt;   id           name            type   role  email                      </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                      </span></span>
-<span><span class="co">#&gt; 1 12345678901… Serena Somebody user   writ… serena@example.com          </span></span>
-<span><span class="co">#&gt; 2 anyoneWithL… NA              anyone read… NA                         </span></span>
+<span><span class="co">#&gt;   id           name            type   role  email</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 12345678901… Serena Somebody user   writ… serena@example.com</span></span>
+<span><span class="co">#&gt; 2 anyoneWithL… NA              anyone read… NA</span></span>
 <span><span class="co">#&gt; 3 98765432109… Orville Owner   user   owner orville@example.com</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="clean-up">Clean up<a class="anchor" aria-label="anchor" href="#clean-up"></a>
@@ -185,7 +185,7 @@ indicative output:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File deleted:</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1py1YxPW2BT2090ThXHp0c1P4oG25XFo7&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1nf_2lxk3EHnKQ-776MUL5rSlqmA5gUGI&gt;</span></span></span></code></pre></div>
 </div>
   </main>
 </div>

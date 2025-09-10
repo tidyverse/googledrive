@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">googledrive</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,7 +83,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Example Files</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googledrive/blob/v2.1.1/vignettes/articles/example-files.Rmd" class="external-link"><code>vignettes/articles/example-files.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googledrive/blob/v2.1.2/vignettes/articles/example-files.Rmd" class="external-link"><code>vignettes/articles/example-files.Rmd</code></a></small>
       <div class="d-none name"><code>example-files.Rmd</code></div>
     </div>
 
@@ -114,30 +114,31 @@ functions for getting just the filename.</p>
 <span><span class="co">#&gt; [3] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.pdf"    </span></span>
 <span><span class="co">#&gt; [4] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.txt"    </span></span>
 <span><span class="co">#&gt; [5] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/imdb_latin1.csv"</span></span>
-<span><span class="co">#&gt; [6] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/r_about.html"   </span></span>
-<span><span class="co">#&gt; [7] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/r_logo.jpg"</span></span>
+<span><span class="co">#&gt; [6] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/markdown.md"    </span></span>
+<span><span class="co">#&gt; [7] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/r_about.html"   </span></span>
+<span><span class="co">#&gt; [8] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/r_logo.jpg"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "chicken.csv"     "chicken.jpg"     "chicken.pdf"    </span></span>
-<span><span class="co">#&gt; [4] "chicken.txt"     "imdb_latin1.csv" "r_about.html"   </span></span>
-<span><span class="co">#&gt; [7] "r_logo.jpg"</span></span></code></pre></div>
+<span><span class="co">#&gt; [4] "chicken.txt"     "imdb_latin1.csv" "markdown.md"    </span></span>
+<span><span class="co">#&gt; [7] "r_about.html"    "r_logo.jpg"</span></span></code></pre></div>
 <p>You can filter the files by providing a regular expression.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_examples.html">drive_examples_local</a></span><span class="op">(</span><span class="st">"csv"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_examples.html">drive_examples_local</a></span><span class="op">(</span><span class="st">"csv"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "chicken.csv"     "imdb_latin1.csv"</span></span></code></pre></div>
 <p>If you want exactly one file, use the singular
 <code><a href="../reference/drive_examples.html">drive_example_local()</a></code> and provide the file’s name (or any
 sufficiently specific regular expression):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_examples.html">drive_examples_local</a></span><span class="op">(</span><span class="st">"chicken.jpg"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_examples.html">drive_examples_local</a></span><span class="op">(</span><span class="st">"chicken.jpg"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "chicken.jpg"</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/drive_examples.html">drive_examples_local</a></span><span class="op">(</span><span class="st">"imdb"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/drive_examples.html">drive_examples_local</a></span><span class="op">(</span><span class="st">"imdb"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "imdb_latin1.csv"</span></span></code></pre></div>
 <p>Here’s how you might use one of these examples to start demonstrating
 something with googledrive:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new_google_sheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_examples.html">drive_examples_local</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">new_google_sheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_examples.html">drive_examples_local</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_upload.html">drive_upload</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span>
 <span><span class="co"># ... example or reprex continues ...</span></span></code></pre></div>
 </div>
@@ -148,7 +149,7 @@ something with googledrive:</p>
 <code>dribble</code> of the remote example files. Here I also reveal
 their MIME type.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_examples.html">drive_examples_remote</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_examples.html">drive_examples_remote</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"mime_type"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 9 × 4</span></span></span>
 <span><span class="co">#&gt;   name            mime_type                     id       drive_resource</span></span>
@@ -246,7 +247,7 @@ the singular form to target exactly one file.</p>
 <p>Here’s how you might use one of these examples to start demonstrating
 something with googledrive:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new_google_doc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_examples.html">drive_examples_remote</a></span><span class="op">(</span><span class="st">"chicken_doc"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">new_google_doc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_examples.html">drive_examples_remote</a></span><span class="op">(</span><span class="st">"chicken_doc"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_cp.html">drive_cp</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"I have a chicken problem"</span><span class="op">)</span></span>
 <span><span class="co"># ... example or reprex continues ...</span></span></code></pre></div>
 </div>

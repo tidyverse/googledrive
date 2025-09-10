@@ -15,7 +15,7 @@ returned dribble will include a path column."><meta property="og:image" content=
 
     <a class="navbar-brand me-2" href="../index.html">googledrive</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@ returned dribble will include a path column."><meta property="og:image" content=
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Drive files by path or id</h1>
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googledrive/blob/v2.1.1/R/drive_get.R" class="external-link"><code>R/drive_get.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googledrive/blob/v2.1.2/R/drive_get.R" class="external-link"><code>R/drive_get.R</code></a></small>
       <div class="d-none name"><code>drive_get.Rd</code></div>
     </div>
 
@@ -189,7 +189,7 @@ path, also calls <code>files.list</code>:</p><ul><li><p><a href="https://develop
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name     id                  drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> My Drive 0AO_RMaBzcP63Uk9PVA <span style="color: #949494;">&lt;named list [33]&gt;</span></span>
-<span class="r-in"><span><span class="fu">drive_get</span><span class="op">(</span>id <span class="op">=</span> <span class="st">"root"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"path"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">drive_get</span><span class="op">(</span>id <span class="op">=</span> <span class="st">"root"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"path"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 1 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name     path  id                  drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
@@ -198,7 +198,7 @@ path, also calls <code>files.list</code>:</p><ul><li><p><a href="https://develop
 <span class="r-in"><span><span class="co"># set up some files to get by path</span></span></span>
 <span class="r-in"><span><span class="va">alfalfa</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_mkdir.html">drive_mkdir</a></span><span class="op">(</span><span class="st">"alfalfa"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">alfalfa</span> <span style="color: #555555;">&lt;id: 17HcJDE4dIA8YYf9yX9gQ_hIdqJvGyjnZ&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">alfalfa</span> <span style="color: #555555;">&lt;id: 1zQumOkGFHFZsJtZfXzEDiq21dnR11rN8&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">application/vnd.google-apps.folder</span></span>
 <span class="r-in"><span><span class="va">broccoli</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_upload.html">drive_upload</a></span><span class="op">(</span></span></span>
@@ -208,7 +208,7 @@ path, also calls <code>files.list</code>:</p><ul><li><p><a href="https://develop
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Local file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.txt</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Uploaded into Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">broccoli</span> <span style="color: #555555;">&lt;id: 1oeQHG5ACfnsDes2A0xDxurq_KulDw37b&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">broccoli</span> <span style="color: #555555;">&lt;id: 1IECXL4OMXvESsAypcanp-qYWp1KOObH7&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">text/plain</span></span>
 <span class="r-in"><span><span class="fu">drive_get</span><span class="op">(</span><span class="st">"broccoli"</span><span class="op">)</span></span></span>
@@ -218,37 +218,37 @@ path, also calls <code>files.list</code>:</p><ul><li><p><a href="https://develop
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 2 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name     path     id                                drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> broccoli broccoli 1oeQHG5ACfnsDes2A0xDxurq_KulDw37b <span style="color: #949494;">&lt;named list [43]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> broccoli broccoli 1IECXL4OMXvESsAypcanp-qYWp1KOObH7 <span style="color: #949494;">&lt;named list [43]&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> broccoli broccoli 1aNh9_YiunRSwgmopO5hZJgusiZQh1Ii7 <span style="color: #949494;">&lt;named list [44]&gt;</span></span>
 <span class="r-in"><span><span class="fu">drive_get</span><span class="op">(</span><span class="st">"alfalfa/broccoli"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> The input `path` resolved to exactly 1 file.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 1 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name     path               id       drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> broccoli ~/alfalfa/broccoli 1oeQHG5… <span style="color: #949494;">&lt;named list [43]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> broccoli ~/alfalfa/broccoli 1IECXL4… <span style="color: #949494;">&lt;named list [44]&gt;</span></span>
 <span class="r-in"><span><span class="fu">drive_get</span><span class="op">(</span><span class="st">"~/alfalfa/broccoli"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> The input `path` resolved to exactly 1 file.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 1 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name     path               id       drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> broccoli ~/alfalfa/broccoli 1oeQHG5… <span style="color: #949494;">&lt;named list [44]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> broccoli ~/alfalfa/broccoli 1IECXL4… <span style="color: #949494;">&lt;named list [44]&gt;</span></span>
 <span class="r-in"><span><span class="fu">drive_get</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"broccoli"</span>, <span class="st">"alfalfa/"</span>, <span class="st">"~/alfalfa/broccoli"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Problem with 1 path: path is compatible with more than 1 file</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">broccoli</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> 1 file in the output is associated with more than 1 input `path`</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #00BBBB;">broccoli</span> <span style="color: #555555;">&lt;id: 1oeQHG5ACfnsDes2A0xDxurq_KulDw37b&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #00BBBB;">broccoli</span> <span style="color: #555555;">&lt;id: 1IECXL4OMXvESsAypcanp-qYWp1KOObH7&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> 2 out of 3 input paths resolved to exactly 1 file.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 3 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name     path               id       drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> broccoli ~/alfalfa/broccoli 1oeQHG5… <span style="color: #949494;">&lt;named list [44]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> broccoli ~/alfalfa/broccoli 1IECXL4… <span style="color: #949494;">&lt;named list [44]&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> broccoli ~/broccoli         1aNh9_Y… <span style="color: #949494;">&lt;named list [44]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> alfalfa  ~/alfalfa/         17HcJDE… <span style="color: #949494;">&lt;named list [35]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> alfalfa  ~/alfalfa/         1zQumOk… <span style="color: #949494;">&lt;named list [35]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">alfalfa</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">alfalfa</span> <span style="color: #555555;">&lt;id: 17HcJDE4dIA8YYf9yX9gQ_hIdqJvGyjnZ&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">alfalfa</span> <span style="color: #555555;">&lt;id: 1zQumOkGFHFZsJtZfXzEDiq21dnR11rN8&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># The examples below are indicative of correct syntax.</span></span></span>
