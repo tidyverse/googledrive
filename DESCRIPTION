@@ -1,6 +1,6 @@
 Package: googledrive
 Title: An Interface to Google Drive
-Version: 2.1.2
+Version: 2.1.2.9000
 Authors@R: c(
     person("Lucy", "D'Agostino McGowan", , role = "aut"),
     person("Jennifer", "Bryan", , "jenny@posit.co", role = c("aut", "cre"),
