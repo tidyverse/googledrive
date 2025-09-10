@@ -205,7 +205,7 @@ Where to learn more:
   
   * Help for [`drive_auth()`](https://googledrive.tidyverse.org/reference/drive_auth.html) *all that most users need*
   * *details for more advanced users*
-    - [Bring your own OAuth app or API key](https://googledrive.tidyverse.org/articles/articles/bring-your-own-app.html)
+    - Bring your own OAuth app or API key *article no longer available*
     - [How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) 
     - [Non-interactive auth](https://gargle.r-lib.org/articles/non-interactive-auth.html)
     - [Auth when using R in the browser](https://gargle.r-lib.org/articles/auth-from-web.html)
