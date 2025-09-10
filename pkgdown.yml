@@ -1,0 +1,15 @@
+pandoc: 3.1.11
+pkgdown: 2.1.3
+pkgdown_sha: ~
+articles:
+  articles/bring-your-own-client: bring-your-own-client.html
+  articles/example-files: example-files.html
+  articles/file-identification: file-identification.html
+  googledrive: googledrive.html
+  articles/messages-and-errors: messages-and-errors.html
+  articles/multiple-files: multiple-files.html
+  articles/permissions: permissions.html
+last_built: 2025-09-10T03:44Z
+urls:
+  reference: https://googledrive.tidyverse.org/reference
+  article: https://googledrive.tidyverse.org/articles
