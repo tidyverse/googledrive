@@ -116,6 +116,11 @@ drive_download <- function(
       "*" = "{.path {path}}"
     ))
   } else {
+    # drop this in to allow a post mortem inspection of failure
+    # not how this would be wired up "in production"
+    # puts the response within reach of the unexported functions
+    # gargle:::gargle_last_response() and gargle:::gargle_last_content()
+    gargle::response_process(response)
     drive_abort("Download failed.")
   }
   invisible(put_column(file, nm = "local_path", val = path, .after = "name"))
