@@ -103,41 +103,41 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> chicken.txt 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y <span style="color: #949494;">&lt;named list [40]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create a copy, then remove it by name</span></span></span>
-<span class="r-in"><span><span class="va">src_file</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">src_file</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="drive_cp.html">drive_cp</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"chicken-rm.txt"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-rm.txt</span> <span style="color: #555555;">&lt;id: 1ZnOlzu0OiGObzpWJMxWDffxCp-xvKJih&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-rm.txt</span> <span style="color: #555555;">&lt;id: 1XhkEgHdT9ZfZ1FUMhzN4a0CD1ZE9yKyg&gt;</span></span>
 <span class="r-in"><span><span class="fu">drive_rm</span><span class="op">(</span><span class="st">"chicken-rm.txt"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-rm.txt</span> <span style="color: #555555;">&lt;id: 1ZnOlzu0OiGObzpWJMxWDffxCp-xvKJih&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-rm.txt</span> <span style="color: #555555;">&lt;id: 1XhkEgHdT9ZfZ1FUMhzN4a0CD1ZE9yKyg&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create several more copies</span></span></span>
-<span class="r-in"><span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="va">src_file</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="va">src_file</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="drive_cp.html">drive_cp</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"chicken-abc.txt"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-abc.txt</span> <span style="color: #555555;">&lt;id: 1aim5Gk5zUYMwMv8mr9VrLBE01wHZrsrJ&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-abc.txt</span> <span style="color: #555555;">&lt;id: 1laRHxp1A1HaOodFaoFFWgGxhz3wNyzLk&gt;</span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_cp.html">drive_cp</a></span><span class="op">(</span><span class="va">src_file</span>, name <span class="op">=</span> <span class="st">"chicken-def.txt"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-def.txt</span> <span style="color: #555555;">&lt;id: 1Wto7GAZwOTKckeuMrPhkege25gg78K6g&gt;</span></span>
-<span class="r-in"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="va">src_file</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-def.txt</span> <span style="color: #555555;">&lt;id: 1dVpLANTcTSuQeVsiU1A0Ajz3FDF7DFB3&gt;</span></span>
+<span class="r-in"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="va">src_file</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="drive_cp.html">drive_cp</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"chicken-ghi.txt"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-ghi.txt</span> <span style="color: #555555;">&lt;id: 1ZDhNhQMM4idEInAQwghz2bk_sE1OgUPW&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-ghi.txt</span> <span style="color: #555555;">&lt;id: 1jNPVtugNv_-iiGAWfdafaohy-8ujsXtO&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Remove the copies all at once, specified in different ways</span></span></span>
 <span class="r-in"><span><span class="fu">drive_rm</span><span class="op">(</span><span class="va">x1</span>, <span class="st">"chicken-def.txt"</span>, <span class="fu"><a href="drive_id.html">as_id</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-abc.txt</span> <span style="color: #555555;">&lt;id: 1aim5Gk5zUYMwMv8mr9VrLBE01wHZrsrJ&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-def.txt</span> <span style="color: #555555;">&lt;id: 1Wto7GAZwOTKckeuMrPhkege25gg78K6g&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-ghi.txt</span> <span style="color: #555555;">&lt;id: 1ZDhNhQMM4idEInAQwghz2bk_sE1OgUPW&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-abc.txt</span> <span style="color: #555555;">&lt;id: 1laRHxp1A1HaOodFaoFFWgGxhz3wNyzLk&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-def.txt</span> <span style="color: #555555;">&lt;id: 1dVpLANTcTSuQeVsiU1A0Ajz3FDF7DFB3&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-ghi.txt</span> <span style="color: #555555;">&lt;id: 1jNPVtugNv_-iiGAWfdafaohy-8ujsXtO&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

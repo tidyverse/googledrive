@@ -120,7 +120,7 @@
 <li>Hold on to all the other metadata sent back by the API</li>
 </ul>
 </li>
-<li>googledrive is “pipe-friendly” and, in fact, re-exports <code>%&gt;%</code>, but does not require its use.</li>
+<li>googledrive is “pipe-friendly” (either the base <code>|&gt;</code> or magrittr <code>%&gt;%</code> pipe), but does not require its use.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -130,24 +130,24 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A dribble: 30 × 3</span></span>
-<span><span class="co">#&gt;    name                       id                                drive_resource</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                      &lt;drv_id&gt;                          &lt;list&gt;        </span></span>
-<span><span class="co">#&gt;  1 2021-09-16_r_logo.jpg      1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D &lt;named list&gt;  </span></span>
-<span><span class="co">#&gt;  2 2021-09-16_r_about.html    1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ &lt;named list&gt;  </span></span>
-<span><span class="co">#&gt;  3 2021-09-16_imdb_latin1.csv 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw &lt;named list&gt;  </span></span>
-<span><span class="co">#&gt;  4 2021-09-16_chicken.txt     1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7 &lt;named list&gt;  </span></span>
-<span><span class="co">#&gt;  5 2021-09-16_chicken.pdf     14Hd6_VQAeEgcwBBJamc-FUlnXhp117T2 &lt;named list&gt;  </span></span>
-<span><span class="co">#&gt;  6 2021-09-16_chicken.jpg     1aslW1T-B8UKzAEotDWpmRFaMyMux5-it &lt;named list&gt;  </span></span>
-<span><span class="co">#&gt;  7 2021-09-16_chicken.csv     1Mj--zJYZJSMKsNVjk2tYFef5LnCsNoDT &lt;named list&gt;  </span></span>
-<span><span class="co">#&gt;  8 pqr                        143iq-CswFTwJTjVfKkcFMDW0jYqDeUj2 &lt;named list&gt;  </span></span>
-<span><span class="co">#&gt;  9 mno                        1gcUTnFbsF6uioJrLCsVQ78_F1wEzyNtI &lt;named list&gt;  </span></span>
-<span><span class="co">#&gt; 10 jkl                        17T40phn99w0hY-B_Ev0deTvVg9fmUSnt &lt;named list&gt;  </span></span>
+<span><span class="co">#&gt;    name                   id                                drive_resource   </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                  &lt;drv_id&gt;                          &lt;list&gt;           </span></span>
+<span><span class="co">#&gt;  1 name-squatter-mv       1ncaT91RYOvHNg2XmrLdUOhrcypK3owCm &lt;named list [41]&gt;</span></span>
+<span><span class="co">#&gt;  2 chicken-mv-renamed.txt 1Hu-OYuiQ7A80y1kEvT6UWDFpPkTkei2A &lt;named list [44]&gt;</span></span>
+<span><span class="co">#&gt;  3 name-squatter-mv       1WR4vBdHvwimyLR9PIl3SSDlTmgfnLWP5 &lt;named list [41]&gt;</span></span>
+<span><span class="co">#&gt;  4 chicken-mv-renamed.txt 16l9dZkax8CAFdOGwQ4IgVVgyFLKumyUp &lt;named list [44]&gt;</span></span>
+<span><span class="co">#&gt;  5 name-squatter-mv       1nKweOnEis8jNzvnmAX3G0rjtak5622b- &lt;named list [41]&gt;</span></span>
+<span><span class="co">#&gt;  6 chicken-mv-renamed.txt 1tgRTfYDyXX7TgoNnDKetfbDC3Kea_aA_ &lt;named list [44]&gt;</span></span>
+<span><span class="co">#&gt;  7 name-squatter-mv       1QQjvI_K_robo715M_YMtwYuVuPCHt1x1 &lt;named list [41]&gt;</span></span>
+<span><span class="co">#&gt;  8 chicken-mv-renamed.txt 1VOax5G5x28UJGANVa1x3kJRH4V76xKXz &lt;named list [44]&gt;</span></span>
+<span><span class="co">#&gt;  9 name-squatter-mv       1uuEA1mkD7327ezEqROYKz7faZj5DsNQL &lt;named list [41]&gt;</span></span>
+<span><span class="co">#&gt; 10 chicken-mv-renamed.txt 1-0VRv2y2k91UOiomyx2WO_C3IFJSNCjM &lt;named list [44]&gt;</span></span>
 <span><span class="co">#&gt; # ℹ 20 more rows</span></span></code></pre></div>
 <p>You can narrow the query by specifying a <code>pattern</code> you’d like to match names against. Or by specifying a file type: the <code>type</code> argument understands MIME types, file extensions, and a few human-friendly keywords.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"chicken"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span>     <span class="co">## Google Sheets!</span></span>
-<span><span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span>             <span class="co">## MIME type = "text/csv"</span></span>
+<span><span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span> <span class="co">## Google Sheets!</span></span>
+<span><span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span> <span class="co">## MIME type = "text/csv"</span></span>
 <span><span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"application/pdf"</span><span class="op">)</span> <span class="co">## MIME type = "application/pdf"</span></span></code></pre></div>
 <p>Alternatively, you can refine the search using the <code>q</code> query parameter. Accepted search clauses can be found in the <a href="https://developers.google.com/drive/v3/web/search-parameters" class="external-link">Google Drive API documentation</a>. For example, to see all files that you’ve starred and that are readable by “anyone with a link”, do this:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -155,8 +155,8 @@
 <span><span class="co">#&gt; # A dribble: 2 × 3</span></span>
 <span><span class="co">#&gt;   name       id                                drive_resource   </span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;      &lt;drv_id&gt;                          &lt;list&gt;           </span></span>
-<span><span class="co">#&gt; 1 r_logo.jpg 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud &lt;named list [43]&gt;</span></span>
-<span><span class="co">#&gt; 2 THANKS     19URV7BT0_E1KhYdfDODszK5aiELOwTSz &lt;named list [42]&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 r_logo.jpg 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud &lt;named list [45]&gt;</span></span>
+<span><span class="co">#&gt; 2 THANKS     19URV7BT0_E1KhYdfDODszK5aiELOwTSz &lt;named list [44]&gt;</span></span></code></pre></div>
 <p>You generally want to store the result of a googledrive call, as we do with <code>files</code> above. <code>files</code> is a dribble with info on several files and can be used as the input for downstream calls. It can also be manipulated as a regular data frame at any point.</p>
 <div class="section level4">
 <h4 id="identify-files">Identify files<a class="anchor" aria-label="anchor" href="#identify-files"></a>
@@ -168,7 +168,7 @@
 <span><span class="co">#&gt; # A dribble: 1 × 4</span></span>
 <span><span class="co">#&gt;   name                path                          id       drive_resource   </span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;                         &lt;drv_id&gt; &lt;list&gt;           </span></span>
-<span><span class="co">#&gt; 1 googledrive-NEWS.md ~/abc/def/googledrive-NEWS.md 1h1lhFf… &lt;named list [41]&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 googledrive-NEWS.md ~/abc/def/googledrive-NEWS.md 1h1lhFf… &lt;named list [43]&gt;</span></span></code></pre></div>
 <p><code><a href="reference/drive_id.html">as_id()</a></code> can be used to convert various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and <code>dribble</code>s.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">id</span></span>
@@ -180,12 +180,12 @@
 <span><span class="co">#&gt; # A dribble: 1 × 3</span></span>
 <span><span class="co">#&gt;   name                id                                drive_resource   </span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;               &lt;drv_id&gt;                          &lt;list&gt;           </span></span>
-<span><span class="co">#&gt; 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm &lt;named list [41]&gt;</span></span>
+<span><span class="co">#&gt; 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm &lt;named list [43]&gt;</span></span>
 <span><span class="fu"><a href="reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="fu"><a href="reference/drive_id.html">as_id</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A dribble: 1 × 3</span></span>
 <span><span class="co">#&gt;   name                id                                drive_resource   </span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;               &lt;drv_id&gt;                          &lt;list&gt;           </span></span>
-<span><span class="co">#&gt; 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm &lt;named list [41]&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm &lt;named list [43]&gt;</span></span></code></pre></div>
 <p>In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a <code>dribble</code>. If it’s ambiguous, use <code><a href="reference/drive_id.html">as_id()</a></code> to mark a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.</p>
 </div>
 <div class="section level4">
@@ -198,31 +198,31 @@
 <span>  <span class="st">"index-chicken.csv"</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Local file:</span></span>
-<span><span class="co">#&gt; • '/private/tmp/Rtmpk4twsE/temp_libpath10e8b70beb6a9/googledrive/extdata/example_files/chicken.csv'</span></span>
+<span><span class="co">#&gt; • '/private/tmp/Rtmpr2jKV8/temp_libpath11f0e41a0b00e/googledrive/extdata/example_files/chicken.csv'</span></span>
 <span><span class="co">#&gt; Uploaded into Drive file:</span></span>
-<span><span class="co">#&gt; • 'index-chicken.csv' &lt;id: 1dE2U3TUvYulwE88ucBPQHP0-CB4zEK7P&gt;</span></span>
+<span><span class="co">#&gt; • 'index-chicken.csv' &lt;id: 1uUBGMtE27XYtNPsVwqHS9HMyC50rbGEk&gt;</span></span>
 <span><span class="co">#&gt; With MIME type:</span></span>
 <span><span class="co">#&gt; • 'text/csv'</span></span>
 <span><span class="co">#&gt; # A dribble: 1 × 3</span></span>
 <span><span class="co">#&gt;   name              id                                drive_resource   </span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;             &lt;drv_id&gt;                          &lt;list&gt;           </span></span>
-<span><span class="co">#&gt; 1 index-chicken.csv 1dE2U3TUvYulwE88ucBPQHP0-CB4zEK7P &lt;named list [41]&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 index-chicken.csv 1uUBGMtE27XYtNPsVwqHS9HMyC50rbGEk &lt;named list [43]&gt;</span></span></code></pre></div>
 <p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive guessed the MIME type. We can overrule this by using the <code>type</code> parameter to upload as a Google Spreadsheet. Let’s delete this file first.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">chicken</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File deleted:</span></span>
-<span><span class="co">#&gt; • 'index-chicken.csv' &lt;id: 1dE2U3TUvYulwE88ucBPQHP0-CB4zEK7P&gt;</span></span>
+<span><span class="co">#&gt; • 'index-chicken.csv' &lt;id: 1uUBGMtE27XYtNPsVwqHS9HMyC50rbGEk&gt;</span></span>
 <span></span>
 <span><span class="co"># example of using a dribble as input</span></span>
-<span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/drive_upload.html">drive_upload</a></span><span class="op">(</span></span>
 <span>    name <span class="op">=</span> <span class="st">"index-chicken-sheet"</span>,</span>
 <span>    type <span class="op">=</span> <span class="st">"spreadsheet"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Local file:</span></span>
-<span><span class="co">#&gt; • '/private/tmp/Rtmpk4twsE/temp_libpath10e8b70beb6a9/googledrive/extdata/example_files/chicken.csv'</span></span>
+<span><span class="co">#&gt; • '/private/tmp/Rtmpr2jKV8/temp_libpath11f0e41a0b00e/googledrive/extdata/example_files/chicken.csv'</span></span>
 <span><span class="co">#&gt; Uploaded into Drive file:</span></span>
-<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1KXgDfk3IfJg833XokFhKDahY9aDml-183NHPz3qXlAY&gt;</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1iKasAIydx6y4f3Pywozn1Ek99nwnqUc-TOdEx-pXRTM&gt;</span></span>
 <span><span class="co">#&gt; With MIME type:</span></span>
 <span><span class="co">#&gt; • 'application/vnd.google-apps.spreadsheet'</span></span></code></pre></div>
 <p>Much better!</p>
@@ -232,25 +232,25 @@
 </h4>
 <p>To allow other people to access your file, you need to change the sharing permissions. You can check the sharing status by running <code>drive_reveal(..., "permissions")</code>, which adds a logical column <code>shared</code> and parks more detailed metadata in a <code>permissions_resource</code> variable.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chicken_sheet</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">chicken_sheet</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"permissions"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A dribble: 1 × 5</span></span>
 <span><span class="co">#&gt;   name                shared id       drive_resource    permissions_resource</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;               &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;            &lt;list&gt;              </span></span>
-<span><span class="co">#&gt; 1 index-chicken-sheet FALSE  1KXgDfk… &lt;named list [36]&gt; &lt;named list [2]&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 index-chicken-sheet FALSE  1iKasAI… &lt;named list [37]&gt; &lt;named list [2]&gt;</span></span></code></pre></div>
 <p>Here’s how to grant anyone with the link permission to view this data set.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="va">chicken_sheet</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>   <span class="fu"><a href="reference/drive_share.html">drive_share</a></span><span class="op">(</span>role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="va">chicken_sheet</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/drive_share.html">drive_share</a></span><span class="op">(</span>role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Permissions updated:</span></span>
 <span><span class="co">#&gt; • role = reader</span></span>
 <span><span class="co">#&gt; • type = anyone</span></span>
 <span><span class="co">#&gt; For file:</span></span>
-<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1KXgDfk3IfJg833XokFhKDahY9aDml-183NHPz3qXlAY&gt;</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1iKasAIydx6y4f3Pywozn1Ek99nwnqUc-TOdEx-pXRTM&gt;</span></span>
 <span><span class="co">#&gt; # A dribble: 1 × 5</span></span>
 <span><span class="co">#&gt;   name                shared id       drive_resource    permissions_resource</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;               &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;            &lt;list&gt;              </span></span>
-<span><span class="co">#&gt; 1 index-chicken-sheet TRUE   1KXgDfk… &lt;named list [37]&gt; &lt;named list [2]&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 index-chicken-sheet TRUE   1iKasAI… &lt;named list [38]&gt; &lt;named list [2]&gt;</span></span></code></pre></div>
 <p>This comes up so often, there’s even a convenience wrapper, <code><a href="reference/drive_share.html">drive_share_anyone()</a></code>.</p>
 </div>
 <div class="section level4">
@@ -258,22 +258,22 @@
 </h4>
 <p>Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running <code>drive_reveal(..., "published")</code>, which adds a logical column <code>published</code> and parks more detailed metadata in a <code>revision_resource</code> variable.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chicken_sheet</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">chicken_sheet</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"published"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A dribble: 1 × 7</span></span>
 <span><span class="co">#&gt;   name             published shared id       drive_resource permissions_resource</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;            &lt;lgl&gt;     &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;         &lt;list&gt;              </span></span>
-<span><span class="co">#&gt; 1 index-chicken-s… FALSE     TRUE   1KXgDfk… &lt;named list&gt;   &lt;named list [2]&gt;    </span></span>
+<span><span class="co">#&gt; 1 index-chicken-s… FALSE     TRUE   1iKasAI… &lt;named list&gt;   &lt;named list [2]&gt;    </span></span>
 <span><span class="co">#&gt; # ℹ 1 more variable: revision_resource &lt;list&gt;</span></span></code></pre></div>
 <p>By default, <code><a href="reference/drive_publish.html">drive_publish()</a></code> will publish your most recent version.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/drive_publish.html">drive_publish</a></span><span class="op">(</span><span class="va">chicken_sheet</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File now published:</span></span>
-<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1KXgDfk3IfJg833XokFhKDahY9aDml-183NHPz3qXlAY&gt;</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1iKasAIydx6y4f3Pywozn1Ek99nwnqUc-TOdEx-pXRTM&gt;</span></span>
 <span><span class="co">#&gt; # A dribble: 1 × 7</span></span>
 <span><span class="co">#&gt;   name             published shared id       drive_resource permissions_resource</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;            &lt;lgl&gt;     &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;         &lt;list&gt;              </span></span>
-<span><span class="co">#&gt; 1 index-chicken-s… TRUE      TRUE   1KXgDfk… &lt;named list&gt;   &lt;named list [2]&gt;    </span></span>
+<span><span class="co">#&gt; 1 index-chicken-s… TRUE      TRUE   1iKasAI… &lt;named list&gt;   &lt;named list [2]&gt;    </span></span>
 <span><span class="co">#&gt; # ℹ 1 more variable: revision_resource &lt;list&gt;</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -286,7 +286,7 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/drive_download.html">drive_download</a></span><span class="op">(</span><span class="st">"index-chicken-sheet"</span>, type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File downloaded:</span></span>
-<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1KXgDfk3IfJg833XokFhKDahY9aDml-183NHPz3qXlAY&gt;</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1iKasAIydx6y4f3Pywozn1Ek99nwnqUc-TOdEx-pXRTM&gt;</span></span>
 <span><span class="co">#&gt; Saved locally as:</span></span>
 <span><span class="co">#&gt; • 'index-chicken-sheet.csv'</span></span></code></pre></div>
 <p>Alternatively, I could specify type via the <code>path</code> parameter.</p>
@@ -297,7 +297,7 @@
 <span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; File downloaded:</span></span>
-<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1KXgDfk3IfJg833XokFhKDahY9aDml-183NHPz3qXlAY&gt;</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1iKasAIydx6y4f3Pywozn1Ek99nwnqUc-TOdEx-pXRTM&gt;</span></span>
 <span><span class="co">#&gt; Saved locally as:</span></span>
 <span><span class="co">#&gt; • 'index-chicken-sheet.csv'</span></span></code></pre></div>
 <p>Notice in the example above, I specified <code>overwrite = TRUE</code>, in order to overwrite the local csv file previously saved.</p>
@@ -305,7 +305,7 @@
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/drive_download.html">drive_download</a></span><span class="op">(</span><span class="st">"index-chicken-sheet"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File downloaded:</span></span>
-<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1KXgDfk3IfJg833XokFhKDahY9aDml-183NHPz3qXlAY&gt;</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1iKasAIydx6y4f3Pywozn1Ek99nwnqUc-TOdEx-pXRTM&gt;</span></span>
 <span><span class="co">#&gt; Saved locally as:</span></span>
 <span><span class="co">#&gt; • 'index-chicken-sheet.xlsx'</span></span></code></pre></div>
 </div>
@@ -320,7 +320,7 @@
 <span><span class="co">#&gt; • 'chicken.txt' &lt;id: 1xMvlJHia_qYNZmucaStDcOF9A9PD4BOT&gt;</span></span>
 <span><span class="co">#&gt; Saved locally as:</span></span>
 <span><span class="co">#&gt; • 'chicken.txt'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "A chicken whose name was Chantecler"      </span></span>
 <span><span class="co">#&gt; [2] "Clucked in iambic pentameter"             </span></span>
 <span><span class="co">#&gt; [3] "It sat on a shelf, reading Song of Myself"</span></span>
@@ -334,12 +334,14 @@
 </h4>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"index-chicken-sheet.csv"</span>, <span class="st">"index-chicken-sheet.xlsx"</span>, <span class="st">"chicken.txt"</span></span>
+<span>  <span class="st">"index-chicken-sheet.csv"</span>,</span>
+<span>  <span class="st">"index-chicken-sheet.xlsx"</span>,</span>
+<span>  <span class="st">"chicken.txt"</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE TRUE TRUE</span></span>
-<span><span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="st">"index-chicken"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="st">"index-chicken"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File deleted:</span></span>
-<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1KXgDfk3IfJg833XokFhKDahY9aDml-183NHPz3qXlAY&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1iKasAIydx6y4f3Pywozn1Ek99nwnqUc-TOdEx-pXRTM&gt;</span></span></code></pre></div>
 </div>
 </div>
 </div>

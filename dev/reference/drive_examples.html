@@ -98,11 +98,11 @@ filepaths.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">drive_examples_local</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">drive_examples_local</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "chicken.csv"     "chicken.jpg"     "chicken.pdf"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "chicken.txt"     "imdb_latin1.csv" "r_about.html"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [7] "r_logo.jpg"     </span>
-<span class="r-in"><span><span class="fu">drive_examples_local</span><span class="op">(</span><span class="st">"chicken"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "chicken.txt"     "imdb_latin1.csv" "markdown.md"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [7] "r_about.html"    "r_logo.jpg"     </span>
+<span class="r-in"><span><span class="fu">drive_examples_local</span><span class="op">(</span><span class="st">"chicken"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "chicken.csv" "chicken.jpg" "chicken.pdf" "chicken.txt"</span>
 <span class="r-in"><span><span class="fu">drive_example_local</span><span class="op">(</span><span class="st">"imdb"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/imdb_latin1.csv"</span>

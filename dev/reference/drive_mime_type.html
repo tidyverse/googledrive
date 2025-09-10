@@ -123,20 +123,20 @@ Drive API.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## see the internal tibble of MIME types known to the Drive API</span></span></span>
 <span class="r-in"><span><span class="fu">drive_mime_type</span><span class="op">(</span><span class="fu"><a href="expose.html">expose</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 78 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 89 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    mime_type                       ext   description human_type default</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> application/epub+zip            <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> application/epub+zip            epub  <span style="color: #BB0000;">NA</span>          epub       FALSE  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> application/msword              doc   <span style="color: #BB0000;">NA</span>          doc        TRUE   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> application/msword              dot   <span style="color: #BB0000;">NA</span>          dot        FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> application/pdf                 pdf   <span style="color: #BB0000;">NA</span>          pdf        TRUE   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> application/rtf                 rtf   <span style="color: #BB0000;">NA</span>          rtf        TRUE   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> application/vnd.google-apps.au… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>          audio      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> application/vnd.google-apps.do… <span style="color: #BB0000;">NA</span>    Google Docs document   <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> application/vnd.google-apps.dr… <span style="color: #BB0000;">NA</span>    Google Dra… drawing    <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> application/vnd.google-apps.dr… <span style="color: #BB0000;">NA</span>    3rd party … drive-sdk  <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> application/vnd.google-apps.fi… <span style="color: #BB0000;">NA</span>    Google Dri… file       <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 68 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> application/pdf                 pdf   <span style="color: #BB0000;">NA</span>          pdf        TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> application/rtf                 rtf   <span style="color: #BB0000;">NA</span>          rtf        TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> application/vnd.google-apps.au… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>          audio      <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> application/vnd.google-apps.do… <span style="color: #BB0000;">NA</span>    Google Docs document   <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> application/vnd.google-apps.dr… <span style="color: #BB0000;">NA</span>    Google Dra… drawing    <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> application/vnd.google-apps.dr… <span style="color: #BB0000;">NA</span>    Third-part… drive-sdk  <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> application/vnd.google-apps.fi… <span style="color: #BB0000;">NA</span>    Google Dri… file       <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> application/vnd.google-apps.fo… <span style="color: #BB0000;">NA</span>    Google Dri… folder     <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 79 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
