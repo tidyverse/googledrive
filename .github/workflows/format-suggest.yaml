@@ -39,7 +39,7 @@ jobs:
         run: air format .
 
       - name: Suggest
-        uses: reviewdog/action-suggester@v1.22.0
+        uses: reviewdog/action-suggester@v1
         with:
           level: error
           fail_level: error

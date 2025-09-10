@@ -9,7 +9,7 @@
 status](https://www.r-pkg.org/badges/version/googledrive)](https://CRAN.R-project.org/package=googledrive)
 [![R-CMD-check](https://github.com/tidyverse/googledrive/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidyverse/googledrive/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/tidyverse/googledrive/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/googledrive?branch=main)
+coverage](https://codecov.io/gh/tidyverse/googledrive/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/googledrive)
 <!-- badges: end -->
 
 ## Overview
