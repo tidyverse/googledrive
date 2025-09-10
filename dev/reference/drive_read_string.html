@@ -148,16 +148,11 @@ the <em>input</em> <code>file</code>.</p></dd>
 <span class="r-in"><span>  <span class="co"># NOTE: we must specify an export MIME type</span></span></span>
 <span class="r-in"><span>  <span class="fu">drive_read_string</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"text/plain"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span>split <span class="op">=</span> <span class="st">"(\r\n|\r|\n)"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> No encoding supplied: defaulting to UTF-8.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "A chicken whose name was Chantecler"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Clucked in iambic pentameter"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "It sat on a shelf, reading Song of Myself"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "And laid eggs with a perfect diameter."   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] ""                                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6] ""                                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [7] "—Richard Maxson"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 1 failed [500: DATA_LOSS].</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 3.3s.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  2s</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in sheets_per_user_quota_exhaustion(resp):</span> Expected content type <span style="color: #00BB00;">application/json</span>, not <span style="color: #00BB00;">text/plain</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  0s</span>
 <span class="r-in"><span>  <span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in (function(x) x[[1]])():</span> argument "x" is missing, with no default</span>
 </code></pre></div>
