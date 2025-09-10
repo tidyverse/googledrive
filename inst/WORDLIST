@@ -1,6 +1,5 @@
 API's
 Auth
-AuthState
 CLI
 CMD
 Codecov
@@ -9,7 +8,6 @@ D'Agostino
 GCE
 GCP
 IDEs
-JSON
 OAuth
 OOB
 ORCID
@@ -32,7 +30,6 @@ determinine
 dev
 dplyr
 fileOrganizer
-filepath
 funder
 ggplot
 gmailr
@@ -40,15 +37,14 @@ googleapis
 googledrive's
 googlesheets
 https
-httr
 httr's
 ing
 lifecycle
 lowerCamel
 magrittr
+mockr
 pkgdown
 pre
-programmatically
 purrr
 readonly
 rebranded
@@ -68,6 +64,5 @@ un
 unexamined
 vctrs
 vectorization
-vectorized
 withr
 www
