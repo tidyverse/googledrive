@@ -79,7 +79,7 @@ many_files <- function(needle, haystack, where = c("local", "remote")) {
   out <- haystack
 
   if (!missing(needle)) {
-    check_needle(needle)
+    check_string(needle, arg = "matches")
     sel <- grepl(needle, haystack$name, ignore.case = TRUE)
     if (!any(sel)) {
       drive_abort(
@@ -142,11 +142,4 @@ remote_example_files <- function() {
   env_get(.googledrive, "remote_example_files")
 }
 
-check_needle <- function(needle) {
-  if (is_string(needle)) {
-    return()
-  }
-  drive_abort(c(
-    "{.arg matches} must be a string, not {.cls class(needle)}"
-  ))
-}
+
