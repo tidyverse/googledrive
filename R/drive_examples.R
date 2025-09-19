@@ -141,5 +141,3 @@ remote_example_files <- function() {
   }
   env_get(.googledrive, "remote_example_files")
 }
-
-
