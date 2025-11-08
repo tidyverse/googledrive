@@ -1,0 +1,57 @@
+# Delete shared drives
+
+A shared drive supports files owned by an organization rather than an
+individual user. Shared drives follow different sharing and ownership
+models from a specific user's "My Drive". Shared drives are the
+successors to the earlier concept of Team Drives. Learn more about
+[shared
+drives](https://googledrive.tidyverse.org/dev/reference/shared_drives.md).
+
+## Usage
+
+``` r
+shared_drive_rm(drive = NULL)
+```
+
+## Arguments
+
+- drive:
+
+  Anything that identifies the shared drive(s) of interest. Can be a
+  character vector of names, a character vector of file ids or URLs
+  marked with
+  [`as_id()`](https://googledrive.tidyverse.org/dev/reference/drive_id.md),
+  or a
+  [`dribble`](https://googledrive.tidyverse.org/dev/reference/dribble.md)
+  consisting only of shared drives.
+
+## Value
+
+Logical vector, indicating whether the delete succeeded.
+
+## See also
+
+Wraps the `drives.delete` endpoint:
+
+- <https://developers.google.com/drive/api/v3/reference/drives/delete>
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Create shared drives to remove in various ways
+shared_drive_create("testdrive-01")
+sd02 <- shared_drive_create("testdrive-02")
+shared_drive_create("testdrive-03")
+sd04 <- shared_drive_create("testdrive-04")
+
+# remove by name
+shared_drive_rm("testdrive-01")
+# remove by id
+shared_drive_rm(as_id(sd02))
+# remove by URL (or, rather, id found in URL)
+shared_drive_rm(as_id("https://drive.google.com/drive/u/0/folders/Q5DqUk9PVA"))
+# remove by dribble
+shared_drive_rm(sd04)
+} # }
+```

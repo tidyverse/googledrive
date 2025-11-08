@@ -1,0 +1,64 @@
+# List contents of a folder or shared drive
+
+List the contents of a folder or shared drive, recursively or not. This
+is a thin wrapper around
+[`drive_find()`](https://googledrive.tidyverse.org/dev/reference/drive_find.md),
+that simply adds one constraint: the search is limited to direct or
+indirect children of `path`.
+
+## Usage
+
+``` r
+drive_ls(path = NULL, ..., recursive = FALSE)
+```
+
+## Arguments
+
+- path:
+
+  Specifies a single folder on Google Drive whose contents you want to
+  list. Can be an actual path (character), a file id or URL marked with
+  [`as_id()`](https://googledrive.tidyverse.org/dev/reference/drive_id.md),
+  or a
+  [`dribble`](https://googledrive.tidyverse.org/dev/reference/dribble.md).
+  If it is a shared drive or is a folder on a shared drive, it must be
+  passed as a
+  [`dribble`](https://googledrive.tidyverse.org/dev/reference/dribble.md).
+  If `path` is a shortcut to a folder, it is automatically resolved to
+  its target folder.
+
+- ...:
+
+  Any parameters that are valid for
+  [`drive_find()`](https://googledrive.tidyverse.org/dev/reference/drive_find.md).
+
+- recursive:
+
+  Logical, indicating if you want only direct children of `path`
+  (`recursive = FALSE`, the default) or all children, including indirect
+  (`recursive = TRUE`).
+
+## Value
+
+An object of class
+[`dribble`](https://googledrive.tidyverse.org/dev/reference/dribble.md),
+a tibble with one row per file.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# get contents of the folder 'abc' (non-recursive)
+drive_ls("abc")
+
+# get contents of folder 'abc' whose names contain the letters 'def'
+drive_ls(path = "abc", pattern = "def")
+
+# get all Google spreadsheets in folder 'abc'
+# whose names contain the letters 'def'
+drive_ls(path = "abc", pattern = "def", type = "spreadsheet")
+
+# get all the files below 'abc', recursively, that are starred
+drive_ls(path = "abc", q = "starred = true", recursive = TRUE)
+} # }
+```

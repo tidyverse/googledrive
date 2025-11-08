@@ -1,0 +1,594 @@
+# googledrive
+
+## Overview
+
+googledrive allows you to interact with files on Google Drive from R.
+
+## Installation
+
+Install from CRAN:
+
+``` r
+install.packages("googledrive")
+```
+
+## Usage
+
+### Load googledrive
+
+``` r
+library("googledrive")
+```
+
+### Package conventions
+
+- Most functions begin with the prefix `drive_`. Auto-completion is your
+  friend.
+- Goal is to allow Drive access that feels similar to Unix file system
+  utilities, e.g., `find`, `ls`, `mv`, `cp`, `mkdir`, and `rm`.
+- The metadata for one or more Drive files is held in a `dribble`, a
+  “Drive tibble”. This is a data frame with one row per file. A dribble
+  is returned (and accepted) by almost every function in googledrive.
+  Design goals:
+  - Give humans what they want: the file name
+  - Track what the API wants: the file ID
+  - Hold on to all the other metadata sent back by the API
+- googledrive is “pipe-friendly” (either the base `|>` or magrittr `%>%`
+  pipe), but does not require its use.
+
+### Quick demo
+
+Here’s how to list up to `n_max` of the files you see in [My
+Drive](https://drive.google.com). You can expect to be sent to your
+browser here, to authenticate yourself and authorize the googledrive
+package to deal on your behalf with Google Drive.
+
+``` r
+drive_find(n_max = 30)
+#> # A dribble: 30 × 3
+#>    name                       id                                drive_resource
+#>    <chr>                      <drv_id>                          <list>        
+#>  1 chicken_poem.txt           1lAxO_zr06v6pL6dyQJ9duwH1j2ztQ3lB <named list>  
+#>  2 2021-09-16_r_logo.jpg      1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D <named list>  
+#>  3 2021-09-16_r_about.html    1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ <named list>  
+#>  4 2021-09-16_imdb_latin1.csv 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw <named list>  
+#>  5 2021-09-16_chicken.txt     1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7 <named list>  
+#>  6 2021-09-16_chicken.pdf     14Hd6_VQAeEgcwBBJamc-FUlnXhp117T2 <named list>  
+#>  7 2021-09-16_chicken.jpg     1aslW1T-B8UKzAEotDWpmRFaMyMux5-it <named list>  
+#>  8 2021-09-16_chicken.csv     1Mj--zJYZJSMKsNVjk2tYFef5LnCsNoDT <named list>  
+#>  9 pqr                        143iq-CswFTwJTjVfKkcFMDW0jYqDeUj2 <named list>  
+#> 10 mno                        1gcUTnFbsF6uioJrLCsVQ78_F1wEzyNtI <named list>  
+#> # ℹ 20 more rows
+```
+
+You can narrow the query by specifying a `pattern` you’d like to match
+names against. Or by specifying a file type: the `type` argument
+understands MIME types, file extensions, and a few human-friendly
+keywords.
+
+``` r
+drive_find(pattern = "chicken")
+drive_find(type = "spreadsheet") ## Google Sheets!
+drive_find(type = "csv") ## MIME type = "text/csv"
+drive_find(type = "application/pdf") ## MIME type = "application/pdf"
+```
+
+Alternatively, you can refine the search using the `q` query parameter.
+Accepted search clauses can be found in the [Google Drive API
+documentation](https://developers.google.com/drive/v3/web/search-parameters).
+For example, to see all files that you’ve starred and that are readable
+by “anyone with a link”, do this:
+
+``` r
+(files <- drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'")))
+#> # A dribble: 2 × 3
+#>   name       id                                drive_resource   
+#>   <chr>      <drv_id>                          <list>           
+#> 1 r_logo.jpg 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud <named list [45]>
+#> 2 THANKS     19URV7BT0_E1KhYdfDODszK5aiELOwTSz <named list [44]>
+```
+
+You generally want to store the result of a googledrive call, as we do
+with `files` above. `files` is a dribble with info on several files and
+can be used as the input for downstream calls. It can also be
+manipulated as a regular data frame at any point.
+
+#### Identify files
+
+[`drive_find()`](https://googledrive.tidyverse.org/dev/reference/drive_find.md)
+searches by file properties, but you can also identify files by name
+(path, really) or by Drive file id using
+[`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md).
+
+``` r
+(x <- drive_get("~/abc/def/googledrive-NEWS.md"))
+#> ✔ The input `path` resolved to exactly 1 file.
+#> # A dribble: 1 × 4
+#>   name                path                          id       drive_resource   
+#>   <chr>               <chr>                         <drv_id> <list>           
+#> 1 googledrive-NEWS.md ~/abc/def/googledrive-NEWS.md 1h1lhFf… <named list [43]>
+```
+
+[`as_id()`](https://googledrive.tidyverse.org/dev/reference/drive_id.md)
+can be used to convert various inputs into a marked vector of file ids.
+It works on file ids (for obvious reasons!), various forms of Drive
+URLs, and `dribble`s.
+
+``` r
+x$id
+#> <drive_id[1]>
+#> [1] 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm
+
+# let's retrieve same file by id (also a great way to force-refresh metadata)
+drive_get(x$id)
+#> # A dribble: 1 × 3
+#>   name                id                                drive_resource   
+#>   <chr>               <drv_id>                          <list>           
+#> 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm <named list [43]>
+drive_get(as_id(x))
+#> # A dribble: 1 × 3
+#>   name                id                                drive_resource   
+#>   <chr>               <drv_id>                          <list>           
+#> 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm <named list [43]>
+```
+
+In general, googledrive functions that operate on files allow you to
+specify the file(s) by name/path, file id, or in a `dribble`. If it’s
+ambiguous, use
+[`as_id()`](https://googledrive.tidyverse.org/dev/reference/drive_id.md)
+to mark a character vector as holding Drive file ids as opposed to file
+paths. This function can also extract file ids from various URLs.
+
+#### Upload files
+
+We can upload any file type.
+
+``` r
+(chicken <- drive_upload(
+  drive_example_local("chicken.csv"),
+  "index-chicken.csv"
+))
+#> Local file:
+#> • '/private/tmp/RtmpGEYKuq/temp_libpath1508f36719bd2/googledrive/extdata/example_files/chicken.csv'
+#> Uploaded into Drive file:
+#> • 'index-chicken.csv' <id: 1y3rPXUnBhqW7ay6oBbfsNauc4UZ8dwpw>
+#> With MIME type:
+#> • 'text/csv'
+#> # A dribble: 1 × 3
+#>   name              id                                drive_resource   
+#>   <chr>             <drv_id>                          <list>           
+#> 1 index-chicken.csv 1y3rPXUnBhqW7ay6oBbfsNauc4UZ8dwpw <named list [43]>
+```
+
+Notice that file was uploaded as `text/csv`. Since this was a `.csv`
+document, and we didn’t specify the type, googledrive guessed the MIME
+type. We can overrule this by using the `type` parameter to upload as a
+Google Spreadsheet. Let’s delete this file first.
+
+``` r
+drive_rm(chicken)
+#> File deleted:
+#> • 'index-chicken.csv' <id: 1y3rPXUnBhqW7ay6oBbfsNauc4UZ8dwpw>
+
+# example of using a dribble as input
+chicken_sheet <- drive_example_local("chicken.csv") |>
+  drive_upload(
+    name = "index-chicken-sheet",
+    type = "spreadsheet"
+  )
+#> Local file:
+#> • '/private/tmp/RtmpGEYKuq/temp_libpath1508f36719bd2/googledrive/extdata/example_files/chicken.csv'
+#> Uploaded into Drive file:
+#> • 'index-chicken-sheet' <id: 1RnvPDsw19uUKqY8K01N8m-7XViOdsz4fFotBlqnUIWU>
+#> With MIME type:
+#> • 'application/vnd.google-apps.spreadsheet'
+```
+
+Much better!
+
+#### Share files
+
+To allow other people to access your file, you need to change the
+sharing permissions. You can check the sharing status by running
+`drive_reveal(..., "permissions")`, which adds a logical column `shared`
+and parks more detailed metadata in a `permissions_resource` variable.
+
+``` r
+chicken_sheet |>
+  drive_reveal("permissions")
+#> # A dribble: 1 × 5
+#>   name                shared id       drive_resource    permissions_resource
+#>   <chr>               <lgl>  <drv_id> <list>            <list>              
+#> 1 index-chicken-sheet FALSE  1RnvPDs… <named list [37]> <named list [2]>
+```
+
+Here’s how to grant anyone with the link permission to view this data
+set.
+
+``` r
+(chicken_sheet <- chicken_sheet |>
+  drive_share(role = "reader", type = "anyone"))
+#> Permissions updated:
+#> • role = reader
+#> • type = anyone
+#> For file:
+#> • 'index-chicken-sheet' <id: 1RnvPDsw19uUKqY8K01N8m-7XViOdsz4fFotBlqnUIWU>
+#> # A dribble: 1 × 5
+#>   name                shared id       drive_resource    permissions_resource
+#>   <chr>               <lgl>  <drv_id> <list>            <list>              
+#> 1 index-chicken-sheet TRUE   1RnvPDs… <named list [38]> <named list [2]>
+```
+
+This comes up so often, there’s even a convenience wrapper,
+[`drive_share_anyone()`](https://googledrive.tidyverse.org/dev/reference/drive_share.md).
+
+#### Publish files
+
+Versions of Google Documents, Sheets, and Presentations can be published
+online. You can check your publication status by running
+`drive_reveal(..., "published")`, which adds a logical column
+`published` and parks more detailed metadata in a `revision_resource`
+variable.
+
+``` r
+chicken_sheet |>
+  drive_reveal("published")
+#> # A dribble: 1 × 7
+#>   name             published shared id       drive_resource permissions_resource
+#>   <chr>            <lgl>     <lgl>  <drv_id> <list>         <list>              
+#> 1 index-chicken-s… FALSE     TRUE   1RnvPDs… <named list>   <named list [2]>    
+#> # ℹ 1 more variable: revision_resource <list>
+```
+
+By default,
+[`drive_publish()`](https://googledrive.tidyverse.org/dev/reference/drive_publish.md)
+will publish your most recent version.
+
+``` r
+(chicken_sheet <- drive_publish(chicken_sheet))
+#> File now published:
+#> • 'index-chicken-sheet' <id: 1RnvPDsw19uUKqY8K01N8m-7XViOdsz4fFotBlqnUIWU>
+#> # A dribble: 1 × 7
+#>   name             published shared id       drive_resource permissions_resource
+#>   <chr>            <lgl>     <lgl>  <drv_id> <list>         <list>              
+#> 1 index-chicken-s… TRUE      TRUE   1RnvPDs… <named list>   <named list [2]>    
+#> # ℹ 1 more variable: revision_resource <list>
+```
+
+#### Download files
+
+##### Google files
+
+We can download files from Google Drive. Native Google file types (such
+as Google Documents, Google Sheets, Google Slides, etc.) need to be
+exported to some conventional file type. There are reasonable defaults
+or you can specify this explicitly via `type` or implicitly via the file
+extension in `path`. For example, if I would like to download the
+“chicken_sheet” Google Sheet as a `.csv` I could run the following.
+
+``` r
+drive_download("index-chicken-sheet", type = "csv")
+#> File downloaded:
+#> • 'index-chicken-sheet' <id: 1RnvPDsw19uUKqY8K01N8m-7XViOdsz4fFotBlqnUIWU>
+#> Saved locally as:
+#> • 'index-chicken-sheet.csv'
+```
+
+Alternatively, I could specify type via the `path` parameter.
+
+``` r
+drive_download(
+  "index-chicken-sheet",
+  path = "index-chicken-sheet.csv",
+  overwrite = TRUE
+)
+#> File downloaded:
+#> • 'index-chicken-sheet' <id: 1RnvPDsw19uUKqY8K01N8m-7XViOdsz4fFotBlqnUIWU>
+#> Saved locally as:
+#> • 'index-chicken-sheet.csv'
+```
+
+Notice in the example above, I specified `overwrite = TRUE`, in order to
+overwrite the local csv file previously saved.
+
+Finally, you could just allow export to the default type. In the case of
+Google Sheets, this is an Excel workbook:
+
+``` r
+drive_download("index-chicken-sheet")
+#> File downloaded:
+#> • 'index-chicken-sheet' <id: 1RnvPDsw19uUKqY8K01N8m-7XViOdsz4fFotBlqnUIWU>
+#> Saved locally as:
+#> • 'index-chicken-sheet.xlsx'
+```
+
+##### All other files
+
+Downloading files that are *not* Google type files is even simpler,
+i.e. it does not require any conversion or type info.
+
+``` r
+# download it and prove we got it
+drive_download("chicken.txt")
+#> File downloaded:
+#> • 'chicken.txt' <id: 1xMvlJHia_qYNZmucaStDcOF9A9PD4BOT>
+#> Saved locally as:
+#> • 'chicken.txt'
+readLines("chicken.txt") |> head()
+#> [1] "A chicken whose name was Chantecler"      
+#> [2] "Clucked in iambic pentameter"             
+#> [3] "It sat on a shelf, reading Song of Myself"
+#> [4] "And laid eggs with a perfect diameter."   
+#> [5] ""                                         
+#> [6] "—Richard Maxson"
+```
+
+#### Clean up
+
+``` r
+file.remove(c(
+  "index-chicken-sheet.csv",
+  "index-chicken-sheet.xlsx",
+  "chicken.txt"
+))
+#> [1] TRUE TRUE TRUE
+drive_find("index-chicken") |> drive_rm()
+#> File deleted:
+#> • 'index-chicken-sheet' <id: 1RnvPDsw19uUKqY8K01N8m-7XViOdsz4fFotBlqnUIWU>
+```
+
+## Privacy
+
+[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
+
+# Package index
+
+## Reach out and touch your files
+
+Retrieve metadata on your Drive files so you can act on them
+
+- [`drive_find()`](https://googledrive.tidyverse.org/dev/reference/drive_find.md)
+  : Find files on Google Drive
+- [`drive_ls()`](https://googledrive.tidyverse.org/dev/reference/drive_ls.md)
+  : List contents of a folder or shared drive
+- [`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md)
+  : Get Drive files by path or id
+- [`drive_reveal()`](https://googledrive.tidyverse.org/dev/reference/drive_reveal.md)
+  : Add a new column of Drive file information
+- [`drive_browse()`](https://googledrive.tidyverse.org/dev/reference/drive_browse.md)
+  : Visit Drive file in browser
+- [`drive_read_string()`](https://googledrive.tidyverse.org/dev/reference/drive_read_string.md)
+  [`drive_read_raw()`](https://googledrive.tidyverse.org/dev/reference/drive_read_string.md)
+  : Read the content of a Drive file
+
+## File creation and deletion
+
+Create or delete Drive files and folders
+
+- [`drive_upload()`](https://googledrive.tidyverse.org/dev/reference/drive_upload.md)
+  : Upload into a new Drive file
+- [`drive_put()`](https://googledrive.tidyverse.org/dev/reference/drive_put.md)
+  : PUT new media into a Drive file
+- [`drive_download()`](https://googledrive.tidyverse.org/dev/reference/drive_download.md)
+  : Download a Drive file
+- [`drive_create()`](https://googledrive.tidyverse.org/dev/reference/drive_create.md)
+  : Create a new blank Drive file
+- [`drive_mkdir()`](https://googledrive.tidyverse.org/dev/reference/drive_mkdir.md)
+  : Create a Drive folder
+- [`drive_cp()`](https://googledrive.tidyverse.org/dev/reference/drive_cp.md)
+  : Copy a Drive file
+- [`drive_mv()`](https://googledrive.tidyverse.org/dev/reference/drive_mv.md)
+  : Move a Drive file
+- [`drive_rename()`](https://googledrive.tidyverse.org/dev/reference/drive_rename.md)
+  : Rename a Drive file
+- [`drive_update()`](https://googledrive.tidyverse.org/dev/reference/drive_update.md)
+  : Update an existing Drive file
+- [`drive_trash()`](https://googledrive.tidyverse.org/dev/reference/drive_trash.md)
+  [`drive_untrash()`](https://googledrive.tidyverse.org/dev/reference/drive_trash.md)
+  : Move Drive files to or from trash
+- [`drive_empty_trash()`](https://googledrive.tidyverse.org/dev/reference/drive_empty_trash.md)
+  : Empty Drive Trash
+- [`drive_rm()`](https://googledrive.tidyverse.org/dev/reference/drive_rm.md)
+  : Delete files from Drive
+- [`drive_examples_local()`](https://googledrive.tidyverse.org/dev/reference/drive_examples.md)
+  [`drive_examples_remote()`](https://googledrive.tidyverse.org/dev/reference/drive_examples.md)
+  [`drive_example_local()`](https://googledrive.tidyverse.org/dev/reference/drive_examples.md)
+  [`drive_example_remote()`](https://googledrive.tidyverse.org/dev/reference/drive_examples.md)
+  : Example files
+
+## Share your files with the world
+
+View or change the sharing and publishing status of Drive files
+
+- [`drive_publish()`](https://googledrive.tidyverse.org/dev/reference/drive_publish.md)
+  [`drive_unpublish()`](https://googledrive.tidyverse.org/dev/reference/drive_publish.md)
+  : Publish native Google files
+- [`drive_share()`](https://googledrive.tidyverse.org/dev/reference/drive_share.md)
+  [`drive_share_anyone()`](https://googledrive.tidyverse.org/dev/reference/drive_share.md)
+  : Share Drive files
+- [`drive_reveal()`](https://googledrive.tidyverse.org/dev/reference/drive_reveal.md)
+  : Add a new column of Drive file information
+- [`drive_link()`](https://googledrive.tidyverse.org/dev/reference/drive_link.md)
+  : Retrieve Drive file links
+
+## Shared drives
+
+Manipulate and explore shared drives
+
+- [`as_shared_drive()`](https://googledrive.tidyverse.org/dev/reference/as_shared_drive.md)
+  : Coerce to shared drive
+- [`is_dribble()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`no_file()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`single_file()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`some_files()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`confirm_dribble()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`confirm_single_file()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`confirm_some_files()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_folder()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_shortcut()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_folder_shortcut()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_native()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_parental()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_mine()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_shared_drive()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  : Check facts about a dribble
+- [`shared_drive_create()`](https://googledrive.tidyverse.org/dev/reference/shared_drive_create.md)
+  : Create a new shared drive
+- [`shared_drive_find()`](https://googledrive.tidyverse.org/dev/reference/shared_drive_find.md)
+  : Find shared drives
+- [`shared_drive_get()`](https://googledrive.tidyverse.org/dev/reference/shared_drive_get.md)
+  : Get shared drives by name or id
+- [`shared_drive_rm()`](https://googledrive.tidyverse.org/dev/reference/shared_drive_rm.md)
+  : Delete shared drives
+- [`shared_drive_update()`](https://googledrive.tidyverse.org/dev/reference/shared_drive_update.md)
+  : Update a shared drive
+- [`shared_drives`](https://googledrive.tidyverse.org/dev/reference/shared_drives.md)
+  : Access shared drives
+
+## Shortcuts
+
+Similar to local file shortcuts, aliases, or symbolic links
+
+- [`is_dribble()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`no_file()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`single_file()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`some_files()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`confirm_dribble()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`confirm_single_file()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`confirm_some_files()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_folder()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_shortcut()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_folder_shortcut()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_native()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_parental()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_mine()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_shared_drive()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  : Check facts about a dribble
+- [`shortcut_create()`](https://googledrive.tidyverse.org/dev/reference/shortcut_create.md)
+  : Create a shortcut to a Drive file
+- [`shortcut_resolve()`](https://googledrive.tidyverse.org/dev/reference/shortcut_resolve.md)
+  : Resolve shortcuts to their targets
+
+## Dribble object
+
+Metadata about Drive files is stored in a “Drive tibble” a.k.a. a
+dribble
+
+- [`dribble`](https://googledrive.tidyverse.org/dev/reference/dribble.md)
+  : dribble object
+
+- [`as_dribble()`](https://googledrive.tidyverse.org/dev/reference/as_dribble.md)
+  :
+
+  Coerce to a `dribble`
+
+- [`drive_reveal()`](https://googledrive.tidyverse.org/dev/reference/drive_reveal.md)
+  : Add a new column of Drive file information
+
+- [`as_id()`](https://googledrive.tidyverse.org/dev/reference/drive_id.md)
+  :
+
+  `drive_id` class
+
+- [`is_dribble()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`no_file()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`single_file()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`some_files()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`confirm_dribble()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`confirm_single_file()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`confirm_some_files()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_folder()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_shortcut()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_folder_shortcut()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_native()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_parental()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_mine()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  [`is_shared_drive()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  : Check facts about a dribble
+
+## Authorization
+
+Take explicit control of the Google auth status or examine current state
+
+- [`drive_user()`](https://googledrive.tidyverse.org/dev/reference/drive_user.md)
+  : Get info on current user
+- [`drive_about()`](https://googledrive.tidyverse.org/dev/reference/drive_about.md)
+  : Get info on Drive capabilities
+- [`drive_auth()`](https://googledrive.tidyverse.org/dev/reference/drive_auth.md)
+  : Authorize googledrive
+- [`drive_deauth()`](https://googledrive.tidyverse.org/dev/reference/drive_deauth.md)
+  : Suspend authorization
+- [`drive_auth_configure()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md)
+  [`drive_api_key()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md)
+  [`drive_oauth_client()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md)
+  : Edit and view auth configuration
+- [`drive_scopes()`](https://googledrive.tidyverse.org/dev/reference/drive_scopes.md)
+  : Produce scopes specific to the Drive API
+
+## Drive API spec
+
+Summon info about or check input against the Drive API spec
+
+- [`drive_endpoints()`](https://googledrive.tidyverse.org/dev/reference/drive_endpoints.md)
+  [`drive_endpoint()`](https://googledrive.tidyverse.org/dev/reference/drive_endpoints.md)
+  : List Drive endpoints
+- [`drive_extension()`](https://googledrive.tidyverse.org/dev/reference/drive_extension.md)
+  : Lookup extension from MIME type
+- [`drive_fields()`](https://googledrive.tidyverse.org/dev/reference/drive_fields.md)
+  [`prep_fields()`](https://googledrive.tidyverse.org/dev/reference/drive_fields.md)
+  : Request partial resources
+- [`drive_mime_type()`](https://googledrive.tidyverse.org/dev/reference/drive_mime_type.md)
+  : Lookup MIME type
+- [`expose()`](https://googledrive.tidyverse.org/dev/reference/expose.md)
+  : An expose object
+
+## Programming around the Drive API
+
+Low-level functions used internally and made available for programming
+
+- [`request_generate()`](https://googledrive.tidyverse.org/dev/reference/request_generate.md)
+  : Build a request for the Google Drive API
+- [`request_make()`](https://googledrive.tidyverse.org/dev/reference/request_make.md)
+  [`do_request()`](https://googledrive.tidyverse.org/dev/reference/request_make.md)
+  [`do_paginated_request()`](https://googledrive.tidyverse.org/dev/reference/request_make.md)
+  : Make a request for the Google Drive v3 API
+- [`drive_auth_configure()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md)
+  [`drive_api_key()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md)
+  [`drive_oauth_client()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md)
+  : Edit and view auth configuration
+- [`drive_token()`](https://googledrive.tidyverse.org/dev/reference/drive_token.md)
+  : Produce configured token
+- [`drive_has_token()`](https://googledrive.tidyverse.org/dev/reference/drive_has_token.md)
+  : Is there a token on hand?
+
+## Package-level configuration
+
+- [`local_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md)
+  [`with_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md)
+  : googledrive configuration
+
+# Articles
+
+### Common tasks
+
+- [googledrive](https://googledrive.tidyverse.org/dev/articles/googledrive.md):
+- [File
+  Identification](https://googledrive.tidyverse.org/dev/articles/file-identification.md):
+- [Dealing with multiple
+  files](https://googledrive.tidyverse.org/dev/articles/multiple-files.md):
+- [File
+  permissions](https://googledrive.tidyverse.org/dev/articles/permissions.md):
+
+### Package configuration
+
+- [Bring your own OAuth client or API
+  key](https://googledrive.tidyverse.org/dev/articles/bring-your-own-client.md):
+
+### Developer
+
+Articles documenting internal matters
+
+- [Example
+  Files](https://googledrive.tidyverse.org/dev/articles/example-files.md):
+- [Messages and errors in
+  googledrive](https://googledrive.tidyverse.org/dev/articles/messages-and-errors.md):

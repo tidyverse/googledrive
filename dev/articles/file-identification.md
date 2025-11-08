@@ -1,0 +1,118 @@
+# File Identification
+
+The most natural way to identify a file is by its **name**. The Drive
+API, however, fundamentally identifies a file by its unique id.
+googledrive makes it easy to specify your file of interest by name at
+first, but then immediately capture that in a way that includes the
+file’s id. This facilitates downstream file operations.
+
+googledrive holds information on Drive files in what we call a
+**dribble**, a Drive tibble. A
+[tibble](https://tibble.tidyverse.org/reference/tbl_df-class.html) is
+the variant of the data frame that is used throughout the
+[tidyverse](https://www.tidyverse.org). A googledrive dribble will have
+one row per file and is guaranteed to have these variables:
+
+- `name`: The file’s name.
+- `id`: The file’s unique id.
+- `drive_resource`: A list column containing Drive API metadata that is
+  internally useful and possibly interesting to some users. The typical
+  user will leave this variable unexamined. Just let it be.
+
+Some functions add additional variables, but the three above are always
+present.
+[`drive_reveal()`](https://googledrive.tidyverse.org/dev/reference/drive_reveal.md),
+for example, can add file paths, MIME types, trash status, and
+information about permissions and publishing. Use your usual techniques
+for data frame manipulation in order to isolate specific rows – files,
+in this case – that you want to operate on. For example, you can
+manipulate the dribble with dplyr verbs such as
+[`filter()`](https://rdrr.io/r/stats/filter.html), `mutate()`,
+`arrange()`, and `slice()`.
+
+## How to get one or more files in a dribble
+
+How do you get files into a dribble in the first place? Two main
+functions for this:
+
+- [`drive_find()`](https://googledrive.tidyverse.org/dev/reference/drive_find.md):
+  Similar to <https://drive.google.com>. Lists all your files or lets
+  you narrow things down based on name or file properties.
+- [`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md):
+  Get files by name – file path, actually – or by id, including by URL.
+
+## drive_find()
+
+Read the help for complete documentation but here are some of the many
+ways to call
+[`drive_find()`](https://googledrive.tidyverse.org/dev/reference/drive_find.md):
+
+``` r
+drive_find()
+drive_find(n_max = 40)
+drive_find(pattern = "chicken")
+drive_find(type = "pdf")
+drive_find(type = "folder")
+drive_find(type = "spreadsheet")
+drive_find(trashed = TRUE)
+drive_find(q = "fullText contains 'project'")
+drive_find(q = "modifiedTime > '2019-04-21T12:00:00'", order_by = "recency")
+drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'"))
+```
+
+[`drive_find()`](https://googledrive.tidyverse.org/dev/reference/drive_find.md)
+is for exhaustive file listing or filtering on file properties.
+
+## drive_get()
+
+Read the help for complete documentation but here are how calls to
+[`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md)
+can look:
+
+``` r
+drive_get("i_am_a_file_name")
+drive_get("i/am/a/deeply/buried/file.txt")
+drive_get("i/am/a/folder/")
+drive_get(c("i_am_a_file_name", "path/to/file"))
+drive_get(as_id("abcdefghijklm"))
+drive_get(as_id(c("abcdefghijklm", "nopqrstuvwxyz")))
+drive_get(id = "abcdefghijklm")
+drive_get(id = c("abcdefghijklm", "nopqrstuvwxyz"))
+drive_get(as_id("https://docs.google.com/document/d/abcdefghijklm/edit"))
+```
+
+[`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md)
+is for targetted file fetching based on name, path, id, or URL.
+
+## Other handy functions
+
+[`drive_reveal()`](https://googledrive.tidyverse.org/dev/reference/drive_reveal.md)
+adds bonus information to the dribble, either by excavating it from the
+`drive_resource` variable or by calling the Drive API. Use it on a
+dribble containing files of interest.
+
+``` r
+drive_reveal(files, "path")
+drive_reveal(files, "trashed")
+drive_reveal(files, "mime_type")
+drive_reveal(files, "permissions")
+drive_reveal(files, "published")
+```
+
+[`drive_ls()`](https://googledrive.tidyverse.org/dev/reference/drive_ls.md)
+lists files below a specified folder. It’s a thin wrapper around
+[`drive_find()`](https://googledrive.tidyverse.org/dev/reference/drive_find.md),
+so all those capabilities are available.
+
+``` r
+drive_ls("i/am/a/folder/", type = "spreadsheet")
+```
+
+[`drive_browse()`](https://googledrive.tidyverse.org/dev/reference/drive_browse.md)
+will open a file in your browser.
+
+``` r
+drive_browse(i_am_a_dribble)
+drive_browse("i_am_a_file_name")
+drive_browse(as_id("abcdefghijklm"))
+```
