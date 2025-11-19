@@ -23,7 +23,7 @@ drive_example(path = NULL)
   JSON downloaded from [Google Cloud
   Console](https://console.cloud.google.com), containing a client id and
   secret, in one of the forms supported for the `txt` argument of
-  [`jsonlite::fromJSON()`](https://rdrr.io/pkg/jsonlite/man/fromJSON.html)
+  [`jsonlite::fromJSON()`](https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html)
   (typically, a file path or JSON string).
 
 - api_key:

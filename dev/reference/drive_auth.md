@@ -59,7 +59,7 @@ drive_auth(
 
   JSON identifying the service account, in one of the forms supported
   for the `txt` argument of
-  [`jsonlite::fromJSON()`](https://rdrr.io/pkg/jsonlite/man/fromJSON.html)
+  [`jsonlite::fromJSON()`](https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html)
   (typically, a file path or JSON string).
 
 - subject:
