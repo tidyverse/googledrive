@@ -15,7 +15,7 @@ file <- drive_example_local("chicken.txt") |>
 #> Local file:
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.txt
 #> Uploaded into Drive file:
-#> • chicken-perm-article.txt <id: 18SsJnSRSN1PFh5Xn5GkV7nGTQxf7f-1Y>
+#> • chicken-perm-article.txt <id: 1zy4s6aTp_zaSmVi1dGxpyd9odI5MMJ4D>
 #> With MIME type:
 #> • text/plain
 
@@ -23,7 +23,7 @@ file
 #> # A dribble: 1 × 5
 #>   name              shared id       drive_resource permissions_resource
 #>   <chr>             <lgl>  <drv_id> <list>         <list>              
-#> 1 chicken-perm-art… FALSE  18SsJnS… <named list>   <named list [2]>
+#> 1 chicken-perm-art… FALSE  1zy4s6a… <named list>   <named list [2]>
 ```
 
 `shared = FALSE` indicates that this file is not yet shared with anyone
@@ -64,12 +64,12 @@ file <- file |>
 #> • role = reader
 #> • type = anyone
 #> For file:
-#> • chicken-perm-article.txt <id: 18SsJnSRSN1PFh5Xn5GkV7nGTQxf7f-1Y>
+#> • chicken-perm-article.txt <id: 1zy4s6aTp_zaSmVi1dGxpyd9odI5MMJ4D>
 file
 #> # A dribble: 1 × 5
 #>   name              shared id       drive_resource permissions_resource
 #>   <chr>             <lgl>  <drv_id> <list>         <list>              
-#> 1 chicken-perm-art… TRUE   18SsJnS… <named list>   <named list [2]>
+#> 1 chicken-perm-art… TRUE   1zy4s6a… <named list>   <named list [2]>
 ```
 
 We see that the file is now `shared = TRUE`.
@@ -114,5 +114,5 @@ indicative output:
 ``` r
 drive_rm(file)
 #> File deleted:
-#> • chicken-perm-article.txt <id: 18SsJnSRSN1PFh5Xn5GkV7nGTQxf7f-1Y>
+#> • chicken-perm-article.txt <id: 1zy4s6aTp_zaSmVi1dGxpyd9odI5MMJ4D>
 ```
