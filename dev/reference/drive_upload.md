@@ -127,7 +127,7 @@ chicken_csv <- drive_example_local("chicken.csv") |>
 #> Local file:
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.csv
 #> Uploaded into Drive file:
-#> • chicken-upload.csv <id: 1CbyA7tf7GWbl8kUOMnWtlj3k9xihovcp>
+#> • chicken-upload.csv <id: 16FRZjfsB0JM7MN9Iw4mlrNGUDnmh76fl>
 #> With MIME type:
 #> • text/csv
 
@@ -141,7 +141,7 @@ chicken_sheet <- drive_example_local("chicken.csv") |>
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.csv
 #> Uploaded into Drive file:
 #> • chicken-sheet-upload
-#>   <id: 1OWeVKicImtsrLriv8qDdI7_OaTc3dJ45Mw2RwEamBm8>
+#>   <id: 1dLCKuwdeQZqjA9TwG9b6AWUc-M6dTsAUwi0adA01nAU>
 #> With MIME type:
 #> • application/vnd.google-apps.spreadsheet
 
@@ -152,8 +152,8 @@ drive_browse(chicken_sheet)
 drive_find("chicken.*upload") |> drive_rm()
 #> Files deleted:
 #> • chicken-sheet-upload
-#>   <id: 1OWeVKicImtsrLriv8qDdI7_OaTc3dJ45Mw2RwEamBm8>
-#> • chicken-upload.csv <id: 1CbyA7tf7GWbl8kUOMnWtlj3k9xihovcp>
+#>   <id: 1dLCKuwdeQZqjA9TwG9b6AWUc-M6dTsAUwi0adA01nAU>
+#> • chicken-upload.csv <id: 16FRZjfsB0JM7MN9Iw4mlrNGUDnmh76fl>
 
 # Upload a file and, at the same time, star it
 chicken <- drive_example_local("chicken.jpg") |>
@@ -161,7 +161,7 @@ chicken <- drive_example_local("chicken.jpg") |>
 #> Local file:
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.jpg
 #> Uploaded into Drive file:
-#> • chicken.jpg <id: 1U7XmN5dQeZwKUF2RxqH8B0evDHbx48yh>
+#> • chicken.jpg <id: 1velgS6duK9pmkhcAg_p6b7w77vn6epCL>
 #> With MIME type:
 #> • image/jpeg
 
@@ -172,13 +172,13 @@ purrr::pluck(chicken, "drive_resource", 1, "starred")
 # Clean up
 drive_rm(chicken)
 #> File deleted:
-#> • chicken.jpg <id: 1U7XmN5dQeZwKUF2RxqH8B0evDHbx48yh>
+#> • chicken.jpg <id: 1velgS6duK9pmkhcAg_p6b7w77vn6epCL>
 
 # `overwrite = FALSE` errors if something already exists at target filepath
 # THIS WILL ERROR!
 drive_create("name-squatter-upload")
 #> Created Drive file:
-#> • name-squatter-upload <id: 1druoWiN60dw1H6qvB4VubDRmQskbJ9EZ>
+#> • name-squatter-upload <id: 1ApzmZXxtUnPtLr5K-kG1h7QEpNnVfZjT>
 #> With MIME type:
 #> • application/octet-stream
 drive_example_local("chicken.jpg") |>
@@ -188,7 +188,7 @@ drive_example_local("chicken.jpg") |>
   )
 #> Error in check_for_overwrite(params[["parents"]], params[["name"]], overwrite): 1 item already exists at the target filepath and `overwrite =
 #> FALSE`:
-#> • name-squatter-upload <id: 1druoWiN60dw1H6qvB4VubDRmQskbJ9EZ>
+#> • name-squatter-upload <id: 1ApzmZXxtUnPtLr5K-kG1h7QEpNnVfZjT>
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
 chicken <- drive_example_local("chicken.jpg") |>
@@ -197,18 +197,18 @@ chicken <- drive_example_local("chicken.jpg") |>
     overwrite = TRUE
   )
 #> File trashed:
-#> • name-squatter-upload <id: 1druoWiN60dw1H6qvB4VubDRmQskbJ9EZ>
+#> • name-squatter-upload <id: 1ApzmZXxtUnPtLr5K-kG1h7QEpNnVfZjT>
 #> Local file:
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.jpg
 #> Uploaded into Drive file:
-#> • name-squatter-upload <id: 1XYjpG5H9jnU1dkYHq9Xfta16MS0Jb647>
+#> • name-squatter-upload <id: 1U_WQJGCFBuUC3dHs8fhUmnwJfOeSSIT5>
 #> With MIME type:
 #> • image/jpeg
 
 # Clean up
 drive_rm(chicken)
 #> File deleted:
-#> • name-squatter-upload <id: 1XYjpG5H9jnU1dkYHq9Xfta16MS0Jb647>
+#> • name-squatter-upload <id: 1U_WQJGCFBuUC3dHs8fhUmnwJfOeSSIT5>
 
 if (FALSE) { # \dontrun{
 # Upload to a shared drive:
