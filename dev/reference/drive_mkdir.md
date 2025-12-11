@@ -88,12 +88,12 @@ Wraps the `files.create` endpoint:
 # Create folder named 'ghi', then another below named it 'jkl' and star it
 ghi <- drive_mkdir("ghi")
 #> Created Drive file:
-#> • ghi <id: 18B0_GS2kRfIKyZYFcy-O6G1XwAUcbS3E>
+#> • ghi <id: 1MMMNxCgsI49Q2oIYOpdEzCpR6XBY2dxz>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 jkl <- drive_mkdir("ghi/jkl", starred = TRUE)
 #> Created Drive file:
-#> • jkl <id: 1UX2RzzmXJj2Or9jOR0Zf7QOh1feBO5wT>
+#> • jkl <id: 1VRBgMcusFpSymnh_9Jc5_SxaMU3PMedm>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 
@@ -104,7 +104,7 @@ purrr::pluck(jkl, "drive_resource", 1, "starred")
 # Another way to create folder 'mno' in folder 'ghi'
 drive_mkdir("mno", path = "ghi")
 #> Created Drive file:
-#> • mno <id: 1LN1BeP-DQEJyOAkK6t8DL9WrkDJFeiRK>
+#> • mno <id: 1eLXLtYNEefBM262KhkPSPCVAjkkPbftS>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 
@@ -113,7 +113,7 @@ drive_mkdir("mno", path = "ghi")
 # and setting the new folder's description
 pqr <- drive_mkdir("pqr", path = ghi, description = "I am a folder")
 #> Created Drive file:
-#> • pqr <id: 1ZwDhZhi5D3t4q6XqUK-I9zLuLPoLJcOS>
+#> • pqr <id: 1P4ar7MZZw_zQLAgrUR7EKrckOiWJ1EyP>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 
@@ -125,20 +125,20 @@ purrr::pluck(pqr, "drive_resource", 1, "description")
 # THIS WILL ERROR!
 drive_create("name-squatter-mkdir", path = ghi)
 #> Created Drive file:
-#> • name-squatter-mkdir <id: 1kivk64Xd2Nap9MUXdiHIqRe5ZZXoCo2n>
+#> • name-squatter-mkdir <id: 1hr5RkL46hR8YmqaOuuNqftScnc2uG0fu>
 #> With MIME type:
 #> • application/octet-stream
 drive_mkdir("name-squatter-mkdir", path = ghi, overwrite = FALSE)
 #> Error in check_for_overwrite(params[["parents"]], params[["name"]], overwrite): 1 item already exists at the target filepath and `overwrite =
 #> FALSE`:
-#> • name-squatter-mkdir <id: 1kivk64Xd2Nap9MUXdiHIqRe5ZZXoCo2n>
+#> • name-squatter-mkdir <id: 1hr5RkL46hR8YmqaOuuNqftScnc2uG0fu>
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
 drive_mkdir("name-squatter-mkdir", path = ghi, overwrite = TRUE)
 #> File trashed:
-#> • name-squatter-mkdir <id: 1kivk64Xd2Nap9MUXdiHIqRe5ZZXoCo2n>
+#> • name-squatter-mkdir <id: 1hr5RkL46hR8YmqaOuuNqftScnc2uG0fu>
 #> Created Drive file:
-#> • name-squatter-mkdir <id: 1Y8chsYt9fZcZOCTFJ8BFAeJy0ytD_sGu>
+#> • name-squatter-mkdir <id: 13SkZMLlIPOHcJE5rTrFKEkheB1T0Z5y8>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 
@@ -147,13 +147,13 @@ drive_ls("ghi")
 #> # A dribble: 4 × 3
 #>   name                id                                drive_resource
 #>   <chr>               <drv_id>                          <list>        
-#> 1 name-squatter-mkdir 1Y8chsYt9fZcZOCTFJ8BFAeJy0ytD_sGu <named list>  
-#> 2 pqr                 1ZwDhZhi5D3t4q6XqUK-I9zLuLPoLJcOS <named list>  
-#> 3 mno                 1LN1BeP-DQEJyOAkK6t8DL9WrkDJFeiRK <named list>  
-#> 4 jkl                 1UX2RzzmXJj2Or9jOR0Zf7QOh1feBO5wT <named list>  
+#> 1 name-squatter-mkdir 13SkZMLlIPOHcJE5rTrFKEkheB1T0Z5y8 <named list>  
+#> 2 pqr                 1P4ar7MZZw_zQLAgrUR7EKrckOiWJ1EyP <named list>  
+#> 3 mno                 1eLXLtYNEefBM262KhkPSPCVAjkkPbftS <named list>  
+#> 4 jkl                 1VRBgMcusFpSymnh_9Jc5_SxaMU3PMedm <named list>  
 
 # Clean up
 drive_rm(ghi)
 #> File deleted:
-#> • ghi <id: 18B0_GS2kRfIKyZYFcy-O6G1XwAUcbS3E>
+#> • ghi <id: 1MMMNxCgsI49Q2oIYOpdEzCpR6XBY2dxz>
 ```
