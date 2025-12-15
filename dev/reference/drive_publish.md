@@ -68,13 +68,13 @@ file <- drive_example_remote("chicken_sheet") |>
 #> • chicken_sheet <id: 1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU>
 #> Copied to file:
 #> • Copy of chicken_sheet
-#>   <id: 1-yddr7lCBwKJjHlap_WfKR_LlsSBZiMrIpuRX2bIzjY>
+#>   <id: 1UBY9JUCnIJZqO4ZVnj7v0Ou4ZRM9nf81IjM4EYf4mpY>
 
 # Publish file
 file <- drive_publish(file)
 #> File now published:
 #> • Copy of chicken_sheet
-#>   <id: 1-yddr7lCBwKJjHlap_WfKR_LlsSBZiMrIpuRX2bIzjY>
+#>   <id: 1UBY9JUCnIJZqO4ZVnj7v0Ou4ZRM9nf81IjM4EYf4mpY>
 file$published
 #> [1] TRUE
 
@@ -82,7 +82,7 @@ file$published
 file <- drive_unpublish(file)
 #> File now NOT published:
 #> • Copy of chicken_sheet
-#>   <id: 1-yddr7lCBwKJjHlap_WfKR_LlsSBZiMrIpuRX2bIzjY>
+#>   <id: 1UBY9JUCnIJZqO4ZVnj7v0Ou4ZRM9nf81IjM4EYf4mpY>
 file$published
 #> [1] FALSE
 
@@ -90,5 +90,5 @@ file$published
 drive_rm(file)
 #> File deleted:
 #> • Copy of chicken_sheet
-#>   <id: 1-yddr7lCBwKJjHlap_WfKR_LlsSBZiMrIpuRX2bIzjY>
+#>   <id: 1UBY9JUCnIJZqO4ZVnj7v0Ou4ZRM9nf81IjM4EYf4mpY>
 ```
