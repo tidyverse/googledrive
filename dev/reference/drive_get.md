@@ -157,7 +157,7 @@ drive_get(id = "root") |> drive_reveal("path")
 # set up some files to get by path
 alfalfa <- drive_mkdir("alfalfa")
 #> Created Drive file:
-#> • alfalfa <id: 1Ab-coJwflz6pfXb8ajUNZWR0NRyIOmJY>
+#> • alfalfa <id: 1JENs6Q4mlC1Z8p-G7A-Y2-0HuAe4FmYG>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 broccoli <- drive_upload(
@@ -167,7 +167,7 @@ broccoli <- drive_upload(
 #> Local file:
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.txt
 #> Uploaded into Drive file:
-#> • broccoli <id: 1rPdEZKpAHfqcYz9SIaMmTbdTrcbyFM6p>
+#> • broccoli <id: 1G1Kx8Um7weth0TvFlUKRwf9-Ramwqh-g>
 #> With MIME type:
 #> • text/plain
 drive_get("broccoli")
@@ -177,37 +177,37 @@ drive_get("broccoli")
 #> # A dribble: 2 × 4
 #>   name     path     id                                drive_resource   
 #>   <chr>    <chr>    <drv_id>                          <list>           
-#> 1 broccoli broccoli 1rPdEZKpAHfqcYz9SIaMmTbdTrcbyFM6p <named list [43]>
+#> 1 broccoli broccoli 1G1Kx8Um7weth0TvFlUKRwf9-Ramwqh-g <named list [43]>
 #> 2 broccoli broccoli 1aNh9_YiunRSwgmopO5hZJgusiZQh1Ii7 <named list [44]>
 drive_get("alfalfa/broccoli")
 #> ✔ The input `path` resolved to exactly 1 file.
 #> # A dribble: 1 × 4
 #>   name     path               id       drive_resource   
 #>   <chr>    <chr>              <drv_id> <list>           
-#> 1 broccoli ~/alfalfa/broccoli 1rPdEZK… <named list [43]>
+#> 1 broccoli ~/alfalfa/broccoli 1G1Kx8U… <named list [44]>
 drive_get("~/alfalfa/broccoli")
 #> ✔ The input `path` resolved to exactly 1 file.
 #> # A dribble: 1 × 4
 #>   name     path               id       drive_resource   
 #>   <chr>    <chr>              <drv_id> <list>           
-#> 1 broccoli ~/alfalfa/broccoli 1rPdEZK… <named list [44]>
+#> 1 broccoli ~/alfalfa/broccoli 1G1Kx8U… <named list [44]>
 drive_get(c("broccoli", "alfalfa/", "~/alfalfa/broccoli"))
 #> ! Problem with 1 path: path is compatible with more than 1 file
 #>   broccoli
 #> ! 1 file in the output is associated with more than 1 input `path`
-#>   broccoli <id: 1rPdEZKpAHfqcYz9SIaMmTbdTrcbyFM6p>
+#>   broccoli <id: 1G1Kx8Um7weth0TvFlUKRwf9-Ramwqh-g>
 #> ! 2 out of 3 input paths resolved to exactly 1 file.
 #> # A dribble: 3 × 4
 #>   name     path               id       drive_resource   
 #>   <chr>    <chr>              <drv_id> <list>           
-#> 1 broccoli ~/alfalfa/broccoli 1rPdEZK… <named list [44]>
+#> 1 broccoli ~/alfalfa/broccoli 1G1Kx8U… <named list [44]>
 #> 2 broccoli ~/broccoli         1aNh9_Y… <named list [44]>
-#> 3 alfalfa  ~/alfalfa/         1Ab-coJ… <named list [35]>
+#> 3 alfalfa  ~/alfalfa/         1JENs6Q… <named list [35]>
 
 # Clean up
 drive_rm(alfalfa)
 #> File deleted:
-#> • alfalfa <id: 1Ab-coJwflz6pfXb8ajUNZWR0NRyIOmJY>
+#> • alfalfa <id: 1JENs6Q4mlC1Z8p-G7A-Y2-0HuAe4FmYG>
 
 if (FALSE) { # \dontrun{
 # The examples below are indicative of correct syntax.
