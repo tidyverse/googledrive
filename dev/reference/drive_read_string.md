@@ -89,12 +89,16 @@ chicken_doc |>
   # NOTE: we must specify an export MIME type
   drive_read_string(type = "text/plain") |>
   strsplit(split = "(\r\n|\r|\n)")
-#> ✖ Request 1 failed [500: DATA_LOSS].
-#> ℹ Will retry in 3.3s.
-#> ⠙ Retry happens in  2s
-#> ⠹ Retry happens in  1s
-#> Error in sheets_per_user_quota_exhaustion(resp): Expected content type application/json, not text/plain.
-#> ⠹ Retry happens in  0s
+#> No encoding supplied: defaulting to UTF-8.
+#> [[1]]
+#> [1] "A chicken whose name was Chantecler"      
+#> [2] "Clucked in iambic pentameter"             
+#> [3] "It sat on a shelf, reading Song of Myself"
+#> [4] "And laid eggs with a perfect diameter."   
+#> [5] ""                                         
+#> [6] ""                                         
+#> [7] "—Richard Maxson"                          
+#> 
   (\(x) x[[1]])()
 #> Error in (function(x) x[[1]])(): argument "x" is missing, with no default
 ```
