@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1GXn8gXPpKf79cekDMlkf85C59631LhBrnTRy00CCpGk>
+#> • drive-quiet-demo <id: 1Xaw0TxBao3t7ps1zht2JjvEgH2kIl1WA5pivwO9YhzY>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1GXn8gX… <named list [37]>
+#> 1 drive-quiet-demo 1Xaw0Tx… <named list [37]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1GXn8gXPpKf79cekDMlkf85C59631LhBrnTRy00CCpGk>
+#> • drive-quiet-demo <id: 1Xaw0TxBao3t7ps1zht2JjvEgH2kIl1WA5pivwO9YhzY>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1GXn8gX… <named list [38]>
+#> 1 drive-quiet-demo TRUE    1Xaw0Tx… <named list [38]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1GXn8gXPpKf79cekDMlkf85C59631LhBrnTRy00CCpGk>
+#> • drive-quiet-works <id: 1Xaw0TxBao3t7ps1zht2JjvEgH2kIl1WA5pivwO9YhzY>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1GXn8gX… <named list [38]>
+#> 1 drive-quiet-works FALSE   1Xaw0Tx… <named list [38]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1GXn8gXPpKf79cekDMlkf85C59631LhBrnTRy00CCpGk>
+#> • drive-quiet-works <id: 1Xaw0TxBao3t7ps1zht2JjvEgH2kIl1WA5pivwO9YhzY>
 ```
