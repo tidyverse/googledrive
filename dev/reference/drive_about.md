@@ -220,6 +220,11 @@ drive_about()
 #> [1] "application/vnd.google-apps.presentation"
 #> 
 #> 
+#> $importFormats$`text/comma-separated-values`
+#> $importFormats$`text/comma-separated-values`[[1]]
+#> [1] "application/vnd.google-apps.spreadsheet"
+#> 
+#> 
 #> $importFormats$`image/pjpeg`
 #> $importFormats$`image/pjpeg`[[1]]
 #> [1] "application/vnd.google-apps.document"
