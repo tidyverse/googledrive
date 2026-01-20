@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 13rfIa-yiHeB0FhqjkR9Fs1lJXO_Kb0AG8zsureaAqN8>
+#> • drive-quiet-demo <id: 11Y4VLu54JnRWF9lfPqkWeTH3ItRfxHFOYt3gm7F9BRs>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 13rfIa-… <named list [37]>
+#> 1 drive-quiet-demo 11Y4VLu… <named list [37]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 13rfIa-yiHeB0FhqjkR9Fs1lJXO_Kb0AG8zsureaAqN8>
+#> • drive-quiet-demo <id: 11Y4VLu54JnRWF9lfPqkWeTH3ItRfxHFOYt3gm7F9BRs>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    13rfIa-… <named list [38]>
+#> 1 drive-quiet-demo TRUE    11Y4VLu… <named list [38]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 13rfIa-yiHeB0FhqjkR9Fs1lJXO_Kb0AG8zsureaAqN8>
+#> • drive-quiet-works <id: 11Y4VLu54JnRWF9lfPqkWeTH3ItRfxHFOYt3gm7F9BRs>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   13rfIa-… <named list [38]>
+#> 1 drive-quiet-works FALSE   11Y4VLu… <named list [38]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 13rfIa-yiHeB0FhqjkR9Fs1lJXO_Kb0AG8zsureaAqN8>
+#> • drive-quiet-works <id: 11Y4VLu54JnRWF9lfPqkWeTH3ItRfxHFOYt3gm7F9BRs>
 ```
