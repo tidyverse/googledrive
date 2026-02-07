@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1wsHOX5fMK2Mr3YWfbjssgKTD9W0ihWFxnrMMk8MPbT8>
+#> • drive-quiet-demo <id: 1rzp5QjYlo8AAbxyhpmM2kUs7tsA9-lJKkAhwP2De2Bc>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1wsHOX5… <named list [37]>
+#> 1 drive-quiet-demo 1rzp5Qj… <named list [37]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1wsHOX5fMK2Mr3YWfbjssgKTD9W0ihWFxnrMMk8MPbT8>
+#> • drive-quiet-demo <id: 1rzp5QjYlo8AAbxyhpmM2kUs7tsA9-lJKkAhwP2De2Bc>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1wsHOX5… <named list [38]>
+#> 1 drive-quiet-demo TRUE    1rzp5Qj… <named list [38]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1wsHOX5fMK2Mr3YWfbjssgKTD9W0ihWFxnrMMk8MPbT8>
+#> • drive-quiet-works <id: 1rzp5QjYlo8AAbxyhpmM2kUs7tsA9-lJKkAhwP2De2Bc>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1wsHOX5… <named list [38]>
+#> 1 drive-quiet-works FALSE   1rzp5Qj… <named list [38]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1wsHOX5fMK2Mr3YWfbjssgKTD9W0ihWFxnrMMk8MPbT8>
+#> • drive-quiet-works <id: 1rzp5QjYlo8AAbxyhpmM2kUs7tsA9-lJKkAhwP2De2Bc>
 ```
