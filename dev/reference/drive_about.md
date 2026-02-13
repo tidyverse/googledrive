@@ -55,10 +55,10 @@ drive_about()
 #> [1] "16106127360"
 #> 
 #> $storageQuota$usage
-#> [1] "2836524"
+#> [1] "2836525"
 #> 
 #> $storageQuota$usageInDrive
-#> [1] "2836524"
+#> [1] "2836525"
 #> 
 #> $storageQuota$usageInDriveTrash
 #> [1] "0"
