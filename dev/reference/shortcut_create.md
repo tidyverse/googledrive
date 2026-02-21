@@ -89,7 +89,7 @@ a tibble with one row per file.
 # Create a shortcut in the default location with the default name
 sc1 <- shortcut_create(src_file)
 #> Created Drive file:
-#> • chicken_sheet <id: 10tFrQTjmws-_9VrOE94_swzYUE_NxE3I>
+#> • chicken_sheet <id: 1sydOzPbCtsZvoHx4s5vtUauwLTLK9p5w>
 #> With MIME type:
 #> • application/vnd.google-apps.shortcut
 # This shortcut could now be moved, renamed, etc.
@@ -99,7 +99,7 @@ sc2 <- src_file |>
   shortcut_create(name = "chicken_sheet_second_shortcut")
 #> Created Drive file:
 #> • chicken_sheet_second_shortcut
-#>   <id: 19ieR_EPh5KFz3sspOlu2pkp5P-jvFTsZ>
+#>   <id: 19fPu9sn31_tX_mUstklR8GhT-IC3LaxA>
 #> With MIME type:
 #> • application/vnd.google-apps.shortcut
 
@@ -107,13 +107,13 @@ sc2 <- src_file |>
 folder <- drive_mkdir("chicken_sheet_shortcut_folder")
 #> Created Drive file:
 #> • chicken_sheet_shortcut_folder
-#>   <id: 1wq7Txui8tE-B7qgqr4_i-i5uTgt_1MnF>
+#>   <id: 1virKL4LmIsDzh8fgdglL3fVDebmh9uoJ>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 sc3 <- src_file |>
   shortcut_create(folder)
 #> Created Drive file:
-#> • chicken_sheet <id: 1AGG6oThBoxB7GN4WCH-nSB7gNUmvuHaH>
+#> • chicken_sheet <id: 1fh3iOYriT9J2E33fvQ7jDOtcXp2-O1jf>
 #> With MIME type:
 #> • application/vnd.google-apps.shortcut
 
@@ -122,9 +122,9 @@ sc3 <- src_file |>
 #> # A dribble: 3 × 3
 #>   name                          id       drive_resource   
 #>   <chr>                         <drv_id> <list>           
-#> 1 chicken_sheet                 1AGG6oT… <named list [34]>
-#> 2 chicken_sheet_second_shortcut 19ieR_E… <named list [34]>
-#> 3 chicken_sheet                 10tFrQT… <named list [34]>
+#> 1 chicken_sheet                 1fh3iOY… <named list [34]>
+#> 2 chicken_sheet_second_shortcut 19fPu9s… <named list [34]>
+#> 3 chicken_sheet                 1sydOzP… <named list [34]>
 
 # Confirm the shortcuts all target the original file
 dat <- dat |>
@@ -140,10 +140,10 @@ as_id(src_file)
 # Clean up
 drive_rm(sc1, sc2, sc3, folder)
 #> Files deleted:
-#> • chicken_sheet <id: 10tFrQTjmws-_9VrOE94_swzYUE_NxE3I>
+#> • chicken_sheet <id: 1sydOzPbCtsZvoHx4s5vtUauwLTLK9p5w>
 #> • chicken_sheet_second_shortcut
-#>   <id: 19ieR_EPh5KFz3sspOlu2pkp5P-jvFTsZ>
-#> • chicken_sheet <id: 1AGG6oThBoxB7GN4WCH-nSB7gNUmvuHaH>
+#>   <id: 19fPu9sn31_tX_mUstklR8GhT-IC3LaxA>
+#> • chicken_sheet <id: 1fh3iOYriT9J2E33fvQ7jDOtcXp2-O1jf>
 #> • chicken_sheet_shortcut_folder
-#>   <id: 1wq7Txui8tE-B7qgqr4_i-i5uTgt_1MnF>
+#>   <id: 1virKL4LmIsDzh8fgdglL3fVDebmh9uoJ>
 ```
