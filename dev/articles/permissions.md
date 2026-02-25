@@ -12,13 +12,10 @@ library(googledrive)
 file <- drive_example_local("chicken.txt") |>
   drive_upload(name = "chicken-perm-article.txt") |>
   drive_reveal("permissions")
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 1.8s.
-#> ✔ Request 2 successful!
 #> Local file:
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.txt
 #> Uploaded into Drive file:
-#> • chicken-perm-article.txt <id: 13ewPN4G6yCTck-p6U9TvBUvBGy-k5lIN>
+#> • chicken-perm-article.txt <id: 1G7UVhCG124ufjzd7zn0D4F1_WKvSMJmG>
 #> With MIME type:
 #> • text/plain
 
@@ -26,7 +23,7 @@ file
 #> # A dribble: 1 × 5
 #>   name              shared id       drive_resource permissions_resource
 #>   <chr>             <lgl>  <drv_id> <list>         <list>              
-#> 1 chicken-perm-art… FALSE  13ewPN4… <named list>   <named list [2]>
+#> 1 chicken-perm-art… FALSE  1G7UVhC… <named list>   <named list [2]>
 ```
 
 `shared = FALSE` indicates that this file is not yet shared with anyone
@@ -67,12 +64,12 @@ file <- file |>
 #> • role = reader
 #> • type = anyone
 #> For file:
-#> • chicken-perm-article.txt <id: 13ewPN4G6yCTck-p6U9TvBUvBGy-k5lIN>
+#> • chicken-perm-article.txt <id: 1G7UVhCG124ufjzd7zn0D4F1_WKvSMJmG>
 file
 #> # A dribble: 1 × 5
 #>   name              shared id       drive_resource permissions_resource
 #>   <chr>             <lgl>  <drv_id> <list>         <list>              
-#> 1 chicken-perm-art… TRUE   13ewPN4… <named list>   <named list [2]>
+#> 1 chicken-perm-art… TRUE   1G7UVhC… <named list>   <named list [2]>
 ```
 
 We see that the file is now `shared = TRUE`.
@@ -117,5 +114,5 @@ indicative output:
 ``` r
 drive_rm(file)
 #> File deleted:
-#> • chicken-perm-article.txt <id: 13ewPN4G6yCTck-p6U9TvBUvBGy-k5lIN>
+#> • chicken-perm-article.txt <id: 1G7UVhCG124ufjzd7zn0D4F1_WKvSMJmG>
 ```
