@@ -206,11 +206,11 @@ each row of the dribble, i.e. for each Drive file.
 ``` r
 dat <- drive_find(n_max = 5)
 gargle_map_cli(dat)
-#> [1] "{.drivepath chicken-perm-article.txt} {cli::col_grey('<id: 1EaozcNLJPioIDdzwZtzLhdHjookEZbZ1>')}"  
-#> [2] "{.drivepath chicken_poem.txt} {cli::col_grey('<id: 1lAxO_zr06v6pL6dyQJ9duwH1j2ztQ3lB>')}"          
-#> [3] "{.drivepath 2021-09-16_r_logo.jpg} {cli::col_grey('<id: 1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D>')}"     
-#> [4] "{.drivepath 2021-09-16_r_about.html} {cli::col_grey('<id: 1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ>')}"   
-#> [5] "{.drivepath 2021-09-16_imdb_latin1.csv} {cli::col_grey('<id: 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw>')}"
+#> [1] "{.drivepath chicken_poem.txt} {cli::col_grey('<id: 1lAxO_zr06v6pL6dyQJ9duwH1j2ztQ3lB>')}"          
+#> [2] "{.drivepath 2021-09-16_r_logo.jpg} {cli::col_grey('<id: 1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D>')}"     
+#> [3] "{.drivepath 2021-09-16_r_about.html} {cli::col_grey('<id: 1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ>')}"   
+#> [4] "{.drivepath 2021-09-16_imdb_latin1.csv} {cli::col_grey('<id: 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw>')}"
+#> [5] "{.drivepath 2021-09-16_chicken.txt} {cli::col_grey('<id: 1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7>')}"
 ```
 
 `gargle_map_cli.dribble()` also allows a custom template, but it’s a
@@ -253,11 +253,11 @@ drive_bullets(c(
   bulletize(gargle_map_cli(dat))
 ))
 #> Some Drive files:
-#> • chicken-perm-article.txt <id: 1EaozcNLJPioIDdzwZtzLhdHjookEZbZ1>
 #> • chicken_poem.txt <id: 1lAxO_zr06v6pL6dyQJ9duwH1j2ztQ3lB>
 #> • 2021-09-16_r_logo.jpg <id: 1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D>
 #> • 2021-09-16_r_about.html <id: 1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ>
 #> • 2021-09-16_imdb_latin1.csv <id: 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw>
+#> • 2021-09-16_chicken.txt <id: 1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7>
 #>   … and 5 more
 ```
 

@@ -83,9 +83,6 @@ MIME type.
 ``` r
 drive_examples_remote() |>
   drive_reveal("mime_type")
-#> ✖ Request 1 failed [500: DATA_LOSS].
-#> ℹ Will retry in 1.8s.
-#> ✔ Request 2 successful!
 #> # A dribble: 9 × 4
 #>   name            mime_type                     id       drive_resource
 #>   <chr>           <chr>                         <drv_id> <list>        
