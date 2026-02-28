@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1_LbLUkH14qYvbw9dRwncm2aKI7c-sy0cGqG6OEWZIGY>
+#> • drive-quiet-demo <id: 1uR3l-BbCnp9eIn-sPkIYZQVDjhdlQsCZMe_IN6pac3o>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1_LbLUk… <named list [38]>
+#> 1 drive-quiet-demo 1uR3l-B… <named list [37]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1_LbLUkH14qYvbw9dRwncm2aKI7c-sy0cGqG6OEWZIGY>
+#> • drive-quiet-demo <id: 1uR3l-BbCnp9eIn-sPkIYZQVDjhdlQsCZMe_IN6pac3o>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1_LbLUk… <named list [38]>
+#> 1 drive-quiet-demo TRUE    1uR3l-B… <named list [38]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1_LbLUkH14qYvbw9dRwncm2aKI7c-sy0cGqG6OEWZIGY>
+#> • drive-quiet-works <id: 1uR3l-BbCnp9eIn-sPkIYZQVDjhdlQsCZMe_IN6pac3o>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1_LbLUk… <named list [38]>
+#> 1 drive-quiet-works FALSE   1uR3l-B… <named list [38]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1_LbLUkH14qYvbw9dRwncm2aKI7c-sy0cGqG6OEWZIGY>
+#> • drive-quiet-works <id: 1uR3l-BbCnp9eIn-sPkIYZQVDjhdlQsCZMe_IN6pac3o>
 ```
