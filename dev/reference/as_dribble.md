@@ -66,12 +66,12 @@ as_dribble(x, ...)
 # create some files for us to re-discover by name or filepath
 alfa <- drive_create("alfa", type = "folder")
 #> Created Drive file:
-#> • alfa <id: 1GUR4SmN8YvIl7OrYp4DiY8pOP81nhl1J>
+#> • alfa <id: 14OYYv4QPhwj2k-xVom2RpOHlOog-oGaF>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 bravo <- drive_create("bravo", path = alfa)
 #> Created Drive file:
-#> • bravo <id: 1LytPE4wBT8mmIEwrxLs43E77vQgyT6VU>
+#> • bravo <id: 10phgdnpG54E2HgPbciq_u_G4D3FEWyvk>
 #> With MIME type:
 #> • application/octet-stream
 
@@ -80,24 +80,24 @@ as_dribble("alfa")
 #> # A dribble: 1 × 4
 #>   name  path  id                                drive_resource   
 #>   <chr> <chr> <drv_id>                          <list>           
-#> 1 alfa  alfa/ 1GUR4SmN8YvIl7OrYp4DiY8pOP81nhl1J <named list [35]>
+#> 1 alfa  alfa/ 14OYYv4QPhwj2k-xVom2RpOHlOog-oGaF <named list [35]>
 as_dribble("bravo")
 #> # A dribble: 2 × 4
 #>   name  path  id                                drive_resource   
 #>   <chr> <chr> <drv_id>                          <list>           
-#> 1 bravo bravo 1LytPE4wBT8mmIEwrxLs43E77vQgyT6VU <named list [41]>
+#> 1 bravo bravo 10phgdnpG54E2HgPbciq_u_G4D3FEWyvk <named list [41]>
 #> 2 bravo bravo 1Lbnr5CXFtJocrr-u3MIRBO8zbkvkUfXJ <named list [41]>
 as_dribble("alfa/bravo")
 #> # A dribble: 1 × 4
 #>   name  path         id                                drive_resource
 #>   <chr> <chr>        <drv_id>                          <list>        
-#> 1 bravo ~/alfa/bravo 1LytPE4wBT8mmIEwrxLs43E77vQgyT6VU <named list>  
+#> 1 bravo ~/alfa/bravo 10phgdnpG54E2HgPbciq_u_G4D3FEWyvk <named list>  
 as_dribble(c("alfa", "alfa/bravo"))
 #> # A dribble: 2 × 4
 #>   name  path         id                                drive_resource
 #>   <chr> <chr>        <drv_id>                          <list>        
-#> 1 alfa  ~/alfa/      1GUR4SmN8YvIl7OrYp4DiY8pOP81nhl1J <named list>  
-#> 2 bravo ~/alfa/bravo 1LytPE4wBT8mmIEwrxLs43E77vQgyT6VU <named list>  
+#> 1 alfa  ~/alfa/      14OYYv4QPhwj2k-xVom2RpOHlOog-oGaF <named list>  
+#> 2 bravo ~/alfa/bravo 10phgdnpG54E2HgPbciq_u_G4D3FEWyvk <named list>  
 
 # specify the file id (substitute a real file id of your own!)
 # as_dribble(as_id("0B0Gh-SuuA2nTOGZVTXZTREgwZ2M"))
@@ -105,5 +105,5 @@ as_dribble(c("alfa", "alfa/bravo"))
 # Clean up
 drive_find("alfa") |> drive_rm()
 #> File deleted:
-#> • alfa <id: 1GUR4SmN8YvIl7OrYp4DiY8pOP81nhl1J>
+#> • alfa <id: 14OYYv4QPhwj2k-xVom2RpOHlOog-oGaF>
 ```

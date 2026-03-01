@@ -4,8 +4,6 @@
 
 ## googledrive 2.1.2
 
-CRAN release: 2025-09-10
-
 - [`drive_upload()`](https://googledrive.tidyverse.org/dev/reference/drive_upload.md)
   and
   [`drive_download()`](https://googledrive.tidyverse.org/dev/reference/drive_download.md)
@@ -15,8 +13,6 @@ CRAN release: 2025-09-10
   [@ateucher](https://github.com/ateucher)).
 
 ## googledrive 2.1.1
-
-CRAN release: 2023-06-11
 
 - `drive_auth(subject =)` is a new argument that can be used with
   `drive_auth(path =)`, i.e. when using a service account. The `path`
@@ -43,8 +39,6 @@ CRAN release: 2023-06-11
 - Various internal changes to sync up with gargle v1.5.0.
 
 ## googledrive 2.1.0
-
-CRAN release: 2023-03-22
 
 ### Syncing up with gargle
 
@@ -90,8 +84,6 @@ was deprecated in googledrive 2.0.0 (released 2021-07-08) and is now
 defunct.
 
 ## googledrive 2.0.0
-
-CRAN release: 2021-07-08
 
 ### Team Drives are dead! Long live shared drives!
 
@@ -272,8 +264,6 @@ dependency.
 
 ## googledrive 1.0.1
 
-CRAN release: 2020-05-05
-
 Patch release to modify a test for compatibility with an upcoming
 release of gargle.
 
@@ -304,8 +294,6 @@ method for `dribble` objects now passes `...` through, which could
 apply, for example, to tibble’s `.name_repair` argument.
 
 ## googledrive 1.0.0
-
-CRAN release: 2019-08-19
 
 The release of version 1.0.0 marks two events:
 
@@ -586,14 +574,10 @@ version of testthat recent enough to offer
 
 ## googledrive 0.1.3
 
-CRAN release: 2019-01-24
-
 Minor patch release for compatibility with the imminent release of purrr
 0.3.0.
 
 ## googledrive 0.1.2
-
-CRAN release: 2018-10-06
 
 - Internal usage of `glue::collapse()` modified to call
   [`glue::glue_collapse()`](https://glue.tidyverse.org/reference/glue_collapse.html)
@@ -603,7 +587,5 @@ CRAN release: 2018-10-06
   [@jimhester](https://github.com/jimhester))
 
 ## googledrive 0.1.1
-
-CRAN release: 2017-08-28
 
 - initial CRAN release
