@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1GNXVDxph7Plt-HGZ1GOlNnQVHj0Mf814GjNCtkx2mew>
+#> • drive-quiet-demo <id: 1WHel5xsy3ZRvEh9b_0yoXxbB3a0x_JrVgOcd8H3noRs>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1GNXVDx… <named list [37]>
+#> 1 drive-quiet-demo 1WHel5x… <named list [37]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1GNXVDxph7Plt-HGZ1GOlNnQVHj0Mf814GjNCtkx2mew>
+#> • drive-quiet-demo <id: 1WHel5xsy3ZRvEh9b_0yoXxbB3a0x_JrVgOcd8H3noRs>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1GNXVDx… <named list [38]>
+#> 1 drive-quiet-demo TRUE    1WHel5x… <named list [37]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1GNXVDxph7Plt-HGZ1GOlNnQVHj0Mf814GjNCtkx2mew>
+#> • drive-quiet-works <id: 1WHel5xsy3ZRvEh9b_0yoXxbB3a0x_JrVgOcd8H3noRs>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1GNXVDx… <named list [38]>
+#> 1 drive-quiet-works FALSE   1WHel5x… <named list [37]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1GNXVDxph7Plt-HGZ1GOlNnQVHj0Mf814GjNCtkx2mew>
+#> • drive-quiet-works <id: 1WHel5xsy3ZRvEh9b_0yoXxbB3a0x_JrVgOcd8H3noRs>
 ```
