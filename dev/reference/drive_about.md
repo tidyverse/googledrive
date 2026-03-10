@@ -240,11 +240,6 @@ drive_about()
 #> [1] "application/vnd.google-apps.document"
 #> 
 #> 
-#> $importFormats$`application/vnd.sun.xml.writer`
-#> $importFormats$`application/vnd.sun.xml.writer`[[1]]
-#> [1] "application/vnd.google-apps.document"
-#> 
-#> 
 #> $importFormats$`application/vnd.ms-powerpoint.slideshow.macroenabled.12`
 #> $importFormats$`application/vnd.ms-powerpoint.slideshow.macroenabled.12`[[1]]
 #> [1] "application/vnd.google-apps.presentation"
