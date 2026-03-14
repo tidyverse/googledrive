@@ -27,6 +27,9 @@ Wraps the `about.get` endpoint:
 
 ``` r
 drive_about()
+#> ✖ Request 1 failed [500: DATA_LOSS].
+#> ℹ Will retry in 1.8s.
+#> ✔ Request 2 successful!
 #> $kind
 #> [1] "drive#about"
 #> 
