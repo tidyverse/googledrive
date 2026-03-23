@@ -117,7 +117,7 @@ cp1 <- drive_cp(src_file)
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • Copy of chicken.txt <id: 1h5TMuaL4sl7pLRfU5KDeC8wAJ5BgYwqO>
+#> • Copy of chicken.txt <id: 1hQayqfHJmM3PQN7sFOXWTfL31mhh3yhI>
 
 # Make an explicitly named copy, in a different folder, and star it.
 # The starring is an example of providing metadata via `...`.
@@ -125,7 +125,7 @@ cp1 <- drive_cp(src_file)
 # it just gets passed through to the API.
 folder <- drive_mkdir("drive-cp-folder")
 #> Created Drive file:
-#> • drive-cp-folder <id: 1pgqtMIuc6IdF21dX8ZOBVWU_jpfcHdHM>
+#> • drive-cp-folder <id: 1i7857l0IHFS4XDJ1DEW_m1eIW8-8gNmt>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 cp2 <- drive_cp(
@@ -138,12 +138,12 @@ cp2 <- drive_cp(
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
 #> • drive-cp-folder/chicken-cp.txt
-#>   <id: 1RO-PHnfeMbVog5nWXQoo8U6NioupqwxH>
+#>   <id: 19YaFss_wR4fslKvPf-YxkqHw1Bskhg1v>
 drive_reveal(cp2, "starred")
 #> # A dribble: 1 × 4
 #>   name           starred id       drive_resource   
 #>   <chr>          <lgl>   <drv_id> <list>           
-#> 1 chicken-cp.txt TRUE    1RO-PHn… <named list [43]>
+#> 1 chicken-cp.txt TRUE    19YaFss… <named list [43]>
 
 # `overwrite = FALSE` errors if file already exists at target filepath
 # THIS WILL ERROR!
@@ -152,19 +152,19 @@ drive_reveal(cp2, "starred")
 # `overwrite = TRUE` moves an existing file to trash, then proceeds
 cp3 <- drive_cp(src_file, name = "Copy of chicken.txt", overwrite = TRUE)
 #> File trashed:
-#> • Copy of chicken.txt <id: 1h5TMuaL4sl7pLRfU5KDeC8wAJ5BgYwqO>
+#> • Copy of chicken.txt <id: 1hQayqfHJmM3PQN7sFOXWTfL31mhh3yhI>
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • Copy of chicken.txt <id: 1ls6vH3e56jPNxu8iOIZWuJF2WgrGexst>
+#> • Copy of chicken.txt <id: 1P3yb4T2QCrgPvpxYRGtfJcA8CCsZ8E8E>
 
 # Delete all of our copies and the new folder!
 drive_rm(cp1, cp2, cp3, folder)
 #> Files deleted:
-#> • Copy of chicken.txt <id: 1h5TMuaL4sl7pLRfU5KDeC8wAJ5BgYwqO>
-#> • chicken-cp.txt <id: 1RO-PHnfeMbVog5nWXQoo8U6NioupqwxH>
-#> • Copy of chicken.txt <id: 1ls6vH3e56jPNxu8iOIZWuJF2WgrGexst>
-#> • drive-cp-folder <id: 1pgqtMIuc6IdF21dX8ZOBVWU_jpfcHdHM>
+#> • Copy of chicken.txt <id: 1hQayqfHJmM3PQN7sFOXWTfL31mhh3yhI>
+#> • chicken-cp.txt <id: 19YaFss_wR4fslKvPf-YxkqHw1Bskhg1v>
+#> • Copy of chicken.txt <id: 1P3yb4T2QCrgPvpxYRGtfJcA8CCsZ8E8E>
+#> • drive-cp-folder <id: 1i7857l0IHFS4XDJ1DEW_m1eIW8-8gNmt>
 
 # Target an official example file that's a csv file
 (csv_file <- drive_example_remote("chicken.csv"))
@@ -183,7 +183,7 @@ chicken_sheet <- drive_cp(
 #> • chicken.csv <id: 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7>
 #> Copied to file:
 #> • chicken-sheet-copy
-#>   <id: 1R1LXsLc7Yj2rYBvBXJisos1ND8hOa6t-pZgJ-fOoLqA>
+#>   <id: 16DNBiMvgN1wlCHNEb1fLJWC_LJ7pNgNzqDX9Uiz41Xg>
 # is it really a Google Sheet?
 drive_reveal(chicken_sheet, "mime_type")$mime_type
 #> [1] "application/vnd.google-apps.spreadsheet"
@@ -195,5 +195,5 @@ drive_reveal(chicken_sheet, "mime_type")$mime_type
 drive_rm(chicken_sheet)
 #> File deleted:
 #> • chicken-sheet-copy
-#>   <id: 1R1LXsLc7Yj2rYBvBXJisos1ND8hOa6t-pZgJ-fOoLqA>
+#>   <id: 16DNBiMvgN1wlCHNEb1fLJWC_LJ7pNgNzqDX9Uiz41Xg>
 ```
