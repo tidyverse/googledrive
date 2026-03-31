@@ -372,11 +372,6 @@ drive_about()
 #> [1] "application/vnd.oasis.opendocument.spreadsheet"
 #> 
 #> 
-#> $exportFormats$`application/vnd.google-apps.jam`
-#> $exportFormats$`application/vnd.google-apps.jam`[[1]]
-#> [1] "application/pdf"
-#> 
-#> 
 #> $exportFormats$`application/vnd.google-apps.script`
 #> $exportFormats$`application/vnd.google-apps.script`[[1]]
 #> [1] "application/vnd.google-apps.script+json"
@@ -1240,9 +1235,6 @@ about[["exportFormats"]] |>
 #> [5] "text/csv"                                                         
 #> [6] "application/zip"                                                  
 #> [7] "application/vnd.oasis.opendocument.spreadsheet"                   
-#> 
-#> $`application/vnd.google-apps.jam`
-#> [1] "application/pdf"
 #> 
 #> $`application/vnd.google-apps.script`
 #> [1] "application/vnd.google-apps.script+json"

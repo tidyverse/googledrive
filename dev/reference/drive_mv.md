@@ -102,19 +102,19 @@ file <- drive_example_remote("chicken.txt") |>
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • chicken-mv.txt <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
+#> • chicken-mv.txt <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
 
 # rename it, but leave in current folder (root folder, in this case)
 file <- drive_mv(file, "chicken-mv-renamed.txt")
 #> Original file:
-#> • chicken-mv.txt <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
+#> • chicken-mv.txt <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
 #> Has been renamed:
-#> • chicken-mv-renamed.txt <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
+#> • chicken-mv-renamed.txt <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
 
 # create a folder to move the file into
 folder <- drive_mkdir("mv-folder")
 #> Created Drive file:
-#> • mv-folder <id: 1iOfIHZd5WjyeEA0fqwH3j9EeLk_8nmgA>
+#> • mv-folder <id: 12adolbF4wqt1q4n73IYBnb6YBsXnrsvq>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 
@@ -122,59 +122,59 @@ folder <- drive_mkdir("mv-folder")
 # specify destination as a dribble
 file <- drive_mv(file, path = folder, name = "chicken-mv-re-renamed.txt")
 #> Original file:
-#> • chicken-mv-renamed.txt <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
+#> • chicken-mv-renamed.txt <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
 #> Has been renamed and moved:
 #> • mv-folder/chicken-mv-re-renamed.txt
-#>   <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
+#>   <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
 
 # verify renamed file is now in the folder
 drive_ls(folder)
 #> # A dribble: 1 × 3
 #>   name                      id       drive_resource   
 #>   <chr>                     <drv_id> <list>           
-#> 1 chicken-mv-re-renamed.txt 13TB4Tf… <named list [44]>
+#> 1 chicken-mv-re-renamed.txt 16RlSfU… <named list [43]>
 
 # move the file back to root folder
 file <- drive_mv(file, "~/")
 #> Original file:
-#> • chicken-mv-re-renamed.txt <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
+#> • chicken-mv-re-renamed.txt <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
 #> Has been moved:
-#> • ~/chicken-mv-re-renamed.txt <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
+#> • ~/chicken-mv-re-renamed.txt <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
 
 # move it again
 # specify destination as path with trailing slash
 # to ensure we get a move vs. renaming it to "mv-folder"
 file <- drive_mv(file, "mv-folder/")
 #> Original file:
-#> • chicken-mv-re-renamed.txt <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
+#> • chicken-mv-re-renamed.txt <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
 #> Has been moved:
 #> • mv-folder/chicken-mv-re-renamed.txt
-#>   <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
+#>   <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
 
 # `overwrite = FALSE` errors if something already exists at target filepath
 # THIS WILL ERROR!
 drive_create("name-squatter-mv", path = "~/")
 #> Created Drive file:
-#> • name-squatter-mv <id: 1cqvW8AGN6i-dRf20bC73fazU3RvsiVHS>
+#> • name-squatter-mv <id: 1Vk0cJit34ZCeJcYASCd5q7tLy2csrtrZ>
 #> With MIME type:
 #> • application/octet-stream
 drive_mv(file, path = "~/", name = "name-squatter-mv", overwrite = FALSE)
 #> Error in check_for_overwrite(parent = params[["addParents"]] %||% parent_before,     name = params[["name"]] %||% file$name, overwrite = overwrite): 1 item already exists at the target filepath and `overwrite =
 #> FALSE`:
-#> • name-squatter-mv <id: 1cqvW8AGN6i-dRf20bC73fazU3RvsiVHS>
+#> • name-squatter-mv <id: 1Vk0cJit34ZCeJcYASCd5q7tLy2csrtrZ>
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
 drive_mv(file, path = "~/", name = "name-squatter-mv", overwrite = TRUE)
 #> File trashed:
-#> • name-squatter-mv <id: 1cqvW8AGN6i-dRf20bC73fazU3RvsiVHS>
+#> • name-squatter-mv <id: 1Vk0cJit34ZCeJcYASCd5q7tLy2csrtrZ>
 #> Original file:
-#> • chicken-mv-re-renamed.txt <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
+#> • chicken-mv-re-renamed.txt <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
 #> Has been renamed and moved:
-#> • ~/name-squatter-mv <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
+#> • ~/name-squatter-mv <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
 
 # Clean up
 drive_rm(file, folder)
 #> Files deleted:
-#> • chicken-mv-re-renamed.txt <id: 13TB4TflTX9DgwIgwA4Z0cEBTBzXdkje8>
-#> • mv-folder <id: 1iOfIHZd5WjyeEA0fqwH3j9EeLk_8nmgA>
+#> • chicken-mv-re-renamed.txt <id: 16RlSfUK8uHM-JQQZh2eyEJAUDN8WhPp8>
+#> • mv-folder <id: 12adolbF4wqt1q4n73IYBnb6YBsXnrsvq>
 ```
