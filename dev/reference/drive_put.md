@@ -111,9 +111,9 @@ writeLines(c("beginning", "middle"), local_file)
 file <- drive_put(local_file)
 #> ℹ No pre-existing Drive file at this path. Calling `drive_upload()`.
 #> Local file:
-#> • /tmp/Rtmp4IvF13/drive_put_1bb83acc8e0.txt
+#> • /tmp/Rtmp3WTRAJ/drive_put_1a8deb26092.txt
 #> Uploaded into Drive file:
-#> • drive_put_1bb83acc8e0.txt <id: 1vI2SMkCh11f2gIZbLWq7iPoljqlDts7u>
+#> • drive_put_1a8deb26092.txt <id: 1on1gYnJV1oF65Lvz4jF6-Jr2pdPhOUaN>
 #> With MIME type:
 #> • text/plain
 
@@ -124,12 +124,12 @@ cat("end", file = local_file, sep = "\n", append = TRUE)
 file <- drive_put(local_file)
 #> ℹ A Drive file already exists at this path. Calling `drive_update()`.
 #> File updated:
-#> • drive_put_1bb83acc8e0.txt <id: 1vI2SMkCh11f2gIZbLWq7iPoljqlDts7u>
+#> • drive_put_1a8deb26092.txt <id: 1on1gYnJV1oF65Lvz4jF6-Jr2pdPhOUaN>
 
 # create a second file at this filepath
 file2 <- drive_create(basename(local_file))
 #> Created Drive file:
-#> • drive_put_1bb83acc8e0.txt <id: 1Jd72PF6AlNNpv9cTVdH8YTaYNx4SW-gt>
+#> • drive_put_1a8deb26092.txt <id: 1KOP9ZVBMdXyeqdto7lwVMopthVR1ODSt>
 #> With MIME type:
 #> • text/plain
 
@@ -137,13 +137,13 @@ file2 <- drive_create(basename(local_file))
 drive_put(local_file)
 #> Error in drive_put(local_file): Multiple items already exist on Drive at the target filepath.
 #> Unclear what `drive_put()` should do. Exiting.
-#> • drive_put_1bb83acc8e0.txt <id: 1Jd72PF6AlNNpv9cTVdH8YTaYNx4SW-gt>
-#> • drive_put_1bb83acc8e0.txt <id: 1vI2SMkCh11f2gIZbLWq7iPoljqlDts7u>
+#> • drive_put_1a8deb26092.txt <id: 1KOP9ZVBMdXyeqdto7lwVMopthVR1ODSt>
+#> • drive_put_1a8deb26092.txt <id: 1on1gYnJV1oF65Lvz4jF6-Jr2pdPhOUaN>
 
 # Clean up
 drive_find("drive_put_.+[.]txt") |> drive_rm()
 #> Files deleted:
-#> • drive_put_1bb83acc8e0.txt <id: 1Jd72PF6AlNNpv9cTVdH8YTaYNx4SW-gt>
-#> • drive_put_1bb83acc8e0.txt <id: 1vI2SMkCh11f2gIZbLWq7iPoljqlDts7u>
+#> • drive_put_1a8deb26092.txt <id: 1KOP9ZVBMdXyeqdto7lwVMopthVR1ODSt>
+#> • drive_put_1a8deb26092.txt <id: 1on1gYnJV1oF65Lvz4jF6-Jr2pdPhOUaN>
 unlink(local_file)
 ```
