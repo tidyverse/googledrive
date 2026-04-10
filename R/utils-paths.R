@@ -84,7 +84,7 @@ check_for_overwrite <- function(parent = NULL, name, overwrite) {
 }
 
 overwrite_hits <- function(parent = NULL, name, overwrite) {
-  stopifnot(is_toggle(overwrite))
+  check_bool(overwrite)
   if (is.na(overwrite)) {
     return(invisible())
   }
