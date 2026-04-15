@@ -111,9 +111,9 @@ writeLines(c("beginning", "middle"), local_file)
 file <- drive_put(local_file)
 #> ℹ No pre-existing Drive file at this path. Calling `drive_upload()`.
 #> Local file:
-#> • /tmp/Rtmp6CIqz1/drive_put_1a34f2fc0f9.txt
+#> • /tmp/RtmpDTd9Hg/drive_put_1a3e61cb74b5.txt
 #> Uploaded into Drive file:
-#> • drive_put_1a34f2fc0f9.txt <id: 1ZC-bJgrEcuBQP9p2lrgjZn-Llj0wBNXU>
+#> • drive_put_1a3e61cb74b5.txt <id: 1xIpTnS9UyWc4KCUUQNoy6AIc7jM8mCHd>
 #> With MIME type:
 #> • text/plain
 
@@ -124,12 +124,12 @@ cat("end", file = local_file, sep = "\n", append = TRUE)
 file <- drive_put(local_file)
 #> ℹ A Drive file already exists at this path. Calling `drive_update()`.
 #> File updated:
-#> • drive_put_1a34f2fc0f9.txt <id: 1ZC-bJgrEcuBQP9p2lrgjZn-Llj0wBNXU>
+#> • drive_put_1a3e61cb74b5.txt <id: 1xIpTnS9UyWc4KCUUQNoy6AIc7jM8mCHd>
 
 # create a second file at this filepath
 file2 <- drive_create(basename(local_file))
 #> Created Drive file:
-#> • drive_put_1a34f2fc0f9.txt <id: 1c5HCD-_CgxD-3rV8nt1zJ2c0wtoOZHB0>
+#> • drive_put_1a3e61cb74b5.txt <id: 111S3beX6z6zz4qAE8yRPE-vUEWsbi0qf>
 #> With MIME type:
 #> • text/plain
 
@@ -137,13 +137,13 @@ file2 <- drive_create(basename(local_file))
 drive_put(local_file)
 #> Error in drive_put(local_file): Multiple items already exist on Drive at the target filepath.
 #> Unclear what `drive_put()` should do. Exiting.
-#> • drive_put_1a34f2fc0f9.txt <id: 1c5HCD-_CgxD-3rV8nt1zJ2c0wtoOZHB0>
-#> • drive_put_1a34f2fc0f9.txt <id: 1ZC-bJgrEcuBQP9p2lrgjZn-Llj0wBNXU>
+#> • drive_put_1a3e61cb74b5.txt <id: 111S3beX6z6zz4qAE8yRPE-vUEWsbi0qf>
+#> • drive_put_1a3e61cb74b5.txt <id: 1xIpTnS9UyWc4KCUUQNoy6AIc7jM8mCHd>
 
 # Clean up
 drive_find("drive_put_.+[.]txt") |> drive_rm()
 #> Files deleted:
-#> • drive_put_1a34f2fc0f9.txt <id: 1c5HCD-_CgxD-3rV8nt1zJ2c0wtoOZHB0>
-#> • drive_put_1a34f2fc0f9.txt <id: 1ZC-bJgrEcuBQP9p2lrgjZn-Llj0wBNXU>
+#> • drive_put_1a3e61cb74b5.txt <id: 111S3beX6z6zz4qAE8yRPE-vUEWsbi0qf>
+#> • drive_put_1a3e61cb74b5.txt <id: 1xIpTnS9UyWc4KCUUQNoy6AIc7jM8mCHd>
 unlink(local_file)
 ```
