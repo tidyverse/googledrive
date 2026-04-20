@@ -68,28 +68,21 @@ file <- drive_example_remote("chicken_sheet") |>
 #> • chicken_sheet <id: 1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU>
 #> Copied to file:
 #> • Copy of chicken_sheet
-#>   <id: 1hMY4G6v4LNwbPYtdN7c6a9ztjFXYB3yPA7w3k4vHYSQ>
+#>   <id: 1PJOxPcQ95LaDetFu_Louh-uJ92honglAgpJUkg7hxbI>
 
 # Publish file
 file <- drive_publish(file)
-#> Error in map(file$id, change_publish_one, params = params): ℹ In index: 1.
-#> Caused by error in `.f()`:
-#> ! Client error: (404) Not Found
-#> Revision not found: head.
-#> • message: Revision not found: head.
-#> • domain: global
-#> • reason: notFound
-#> • location: revisionId
-#> • locationType: parameter
+#> File now published:
+#> • Copy of chicken_sheet
+#>   <id: 1PJOxPcQ95LaDetFu_Louh-uJ92honglAgpJUkg7hxbI>
 file$published
-#> Warning: Unknown or uninitialised column: `published`.
-#> NULL
+#> [1] TRUE
 
 # Unpublish file
 file <- drive_unpublish(file)
 #> File now NOT published:
 #> • Copy of chicken_sheet
-#>   <id: 1hMY4G6v4LNwbPYtdN7c6a9ztjFXYB3yPA7w3k4vHYSQ>
+#>   <id: 1PJOxPcQ95LaDetFu_Louh-uJ92honglAgpJUkg7hxbI>
 file$published
 #> [1] FALSE
 
@@ -97,5 +90,5 @@ file$published
 drive_rm(file)
 #> File deleted:
 #> • Copy of chicken_sheet
-#>   <id: 1hMY4G6v4LNwbPYtdN7c6a9ztjFXYB3yPA7w3k4vHYSQ>
+#>   <id: 1PJOxPcQ95LaDetFu_Louh-uJ92honglAgpJUkg7hxbI>
 ```

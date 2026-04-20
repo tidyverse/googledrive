@@ -137,7 +137,7 @@ drive_example_remote("logo")
 #> # A dribble: 1 × 3
 #>   name       id                                drive_resource   
 #>   <chr>      <drv_id>                          <list>           
-#> 1 r_logo.jpg 1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW <named list [40]>
+#> 1 r_logo.jpg 1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW <named list [41]>
 ```
 
 Here’s how you might use one of these examples to start demonstrating
