@@ -35,7 +35,8 @@ files with the same filepath.
 zero or one, move a pre-existing file to the trash, then carry on. Note
 that the new file does not inherit any properties from the old one, such
 as sharing or publishing settings. It will have a new file ID. An error is
-thrown if two or more pre-existing files are found.
+thrown if two or more pre-existing files are found. Use \code{drive_update()} or
+\code{drive_put()} if you want to keep permissions and sharing from an already existing file.
 \item \code{FALSE}: Error if there is any pre-existing file at the filepath.
 }
 
