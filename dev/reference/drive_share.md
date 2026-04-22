@@ -107,7 +107,7 @@ file <- drive_example_remote("chicken_doc") |>
 #> Original file:
 #> • chicken_doc <id: 1X9pd4nOjl33zDFfTjw-_eFL7Qb9_g6VfVFDp1PPae94>
 #> Copied to file:
-#> • chicken-share.txt <id: 1V8TBq4lAUc-BL_mdePiwGXmqXr0utjAWfQK7ARc6Nxg>
+#> • chicken-share.txt <id: 1gVTaowML7NMNBgmx2M2zOPSI9ctA1dyXvsRpbYctbdg>
 
 # Let a specific person comment
 file <- file |>
@@ -120,7 +120,7 @@ file <- file |>
 #> • role = commenter
 #> • type = user
 #> For file:
-#> • chicken-share.txt <id: 1V8TBq4lAUc-BL_mdePiwGXmqXr0utjAWfQK7ARc6Nxg>
+#> • chicken-share.txt <id: 1gVTaowML7NMNBgmx2M2zOPSI9ctA1dyXvsRpbYctbdg>
 
 # Let a different specific person edit and customize the email notification
 file <- file |>
@@ -134,7 +134,7 @@ file <- file |>
 #> • role = writer
 #> • type = user
 #> For file:
-#> • chicken-share.txt <id: 1V8TBq4lAUc-BL_mdePiwGXmqXr0utjAWfQK7ARc6Nxg>
+#> • chicken-share.txt <id: 1gVTaowML7NMNBgmx2M2zOPSI9ctA1dyXvsRpbYctbdg>
 
 # Let anyone read the file
 file <- file |>
@@ -143,17 +143,17 @@ file <- file |>
 #> • role = reader
 #> • type = anyone
 #> For file:
-#> • chicken-share.txt <id: 1V8TBq4lAUc-BL_mdePiwGXmqXr0utjAWfQK7ARc6Nxg>
+#> • chicken-share.txt <id: 1gVTaowML7NMNBgmx2M2zOPSI9ctA1dyXvsRpbYctbdg>
 # Single-purpose wrapper function for this
 drive_share_anyone(file)
 #> Permissions updated:
 #> • role = reader
 #> • type = anyone
 #> For file:
-#> • chicken-share.txt <id: 1V8TBq4lAUc-BL_mdePiwGXmqXr0utjAWfQK7ARc6Nxg>
+#> • chicken-share.txt <id: 1gVTaowML7NMNBgmx2M2zOPSI9ctA1dyXvsRpbYctbdg>
 
 # Clean up
 drive_rm(file)
 #> File deleted:
-#> • chicken-share.txt <id: 1V8TBq4lAUc-BL_mdePiwGXmqXr0utjAWfQK7ARc6Nxg>
+#> • chicken-share.txt <id: 1gVTaowML7NMNBgmx2M2zOPSI9ctA1dyXvsRpbYctbdg>
 ```
