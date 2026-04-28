@@ -70,26 +70,26 @@ some_files(d)
 # confirm_single_file(d)
 
 confirm_some_files(d)
-#> # A dribble: 30 × 3
+#> # A dribble: 31 × 3
 #>    name                       id       drive_resource   
 #>    <chr>                      <drv_id> <list>           
-#>  1 chicken_poem.txt           1lAxO_z… <named list [44]>
-#>  2 2021-09-16_r_logo.jpg      1dandXB… <named list [45]>
-#>  3 2021-09-16_r_about.html    1XfCI_o… <named list [44]>
-#>  4 2021-09-16_imdb_latin1.csv 163YPvq… <named list [43]>
-#>  5 2021-09-16_chicken.txt     1axJz8G… <named list [44]>
-#>  6 2021-09-16_chicken.pdf     14Hd6_V… <named list [44]>
-#>  7 2021-09-16_chicken.jpg     1aslW1T… <named list [45]>
-#>  8 2021-09-16_chicken.csv     1Mj--zJ… <named list [43]>
-#>  9 pqr                        143iq-C… <named list [36]>
-#> 10 mno                        1gcUTnF… <named list [35]>
-#> # ℹ 20 more rows
+#>  1 bravo                      11RgjTH… <named list [40]>
+#>  2 chicken_poem.txt           1lAxO_z… <named list [44]>
+#>  3 2021-09-16_r_logo.jpg      1dandXB… <named list [45]>
+#>  4 2021-09-16_r_about.html    1XfCI_o… <named list [44]>
+#>  5 2021-09-16_imdb_latin1.csv 163YPvq… <named list [43]>
+#>  6 2021-09-16_chicken.txt     1axJz8G… <named list [44]>
+#>  7 2021-09-16_chicken.pdf     14Hd6_V… <named list [44]>
+#>  8 2021-09-16_chicken.jpg     1aslW1T… <named list [45]>
+#>  9 2021-09-16_chicken.csv     1Mj--zJ… <named list [43]>
+#> 10 pqr                        143iq-C… <named list [36]>
+#> # ℹ 21 more rows
 is_folder(d)
-#>  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE
-#> [12] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE
-#> [23] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#>  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
+#> [12]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE
+#> [23] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 is_mine(d)
 #>  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
 #> [14] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-#> [27] TRUE TRUE TRUE TRUE
+#> [27] TRUE TRUE TRUE TRUE TRUE
 ```
