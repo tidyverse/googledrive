@@ -26,6 +26,7 @@ Preferred method: Provide the path to the JSON file downloaded from the
 [Google Cloud Platform Console](https://console.cloud.google.com).
 
 ``` r
+
 drive_auth_configure(
   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
 )
@@ -38,6 +39,7 @@ Confirm success and carry on! You can see the currently configured OAuth
 client like so:
 
 ``` r
+
 drive_oauth_client()
 ```
 
@@ -56,6 +58,7 @@ create both your OAuth client (above) and your API key. Now register it
 with googledrive.
 
 ``` r
+
 drive_auth_configure(api_key = "YOUR_API_KEY_GOES_HERE")
 ```
 
@@ -63,6 +66,7 @@ Confirm success and carry on! You can see the currently configured API
 key like so:
 
 ``` r
+
 drive_api_key()
 ```
 

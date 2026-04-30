@@ -39,6 +39,7 @@ on Drive. Then we regret their original names and want to rename them.
 Load packages.
 
 ``` r
+
 library(googledrive)
 library(glue)
 library(tidyverse)
@@ -49,6 +50,7 @@ library(tidyverse)
 Use the example files that ship with googledrive.
 
 ``` r
+
 local_files <- drive_examples_local()
 local_files <- set_names(local_files, basename(local_files))
 local_files
@@ -75,9 +77,10 @@ iterating over the `local_files` using
 [`purrr::map()`](https://purrr.tidyverse.org/reference/map.html).
 
 ``` r
+
 folder <- drive_mkdir("upload-into-me-article-demo")
 #> Created Drive file:
-#> • upload-into-me-article-demo <id: 14gA2zvPuMLDT8QOb8ZHMu5A2vWz6LrTe>
+#> • upload-into-me-article-demo <id: 1pRMI6thJ1BgFt0ehMk6DbLfhOCTbB_ka>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 with_drive_quiet(
@@ -88,24 +91,26 @@ with_drive_quiet(
 First, let’s confirm that we uploaded the files into the new folder.
 
 ``` r
+
 drive_ls(folder)
 #> # A dribble: 8 × 3
 #>   name            id                                drive_resource   
 #>   <chr>           <drv_id>                          <list>           
-#> 1 r_logo.jpg      13eIuzFVAE74DwRjmghxPziryc3LuXyJD <named list [45]>
-#> 2 r_about.html    1MuvKQY_lzRmTjBVnSGTn88VQIR9LvUzG <named list [44]>
-#> 3 markdown.md     1UXISv8ETnjiJjTxZtHmQc7v-_7U2zjBj <named list [43]>
-#> 4 imdb_latin1.csv 1vtJksg5HDrMM9urulXALckfPh1EC8MU1 <named list [43]>
-#> 5 chicken.txt     1Y69rMiNs4SQSXcTXJTP197dM6O7v_e8R <named list [44]>
-#> 6 chicken.pdf     1KuqtjMnNV-1KXgzkDuJ8GhsZrit7Q-cN <named list [44]>
-#> 7 chicken.jpg     1MMS6BMI7h9w3K6egBL63uRF3rG31V4O0 <named list [45]>
-#> 8 chicken.csv     1rIdLZGYfgoEpc8hHoEdXk0fjwA4J22j- <named list [43]>
+#> 1 r_logo.jpg      1huaN2IdCXCRNPRPLl4e_EVkTfRPtCvak <named list [45]>
+#> 2 r_about.html    1Zx-hOiJl3NVXfnXSWKJCwLW_dywd360c <named list [43]>
+#> 3 markdown.md     1wckjFx6hp1brunKkmI5E_OINrKPwULCj <named list [43]>
+#> 4 imdb_latin1.csv 1gXa0t2nXu3WKp4KCx28Rny8eoDKHoi7- <named list [44]>
+#> 5 chicken.txt     1wdwnXRfFH6fmcj6oy80kRFqDBEJ5OGOS <named list [44]>
+#> 6 chicken.pdf     1JyjMT9tdwRy0NCUx3fMXOQlER507PoQy <named list [44]>
+#> 7 chicken.jpg     1nuGClay2CQPHV7TPAC5FCz3jqk-syvvz <named list [45]>
+#> 8 chicken.csv     1yJuO7c5JH3jcLU5c1ru8IngOscpsj-Ol <named list [43]>
 ```
 
 Now let’s reflect on the `files` object returned by this operation.
 `files` is a list of **dribbles**, one per uploaded file.
 
 ``` r
+
 str(files, max.level = 1)
 #> List of 8
 #>  $ chicken.csv    : dribble [1 × 3] (S3: dribble/tbl_df/tbl/data.frame)
@@ -127,18 +132,19 @@ big dribble yourself with, e.g.,
 [`dplyr::bind_rows()`](https://dplyr.tidyverse.org/reference/bind_rows.html).
 
 ``` r
+
 bind_rows(files)
 #> # A dribble: 8 × 3
 #>   name            id                                drive_resource   
 #>   <chr>           <drv_id>                          <list>           
-#> 1 chicken.csv     1rIdLZGYfgoEpc8hHoEdXk0fjwA4J22j- <named list [43]>
-#> 2 chicken.jpg     1MMS6BMI7h9w3K6egBL63uRF3rG31V4O0 <named list [45]>
-#> 3 chicken.pdf     1KuqtjMnNV-1KXgzkDuJ8GhsZrit7Q-cN <named list [43]>
-#> 4 chicken.txt     1Y69rMiNs4SQSXcTXJTP197dM6O7v_e8R <named list [43]>
-#> 5 imdb_latin1.csv 1vtJksg5HDrMM9urulXALckfPh1EC8MU1 <named list [43]>
-#> 6 markdown.md     1UXISv8ETnjiJjTxZtHmQc7v-_7U2zjBj <named list [43]>
-#> 7 r_about.html    1MuvKQY_lzRmTjBVnSGTn88VQIR9LvUzG <named list [43]>
-#> 8 r_logo.jpg      13eIuzFVAE74DwRjmghxPziryc3LuXyJD <named list [45]>
+#> 1 chicken.csv     1yJuO7c5JH3jcLU5c1ru8IngOscpsj-Ol <named list [43]>
+#> 2 chicken.jpg     1nuGClay2CQPHV7TPAC5FCz3jqk-syvvz <named list [45]>
+#> 3 chicken.pdf     1JyjMT9tdwRy0NCUx3fMXOQlER507PoQy <named list [43]>
+#> 4 chicken.txt     1wdwnXRfFH6fmcj6oy80kRFqDBEJ5OGOS <named list [43]>
+#> 5 imdb_latin1.csv 1gXa0t2nXu3WKp4KCx28Rny8eoDKHoi7- <named list [43]>
+#> 6 markdown.md     1wckjFx6hp1brunKkmI5E_OINrKPwULCj <named list [43]>
+#> 7 r_about.html    1Zx-hOiJl3NVXfnXSWKJCwLW_dywd360c <named list [43]>
+#> 8 r_logo.jpg      1huaN2IdCXCRNPRPLl4e_EVkTfRPtCvak <named list [45]>
 ```
 
 Below we show another way to finesse this by using a variant of
@@ -156,48 +162,49 @@ string interpolation but you could also use
 inputs: the list of dribbles from above and the vector of new names.
 
 ``` r
+
 (new_names <- glue("{Sys.Date()}_{basename(local_files)}"))
-#> 2026-04-29_chicken.csv
-#> 2026-04-29_chicken.jpg
-#> 2026-04-29_chicken.pdf
-#> 2026-04-29_chicken.txt
-#> 2026-04-29_imdb_latin1.csv
-#> 2026-04-29_markdown.md
-#> 2026-04-29_r_about.html
-#> 2026-04-29_r_logo.jpg
+#> 2026-04-30_chicken.csv
+#> 2026-04-30_chicken.jpg
+#> 2026-04-30_chicken.pdf
+#> 2026-04-30_chicken.txt
+#> 2026-04-30_imdb_latin1.csv
+#> 2026-04-30_markdown.md
+#> 2026-04-30_r_about.html
+#> 2026-04-30_r_logo.jpg
 files_dribble <- map2_dfr(files, new_names, drive_rename)
 #> Original file:
-#> • chicken.csv <id: 1rIdLZGYfgoEpc8hHoEdXk0fjwA4J22j->
+#> • chicken.csv <id: 1yJuO7c5JH3jcLU5c1ru8IngOscpsj-Ol>
 #> Has been renamed:
-#> • 2026-04-29_chicken.csv <id: 1rIdLZGYfgoEpc8hHoEdXk0fjwA4J22j->
+#> • 2026-04-30_chicken.csv <id: 1yJuO7c5JH3jcLU5c1ru8IngOscpsj-Ol>
 #> Original file:
-#> • chicken.jpg <id: 1MMS6BMI7h9w3K6egBL63uRF3rG31V4O0>
+#> • chicken.jpg <id: 1nuGClay2CQPHV7TPAC5FCz3jqk-syvvz>
 #> Has been renamed:
-#> • 2026-04-29_chicken.jpg <id: 1MMS6BMI7h9w3K6egBL63uRF3rG31V4O0>
+#> • 2026-04-30_chicken.jpg <id: 1nuGClay2CQPHV7TPAC5FCz3jqk-syvvz>
 #> Original file:
-#> • chicken.pdf <id: 1KuqtjMnNV-1KXgzkDuJ8GhsZrit7Q-cN>
+#> • chicken.pdf <id: 1JyjMT9tdwRy0NCUx3fMXOQlER507PoQy>
 #> Has been renamed:
-#> • 2026-04-29_chicken.pdf <id: 1KuqtjMnNV-1KXgzkDuJ8GhsZrit7Q-cN>
+#> • 2026-04-30_chicken.pdf <id: 1JyjMT9tdwRy0NCUx3fMXOQlER507PoQy>
 #> Original file:
-#> • chicken.txt <id: 1Y69rMiNs4SQSXcTXJTP197dM6O7v_e8R>
+#> • chicken.txt <id: 1wdwnXRfFH6fmcj6oy80kRFqDBEJ5OGOS>
 #> Has been renamed:
-#> • 2026-04-29_chicken.txt <id: 1Y69rMiNs4SQSXcTXJTP197dM6O7v_e8R>
+#> • 2026-04-30_chicken.txt <id: 1wdwnXRfFH6fmcj6oy80kRFqDBEJ5OGOS>
 #> Original file:
-#> • imdb_latin1.csv <id: 1vtJksg5HDrMM9urulXALckfPh1EC8MU1>
+#> • imdb_latin1.csv <id: 1gXa0t2nXu3WKp4KCx28Rny8eoDKHoi7->
 #> Has been renamed:
-#> • 2026-04-29_imdb_latin1.csv <id: 1vtJksg5HDrMM9urulXALckfPh1EC8MU1>
+#> • 2026-04-30_imdb_latin1.csv <id: 1gXa0t2nXu3WKp4KCx28Rny8eoDKHoi7->
 #> Original file:
-#> • markdown.md <id: 1UXISv8ETnjiJjTxZtHmQc7v-_7U2zjBj>
+#> • markdown.md <id: 1wckjFx6hp1brunKkmI5E_OINrKPwULCj>
 #> Has been renamed:
-#> • 2026-04-29_markdown.md <id: 1UXISv8ETnjiJjTxZtHmQc7v-_7U2zjBj>
+#> • 2026-04-30_markdown.md <id: 1wckjFx6hp1brunKkmI5E_OINrKPwULCj>
 #> Original file:
-#> • r_about.html <id: 1MuvKQY_lzRmTjBVnSGTn88VQIR9LvUzG>
+#> • r_about.html <id: 1Zx-hOiJl3NVXfnXSWKJCwLW_dywd360c>
 #> Has been renamed:
-#> • 2026-04-29_r_about.html <id: 1MuvKQY_lzRmTjBVnSGTn88VQIR9LvUzG>
+#> • 2026-04-30_r_about.html <id: 1Zx-hOiJl3NVXfnXSWKJCwLW_dywd360c>
 #> Original file:
-#> • r_logo.jpg <id: 13eIuzFVAE74DwRjmghxPziryc3LuXyJD>
+#> • r_logo.jpg <id: 1huaN2IdCXCRNPRPLl4e_EVkTfRPtCvak>
 #> Has been renamed:
-#> • 2026-04-29_r_logo.jpg <id: 13eIuzFVAE74DwRjmghxPziryc3LuXyJD>
+#> • 2026-04-30_r_logo.jpg <id: 1huaN2IdCXCRNPRPLl4e_EVkTfRPtCvak>
 ```
 
 We use
@@ -210,18 +217,19 @@ Let’s check on the contents of this folder again to confirm the new
 names:
 
 ``` r
+
 drive_ls(folder)
 #> # A dribble: 8 × 3
 #>   name                       id       drive_resource   
 #>   <chr>                      <drv_id> <list>           
-#> 1 2026-04-29_r_logo.jpg      13eIuzF… <named list [45]>
-#> 2 2026-04-29_r_about.html    1MuvKQY… <named list [44]>
-#> 3 2026-04-29_markdown.md     1UXISv8… <named list [43]>
-#> 4 2026-04-29_imdb_latin1.csv 1vtJksg… <named list [43]>
-#> 5 2026-04-29_chicken.txt     1Y69rMi… <named list [44]>
-#> 6 2026-04-29_chicken.pdf     1KuqtjM… <named list [44]>
-#> 7 2026-04-29_chicken.jpg     1MMS6BM… <named list [45]>
-#> 8 2026-04-29_chicken.csv     1rIdLZG… <named list [43]>
+#> 1 2026-04-30_r_logo.jpg      1huaN2I… <named list [45]>
+#> 2 2026-04-30_r_about.html    1Zx-hOi… <named list [44]>
+#> 3 2026-04-30_markdown.md     1wckjFx… <named list [43]>
+#> 4 2026-04-30_imdb_latin1.csv 1gXa0t2… <named list [44]>
+#> 5 2026-04-30_chicken.txt     1wdwnXR… <named list [44]>
+#> 6 2026-04-30_chicken.pdf     1JyjMT9… <named list [44]>
+#> 7 2026-04-30_chicken.jpg     1nuGCla… <named list [45]>
+#> 8 2026-04-30_chicken.csv     1yJuO7c… <named list [43]>
 ```
 
 Let’s confirm that, by using `map2_df2()` instead of
@@ -229,18 +237,19 @@ Let’s confirm that, by using `map2_df2()` instead of
 single dribble back, instead of a list of one-row dribbles:
 
 ``` r
+
 files_dribble
 #> # A dribble: 8 × 3
 #>   name                       id       drive_resource   
 #>   <chr>                      <drv_id> <list>           
-#> 1 2026-04-29_chicken.csv     1rIdLZG… <named list [43]>
-#> 2 2026-04-29_chicken.jpg     1MMS6BM… <named list [45]>
-#> 3 2026-04-29_chicken.pdf     1KuqtjM… <named list [44]>
-#> 4 2026-04-29_chicken.txt     1Y69rMi… <named list [44]>
-#> 5 2026-04-29_imdb_latin1.csv 1vtJksg… <named list [43]>
-#> 6 2026-04-29_markdown.md     1UXISv8… <named list [43]>
-#> 7 2026-04-29_r_about.html    1MuvKQY… <named list [44]>
-#> 8 2026-04-29_r_logo.jpg      13eIuzF… <named list [45]>
+#> 1 2026-04-30_chicken.csv     1yJuO7c… <named list [43]>
+#> 2 2026-04-30_chicken.jpg     1nuGCla… <named list [45]>
+#> 3 2026-04-30_chicken.pdf     1JyjMT9… <named list [44]>
+#> 4 2026-04-30_chicken.txt     1wdwnXR… <named list [44]>
+#> 5 2026-04-30_imdb_latin1.csv 1gXa0t2… <named list [44]>
+#> 6 2026-04-30_markdown.md     1wckjFx… <named list [43]>
+#> 7 2026-04-30_r_about.html    1Zx-hOi… <named list [44]>
+#> 8 2026-04-30_r_logo.jpg      1huaN2I… <named list [45]>
 ```
 
 What if you wanted to get a list back, because your downstream
@@ -249,6 +258,7 @@ operations include yet more
 would use [`map2()`](https://purrr.tidyverse.org/reference/map2.html).
 
 ``` r
+
 files_list <- map2(files, new_names, drive_rename)
 ```
 
@@ -260,6 +270,7 @@ is vectorized and can therefore operate on a multi-file dribble. We
 could trash these files like so:
 
 ``` r
+
 drive_trash(files_dribble)
 ```
 
@@ -269,6 +280,7 @@ irreversible, you could truly delete these files with
 which is also vectorized:
 
 ``` r
+
 drive_rm(files_dribble)
 ```
 
@@ -276,7 +288,8 @@ Finally – and this is the code we will actually execute – the easiest
 way to delete these files is to delete their enclosing folder.
 
 ``` r
+
 drive_rm(folder)
 #> File deleted:
-#> • upload-into-me-article-demo <id: 14gA2zvPuMLDT8QOb8ZHMu5A2vWz6LrTe>
+#> • upload-into-me-article-demo <id: 1pRMI6thJ1BgFt0ehMk6DbLfhOCTbB_ka>
 ```

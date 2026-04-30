@@ -162,6 +162,7 @@ that is different and not what we’re talking about here.
     current setup and clean code across all test files.
 
     ``` r
+
     ## gather all the test setup and clean code from individual test files
     source(testthat::test_path("driver.R"))
     ## leaves behind:
@@ -181,6 +182,7 @@ that is different and not what we’re talking about here.
     so:
 
 ``` r
+
 rmarkdown::render(testthat::test_path("all-test-setup.R"))
 ```
 
@@ -197,6 +199,7 @@ that is the whole point!
 When your googledrive development is over, render the clean script:
 
 ``` r
+
 rmarkdown::render(testthat::test_path("all-test-clean.R"))
 ```
 

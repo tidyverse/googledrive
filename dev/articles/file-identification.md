@@ -48,6 +48,7 @@ ways to call
 [`drive_find()`](https://googledrive.tidyverse.org/dev/reference/drive_find.md):
 
 ``` r
+
 drive_find()
 drive_find(n_max = 40)
 drive_find(pattern = "chicken")
@@ -70,6 +71,7 @@ Read the help for complete documentation but here are how calls to
 can look:
 
 ``` r
+
 drive_get("i_am_a_file_name")
 drive_get("i/am/a/deeply/buried/file.txt")
 drive_get("i/am/a/folder/")
@@ -92,6 +94,7 @@ adds bonus information to the dribble, either by excavating it from the
 dribble containing files of interest.
 
 ``` r
+
 drive_reveal(files, "path")
 drive_reveal(files, "trashed")
 drive_reveal(files, "mime_type")
@@ -105,6 +108,7 @@ lists files below a specified folder. It’s a thin wrapper around
 so all those capabilities are available.
 
 ``` r
+
 drive_ls("i/am/a/folder/", type = "spreadsheet")
 ```
 
@@ -112,6 +116,7 @@ drive_ls("i/am/a/folder/", type = "spreadsheet")
 will open a file in your browser.
 
 ``` r
+
 drive_browse(i_am_a_dribble)
 drive_browse("i_am_a_file_name")
 drive_browse(as_id("abcdefghijklm"))

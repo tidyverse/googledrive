@@ -372,6 +372,7 @@ have changed.
 - Previous signature (v0.1.3 and earlier)
 
   ``` r
+
   drive_auth(
     oauth_token = NULL,                       # use `token` now
     service_token = NULL,                     # use `path` now
@@ -385,6 +386,7 @@ have changed.
 - Current signature (\>= v1.0.0)
 
   ``` r
+
   drive_auth(
     email = gargle::gargle_oauth_email(),             # NEW!
     path = NULL,                                      # was `service_token`

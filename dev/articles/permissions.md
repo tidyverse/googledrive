@@ -7,6 +7,7 @@ i.e. grant different people or groups of people various levels of access
 Let’s upload a file and view its permissions.
 
 ``` r
+
 library(googledrive)
 
 file <- drive_example_local("chicken.txt") |>
@@ -15,7 +16,7 @@ file <- drive_example_local("chicken.txt") |>
 #> Local file:
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.txt
 #> Uploaded into Drive file:
-#> • chicken-perm-article.txt <id: 1jTKLW3snFkU49Vgy6HN2nHDK2GEGwms->
+#> • chicken-perm-article.txt <id: 1zoopAQfpJjw4361r5jHTEHtaOPX7Y-b_>
 #> With MIME type:
 #> • text/plain
 
@@ -23,7 +24,7 @@ file
 #> # A dribble: 1 × 5
 #>   name              shared id       drive_resource permissions_resource
 #>   <chr>             <lgl>  <drv_id> <list>         <list>              
-#> 1 chicken-perm-art… FALSE  1jTKLW3… <named list>   <named list [2]>
+#> 1 chicken-perm-art… FALSE  1zoopAQ… <named list>   <named list [2]>
 ```
 
 `shared = FALSE` indicates that this file is not yet shared with anyone
@@ -39,6 +40,7 @@ customized message, using the `emailAddress` and `emailMessage`
 parameters.
 
 ``` r
+
 file <- file |>
   drive_share(
     role = "writer",
@@ -51,6 +53,7 @@ file <- file |>
 Let’s say we also want “anyone with a link” to be able to read the file.
 
 ``` r
+
 file <- file |>
   drive_share(role = "reader", type = "anyone")
 ```
@@ -58,18 +61,19 @@ file <- file |>
 This comes up often enough that we’ve made a convenience wrapper:
 
 ``` r
+
 file <- file |>
   drive_share_anyone()
 #> Permissions updated:
 #> • role = reader
 #> • type = anyone
 #> For file:
-#> • chicken-perm-article.txt <id: 1jTKLW3snFkU49Vgy6HN2nHDK2GEGwms->
+#> • chicken-perm-article.txt <id: 1zoopAQfpJjw4361r5jHTEHtaOPX7Y-b_>
 file
 #> # A dribble: 1 × 5
 #>   name              shared id       drive_resource permissions_resource
 #>   <chr>             <lgl>  <drv_id> <list>         <list>              
-#> 1 chicken-perm-art… TRUE   1jTKLW3… <named list>   <named list [2]>
+#> 1 chicken-perm-art… TRUE   1zoopAQ… <named list>   <named list [2]>
 ```
 
 We see that the file is now `shared = TRUE`.
@@ -83,6 +87,7 @@ issue](https://github.com/tidyverse/googledrive/issues/180)*). We use
 other packages in the tidyverse now for this data wrangling.
 
 ``` r
+
 library(tidyverse)
 
 perm <- pluck(file, "permissions_resource", 1, "permissions")
@@ -101,6 +106,7 @@ We’ve suppressed execution of the above chunk but here’s some static,
 indicative output:
 
 ``` r
+
 #> # A tibble: 3 x 5
 #>   id           name            type   role  email
 #>   <chr>        <chr>           <chr>  <chr> <chr>
@@ -112,7 +118,8 @@ indicative output:
 ## Clean up
 
 ``` r
+
 drive_rm(file)
 #> File deleted:
-#> • chicken-perm-article.txt <id: 1jTKLW3snFkU49Vgy6HN2nHDK2GEGwms->
+#> • chicken-perm-article.txt <id: 1zoopAQfpJjw4361r5jHTEHtaOPX7Y-b_>
 ```

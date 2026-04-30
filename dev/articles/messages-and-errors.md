@@ -1,6 +1,7 @@
 # Messages and errors in googledrive
 
 ``` r
+
 library(googledrive)
 ```
 
@@ -22,6 +23,7 @@ all wrappers around cli functions, such as
 nice.*
 
 ``` r
+
 drive_bullets(c(
         "noindent",
   " " = "indent",
@@ -86,6 +88,7 @@ How we use the inline classes:
 - `.arg`, `.fun`, `.path`, `.cls`, `.url` for their usual purpose
 
 ``` r
+
 drive_bullets(c(
   "We need to talk about the {.arg foofy} argument to {.fun blarg}",
   "You provided {.field a_very_weird_value} and I suspect you're confused \\
@@ -113,6 +116,7 @@ that they misunderstand something about googledrive or Google Drive or
 their Drive files. Examples:
 
 ``` r
+
 drive_bullets(c(
   "!" = "Ignoring {.arg type}. Only consulted for native Google file types.",
   " " = "MIME type of {.arg file}: {.field mime_type}."
@@ -143,6 +147,7 @@ drive_bullets(c(
 Information “i”: I’m just keeping you informed of how my work is going.
 
 ``` r
+
 drive_bullets(c(
   "i" = "No pre-existing file at this filepath. Calling \\
          {.fun drive_upload}."
@@ -183,6 +188,7 @@ method for `dribble`. This is likely to be replaced by something in cli
 itself in due course.
 
 ``` r
+
 gargle_map_cli(letters[1:3])
 #> [1] "{.field a}" "{.field b}" "{.field c}"
 ```
@@ -195,6 +201,7 @@ interpolating into a string with glue/cli markup, where
 [`{}`](https://rdrr.io/r/base/Paren.html) has the usual meaning.
 
 ``` r
+
 gargle_map_cli(letters[4:6], template = "how about a path {.path <<x>>}?")
 #> [1] "how about a path {.path d}?" "how about a path {.path e}?"
 #> [3] "how about a path {.path f}?"
@@ -204,6 +211,7 @@ The `gargle_map_cli.dribble()` method makes a cli-marked up string for
 each row of the dribble, i.e. for each Drive file.
 
 ``` r
+
 dat <- drive_find(n_max = 5)
 gargle_map_cli(dat)
 #> [1] "{.drivepath chicken_poem.txt} {cli::col_grey('<id: 1lAxO_zr06v6pL6dyQJ9duwH1j2ztQ3lB>')}"          
@@ -224,6 +232,7 @@ which adds the bullet-specifying names and does aesthetically pleasing
 truncation.
 
 ``` r
+
 bulletize(gargle_map_cli(letters))
 #>               *               *               *               * 
 #>    "{.field a}"    "{.field b}"    "{.field c}"    "{.field d}" 

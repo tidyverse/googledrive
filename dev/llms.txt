@@ -9,6 +9,7 @@ googledrive allows you to interact with files on Google Drive from R.
 Install from CRAN:
 
 ``` r
+
 install.packages("googledrive")
 ```
 
@@ -17,6 +18,7 @@ install.packages("googledrive")
 ### Load googledrive
 
 ``` r
+
 library("googledrive")
 ```
 
@@ -44,6 +46,7 @@ browser here, to authenticate yourself and authorize the googledrive
 package to deal on your behalf with Google Drive.
 
 ``` r
+
 drive_find(n_max = 30)
 #> # A dribble: 30 × 3
 #>    name                       id                                drive_resource
@@ -67,6 +70,7 @@ understands MIME types, file extensions, and a few human-friendly
 keywords.
 
 ``` r
+
 drive_find(pattern = "chicken")
 drive_find(type = "spreadsheet") ## Google Sheets!
 drive_find(type = "csv") ## MIME type = "text/csv"
@@ -80,6 +84,7 @@ For example, to see all files that you’ve starred and that are readable
 by “anyone with a link”, do this:
 
 ``` r
+
 (files <- drive_find(q = c("starred = true", "visibility = 'anyoneWithLink'")))
 #> # A dribble: 2 × 3
 #>   name       id                                drive_resource   
@@ -101,6 +106,7 @@ searches by file properties, but you can also identify files by name
 [`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md).
 
 ``` r
+
 (x <- drive_get("~/abc/def/googledrive-NEWS.md"))
 #> ✔ The input `path` resolved to exactly 1 file.
 #> # A dribble: 1 × 4
@@ -115,6 +121,7 @@ It works on file ids (for obvious reasons!), various forms of Drive
 URLs, and `dribble`s.
 
 ``` r
+
 x$id
 #> <drive_id[1]>
 #> [1] 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm
@@ -144,6 +151,7 @@ paths. This function can also extract file ids from various URLs.
 We can upload any file type.
 
 ``` r
+
 (chicken <- drive_upload(
   drive_example_local("chicken.csv"),
   "index-chicken.csv"
@@ -166,6 +174,7 @@ type. We can overrule this by using the `type` parameter to upload as a
 Google Spreadsheet. Let’s delete this file first.
 
 ``` r
+
 drive_rm(chicken)
 #> File deleted:
 #> • 'index-chicken.csv' <id: 1y3rPXUnBhqW7ay6oBbfsNauc4UZ8dwpw>
@@ -194,6 +203,7 @@ sharing permissions. You can check the sharing status by running
 and parks more detailed metadata in a `permissions_resource` variable.
 
 ``` r
+
 chicken_sheet |>
   drive_reveal("permissions")
 #> # A dribble: 1 × 5
@@ -206,6 +216,7 @@ Here’s how to grant anyone with the link permission to view this data
 set.
 
 ``` r
+
 (chicken_sheet <- chicken_sheet |>
   drive_share(role = "reader", type = "anyone"))
 #> Permissions updated:
@@ -231,6 +242,7 @@ online. You can check your publication status by running
 variable.
 
 ``` r
+
 chicken_sheet |>
   drive_reveal("published")
 #> # A dribble: 1 × 7
@@ -245,6 +257,7 @@ By default,
 will publish your most recent version.
 
 ``` r
+
 (chicken_sheet <- drive_publish(chicken_sheet))
 #> File now published:
 #> • 'index-chicken-sheet' <id: 1RnvPDsw19uUKqY8K01N8m-7XViOdsz4fFotBlqnUIWU>
@@ -267,6 +280,7 @@ extension in `path`. For example, if I would like to download the
 “chicken_sheet” Google Sheet as a `.csv` I could run the following.
 
 ``` r
+
 drive_download("index-chicken-sheet", type = "csv")
 #> File downloaded:
 #> • 'index-chicken-sheet' <id: 1RnvPDsw19uUKqY8K01N8m-7XViOdsz4fFotBlqnUIWU>
@@ -277,6 +291,7 @@ drive_download("index-chicken-sheet", type = "csv")
 Alternatively, I could specify type via the `path` parameter.
 
 ``` r
+
 drive_download(
   "index-chicken-sheet",
   path = "index-chicken-sheet.csv",
@@ -295,6 +310,7 @@ Finally, you could just allow export to the default type. In the case of
 Google Sheets, this is an Excel workbook:
 
 ``` r
+
 drive_download("index-chicken-sheet")
 #> File downloaded:
 #> • 'index-chicken-sheet' <id: 1RnvPDsw19uUKqY8K01N8m-7XViOdsz4fFotBlqnUIWU>
@@ -308,6 +324,7 @@ Downloading files that are *not* Google type files is even simpler,
 i.e. it does not require any conversion or type info.
 
 ``` r
+
 # download it and prove we got it
 drive_download("chicken.txt")
 #> File downloaded:
@@ -326,6 +343,7 @@ readLines("chicken.txt") |> head()
 #### Clean up
 
 ``` r
+
 file.remove(c(
   "index-chicken-sheet.csv",
   "index-chicken-sheet.xlsx",

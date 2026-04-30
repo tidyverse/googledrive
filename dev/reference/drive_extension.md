@@ -27,6 +27,7 @@ Character. File extension.
 ## Examples
 
 ``` r
+
 ## get the extension for mime type image/jpeg
 drive_extension("image/jpeg")
 #> [1] "jpeg"

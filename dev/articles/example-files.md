@@ -13,6 +13,7 @@ googledrive, we also do
 [`drive_deauth()`](https://googledrive.tidyverse.org/dev/reference/drive_deauth.md).
 
 ``` r
+
 library(googledrive)
 
 drive_deauth()
@@ -28,6 +29,7 @@ to get the full filepaths.
 handy functions for getting just the filename.
 
 ``` r
+
 (x <- drive_examples_local())
 #> [1] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.csv"    
 #> [2] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.jpg"    
@@ -47,6 +49,7 @@ basename(x)
 You can filter the files by providing a regular expression.
 
 ``` r
+
 drive_examples_local("csv") |> basename()
 #> [1] "chicken.csv"     "imdb_latin1.csv"
 ```
@@ -57,6 +60,7 @@ and provide the file’s name (or any sufficiently specific regular
 expression):
 
 ``` r
+
 drive_examples_local("chicken.jpg") |> basename()
 #> [1] "chicken.jpg"
 
@@ -68,6 +72,7 @@ Here’s how you might use one of these examples to start demonstrating
 something with googledrive:
 
 ``` r
+
 new_google_sheet <- drive_examples_local("chicken.csv") |>
   drive_upload(type = "spreadsheet")
 # ... example or reprex continues ...
@@ -81,6 +86,7 @@ to get a `dribble` of the remote example files. Here I also reveal their
 MIME type.
 
 ``` r
+
 drive_examples_remote() |>
   drive_reveal("mime_type")
 #> # A dribble: 9 × 4
@@ -105,31 +111,32 @@ files, but that are derived from them:
 
 Here’s a clickable table of the remote example files:
 
-| name (these are links)                                                                                                 | id                                            |
-|:-----------------------------------------------------------------------------------------------------------------------|:----------------------------------------------|
-| [chicken_doc](https://docs.google.com/document/d/1X9pd4nOjl33zDFfTjw-_eFL7Qb9_g6VfVFDp1PPae94/edit?usp=drivesdk)       | 1X9pd4nOjl33zDFfTjw-\_eFL7Qb9_g6VfVFDp1PPae94 |
-| [chicken_sheet](https://docs.google.com/spreadsheets/d/1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU/edit?usp=drivesdk) | 1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU  |
-| [chicken.csv](https://drive.google.com/file/d/1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7/view?usp=drivesdk)                     | 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7             |
-| [chicken.jpg](https://drive.google.com/file/d/1b2_ZjzgvrSw0hBMgn-rnEbjp3Uq0XTKJ/view?usp=drivesdk)                     | 1b2_ZjzgvrSw0hBMgn-rnEbjp3Uq0XTKJ             |
-| [chicken.pdf](https://drive.google.com/file/d/13OQcAo8hkh0Ja5Wxlmi4a8aNvPK7pDkO/view?usp=drivesdk)                     | 13OQcAo8hkh0Ja5Wxlmi4a8aNvPK7pDkO             |
-| [chicken.txt](https://drive.google.com/file/d/1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y/view?usp=drivesdk)                     | 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y             |
-| [imdb_latin1.csv](https://drive.google.com/file/d/1YJSVa0LTaVtGrZ4eVXYrSQ4y50uFl5bw/view?usp=drivesdk)                 | 1YJSVa0LTaVtGrZ4eVXYrSQ4y50uFl5bw             |
-| [r_about.html](https://drive.google.com/file/d/1sfCT0zqDz3vpZZlv_4nFlhq2WMaKqjow/view?usp=drivesdk)                    | 1sfCT0zqDz3vpZZlv_4nFlhq2WMaKqjow             |
-| [r_logo.jpg](https://drive.google.com/file/d/1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW/view?usp=drivesdk)                      | 1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW             |
+| name (these are links) | id |
+|:---|:---|
+| [chicken_doc](https://docs.google.com/document/d/1X9pd4nOjl33zDFfTjw-_eFL7Qb9_g6VfVFDp1PPae94/edit?usp=drivesdk) | 1X9pd4nOjl33zDFfTjw-\_eFL7Qb9_g6VfVFDp1PPae94 |
+| [chicken_sheet](https://docs.google.com/spreadsheets/d/1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU/edit?usp=drivesdk) | 1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU |
+| [chicken.csv](https://drive.google.com/file/d/1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7/view?usp=drivesdk) | 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7 |
+| [chicken.jpg](https://drive.google.com/file/d/1b2_ZjzgvrSw0hBMgn-rnEbjp3Uq0XTKJ/view?usp=drivesdk) | 1b2_ZjzgvrSw0hBMgn-rnEbjp3Uq0XTKJ |
+| [chicken.pdf](https://drive.google.com/file/d/13OQcAo8hkh0Ja5Wxlmi4a8aNvPK7pDkO/view?usp=drivesdk) | 13OQcAo8hkh0Ja5Wxlmi4a8aNvPK7pDkO |
+| [chicken.txt](https://drive.google.com/file/d/1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y/view?usp=drivesdk) | 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y |
+| [imdb_latin1.csv](https://drive.google.com/file/d/1YJSVa0LTaVtGrZ4eVXYrSQ4y50uFl5bw/view?usp=drivesdk) | 1YJSVa0LTaVtGrZ4eVXYrSQ4y50uFl5bw |
+| [r_about.html](https://drive.google.com/file/d/1sfCT0zqDz3vpZZlv_4nFlhq2WMaKqjow/view?usp=drivesdk) | 1sfCT0zqDz3vpZZlv_4nFlhq2WMaKqjow |
+| [r_logo.jpg](https://drive.google.com/file/d/1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW/view?usp=drivesdk) | 1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW |
 
 Accessing the remote example files works just like the local files.
 Provide a regular expression to specify the name of target file(s). Use
 the singular form to target exactly one file.
 
 ``` r
+
 drive_examples_remote("chicken")
 #> # A dribble: 6 × 3
 #>   name          id       drive_resource   
 #>   <chr>         <drv_id> <list>           
-#> 1 chicken_doc   1X9pd4n… <named list [31]>
+#> 1 chicken_doc   1X9pd4n… <named list [32]>
 #> 2 chicken_sheet 1SeFXkr… <named list [31]>
 #> 3 chicken.csv   1VOh6wW… <named list [38]>
-#> 4 chicken.jpg   1b2_Zjz… <named list [40]>
+#> 4 chicken.jpg   1b2_Zjz… <named list [41]>
 #> 5 chicken.pdf   13OQcAo… <named list [39]>
 #> 6 chicken.txt   1wOLeWV… <named list [39]>
 
@@ -144,6 +151,7 @@ Here’s how you might use one of these examples to start demonstrating
 something with googledrive:
 
 ``` r
+
 new_google_doc <- drive_examples_remote("chicken_doc") |>
   drive_cp(name = "I have a chicken problem")
 # ... example or reprex continues ...
