@@ -136,9 +136,9 @@ drive_examples_remote("chicken")
 #> 1 chicken_doc   1X9pd4n… <named list [32]>
 #> 2 chicken_sheet 1SeFXkr… <named list [31]>
 #> 3 chicken.csv   1VOh6wW… <named list [38]>
-#> 4 chicken.jpg   1b2_Zjz… <named list [41]>
+#> 4 chicken.jpg   1b2_Zjz… <named list [40]>
 #> 5 chicken.pdf   13OQcAo… <named list [39]>
-#> 6 chicken.txt   1wOLeWV… <named list [39]>
+#> 6 chicken.txt   1wOLeWV… <named list [40]>
 
 drive_example_remote("logo")
 #> # A dribble: 1 × 3

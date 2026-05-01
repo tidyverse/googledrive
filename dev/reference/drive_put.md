@@ -111,9 +111,9 @@ writeLines(c("beginning", "middle"), local_file)
 file <- drive_put(local_file)
 #> ℹ No pre-existing Drive file at this path. Calling `drive_upload()`.
 #> Local file:
-#> • /tmp/RtmpFHdV4V/drive_put_1a8d18f90b57.txt
+#> • /tmp/Rtmp8ILGvB/drive_put_19c817caa963.txt
 #> Uploaded into Drive file:
-#> • drive_put_1a8d18f90b57.txt <id: 1VDvM97hpHJSxMpamkH3LPW8J6RJxL8IH>
+#> • drive_put_19c817caa963.txt <id: 1iRv4gfWyKzOaW_XR-MUXoGEmTWtEhWdq>
 #> With MIME type:
 #> • text/plain
 
@@ -124,12 +124,12 @@ cat("end", file = local_file, sep = "\n", append = TRUE)
 file <- drive_put(local_file)
 #> ℹ A Drive file already exists at this path. Calling `drive_update()`.
 #> File updated:
-#> • drive_put_1a8d18f90b57.txt <id: 1VDvM97hpHJSxMpamkH3LPW8J6RJxL8IH>
+#> • drive_put_19c817caa963.txt <id: 1iRv4gfWyKzOaW_XR-MUXoGEmTWtEhWdq>
 
 # create a second file at this filepath
 file2 <- drive_create(basename(local_file))
 #> Created Drive file:
-#> • drive_put_1a8d18f90b57.txt <id: 1SNgFprhlIYUOeL_35MYgn9xaj63JrOV2>
+#> • drive_put_19c817caa963.txt <id: 1FtmwQPYIWW48UF4C74e0l-CNhBlzU37P>
 #> With MIME type:
 #> • text/plain
 
@@ -137,13 +137,13 @@ file2 <- drive_create(basename(local_file))
 drive_put(local_file)
 #> Error in drive_put(local_file): Multiple items already exist on Drive at the target filepath.
 #> Unclear what `drive_put()` should do. Exiting.
-#> • drive_put_1a8d18f90b57.txt <id: 1SNgFprhlIYUOeL_35MYgn9xaj63JrOV2>
-#> • drive_put_1a8d18f90b57.txt <id: 1VDvM97hpHJSxMpamkH3LPW8J6RJxL8IH>
+#> • drive_put_19c817caa963.txt <id: 1FtmwQPYIWW48UF4C74e0l-CNhBlzU37P>
+#> • drive_put_19c817caa963.txt <id: 1iRv4gfWyKzOaW_XR-MUXoGEmTWtEhWdq>
 
 # Clean up
 drive_find("drive_put_.+[.]txt") |> drive_rm()
 #> Files deleted:
-#> • drive_put_1a8d18f90b57.txt <id: 1SNgFprhlIYUOeL_35MYgn9xaj63JrOV2>
-#> • drive_put_1a8d18f90b57.txt <id: 1VDvM97hpHJSxMpamkH3LPW8J6RJxL8IH>
+#> • drive_put_19c817caa963.txt <id: 1FtmwQPYIWW48UF4C74e0l-CNhBlzU37P>
+#> • drive_put_19c817caa963.txt <id: 1iRv4gfWyKzOaW_XR-MUXoGEmTWtEhWdq>
 unlink(local_file)
 ```
