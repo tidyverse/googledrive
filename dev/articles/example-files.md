@@ -134,17 +134,17 @@ drive_examples_remote("chicken")
 #>   name          id       drive_resource   
 #>   <chr>         <drv_id> <list>           
 #> 1 chicken_doc   1X9pd4n… <named list [32]>
-#> 2 chicken_sheet 1SeFXkr… <named list [31]>
-#> 3 chicken.csv   1VOh6wW… <named list [38]>
-#> 4 chicken.jpg   1b2_Zjz… <named list [40]>
-#> 5 chicken.pdf   13OQcAo… <named list [39]>
+#> 2 chicken_sheet 1SeFXkr… <named list [32]>
+#> 3 chicken.csv   1VOh6wW… <named list [39]>
+#> 4 chicken.jpg   1b2_Zjz… <named list [41]>
+#> 5 chicken.pdf   13OQcAo… <named list [40]>
 #> 6 chicken.txt   1wOLeWV… <named list [40]>
 
 drive_example_remote("logo")
 #> # A dribble: 1 × 3
 #>   name       id                                drive_resource   
 #>   <chr>      <drv_id>                          <list>           
-#> 1 r_logo.jpg 1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW <named list [40]>
+#> 1 r_logo.jpg 1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW <named list [41]>
 ```
 
 Here’s how you might use one of these examples to start demonstrating

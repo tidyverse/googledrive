@@ -110,14 +110,14 @@ Wraps the `files.copy` endpoint:
 #> # A dribble: 1 × 3
 #>   name        id                                drive_resource   
 #>   <chr>       <drv_id>                          <list>           
-#> 1 chicken.txt 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y <named list [40]>
+#> 1 chicken.txt 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y <named list [41]>
 
 # Make a "Copy of" copy in your My Drive
 cp1 <- drive_cp(src_file)
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • Copy of chicken.txt <id: 1o7iMuXdhG8vAC8_iHRqeJIEHRfaKkMPz>
+#> • Copy of chicken.txt <id: 1xgK9EVS6RQcQLRUpiMQ91xR1TwNkMTAz>
 
 # Make an explicitly named copy, in a different folder, and star it.
 # The starring is an example of providing metadata via `...`.
@@ -125,7 +125,7 @@ cp1 <- drive_cp(src_file)
 # it just gets passed through to the API.
 folder <- drive_mkdir("drive-cp-folder")
 #> Created Drive file:
-#> • drive-cp-folder <id: 1UnkGhzIkxFlJnLrzrl7moPonpMjK6wp9>
+#> • drive-cp-folder <id: 1SI9NdZzqlWl2shbnNwVAWhvT355DxNj4>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 cp2 <- drive_cp(
@@ -138,12 +138,12 @@ cp2 <- drive_cp(
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
 #> • drive-cp-folder/chicken-cp.txt
-#>   <id: 1njPoAlfh3DKxmGq46WLoQZ6HBm4XObfd>
+#>   <id: 1inDH6S23TBlyB_LwONMz7KnBwTsEfbXb>
 drive_reveal(cp2, "starred")
 #> # A dribble: 1 × 4
 #>   name           starred id       drive_resource   
 #>   <chr>          <lgl>   <drv_id> <list>           
-#> 1 chicken-cp.txt TRUE    1njPoAl… <named list [43]>
+#> 1 chicken-cp.txt TRUE    1inDH6S… <named list [44]>
 
 # `overwrite = FALSE` errors if file already exists at target filepath
 # THIS WILL ERROR!
@@ -152,26 +152,26 @@ drive_reveal(cp2, "starred")
 # `overwrite = TRUE` moves an existing file to trash, then proceeds
 cp3 <- drive_cp(src_file, name = "Copy of chicken.txt", overwrite = TRUE)
 #> File trashed:
-#> • Copy of chicken.txt <id: 1o7iMuXdhG8vAC8_iHRqeJIEHRfaKkMPz>
+#> • Copy of chicken.txt <id: 1xgK9EVS6RQcQLRUpiMQ91xR1TwNkMTAz>
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • Copy of chicken.txt <id: 1cxz1CDlzbHNFCFlRVaEmZA--plNmGQFV>
+#> • Copy of chicken.txt <id: 1CDOxvjCsNnoRKUJbhx6eXXdMTN3P2JE6>
 
 # Delete all of our copies and the new folder!
 drive_rm(cp1, cp2, cp3, folder)
 #> Files deleted:
-#> • Copy of chicken.txt <id: 1o7iMuXdhG8vAC8_iHRqeJIEHRfaKkMPz>
-#> • chicken-cp.txt <id: 1njPoAlfh3DKxmGq46WLoQZ6HBm4XObfd>
-#> • Copy of chicken.txt <id: 1cxz1CDlzbHNFCFlRVaEmZA--plNmGQFV>
-#> • drive-cp-folder <id: 1UnkGhzIkxFlJnLrzrl7moPonpMjK6wp9>
+#> • Copy of chicken.txt <id: 1xgK9EVS6RQcQLRUpiMQ91xR1TwNkMTAz>
+#> • chicken-cp.txt <id: 1inDH6S23TBlyB_LwONMz7KnBwTsEfbXb>
+#> • Copy of chicken.txt <id: 1CDOxvjCsNnoRKUJbhx6eXXdMTN3P2JE6>
+#> • drive-cp-folder <id: 1SI9NdZzqlWl2shbnNwVAWhvT355DxNj4>
 
 # Target an official example file that's a csv file
 (csv_file <- drive_example_remote("chicken.csv"))
 #> # A dribble: 1 × 3
 #>   name        id                                drive_resource   
 #>   <chr>       <drv_id>                          <list>           
-#> 1 chicken.csv 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7 <named list [39]>
+#> 1 chicken.csv 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7 <named list [40]>
 
 # copy AND AT THE SAME TIME convert it to a Google Sheet
 chicken_sheet <- drive_cp(
@@ -183,7 +183,7 @@ chicken_sheet <- drive_cp(
 #> • chicken.csv <id: 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7>
 #> Copied to file:
 #> • chicken-sheet-copy
-#>   <id: 1GALuoCrWDb0TqUPIrNg9LqMh1M7XhhoRb_rLoVuUUg8>
+#>   <id: 1IHjXTDer1ateBUpewSOUeqkOGrOuWVtp5NGIWP03ZXk>
 # is it really a Google Sheet?
 drive_reveal(chicken_sheet, "mime_type")$mime_type
 #> [1] "application/vnd.google-apps.spreadsheet"
@@ -195,5 +195,5 @@ drive_reveal(chicken_sheet, "mime_type")$mime_type
 drive_rm(chicken_sheet)
 #> File deleted:
 #> • chicken-sheet-copy
-#>   <id: 1GALuoCrWDb0TqUPIrNg9LqMh1M7XhhoRb_rLoVuUUg8>
+#>   <id: 1IHjXTDer1ateBUpewSOUeqkOGrOuWVtp5NGIWP03ZXk>
 ```

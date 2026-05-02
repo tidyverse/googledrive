@@ -84,12 +84,12 @@ a tibble with one row per file.
 #> # A dribble: 1 × 3
 #>   name          id       drive_resource   
 #>   <chr>         <drv_id> <list>           
-#> 1 chicken_sheet 1SeFXkr… <named list [32]>
+#> 1 chicken_sheet 1SeFXkr… <named list [33]>
 
 # Create a shortcut in the default location with the default name
 sc1 <- shortcut_create(src_file)
 #> Created Drive file:
-#> • chicken_sheet <id: 1ukAP7AY5Z_KQeTx32hgvXOedsWuPgzTb>
+#> • chicken_sheet <id: 1wTL5DQXBrDXWYIFocEcRB-BxOQB5Vq_7>
 #> With MIME type:
 #> • application/vnd.google-apps.shortcut
 # This shortcut could now be moved, renamed, etc.
@@ -99,7 +99,7 @@ sc2 <- src_file |>
   shortcut_create(name = "chicken_sheet_second_shortcut")
 #> Created Drive file:
 #> • chicken_sheet_second_shortcut
-#>   <id: 1yBWWsvuy6dBBRQQvtW3vjXCjncKoIDFF>
+#>   <id: 1zp9dQG0zkF0kUFsur2Uwx0cl5t5osnsZ>
 #> With MIME type:
 #> • application/vnd.google-apps.shortcut
 
@@ -107,13 +107,13 @@ sc2 <- src_file |>
 folder <- drive_mkdir("chicken_sheet_shortcut_folder")
 #> Created Drive file:
 #> • chicken_sheet_shortcut_folder
-#>   <id: 1QVeUWLtKalAvqraRMFqMlhZWNKpKkHoR>
+#>   <id: 11THxu1hmRDdhipxgtvPbM5ixjnnQeyzb>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 sc3 <- src_file |>
   shortcut_create(folder)
 #> Created Drive file:
-#> • chicken_sheet <id: 1PCLDDgI0iyhacCcqxeNHbx2ASeSvUU1S>
+#> • chicken_sheet <id: 1Jr45LNp8Jnp6lWo2I6wZ0cZMyE6fz0W2>
 #> With MIME type:
 #> • application/vnd.google-apps.shortcut
 
@@ -122,9 +122,9 @@ sc3 <- src_file |>
 #> # A dribble: 3 × 3
 #>   name                          id       drive_resource   
 #>   <chr>                         <drv_id> <list>           
-#> 1 chicken_sheet                 1PCLDDg… <named list [34]>
-#> 2 chicken_sheet_second_shortcut 1yBWWsv… <named list [34]>
-#> 3 chicken_sheet                 1ukAP7A… <named list [34]>
+#> 1 chicken_sheet                 1Jr45LN… <named list [35]>
+#> 2 chicken_sheet_second_shortcut 1zp9dQG… <named list [35]>
+#> 3 chicken_sheet                 1wTL5DQ… <named list [35]>
 
 # Confirm the shortcuts all target the original file
 dat <- dat |>
@@ -140,10 +140,10 @@ as_id(src_file)
 # Clean up
 drive_rm(sc1, sc2, sc3, folder)
 #> Files deleted:
-#> • chicken_sheet <id: 1ukAP7AY5Z_KQeTx32hgvXOedsWuPgzTb>
+#> • chicken_sheet <id: 1wTL5DQXBrDXWYIFocEcRB-BxOQB5Vq_7>
 #> • chicken_sheet_second_shortcut
-#>   <id: 1yBWWsvuy6dBBRQQvtW3vjXCjncKoIDFF>
-#> • chicken_sheet <id: 1PCLDDgI0iyhacCcqxeNHbx2ASeSvUU1S>
+#>   <id: 1zp9dQG0zkF0kUFsur2Uwx0cl5t5osnsZ>
+#> • chicken_sheet <id: 1Jr45LNp8Jnp6lWo2I6wZ0cZMyE6fz0W2>
 #> • chicken_sheet_shortcut_folder
-#>   <id: 1QVeUWLtKalAvqraRMFqMlhZWNKpKkHoR>
+#>   <id: 11THxu1hmRDdhipxgtvPbM5ixjnnQeyzb>
 ```

@@ -52,28 +52,28 @@ drive_examples_remote()
 #> # A dribble: 9 × 3
 #>   name            id       drive_resource   
 #>   <chr>           <drv_id> <list>           
-#> 1 chicken_doc     1X9pd4n… <named list [32]>
-#> 2 chicken_sheet   1SeFXkr… <named list [32]>
-#> 3 chicken.csv     1VOh6wW… <named list [39]>
-#> 4 chicken.jpg     1b2_Zjz… <named list [41]>
-#> 5 chicken.pdf     13OQcAo… <named list [40]>
-#> 6 chicken.txt     1wOLeWV… <named list [40]>
-#> 7 imdb_latin1.csv 1YJSVa0… <named list [39]>
-#> 8 r_about.html    1sfCT0z… <named list [40]>
-#> 9 r_logo.jpg      1J4v-iy… <named list [41]>
+#> 1 chicken_doc     1X9pd4n… <named list [33]>
+#> 2 chicken_sheet   1SeFXkr… <named list [33]>
+#> 3 chicken.csv     1VOh6wW… <named list [40]>
+#> 4 chicken.jpg     1b2_Zjz… <named list [42]>
+#> 5 chicken.pdf     13OQcAo… <named list [41]>
+#> 6 chicken.txt     1wOLeWV… <named list [41]>
+#> 7 imdb_latin1.csv 1YJSVa0… <named list [40]>
+#> 8 r_about.html    1sfCT0z… <named list [41]>
+#> 9 r_logo.jpg      1J4v-iy… <named list [42]>
 drive_examples_remote("chicken")
 #> # A dribble: 6 × 3
 #>   name          id       drive_resource   
 #>   <chr>         <drv_id> <list>           
-#> 1 chicken_doc   1X9pd4n… <named list [32]>
-#> 2 chicken_sheet 1SeFXkr… <named list [32]>
-#> 3 chicken.csv   1VOh6wW… <named list [39]>
-#> 4 chicken.jpg   1b2_Zjz… <named list [41]>
-#> 5 chicken.pdf   13OQcAo… <named list [40]>
-#> 6 chicken.txt   1wOLeWV… <named list [40]>
+#> 1 chicken_doc   1X9pd4n… <named list [33]>
+#> 2 chicken_sheet 1SeFXkr… <named list [33]>
+#> 3 chicken.csv   1VOh6wW… <named list [40]>
+#> 4 chicken.jpg   1b2_Zjz… <named list [42]>
+#> 5 chicken.pdf   13OQcAo… <named list [41]>
+#> 6 chicken.txt   1wOLeWV… <named list [41]>
 drive_example_remote("chicken_doc")
 #> # A dribble: 1 × 3
 #>   name        id       drive_resource   
 #>   <chr>       <drv_id> <list>           
-#> 1 chicken_doc 1X9pd4n… <named list [32]>
+#> 1 chicken_doc 1X9pd4n… <named list [33]>
 ```

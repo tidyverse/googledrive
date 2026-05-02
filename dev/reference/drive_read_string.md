@@ -63,7 +63,7 @@ drive_read_raw(file, type = NULL)
 #> # A dribble: 1 × 3
 #>   name        id                                drive_resource   
 #>   <chr>       <drv_id>                          <list>           
-#> 1 chicken.csv 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7 <named list [39]>
+#> 1 chicken.csv 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7 <named list [40]>
 read.csv(text = chicken_csv |> drive_read_string())
 #> No encoding supplied: defaulting to UTF-8.
 #>                   chicken            breed     sex
@@ -84,7 +84,7 @@ read.csv(text = chicken_csv |> drive_read_string())
 #> # A dribble: 1 × 3
 #>   name        id       drive_resource   
 #>   <chr>       <drv_id> <list>           
-#> 1 chicken_doc 1X9pd4n… <named list [32]>
+#> 1 chicken_doc 1X9pd4n… <named list [33]>
 chicken_doc |>
   # NOTE: we must specify an export MIME type
   drive_read_string(type = "text/plain") |>

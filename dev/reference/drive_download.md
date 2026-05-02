@@ -87,7 +87,7 @@ the Drive API documentation.
 #> # A dribble: 1 × 3
 #>   name          id       drive_resource   
 #>   <chr>         <drv_id> <list>           
-#> 1 chicken_sheet 1SeFXkr… <named list [32]>
+#> 1 chicken_sheet 1SeFXkr… <named list [33]>
 
 # Download Sheet as csv, explicit type
 downloaded_file <- drive_download(src_file, type = "csv")
