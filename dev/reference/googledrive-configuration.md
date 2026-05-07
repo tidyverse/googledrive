@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1Arj-UkdpwKGcr3WIQN73Zi9p8Thpvp18Fw_l_n-Yr2Y>
+#> • drive-quiet-demo <id: 1wS1Z-1aVGP4gW6GTamNPrSw8Xx25SjE6D9nVAVTXfDM>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1Arj-Uk… <named list [38]>
+#> 1 drive-quiet-demo 1wS1Z-1… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1Arj-UkdpwKGcr3WIQN73Zi9p8Thpvp18Fw_l_n-Yr2Y>
+#> • drive-quiet-demo <id: 1wS1Z-1aVGP4gW6GTamNPrSw8Xx25SjE6D9nVAVTXfDM>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1Arj-Uk… <named list [39]>
+#> 1 drive-quiet-demo TRUE    1wS1Z-1… <named list [38]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -102,15 +102,8 @@ x$name
 
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
-#> ✖ Request 1 failed [500: DATA_LOSS].
-#> ℹ Will retry in 4s.
-#> ⠙ Retry happens in  3s
-#> ⠹ Retry happens in  0s
-#> ✔ Request 2 successful!
-#> ⠹ Retry happens in  0s
-#> ⠹ Retry happens in  0s
 #> File updated:
-#> • drive-quiet-works <id: 1Arj-UkdpwKGcr3WIQN73Zi9p8Thpvp18Fw_l_n-Yr2Y>
+#> • drive-quiet-works <id: 1wS1Z-1aVGP4gW6GTamNPrSw8Xx25SjE6D9nVAVTXfDM>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -122,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1Arj-Uk… <named list [39]>
+#> 1 drive-quiet-works FALSE   1wS1Z-1… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1Arj-UkdpwKGcr3WIQN73Zi9p8Thpvp18Fw_l_n-Yr2Y>
+#> • drive-quiet-works <id: 1wS1Z-1aVGP4gW6GTamNPrSw8Xx25SjE6D9nVAVTXfDM>
 ```
