@@ -1,7 +1,5 @@
 isFALSE <- function(x) identical(x, FALSE)
 
-is_toggle <- function(x) length(x) == 1L && is.logical(x)
-
 last <- function(x) pluck(x, length(x))
 
 escape_regex <- function(x) {
