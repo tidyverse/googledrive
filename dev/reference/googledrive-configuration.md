@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1kmHY9XeJg78mEoPMXU47pgGirQ3KlMGWViDr__q6PVA>
+#> • drive-quiet-demo <id: 1S2waW5W7avRrD0Ui8DG-R9-VIyegjKeN0_dXdATQTN4>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1kmHY9X… <named list [38]>
+#> 1 drive-quiet-demo 1S2waW5… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1kmHY9XeJg78mEoPMXU47pgGirQ3KlMGWViDr__q6PVA>
+#> • drive-quiet-demo <id: 1S2waW5W7avRrD0Ui8DG-R9-VIyegjKeN0_dXdATQTN4>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1kmHY9X… <named list [39]>
+#> 1 drive-quiet-demo TRUE    1S2waW5… <named list [38]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1kmHY9XeJg78mEoPMXU47pgGirQ3KlMGWViDr__q6PVA>
+#> • drive-quiet-works <id: 1S2waW5W7avRrD0Ui8DG-R9-VIyegjKeN0_dXdATQTN4>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1kmHY9X… <named list [39]>
+#> 1 drive-quiet-works FALSE   1S2waW5… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1kmHY9XeJg78mEoPMXU47pgGirQ3KlMGWViDr__q6PVA>
+#> • drive-quiet-works <id: 1S2waW5W7avRrD0Ui8DG-R9-VIyegjKeN0_dXdATQTN4>
 ```
