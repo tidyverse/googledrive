@@ -108,7 +108,7 @@ Wraps the `files.create` endpoint:
 # your 'My Drive' root folder and star it
 wordstar <- drive_create("WordStar", type = "document", starred = TRUE)
 #> Created Drive file:
-#> • WordStar <id: 18RSeyYIOFkDd5LztMMLOOr75C0m_9uTId2VQyC7JNN8>
+#> • WordStar <id: 1EdSc39MkApYKu4ZOrhtfcN2yRyQqiU3bzCGSjuePJ1A>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 
@@ -124,7 +124,7 @@ execuvision <- drive_create(
   description = "deeply nested bullet lists FTW"
 )
 #> Created Drive file:
-#> • ExecuVision <id: 1vIGrSnJzGwxQS-ao7peWjxhHbyJtuhN_D1xLiTLC_-c>
+#> • ExecuVision <id: 1DXHKMdb4ivETckH1FSSOSHVQBUiT5-uQ5tKRe1evk2w>
 #> With MIME type:
 #> • application/vnd.google-apps.presentation
 
@@ -139,19 +139,19 @@ drive_browse(execuvision)
 # then create an empty new Google Sheet in it
 b4xl <- drive_mkdir("b4xl")
 #> Created Drive file:
-#> • b4xl <id: 1vivmYfQ_cSYZpaOn-3_4sQ9Mfmx6iYk9>
+#> • b4xl <id: 1UIgFPdEQ44AUqPQKVivhJd1BLIb-i_h1>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 drive_create("VisiCalc", path = b4xl, type = "spreadsheet")
 #> Created Drive file:
-#> • VisiCalc <id: 140-Q6daRbmrtj2f75ZT8Z0xjN2YqpJkyF64IpOKlOs8>
+#> • VisiCalc <id: 1cnCof4jThUTZhMDkAPD1EuoYZwwFW6IFt64uahHdNbU>
 #> With MIME type:
 #> • application/vnd.google-apps.spreadsheet
 
 # Another way to create a Google Sheet in the folder 'b4xl'
 drive_create("b4xl/SuperCalc", type = "spreadsheet")
 #> Created Drive file:
-#> • SuperCalc <id: 1JaGKPavJu4dcamK42p-5ILBgzEQcoH7mBw7JrmUZdAU>
+#> • SuperCalc <id: 12oIA1U-F_-BQqZMwJY2Xy5q4e9gHIdD_c-ob3yPKUWY>
 #> With MIME type:
 #> • application/vnd.google-apps.spreadsheet
 
@@ -159,7 +159,7 @@ drive_create("b4xl/SuperCalc", type = "spreadsheet")
 # this time specifying parent `path` as a character
 drive_create("Lotus 1-2-3", path = "b4xl", type = "spreadsheet")
 #> Created Drive file:
-#> • Lotus 1-2-3 <id: 1-9qYJGus01AIequGz5-oVt7-7nVk_PML1yufLR4AvCo>
+#> • Lotus 1-2-3 <id: 1fhRozm9mLBw57amYe587ACWFLs62MT4E7PH2QDh-NvA>
 #> With MIME type:
 #> • application/vnd.google-apps.spreadsheet
 
@@ -168,30 +168,30 @@ drive_ls("b4xl")
 #> # A dribble: 3 × 3
 #>   name        id       drive_resource   
 #>   <chr>       <drv_id> <list>           
-#> 1 Lotus 1-2-3 1-9qYJG… <named list [39]>
-#> 2 SuperCalc   1JaGKPa… <named list [39]>
-#> 3 VisiCalc    140-Q6d… <named list [39]>
+#> 1 Lotus 1-2-3 1fhRozm… <named list [39]>
+#> 2 SuperCalc   12oIA1U… <named list [39]>
+#> 3 VisiCalc    1cnCof4… <named list [39]>
 
 # `overwrite = FALSE` errors if file already exists at target filepath
 # THIS WILL ERROR!
 drive_create("VisiCalc", path = b4xl, overwrite = FALSE)
 #> Error in check_for_overwrite(params[["parents"]], params[["name"]], overwrite): 1 item already exists at the target filepath and `overwrite =
 #> FALSE`:
-#> • VisiCalc <id: 140-Q6daRbmrtj2f75ZT8Z0xjN2YqpJkyF64IpOKlOs8>
+#> • VisiCalc <id: 1cnCof4jThUTZhMDkAPD1EuoYZwwFW6IFt64uahHdNbU>
 
 # `overwrite = TRUE` moves an existing file to trash, then proceeds
 drive_create("VisiCalc", path = b4xl, overwrite = TRUE)
 #> File trashed:
-#> • VisiCalc <id: 140-Q6daRbmrtj2f75ZT8Z0xjN2YqpJkyF64IpOKlOs8>
+#> • VisiCalc <id: 1cnCof4jThUTZhMDkAPD1EuoYZwwFW6IFt64uahHdNbU>
 #> Created Drive file:
-#> • VisiCalc <id: 14SiMP3m58UeD39q5ISgYlf0mIeX-2goU>
+#> • VisiCalc <id: 1rNage53-rsynZnO1BjKFxF-sGkEiP9wV>
 #> With MIME type:
 #> • application/octet-stream
 
 # Clean up
 drive_rm(wordstar, b4xl, execuvision)
 #> Files deleted:
-#> • WordStar <id: 18RSeyYIOFkDd5LztMMLOOr75C0m_9uTId2VQyC7JNN8>
-#> • b4xl <id: 1vivmYfQ_cSYZpaOn-3_4sQ9Mfmx6iYk9>
-#> • ExecuVision <id: 1vIGrSnJzGwxQS-ao7peWjxhHbyJtuhN_D1xLiTLC_-c>
+#> • WordStar <id: 1EdSc39MkApYKu4ZOrhtfcN2yRyQqiU3bzCGSjuePJ1A>
+#> • b4xl <id: 1UIgFPdEQ44AUqPQKVivhJd1BLIb-i_h1>
+#> • ExecuVision <id: 1DXHKMdb4ivETckH1FSSOSHVQBUiT5-uQ5tKRe1evk2w>
 ```
