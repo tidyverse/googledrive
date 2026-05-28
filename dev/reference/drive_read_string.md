@@ -89,6 +89,9 @@ chicken_doc |>
   # NOTE: we must specify an export MIME type
   drive_read_string(type = "text/plain") |>
   strsplit(split = "(\r\n|\r|\n)")
+#> ✖ Request 1 failed [500: DATA_LOSS].
+#> ℹ Will retry in 1.8s.
+#> ✔ Request 2 successful!
 #> No encoding supplied: defaulting to UTF-8.
 #> [[1]]
 #> [1] "A chicken whose name was Chantecler"      

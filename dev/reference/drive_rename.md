@@ -71,40 +71,40 @@ a tibble with one row per file.
 # Create a file to rename
 file <- drive_create("file-to-rename")
 #> Created Drive file:
-#> • file-to-rename <id: 1DZm52fcaUaF6Lis9P5P7EhlDTidFZLbu>
+#> • file-to-rename <id: 1E9mEhN5WGz7sdjFTgvulUk7m-kz7lOce>
 #> With MIME type:
 #> • application/octet-stream
 
 # Rename it
 file <- drive_rename(file, name = "renamed-file")
 #> Original file:
-#> • file-to-rename <id: 1DZm52fcaUaF6Lis9P5P7EhlDTidFZLbu>
+#> • file-to-rename <id: 1E9mEhN5WGz7sdjFTgvulUk7m-kz7lOce>
 #> Has been renamed:
-#> • renamed-file <id: 1DZm52fcaUaF6Lis9P5P7EhlDTidFZLbu>
+#> • renamed-file <id: 1E9mEhN5WGz7sdjFTgvulUk7m-kz7lOce>
 
 # `overwrite = FALSE` errors if something already exists at target filepath
 # THIS WILL ERROR!
 drive_create("name-squatter-rename")
 #> Created Drive file:
-#> • name-squatter-rename <id: 1Ck3W8zRsoU6nW_ICA0G0TdsQeXRUcrQc>
+#> • name-squatter-rename <id: 1F3HufGM6ZPBTngv-ekvKxAOWmbZ7I_QM>
 #> With MIME type:
 #> • application/octet-stream
 drive_rename(file, name = "name-squatter-rename", overwrite = FALSE)
 #> Error in check_for_overwrite(parent = params[["addParents"]] %||% parent_before,     name = params[["name"]] %||% file$name, overwrite = overwrite): 1 item already exists at the target filepath and `overwrite =
 #> FALSE`:
-#> • name-squatter-rename <id: 1Ck3W8zRsoU6nW_ICA0G0TdsQeXRUcrQc>
+#> • name-squatter-rename <id: 1F3HufGM6ZPBTngv-ekvKxAOWmbZ7I_QM>
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
 file <- drive_rename(file, name = "name-squatter-rename", overwrite = TRUE)
 #> File trashed:
-#> • name-squatter-rename <id: 1Ck3W8zRsoU6nW_ICA0G0TdsQeXRUcrQc>
+#> • name-squatter-rename <id: 1F3HufGM6ZPBTngv-ekvKxAOWmbZ7I_QM>
 #> Original file:
-#> • renamed-file <id: 1DZm52fcaUaF6Lis9P5P7EhlDTidFZLbu>
+#> • renamed-file <id: 1E9mEhN5WGz7sdjFTgvulUk7m-kz7lOce>
 #> Has been renamed:
-#> • name-squatter-rename <id: 1DZm52fcaUaF6Lis9P5P7EhlDTidFZLbu>
+#> • name-squatter-rename <id: 1E9mEhN5WGz7sdjFTgvulUk7m-kz7lOce>
 
 # Clean up
 drive_rm(file)
 #> File deleted:
-#> • name-squatter-rename <id: 1DZm52fcaUaF6Lis9P5P7EhlDTidFZLbu>
+#> • name-squatter-rename <id: 1E9mEhN5WGz7sdjFTgvulUk7m-kz7lOce>
 ```
