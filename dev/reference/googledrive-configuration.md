@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1dN8An97aQPpAlukwHeesioeKhJ6hISCmCPI9v1249bY>
+#> • drive-quiet-demo <id: 1yAkHdlkr2bwLQ0SiR98Jtj9-N01w-GCzh7-uaJCAExE>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1dN8An9… <named list [38]>
+#> 1 drive-quiet-demo 1yAkHdl… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1dN8An97aQPpAlukwHeesioeKhJ6hISCmCPI9v1249bY>
+#> • drive-quiet-demo <id: 1yAkHdlkr2bwLQ0SiR98Jtj9-N01w-GCzh7-uaJCAExE>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1dN8An9… <named list [39]>
+#> 1 drive-quiet-demo TRUE    1yAkHdl… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1dN8An97aQPpAlukwHeesioeKhJ6hISCmCPI9v1249bY>
+#> • drive-quiet-works <id: 1yAkHdlkr2bwLQ0SiR98Jtj9-N01w-GCzh7-uaJCAExE>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1dN8An9… <named list [39]>
+#> 1 drive-quiet-works FALSE   1yAkHdl… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1dN8An97aQPpAlukwHeesioeKhJ6hISCmCPI9v1249bY>
+#> • drive-quiet-works <id: 1yAkHdlkr2bwLQ0SiR98Jtj9-N01w-GCzh7-uaJCAExE>
 ```
