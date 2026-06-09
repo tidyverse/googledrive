@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1nlEFc27H70fTD9wC4bAPb-bUyIqo6ScxpRXqTP8JOlY>
+#> • drive-quiet-demo <id: 1fzGL5x1ISkmz9EqnIvFBcyw6XbTgJiOpaCl0SBTezow>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1nlEFc2… <named list [38]>
+#> 1 drive-quiet-demo 1fzGL5x… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1nlEFc27H70fTD9wC4bAPb-bUyIqo6ScxpRXqTP8JOlY>
+#> • drive-quiet-demo <id: 1fzGL5x1ISkmz9EqnIvFBcyw6XbTgJiOpaCl0SBTezow>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1nlEFc2… <named list [39]>
+#> 1 drive-quiet-demo TRUE    1fzGL5x… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1nlEFc27H70fTD9wC4bAPb-bUyIqo6ScxpRXqTP8JOlY>
+#> • drive-quiet-works <id: 1fzGL5x1ISkmz9EqnIvFBcyw6XbTgJiOpaCl0SBTezow>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1nlEFc2… <named list [39]>
+#> 1 drive-quiet-works FALSE   1fzGL5x… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1nlEFc27H70fTD9wC4bAPb-bUyIqo6ScxpRXqTP8JOlY>
+#> • drive-quiet-works <id: 1fzGL5x1ISkmz9EqnIvFBcyw6XbTgJiOpaCl0SBTezow>
 ```
