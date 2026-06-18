@@ -41,7 +41,6 @@ as_id("https://docs.google.com/spreadsheets/d/qawsedrf16273849/edit#gid=12345")
 x <- drive_find(n_max = 3)
 as_id(x)
 #> <drive_id[3]>
-#> [1] 1xaEuUeISUDODHeX7t1YqFzDCuqVQ9wNm           
-#> [2] 1ix0sld_CLKNOPOGWU4TUE4vCojL_0ivs           
-#> [3] 13IBvS-tAf6qGuLi7Nv2YW2aBNP8aFT6ttkLGYy-3NTo
+#> [1] 1cBrEg2hz0OaJDejS-dKC-pyM8qiM46Fw 1lAxO_zr06v6pL6dyQJ9duwH1j2ztQ3lB
+#> [3] 1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D
 ```
