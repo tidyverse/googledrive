@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 16CB9Szi9a2ljOgFVnh4yZh5yGUCMMF1R_-06YrlCMvw>
+#> • drive-quiet-demo <id: 1P1c3hWbT-xQ-LdqOg44wM6NdFu6s3I_QfR0IMbysROk>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 16CB9Sz… <named list [38]>
+#> 1 drive-quiet-demo 1P1c3hW… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 16CB9Szi9a2ljOgFVnh4yZh5yGUCMMF1R_-06YrlCMvw>
+#> • drive-quiet-demo <id: 1P1c3hWbT-xQ-LdqOg44wM6NdFu6s3I_QfR0IMbysROk>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    16CB9Sz… <named list [39]>
+#> 1 drive-quiet-demo TRUE    1P1c3hW… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 16CB9Szi9a2ljOgFVnh4yZh5yGUCMMF1R_-06YrlCMvw>
+#> • drive-quiet-works <id: 1P1c3hWbT-xQ-LdqOg44wM6NdFu6s3I_QfR0IMbysROk>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   16CB9Sz… <named list [39]>
+#> 1 drive-quiet-works FALSE   1P1c3hW… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 16CB9Szi9a2ljOgFVnh4yZh5yGUCMMF1R_-06YrlCMvw>
+#> • drive-quiet-works <id: 1P1c3hWbT-xQ-LdqOg44wM6NdFu6s3I_QfR0IMbysROk>
 ```
