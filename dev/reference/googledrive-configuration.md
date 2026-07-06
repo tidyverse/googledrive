@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1yJpeDmAnWnqDY__4FGJHOK1Y4cULmoav90aP_QW9YQ0>
+#> • drive-quiet-demo <id: 1T1i43JSgD3FWQ6B09LbI2poij5kjQ9Nuumnb5Uozvqs>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1yJpeDm… <named list [39]>
+#> 1 drive-quiet-demo 1T1i43J… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1yJpeDmAnWnqDY__4FGJHOK1Y4cULmoav90aP_QW9YQ0>
+#> • drive-quiet-demo <id: 1T1i43JSgD3FWQ6B09LbI2poij5kjQ9Nuumnb5Uozvqs>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1yJpeDm… <named list [39]>
+#> 1 drive-quiet-demo TRUE    1T1i43J… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1yJpeDmAnWnqDY__4FGJHOK1Y4cULmoav90aP_QW9YQ0>
+#> • drive-quiet-works <id: 1T1i43JSgD3FWQ6B09LbI2poij5kjQ9Nuumnb5Uozvqs>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1yJpeDm… <named list [39]>
+#> 1 drive-quiet-works FALSE   1T1i43J… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1yJpeDmAnWnqDY__4FGJHOK1Y4cULmoav90aP_QW9YQ0>
+#> • drive-quiet-works <id: 1T1i43JSgD3FWQ6B09LbI2poij5kjQ9Nuumnb5Uozvqs>
 ```
