@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 165UoNeXQEpa_vHFcavaGN-0lTyOajV8iqlCGj4yuPVY>
+#> • drive-quiet-demo <id: 1hDuSvWJ3RHx828Boxqpx1pHyEXeu9mTwgqEXkDBqmgY>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 165UoNe… <named list [38]>
+#> 1 drive-quiet-demo 1hDuSvW… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 165UoNeXQEpa_vHFcavaGN-0lTyOajV8iqlCGj4yuPVY>
+#> • drive-quiet-demo <id: 1hDuSvWJ3RHx828Boxqpx1pHyEXeu9mTwgqEXkDBqmgY>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    165UoNe… <named list [39]>
+#> 1 drive-quiet-demo TRUE    1hDuSvW… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 165UoNeXQEpa_vHFcavaGN-0lTyOajV8iqlCGj4yuPVY>
+#> • drive-quiet-works <id: 1hDuSvWJ3RHx828Boxqpx1pHyEXeu9mTwgqEXkDBqmgY>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   165UoNe… <named list [39]>
+#> 1 drive-quiet-works FALSE   1hDuSvW… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 165UoNeXQEpa_vHFcavaGN-0lTyOajV8iqlCGj4yuPVY>
+#> • drive-quiet-works <id: 1hDuSvWJ3RHx828Boxqpx1pHyEXeu9mTwgqEXkDBqmgY>
 ```
