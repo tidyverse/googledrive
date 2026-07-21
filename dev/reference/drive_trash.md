@@ -47,50 +47,50 @@ file <- drive_example_remote("chicken.txt") |>
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • chicken-trash.txt <id: 1QpkUVmVrbA-cwRCRKtWUNWNm3F5C_pKU>
+#> • chicken-trash.txt <id: 1vdspq8EBN6z33jcdeAwl9v6XvxUb5iH0>
 drive_trash("chicken-trash.txt")
 #> File trashed:
-#> • chicken-trash.txt <id: 1QpkUVmVrbA-cwRCRKtWUNWNm3F5C_pKU>
+#> • chicken-trash.txt <id: 1vdspq8EBN6z33jcdeAwl9v6XvxUb5iH0>
 
 # Confirm it's in the trash
 drive_find(trashed = TRUE)
-#> # A dribble: 87 × 3
+#> # A dribble: 90 × 3
 #>    name                 id       drive_resource   
 #>    <chr>                <drv_id> <list>           
-#>  1 chicken-trash.txt    1QpkUVm… <named list [44]>
-#>  2 name-squatter-rename 1WLkRoq… <named list [42]>
-#>  3 name-squatter-mv     13LL-GO… <named list [42]>
-#>  4 name-squatter-upload 1jaFtIM… <named list [42]>
-#>  5 name-squatter-rename 1rYno1O… <named list [42]>
-#>  6 name-squatter-mv     17wSaw7… <named list [42]>
-#>  7 name-squatter-upload 1M7Y7TU… <named list [42]>
-#>  8 name-squatter-rename 1ggq7DW… <named list [42]>
-#>  9 name-squatter-mv     12INVuE… <named list [42]>
-#> 10 name-squatter-upload 1ikJyha… <named list [42]>
-#> # ℹ 77 more rows
+#>  1 chicken-trash.txt    1vdspq8… <named list [45]>
+#>  2 name-squatter-rename 1_pw4kK… <named list [42]>
+#>  3 name-squatter-mv     1AnBQxb… <named list [42]>
+#>  4 name-squatter-upload 1QzTDr0… <named list [42]>
+#>  5 name-squatter-rename 1WLkRoq… <named list [42]>
+#>  6 name-squatter-mv     13LL-GO… <named list [42]>
+#>  7 name-squatter-upload 1jaFtIM… <named list [42]>
+#>  8 name-squatter-rename 1rYno1O… <named list [42]>
+#>  9 name-squatter-mv     17wSaw7… <named list [42]>
+#> 10 name-squatter-upload 1M7Y7TU… <named list [42]>
+#> # ℹ 80 more rows
 
 # Remove it from the trash and confirm
 drive_untrash("chicken-trash.txt")
 #> File untrashed:
-#> • chicken-trash.txt <id: 1QpkUVmVrbA-cwRCRKtWUNWNm3F5C_pKU>
+#> • chicken-trash.txt <id: 1vdspq8EBN6z33jcdeAwl9v6XvxUb5iH0>
 drive_find(trashed = TRUE)
-#> # A dribble: 86 × 3
+#> # A dribble: 89 × 3
 #>    name                 id       drive_resource   
 #>    <chr>                <drv_id> <list>           
-#>  1 name-squatter-rename 1WLkRoq… <named list [42]>
-#>  2 name-squatter-mv     13LL-GO… <named list [42]>
-#>  3 name-squatter-upload 1jaFtIM… <named list [42]>
-#>  4 name-squatter-rename 1rYno1O… <named list [42]>
-#>  5 name-squatter-mv     17wSaw7… <named list [42]>
-#>  6 name-squatter-upload 1M7Y7TU… <named list [42]>
-#>  7 name-squatter-rename 1ggq7DW… <named list [42]>
-#>  8 name-squatter-mv     12INVuE… <named list [42]>
-#>  9 name-squatter-upload 1ikJyha… <named list [42]>
-#> 10 name-squatter-rename 1lxunRF… <named list [42]>
-#> # ℹ 76 more rows
+#>  1 name-squatter-rename 1_pw4kK… <named list [42]>
+#>  2 name-squatter-mv     1AnBQxb… <named list [42]>
+#>  3 name-squatter-upload 1QzTDr0… <named list [42]>
+#>  4 name-squatter-rename 1WLkRoq… <named list [42]>
+#>  5 name-squatter-mv     13LL-GO… <named list [42]>
+#>  6 name-squatter-upload 1jaFtIM… <named list [42]>
+#>  7 name-squatter-rename 1rYno1O… <named list [42]>
+#>  8 name-squatter-mv     17wSaw7… <named list [42]>
+#>  9 name-squatter-upload 1M7Y7TU… <named list [42]>
+#> 10 name-squatter-rename 1ggq7DW… <named list [42]>
+#> # ℹ 79 more rows
 
 # Clean up
 drive_rm("chicken-trash.txt")
 #> File deleted:
-#> • chicken-trash.txt <id: 1QpkUVmVrbA-cwRCRKtWUNWNm3F5C_pKU>
+#> • chicken-trash.txt <id: 1vdspq8EBN6z33jcdeAwl9v6XvxUb5iH0>
 ```
