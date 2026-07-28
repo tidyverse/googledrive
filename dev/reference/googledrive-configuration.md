@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1GeePX5uOM9DeMjv9kBYR11tGo3HkwDyqzbt4f2im7aY>
+#> • drive-quiet-demo <id: 19OIPiVpih2NGpHr7smIR-ur_JsflWjg7kGfN627tXPE>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1GeePX5… <named list [38]>
+#> 1 drive-quiet-demo 19OIPiV… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1GeePX5uOM9DeMjv9kBYR11tGo3HkwDyqzbt4f2im7aY>
+#> • drive-quiet-demo <id: 19OIPiVpih2NGpHr7smIR-ur_JsflWjg7kGfN627tXPE>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1GeePX5… <named list [39]>
+#> 1 drive-quiet-demo TRUE    19OIPiV… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1GeePX5uOM9DeMjv9kBYR11tGo3HkwDyqzbt4f2im7aY>
+#> • drive-quiet-works <id: 19OIPiVpih2NGpHr7smIR-ur_JsflWjg7kGfN627tXPE>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1GeePX5… <named list [39]>
+#> 1 drive-quiet-works FALSE   19OIPiV… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1GeePX5uOM9DeMjv9kBYR11tGo3HkwDyqzbt4f2im7aY>
+#> • drive-quiet-works <id: 19OIPiVpih2NGpHr7smIR-ur_JsflWjg7kGfN627tXPE>
 ```
