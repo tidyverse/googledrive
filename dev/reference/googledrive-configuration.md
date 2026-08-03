@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1WgpW7Yf_D-W12grG3ioH4mYhUG6ame_EYo1MYULfEv8>
+#> • drive-quiet-demo <id: 1wwta0XqXlmji4A-TGnLK9lbaGo_fzYxayx8sr_EaH8E>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1WgpW7Y… <named list [38]>
+#> 1 drive-quiet-demo 1wwta0X… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1WgpW7Yf_D-W12grG3ioH4mYhUG6ame_EYo1MYULfEv8>
+#> • drive-quiet-demo <id: 1wwta0XqXlmji4A-TGnLK9lbaGo_fzYxayx8sr_EaH8E>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1WgpW7Y… <named list [39]>
+#> 1 drive-quiet-demo TRUE    1wwta0X… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1WgpW7Yf_D-W12grG3ioH4mYhUG6ame_EYo1MYULfEv8>
+#> • drive-quiet-works <id: 1wwta0XqXlmji4A-TGnLK9lbaGo_fzYxayx8sr_EaH8E>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1WgpW7Y… <named list [39]>
+#> 1 drive-quiet-works FALSE   1wwta0X… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1WgpW7Yf_D-W12grG3ioH4mYhUG6ame_EYo1MYULfEv8>
+#> • drive-quiet-works <id: 1wwta0XqXlmji4A-TGnLK9lbaGo_fzYxayx8sr_EaH8E>
 ```
