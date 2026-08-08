@@ -428,14 +428,6 @@ drive_about()
 #> [1] "text/plain"
 #> 
 #> 
-#> $exportFormats$`application/vnd.google-apps.pix`
-#> $exportFormats$`application/vnd.google-apps.pix`[[1]]
-#> [1] "image/jpeg"
-#> 
-#> $exportFormats$`application/vnd.google-apps.pix`[[2]]
-#> [1] "image/png"
-#> 
-#> 
 #> 
 #> $maxImportSizes
 #> $maxImportSizes$`application/vnd.google-apps.document`
@@ -1276,8 +1268,5 @@ about[["exportFormats"]] |>
 #> 
 #> $`application/vnd.google-apps.mail-layout`
 #> [1] "text/plain"
-#> 
-#> $`application/vnd.google-apps.pix`
-#> [1] "image/jpeg" "image/png" 
 #> 
 ```
