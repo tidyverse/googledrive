@@ -382,6 +382,9 @@ drive_about()
 #> [1] "image/jpeg"
 #> 
 #> $exportFormats$`application/vnd.google-apps.pic`[[2]]
+#> [1] "application/pdf"
+#> 
+#> $exportFormats$`application/vnd.google-apps.pic`[[3]]
 #> [1] "image/png"
 #> 
 #> 
@@ -1248,7 +1251,7 @@ about[["exportFormats"]] |>
 #> [1] "application/vnd.google-apps.script+json"
 #> 
 #> $`application/vnd.google-apps.pic`
-#> [1] "image/jpeg" "image/png" 
+#> [1] "image/jpeg"      "application/pdf" "image/png"      
 #> 
 #> $`application/vnd.google-apps.presentation`
 #> [1] "application/vnd.oasis.opendocument.presentation"                          
