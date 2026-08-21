@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1KRlhhdgMpBFI98VtVhAcS71BsQbgII6PYWf_V17FXO0>
+#> • drive-quiet-demo <id: 1guWrBiOxQ02iFpMzk7AngCUDz0Z1irgvWOxHMyWWeko>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1KRlhhd… <named list [38]>
+#> 1 drive-quiet-demo 1guWrBi… <named list [39]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1KRlhhdgMpBFI98VtVhAcS71BsQbgII6PYWf_V17FXO0>
+#> • drive-quiet-demo <id: 1guWrBiOxQ02iFpMzk7AngCUDz0Z1irgvWOxHMyWWeko>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1KRlhhd… <named list [38]>
+#> 1 drive-quiet-demo TRUE    1guWrBi… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1KRlhhdgMpBFI98VtVhAcS71BsQbgII6PYWf_V17FXO0>
+#> • drive-quiet-works <id: 1guWrBiOxQ02iFpMzk7AngCUDz0Z1irgvWOxHMyWWeko>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1KRlhhd… <named list [39]>
+#> 1 drive-quiet-works FALSE   1guWrBi… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1KRlhhdgMpBFI98VtVhAcS71BsQbgII6PYWf_V17FXO0>
+#> • drive-quiet-works <id: 1guWrBiOxQ02iFpMzk7AngCUDz0Z1irgvWOxHMyWWeko>
 ```
