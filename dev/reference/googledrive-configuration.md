@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1YoJiy3S3c98gJkbztgPnvVGbckTKZ2rjXNJpJJePAtI>
+#> • drive-quiet-demo <id: 1a62n0OvSa1MXoIxlyrsZTGC-T7Jza4cOkp78h3ZqiqQ>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1YoJiy3… <named list [38]>
+#> 1 drive-quiet-demo 1a62n0O… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1YoJiy3S3c98gJkbztgPnvVGbckTKZ2rjXNJpJJePAtI>
+#> • drive-quiet-demo <id: 1a62n0OvSa1MXoIxlyrsZTGC-T7Jza4cOkp78h3ZqiqQ>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1YoJiy3… <named list [39]>
+#> 1 drive-quiet-demo TRUE    1a62n0O… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1YoJiy3S3c98gJkbztgPnvVGbckTKZ2rjXNJpJJePAtI>
+#> • drive-quiet-works <id: 1a62n0OvSa1MXoIxlyrsZTGC-T7Jza4cOkp78h3ZqiqQ>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1YoJiy3… <named list [39]>
+#> 1 drive-quiet-works FALSE   1a62n0O… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1YoJiy3S3c98gJkbztgPnvVGbckTKZ2rjXNJpJJePAtI>
+#> • drive-quiet-works <id: 1a62n0OvSa1MXoIxlyrsZTGC-T7Jza4cOkp78h3ZqiqQ>
 ```
