@@ -57,7 +57,8 @@ files with the same filepath.
 zero or one, move a pre-existing file to the trash, then carry on. Note
 that the new file does not inherit any properties from the old one, such
 as sharing or publishing settings. It will have a new file ID. An error is
-thrown if two or more pre-existing files are found.
+thrown if two or more pre-existing files are found. Use \code{drive_update()} or
+\code{drive_put()} if you want to keep permissions and sharing from an already existing file.
 \item \code{FALSE}: Error if there is any pre-existing file at the filepath.
 }
 
@@ -108,7 +109,7 @@ purrr::pluck(chicken, "drive_resource", 1, "starred")
 # Clean up
 drive_rm(chicken)
 
-# `overwrite = FALSE` errors if something already exists at target filepath
+# `overwrite = FALSE` errors if something already exists at target filepath.
 # THIS WILL ERROR!
 drive_create("name-squatter-upload")
 drive_example_local("chicken.jpg") |>
@@ -118,6 +119,7 @@ drive_example_local("chicken.jpg") |>
   )
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
+#Use `drive_update()` or `drive_put()` if you want to permissions and file is from an already existing file.
 chicken <- drive_example_local("chicken.jpg") |>
   drive_upload(
     name = "name-squatter-upload",
