@@ -12,7 +12,7 @@
       drive_create(letters)
     Condition
       Error in `drive_create()`:
-      ! is_string(name) is not TRUE
+      ! `name` must be a single string, not a character vector.
 
 # drive_create() errors if parent path does not exist
 

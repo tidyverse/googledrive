@@ -142,17 +142,13 @@ new_corpus <- function(
   includeItemsFromAllDrives = NULL
 ) {
   if (!is.null(driveId)) {
-    # can't use is_string() because object of class drive_id IS acceptable
-    stopifnot(is.character(driveId), length(driveId) == 1)
+    check_string(driveId)
   }
   if (!is.null(corpora)) {
-    stopifnot(is_string(corpora))
+    check_string(corpora)
   }
   if (!is.null(includeItemsFromAllDrives)) {
-    stopifnot(
-      is.logical(includeItemsFromAllDrives),
-      length(includeItemsFromAllDrives) == 1
-    )
+    check_bool(includeItemsFromAllDrives)
   }
   structure(
     list(

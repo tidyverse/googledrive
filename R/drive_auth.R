@@ -215,7 +215,7 @@ drive_auth_configure <- function(client, path, api_key, app = deprecated()) {
   stopifnot(missing(api_key) || is.null(api_key) || is_string(api_key))
 
   if (!missing(path)) {
-    stopifnot(is_string(path))
+    stopifnot(is_path_scalar(path))
     client <- gargle::gargle_oauth_client_from_json(path)
   }
   stopifnot(

@@ -30,7 +30,7 @@
       partition_path(letters)
     Condition
       Error in `partition_path()`:
-      ! is_string(path) is not TRUE
+      ! is_path_scalar(path) is not TRUE
 
 ---
 
@@ -38,7 +38,7 @@
       partition_path(dribble())
     Condition
       Error in `partition_path()`:
-      ! is_string(path) is not TRUE
+      ! is_path_scalar(path) is not TRUE
 
 ---
 
@@ -46,7 +46,7 @@
       partition_path(as_id("123"))
     Condition
       Error in `partition_path()`:
-      ! is_string(path) is not TRUE
+      ! is_path_scalar(path) is not TRUE
 
 # rationalize_path_name() errors for bad `name`, before hitting API
 
@@ -54,5 +54,5 @@
       rationalize_path_name(name = letters)
     Condition
       Error in `rationalize_path_name()`:
-      ! is_string(name) is not TRUE
+      ! `name` must be a single string, not a character vector.
 
