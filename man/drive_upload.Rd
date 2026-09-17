@@ -119,7 +119,7 @@ drive_example_local("chicken.jpg") |>
   )
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
-#Use `drive_update()` or `drive_put()` if you want to permissions and file is from an already existing file.
+#Use `drive_update()` or `drive_put()` if you want to update the permissions of an already existing file.
 chicken <- drive_example_local("chicken.jpg") |>
   drive_upload(
     name = "name-squatter-upload",
