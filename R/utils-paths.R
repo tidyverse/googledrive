@@ -10,7 +10,7 @@ root_id <- function() root_folder()$id
 
 rationalize_path_name <- function(path = NULL, name = NULL) {
   if (!is.null(name)) {
-    stopifnot(is_string(name))
+    check_string(name)
   }
 
   if (is_path(path)) {
@@ -107,7 +107,7 @@ dribble_with_path <- function() {
 
 is_path <- function(x) is.character(x) && !is_drive_id(x)
 
-is_string <- function(x) length(x) == 1L && is_path(x)
+is_path_scalar <- function(x) length(x) == 1L && is_path(x)
 
 # turn '~' into `~/`
 rootize_path <- function(path) {
@@ -154,7 +154,7 @@ partition_path <- function(path, maybe_name = FALSE) {
   if (length(path) < 1) {
     return(out)
   }
-  stopifnot(is_string(path))
+  stopifnot(is_path_scalar(path))
   path <- rootize_path(path)
   if (!maybe_name) {
     path <- append_slash(path)

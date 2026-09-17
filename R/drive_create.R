@@ -81,7 +81,7 @@ drive_create <- function(
   # in the special case of creating a shortcut, `name` is not required
   if (!identical(drive_mime_type(type), drive_mime_type("shortcut"))) {
     check_required(name)
-    stopifnot(is_string(name))
+    check_string(name, allow_empty = FALSE)
   }
   # the order and role of `path` and `name` is naturally inverted here,
   # relative to all other related functions, hence we pre-process

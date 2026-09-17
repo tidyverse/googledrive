@@ -4,7 +4,7 @@
       new_corpus(driveId = c("1", "2"))
     Condition
       Error in `new_corpus()`:
-      ! length(driveId) == 1 is not TRUE
+      ! `driveId` must be a single string, not a character vector.
 
 ---
 
@@ -12,7 +12,7 @@
       new_corpus(corpora = c("a", "b"))
     Condition
       Error in `new_corpus()`:
-      ! is_string(corpora) is not TRUE
+      ! `corpora` must be a single string, not a character vector.
 
 ---
 
@@ -20,7 +20,7 @@
       new_corpus(includeItemsFromAllDrives = c(TRUE, FALSE))
     Condition
       Error in `new_corpus()`:
-      ! length(includeItemsFromAllDrives) == 1 is not TRUE
+      ! `includeItemsFromAllDrives` must be `TRUE` or `FALSE`, not a logical vector.
 
 # `corpora` is checked for validity
 
