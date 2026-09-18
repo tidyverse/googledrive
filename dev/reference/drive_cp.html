@@ -116,7 +116,8 @@ files with the same filepath.</p></li>
 zero or one, move a pre-existing file to the trash, then carry on. Note
 that the new file does not inherit any properties from the old one, such
 as sharing or publishing settings. It will have a new file ID. An error is
-thrown if two or more pre-existing files are found.</p></li>
+thrown if two or more pre-existing files are found. Use <code><a href="drive_update.html">drive_update()</a></code> or
+<code><a href="drive_put.html">drive_put()</a></code> if you want to keep permissions and sharing from an already existing file.</p></li>
 <li><p><code>FALSE</code>: Error if there is any pre-existing file at the filepath.</p></li>
 </ul><p>Note that existence checks, based on filepath, are expensive operations, i.e.
 they require additional API calls.</p></dd>
@@ -155,7 +156,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1ILY2zUjWBGRN8BBkNB6NqZo91f_xS_ja&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 13chdEbfaVf6d_431-1Fq3p8BcJlkzHGy&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make an explicitly named copy, in a different folder, and star it.</span></span></span>
 <span class="r-in"><span><span class="co"># The starring is an example of providing metadata via `...`.</span></span></span>
@@ -163,7 +164,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span><span class="co"># it just gets passed through to the API.</span></span></span>
 <span class="r-in"><span><span class="va">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_mkdir.html">drive_mkdir</a></span><span class="op">(</span><span class="st">"drive-cp-folder"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive-cp-folder</span> <span style="color: #555555;">&lt;id: 1EtPzIkDTBNm-fv1RmEDKDenvZDhhJyNE&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive-cp-folder</span> <span style="color: #555555;">&lt;id: 1XFwfP2fCQDC2O8azk-iLWMkG1c0yw4FF&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">application/vnd.google-apps.folder</span></span>
 <span class="r-in"><span><span class="va">cp2</span> <span class="op">&lt;-</span> <span class="fu">drive_cp</span><span class="op">(</span></span></span>
@@ -176,12 +177,12 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive-cp-folder/chicken-cp.txt</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1HVXy6rythQCeTty6bD7kZG77Q2od_B6G&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1uFPt6isMOqBOsIx8lfv3xzAAT2DsS7_i&gt;</span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">cp2</span>, <span class="st">"starred"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 1 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name           starred id       drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> chicken-cp.txt TRUE    1HVXy6r… <span style="color: #949494;">&lt;named list [44]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> chicken-cp.txt TRUE    1uFPt6i… <span style="color: #949494;">&lt;named list [44]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `overwrite = FALSE` errors if file already exists at target filepath</span></span></span>
 <span class="r-in"><span><span class="co"># THIS WILL ERROR!</span></span></span>
@@ -190,19 +191,19 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span><span class="co"># `overwrite = TRUE` moves an existing file to trash, then proceeds</span></span></span>
 <span class="r-in"><span><span class="va">cp3</span> <span class="op">&lt;-</span> <span class="fu">drive_cp</span><span class="op">(</span><span class="va">src_file</span>, name <span class="op">=</span> <span class="st">"Copy of chicken.txt"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1ILY2zUjWBGRN8BBkNB6NqZo91f_xS_ja&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 13chdEbfaVf6d_431-1Fq3p8BcJlkzHGy&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1pRj4sN-fH4gdxqq1KB-UNwJ8CfWESEVP&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1zBSIXpWLQDnJqFvQd3TEfkckBO8Whw_V&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Delete all of our copies and the new folder!</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">cp1</span>, <span class="va">cp2</span>, <span class="va">cp3</span>, <span class="va">folder</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1ILY2zUjWBGRN8BBkNB6NqZo91f_xS_ja&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-cp.txt</span> <span style="color: #555555;">&lt;id: 1HVXy6rythQCeTty6bD7kZG77Q2od_B6G&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1pRj4sN-fH4gdxqq1KB-UNwJ8CfWESEVP&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive-cp-folder</span> <span style="color: #555555;">&lt;id: 1EtPzIkDTBNm-fv1RmEDKDenvZDhhJyNE&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 13chdEbfaVf6d_431-1Fq3p8BcJlkzHGy&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-cp.txt</span> <span style="color: #555555;">&lt;id: 1uFPt6isMOqBOsIx8lfv3xzAAT2DsS7_i&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1zBSIXpWLQDnJqFvQd3TEfkckBO8Whw_V&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive-cp-folder</span> <span style="color: #555555;">&lt;id: 1XFwfP2fCQDC2O8azk-iLWMkG1c0yw4FF&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Target an official example file that's a csv file</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">csv_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_examples.html">drive_example_remote</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -221,7 +222,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.csv</span> <span style="color: #555555;">&lt;id: 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-sheet-copy</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1LOBLKrdT21UsSYfd0dm0xGZnAw4ewYXDlFqN8VsCHFw&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1XmykeDcpsU74V1t3_VYq-UaNXrlDVflASBEQM1FDhb8&gt;</span></span>
 <span class="r-in"><span><span class="co"># is it really a Google Sheet?</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">chicken_sheet</span>, <span class="st">"mime_type"</span><span class="op">)</span><span class="op">$</span><span class="va">mime_type</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/vnd.google-apps.spreadsheet"</span>
@@ -233,7 +234,7 @@ more limited way, use the helpers <code><a href="googledrive-configuration.html"
 <span class="r-in"><span><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">chicken_sheet</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-sheet-copy</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1LOBLKrdT21UsSYfd0dm0xGZnAw4ewYXDlFqN8VsCHFw&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1XmykeDcpsU74V1t3_VYq-UaNXrlDVflASBEQM1FDhb8&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

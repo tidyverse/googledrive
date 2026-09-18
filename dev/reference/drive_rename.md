@@ -42,6 +42,12 @@ drive_rename(file, name = NULL, overwrite = NA, verbose = deprecated())
     Note that the new file does not inherit any properties from the old
     one, such as sharing or publishing settings. It will have a new file
     ID. An error is thrown if two or more pre-existing files are found.
+    Use
+    [`drive_update()`](https://googledrive.tidyverse.org/dev/reference/drive_update.md)
+    or
+    [`drive_put()`](https://googledrive.tidyverse.org/dev/reference/drive_put.md)
+    if you want to keep permissions and sharing from an already existing
+    file.
 
   - `FALSE`: Error if there is any pre-existing file at the filepath.
 
@@ -71,40 +77,40 @@ a tibble with one row per file.
 # Create a file to rename
 file <- drive_create("file-to-rename")
 #> Created Drive file:
-#> • file-to-rename <id: 18nH5GHoZj7JnM_hppbP1nE7_u6JF8xFE>
+#> • file-to-rename <id: 10tp2tFOwcD912IWjX1mbBeTcJ1aKuSsC>
 #> With MIME type:
 #> • application/octet-stream
 
 # Rename it
 file <- drive_rename(file, name = "renamed-file")
 #> Original file:
-#> • file-to-rename <id: 18nH5GHoZj7JnM_hppbP1nE7_u6JF8xFE>
+#> • file-to-rename <id: 10tp2tFOwcD912IWjX1mbBeTcJ1aKuSsC>
 #> Has been renamed:
-#> • renamed-file <id: 18nH5GHoZj7JnM_hppbP1nE7_u6JF8xFE>
+#> • renamed-file <id: 10tp2tFOwcD912IWjX1mbBeTcJ1aKuSsC>
 
 # `overwrite = FALSE` errors if something already exists at target filepath
 # THIS WILL ERROR!
 drive_create("name-squatter-rename")
 #> Created Drive file:
-#> • name-squatter-rename <id: 1IzW9VZdedQ3N-DNPf_cnKmlPQCneA9_p>
+#> • name-squatter-rename <id: 1FctExE9x_4vyWPEzI2WBS7OEVNFp1Tbg>
 #> With MIME type:
 #> • application/octet-stream
 drive_rename(file, name = "name-squatter-rename", overwrite = FALSE)
 #> Error in check_for_overwrite(parent = params[["addParents"]] %||% parent_before,     name = params[["name"]] %||% file$name, overwrite = overwrite): 1 item already exists at the target filepath and `overwrite =
 #> FALSE`:
-#> • name-squatter-rename <id: 1IzW9VZdedQ3N-DNPf_cnKmlPQCneA9_p>
+#> • name-squatter-rename <id: 1FctExE9x_4vyWPEzI2WBS7OEVNFp1Tbg>
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
 file <- drive_rename(file, name = "name-squatter-rename", overwrite = TRUE)
 #> File trashed:
-#> • name-squatter-rename <id: 1IzW9VZdedQ3N-DNPf_cnKmlPQCneA9_p>
+#> • name-squatter-rename <id: 1FctExE9x_4vyWPEzI2WBS7OEVNFp1Tbg>
 #> Original file:
-#> • renamed-file <id: 18nH5GHoZj7JnM_hppbP1nE7_u6JF8xFE>
+#> • renamed-file <id: 10tp2tFOwcD912IWjX1mbBeTcJ1aKuSsC>
 #> Has been renamed:
-#> • name-squatter-rename <id: 18nH5GHoZj7JnM_hppbP1nE7_u6JF8xFE>
+#> • name-squatter-rename <id: 10tp2tFOwcD912IWjX1mbBeTcJ1aKuSsC>
 
 # Clean up
 drive_rm(file)
 #> File deleted:
-#> • name-squatter-rename <id: 18nH5GHoZj7JnM_hppbP1nE7_u6JF8xFE>
+#> • name-squatter-rename <id: 10tp2tFOwcD912IWjX1mbBeTcJ1aKuSsC>
 ```

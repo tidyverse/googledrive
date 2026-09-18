@@ -85,6 +85,12 @@ drive_upload(
     Note that the new file does not inherit any properties from the old
     one, such as sharing or publishing settings. It will have a new file
     ID. An error is thrown if two or more pre-existing files are found.
+    Use
+    [`drive_update()`](https://googledrive.tidyverse.org/dev/reference/drive_update.md)
+    or
+    [`drive_put()`](https://googledrive.tidyverse.org/dev/reference/drive_put.md)
+    if you want to keep permissions and sharing from an already existing
+    file.
 
   - `FALSE`: Error if there is any pre-existing file at the filepath.
 
@@ -127,7 +133,7 @@ chicken_csv <- drive_example_local("chicken.csv") |>
 #> Local file:
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.csv
 #> Uploaded into Drive file:
-#> • chicken-upload.csv <id: 1c-kBbwoNoothcKdWby-xbvNcpiASGWAY>
+#> • chicken-upload.csv <id: 1C2YEE9RDh4RIyPJdAQgK_Pu8Rc0C7SUA>
 #> With MIME type:
 #> • text/csv
 
@@ -141,7 +147,7 @@ chicken_sheet <- drive_example_local("chicken.csv") |>
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.csv
 #> Uploaded into Drive file:
 #> • chicken-sheet-upload
-#>   <id: 1wlxwEIwik_93he9BE-1sw0cs9da3StZm17nQ4u8ZesE>
+#>   <id: 1Y5-OZeS0z_Bl11krWk05xTQfSxbACJ6i7h9htU37iA8>
 #> With MIME type:
 #> • application/vnd.google-apps.spreadsheet
 
@@ -152,8 +158,8 @@ drive_browse(chicken_sheet)
 drive_find("chicken.*upload") |> drive_rm()
 #> Files deleted:
 #> • chicken-sheet-upload
-#>   <id: 1wlxwEIwik_93he9BE-1sw0cs9da3StZm17nQ4u8ZesE>
-#> • chicken-upload.csv <id: 1c-kBbwoNoothcKdWby-xbvNcpiASGWAY>
+#>   <id: 1Y5-OZeS0z_Bl11krWk05xTQfSxbACJ6i7h9htU37iA8>
+#> • chicken-upload.csv <id: 1C2YEE9RDh4RIyPJdAQgK_Pu8Rc0C7SUA>
 
 # Upload a file and, at the same time, star it
 chicken <- drive_example_local("chicken.jpg") |>
@@ -161,7 +167,7 @@ chicken <- drive_example_local("chicken.jpg") |>
 #> Local file:
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.jpg
 #> Uploaded into Drive file:
-#> • chicken.jpg <id: 1gax7bcx5cQE6OYKMfEv8DSI7WoXWQzsV>
+#> • chicken.jpg <id: 16-ITl2uLg2z3bJi5QFPC6pKaeq2C683n>
 #> With MIME type:
 #> • image/jpeg
 
@@ -172,13 +178,13 @@ purrr::pluck(chicken, "drive_resource", 1, "starred")
 # Clean up
 drive_rm(chicken)
 #> File deleted:
-#> • chicken.jpg <id: 1gax7bcx5cQE6OYKMfEv8DSI7WoXWQzsV>
+#> • chicken.jpg <id: 16-ITl2uLg2z3bJi5QFPC6pKaeq2C683n>
 
-# `overwrite = FALSE` errors if something already exists at target filepath
+# `overwrite = FALSE` errors if something already exists at target filepath.
 # THIS WILL ERROR!
 drive_create("name-squatter-upload")
 #> Created Drive file:
-#> • name-squatter-upload <id: 1pm6RcLFTzwZBEN2ZOhtXTIwI0l0Lqlwv>
+#> • name-squatter-upload <id: 1gSm5htD75Z2i1Ezvi-UiXwNl78rKSik9>
 #> With MIME type:
 #> • application/octet-stream
 drive_example_local("chicken.jpg") |>
@@ -188,27 +194,28 @@ drive_example_local("chicken.jpg") |>
   )
 #> Error in check_for_overwrite(params[["parents"]], params[["name"]], overwrite): 1 item already exists at the target filepath and `overwrite =
 #> FALSE`:
-#> • name-squatter-upload <id: 1pm6RcLFTzwZBEN2ZOhtXTIwI0l0Lqlwv>
+#> • name-squatter-upload <id: 1gSm5htD75Z2i1Ezvi-UiXwNl78rKSik9>
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
+#Use `drive_update()` or `drive_put()` if you want to permissions and file is from an already existing file.
 chicken <- drive_example_local("chicken.jpg") |>
   drive_upload(
     name = "name-squatter-upload",
     overwrite = TRUE
   )
 #> File trashed:
-#> • name-squatter-upload <id: 1pm6RcLFTzwZBEN2ZOhtXTIwI0l0Lqlwv>
+#> • name-squatter-upload <id: 1gSm5htD75Z2i1Ezvi-UiXwNl78rKSik9>
 #> Local file:
 #> • /home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.jpg
 #> Uploaded into Drive file:
-#> • name-squatter-upload <id: 1SodJzyz3hS_VCxsntSXBjJgMA9pIbNhJ>
+#> • name-squatter-upload <id: 14k6MQg04BTJ1ZAZLohpBK-3N85rkmBGg>
 #> With MIME type:
 #> • image/jpeg
 
 # Clean up
 drive_rm(chicken)
 #> File deleted:
-#> • name-squatter-upload <id: 1SodJzyz3hS_VCxsntSXBjJgMA9pIbNhJ>
+#> • name-squatter-upload <id: 14k6MQg04BTJ1ZAZLohpBK-3N85rkmBGg>
 
 if (FALSE) { # \dontrun{
 # Upload to a shared drive:

@@ -53,6 +53,12 @@ drive_mkdir(name, path = NULL, ..., overwrite = NA, verbose = deprecated())
     Note that the new file does not inherit any properties from the old
     one, such as sharing or publishing settings. It will have a new file
     ID. An error is thrown if two or more pre-existing files are found.
+    Use
+    [`drive_update()`](https://googledrive.tidyverse.org/dev/reference/drive_update.md)
+    or
+    [`drive_put()`](https://googledrive.tidyverse.org/dev/reference/drive_put.md)
+    if you want to keep permissions and sharing from an already existing
+    file.
 
   - `FALSE`: Error if there is any pre-existing file at the filepath.
 
@@ -88,12 +94,12 @@ Wraps the `files.create` endpoint:
 # Create folder named 'ghi', then another below named it 'jkl' and star it
 ghi <- drive_mkdir("ghi")
 #> Created Drive file:
-#> • ghi <id: 1qAUBNgtEIBDXG2y9TOgBvrCarg8TsT88>
+#> • ghi <id: 1RdwT9Tf48ohpwTkf52o_DODcNpDv6NdB>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 jkl <- drive_mkdir("ghi/jkl", starred = TRUE)
 #> Created Drive file:
-#> • jkl <id: 1xvQo9w6IxtZyl1STecjOHZ_zckkzPNhY>
+#> • jkl <id: 1UV3rfoyR1OgMpGnOdTGo2RWAEnjtGXxS>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 
@@ -104,7 +110,7 @@ purrr::pluck(jkl, "drive_resource", 1, "starred")
 # Another way to create folder 'mno' in folder 'ghi'
 drive_mkdir("mno", path = "ghi")
 #> Created Drive file:
-#> • mno <id: 1xx03y12irMcTLTSoIggo-9JKD9wVnBSA>
+#> • mno <id: 1we0OAid_3cJKKc-c9YISZvD7R0P6Ujrr>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 
@@ -113,7 +119,7 @@ drive_mkdir("mno", path = "ghi")
 # and setting the new folder's description
 pqr <- drive_mkdir("pqr", path = ghi, description = "I am a folder")
 #> Created Drive file:
-#> • pqr <id: 1h2huZa0h5wRwCni5c3NheN8Abp4bjnig>
+#> • pqr <id: 1qaqI1TA9FnKIL-BOMoG3oL5i96iOj4Da>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 
@@ -125,20 +131,20 @@ purrr::pluck(pqr, "drive_resource", 1, "description")
 # THIS WILL ERROR!
 drive_create("name-squatter-mkdir", path = ghi)
 #> Created Drive file:
-#> • name-squatter-mkdir <id: 1NfQsEvrL6ZNsDZzfzXYgn6AnyTDwcSXp>
+#> • name-squatter-mkdir <id: 1z4oMexnuKrJBIAEW4hxpNTVFvpUL5cGM>
 #> With MIME type:
 #> • application/octet-stream
 drive_mkdir("name-squatter-mkdir", path = ghi, overwrite = FALSE)
 #> Error in check_for_overwrite(params[["parents"]], params[["name"]], overwrite): 1 item already exists at the target filepath and `overwrite =
 #> FALSE`:
-#> • name-squatter-mkdir <id: 1NfQsEvrL6ZNsDZzfzXYgn6AnyTDwcSXp>
+#> • name-squatter-mkdir <id: 1z4oMexnuKrJBIAEW4hxpNTVFvpUL5cGM>
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
 drive_mkdir("name-squatter-mkdir", path = ghi, overwrite = TRUE)
 #> File trashed:
-#> • name-squatter-mkdir <id: 1NfQsEvrL6ZNsDZzfzXYgn6AnyTDwcSXp>
+#> • name-squatter-mkdir <id: 1z4oMexnuKrJBIAEW4hxpNTVFvpUL5cGM>
 #> Created Drive file:
-#> • name-squatter-mkdir <id: 1ZdsRsM2nk8l2Dlu0mBwIOeRExl-V1Yvq>
+#> • name-squatter-mkdir <id: 11L9sB4EzvUCc2SmkBEA99nKz8FHZKZIu>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 
@@ -147,13 +153,13 @@ drive_ls("ghi")
 #> # A dribble: 4 × 3
 #>   name                id                                drive_resource
 #>   <chr>               <drv_id>                          <list>        
-#> 1 name-squatter-mkdir 1ZdsRsM2nk8l2Dlu0mBwIOeRExl-V1Yvq <named list>  
-#> 2 pqr                 1h2huZa0h5wRwCni5c3NheN8Abp4bjnig <named list>  
-#> 3 mno                 1xx03y12irMcTLTSoIggo-9JKD9wVnBSA <named list>  
-#> 4 jkl                 1xvQo9w6IxtZyl1STecjOHZ_zckkzPNhY <named list>  
+#> 1 name-squatter-mkdir 11L9sB4EzvUCc2SmkBEA99nKz8FHZKZIu <named list>  
+#> 2 pqr                 1qaqI1TA9FnKIL-BOMoG3oL5i96iOj4Da <named list>  
+#> 3 mno                 1we0OAid_3cJKKc-c9YISZvD7R0P6Ujrr <named list>  
+#> 4 jkl                 1UV3rfoyR1OgMpGnOdTGo2RWAEnjtGXxS <named list>  
 
 # Clean up
 drive_rm(ghi)
 #> File deleted:
-#> • ghi <id: 1qAUBNgtEIBDXG2y9TOgBvrCarg8TsT88>
+#> • ghi <id: 1RdwT9Tf48ohpwTkf52o_DODcNpDv6NdB>
 ```
