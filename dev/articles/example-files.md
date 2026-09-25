@@ -120,7 +120,7 @@ Here’s a clickable table of the remote example files:
 | [chicken.pdf](https://drive.google.com/file/d/13OQcAo8hkh0Ja5Wxlmi4a8aNvPK7pDkO/view?usp=drivesdk) | 13OQcAo8hkh0Ja5Wxlmi4a8aNvPK7pDkO |
 | [chicken.txt](https://drive.google.com/file/d/1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y/view?usp=drivesdk) | 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y |
 | [imdb_latin1.csv](https://drive.google.com/file/d/1YJSVa0LTaVtGrZ4eVXYrSQ4y50uFl5bw/view?usp=drivesdk) | 1YJSVa0LTaVtGrZ4eVXYrSQ4y50uFl5bw |
-| [r_about.html](https://drive.google.com/file/d/1sfCT0zqDz3vpZZlv_4nFlhq2WMaKqjow/view?usp=drivesdk) | 1sfCT0zqDz3vpZZlv_4nFlhq2WMaKqjow |
+| [r_about.html](https://sites.google.com/d/1sfCT0zqDz3vpZZlv_4nFlhq2WMaKqjow/edit) | 1sfCT0zqDz3vpZZlv_4nFlhq2WMaKqjow |
 | [r_logo.jpg](https://drive.google.com/file/d/1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW/view?usp=drivesdk) | 1J4v-iyydf1Cad3GjDkGRrynauV9JFOyW |
 
 Accessing the remote example files works just like the local files.
