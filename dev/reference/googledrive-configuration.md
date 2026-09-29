@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 17bdOEAYrTZ18tqt9Jc3-ZkEkDvmGzIA98djMAz3SFN8>
+#> • drive-quiet-demo <id: 15itLCxDi76fBwe1FnjPsgXGgavcZKmnX_-rAbX7qCOI>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 17bdOEA… <named list [38]>
+#> 1 drive-quiet-demo 15itLCx… <named list [39]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 17bdOEAYrTZ18tqt9Jc3-ZkEkDvmGzIA98djMAz3SFN8>
+#> • drive-quiet-demo <id: 15itLCxDi76fBwe1FnjPsgXGgavcZKmnX_-rAbX7qCOI>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    17bdOEA… <named list [39]>
+#> 1 drive-quiet-demo TRUE    15itLCx… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 17bdOEAYrTZ18tqt9Jc3-ZkEkDvmGzIA98djMAz3SFN8>
+#> • drive-quiet-works <id: 15itLCxDi76fBwe1FnjPsgXGgavcZKmnX_-rAbX7qCOI>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   17bdOEA… <named list [39]>
+#> 1 drive-quiet-works FALSE   15itLCx… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 17bdOEAYrTZ18tqt9Jc3-ZkEkDvmGzIA98djMAz3SFN8>
+#> • drive-quiet-works <id: 15itLCxDi76fBwe1FnjPsgXGgavcZKmnX_-rAbX7qCOI>
 ```
