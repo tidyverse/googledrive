@@ -163,44 +163,44 @@ drive_reveal(files, "path")
 #> # A dribble: 10 × 4
 #>    name                 path                   id       drive_resource
 #>    <chr>                <chr>                  <drv_id> <list>        
-#>  1 name-squatter-rename ~/name-squatter-rename 1mcYWU_… <named list>  
-#>  2 name-squatter-mv     ~/name-squatter-mv     18YWcpm… <named list>  
-#>  3 name-squatter-upload ~/name-squatter-upload 16MOsgz… <named list>  
-#>  4 name-squatter-rename ~/name-squatter-rename 1UhJ-Lu… <named list>  
-#>  5 name-squatter-mv     ~/name-squatter-mv     1vp5RVN… <named list>  
-#>  6 name-squatter-upload ~/name-squatter-upload 1lNFuKW… <named list>  
-#>  7 name-squatter-rename ~/name-squatter-rename 1Wv-SlX… <named list>  
-#>  8 name-squatter-mv     ~/name-squatter-mv     18gM21a… <named list>  
-#>  9 name-squatter-upload ~/name-squatter-upload 1LuRDHg… <named list>  
-#> 10 name-squatter-rename ~/name-squatter-rename 1eV6BCb… <named list>  
+#>  1 name-squatter-rename ~/name-squatter-rename 1CntxFx… <named list>  
+#>  2 name-squatter-mv     ~/name-squatter-mv     1Q6oEic… <named list>  
+#>  3 name-squatter-upload ~/name-squatter-upload 1R_FeQd… <named list>  
+#>  4 name-squatter-rename ~/name-squatter-rename 1mcYWU_… <named list>  
+#>  5 name-squatter-mv     ~/name-squatter-mv     18YWcpm… <named list>  
+#>  6 name-squatter-upload ~/name-squatter-upload 16MOsgz… <named list>  
+#>  7 name-squatter-rename ~/name-squatter-rename 1UhJ-Lu… <named list>  
+#>  8 name-squatter-mv     ~/name-squatter-mv     1vp5RVN… <named list>  
+#>  9 name-squatter-upload ~/name-squatter-upload 1lNFuKW… <named list>  
+#> 10 name-squatter-rename ~/name-squatter-rename 1Wv-SlX… <named list>  
 drive_reveal(files, "permissions")
 #> # A dribble: 10 × 5
 #>    name             shared id       drive_resource permissions_resource
 #>    <chr>            <lgl>  <drv_id> <list>         <list>              
-#>  1 name-squatter-r… FALSE  1mcYWU_… <named list>   <named list [2]>    
-#>  2 name-squatter-mv FALSE  18YWcpm… <named list>   <named list [2]>    
-#>  3 name-squatter-u… FALSE  16MOsgz… <named list>   <named list [2]>    
-#>  4 name-squatter-r… FALSE  1UhJ-Lu… <named list>   <named list [2]>    
-#>  5 name-squatter-mv FALSE  1vp5RVN… <named list>   <named list [2]>    
-#>  6 name-squatter-u… FALSE  1lNFuKW… <named list>   <named list [2]>    
-#>  7 name-squatter-r… FALSE  1Wv-SlX… <named list>   <named list [2]>    
-#>  8 name-squatter-mv FALSE  18gM21a… <named list>   <named list [2]>    
-#>  9 name-squatter-u… FALSE  1LuRDHg… <named list>   <named list [2]>    
-#> 10 name-squatter-r… FALSE  1eV6BCb… <named list>   <named list [2]>    
+#>  1 name-squatter-r… FALSE  1CntxFx… <named list>   <named list [2]>    
+#>  2 name-squatter-mv FALSE  1Q6oEic… <named list>   <named list [2]>    
+#>  3 name-squatter-u… FALSE  1R_FeQd… <named list>   <named list [2]>    
+#>  4 name-squatter-r… FALSE  1mcYWU_… <named list>   <named list [2]>    
+#>  5 name-squatter-mv FALSE  18YWcpm… <named list>   <named list [2]>    
+#>  6 name-squatter-u… FALSE  16MOsgz… <named list>   <named list [2]>    
+#>  7 name-squatter-r… FALSE  1UhJ-Lu… <named list>   <named list [2]>    
+#>  8 name-squatter-mv FALSE  1vp5RVN… <named list>   <named list [2]>    
+#>  9 name-squatter-u… FALSE  1lNFuKW… <named list>   <named list [2]>    
+#> 10 name-squatter-r… FALSE  1Wv-SlX… <named list>   <named list [2]>    
 drive_reveal(files, "published")
 #> # A dribble: 10 × 5
 #>    name             published id       drive_resource revision_resource
 #>    <chr>            <lgl>     <drv_id> <list>         <list>           
-#>  1 name-squatter-r… FALSE     1mcYWU_… <named list>   <named list [9]> 
-#>  2 name-squatter-mv FALSE     18YWcpm… <named list>   <named list [9]> 
-#>  3 name-squatter-u… FALSE     16MOsgz… <named list>   <named list [9]> 
-#>  4 name-squatter-r… FALSE     1UhJ-Lu… <named list>   <named list [9]> 
-#>  5 name-squatter-mv FALSE     1vp5RVN… <named list>   <named list [9]> 
-#>  6 name-squatter-u… FALSE     1lNFuKW… <named list>   <named list [9]> 
-#>  7 name-squatter-r… FALSE     1Wv-SlX… <named list>   <named list [9]> 
-#>  8 name-squatter-mv FALSE     18gM21a… <named list>   <named list [9]> 
-#>  9 name-squatter-u… FALSE     1LuRDHg… <named list>   <named list [9]> 
-#> 10 name-squatter-r… FALSE     1eV6BCb… <named list>   <named list [9]> 
+#>  1 name-squatter-r… FALSE     1CntxFx… <named list>   <named list [9]> 
+#>  2 name-squatter-mv FALSE     1Q6oEic… <named list>   <named list [9]> 
+#>  3 name-squatter-u… FALSE     1R_FeQd… <named list>   <named list [9]> 
+#>  4 name-squatter-r… FALSE     1mcYWU_… <named list>   <named list [9]> 
+#>  5 name-squatter-mv FALSE     18YWcpm… <named list>   <named list [9]> 
+#>  6 name-squatter-u… FALSE     16MOsgz… <named list>   <named list [9]> 
+#>  7 name-squatter-r… FALSE     1UhJ-Lu… <named list>   <named list [9]> 
+#>  8 name-squatter-mv FALSE     1vp5RVN… <named list>   <named list [9]> 
+#>  9 name-squatter-u… FALSE     1lNFuKW… <named list>   <named list [9]> 
+#> 10 name-squatter-r… FALSE     1Wv-SlX… <named list>   <named list [9]> 
 
 # a "special" case of digging info out of `drive_resource`, then processing
 # a bit
@@ -208,172 +208,172 @@ drive_reveal(files, "parent")
 #> # A dribble: 10 × 4
 #>    name                 id_parent           id       drive_resource   
 #>    <chr>                <drv_id>            <drv_id> <list>           
-#>  1 name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1mcYWU_… <named list [42]>
-#>  2 name-squatter-mv     0AO_RMaBzcP63Uk9PVA 18YWcpm… <named list [42]>
-#>  3 name-squatter-upload 0AO_RMaBzcP63Uk9PVA 16MOsgz… <named list [42]>
-#>  4 name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1UhJ-Lu… <named list [42]>
-#>  5 name-squatter-mv     0AO_RMaBzcP63Uk9PVA 1vp5RVN… <named list [42]>
-#>  6 name-squatter-upload 0AO_RMaBzcP63Uk9PVA 1lNFuKW… <named list [42]>
-#>  7 name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1Wv-SlX… <named list [42]>
-#>  8 name-squatter-mv     0AO_RMaBzcP63Uk9PVA 18gM21a… <named list [42]>
-#>  9 name-squatter-upload 0AO_RMaBzcP63Uk9PVA 1LuRDHg… <named list [42]>
-#> 10 name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1eV6BCb… <named list [42]>
+#>  1 name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1CntxFx… <named list [42]>
+#>  2 name-squatter-mv     0AO_RMaBzcP63Uk9PVA 1Q6oEic… <named list [42]>
+#>  3 name-squatter-upload 0AO_RMaBzcP63Uk9PVA 1R_FeQd… <named list [42]>
+#>  4 name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1mcYWU_… <named list [42]>
+#>  5 name-squatter-mv     0AO_RMaBzcP63Uk9PVA 18YWcpm… <named list [42]>
+#>  6 name-squatter-upload 0AO_RMaBzcP63Uk9PVA 16MOsgz… <named list [42]>
+#>  7 name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1UhJ-Lu… <named list [42]>
+#>  8 name-squatter-mv     0AO_RMaBzcP63Uk9PVA 1vp5RVN… <named list [42]>
+#>  9 name-squatter-upload 0AO_RMaBzcP63Uk9PVA 1lNFuKW… <named list [42]>
+#> 10 name-squatter-rename 0AO_RMaBzcP63Uk9PVA 1Wv-SlX… <named list [42]>
 
 # the "simple" cases of digging info out of `drive_resource`
 drive_reveal(files, "trashed")
 #> # A dribble: 10 × 4
 #>    name                 trashed id       drive_resource   
 #>    <chr>                <lgl>   <drv_id> <list>           
-#>  1 name-squatter-rename TRUE    1mcYWU_… <named list [42]>
-#>  2 name-squatter-mv     TRUE    18YWcpm… <named list [42]>
-#>  3 name-squatter-upload TRUE    16MOsgz… <named list [42]>
-#>  4 name-squatter-rename TRUE    1UhJ-Lu… <named list [42]>
-#>  5 name-squatter-mv     TRUE    1vp5RVN… <named list [42]>
-#>  6 name-squatter-upload TRUE    1lNFuKW… <named list [42]>
-#>  7 name-squatter-rename TRUE    1Wv-SlX… <named list [42]>
-#>  8 name-squatter-mv     TRUE    18gM21a… <named list [42]>
-#>  9 name-squatter-upload TRUE    1LuRDHg… <named list [42]>
-#> 10 name-squatter-rename TRUE    1eV6BCb… <named list [42]>
+#>  1 name-squatter-rename TRUE    1CntxFx… <named list [42]>
+#>  2 name-squatter-mv     TRUE    1Q6oEic… <named list [42]>
+#>  3 name-squatter-upload TRUE    1R_FeQd… <named list [42]>
+#>  4 name-squatter-rename TRUE    1mcYWU_… <named list [42]>
+#>  5 name-squatter-mv     TRUE    18YWcpm… <named list [42]>
+#>  6 name-squatter-upload TRUE    16MOsgz… <named list [42]>
+#>  7 name-squatter-rename TRUE    1UhJ-Lu… <named list [42]>
+#>  8 name-squatter-mv     TRUE    1vp5RVN… <named list [42]>
+#>  9 name-squatter-upload TRUE    1lNFuKW… <named list [42]>
+#> 10 name-squatter-rename TRUE    1Wv-SlX… <named list [42]>
 drive_reveal(files, "mime_type")
 #> # A dribble: 10 × 4
 #>    name                 mime_type               id       drive_resource
 #>    <chr>                <chr>                   <drv_id> <list>        
-#>  1 name-squatter-rename application/octet-stre… 1mcYWU_… <named list>  
-#>  2 name-squatter-mv     application/octet-stre… 18YWcpm… <named list>  
-#>  3 name-squatter-upload application/octet-stre… 16MOsgz… <named list>  
-#>  4 name-squatter-rename application/octet-stre… 1UhJ-Lu… <named list>  
-#>  5 name-squatter-mv     application/octet-stre… 1vp5RVN… <named list>  
-#>  6 name-squatter-upload application/octet-stre… 1lNFuKW… <named list>  
-#>  7 name-squatter-rename application/octet-stre… 1Wv-SlX… <named list>  
-#>  8 name-squatter-mv     application/octet-stre… 18gM21a… <named list>  
-#>  9 name-squatter-upload application/octet-stre… 1LuRDHg… <named list>  
-#> 10 name-squatter-rename application/octet-stre… 1eV6BCb… <named list>  
+#>  1 name-squatter-rename application/octet-stre… 1CntxFx… <named list>  
+#>  2 name-squatter-mv     application/octet-stre… 1Q6oEic… <named list>  
+#>  3 name-squatter-upload application/octet-stre… 1R_FeQd… <named list>  
+#>  4 name-squatter-rename application/octet-stre… 1mcYWU_… <named list>  
+#>  5 name-squatter-mv     application/octet-stre… 18YWcpm… <named list>  
+#>  6 name-squatter-upload application/octet-stre… 16MOsgz… <named list>  
+#>  7 name-squatter-rename application/octet-stre… 1UhJ-Lu… <named list>  
+#>  8 name-squatter-mv     application/octet-stre… 1vp5RVN… <named list>  
+#>  9 name-squatter-upload application/octet-stre… 1lNFuKW… <named list>  
+#> 10 name-squatter-rename application/octet-stre… 1Wv-SlX… <named list>  
 drive_reveal(files, "starred")
 #> # A dribble: 10 × 4
 #>    name                 starred id       drive_resource   
 #>    <chr>                <lgl>   <drv_id> <list>           
-#>  1 name-squatter-rename FALSE   1mcYWU_… <named list [42]>
-#>  2 name-squatter-mv     FALSE   18YWcpm… <named list [42]>
-#>  3 name-squatter-upload FALSE   16MOsgz… <named list [42]>
-#>  4 name-squatter-rename FALSE   1UhJ-Lu… <named list [42]>
-#>  5 name-squatter-mv     FALSE   1vp5RVN… <named list [42]>
-#>  6 name-squatter-upload FALSE   1lNFuKW… <named list [42]>
-#>  7 name-squatter-rename FALSE   1Wv-SlX… <named list [42]>
-#>  8 name-squatter-mv     FALSE   18gM21a… <named list [42]>
-#>  9 name-squatter-upload FALSE   1LuRDHg… <named list [42]>
-#> 10 name-squatter-rename FALSE   1eV6BCb… <named list [42]>
+#>  1 name-squatter-rename FALSE   1CntxFx… <named list [42]>
+#>  2 name-squatter-mv     FALSE   1Q6oEic… <named list [42]>
+#>  3 name-squatter-upload FALSE   1R_FeQd… <named list [42]>
+#>  4 name-squatter-rename FALSE   1mcYWU_… <named list [42]>
+#>  5 name-squatter-mv     FALSE   18YWcpm… <named list [42]>
+#>  6 name-squatter-upload FALSE   16MOsgz… <named list [42]>
+#>  7 name-squatter-rename FALSE   1UhJ-Lu… <named list [42]>
+#>  8 name-squatter-mv     FALSE   1vp5RVN… <named list [42]>
+#>  9 name-squatter-upload FALSE   1lNFuKW… <named list [42]>
+#> 10 name-squatter-rename FALSE   1Wv-SlX… <named list [42]>
 drive_reveal(files, "description")
 #> # A dribble: 10 × 4
 #>    name                 description id       drive_resource   
 #>    <chr>                <list>      <drv_id> <list>           
-#>  1 name-squatter-rename <NULL>      1mcYWU_… <named list [42]>
-#>  2 name-squatter-mv     <NULL>      18YWcpm… <named list [42]>
-#>  3 name-squatter-upload <NULL>      16MOsgz… <named list [42]>
-#>  4 name-squatter-rename <NULL>      1UhJ-Lu… <named list [42]>
-#>  5 name-squatter-mv     <NULL>      1vp5RVN… <named list [42]>
-#>  6 name-squatter-upload <NULL>      1lNFuKW… <named list [42]>
-#>  7 name-squatter-rename <NULL>      1Wv-SlX… <named list [42]>
-#>  8 name-squatter-mv     <NULL>      18gM21a… <named list [42]>
-#>  9 name-squatter-upload <NULL>      1LuRDHg… <named list [42]>
-#> 10 name-squatter-rename <NULL>      1eV6BCb… <named list [42]>
+#>  1 name-squatter-rename <NULL>      1CntxFx… <named list [42]>
+#>  2 name-squatter-mv     <NULL>      1Q6oEic… <named list [42]>
+#>  3 name-squatter-upload <NULL>      1R_FeQd… <named list [42]>
+#>  4 name-squatter-rename <NULL>      1mcYWU_… <named list [42]>
+#>  5 name-squatter-mv     <NULL>      18YWcpm… <named list [42]>
+#>  6 name-squatter-upload <NULL>      16MOsgz… <named list [42]>
+#>  7 name-squatter-rename <NULL>      1UhJ-Lu… <named list [42]>
+#>  8 name-squatter-mv     <NULL>      1vp5RVN… <named list [42]>
+#>  9 name-squatter-upload <NULL>      1lNFuKW… <named list [42]>
+#> 10 name-squatter-rename <NULL>      1Wv-SlX… <named list [42]>
 drive_reveal(files, "version")
 #> # A dribble: 10 × 4
 #>    name                 version id       drive_resource   
 #>    <chr>                <chr>   <drv_id> <list>           
-#>  1 name-squatter-rename 3       1mcYWU_… <named list [42]>
-#>  2 name-squatter-mv     3       18YWcpm… <named list [42]>
-#>  3 name-squatter-upload 3       16MOsgz… <named list [42]>
-#>  4 name-squatter-rename 3       1UhJ-Lu… <named list [42]>
-#>  5 name-squatter-mv     3       1vp5RVN… <named list [42]>
-#>  6 name-squatter-upload 3       1lNFuKW… <named list [42]>
-#>  7 name-squatter-rename 3       1Wv-SlX… <named list [42]>
-#>  8 name-squatter-mv     3       18gM21a… <named list [42]>
-#>  9 name-squatter-upload 3       1LuRDHg… <named list [42]>
-#> 10 name-squatter-rename 3       1eV6BCb… <named list [42]>
+#>  1 name-squatter-rename 3       1CntxFx… <named list [42]>
+#>  2 name-squatter-mv     3       1Q6oEic… <named list [42]>
+#>  3 name-squatter-upload 3       1R_FeQd… <named list [42]>
+#>  4 name-squatter-rename 3       1mcYWU_… <named list [42]>
+#>  5 name-squatter-mv     3       18YWcpm… <named list [42]>
+#>  6 name-squatter-upload 3       16MOsgz… <named list [42]>
+#>  7 name-squatter-rename 3       1UhJ-Lu… <named list [42]>
+#>  8 name-squatter-mv     3       1vp5RVN… <named list [42]>
+#>  9 name-squatter-upload 3       1lNFuKW… <named list [42]>
+#> 10 name-squatter-rename 3       1Wv-SlX… <named list [42]>
 drive_reveal(files, "web_view_link")
 #> # A dribble: 10 × 4
 #>    name                 web_view_link           id       drive_resource
 #>    <chr>                <chr>                   <drv_id> <list>        
-#>  1 name-squatter-rename https://drive.google.c… 1mcYWU_… <named list>  
-#>  2 name-squatter-mv     https://drive.google.c… 18YWcpm… <named list>  
-#>  3 name-squatter-upload https://drive.google.c… 16MOsgz… <named list>  
-#>  4 name-squatter-rename https://drive.google.c… 1UhJ-Lu… <named list>  
-#>  5 name-squatter-mv     https://drive.google.c… 1vp5RVN… <named list>  
-#>  6 name-squatter-upload https://drive.google.c… 1lNFuKW… <named list>  
-#>  7 name-squatter-rename https://drive.google.c… 1Wv-SlX… <named list>  
-#>  8 name-squatter-mv     https://drive.google.c… 18gM21a… <named list>  
-#>  9 name-squatter-upload https://drive.google.c… 1LuRDHg… <named list>  
-#> 10 name-squatter-rename https://drive.google.c… 1eV6BCb… <named list>  
+#>  1 name-squatter-rename https://drive.google.c… 1CntxFx… <named list>  
+#>  2 name-squatter-mv     https://drive.google.c… 1Q6oEic… <named list>  
+#>  3 name-squatter-upload https://drive.google.c… 1R_FeQd… <named list>  
+#>  4 name-squatter-rename https://drive.google.c… 1mcYWU_… <named list>  
+#>  5 name-squatter-mv     https://drive.google.c… 18YWcpm… <named list>  
+#>  6 name-squatter-upload https://drive.google.c… 16MOsgz… <named list>  
+#>  7 name-squatter-rename https://drive.google.c… 1UhJ-Lu… <named list>  
+#>  8 name-squatter-mv     https://drive.google.c… 1vp5RVN… <named list>  
+#>  9 name-squatter-upload https://drive.google.c… 1lNFuKW… <named list>  
+#> 10 name-squatter-rename https://drive.google.c… 1Wv-SlX… <named list>  
 drive_reveal(files, "modified_time")
 #> # A dribble: 10 × 4
 #>    name                 modified_time       id       drive_resource   
 #>    <chr>                <dttm>              <drv_id> <list>           
-#>  1 name-squatter-rename 2026-10-01 19:03:09 1mcYWU_… <named list [42]>
-#>  2 name-squatter-mv     2026-10-01 19:02:44 18YWcpm… <named list [42]>
-#>  3 name-squatter-upload 2026-09-30 18:35:28 16MOsgz… <named list [42]>
-#>  4 name-squatter-rename 2026-09-30 18:34:39 1UhJ-Lu… <named list [42]>
-#>  5 name-squatter-mv     2026-09-30 18:34:16 1vp5RVN… <named list [42]>
-#>  6 name-squatter-upload 2026-09-29 18:52:19 1lNFuKW… <named list [42]>
-#>  7 name-squatter-rename 2026-09-29 18:51:35 1Wv-SlX… <named list [42]>
-#>  8 name-squatter-mv     2026-09-29 18:51:13 18gM21a… <named list [42]>
-#>  9 name-squatter-upload 2026-09-28 20:15:14 1LuRDHg… <named list [42]>
-#> 10 name-squatter-rename 2026-09-28 20:14:26 1eV6BCb… <named list [42]>
+#>  1 name-squatter-rename 2026-10-02 18:41:46 1CntxFx… <named list [42]>
+#>  2 name-squatter-mv     2026-10-02 18:41:28 1Q6oEic… <named list [42]>
+#>  3 name-squatter-upload 2026-10-01 19:04:11 1R_FeQd… <named list [42]>
+#>  4 name-squatter-rename 2026-10-01 19:03:09 1mcYWU_… <named list [42]>
+#>  5 name-squatter-mv     2026-10-01 19:02:44 18YWcpm… <named list [42]>
+#>  6 name-squatter-upload 2026-09-30 18:35:28 16MOsgz… <named list [42]>
+#>  7 name-squatter-rename 2026-09-30 18:34:39 1UhJ-Lu… <named list [42]>
+#>  8 name-squatter-mv     2026-09-30 18:34:16 1vp5RVN… <named list [42]>
+#>  9 name-squatter-upload 2026-09-29 18:52:19 1lNFuKW… <named list [42]>
+#> 10 name-squatter-rename 2026-09-29 18:51:35 1Wv-SlX… <named list [42]>
 drive_reveal(files, "created_time")
 #> # A dribble: 10 × 4
 #>    name                 created_time        id       drive_resource   
 #>    <chr>                <dttm>              <drv_id> <list>           
-#>  1 name-squatter-rename 2026-10-01 19:03:09 1mcYWU_… <named list [42]>
-#>  2 name-squatter-mv     2026-10-01 19:02:44 18YWcpm… <named list [42]>
-#>  3 name-squatter-upload 2026-09-30 18:35:28 16MOsgz… <named list [42]>
-#>  4 name-squatter-rename 2026-09-30 18:34:39 1UhJ-Lu… <named list [42]>
-#>  5 name-squatter-mv     2026-09-30 18:34:16 1vp5RVN… <named list [42]>
-#>  6 name-squatter-upload 2026-09-29 18:52:19 1lNFuKW… <named list [42]>
-#>  7 name-squatter-rename 2026-09-29 18:51:35 1Wv-SlX… <named list [42]>
-#>  8 name-squatter-mv     2026-09-29 18:51:13 18gM21a… <named list [42]>
-#>  9 name-squatter-upload 2026-09-28 20:15:14 1LuRDHg… <named list [42]>
-#> 10 name-squatter-rename 2026-09-28 20:14:26 1eV6BCb… <named list [42]>
+#>  1 name-squatter-rename 2026-10-02 18:41:46 1CntxFx… <named list [42]>
+#>  2 name-squatter-mv     2026-10-02 18:41:28 1Q6oEic… <named list [42]>
+#>  3 name-squatter-upload 2026-10-01 19:04:11 1R_FeQd… <named list [42]>
+#>  4 name-squatter-rename 2026-10-01 19:03:09 1mcYWU_… <named list [42]>
+#>  5 name-squatter-mv     2026-10-01 19:02:44 18YWcpm… <named list [42]>
+#>  6 name-squatter-upload 2026-09-30 18:35:28 16MOsgz… <named list [42]>
+#>  7 name-squatter-rename 2026-09-30 18:34:39 1UhJ-Lu… <named list [42]>
+#>  8 name-squatter-mv     2026-09-30 18:34:16 1vp5RVN… <named list [42]>
+#>  9 name-squatter-upload 2026-09-29 18:52:19 1lNFuKW… <named list [42]>
+#> 10 name-squatter-rename 2026-09-29 18:51:35 1Wv-SlX… <named list [42]>
 drive_reveal(files, "owned_by_me")
 #> # A dribble: 10 × 4
 #>    name                 owned_by_me id       drive_resource   
 #>    <chr>                <lgl>       <drv_id> <list>           
-#>  1 name-squatter-rename TRUE        1mcYWU_… <named list [42]>
-#>  2 name-squatter-mv     TRUE        18YWcpm… <named list [42]>
-#>  3 name-squatter-upload TRUE        16MOsgz… <named list [42]>
-#>  4 name-squatter-rename TRUE        1UhJ-Lu… <named list [42]>
-#>  5 name-squatter-mv     TRUE        1vp5RVN… <named list [42]>
-#>  6 name-squatter-upload TRUE        1lNFuKW… <named list [42]>
-#>  7 name-squatter-rename TRUE        1Wv-SlX… <named list [42]>
-#>  8 name-squatter-mv     TRUE        18gM21a… <named list [42]>
-#>  9 name-squatter-upload TRUE        1LuRDHg… <named list [42]>
-#> 10 name-squatter-rename TRUE        1eV6BCb… <named list [42]>
+#>  1 name-squatter-rename TRUE        1CntxFx… <named list [42]>
+#>  2 name-squatter-mv     TRUE        1Q6oEic… <named list [42]>
+#>  3 name-squatter-upload TRUE        1R_FeQd… <named list [42]>
+#>  4 name-squatter-rename TRUE        1mcYWU_… <named list [42]>
+#>  5 name-squatter-mv     TRUE        18YWcpm… <named list [42]>
+#>  6 name-squatter-upload TRUE        16MOsgz… <named list [42]>
+#>  7 name-squatter-rename TRUE        1UhJ-Lu… <named list [42]>
+#>  8 name-squatter-mv     TRUE        1vp5RVN… <named list [42]>
+#>  9 name-squatter-upload TRUE        1lNFuKW… <named list [42]>
+#> 10 name-squatter-rename TRUE        1Wv-SlX… <named list [42]>
 drive_reveal(files, "size")
 #> # A dribble: 10 × 4
 #>    name                 size  id       drive_resource   
 #>    <chr>                <chr> <drv_id> <list>           
-#>  1 name-squatter-rename 0     1mcYWU_… <named list [42]>
-#>  2 name-squatter-mv     0     18YWcpm… <named list [42]>
-#>  3 name-squatter-upload 0     16MOsgz… <named list [42]>
-#>  4 name-squatter-rename 0     1UhJ-Lu… <named list [42]>
-#>  5 name-squatter-mv     0     1vp5RVN… <named list [42]>
-#>  6 name-squatter-upload 0     1lNFuKW… <named list [42]>
-#>  7 name-squatter-rename 0     1Wv-SlX… <named list [42]>
-#>  8 name-squatter-mv     0     18gM21a… <named list [42]>
-#>  9 name-squatter-upload 0     1LuRDHg… <named list [42]>
-#> 10 name-squatter-rename 0     1eV6BCb… <named list [42]>
+#>  1 name-squatter-rename 0     1CntxFx… <named list [42]>
+#>  2 name-squatter-mv     0     1Q6oEic… <named list [42]>
+#>  3 name-squatter-upload 0     1R_FeQd… <named list [42]>
+#>  4 name-squatter-rename 0     1mcYWU_… <named list [42]>
+#>  5 name-squatter-mv     0     18YWcpm… <named list [42]>
+#>  6 name-squatter-upload 0     16MOsgz… <named list [42]>
+#>  7 name-squatter-rename 0     1UhJ-Lu… <named list [42]>
+#>  8 name-squatter-mv     0     1vp5RVN… <named list [42]>
+#>  9 name-squatter-upload 0     1lNFuKW… <named list [42]>
+#> 10 name-squatter-rename 0     1Wv-SlX… <named list [42]>
 drive_reveal(files, "quota_bytes_used")
 #> # A dribble: 10 × 4
 #>    name                 quota_bytes_used id       drive_resource   
 #>    <chr>                <chr>            <drv_id> <list>           
-#>  1 name-squatter-rename 0                1mcYWU_… <named list [42]>
-#>  2 name-squatter-mv     0                18YWcpm… <named list [42]>
-#>  3 name-squatter-upload 0                16MOsgz… <named list [42]>
-#>  4 name-squatter-rename 0                1UhJ-Lu… <named list [42]>
-#>  5 name-squatter-mv     0                1vp5RVN… <named list [42]>
-#>  6 name-squatter-upload 0                1lNFuKW… <named list [42]>
-#>  7 name-squatter-rename 0                1Wv-SlX… <named list [42]>
-#>  8 name-squatter-mv     0                18gM21a… <named list [42]>
-#>  9 name-squatter-upload 0                1LuRDHg… <named list [42]>
-#> 10 name-squatter-rename 0                1eV6BCb… <named list [42]>
+#>  1 name-squatter-rename 0                1CntxFx… <named list [42]>
+#>  2 name-squatter-mv     0                1Q6oEic… <named list [42]>
+#>  3 name-squatter-upload 0                1R_FeQd… <named list [42]>
+#>  4 name-squatter-rename 0                1mcYWU_… <named list [42]>
+#>  5 name-squatter-mv     0                18YWcpm… <named list [42]>
+#>  6 name-squatter-upload 0                16MOsgz… <named list [42]>
+#>  7 name-squatter-rename 0                1UhJ-Lu… <named list [42]>
+#>  8 name-squatter-mv     0                1vp5RVN… <named list [42]>
+#>  9 name-squatter-upload 0                1lNFuKW… <named list [42]>
+#> 10 name-squatter-rename 0                1Wv-SlX… <named list [42]>
 
 # 'root' is a special file id that represents your My Drive root folder
 drive_get(id = "root") |>
