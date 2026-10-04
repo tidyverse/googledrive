@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1MD8lzIqtoAHpFa4atWQOBw8RN5133gWX7WUygEVBQ1A>
+#> • drive-quiet-demo <id: 1mlDAPkznxErWuICjzAYOUt7D92D3XaVjZScDKhTCuCI>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1MD8lzI… <named list [39]>
+#> 1 drive-quiet-demo 1mlDAPk… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1MD8lzIqtoAHpFa4atWQOBw8RN5133gWX7WUygEVBQ1A>
+#> • drive-quiet-demo <id: 1mlDAPkznxErWuICjzAYOUt7D92D3XaVjZScDKhTCuCI>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1MD8lzI… <named list [39]>
+#> 1 drive-quiet-demo TRUE    1mlDAPk… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1MD8lzIqtoAHpFa4atWQOBw8RN5133gWX7WUygEVBQ1A>
+#> • drive-quiet-works <id: 1mlDAPkznxErWuICjzAYOUt7D92D3XaVjZScDKhTCuCI>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1MD8lzI… <named list [39]>
+#> 1 drive-quiet-works FALSE   1mlDAPk… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1MD8lzIqtoAHpFa4atWQOBw8RN5133gWX7WUygEVBQ1A>
+#> • drive-quiet-works <id: 1mlDAPkznxErWuICjzAYOUt7D92D3XaVjZScDKhTCuCI>
 ```
