@@ -1,5 +1,12 @@
 # googledrive (development version)
 
+* Deprecated `team_drive_update()` forwards its `team_drive` argument to the
+  `shared_drive` argument of `shared_drive_update()`. Previously the argument
+  was passed under the wrong name and swallowed by `...`, so the call always
+  errored.
+* `is_mine()` returns `FALSE` instead of erroring for resources without an
+  owner, such as shared drives.
+
 # googledrive 2.1.2
 
 * `drive_upload()` and `drive_download()` support the conversion of a local

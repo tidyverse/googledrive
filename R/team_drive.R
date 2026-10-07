@@ -66,7 +66,7 @@ team_drive_update <- function(team_drive, ..., verbose = deprecated()) {
     "team_drive_update()",
     "shared_drive_update()"
   )
-  shared_drive_update(drive = team_drive, ...)
+  shared_drive_update(shared_drive = team_drive, ...)
 }
 
 #' @export
