@@ -4,7 +4,7 @@ test_that("drive_auth_config() is deprecated", {
     error = TRUE,
     drive_auth_config()
   )
-  })
+})
 
 test_that("drive_oauth_app() is deprecated", {
   withr::local_options(lifecycle_verbosity = "warning")
@@ -18,7 +18,8 @@ test_that("drive_auth_configure(app =) is deprecated in favor of client", {
 
   client <- gargle::gargle_oauth_client_from_json(
     system.file(
-      "extdata", "client_secret_installed.googleusercontent.com.json",
+      "extdata",
+      "client_secret_installed.googleusercontent.com.json",
       package = "gargle"
     ),
     name = "test-client"

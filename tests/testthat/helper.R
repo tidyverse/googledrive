@@ -13,10 +13,6 @@ skip_if_no_token <- function() {
   testthat::skip_if_not(drive_has_token(), "No Drive token")
 }
 
-with_mock <- function(..., .parent = parent.frame()) {
-  mockr::with_mock(..., .parent = .parent, .env = "googledrive")
-}
-
 # usage:
 # test_fixture("something.rds")
 test_fixture <- function(name) testthat::test_path("test-fixtures", name)

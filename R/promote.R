@@ -28,7 +28,7 @@ promote <- function(d, elem) {
 # simplified version of tidyr:::simplify_col()
 simplify_col <- function(x) {
   is_list <- map_lgl(x, is_list)
-  is_vec  <- map_lgl(x, ~ vec_is(.x) || is_null(.x))
+  is_vec <- map_lgl(x, ~ vec_is(.x) || is_null(.x))
   is_not_vec <- !is_vec
   if (any(is_list | is_not_vec)) {
     return(x)

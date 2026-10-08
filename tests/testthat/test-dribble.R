@@ -19,7 +19,9 @@ test_that("dribble() creates empty dribble", {
 test_that("new_dribble() requires a list and adds the dribble class", {
   expect_snapshot(new_dribble(1:3), error = TRUE)
   expect_dribble(new_dribble(list(
-    name = "NAME", id = "ID", drive_resource = list("DRIVE_RESOURCE")
+    name = "NAME",
+    id = "ID",
+    drive_resource = list("DRIVE_RESOURCE")
   )))
 })
 
@@ -118,9 +120,15 @@ test_that("is_folder() works", {
   expect_identical(is_folder(dribble()), logical(0))
   d <- new_dribble(
     tibble::tribble(
-      ~name, ~id, ~drive_resource,
-      "a", "aa", list(mimeType = "application/vnd.google-apps.folder"),
-      "b", "bb", list(mimeType = "foo")
+      ~name,
+      ~id,
+      ~drive_resource,
+      "a",
+      "aa",
+      list(mimeType = "application/vnd.google-apps.folder"),
+      "b",
+      "bb",
+      list(mimeType = "foo")
     )
   )
   expect_identical(is_folder(d), c(TRUE, FALSE))

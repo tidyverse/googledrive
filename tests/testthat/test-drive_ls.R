@@ -92,9 +92,9 @@ test_that("drive_ls() list contents of the target of a folder shortcut", {
     indirect_ls <- drive_ls(shortcut_name),
     type = "message"
   )
-  drive_ls_message <- drive_ls_message %>%
-    scrub_filepath(target_name) %>%
-    scrub_filepath(shortcut_name) %>%
+  drive_ls_message <- drive_ls_message |>
+    scrub_filepath(target_name) |>
+    scrub_filepath(shortcut_name) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(drive_ls_message)
@@ -134,8 +134,8 @@ test_that("`recursive` does its job", {
   out <- drive_ls(nm_("topdir"), recursive = FALSE)
   expect_true(
     all(
-      c(nm_("apple"), nm_("folder1-level1"), nm_("folder2-level1"))
-      %in% out$name
+      c(nm_("apple"), nm_("folder1-level1"), nm_("folder2-level1")) %in%
+        out$name
     )
   )
 
@@ -143,9 +143,14 @@ test_that("`recursive` does its job", {
   expect_true(
     all(
       c(
-        nm_("apple"), nm_("folder1-level1"), nm_("folder2-level1"),
-        nm_("banana"), nm_("folder1-level2"), nm_("cranberry")
-      ) %in% out$name
+        nm_("apple"),
+        nm_("folder1-level1"),
+        nm_("folder2-level1"),
+        nm_("banana"),
+        nm_("folder1-level2"),
+        nm_("cranberry")
+      ) %in%
+        out$name
     )
   )
 

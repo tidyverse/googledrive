@@ -26,3 +26,4 @@ application/vnd.oasis.opendocument.presentation,odp
 text/richtext,rtx
 application/zip,zip
 image/svg+xml,svg
+text/markdown,md

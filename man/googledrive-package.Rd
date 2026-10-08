@@ -25,8 +25,8 @@ tibble". This is a data frame with one row per file. A dribble is returned
 give people what they want (file name), track what the API wants (file id),
 and to hold the metadata needed for general file operations.
 
-googledrive is "pipe-friendly" and, in fact, re-exports \verb{\%>\%}, but does not
-require its use.
+googledrive is "pipe-friendly" (either the base \verb{|>} or magrittr \verb{\%>\%}
+pipe), but does not require its use.
 
 Please see the googledrive website for full documentation:
 \itemize{
@@ -53,6 +53,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Jennifer Bryan \email{jenny@posit.co} (\href{https://orcid.org/0000-0002-6983-2759}{ORCID})
   \item Lucy D'Agostino McGowan
 }
 

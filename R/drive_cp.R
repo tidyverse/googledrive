@@ -68,12 +68,14 @@
 #'
 #' # Clean up
 #' drive_rm(chicken_sheet)
-drive_cp <- function(file,
-                     path = NULL,
-                     name = NULL,
-                     ...,
-                     overwrite = NA,
-                     verbose = deprecated()) {
+drive_cp <- function(
+  file,
+  path = NULL,
+  name = NULL,
+  ...,
+  overwrite = NA,
+  verbose = deprecated()
+) {
   warn_for_verbose(verbose)
 
   file <- as_dribble(file)

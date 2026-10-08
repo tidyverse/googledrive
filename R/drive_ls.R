@@ -45,7 +45,8 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   } else {
     shared_drive <- pluck(path, "drive_resource", 1, "driveId")
     if (!is.null(shared_drive)) {
-      params[["shared_drive"]] <- params[["shared_drive"]] %||% as_id(shared_drive)
+      params[["shared_drive"]] <- params[["shared_drive"]] %||%
+        as_id(shared_drive)
     }
   }
 
@@ -67,11 +68,14 @@ folders_below <- function(id, shared_drive = NULL) {
   } else {
     c(
       folder_kids,
-      unlist(lapply(
-        folder_kids,
-        folders_below,
-        shared_drive = shared_drive
-      ), recursive = FALSE)
+      unlist(
+        lapply(
+          folder_kids,
+          folders_below,
+          shared_drive = shared_drive
+        ),
+        recursive = FALSE
+      )
     )
   }
 }

@@ -75,7 +75,11 @@ test_that("drive_read() can handle non UTF-8 input, if informed", {
   suppressMessages(
     imdb <- drive_read_string(nm_("imdb_latin1_csv"), encoding = "latin1")
   )
-  imdb <- utils::read.csv(text = imdb, stringsAsFactors = FALSE, encoding = "UTF-8")
+  imdb <- utils::read.csv(
+    text = imdb,
+    stringsAsFactors = FALSE,
+    encoding = "UTF-8"
+  )
   expect_equal(
     names(imdb),
     c("Votes", "Rating", "Title", "Year", "Decade")

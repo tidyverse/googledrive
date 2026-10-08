@@ -7,8 +7,6 @@
 #' from a specific user's "My Drive". Shared drives are the successors to the
 #' earlier concept of Team Drives.
 
-
-
 #' @description How to capture a shared drive or files/folders that live on a
 #'   shared drive for downstream use:
 
@@ -75,7 +73,6 @@
 #' * Get started with shared drives: `https://support.google.com/a/users/answer/9310351` from Google Workspace Learning Center
 #' * Best practices for shared drives: `https://support.google.com/a/users/answer/9310156` from Google Workspace Learning Center
 
-
 #' @section API docs:
 #' googledrive implements shared drive support as outlined here:
 #' * <https://developers.google.com/drive/api/v3/enable-shareddrives>
@@ -125,19 +122,25 @@ NULL
 # # this will error because `corpora = "domain"` forbids inclusion of id
 # shared_drive_params(corpora = "domain", driveId = "123456789")
 # }
-shared_drive_params <- function(driveId = NULL,
-                                corpora = NULL,
-                                includeItemsFromAllDrives = NULL) {
+shared_drive_params <- function(
+  driveId = NULL,
+  corpora = NULL,
+  includeItemsFromAllDrives = NULL
+) {
   rationalize_corpus(
     new_corpus(
-      driveId, corpora, includeItemsFromAllDrives
+      driveId,
+      corpora,
+      includeItemsFromAllDrives
     )
   )
 }
 
-new_corpus <- function(driveId = NULL,
-                       corpora = NULL,
-                       includeItemsFromAllDrives = NULL) {
+new_corpus <- function(
+  driveId = NULL,
+  corpora = NULL,
+  includeItemsFromAllDrives = NULL
+) {
   if (!is.null(driveId)) {
     # can't use is_string() because object of class drive_id IS acceptable
     stopifnot(is.character(driveId), length(driveId) == 1)
@@ -177,15 +180,19 @@ rationalize_corpus <- function(corpus) {
   validate_corpora(corpus[["corpora"]])
 
   if (corpus[["corpora"]] == "drive" && is.null(corpus[["driveId"]])) {
-    drive_abort('
+    drive_abort(
+      '
       When {.code corpus = "drive"}, you must also specify \\
-      the {.arg shared_drive}.')
+      the {.arg shared_drive}.'
+    )
   }
 
   if (corpus[["corpora"]] != "drive" && !is.null(corpus[["driveId"]])) {
-    drive_abort('
+    drive_abort(
+      '
       When {.code corpus != "drive"}, you must not specify \\
-      a {.arg shared_drive}.')
+      a {.arg shared_drive}.'
+    )
   }
 
   corpus[["includeItemsFromAllDrives"]] <- TRUE
@@ -243,9 +250,11 @@ as_shared_drive <- function(x, ...) UseMethod("as_shared_drive")
 
 #' @export
 as_shared_drive.default <- function(x, ...) {
-  drive_abort("
+  drive_abort(
+    "
     Don't know how to coerce an object of class {.cls {class(x)}} into \\
-    a shared drive {.cls dribble}.")
+    a shared drive {.cls dribble}."
+  )
 }
 
 #' @export
@@ -273,8 +282,10 @@ as_shared_drive.list <- function(x, ...) {
 validate_shared_drive_dribble <- function(x) {
   stopifnot(inherits(x, "dribble"))
   if (!all(is_shared_drive(x))) {
-    drive_abort("
-      All rows of shared drive {.cls dribble} must contain a shared drive.")
+    drive_abort(
+      "
+      All rows of shared drive {.cls dribble} must contain a shared drive."
+    )
   }
   x
 }

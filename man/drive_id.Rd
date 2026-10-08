@@ -24,7 +24,7 @@ inputs into an instance of \code{drive_id}.
 \code{as_id()} is a generic function.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 as_id("123abc")
 as_id("https://docs.google.com/spreadsheets/d/qawsedrf16273849/edit#gid=12345")
 

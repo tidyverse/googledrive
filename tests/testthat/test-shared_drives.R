@@ -5,7 +5,10 @@ test_that("new_corpus() checks type and length, if not-NULL", {
   )
   expect_snapshot(new_corpus(driveId = c("1", "2")), error = TRUE)
   expect_snapshot(new_corpus(corpora = c("a", "b")), error = TRUE)
-  expect_snapshot(new_corpus(includeItemsFromAllDrives = c(TRUE, FALSE)), error = TRUE)
+  expect_snapshot(
+    new_corpus(includeItemsFromAllDrives = c(TRUE, FALSE)),
+    error = TRUE
+  )
 })
 
 test_that("`corpora` is checked for validity", {

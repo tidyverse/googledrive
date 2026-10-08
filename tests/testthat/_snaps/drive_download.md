@@ -55,3 +55,13 @@
       Saved locally as:
       * '{download_filename}'
 
+# drive_download() can convert a Google Doc to local markdown
+
+    Code
+      write_utf8(drive_download_message)
+    Output
+      File downloaded:
+      * '{file_to_download}' <id: {FILE_ID}>
+      Saved locally as:
+      * '{download_filename}'
+

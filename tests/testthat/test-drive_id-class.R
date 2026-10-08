@@ -40,8 +40,12 @@ test_that("as_id() extracts ids from Drive URLs but not other URLs", {
   expect_identical(
     as_id(x),
     as_id(c(
-      "doc12345", "folder12345", "folder12345", "blob12345",
-      "team12345", "teamdrive12345"
+      "doc12345",
+      "folder12345",
+      "folder12345",
+      "blob12345",
+      "team12345",
+      "teamdrive12345"
     ))
   )
   ## properly recognizes a missing URL

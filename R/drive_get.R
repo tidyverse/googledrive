@@ -67,7 +67,7 @@
 #' drive_get("~/")
 #' # the API reserves the file id "root" for your root folder
 #' drive_get(id = "root")
-#' drive_get(id = "root") %>% drive_reveal("path")
+#' drive_get(id = "root") |> drive_reveal("path")
 #'
 #' # set up some files to get by path
 #' alfalfa <- drive_mkdir("alfalfa")
@@ -116,12 +116,14 @@
 #' # search all shared drives and other files user has accessed
 #' drive_get(c("this.jpg", "that-file"), corpus = "allDrives")
 #' }
-drive_get <- function(path = NULL,
-                      id = NULL,
-                      shared_drive = NULL,
-                      corpus = NULL,
-                      verbose = deprecated(),
-                      team_drive = deprecated()) {
+drive_get <- function(
+  path = NULL,
+  id = NULL,
+  shared_drive = NULL,
+  corpus = NULL,
+  verbose = deprecated(),
+  team_drive = deprecated()
+) {
   warn_for_verbose(verbose)
   if (length(path) + length(id) == 0) {
     return(dribble_with_path())

@@ -98,5 +98,11 @@ vec_cast.data.frame.dribble <- function(x, to, ..., x_arg = "", to_arg = "") {
 
 stop_incompatible_cast_dribble <- function(x, to, ..., x_arg, to_arg) {
   details <- "Can't cast to a <dribble> because the resulting structure is likely invalid."
-  stop_incompatible_cast(x, to, x_arg = x_arg, to_arg = to_arg, details = details)
+  stop_incompatible_cast(
+    x,
+    to,
+    x_arg = x_arg,
+    to_arg = to_arg,
+    details = details
+  )
 }

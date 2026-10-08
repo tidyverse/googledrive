@@ -18,7 +18,7 @@ via \code{\link[=drive_auth_configure]{drive_auth_configure()}} and retrieve tha
 In the absence of a user-configured key, a built-in default key is used.
 }
 \examples{
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 drive_deauth()
 drive_user()
 
@@ -30,9 +30,9 @@ drive_download(public_file)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other auth functions: 
-\code{\link{drive_auth_configure}()},
-\code{\link{drive_auth}()},
-\code{\link{drive_scopes}()}
+Other auth functions:
+\code{\link[=drive_auth]{drive_auth()}},
+\code{\link[=drive_auth_configure]{drive_auth_configure()}},
+\code{\link[=drive_scopes]{drive_scopes()}}
 }
 \concept{auth functions}

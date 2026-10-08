@@ -42,7 +42,7 @@ exists.
 \section{\code{drive_oauth_app()}}{
 
 
-In light of the new \code{\link[gargle:gargle_oauth_client_from_json]{gargle::gargle_oauth_client()}} constructor and class of
+In light of the new \code{\link[gargle:gargle_oauth_client]{gargle::gargle_oauth_client()}} constructor and class of
 the same name, \code{drive_oauth_app()} is being replaced by
 \code{\link[=drive_oauth_client]{drive_oauth_client()}}.
 }

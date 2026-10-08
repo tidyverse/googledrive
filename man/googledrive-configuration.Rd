@@ -25,11 +25,11 @@ Read about googledrive's main auth function, \code{\link[=drive_auth]{drive_auth
 by the gargle package, which consults several options:
 \itemize{
 \item Default Google user or, more precisely, \code{email}: see
-\code{\link[gargle:gargle_options]{gargle::gargle_oauth_email()}}
+\code{\link[gargle:gargle_oauth_email]{gargle::gargle_oauth_email()}}
 \item Whether or where to cache OAuth tokens: see
-\code{\link[gargle:gargle_options]{gargle::gargle_oauth_cache()}}
+\code{\link[gargle:gargle_oauth_cache]{gargle::gargle_oauth_cache()}}
 \item Whether to prefer "out-of-band" auth: see
-\code{\link[gargle:gargle_options]{gargle::gargle_oob_default()}}
+\code{\link[gargle:gargle_oob_default]{gargle::gargle_oob_default()}}
 \item Application Default Credentials: see \code{\link[gargle:credentials_app_default]{gargle::credentials_app_default()}}
 }
 }
@@ -69,7 +69,7 @@ the withr package (\url{https://withr.r-lib.org}).
 }
 
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 

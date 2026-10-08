@@ -60,7 +60,7 @@ represents, such as:
 }
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 ## most of us have multiple files or folders on Google Drive
 d <- drive_find()
 is_dribble(d)

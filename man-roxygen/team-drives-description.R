@@ -10,4 +10,3 @@
 
 #' * <https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api>
 
-

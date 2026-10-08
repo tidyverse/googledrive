@@ -12,5 +12,7 @@ df <- tibble(
   name = names(ff),
   desc = map_chr(ff, "description")
 )
+df <- df |>
+  arrange(name)
 
 write_csv(df, here("inst", "extdata", "data", "files_fields.csv"))

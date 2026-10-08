@@ -23,7 +23,7 @@ a thin wrapper around \code{\link[=drive_about]{drive_about()}} that just extrac
 information (the information on current user) and prints it nicely.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 drive_user()
 
 # more info is returned than is printed

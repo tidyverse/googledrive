@@ -19,7 +19,7 @@ Returns the \code{"webViewLink"} for one or more files, which is the "link for
 opening the file in a relevant Google editor or viewer in a browser".
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # get a few files into a dribble
 three_files <- drive_find(n_max = 3)
 

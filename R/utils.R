@@ -5,8 +5,28 @@ is_toggle <- function(x) length(x) == 1L && is.logical(x)
 last <- function(x) pluck(x, length(x))
 
 escape_regex <- function(x) {
-  chars <- c("*", ".", "?", "^", "+", "$", "|", "(", ")", "[", "]", "{", "}", "\\")
-  gsub(paste0("([\\", paste0(collapse = "\\", chars), "])"), "\\\\\\1", x, perl = TRUE)
+  chars <- c(
+    "*",
+    ".",
+    "?",
+    "^",
+    "+",
+    "$",
+    "|",
+    "(",
+    ")",
+    "[",
+    "]",
+    "{",
+    "}",
+    "\\"
+  )
+  gsub(
+    paste0("([\\", paste0(collapse = "\\", chars), "])"),
+    "\\\\\\1",
+    x,
+    perl = TRUE
+  )
 }
 
 ## put a column into a tibble in the REST sense: "create or update"

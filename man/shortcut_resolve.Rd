@@ -36,17 +36,17 @@ specific error.
 }
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Create a file to make a shortcut to
-file <- drive_example_remote("chicken_sheet") \%>\%
+file <- drive_example_remote("chicken_sheet") |>
   drive_cp(name = "chicken-sheet-for-shortcut")
 
 # Create a shortcut
-sc1 <- file \%>\%
+sc1 <- file |>
   shortcut_create(name = "shortcut-1")
 
 # Create a second shortcut by copying the first
-sc1 <- sc1 \%>\%
+sc1 <- sc1 |>
   drive_cp(name = "shortcut-2")
 
 # Get the shortcuts

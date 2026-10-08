@@ -55,7 +55,7 @@ and URL endpoint substitution (which is also enacted).
 }
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 req <- request_generate(
   "drive.files.get",
   list(fileId = "abc"),
@@ -65,11 +65,11 @@ req
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_develop]{gargle::request_build()}}
+\code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_build]{gargle::request_build()}}
 
-Other low-level API functions: 
-\code{\link{drive_has_token}()},
-\code{\link{drive_token}()},
-\code{\link{request_make}()}
+Other low-level API functions:
+\code{\link[=drive_has_token]{drive_has_token()}},
+\code{\link[=drive_token]{drive_token()}},
+\code{\link[=request_make]{request_make()}}
 }
 \concept{low-level API functions}

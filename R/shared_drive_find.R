@@ -18,9 +18,7 @@
 #' \dontrun{
 #' shared_drive_find()
 #' }
-shared_drive_find <- function(pattern = NULL,
-                              n_max = Inf,
-                              ...) {
+shared_drive_find <- function(pattern = NULL, n_max = Inf, ...) {
   if (!is.null(pattern) && !(is_string(pattern))) {
     drive_abort("{.arg pattern} must be a character string.")
   }
@@ -40,9 +38,9 @@ shared_drive_find <- function(pattern = NULL,
     n = function(x) length(x$drives)
   )
 
-  res_tbl <- proc_res_list %>%
-    map("drives") %>%
-    purrr::flatten() %>%
+  res_tbl <- proc_res_list |>
+    map("drives") |>
+    purrr::flatten() |>
     as_dribble()
 
   if (!is.null(pattern)) {

@@ -44,9 +44,9 @@ drive_scopes()
 \url{https://developers.google.com/drive/api/guides/api-specific-auth} for details on
 the permissions for each scope.
 
-Other auth functions: 
-\code{\link{drive_auth_configure}()},
-\code{\link{drive_auth}()},
-\code{\link{drive_deauth}()}
+Other auth functions:
+\code{\link[=drive_auth]{drive_auth()}},
+\code{\link[=drive_auth_configure]{drive_auth_configure()}},
+\code{\link[=drive_deauth]{drive_deauth()}}
 }
 \concept{auth functions}

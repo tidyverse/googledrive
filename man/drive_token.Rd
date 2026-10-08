@@ -7,7 +7,7 @@
 drive_token()
 }
 \value{
-A \code{request} object (an S3 class provided by \link[httr:httr-package]{httr}).
+A \code{request} object (an S3 class provided by \link[httr:httr]{httr}).
 }
 \description{
 For internal use or for those programming around the Drive API.
@@ -20,7 +20,7 @@ If auth has been deactivated via \code{\link[=drive_deauth]{drive_deauth()}}, \c
 returns \code{NULL}.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 req <- request_generate(
   "drive.files.get",
   list(fileId = "abc"),
@@ -30,9 +30,9 @@ req
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other low-level API functions: 
-\code{\link{drive_has_token}()},
-\code{\link{request_generate}()},
-\code{\link{request_make}()}
+Other low-level API functions:
+\code{\link[=drive_has_token]{drive_has_token()}},
+\code{\link[=request_generate]{request_generate()}},
+\code{\link[=request_make]{request_make()}}
 }
 \concept{low-level API functions}

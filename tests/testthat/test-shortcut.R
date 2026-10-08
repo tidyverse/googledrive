@@ -45,8 +45,8 @@ test_that("shortcut_create() works", {
     type = "message"
   )
   defer_drive_rm(sc)
-  shortcut_create_message <- shortcut_create_message %>%
-    scrub_filepath(sc_name) %>%
+  shortcut_create_message <- shortcut_create_message |>
+    scrub_filepath(sc_name) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(shortcut_create_message)

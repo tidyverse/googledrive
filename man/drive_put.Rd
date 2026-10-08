@@ -77,7 +77,7 @@ if (no hits) \{
 }\if{html}{\out{</div>}}
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # create a local file to work with
 local_file <- tempfile("drive_put_", fileext = ".txt")
 writeLines(c("beginning", "middle"), local_file)
@@ -98,7 +98,7 @@ file2 <- drive_create(basename(local_file))
 drive_put(local_file)
 
 # Clean up
-drive_find("drive_put_.+[.]txt") \%>\% drive_rm()
+drive_find("drive_put_.+[.]txt") |> drive_rm()
 unlink(local_file)
 \dontshow{\}) # examplesIf}
 }

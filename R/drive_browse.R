@@ -39,7 +39,7 @@ drive_link <- function(file) {
 #' @return Character vector of file hyperlinks, from [drive_link()], invisibly.
 #' @export
 #' @examplesIf drive_has_token() && rlang::is_interactive()
-#' drive_find(n_max = 1) %>% drive_browse()
+#' drive_find(n_max = 1) |> drive_browse()
 drive_browse <- function(file = .Last.value) {
   file <- as_dribble(file)
   links <- drive_link(file)

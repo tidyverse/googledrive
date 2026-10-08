@@ -48,8 +48,10 @@ shared_drive_get <- function(name = NULL, id = NULL) {
 
 get_one_shared_drive_id <- function(id) {
   if (is.na(id)) {
-    drive_abort("
-      Can't {.fun shared_drive_get} a shared drive when {.arg id} is {.code NA}.")
+    drive_abort(
+      "
+      Can't {.fun shared_drive_get} a shared drive when {.arg id} is {.code NA}."
+    )
   }
   request <- request_generate(
     endpoint = "drive.drives.get",

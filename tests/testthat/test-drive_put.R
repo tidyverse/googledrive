@@ -36,9 +36,9 @@ test_that("drive_put() works", {
     original <- drive_put(local_file),
     type = "message"
   )
-  first_put <- first_put %>%
-    scrub_filepath(local_file) %>%
-    scrub_filepath(put_file) %>%
+  first_put <- first_put |>
+    scrub_filepath(local_file) |>
+    scrub_filepath(put_file) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(first_put)
@@ -59,8 +59,8 @@ test_that("drive_put() works", {
     second <- drive_put(local_file),
     type = "message"
   )
-  second_put <- second_put %>%
-    scrub_filepath(put_file) %>%
+  second_put <- second_put |>
+    scrub_filepath(put_file) |>
     scrub_file_id()
   expect_snapshot(
     write_utf8(second_put)

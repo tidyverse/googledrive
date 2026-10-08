@@ -126,15 +126,17 @@
 #' }
 #'
 #' @export
-drive_find <- function(pattern = NULL,
-                       trashed = FALSE,
-                       type = NULL,
-                       n_max = Inf,
-                       shared_drive = NULL,
-                       corpus = NULL,
-                       ...,
-                       verbose = deprecated(),
-                       team_drive = deprecated()) {
+drive_find <- function(
+  pattern = NULL,
+  trashed = FALSE,
+  type = NULL,
+  n_max = Inf,
+  shared_drive = NULL,
+  corpus = NULL,
+  ...,
+  verbose = deprecated(),
+  team_drive = deprecated()
+) {
   warn_for_verbose(verbose)
   if (!is.null(pattern) && !(is_string(pattern))) {
     drive_abort("{.arg pattern} must be a character string.")
@@ -189,9 +191,9 @@ drive_find <- function(pattern = NULL,
     n = function(x) length(x$files)
   )
 
-  res_tbl <- proc_res_list %>%
-    map("files") %>%
-    purrr::flatten() %>%
+  res_tbl <- proc_res_list |>
+    map("files") |>
+    purrr::flatten() |>
     as_dribble()
 
   # there is some evidence of overlap in the results returned in different

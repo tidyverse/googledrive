@@ -43,7 +43,8 @@ drive_share_anyone(x)
 # export 2 local examples for native Google file types
 x <- drive_upload(
   drive_example_local("chicken.txt"),
-  type = "document", name = "chicken_doc"
+  type = "document",
+  name = "chicken_doc"
 )
 drive_share_anyone(x)
 

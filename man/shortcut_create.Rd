@@ -25,7 +25,7 @@ the target \code{file}. As a consequence, if you want to use
 specify the shortcut's \code{name}.}
 
 \item{overwrite}{Logical, indicating whether to check for a pre-existing file
-at the targetted "filepath". The quotes around "filepath" refer to the fact
+at the targeted "filepath". The quotes around "filepath" refer to the fact
 that Drive does not impose a 1-to-1 relationship between filepaths and files,
 like a typical file system; read more about that in \code{\link[=drive_get]{drive_get()}}.
 \itemize{
@@ -34,8 +34,10 @@ files with the same filepath.
 \item \code{TRUE}: Check for a pre-existing file at the filepath. If there is
 zero or one, move a pre-existing file to the trash, then carry on. Note
 that the new file does not inherit any properties from the old one, such
-as sharing or publishing settings. It will have a new file ID. An error is
-thrown if two or more pre-existing files are found.
+as sharing or publishing settings. It will have a new file ID. An error
+is thrown if two or more pre-existing files are found. If you need to
+keep the file ID (and its sharing/publishing settings), use
+\code{drive_update()} or \code{drive_put()}.
 \item \code{FALSE}: Error if there is any pre-existing file at the filepath.
 }
 
@@ -54,7 +56,7 @@ relatively new feature in Drive; they were introduced when Drive stopped
 allowing a file to have more than 1 parent folder.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Target one of the official example files
 (src_file <- drive_example_remote("chicken_sheet"))
 
@@ -63,19 +65,19 @@ sc1 <- shortcut_create(src_file)
 # This shortcut could now be moved, renamed, etc.
 
 # Create a shortcut in the default location with a custom name
-sc2 <- src_file \%>\%
+sc2 <- src_file |>
   shortcut_create(name = "chicken_sheet_second_shortcut")
 
 # Create a folder, then put a shortcut there, with default name
 folder <- drive_mkdir("chicken_sheet_shortcut_folder")
-sc3 <- src_file \%>\%
+sc3 <- src_file |>
   shortcut_create(folder)
 
 # Look at all these shortcuts
 (dat <- drive_find("chicken_sheet", type = "shortcut"))
 
 # Confirm the shortcuts all target the original file
-dat <- dat \%>\%
+dat <- dat |>
   drive_reveal("shortcut_details")
 purrr::map_chr(dat$shortcut_details, "targetId")
 as_id(src_file)

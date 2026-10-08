@@ -34,23 +34,23 @@ API-speak), new metadata, or both.  To create a new file or update existing,
 depending on whether the Drive file already exists, see \code{\link[=drive_put]{drive_put()}}.
 }
 \examples{
-\dontshow{if (drive_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (drive_has_token()) withAutoprint(\{ # examplesIf}
 # Create a new file, so we can update it
-x <- drive_example_remote("chicken.csv") \%>\%
+x <- drive_example_remote("chicken.csv") |>
   drive_cp()
 
 # Update the file with new media
-x <- x \%>\%
+x <- x |>
   drive_update(drive_example_local("chicken.txt"))
 
 # Update the file with new metadata.
 # Notice here `name` is not an argument of `drive_update()`, we are passing
 # this to the API via the `...``
-x <- x \%>\%
+x <- x |>
   drive_update(name = "CHICKENS!")
 
 # Update the file with new media AND new metadata
-x <- x \%>\%
+x <- x |>
   drive_update(
     drive_example_local("chicken.txt"),
     name = "chicken-poem-again.txt"
