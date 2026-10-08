@@ -22,7 +22,7 @@ body" section of the Drive API docs for the associated endpoint to learn
 about relevant parameters.}
 
 \item{overwrite}{Logical, indicating whether to check for a pre-existing file
-at the targetted "filepath". The quotes around "filepath" refer to the fact
+at the targeted "filepath". The quotes around "filepath" refer to the fact
 that Drive does not impose a 1-to-1 relationship between filepaths and files,
 like a typical file system; read more about that in \code{\link[=drive_get]{drive_get()}}.
 \itemize{

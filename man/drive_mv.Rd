@@ -34,7 +34,7 @@ By default, the file stays in its current folder.}
 is character and lacks a trailing slash. By default, the file keeps its current name.}
 
 \item{overwrite}{Logical, indicating whether to check for a pre-existing file
-at the targetted "filepath". The quotes around "filepath" refer to the fact
+at the targeted "filepath". The quotes around "filepath" refer to the fact
 that Drive does not impose a 1-to-1 relationship between filepaths and files,
 like a typical file system; read more about that in \code{\link[=drive_get]{drive_get()}}.
 \itemize{

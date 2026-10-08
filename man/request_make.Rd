@@ -31,7 +31,7 @@ is no limit and we keep making requests until we get all items.}
 \item{n}{Function that computes the number of items in one response or page.
 The default function always returns \code{1} and therefore treats each page as
 an item. If you know more about the structure of the response, you can
-pass another function to count and threshhold, for example, the number of
+pass another function to count and threshold, for example, the number of
 files or comments.}
 
 \item{verbose}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This logical argument to
