@@ -153,17 +153,23 @@ test_that("you can't insert invalid strings into a drive_id", {
 
 test_that("colab paths (with resource keys) are parsed", {
   expect_identical(
-    as_id("https://colab.research.google.com/drive/1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu?usp=sharing"),
+    as_id(
+      "https://colab.research.google.com/drive/1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu?usp=sharing"
+    ),
     as_id("1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu")
   )
   # without resoucekey
   expect_identical(
-    as_id("https://colab.research.google.com/drive/1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu#scrollTo=Re4OQJePO-3g"),
+    as_id(
+      "https://colab.research.google.com/drive/1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu#scrollTo=Re4OQJePO-3g"
+    ),
     as_id("1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu")
   )
   # as copied from the Drive UI (Share>Copy Link)
   expect_identical(
-    as_id("https://colab.research.google.com/drive/1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu?resourcekey=0-IfkPRsAwVV1-noFH9jD37Q&usp=drive_link"),
+    as_id(
+      "https://colab.research.google.com/drive/1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu?resourcekey=0-IfkPRsAwVV1-noFH9jD37Q&usp=drive_link"
+    ),
     as_id("1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu")
   )
 })
