@@ -8,9 +8,10 @@
 #'   * `TRUE`: Check for a pre-existing file at the filepath. If there is
 #'     zero or one, move a pre-existing file to the trash, then carry on. Note
 #'     that the new file does not inherit any properties from the old one, such
-#'     as sharing or publishing settings. It will have a new file ID. An error is
-#'     thrown if two or more pre-existing files are found. Use `drive_update()` or
-#'     `drive_put()` if you want to keep permissions and sharing from an already existing file.
+#'     as sharing or publishing settings. It will have a new file ID. An error
+#'     is thrown if two or more pre-existing files are found. If you need to
+#'     keep the file ID (and its sharing/publishing settings), use
+#'     `drive_update()` or `drive_put()`.
 #'   * `FALSE`: Error if there is any pre-existing file at the filepath.
 #'
 #' Note that existence checks, based on filepath, are expensive operations, i.e.
