@@ -42,7 +42,7 @@ more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_qu
 \code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
 }
 \value{
-\code{request_make()}: Object of class \code{response} from \link[httr:httr-package]{httr::httr}.
+\code{request_make()}: Object of class \code{response} from \link[httr:httr]{httr}.
 
 \code{do_request()}: List representing the content returned by a single
 request.
@@ -99,9 +99,9 @@ do_paginated_request(req, n_max = 1)
 }
 }
 \seealso{
-Other low-level API functions: 
-\code{\link{drive_has_token}()},
-\code{\link{drive_token}()},
-\code{\link{request_generate}()}
+Other low-level API functions:
+\code{\link[=drive_has_token]{drive_has_token()}},
+\code{\link[=drive_token]{drive_token()}},
+\code{\link[=request_generate]{request_generate()}}
 }
 \concept{low-level API functions}
