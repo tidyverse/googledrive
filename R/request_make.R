@@ -47,7 +47,7 @@ do_request <- function(x, ...) {
 #' @param n Function that computes the number of items in one response or page.
 #'   The default function always returns `1` and therefore treats each page as
 #'   an item. If you know more about the structure of the response, you can
-#'   pass another function to count and threshhold, for example, the number of
+#'   pass another function to count and threshold, for example, the number of
 #'   files or comments.
 #' @export
 #' @return `do_paginated_request()`: List of lists, representing the returned

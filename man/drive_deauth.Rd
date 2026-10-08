@@ -30,9 +30,9 @@ drive_download(public_file)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other auth functions: 
-\code{\link{drive_auth}()},
-\code{\link{drive_auth_configure}()},
-\code{\link{drive_scopes}()}
+Other auth functions:
+\code{\link[=drive_auth]{drive_auth()}},
+\code{\link[=drive_auth_configure]{drive_auth_configure()}},
+\code{\link[=drive_scopes]{drive_scopes()}}
 }
 \concept{auth functions}

@@ -41,7 +41,7 @@ body" section of the Drive API docs for the associated endpoint to learn
 about relevant parameters.}
 
 \item{overwrite}{Logical, indicating whether to check for a pre-existing file
-at the targetted "filepath". The quotes around "filepath" refer to the fact
+at the targeted "filepath". The quotes around "filepath" refer to the fact
 that Drive does not impose a 1-to-1 relationship between filepaths and files,
 like a typical file system; read more about that in \code{\link[=drive_get]{drive_get()}}.
 \itemize{
@@ -50,8 +50,10 @@ files with the same filepath.
 \item \code{TRUE}: Check for a pre-existing file at the filepath. If there is
 zero or one, move a pre-existing file to the trash, then carry on. Note
 that the new file does not inherit any properties from the old one, such
-as sharing or publishing settings. It will have a new file ID. An error is
-thrown if two or more pre-existing files are found.
+as sharing or publishing settings. It will have a new file ID. An error
+is thrown if two or more pre-existing files are found. If you need to
+keep the file ID (and its sharing/publishing settings), use
+\code{drive_update()} or \code{drive_put()}.
 \item \code{FALSE}: Error if there is any pre-existing file at the filepath.
 }
 
