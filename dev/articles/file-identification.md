@@ -84,7 +84,7 @@ drive_get(as_id("https://docs.google.com/document/d/abcdefghijklm/edit"))
 ```
 
 [`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md)
-is for targetted file fetching based on name, path, id, or URL.
+is for targeted file fetching based on name, path, id, or URL.
 
 ## Other handy functions
 

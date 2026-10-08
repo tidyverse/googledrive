@@ -47,7 +47,7 @@ shortcut_create(file, path = NULL, name = NULL, overwrite = NA)
 - overwrite:
 
   Logical, indicating whether to check for a pre-existing file at the
-  targetted "filepath". The quotes around "filepath" refer to the fact
+  targeted "filepath". The quotes around "filepath" refer to the fact
   that Drive does not impose a 1-to-1 relationship between filepaths and
   files, like a typical file system; read more about that in
   [`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md).
@@ -60,12 +60,11 @@ shortcut_create(file, path = NULL, name = NULL, overwrite = NA)
     Note that the new file does not inherit any properties from the old
     one, such as sharing or publishing settings. It will have a new file
     ID. An error is thrown if two or more pre-existing files are found.
-    Use
+    If you need to keep the file ID (and its sharing/publishing
+    settings), use
     [`drive_update()`](https://googledrive.tidyverse.org/dev/reference/drive_update.md)
     or
-    [`drive_put()`](https://googledrive.tidyverse.org/dev/reference/drive_put.md)
-    if you want to keep permissions and sharing from an already existing
-    file.
+    [`drive_put()`](https://googledrive.tidyverse.org/dev/reference/drive_put.md).
 
   - `FALSE`: Error if there is any pre-existing file at the filepath.
 
@@ -95,7 +94,7 @@ a tibble with one row per file.
 # Create a shortcut in the default location with the default name
 sc1 <- shortcut_create(src_file)
 #> Created Drive file:
-#> • chicken_sheet <id: 10_H1QLZzxV3xqoPMbRUD6NhmNDX3xhKH>
+#> • chicken_sheet <id: 1x3lZxhwCXF5dvTvg6CekmZ9FrVM9EJn5>
 #> With MIME type:
 #> • application/vnd.google-apps.shortcut
 # This shortcut could now be moved, renamed, etc.
@@ -105,7 +104,7 @@ sc2 <- src_file |>
   shortcut_create(name = "chicken_sheet_second_shortcut")
 #> Created Drive file:
 #> • chicken_sheet_second_shortcut
-#>   <id: 1an1SZQZXNaSOHcjUkvTgGk3m8cWrQwrI>
+#>   <id: 1VJUlF-Vh58h1er4A9lSp9Sq8jnCZi4DO>
 #> With MIME type:
 #> • application/vnd.google-apps.shortcut
 
@@ -113,13 +112,13 @@ sc2 <- src_file |>
 folder <- drive_mkdir("chicken_sheet_shortcut_folder")
 #> Created Drive file:
 #> • chicken_sheet_shortcut_folder
-#>   <id: 1Vh5s2RA9npCnd-nVkes7n8Nydoy-gPu7>
+#>   <id: 1EpKQdyHsoo_X9lvn0iPkqDTop16B54cC>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 sc3 <- src_file |>
   shortcut_create(folder)
 #> Created Drive file:
-#> • chicken_sheet <id: 1q4RZTP5ZJpn6Gl58geFIxgUhYJzK5sY9>
+#> • chicken_sheet <id: 1LepmNO0p9SGQu-9NrknI5IUQaGaaqaOa>
 #> With MIME type:
 #> • application/vnd.google-apps.shortcut
 
@@ -128,9 +127,9 @@ sc3 <- src_file |>
 #> # A dribble: 3 × 3
 #>   name                          id       drive_resource   
 #>   <chr>                         <drv_id> <list>           
-#> 1 chicken_sheet                 1q4RZTP… <named list [35]>
-#> 2 chicken_sheet_second_shortcut 1an1SZQ… <named list [35]>
-#> 3 chicken_sheet                 10_H1QL… <named list [35]>
+#> 1 chicken_sheet                 1LepmNO… <named list [35]>
+#> 2 chicken_sheet_second_shortcut 1VJUlF-… <named list [35]>
+#> 3 chicken_sheet                 1x3lZxh… <named list [35]>
 
 # Confirm the shortcuts all target the original file
 dat <- dat |>
@@ -146,10 +145,10 @@ as_id(src_file)
 # Clean up
 drive_rm(sc1, sc2, sc3, folder)
 #> Files deleted:
-#> • chicken_sheet <id: 10_H1QLZzxV3xqoPMbRUD6NhmNDX3xhKH>
+#> • chicken_sheet <id: 1x3lZxhwCXF5dvTvg6CekmZ9FrVM9EJn5>
 #> • chicken_sheet_second_shortcut
-#>   <id: 1an1SZQZXNaSOHcjUkvTgGk3m8cWrQwrI>
-#> • chicken_sheet <id: 1q4RZTP5ZJpn6Gl58geFIxgUhYJzK5sY9>
+#>   <id: 1VJUlF-Vh58h1er4A9lSp9Sq8jnCZi4DO>
+#> • chicken_sheet <id: 1LepmNO0p9SGQu-9NrknI5IUQaGaaqaOa>
 #> • chicken_sheet_shortcut_folder
-#>   <id: 1Vh5s2RA9npCnd-nVkes7n8Nydoy-gPu7>
+#>   <id: 1EpKQdyHsoo_X9lvn0iPkqDTop16B54cC>
 ```

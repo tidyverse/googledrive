@@ -2,6 +2,14 @@
 
 ## googledrive (development version)
 
+- [`as_id()`](https://googledrive.tidyverse.org/dev/reference/drive_id.md)
+  (and hence
+  [`drive_download()`](https://googledrive.tidyverse.org/dev/reference/drive_download.md),
+  [`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md),
+  etc.) works for Google Colab links
+  ([\#459](https://github.com/tidyverse/googledrive/issues/459),
+  [@MichaelChirico](https://github.com/MichaelChirico)).
+
 ## googledrive 2.1.2
 
 CRAN release: 2025-09-10

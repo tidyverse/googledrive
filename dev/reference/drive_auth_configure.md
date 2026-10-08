@@ -74,11 +74,11 @@ Other auth functions:
 ## Examples
 
 ``` r
-# see and store the current user-configured OAuth client (probaby `NULL`)
+# see and store the current user-configured OAuth client (probably `NULL`)
 (original_client <- drive_oauth_client())
 #> NULL
 
-# see and store the current user-configured API key (probaby `NULL`)
+# see and store the current user-configured API key (probably `NULL`)
 (original_api_key <- drive_api_key())
 #> NULL
 

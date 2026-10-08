@@ -29,7 +29,7 @@ drive_rename(file, name = NULL, overwrite = NA, verbose = deprecated())
 - overwrite:
 
   Logical, indicating whether to check for a pre-existing file at the
-  targetted "filepath". The quotes around "filepath" refer to the fact
+  targeted "filepath". The quotes around "filepath" refer to the fact
   that Drive does not impose a 1-to-1 relationship between filepaths and
   files, like a typical file system; read more about that in
   [`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md).
@@ -42,12 +42,11 @@ drive_rename(file, name = NULL, overwrite = NA, verbose = deprecated())
     Note that the new file does not inherit any properties from the old
     one, such as sharing or publishing settings. It will have a new file
     ID. An error is thrown if two or more pre-existing files are found.
-    Use
+    If you need to keep the file ID (and its sharing/publishing
+    settings), use
     [`drive_update()`](https://googledrive.tidyverse.org/dev/reference/drive_update.md)
     or
-    [`drive_put()`](https://googledrive.tidyverse.org/dev/reference/drive_put.md)
-    if you want to keep permissions and sharing from an already existing
-    file.
+    [`drive_put()`](https://googledrive.tidyverse.org/dev/reference/drive_put.md).
 
   - `FALSE`: Error if there is any pre-existing file at the filepath.
 
@@ -77,40 +76,40 @@ a tibble with one row per file.
 # Create a file to rename
 file <- drive_create("file-to-rename")
 #> Created Drive file:
-#> • file-to-rename <id: 1Qio7CldIjeTP1PfNiPjwS37odo-RjV9r>
+#> • file-to-rename <id: 1uUdqs6a0f12vZL5ONnmC6d1Hyw8dddnp>
 #> With MIME type:
 #> • application/octet-stream
 
 # Rename it
 file <- drive_rename(file, name = "renamed-file")
 #> Original file:
-#> • file-to-rename <id: 1Qio7CldIjeTP1PfNiPjwS37odo-RjV9r>
+#> • file-to-rename <id: 1uUdqs6a0f12vZL5ONnmC6d1Hyw8dddnp>
 #> Has been renamed:
-#> • renamed-file <id: 1Qio7CldIjeTP1PfNiPjwS37odo-RjV9r>
+#> • renamed-file <id: 1uUdqs6a0f12vZL5ONnmC6d1Hyw8dddnp>
 
 # `overwrite = FALSE` errors if something already exists at target filepath
 # THIS WILL ERROR!
 drive_create("name-squatter-rename")
 #> Created Drive file:
-#> • name-squatter-rename <id: 1FMCBdfhGE3helPCT3cHDyNbN93-DD2fJ>
+#> • name-squatter-rename <id: 1-SYgDo6BLdSz0F5wpVB6eJHRt95Xb06F>
 #> With MIME type:
 #> • application/octet-stream
 drive_rename(file, name = "name-squatter-rename", overwrite = FALSE)
 #> Error in check_for_overwrite(parent = params[["addParents"]] %||% parent_before,     name = params[["name"]] %||% file$name, overwrite = overwrite): 1 item already exists at the target filepath and `overwrite =
 #> FALSE`:
-#> • name-squatter-rename <id: 1FMCBdfhGE3helPCT3cHDyNbN93-DD2fJ>
+#> • name-squatter-rename <id: 1-SYgDo6BLdSz0F5wpVB6eJHRt95Xb06F>
 
 # `overwrite = TRUE` moves the existing item to trash, then proceeds
 file <- drive_rename(file, name = "name-squatter-rename", overwrite = TRUE)
 #> File trashed:
-#> • name-squatter-rename <id: 1FMCBdfhGE3helPCT3cHDyNbN93-DD2fJ>
+#> • name-squatter-rename <id: 1-SYgDo6BLdSz0F5wpVB6eJHRt95Xb06F>
 #> Original file:
-#> • renamed-file <id: 1Qio7CldIjeTP1PfNiPjwS37odo-RjV9r>
+#> • renamed-file <id: 1uUdqs6a0f12vZL5ONnmC6d1Hyw8dddnp>
 #> Has been renamed:
-#> • name-squatter-rename <id: 1Qio7CldIjeTP1PfNiPjwS37odo-RjV9r>
+#> • name-squatter-rename <id: 1uUdqs6a0f12vZL5ONnmC6d1Hyw8dddnp>
 
 # Clean up
 drive_rm(file)
 #> File deleted:
-#> • name-squatter-rename <id: 1Qio7CldIjeTP1PfNiPjwS37odo-RjV9r>
+#> • name-squatter-rename <id: 1uUdqs6a0f12vZL5ONnmC6d1Hyw8dddnp>
 ```

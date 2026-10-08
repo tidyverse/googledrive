@@ -49,6 +49,9 @@ Useful links:
 
 Authors:
 
+- Jennifer Bryan <jenny@posit.co>
+  ([ORCID](https://orcid.org/0000-0002-6983-2759))
+
 - Lucy D'Agostino McGowan
 
 Other contributors:
