@@ -26,7 +26,7 @@ test_that("as_id() returns non-URL character strings as ids", {
   expect_identical(unclass(as_id(c("123", "456"))), c("123", "456"))
 })
 
-test_that("as_id() extracts ids from Drive URLs but not other URLs", {
+test_that("as_id() extracts ids from Drive URLs", {
   x <- c(
     "https://docs.google.com/document/d/doc12345/edit",
     "https://drive.google.com/drive/folders/folder12345",
@@ -35,7 +35,13 @@ test_that("as_id() extracts ids from Drive URLs but not other URLs", {
     "https://drive.google.com/open?id=blob12345",
     "https://docs.google.com/a/example.com/spreadsheets/d/team12345",
     # Team Drive URL
-    "https://drive.google.com/drive/u/0/folders/teamdrive12345"
+    "https://drive.google.com/drive/u/0/folders/teamdrive12345",
+    # id followed by a query parameter or fragment
+    "https://docs.google.com/document/d/doc12345?usp=sharing",
+    "https://docs.google.com/spreadsheets/d/sheet12345#gid=0",
+    "https://drive.google.com/file/d/file12345/view?usp=drive_link",
+    "https://drive.google.com/open?id=blob12345&usp=drive_fs",
+    "https://drive.google.com/uc?export=download&id=blob67890"
   )
   expect_identical(
     as_id(x),
@@ -45,7 +51,12 @@ test_that("as_id() extracts ids from Drive URLs but not other URLs", {
       "folder12345",
       "blob12345",
       "team12345",
-      "teamdrive12345"
+      "teamdrive12345",
+      "doc12345",
+      "sheet12345",
+      "file12345",
+      "blob12345",
+      "blob67890"
     ))
   )
   ## properly recognizes a missing URL
@@ -55,10 +66,19 @@ test_that("as_id() extracts ids from Drive URLs but not other URLs", {
     "https://drive.google.com/open?id=blob12345"
   )
   expect_identical(as_id(x), as_id(c("doc12345", NA, "blob12345")))
+})
 
-  ## properly recognizes a non-conforming URL
-  x <- "http://example.com"
-  expect_identical(unclass(as_id(x)), NA_character_)
+test_that("as_id() returns NA for URLs that don't contain an id", {
+  x <- c(
+    "http://example.com",
+    "https://drive.google.com/drive/my-drive",
+    "https://drive.google.com/drive/recent",
+    "https://drive.google.com/drive/search?q=foo",
+    # Colab notebook stored on GitHub, not Drive
+    "https://colab.research.google.com/github/user/repo/blob/main/nb.ipynb"
+  )
+  expect_identical(unclass(as_id(x)), rep(NA_character_, length(x)))
+  expect_false(any(is_drive_url(x)))
 })
 
 test_that("as_id() works with dribble and dribble-ish data frames", {
@@ -149,4 +169,27 @@ test_that("you can't insert invalid strings into a drive_id", {
   x <- as_id(month.name)
   expect_true(is_drive_id(x))
   expect_snapshot(x[2] <- "", error = TRUE)
+})
+
+test_that("as_id() extracts ids from Colab URLs", {
+  expect_identical(
+    as_id(
+      "https://colab.research.google.com/drive/1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu?usp=sharing"
+    ),
+    as_id("1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu")
+  )
+  # with a fragment
+  expect_identical(
+    as_id(
+      "https://colab.research.google.com/drive/1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu#scrollTo=Re4OQJePO-3g"
+    ),
+    as_id("1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu")
+  )
+  # as copied from the Drive UI (Share>Copy Link)
+  expect_identical(
+    as_id(
+      "https://colab.research.google.com/drive/1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu?resourcekey=0-IfkPRsAwVV1-noFH9jD37Q&usp=drive_link"
+    ),
+    as_id("1Dcf35JDcpxXjahcSHVJtQFkBaLhhQWLu")
+  )
 })
