@@ -1,6 +1,7 @@
 # googledrive (development version)
 
-* `as_id()` (and hence `drive_download()`) work for Google Colab links (#459, @MichaelChirico).
+* `as_id()` (and hence `drive_download()`, `drive_get()`, etc.) works for
+  Google Colab links (#459, @MichaelChirico).
 
 # googledrive 2.1.2
 

@@ -152,11 +152,14 @@ pillar_shaft.drive_id <- function(x, ...) {
 }
 
 ## we anticipate file-id-containing URLs in these forms:
-##       /d/FILE_ID   Drive file
-##   /drive/FILE_ID   Drive file, from Colab
-## /folders/FILE_ID   Drive folder
-##       id=FILE_ID   uploaded blob
-id_regexp <- "(/d/|/drive/(?!folders/|u/)|/folders/|id=)[^/]+"
+##                               /d/FILE_ID   Drive file
+##                         /folders/FILE_ID   Drive folder
+##  colab.research.google.com/drive/FILE_ID   Colab notebook
+##               ?id=FILE_ID or &id=FILE_ID   uploaded blob
+id_regexp <- paste0(
+  "(/d/|/folders/|colab[.]research[.]google[.]com/drive/|[?&]id=)",
+  "([^/?#&]+)"
+)
 
 is_drive_url <- function(x) grepl("^http", x) & grepl(id_regexp, x)
 
@@ -165,10 +168,10 @@ get_one_id <- function(x) {
     return(x)
   }
 
-  id_loc <- regexpr(id_regexp, x, perl = TRUE)
-  if (id_loc == -1) {
+  m <- regmatches(x, regexec(id_regexp, x))[[1]]
+  if (length(m) == 0) {
     NA_character_
   } else {
-    gsub("/d/|/drive/|/folders/|id=", "", regmatches(x, id_loc))
+    m[[3]]
   }
 }
