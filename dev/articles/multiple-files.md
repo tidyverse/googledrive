@@ -80,7 +80,7 @@ iterating over the `local_files` using
 
 folder <- drive_mkdir("upload-into-me-article-demo")
 #> Created Drive file:
-#> • upload-into-me-article-demo <id: 1ikm_a2DMdc1ZhrJlVWvNpFQq5NPl7tsU>
+#> • upload-into-me-article-demo <id: 1nWhDsXFnrr39tb0gNNwjT0wG-ezka5CK>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 with_drive_quiet(
@@ -96,14 +96,14 @@ drive_ls(folder)
 #> # A dribble: 8 × 3
 #>   name            id                                drive_resource   
 #>   <chr>           <drv_id>                          <list>           
-#> 1 r_logo.jpg      1ztkc8CEYHiOkKtUJGYnMt0Ip5mGsiL7z <named list [46]>
-#> 2 r_about.html    1CAGM6wmMokN344KIuPJjRuTMeWXerVzs <named list [45]>
-#> 3 markdown.md     19APQ2d3AvK9ulrzTZVfv5eNz6fJkRCdm <named list [44]>
-#> 4 imdb_latin1.csv 1qyFLUB3Q4rPXkQLxdURPuDW9ggewBAP4 <named list [44]>
-#> 5 chicken.txt     14Y8RSXUKhQkCHMyk9d-K9xVHJ6p5jLOk <named list [45]>
-#> 6 chicken.pdf     16qmL2WjNgY-MCj70nj5F_Zw4f2dyVPj8 <named list [45]>
-#> 7 chicken.jpg     18C3w3QvEdhWRQuZMsYNL1DfvaegJ22gQ <named list [46]>
-#> 8 chicken.csv     1rkxr0uwRgPGPxohkvDpvTcUY4xjiu7k8 <named list [44]>
+#> 1 r_logo.jpg      1zzfnn_9gyHihYyEwRYKlsqKmzIFNMYkZ <named list [46]>
+#> 2 r_about.html    1RT9akI5CktwFeR2bhJl6jKhrtwuKhFoP <named list [44]>
+#> 3 markdown.md     1zSCod94lnAs_hfUXapSqMpcMECMBchHF <named list [44]>
+#> 4 imdb_latin1.csv 1hP0HBCpWXOgSpEw6WcNTE-zw38TInCmn <named list [44]>
+#> 5 chicken.txt     1K7EdOo2HDnxlGs9CrX56SGBDLIvnX8fu <named list [45]>
+#> 6 chicken.pdf     1JcbELS4mUmF4afazyAa7fhGRoygwwhig <named list [45]>
+#> 7 chicken.jpg     1FDKCvutXWDOv_iik2gFDKJ9ECVJsp6Ok <named list [46]>
+#> 8 chicken.csv     1kCVzdSrpEq2J8tS5gV6iTiWXPVCtATzw <named list [44]>
 ```
 
 Now let’s reflect on the `files` object returned by this operation.
@@ -137,14 +137,14 @@ bind_rows(files)
 #> # A dribble: 8 × 3
 #>   name            id                                drive_resource   
 #>   <chr>           <drv_id>                          <list>           
-#> 1 chicken.csv     1rkxr0uwRgPGPxohkvDpvTcUY4xjiu7k8 <named list [44]>
-#> 2 chicken.jpg     18C3w3QvEdhWRQuZMsYNL1DfvaegJ22gQ <named list [46]>
-#> 3 chicken.pdf     16qmL2WjNgY-MCj70nj5F_Zw4f2dyVPj8 <named list [44]>
-#> 4 chicken.txt     14Y8RSXUKhQkCHMyk9d-K9xVHJ6p5jLOk <named list [44]>
-#> 5 imdb_latin1.csv 1qyFLUB3Q4rPXkQLxdURPuDW9ggewBAP4 <named list [44]>
-#> 6 markdown.md     19APQ2d3AvK9ulrzTZVfv5eNz6fJkRCdm <named list [44]>
-#> 7 r_about.html    1CAGM6wmMokN344KIuPJjRuTMeWXerVzs <named list [44]>
-#> 8 r_logo.jpg      1ztkc8CEYHiOkKtUJGYnMt0Ip5mGsiL7z <named list [46]>
+#> 1 chicken.csv     1kCVzdSrpEq2J8tS5gV6iTiWXPVCtATzw <named list [44]>
+#> 2 chicken.jpg     1FDKCvutXWDOv_iik2gFDKJ9ECVJsp6Ok <named list [46]>
+#> 3 chicken.pdf     1JcbELS4mUmF4afazyAa7fhGRoygwwhig <named list [44]>
+#> 4 chicken.txt     1K7EdOo2HDnxlGs9CrX56SGBDLIvnX8fu <named list [44]>
+#> 5 imdb_latin1.csv 1hP0HBCpWXOgSpEw6WcNTE-zw38TInCmn <named list [44]>
+#> 6 markdown.md     1zSCod94lnAs_hfUXapSqMpcMECMBchHF <named list [44]>
+#> 7 r_about.html    1RT9akI5CktwFeR2bhJl6jKhrtwuKhFoP <named list [44]>
+#> 8 r_logo.jpg      1zzfnn_9gyHihYyEwRYKlsqKmzIFNMYkZ <named list [46]>
 ```
 
 Below we show another way to finesse this by using a variant of
@@ -164,47 +164,47 @@ inputs: the list of dribbles from above and the vector of new names.
 ``` r
 
 (new_names <- glue("{Sys.Date()}_{basename(local_files)}"))
-#> 2026-10-12_chicken.csv
-#> 2026-10-12_chicken.jpg
-#> 2026-10-12_chicken.pdf
-#> 2026-10-12_chicken.txt
-#> 2026-10-12_imdb_latin1.csv
-#> 2026-10-12_markdown.md
-#> 2026-10-12_r_about.html
-#> 2026-10-12_r_logo.jpg
+#> 2026-10-13_chicken.csv
+#> 2026-10-13_chicken.jpg
+#> 2026-10-13_chicken.pdf
+#> 2026-10-13_chicken.txt
+#> 2026-10-13_imdb_latin1.csv
+#> 2026-10-13_markdown.md
+#> 2026-10-13_r_about.html
+#> 2026-10-13_r_logo.jpg
 files_dribble <- map2_dfr(files, new_names, drive_rename)
 #> Original file:
-#> • chicken.csv <id: 1rkxr0uwRgPGPxohkvDpvTcUY4xjiu7k8>
+#> • chicken.csv <id: 1kCVzdSrpEq2J8tS5gV6iTiWXPVCtATzw>
 #> Has been renamed:
-#> • 2026-10-12_chicken.csv <id: 1rkxr0uwRgPGPxohkvDpvTcUY4xjiu7k8>
+#> • 2026-10-13_chicken.csv <id: 1kCVzdSrpEq2J8tS5gV6iTiWXPVCtATzw>
 #> Original file:
-#> • chicken.jpg <id: 18C3w3QvEdhWRQuZMsYNL1DfvaegJ22gQ>
+#> • chicken.jpg <id: 1FDKCvutXWDOv_iik2gFDKJ9ECVJsp6Ok>
 #> Has been renamed:
-#> • 2026-10-12_chicken.jpg <id: 18C3w3QvEdhWRQuZMsYNL1DfvaegJ22gQ>
+#> • 2026-10-13_chicken.jpg <id: 1FDKCvutXWDOv_iik2gFDKJ9ECVJsp6Ok>
 #> Original file:
-#> • chicken.pdf <id: 16qmL2WjNgY-MCj70nj5F_Zw4f2dyVPj8>
+#> • chicken.pdf <id: 1JcbELS4mUmF4afazyAa7fhGRoygwwhig>
 #> Has been renamed:
-#> • 2026-10-12_chicken.pdf <id: 16qmL2WjNgY-MCj70nj5F_Zw4f2dyVPj8>
+#> • 2026-10-13_chicken.pdf <id: 1JcbELS4mUmF4afazyAa7fhGRoygwwhig>
 #> Original file:
-#> • chicken.txt <id: 14Y8RSXUKhQkCHMyk9d-K9xVHJ6p5jLOk>
+#> • chicken.txt <id: 1K7EdOo2HDnxlGs9CrX56SGBDLIvnX8fu>
 #> Has been renamed:
-#> • 2026-10-12_chicken.txt <id: 14Y8RSXUKhQkCHMyk9d-K9xVHJ6p5jLOk>
+#> • 2026-10-13_chicken.txt <id: 1K7EdOo2HDnxlGs9CrX56SGBDLIvnX8fu>
 #> Original file:
-#> • imdb_latin1.csv <id: 1qyFLUB3Q4rPXkQLxdURPuDW9ggewBAP4>
+#> • imdb_latin1.csv <id: 1hP0HBCpWXOgSpEw6WcNTE-zw38TInCmn>
 #> Has been renamed:
-#> • 2026-10-12_imdb_latin1.csv <id: 1qyFLUB3Q4rPXkQLxdURPuDW9ggewBAP4>
+#> • 2026-10-13_imdb_latin1.csv <id: 1hP0HBCpWXOgSpEw6WcNTE-zw38TInCmn>
 #> Original file:
-#> • markdown.md <id: 19APQ2d3AvK9ulrzTZVfv5eNz6fJkRCdm>
+#> • markdown.md <id: 1zSCod94lnAs_hfUXapSqMpcMECMBchHF>
 #> Has been renamed:
-#> • 2026-10-12_markdown.md <id: 19APQ2d3AvK9ulrzTZVfv5eNz6fJkRCdm>
+#> • 2026-10-13_markdown.md <id: 1zSCod94lnAs_hfUXapSqMpcMECMBchHF>
 #> Original file:
-#> • r_about.html <id: 1CAGM6wmMokN344KIuPJjRuTMeWXerVzs>
+#> • r_about.html <id: 1RT9akI5CktwFeR2bhJl6jKhrtwuKhFoP>
 #> Has been renamed:
-#> • 2026-10-12_r_about.html <id: 1CAGM6wmMokN344KIuPJjRuTMeWXerVzs>
+#> • 2026-10-13_r_about.html <id: 1RT9akI5CktwFeR2bhJl6jKhrtwuKhFoP>
 #> Original file:
-#> • r_logo.jpg <id: 1ztkc8CEYHiOkKtUJGYnMt0Ip5mGsiL7z>
+#> • r_logo.jpg <id: 1zzfnn_9gyHihYyEwRYKlsqKmzIFNMYkZ>
 #> Has been renamed:
-#> • 2026-10-12_r_logo.jpg <id: 1ztkc8CEYHiOkKtUJGYnMt0Ip5mGsiL7z>
+#> • 2026-10-13_r_logo.jpg <id: 1zzfnn_9gyHihYyEwRYKlsqKmzIFNMYkZ>
 ```
 
 We use
@@ -222,14 +222,14 @@ drive_ls(folder)
 #> # A dribble: 8 × 3
 #>   name                       id       drive_resource   
 #>   <chr>                      <drv_id> <list>           
-#> 1 2026-10-12_r_logo.jpg      1ztkc8C… <named list [46]>
-#> 2 2026-10-12_r_about.html    1CAGM6w… <named list [45]>
-#> 3 2026-10-12_markdown.md     19APQ2d… <named list [44]>
-#> 4 2026-10-12_imdb_latin1.csv 1qyFLUB… <named list [44]>
-#> 5 2026-10-12_chicken.txt     14Y8RSX… <named list [45]>
-#> 6 2026-10-12_chicken.pdf     16qmL2W… <named list [45]>
-#> 7 2026-10-12_chicken.jpg     18C3w3Q… <named list [46]>
-#> 8 2026-10-12_chicken.csv     1rkxr0u… <named list [44]>
+#> 1 2026-10-13_r_logo.jpg      1zzfnn_… <named list [46]>
+#> 2 2026-10-13_r_about.html    1RT9akI… <named list [45]>
+#> 3 2026-10-13_markdown.md     1zSCod9… <named list [44]>
+#> 4 2026-10-13_imdb_latin1.csv 1hP0HBC… <named list [44]>
+#> 5 2026-10-13_chicken.txt     1K7EdOo… <named list [45]>
+#> 6 2026-10-13_chicken.pdf     1JcbELS… <named list [45]>
+#> 7 2026-10-13_chicken.jpg     1FDKCvu… <named list [46]>
+#> 8 2026-10-13_chicken.csv     1kCVzdS… <named list [44]>
 ```
 
 Let’s confirm that, by using `map2_df2()` instead of
@@ -242,14 +242,14 @@ files_dribble
 #> # A dribble: 8 × 3
 #>   name                       id       drive_resource   
 #>   <chr>                      <drv_id> <list>           
-#> 1 2026-10-12_chicken.csv     1rkxr0u… <named list [44]>
-#> 2 2026-10-12_chicken.jpg     18C3w3Q… <named list [46]>
-#> 3 2026-10-12_chicken.pdf     16qmL2W… <named list [45]>
-#> 4 2026-10-12_chicken.txt     14Y8RSX… <named list [45]>
-#> 5 2026-10-12_imdb_latin1.csv 1qyFLUB… <named list [44]>
-#> 6 2026-10-12_markdown.md     19APQ2d… <named list [44]>
-#> 7 2026-10-12_r_about.html    1CAGM6w… <named list [45]>
-#> 8 2026-10-12_r_logo.jpg      1ztkc8C… <named list [46]>
+#> 1 2026-10-13_chicken.csv     1kCVzdS… <named list [44]>
+#> 2 2026-10-13_chicken.jpg     1FDKCvu… <named list [46]>
+#> 3 2026-10-13_chicken.pdf     1JcbELS… <named list [45]>
+#> 4 2026-10-13_chicken.txt     1K7EdOo… <named list [45]>
+#> 5 2026-10-13_imdb_latin1.csv 1hP0HBC… <named list [44]>
+#> 6 2026-10-13_markdown.md     1zSCod9… <named list [44]>
+#> 7 2026-10-13_r_about.html    1RT9akI… <named list [45]>
+#> 8 2026-10-13_r_logo.jpg      1zzfnn_… <named list [46]>
 ```
 
 What if you wanted to get a list back, because your downstream
@@ -291,5 +291,5 @@ way to delete these files is to delete their enclosing folder.
 
 drive_rm(folder)
 #> File deleted:
-#> • upload-into-me-article-demo <id: 1ikm_a2DMdc1ZhrJlVWvNpFQq5NPl7tsU>
+#> • upload-into-me-article-demo <id: 1nWhDsXFnrr39tb0gNNwjT0wG-ezka5CK>
 ```
