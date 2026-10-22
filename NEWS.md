@@ -4,7 +4,7 @@
   Google Colab links (#459, @MichaelChirico).
 
 * `is_mine()` returns `FALSE` instead of erroring for resources without an
-  owner, such as shared drives.
+  owner, such as items on a shared drive (#478, @sims1253).
 
 # googledrive 2.1.2
 
