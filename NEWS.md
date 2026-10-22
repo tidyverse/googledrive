@@ -1,9 +1,8 @@
 # googledrive (development version)
 
-* Deprecated `team_drive_update()` forwards its `team_drive` argument to the
-  `shared_drive` argument of `shared_drive_update()`. Previously the argument
-  was passed under the wrong name and swallowed by `...`, so the call always
-  errored.
+* `as_id()` (and hence `drive_download()`, `drive_get()`, etc.) works for
+  Google Colab links (#459, @MichaelChirico).
+
 * `is_mine()` returns `FALSE` instead of erroring for resources without an
   owner, such as shared drives.
 

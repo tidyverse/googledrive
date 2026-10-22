@@ -98,6 +98,7 @@ test_that("is_path() works", {
 
 test_that("rationalize_path_name() errors for bad `name`, before hitting API", {
   expect_snapshot(rationalize_path_name(name = letters), error = TRUE)
+  expect_snapshot(rationalize_path_name(name = as_id("abc")), error = TRUE)
 })
 
 test_that("rationalize_path_name() can pass `path` and `name` through, w/o hitting API", {
@@ -137,7 +138,7 @@ test_that("rationalize_path_name() won't hit API if we can infer `path` is a fol
 
 test_that("rationalize_path_name() populates `path` and `name` and correctly", {
   local_mocked_bindings(
-    confirm_clear_path = function(path, name) NULL
+    confirm_clear_path = function(path, name, ...) NULL
   )
   expect_identical(
     rationalize_path_name(path = "FILE_NAME", name = NULL),

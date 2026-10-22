@@ -65,11 +65,11 @@ req
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_develop]{gargle::request_build()}}
+\code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_build]{gargle::request_build()}}
 
-Other low-level API functions: 
-\code{\link{drive_has_token}()},
-\code{\link{drive_token}()},
-\code{\link{request_make}()}
+Other low-level API functions:
+\code{\link[=drive_has_token]{drive_has_token()}},
+\code{\link[=drive_token]{drive_token()}},
+\code{\link[=request_make]{request_make()}}
 }
 \concept{low-level API functions}

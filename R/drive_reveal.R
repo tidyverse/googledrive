@@ -134,7 +134,7 @@ drive_reveal <- function(
   file,
   what = c("path", "permissions", "published", "parent")
 ) {
-  stopifnot(is_string(what))
+  check_string(what)
   file <- as_dribble(file)
 
   if (what %in% c("path", "permissions", "published", "parent")) {

@@ -17,9 +17,9 @@ requests.
 drive_has_token()
 }
 \seealso{
-Other low-level API functions: 
-\code{\link{drive_token}()},
-\code{\link{request_generate}()},
-\code{\link{request_make}()}
+Other low-level API functions:
+\code{\link[=drive_token]{drive_token()}},
+\code{\link[=request_generate]{request_generate()}},
+\code{\link[=request_make]{request_make()}}
 }
 \concept{low-level API functions}

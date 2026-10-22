@@ -138,10 +138,13 @@ drive_find <- function(
   team_drive = deprecated()
 ) {
   warn_for_verbose(verbose)
-  if (!is.null(pattern) && !(is_string(pattern))) {
-    drive_abort("{.arg pattern} must be a character string.")
-  }
-  stopifnot(is_toggle(trashed))
+  check_non_id_string(
+    pattern,
+    what = "a regular expression",
+    hint = c(i = "To get a file by its ID, use {.code drive_get(id = )}."),
+    allow_null = TRUE
+  )
+  check_bool(trashed, allow_na = TRUE)
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
 
   if (lifecycle::is_present(team_drive)) {

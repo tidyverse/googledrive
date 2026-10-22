@@ -6,6 +6,14 @@
       Error in `drive_auth_configure()`:
       ! Must supply exactly one of `client` or `path`, not both
 
+---
+
+    Code
+      drive_auth_configure(path = 1)
+    Condition
+      Error in `drive_auth_configure()`:
+      ! `path` must be a single string, not the number 1.
+
 # drive_scopes() reveals Drive scopes
 
     Code
