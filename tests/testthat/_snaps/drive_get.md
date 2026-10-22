@@ -1,3 +1,25 @@
+# drive_get() checks `corpus` (before hitting Drive API)
+
+    Code
+      drive_get("foo", corpus = "nope")
+    Condition
+      Error in `drive_get()`:
+      ! Invalid value for `corpus`:
+      x 'nope'
+      These are the only acceptable values:
+      * 'user'
+      * 'drive'
+      * 'allDrives'
+      * 'domain'
+
+---
+
+    Code
+      drive_get("foo", corpus = "drive")
+    Condition
+      Error in `drive_get()`:
+      ! When `corpus = "drive"`, you must also specify the `shared_drive`.
+
 # drive_get() 'no input' edge cases
 
     Code

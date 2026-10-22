@@ -27,7 +27,7 @@
     Code
       shared_drive_params(corpora = "foo")
     Condition
-      Error in `validate_corpora()`:
+      Error:
       ! Invalid value for `corpus`:
       x 'foo'
       These are the only acceptable values:
@@ -41,7 +41,7 @@
     Code
       shared_drive_params(corpora = "drive")
     Condition
-      Error in `rationalize_corpus()`:
+      Error:
       ! When `corpus = "drive"`, you must also specify the `shared_drive`.
 
 # `corpora != "drive"` rejects shared drive specification
@@ -49,7 +49,7 @@
     Code
       shared_drive_params(corpora = "user", driveId = "123")
     Condition
-      Error in `rationalize_corpus()`:
+      Error:
       ! When `corpus != "drive"`, you must not specify a `shared_drive`.
 
 # shared_drive_find() checks `pattern` (before hitting Drive API)

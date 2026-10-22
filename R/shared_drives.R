@@ -125,14 +125,16 @@ NULL
 shared_drive_params <- function(
   driveId = NULL,
   corpora = NULL,
-  includeItemsFromAllDrives = NULL
+  includeItemsFromAllDrives = NULL,
+  call = caller_env()
 ) {
   rationalize_corpus(
     new_corpus(
       driveId,
       corpora,
       includeItemsFromAllDrives
-    )
+    ),
+    call = call
   )
 }
 
@@ -166,20 +168,21 @@ new_corpus <- function(
 #   1. if `driveId` is provided and `corpora` is not, we fill in
 #      `corpora = "drive"`
 #   2. we always send `includeItemsFromAllDrives = TRUE`
-rationalize_corpus <- function(corpus) {
+rationalize_corpus <- function(corpus, call = caller_env()) {
   stopifnot(inherits(corpus, "corpus"))
 
   if (!is.null(corpus[["driveId"]])) {
     corpus[["corpora"]] <- corpus[["corpora"]] %||% "drive"
   }
 
-  validate_corpora(corpus[["corpora"]])
+  validate_corpora(corpus[["corpora"]], call = call)
 
   if (corpus[["corpora"]] == "drive" && is.null(corpus[["driveId"]])) {
     drive_abort(
       '
       When {.code corpus = "drive"}, you must also specify \\
-      the {.arg shared_drive}.'
+      the {.arg shared_drive}.',
+      call = call
     )
   }
 
@@ -187,7 +190,8 @@ rationalize_corpus <- function(corpus) {
     drive_abort(
       '
       When {.code corpus != "drive"}, you must not specify \\
-      a {.arg shared_drive}.'
+      a {.arg shared_drive}.',
+      call = call
     )
   }
 
@@ -198,18 +202,21 @@ rationalize_corpus <- function(corpus) {
 
 valid_corpora <- c("user", "drive", "allDrives", "domain")
 
-validate_corpora <- function(corpora) {
+validate_corpora <- function(corpora, call = caller_env()) {
   if (!corpora %in% valid_corpora) {
     # yes, I intentionally use `corpus` in this message, even
     # though the actual API parameter is `corpora`
     # googledrive's user-facing functions have `corpus` in their signature and
     # the rationale is explained elsewhere in this file
-    drive_abort(c(
-      "Invalid value for {.arg corpus}:",
-      bulletize(gargle_map_cli(corpora), bullet = "x"),
-      "These are the only acceptable values:",
-      bulletize(gargle_map_cli(valid_corpora))
-    ))
+    drive_abort(
+      c(
+        "Invalid value for {.arg corpus}:",
+        bulletize(gargle_map_cli(corpora), bullet = "x"),
+        "These are the only acceptable values:",
+        bulletize(gargle_map_cli(valid_corpora))
+      ),
+      call = call
+    )
   }
   invisible(corpora)
 }

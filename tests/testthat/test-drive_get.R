@@ -30,6 +30,11 @@ if (SETUP) {
 }
 
 # ---- tests ----
+test_that("drive_get() checks `corpus` (before hitting Drive API)", {
+  expect_snapshot(drive_get("foo", corpus = "nope"), error = TRUE)
+  expect_snapshot(drive_get("foo", corpus = "drive"), error = TRUE)
+})
+
 test_that("drive_get() 'no input' edge cases", {
   skip_if_no_token()
   skip_if_offline()

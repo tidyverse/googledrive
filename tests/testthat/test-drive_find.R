@@ -26,6 +26,20 @@ test_that("drive_find() checks `pattern` (before hitting Drive API)", {
   expect_snapshot(drive_find(pattern = as_id("abc")), error = TRUE)
 })
 
+test_that("drive_find() checks `corpus` (before hitting Drive API)", {
+  expect_snapshot(drive_find(corpus = c("user", "domain")), error = TRUE)
+  expect_snapshot(drive_find(corpus = "foo"), error = TRUE)
+  expect_snapshot(drive_find(corpus = "drive"), error = TRUE)
+})
+
+test_that("drive_find() checks `shared_drive` (before hitting Drive API)", {
+  two_drives <- as_dribble(list(
+    list(name = "a", id = "1", kind = "drive#drive"),
+    list(name = "b", id = "2", kind = "drive#drive")
+  ))
+  expect_snapshot(drive_find(shared_drive = two_drives), error = TRUE)
+})
+
 test_that("drive_find() passes q", {
   skip_if_no_token()
   skip_if_offline()
