@@ -404,10 +404,9 @@ is_parental <- function(d) {
 
 #' @export
 #' @rdname dribble-checks
-## TO DO: do I need to do anything about shared drives here?
 is_mine <- function(d) {
   stopifnot(inherits(d, "dribble"))
-  map_lgl(d$drive_resource, list("owners", 1, "me"))
+  map_lgl(d$drive_resource, list("owners", 1, "me"), .default = FALSE)
 }
 
 #' @export

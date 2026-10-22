@@ -201,3 +201,17 @@ test_that("as_parent() throws specific errors", {
     error = TRUE
   )
 })
+
+test_that("is_mine() handles resources without an owner", {
+  d <- new_dribble(
+    tibble(
+      name = c("mine", "shared"),
+      id = c("1", "2"),
+      drive_resource = list(
+        list(kind = "drive#file", owners = list(list(me = TRUE))),
+        list(kind = "drive#file")
+      )
+    )
+  )
+  expect_identical(is_mine(d), c(TRUE, FALSE))
+})

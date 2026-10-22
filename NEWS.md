@@ -3,6 +3,9 @@
 * `as_id()` (and hence `drive_download()`, `drive_get()`, etc.) works for
   Google Colab links (#459, @MichaelChirico).
 
+* `is_mine()` returns `FALSE` instead of erroring for resources without an
+  owner, such as items on a shared drive (#478, @sims1253).
+
 # googledrive 2.1.2
 
 * `drive_upload()` and `drive_download()` support the conversion of a local
