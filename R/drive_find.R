@@ -141,7 +141,7 @@ drive_find <- function(
   if (!is.null(pattern) && !(is_string(pattern))) {
     drive_abort("{.arg pattern} must be a character string.")
   }
-  check_bool(trashed)
+  check_bool(trashed, allow_na = TRUE)
   stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
 
   if (lifecycle::is_present(team_drive)) {
