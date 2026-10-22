@@ -34,7 +34,9 @@ drive_endpoints <- function(i = NULL) {
   if (is.null(i) || is_expose(i)) {
     i <- seq_along(.endpoints)
   }
-  stopifnot(is.character(i) || (is.numeric(i)))
+  if (!is.character(i) && !is.numeric(i)) {
+    stop_input_type(i, "a character or numeric vector")
+  }
   .endpoints[i]
 }
 

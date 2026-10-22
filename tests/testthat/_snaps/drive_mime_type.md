@@ -29,7 +29,7 @@
       drive_extension(1)
     Condition
       Error in `drive_extension()`:
-      ! is.character(type) is not TRUE
+      ! `type` must be a character vector, not the number 1.
 
 ---
 
@@ -37,7 +37,7 @@
       drive_extension(dribble())
     Condition
       Error in `drive_extension()`:
-      ! is.character(type) is not TRUE
+      ! `type` must be a character vector, not a <dribble> object.
 
 # drive_extension() errors for single unrecognized input
 

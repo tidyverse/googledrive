@@ -15,3 +15,7 @@ test_that("drive_endpoint() checks `i`", {
   expect_snapshot(drive_endpoint(1.5), error = TRUE)
   expect_snapshot(drive_endpoint(TRUE), error = TRUE)
 })
+
+test_that("drive_endpoints() checks type of `i`", {
+  expect_snapshot(drive_endpoints(TRUE), error = TRUE)
+})

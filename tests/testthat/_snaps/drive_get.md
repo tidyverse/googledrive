@@ -50,7 +50,7 @@
       drive_get(id = c("abc", NA))
     Condition
       Error in `drive_get()`:
-      ! `id` can't contain `NA`.
+      ! `id` can't contain NA values.
 
 # drive_get() 'no input' edge cases
 
@@ -58,7 +58,7 @@
       drive_get(id = NA_character_)
     Condition
       Error in `drive_get()`:
-      ! `id` can't contain `NA`.
+      ! `id` can't contain NA values.
 
 ---
 

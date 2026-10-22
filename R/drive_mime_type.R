@@ -88,7 +88,7 @@ drive_extension <- function(type = NULL) {
   if (is.null(type)) {
     return(invisible())
   }
-  stopifnot(is.character(type))
+  check_character(type)
 
   type <- drive_mime_type(type)
   m <- map_int(type, one_ext)

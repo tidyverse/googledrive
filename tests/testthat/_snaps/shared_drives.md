@@ -77,3 +77,27 @@
       Error in `shared_drive_find()`:
       ! `n_max` must be a whole number larger than or equal to 0, not the number -1.
 
+# shared_drive_get() checks `name` and `id` (before hitting Drive API)
+
+    Code
+      shared_drive_get(c("a", NA))
+    Condition
+      Error in `shared_drive_get()`:
+      ! `name` can't contain NA values.
+
+---
+
+    Code
+      shared_drive_get(id = 1)
+    Condition
+      Error in `shared_drive_get()`:
+      ! `id` must be a character vector, not the number 1.
+
+---
+
+    Code
+      shared_drive_get(id = c("abc", NA))
+    Condition
+      Error in `shared_drive_get()`:
+      ! `id` can't contain NA values.
+

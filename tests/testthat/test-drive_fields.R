@@ -44,3 +44,7 @@ test_that("prep_fields() concatenates input", {
     "blah/a,blah/b"
   )
 })
+
+test_that("drive_fields() checks type of `fields`", {
+  expect_snapshot(drive_fields(1), error = TRUE)
+})

@@ -128,12 +128,8 @@ drive_get <- function(
   if (length(path) + length(id) == 0) {
     return(dribble_with_path())
   }
-  if (!is.null(path) && !is.character(path)) {
-    stop_input_type(path, "a character vector", allow_null = TRUE)
-  }
-  if (!is.null(id) && !is.character(id)) {
-    stop_input_type(id, "a character vector", allow_null = TRUE)
-  }
+  check_character(path, allow_null = TRUE)
+  check_character(id, allow_null = TRUE)
 
   if (lifecycle::is_present(team_drive)) {
     lifecycle::deprecate_warn(
@@ -156,7 +152,7 @@ drive_get <- function(
   if (is.null(path)) {
     id <- as_id(id)
     if (anyNA(id)) {
-      drive_abort("{.arg id} can't contain {.code NA}.")
+      drive_abort("{.arg id} can't contain NA values.")
     }
     as_dribble(map(id, get_one_file_id))
   } else {

@@ -46,3 +46,9 @@ test_that("shared_drive_find() checks `pattern` (before hitting Drive API)", {
 test_that("shared_drive_find() checks `n_max` (before hitting Drive API)", {
   expect_snapshot(shared_drive_find(n_max = -1), error = TRUE)
 })
+
+test_that("shared_drive_get() checks `name` and `id` (before hitting Drive API)", {
+  expect_snapshot(shared_drive_get(c("a", NA)), error = TRUE)
+  expect_snapshot(shared_drive_get(id = 1), error = TRUE)
+  expect_snapshot(shared_drive_get(id = c("abc", NA)), error = TRUE)
+})

@@ -37,22 +37,20 @@ shared_drive_get <- function(name = NULL, id = NULL) {
   }
 
   if (!is.null(name)) {
-    stopifnot(all(map_lgl(name, is_string)))
+    check_character(name, allow_na = FALSE)
     return(shared_drive_from_name(name))
   }
 
-  stopifnot(is.character(id))
+  check_character(id)
+  id <- as_id(id)
+  if (anyNA(id)) {
+    drive_abort("{.arg id} can't contain NA values.")
+  }
   # TODO: use a batch request
-  as_dribble(map(as_id(id), get_one_shared_drive_id))
+  as_dribble(map(id, get_one_shared_drive_id))
 }
 
 get_one_shared_drive_id <- function(id) {
-  if (is.na(id)) {
-    drive_abort(
-      "
-      Can't {.fun shared_drive_get} a shared drive when {.arg id} is {.code NA}."
-    )
-  }
   request <- request_generate(
     endpoint = "drive.drives.get",
     params = list(
