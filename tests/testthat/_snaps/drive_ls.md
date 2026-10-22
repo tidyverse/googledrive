@@ -3,7 +3,7 @@
     Code
       drive_ls(nm_("this-should-not-exist"))
     Condition
-      Error in `as_parent()`:
+      Error in `drive_ls()`:
       ! Parent specified via `path` is invalid:
       x Does not exist.
 

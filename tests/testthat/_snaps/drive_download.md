@@ -22,7 +22,7 @@
     Code
       drive_download(nm_("this-should-not-exist"))
     Condition
-      Error in `confirm_single_file()`:
+      Error in `drive_download()`:
       ! `file` does not identify at least one Drive file.
 
 # drive_download() converts with explicit `type`

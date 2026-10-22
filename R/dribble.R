@@ -234,35 +234,42 @@ as_dribble.list <- function(x, ...) {
 
 # used across several functions that create a file or modify "parentage"
 # processes a putative parent folder or shared drive
-as_parent <- function(d) {
-  in_var <- deparse(substitute(d))
+as_parent <- function(d, arg = caller_arg(d), call = caller_env()) {
+  # force before `d` is modified
+  force(arg)
   if (is_path(d)) {
     d <- append_slash(d)
   }
   d <- as_dribble(d)
   # wording chosen to work for folder and shared drive
-  invalid_parent <- "Parent specified via {.arg {in_var}} is invalid:"
+  invalid_parent <- "Parent specified via {.arg {arg}} is invalid:"
   if (no_file(d)) {
-    drive_abort(c(invalid_parent, x = "Does not exist."))
+    drive_abort(c(invalid_parent, x = "Does not exist."), call = call)
   }
   if (!single_file(d)) {
-    drive_abort(c(
-      invalid_parent,
-      x = "Doesn't uniquely identify exactly one folder or shared drive."
-    ))
+    drive_abort(
+      c(
+        invalid_parent,
+        x = "Doesn't uniquely identify exactly one folder or shared drive."
+      ),
+      call = call
+    )
   }
   if (is_folder_shortcut(d)) {
     drive_bullets(c(
-      i = "Parent specified via {.arg {in_var}} is a shortcut; resolving to \\
+      i = "Parent specified via {.arg {arg}} is a shortcut; resolving to \\
            its target folder"
     ))
     d <- shortcut_resolve(d)
   }
   if (!is_parental(d)) {
-    drive_abort(c(
-      invalid_parent,
-      x = "Is neither a folder nor a shared drive."
-    ))
+    drive_abort(
+      c(
+        invalid_parent,
+        x = "Is neither a folder nor a shared drive."
+      ),
+      call = call
+    )
   }
   d
 }
@@ -278,6 +285,7 @@ as_parent <- function(d) {
 #'
 #' @name dribble-checks
 #' @param d A [`dribble`].
+#' @inheritParams rlang::args_error_context
 #' @examplesIf drive_has_token()
 #' ## most of us have multiple files or folders on Google Drive
 #' d <- drive_find()
@@ -323,32 +331,39 @@ some_files <- function(d) {
 
 #' @export
 #' @rdname dribble-checks
-confirm_dribble <- function(d) {
+confirm_dribble <- function(d, arg = caller_arg(d), call = caller_env()) {
   if (!is_dribble(d)) {
-    drive_abort("Input is not a {.cls dribble}.")
+    drive_abort("{.arg {arg}} must be a {.cls dribble}.", call = call)
   }
   d
 }
 
 #' @export
 #' @rdname dribble-checks
-confirm_single_file <- function(d) {
-  in_var <- deparse(substitute(d))
+confirm_single_file <- function(d, arg = caller_arg(d), call = caller_env()) {
   if (no_file(d)) {
-    drive_abort("{.arg {in_var}} does not identify at least one Drive file.")
+    drive_abort(
+      "{.arg {arg}} does not identify at least one Drive file.",
+      call = call
+    )
   }
   if (!single_file(d)) {
-    drive_abort("{.arg {in_var}} identifies more than one Drive file.")
+    drive_abort(
+      "{.arg {arg}} identifies more than one Drive file.",
+      call = call
+    )
   }
   d
 }
 
 #' @export
 #' @rdname dribble-checks
-confirm_some_files <- function(d) {
-  in_var <- deparse(substitute(d))
+confirm_some_files <- function(d, arg = caller_arg(d), call = caller_env()) {
   if (no_file(d)) {
-    drive_abort("{.arg {in_var}} does not identify at least one Drive file.")
+    drive_abort(
+      "{.arg {arg}} does not identify at least one Drive file.",
+      call = call
+    )
   }
   d
 }

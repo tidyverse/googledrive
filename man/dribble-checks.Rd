@@ -26,11 +26,11 @@ single_file(d)
 
 some_files(d)
 
-confirm_dribble(d)
+confirm_dribble(d, arg = caller_arg(d), call = caller_env())
 
-confirm_single_file(d)
+confirm_single_file(d, arg = caller_arg(d), call = caller_env())
 
-confirm_some_files(d)
+confirm_some_files(d, arg = caller_arg(d), call = caller_env())
 
 is_folder(d)
 
@@ -48,6 +48,15 @@ is_shared_drive(d)
 }
 \arguments{
 \item{d}{A \code{\link{dribble}}.}
+
+\item{arg}{An argument name as a string. This argument
+will be mentioned in error messages as the input that is at the
+origin of a problem.}
+
+\item{call}{The execution environment of a currently
+running function, e.g. \code{caller_env()}. The function will be
+mentioned in error messages as the source of the error. See the
+\code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 }
 \description{
 Sometimes you need to check things about a \code{\link{dribble}}` or about the files it

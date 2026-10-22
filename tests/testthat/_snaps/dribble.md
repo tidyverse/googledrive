@@ -76,7 +76,7 @@
     Code
       confirm_single_file(d)
     Condition
-      Error in `confirm_single_file()`:
+      Error:
       ! `d` does not identify at least one Drive file.
 
 ---
@@ -84,7 +84,7 @@
     Code
       confirm_some_files(d)
     Condition
-      Error in `confirm_some_files()`:
+      Error:
       ! `d` does not identify at least one Drive file.
 
 ---
@@ -92,7 +92,7 @@
     Code
       confirm_single_file(d)
     Condition
-      Error in `confirm_single_file()`:
+      Error:
       ! `d` identifies more than one Drive file.
 
 # as_dribble() default method handles unsuitable input
@@ -133,7 +133,7 @@
       foo <- d[0, ]
       as_parent(foo)
     Condition
-      Error in `as_parent()`:
+      Error:
       ! Parent specified via `foo` is invalid:
       x Does not exist.
 
@@ -143,7 +143,7 @@
       foo <- d
       as_parent(foo)
     Condition
-      Error in `as_parent()`:
+      Error:
       ! Parent specified via `foo` is invalid:
       x Doesn't uniquely identify exactly one folder or shared drive.
 
@@ -153,7 +153,7 @@
       foo <- d[1, ]
       as_parent(foo)
     Condition
-      Error in `as_parent()`:
+      Error:
       ! Parent specified via `foo` is invalid:
       x Is neither a folder nor a shared drive.
 
