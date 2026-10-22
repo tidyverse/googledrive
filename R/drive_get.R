@@ -128,8 +128,12 @@ drive_get <- function(
   if (length(path) + length(id) == 0) {
     return(dribble_with_path())
   }
-  stopifnot(is.null(path) || is.character(path))
-  stopifnot(is.null(id) || is.character(id))
+  if (!is.null(path) && !is.character(path)) {
+    stop_input_type(path, "a character vector", allow_null = TRUE)
+  }
+  if (!is.null(id) && !is.character(id)) {
+    stop_input_type(id, "a character vector", allow_null = TRUE)
+  }
 
   if (lifecycle::is_present(team_drive)) {
     lifecycle::deprecate_warn(
@@ -150,16 +154,17 @@ drive_get <- function(
   }
 
   if (is.null(path)) {
-    as_dribble(map(as_id(id), get_one_file_id))
+    id <- as_id(id)
+    if (anyNA(id)) {
+      drive_abort("{.arg id} can't contain {.code NA}.")
+    }
+    as_dribble(map(id, get_one_file_id))
   } else {
     drive_get_path(path, shared_drive, corpus)
   }
 }
 
 get_one_file_id <- function(id) {
-  if (is.na(id)) {
-    drive_abort("Can't {.fun drive_get} a file when {.arg id} is {.code NA}.")
-  }
   # drive_id validity checks catch the id = "" case, but just FYI:
   # when id = "", drive.files.get actually becomes a call to drive.files.list
   # and, therefore, returns 100 files by default; this is a bad thing

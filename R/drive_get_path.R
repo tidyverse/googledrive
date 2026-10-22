@@ -57,7 +57,7 @@ drive_get_path <- function(
     return(dribble_with_path())
   }
   stopifnot(is_path(path))
-  path <- rootize_path(path)
+  path <- rootize_path(path, call = call)
 
   last_path_part <- get_last_path_part(path)
   candidates <- get_by_name(

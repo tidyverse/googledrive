@@ -35,6 +35,13 @@ test_that("drive_get() checks `corpus` (before hitting Drive API)", {
   expect_snapshot(drive_get("foo", corpus = "drive"), error = TRUE)
 })
 
+test_that("drive_get() checks `path` and `id` (before hitting Drive API)", {
+  expect_snapshot(drive_get(path = 1), error = TRUE)
+  expect_snapshot(drive_get(id = 1), error = TRUE)
+  expect_snapshot(drive_get("/abc"), error = TRUE)
+  expect_snapshot(drive_get(id = c("abc", NA)), error = TRUE)
+})
+
 test_that("drive_get() 'no input' edge cases", {
   skip_if_no_token()
   skip_if_offline()

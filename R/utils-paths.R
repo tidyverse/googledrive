@@ -167,7 +167,7 @@ check_file_name <- function(
 }
 
 # turn '~' into `~/`
-rootize_path <- function(path) {
+rootize_path <- function(path, call = caller_env()) {
   if (length(path) == 0) {
     return(path)
   }
@@ -175,7 +175,8 @@ rootize_path <- function(path) {
   leading_slash <- startsWith(path, "/")
   if (any(leading_slash)) {
     drive_abort(
-      "{.pkg googledrive} does not allow paths to start with {.code /}"
+      "{.pkg googledrive} does not allow paths to start with {.code /}",
+      call = call
     )
   }
   sub("^~$", "~/", path)
@@ -212,7 +213,7 @@ partition_path <- function(path, maybe_name = FALSE, call = caller_env()) {
     return(out)
   }
   check_non_id_string(path, what = "a Drive path", call = call)
-  path <- rootize_path(path)
+  path <- rootize_path(path, call = call)
   if (!maybe_name) {
     path <- append_slash(path)
   }

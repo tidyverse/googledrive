@@ -21,7 +21,7 @@
     Code
       rootize_path("/")
     Condition
-      Error in `rootize_path()`:
+      Error:
       ! googledrive does not allow paths to start with `/`
 
 # partition_path() fails for bad input
