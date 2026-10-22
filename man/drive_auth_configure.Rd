@@ -29,7 +29,7 @@ argument.}
 \value{
 \itemize{
 \item \code{drive_auth_configure()}: An object of R6 class
-\link[gargle:AuthState-class]{gargle::AuthState}, invisibly.
+\link[gargle:AuthState]{gargle::AuthState}, invisibly.
 \item \code{drive_oauth_client()}: the current user-configured OAuth client.
 \item \code{drive_api_key()}: the current user-configured API key.
 }
@@ -53,10 +53,10 @@ are used.
 currently configured OAuth client and API key, respectively.
 }
 \examples{
-# see and store the current user-configured OAuth client (probaby `NULL`)
+# see and store the current user-configured OAuth client (probably `NULL`)
 (original_client <- drive_oauth_client())
 
-# see and store the current user-configured API key (probaby `NULL`)
+# see and store the current user-configured API key (probably `NULL`)
 (original_api_key <- drive_api_key())
 
 # the preferred way to configure your own client is via a JSON file
@@ -79,9 +79,9 @@ drive_api_key()
 drive_auth_configure(client = original_client, api_key = original_api_key)
 }
 \seealso{
-Other auth functions: 
-\code{\link{drive_auth}()},
-\code{\link{drive_deauth}()},
-\code{\link{drive_scopes}()}
+Other auth functions:
+\code{\link[=drive_auth]{drive_auth()}},
+\code{\link[=drive_deauth]{drive_deauth()}},
+\code{\link[=drive_scopes]{drive_scopes()}}
 }
 \concept{auth functions}
