@@ -18,7 +18,7 @@
 #' shared_drive_rm("my-awesome-shared-drive")
 #' }
 shared_drive_create <- function(name) {
-  stopifnot(is_string(name), isTRUE(nzchar(name)))
+  check_string(name, allow_empty = FALSE)
   request <- request_generate(
     "drive.drives.create",
     params = list(

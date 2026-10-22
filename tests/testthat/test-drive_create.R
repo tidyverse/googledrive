@@ -20,6 +20,7 @@ if (SETUP) {
 test_that("drive_create() errors for bad input (before hitting Drive API)", {
   expect_snapshot(drive_create(), error = TRUE)
   expect_snapshot(drive_create(letters), error = TRUE)
+  expect_snapshot(drive_create(as_id("abc")), error = TRUE)
 })
 
 test_that("drive_create() errors if parent path does not exist", {

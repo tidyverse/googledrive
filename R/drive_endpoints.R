@@ -41,6 +41,8 @@ drive_endpoints <- function(i = NULL) {
 #' @rdname drive_endpoints
 #' @export
 drive_endpoint <- function(i) {
-  stopifnot(is_string(i) || (is.numeric(i) && length(i) == 1))
+  if (!is_string(i) && !is_scalar_integerish(i)) {
+    stop_input_type(i, "a single string or a whole number")
+  }
   .endpoints[[i]]
 }

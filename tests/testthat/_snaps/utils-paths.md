@@ -29,30 +29,39 @@
     Code
       partition_path(letters)
     Condition
-      Error in `partition_path()`:
-      ! is_string(path) is not TRUE
+      Error:
+      ! `path` must be a single string, not a character vector.
 
 ---
 
     Code
       partition_path(dribble())
     Condition
-      Error in `partition_path()`:
-      ! is_string(path) is not TRUE
+      Error:
+      ! `path` must be a single string, not a <dribble> object.
 
 ---
 
     Code
       partition_path(as_id("123"))
     Condition
-      Error in `partition_path()`:
-      ! is_string(path) is not TRUE
+      Error:
+      ! `path` must be a Drive path, not a Drive ID.
 
 # rationalize_path_name() errors for bad `name`, before hitting API
 
     Code
       rationalize_path_name(name = letters)
     Condition
-      Error in `rationalize_path_name()`:
-      ! is_string(name) is not TRUE
+      Error:
+      ! `name` must be a single string, not a character vector.
+
+---
+
+    Code
+      rationalize_path_name(name = as_id("abc"))
+    Condition
+      Error:
+      ! `name` must be a file name, not a Drive ID.
+      i Did you mean to pass the ID as `path`?
 
