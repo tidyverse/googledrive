@@ -1,3 +1,20 @@
+# drive_find() checks `pattern` (before hitting Drive API)
+
+    Code
+      drive_find(pattern = letters)
+    Condition
+      Error in `drive_find()`:
+      ! `pattern` must be a single string or `NULL`, not a character vector.
+
+---
+
+    Code
+      drive_find(pattern = as_id("abc"))
+    Condition
+      Error in `drive_find()`:
+      ! `pattern` must be a regular expression, not a Drive ID.
+      i To get a file by its ID, use `drive_get(id = )`.
+
 # drive_find() errors for nonsense in `n_max`
 
     Code

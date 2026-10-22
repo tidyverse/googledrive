@@ -37,3 +37,8 @@ test_that('`corpora = "drive" is inferred from shared drive specification', {
   out <- shared_drive_params(driveId = "123")
   expect_identical(out$corpora, "drive")
 })
+
+test_that("shared_drive_find() checks `pattern` (before hitting Drive API)", {
+  expect_snapshot(shared_drive_find(pattern = letters), error = TRUE)
+  expect_snapshot(shared_drive_find(pattern = as_id("abc")), error = TRUE)
+})

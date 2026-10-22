@@ -21,6 +21,11 @@ if (SETUP) {
 }
 
 # ---- tests ----
+test_that("drive_find() checks `pattern` (before hitting Drive API)", {
+  expect_snapshot(drive_find(pattern = letters), error = TRUE)
+  expect_snapshot(drive_find(pattern = as_id("abc")), error = TRUE)
+})
+
 test_that("drive_find() passes q", {
   skip_if_no_token()
   skip_if_offline()

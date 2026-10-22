@@ -8,14 +8,22 @@ root_folder <- function() {
 }
 root_id <- function() root_folder()$id
 
-rationalize_path_name <- function(path = NULL, name = NULL) {
+rationalize_path_name <- function(
+  path = NULL,
+  name = NULL,
+  call = caller_env()
+) {
   if (!is.null(name)) {
-    check_string(name)
+    check_file_name(name, call = call)
   }
 
   if (is_path(path)) {
-    confirm_clear_path(path, name)
-    path_parts <- partition_path(path, maybe_name = is.null(name))
+    confirm_clear_path(path, name, call = call)
+    path_parts <- partition_path(
+      path,
+      maybe_name = is.null(name),
+      call = call
+    )
     path <- path_parts$parent
     name <- name %||% path_parts$name
   }
@@ -23,17 +31,20 @@ rationalize_path_name <- function(path = NULL, name = NULL) {
   list(path = path, name = name)
 }
 
-confirm_clear_path <- function(path, name) {
+confirm_clear_path <- function(path, name, call = caller_env()) {
   if (
     is.null(name) &&
       !has_slash(path) &&
       drive_path_exists(append_slash(path))
   ) {
-    drive_abort(c(
-      "Unclear if {.arg path} specifies parent folder or full path \\
-       to the new file, including its name.",
-      "See {.fun ?as_dribble} for advice on how to make this clear."
-    ))
+    drive_abort(
+      c(
+        "Unclear if {.arg path} specifies parent folder or full path \\
+         to the new file, including its name.",
+        "See {.fun ?as_dribble} for advice on how to make this clear."
+      ),
+      call = call
+    )
   }
 }
 
@@ -107,7 +118,53 @@ dribble_with_path <- function() {
 
 is_path <- function(x) is.character(x) && !is_drive_id(x)
 
-is_path_scalar <- function(x) length(x) == 1L && is_path(x)
+# Use this for string arguments where a Drive ID makes no sense.
+check_non_id_string <- function(
+  x,
+  ...,
+  what = "a string",
+  hint = NULL,
+  allow_empty = TRUE,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
+  check_string(
+    x,
+    allow_empty = allow_empty,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+  # check_string() accepts a `drive_id`, since it's character, so we need this
+  if (is_drive_id(x)) {
+    drive_abort(
+      c("{.arg {arg}} must be {what}, not a Drive ID.", hint),
+      call = call
+    )
+  }
+  invisible(NULL)
+}
+
+# `name` is always a literal file name, never a Drive ID. Functions with a
+# `name` argument usually also have a `path` argument that accepts an ID, so an
+# ID in `name` is most likely a misplaced `path`.
+check_file_name <- function(
+  name,
+  ...,
+  allow_empty = TRUE,
+  arg = caller_arg(name),
+  call = caller_env()
+) {
+  check_non_id_string(
+    name,
+    what = "a file name",
+    hint = c(i = "Did you mean to pass the ID as {.arg path}?"),
+    allow_empty = allow_empty,
+    arg = arg,
+    call = call
+  )
+}
 
 # turn '~' into `~/`
 rootize_path <- function(path) {
@@ -149,12 +206,12 @@ strip_slash <- function(path) {
 # use maybe_name if you have external info re: how to interpret the path
 # maybe_name = TRUE --> path could end in a name
 # maybe_name = FALSE --> path is known to be a directory
-partition_path <- function(path, maybe_name = FALSE) {
+partition_path <- function(path, maybe_name = FALSE, call = caller_env()) {
   out <- list(parent = NULL, name = NULL)
   if (length(path) < 1) {
     return(out)
   }
-  stopifnot(is_path_scalar(path))
+  check_non_id_string(path, what = "a Drive path", call = call)
   path <- rootize_path(path)
   if (!maybe_name) {
     path <- append_slash(path)

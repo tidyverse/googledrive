@@ -74,17 +74,28 @@ drive_example_remote <- function(matches) {
   )
 }
 
-many_files <- function(needle, haystack, where = c("local", "remote")) {
+many_files <- function(
+  needle,
+  haystack,
+  where = c("local", "remote"),
+  call = caller_env()
+) {
   where <- match.arg(where)
   out <- haystack
 
   if (!missing(needle)) {
-    check_string(needle, arg = "matches")
+    check_non_id_string(
+      needle,
+      what = "a regular expression",
+      arg = "matches",
+      call = call
+    )
     sel <- grepl(needle, haystack$name, ignore.case = TRUE)
     if (!any(sel)) {
       drive_abort(
         "Can't find a {where} example file with a name that matches \\
-        \"{needle}\"."
+        \"{needle}\".",
+        call = call
       )
     }
     out <- haystack[sel, ]
@@ -93,14 +104,22 @@ many_files <- function(needle, haystack, where = c("local", "remote")) {
   out
 }
 
-one_file <- function(needle, haystack, where) {
-  out <- many_files(needle = needle, haystack = haystack, where = where)
+one_file <- function(needle, haystack, where, call = caller_env()) {
+  out <- many_files(
+    needle = needle,
+    haystack = haystack,
+    where = where,
+    call = call
+  )
   if (nrow(out) > 1) {
-    drive_abort(c(
-      "Found multiple matching {where} files:",
-      bulletize(gargle_map_cli(out$name)),
-      i = "Make the {.arg matches} regular expression more specific."
-    ))
+    drive_abort(
+      c(
+        "Found multiple matching {where} files:",
+        bulletize(gargle_map_cli(out$name)),
+        i = "Make the {.arg matches} regular expression more specific."
+      ),
+      call = call
+    )
   }
   out
 }

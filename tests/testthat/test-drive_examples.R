@@ -42,3 +42,8 @@ test_that("drive_examples_local() errors when no match", {
     error = TRUE
   )
 })
+
+test_that("drive_example_local() checks `matches`", {
+  expect_snapshot(drive_example_local(letters), error = TRUE)
+  expect_snapshot(drive_example_local(as_id("abc")), error = TRUE)
+})

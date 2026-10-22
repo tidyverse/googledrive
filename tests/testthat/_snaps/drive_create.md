@@ -14,6 +14,15 @@
       Error in `drive_create()`:
       ! `name` must be a single string, not a character vector.
 
+---
+
+    Code
+      drive_create(as_id("abc"))
+    Condition
+      Error in `drive_create()`:
+      ! `name` must be a file name, not a Drive ID.
+      i Did you mean to pass the ID as `path`?
+
 # drive_create() errors if parent path does not exist
 
     Code

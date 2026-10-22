@@ -52,3 +52,20 @@
       Error in `rationalize_corpus()`:
       ! When `corpus != "drive"`, you must not specify a `shared_drive`.
 
+# shared_drive_find() checks `pattern` (before hitting Drive API)
+
+    Code
+      shared_drive_find(pattern = letters)
+    Condition
+      Error in `shared_drive_find()`:
+      ! `pattern` must be a single string or `NULL`, not a character vector.
+
+---
+
+    Code
+      shared_drive_find(pattern = as_id("abc"))
+    Condition
+      Error in `shared_drive_find()`:
+      ! `pattern` must be a regular expression, not a Drive ID.
+      i To get a shared drive by its ID, use `shared_drive_get(id = )`.
+
