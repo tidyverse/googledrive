@@ -3,7 +3,7 @@
 # drive_reveal(what = "path")
 
 drive_reveal_path <- function(x, ancestors = c("none", "parents", "all")) {
-  stopifnot(inherits(x, "dribble"))
+  confirm_dribble(x)
   if (no_file(x)) {
     return(dribble_with_path())
   }
@@ -126,7 +126,7 @@ get_folders <- function(shared_drive = NULL, corpus = NULL) {
 }
 
 get_immediate_parents <- function(x) {
-  stopifnot(inherits(x, "dribble"))
+  confirm_dribble(x)
   x <- drive_reveal(x, "parent")
   parent_ids <- unique(x$id_parent[!is.na(x$id_parent)])
   # TODO: I suspect I must deal with the case where don't have permission to

@@ -283,7 +283,7 @@ as_shared_drive.list <- function(x, ...) {
 }
 
 validate_shared_drive_dribble <- function(x) {
-  stopifnot(inherits(x, "dribble"))
+  confirm_dribble(x)
   if (!all(is_shared_drive(x))) {
     drive_abort(
       "
