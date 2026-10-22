@@ -220,9 +220,9 @@ warn_for_verbose <- function(
   fc <- frame_call(env)
   caller <- if (is.null(fc)) NULL else call_name(fc)
   if (is.null(caller)) {
-    what = I("The `verbose` argument")
+    what <- I("The `verbose` argument")
   } else {
-    what = glue("{caller}(verbose)")
+    what <- glue("{caller}(verbose)")
   }
 
   lifecycle::deprecate_warn(
