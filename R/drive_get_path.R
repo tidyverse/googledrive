@@ -228,7 +228,7 @@ finalize <- function(dat, candidates) {
 
   no_status <- is.na(scratch$status)
   if (any(no_status)) {
-    abort("Internal error: paths with missing status")
+    drive_abort("Paths with missing status.", .internal = TRUE)
   }
 
   report_weird_stuff <- function(x, indicator, problem) {

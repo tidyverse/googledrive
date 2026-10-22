@@ -83,8 +83,8 @@ drive_share <- function(
 ) {
   warn_for_verbose(verbose)
 
-  role <- match.arg(role)
-  type <- match.arg(type)
+  role <- arg_match(role)
+  type <- arg_match(type)
   file <- as_dribble(file)
   file <- confirm_some_files(file)
 

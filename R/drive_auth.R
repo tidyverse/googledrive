@@ -293,7 +293,7 @@ resolve_scopes <- function(user_scopes, package_scopes) {
 
 # unexported helpers that are nice for internal use ----
 drive_auth_internal <- function(account = c("docs", "testing"), scopes = NULL) {
-  account <- match.arg(account)
+  account <- arg_match(account)
   can_decrypt <- gargle::secret_has_key("GOOGLEDRIVE_KEY")
   online <- !is.null(curl::nslookup("drive.googleapis.com", error = FALSE))
   if (!can_decrypt || !online) {
