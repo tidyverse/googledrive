@@ -212,17 +212,21 @@ drive_auth_configure <- function(client, path, api_key, app = deprecated()) {
       "Must supply exactly one of {.arg client} or {.arg path}, not both"
     )
   }
-  stopifnot(missing(api_key) || is.null(api_key) || is_string(api_key))
+  if (!missing(api_key)) {
+    check_string(api_key, allow_null = TRUE)
+  }
 
   if (!missing(path)) {
     check_string(path)
     client <- gargle::gargle_oauth_client_from_json(path)
   }
-  stopifnot(
-    missing(client) ||
-      is.null(client) ||
-      inherits(client, "gargle_oauth_client")
-  )
+  if (
+    !missing(client) &&
+      !is.null(client) &&
+      !inherits(client, "gargle_oauth_client")
+  ) {
+    stop_input_type(client, "a <gargle_oauth_client>", allow_null = TRUE)
+  }
 
   if (!missing(client) || !missing(path)) {
     .auth$set_client(client)

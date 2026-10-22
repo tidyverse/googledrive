@@ -14,6 +14,22 @@
       Error in `drive_auth_configure()`:
       ! `path` must be a single string, not the number 1.
 
+---
+
+    Code
+      drive_auth_configure(api_key = 1)
+    Condition
+      Error in `drive_auth_configure()`:
+      ! `api_key` must be a single string or `NULL`, not the number 1.
+
+---
+
+    Code
+      drive_auth_configure(client = "a")
+    Condition
+      Error in `drive_auth_configure()`:
+      ! `client` must be a <gargle_oauth_client> or `NULL`, not the string "a".
+
 # drive_scopes() reveals Drive scopes
 
     Code

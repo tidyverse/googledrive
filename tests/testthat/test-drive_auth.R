@@ -13,6 +13,8 @@ test_that("drive_auth_configure works", {
     error = TRUE
   )
   expect_snapshot(drive_auth_configure(path = 1), error = TRUE)
+  expect_snapshot(drive_auth_configure(api_key = 1), error = TRUE)
+  expect_snapshot(drive_auth_configure(client = "a"), error = TRUE)
 
   drive_auth_configure(client = gargle::gargle_client())
   expect_s3_class(drive_oauth_client(), "gargle_oauth_client")
