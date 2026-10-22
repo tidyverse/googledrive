@@ -1,3 +1,11 @@
+# drive_ls() checks `recursive` (before hitting Drive API)
+
+    Code
+      drive_ls(recursive = "yes")
+    Condition
+      Error in `drive_ls()`:
+      ! `recursive` must be `TRUE` or `FALSE`, not the string "yes".
+
 # drive_ls() errors if `path` does not exist
 
     Code

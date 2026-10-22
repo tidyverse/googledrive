@@ -52,6 +52,10 @@ if (SETUP) {
 }
 
 # ---- tests ----
+test_that("drive_ls() checks `recursive` (before hitting Drive API)", {
+  expect_snapshot(drive_ls(recursive = "yes"), error = TRUE)
+})
+
 test_that("drive_ls() errors if `path` does not exist", {
   skip_if_no_token()
   skip_if_offline()

@@ -138,7 +138,7 @@ drive_find <- function(
   team_drive = deprecated()
 ) {
   warn_for_verbose(verbose)
-  stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
+  check_number_whole(n_max, min = 0, allow_infinite = TRUE)
 
   if (lifecycle::is_present(team_drive)) {
     lifecycle::deprecate_warn(

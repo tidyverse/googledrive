@@ -59,7 +59,7 @@
       drive_find(n_max = "a")
     Condition
       Error in `drive_find()`:
-      ! is.numeric(n_max) is not TRUE
+      ! `n_max` must be a whole number, not the string "a".
 
 ---
 
@@ -67,7 +67,7 @@
       drive_find(n_max = 1:3)
     Condition
       Error in `drive_find()`:
-      ! length(n_max) == 1 is not TRUE
+      ! `n_max` must be a whole number, not an integer vector.
 
 ---
 
@@ -75,5 +75,5 @@
       drive_find(n_max = -2)
     Condition
       Error in `drive_find()`:
-      ! n_max >= 0 is not TRUE
+      ! `n_max` must be a whole number larger than or equal to 0, not the number -2.
 

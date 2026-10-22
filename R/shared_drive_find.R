@@ -27,7 +27,7 @@ shared_drive_find <- function(pattern = NULL, n_max = Inf, ...) {
     ),
     allow_null = TRUE
   )
-  stopifnot(is.numeric(n_max), n_max >= 0, length(n_max) == 1)
+  check_number_whole(n_max, min = 0, allow_infinite = TRUE)
   if (n_max < 1) {
     return(dribble())
   }

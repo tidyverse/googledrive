@@ -32,7 +32,7 @@
 #' drive_ls(path = "abc", q = "starred = true", recursive = TRUE)
 #' }
 drive_ls <- function(path = NULL, ..., recursive = FALSE) {
-  stopifnot(is.logical(recursive), length(recursive) == 1)
+  check_bool(recursive)
   if (is.null(path)) {
     return(drive_find(...))
   }

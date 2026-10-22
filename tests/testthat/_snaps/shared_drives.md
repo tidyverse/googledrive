@@ -69,3 +69,11 @@
       ! `pattern` must be a regular expression, not a Drive ID.
       i To get a shared drive by its ID, use `shared_drive_get(id = )`.
 
+# shared_drive_find() checks `n_max` (before hitting Drive API)
+
+    Code
+      shared_drive_find(n_max = -1)
+    Condition
+      Error in `shared_drive_find()`:
+      ! `n_max` must be a whole number larger than or equal to 0, not the number -1.
+

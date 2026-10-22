@@ -79,7 +79,7 @@ test_that("drive_find() errors for nonsense in `n_max`", {
 })
 
 test_that("drive_find() returns early if n_max < 1", {
-  expect_identical(drive_find(n_max = 0.5), dribble())
+  expect_identical(drive_find(n_max = 0), dribble())
 })
 
 test_that("drive_find() returns empty dribble if no match for `pattern`", {
