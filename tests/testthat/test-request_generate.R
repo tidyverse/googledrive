@@ -4,7 +4,7 @@ test_that("request_generate() basically works", {
   expect_type(req, "list")
   expect_setequal(
     names(req),
-    c("method", "url", "body", "token")
+    c("method", "url", "headers", "body", "token")
   )
   expect_match(req$url, "supportsAllDrives=TRUE")
 })
@@ -48,6 +48,7 @@ test_that("request_generate() suppresses API key if token is non-NULL", {
     token = httr::config(token = "token!")
   )
   expect_false(grepl("key", req$url))
+  expect_null(req$headers[["X-goog-api-key"]])
 })
 
 test_that("request_generate() adds gargle's tidyverse API key if no token", {
@@ -56,7 +57,7 @@ test_that("request_generate() adds gargle's tidyverse API key if no token", {
     params = list(fileId = "abc"),
     token = NULL
   )
-  expect_match(req$url, gargle::tidyverse_api_key())
+  expect_equal(req$headers[["X-goog-api-key"]], gargle::tidyverse_api_key())
 })
 
 test_that("request_generate(): explicit API key > key in params > built-in", {
@@ -66,7 +67,7 @@ test_that("request_generate(): explicit API key > key in params > built-in", {
     key = "xyz",
     token = NULL
   )
-  expect_match(req$url, "key=xyz")
+  expect_equal(req$headers[["X-goog-api-key"]], "xyz")
 
   req <- request_generate(
     "drive.files.get",
@@ -74,12 +75,12 @@ test_that("request_generate(): explicit API key > key in params > built-in", {
     key = "xyz",
     token = NULL
   )
-  expect_match(req$url, "key=xyz")
+  expect_equal(req$headers[["X-goog-api-key"]], "xyz")
 
   req <- request_generate(
     "drive.files.get",
     params = list(fileId = "abc", key = "xyz"),
     token = NULL
   )
-  expect_match(req$url, "xyz")
+  expect_equal(req$headers[["X-goog-api-key"]], "xyz")
 })

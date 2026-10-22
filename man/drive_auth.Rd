@@ -167,9 +167,9 @@ drive_auth(path = "foofy-83ee9e7c9c48.json")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other auth functions: 
-\code{\link{drive_auth_configure}()},
-\code{\link{drive_deauth}()},
-\code{\link{drive_scopes}()}
+Other auth functions:
+\code{\link[=drive_auth_configure]{drive_auth_configure()}},
+\code{\link[=drive_deauth]{drive_deauth()}},
+\code{\link[=drive_scopes]{drive_scopes()}}
 }
 \concept{auth functions}
