@@ -311,21 +311,21 @@ is_dribble <- function(d) {
 #' @export
 #' @rdname dribble-checks
 no_file <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   nrow(d) == 0
 }
 
 #' @export
 #' @rdname dribble-checks
 single_file <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   nrow(d) == 1
 }
 
 #' @export
 #' @rdname dribble-checks
 some_files <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   nrow(d) > 0
 }
 
@@ -333,7 +333,7 @@ some_files <- function(d) {
 #' @rdname dribble-checks
 confirm_dribble <- function(d, arg = caller_arg(d), call = caller_env()) {
   if (!is_dribble(d)) {
-    drive_abort("{.arg {arg}} must be a {.cls dribble}.", call = call)
+    stop_input_type(d, "a <dribble>", arg = arg, call = call)
   }
   d
 }
@@ -371,7 +371,7 @@ confirm_some_files <- function(d, arg = caller_arg(d), call = caller_env()) {
 #' @export
 #' @rdname dribble-checks
 is_folder <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   map_chr(d$drive_resource, "mimeType", .default = NA) ==
     "application/vnd.google-apps.folder"
 }
@@ -379,7 +379,7 @@ is_folder <- function(d) {
 #' @export
 #' @rdname dribble-checks
 is_shortcut <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   map_chr(d$drive_resource, "mimeType", .default = NA) ==
     "application/vnd.google-apps.shortcut"
 }
@@ -387,7 +387,7 @@ is_shortcut <- function(d) {
 #' @export
 #' @rdname dribble-checks
 is_folder_shortcut <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   is_shortcut(d) &
     (map_chr(
       d$drive_resource,
@@ -400,7 +400,7 @@ is_folder_shortcut <- function(d) {
 #' @export
 #' @rdname dribble-checks
 is_native <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   d <- promote(d, "mimeType")
   grepl("application/vnd.google-apps.", d$mimeType) & !is_folder(d)
 }
@@ -408,7 +408,7 @@ is_native <- function(d) {
 #' @export
 #' @rdname dribble-checks
 is_parental <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   kind <- map_chr(d$drive_resource, "kind")
   mime_type <- map_chr(d$drive_resource, "mimeType", .default = "")
   # TODO: remove `drive#teamDrive` here, when possible
@@ -420,13 +420,13 @@ is_parental <- function(d) {
 #' @export
 #' @rdname dribble-checks
 is_mine <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   map_lgl(d$drive_resource, list("owners", 1, "me"), .default = FALSE)
 }
 
 #' @export
 #' @rdname dribble-checks
 is_shared_drive <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   map_chr(d$drive_resource, "kind") == "drive#drive"
 }

@@ -87,6 +87,11 @@ test_that("`[` drops dribble class when not valid", {
   expect_false(inherits(d[, 1], "dribble"))
 })
 
+test_that("dribble predicates require a dribble", {
+  expect_snapshot(no_file("a"), error = TRUE)
+  expect_snapshot(is_folder(data.frame(x = 1)), error = TRUE)
+})
+
 test_that("dribble nrow checkers work", {
   d <- dribble()
   expect_true(no_file(d))

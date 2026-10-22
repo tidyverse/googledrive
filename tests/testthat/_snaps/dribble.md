@@ -71,6 +71,22 @@
       Error in `validate_dribble()`:
       ! Invalid <dribble>. Can't confirm `kind = "drive#file"` or `kind = "drive#drive"` for all elements of the `drive_resource` column.
 
+# dribble predicates require a dribble
+
+    Code
+      no_file("a")
+    Condition
+      Error in `no_file()`:
+      ! `d` must be a <dribble>, not the string "a".
+
+---
+
+    Code
+      is_folder(data.frame(x = 1))
+    Condition
+      Error in `is_folder()`:
+      ! `d` must be a <dribble>, not a <data.frame> object.
+
 # dribble nrow checkers work
 
     Code

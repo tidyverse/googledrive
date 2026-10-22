@@ -79,6 +79,6 @@ as_team_drive <- function(x, ...) {
 #' @export
 #' @rdname deprecated-team-drive-functions
 is_team_drive <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   map_chr(d$drive_resource, "kind") == "drive#teamDrive"
 }
