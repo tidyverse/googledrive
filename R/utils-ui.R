@@ -198,9 +198,8 @@ bt <- function(x) glue::backtick(x)
 
 message <- function(...) {
   drive_abort(
-    "
-    Internal error: use the UI functions in {.pkg googledrive} \\
-    instead of {.fun message}"
+    "Use the UI functions in {.pkg googledrive} instead of {.fun message}.",
+    .internal = TRUE
   )
 }
 

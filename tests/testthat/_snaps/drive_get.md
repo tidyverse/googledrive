@@ -1,12 +1,58 @@
+# drive_get() checks `corpus` (before hitting Drive API)
+
+    Code
+      drive_get("foo", corpus = "nope")
+    Condition
+      Error in `drive_get()`:
+      ! `corpus` must be one of "user", "drive", "allDrives", or "domain", not "nope".
+
+---
+
+    Code
+      drive_get("foo", corpus = "drive")
+    Condition
+      Error in `drive_get()`:
+      ! When `corpus = "drive"`, you must also specify the `shared_drive`.
+
+# drive_get() checks `path` and `id` (before hitting Drive API)
+
+    Code
+      drive_get(path = 1)
+    Condition
+      Error in `drive_get()`:
+      ! `path` must be a character vector or `NULL`, not the number 1.
+
+---
+
+    Code
+      drive_get(id = 1)
+    Condition
+      Error in `drive_get()`:
+      ! `id` must be a character vector or `NULL`, not the number 1.
+
+---
+
+    Code
+      drive_get("/abc")
+    Condition
+      Error in `drive_get()`:
+      ! googledrive does not allow paths to start with `/`
+
+---
+
+    Code
+      drive_get(id = c("abc", NA))
+    Condition
+      Error in `drive_get()`:
+      ! `id` can't contain NA values.
+
 # drive_get() 'no input' edge cases
 
     Code
       drive_get(id = NA_character_)
     Condition
-      Error in `map()`:
-      i In index: 1.
-      Caused by error in `.f()`:
-      ! Can't `drive_get()` a file when `id` is `NA`.
+      Error in `drive_get()`:
+      ! `id` can't contain NA values.
 
 ---
 

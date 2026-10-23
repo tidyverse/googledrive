@@ -22,3 +22,11 @@
       Error in `drive_endpoint()`:
       ! `i` must be a single string or a whole number, not `TRUE`.
 
+# drive_endpoints() checks type of `i`
+
+    Code
+      drive_endpoints(TRUE)
+    Condition
+      Error in `drive_endpoints()`:
+      ! `i` must be a character or numeric vector, not `TRUE`.
+

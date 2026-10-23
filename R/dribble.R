@@ -35,7 +35,10 @@ new_dribble <- function(x) {
     new_tibble0(x),
     class = c("dribble", "tbl_df", "tbl", "data.frame")
   )
-  out$id <- new_drive_id(unclass(out$id))
+  # leave a missing or mistyped `id` for validate_dribble() to report
+  if (is.character(out[["id"]])) {
+    out$id <- new_drive_id(unclass(out$id))
+  }
   out
 }
 
@@ -43,7 +46,7 @@ validate_dribble <- function(x) {
   stopifnot(inherits(x, "dribble"))
 
   if (!has_dribble_cols(x)) {
-    missing_cols <- setdiff(dribble_cols, colnames(x))
+    missing_cols <- setdiff(names(dribble_ptype), colnames(x))
     drive_abort(c(
       "Invalid {.cls dribble}. \\
        {cli::qty(length(missing_cols))}{?This/These} required column{?s} \\
@@ -52,13 +55,21 @@ validate_dribble <- function(x) {
     ))
   }
 
-  if (!has_dribble_coltypes(x)) {
-    mistyped_cols <- dribble_cols[!dribble_coltypes_ok(x)]
+  type_problems <- c(
+    catch_type_problem(check_character(x$name, arg = "name")),
+    catch_type_problem(check_character(x$id, arg = "id")),
+    catch_type_problem(
+      if (!inherits(x$drive_resource, "list")) {
+        stop_input_type(x$drive_resource, "a list", arg = "drive_resource")
+      }
+    )
+  )
+  if (length(type_problems) > 0) {
     drive_abort(c(
       "Invalid {.cls dribble}. \\
-       {cli::qty(length(mistyped_cols))}{?This/These} column{?s} {?has/have} \\
-       the wrong type:",
-      bulletize(gargle_map_cli(mistyped_cols, template = "{.code <<x>>}"))
+       {cli::qty(length(type_problems))}{?This/These} column{?s} \\
+       {?has/have} the wrong type:",
+      bulletize(type_problems)
     ))
   }
 
@@ -79,14 +90,14 @@ validate_dribble <- function(x) {
   x
 }
 
+dribble_ptype <- list(
+  name = character(),
+  id = character(),
+  drive_resource = list()
+)
+
 dribble <- function(x = NULL) {
-  x <- x %||%
-    list(
-      name = character(),
-      id = character(),
-      drive_resource = list()
-    )
-  validate_dribble(new_dribble(x))
+  validate_dribble(new_dribble(x %||% dribble_ptype))
 }
 
 #' @export
@@ -110,22 +121,25 @@ as_tibble.dribble <- function(x, ...) {
   as_tibble(new_tibble0(x), ...)
 }
 
-dribble_cols <- c("name", "id", "drive_resource")
-
 has_dribble_cols <- function(x) {
-  all(dribble_cols %in% colnames(x))
+  all(names(dribble_ptype) %in% colnames(x))
 }
 
-dribble_coltypes_ok <- function(x) {
-  c(
-    name = is.character(x$name),
-    id = is.character(x$id),
-    drive_resource = inherits(x$drive_resource, "list")
-  )
+# evaluates a type check and returns its error message, or NULL if it passes
+catch_type_problem <- function(expr) {
+  cnd <- catch_cnd(expr, classes = "rlang_error")
+  if (is.null(cnd)) {
+    return(NULL)
+  }
+  # the message can include user data, so escape it before it's used as cli
+  # markup
+  gsub("([{}])", "\\1\\1", cnd_header(cnd))
 }
 
 has_dribble_coltypes <- function(x) {
-  all(dribble_coltypes_ok(x))
+  is.character(x$name) &&
+    is.character(x$id) &&
+    inherits(x$drive_resource, "list")
 }
 
 id_can_be_drive_id <- function(x) {
@@ -221,7 +235,22 @@ as_dribble.list <- function(x, ...) {
   }
 
   required_nms <- c("name", "id", "kind")
-  stopifnot(map_lgl(x, ~ all(required_nms %in% names(.x))))
+  missing_nms <- map(x, ~ setdiff(required_nms, names(.x)))
+  bad <- which(lengths(missing_nms) > 0)
+  if (length(bad) > 0) {
+    first_bad <- bad[[1]]
+    first_missing <- missing_nms[[first_bad]]
+    n_other <- length(bad) - 1
+    drive_abort(c(
+      "Can't make a {.cls dribble} from this list.",
+      x = "Element {first_bad} is missing {.field {first_missing}}.",
+      if (n_other > 0) {
+        c(
+          x = "{n_other} other element{?s} also {?has/have} missing components."
+        )
+      }
+    ))
+  }
 
   as_dribble(
     tibble(
@@ -234,35 +263,42 @@ as_dribble.list <- function(x, ...) {
 
 # used across several functions that create a file or modify "parentage"
 # processes a putative parent folder or shared drive
-as_parent <- function(d) {
-  in_var <- deparse(substitute(d))
+as_parent <- function(d, arg = caller_arg(d), call = caller_env()) {
+  # force before `d` is modified
+  force(arg)
   if (is_path(d)) {
     d <- append_slash(d)
   }
   d <- as_dribble(d)
   # wording chosen to work for folder and shared drive
-  invalid_parent <- "Parent specified via {.arg {in_var}} is invalid:"
+  invalid_parent <- "Parent specified via {.arg {arg}} is invalid:"
   if (no_file(d)) {
-    drive_abort(c(invalid_parent, x = "Does not exist."))
+    drive_abort(c(invalid_parent, x = "Does not exist."), call = call)
   }
   if (!single_file(d)) {
-    drive_abort(c(
-      invalid_parent,
-      x = "Doesn't uniquely identify exactly one folder or shared drive."
-    ))
+    drive_abort(
+      c(
+        invalid_parent,
+        x = "Doesn't uniquely identify exactly one folder or shared drive."
+      ),
+      call = call
+    )
   }
   if (is_folder_shortcut(d)) {
     drive_bullets(c(
-      i = "Parent specified via {.arg {in_var}} is a shortcut; resolving to \\
+      i = "Parent specified via {.arg {arg}} is a shortcut; resolving to \\
            its target folder"
     ))
     d <- shortcut_resolve(d)
   }
   if (!is_parental(d)) {
-    drive_abort(c(
-      invalid_parent,
-      x = "Is neither a folder nor a shared drive."
-    ))
+    drive_abort(
+      c(
+        invalid_parent,
+        x = "Is neither a folder nor a shared drive."
+      ),
+      call = call
+    )
   }
   d
 }
@@ -278,6 +314,7 @@ as_parent <- function(d) {
 #'
 #' @name dribble-checks
 #' @param d A [`dribble`].
+#' @inheritParams rlang::args_error_context
 #' @examplesIf drive_has_token()
 #' ## most of us have multiple files or folders on Google Drive
 #' d <- drive_find()
@@ -303,52 +340,59 @@ is_dribble <- function(d) {
 #' @export
 #' @rdname dribble-checks
 no_file <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   nrow(d) == 0
 }
 
 #' @export
 #' @rdname dribble-checks
 single_file <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   nrow(d) == 1
 }
 
 #' @export
 #' @rdname dribble-checks
 some_files <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   nrow(d) > 0
 }
 
 #' @export
 #' @rdname dribble-checks
-confirm_dribble <- function(d) {
+confirm_dribble <- function(d, arg = caller_arg(d), call = caller_env()) {
   if (!is_dribble(d)) {
-    drive_abort("Input is not a {.cls dribble}.")
+    stop_input_type(d, "a <dribble>", arg = arg, call = call)
   }
   d
 }
 
 #' @export
 #' @rdname dribble-checks
-confirm_single_file <- function(d) {
-  in_var <- deparse(substitute(d))
+confirm_single_file <- function(d, arg = caller_arg(d), call = caller_env()) {
   if (no_file(d)) {
-    drive_abort("{.arg {in_var}} does not identify at least one Drive file.")
+    drive_abort(
+      "{.arg {arg}} does not identify at least one Drive file.",
+      call = call
+    )
   }
   if (!single_file(d)) {
-    drive_abort("{.arg {in_var}} identifies more than one Drive file.")
+    drive_abort(
+      "{.arg {arg}} identifies more than one Drive file.",
+      call = call
+    )
   }
   d
 }
 
 #' @export
 #' @rdname dribble-checks
-confirm_some_files <- function(d) {
-  in_var <- deparse(substitute(d))
+confirm_some_files <- function(d, arg = caller_arg(d), call = caller_env()) {
   if (no_file(d)) {
-    drive_abort("{.arg {in_var}} does not identify at least one Drive file.")
+    drive_abort(
+      "{.arg {arg}} does not identify at least one Drive file.",
+      call = call
+    )
   }
   d
 }
@@ -356,7 +400,7 @@ confirm_some_files <- function(d) {
 #' @export
 #' @rdname dribble-checks
 is_folder <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   map_chr(d$drive_resource, "mimeType", .default = NA) ==
     "application/vnd.google-apps.folder"
 }
@@ -364,7 +408,7 @@ is_folder <- function(d) {
 #' @export
 #' @rdname dribble-checks
 is_shortcut <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   map_chr(d$drive_resource, "mimeType", .default = NA) ==
     "application/vnd.google-apps.shortcut"
 }
@@ -372,7 +416,7 @@ is_shortcut <- function(d) {
 #' @export
 #' @rdname dribble-checks
 is_folder_shortcut <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   is_shortcut(d) &
     (map_chr(
       d$drive_resource,
@@ -385,7 +429,7 @@ is_folder_shortcut <- function(d) {
 #' @export
 #' @rdname dribble-checks
 is_native <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   d <- promote(d, "mimeType")
   grepl("application/vnd.google-apps.", d$mimeType) & !is_folder(d)
 }
@@ -393,7 +437,7 @@ is_native <- function(d) {
 #' @export
 #' @rdname dribble-checks
 is_parental <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   kind <- map_chr(d$drive_resource, "kind")
   mime_type <- map_chr(d$drive_resource, "mimeType", .default = "")
   # TODO: remove `drive#teamDrive` here, when possible
@@ -405,13 +449,13 @@ is_parental <- function(d) {
 #' @export
 #' @rdname dribble-checks
 is_mine <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   map_lgl(d$drive_resource, list("owners", 1, "me"), .default = FALSE)
 }
 
 #' @export
 #' @rdname dribble-checks
 is_shared_drive <- function(d) {
-  stopifnot(inherits(d, "dribble"))
+  confirm_dribble(d)
   map_chr(d$drive_resource, "kind") == "drive#drive"
 }

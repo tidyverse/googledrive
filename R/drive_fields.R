@@ -51,7 +51,7 @@ drive_fields <- function(fields = NULL, resource = "files") {
     return(.drive$files_fields)
   }
 
-  stopifnot(is.character(fields))
+  check_character(fields)
   if (!identical(resource, "files")) {
     return(fields)
   }

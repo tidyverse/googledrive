@@ -1,9 +1,33 @@
+# drive_ls() checks `recursive` (before hitting Drive API)
+
+    Code
+      drive_ls(recursive = "yes")
+    Condition
+      Error in `drive_ls()`:
+      ! `recursive` must be `TRUE` or `FALSE`, not the string "yes".
+
+# drive_ls() reports itself for errors from drive_find() args
+
+    Code
+      drive_ls(corpus = "nope")
+    Condition
+      Error in `drive_ls()`:
+      ! `corpus` must be one of "user", "drive", "allDrives", or "domain", not "nope".
+
+---
+
+    Code
+      drive_ls(n_max = -1)
+    Condition
+      Error in `drive_ls()`:
+      ! `n_max` must be a whole number larger than or equal to 0, not the number -1.
+
 # drive_ls() errors if `path` does not exist
 
     Code
       drive_ls(nm_("this-should-not-exist"))
     Condition
-      Error in `as_parent()`:
+      Error in `drive_ls()`:
       ! Parent specified via `path` is invalid:
       x Does not exist.
 

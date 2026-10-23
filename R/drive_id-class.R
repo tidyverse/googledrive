@@ -22,7 +22,7 @@
 NULL
 
 new_drive_id <- function(x = character()) {
-  vec_assert(x, character())
+  check_character(x)
   new_vctr(x, class = "drive_id", inherit_base_type = TRUE)
 }
 

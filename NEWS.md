@@ -6,6 +6,11 @@
 * `is_mine()` returns `FALSE` instead of erroring for resources without an
   owner, such as items on a shared drive (#478, @sims1253).
 
+* Argument checking now uses rlang's type checkers (`check_string()`,
+  `check_bool()`, `arg_match0()`, `stop_input_type()`, etc.) throughout, so
+  error messages are more consistent and more informative about what was
+  received.
+
 # googledrive 2.1.2
 
 * `drive_upload()` and `drive_download()` support the conversion of a local

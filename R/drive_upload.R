@@ -54,7 +54,7 @@
 #' chicken <- drive_example_local("chicken.jpg") |>
 #'   drive_upload(starred = "true")
 #'
-#' # Is is really starred? YES
+#' # Is it really starred? YES
 #' purrr::pluck(chicken, "drive_resource", 1, "starred")
 #'
 #' # Clean up

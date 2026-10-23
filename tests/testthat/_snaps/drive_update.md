@@ -12,7 +12,7 @@
     Code
       drive_update(nm_("does-not-exist"), system.file("DESCRIPTION"))
     Condition
-      Error in `confirm_single_file()`:
+      Error in `drive_update()`:
       ! `file` does not identify at least one Drive file.
 
 # drive_update() informatively errors if the path is not unique
@@ -20,7 +20,7 @@
     Code
       drive_update(nm_("not-unique"), system.file("DESCRIPTION"))
     Condition
-      Error in `confirm_single_file()`:
+      Error in `drive_update()`:
       ! `file` identifies more than one Drive file.
 
 # no op if no media, no metadata

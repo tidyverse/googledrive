@@ -50,7 +50,7 @@ drive_read_impl <- function(
   as = c("string", "raw"),
   encoding = NULL
 ) {
-  as <- match.arg(as)
+  as <- arg_match(as)
   file <- as_dribble(file)
   file <- confirm_single_file(file)
 
@@ -102,10 +102,13 @@ drive_read_impl <- function(
   } else if (as == "raw") {
     resp_body_raw(response)
   } else {
-    drive_abort(c(
-      "Internal error: unexpected value for the {.arg as} argument.",
-      x = "{.field {as}}"
-    ))
+    drive_abort(
+      c(
+        "Unexpected value for the {.arg as} argument.",
+        x = "{.field {as}}"
+      ),
+      .internal = TRUE
+    )
   }
 }
 

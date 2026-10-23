@@ -26,6 +26,20 @@ test_that("drive_find() checks `pattern` (before hitting Drive API)", {
   expect_snapshot(drive_find(pattern = as_id("abc")), error = TRUE)
 })
 
+test_that("drive_find() checks `corpus` (before hitting Drive API)", {
+  expect_snapshot(drive_find(corpus = c("user", "domain")), error = TRUE)
+  expect_snapshot(drive_find(corpus = "foo"), error = TRUE)
+  expect_snapshot(drive_find(corpus = "drive"), error = TRUE)
+})
+
+test_that("drive_find() checks `shared_drive` (before hitting Drive API)", {
+  two_drives <- as_dribble(list(
+    list(name = "a", id = "1", kind = "drive#drive"),
+    list(name = "b", id = "2", kind = "drive#drive")
+  ))
+  expect_snapshot(drive_find(shared_drive = two_drives), error = TRUE)
+})
+
 test_that("drive_find() passes q", {
   skip_if_no_token()
   skip_if_offline()
@@ -65,7 +79,7 @@ test_that("drive_find() errors for nonsense in `n_max`", {
 })
 
 test_that("drive_find() returns early if n_max < 1", {
-  expect_identical(drive_find(n_max = 0.5), dribble())
+  expect_identical(drive_find(n_max = 0), dribble())
 })
 
 test_that("drive_find() returns empty dribble if no match for `pattern`", {
@@ -93,6 +107,12 @@ test_that("drive_find() honors n_max", {
 
   out <- drive_find(n_max = 4)
   expect_equal(nrow(out), 4)
+})
+
+test_that("drive_find() checks type of `q` (before hitting Drive API)", {
+  expect_snapshot(drive_find(q = 1), error = TRUE)
+  expect_snapshot(drive_find(q = "name = 'a'", q = TRUE), error = TRUE)
+  expect_snapshot(drive_find(q = NULL), error = TRUE)
 })
 
 test_that("marshal_q_clauses() works in the absence of q", {

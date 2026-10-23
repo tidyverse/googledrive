@@ -37,9 +37,7 @@ drive_mime_type <- function(type = NULL) {
   if (is_expose(type)) {
     return(.drive$mime_tbl)
   }
-  if (!(is.character(type))) {
-    drive_abort("{.arg type} must be character.")
-  }
+  check_character(type)
 
   human_m <- match(
     type,
@@ -88,7 +86,7 @@ drive_extension <- function(type = NULL) {
   if (is.null(type)) {
     return(invisible())
   }
-  stopifnot(is.character(type))
+  check_character(type)
 
   type <- drive_mime_type(type)
   m <- map_int(type, one_ext)

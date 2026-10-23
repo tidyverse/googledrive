@@ -32,7 +32,7 @@
     Condition
       Error in `validate_dribble()`:
       ! Invalid <dribble>. This column has the wrong type:
-      * `id`
+      * `id` must be a character vector, not an empty numeric vector.
 
 ---
 
@@ -41,8 +41,8 @@
     Condition
       Error in `validate_dribble()`:
       ! Invalid <dribble>. These columns have the wrong type:
-      * `name`
-      * `id`
+      * `name` must be a character vector, not an empty logical vector.
+      * `id` must be a character vector, not an empty numeric vector.
 
 ---
 
@@ -71,12 +71,28 @@
       Error in `validate_dribble()`:
       ! Invalid <dribble>. Can't confirm `kind = "drive#file"` or `kind = "drive#drive"` for all elements of the `drive_resource` column.
 
+# dribble predicates require a dribble
+
+    Code
+      no_file("a")
+    Condition
+      Error in `no_file()`:
+      ! `d` must be a <dribble>, not the string "a".
+
+---
+
+    Code
+      is_folder(data.frame(x = 1))
+    Condition
+      Error in `is_folder()`:
+      ! `d` must be a <dribble>, not a <data.frame> object.
+
 # dribble nrow checkers work
 
     Code
       confirm_single_file(d)
     Condition
-      Error in `confirm_single_file()`:
+      Error:
       ! `d` does not identify at least one Drive file.
 
 ---
@@ -84,7 +100,7 @@
     Code
       confirm_some_files(d)
     Condition
-      Error in `confirm_some_files()`:
+      Error:
       ! `d` does not identify at least one Drive file.
 
 ---
@@ -92,7 +108,7 @@
     Code
       confirm_single_file(d)
     Condition
-      Error in `confirm_single_file()`:
+      Error:
       ! `d` identifies more than one Drive file.
 
 # as_dribble() default method handles unsuitable input
@@ -111,13 +127,44 @@
       Error in `as_dribble()`:
       ! Don't know how to coerce an object of class <logical> into a <dribble>.
 
+# as_dribble() reports missing or mistyped columns of a data frame
+
+    Code
+      as_dribble(data.frame(x = 1))
+    Condition
+      Error in `validate_dribble()`:
+      ! Invalid <dribble>. These required columns are missing:
+      * `name`
+      * `id`
+      * `drive_resource`
+
+---
+
+    Code
+      as_dribble(d)
+    Condition
+      Error in `validate_dribble()`:
+      ! Invalid <dribble>. This column has the wrong type:
+      * `id` must be a character vector, not the number 1.
+
+---
+
+    Code
+      as_dribble(d)
+    Condition
+      Error in `validate_dribble()`:
+      ! Invalid <dribble>. These columns have the wrong type:
+      * `name` must be a character vector, not a <factor> object.
+      * `drive_resource` must be a list, not the string "c".
+
 # as_dribble.list() catches bad input
 
     Code
       as_dribble(list(drib_lst))
     Condition
-      Error in `as_dribble.list()`:
-      ! map_lgl(x, ~all(required_nms %in% names(.x))) is not TRUE
+      Error in `as_dribble()`:
+      ! Can't make a <dribble> from this list.
+      x Element 1 is missing 'id' and 'kind'.
 
 ---
 
@@ -127,13 +174,23 @@
       Error in `validate_dribble()`:
       ! Invalid <dribble>. Can't confirm `kind = "drive#file"` or `kind = "drive#drive"` for all elements of the `drive_resource` column.
 
+---
+
+    Code
+      as_dribble(list(ok_lst, list(name = "a"), list(id = "b"), list()))
+    Condition
+      Error in `as_dribble()`:
+      ! Can't make a <dribble> from this list.
+      x Element 2 is missing 'id' and 'kind'.
+      x 2 other elements also have missing components.
+
 # as_parent() throws specific errors
 
     Code
       foo <- d[0, ]
       as_parent(foo)
     Condition
-      Error in `as_parent()`:
+      Error:
       ! Parent specified via `foo` is invalid:
       x Does not exist.
 
@@ -143,7 +200,7 @@
       foo <- d
       as_parent(foo)
     Condition
-      Error in `as_parent()`:
+      Error:
       ! Parent specified via `foo` is invalid:
       x Doesn't uniquely identify exactly one folder or shared drive.
 
@@ -153,7 +210,7 @@
       foo <- d[1, ]
       as_parent(foo)
     Condition
-      Error in `as_parent()`:
+      Error:
       ! Parent specified via `foo` is invalid:
       x Is neither a folder nor a shared drive.
 

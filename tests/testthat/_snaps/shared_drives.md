@@ -27,21 +27,15 @@
     Code
       shared_drive_params(corpora = "foo")
     Condition
-      Error in `validate_corpora()`:
-      ! Invalid value for `corpus`:
-      x 'foo'
-      These are the only acceptable values:
-      * 'user'
-      * 'drive'
-      * 'allDrives'
-      * 'domain'
+      Error:
+      ! `corpus` must be one of "user", "drive", "allDrives", or "domain", not "foo".
 
 # `corpora = "drive"` requires shared drive specification
 
     Code
       shared_drive_params(corpora = "drive")
     Condition
-      Error in `rationalize_corpus()`:
+      Error:
       ! When `corpus = "drive"`, you must also specify the `shared_drive`.
 
 # `corpora != "drive"` rejects shared drive specification
@@ -49,7 +43,7 @@
     Code
       shared_drive_params(corpora = "user", driveId = "123")
     Condition
-      Error in `rationalize_corpus()`:
+      Error:
       ! When `corpus != "drive"`, you must not specify a `shared_drive`.
 
 # shared_drive_find() checks `pattern` (before hitting Drive API)
@@ -68,4 +62,36 @@
       Error in `shared_drive_find()`:
       ! `pattern` must be a regular expression, not a Drive ID.
       i To get a shared drive by its ID, use `shared_drive_get(id = )`.
+
+# shared_drive_find() checks `n_max` (before hitting Drive API)
+
+    Code
+      shared_drive_find(n_max = -1)
+    Condition
+      Error in `shared_drive_find()`:
+      ! `n_max` must be a whole number larger than or equal to 0, not the number -1.
+
+# shared_drive_get() checks `name` and `id` (before hitting Drive API)
+
+    Code
+      shared_drive_get(c("a", NA))
+    Condition
+      Error in `shared_drive_get()`:
+      ! `name` can't contain NA values.
+
+---
+
+    Code
+      shared_drive_get(id = 1)
+    Condition
+      Error in `shared_drive_get()`:
+      ! `id` must be a character vector, not the number 1.
+
+---
+
+    Code
+      shared_drive_get(id = c("abc", NA))
+    Condition
+      Error in `shared_drive_get()`:
+      ! `id` can't contain NA values.
 

@@ -28,7 +28,7 @@
     Code
       drive_create("a", path = "qweruiop")
     Condition
-      Error in `as_parent()`:
+      Error in `drive_create()`:
       ! Parent specified via `path` is invalid:
       x Does not exist.
 
@@ -37,7 +37,7 @@
     Code
       drive_create("a", path = x)
     Condition
-      Error in `as_parent()`:
+      Error in `drive_create()`:
       ! Parent specified via `path` is invalid:
       x Is neither a folder nor a shared drive.
 

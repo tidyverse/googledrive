@@ -80,7 +80,7 @@ many_files <- function(
   where = c("local", "remote"),
   call = caller_env()
 ) {
-  where <- match.arg(where)
+  where <- arg_match(where)
   out <- haystack
 
   if (!missing(needle)) {

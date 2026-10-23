@@ -3,7 +3,7 @@
 # drive_reveal(what = "path")
 
 drive_reveal_path <- function(x, ancestors = c("none", "parents", "all")) {
-  stopifnot(inherits(x, "dribble"))
+  confirm_dribble(x)
   if (no_file(x)) {
     return(dribble_with_path())
   }
@@ -47,18 +47,24 @@ sort_out_shared_drive_and_corpus <- function(x) {
   list(shared_drive = shared_drive, corpus = corpus)
 }
 
-drive_get_path <- function(path = NULL, shared_drive = NULL, corpus = NULL) {
+drive_get_path <- function(
+  path = NULL,
+  shared_drive = NULL,
+  corpus = NULL,
+  call = caller_env()
+) {
   if (length(path) == 0) {
     return(dribble_with_path())
   }
   stopifnot(is_path(path))
-  path <- rootize_path(path)
+  path <- rootize_path(path, call = call)
 
   last_path_part <- get_last_path_part(path)
   candidates <- get_by_name(
     last_path_part,
     shared_drive = shared_drive,
-    corpus = corpus
+    corpus = corpus,
+    call = call
   )
   candidates <- drive_reveal_path(candidates)
 
@@ -120,7 +126,7 @@ get_folders <- function(shared_drive = NULL, corpus = NULL) {
 }
 
 get_immediate_parents <- function(x) {
-  stopifnot(inherits(x, "dribble"))
+  confirm_dribble(x)
   x <- drive_reveal(x, "parent")
   parent_ids <- unique(x$id_parent[!is.na(x$id_parent)])
   # TODO: I suspect I must deal with the case where don't have permission to
@@ -228,7 +234,7 @@ finalize <- function(dat, candidates) {
 
   no_status <- is.na(scratch$status)
   if (any(no_status)) {
-    abort("Internal error: paths with missing status")
+    drive_abort("Paths with missing status.", .internal = TRUE)
   }
 
   report_weird_stuff <- function(x, indicator, problem) {
@@ -298,7 +304,12 @@ finalize <- function(dat, candidates) {
   vec_slice(candidates, index[!dupes])
 }
 
-get_by_name <- function(names, shared_drive = NULL, corpus = NULL) {
+get_by_name <- function(
+  names,
+  shared_drive = NULL,
+  corpus = NULL,
+  call = caller_env()
+) {
   nms <- strip_slash(unique(names))
   is_root <- nms == "~"
   nms <- nms[!is_root]
@@ -309,11 +320,12 @@ get_by_name <- function(names, shared_drive = NULL, corpus = NULL) {
   if (length(q_clauses) == 0) {
     found <- dribble()
   } else {
-    found <- drive_find(
+    found <- drive_find_impl(
       q = or(q_clauses),
       # fields = prep_fields(fields),
       shared_drive = shared_drive,
-      corpus = corpus
+      corpus = corpus,
+      call = call
     )
   }
 
