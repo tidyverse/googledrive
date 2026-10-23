@@ -138,7 +138,6 @@ drive_find <- function(
   team_drive = deprecated()
 ) {
   warn_for_verbose(verbose)
-  check_number_whole(n_max, min = 0, allow_infinite = TRUE)
 
   if (lifecycle::is_present(team_drive)) {
     lifecycle::deprecate_warn(
@@ -160,8 +159,8 @@ drive_find <- function(
   )
 }
 
-# also used internally, e.g. by drive_get(), so errors can report the
-# user-facing caller
+# also used internally, e.g. by drive_get() and drive_ls(), so errors can
+# report the user-facing caller
 drive_find_impl <- function(
   pattern = NULL,
   trashed = FALSE,
@@ -180,6 +179,7 @@ drive_find_impl <- function(
     call = call
   )
   check_bool(trashed, allow_na = TRUE, call = call)
+  check_number_whole(n_max, min = 0, allow_infinite = TRUE, call = call)
 
   if (n_max < 1) {
     return(dribble())

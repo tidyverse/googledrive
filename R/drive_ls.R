@@ -34,7 +34,7 @@
 drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   check_bool(recursive)
   if (is.null(path)) {
-    return(drive_find(...))
+    return(drive_find_impl(...))
   }
 
   path <- as_parent(path)
@@ -58,7 +58,7 @@ drive_ls <- function(path = NULL, ..., recursive = FALSE) {
   parent <- glue("({or(parent)})")
   params[["q"]] <- append(params[["q"]], parent)
 
-  exec(drive_find, !!!params)
+  exec(drive_find_impl, !!!params, call = current_env())
 }
 
 folders_below <- function(id, shared_drive = NULL) {
