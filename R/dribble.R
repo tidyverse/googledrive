@@ -35,7 +35,10 @@ new_dribble <- function(x) {
     new_tibble0(x),
     class = c("dribble", "tbl_df", "tbl", "data.frame")
   )
-  out$id <- new_drive_id(unclass(out$id))
+  # leave a missing or mistyped `id` for validate_dribble() to report
+  if (is.character(out[["id"]])) {
+    out$id <- new_drive_id(unclass(out$id))
+  }
   out
 }
 
@@ -43,7 +46,7 @@ validate_dribble <- function(x) {
   stopifnot(inherits(x, "dribble"))
 
   if (!has_dribble_cols(x)) {
-    missing_cols <- setdiff(dribble_cols, colnames(x))
+    missing_cols <- setdiff(names(dribble_ptype), colnames(x))
     drive_abort(c(
       "Invalid {.cls dribble}. \\
        {cli::qty(length(missing_cols))}{?This/These} required column{?s} \\
@@ -52,13 +55,21 @@ validate_dribble <- function(x) {
     ))
   }
 
-  if (!has_dribble_coltypes(x)) {
-    mistyped_cols <- dribble_cols[!dribble_coltypes_ok(x)]
+  type_problems <- c(
+    catch_type_problem(check_character(x$name, arg = "name")),
+    catch_type_problem(check_character(x$id, arg = "id")),
+    catch_type_problem(
+      if (!inherits(x$drive_resource, "list")) {
+        stop_input_type(x$drive_resource, "a list", arg = "drive_resource")
+      }
+    )
+  )
+  if (length(type_problems) > 0) {
     drive_abort(c(
       "Invalid {.cls dribble}. \\
-       {cli::qty(length(mistyped_cols))}{?This/These} column{?s} {?has/have} \\
-       the wrong type:",
-      bulletize(gargle_map_cli(mistyped_cols, template = "{.code <<x>>}"))
+       {cli::qty(length(type_problems))}{?This/These} column{?s} \\
+       {?has/have} the wrong type:",
+      bulletize(type_problems)
     ))
   }
 
@@ -79,14 +90,14 @@ validate_dribble <- function(x) {
   x
 }
 
+dribble_ptype <- list(
+  name = character(),
+  id = character(),
+  drive_resource = list()
+)
+
 dribble <- function(x = NULL) {
-  x <- x %||%
-    list(
-      name = character(),
-      id = character(),
-      drive_resource = list()
-    )
-  validate_dribble(new_dribble(x))
+  validate_dribble(new_dribble(x %||% dribble_ptype))
 }
 
 #' @export
@@ -110,22 +121,25 @@ as_tibble.dribble <- function(x, ...) {
   as_tibble(new_tibble0(x), ...)
 }
 
-dribble_cols <- c("name", "id", "drive_resource")
-
 has_dribble_cols <- function(x) {
-  all(dribble_cols %in% colnames(x))
+  all(names(dribble_ptype) %in% colnames(x))
 }
 
-dribble_coltypes_ok <- function(x) {
-  c(
-    name = is.character(x$name),
-    id = is.character(x$id),
-    drive_resource = inherits(x$drive_resource, "list")
-  )
+# evaluates a type check and returns its error message, or NULL if it passes
+catch_type_problem <- function(expr) {
+  cnd <- catch_cnd(expr, classes = "rlang_error")
+  if (is.null(cnd)) {
+    return(NULL)
+  }
+  # the message can include user data, so escape it before it's used as cli
+  # markup
+  gsub("([{}])", "\\1\\1", cnd_header(cnd))
 }
 
 has_dribble_coltypes <- function(x) {
-  all(dribble_coltypes_ok(x))
+  is.character(x$name) &&
+    is.character(x$id) &&
+    inherits(x$drive_resource, "list")
 }
 
 id_can_be_drive_id <- function(x) {
@@ -221,7 +235,22 @@ as_dribble.list <- function(x, ...) {
   }
 
   required_nms <- c("name", "id", "kind")
-  stopifnot(map_lgl(x, ~ all(required_nms %in% names(.x))))
+  missing_nms <- map(x, ~ setdiff(required_nms, names(.x)))
+  bad <- which(lengths(missing_nms) > 0)
+  if (length(bad) > 0) {
+    first_bad <- bad[[1]]
+    first_missing <- missing_nms[[first_bad]]
+    n_other <- length(bad) - 1
+    drive_abort(c(
+      "Can't make a {.cls dribble} from this list.",
+      x = "Element {first_bad} is missing {.field {first_missing}}.",
+      if (n_other > 0) {
+        c(
+          x = "{n_other} other element{?s} also {?has/have} missing components."
+        )
+      }
+    ))
+  }
 
   as_dribble(
     tibble(
