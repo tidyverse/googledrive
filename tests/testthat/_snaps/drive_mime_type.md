@@ -4,7 +4,7 @@
       drive_mime_type(1)
     Condition
       Error in `drive_mime_type()`:
-      ! `type` must be character.
+      ! `type` must be a character vector, not the number 1.
 
 ---
 
@@ -12,7 +12,7 @@
       drive_mime_type(dribble())
     Condition
       Error in `drive_mime_type()`:
-      ! `type` must be character.
+      ! `type` must be a character vector, not a <dribble> object.
 
 # drive_mime_type() errors for single unrecognized input
 

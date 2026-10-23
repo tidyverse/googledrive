@@ -41,11 +41,8 @@ shared_drive_get <- function(name = NULL, id = NULL) {
     return(shared_drive_from_name(name))
   }
 
-  check_character(id)
+  check_character(id, allow_na = FALSE)
   id <- as_id(id)
-  if (anyNA(id)) {
-    drive_abort("{.arg id} can't contain NA values.")
-  }
   # TODO: use a batch request
   as_dribble(map(id, get_one_shared_drive_id))
 }

@@ -37,9 +37,7 @@ drive_mime_type <- function(type = NULL) {
   if (is_expose(type)) {
     return(.drive$mime_tbl)
   }
-  if (!(is.character(type))) {
-    drive_abort("{.arg type} must be character.")
-  }
+  check_character(type)
 
   human_m <- match(
     type,

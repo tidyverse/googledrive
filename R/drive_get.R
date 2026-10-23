@@ -151,9 +151,7 @@ drive_get <- function(
 
   if (is.null(path)) {
     id <- as_id(id)
-    if (anyNA(id)) {
-      drive_abort("{.arg id} can't contain NA values.")
-    }
+    check_character(id, allow_na = FALSE)
     as_dribble(map(id, get_one_file_id))
   } else {
     drive_get_path(path, shared_drive, corpus)
