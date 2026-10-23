@@ -203,22 +203,13 @@ rationalize_corpus <- function(corpus, call = caller_env()) {
 valid_corpora <- c("user", "drive", "allDrives", "domain")
 
 validate_corpora <- function(corpora, call = caller_env()) {
-  if (!corpora %in% valid_corpora) {
-    # yes, I intentionally use `corpus` in this message, even
-    # though the actual API parameter is `corpora`
-    # googledrive's user-facing functions have `corpus` in their signature and
-    # the rationale is explained elsewhere in this file
-    drive_abort(
-      c(
-        "Invalid value for {.arg corpus}:",
-        bulletize(gargle_map_cli(corpora), bullet = "x"),
-        "These are the only acceptable values:",
-        bulletize(gargle_map_cli(valid_corpora))
-      ),
-      call = call
-    )
-  }
-  invisible(corpora)
+  # yes, I intentionally use `corpus` in this message, even
+  # though the actual API parameter is `corpora`
+  # googledrive's user-facing functions have `corpus` in their signature and
+  # the rationale is explained elsewhere in this file
+  invisible(
+    arg_match0(corpora, valid_corpora, arg_nm = "corpus", error_call = call)
+  )
 }
 
 #' Coerce to shared drive

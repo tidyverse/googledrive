@@ -4,13 +4,7 @@
       drive_get("foo", corpus = "nope")
     Condition
       Error in `drive_get()`:
-      ! Invalid value for `corpus`:
-      x 'nope'
-      These are the only acceptable values:
-      * 'user'
-      * 'drive'
-      * 'allDrives'
-      * 'domain'
+      ! `corpus` must be one of "user", "drive", "allDrives", or "domain", not "nope".
 
 ---
 

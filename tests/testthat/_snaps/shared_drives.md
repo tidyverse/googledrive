@@ -28,13 +28,7 @@
       shared_drive_params(corpora = "foo")
     Condition
       Error:
-      ! Invalid value for `corpus`:
-      x 'foo'
-      These are the only acceptable values:
-      * 'user'
-      * 'drive'
-      * 'allDrives'
-      * 'domain'
+      ! `corpus` must be one of "user", "drive", "allDrives", or "domain", not "foo".
 
 # `corpora = "drive"` requires shared drive specification
 
