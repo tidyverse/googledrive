@@ -55,10 +55,10 @@ drive_about()
 #> [1] "16106127360"
 #> 
 #> $storageQuota$usage
-#> [1] "2836524"
+#> [1] "2836525"
 #> 
 #> $storageQuota$usageInDrive
-#> [1] "2836524"
+#> [1] "2836525"
 #> 
 #> $storageQuota$usageInDriveTrash
 #> [1] "0"
@@ -153,6 +153,9 @@ drive_about()
 #> $importFormats$`text/html`
 #> $importFormats$`text/html`[[1]]
 #> [1] "application/vnd.google-apps.document"
+#> 
+#> $importFormats$`text/html`[[2]]
+#> [1] "application/vnd.google-apps.site"
 #> 
 #> 
 #> $importFormats$`application/vnd.oasis.opendocument.text`

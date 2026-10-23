@@ -55,8 +55,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="googledrive-development-version">googledrive (development version)<a class="anchor" aria-label="anchor" href="#googledrive-development-version"></a></h2>
-<ul><li>
-<code><a href="../reference/drive_id.html">as_id()</a></code> (and hence <code><a href="../reference/drive_download.html">drive_download()</a></code>, <code><a href="../reference/drive_get.html">drive_get()</a></code>, etc.) works for Google Colab links (<a href="https://github.com/tidyverse/googledrive/issues/459" class="external-link">#459</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>).</li>
+<ul><li><p><code><a href="../reference/drive_id.html">as_id()</a></code> (and hence <code><a href="../reference/drive_download.html">drive_download()</a></code>, <code><a href="../reference/drive_get.html">drive_get()</a></code>, etc.) works for Google Colab links (<a href="https://github.com/tidyverse/googledrive/issues/459" class="external-link">#459</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>).</p></li>
+<li><p><code><a href="../reference/dribble-checks.html">is_mine()</a></code> returns <code>FALSE</code> instead of erroring for resources without an owner, such as items on a shared drive (<a href="https://github.com/tidyverse/googledrive/issues/478" class="external-link">#478</a>, <a href="https://github.com/sims1253" class="external-link">@sims1253</a>).</p></li>
+<li><p>Argument checking now uses rlang’s type checkers (<code>check_string()</code>, <code>check_bool()</code>, <code>arg_match0()</code>, <code>stop_input_type()</code>, etc.) throughout, so error messages are more consistent and more informative about what was received.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.2" id="googledrive-212">googledrive 2.1.2<a class="anchor" aria-label="anchor" href="#googledrive-212"></a></h2><p class="text-muted">CRAN release: 2025-09-10</p>

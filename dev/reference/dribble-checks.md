@@ -24,11 +24,11 @@ single_file(d)
 
 some_files(d)
 
-confirm_dribble(d)
+confirm_dribble(d, arg = caller_arg(d), call = caller_env())
 
-confirm_single_file(d)
+confirm_single_file(d, arg = caller_arg(d), call = caller_env())
 
-confirm_some_files(d)
+confirm_some_files(d, arg = caller_arg(d), call = caller_env())
 
 is_folder(d)
 
@@ -51,6 +51,19 @@ is_shared_drive(d)
 
   A
   [`dribble`](https://googledrive.tidyverse.org/dev/reference/dribble.md).
+
+- arg:
+
+  An argument name as a string. This argument will be mentioned in error
+  messages as the input that is at the origin of a problem.
+
+- call:
+
+  The execution environment of a currently running function, e.g.
+  `caller_env()`. The function will be mentioned in error messages as
+  the source of the error. See the `call` argument of
+  [`abort()`](https://rlang.r-lib.org/reference/abort.html) for more
+  information.
 
 ## Examples
 

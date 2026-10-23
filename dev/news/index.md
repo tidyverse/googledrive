@@ -10,6 +10,17 @@
   ([\#459](https://github.com/tidyverse/googledrive/issues/459),
   [@MichaelChirico](https://github.com/MichaelChirico)).
 
+- [`is_mine()`](https://googledrive.tidyverse.org/dev/reference/dribble-checks.md)
+  returns `FALSE` instead of erroring for resources without an owner,
+  such as items on a shared drive
+  ([\#478](https://github.com/tidyverse/googledrive/issues/478),
+  [@sims1253](https://github.com/sims1253)).
+
+- Argument checking now uses rlang’s type checkers (`check_string()`,
+  `check_bool()`, `arg_match0()`, `stop_input_type()`, etc.) throughout,
+  so error messages are more consistent and more informative about what
+  was received.
+
 ## googledrive 2.1.2
 
 CRAN release: 2025-09-10
