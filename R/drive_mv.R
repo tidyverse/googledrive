@@ -16,7 +16,6 @@
 #'   default_notes = "By default, the file keeps its current name."
 #' )
 #' @template overwrite
-#' @template verbose
 #'
 #' @eval return_dribble()
 #' @export
@@ -60,11 +59,8 @@ drive_mv <- function(
   file,
   path = NULL,
   name = NULL,
-  overwrite = NA,
-  verbose = deprecated()
+  overwrite = NA
 ) {
-  warn_for_verbose(verbose)
-
   file <- as_dribble(file)
   file <- confirm_single_file(file)
 

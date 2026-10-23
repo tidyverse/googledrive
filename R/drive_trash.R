@@ -1,6 +1,5 @@
 #' Move Drive files to or from trash
 #' @template file-plural
-#' @template verbose
 #'
 #' @eval return_dribble()
 #' @export
@@ -19,15 +18,13 @@
 #'
 #' # Clean up
 #' drive_rm("chicken-trash.txt")
-drive_trash <- function(file, verbose = deprecated()) {
-  warn_for_verbose(verbose)
+drive_trash <- function(file) {
   invisible(drive_toggle_trash(file, trash = TRUE))
 }
 
 #' @rdname drive_trash
 #' @export
-drive_untrash <- function(file, verbose = deprecated()) {
-  warn_for_verbose(verbose)
+drive_untrash <- function(file) {
   if (is_path(file)) {
     trash <- drive_find(trashed = TRUE)
     file <- trash[trash$name %in% file, ]
@@ -74,11 +71,8 @@ toggle_trash_one <- function(id, trash = TRUE) {
 #'
 #' @description Caution, this will permanently delete files in your Drive trash.
 #'
-#' @template verbose
 #' @export
-drive_empty_trash <- function(verbose = deprecated()) {
-  warn_for_verbose(verbose)
-
+drive_empty_trash <- function() {
   files <- drive_find(trashed = TRUE)
   if (no_file(files)) {
     drive_bullets(c(

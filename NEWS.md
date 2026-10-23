@@ -6,10 +6,31 @@
 * `is_mine()` returns `FALSE` instead of erroring for resources without an
   owner, such as items on a shared drive (#478, @sims1253).
 
-* Argument checking now uses rlang's type checkers (`check_string()`,
-  `check_bool()`, `arg_match0()`, `stop_input_type()`, etc.) throughout, so
-  error messages are more consistent and more informative about what was
-  received.
+* Argument checking now uses rlang's argument checkers (`check_bool()`,
+  `arg_match0()`, `stop_input_type()`, etc.) throughout, so error messages are
+  more consistent and actionable.
+
+* Several deprecated functions and arguments have been removed. Most have been
+  deprecated since googledrive 2.0.0 (released July 2021) or earlier; the OAuth
+  "app" items have been deprecated since googledrive 2.1.0
+  (released March 2023):
+
+  - All Team Drive functions are gone: `team_drive_find()`, `team_drive_get()`,
+    `team_drive_create()`, `team_drive_rm()`, `team_drive_update()`,
+    `as_team_drive()`, and `is_team_drive()`. Use the modern shared drive
+    equivalents.
+  - The `team_drive` argument of `drive_find()` and `drive_get()` is gone; use
+    `shared_drive` instead.
+  - The `verbose` argument is removed from all functions. Control verbosity with
+    `options(googledrive_quiet = TRUE)`, `local_drive_quiet()`, or
+    `with_drive_quiet()`.
+  - `corpus = "all"` is no longer accepted by `drive_find()` or `drive_get()` as
+    a synonym for `corpus = "allDrives"`.
+  - `drive_oauth_app()` is removed in favor of `drive_oauth_client()`.
+  - The `app` argument of `drive_auth_configure()` is removed in favor of
+    `client`.
+  - The defunct functions `drive_auth_config()` and `drive_example()` are
+    removed.
 
 # googledrive 2.1.2
 

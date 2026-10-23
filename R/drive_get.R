@@ -55,8 +55,6 @@
 #'   ignored.
 #' @template shared_drive-singular
 #' @template corpus
-#' @template verbose
-#' @template team_drive-singular
 #'
 #' @eval return_dribble(extras = "If the target files were specified via `path`,
 #'   there will be a `path` column.")
@@ -120,25 +118,13 @@ drive_get <- function(
   path = NULL,
   id = NULL,
   shared_drive = NULL,
-  corpus = NULL,
-  verbose = deprecated(),
-  team_drive = deprecated()
+  corpus = NULL
 ) {
-  warn_for_verbose(verbose)
   if (length(path) + length(id) == 0) {
     return(dribble_with_path())
   }
   check_character(path, allow_null = TRUE)
   check_character(id, allow_null = TRUE)
-
-  if (lifecycle::is_present(team_drive)) {
-    lifecycle::deprecate_warn(
-      "2.0.0",
-      "drive_get(team_drive)",
-      "drive_get(shared_drive)"
-    )
-    shared_drive <- shared_drive %||% team_drive
-  }
 
   if (!is.null(path) && any(is_drive_url(path))) {
     path <- as_id(path)

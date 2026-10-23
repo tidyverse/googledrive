@@ -10,7 +10,6 @@
 #' [`dribble`], by name or path, or by file id or URL marked with [as_id()]. Or
 #' any combination thereof. Elements are processed with [as_dribble()] and
 #' row-bound prior to deletion.
-#' @template verbose
 #'
 #' @return Logical vector, indicating whether the delete succeeded.
 #' @export
@@ -33,8 +32,7 @@
 #'
 #' # Remove the copies all at once, specified in different ways
 #' drive_rm(x1, "chicken-def.txt", as_id(x2))
-drive_rm <- function(..., verbose = deprecated()) {
-  warn_for_verbose(verbose)
+drive_rm <- function(...) {
   dots <- list(...)
   if (length(dots) == 0) {
     dots <- list(NULL)

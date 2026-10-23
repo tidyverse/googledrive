@@ -9,11 +9,10 @@ drive_share(
   file,
   role = c("reader", "commenter", "writer", "fileOrganizer", "owner", "organizer"),
   type = c("user", "group", "domain", "anyone"),
-  ...,
-  verbose = deprecated()
+  ...
 )
 
-drive_share_anyone(file, verbose = deprecated())
+drive_share_anyone(file)
 }
 \arguments{
 \item{file}{Something that identifies the file(s) of interest on your Google
@@ -42,13 +41,6 @@ ids or URLs marked with \code{\link[=as_id]{as_id()}}, or a \code{\link{dribble}
 provide additional information, such as the \code{emailAddress} (when grantee
 \code{type} is \code{"group"} or \code{"user"}) or the \code{domain} (when grantee type is
 \code{"domain"}). Read the API docs linked below for more details.}
-
-\item{verbose}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This logical argument to
-individual googledrive functions is deprecated. To globally suppress
-googledrive messaging, use \code{options(googledrive_quiet = TRUE)} (the default
-behaviour is to emit informational messages). To suppress messaging in a
-more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_quiet()}} or
-\code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per file.

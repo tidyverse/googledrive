@@ -4,7 +4,7 @@
 \alias{drive_mkdir}
 \title{Create a Drive folder}
 \usage{
-drive_mkdir(name, path = NULL, ..., overwrite = NA, verbose = deprecated())
+drive_mkdir(name, path = NULL, ..., overwrite = NA)
 }
 \arguments{
 \item{name}{Name for the new folder or, optionally, a path that specifies
@@ -40,13 +40,6 @@ keep the file ID (and its sharing/publishing settings), use
 
 Note that existence checks, based on filepath, are expensive operations, i.e.
 they require additional API calls.}
-
-\item{verbose}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This logical argument to
-individual googledrive functions is deprecated. To globally suppress
-googledrive messaging, use \code{options(googledrive_quiet = TRUE)} (the default
-behaviour is to emit informational messages). To suppress messaging in a
-more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_quiet()}} or
-\code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per file.

@@ -24,7 +24,6 @@
 #'   with [request_generate()] Should contain the `method`, `url`, `body`,
 #'   and `token`.
 #' @param ... Optional arguments passed through to the HTTP method.
-#' @template verbose
 #'
 #' @return `request_make()`: Object of class `response` from [httr].
 #' @export
@@ -80,11 +79,8 @@ do_paginated_request <- function(
   x,
   ...,
   n_max = Inf,
-  n = function(res) 1,
-  verbose = deprecated()
+  n = function(res) 1
 ) {
-  warn_for_verbose(verbose)
-
   ## when traversing pages, you can't cleanly separate the task into
   ## request_make() and gargle::response_process(), because you need to process
   ## response / page i to get the pageToken for request / page i + 1

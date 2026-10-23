@@ -49,11 +49,8 @@ drive_mkdir <- function(
   name,
   path = NULL,
   ...,
-  overwrite = NA,
-  verbose = deprecated()
+  overwrite = NA
 ) {
-  warn_for_verbose(verbose)
-
   drive_create(
     name = name,
     path = path,

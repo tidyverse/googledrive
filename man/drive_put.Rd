@@ -4,14 +4,7 @@
 \alias{drive_put}
 \title{PUT new media into a Drive file}
 \usage{
-drive_put(
-  media,
-  path = NULL,
-  name = NULL,
-  ...,
-  type = NULL,
-  verbose = deprecated()
-)
+drive_put(media, path = NULL, name = NULL, ..., type = NULL)
 }
 \arguments{
 \item{media}{Character, path to the local file to upload.}
@@ -44,13 +37,6 @@ suitable type, you can request conversion to Google Doc, Sheet or Slides by
 setting \code{type} to \code{document}, \code{spreadsheet}, or \code{presentation},
 respectively. All non-\code{NULL} values for \code{type} are pre-processed with
 \code{\link[=drive_mime_type]{drive_mime_type()}}.}
-
-\item{verbose}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This logical argument to
-individual googledrive functions is deprecated. To globally suppress
-googledrive messaging, use \code{options(googledrive_quiet = TRUE)} (the default
-behaviour is to emit informational messages). To suppress messaging in a
-more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_quiet()}} or
-\code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per file.

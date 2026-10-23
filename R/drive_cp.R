@@ -17,7 +17,6 @@
 #' )
 #' @template dots-metadata
 #' @template overwrite
-#' @template verbose
 #' @eval return_dribble()
 #' @export
 #'
@@ -73,11 +72,8 @@ drive_cp <- function(
   path = NULL,
   name = NULL,
   ...,
-  overwrite = NA,
-  verbose = deprecated()
+  overwrite = NA
 ) {
-  warn_for_verbose(verbose)
-
   file <- as_dribble(file)
   file <- confirm_single_file(file)
   if (is_parental(file)) {

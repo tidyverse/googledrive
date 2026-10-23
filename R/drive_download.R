@@ -28,7 +28,6 @@
 #'   type like `"application/pdf"` is acceptable.
 #' @param overwrite A logical scalar. If local `path` already exists, do you
 #'   want to overwrite it?
-#' @template verbose
 #' @eval return_dribble()
 #' @export
 #' @examplesIf drive_has_token()
@@ -53,10 +52,8 @@ drive_download <- function(
   file,
   path = NULL,
   type = NULL,
-  overwrite = FALSE,
-  verbose = deprecated()
+  overwrite = FALSE
 ) {
-  warn_for_verbose(verbose)
   if (!is.null(path) && file.exists(path) && !overwrite) {
     drive_abort(c(
       "Local {.arg path} already exists and overwrite is {.code FALSE}:",

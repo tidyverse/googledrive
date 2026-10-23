@@ -13,7 +13,6 @@
 #' linked below for details). For `drive_publish()`, we include
 #' `publishAuto = TRUE` and `publishedOutsideDomain = TRUE`, if user does not
 #' specify other values.
-#' @template verbose
 #'
 #' @eval return_dribble(extras = "There will be extra columns, `published` and
 #'   `revisions_resource`.")
@@ -33,15 +32,13 @@
 #'
 #' # Clean up
 #' drive_rm(file)
-drive_publish <- function(file, ..., verbose = deprecated()) {
-  warn_for_verbose(verbose)
+drive_publish <- function(file, ...) {
   drive_change_publish(file = file, publish = TRUE, ...)
 }
 
 #' @rdname drive_publish
 #' @export
-drive_unpublish <- function(file, ..., verbose = deprecated()) {
-  warn_for_verbose(verbose)
+drive_unpublish <- function(file, ...) {
   drive_change_publish(file = file, publish = FALSE, ...)
 }
 

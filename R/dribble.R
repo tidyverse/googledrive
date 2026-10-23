@@ -148,10 +148,7 @@ id_can_be_drive_id <- function(x) {
 
 has_drive_resource <- function(x) {
   kind <- map_chr(x$drive_resource, "kind", .default = NA_character_)
-  # TODO: remove `drive#teamDrive` here, when possible
-  all(
-    !is.na(kind) & kind %in% c("drive#file", "drive#drive", "drive#teamDrive")
-  )
+  all(!is.na(kind) & kind %in% c("drive#file", "drive#drive"))
 }
 
 #' Coerce to a `dribble`
@@ -440,10 +437,7 @@ is_parental <- function(d) {
   confirm_dribble(d)
   kind <- map_chr(d$drive_resource, "kind")
   mime_type <- map_chr(d$drive_resource, "mimeType", .default = "")
-  # TODO: remove `drive#teamDrive` here, when possible
-  kind == "drive#teamDrive" |
-    kind == "drive#drive" |
-    mime_type == "application/vnd.google-apps.folder"
+  kind == "drive#drive" | mime_type == "application/vnd.google-apps.folder"
 }
 
 #' @export
