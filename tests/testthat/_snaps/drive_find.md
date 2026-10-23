@@ -77,3 +77,27 @@
       Error in `drive_find()`:
       ! `n_max` must be a whole number larger than or equal to 0, not the number -2.
 
+# drive_find() checks type of `q` (before hitting Drive API)
+
+    Code
+      drive_find(q = 1)
+    Condition
+      Error in `drive_find()`:
+      ! `q` must be a character vector, not the number 1.
+
+---
+
+    Code
+      drive_find(q = "name = 'a'", q = TRUE)
+    Condition
+      Error in `drive_find()`:
+      ! `q` must be a character vector, not `TRUE`.
+
+---
+
+    Code
+      drive_find(q = NULL)
+    Condition
+      Error in `drive_find()`:
+      ! `q` must be a character vector, not `NULL`.
+

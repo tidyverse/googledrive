@@ -190,7 +190,7 @@ drive_find_impl <- function(
   if (!has_name(params, "orderBy")) {
     params[["orderBy"]] <- "recency desc"
   }
-  params <- marshal_q_clauses(params)
+  params <- marshal_q_clauses(params, call = call)
 
   trash_clause <- switch(
     as.character(trashed),
@@ -243,14 +243,19 @@ drive_find_impl <- function(
 
 ## finds all the q clauses and collapses into one character vector of clauses
 ## these are destined to be and'ed to form q in the query
-marshal_q_clauses <- function(params) {
+marshal_q_clauses <- function(params, call = caller_env()) {
   params <- partition_params(params, "q")
   if (length(params[["matched"]]) == 0) {
     return(params[["unmatched"]])
   }
 
   q_bits <- params[["matched"]]
-  stopifnot(all(vapply(q_bits, is.character, logical(1))))
+  is_chr <- map_lgl(q_bits, is.character)
+  if (!all(is_chr)) {
+    # pass the first offending `q` so the message says what it is
+    bad_q <- q_bits[[which(!is_chr)[1]]]
+    stop_input_type(bad_q, "a character vector", arg = "q", call = call)
+  }
   q_bits <- unique(unlist(q_bits, use.names = FALSE))
   q_bits <- q_bits[lengths(q_bits) > 0]
   c(params[["unmatched"]], q = list(q_bits))

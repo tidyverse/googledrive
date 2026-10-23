@@ -7,6 +7,14 @@
       ! No file exists at the local `media` path:
       x 'no-such-file'
 
+# drive_upload() requires a single `path` (before hitting Drive API)
+
+    Code
+      drive_upload(system.file("DESCRIPTION"), path = c("a", "b"))
+    Condition
+      Error in `drive_upload()`:
+      ! `path` must be a single string, not a character vector.
+
 # drive_upload() can convert local markdown to a Doc
 
     Code

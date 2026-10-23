@@ -28,6 +28,13 @@ test_that("drive_upload() detects non-existent file", {
   )
 })
 
+test_that("drive_upload() requires a single `path` (before hitting Drive API)", {
+  expect_snapshot(
+    drive_upload(system.file("DESCRIPTION"), path = c("a", "b")),
+    error = TRUE
+  )
+})
+
 test_that("drive_upload() places file in non-root folder, with new name", {
   skip_if_no_token()
   skip_if_offline()

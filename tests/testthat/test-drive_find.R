@@ -109,6 +109,12 @@ test_that("drive_find() honors n_max", {
   expect_equal(nrow(out), 4)
 })
 
+test_that("drive_find() checks type of `q` (before hitting Drive API)", {
+  expect_snapshot(drive_find(q = 1), error = TRUE)
+  expect_snapshot(drive_find(q = "name = 'a'", q = TRUE), error = TRUE)
+  expect_snapshot(drive_find(q = NULL), error = TRUE)
+})
+
 test_that("marshal_q_clauses() works in the absence of q", {
   params <- list(a = "a", b = "b")
   expect_identical(marshal_q_clauses(params), params)

@@ -18,6 +18,7 @@ rationalize_path_name <- function(
   }
 
   if (is_path(path)) {
+    check_string(path, call = call)
     confirm_clear_path(path, name, call = call)
     path_parts <- partition_path(
       path,
