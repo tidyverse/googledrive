@@ -2,7 +2,8 @@
 title: "Example Files"
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -16,7 +17,8 @@ Local versions of those same example files also ship with the googledrive packag
 This article lists these assets and explains how to get at them.
 Since the remote example files are accessible to all, after we attach googledrive, we also do `drive_deauth()`.
 
-```{r setup}
+```{r}
+#| label: setup
 library(googledrive)
 
 drive_deauth()
@@ -49,7 +51,8 @@ drive_examples_local("imdb") |> basename()
 
 Here's how you might use one of these examples to start demonstrating something with googledrive:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 new_google_sheet <- drive_examples_local("chicken.csv") |>
   drive_upload(type = "spreadsheet")
 # ... example or reprex continues ...
@@ -72,7 +75,8 @@ You'll notice there are two files that aren't among the local example files, but
 
 Here's a clickable table of the remote example files:
 
-```{r include = FALSE}
+```{r}
+#| include: false
 dat <- drive_examples_remote() |>
   drive_reveal("webViewLink")
 dat2 <- tibble::tibble(
@@ -81,7 +85,8 @@ dat2 <- tibble::tibble(
 )
 ```
 
-```{r echo = FALSE}
+```{r}
+#| echo: false
 knitr::kable(dat2)
 ```
 
@@ -97,7 +102,8 @@ drive_example_remote("logo")
 
 Here's how you might use one of these examples to start demonstrating something with googledrive:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 new_google_doc <- drive_examples_remote("chicken_doc") |>
   drive_cp(name = "I have a chicken problem")
 # ... example or reprex continues ...

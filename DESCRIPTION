@@ -32,12 +32,8 @@ Imports:
 Suggests:
     curl,
     dplyr (>= 1.0.0),
-    knitr,
-    rmarkdown,
     spelling,
     testthat (>= 3.1.5)
-VignetteBuilder:
-    knitr
 Config/Needs/website:
     tidyverse,
     tidyverse/tidytemplate

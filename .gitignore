@@ -9,4 +9,5 @@ scratch.R
 *token.rds
 inst/doc
 docs/
+**/.quarto/
 internal

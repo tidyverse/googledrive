@@ -1,8 +1,10 @@
 ---
-output: github_document
+title: "Get started with googledrive"
 ---
 
-```{r setup, include = FALSE}
+```{r}
+#| label: setup
+#| include: false
 auth_success <- tryCatch(
   googledrive:::drive_auth_docs(),
   googledrive_auth_internal_error = function(e) e
@@ -17,7 +19,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r eval = !googledrive::drive_has_token(), echo = FALSE, comment = NA}
+```{r}
+#| eval: !expr '!googledrive::drive_has_token()'
+#| echo: false
+#| comment: ""
 googledrive:::drive_bullets(c(
   "Code chunks will not be evaluated, because:",
   strsplit(auth_success$message, split = "\n")[[1]]
@@ -25,35 +30,19 @@ googledrive:::drive_bullets(c(
 googledrive::drive_deauth()
 ```
 
-# googledrive
+This article takes a quick tour of the main features of googledrive.
+See [the articles](https://googledrive.tidyverse.org/articles/index.html) for more detailed treatment of these topics and more.
 
-<!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/googledrive)](https://CRAN.R-project.org/package=googledrive)
-[![R-CMD-check](https://github.com/tidyverse/googledrive/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googledrive/actions)
-[![Codecov test coverage](https://codecov.io/gh/tidyverse/googledrive/branch/main/graph/badge.svg)](https://codecov.io/gh/tidyverse/googledrive?branch=main)
-<!-- badges: end -->
-
-## Overview
-
-googledrive allows you to interact with files on Google Drive from R.
-
-## Installation
-
-Install from CRAN:
-
-```{r, eval = FALSE}
-install.packages("googledrive")
-```
-
-## Usage
-
-### Load googledrive
+## Load googledrive
 
 ```{r}
 library("googledrive")
 ```
 
-```{r drive-setup, eval = FALSE, include = FALSE}
+```{r}
+#| label: drive-setup
+#| eval: false
+#| include: false
 # This chunk contains code to setup all the files necessary for this document
 # to make sense, starting from a blank slate. Likewise, it contains code to
 # delete those same files.
@@ -105,7 +94,7 @@ if (isTRUE(CLEAN)) {
 }
 ```
 
-### Package conventions
+## Package conventions
 
 * Most functions begin with the prefix `drive_`. Auto-completion is your friend.
 * Goal is to allow Drive access that feels similar to Unix file system utilities, e.g., `find`, `ls`, `mv`, `cp`, `mkdir`, and `rm`.
@@ -115,7 +104,7 @@ if (isTRUE(CLEAN)) {
   - Hold on to all the other metadata sent back by the API
 * googledrive is "pipe-friendly" (either the base `|>` or magrittr `%>%` pipe), but does not require its use.
 
-### Quick demo
+## Quick demo
 
 Here's how to list up to `n_max` of the files you see in [My Drive](https://drive.google.com). You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.
 
@@ -125,7 +114,8 @@ drive_find(n_max = 30)
 
 You can narrow the query by specifying a `pattern` you'd like to match names against. Or by specifying a file type: the `type` argument understands MIME types, file extensions, and a few human-friendly keywords.
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 drive_find(pattern = "chicken")
 drive_find(type = "spreadsheet") ## Google Sheets!
 drive_find(type = "csv") ## MIME type = "text/csv"
@@ -140,7 +130,7 @@ Alternatively, you can refine the search using the `q` query parameter. Accepted
 
 You generally want to store the result of a googledrive call, as we do with `files` above. `files` is a dribble with info on several files and can be used as the input for downstream calls. It can also be manipulated as a regular data frame at any point.
 
-#### Identify files
+### Identify files
 
 `drive_find()` searches by file properties, but you can also identify files by name (path, really) or by Drive file id using `drive_get()`.
 
@@ -160,7 +150,7 @@ drive_get(as_id(x))
 
 In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a `dribble`. If it's ambiguous, use `as_id()` to mark a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.
 
-#### Upload files
+### Upload files
 
 We can upload any file type.
 
@@ -186,7 +176,7 @@ chicken_sheet <- drive_example_local("chicken.csv") |>
 
 Much better!
 
-#### Share files
+### Share files
 
 To allow other people to access your file, you need to change the sharing permissions. You can check the sharing status by running `drive_reveal(..., "permissions")`, which adds a logical column `shared` and parks more detailed metadata in a `permissions_resource` variable.
 
@@ -204,7 +194,7 @@ Here's how to grant anyone with the link permission to view this data set.
 
 This comes up so often, there's even a convenience wrapper, `drive_share_anyone()`.
 
-#### Publish files
+### Publish files
 
 Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running `drive_reveal(..., "published")`, which adds a logical column `published` and parks more detailed metadata in a `revision_resource` variable.
 
@@ -219,9 +209,9 @@ By default, `drive_publish()` will publish your most recent version.
 (chicken_sheet <- drive_publish(chicken_sheet))
 ```
 
-#### Download files
+### Download files
 
-##### Google files
+#### Google files
 
 We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. There are reasonable defaults or you can specify this explicitly via `type` or implicitly via the file extension in `path`. For example, if I would like to download the "chicken_sheet" Google Sheet as a `.csv` I could run the following.
 
@@ -247,7 +237,7 @@ Finally, you could just allow export to the default type. In the case of Google 
 drive_download("index-chicken-sheet")
 ```
 
-##### All other files
+#### All other files
 
 Downloading files that are *not* Google type files is even simpler, i.e. it does not require any conversion or type info.
 
@@ -257,7 +247,7 @@ drive_download("chicken.txt")
 readLines("chicken.txt") |> head()
 ```
 
-#### Clean up
+### Clean up
 
 ```{r}
 file.remove(c(
@@ -267,7 +257,3 @@ file.remove(c(
 ))
 drive_find("index-chicken") |> drive_rm()
 ```
-
-## Privacy
-
-[Privacy policy](https://www.tidyverse.org/google_privacy_policy)

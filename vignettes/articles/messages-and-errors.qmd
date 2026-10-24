@@ -2,7 +2,8 @@
 title: "Messages and errors in googledrive"
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -10,7 +11,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r}
+#| label: setup
 library(googledrive)
 ```
 
@@ -19,7 +21,8 @@ library(googledrive)
 -   *"Export" the internal helpers covered below*
 -   *(Attempt to) auth as the service account we use when rendering documentation*
 
-```{r include = FALSE}
+```{r}
+#| include: false
 drive_bullets <- googledrive:::drive_bullets
 drive_abort <- googledrive:::drive_abort
 bulletize <- gargle::bulletize

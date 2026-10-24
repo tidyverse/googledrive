@@ -2,7 +2,9 @@
 title: "Bring your own OAuth client or API key"
 ---
 
-```{r setup, include = FALSE}
+```{r}
+#| label: setup
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -24,7 +26,8 @@ Follow the instructions in the gargle article [How to get your own API credentia
 
 Preferred method: Provide the path to the JSON file downloaded from the [Google Cloud Platform Console](https://console.cloud.google.com).
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 drive_auth_configure(
   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
 )
@@ -34,7 +37,8 @@ It is also possible, though discouraged, to directly use the constructor `gargle
 
 Confirm success and carry on! You can see the currently configured OAuth client like so:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 drive_oauth_client()
 ```
 
@@ -46,13 +50,15 @@ For the rest of this R session, when you get a new token with `drive_auth()`, yo
 
 Follow the instructions in the gargle article [How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) to get an API key. You probably want to use the same GCP project to create both your OAuth client (above) and your API key. Now register it with googledrive.
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 drive_auth_configure(api_key = "YOUR_API_KEY_GOES_HERE")
 ```
 
 Confirm success and carry on! You can see the currently configured API key like so:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 drive_api_key()
 ```
 
