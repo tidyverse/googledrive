@@ -2,7 +2,9 @@
 title: "File permissions"
 ---
 
-```{r setup, include = FALSE}
+```{r}
+#| label: setup
+#| include: false
 auth_success <- tryCatch(
   googledrive:::drive_auth_docs(),
   googledrive_auth_internal_error = function(e) e
@@ -19,7 +21,10 @@ knitr::opts_chunk$set(
 options(tidyverse.quiet = TRUE)
 ```
 
-```{r eval = !googledrive::drive_has_token(), echo = FALSE, comment = NA}
+```{r}
+#| eval: !expr '!googledrive::drive_has_token()'
+#| echo: false
+#| comment: ""
 googledrive:::drive_bullets(c(
   "Code chunks will not be evaluated, because:",
   strsplit(auth_success$message, split = "\n")[[1]]
@@ -27,7 +32,8 @@ googledrive:::drive_bullets(c(
 googledrive::drive_deauth()
 ```
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 # clean up if any previous runs left this lying around
 trash_me <- googledrive::drive_find("chicken-perm-article")
 if (googledrive::some_files(trash_me)) {
@@ -53,7 +59,8 @@ file
 
 Let's give a specific person permission to edit this file and a customized message, using the `emailAddress` and `emailMessage` parameters.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 file <- file |>
   drive_share(
     role = "writer",
@@ -65,7 +72,8 @@ file <- file |>
 
 Let's say we also want "anyone with a link" to be able to read the file.
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 file <- file |>
   drive_share(role = "reader", type = "anyone")
 ```
@@ -82,7 +90,8 @@ We see that the file is now `shared = TRUE`.
 
 Now that we've made a few updates to our permissions, the `permissions_resource` list-column has become more interesting. Here's how to pull important information out of this and put into a tibble with one row per permission. (*Permission handling will become more formalized in future versions of googledrive. See [the issue](https://github.com/tidyverse/googledrive/issues/180)*). We use other packages in the tidyverse now for this data wrangling.
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 library(tidyverse)
 
 perm <- pluck(file, "permissions_resource", 1, "permissions")
@@ -99,7 +108,8 @@ permissions
 
 We've suppressed execution of the above chunk but here's some static, indicative output:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 #> # A tibble: 3 x 5
 #>   id           name            type   role  email
 #>   <chr>        <chr>           <chr>  <chr> <chr>

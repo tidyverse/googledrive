@@ -1,5 +1,6 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
 # googledrive <a href="https://googledrive.tidyverse.org"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
@@ -33,8 +34,6 @@ pak::pak("tidyverse/googledrive")
 
 ## Usage
 
-Please see the package website: <https://googledrive.tidyverse.org>
-
 Here’s a teaser that uses googledrive to view some of the files you see
 on <https://drive.google.com> (up to `n_max = 25`, in this case):
 
@@ -56,6 +55,20 @@ drive_find(n_max = 25)
 #> 10 mno                        1gcUTnFbsF6uioJrLCsVQ78_F1wEzyNtI <named list>  
 #> # ℹ 15 more rows
 ```
+
+## Where to learn more
+
+[Get
+started](https://googledrive.tidyverse.org/articles/googledrive.html) is
+a more extensive general introduction to googledrive.
+
+Browse the [articles
+index](https://googledrive.tidyverse.org/articles/index.html) to find
+articles that cover various topics in more depth.
+
+See the [function
+index](https://googledrive.tidyverse.org/reference/index.html) for an
+organized, exhaustive listing.
 
 ## Contributing
 
