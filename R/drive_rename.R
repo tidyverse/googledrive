@@ -6,7 +6,6 @@
 #' @template file-singular
 #' @param name Character. Name you would like the file to have.
 #' @template overwrite
-#' @template verbose
 #'
 #' @eval return_dribble()
 #'
@@ -31,9 +30,7 @@
 drive_rename <- function(
   file,
   name = NULL,
-  overwrite = NA,
-  verbose = deprecated()
+  overwrite = NA
 ) {
-  warn_for_verbose(verbose)
   drive_mv(file = file, name = name, overwrite = overwrite)
 }

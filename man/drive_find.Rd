@@ -11,9 +11,7 @@ drive_find(
   n_max = Inf,
   shared_drive = NULL,
   corpus = NULL,
-  ...,
-  verbose = deprecated(),
-  team_drive = deprecated()
+  ...
 )
 }
 \arguments{
@@ -47,16 +45,6 @@ about \link[=shared_drives]{shared drives}.}
 \item{...}{Other parameters to pass along in the request. The most likely
 candidate is \code{q}. See below and the API's
 \href{https://developers.google.com/drive/api/v3/search-files}{Search for files and folders guide}.}
-
-\item{verbose}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This logical argument to
-individual googledrive functions is deprecated. To globally suppress
-googledrive messaging, use \code{options(googledrive_quiet = TRUE)} (the default
-behaviour is to emit informational messages). To suppress messaging in a
-more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_quiet()}} or
-\code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
-
-\item{team_drive}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Google Drive and the
-Drive API have replaced Team Drives with shared drives.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per file.

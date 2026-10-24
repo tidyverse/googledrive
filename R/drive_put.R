@@ -53,10 +53,8 @@ drive_put <- function(
   path = NULL,
   name = NULL,
   ...,
-  type = NULL,
-  verbose = deprecated()
+  type = NULL
 ) {
-  warn_for_verbose(verbose)
   if (file.exists(media)) {
     media <- enc2utf8(media)
   } else {

@@ -65,8 +65,6 @@
 #' @param ... Other parameters to pass along in the request. The most likely
 #'   candidate is `q`. See below and the API's
 #'   [Search for files and folders guide](https://developers.google.com/drive/api/v3/search-files).
-#' @template verbose
-#' @template team_drive-singular
 #'
 #' @eval return_dribble()
 #' @examples
@@ -133,21 +131,8 @@ drive_find <- function(
   n_max = Inf,
   shared_drive = NULL,
   corpus = NULL,
-  ...,
-  verbose = deprecated(),
-  team_drive = deprecated()
+  ...
 ) {
-  warn_for_verbose(verbose)
-
-  if (lifecycle::is_present(team_drive)) {
-    lifecycle::deprecate_warn(
-      "2.0.0",
-      "drive_find(team_drive)",
-      "drive_find(shared_drive)"
-    )
-    shared_drive <- shared_drive %||% team_drive
-  }
-
   drive_find_impl(
     pattern = pattern,
     trashed = trashed,
@@ -281,13 +266,6 @@ handle_shared_drives <- function(shared_drive, corpus, call = caller_env()) {
       )
     }
     shared_drive <- as_id(shared_drive)
-  }
-  if (identical(corpus, "all")) {
-    lifecycle::deprecate_warn(
-      "2.0.0",
-      "drive_find(corpus = 'now expects \"allDrives\" instead of \"all\"')"
-    )
-    corpus <- "allDrives"
   }
   if (is.null(shared_drive) && is.null(corpus)) {
     return()

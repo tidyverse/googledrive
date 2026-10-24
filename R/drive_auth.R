@@ -197,16 +197,7 @@ drive_has_token <- function() {
 #'
 #' # restore original auth config
 #' drive_auth_configure(client = original_client, api_key = original_api_key)
-drive_auth_configure <- function(client, path, api_key, app = deprecated()) {
-  if (lifecycle::is_present(app)) {
-    lifecycle::deprecate_warn(
-      "2.1.0",
-      "drive_auth_configure(app)",
-      "drive_auth_configure(client)"
-    )
-    drive_auth_configure(client = app, path = path, api_key = api_key)
-  }
-
+drive_auth_configure <- function(client, path, api_key) {
   if (!missing(client) && !missing(path)) {
     drive_abort(
       "Must supply exactly one of {.arg client} or {.arg path}, not both"

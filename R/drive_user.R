@@ -7,8 +7,6 @@
 #' @seealso Wraps the `about.get` endpoint:
 #'   * <https://developers.google.com/drive/api/v3/reference/about/get>
 #'
-#' @template verbose
-#'
 #' @return A list of class `drive_user`.
 #' @export
 #' @examplesIf drive_has_token()
@@ -17,9 +15,7 @@
 #' # more info is returned than is printed
 #' user <- drive_user()
 #' str(user)
-drive_user <- function(verbose = deprecated()) {
-  warn_for_verbose(verbose)
-
+drive_user <- function() {
   if (!drive_has_token()) {
     drive_bullets(c(
       "i" = "Not logged in as any specific Google user."

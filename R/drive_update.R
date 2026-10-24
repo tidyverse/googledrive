@@ -13,7 +13,6 @@
 #' @template file-singular
 #' @template media
 #' @template dots-metadata
-#' @template verbose
 #'
 #' @eval return_dribble()
 #' @export
@@ -42,8 +41,7 @@
 #'
 #' # Clean up
 #' drive_rm(x)
-drive_update <- function(file, media = NULL, ..., verbose = deprecated()) {
-  warn_for_verbose(verbose)
+drive_update <- function(file, media = NULL, ...) {
   if ((!is.null(media)) && (!file.exists(media))) {
     drive_abort(c(
       "No file exists at the local {.arg media} path:",

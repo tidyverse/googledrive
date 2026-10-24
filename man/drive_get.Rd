@@ -4,14 +4,7 @@
 \alias{drive_get}
 \title{Get Drive files by path or id}
 \usage{
-drive_get(
-  path = NULL,
-  id = NULL,
-  shared_drive = NULL,
-  corpus = NULL,
-  verbose = deprecated(),
-  team_drive = deprecated()
-)
+drive_get(path = NULL, id = NULL, shared_drive = NULL, corpus = NULL)
 }
 \arguments{
 \item{path}{Character vector of path(s) to get. Use a trailing slash to
@@ -34,16 +27,6 @@ Relevant to those who work with shared drives and/or Google Workspace
 domains. If specified, must be one of \code{"user"}, \code{"drive"} (requires that
 \code{shared_drive} also be specified), \code{"allDrives"}, or \code{"domain"}. Read more
 about \link[=shared_drives]{shared drives}.}
-
-\item{verbose}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This logical argument to
-individual googledrive functions is deprecated. To globally suppress
-googledrive messaging, use \code{options(googledrive_quiet = TRUE)} (the default
-behaviour is to emit informational messages). To suppress messaging in a
-more limited way, use the helpers \code{\link[=local_drive_quiet]{local_drive_quiet()}} or
-\code{\link[=with_drive_quiet]{with_drive_quiet()}}.}
-
-\item{team_drive}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Google Drive and the
-Drive API have replaced Team Drives with shared drives.}
 }
 \value{
 An object of class \code{\link{dribble}}, a tibble with one row per file.

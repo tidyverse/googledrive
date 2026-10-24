@@ -18,7 +18,6 @@
 #'   [drive_mime_type()].
 #' @template dots-metadata
 #' @template overwrite
-#' @template verbose
 #'
 #' @eval return_dribble()
 #' @export
@@ -73,11 +72,8 @@ drive_create <- function(
   path = NULL,
   type = NULL,
   ...,
-  overwrite = NA,
-  verbose = deprecated()
+  overwrite = NA
 ) {
-  warn_for_verbose(verbose)
-
   # in the special case of creating a shortcut, `name` is not required
   if (!identical(drive_mime_type(type), drive_mime_type("shortcut"))) {
     check_required(name)
