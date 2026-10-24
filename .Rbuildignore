@@ -22,6 +22,7 @@
 ^CRAN-RELEASE$
 ^\.covrignore$
 ^tests/testthat/all-test.+
+^tests/testthat/driver\.R$
 ^CRAN-SUBMISSION$
 ^[.]?air[.]toml$
 ^\.vscode$
