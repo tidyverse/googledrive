@@ -3,6 +3,7 @@ Auth
 CLI
 CMD
 Codecov
+Colab
 Colaboratory
 D'Agostino
 GCE
@@ -29,6 +30,7 @@ de
 determinine
 dev
 dplyr
+erroring
 fileOrganizer
 funder
 ggplot
@@ -53,10 +55,8 @@ reprexes
 rlang's
 rprojroot
 setwise
-targetted
 testthat
 th
-threshhold
 tibble
 tibble's
 tidyverse
