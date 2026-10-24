@@ -214,11 +214,11 @@ each row of the dribble, i.e. for each Drive file.
 
 dat <- drive_find(n_max = 5)
 gargle_map_cli(dat)
-#> [1] "{.drivepath chicken_poem.txt} {cli::col_grey('<id: 1lAxO_zr06v6pL6dyQJ9duwH1j2ztQ3lB>')}"          
-#> [2] "{.drivepath 2021-09-16_r_logo.jpg} {cli::col_grey('<id: 1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D>')}"     
-#> [3] "{.drivepath 2021-09-16_r_about.html} {cli::col_grey('<id: 1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ>')}"   
-#> [4] "{.drivepath 2021-09-16_imdb_latin1.csv} {cli::col_grey('<id: 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw>')}"
-#> [5] "{.drivepath 2021-09-16_chicken.txt} {cli::col_grey('<id: 1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7>')}"
+#> [1] "{.drivepath chicken_sheet} {cli::col_grey('<id: 1s0kEHcqG2PyciERoGq52L_Qwzp4y3__rBVKSx7E_j88>')}"
+#> [2] "{.drivepath r_logo.jpg} {cli::col_grey('<id: 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud>')}"              
+#> [3] "{.drivepath THANKS} {cli::col_grey('<id: 19URV7BT0_E1KhYdfDODszK5aiELOwTSz>')}"                  
+#> [4] "{.drivepath googledrive-NEWS.md} {cli::col_grey('<id: 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm>')}"     
+#> [5] "{.drivepath def} {cli::col_grey('<id: 1ALSW_Nqs7FsPOcrJ6MqyBoRm03gansmn>')}"
 ```
 
 `gargle_map_cli.dribble()` also allows a custom template, but it’s a
@@ -262,11 +262,11 @@ drive_bullets(c(
   bulletize(gargle_map_cli(dat))
 ))
 #> Some Drive files:
-#> • chicken_poem.txt <id: 1lAxO_zr06v6pL6dyQJ9duwH1j2ztQ3lB>
-#> • 2021-09-16_r_logo.jpg <id: 1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D>
-#> • 2021-09-16_r_about.html <id: 1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ>
-#> • 2021-09-16_imdb_latin1.csv <id: 163YPvqYmGuqQiEwEFLg2s1URq4EnpkBw>
-#> • 2021-09-16_chicken.txt <id: 1axJz8GSmecSnaYBx0Sb3Gb-SXVaTzKw7>
+#> • chicken_sheet <id: 1s0kEHcqG2PyciERoGq52L_Qwzp4y3__rBVKSx7E_j88>
+#> • r_logo.jpg <id: 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud>
+#> • THANKS <id: 19URV7BT0_E1KhYdfDODszK5aiELOwTSz>
+#> • googledrive-NEWS.md <id: 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm>
+#> • def <id: 1ALSW_Nqs7FsPOcrJ6MqyBoRm03gansmn>
 #>   … and 5 more
 ```
 

@@ -46,33 +46,34 @@ googledrive.
 ``` r
 str(head(drive_endpoints(), 3), max.level = 2)
 #> List of 3
-#>  $ drive.operations.get:List of 8
-#>   ..$ id            : chr "drive.operations.get"
-#>   ..$ httpMethod    : chr "GET"
-#>   ..$ path          : 'fs_path' chr "drive/v3/operations/{name}"
-#>   ..$ parameters    :List of 12
-#>   ..$ scopes        : chr "drive, drive.file, drive.meet.readonly, drive.readonly"
-#>   ..$ description   : chr "Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at "| __truncated__
-#>   ..$ response      : chr "Operation"
-#>   ..$ parameterOrder: chr "name"
-#>  $ drive.about.get     :List of 8
-#>   ..$ id            : chr "drive.about.get"
-#>   ..$ httpMethod    : chr "GET"
-#>   ..$ path          : 'fs_path' chr "drive/v3/about"
-#>   ..$ parameters    :List of 11
-#>   ..$ scopes        : chr "drive, drive.appdata, drive.file, drive.metadata, drive.metadata.readonly, drive.photos.readonly, drive.readonly"
-#>   ..$ description   : chr "Gets information about the user, the user's Drive, and system capabilities. For more information, see [Return u"| __truncated__
-#>   ..$ response      : chr "About"
-#>   ..$ parameterOrder: list()
-#>  $ drive.apps.get      :List of 8
-#>   ..$ id            : chr "drive.apps.get"
-#>   ..$ httpMethod    : chr "GET"
-#>   ..$ path          : 'fs_path' chr "drive/v3/apps/{appId}"
-#>   ..$ parameters    :List of 12
-#>   ..$ scopes        : chr "drive, drive.appdata, drive.apps.readonly, drive.file, drive.metadata, drive.metadata.readonly, drive.readonly"
-#>   ..$ description   : chr "Gets a specific app. For more information, see [Return user info](https://developers.google.com/workspace/drive"| __truncated__
-#>   ..$ response      : chr "App"
-#>   ..$ parameterOrder: chr "appId"
+#>  $ drive.comments.update:List of 9
+#>   ..$ id            : chr "drive.comments.update"
+#>   ..$ httpMethod    : chr "PATCH"
+#>   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}"
+#>   ..$ parameters    :List of 27
+#>   ..$ scopes        : chr "drive, drive.file"
+#>   ..$ description   : chr "Updates a comment with patch semantics. For more information, see [Manage comments and replies](https://develop"| __truncated__
+#>   ..$ request       : chr "Comment"
+#>   ..$ response      : chr "Comment"
+#>   ..$ parameterOrder: chr [1:2] "fileId" "commentId"
+#>  $ drive.comments.delete:List of 7
+#>   ..$ id            : chr "drive.comments.delete"
+#>   ..$ httpMethod    : chr "DELETE"
+#>   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}"
+#>   ..$ parameters    :List of 13
+#>   ..$ scopes        : chr "drive, drive.file"
+#>   ..$ description   : chr "Deletes a comment. For more information, see [Manage comments and replies](https://developers.google.com/worksp"| __truncated__
+#>   ..$ parameterOrder: chr [1:2] "fileId" "commentId"
+#>  $ drive.comments.create:List of 9
+#>   ..$ id            : chr "drive.comments.create"
+#>   ..$ httpMethod    : chr "POST"
+#>   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments"
+#>   ..$ parameters    :List of 26
+#>   ..$ scopes        : chr "drive, drive.file"
+#>   ..$ description   : chr "Creates a comment on a file. For more information, see [Manage comments and replies](https://developers.google."| __truncated__
+#>   ..$ request       : chr "Comment"
+#>   ..$ response      : chr "Comment"
+#>   ..$ parameterOrder: chr "fileId"
 drive_endpoint("drive.files.delete")
 #> $id
 #> [1] "drive.files.delete"
@@ -84,82 +85,143 @@ drive_endpoint("drive.files.delete")
 #> drive/v3/files/{fileId}
 #> 
 #> $parameters
-#> $parameters$fileId
-#> $parameters$fileId$description
-#> [1] "The ID of the file."
-#> 
-#> $parameters$fileId$location
-#> [1] "path"
-#> 
-#> $parameters$fileId$required
-#> [1] TRUE
-#> 
-#> $parameters$fileId$type
-#> [1] "string"
-#> 
-#> 
-#> $parameters$supportsAllDrives
-#> $parameters$supportsAllDrives$description
-#> [1] "Whether the requesting application supports both My Drives and shared drives."
-#> 
-#> $parameters$supportsAllDrives$default
-#> [1] "false"
-#> 
-#> $parameters$supportsAllDrives$location
-#> [1] "query"
-#> 
-#> $parameters$supportsAllDrives$type
-#> [1] "boolean"
-#> 
-#> 
 #> $parameters$supportsTeamDrives
-#> $parameters$supportsTeamDrives$description
-#> [1] "Deprecated: Use `supportsAllDrives` instead."
-#> 
 #> $parameters$supportsTeamDrives$default
 #> [1] "false"
-#> 
-#> $parameters$supportsTeamDrives$location
-#> [1] "query"
-#> 
-#> $parameters$supportsTeamDrives$deprecated
-#> [1] TRUE
 #> 
 #> $parameters$supportsTeamDrives$type
 #> [1] "boolean"
 #> 
+#> $parameters$supportsTeamDrives$deprecated
+#> [1] TRUE
+#> 
+#> $parameters$supportsTeamDrives$location
+#> [1] "query"
+#> 
+#> $parameters$supportsTeamDrives$description
+#> [1] "Deprecated: Use `supportsAllDrives` instead."
+#> 
 #> 
 #> $parameters$enforceSingleParent
+#> $parameters$enforceSingleParent$location
+#> [1] "query"
+#> 
+#> $parameters$enforceSingleParent$type
+#> [1] "boolean"
+#> 
 #> $parameters$enforceSingleParent$description
 #> [1] "Deprecated: If an item isn't in a shared drive and its last parent is deleted but the item itself isn't, the item will be placed under its owner's root."
 #> 
 #> $parameters$enforceSingleParent$default
 #> [1] "false"
 #> 
-#> $parameters$enforceSingleParent$location
-#> [1] "query"
-#> 
 #> $parameters$enforceSingleParent$deprecated
 #> [1] TRUE
 #> 
-#> $parameters$enforceSingleParent$type
+#> 
+#> $parameters$supportsAllDrives
+#> $parameters$supportsAllDrives$location
+#> [1] "query"
+#> 
+#> $parameters$supportsAllDrives$default
+#> [1] "false"
+#> 
+#> $parameters$supportsAllDrives$type
 #> [1] "boolean"
+#> 
+#> $parameters$supportsAllDrives$description
+#> [1] "Whether the requesting application supports both My Drives and shared drives."
+#> 
+#> 
+#> $parameters$fileId
+#> $parameters$fileId$required
+#> [1] TRUE
+#> 
+#> $parameters$fileId$location
+#> [1] "path"
+#> 
+#> $parameters$fileId$type
+#> [1] "string"
+#> 
+#> $parameters$fileId$description
+#> [1] "The ID of the file."
 #> 
 #> 
 #> $parameters$access_token
-#> $parameters$access_token$type
-#> [1] "string"
-#> 
 #> $parameters$access_token$description
 #> [1] "OAuth access token."
 #> 
 #> $parameters$access_token$location
 #> [1] "query"
 #> 
+#> $parameters$access_token$type
+#> [1] "string"
+#> 
+#> 
+#> $parameters$upload_protocol
+#> $parameters$upload_protocol$location
+#> [1] "query"
+#> 
+#> $parameters$upload_protocol$type
+#> [1] "string"
+#> 
+#> $parameters$upload_protocol$description
+#> [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."
+#> 
+#> 
+#> $parameters$quotaUser
+#> $parameters$quotaUser$description
+#> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."
+#> 
+#> $parameters$quotaUser$location
+#> [1] "query"
+#> 
+#> $parameters$quotaUser$type
+#> [1] "string"
+#> 
+#> 
+#> $parameters$`$.xgafv`
+#> $parameters$`$.xgafv`$location
+#> [1] "query"
+#> 
+#> $parameters$`$.xgafv`$description
+#> [1] "V1 error format."
+#> 
+#> $parameters$`$.xgafv`$enumDescriptions
+#> [1] "v1 error format" "v2 error format"
+#> 
+#> $parameters$`$.xgafv`$enum
+#> [1] "1" "2"
+#> 
+#> $parameters$`$.xgafv`$type
+#> [1] "string"
+#> 
+#> 
+#> $parameters$key
+#> $parameters$key$type
+#> [1] "string"
+#> 
+#> $parameters$key$location
+#> [1] "query"
+#> 
+#> $parameters$key$description
+#> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+#> 
+#> 
+#> $parameters$callback
+#> $parameters$callback$type
+#> [1] "string"
+#> 
+#> $parameters$callback$location
+#> [1] "query"
+#> 
+#> $parameters$callback$description
+#> [1] "JSONP"
+#> 
 #> 
 #> $parameters$alt
-#> $parameters$alt$type
-#> [1] "string"
+#> $parameters$alt$location
+#> [1] "query"
 #> 
 #> $parameters$alt$description
 #> [1] "Data format for response."
@@ -170,120 +232,59 @@ drive_endpoint("drive.files.delete")
 #> $parameters$alt$enum
 #> [1] "json"  "media" "proto"
 #> 
+#> $parameters$alt$type
+#> [1] "string"
+#> 
 #> $parameters$alt$enumDescriptions
 #> [1] "Responses with Content-Type of application/json"      
 #> [2] "Media download with context-dependent Content-Type"   
 #> [3] "Responses with Content-Type of application/x-protobuf"
 #> 
-#> $parameters$alt$location
-#> [1] "query"
-#> 
-#> 
-#> $parameters$callback
-#> $parameters$callback$type
-#> [1] "string"
-#> 
-#> $parameters$callback$description
-#> [1] "JSONP"
-#> 
-#> $parameters$callback$location
-#> [1] "query"
-#> 
-#> 
-#> $parameters$fields
-#> $parameters$fields$type
-#> [1] "string"
-#> 
-#> $parameters$fields$description
-#> [1] "Selector specifying which fields to include in a partial response."
-#> 
-#> $parameters$fields$location
-#> [1] "query"
-#> 
-#> 
-#> $parameters$key
-#> $parameters$key$type
-#> [1] "string"
-#> 
-#> $parameters$key$description
-#> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
-#> 
-#> $parameters$key$location
-#> [1] "query"
-#> 
 #> 
 #> $parameters$oauth_token
-#> $parameters$oauth_token$type
-#> [1] "string"
-#> 
 #> $parameters$oauth_token$description
 #> [1] "OAuth 2.0 token for the current user."
 #> 
 #> $parameters$oauth_token$location
 #> [1] "query"
 #> 
-#> 
-#> $parameters$prettyPrint
-#> $parameters$prettyPrint$type
-#> [1] "boolean"
-#> 
-#> $parameters$prettyPrint$description
-#> [1] "Returns response with indentations and line breaks."
-#> 
-#> $parameters$prettyPrint$default
-#> [1] "true"
-#> 
-#> $parameters$prettyPrint$location
-#> [1] "query"
-#> 
-#> 
-#> $parameters$quotaUser
-#> $parameters$quotaUser$type
+#> $parameters$oauth_token$type
 #> [1] "string"
 #> 
-#> $parameters$quotaUser$description
-#> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."
 #> 
-#> $parameters$quotaUser$location
+#> $parameters$fields
+#> $parameters$fields$description
+#> [1] "Selector specifying which fields to include in a partial response."
+#> 
+#> $parameters$fields$location
 #> [1] "query"
 #> 
-#> 
-#> $parameters$upload_protocol
-#> $parameters$upload_protocol$type
+#> $parameters$fields$type
 #> [1] "string"
-#> 
-#> $parameters$upload_protocol$description
-#> [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."
-#> 
-#> $parameters$upload_protocol$location
-#> [1] "query"
 #> 
 #> 
 #> $parameters$uploadType
-#> $parameters$uploadType$type
-#> [1] "string"
-#> 
 #> $parameters$uploadType$description
 #> [1] "Legacy upload protocol for media (e.g. \"media\", \"multipart\")."
 #> 
 #> $parameters$uploadType$location
 #> [1] "query"
 #> 
-#> 
-#> $parameters$`$.xgafv`
-#> $parameters$`$.xgafv`$type
+#> $parameters$uploadType$type
 #> [1] "string"
 #> 
-#> $parameters$`$.xgafv`$description
-#> [1] "V1 error format."
 #> 
-#> $parameters$`$.xgafv`$enum
-#> [1] "1" "2"
+#> $parameters$prettyPrint
+#> $parameters$prettyPrint$description
+#> [1] "Returns response with indentations and line breaks."
 #> 
-#> $parameters$`$.xgafv`$enumDescriptions
-#> [1] "v1 error format" "v2 error format"
+#> $parameters$prettyPrint$default
+#> [1] "true"
 #> 
-#> $parameters$`$.xgafv`$location
+#> $parameters$prettyPrint$type
+#> [1] "boolean"
+#> 
+#> $parameters$prettyPrint$location
 #> [1] "query"
 #> 
 #> 
@@ -299,68 +300,132 @@ drive_endpoint("drive.files.delete")
 #> 
 drive_endpoint(4)
 #> $id
-#> [1] "drive.apps.list"
+#> [1] "drive.comments.get"
 #> 
 #> $httpMethod
 #> [1] "GET"
 #> 
 #> $path
-#> drive/v3/apps
+#> drive/v3/files/{fileId}/comments/{commentId}
 #> 
 #> $parameters
-#> $parameters$appFilterExtensions
-#> $parameters$appFilterExtensions$description
-#> [1] "A comma-separated list of file extensions to limit returned results. All results within the given app query scope which can open any of the given file extensions are included in the response. If `appFilterMimeTypes` are provided as well, the result is a union of the two resulting app lists."
+#> $parameters$fileId
+#> $parameters$fileId$required
+#> [1] TRUE
 #> 
-#> $parameters$appFilterExtensions$default
-#> [1] ""
+#> $parameters$fileId$location
+#> [1] "path"
 #> 
-#> $parameters$appFilterExtensions$location
-#> [1] "query"
-#> 
-#> $parameters$appFilterExtensions$type
+#> $parameters$fileId$type
 #> [1] "string"
 #> 
+#> $parameters$fileId$description
+#> [1] "The ID of the file."
 #> 
-#> $parameters$appFilterMimeTypes
-#> $parameters$appFilterMimeTypes$description
-#> [1] "A comma-separated list of file extensions to limit returned results. All results within the given app query scope which can open any of the given MIME types will be included in the response. If `appFilterExtensions` are provided as well, the result is a union of the two resulting app lists."
 #> 
-#> $parameters$appFilterMimeTypes$default
-#> [1] ""
+#> $parameters$commentId
+#> $parameters$commentId$location
+#> [1] "path"
 #> 
-#> $parameters$appFilterMimeTypes$location
-#> [1] "query"
-#> 
-#> $parameters$appFilterMimeTypes$type
+#> $parameters$commentId$type
 #> [1] "string"
 #> 
+#> $parameters$commentId$description
+#> [1] "The ID of the comment."
 #> 
-#> $parameters$languageCode
-#> $parameters$languageCode$description
-#> [1] "A language or locale code, as defined by BCP 47, with some extensions from Unicode's LDML format (http://www.unicode.org/reports/tr35/)."
+#> $parameters$commentId$required
+#> [1] TRUE
 #> 
-#> $parameters$languageCode$location
+#> 
+#> $parameters$includeDeleted
+#> $parameters$includeDeleted$location
 #> [1] "query"
 #> 
-#> $parameters$languageCode$type
-#> [1] "string"
+#> $parameters$includeDeleted$description
+#> [1] "Whether to return deleted comments. Deleted comments will not include their original content."
+#> 
+#> $parameters$includeDeleted$default
+#> [1] "false"
+#> 
+#> $parameters$includeDeleted$type
+#> [1] "boolean"
 #> 
 #> 
 #> $parameters$access_token
-#> $parameters$access_token$type
-#> [1] "string"
-#> 
 #> $parameters$access_token$description
 #> [1] "OAuth access token."
 #> 
 #> $parameters$access_token$location
 #> [1] "query"
 #> 
+#> $parameters$access_token$type
+#> [1] "string"
+#> 
+#> 
+#> $parameters$upload_protocol
+#> $parameters$upload_protocol$location
+#> [1] "query"
+#> 
+#> $parameters$upload_protocol$type
+#> [1] "string"
+#> 
+#> $parameters$upload_protocol$description
+#> [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."
+#> 
+#> 
+#> $parameters$quotaUser
+#> $parameters$quotaUser$description
+#> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."
+#> 
+#> $parameters$quotaUser$location
+#> [1] "query"
+#> 
+#> $parameters$quotaUser$type
+#> [1] "string"
+#> 
+#> 
+#> $parameters$`$.xgafv`
+#> $parameters$`$.xgafv`$location
+#> [1] "query"
+#> 
+#> $parameters$`$.xgafv`$description
+#> [1] "V1 error format."
+#> 
+#> $parameters$`$.xgafv`$enumDescriptions
+#> [1] "v1 error format" "v2 error format"
+#> 
+#> $parameters$`$.xgafv`$enum
+#> [1] "1" "2"
+#> 
+#> $parameters$`$.xgafv`$type
+#> [1] "string"
+#> 
+#> 
+#> $parameters$key
+#> $parameters$key$type
+#> [1] "string"
+#> 
+#> $parameters$key$location
+#> [1] "query"
+#> 
+#> $parameters$key$description
+#> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+#> 
+#> 
+#> $parameters$callback
+#> $parameters$callback$type
+#> [1] "string"
+#> 
+#> $parameters$callback$location
+#> [1] "query"
+#> 
+#> $parameters$callback$description
+#> [1] "JSONP"
+#> 
 #> 
 #> $parameters$alt
-#> $parameters$alt$type
-#> [1] "string"
+#> $parameters$alt$location
+#> [1] "query"
 #> 
 #> $parameters$alt$description
 #> [1] "Data format for response."
@@ -371,134 +436,73 @@ drive_endpoint(4)
 #> $parameters$alt$enum
 #> [1] "json"  "media" "proto"
 #> 
+#> $parameters$alt$type
+#> [1] "string"
+#> 
 #> $parameters$alt$enumDescriptions
 #> [1] "Responses with Content-Type of application/json"      
 #> [2] "Media download with context-dependent Content-Type"   
 #> [3] "Responses with Content-Type of application/x-protobuf"
 #> 
-#> $parameters$alt$location
-#> [1] "query"
-#> 
-#> 
-#> $parameters$callback
-#> $parameters$callback$type
-#> [1] "string"
-#> 
-#> $parameters$callback$description
-#> [1] "JSONP"
-#> 
-#> $parameters$callback$location
-#> [1] "query"
-#> 
-#> 
-#> $parameters$fields
-#> $parameters$fields$type
-#> [1] "string"
-#> 
-#> $parameters$fields$description
-#> [1] "Selector specifying which fields to include in a partial response."
-#> 
-#> $parameters$fields$location
-#> [1] "query"
-#> 
-#> 
-#> $parameters$key
-#> $parameters$key$type
-#> [1] "string"
-#> 
-#> $parameters$key$description
-#> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
-#> 
-#> $parameters$key$location
-#> [1] "query"
-#> 
 #> 
 #> $parameters$oauth_token
-#> $parameters$oauth_token$type
-#> [1] "string"
-#> 
 #> $parameters$oauth_token$description
 #> [1] "OAuth 2.0 token for the current user."
 #> 
 #> $parameters$oauth_token$location
 #> [1] "query"
 #> 
-#> 
-#> $parameters$prettyPrint
-#> $parameters$prettyPrint$type
-#> [1] "boolean"
-#> 
-#> $parameters$prettyPrint$description
-#> [1] "Returns response with indentations and line breaks."
-#> 
-#> $parameters$prettyPrint$default
-#> [1] "true"
-#> 
-#> $parameters$prettyPrint$location
-#> [1] "query"
-#> 
-#> 
-#> $parameters$quotaUser
-#> $parameters$quotaUser$type
+#> $parameters$oauth_token$type
 #> [1] "string"
 #> 
-#> $parameters$quotaUser$description
-#> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."
 #> 
-#> $parameters$quotaUser$location
+#> $parameters$fields
+#> $parameters$fields$description
+#> [1] "Selector specifying which fields to include in a partial response."
+#> 
+#> $parameters$fields$location
 #> [1] "query"
 #> 
-#> 
-#> $parameters$upload_protocol
-#> $parameters$upload_protocol$type
+#> $parameters$fields$type
 #> [1] "string"
-#> 
-#> $parameters$upload_protocol$description
-#> [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."
-#> 
-#> $parameters$upload_protocol$location
-#> [1] "query"
 #> 
 #> 
 #> $parameters$uploadType
-#> $parameters$uploadType$type
-#> [1] "string"
-#> 
 #> $parameters$uploadType$description
 #> [1] "Legacy upload protocol for media (e.g. \"media\", \"multipart\")."
 #> 
 #> $parameters$uploadType$location
 #> [1] "query"
 #> 
-#> 
-#> $parameters$`$.xgafv`
-#> $parameters$`$.xgafv`$type
+#> $parameters$uploadType$type
 #> [1] "string"
 #> 
-#> $parameters$`$.xgafv`$description
-#> [1] "V1 error format."
 #> 
-#> $parameters$`$.xgafv`$enum
-#> [1] "1" "2"
+#> $parameters$prettyPrint
+#> $parameters$prettyPrint$description
+#> [1] "Returns response with indentations and line breaks."
 #> 
-#> $parameters$`$.xgafv`$enumDescriptions
-#> [1] "v1 error format" "v2 error format"
+#> $parameters$prettyPrint$default
+#> [1] "true"
 #> 
-#> $parameters$`$.xgafv`$location
+#> $parameters$prettyPrint$type
+#> [1] "boolean"
+#> 
+#> $parameters$prettyPrint$location
 #> [1] "query"
 #> 
 #> 
 #> 
 #> $scopes
-#> [1] "drive.apps.readonly"
+#> [1] "drive, drive.file, drive.meet.readonly, drive.readonly"
 #> 
 #> $description
-#> [1] "Lists a user's installed apps. For more information, see [Return user info](https://developers.google.com/workspace/drive/api/guides/user-info)."
+#> [1] "Gets a comment by ID. For more information, see [Manage comments and replies](https://developers.google.com/workspace/drive/api/guides/manage-comments). Required: The `fields` parameter must be set. To return the exact fields you need, see [Return specific fields](https://developers.google.com/workspace/drive/api/guides/fields-parameter)."
 #> 
 #> $response
-#> [1] "AppList"
+#> [1] "Comment"
 #> 
 #> $parameterOrder
-#> list()
+#> [1] "fileId"    "commentId"
 #> 
 ```

@@ -34,13 +34,7 @@ request_make(x, ...)
 
 do_request(x, ...)
 
-do_paginated_request(
-  x,
-  ...,
-  n_max = Inf,
-  n = function(res) 1,
-  verbose = deprecated()
-)
+do_paginated_request(x, ..., n_max = Inf, n = function(res) 1)
 ```
 
 ## Arguments
@@ -68,17 +62,6 @@ do_paginated_request(
   as an item. If you know more about the structure of the response, you
   can pass another function to count and threshold, for example, the
   number of files or comments.
-
-- verbose:
-
-  **\[deprecated\]** This logical argument to individual googledrive
-  functions is deprecated. To globally suppress googledrive messaging,
-  use `options(googledrive_quiet = TRUE)` (the default behaviour is to
-  emit informational messages). To suppress messaging in a more limited
-  way, use the helpers
-  [`local_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md)
-  or
-  [`with_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md).
 
 ## Value
 

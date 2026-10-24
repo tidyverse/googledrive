@@ -17,7 +17,6 @@
 <url><loc>https://googledrive.tidyverse.org/dev/news/index.html</loc></url>
 <url><loc>https://googledrive.tidyverse.org/dev/reference/as_dribble.html</loc></url>
 <url><loc>https://googledrive.tidyverse.org/dev/reference/as_shared_drive.html</loc></url>
-<url><loc>https://googledrive.tidyverse.org/dev/reference/deprecated-team-drive-functions.html</loc></url>
 <url><loc>https://googledrive.tidyverse.org/dev/reference/dribble-checks.html</loc></url>
 <url><loc>https://googledrive.tidyverse.org/dev/reference/dribble.html</loc></url>
 <url><loc>https://googledrive.tidyverse.org/dev/reference/drive_about.html</loc></url>
@@ -57,7 +56,6 @@
 <url><loc>https://googledrive.tidyverse.org/dev/reference/drive_user.html</loc></url>
 <url><loc>https://googledrive.tidyverse.org/dev/reference/expose.html</loc></url>
 <url><loc>https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.html</loc></url>
-<url><loc>https://googledrive.tidyverse.org/dev/reference/googledrive-deprecated.html</loc></url>
 <url><loc>https://googledrive.tidyverse.org/dev/reference/googledrive-package.html</loc></url>
 <url><loc>https://googledrive.tidyverse.org/dev/reference/index.html</loc></url>
 <url><loc>https://googledrive.tidyverse.org/dev/reference/pipe.html</loc></url>

@@ -16,10 +16,41 @@
   ([\#478](https://github.com/tidyverse/googledrive/issues/478),
   [@sims1253](https://github.com/sims1253)).
 
-- Argument checking now uses rlang’s type checkers (`check_string()`,
-  `check_bool()`, `arg_match0()`, `stop_input_type()`, etc.) throughout,
-  so error messages are more consistent and more informative about what
-  was received.
+- Argument checking now uses rlang’s argument checkers (`check_bool()`,
+  `arg_match0()`, `stop_input_type()`, etc.) throughout, so error
+  messages are more consistent and actionable.
+
+- Several deprecated functions and arguments have been removed. Most
+  have been deprecated since googledrive 2.0.0 (released July 2021) or
+  earlier; the OAuth “app” items have been deprecated since googledrive
+  2.1.0 (released March 2023):
+
+  - All Team Drive functions are gone: `team_drive_find()`,
+    `team_drive_get()`, `team_drive_create()`, `team_drive_rm()`,
+    `team_drive_update()`, `as_team_drive()`, and `is_team_drive()`. Use
+    the modern shared drive equivalents.
+  - The `team_drive` argument of
+    [`drive_find()`](https://googledrive.tidyverse.org/dev/reference/drive_find.md)
+    and
+    [`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md)
+    is gone; use `shared_drive` instead.
+  - The `verbose` argument is removed from all functions. Control
+    verbosity with `options(googledrive_quiet = TRUE)`,
+    [`local_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md),
+    or
+    [`with_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md).
+  - `corpus = "all"` is no longer accepted by
+    [`drive_find()`](https://googledrive.tidyverse.org/dev/reference/drive_find.md)
+    or
+    [`drive_get()`](https://googledrive.tidyverse.org/dev/reference/drive_get.md)
+    as a synonym for `corpus = "allDrives"`.
+  - `drive_oauth_app()` is removed in favor of
+    [`drive_oauth_client()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md).
+  - The `app` argument of
+    [`drive_auth_configure()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md)
+    is removed in favor of `client`.
+  - The defunct functions `drive_auth_config()` and `drive_example()`
+    are removed.
 
 ## googledrive 2.1.2
 
@@ -71,8 +102,7 @@ Version 1.3.0 of gargle introduced some changes around OAuth and
 googledrive is syncing up that:
 
 - [`drive_oauth_client()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md)
-  is a new function to replace the now-deprecated
-  [`drive_oauth_app()`](https://googledrive.tidyverse.org/dev/reference/googledrive-deprecated.md).
+  is a new function to replace the now-deprecated `drive_oauth_app()`.
 - The new `client` argument of
   [`drive_auth_configure()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md)
   replaces the now-deprecated `app` argument.
@@ -100,13 +130,11 @@ now warns if the user specifies both `email` and `path`, because this is
 almost always an error
 ([\#420](https://github.com/tidyverse/googledrive/issues/420)).
 
-[`drive_auth_config()`](https://googledrive.tidyverse.org/dev/reference/googledrive-deprecated.md)
-was deprecated in googledrive 1.0.0 (released 2019-08-19) and is now
-defunct.
+`drive_auth_config()` was deprecated in googledrive 1.0.0 (released
+2019-08-19) and is now defunct.
 
-[`drive_example()`](https://googledrive.tidyverse.org/dev/reference/googledrive-deprecated.md)
-was deprecated in googledrive 2.0.0 (released 2021-07-08) and is now
-defunct.
+`drive_example()` was deprecated in googledrive 2.0.0 (released
+2021-07-08) and is now defunct.
 
 ## googledrive 2.0.0
 
@@ -234,8 +262,8 @@ setting `googledrive_quiet = TRUE` for some limited scope.
   files complement the local example files that were already included in
   googledrive.
 
-  [`drive_example()`](https://googledrive.tidyverse.org/dev/reference/googledrive-deprecated.md)
-  is deprecated in favor of these accessors for example files:
+  `drive_example()` is deprecated in favor of these accessors for
+  example files:
 
   - Plural
     forms:[`drive_examples_remote()`](https://googledrive.tidyverse.org/dev/reference/drive_examples.md),
@@ -427,13 +455,10 @@ v1.0.0)
 Auth configuration has also changed:
 
 - [`drive_auth_configure()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md)
-  is a variant of the now-deprecated
-  [`drive_auth_config()`](https://googledrive.tidyverse.org/dev/reference/googledrive-deprecated.md)
-  whose explicit and only job is to *set* aspects of the configuration,
+  is a variant of the now-deprecated `drive_auth_config()` whose
+  explicit and only job is to *set* aspects of the configuration,
   i.e. the OAuth app or API key.
-  - Use
-    [`drive_oauth_app()`](https://googledrive.tidyverse.org/dev/reference/googledrive-deprecated.md)
-    (new) and
+  - Use `drive_oauth_app()` (new) and
     [`drive_api_key()`](https://googledrive.tidyverse.org/dev/reference/drive_auth_configure.md)
     to *retrieve* a user-configured app or API key, if such exist.
   - These functions no longer return built-in auth assets, although

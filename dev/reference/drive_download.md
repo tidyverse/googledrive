@@ -18,13 +18,7 @@ includes a `local_path` column.
 ## Usage
 
 ``` r
-drive_download(
-  file,
-  path = NULL,
-  type = NULL,
-  overwrite = FALSE,
-  verbose = deprecated()
-)
+drive_download(file, path = NULL, type = NULL, overwrite = FALSE)
 ```
 
 ## Arguments
@@ -55,17 +49,6 @@ drive_download(
 
   A logical scalar. If local `path` already exists, do you want to
   overwrite it?
-
-- verbose:
-
-  **\[deprecated\]** This logical argument to individual googledrive
-  functions is deprecated. To globally suppress googledrive messaging,
-  use `options(googledrive_quiet = TRUE)` (the default behaviour is to
-  emit informational messages). To suppress messaging in a more limited
-  way, use the helpers
-  [`local_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md)
-  or
-  [`with_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md).
 
 ## Value
 

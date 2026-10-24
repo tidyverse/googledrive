@@ -11,9 +11,9 @@ in
 ## Usage
 
 ``` r
-drive_publish(file, ..., verbose = deprecated())
+drive_publish(file, ...)
 
-drive_unpublish(file, ..., verbose = deprecated())
+drive_unpublish(file, ...)
 ```
 
 ## Arguments
@@ -33,17 +33,6 @@ drive_unpublish(file, ..., verbose = deprecated())
   below for details). For `drive_publish()`, we include
   `publishAuto = TRUE` and `publishedOutsideDomain = TRUE`, if user does
   not specify other values.
-
-- verbose:
-
-  **\[deprecated\]** This logical argument to individual googledrive
-  functions is deprecated. To globally suppress googledrive messaging,
-  use `options(googledrive_quiet = TRUE)` (the default behaviour is to
-  emit informational messages). To suppress messaging in a more limited
-  way, use the helpers
-  [`local_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md)
-  or
-  [`with_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md).
 
 ## Value
 
@@ -68,13 +57,13 @@ file <- drive_example_remote("chicken_sheet") |>
 #> • chicken_sheet <id: 1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU>
 #> Copied to file:
 #> • Copy of chicken_sheet
-#>   <id: 1glSdPm0sB7DJ3CGN3q_J84-02eViDMksmTY0gaCwdUM>
+#>   <id: 12G-DdcC7Jr41skAa8nxE7QXpC3YtXo-LtEwBh6wmCho>
 
 # Publish file
 file <- drive_publish(file)
 #> File now published:
 #> • Copy of chicken_sheet
-#>   <id: 1glSdPm0sB7DJ3CGN3q_J84-02eViDMksmTY0gaCwdUM>
+#>   <id: 12G-DdcC7Jr41skAa8nxE7QXpC3YtXo-LtEwBh6wmCho>
 file$published
 #> [1] TRUE
 
@@ -82,7 +71,7 @@ file$published
 file <- drive_unpublish(file)
 #> File now NOT published:
 #> • Copy of chicken_sheet
-#>   <id: 1glSdPm0sB7DJ3CGN3q_J84-02eViDMksmTY0gaCwdUM>
+#>   <id: 12G-DdcC7Jr41skAa8nxE7QXpC3YtXo-LtEwBh6wmCho>
 file$published
 #> [1] FALSE
 
@@ -90,5 +79,5 @@ file$published
 drive_rm(file)
 #> File deleted:
 #> • Copy of chicken_sheet
-#>   <id: 1glSdPm0sB7DJ3CGN3q_J84-02eViDMksmTY0gaCwdUM>
+#>   <id: 12G-DdcC7Jr41skAa8nxE7QXpC3YtXo-LtEwBh6wmCho>
 ```

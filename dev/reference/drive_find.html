@@ -85,9 +85,7 @@ search within a specific folder or shared drive, use <code><a href="drive_ls.htm
 <span>  n_max <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  shared_drive <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  corpus <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  team_drive <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -138,20 +136,6 @@ about <a href="shared_drives.html">shared drives</a>.</p></dd>
 <dd><p>Other parameters to pass along in the request. The most likely
 candidate is <code>q</code>. See below and the API's
 <a href="https://developers.google.com/drive/api/v3/search-files" class="external-link">Search for files and folders guide</a>.</p></dd>
-
-
-<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This logical argument to
-individual googledrive functions is deprecated. To globally suppress
-googledrive messaging, use <code>options(googledrive_quiet = TRUE)</code> (the default
-behaviour is to emit informational messages). To suppress messaging in a
-more limited way, use the helpers <code><a href="googledrive-configuration.html">local_drive_quiet()</a></code> or
-<code><a href="googledrive-configuration.html">with_drive_quiet()</a></code>.</p></dd>
-
-
-<dt id="arg-team-drive">team_drive<a class="anchor" aria-label="anchor" href="#arg-team-drive"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Google Drive and the
-Drive API have replaced Team Drives with shared drives.</p></dd>
 
 </dl></div>
     <div class="section level2">

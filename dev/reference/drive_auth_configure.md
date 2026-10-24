@@ -22,7 +22,7 @@ configured OAuth client and API key, respectively.
 ## Usage
 
 ``` r
-drive_auth_configure(client, path, api_key, app = deprecated())
+drive_auth_configure(client, path, api_key)
 
 drive_api_key()
 
@@ -49,10 +49,6 @@ drive_oauth_client()
 - api_key:
 
   API key.
-
-- app:
-
-  **\[deprecated\]** Replaced by the `client` argument.
 
 ## Value
 

@@ -22,9 +22,7 @@ drive_find(
   n_max = Inf,
   shared_drive = NULL,
   corpus = NULL,
-  ...,
-  verbose = deprecated(),
-  team_drive = deprecated()
+  ...
 )
 ```
 
@@ -84,22 +82,6 @@ drive_find(
   candidate is `q`. See below and the API's [Search for files and
   folders
   guide](https://developers.google.com/drive/api/v3/search-files).
-
-- verbose:
-
-  **\[deprecated\]** This logical argument to individual googledrive
-  functions is deprecated. To globally suppress googledrive messaging,
-  use `options(googledrive_quiet = TRUE)` (the default behaviour is to
-  emit informational messages). To suppress messaging in a more limited
-  way, use the helpers
-  [`local_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md)
-  or
-  [`with_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md).
-
-- team_drive:
-
-  **\[deprecated\]** Google Drive and the Drive API have replaced Team
-  Drives with shared drives.
 
 ## Value
 

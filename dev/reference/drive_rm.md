@@ -7,7 +7,7 @@ reversible option, see
 ## Usage
 
 ``` r
-drive_rm(..., verbose = deprecated())
+drive_rm(...)
 ```
 
 ## Arguments
@@ -21,17 +21,6 @@ drive_rm(..., verbose = deprecated())
   Or any combination thereof. Elements are processed with
   [`as_dribble()`](https://googledrive.tidyverse.org/dev/reference/as_dribble.md)
   and row-bound prior to deletion.
-
-- verbose:
-
-  **\[deprecated\]** This logical argument to individual googledrive
-  functions is deprecated. To globally suppress googledrive messaging,
-  use `options(googledrive_quiet = TRUE)` (the default behaviour is to
-  emit informational messages). To suppress messaging in a more limited
-  way, use the helpers
-  [`local_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md)
-  or
-  [`with_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md).
 
 ## Value
 
@@ -59,10 +48,10 @@ src_file |>
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • chicken-rm.txt <id: 1-1z8O5ImTPirENJj3CPvZM2tjhIws-9z>
+#> • chicken-rm.txt <id: 1x6qXmNw0zr2U3jh3gO4GyAuBRWf30Vfo>
 drive_rm("chicken-rm.txt")
 #> File deleted:
-#> • chicken-rm.txt <id: 1-1z8O5ImTPirENJj3CPvZM2tjhIws-9z>
+#> • chicken-rm.txt <id: 1x6qXmNw0zr2U3jh3gO4GyAuBRWf30Vfo>
 
 # Create several more copies
 x1 <- src_file |>
@@ -70,23 +59,23 @@ x1 <- src_file |>
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • chicken-abc.txt <id: 1jbze0ZWHzQUQ9zJdQvSguwhwqMnRrYGE>
+#> • chicken-abc.txt <id: 1I5eztFWGURrD7mlHR4n5SXm6lPW6ZNIu>
 drive_cp(src_file, name = "chicken-def.txt")
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • chicken-def.txt <id: 1tQDRsjY10uEuWCho5Pf41nEl5eQuYYqU>
+#> • chicken-def.txt <id: 1iv47pEuF6DGLg6KgLzfQvwUk_8eUQ8c6>
 x2 <- src_file |>
   drive_cp(name = "chicken-ghi.txt")
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • chicken-ghi.txt <id: 13b488Oxs3s6Xo8Alr6w8WmyiklTmIcdg>
+#> • chicken-ghi.txt <id: 1aOmN_8T82tw0un41z0Pt6L9pn33yNYO_>
 
 # Remove the copies all at once, specified in different ways
 drive_rm(x1, "chicken-def.txt", as_id(x2))
 #> Files deleted:
-#> • chicken-abc.txt <id: 1jbze0ZWHzQUQ9zJdQvSguwhwqMnRrYGE>
-#> • chicken-def.txt <id: 1tQDRsjY10uEuWCho5Pf41nEl5eQuYYqU>
-#> • chicken-ghi.txt <id: 13b488Oxs3s6Xo8Alr6w8WmyiklTmIcdg>
+#> • chicken-abc.txt <id: 1I5eztFWGURrD7mlHR4n5SXm6lPW6ZNIu>
+#> • chicken-def.txt <id: 1iv47pEuF6DGLg6KgLzfQvwUk_8eUQ8c6>
+#> • chicken-ghi.txt <id: 1aOmN_8T82tw0un41z0Pt6L9pn33yNYO_>
 ```

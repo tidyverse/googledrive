@@ -8,7 +8,7 @@ existing, depending on whether the Drive file already exists, see
 ## Usage
 
 ``` r
-drive_update(file, media = NULL, ..., verbose = deprecated())
+drive_update(file, media = NULL, ...)
 ```
 
 ## Arguments
@@ -33,17 +33,6 @@ drive_update(file, media = NULL, ..., verbose = deprecated())
   the Files resource via `...`. Read the "Request body" section of the
   Drive API docs for the associated endpoint to learn about relevant
   parameters.
-
-- verbose:
-
-  **\[deprecated\]** This logical argument to individual googledrive
-  functions is deprecated. To globally suppress googledrive messaging,
-  use `options(googledrive_quiet = TRUE)` (the default behaviour is to
-  emit informational messages). To suppress messaging in a more limited
-  way, use the helpers
-  [`local_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md)
-  or
-  [`with_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md).
 
 ## Value
 
@@ -70,13 +59,13 @@ x <- drive_example_remote("chicken.csv") |>
 #> Original file:
 #> • chicken.csv <id: 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7>
 #> Copied to file:
-#> • Copy of chicken.csv <id: 1QpRV2jLEr4fYCJRWj0nvf5kkAUn-hPKP>
+#> • Copy of chicken.csv <id: 1KDj0E4vj75VeiKMRPDIbg99saiXG-HSL>
 
 # Update the file with new media
 x <- x |>
   drive_update(drive_example_local("chicken.txt"))
 #> File updated:
-#> • Copy of chicken.csv <id: 1QpRV2jLEr4fYCJRWj0nvf5kkAUn-hPKP>
+#> • Copy of chicken.csv <id: 1KDj0E4vj75VeiKMRPDIbg99saiXG-HSL>
 
 # Update the file with new metadata.
 # Notice here `name` is not an argument of `drive_update()`, we are passing
@@ -84,7 +73,7 @@ x <- x |>
 x <- x |>
   drive_update(name = "CHICKENS!")
 #> File updated:
-#> • 'CHICKENS!' <id: 1QpRV2jLEr4fYCJRWj0nvf5kkAUn-hPKP>
+#> • 'CHICKENS!' <id: 1KDj0E4vj75VeiKMRPDIbg99saiXG-HSL>
 
 # Update the file with new media AND new metadata
 x <- x |>
@@ -93,10 +82,10 @@ x <- x |>
     name = "chicken-poem-again.txt"
   )
 #> File updated:
-#> • chicken-poem-again.txt <id: 1QpRV2jLEr4fYCJRWj0nvf5kkAUn-hPKP>
+#> • chicken-poem-again.txt <id: 1KDj0E4vj75VeiKMRPDIbg99saiXG-HSL>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • chicken-poem-again.txt <id: 1QpRV2jLEr4fYCJRWj0nvf5kkAUn-hPKP>
+#> • chicken-poem-again.txt <id: 1KDj0E4vj75VeiKMRPDIbg99saiXG-HSL>
 ```

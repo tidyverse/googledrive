@@ -17,11 +17,10 @@ drive_share(
   file,
   role = c("reader", "commenter", "writer", "fileOrganizer", "owner", "organizer"),
   type = c("user", "group", "domain", "anyone"),
-  ...,
-  verbose = deprecated()
+  ...
 )
 
-drive_share_anyone(file, verbose = deprecated())
+drive_share_anyone(file)
 ```
 
 ## Arguments
@@ -70,17 +69,6 @@ drive_share_anyone(file, verbose = deprecated())
   `type` is `"group"` or `"user"`) or the `domain` (when grantee type is
   `"domain"`). Read the API docs linked below for more details.
 
-- verbose:
-
-  **\[deprecated\]** This logical argument to individual googledrive
-  functions is deprecated. To globally suppress googledrive messaging,
-  use `options(googledrive_quiet = TRUE)` (the default behaviour is to
-  emit informational messages). To suppress messaging in a more limited
-  way, use the helpers
-  [`local_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md)
-  or
-  [`with_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md).
-
 ## Value
 
 An object of class
@@ -107,7 +95,7 @@ file <- drive_example_remote("chicken_doc") |>
 #> Original file:
 #> • chicken_doc <id: 1X9pd4nOjl33zDFfTjw-_eFL7Qb9_g6VfVFDp1PPae94>
 #> Copied to file:
-#> • chicken-share.txt <id: 1TBzyL0YCfjTURB6WKjhgM2Ox8pEa4xmDPZPvnGH29NI>
+#> • chicken-share.txt <id: 183aMfqjKDB8t6O5wsolujMTF78OinB1LpOudak_ax6w>
 
 # Let a specific person comment
 file <- file |>
@@ -120,7 +108,7 @@ file <- file |>
 #> • role = commenter
 #> • type = user
 #> For file:
-#> • chicken-share.txt <id: 1TBzyL0YCfjTURB6WKjhgM2Ox8pEa4xmDPZPvnGH29NI>
+#> • chicken-share.txt <id: 183aMfqjKDB8t6O5wsolujMTF78OinB1LpOudak_ax6w>
 
 # Let a different specific person edit and customize the email notification
 file <- file |>
@@ -134,7 +122,7 @@ file <- file |>
 #> • role = writer
 #> • type = user
 #> For file:
-#> • chicken-share.txt <id: 1TBzyL0YCfjTURB6WKjhgM2Ox8pEa4xmDPZPvnGH29NI>
+#> • chicken-share.txt <id: 183aMfqjKDB8t6O5wsolujMTF78OinB1LpOudak_ax6w>
 
 # Let anyone read the file
 file <- file |>
@@ -143,17 +131,17 @@ file <- file |>
 #> • role = reader
 #> • type = anyone
 #> For file:
-#> • chicken-share.txt <id: 1TBzyL0YCfjTURB6WKjhgM2Ox8pEa4xmDPZPvnGH29NI>
+#> • chicken-share.txt <id: 183aMfqjKDB8t6O5wsolujMTF78OinB1LpOudak_ax6w>
 # Single-purpose wrapper function for this
 drive_share_anyone(file)
 #> Permissions updated:
 #> • role = reader
 #> • type = anyone
 #> For file:
-#> • chicken-share.txt <id: 1TBzyL0YCfjTURB6WKjhgM2Ox8pEa4xmDPZPvnGH29NI>
+#> • chicken-share.txt <id: 183aMfqjKDB8t6O5wsolujMTF78OinB1LpOudak_ax6w>
 
 # Clean up
 drive_rm(file)
 #> File deleted:
-#> • chicken-share.txt <id: 1TBzyL0YCfjTURB6WKjhgM2Ox8pEa4xmDPZPvnGH29NI>
+#> • chicken-share.txt <id: 183aMfqjKDB8t6O5wsolujMTF78OinB1LpOudak_ax6w>
 ```

@@ -33,7 +33,7 @@ three_files <- drive_find(n_max = 3)
 
 # get their browser links
 drive_link(three_files)
-#> [1] "https://drive.google.com/file/d/1lAxO_zr06v6pL6dyQJ9duwH1j2ztQ3lB/view?usp=drivesdk"
-#> [2] "https://drive.google.com/file/d/1dandXB0QZpjeGQq_56wTXKNwaqgsOa9D/view?usp=drivesdk"
-#> [3] "https://drive.google.com/file/d/1XfCI_orH4oNUZh06C4w6vXtno-BT_zmZ/view?usp=drivesdk"
+#> [1] "https://docs.google.com/spreadsheets/d/1s0kEHcqG2PyciERoGq52L_Qwzp4y3__rBVKSx7E_j88/edit?usp=drivesdk"
+#> [2] "https://drive.google.com/file/d/1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud/view?usp=drivesdk"                  
+#> [3] "https://drive.google.com/file/d/19URV7BT0_E1KhYdfDODszK5aiELOwTSz/view?usp=drivesdk"                  
 ```

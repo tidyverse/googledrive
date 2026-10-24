@@ -121,13 +121,7 @@ responses, one per page.</p></li>
 <span></span>
 <span><span class="fu">do_request</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">do_paginated_request</span><span class="op">(</span></span>
-<span>  <span class="va">x</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  n_max <span class="op">=</span> <span class="cn">Inf</span>,</span>
-<span>  n <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="fl">1</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">do_paginated_request</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, n_max <span class="op">=</span> <span class="cn">Inf</span>, n <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -155,15 +149,6 @@ The default function always returns <code>1</code> and therefore treats each pag
 an item. If you know more about the structure of the response, you can
 pass another function to count and threshold, for example, the number of
 files or comments.</p></dd>
-
-
-<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This logical argument to
-individual googledrive functions is deprecated. To globally suppress
-googledrive messaging, use <code>options(googledrive_quiet = TRUE)</code> (the default
-behaviour is to emit informational messages). To suppress messaging in a
-more limited way, use the helpers <code><a href="googledrive-configuration.html">local_drive_quiet()</a></code> or
-<code><a href="googledrive-configuration.html">with_drive_quiet()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

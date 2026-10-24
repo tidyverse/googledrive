@@ -25,14 +25,7 @@ In pseudo-code:
 ## Usage
 
 ``` r
-drive_put(
-  media,
-  path = NULL,
-  name = NULL,
-  ...,
-  type = NULL,
-  verbose = deprecated()
-)
+drive_put(media, path = NULL, name = NULL, ..., type = NULL)
 ```
 
 ## Arguments
@@ -83,17 +76,6 @@ drive_put(
   pre-processed with
   [`drive_mime_type()`](https://googledrive.tidyverse.org/dev/reference/drive_mime_type.md).
 
-- verbose:
-
-  **\[deprecated\]** This logical argument to individual googledrive
-  functions is deprecated. To globally suppress googledrive messaging,
-  use `options(googledrive_quiet = TRUE)` (the default behaviour is to
-  emit informational messages). To suppress messaging in a more limited
-  way, use the helpers
-  [`local_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md)
-  or
-  [`with_drive_quiet()`](https://googledrive.tidyverse.org/dev/reference/googledrive-configuration.md).
-
 ## Value
 
 An object of class
@@ -111,9 +93,9 @@ writeLines(c("beginning", "middle"), local_file)
 file <- drive_put(local_file)
 #> ℹ No pre-existing Drive file at this path. Calling `drive_upload()`.
 #> Local file:
-#> • /tmp/RtmpUJMFpj/drive_put_1ae11a292d40.txt
+#> • /tmp/Rtmpj3ZFyP/drive_put_1aee4593ccbf.txt
 #> Uploaded into Drive file:
-#> • drive_put_1ae11a292d40.txt <id: 1Dlocu4bP7DKgxoIgdONE2RR-mC7Rvjda>
+#> • drive_put_1aee4593ccbf.txt <id: 1DQf-zg8BhRFZQOLRvkizXAUlG1_mkBCE>
 #> With MIME type:
 #> • text/plain
 
@@ -124,12 +106,12 @@ cat("end", file = local_file, sep = "\n", append = TRUE)
 file <- drive_put(local_file)
 #> ℹ A Drive file already exists at this path. Calling `drive_update()`.
 #> File updated:
-#> • drive_put_1ae11a292d40.txt <id: 1Dlocu4bP7DKgxoIgdONE2RR-mC7Rvjda>
+#> • drive_put_1aee4593ccbf.txt <id: 1DQf-zg8BhRFZQOLRvkizXAUlG1_mkBCE>
 
 # create a second file at this filepath
 file2 <- drive_create(basename(local_file))
 #> Created Drive file:
-#> • drive_put_1ae11a292d40.txt <id: 1MbOz56pqHYcyNjQJTc1zqQhoQYdJGgye>
+#> • drive_put_1aee4593ccbf.txt <id: 1TTcYXJsmCIay8_KdUKNESTlPX6jESmhW>
 #> With MIME type:
 #> • text/plain
 
@@ -137,13 +119,13 @@ file2 <- drive_create(basename(local_file))
 drive_put(local_file)
 #> Error in drive_put(local_file): Multiple items already exist on Drive at the target filepath.
 #> Unclear what `drive_put()` should do. Exiting.
-#> • drive_put_1ae11a292d40.txt <id: 1MbOz56pqHYcyNjQJTc1zqQhoQYdJGgye>
-#> • drive_put_1ae11a292d40.txt <id: 1Dlocu4bP7DKgxoIgdONE2RR-mC7Rvjda>
+#> • drive_put_1aee4593ccbf.txt <id: 1TTcYXJsmCIay8_KdUKNESTlPX6jESmhW>
+#> • drive_put_1aee4593ccbf.txt <id: 1DQf-zg8BhRFZQOLRvkizXAUlG1_mkBCE>
 
 # Clean up
 drive_find("drive_put_.+[.]txt") |> drive_rm()
 #> Files deleted:
-#> • drive_put_1ae11a292d40.txt <id: 1MbOz56pqHYcyNjQJTc1zqQhoQYdJGgye>
-#> • drive_put_1ae11a292d40.txt <id: 1Dlocu4bP7DKgxoIgdONE2RR-mC7Rvjda>
+#> • drive_put_1aee4593ccbf.txt <id: 1TTcYXJsmCIay8_KdUKNESTlPX6jESmhW>
+#> • drive_put_1aee4593ccbf.txt <id: 1DQf-zg8BhRFZQOLRvkizXAUlG1_mkBCE>
 unlink(local_file)
 ```
