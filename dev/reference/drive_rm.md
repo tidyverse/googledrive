@@ -48,10 +48,10 @@ src_file |>
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • chicken-rm.txt <id: 1x6qXmNw0zr2U3jh3gO4GyAuBRWf30Vfo>
+#> • chicken-rm.txt <id: 1QdpGQtYVaN4yxHl1VK-2WCY9bOtn2e6b>
 drive_rm("chicken-rm.txt")
 #> File deleted:
-#> • chicken-rm.txt <id: 1x6qXmNw0zr2U3jh3gO4GyAuBRWf30Vfo>
+#> • chicken-rm.txt <id: 1QdpGQtYVaN4yxHl1VK-2WCY9bOtn2e6b>
 
 # Create several more copies
 x1 <- src_file |>
@@ -59,23 +59,23 @@ x1 <- src_file |>
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • chicken-abc.txt <id: 1I5eztFWGURrD7mlHR4n5SXm6lPW6ZNIu>
+#> • chicken-abc.txt <id: 1FDEB3n2MfHq3DIkGqIJJW98LnwQKTBNu>
 drive_cp(src_file, name = "chicken-def.txt")
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • chicken-def.txt <id: 1iv47pEuF6DGLg6KgLzfQvwUk_8eUQ8c6>
+#> • chicken-def.txt <id: 1it2J_qJzGzQUg1qFzMBJMY8b8r-ClsPo>
 x2 <- src_file |>
   drive_cp(name = "chicken-ghi.txt")
 #> Original file:
 #> • chicken.txt <id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y>
 #> Copied to file:
-#> • chicken-ghi.txt <id: 1aOmN_8T82tw0un41z0Pt6L9pn33yNYO_>
+#> • chicken-ghi.txt <id: 16yOak9n7htPeKpC69QuEcwIbt_OpyyR7>
 
 # Remove the copies all at once, specified in different ways
 drive_rm(x1, "chicken-def.txt", as_id(x2))
 #> Files deleted:
-#> • chicken-abc.txt <id: 1I5eztFWGURrD7mlHR4n5SXm6lPW6ZNIu>
-#> • chicken-def.txt <id: 1iv47pEuF6DGLg6KgLzfQvwUk_8eUQ8c6>
-#> • chicken-ghi.txt <id: 1aOmN_8T82tw0un41z0Pt6L9pn33yNYO_>
+#> • chicken-abc.txt <id: 1FDEB3n2MfHq3DIkGqIJJW98LnwQKTBNu>
+#> • chicken-def.txt <id: 1it2J_qJzGzQUg1qFzMBJMY8b8r-ClsPo>
+#> • chicken-ghi.txt <id: 16yOak9n7htPeKpC69QuEcwIbt_OpyyR7>
 ```

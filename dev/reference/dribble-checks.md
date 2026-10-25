@@ -86,7 +86,7 @@ confirm_some_files(d)
 #> # A dribble: 17 × 3
 #>    name                id       drive_resource   
 #>    <chr>               <drv_id> <list>           
-#>  1 bravo               1fgp9gZ… <named list [41]>
+#>  1 bravo               1fjzEk-… <named list [41]>
 #>  2 chicken_sheet       1s0kEHc… <named list [38]>
 #>  3 r_logo.jpg          1wFAZdm… <named list [46]>
 #>  4 THANKS              19URV7B… <named list [45]>
