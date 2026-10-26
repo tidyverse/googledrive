@@ -141,7 +141,7 @@ they require additional API calls.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1C9OWxX4Rk7lBMd2CCZX5Q2RoZpLbpzPI&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1v6eleGu0YI5aMU_PwyWqmfN5-slMHyCT&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make an explicitly named copy, in a different folder, and star it.</span></span></span>
 <span class="r-in"><span><span class="co"># The starring is an example of providing metadata via `...`.</span></span></span>
@@ -149,7 +149,7 @@ they require additional API calls.</p></dd>
 <span class="r-in"><span><span class="co"># it just gets passed through to the API.</span></span></span>
 <span class="r-in"><span><span class="va">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_mkdir.html">drive_mkdir</a></span><span class="op">(</span><span class="st">"drive-cp-folder"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Created Drive file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive-cp-folder</span> <span style="color: #555555;">&lt;id: 1B1tyPXhEP7-Dwc_mHqhug5jF68JzM1wM&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive-cp-folder</span> <span style="color: #555555;">&lt;id: 16dFdyisTe5WM8iYUmYUPVQ7i9VBNOolZ&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> With MIME type:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00;">application/vnd.google-apps.folder</span></span>
 <span class="r-in"><span><span class="va">cp2</span> <span class="op">&lt;-</span> <span class="fu">drive_cp</span><span class="op">(</span></span></span>
@@ -162,12 +162,12 @@ they require additional API calls.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive-cp-folder/chicken-cp.txt</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1TmcH_t-6l1dD5j677Lv59GX85X6hai3s&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1AtojwK7H5tr1FwkWlNwUgUv4WlXAuCK3&gt;</span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">cp2</span>, <span class="st">"starred"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 1 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name           starred id       drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> chicken-cp.txt TRUE    1TmcH_t… <span style="color: #949494;">&lt;named list [44]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> chicken-cp.txt TRUE    1AtojwK… <span style="color: #949494;">&lt;named list [44]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `overwrite = FALSE` errors if file already exists at target filepath</span></span></span>
 <span class="r-in"><span><span class="co"># THIS WILL ERROR!</span></span></span>
@@ -176,19 +176,19 @@ they require additional API calls.</p></dd>
 <span class="r-in"><span><span class="co"># `overwrite = TRUE` moves an existing file to trash, then proceeds</span></span></span>
 <span class="r-in"><span><span class="va">cp3</span> <span class="op">&lt;-</span> <span class="fu">drive_cp</span><span class="op">(</span><span class="va">src_file</span>, name <span class="op">=</span> <span class="st">"Copy of chicken.txt"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1C9OWxX4Rk7lBMd2CCZX5Q2RoZpLbpzPI&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1v6eleGu0YI5aMU_PwyWqmfN5-slMHyCT&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Original file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.txt</span> <span style="color: #555555;">&lt;id: 1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1syw5mlfQh9Zq5MuWL1o0wZ5hGm2CB74S&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1VnbrWGKXNdV3i4el-dNFx0wlpRuF10dK&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Delete all of our copies and the new folder!</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">cp1</span>, <span class="va">cp2</span>, <span class="va">cp3</span>, <span class="va">folder</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files deleted:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1C9OWxX4Rk7lBMd2CCZX5Q2RoZpLbpzPI&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-cp.txt</span> <span style="color: #555555;">&lt;id: 1TmcH_t-6l1dD5j677Lv59GX85X6hai3s&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1syw5mlfQh9Zq5MuWL1o0wZ5hGm2CB74S&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive-cp-folder</span> <span style="color: #555555;">&lt;id: 1B1tyPXhEP7-Dwc_mHqhug5jF68JzM1wM&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1v6eleGu0YI5aMU_PwyWqmfN5-slMHyCT&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-cp.txt</span> <span style="color: #555555;">&lt;id: 1AtojwK7H5tr1FwkWlNwUgUv4WlXAuCK3&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">Copy of chicken.txt</span> <span style="color: #555555;">&lt;id: 1VnbrWGKXNdV3i4el-dNFx0wlpRuF10dK&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">drive-cp-folder</span> <span style="color: #555555;">&lt;id: 16dFdyisTe5WM8iYUmYUPVQ7i9VBNOolZ&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Target an official example file that's a csv file</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">csv_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="drive_examples.html">drive_example_remote</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -207,7 +207,7 @@ they require additional API calls.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken.csv</span> <span style="color: #555555;">&lt;id: 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Copied to file:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-sheet-copy</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1rYPBHu_cFmSsKVQ6UH6ElVV13ji0_dirktiTJgf2ScM&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1pHqK1Z8cgoh7p2E9DguzTX1b3542MCR5kTvFfngkyB8&gt;</span></span>
 <span class="r-in"><span><span class="co"># is it really a Google Sheet?</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="va">chicken_sheet</span>, <span class="st">"mime_type"</span><span class="op">)</span><span class="op">$</span><span class="va">mime_type</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "application/vnd.google-apps.spreadsheet"</span>
@@ -219,7 +219,7 @@ they require additional API calls.</p></dd>
 <span class="r-in"><span><span class="fu"><a href="drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">chicken_sheet</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File deleted:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">chicken-sheet-copy</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1rYPBHu_cFmSsKVQ6UH6ElVV13ji0_dirktiTJgf2ScM&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1pHqK1Z8cgoh7p2E9DguzTX1b3542MCR5kTvFfngkyB8&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
