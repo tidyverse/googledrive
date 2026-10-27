@@ -2,7 +2,9 @@
 title: "Dealing with multiple files"
 ---
 
-```{r setup, include = FALSE}
+```{r}
+#| label: setup
+#| include: false
 auth_success <- tryCatch(
   googledrive:::drive_auth_docs(),
   googledrive_auth_internal_error = function(e) e
@@ -19,7 +21,10 @@ knitr::opts_chunk$set(
 options(tidyverse.quiet = TRUE)
 ```
 
-```{r eval = !googledrive::drive_has_token(), echo = FALSE, comment = NA}
+```{r}
+#| eval: !expr '!googledrive::drive_has_token()'
+#| echo: false
+#| comment: ""
 googledrive:::drive_bullets(c(
   "Code chunks will not be evaluated, because:",
   strsplit(auth_success$message, split = "\n")[[1]]
@@ -27,7 +32,8 @@ googledrive:::drive_bullets(c(
 googledrive::drive_deauth()
 ```
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 # clean up if any previous runs left this lying around
 trash_me <- googledrive::drive_find(
   "upload-into-me-article-demo", type = "folder"
@@ -139,7 +145,8 @@ files_dribble
 
 What if you wanted to get a list back, because your downstream operations include yet more `map()`ing? Then you would use `map2()`.
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 files_list <- map2(files, new_names, drive_rename)
 ```
 
@@ -147,13 +154,15 @@ files_list <- map2(files, new_names, drive_rename)
 
 Our trashing function, `drive_trash()` is vectorized and can therefore operate on a multi-file dribble. We could trash these files like so:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 drive_trash(files_dribble)
 ```
 
 If you're absolutely sure of yourself and happy to do something irreversible, you could truly delete these files with `drive_rm()`, which is also vectorized:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 drive_rm(files_dribble)
 ```
 
