@@ -41,9 +41,8 @@ handy functions for getting just the filename.
 #> [8] "/home/runner/work/_temp/Library/googledrive/extdata/example_files/r_logo.jpg"
 
 basename(x)
-#> [1] "chicken.csv"     "chicken.jpg"     "chicken.pdf"    
-#> [4] "chicken.txt"     "imdb_latin1.csv" "markdown.md"    
-#> [7] "r_about.html"    "r_logo.jpg"
+#> [1] "chicken.csv"     "chicken.jpg"     "chicken.pdf"     "chicken.txt"    
+#> [5] "imdb_latin1.csv" "markdown.md"     "r_about.html"    "r_logo.jpg"
 ```
 
 You can filter the files by providing a regular expression.
@@ -90,17 +89,17 @@ MIME type.
 drive_examples_remote() |>
   drive_reveal("mime_type")
 #> # A dribble: 9 × 4
-#>   name            mime_type                     id       drive_resource
-#>   <chr>           <chr>                         <drv_id> <list>        
-#> 1 chicken_doc     application/vnd.google-apps.… 1X9pd4n… <named list>  
-#> 2 chicken_sheet   application/vnd.google-apps.… 1SeFXkr… <named list>  
-#> 3 chicken.csv     text/csv                      1VOh6wW… <named list>  
-#> 4 chicken.jpg     image/jpeg                    1b2_Zjz… <named list>  
-#> 5 chicken.pdf     application/pdf               13OQcAo… <named list>  
-#> 6 chicken.txt     text/plain                    1wOLeWV… <named list>  
-#> 7 imdb_latin1.csv text/csv                      1YJSVa0… <named list>  
-#> 8 r_about.html    text/html                     1sfCT0z… <named list>  
-#> 9 r_logo.jpg      image/jpeg                    1J4v-iy… <named list>
+#>   name            mime_type                              id       drive_resource
+#>   <chr>           <chr>                                  <drv_id> <list>        
+#> 1 chicken_doc     application/vnd.google-apps.document   1X9pd4n… <named list>  
+#> 2 chicken_sheet   application/vnd.google-apps.spreadshe… 1SeFXkr… <named list>  
+#> 3 chicken.csv     text/csv                               1VOh6wW… <named list>  
+#> 4 chicken.jpg     image/jpeg                             1b2_Zjz… <named list>  
+#> 5 chicken.pdf     application/pdf                        13OQcAo… <named list>  
+#> 6 chicken.txt     text/plain                             1wOLeWV… <named list>  
+#> 7 imdb_latin1.csv text/csv                               1YJSVa0… <named list>  
+#> 8 r_about.html    text/html                              1sfCT0z… <named list>  
+#> 9 r_logo.jpg      image/jpeg                             1J4v-iy… <named list>
 ```
 
 You’ll notice there are two files that aren’t among the local example
@@ -131,14 +130,14 @@ the singular form to target exactly one file.
 
 drive_examples_remote("chicken")
 #> # A dribble: 6 × 3
-#>   name          id       drive_resource   
-#>   <chr>         <drv_id> <list>           
-#> 1 chicken_doc   1X9pd4n… <named list [32]>
-#> 2 chicken_sheet 1SeFXkr… <named list [32]>
-#> 3 chicken.csv   1VOh6wW… <named list [39]>
-#> 4 chicken.jpg   1b2_Zjz… <named list [41]>
-#> 5 chicken.pdf   13OQcAo… <named list [40]>
-#> 6 chicken.txt   1wOLeWV… <named list [40]>
+#>   name          id                                           drive_resource   
+#>   <chr>         <drv_id>                                     <list>           
+#> 1 chicken_doc   1X9pd4nOjl33zDFfTjw-_eFL7Qb9_g6VfVFDp1PPae94 <named list [32]>
+#> 2 chicken_sheet 1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU <named list [32]>
+#> 3 chicken.csv   1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7            <named list [39]>
+#> 4 chicken.jpg   1b2_ZjzgvrSw0hBMgn-rnEbjp3Uq0XTKJ            <named list [41]>
+#> 5 chicken.pdf   13OQcAo8hkh0Ja5Wxlmi4a8aNvPK7pDkO            <named list [40]>
+#> 6 chicken.txt   1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y            <named list [40]>
 
 drive_example_remote("logo")
 #> # A dribble: 1 × 3

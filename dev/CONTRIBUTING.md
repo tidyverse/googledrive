@@ -16,9 +16,9 @@
   a good idea to do that before you touch anything, so you have a
   baseline.
 - Match the existing code style. Our intent is to follow
-  <https://style.tidyverse.org>. Please use the [styler
-  package](https://styler.r-lib.org) to re-style any code that you
-  touch.
+  <https://style.tidyverse.org>. Please use
+  [Air](https://posit-dev.github.io/air/) to format any code that you
+  touch. The project’s Air configuration lives in `air.toml`.
 - Tests: please *try* to run our tests or at least those that exercise
   your PR. Add tests, if relevant. If things go sideways, just say so.
   We are painfully aware that it’s not easy to test API-wrapping,
@@ -30,16 +30,16 @@
   edit the roxygen comments above the function; never edit `NAMESPACE`
   or `.Rd` files by hand. More below.
 - Website: The pkgdown-created website is built and deployed
-  automatically via Travis-CI. Some changes require an edit to the
+  automatically via GitHub Actions. Some changes require an edit to the
   `reference` section of `_pkgdown.yml`, i.e. to make sure that a
   function appears there.
 - If the PR is related to an issue, link to it in the description, with
   [the `#15`
-  syntax](https://help.github.com/articles/autolinked-references-and-urls/)
+  syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls)
   and the issue slug for context. If the PR is meant to close an issue,
   make sure one of the commit messages includes [text like `closes #44`
   or
-  `fixes #101`](https://help.github.com/articles/closing-issues-using-keywords/).
+  `fixes #101`](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue).
   Provide the issue number and slug in the description, even if the
   issue is mentioned in the title, because auto-linking does not work in
   the PR title.
@@ -48,7 +48,7 @@
     is about!
   - BAD PR title: “Something about \#345”. This will not actually close
     issue \#345 upon merging. [Use the magic
-    words](https://help.github.com/articles/closing-issues-using-keywords/).
+    words](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue).
 - Add a bullet to `NEWS.md` with a concise description of the change, if
   it’s something a user would want to know when updating the package.
   [dplyr’s
@@ -73,7 +73,7 @@
 - Accommodate initial file specification via path or name, but
   constantly push downstream work to be based on file id.
 - Return a tidy tibble, almost always a
-  [`dribble`](https://tidyverse.github.io/googledrive/reference/dribble.html),
+  [`dribble`](https://googledrive.tidyverse.org/reference/dribble.html),
   whenever it makes sense.
 
 There is a high-level interface for the typical user. These functions
@@ -90,8 +90,9 @@ is the function
 [`request_generate()`](https://googledrive.tidyverse.org/dev/reference/request_generate.md).
 These functions are exported for use by programming-oriented users who
 are willing to read [Drive API
-docs](https://developers.google.com/drive/v3/web/about-sdk) and want to
-do things we haven’t made available in the high-level interface.
+docs](https://developers.google.com/workspace/drive/api/guides/about-sdk)
+and want to do things we haven’t made available in the high-level
+interface.
 
 ## Package mechanics
 
@@ -99,10 +100,9 @@ do things we haven’t made available in the high-level interface.
 
 We use [roxygen2](https://cran.r-project.org/package=roxygen2),
 specifically with the [Markdown
-syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html),
-to create `NAMESPACE` and all `.Rd` files. All edits to documentation
-should be done in roxygen comments above the associated function or
-object.
+syntax](https://roxygen2.r-lib.org/articles/markdown.html), to create
+`NAMESPACE` and all `.Rd` files. All edits to documentation should be
+done in roxygen comments above the associated function or object.
 
 Use templates or inheritance to repeat documentation whenever it is
 helpful, but without actually repeating its source.
@@ -111,7 +111,9 @@ Use internal and external links liberally, i.e. to other docs in
 googledrive or to Drive API resources.
 
 We encourage working examples that include any necessary setup and
-teardown. In most cases, you’ll have to put them inside a `\dontrun{}`.
+teardown. Since most examples require auth, use
+`@examplesIf drive_has_token()` so they run only when a token is
+available.
 
 It’s nice if a pull request includes the result of running
 `devtools::document()`, to update `NAMESPACE` and the `.Rd` files, but
@@ -139,7 +141,7 @@ few lines of
 
 - This reflects the approach documented in the gargle vignette [Managing
   tokens
-  securely](https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html).
+  securely](https://gargle.r-lib.org/articles/managing-tokens-securely.html).
   We use embedded, encrypted service account token.
 - If you want to use a token you already have, edit those lines to use
   any of the techniques described in the gargle vignette
@@ -232,7 +234,7 @@ Example and structure of a self-documenting name for a persistent test
 file:
 
 ``` R
-move-files-into-me-TEST-drive-mv
+move-files-into-me-TEST-drive_mv
 <informative-slug>-TEST-<test-context>
 ```
 
@@ -240,22 +242,26 @@ Example and structure of a self-documenting name for an ephemeral test
 file:
 
 ``` R
-DESCRIPTION-TEST-drive-upload-travis
-<informative-slug>-TEST-<test-context>-<user>
+DESCRIPTION-TEST-drive_upload-jenny-1b2c3d4e
+<informative-slug>-TEST-<test-context>-<user>-<random-id>
+
+DESCRIPTION-TEST-drive_upload-gha-with-auth.yaml-12345678901
+<informative-slug>-TEST-<test-context>-gha-<workflow>-<run-id>
 ```
 
-Note that the current user is appended! This is so that concurrent test
+Note that the current user and a random id are appended (or, on GitHub
+Actions, the workflow name and run id). This is so that concurrent test
 runs do not attempt to edit the same files.
 
 ### Continuous integration
 
 googledrive is checked on a large matrix of R versions and operating
 systems via GitHub Actions. We use
-[codecov](https://codecov.io/github/tidyverse/googledrive?branch=main)
-to track the test coverage. In general, the package is subjected to
-`R CMD check`, unit tests, and test coverage analysis after every push
-to GitHub. For internal branches, an encrypted service account token is
-available on GHA, so tests against the Drive API can be run.
+[codecov](https://app.codecov.io/gh/tidyverse/googledrive) to track the
+test coverage. In general, the package is subjected to `R CMD check`,
+unit tests, and test coverage analysis after every push to GitHub. For
+internal branches, an encrypted service account token is available on
+GHA, so tests against the Drive API can be run.
 
 Things are a bit different for pull requests from outside contributors,
 however. These PRs do not have access to the encrypted tokens, therefore

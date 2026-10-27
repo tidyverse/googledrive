@@ -95,8 +95,7 @@ drive_bullets(c(
    about something"
 ))
 #> We need to talk about the `foofy` argument to `blarg()`
-#> You provided a_very_weird_value and I suspect you're confused about
-#> something
+#> You provided 'a_very_weird_value' and I suspect you're confused about something
 ```
 
 Most relevant cli docs:
@@ -122,15 +121,14 @@ drive_bullets(c(
   " " = "MIME type of {.arg file}: {.field mime_type}."
 ))
 #> ! Ignoring `type`. Only consulted for native Google file types.
-#>   MIME type of `file`: mime_type.
+#>   MIME type of `file`: 'mime_type'.
 
 drive_bullets(c(
   "!" = "Currently only fields for the {.field files} resource can be \\
          checked for validity.",
   " " = "Nothing done."
 ))
-#> ! Currently only fields for the files resource can be checked for
-#>   validity.
+#> ! Currently only fields for the 'files' resource can be checked for validity.
 #>   Nothing done.
 
 drive_bullets(c(
@@ -234,10 +232,10 @@ truncation.
 ``` r
 
 bulletize(gargle_map_cli(letters))
-#>               *               *               *               * 
-#>    "{.field a}"    "{.field b}"    "{.field c}"    "{.field d}" 
-#>               *                 
-#>    "{.field e}" "… and 21 more"
+#>               *               *               *               *               * 
+#>    "{.field a}"    "{.field b}"    "{.field c}"    "{.field d}"    "{.field e}" 
+#>                 
+#> "… and 21 more"
 
 bulletize(gargle_map_cli(letters), bullet = "x", n_show = 2)
 #>               x               x                 
@@ -248,11 +246,11 @@ drive_bullets(c(
   bulletize(gargle_map_cli(letters), bullet = "!")
 ))
 #> These are surprising things:
-#> ! a
-#> ! b
-#> ! c
-#> ! d
-#> ! e
+#> ! 'a'
+#> ! 'b'
+#> ! 'c'
+#> ! 'd'
+#> ! 'e'
 #>   … and 21 more
 
 dat <- drive_find(n_max = 10)
@@ -262,11 +260,11 @@ drive_bullets(c(
   bulletize(gargle_map_cli(dat))
 ))
 #> Some Drive files:
-#> • chicken_sheet <id: 1s0kEHcqG2PyciERoGq52L_Qwzp4y3__rBVKSx7E_j88>
-#> • r_logo.jpg <id: 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud>
-#> • THANKS <id: 19URV7BT0_E1KhYdfDODszK5aiELOwTSz>
-#> • googledrive-NEWS.md <id: 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm>
-#> • def <id: 1ALSW_Nqs7FsPOcrJ6MqyBoRm03gansmn>
+#> • 'chicken_sheet' <id: 1s0kEHcqG2PyciERoGq52L_Qwzp4y3__rBVKSx7E_j88>
+#> • 'r_logo.jpg' <id: 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud>
+#> • 'THANKS' <id: 19URV7BT0_E1KhYdfDODszK5aiELOwTSz>
+#> • 'googledrive-NEWS.md' <id: 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm>
+#> • 'def' <id: 1ALSW_Nqs7FsPOcrJ6MqyBoRm03gansmn>
 #>   … and 5 more
 ```
 

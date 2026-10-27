@@ -2,7 +2,8 @@
 
 ### Common tasks
 
-- [googledrive](https://googledrive.tidyverse.org/dev/articles/googledrive.md):
+- [Get started with
+  googledrive](https://googledrive.tidyverse.org/dev/articles/googledrive.md):
 - [File
   Identification](https://googledrive.tidyverse.org/dev/articles/file-identification.md):
 - [Dealing with multiple

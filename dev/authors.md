@@ -13,7 +13,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/tidyverse/googledrive/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/tidyverse/googledrive/blob/embrace-quarto/DESCRIPTION)
 
 D'Agostino McGowan L, Bryan J (2026). *googledrive: An Interface to
 Google Drive*. R package version 2.1.2.9000,
