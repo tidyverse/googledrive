@@ -110,6 +110,7 @@ reference:
   - drive_deauth
   - drive_auth_configure
   - drive_scopes
+  - drive_token_write
 - title: "Drive API spec"
   desc: >
     Summon info about or check input against the Drive API spec

@@ -54,3 +54,19 @@
                                                   drive.scripts 
                 "https://www.googleapis.com/auth/drive.scripts" 
 
+# drive_token_write() and drive_token_read() check inputs
+
+    Code
+      drive_token_write("nope", path = "x.rds")
+    Condition
+      Error in `drive_token_write()`:
+      ! `token` must be a <Token2.0> or the result of `drive_token()`, not the string "nope".
+
+---
+
+    Code
+      drive_token_read(path = "does-not-exist.rds")
+    Condition
+      Error in `drive_token_read()`:
+      ! Can't find token file at 'does-not-exist.rds'.
+

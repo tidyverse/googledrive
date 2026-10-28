@@ -42,6 +42,7 @@
 #' @importFrom glue glue
 #' @importFrom glue glue_collapse
 #' @importFrom glue glue_data
+#' @importFrom lifecycle deprecated
 #' @importFrom pillar pillar_shaft
 #' @importFrom purrr map
 #' @importFrom purrr map_chr

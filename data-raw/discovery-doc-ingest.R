@@ -1,32 +1,34 @@
 library(tidyverse)
+library(fs)
+library(cli)
 
 source(
   system.file("discovery-doc-ingest", "ingest-functions.R", package = "gargle")
 )
 
-download_discovery_document("drive:v3")
-# you can try to do some diffing here, but I haven't had much success with this
-# currently am comparing a 2021 disc doc to 2025 and there are 632 diffs
-# just YOLOing now
+# Always download the current Discovery Document. The date in the filename is
+# the API's revision date (from the document's `revision` field), so a download
+# either overwrites the existing JSON or adds a new one. In the latter case,
+# move the old JSON to data-raw/old/.
+# Naively diffing old vs. new Discovery Documents hasn't proven very useful (a
+# 2021 vs. 2025 comparison had 632 diffs). So you'll need to use an appropriate
+# tool if you want to do that.
 
-existing <- list_discovery_documents("drive")
-if (length(existing) > 1) {
-  rlang::warn("MULTIPLE DISCOVERY DOCUMENTS FOUND. FIX THIS!")
-}
+x <- download_discovery_document("drive:v3")
 
-if (length(existing) < 1) {
-  rlang::inform("Downloading Discovery Document")
-  x <- download_discovery_document("drive:v3")
-} else {
-  msg <- glue::glue(
-    "
-    Using existing Discovery Document:
-      * {existing}
-    "
+superseded <- setdiff(list_discovery_documents("drive"), path_file(x))
+if (length(superseded) > 0) {
+  move_code <- glue::glue(
+    'fs::file_move("{path("data-raw", superseded)}", "data-raw/old")'
   )
-  rlang::inform(msg)
-  x <- here::here("data-raw", existing)
+  cli_warn(c(
+    "Superseded Drive Discovery Document{?s} found in {.path data-raw/}: \\
+     {.file {superseded}}",
+    "i" = "Move to {.path data-raw/old/} with:",
+    set_names(paste0("{.run ", move_code, "}"), " ")
+  ))
 }
+cli_inform("Ingesting {.file {path_file(x)}}")
 
 dd <- read_discovery_document(x)
 
@@ -62,6 +64,7 @@ methods <- mediafy("drive.files.create", methods)
 
 .endpoints <- methods
 attr(.endpoints, "base_url") <- dd$rootUrl
-# View(.endpoints)
+#View(.endpoints)
 
-usethis::use_data(.endpoints, internal = TRUE, overwrite = TRUE)
+# This script does NOT write R/sysdata.rda. It is sourced by
+# data-raw/sysdata.R, which does that.
