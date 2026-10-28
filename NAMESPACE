@@ -93,6 +93,8 @@ export(drive_scopes)
 export(drive_share)
 export(drive_share_anyone)
 export(drive_token)
+export(drive_token_read)
+export(drive_token_write)
 export(drive_trash)
 export(drive_unpublish)
 export(drive_untrash)
@@ -134,6 +136,7 @@ importFrom(glue,
   glue_collapse,
   glue_data
 )
+importFrom(lifecycle,deprecated)
 importFrom(magrittr,"%>%")
 importFrom(pillar,pillar_shaft)
 importFrom(purrr,

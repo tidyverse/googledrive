@@ -1,5 +1,10 @@
 # googledrive (development version)
 
+* `drive_token_write()` + `drive_token_read()` is a new matched pair of
+  functions that make it much easier to explicitly store a token obtained in an
+  interactive session then reuse that token elsewhere, such in CI or in a
+  deployed product.
+
 * `as_id()` (and hence `drive_download()`, `drive_get()`, etc.) works for
   Google Colab links (#459, @MichaelChirico).
 
