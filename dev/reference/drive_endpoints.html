@@ -124,34 +124,33 @@ googledrive.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">drive_endpoints</span><span class="op">(</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ drive.comments.update:List of 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "drive.comments.update"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "PATCH"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Updates a comment with patch semantics. For more information, see [Manage comments and replies](https://develop"| __truncated__</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "Comment"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "Comment"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ drive.replies.list  :List of 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "drive.replies.list"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "GET"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}/replies"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, drive.meet.readonly, drive.readonly"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Lists a comment's replies. For more information, see [Manage comments and replies](https://developers.google.co"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "ReplyList"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "fileId" "commentId"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ drive.comments.delete:List of 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "drive.comments.delete"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ drive.replies.delete:List of 7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "drive.replies.delete"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "DELETE"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}/replies/{replyId}"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Deletes a comment. For more information, see [Manage comments and replies](https://developers.google.com/worksp"| __truncated__</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "fileId" "commentId"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ drive.comments.create:List of 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "drive.comments.create"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Deletes a reply. For more information, see [Manage comments and replies](https://developers.google.com/workspac"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:3] "fileId" "commentId" "replyId"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ drive.replies.update:List of 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "drive.replies.update"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "PATCH"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "drive/v3/files/{fileId}/comments/{commentId}/replies/{replyId}"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 25</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Creates a comment on a file. For more information, see [Manage comments and replies](https://developers.google."| __truncated__</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "Comment"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "Comment"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "fileId"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Updates a reply with patch semantics. For more information, see [Manage comments and replies](https://developer"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "Reply"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "Reply"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:3] "fileId" "commentId" "replyId"</span>
 <span class="r-in"><span><span class="fu">drive_endpoint</span><span class="op">(</span><span class="st">"drive.files.delete"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "drive.files.delete"</span>
@@ -164,152 +163,143 @@ googledrive.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsTeamDrives</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsTeamDrives$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "false"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsTeamDrives$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsTeamDrives$deprecated</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsTeamDrives$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsTeamDrives$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "false"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsTeamDrives$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Deprecated: Use `supportsAllDrives` instead."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsTeamDrives$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Deprecated: If an item isn't in a shared drive and its last parent is deleted but the item itself isn't, the item will be placed under its owner's root."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "false"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent$deprecated</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsAllDrives</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsAllDrives$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsAllDrives$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "false"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsAllDrives$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsAllDrives$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Whether the requesting application supports both My Drives and shared drives."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$required</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The ID of the file."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth access token."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$required</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "false"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Deprecated: If an item isn't in a shared drive and its last parent is deleted but the item itself isn't, the item will be placed under its owner's root."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$enforceSingleParent$deprecated</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsAllDrives</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsAllDrives$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsAllDrives$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Whether the requesting application supports both My Drives and shared drives."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsAllDrives$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$supportsAllDrives$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "false"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Returns response with indentations and line breaks."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "V1 error format."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$enumDescriptions</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "v1 error format" "v2 error format"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$enum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1" "2"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "true"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "JSONP"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth access token."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Data format for response."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Selector specifying which fields to include in a partial response."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$enum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"  "media" "proto"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$enumDescriptions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "v1 error format" "v2 error format"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "V1 error format."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$enum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1" "2"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -318,52 +308,61 @@ googledrive.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Media download with context-dependent Content-Type"   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Responses with Content-Type of application/x-protobuf"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$enum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"  "media" "proto"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Data format for response."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth 2.0 token for the current user."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Selector specifying which fields to include in a partial response."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth 2.0 token for the current user."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$uploadType</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$uploadType$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Legacy upload protocol for media (e.g. \"media\", \"multipart\")."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$uploadType$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$uploadType$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Legacy upload protocol for media (e.g. \"media\", \"multipart\")."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$uploadType$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Returns response with indentations and line breaks."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "true"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -378,18 +377,18 @@ googledrive.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">drive_endpoint</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "drive.comments.get"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "drive.replies.get"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $httpMethod</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "GET"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $path</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> drive/v3/files/{fileId}/comments/{commentId}</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> drive/v3/files/{fileId}/comments/{commentId}/replies/{replyId}</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$required</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The ID of the file."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
@@ -397,13 +396,27 @@ googledrive.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The ID of the file."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fileId$required</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$includeDeleted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$includeDeleted$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$includeDeleted$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Whether to return deleted replies. Deleted replies don't include their original content."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$includeDeleted$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$includeDeleted$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "false"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$commentId</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$commentId$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$commentId$required</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$commentId$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
@@ -411,109 +424,100 @@ googledrive.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$commentId$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The ID of the comment."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$commentId$required</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$commentId$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$replyId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$replyId$required</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$replyId$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$includeDeleted</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$includeDeleted$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$replyId$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The ID of the reply."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$replyId$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$includeDeleted$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Whether to return deleted comments. Deleted comments will not include their original content."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$includeDeleted$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "false"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$includeDeleted$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Returns response with indentations and line breaks."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "true"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "JSONP"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth access token."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$access_token$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Selector specifying which fields to include in a partial response."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$upload_protocol$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "V1 error format."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$enumDescriptions</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "v1 error format" "v2 error format"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$enum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1" "2"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "V1 error format."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$enum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1" "2"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$`$.xgafv`$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$callback$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "JSONP"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Data format for response."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$enum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"  "media" "proto"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -522,52 +526,61 @@ googledrive.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Media download with context-dependent Content-Type"   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Responses with Content-Type of application/x-protobuf"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$enum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"  "media" "proto"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$alt$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Data format for response."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$key$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$quotaUser$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth 2.0 token for the current user."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Selector specifying which fields to include in a partial response."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$fields$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$oauth_token$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth 2.0 token for the current user."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$uploadType</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$uploadType$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Legacy upload protocol for media (e.g. \"media\", \"multipart\")."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$uploadType$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$uploadType$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Legacy upload protocol for media (e.g. \"media\", \"multipart\")."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$uploadType$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Returns response with indentations and line breaks."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "true"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parameters$prettyPrint$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -575,13 +588,13 @@ googledrive.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "drive, drive.file, drive.meet.readonly, drive.readonly"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Gets a comment by ID. For more information, see [Manage comments and replies](https://developers.google.com/workspace/drive/api/guides/manage-comments). Required: The `fields` parameter must be set. To return the exact fields you need, see [Return specific fields](https://developers.google.com/workspace/drive/api/guides/fields-parameter)."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Gets a reply by ID. For more information, see [Manage comments and replies](https://developers.google.com/workspace/drive/api/guides/manage-comments)."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $response</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Comment"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Reply"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parameterOrder</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "fileId"    "commentId"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "fileId"    "commentId" "replyId"  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

@@ -181,6 +181,9 @@ Take explicit control of the Google auth status or examine current state
   : Edit and view auth configuration
 - [`drive_scopes()`](https://googledrive.tidyverse.org/dev/reference/drive_scopes.md)
   : Produce scopes specific to the Drive API
+- [`drive_token_write()`](https://googledrive.tidyverse.org/dev/reference/drive_token_write.md)
+  [`drive_token_read()`](https://googledrive.tidyverse.org/dev/reference/drive_token_write.md)
+  **\[experimental\]** : Write/read a googledrive user token
 
 ## Drive API spec
 

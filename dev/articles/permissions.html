@@ -109,7 +109,7 @@
 <span><span class="co">#&gt; Local file:</span></span>
 <span><span class="co">#&gt; • '/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.txt'</span></span>
 <span><span class="co">#&gt; Uploaded into Drive file:</span></span>
-<span><span class="co">#&gt; • 'chicken-perm-article.txt' &lt;id: 1K9I3hcMv1PUyfGzYl9OWxrKIUInMflYP&gt;</span></span>
+<span><span class="co">#&gt; • 'chicken-perm-article.txt' &lt;id: 1vRQyY0X7VZPypSr-A97nOAEPFAkeVmX4&gt;</span></span>
 <span><span class="co">#&gt; With MIME type:</span></span>
 <span><span class="co">#&gt; • 'text/plain'</span></span>
 <span></span>
@@ -117,7 +117,7 @@
 <span><span class="co">#&gt; # A dribble: 1 × 5</span></span>
 <span><span class="co">#&gt;   name                     shared id       drive_resource permissions_resource</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;                    &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;         &lt;list&gt;              </span></span>
-<span><span class="co">#&gt; 1 chicken-perm-article.txt FALSE  1K9I3hc… &lt;named list&gt;   &lt;named list [2]&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 chicken-perm-article.txt FALSE  1vRQyY0… &lt;named list&gt;   &lt;named list [2]&gt;</span></span></code></pre></div>
 </div>
 <p><code>shared = FALSE</code> indicates that this file is not yet shared with anyone and, for those so inclined, detailed information on permissions can be found in the <code>permissions_resource</code> list-column. Note that the <code>drive_resource</code>, which is always present in a dribble, typically also contains information on permissions. So if you just want to <em>know</em> about permissions, as opposed to modifying them, you can probably consult <code>drive_resource</code>.</p>
 <p>Let’s give a specific person permission to edit this file and a customized message, using the <code>emailAddress</code> and <code>emailMessage</code> parameters.</p>
@@ -146,12 +146,12 @@
 <span><span class="co">#&gt; • role = reader</span></span>
 <span><span class="co">#&gt; • type = anyone</span></span>
 <span><span class="co">#&gt; For file:</span></span>
-<span><span class="co">#&gt; • 'chicken-perm-article.txt' &lt;id: 1K9I3hcMv1PUyfGzYl9OWxrKIUInMflYP&gt;</span></span>
+<span><span class="co">#&gt; • 'chicken-perm-article.txt' &lt;id: 1vRQyY0X7VZPypSr-A97nOAEPFAkeVmX4&gt;</span></span>
 <span><span class="va">file</span></span>
 <span><span class="co">#&gt; # A dribble: 1 × 5</span></span>
 <span><span class="co">#&gt;   name                     shared id       drive_resource permissions_resource</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;                    &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;         &lt;list&gt;              </span></span>
-<span><span class="co">#&gt; 1 chicken-perm-article.txt TRUE   1K9I3hc… &lt;named list&gt;   &lt;named list [2]&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 chicken-perm-article.txt TRUE   1vRQyY0… &lt;named list&gt;   &lt;named list [2]&gt;</span></span></code></pre></div>
 </div>
 <p>We see that the file is now <code>shared = TRUE</code>.</p>
 <p>Now that we’ve made a few updates to our permissions, the <code>permissions_resource</code> list-column has become more interesting. Here’s how to pull important information out of this and put into a tibble with one row per permission. (<em>Permission handling will become more formalized in future versions of googledrive. See <a href="https://github.com/tidyverse/googledrive/issues/180" class="external-link">the issue</a></em>). We use other packages in the tidyverse now for this data wrangling.</p>
@@ -186,7 +186,7 @@
 <div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File deleted:</span></span>
-<span><span class="co">#&gt; • 'chicken-perm-article.txt' &lt;id: 1K9I3hcMv1PUyfGzYl9OWxrKIUInMflYP&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; • 'chicken-perm-article.txt' &lt;id: 1vRQyY0X7VZPypSr-A97nOAEPFAkeVmX4&gt;</span></span></code></pre></div>
 </div>
 </section><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

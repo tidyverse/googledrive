@@ -2,6 +2,12 @@
 
 ## googledrive (development version)
 
+- [`drive_token_write()`](https://googledrive.tidyverse.org/dev/reference/drive_token_write.md) +
+  [`drive_token_read()`](https://googledrive.tidyverse.org/dev/reference/drive_token_write.md)
+  is a new matched pair of functions that make it much easier to
+  explicitly store a token obtained in an interactive session then reuse
+  that token elsewhere, such in CI or in a deployed product.
+
 - [`as_id()`](https://googledrive.tidyverse.org/dev/reference/drive_id.md)
   (and hence
   [`drive_download()`](https://googledrive.tidyverse.org/dev/reference/drive_download.md),
