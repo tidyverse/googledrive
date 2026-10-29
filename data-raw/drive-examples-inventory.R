@@ -2,12 +2,11 @@
 # create/update an inventory file consulted by drive_examples_remote()
 
 library(here)
-library(glue)
 library(googledrive)
 library(tidyverse)
 
 # auth with the special-purpose service account
-filename <- glue("~/.R/gargle/googledrive-file-keeper.json")
+filename <- "~/work/gargle-internal/googledrive/googledrive-file-keeper.json"
 drive_auth(path = filename)
 # user should be googledrive-file-keeper
 drive_user()
