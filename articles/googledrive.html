@@ -5,20 +5,26 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>googledrive • googledrive</title>
+<title>Get started with googledrive • googledrive</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="googledrive">
-<script defer data-domain="googledrive.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="googledrive_files/libs/quarto-html/popper.min.js"></script><script src="googledrive_files/libs/quarto-html/tippy.umd.min.js"></script><link href="googledrive_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="googledrive_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Get started with googledrive">
+<meta property="og:image" content="https://googledrive.tidyverse.org/logo.png">
+<script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-hide-below="1200" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><!-- Privacy-friendly analytics by Plausible --><script async src="https://plausible.io/js/pa-qqzH9EITRTKkhlMOvLy7c.js"></script><script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
 </head>
 <body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
@@ -28,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">googledrive</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,34 +79,369 @@
 
 
   </div>
-</nav><div class="container template-article" id="container">
-
-
-
-
+</nav><div class="container template-quarto" id="container">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>googledrive</h1>
-            
-      
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googledrive/blob/v2.1.2/vignettes/googledrive.Rmd" class="external-link"><code>vignettes/googledrive.Rmd</code></a></small>
-      <div class="d-none name"><code>googledrive.Rmd</code></div>
+      <img src="../logo.png" class="logo" alt=""><h1>Get started with googledrive</h1>
+
+
+
+
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googledrive/blob/v2.2.0/vignettes/googledrive.qmd" class="external-link"><code>vignettes/googledrive.qmd</code></a></small>
+      <div class="d-none name"><code></code></div>
     </div>
 
-    
-    
-<p>Please see the googledrive website for full documentation:</p>
-<ul>
-<li><a href="https://googledrive.tidyverse.org/index.html" class="uri">https://googledrive.tidyverse.org/index.html</a></li>
-</ul>
-<p>In addition to function-specific help, there are several articles
-which are indexed here:</p>
-<ul>
-<li><a href="https://googledrive.tidyverse.org/articles/index.html">Article
-index</a></li>
-</ul></main>
-</div>
 
+
+
+
+
+    <p>This article takes a quick tour of the main features of googledrive. See <a href="https://googledrive.tidyverse.org/articles/index.html">the articles</a> for more detailed treatment of these topics and more.</p>
+<section class="level2"><h2 id="load-googledrive">Load googledrive<a class="anchor" aria-label="anchor" href="#load-googledrive"></a>
+</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://googledrive.tidyverse.org">"googledrive"</a></span><span class="op">)</span></span></code></pre></div>
+</div>
+</section><section class="level2"><h2 id="package-conventions">Package conventions<a class="anchor" aria-label="anchor" href="#package-conventions"></a>
+</h2>
+<ul>
+<li>Most functions begin with the prefix <code>drive_</code>. Auto-completion is your friend.</li>
+<li>Goal is to allow Drive access that feels similar to Unix file system utilities, e.g., <code>find</code>, <code>ls</code>, <code>mv</code>, <code>cp</code>, <code>mkdir</code>, and <code>rm</code>.</li>
+<li>The metadata for one or more Drive files is held in a <code>dribble</code>, a “Drive tibble”. This is a data frame with one row per file. A dribble is returned (and accepted) by almost every function in googledrive. Design goals:
+<ul>
+<li>Give humans what they want: the file name</li>
+<li>Track what the API wants: the file ID</li>
+<li>Hold on to all the other metadata sent back by the API</li>
+</ul>
+</li>
+<li>googledrive is “pipe-friendly” (either the base <code>|&gt;</code> or magrittr <code>%&gt;%</code> pipe), but does not require its use.</li>
+</ul></section><section class="level2"><h2 id="quick-demo">Quick demo<a class="anchor" aria-label="anchor" href="#quick-demo"></a>
+</h2>
+<p>Here’s how to list up to <code>n_max</code> of the files you see in <a href="https://drive.google.com" class="external-link">My Drive</a>. You can expect to be sent to your browser here, to authenticate yourself and authorize the googledrive package to deal on your behalf with Google Drive.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>n_max <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A dribble: 16 × 3</span></span>
+<span><span class="co">#&gt;    name                id       drive_resource   </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;               &lt;drv_id&gt; &lt;list&gt;           </span></span>
+<span><span class="co">#&gt;  1 chicken_sheet       1s0kEHc… &lt;named list [38]&gt;</span></span>
+<span><span class="co">#&gt;  2 r_logo.jpg          1wFAZdm… &lt;named list [46]&gt;</span></span>
+<span><span class="co">#&gt;  3 THANKS              19URV7B… &lt;named list [45]&gt;</span></span>
+<span><span class="co">#&gt;  4 googledrive-NEWS.md 1h1lhFf… &lt;named list [44]&gt;</span></span>
+<span><span class="co">#&gt;  5 def                 1ALSW_N… &lt;named list [36]&gt;</span></span>
+<span><span class="co">#&gt;  6 abc                 1o89YN5… &lt;named list [36]&gt;</span></span>
+<span><span class="co">#&gt;  7 BioC_mirrors.csv    13tMFbh… &lt;named list [44]&gt;</span></span>
+<span><span class="co">#&gt;  8 Rlogo.svg           1lCQGxj… &lt;named list [46]&gt;</span></span>
+<span><span class="co">#&gt;  9 DESCRIPTION         1KKYhtc… &lt;named list [45]&gt;</span></span>
+<span><span class="co">#&gt; 10 r_about.html        1mHtQhv… &lt;named list [45]&gt;</span></span>
+<span><span class="co">#&gt; 11 imdb_latin1.csv     1S5HxY7… &lt;named list [44]&gt;</span></span>
+<span><span class="co">#&gt; 12 chicken.txt         1xMvlJH… &lt;named list [45]&gt;</span></span>
+<span><span class="co">#&gt; 13 chicken.pdf         1au0aK6… &lt;named list [45]&gt;</span></span>
+<span><span class="co">#&gt; 14 chicken.jpg         1-BF1c4… &lt;named list [46]&gt;</span></span>
+<span><span class="co">#&gt; 15 chicken.csv         12212CX… &lt;named list [44]&gt;</span></span>
+<span><span class="co">#&gt; 16 chicken_doc         11GY4Q4… &lt;named list [38]&gt;</span></span></code></pre></div>
+</div>
+<p>You can narrow the query by specifying a <code>pattern</code> you’d like to match names against. Or by specifying a file type: the <code>type</code> argument understands MIME types, file extensions, and a few human-friendly keywords.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"chicken"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span> <span class="co">## Google Sheets!</span></span>
+<span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span> <span class="co">## MIME type = "text/csv"</span></span>
+<span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"application/pdf"</span><span class="op">)</span> <span class="co">## MIME type = "application/pdf"</span></span></code></pre></div>
+</div>
+<p>Alternatively, you can refine the search using the <code>q</code> query parameter. Accepted search clauses can be found in the <a href="https://developers.google.com/drive/v3/web/search-parameters" class="external-link">Google Drive API documentation</a>. For example, to see all files that you’ve starred and that are readable by “anyone with a link”, do this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"starred = true"</span>, <span class="st">"visibility = 'anyoneWithLink'"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A dribble: 2 × 3</span></span>
+<span><span class="co">#&gt;   name       id                                drive_resource   </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;      &lt;drv_id&gt;                          &lt;list&gt;           </span></span>
+<span><span class="co">#&gt; 1 r_logo.jpg 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud &lt;named list [46]&gt;</span></span>
+<span><span class="co">#&gt; 2 THANKS     19URV7BT0_E1KhYdfDODszK5aiELOwTSz &lt;named list [45]&gt;</span></span></code></pre></div>
+</div>
+<p>You generally want to store the result of a googledrive call, as we do with <code>files</code> above. <code>files</code> is a dribble with info on several files and can be used as the input for downstream calls. It can also be manipulated as a regular data frame at any point.</p>
+<section class="level3"><h3 id="identify-files">Identify files<a class="anchor" aria-label="anchor" href="#identify-files"></a>
+</h3>
+<p><code><a href="../reference/drive_find.html">drive_find()</a></code> searches by file properties, but you can also identify files by name (path, really) or by Drive file id using <code><a href="../reference/drive_get.html">drive_get()</a></code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"~/abc/def/googledrive-NEWS.md"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ✔ The input `path` resolved to exactly 1 file.</span></span>
+<span><span class="co">#&gt; # A dribble: 1 × 4</span></span>
+<span><span class="co">#&gt;   name                path                          id       drive_resource   </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;                         &lt;drv_id&gt; &lt;list&gt;           </span></span>
+<span><span class="co">#&gt; 1 googledrive-NEWS.md ~/abc/def/googledrive-NEWS.md 1h1lhFf… &lt;named list [44]&gt;</span></span></code></pre></div>
+</div>
+<p><code><a href="../reference/drive_id.html">as_id()</a></code> can be used to convert various inputs into a marked vector of file ids. It works on file ids (for obvious reasons!), various forms of Drive URLs, and <code>dribble</code>s.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">id</span></span>
+<span><span class="co">#&gt; &lt;drive_id[1]&gt;</span></span>
+<span><span class="co">#&gt; [1] 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm</span></span>
+<span></span>
+<span><span class="co"># let's retrieve same file by id (also a great way to force-refresh metadata)</span></span>
+<span><span class="fu"><a href="../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A dribble: 1 × 3</span></span>
+<span><span class="co">#&gt;   name                id                                drive_resource   </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;               &lt;drv_id&gt;                          &lt;list&gt;           </span></span>
+<span><span class="co">#&gt; 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm &lt;named list [44]&gt;</span></span>
+<span><span class="fu"><a href="../reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="fu"><a href="../reference/drive_id.html">as_id</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A dribble: 1 × 3</span></span>
+<span><span class="co">#&gt;   name                id                                drive_resource   </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;               &lt;drv_id&gt;                          &lt;list&gt;           </span></span>
+<span><span class="co">#&gt; 1 googledrive-NEWS.md 1h1lhFfQrDZevE2OEX10-rbi2BfvGogFm &lt;named list [44]&gt;</span></span></code></pre></div>
+</div>
+<p>In general, googledrive functions that operate on files allow you to specify the file(s) by name/path, file id, or in a <code>dribble</code>. If it’s ambiguous, use <code><a href="../reference/drive_id.html">as_id()</a></code> to mark a character vector as holding Drive file ids as opposed to file paths. This function can also extract file ids from various URLs.</p>
+</section><section class="level3"><h3 id="upload-files">Upload files<a class="anchor" aria-label="anchor" href="#upload-files"></a>
+</h3>
+<p>We can upload any file type.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">chicken</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_upload.html">drive_upload</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span>,</span>
+<span>  <span class="st">"index-chicken.csv"</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Local file:</span></span>
+<span><span class="co">#&gt; • '/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.csv'</span></span>
+<span><span class="co">#&gt; Uploaded into Drive file:</span></span>
+<span><span class="co">#&gt; • 'index-chicken.csv' &lt;id: 1ujENk6gBGL16LdGtBV0MtMJfO1RDe_Ki&gt;</span></span>
+<span><span class="co">#&gt; With MIME type:</span></span>
+<span><span class="co">#&gt; • 'text/csv'</span></span>
+<span><span class="co">#&gt; # A dribble: 1 × 3</span></span>
+<span><span class="co">#&gt;   name              id                                drive_resource   </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;             &lt;drv_id&gt;                          &lt;list&gt;           </span></span>
+<span><span class="co">#&gt; 1 index-chicken.csv 1ujENk6gBGL16LdGtBV0MtMJfO1RDe_Ki &lt;named list [44]&gt;</span></span></code></pre></div>
+</div>
+<p>Notice that file was uploaded as <code>text/csv</code>. Since this was a <code>.csv</code> document, and we didn’t specify the type, googledrive guessed the MIME type. We can overrule this by using the <code>type</code> parameter to upload as a Google Spreadsheet. Let’s delete this file first.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">chicken</span><span class="op">)</span></span>
+<span><span class="co">#&gt; File deleted:</span></span>
+<span><span class="co">#&gt; • 'index-chicken.csv' &lt;id: 1ujENk6gBGL16LdGtBV0MtMJfO1RDe_Ki&gt;</span></span>
+<span></span>
+<span><span class="co"># example of using a dribble as input</span></span>
+<span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.csv"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/drive_upload.html">drive_upload</a></span><span class="op">(</span></span>
+<span>    name <span class="op">=</span> <span class="st">"index-chicken-sheet"</span>,</span>
+<span>    type <span class="op">=</span> <span class="st">"spreadsheet"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Local file:</span></span>
+<span><span class="co">#&gt; • '/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.csv'</span></span>
+<span><span class="co">#&gt; Uploaded into Drive file:</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1jFXnGO8AHiu9aarmXlMZO8yGj_LSn8LPIvK_XQBYQ0M&gt;</span></span>
+<span><span class="co">#&gt; With MIME type:</span></span>
+<span><span class="co">#&gt; • 'application/vnd.google-apps.spreadsheet'</span></span></code></pre></div>
+</div>
+<p>Much better!</p>
+</section><section class="level3"><h3 id="share-files">Share files<a class="anchor" aria-label="anchor" href="#share-files"></a>
+</h3>
+<p>To allow other people to access your file, you need to change the sharing permissions. You can check the sharing status by running <code>drive_reveal(..., "permissions")</code>, which adds a logical column <code>shared</code> and parks more detailed metadata in a <code>permissions_resource</code> variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">chicken_sheet</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"permissions"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A dribble: 1 × 5</span></span>
+<span><span class="co">#&gt;   name                shared id       drive_resource    permissions_resource</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;               &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;            &lt;list&gt;              </span></span>
+<span><span class="co">#&gt; 1 index-chicken-sheet FALSE  1jFXnGO… &lt;named list [38]&gt; &lt;named list [2]&gt;</span></span></code></pre></div>
+</div>
+<p>Here’s how to grant anyone with the link permission to view this data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="va">chicken_sheet</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/drive_share.html">drive_share</a></span><span class="op">(</span>role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Permissions updated:</span></span>
+<span><span class="co">#&gt; • role = reader</span></span>
+<span><span class="co">#&gt; • type = anyone</span></span>
+<span><span class="co">#&gt; For file:</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1jFXnGO8AHiu9aarmXlMZO8yGj_LSn8LPIvK_XQBYQ0M&gt;</span></span>
+<span><span class="co">#&gt; # A dribble: 1 × 5</span></span>
+<span><span class="co">#&gt;   name                shared id       drive_resource    permissions_resource</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;               &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;            &lt;list&gt;              </span></span>
+<span><span class="co">#&gt; 1 index-chicken-sheet TRUE   1jFXnGO… &lt;named list [39]&gt; &lt;named list [2]&gt;</span></span></code></pre></div>
+</div>
+<p>This comes up so often, there’s even a convenience wrapper, <code><a href="../reference/drive_share.html">drive_share_anyone()</a></code>.</p>
+</section><section class="level3"><h3 id="publish-files">Publish files<a class="anchor" aria-label="anchor" href="#publish-files"></a>
+</h3>
+<p>Versions of Google Documents, Sheets, and Presentations can be published online. You can check your publication status by running <code>drive_reveal(..., "published")</code>, which adds a logical column <code>published</code> and parks more detailed metadata in a <code>revision_resource</code> variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">chicken_sheet</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"published"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A dribble: 1 × 7</span></span>
+<span><span class="co">#&gt;   name             published shared id       drive_resource permissions_resource</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;            &lt;lgl&gt;     &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;         &lt;list&gt;              </span></span>
+<span><span class="co">#&gt; 1 index-chicken-s… FALSE     TRUE   1jFXnGO… &lt;named list&gt;   &lt;named list [2]&gt;    </span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: revision_resource &lt;list&gt;</span></span></code></pre></div>
+</div>
+<p>By default, <code><a href="../reference/drive_publish.html">drive_publish()</a></code> will publish your most recent version.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">chicken_sheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_publish.html">drive_publish</a></span><span class="op">(</span><span class="va">chicken_sheet</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; File now published:</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1jFXnGO8AHiu9aarmXlMZO8yGj_LSn8LPIvK_XQBYQ0M&gt;</span></span>
+<span><span class="co">#&gt; # A dribble: 1 × 7</span></span>
+<span><span class="co">#&gt;   name             published shared id       drive_resource permissions_resource</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;            &lt;lgl&gt;     &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;         &lt;list&gt;              </span></span>
+<span><span class="co">#&gt; 1 index-chicken-s… TRUE      TRUE   1jFXnGO… &lt;named list&gt;   &lt;named list [2]&gt;    </span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: revision_resource &lt;list&gt;</span></span></code></pre></div>
+</div>
+</section><section class="level3"><h3 id="download-files">Download files<a class="anchor" aria-label="anchor" href="#download-files"></a>
+</h3>
+<section class="level4"><h4 id="google-files">Google files<a class="anchor" aria-label="anchor" href="#google-files"></a>
+</h4>
+<p>We can download files from Google Drive. Native Google file types (such as Google Documents, Google Sheets, Google Slides, etc.) need to be exported to some conventional file type. There are reasonable defaults or you can specify this explicitly via <code>type</code> or implicitly via the file extension in <code>path</code>. For example, if I would like to download the “chicken_sheet” Google Sheet as a <code>.csv</code> I could run the following.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_download.html">drive_download</a></span><span class="op">(</span><span class="st">"index-chicken-sheet"</span>, type <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; File downloaded:</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1jFXnGO8AHiu9aarmXlMZO8yGj_LSn8LPIvK_XQBYQ0M&gt;</span></span>
+<span><span class="co">#&gt; Saved locally as:</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet.csv'</span></span></code></pre></div>
+</div>
+<p>Alternatively, I could specify type via the <code>path</code> parameter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_download.html">drive_download</a></span><span class="op">(</span></span>
+<span>  <span class="st">"index-chicken-sheet"</span>,</span>
+<span>  path <span class="op">=</span> <span class="st">"index-chicken-sheet.csv"</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; File downloaded:</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1jFXnGO8AHiu9aarmXlMZO8yGj_LSn8LPIvK_XQBYQ0M&gt;</span></span>
+<span><span class="co">#&gt; Saved locally as:</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet.csv'</span></span></code></pre></div>
+</div>
+<p>Notice in the example above, I specified <code>overwrite = TRUE</code>, in order to overwrite the local csv file previously saved.</p>
+<p>Finally, you could just allow export to the default type. In the case of Google Sheets, this is an Excel workbook:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_download.html">drive_download</a></span><span class="op">(</span><span class="st">"index-chicken-sheet"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; File downloaded:</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1jFXnGO8AHiu9aarmXlMZO8yGj_LSn8LPIvK_XQBYQ0M&gt;</span></span>
+<span><span class="co">#&gt; Saved locally as:</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet.xlsx'</span></span></code></pre></div>
+</div>
+</section><section class="level4"><h4 id="all-other-files">All other files<a class="anchor" aria-label="anchor" href="#all-other-files"></a>
+</h4>
+<p>Downloading files that are <em>not</em> Google type files is even simpler, i.e. it does not require any conversion or type info.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># download it and prove we got it</span></span>
+<span><span class="fu"><a href="../reference/drive_download.html">drive_download</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; File downloaded:</span></span>
+<span><span class="co">#&gt; • 'chicken.txt' &lt;id: 1xMvlJHia_qYNZmucaStDcOF9A9PD4BOT&gt;</span></span>
+<span><span class="co">#&gt; Saved locally as:</span></span>
+<span><span class="co">#&gt; • 'chicken.txt'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "A chicken whose name was Chantecler"      </span></span>
+<span><span class="co">#&gt; [2] "Clucked in iambic pentameter"             </span></span>
+<span><span class="co">#&gt; [3] "It sat on a shelf, reading Song of Myself"</span></span>
+<span><span class="co">#&gt; [4] "And laid eggs with a perfect diameter."   </span></span>
+<span><span class="co">#&gt; [5] ""                                         </span></span>
+<span><span class="co">#&gt; [6] "—Richard Maxson"</span></span></code></pre></div>
+</div>
+</section></section><section class="level3"><h3 id="clean-up">Clean up<a class="anchor" aria-label="anchor" href="#clean-up"></a>
+</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"index-chicken-sheet.csv"</span>,</span>
+<span>  <span class="st">"index-chicken-sheet.xlsx"</span>,</span>
+<span>  <span class="st">"chicken.txt"</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE TRUE TRUE</span></span>
+<span><span class="fu"><a href="../reference/drive_find.html">drive_find</a></span><span class="op">(</span><span class="st">"index-chicken"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; File deleted:</span></span>
+<span><span class="co">#&gt; • 'index-chicken-sheet' &lt;id: 1jFXnGO8AHiu9aarmXlMZO8yGj_LSn8LPIvK_XQBYQ0M&gt;</span></span></code></pre></div>
+</div>
+</section></section><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config);
+    }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script></main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
+</div>
 
 
    </div>
@@ -110,7 +451,7 @@ index</a></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
   </div></footer>

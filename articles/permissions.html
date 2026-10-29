@@ -12,13 +12,19 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="File permissions">
-<script defer data-domain="googledrive.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="permissions_files/libs/quarto-html/popper.min.js"></script><script src="permissions_files/libs/quarto-html/tippy.umd.min.js"></script><link href="permissions_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="permissions_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="File permissions">
+<meta property="og:image" content="https://googledrive.tidyverse.org/logo.png">
+<script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-hide-below="1200" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><!-- Privacy-friendly analytics by Plausible --><script async src="https://plausible.io/js/pa-qqzH9EITRTKkhlMOvLy7c.js"></script><script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
 </head>
 <body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
@@ -28,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">googledrive</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,56 +79,49 @@
 
 
   </div>
-</nav><div class="container template-article" id="container">
-
-
-
-
+</nav><div class="container template-quarto" id="container">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>File permissions</h1>
-            
-      
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googledrive/blob/v2.1.2/vignettes/articles/permissions.Rmd" class="external-link"><code>vignettes/articles/permissions.Rmd</code></a></small>
-      <div class="d-none name"><code>permissions.Rmd</code></div>
+
+
+
+
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googledrive/blob/v2.2.0/vignettes/articles/permissions.qmd" class="external-link"><code>vignettes/articles/permissions.qmd</code></a></small>
+      <div class="d-none name"><code></code></div>
     </div>
 
-    
-    
-<p>You can use googledrive to manage permissions on your Drive files,
-i.e. grant different people or groups of people various levels of access
-(read, comment, edit, etc.).</p>
+
+
+
+
+
+    <p>You can use googledrive to manage permissions on your Drive files, i.e. grant different people or groups of people various levels of access (read, comment, edit, etc.).</p>
 <p>Let’s upload a file and view its permissions.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/drive_examples.html">drive_example_local</a></span><span class="op">(</span><span class="st">"chicken.txt"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_upload.html">drive_upload</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"chicken-perm-article.txt"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_reveal.html">drive_reveal</a></span><span class="op">(</span><span class="st">"permissions"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Local file:</span></span>
-<span><span class="co">#&gt; • <span style="color: #0000BB;">/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.txt</span></span></span>
+<span><span class="co">#&gt; • '/home/runner/work/_temp/Library/googledrive/extdata/example_files/chicken.txt'</span></span>
 <span><span class="co">#&gt; Uploaded into Drive file:</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1nf_2lxk3EHnKQ-776MUL5rSlqmA5gUGI&gt;</span></span></span>
+<span><span class="co">#&gt; • 'chicken-perm-article.txt' &lt;id: 1Up-OxoPTQ4NDnJNbaqdaiQXpBrdBCdpR&gt;</span></span>
 <span><span class="co">#&gt; With MIME type:</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BB00;">text/plain</span></span></span>
+<span><span class="co">#&gt; • 'text/plain'</span></span>
 <span></span>
 <span><span class="va">file</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 5</span></span></span>
-<span><span class="co">#&gt;   name              shared id       drive_resource permissions_resource</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-perm-art… FALSE  1nf_2lx… <span style="color: #949494;">&lt;named list&gt;</span>   <span style="color: #949494;">&lt;named list [2]&gt;</span></span></span></code></pre></div>
-<p><code>shared = FALSE</code> indicates that this file is not yet
-shared with anyone and, for those so inclined, detailed information on
-permissions can be found in the <code>permissions_resource</code>
-list-column. Note that the <code>drive_resource</code>, which is always
-present in a dribble, typically also contains information on
-permissions. So if you just want to <em>know</em> about permissions, as
-opposed to modifying them, you can probably consult
-<code>drive_resource</code>.</p>
-<p>Let’s give a specific person permission to edit this file and a
-customized message, using the <code>emailAddress</code> and
-<code>emailMessage</code> parameters.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<span><span class="co">#&gt; # A dribble: 1 × 5</span></span>
+<span><span class="co">#&gt;   name                     shared id       drive_resource permissions_resource</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                    &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;         &lt;list&gt;              </span></span>
+<span><span class="co">#&gt; 1 chicken-perm-article.txt FALSE  1Up-Oxo… &lt;named list&gt;   &lt;named list [2]&gt;</span></span></code></pre></div>
+</div>
+<p><code>shared = FALSE</code> indicates that this file is not yet shared with anyone and, for those so inclined, detailed information on permissions can be found in the <code>permissions_resource</code> list-column. Note that the <code>drive_resource</code>, which is always present in a dribble, typically also contains information on permissions. So if you just want to <em>know</em> about permissions, as opposed to modifying them, you can probably consult <code>drive_resource</code>.</p>
+<p>Let’s give a specific person permission to edit this file and a customized message, using the <code>emailAddress</code> and <code>emailMessage</code> parameters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_share.html">drive_share</a></span><span class="op">(</span></span>
 <span>    role <span class="op">=</span> <span class="st">"writer"</span>,</span>
@@ -130,34 +129,33 @@ customized message, using the <code>emailAddress</code> and
 <span>    emailAddress <span class="op">=</span> <span class="st">"serena@example.com"</span>,</span>
 <span>    emailMessage <span class="op">=</span> <span class="st">"Would appreciate your feedback on this!"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p>Let’s say we also want “anyone with a link” to be able to read the
-file.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+</div>
+<p>Let’s say we also want “anyone with a link” to be able to read the file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_share.html">drive_share</a></span><span class="op">(</span>role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span></span></code></pre></div>
+</div>
 <p>This comes up often enough that we’ve made a convenience wrapper:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/drive_share.html">drive_share_anyone</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Permissions updated:</span></span>
 <span><span class="co">#&gt; • role = reader</span></span>
 <span><span class="co">#&gt; • type = anyone</span></span>
 <span><span class="co">#&gt; For file:</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1nf_2lxk3EHnKQ-776MUL5rSlqmA5gUGI&gt;</span></span></span>
+<span><span class="co">#&gt; • 'chicken-perm-article.txt' &lt;id: 1Up-OxoPTQ4NDnJNbaqdaiQXpBrdBCdpR&gt;</span></span>
 <span><span class="va">file</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 5</span></span></span>
-<span><span class="co">#&gt;   name              shared id       drive_resource permissions_resource</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-perm-art… TRUE   1nf_2lx… <span style="color: #949494;">&lt;named list&gt;</span>   <span style="color: #949494;">&lt;named list [2]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; # A dribble: 1 × 5</span></span>
+<span><span class="co">#&gt;   name                     shared id       drive_resource permissions_resource</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                    &lt;lgl&gt;  &lt;drv_id&gt; &lt;list&gt;         &lt;list&gt;              </span></span>
+<span><span class="co">#&gt; 1 chicken-perm-article.txt TRUE   1Up-Oxo… &lt;named list&gt;   &lt;named list [2]&gt;</span></span></code></pre></div>
+</div>
 <p>We see that the file is now <code>shared = TRUE</code>.</p>
-<p>Now that we’ve made a few updates to our permissions, the
-<code>permissions_resource</code> list-column has become more
-interesting. Here’s how to pull important information out of this and
-put into a tibble with one row per permission. (<em>Permission handling
-will become more formalized in future versions of googledrive. See <a href="https://github.com/tidyverse/googledrive/issues/180" class="external-link">the
-issue</a></em>). We use other packages in the tidyverse now for this
-data wrangling.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>Now that we’ve made a few updates to our permissions, the <code>permissions_resource</code> list-column has become more interesting. Here’s how to pull important information out of this and put into a tibble with one row per permission. (<em>Permission handling will become more formalized in future versions of googledrive. See <a href="https://github.com/tidyverse/googledrive/issues/180" class="external-link">the issue</a></em>). We use other packages in the tidyverse now for this data wrangling.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">perm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">file</span>, <span class="st">"permissions_resource"</span>, <span class="fl">1</span>, <span class="st">"permissions"</span><span class="op">)</span></span>
@@ -170,26 +168,110 @@ data wrangling.</p>
 <span>  email <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span><span class="va">perm</span>, <span class="st">"emailAddress"</span>, .default <span class="op">=</span> <span class="cn">NA_character_</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">permissions</span></span></code></pre></div>
-<p>We’ve suppressed execution of the above chunk but here’s some static,
-indicative output:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+</div>
+<p>We’ve suppressed execution of the above chunk but here’s some static, indicative output:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#&gt; # A tibble: 3 x 5</span></span>
 <span><span class="co">#&gt;   id           name            type   role  email</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;</span></span>
 <span><span class="co">#&gt; 1 12345678901… Serena Somebody user   writ… serena@example.com</span></span>
 <span><span class="co">#&gt; 2 anyoneWithL… NA              anyone read… NA</span></span>
 <span><span class="co">#&gt; 3 98765432109… Orville Owner   user   owner orville@example.com</span></span></code></pre></div>
-<div class="section level2">
-<h2 id="clean-up">Clean up<a class="anchor" aria-label="anchor" href="#clean-up"></a>
+</div>
+<section class="level2"><h2 id="clean-up">Clean up<a class="anchor" aria-label="anchor" href="#clean-up"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/drive_rm.html">drive_rm</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File deleted:</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">chicken-perm-article.txt</span> <span style="color: #555555;">&lt;id: 1nf_2lxk3EHnKQ-776MUL5rSlqmA5gUGI&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; • 'chicken-perm-article.txt' &lt;id: 1Up-OxoPTQ4NDnJNbaqdaiQXpBrdBCdpR&gt;</span></span></code></pre></div>
 </div>
-  </main>
+</section><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config);
+    }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script></main>
 </div>
-
 
 
    </div>
@@ -199,7 +281,7 @@ indicative output:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
   </div></footer>

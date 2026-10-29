@@ -1,0 +1,47 @@
+# `drive_id` class
+
+`drive_id` is an S3 class to mark strings as Drive file ids, in order to
+distinguish them from Drive file names or paths. `as_id()` converts
+various inputs into an instance of `drive_id`.
+
+`as_id()` is a generic function.
+
+## Usage
+
+``` r
+as_id(x, ...)
+```
+
+## Arguments
+
+- x:
+
+  A character vector of file or shared drive ids or URLs, a
+  [`dribble`](https://googledrive.tidyverse.org/reference/dribble.md),
+  or a suitable data frame.
+
+- ...:
+
+  Other arguments passed down to methods. (Not used.)
+
+## Value
+
+A character vector bearing the S3 class `drive_id`.
+
+## Examples
+
+``` r
+as_id("123abc")
+#> <drive_id[1]>
+#> [1] 123abc
+as_id("https://docs.google.com/spreadsheets/d/qawsedrf16273849/edit#gid=12345")
+#> <drive_id[1]>
+#> [1] qawsedrf16273849
+
+x <- drive_find(n_max = 3)
+as_id(x)
+#> <drive_id[3]>
+#> [1] 1s0kEHcqG2PyciERoGq52L_Qwzp4y3__rBVKSx7E_j88
+#> [2] 1wFAZdmBiSRu4GShsqurxD7wIDSCZvPud           
+#> [3] 19URV7BT0_E1KhYdfDODszK5aiELOwTSz           
+```
