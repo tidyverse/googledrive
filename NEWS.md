@@ -1,4 +1,4 @@
-# googledrive (development version)
+# googledrive 2.2.0
 
 * `drive_token_write()` + `drive_token_read()` is a new matched pair of
   functions that make it much easier to explicitly store a token obtained in an
