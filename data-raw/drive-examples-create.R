@@ -1,10 +1,9 @@
 library(here)
-library(glue)
 library(googledrive)
 library(tidyverse)
 
 # auth with the special-purpose service account
-filename <- glue("~/.R/gargle/googledrive-file-keeper.json")
+filename <- "~/work/gargle-internal/googledrive/googledrive-file-keeper.json"
 drive_auth(path = filename)
 drive_user()
 
@@ -12,6 +11,7 @@ drive_user()
 x <- drive_upload(drive_example_local("chicken.csv"))
 drive_share_anyone(x)
 
+# chicken.jpg and chicken.pdf are created by data-raw/chicken-images.R
 x <- drive_upload(drive_example_local("chicken.jpg"))
 drive_share_anyone(x)
 
@@ -60,3 +60,15 @@ drive_share_anyone(x)
 # curl::curl_download("https://httpbin.org/html", destfile = tfile)
 # curl::curl_download("https://httpbin.org/xml", destfile = tfile)
 # curl::curl_download("https://httpbin.org/json", destfile = tfile)
+
+# October 2026: replaced the chicken.jpg and chicken.pdf content with smaller
+# files (see data-raw/chicken-images.R). Uploaded new content into the existing
+# files, so their IDs, sharing, and the inventory are unchanged.
+# drive_update(
+#   as_id("1b2_ZjzgvrSw0hBMgn-rnEbjp3Uq0XTKJ"),
+#   media = drive_example_local("chicken.jpg")
+# )
+# drive_update(
+#   as_id("13OQcAo8hkh0Ja5Wxlmi4a8aNvPK7pDkO"),
+#   media = drive_example_local("chicken.pdf")
+# )
