@@ -89,4 +89,4 @@ Please note that the googledrive project is released with a [Contributor Code of
 
 ## Privacy
 
-[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
+[Privacy policy](https://tidyverse.org/google_privacy_policy/)

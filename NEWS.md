@@ -255,7 +255,7 @@ Where to learn more:
 
 OAuth2 tokens are now cached at the user level, by default, instead of in `.httr-oauth` in the current project. We recommend that you delete any vestigial `.httr-oauth` files lying around your googledrive projects and re-authorize googledrive, i.e. get a new token, stored in the new way.
 
-googledrive uses a new OAuth "app", owned by a verified Google Cloud Project entitled "Tidyverse API Packages", which is the project name you will see on the OAuth consent screen. See our new [Privacy Policy](https://www.tidyverse.org/google_privacy_policy/) for details.
+googledrive uses a new OAuth "app", owned by a verified Google Cloud Project entitled "Tidyverse API Packages", which is the project name you will see on the OAuth consent screen. See our new [Privacy Policy](https://tidyverse.org/google_privacy_policy/) for details.
 
 The local OAuth2 token key-value store now incorporates the associated Google user when indexing, which makes it easier to switch between Google identities.
 
@@ -377,7 +377,7 @@ Colaboratory notebooks now have some MIME type support, in terms of the `type` a
 
 ## Dependency changes
 
-R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2). See [Which versions of R do tidyverse packages support?](https://www.tidyverse.org/blog/2019/04/r-version-support/).
+R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2). See [Which versions of R do tidyverse packages support?](https://tidyverse.org/blog/2019/04/r-version-support/).
 
 gargle and magrittr are newly Imported.
 
