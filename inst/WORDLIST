@@ -27,6 +27,7 @@ cli's
 commenter
 csv
 de
+decrypt
 determinine
 dev
 dplyr
@@ -39,6 +40,7 @@ googleapis
 googledrive's
 googlesheets
 https
+httr
 httr's
 ing
 lifecycle
