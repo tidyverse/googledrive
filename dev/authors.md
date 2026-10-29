@@ -16,13 +16,13 @@ Source:
 [`DESCRIPTION`](https://github.com/tidyverse/googledrive/blob/main/DESCRIPTION)
 
 D'Agostino McGowan L, Bryan J (2026). *googledrive: An Interface to
-Google Drive*. R package version 2.1.2.9000,
+Google Drive*. R package version 2.2.0.9000,
 <https://googledrive.tidyverse.org>.
 
     @Manual{,
       title = {googledrive: An Interface to Google Drive},
       author = {Lucy {D'Agostino McGowan} and Jennifer Bryan},
       year = {2026},
-      note = {R package version 2.1.2.9000},
+      note = {R package version 2.2.0.9000},
       url = {https://googledrive.tidyverse.org},
     }

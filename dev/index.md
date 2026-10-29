@@ -78,4 +78,4 @@ contributing to this project, you agree to abide by its terms.
 
 ## Privacy
 
-[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
+[Privacy policy](https://tidyverse.org/google_privacy_policy/)

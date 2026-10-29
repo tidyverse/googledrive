@@ -10,7 +10,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">googledrive</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.2.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.2.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,6 +55,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="googledrive-development-version">googledrive (development version)<a class="anchor" aria-label="anchor" href="#googledrive-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.2.0" id="googledrive-220">googledrive 2.2.0<a class="anchor" aria-label="anchor" href="#googledrive-220"></a></h2><p class="text-muted">CRAN release: 2026-10-29</p>
 <ul><li><p><code><a href="../reference/drive_token_write.html">drive_token_write()</a></code> + <code><a href="../reference/drive_token_write.html">drive_token_read()</a></code> is a new matched pair of functions that make it much easier to explicitly store a token obtained in an interactive session then reuse that token elsewhere, such in CI or in a deployed product.</p></li>
 <li><p><code><a href="../reference/drive_id.html">as_id()</a></code> (and hence <code><a href="../reference/drive_download.html">drive_download()</a></code>, <code><a href="../reference/drive_get.html">drive_get()</a></code>, etc.) works for Google Colab links (<a href="https://github.com/tidyverse/googledrive/issues/459" class="external-link">#459</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>).</p></li>
 <li><p><code><a href="../reference/dribble-checks.html">is_mine()</a></code> returns <code>FALSE</code> instead of erroring for resources without an owner, such as items on a shared drive (<a href="https://github.com/tidyverse/googledrive/issues/478" class="external-link">#478</a>, <a href="https://github.com/sims1253" class="external-link">@sims1253</a>).</p></li>
@@ -226,7 +229,7 @@
 </ul><div class="section level4">
 <h4 id="changes-that-a-user-will-notice-1-0-0">Changes that a user will notice<a class="anchor" aria-label="anchor" href="#changes-that-a-user-will-notice-1-0-0"></a></h4>
 <p>OAuth2 tokens are now cached at the user level, by default, instead of in <code>.httr-oauth</code> in the current project. We recommend that you delete any vestigial <code>.httr-oauth</code> files lying around your googledrive projects and re-authorize googledrive, i.e. get a new token, stored in the new way.</p>
-<p>googledrive uses a new OAuth “app”, owned by a verified Google Cloud Project entitled “Tidyverse API Packages”, which is the project name you will see on the OAuth consent screen. See our new <a href="https://www.tidyverse.org/google_privacy_policy/" class="external-link">Privacy Policy</a> for details.</p>
+<p>googledrive uses a new OAuth “app”, owned by a verified Google Cloud Project entitled “Tidyverse API Packages”, which is the project name you will see on the OAuth consent screen. See our new <a href="https://tidyverse.org/google_privacy_policy/" class="external-link">Privacy Policy</a> for details.</p>
 <p>The local OAuth2 token key-value store now incorporates the associated Google user when indexing, which makes it easier to switch between Google identities.</p>
 <p>The arguments and usage of <code><a href="../reference/drive_auth.html">drive_auth()</a></code> have changed.</p>
 <ul><li>
@@ -328,7 +331,7 @@
 </div>
 <div class="section level3">
 <h3 id="dependency-changes-1-0-0">Dependency changes<a class="anchor" aria-label="anchor" href="#dependency-changes-1-0-0"></a></h3>
-<p>R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2). See <a href="https://www.tidyverse.org/blog/2019/04/r-version-support/" class="external-link">Which versions of R do tidyverse packages support?</a>.</p>
+<p>R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2). See <a href="https://tidyverse.org/blog/2019/04/r-version-support/" class="external-link">Which versions of R do tidyverse packages support?</a>.</p>
 <p>gargle and magrittr are newly Imported.</p>
 <p>rprojroot has been removed from Suggests, because we can now use a version of testthat recent enough to offer <code><a href="https://testthat.r-lib.org/reference/test_path.html" class="external-link">testthat::test_path()</a></code>.</p>
 </div>

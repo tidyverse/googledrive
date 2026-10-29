@@ -2,6 +2,10 @@
 
 ## googledrive (development version)
 
+## googledrive 2.2.0
+
+CRAN release: 2026-10-29
+
 - [`drive_token_write()`](https://googledrive.tidyverse.org/dev/reference/drive_token_write.md) +
   [`drive_token_read()`](https://googledrive.tidyverse.org/dev/reference/drive_token_write.md)
   is a new matched pair of functions that make it much easier to
@@ -412,7 +416,7 @@ way.
 googledrive uses a new OAuth “app”, owned by a verified Google Cloud
 Project entitled “Tidyverse API Packages”, which is the project name you
 will see on the OAuth consent screen. See our new [Privacy
-Policy](https://www.tidyverse.org/google_privacy_policy/) for details.
+Policy](https://tidyverse.org/google_privacy_policy/) for details.
 
 The local OAuth2 token key-value store now incorporates the associated
 Google user when indexing, which makes it easier to switch between
@@ -628,7 +632,7 @@ R 3.1 is no longer explicitly supported or tested. Our general practice
 is to support the current release (3.6), devel, and the 4 previous
 versions of R (3.5, 3.4, 3.3, 3.2). See [Which versions of R do
 tidyverse packages
-support?](https://www.tidyverse.org/blog/2019/04/r-version-support/).
+support?](https://tidyverse.org/blog/2019/04/r-version-support/).
 
 gargle and magrittr are newly Imported.
 
