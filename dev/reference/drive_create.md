@@ -95,7 +95,7 @@ Wraps the `files.create` endpoint:
 # your 'My Drive' root folder and star it
 wordstar <- drive_create("WordStar", type = "document", starred = TRUE)
 #> Created Drive file:
-#> • WordStar <id: 165ZQNKoPkDx0DdfLKXfB3Q73Nt5NyHLw89aqUSMFYag>
+#> • WordStar <id: 17hQDZGXVGFIydNXPkQmpk6beM7L_-YZq1HMWFRmYZO8>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 
@@ -111,7 +111,7 @@ execuvision <- drive_create(
   description = "deeply nested bullet lists FTW"
 )
 #> Created Drive file:
-#> • ExecuVision <id: 1gVMa3BPekfHozUYTo29vtZhJE8hZE0mBWrFpGUpKzSA>
+#> • ExecuVision <id: 1rBHQP1st9WLnyhdFGSfMYr9o1kXP7ZuT4eZzcuG4WXI>
 #> With MIME type:
 #> • application/vnd.google-apps.presentation
 
@@ -126,19 +126,20 @@ drive_browse(execuvision)
 # then create an empty new Google Sheet in it
 b4xl <- drive_mkdir("b4xl")
 #> Created Drive file:
-#> • b4xl <id: 13Jh1xnNC-36o6aKc3MEsxHnNLRhy7xbD>
+#> • b4xl <id: 1tt_IZ5eQU7lXSponYL78v00F8LefLmv5>
 #> With MIME type:
 #> • application/vnd.google-apps.folder
 drive_create("VisiCalc", path = b4xl, type = "spreadsheet")
-#> Created Drive file:
-#> • VisiCalc <id: 13PRgiNHT-xtNwDBW0wGfo41CGaFyzUFGBwcKPPTlE4I>
-#> With MIME type:
-#> • application/vnd.google-apps.spreadsheet
+#> Error in drive_create("VisiCalc", path = b4xl, type = "spreadsheet"): Client error: (403) Forbidden
+#> User rate limit exceeded.
+#> • message: User rate limit exceeded.
+#> • domain: usageLimits
+#> • reason: userRateLimitExceeded
 
 # Another way to create a Google Sheet in the folder 'b4xl'
 drive_create("b4xl/SuperCalc", type = "spreadsheet")
 #> Created Drive file:
-#> • SuperCalc <id: 1st-o5Y9VaJhEZiIzdJSkxw4JPnQdrVz14ZbvWFFbjYc>
+#> • SuperCalc <id: 1vSJmN_RqY8r2vRbEucoMFdH4z6laQEIjVxLEODaHJgA>
 #> With MIME type:
 #> • application/vnd.google-apps.spreadsheet
 
@@ -146,39 +147,39 @@ drive_create("b4xl/SuperCalc", type = "spreadsheet")
 # this time specifying parent `path` as a character
 drive_create("Lotus 1-2-3", path = "b4xl", type = "spreadsheet")
 #> Created Drive file:
-#> • Lotus 1-2-3 <id: 12ZkeuUpovx2jEmdhSNdwUfiAk1yNwfhrisyvEPeoqSo>
+#> • Lotus 1-2-3 <id: 1p-Tt5gBCDMzOjqsusG40gJgGJiXvfm7DsFekpg042xk>
 #> With MIME type:
 #> • application/vnd.google-apps.spreadsheet
 
 # Did we really create those Sheets in the intended folder? YES
 drive_ls("b4xl")
-#> # A dribble: 3 × 3
+#> # A dribble: 2 × 3
 #>   name        id       drive_resource   
 #>   <chr>       <drv_id> <list>           
-#> 1 Lotus 1-2-3 12ZkeuU… <named list [39]>
-#> 2 SuperCalc   1st-o5Y… <named list [39]>
-#> 3 VisiCalc    13PRgiN… <named list [39]>
+#> 1 Lotus 1-2-3 1p-Tt5g… <named list [39]>
+#> 2 SuperCalc   1vSJmN_… <named list [39]>
 
 # `overwrite = FALSE` errors if file already exists at target filepath
 # THIS WILL ERROR!
 drive_create("VisiCalc", path = b4xl, overwrite = FALSE)
-#> Error in check_for_overwrite(params[["parents"]], params[["name"]], overwrite): 1 item already exists at the target filepath and `overwrite =
-#> FALSE`:
-#> • VisiCalc <id: 13PRgiNHT-xtNwDBW0wGfo41CGaFyzUFGBwcKPPTlE4I>
+#> Created Drive file:
+#> • VisiCalc <id: 1QYEbubblMqNOapA-MHzQp40M_DSsEscq>
+#> With MIME type:
+#> • application/octet-stream
 
 # `overwrite = TRUE` moves an existing file to trash, then proceeds
 drive_create("VisiCalc", path = b4xl, overwrite = TRUE)
 #> File trashed:
-#> • VisiCalc <id: 13PRgiNHT-xtNwDBW0wGfo41CGaFyzUFGBwcKPPTlE4I>
+#> • VisiCalc <id: 1QYEbubblMqNOapA-MHzQp40M_DSsEscq>
 #> Created Drive file:
-#> • VisiCalc <id: 10iJ1BHMc3KYEJ4T-TYgB4BBqWNytlfdu>
+#> • VisiCalc <id: 1-t1NFP3HvwU8WrotDIWNzaSAHYXT-zeu>
 #> With MIME type:
 #> • application/octet-stream
 
 # Clean up
 drive_rm(wordstar, b4xl, execuvision)
 #> Files deleted:
-#> • WordStar <id: 165ZQNKoPkDx0DdfLKXfB3Q73Nt5NyHLw89aqUSMFYag>
-#> • b4xl <id: 13Jh1xnNC-36o6aKc3MEsxHnNLRhy7xbD>
-#> • ExecuVision <id: 1gVMa3BPekfHozUYTo29vtZhJE8hZE0mBWrFpGUpKzSA>
+#> • WordStar <id: 17hQDZGXVGFIydNXPkQmpk6beM7L_-YZq1HMWFRmYZO8>
+#> • b4xl <id: 1tt_IZ5eQU7lXSponYL78v00F8LefLmv5>
+#> • ExecuVision <id: 1rBHQP1st9WLnyhdFGSfMYr9o1kXP7ZuT4eZzcuG4WXI>
 ```
