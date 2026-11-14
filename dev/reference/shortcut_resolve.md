@@ -58,13 +58,13 @@ file <- drive_example_remote("chicken_sheet") |>
 #> • chicken_sheet <id: 1SeFXkr3XdzPSuWauzPdN-XnaryOYmZ7sFiUF5t-wSVU>
 #> Copied to file:
 #> • chicken-sheet-for-shortcut
-#>   <id: 1K4WHKXaAVNxzsK1wCP6lNoFubHTpSFJ95aNjXvC2Qls>
+#>   <id: 1PCAevlYOkVJzda-IJUXXey14ZW41nBQqltmIm3jjZ9I>
 
 # Create a shortcut
 sc1 <- file |>
   shortcut_create(name = "shortcut-1")
 #> Created Drive file:
-#> • shortcut-1 <id: 1T2oXCLz3jJQJdGgrmSx2oM1xCNAF-IiP>
+#> • shortcut-1 <id: 1PJZpJc8DIE4YL9WBj0cxjd26gKASNQQr>
 #> With MIME type:
 #> • application/vnd.google-apps.shortcut
 
@@ -72,64 +72,64 @@ sc1 <- file |>
 sc1 <- sc1 |>
   drive_cp(name = "shortcut-2")
 #> Original file:
-#> • shortcut-1 <id: 1T2oXCLz3jJQJdGgrmSx2oM1xCNAF-IiP>
+#> • shortcut-1 <id: 1PJZpJc8DIE4YL9WBj0cxjd26gKASNQQr>
 #> Copied to file:
-#> • shortcut-2 <id: 1Z49eCO3k22VD_8Nl8A8zMOcdoNBI1pvC>
+#> • shortcut-2 <id: 1oT0AOOSzAYUh0SCLgUs9ZffDuuChp95d>
 
 # Get the shortcuts
 (sc_dat <- drive_find("-[12]$", type = "shortcut"))
 #> # A dribble: 2 × 3
 #>   name       id                                drive_resource   
 #>   <chr>      <drv_id>                          <list>           
-#> 1 shortcut-2 1Z49eCO3k22VD_8Nl8A8zMOcdoNBI1pvC <named list [35]>
-#> 2 shortcut-1 1T2oXCLz3jJQJdGgrmSx2oM1xCNAF-IiP <named list [35]>
+#> 1 shortcut-2 1oT0AOOSzAYUh0SCLgUs9ZffDuuChp95d <named list [35]>
+#> 2 shortcut-1 1PJZpJc8DIE4YL9WBj0cxjd26gKASNQQr <named list [35]>
 
 # Resolve them
 (resolved <- shortcut_resolve(sc_dat))
 #> ℹ Resolved 2 shortcuts found in 2 files:
-#> • shortcut-2 <id: 1Z49eCO3k22VD_8Nl8A8zMOcdoNBI1pvC> ->
+#> • shortcut-2 <id: 1oT0AOOSzAYUh0SCLgUs9ZffDuuChp95d> ->
 #>   chicken-sheet-for-shortcut
-#>   <id: 1K4WHKXaAVNxzsK1wCP6lNoFubHTpSFJ95aNjXvC2Qls>
-#> • shortcut-1 <id: 1T2oXCLz3jJQJdGgrmSx2oM1xCNAF-IiP> ->
+#>   <id: 1PCAevlYOkVJzda-IJUXXey14ZW41nBQqltmIm3jjZ9I>
+#> • shortcut-1 <id: 1PJZpJc8DIE4YL9WBj0cxjd26gKASNQQr> ->
 #>   chicken-sheet-for-shortcut
-#>   <id: 1K4WHKXaAVNxzsK1wCP6lNoFubHTpSFJ95aNjXvC2Qls>
+#>   <id: 1PCAevlYOkVJzda-IJUXXey14ZW41nBQqltmIm3jjZ9I>
 #> # A dribble: 2 × 5
 #>   name                id       name_shortcut id_shortcut drive_resource
 #>   <chr>               <drv_id> <chr>         <drv_id>    <list>        
-#> 1 chicken-sheet-for-… 1K4WHKX… shortcut-2    1Z49eCO…    <named list>  
-#> 2 chicken-sheet-for-… 1K4WHKX… shortcut-1    1T2oXCL…    <named list>  
+#> 1 chicken-sheet-for-… 1PCAevl… shortcut-2    1oT0AOO…    <named list>  
+#> 2 chicken-sheet-for-… 1PCAevl… shortcut-1    1PJZpJc…    <named list>  
 
 resolved$id
 #> <drive_id[2]>
-#> [1] 1K4WHKXaAVNxzsK1wCP6lNoFubHTpSFJ95aNjXvC2Qls
-#> [2] 1K4WHKXaAVNxzsK1wCP6lNoFubHTpSFJ95aNjXvC2Qls
+#> [1] 1PCAevlYOkVJzda-IJUXXey14ZW41nBQqltmIm3jjZ9I
+#> [2] 1PCAevlYOkVJzda-IJUXXey14ZW41nBQqltmIm3jjZ9I
 file$id
 #> <drive_id[1]>
-#> [1] 1K4WHKXaAVNxzsK1wCP6lNoFubHTpSFJ95aNjXvC2Qls
+#> [1] 1PCAevlYOkVJzda-IJUXXey14ZW41nBQqltmIm3jjZ9I
 
 # Delete the target file
 drive_rm(file)
 #> File deleted:
 #> • chicken-sheet-for-shortcut
-#>   <id: 1K4WHKXaAVNxzsK1wCP6lNoFubHTpSFJ95aNjXvC2Qls>
+#>   <id: 1PCAevlYOkVJzda-IJUXXey14ZW41nBQqltmIm3jjZ9I>
 
 # (Try to) resolve the shortcuts again
 shortcut_resolve(sc_dat)
 #> ℹ Resolved 0 of 2 shortcuts found in 2 files:
-#> • shortcut-2 <id: 1Z49eCO3k22VD_8Nl8A8zMOcdoNBI1pvC> -> NA
-#>   <id: 1K4WHKXaAVNxzsK1wCP6lNoFubHTpSFJ95aNjXvC2Qls>
-#> • shortcut-1 <id: 1T2oXCLz3jJQJdGgrmSx2oM1xCNAF-IiP> -> NA
-#>   <id: 1K4WHKXaAVNxzsK1wCP6lNoFubHTpSFJ95aNjXvC2Qls>
+#> • shortcut-2 <id: 1oT0AOOSzAYUh0SCLgUs9ZffDuuChp95d> -> NA
+#>   <id: 1PCAevlYOkVJzda-IJUXXey14ZW41nBQqltmIm3jjZ9I>
+#> • shortcut-1 <id: 1PJZpJc8DIE4YL9WBj0cxjd26gKASNQQr> -> NA
+#>   <id: 1PCAevlYOkVJzda-IJUXXey14ZW41nBQqltmIm3jjZ9I>
 #> # A dribble: 2 × 5
 #>   name  id       name_shortcut id_shortcut drive_resource  
 #>   <chr> <drv_id> <chr>         <drv_id>    <list>          
-#> 1 NA    1K4WHKX… shortcut-2    1Z49eCO…    <named list [3]>
-#> 2 NA    1K4WHKX… shortcut-1    1T2oXCL…    <named list [3]>
+#> 1 NA    1PCAevl… shortcut-2    1oT0AOO…    <named list [3]>
+#> 2 NA    1PCAevl… shortcut-1    1PJZpJc…    <named list [3]>
 # No error, but resolution is unsuccessful due to non-existent target
 
 # Clean up
 drive_rm(sc_dat)
 #> Files deleted:
-#> • shortcut-2 <id: 1Z49eCO3k22VD_8Nl8A8zMOcdoNBI1pvC>
-#> • shortcut-1 <id: 1T2oXCLz3jJQJdGgrmSx2oM1xCNAF-IiP>
+#> • shortcut-2 <id: 1oT0AOOSzAYUh0SCLgUs9ZffDuuChp95d>
+#> • shortcut-1 <id: 1PJZpJc8DIE4YL9WBj0cxjd26gKASNQQr>
 ```
