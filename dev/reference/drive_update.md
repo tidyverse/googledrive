@@ -59,13 +59,13 @@ x <- drive_example_remote("chicken.csv") |>
 #> Original file:
 #> • chicken.csv <id: 1VOh6wWbRfuQLxbLg87o58vxJt95SIiZ7>
 #> Copied to file:
-#> • Copy of chicken.csv <id: 12bA1bNIwFQtVe0nHlMujp7yUN8jGVJMe>
+#> • Copy of chicken.csv <id: 11uL5-6gP_V7WUTacgsyXa6XdirDIqaUR>
 
 # Update the file with new media
 x <- x |>
   drive_update(drive_example_local("chicken.txt"))
 #> File updated:
-#> • Copy of chicken.csv <id: 12bA1bNIwFQtVe0nHlMujp7yUN8jGVJMe>
+#> • Copy of chicken.csv <id: 11uL5-6gP_V7WUTacgsyXa6XdirDIqaUR>
 
 # Update the file with new metadata.
 # Notice here `name` is not an argument of `drive_update()`, we are passing
@@ -73,7 +73,7 @@ x <- x |>
 x <- x |>
   drive_update(name = "CHICKENS!")
 #> File updated:
-#> • 'CHICKENS!' <id: 12bA1bNIwFQtVe0nHlMujp7yUN8jGVJMe>
+#> • 'CHICKENS!' <id: 11uL5-6gP_V7WUTacgsyXa6XdirDIqaUR>
 
 # Update the file with new media AND new metadata
 x <- x |>
@@ -82,10 +82,10 @@ x <- x |>
     name = "chicken-poem-again.txt"
   )
 #> File updated:
-#> • chicken-poem-again.txt <id: 12bA1bNIwFQtVe0nHlMujp7yUN8jGVJMe>
+#> • chicken-poem-again.txt <id: 11uL5-6gP_V7WUTacgsyXa6XdirDIqaUR>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • chicken-poem-again.txt <id: 12bA1bNIwFQtVe0nHlMujp7yUN8jGVJMe>
+#> • chicken-poem-again.txt <id: 11uL5-6gP_V7WUTacgsyXa6XdirDIqaUR>
 ```
