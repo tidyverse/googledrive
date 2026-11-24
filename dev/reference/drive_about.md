@@ -55,13 +55,13 @@ drive_about()
 #> [1] "16106127360"
 #> 
 #> $storageQuota$usage
-#> [1] "2836524"
+#> [1] "1431414"
 #> 
 #> $storageQuota$usageInDrive
-#> [1] "2836524"
+#> [1] "1431414"
 #> 
 #> $storageQuota$usageInDriveTrash
-#> [1] "1405110"
+#> [1] "0"
 #> 
 #> 
 #> $importFormats
