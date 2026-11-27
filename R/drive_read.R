@@ -56,14 +56,19 @@ drive_read_impl <- function(
 
   mime_type <- pluck(file, "drive_resource", 1, "mimeType")
 
-  if (!grepl("google", mime_type) && !is.null(type)) {
+  is_google_apps <- isTRUE(grepl(
+    "^application/vnd\\.google-apps\\.",
+    mime_type
+  ))
+
+  if (!is_google_apps && !is.null(type)) {
     drive_bullets(c(
       "!" = "Ignoring {.arg type}. Only consulted for native Google file types.",
       " " = "MIME type of {.arg file}: {.field {mime_type}}."
     ))
   }
 
-  if (grepl("google", mime_type)) {
+  if (is_google_apps) {
     export_type <- type %||% get_export_mime_type(mime_type)
     export_type <- drive_mime_type(export_type)
     verify_export_mime_type(mime_type, export_type)

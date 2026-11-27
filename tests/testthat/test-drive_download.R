@@ -198,3 +198,45 @@ test_that("drive_download() can convert a Google Doc to local markdown", {
 
   expect_equal(upload_lines, download_lines)
 })
+
+test_that("drive_download() treats non-native MIME types containing 'google' as regular files", {
+  kml_file <- new_dribble(
+    tibble(
+      name = "example.kml",
+      id = "12345",
+      drive_resource = list(list(
+        kind = "drive#file",
+        mimeType = "application/vnd.google-earth.kml+xml"
+      ))
+    )
+  )
+  download_filepath <- withr::local_tempfile(fileext = ".kml")
+  captured_req <- NULL
+
+  local_mocked_bindings(
+    request_make = function(x, ...) {
+      captured_req <<- x
+      write_utf8("<kml/>", download_filepath)
+      structure(list(status_code = 200L), class = "response")
+    }
+  )
+
+  out <- with_drive_quiet(
+    drive_download(kml_file, path = download_filepath)
+  )
+  expect_match(captured_req$url, "alt=media")
+  expect_false(grepl("/export", captured_req$url))
+  expect_identical(out$local_path, download_filepath)
+
+  local_drive_loud_and_wide()
+  msgs <- capture.output(
+    drive_download(
+      kml_file,
+      path = download_filepath,
+      type = "txt",
+      overwrite = TRUE
+    ),
+    type = "message"
+  )
+  expect_true(any(grepl("application/vnd.google-earth.kml\\+xml", msgs)))
+})
