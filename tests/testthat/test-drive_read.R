@@ -89,3 +89,50 @@ test_that("drive_read() can handle non UTF-8 input, if informed", {
   eight_and_a_half <- "\u0038\u00BD"
   expect_equal(imdb$Title[[31]], eight_and_a_half)
 })
+
+test_that("drive_read_*() treats non-native MIME types containing 'google' as regular files", {
+  kml_file <- new_dribble(
+    tibble(
+      name = "example.kml",
+      id = "12345",
+      drive_resource = list(list(
+        kind = "drive#file",
+        mimeType = "application/vnd.google-earth.kml+xml"
+      ))
+    )
+  )
+  doc_file <- new_dribble(
+    tibble(
+      name = "example_doc",
+      id = "67890",
+      drive_resource = list(list(
+        kind = "drive#file",
+        mimeType = "application/vnd.google-apps.document"
+      ))
+    )
+  )
+  captured_req <- NULL
+
+  local_mocked_bindings(
+    request_make = function(x, ...) {
+      captured_req <<- x
+      structure(
+        list(
+          url = x$url,
+          status_code = 200L,
+          content = charToRaw("<kml/>"),
+          headers = list("Content-Type" = "text/plain; charset=UTF-8")
+        ),
+        class = "response"
+      )
+    }
+  )
+
+  res <- with_drive_quiet(drive_read_string(kml_file))
+  expect_identical(res, "<kml/>")
+  expect_match(captured_req$url, "alt=media")
+  expect_false(grepl("/export", captured_req$url))
+
+  with_drive_quiet(drive_read_string(doc_file, type = "text/plain"))
+  expect_match(captured_req$url, "/export")
+})
