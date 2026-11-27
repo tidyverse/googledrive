@@ -75,23 +75,23 @@ the the withr package (<https://withr.r-lib.org>).
 # message: "Created Drive file"
 (x <- drive_create("drive-quiet-demo", type = "document"))
 #> Created Drive file:
-#> • drive-quiet-demo <id: 1gpmbFDB5rf57ax11qGNnfKDzEnfjR4VKFFQ-Cv8Ne4M>
+#> • drive-quiet-demo <id: 1rprGrjn2h8Yl2Cq2thV6eA8s_R4IMUTnAadL3VAHykw>
 #> With MIME type:
 #> • application/vnd.google-apps.document
 #> # A dribble: 1 × 3
 #>   name             id       drive_resource   
 #>   <chr>            <drv_id> <list>           
-#> 1 drive-quiet-demo 1gpmbFD… <named list [38]>
+#> 1 drive-quiet-demo 1rprGrj… <named list [38]>
 
 # message: "File updated"
 x <- drive_update(x, starred = TRUE)
 #> File updated:
-#> • drive-quiet-demo <id: 1gpmbFDB5rf57ax11qGNnfKDzEnfjR4VKFFQ-Cv8Ne4M>
+#> • drive-quiet-demo <id: 1rprGrjn2h8Yl2Cq2thV6eA8s_R4IMUTnAadL3VAHykw>
 drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name             starred id       drive_resource   
 #>   <chr>            <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-demo TRUE    1gpmbFD… <named list [38]>
+#> 1 drive-quiet-demo TRUE    1rprGrj… <named list [39]>
 
 # suppress messages for a small amount of code
 with_drive_quiet(
@@ -103,7 +103,7 @@ x$name
 # message: "File updated"
 x <- drive_update(x, media = drive_example_local("chicken.txt"))
 #> File updated:
-#> • drive-quiet-works <id: 1gpmbFDB5rf57ax11qGNnfKDzEnfjR4VKFFQ-Cv8Ne4M>
+#> • drive-quiet-works <id: 1rprGrjn2h8Yl2Cq2thV6eA8s_R4IMUTnAadL3VAHykw>
 
 # suppress messages within a specific scope, e.g. function
 unstar <- function(y) {
@@ -115,10 +115,10 @@ drive_reveal(x, "starred")
 #> # A dribble: 1 × 4
 #>   name              starred id       drive_resource   
 #>   <chr>             <lgl>   <drv_id> <list>           
-#> 1 drive-quiet-works FALSE   1gpmbFD… <named list [39]>
+#> 1 drive-quiet-works FALSE   1rprGrj… <named list [39]>
 
 # Clean up
 drive_rm(x)
 #> File deleted:
-#> • drive-quiet-works <id: 1gpmbFDB5rf57ax11qGNnfKDzEnfjR4VKFFQ-Cv8Ne4M>
+#> • drive-quiet-works <id: 1rprGrjn2h8Yl2Cq2thV6eA8s_R4IMUTnAadL3VAHykw>
 ```
